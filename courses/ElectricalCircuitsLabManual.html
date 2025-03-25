@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Electrical Circuits Lab Data Sheet</title>
+<style>
+@media print {
+  body {
+    margin: 1cm;
+    font-size: 12pt;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  input[type="text"] {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+  ol {
+    page-break-inside: avoid;
+  }
+}
+</style>
+</head>
+<body>
+
+<h1>Data Sheet for Electrical Circuits</h1>
+
+<p>Section: _____ Partner’s Last Name: ____________________ Your Name: __________________</p>
+
+<h2>Part A: A Simple Circuit</h2>
+
+<ol>
+  <li>Set up the circuit shown in Figure 11-A, using the 3V battery, the first bulb of the three-bulb board, and 2 wires. On Figure 11-A, draw <i>red</i> arrows showing the direction of the <i>current</i> when the switch is on. Draw <i>black</i> arrows showing the direction of <i>electron</i> <i>flow</i>. Turn on the switch. What is observed?
+  <input type="text" id="observation1" name="observation1"><br><br>
+  With the switch still on, loosen the bulb. What is observed?
+  <input type="text" id="observation2" name="observation2"><br><br>
+  Why?
+  <input type="text" id="why1" name="why1"><br><br>
+  </li>
+  <img src="Data Sheet for Electric Circuits_files/image003.gif" alt="Figure 11-A">
+  <img src="Data Sheet for Electric Circuits_files/image004.jpg" alt="Figure 11-B">
+  <li>Tighten the bulb (not too tight). Turn off the switch. Use another wire to set up the circuit shown in Figure 11-B, where a metal spoon is made part of the circuit.
+  <br>Turn on the switch. What is observed?
+  <input type="text" id="observation3" name="observation3"><br><br>
+  Is the metal spoon a conductor, or an insulator?
+  <input type="text" id="conductor1" name="conductor1"><br><br>
+  Turn off the switch and replace the metal spoon with the plastic spoon.<br>
+  Turn on the switch. What is observed?
+  <input type="text" id="observation4" name="observation4"><br><br>
+  Is the plastic spoon a conductor, or an insulator?
+  <input type="text" id="conductor2" name="conductor2"><br><br>
+  </li>
+  <img src="Data Sheet for Electric Circuits_files/image006.jpg" alt="Ammeter">
+  <li>Turn off the switch, remove the plastic spoon, and connect the ammeter in its place as shown in the figure to the right.
+  <br>Turn on the switch and measure and record the current to the nearest 0.01 A.
+  <input type="text" id="current1" name="current1"><br><br>
+  Turn off the switch. Disconnect the ammeter, and replace it with one wire, as previously. Connect the ammeter between the positive terminal of the battery and the bulb. Check to see that the positive connection on the ammeter is toward the positive side of the battery.<br>
+  Turn on the switch and measure and record the current to the nearest 0.01A.
+  <input type="text" id="current2" name="current2"><br><br>
+  Was the current the same (within experimental error) on both sides of the circuit?
+  <input type="text" id="sameCurrent" name="sameCurrent"><br><br>
+  </li>
+  <img src="Data Sheet for Electric Circuits_files/image008.jpg" alt="Voltmeter">
+  <li>Turn off the switch, disconnect the ammeter, and again use one wire to connect the positive terminal of the battery to the bulb. Connect a wire to the common input of the <b>voltmeter</b> and a wire to its middle input, where the scale will read 0 to 3 V.
+  <br>Turn on the switch. Touch the voltmeter’s red connection (+) to the positive side of the bulb and the black connection (-) to the negative side of the bulb as shown in the figure above. This measures the voltage across the bulb. <i>Read the voltage, to the nearest 0.05V, on the scale that goes from 0 to 3V.</i>
+  <input type="text" id="voltageBulb" name="voltageBulb"><br><br>
+  In similar fashion, <i>being careful to touch the correct leads to the proper places,</i> measure the voltage across the battery and then turn off the switch.
+  <input type="text" id="voltageBattery" name="voltageBattery"><br><br>
+  Use the value of the current from Part A.3 and of the voltage across the <b>bulb</b>, along with Ohm’s law, to calculate the resistance of the <b>bulb</b>.
+  <br>Setup:
+  <input type="text" id="setup1" name="setup1">
+  Answer:
+  <input type="text" id="answer1" name="answer1"><br><br>
+  Use P = IV to find the power used by the bulb.
+  <br>Setup:
+  <input type="text" id="setup2" name="setup2">
+  Answer:
+  <input type="text" id="answer2" name="answer2"><br><br>
+  </li>
+</ol>
+
+<h2>Part B: The Effect on Current of Changes in Voltage and Resistance</h2>
+<img src="Data Sheet for Electric Circuits_files/image010.jpg" alt="Resistor">
+<ol>
+ <li>Use the same setup as in A.3, with the <b>ammeter</b> in the circuit. Turn on the switch and note the brightness of the bulb.
+  <br>Turn off the switch and replace the regular bulb with one that has lower resistance as shown in the figure on the right.
+  <br><i>Before turning on the switch</i>, use Ohm’s law (I = V/R) to predict what will happen to the <i>current</i> (I) in the circuit when the battery voltage (V) stays the same, and the bulb resistance (R) is decreased.
+  <input type="text" id="predictCurrent" name="predictCurrent"> (larger/smaller/same)<br><br>
+  An increase in current will cause a brighter bulb; a decrease in current will cause a dimmer bulb. According to your prediction of the change in current, should this bulb be brighter, or dimmer, than the first bulb?
+  <input type="text" id="predictBrightness" name="predictBrightness"><br><br>
+  Now, turn on the switch. Results? Current value:
+  <input type="text" id="currentValue" name="currentValue"> Brightness:
+  <input type="text" id="brightnessValue" name="brightnessValue"><br><br>
+  Were the changes in current and brightness of the bulb consistent with Ohm’s law?
+  <input type="text" id="consistentOhm" name="consistentOhm"> (yes/no)<br><br>
+  Turn off the switch and <b>replace the low resistance bulb with the original bulb</b>.
+ </li>
+ <img src="Data Sheet for Electric Circuits_files/image012.jpg" alt="Voltmeter">
+ <li><b>Change the voltage from 3V to 6V</b>. Keep the ammeter connected as shown in the figure below. According to Ohm’s law, if the resistance stays the same and the voltage increases, what <i>should</i> happen to the current?
+  <input type="text" id="currentPredict2" name="currentPredict2"><br><br>
+  (larger/smaller/same)<br>
+  Therefore, what <i>should</i> happen to the brightness of the bulb?
+  <input type="text" id="brightnessPredict2" name="brightnessPredict2"><br><br>
+  (brighter/dimmer/same)<br>
+  Turn on the switch. What is the value for the current?
+  <input type="text" id="currentValue2" name="currentValue2"><br><br>
+  Is the bulb brighter or dimmer, with the 6 V than with the 3 V source?
+  <input type="text" id="brightnessCompare" name="brightnessCompare"><br><br>
+  Carefully use the <b>voltmeter</b> to measure the voltage across the bulb. Be <i>sure</i> the black connection on the voltmeter is connected to the side of the bulb connected to the negative side of the battery. Voltage:
+  <input type="text" id="voltageValue" name="voltageValue"><br><br>
+  Turn off the switch. Use Ohm’s law to find the bulb’s resistance when this voltage is used.
+  <br>Setup:
+  <input type="text" id="setup3" name="setup3">
+  Answer:
+  <input type="text" id="answer3" name="answer3"><br><br>
+  Is the bulb’s resistance still the same as found in Part A.4 where 3 V were used?
+  <input type="text" id="sameResistance" name="sameResistance"> (yes/no). Ohmic resistors have constant resistance for any current.<br>
+  Therefore, is a light bulb an <i>ohmic</i>, or a non-<i>ohmic</i>, resistance?
+  <input type="text" id="ohmic" name="ohmic"><br><br>
+  Use P = IV to find the power now used by the bulb.
+  <br>Setup:
+  <input type="text" id="setup4" name="setup4">
+  Answer:
+  <input type="text" id="answer4" name="answer4"><br><br>
+ </li>
+</ol>
+
+<h2>Part C: A Series Circuit</h2>
+<p><b>Note: Be sure to switch the voltage back to 3 V!</b></p>
+<img src="Data Sheet for Electric Circuits_files/image014.jpg" alt="Series Circuit">
+<ol>
+ <li>Set up the bulb board, the <b>3 V battery,</b> and the <b>ammeter</b> so that <b>two</b> regular bulbs are connected <b>in series</b> as shown in the figure below. In the space at the right, sketch a schematic of the circuit using the shorthand notation shown on page 129 of the lab manual.
+  <br>Get the instructor’s approval (<b>initials</b>) here <i>before turning on the switch</i>.
+  <input type="text" id="instructorApproval1" name="instructorApproval1"><br><br>
+  Turn on the switch. Are the bulbs equally bright?
+  <input type="text" id="equalBrightness1" name="equalBrightness1"><br><br>
+  Are they brighter, or dimmer, than when only one regular bulb was in the circuit?
+  <input type="text" id="brightnessCompare1" name="brightnessCompare1"><br><br>
+  What does the brightness indicate about the current through each bulb?
+  <input type="text" id="currentIndication1" name="currentIndication1"><br><br>
+  What is the value given by the ammeter for the current through the two bulbs in series?
+  <input type="text" id="currentValue3" name="currentValue3"><br><br>
+  Is the current less than in Part A.3, where only one bulb was used?
+  <input type="text" id="currentCompare1" name="currentCompare1"><br><br>
+ </li>
+ <li>Turn off the switch. Connect all <b>three</b> bulbs in series.
+  <br><i>Before turning on the switch</i>, predict if all the bulbs will be of equal brightness.
+  <input type="text" id="equalBrightness2" name="equalBrightness2"> (yes/no)<br><br>
+  Will they be brighter, dimmer, or the same as when two bulbs were in the circuit?
+  <input type="text" id="brightnessCompare2" name="brightnessCompare2"><br><br>
+  Now, turn on the switch and test your brightness predictions. Results?
+  <input type="text" id="brightnessResults" name="brightnessResults"><br><br>
+  What does this indicate about the current through the bulbs?
+  <input type="text" id="currentIndication2" name="currentIndication2"><br><br>
+  What is the value given by the ammeter for the current for three bulbs in series?
+  <input type="text" id="currentValue4" name="currentValue4"><br><br>
+  Is that less than the current when only two bulbs were in series?
+  <input type="text" id="currentCompare2" name="currentCompare2"><br><br>
+  With the switch still on, loosen one of the bulbs. What happens, and why?
+  <input type="text" id="bulbLoosen" name="bulbLoosen"><br><br>
+  Retighten the bulb and turn off the switch.
+ </li>
+</ol>
+
+<h2>Part D: A Parallel Circuit</h2>
+<img src="Data Sheet for Electric Circuits_files/image016.jpg" alt="Parallel Circuit">
+<ol>
+ <li>Set up the bulb board, the <b>3V battery,</b> and the <b>ammeter</b>, so that <b>two</b> bulbs are connected <b>in parallel</b> as shown in the figure below. In the space at the right, sketch a schematic of the circuit using the shorthand notation shown on page 129.
+  <br>Get the instructor’s approval (<b>initials)</b> here <i>before turning on the switch</i>.
+  <input type="text" id="instructorApproval2" name="instructorApproval2"><br><br>
+  According to the reading assignment in the lab manual, should the current through each of the two bulbs be greater, or less, than when the two were in series?
+  <input type="text" id="currentCompare3" name="currentCompare3"><br><br>
+  Turn on the switch. Are the bulbs equally bright?
+  <input type="text" id="equalBrightness3" name="equalBrightness3"><br><br>
+  Are the bulbs brighter, or dimmer, than when the two bulbs were in series?
+  <input type="text" id="brightnessCompare3" name="brightnessCompare3"><br><br>
+  What does the brightness indicate about the current through each bulb?
+  <input type="text" id="currentIndication3" name="currentIndication3"><br><br>
+  What is the value for the total current, as given by the ammeter?
+  <input type="text" id="currentValue5" name="currentValue5"><br><br>
+  Is this less, more, or the same as when two bulbs were in series (see Part C.1)?
+  <input type="text" id="seriesCompare" name="seriesCompare"><br><br>
+  Is this less, more, or the same as when only one bulb was used (see Part A.3)?
+  <input type="text" id="oneBulbCompare" name="oneBulbCompare"><br><br>
+  Do two bulbs in parallel really allow more current than just one bulb by itself?
+  <input type="text" id="parallelCurrent" name="parallelCurrent"><br><br>
+  Turn off the switch.
+ </li>
+ <li>Connect the ammeter to measure the current through one bulb as shown in the figure below. Turn on the switch and measure the current then turn off the switch.
+  <br>What is the current?
+  <input type="text" id="currentValue6" name="currentValue6"><br><br>
+ </li>
+ <img src="Data Sheet for Electric Circuits_files/image018.jpg" alt="Ammeter Through One Bulb">
+ <li>Connect the ammeter to measure the current through the other bulb as shown in the figure below. Repeat the current measurement. What is the current?
+  <input type="text" id="currentValue7" name="currentValue7"><br><br>
+  Do the last two current values add up to the total current (allowing for experimental error)?
+  <input type="text" id="currentAddUp" name="currentAddUp"><br><br>
+ </li>
+ <li>Turn off the switch. Connect all three bulbs in parallel. <i>Before turning on the switch</i>, predict whether all the bulbs will be of equal brightness. Will they be brighter, or dimmer, than when only two bulbs were in the circuit?
+  <input type="text" id="brightnessPredict3" name="brightnessPredict3"><br><br>
+  Turn on the switch and test your brightness predictions. Results?
+  <input type="text" id="brightnessResults2" name="brightnessResults2"><br><br>
+  What does this indicate about the current through the bulbs?
+  <input type="text" id="currentIndication4" name="currentIndication4"><br><br>
+  What is the value for the current, as given by the ammeter?
+  <input type="text" id="currentValue8" name="currentValue8"><br><br>
+  With the switch still on, loosen one of the bulbs. What happens, and why?
+  <input type="text" id="bulbLoosen2" name="bulbLoosen2"><br><br>
+  Turn off the switch, and then disconnect all wires and meters.
+ </li>
+</ol>
+
+</body>
+</html>
