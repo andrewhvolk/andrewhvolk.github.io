@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: sans-serif;
+}
+
+h1 {
+    color: #333;
+}
+
+canvas#gameCanvas {
+    border: 1px solid black;
+    background-color: #fff;
+}
+
+#uiContainer {
+    margin-top: 10px;
+    /* Styles for UI elements will go here */
+}
+
+#problemOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: rgba(200, 200, 200, 0.9);
+    border: 2px solid #555;
+    border-radius: 10px;
+    text-align: center;
+    /* Styles for problem overlay will go here */
+}

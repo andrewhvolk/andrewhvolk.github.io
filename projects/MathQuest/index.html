@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quest</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Math Quest</h1>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="uiContainer">
+        <!-- UI elements like health, ammo, score will go here -->
+        <div id="ammoCounter">Ammo: 0</div>
+    </div>
+    <div id="problemOverlay" style="display: none;">
+        <h3>Math Problem</h3>
+        <p id="problemText">What is 2 + 2?</p>
+        <input type="text" id="answerInput">
+        <button id="submitButton">Submit</button>
+    </div>
+
+    <script src="js/input.js"></script>
+    <script src="js/projectile.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/study_station.js"></script> <script src="js/player.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
