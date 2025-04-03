@@ -12,6 +12,7 @@ class Enemy {
     }
 
     draw(ctx) {
+        console.log('Drawing enemy at:', this.x, this.y, 'health:', this.health);
         ctx.fillStyle = 'blue';
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }

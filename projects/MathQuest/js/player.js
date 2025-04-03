@@ -1,5 +1,5 @@
 class Player {
-    constructor(gameWidth, gameHeight) {
+    constructor(gameWidth, gameHeight, level) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.width = 50;
@@ -19,17 +19,36 @@ class Player {
         this.idleImage.src = 'assets/images/player_idle.png'; // Assuming placeholder image exists
         this.runImage = new Image(); // Load run sprite
         this.runImage.src = 'assets/images/player_run.png';   // Assuming placeholder image exists
+        this.ammo = 0; // Initialize ammo count
+        this.ammo = 0; // Initialize ammo count
+        this.level = level;
     }
 
     update(input, deltaTime, studyStation) { // Pass studyStation as argument
         // Horizontal movement
+        let dx = 0;
         if (input.keys.ArrowLeft) {
-            this.x -= this.speed;
+            dx = -this.speed;
         }
         if (input.keys.ArrowRight) {
-            this.x += this.speed;
+            dx = this.speed;
         }
 
+        // Collision detection before horizontal movement
+        if (this.level.checkCollision(this.x + dx, this.y, this.width, this.height)) {
+            dx = 0; // Prevent horizontal movement
+        }
+
+        this.x += dx;
+
+        let dy = this.velocityY;
+        if (this.level.checkCollision(this.x, this.y + dy, this.width, this.height)) {
+            dy = 0;
+            this.velocityY = 0;
+            this.isJumping = false;
+        }
+
+        this.y += dy;
         // Jumping
         if (input.keys.Space && !this.isJumping) {
             this.velocityY = -20; // Initial jump velocity
@@ -73,18 +92,22 @@ class Player {
     }
 
     shoot() {
-        console.log('Shoot method called'); // Just log to console for now
-        const projectile = new Projectile(this.x + this.width, this.y + this.height/2, 10); // Create projectile at player position
-        this.projectiles.push(projectile); // Projectile creation re-introduced
+        if (this.ammo > 0) {
+            this.ammo--;
+            const projectile = new Projectile(this.x + this.width, this.y + this.height/2, 10); // Create projectile at player position
+            this.projectiles.push(projectile); // Projectile creation re-introduced
+        }
     }
 
     draw(ctx) {
+        console.log('Drawing player at:', this.x, this.y);
         const isMovingHorizontally = this.speedX !== 0; // Check if player is moving horizontally
         const image = isMovingHorizontally ? this.runImage : this.idleImage; // Choose sprite based on movement
 
         ctx.drawImage(image, this.x, this.y, this.width, this.height); // Draw player sprite
 
         // Projectile drawing - re-introduced
+        console.log('Drawing projectiles:', this.projectiles.length);
         this.projectiles.forEach(projectile => projectile.draw(ctx));
     }
 
@@ -100,4 +123,10 @@ class Player {
     interactWithStation(station) {
         station.activate(); // Call activate method of study station
     }
+
+    addAmmo(amount) {
+        this.ammo += amount;
+        console.log(`Ammo added: ${amount}. Current ammo: ${this.ammo}`); // Log for debugging
+    }
+
 }

@@ -1,20 +1,21 @@
 class Projectile {
-    constructor(x, y, velocityX) {
+    constructor(x, y, vx, vy, width, height, damage) {
         this.x = x;
         this.y = y;
-        this.velocityX = velocityX;
-        this.width = 10;
-        this.height = 5;
+        this.vx = vx;
+        this.vy = vy;
+        this.width = width;
+        this.height = height;
+        this.damage = damage;
     }
 
-    update(deltaTime) {
-        this.x += this.velocityX;
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
     }
 
     draw(ctx) {
-        ctx.fillStyle = 'green'; // Changed to green for visibility
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2); // Draw circle
-        ctx.fill();
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 }

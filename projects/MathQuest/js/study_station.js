@@ -26,6 +26,17 @@ class StudyStation {
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
+
+    checkInteraction(player) {
+        // Simple AABB collision detection
+        return (
+            player.x < this.x + this.width &&
+            player.x + player.width > this.x &&
+            player.y < this.y + this.height &&
+            player.y + player.height > this.y
+        );
+    }
+
     activate() {
         this.isActive = true;
         this.problemOverlay.style.display = 'flex'; // Show problem overlay
