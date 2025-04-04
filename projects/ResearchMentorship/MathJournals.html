@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Undergraduate Math Journals Resource</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-indigo-100 font-sans text-slate-700 min-h-screen p-4 sm:p-8">
+
+    <div class="container mx-auto max-w-7xl bg-white rounded-xl shadow-lg p-6 sm:p-8 md:p-12">
+
+        <header class="mb-10 border-b border-slate-200 pb-6">
+            <h1 class="text-3xl sm:text-4xl font-bold text-indigo-700 mb-3">Interactive Guide to Undergraduate Math Journals</h1>
+            <p class="text-lg text-slate-600">Explore peer-reviewed journals welcoming undergraduate contributions.</p>
+        </header>
+
+        <section class="mb-10 text-slate-700 space-y-4 leading-relaxed">
+             <p>
+                Publishing your work as an undergraduate is a fantastic way to deepen your understanding, contribute to the mathematical community, and enhance your academic profile. This resource provides information on various journals that publish undergraduate work, including original research, expository articles, and problem solutions.
+            </p>
+            <p>
+                <strong class="font-semibold text-indigo-600">Seek Faculty Mentorship:</strong> We strongly encourage you to work closely with a faculty mentor. They can provide invaluable guidance on topic selection, research methods, mathematical rigor, writing style, choosing the right journal, and navigating the submission and revision process.
+            </p>
+            <p>
+                Use the interactive table below to explore journals. Always visit the official journal website (linked where available) for the most current submission guidelines, deadlines, and scope. Remember that presenting at <strong class="font-semibold">undergraduate research conferences</strong> (like those listed on the <a href="https://www.maa.org/sections/meetings" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">MAA Sections page</a> or CUR events) is another excellent way to share your work and get feedback.
+            </p>
+             <p class="text-sm text-slate-500">
+                Note: <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/link-2.svg" alt="Link icon" class="icon link-icon opacity-70"> indicates a link to the journal's website. Use the controls below to filter and sort the table.
+            </p>
+        </section>
+
+        <section class="mb-12 p-6 bg-indigo-50 rounded-lg border-l-4 border-indigo-400 shadow-sm">
+            <h2 class="text-2xl font-semibold text-indigo-700 mb-4">General Guidelines & Tips for Success</h2>
+            <div class="space-y-3 text-slate-700 text-sm sm:text-base leading-relaxed">
+                <p><strong class="font-medium text-indigo-800">Formatting:</strong> Most mathematics journals require submissions in <strong class="font-medium">LaTeX</strong>. Familiarize yourself with it early!</p>
+                <p><strong class="font-medium text-indigo-800">Scope:</strong> Ensure your paper's topic and style (research, exposition, problem) fit the journal's scope.</p>
+                <p><strong class="font-medium text-indigo-800">Clarity & Rigor:</strong> Write clearly and concisely. Ensure all arguments are mathematically sound and well-supported. Proofread carefully!</p>
+                <p><strong class="font-medium text-indigo-800">Originality:</strong> Research papers must present original work. Expository papers should offer a novel perspective or clear explanation of existing topics.</p>
+                 <p><strong class="font-medium text-indigo-800">Submission Process:</strong> Most journals use an online submission portal, but some may accept email submissions. Always check the specific journal's website for their procedure.</p>
+                <p><strong class="font-medium text-indigo-800">Peer Review:</strong> Be prepared for the peer review process. Reviewers provide constructive criticism to improve your work. Respond thoughtfully and revise accordingly.</p>
+                <p><strong class="font-medium text-indigo-800">Ethics:</strong> Properly cite all sources and avoid plagiarism. Discuss authorship contributions honestly with co-authors and your mentor.</p>
+            </div>
+        </section>
+
+        <section class="mb-12 p-6 bg-green-50 rounded-lg border-l-4 border-green-500 shadow-sm info-section">
+            <h2 class="text-2xl font-semibold text-green-800 mb-5">Understanding Paper Types, Formatting, and Structure</h2>
+
+            <h3 class="text-xl font-semibold text-green-700 mt-6 mb-3">Types of Papers in Undergraduate Math Journals</h3>
+            <p class="mb-4 text-sm sm:text-base leading-relaxed">While specific journals have their own focus, papers submitted by undergraduates generally fall into these categories:</p>
+            <ol class="space-y-4 text-sm sm:text-base leading-relaxed">
+                <li>
+                    <strong class="font-medium">Original Research Papers:</strong>
+                    <ul class="mt-1 space-y-1 pl-4">
+                        <li><strong>Goal:</strong> Present new mathematical results discovered by the student(s), often under the guidance of a faculty mentor.</li>
+                        <li><strong>Content:</strong> Includes rigorous proofs of original theorems, lemmas, or propositions, along with necessary background and context.</li>
+                        <li><strong>Examples:</strong> Proving a new property of a specific mathematical object, developing a novel algorithm, or analyzing a mathematical model in a new way.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="font-medium">Expository Papers:</strong>
+                     <ul class="mt-1 space-y-1 pl-4">
+                        <li><strong>Goal:</strong> Explain existing mathematical topics, concepts, or theorems in a clear, insightful, and accessible manner for an audience of peers (other undergraduates).</li>
+                        <li><strong>Content:</strong> Synthesizes information from various sources (textbooks, articles), provides illustrative examples, clarifies difficult points, or presents a topic from a unique perspective. Does *not* typically contain original mathematical results but values clarity and pedagogical insight.</li>
+                        <li><strong>Examples:</strong> A detailed explanation of the RSA encryption algorithm, an accessible introduction to knot theory, a historical overview of the development of calculus.</li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong class="font-medium">Problem Solutions:</strong>
+                     <ul class="mt-1 space-y-1 pl-4">
+                        <li><strong>Goal:</strong> Provide correct and well-explained solutions to problems posed in specific sections of certain journals (like *Crux Mathematicorum* or the *Pi Mu Epsilon Journal*).</li>
+                        <li><strong>Content:</strong> Focuses on the logical steps and reasoning needed to arrive at the solution. Elegance and clarity are often valued.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="font-medium">Survey or Literature Review Papers:</strong>
+                     <ul class="mt-1 space-y-1 pl-4">
+                        <li><strong>Goal:</strong> Summarize and synthesize the existing research or literature on a specific, often narrow, mathematical topic.</li>
+                        <li><strong>Content:</strong> Discusses key results, different approaches, open questions, and the historical development within that subfield. Requires extensive reading and critical analysis of existing papers. (Less common for undergraduate submissions unless highly focused).</li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong class="font-medium">Historical, Philosophical, or Cultural Papers:</strong>
+                     <ul class="mt-1 space-y-1 pl-4">
+                        <li><strong>Goal:</strong> Explore the history of mathematical ideas, the philosophical underpinnings of mathematics, its connections to culture, or pedagogical aspects.</li>
+                        <li><strong>Content:</strong> Often more essay-like, relying on historical sources, philosophical arguments, or educational research. Rigor is still important but may involve different kinds of evidence than purely mathematical proof. (Suitable for journals like *Journal of Humanistic Mathematics* or *PRIMUS*).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3 class="text-xl font-semibold text-green-700 mt-8 mb-3">Formatting Standards</h3>
+            <p class="mb-4 text-sm sm:text-base leading-relaxed">While you <strong class="font-medium">must always consult the specific journal's submission guidelines</strong>, here are common formatting practices in mathematics:</p>
+            <ol class="space-y-4 text-sm sm:text-base leading-relaxed">
+                <li>
+                    <strong class="font-medium">LaTeX:</strong> This is the <strong class="font-medium">overwhelming standard</strong> for mathematical typesetting. Its ability to handle complex formulas, automatic numbering (theorems, equations, sections), and bibliography management makes it essential. Most journals <em class="italic">require</em> submissions as a PDF generated from LaTeX source code.
+                    <ul class="mt-1 space-y-1 pl-4 list-disc">
+                        <li><strong>Templates:</strong> Many journals provide their own LaTeX class file (<code>.cls</code>) or style file (<code>.sty</code>) and a template (<code>.tex</code>) file. <strong class="font-medium">Using the journal's template is highly recommended</strong> to ensure correct margins, fonts, heading styles, etc.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="font-medium">Document Structure:</strong>
+                    <ul class="mt-1 space-y-1 pl-4 list-disc">
+                        <li><strong>Page Size:</strong> Usually US Letter or A4.</li>
+                        <li><strong>Margins:</strong> Typically 1 inch or as defined by the template.</li>
+                        <li><strong>Font:</strong> Often standard LaTeX fonts (e.g., Computer Modern) or Times variants (specified by template). Size usually 10pt-12pt.</li>
+                        <li><strong>Spacing:</strong> Usually single-spaced or 1.5-spaced.</li>
+                        <li><strong>Title/Author/Abstract:</strong> Formatted distinctly at the beginning.</li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong class="font-medium">Mathematical Content:</strong>
+                     <ul class="mt-1 space-y-1 pl-4 list-disc">
+                        <li><strong>Environments:</strong> Use standard LaTeX environments for theorems, lemmas, definitions, proofs, etc. (<code>\begin{theorem}...\end{theorem}</code>). Journals often provide custom ones.</li>
+                        <li><strong>Equations:</strong> Use environments like <code>equation</code> or <code>align</code> for numbered equations.</li>
+                    </ul>
+                </li>
+                 <li>
+                    <strong class="font-medium">Citations & Bibliography:</strong>
+                     <ul class="mt-1 space-y-1 pl-4 list-disc">
+                        <li><strong>Style:</strong> Numeric citations (e.g., <code>[1]</code>, <code>[3, Thm. 4.2]</code>) are very common.</li>
+                        <li><strong>Tools:</strong> BibTeX with a journal-provided style file (<code>.bst</code>) is standard for managing references.</li>
+                    </ul>
+                </li>
+            </ol>
+
+             <h3 class="text-xl font-semibold text-green-700 mt-8 mb-3">Common Sections of a Math Paper</h3>
+             <p class="mb-4 text-sm sm:text-base leading-relaxed">The exact structure depends on the paper type, but a typical research or expository paper includes:</p>
+             <ol class="space-y-3 text-sm sm:text-base leading-relaxed">
+                 <li><strong class="font-medium">Title:</strong> Concise and informative.</li>
+                 <li><strong class="font-medium">Author(s) and Affiliation(s):</strong> Name, university, status (e.g., Undergraduate).</li>
+                 <li><strong class="font-medium">Abstract:</strong> Brief standalone summary (100-250 words) of motivation, methods, results, significance.</li>
+                 <li><strong class="font-medium">Introduction:</strong> Background, motivation, problem/topic statement, main results overview, paper structure.</li>
+                 <li><strong class="font-medium">Preliminaries / Background / Definitions:</strong> Essential notation, terminology, known theorems needed.</li>
+                 <li><strong class="font-medium">Main Body (Multiple Sections):</strong> Core content with logical headings.
+                    <ul class="mt-1 space-y-1 pl-4 list-disc">
+                        <li><em>For Research:</em> Arguments, lemmas, proofs leading to main results.</li>
+                        <li><em>For Expository:</em> Step-by-step explanations, examples, discussions.</li>
+                    </ul>
+                 </li>
+                 <li><strong class="font-medium">Results (for Research):</strong> Clear statement and proof of main findings.</li>
+                 <li><strong class="font-medium">Examples / Applications:</strong> Illustrate concepts or results.</li>
+                 <li><strong class="font-medium">Conclusion / Discussion / Future Work:</strong> Summary, limitations, implications, open questions.</li>
+                 <li><strong class="font-medium">Acknowledgements (Optional):</strong> Thank mentors, funders, reviewers.</li>
+                 <li><strong class="font-medium">References / Bibliography:</strong> Numbered list of cited works in journal style.</li>
+                 <li><strong class="font-medium">Appendix (Optional):</strong> Supplementary material (code, long proofs).</li>
+             </ol>
+             <p class="mt-4 text-sm sm:text-base leading-relaxed italic">Remember to tailor the sections and content based on the type of paper and the specific requirements of the target journal.</p>
+        </section>
+        <section id="controls" class="mb-6 p-4 bg-slate-50 rounded-lg border border-slate-200 shadow-sm">
+             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-end">
+                <div>
+                    <label for="filter-type" class="block text-sm font-medium text-slate-700 mb-1">Filter by Type:</label>
+                    <select id="filter-type" name="filter-type" aria-label="Filter journals by type" class="w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                        <option value="all">All Types</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filter-ug-focus" class="block text-sm font-medium text-slate-700 mb-1">Filter by UG Focus:</label>
+                    <select id="filter-ug-focus" name="filter-ug-focus" aria-label="Filter journals by undergraduate focus" class="w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
+                        <option value="all">All</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="sm:col-span-2 md:col-span-1">
+                     <label class="block text-sm font-medium text-slate-700 mb-1">Sort by:</label>
+                     <div class="flex flex-wrap gap-2">
+                         <button id="sort-name" data-column="name" aria-label="Sort by journal name" class="sort-button flex-1 text-xs px-3 py-1.5 border border-slate-300 rounded-md bg-white hover:bg-slate-100 transition-colors">
+                             Name <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
+                         </button>
+                         <button id="sort-type" data-column="type" aria-label="Sort by type" class="sort-button flex-1 text-xs px-3 py-1.5 border border-slate-300 rounded-md bg-white hover:bg-slate-100 transition-colors">
+                             Type <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
+                         </button>
+                         <button id="sort-ug-focus" data-column="undergradFocus" aria-label="Sort by undergraduate focus" class="sort-button flex-1 text-xs px-3 py-1.5 border border-slate-300 rounded-md bg-white hover:bg-slate-100 transition-colors">
+                             UG Focus <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
+                         </button>
+                     </div>
+                </div>
+                <div>
+                     <button id="reset-filters" aria-label="Reset filters and sorting" class="w-full px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                         Reset All
+                     </button>
+                </div>
+            </div>
+        </section>
+
+        <div id="table-status" class="sr-only" aria-live="polite" aria-atomic="true">
+            Journal table loaded.
+        </div>
+
+        <section class="mb-12">
+             <h2 class="text-2xl font-semibold text-indigo-700 mb-5 sr-only">Journal Directory Table</h2>
+             <div class="table-container border border-slate-200 rounded-lg shadow-md overflow-hidden">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-indigo-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">Journal Name & Website</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">Primary Focus</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">Type</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">Peer-Rev?</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">UG Focus?</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">Recent Pub</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">Deadlines</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">Accept %</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-indigo-800 uppercase tracking-wider">Decision Time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-200" id="journal-table-body">
+                        </tbody>
+                </table>
+             </div>
+             <p id="no-results" class="text-center text-slate-500 mt-6 hidden">No journals match the current filters.</p>
+        </section>
+
+        <section class="mb-10 p-6 bg-slate-50 rounded-lg border-l-4 border-slate-400 shadow-sm info-section">
+            <h2 class="text-2xl font-semibold text-slate-700 mb-4">Glossary of Common Terms</h2>
+             <dl class="space-y-4 text-sm sm:text-base leading-relaxed">
+                 <div><dt class="font-semibold text-slate-800">Peer Review</dt><dd class="text-slate-600 ml-4 mt-1">A process where experts ("peers") evaluate a manuscript's quality, originality, and rigor before publication.</dd></div>
+                <div><dt class="font-semibold text-slate-800">Expository Article</dt><dd class="text-slate-600 ml-4 mt-1">A paper that explains existing mathematical concepts, results, or history clearly, often providing new insights or connections.</dd></div>
+                <div><dt class="font-semibold text-slate-800">LaTeX</dt><dd class="text-slate-600 ml-4 mt-1">A document preparation system widely used for typesetting complex mathematical formulas.</dd></div>
+                <div><dt class="font-semibold text-slate-800">Acceptance Rate</dt><dd class="text-slate-600 ml-4 mt-1">The approximate percentage of submitted manuscripts that a journal eventually publishes.</dd></div>
+                <div><dt class="font-semibold text-slate-800">Faculty Sponsor/Mentor</dt><dd class="text-slate-600 ml-4 mt-1">A professor guiding an undergraduate's research and writing, often required for submission.</dd></div>
+            </dl>
+        </section>
+
+        <footer class="mt-12 pt-8 border-t border-slate-200 text-center text-sm text-slate-500">
+            <p>&copy; <span id="year"></span> Undergraduate Math Publishing Resource. Data gathered from publicly available sources.</p>
+            <p>Last Updated: <span id="last-updated"></span></p>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- Data ---
+        const journals = [
+            // Data array remains the same as the previous version...
+            { name: "Involve: A Journal of Mathematics", url: "https://msp.org/involve/about/journal/about.html", focus: "High-quality student research, all math areas", type: "Research", icon: "flask-conical.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "February 2025", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "Rose-Hulman Undergraduate Mathematics Journal", url: "https://scholar.rose-hulman.edu/rhumj/", focus: "Undergraduate research in mathematical sciences", type: "Research", icon: "flask-conical.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "2024 (Vol. 25)", deadlines: "Rolling basis", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "SIAM Undergraduate Research Online (SIURO)", url: "https://www.siam.org/publications/siam-journals/siam-undergraduate-research-online-siuro/", focus: "Applied and computational mathematics by undergraduates", type: "Research (Applied)", icon: "calculator.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "March 2025", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "~1.5 months" },
+            { name: "Minnesota Journal of Undergraduate Mathematics (MJUM)", url: "https://mjum.math.umn.edu/", focus: "Original undergraduate research, all math areas", type: "Research", icon: "flask-conical.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "February 2024", deadlines: "Check website (was closed)", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "PUMP Journal of Undergraduate Research", url: "https://journals.calstate.edu/pump", focus: "Undergraduates pursuing math PhDs, all math areas", type: "Research", icon: "flask-conical.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "January 2025", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "~9-12 months" },
+            { name: "Pi Mu Epsilon Journal", url: "https://pme-math.org/journal", focus: "Undergraduate focused, all math areas, problem section", type: "Research/Problems", icon: "puzzle.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "Fall 2022 (Problems)", deadlines: "March 31, October 31 (Problems)", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "Columbia Journal of Undergraduate Mathematics (CJUM)", url: "https://journals.library.columbia.edu/index.php/cjum/index", focus: "Expository articles by undergraduates, broad math areas", type: "Expository", icon: "book-open.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "August 2024", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "Ball State Undergraduate Mathematics Exchange", url: "https://digitalresearch.bsu.edu/mathexchange/", focus: "Beyond classroom material, broad math areas", type: "Expository/Broad", icon: "library.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "2024 (Vol. 18)", deadlines: "Check website (was closed)", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "The Pentagon (Journal of Kappa Mu Epsilon)", url: "https://www.kappamuepsilon.org/pentagon.php", focus: "Undergraduate focused, broad math areas, KME members", type: "Broad/Membership", icon: "users.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "Spring 2023", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "Journal of Young Investigators (JYI)", url: "https://www.jyi.org/", focus: "Broad science, including math, undergraduate research", type: "Research (Broad Sci)", icon: "atom.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "Check website", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "Missouri Journal of Mathematical Sciences", url: "#", focus: "Original research, expository, survey, broad math areas", type: "Research/Expository", icon: "combine.svg", peerReviewed: "Yes", undergradFocus: "No", recentPub: "November 2024", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "~2-3 months" },
+            { name: "Math Horizons", url: "https://maa.org/mathhorizons", focus: "Broad mathematical culture, accessible to undergraduates", type: "Broad/Culture", icon: "palette.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "February 2025", deadlines: "Check website", acceptanceRate: "~25%", decisionTime: "~1-2 months" },
+            { name: "Mathematics Magazine", url: "https://maa.org/publication/mathematics-magazine", focus: "Expository, broad mathematical audience, undergraduates", type: "Expository/Broad", icon: "book-open.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "March 2025", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "~2-3 months" },
+            { name: "The American Mathematical Monthly", url: "https://maa.org/publication/the-american-mathematical-monthly", focus: "Broad mathematical interests, diverse audience", type: "Broad/Diverse", icon: "library.svg", peerReviewed: "Yes", undergradFocus: "No", recentPub: "January 2025", deadlines: "Check website", acceptanceRate: "~12%", decisionTime: "~2-3 months" },
+            { name: "Crux Mathematicorum", url: "https://cms.math.ca/publications/crux/", focus: "Problem-solving focused, secondary/undergraduate level", type: "Problems", icon: "puzzle.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "March 2025", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "The Mathematical Gazette", url: "https://www.m-a.org.uk/the-mathematical-gazette", focus: "Teachers, students (GCSE to undergraduate), broad math", type: "Broad/Educational", icon: "graduation-cap.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "March 2025", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "Journal of Humanistic Mathematics", url: "https://scholarship.claremont.edu/jhm/", focus: "Aesthetic, cultural, historical, pedagogical math aspects", type: "Broad/Humanistic", icon: "heart.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "July 2023", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "~2-4 months" },
+            { name: "International Journal of Undergraduate Research and Innovation", url: "https://ijur.terrajournals.org/", focus: "Multidisciplinary, including mathematics", type: "Research (Multi)", icon: "globe.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "October 2024", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "Mathematics Enthusiast", url: "https://scholarworks.umt.edu/tme/", focus: "Math content, education research, interdisciplinary", type: "Broad/Education", icon: "graduation-cap.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "October 2025", deadlines: "Check website", acceptanceRate: "~25%", decisionTime: "~2-3 months" },
+            { name: "UNC Charlotte Undergraduate Research Journal", url: "#", focus: "Broad undergraduate research, including mathematics", type: "Research (Broad)", icon: "flask-conical.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "Unknown", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "Furman University Electronic Journal of Undergraduate Mathematics", url: "https://math.furman.edu/~ejournal/", focus: "Undergraduate work, technical, historical, expository", type: "Research/Expository", icon: "combine.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "Unknown", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "PRIMUS: Problems, Resources, and Issues in Mathematics Undergraduate Studies", url: "https://www.tandfonline.com/toc/upri20/current", focus: "Teaching collegiate mathematics, pedagogical initiatives", type: "Education/Pedagogy", icon: "graduation-cap.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "February 2025", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "~1-2 months" },
+            { name: "Parabola", url: "https://www.parabola.unsw.edu.au/", focus: "Broad mathematical topics, accessible to undergraduates", type: "Broad", icon: "library.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "Spring 2025", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+            { name: "College Mathematics Journal", url: "https://maa.org/publication/college-mathematics-journal", focus: "Enhance classroom learning, stimulate thinking", type: "Education/Expository", icon: "book-open.svg", peerReviewed: "Yes", undergradFocus: "Yes", recentPub: "Unknown", deadlines: "Check website", acceptanceRate: "Unknown", decisionTime: "Unknown" },
+        ];
+
+        // --- State Variables ---
+        const originalJournals = [...journals];
+        let currentSort = { column: null, direction: 'asc' };
+        let currentFilters = { type: 'all', undergradFocus: 'all' };
+
+        // --- DOM Elements ---
+        const tableBody = document.getElementById('journal-table-body');
+        const typeFilterSelect = document.getElementById('filter-type');
+        const ugFocusFilterSelect = document.getElementById('filter-ug-focus');
+        const sortNameButton = document.getElementById('sort-name');
+        const sortTypeButton = document.getElementById('sort-type');
+        const sortUgFocusButton = document.getElementById('sort-ug-focus');
+        const resetButton = document.getElementById('reset-filters');
+        const noResultsMsg = document.getElementById('no-results');
+        const tableStatus = document.getElementById('table-status');
+
+        // --- Functions ---
+        // populateTable, applyFilters, applySort, updateSortButtonsUI, updateTable,
+        // populateTypeFilter, handleSortClick, setFooterContent
+        // remain the same as the previous version...
+
+        /** Populates the table body with journal data. */
+        function populateTable(dataToRender) {
+            if (!tableBody) return;
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            if (dataToRender.length === 0) {
+                noResultsMsg.classList.remove('hidden');
+            } else {
+                noResultsMsg.classList.add('hidden');
+            }
+
+            dataToRender.forEach((journal, index) => {
+                const row = document.createElement('tr');
+                row.classList.add(index % 2 === 0 ? 'bg-white' : 'bg-slate-50', 'hover:bg-indigo-100/50', 'transition-colors', 'duration-150');
+
+                let nameCellContent = journal.name;
+                if (journal.url && journal.url !== '#') {
+                    nameCellContent = `<a href="${journal.url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 hover:underline group font-medium">${journal.name}<img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/link-2.svg" alt="Link" class="icon link-icon"></a>`;
+                } else {
+                     nameCellContent = `<span class="font-medium">${journal.name}</span> <span class="text-slate-400 text-xs italic">(No link found)</span>`;
+                }
+
+                const typeIconUrl = `https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/${journal.icon || 'help-circle.svg'}`;
+                const typeCellContent = `<div class="flex items-center"><img src="${typeIconUrl}" alt="${journal.type} icon" class="icon" title="${journal.type}"><span class="text-slate-700">${journal.type}</span></div>`;
+
+                const cells = [
+                    `<td class="px-6 py-4 whitespace-nowrap text-sm">${nameCellContent}</td>`,
+                    `<td class="px-6 py-4 text-sm text-slate-600">${journal.focus}</td>`,
+                    `<td class="px-6 py-4 whitespace-nowrap text-sm">${typeCellContent}</td>`,
+                    `<td class="px-6 py-4 whitespace-nowrap text-sm text-center ${journal.peerReviewed === 'Yes' ? 'text-green-600 font-semibold' : 'text-red-600'}">${journal.peerReviewed}</td>`,
+                    `<td class="px-6 py-4 whitespace-nowrap text-sm text-center ${journal.undergradFocus === 'Yes' ? 'text-green-600 font-semibold' : 'text-orange-600'}">${journal.undergradFocus}</td>`,
+                    `<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${journal.recentPub}</td>`,
+                    `<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${journal.deadlines}</td>`,
+                    `<td class="px-6 py-4 whitespace-nowrap text-sm text-center text-slate-600">${journal.acceptanceRate}</td>`,
+                    `<td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${journal.decisionTime}</td>`
+                ];
+                row.innerHTML = cells.join('');
+                tableBody.appendChild(row);
+            });
+        }
+
+        /** Applies current filters to the original dataset. */
+        function applyFilters() {
+            return originalJournals.filter(journal => {
+                const typeMatch = currentFilters.type === 'all' || journal.type === currentFilters.type;
+                const ugFocusMatch = currentFilters.undergradFocus === 'all' || journal.undergradFocus === currentFilters.undergradFocus;
+                return typeMatch && ugFocusMatch;
+            });
+        }
+
+        /** Sorts the provided data based on the current sort state. */
+        function applySort(data) {
+            if (!currentSort.column) return data;
+
+            const { column, direction } = currentSort;
+            const modifier = direction === 'asc' ? 1 : -1;
+
+            // Custom sort for 'Yes'/'No' columns (prioritize 'Yes' when ascending)
+            const yesNoSort = (a, b) => {
+                if (a === b) return 0;
+                if (a === 'Yes') return -1;
+                if (b === 'Yes') return 1;
+                if (a === 'No') return -1; // Should only happen if b is not 'Yes' or 'No'
+                if (b === 'No') return 1;
+                return 0; // Fallback for other values
+            };
+
+            return [...data].sort((a, b) => {
+                const valA = a[column];
+                const valB = b[column];
+
+                if (column === 'undergradFocus' || column === 'peerReviewed') {
+                     return yesNoSort(valA, valB) * modifier;
+                }
+
+                // Default string comparison (case-insensitive)
+                 const strA = String(valA).toLowerCase();
+                 const strB = String(valB).toLowerCase();
+                 if (strA < strB) return -1 * modifier;
+                 if (strA > strB) return 1 * modifier;
+                 return 0;
+            });
+        }
+
+         /** Updates the sort button UI elements. */
+        function updateSortButtonsUI() {
+            document.querySelectorAll('.sort-button').forEach(button => {
+                button.classList.remove('active', 'asc', 'desc');
+                if (button.dataset.column === currentSort.column) {
+                    button.classList.add('active', currentSort.direction);
+                }
+            });
+         }
+
+        /** Updates the table display by applying filters and sorting. */
+        function updateTable() {
+            const filteredData = applyFilters();
+            const sortedData = applySort(filteredData);
+            populateTable(sortedData);
+            updateSortButtonsUI();
+
+            // Update status for screen readers
+            let statusText = `Table updated. Showing ${sortedData.length} journals.`;
+            if (currentSort.column) {
+                 const columnText = currentSort.column === 'undergradFocus' ? 'Undergraduate Focus' : currentSort.column.charAt(0).toUpperCase() + currentSort.column.slice(1);
+                 statusText += ` Sorted by ${columnText} ${currentSort.direction === 'asc' ? 'ascending' : 'descending'}.`;
+            }
+             if (currentFilters.type !== 'all' || currentFilters.undergradFocus !== 'all') {
+                 statusText += ` Filters applied.`;
+             }
+            tableStatus.textContent = statusText;
+        }
+
+        /** Populates the Type filter dropdown with unique types. */
+        function populateTypeFilter() {
+            if (!typeFilterSelect) return;
+            const types = [...new Set(originalJournals.map(j => j.type))].sort((a,b) => a.localeCompare(b)); // Sort alphabetically
+            types.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                typeFilterSelect.appendChild(option);
+            });
+        }
+
+        /** Handles clicks on sort buttons. */
+        function handleSortClick(event) {
+            const clickedColumn = event.currentTarget.dataset.column;
+            if (!clickedColumn) return;
+
+            if (currentSort.column === clickedColumn) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = clickedColumn;
+                currentSort.direction = 'asc';
+            }
+            updateTable();
+        }
+
+        /** Sets the dynamic footer content. */
+        function setFooterContent() {
+            const yearSpan = document.getElementById('year');
+            const lastUpdatedSpan = document.getElementById('last-updated');
+            const now = new Date();
+            if (yearSpan) yearSpan.textContent = now.getFullYear();
+            if (lastUpdatedSpan) lastUpdatedSpan.textContent = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTypeFilter();
+            setFooterContent();
+            populateTable(originalJournals); // Initial render
+
+            // Add Event Listeners
+            if (typeFilterSelect) typeFilterSelect.addEventListener('change', (e) => { currentFilters.type = e.target.value; updateTable(); });
+            if (ugFocusFilterSelect) ugFocusFilterSelect.addEventListener('change', (e) => { currentFilters.undergradFocus = e.target.value; updateTable(); });
+            if (sortNameButton) sortNameButton.addEventListener('click', handleSortClick);
+            if (sortTypeButton) sortTypeButton.addEventListener('click', handleSortClick);
+            if (sortUgFocusButton) sortUgFocusButton.addEventListener('click', handleSortClick);
+            if (resetButton) {
+                resetButton.addEventListener('click', () => {
+                    currentFilters = { type: 'all', undergradFocus: 'all' };
+                    currentSort = { column: null, direction: 'asc' };
+                    if (typeFilterSelect) typeFilterSelect.value = 'all';
+                    if (ugFocusFilterSelect) ugFocusFilterSelect.value = 'all';
+                    updateTable();
+                });
+            }
+        });
+
+    </script>
+
+</body>
+</html>
