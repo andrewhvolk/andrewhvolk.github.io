@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chessboard Rice Growth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: 'LucideIcons';
+        /* Using unpkg CDN for Lucide font */
+        src: url(https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.ttf) format('truetype');
+      }
+      .lucide {
+        font-family: 'LucideIcons';
+        font-size: 1.25rem; /* Adjust size as needed */
+        line-height: 1;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      /* Style for chessboard squares */
+      .square {
+        width: 12.5%; /* 100% / 8 squares */
+        padding-bottom: 12.5%; /* Maintain aspect ratio */
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s;
+        border: 1px solid #ccc; /* Add subtle border */
+      }
+      .square:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+      }
+      .square.selected {
+         border: 3px solid #3b82f6; /* Blue border for selected */
+         box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+      }
+      .square .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem; /* Smaller font for square number */
+        font-weight: bold;
+        color: #4b5563; /* Gray text */
+      }
+      /* Alternating square colors */
+      .board-row:nth-child(odd) .square:nth-child(even),
+      .board-row:nth-child(even) .square:nth-child(odd) {
+        background-color: #d1d5db; /* Light gray */
+      }
+      .board-row:nth-child(odd) .square:nth-child(odd),
+      .board-row:nth-child(even) .square:nth-child(even) {
+        background-color: #f3f4f6; /* Lighter gray/white */
+      }
+      /* Style for the chart tooltips */
+      .tooltip {
+        position: absolute;
+        text-align: center;
+        padding: 8px;
+        font: 12px sans-serif;
+        background: rgba(50, 50, 50, 0.8); /* Darker tooltip */
+        color: white;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none; /* Make tooltip non-interactive */
+        opacity: 0;
+        transition: opacity 0.2s;
+        z-index: 20; /* Ensure tooltip is above chart elements */
+      }
+      /* Style for chart axes */
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: #333;
+        shape-rendering: crispEdges;
+      }
+      .axis text {
+        font-size: 0.8rem;
+        fill: #333;
+      }
+
+      /* Style for linear chart bars */
+       .bar {
+         fill: #fb923c; /* Orange color for bars */
+         transition: fill 0.2s;
+         cursor: pointer; /* Add cursor pointer to bars */
+       }
+       .bar:hover {
+         fill: #f97316; /* Darker orange on hover */
+         fill-opacity: 0.8; /* Slightly transparent on hover */
+       }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 md:p-8 flex flex-col items-center min-h-screen">
+
+    <div class="w-full max-w-6xl bg-white rounded-lg shadow-xl p-6 md:p-8">
+        <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
+            <span class="lucide mr-2">&#xe9a2;</span>
+            Exponential Growth: Rice on a Chessboard
+        </h1>
+
+        <div class="flex flex-col lg:flex-row gap-6 md:gap-8">
+
+            <div class="w-full lg:w-1/2 xl:w-2/5">
+                <h2 class="text-lg font-semibold text-gray-700 mb-3 text-center">Chessboard (Click a Square)</h2>
+                <div id="chessboard" class="aspect-square w-full max-w-md mx-auto bg-white border-2 border-gray-300 rounded-md overflow-hidden shadow-md">
+                    </div>
+                <div id="info-box" class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-center">
+                    <p class="text-sm text-gray-600">Selected Square: <strong id="selected-square" class="text-blue-700">-</strong></p>
+                    <p class="text-sm text-gray-600 mt-1">Grains on this square:</p>
+                    <p id="grains-on-square" class="text-lg font-bold text-blue-800 break-words">-</p>
+                </div>
+                 <div class="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg text-center">
+                     <p class="text-sm text-gray-600">Total Grains on Board:</p>
+                     <p id="total-grains" class="text-xl font-bold text-green-800 break-words">-</p>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/2 xl:w-3/5">
+                 <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-3 text-center">Grains up to Selected Square (Linear Scale)</h2>
+                    <div id="linear-chart-container" class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-inner min-h-[300px] md:min-h-[400px]">
+                        <svg id="linear-rice-chart" class="w-full h-full"></svg>
+                    </div>
+                     <p class="text-xs text-gray-500 mt-2 text-center">Linear scale shows true magnitude (early squares become tiny).</p>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        // --- Constants and Setup ---
+        const boardSize = 8;
+        const totalSquares = boardSize * boardSize;
+        const chessboard = document.getElementById('chessboard');
+        const infoBox = document.getElementById('info-box');
+        const selectedSquareDisplay = document.getElementById('selected-square');
+        const grainsOnSquareDisplay = document.getElementById('grains-on-square');
+        const totalGrainsDisplay = document.getElementById('total-grains');
+        const linearChartContainer = document.getElementById('linear-chart-container');
+        const tooltip = d3.select("#tooltip");
+
+        let grainsData = []; // Array to hold { square: number, grains: BigInt }
+        let totalGrains = 0n; // Use BigInt for total
+        let selectedSquareIndex = -1; // Track selected square (0-63)
+
+        // D3 Chart variables
+        let linearSvg, linearXScale, linearYScale;
+
+
+        // --- Grain Calculation ---
+        function calculateGrains() {
+            grainsData = [];
+            let currentGrains = 1n; // Start with 1 grain (using BigInt)
+            totalGrains = 0n;
+            for (let i = 0; i < totalSquares; i++) {
+                grainsData.push({ square: i + 1, grains: currentGrains });
+                totalGrains += currentGrains;
+                // Double for the next square only if not the last square
+                if (i < totalSquares - 1) {
+                    currentGrains *= 2n;
+                }
+            }
+            totalGrainsDisplay.textContent = totalGrains.toLocaleString();
+        }
+
+        // --- Chessboard Generation ---
+        function createChessboard() {
+            // Ensure chessboard element exists before trying to modify it
+            if (!chessboard) {
+                console.error("Chessboard element not found!");
+                return;
+            }
+            chessboard.innerHTML = ''; // Clear previous board
+            for (let row = 0; row < boardSize; row++) {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'flex board-row'; // Use flex for rows
+                for (let col = 0; col < boardSize; col++) {
+                    const squareIndex = row * boardSize + col;
+                    const squareDiv = document.createElement('div');
+                    // Apply Tailwind classes for styling squares
+                    squareDiv.className = 'square rounded-sm'; // Add rounded corners back if needed
+                    squareDiv.dataset.index = squareIndex; // Store index (0-63)
+
+                    const contentDiv = document.createElement('div');
+                    contentDiv.className = 'content';
+                    contentDiv.textContent = squareIndex + 1; // Display square number (1-64)
+                    squareDiv.appendChild(contentDiv);
+
+                    squareDiv.addEventListener('click', () => handleSquareClick(squareIndex));
+                    rowDiv.appendChild(squareDiv);
+                }
+                chessboard.appendChild(rowDiv);
+            }
+             console.log("Chessboard created."); // Add log to confirm creation
+        }
+
+
+        // --- Linear Bar Chart Creation (D3.js) ---
+        function createLinearChart(selectedIndex) {
+             // Ensure selectedIndex is valid before proceeding
+             if (selectedIndex < 0 || !grainsData || selectedIndex >= grainsData.length) {
+                 console.error("Invalid selectedIndex or missing grainsData for createLinearChart:", selectedIndex);
+                 d3.select("#linear-rice-chart").selectAll("*").remove();
+                 return;
+             }
+
+             const currentData = grainsData.slice(0, selectedIndex + 1); // Data up to selected square
+             if (!currentData.length) return; // Exit if no data
+
+             // Ensure chart container exists
+             if (!linearChartContainer) {
+                 console.error("Linear chart container not found!");
+                 return;
+             }
+             const containerRect = linearChartContainer.getBoundingClientRect();
+             const margin = { top: 20, right: 20, bottom: 40, left: 60 };
+             const width = containerRect.width - margin.left - margin.right;
+             const height = containerRect.height - margin.top - margin.bottom;
+
+             // Ensure width and height are positive
+             if (width <= 0 || height <= 0) {
+                 console.warn("Linear chart container has zero/negative dimensions:", width, height);
+                 // Clear previous chart content if dimensions are invalid
+                 d3.select("#linear-rice-chart").selectAll("*").remove();
+                 return;
+             }
+
+             d3.select("#linear-rice-chart").selectAll("*").remove(); // Clear previous chart
+
+             linearSvg = d3.select("#linear-rice-chart")
+                 .attr("viewBox", `0 0 ${containerRect.width} ${containerRect.height}`)
+                 .attr("preserveAspectRatio", "xMidYMid meet")
+                 .append("g")
+                 .attr("transform", `translate(${margin.left},${margin.top})`);
+
+             // X scale (ordinal for bars)
+             linearXScale = d3.scaleBand()
+                 .domain(currentData.map(d => d.square)) // Squares 1 to selectedIndex+1
+                 .range([0, width])
+                 .padding(0.2); // Padding between bars
+
+             // Y scale (linear)
+             const maxGrainsLinear = Number(currentData[currentData.length - 1].grains);
+             linearYScale = d3.scaleLinear()
+                 .domain([0, maxGrainsLinear > 0 ? maxGrainsLinear : 1]) // Domain from 0 to max grains
+                 .range([height, 0])
+                 .nice(); // Adjust domain to nice round values
+
+             // Add X axis
+             linearSvg.append("g")
+                 .attr("class", "axis x-axis")
+                 .attr("transform", `translate(0,${height})`)
+                 .call(d3.axisBottom(linearXScale)
+                    .tickValues(linearXScale.domain().filter((d, i, arr) => !(i % Math.max(1, Math.floor(arr.length / 10)))))
+                 );
+
+             // Add Y axis
+             linearSvg.append("g")
+                 .attr("class", "axis y-axis")
+                 .call(d3.axisLeft(linearYScale).ticks(5, ".2s")); // SI prefix format
+
+             // Add X axis label
+             linearSvg.append("text")
+                 .attr("text-anchor", "middle")
+                 .attr("x", width / 2)
+                 .attr("y", height + margin.bottom - 5)
+                 .attr("class", "text-xs font-medium text-gray-600")
+                 .text("Square Number");
+
+             // Add Y axis label
+             linearSvg.append("text")
+                 .attr("text-anchor", "middle")
+                 .attr("transform", "rotate(-90)")
+                 .attr("y", -margin.left + 15)
+                 .attr("x", -height / 2)
+                 .attr("class", "text-xs font-medium text-gray-600")
+                 .text("Grains (Linear Scale)");
+
+             // Draw the bars
+             linearSvg.selectAll(".bar")
+                 .data(currentData)
+                 .enter().append("rect")
+                 .attr("class", "bar")
+                 .attr("x", d => linearXScale(d.square))
+                 .attr("y", d => linearYScale(Number(d.grains)))
+                 .attr("width", linearXScale.bandwidth())
+                 .attr("height", d => Math.max(0, height - linearYScale(Number(d.grains)))) // Ensure non-negative height
+                 .attr("data-index", (d, i) => i)
+                 .on("mouseover", handleMouseOver)
+                 .on("mouseout", handleMouseOut)
+                 .on("click", (event, d) => handleSquareClick(d.square - 1));
+        }
+
+
+        // --- Interactivity Handlers ---
+        function handleSquareClick(index) {
+            if (index < 0 || index >= totalSquares) {
+                 console.warn("Invalid square index clicked:", index);
+                 return;
+            }
+
+            selectedSquareIndex = index;
+
+            // Update info box
+            // Ensure grainsData exists and index is valid
+            if (grainsData && grainsData[index]) {
+                 const squareNum = index + 1;
+                 const grains = grainsData[index].grains;
+                 selectedSquareDisplay.textContent = squareNum;
+                 grainsOnSquareDisplay.textContent = grains.toLocaleString();
+            } else {
+                 console.error("Failed to get grain data for index:", index);
+                 selectedSquareDisplay.textContent = "-";
+                 grainsOnSquareDisplay.textContent = "-";
+            }
+
+
+            // Update chessboard square appearance
+            document.querySelectorAll('.square').forEach((sq, i) => {
+                 sq.classList.toggle('selected', i === index);
+            });
+
+            // Update/Create the Linear chart
+            createLinearChart(index);
+        }
+
+
+        // Tooltip mouseover handler
+        function handleMouseOver(event, d) {
+             // Check if data 'd' is valid
+             if (!d || typeof d.square === 'undefined' || typeof d.grains === 'undefined') {
+                 return; // Don't show tooltip if data is missing
+             }
+            tooltip.transition().duration(200).style("opacity", .9);
+            tooltip.html(`Square: ${d.square}<br/>Grains: ${d.grains.toLocaleString()}`)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 30) + "px");
+
+             // Highlight the hovered bar
+             d3.select(this).style("fill-opacity", 0.7);
+        }
+
+        // Tooltip mouseout handler
+        function handleMouseOut(event, d) {
+            tooltip.transition().duration(500).style("opacity", 0);
+             // Reset hover effect
+             d3.select(this).style("fill-opacity", null);
+        }
+
+        // --- Debounced Resize Handler ---
+         let resizeTimer;
+         function handleResize() {
+             clearTimeout(resizeTimer);
+             resizeTimer = setTimeout(() => {
+                 console.log("Resizing chart...");
+                 if (selectedSquareIndex !== -1) {
+                     // Check if createLinearChart exists before calling
+                     if (typeof createLinearChart === 'function') {
+                         createLinearChart(selectedSquareIndex);
+                     } else {
+                         console.error("createLinearChart function not defined during resize.");
+                     }
+                 }
+             }, 250); // Debounce resize event
+         }
+
+
+        // --- Initialization ---
+        function initialize() {
+             try {
+                 calculateGrains();
+                 createChessboard();
+                 // Select the first square by default and create initial linear chart
+                 handleSquareClick(0);
+                 // Add debounced resize listener
+                 window.addEventListener('resize', handleResize);
+             } catch (error) {
+                 console.error("Initialization failed:", error);
+                 // Optionally display an error message to the user on the page
+             }
+        }
+
+        // --- Run Initialization ---
+        // Ensures the script runs after the HTML is fully parsed
+        document.addEventListener('DOMContentLoaded', initialize);
+
+    </script>
+
+</body>
+</html>

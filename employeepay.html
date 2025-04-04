@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Earns More? Fixed vs. Doubling Pay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: 'Inter', sans-serif; /* Use Inter font */
+            background-color: #f0f9ff; /* Light blue background */
+        }
+        /* Ensure chart container takes up space */
+        .chart-container {
+            position: relative;
+            height: 55vh; /* Slightly smaller height */
+            width: 90vw; /* Adjust width as needed */
+            max-width: 900px; /* Max width for larger screens */
+            margin: 1.5rem auto; /* Center the chart */
+            margin-bottom: 3rem; /* Add space between charts */
+            background-color: #ffffff; /* White background for chart area */
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            padding: 1rem; /* Padding inside chart container */
+        }
+        /* Styling for the person intro boxes */
+        .person-box {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 2px solid; /* Add border for definition */
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <h1 class="text-2xl md:text-4xl font-bold text-center text-sky-800 mb-6">
+        Who Earns More Money?
+    </h1>
+
+    <p class="text-center max-w-3xl mx-auto mb-8 text-gray-700 text-base md:text-lg px-4">
+        Let's see how two people get paid for 30 days of work! One gets the same amount each day, and the other starts super small, but their pay doubles every day. Watch what happens!
+    </p>
+    <div class="max-w-3xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+        <div class="person-box border-blue-400">
+            <span class="text-5xl mb-2 block" role="img" aria-label="Steady Worker">👨‍💼</span>
+            <h3 class="text-xl font-semibold text-blue-700 mb-1">Person 1: Steady Sam</h3>
+            <p class="text-gray-600">Gets <strong class="font-bold">$1,000</strong> every single day.</p>
+        </div>
+        <div class="person-box border-red-400">
+             <span class="text-5xl mb-2 block" role="img" aria-label="Rocket Growth">🚀</span>
+            <h3 class="text-xl font-semibold text-red-700 mb-1">Person 2: Doubling Penny</h3>
+            <p class="text-gray-600">Starts with <strong class="font-bold">1 penny</strong> ($0.01). Pay <strong class="font-bold">doubles</strong> each day!</p>
+        </div>
+    </div>
+    <h2 class="text-xl md:text-2xl font-semibold text-center text-sky-700 mb-4">
+        Chart 1: Seeing the Start (Log View)
+    </h2>
+    <div class="chart-container">
+        <canvas id="earningsChartLog"></canvas>
+    </div>
+
+    <h2 class="text-xl md:text-2xl font-semibold text-center text-sky-700 mt-10 mb-4">
+        Chart 2: Seeing the End (Normal View)
+    </h2>
+    <div class="chart-container">
+        <canvas id="earningsChartLinear"></canvas>
+    </div>
+
+    <script>
+        // --- Data Preparation (Same for both charts) ---
+        const days = Array.from({ length: 30 }, (_, i) => i + 1); // Array [1, 2, ..., 30]
+        const employee1DailyEarnings = Array(30).fill(1000); // Constant $1000 per day
+
+        // Calculate Person 2's daily earnings (penny doubling)
+        const employee2DailyEarnings = days.map(day => {
+            // Calculate 0.01 * 2^(day - 1)
+            return 0.01 * Math.pow(2, day - 1);
+        });
+
+        // --- Tooltip Configuration (Shared) ---
+        // Shows the money earned when you hover over a point
+        const tooltipConfig = {
+            callbacks: {
+                label: function(context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                        label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                        // Format money nicely
+                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                    }
+                    return label;
+                }
+            }
+        };
+
+        // --- Chart 1 Configuration (Logarithmic) ---
+        // This chart helps see the small numbers at the start
+        const ctxLog = document.getElementById('earningsChartLog').getContext('2d');
+        const earningsChartLog = new Chart(ctxLog, {
+            type: 'line', // Make a line chart
+            data: {
+                labels: days, // Days go on the bottom
+                datasets: [
+                    {
+                        label: 'Person 1 (Steady Sam)', // Name for the blue line
+                        data: employee1DailyEarnings,
+                        borderColor: 'rgb(54, 162, 235)', // Blue color
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        tension: 0.1 // Makes the line slightly curvy
+                    },
+                    {
+                        label: 'Person 2 (Doubling Penny)', // Name for the red line
+                        data: employee2DailyEarnings,
+                        borderColor: 'rgb(255, 99, 132)', // Red color
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        tension: 0.1 // Makes the line slightly curvy
+                    }
+                ]
+            },
+            options: {
+                responsive: true, // Make chart fit the screen size
+                maintainAspectRatio: false, // Let chart fill the box
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Daily Pay Compared (Log View - helps see start)', // Chart title
+                        font: { size: 16 }
+                    },
+                    tooltip: tooltipConfig // Use shared tooltip settings
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Day Number' // Label for bottom axis
+                        }
+                    },
+                    y: {
+                        type: 'logarithmic', // Special scale to see small and big numbers
+                        title: {
+                            display: true,
+                            text: 'Money Earned Each Day ($) - Log Scale' // Label for side axis
+                        },
+                        ticks: {
+                            // Show some money amounts on the side
+                            callback: function(value, index, ticks) {
+                                if (value === 1e-2 || value === 1e0 || value === 1e2 || value === 1e3 || value === 1e4 || value === 1e5 || value === 1e6 || value === 1e7) {
+                                     return '$' + value.toLocaleString();
+                                }
+                                return null; // Hide other numbers to keep it clean
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2 Configuration (Linear) ---
+        // This chart shows how big the numbers get at the end
+        const ctxLinear = document.getElementById('earningsChartLinear').getContext('2d');
+        const earningsChartLinear = new Chart(ctxLinear, {
+            type: 'line', // Make a line chart
+            data: {
+                labels: days, // Days go on the bottom
+                datasets: [
+                     {
+                        label: 'Person 1 (Steady Sam)', // Name for the blue line
+                        data: employee1DailyEarnings,
+                        borderColor: 'rgb(54, 162, 235)', // Blue color
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        tension: 0.1
+                    },
+                    {
+                        label: 'Person 2 (Doubling Penny)', // Name for the red line
+                        data: employee2DailyEarnings,
+                        borderColor: 'rgb(255, 99, 132)', // Red color
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true, // Make chart fit the screen size
+                maintainAspectRatio: false, // Let chart fill the box
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Daily Pay Compared (Normal View - shows the huge finish!)', // Chart title
+                        font: { size: 16 }
+                    },
+                    tooltip: tooltipConfig // Use shared tooltip settings
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Day Number' // Label for bottom axis
+                        }
+                    },
+                    y: {
+                        type: 'linear', // Normal number scale
+                        title: {
+                            display: true,
+                            text: 'Money Earned Each Day ($) - Normal Scale' // Label for side axis
+                        },
+                        ticks: {
+                             // Show money amounts on the side
+                            callback: function(value, index, ticks) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
