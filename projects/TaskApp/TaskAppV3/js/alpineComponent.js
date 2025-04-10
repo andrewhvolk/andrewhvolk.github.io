@@ -200,6 +200,38 @@ const taskApp = {
     this.tasks = this.tasks.filter(t => !t.isCompleted);
     saveTasks(this.tasks);
   },
+  sortByDueDate() {
+    this.tasks.sort((a, b) => {
+      const dateA = a.dueDate ? new Date(a.dueDate) : null;
+      const dateB = b.dueDate ? new Date(b.dueDate) : null;
+
+      if (!dateA && !dateB) return 0;
+      if (!dateA) return 1;
+      if (!dateB) return -1;
+
+      return dateA - dateB;
+    });
+    saveTasks(this.tasks);
+    this.tasks = [...this.tasks]; // Trigger reactivity
+  },
+
+  sortByTimeEstimate() {
+    const parseTime = (estimate) => {
+      if (!estimate) return Infinity;
+      if (estimate === 'Supertask') return 9999;
+      if (estimate.endsWith('m')) return parseInt(estimate);
+      if (estimate.endsWith('h')) return parseInt(estimate) * 60;
+      return Infinity;
+    };
+
+    this.tasks.sort((a, b) => {
+      const timeA = parseTime(a.timeEstimate);
+      const timeB = parseTime(b.timeEstimate);
+      return timeA - timeB;
+    });
+    saveTasks(this.tasks);
+    this.tasks = [...this.tasks]; // Trigger reactivity
+  },
 
 
   exportTasks() {
@@ -230,12 +262,36 @@ const taskApp = {
           // Basic validation: check if it's an array
           if (Array.isArray(importedTasks)) {
             // Optional: Add more robust validation here (check task structure)
-            if (window.confirm('This will replace your current tasks. Are you sure?')) {
+            const merge = window.confirm('Click OK to merge imported tasks with existing ones.\nClick Cancel to replace all current tasks.');
+            if (merge) {
+              const existingTasks = this.tasks;
+              const existingIds = new Map();
+              existingTasks.forEach(task => existingIds.set(task.id, task));
+
+              const mergedTasks = [...existingTasks];
+
+              importedTasks.forEach(importedTask => {
+                const existingTask = existingIds.get(importedTask.id);
+                if (!existingTask) {
+                  mergedTasks.push(importedTask);
+                } else {
+                  if (existingTask.title === importedTask.title) {
+                    // Skip duplicate with same title
+                  } else {
+                    // Generate new unique ID for imported task
+                    importedTask.id = `${importedTask.id}_${Date.now()}_${Math.floor(Math.random()*1000)}`;
+                    mergedTasks.push(importedTask);
+                  }
+                }
+              });
+
+              this.tasks = mergedTasks;
+            } else {
               this.tasks = importedTasks;
-              saveTasks(this.tasks);
-              this.tasks = [...this.tasks]; // Trigger reactivity
-              alert('Tasks imported successfully!');
             }
+            saveTasks(this.tasks);
+            this.tasks = [...this.tasks]; // Trigger reactivity
+            alert('Tasks imported successfully!');
           } else {
             alert('Invalid file format. Please select a valid JSON file exported from this app.');
           }

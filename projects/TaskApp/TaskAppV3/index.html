@@ -29,6 +29,8 @@
     <div class="flex gap-2">
       <button @click="exportTasks()" class="px-3 py-1 rounded bg-green-600 hover:bg-green-700">Export Tasks</button>
       <button @click="importTasks()" class="px-3 py-1 rounded bg-purple-600 hover:bg-purple-700">Import Tasks</button>
+<button @click="sortByDueDate()" class="px-3 py-1 rounded bg-yellow-600 hover:bg-yellow-700">Sort Dates</button>
+<button @click="sortByTimeEstimate()" class="px-3 py-1 rounded bg-pink-600 hover:bg-pink-700">Snowball</button>
     </div>
   </header>
   <form @submit.prevent="addTask(newTaskTitle)" class="flex gap-2 mb-4">
