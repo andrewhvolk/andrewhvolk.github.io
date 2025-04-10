@@ -199,7 +199,59 @@ const taskApp = {
   bulkDeleteCompleted() {
     this.tasks = this.tasks.filter(t => !t.isCompleted);
     saveTasks(this.tasks);
-  }
+  },
+
+
+  exportTasks() {
+    const dataStr = JSON.stringify(this.tasks, null, 2); // Pretty print JSON
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'tasks_backup.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  },
+
+  importTasks() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = e => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = event => {
+        try {
+          const importedTasks = JSON.parse(event.target.result);
+          // Basic validation: check if it's an array
+          if (Array.isArray(importedTasks)) {
+            // Optional: Add more robust validation here (check task structure)
+            if (window.confirm('This will replace your current tasks. Are you sure?')) {
+              this.tasks = importedTasks;
+              saveTasks(this.tasks);
+              this.tasks = [...this.tasks]; // Trigger reactivity
+              alert('Tasks imported successfully!');
+            }
+          } else {
+            alert('Invalid file format. Please select a valid JSON file exported from this app.');
+          }
+        } catch (error) {
+          console.error('Error parsing JSON file:', error);
+          alert('Error reading or parsing the file. Please ensure it is a valid JSON file.');
+        }
+      };
+      reader.onerror = error => {
+        console.error('Error reading file:', error);
+        alert('Error reading the file.');
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  },
 };
 
 export default taskApp;
