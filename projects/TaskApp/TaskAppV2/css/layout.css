@@ -1,0 +1,29 @@
+/* Layout styles */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Responsive task lists grid */
+.task-lists {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .task-lists {
+    grid-template-columns: 1fr 1fr;
+  }
+}

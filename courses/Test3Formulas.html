@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH114 Test 3 - Formula Reference Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic print styles */
+        @media print {
+            body {
+                color: #000;
+                margin: 0.35in; /* Reduced print margin */
+                font-size: 7.5pt; /* Reduced base print font size */
+            }
+            .no-print { display: none; }
+             .container { max-width: 100%; width: 100%; padding: 0; margin: 0; }
+             .section-block { page-break-inside: avoid; margin-bottom: 0.5rem; } /* Reduced margin */
+             code {
+                font-family: monospace;
+                background-color: #f0f0f0 !important;
+                padding: 0.05em 0.2em; /* Reduced padding */
+                border-radius: 2px; /* Smaller radius */
+                font-size: 0.95em;
+                color: #000;
+                border: 1px solid #ccc;
+             }
+             h1 { font-size: 14pt; margin-bottom: 0.5rem; }
+             h2 { font-size: 11pt; margin-bottom: 0.3rem; }
+             h3 { font-size: 9pt; margin-bottom: 0.2rem; }
+             p { font-size: 7.5pt; margin-bottom: 0.3rem;}
+             .section-block + .section-block { border-top: 1px solid #ccc; padding-top: 0.5rem; margin-top: 0.5rem;}
+             table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+             th, td { border: 1px solid #ccc; text-align: center; }
+             th { background-color: #e0e0e0 !important; font-size: 6.5pt; padding: 1px; } /* Smaller font/padding */
+             td { font-size: 6.5pt; padding: 1px; } /* Smaller font/padding */
+             .z-table th, .z-table td { padding: 1px; }
+             .excel-formulas ul { padding-left: 0.8rem; }
+             .excel-formulas li { margin-bottom: 0.1rem; }
+             .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; } /* Force 2 columns for print */
+        }
+
+        /* Base styles for screen */
+        body {
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.4; /* Adjust line height */
+        }
+
+        /* Style for code blocks */
+        code {
+            font-family: monospace;
+            background-color: #f3f4f6; /* Tailwind gray-100 */
+            padding: 0.1em 0.3em; /* Reduced padding */
+            border-radius: 3px;
+            font-size: 0.85em; /* Slightly smaller code font */
+            display: inline-block;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+        /* Reduce list item spacing */
+        ul > li {
+            margin-bottom: 0.25rem; /* Reduced space */
+        }
+        /* Z-Table specific styles */
+        .z-table th, .z-table td {
+            border: 1px solid #d1d5db; /* gray-300 */
+            padding: 0.1rem 0.05rem; /* Minimal padding */
+            text-align: center;
+            font-size: 0.7rem; /* Even smaller font size */
+        }
+        .z-table th {
+            background-color: #f3f4f6; /* gray-100 */
+            font-weight: 600; /* semibold */
+            font-size: 0.65rem; /* Even smaller header font */
+        }
+        .z-table {
+             table-layout: fixed;
+             width: 100%;
+        }
+        /* Excel formulas section style */
+        .excel-formulas h3 {
+            margin-top: 0.5rem; /* Reduced margin */
+            font-size: 0.95rem; /* Smaller heading */
+            margin-bottom: 0.2rem;
+        }
+         .excel-formulas ul {
+            list-style: none;
+            padding-left: 1rem; /* Reduced indent */
+         }
+         .excel-formulas li {
+             margin-bottom: 0.15rem; /* Reduced margin */
+         }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-800">
+
+    <div class="container mx-auto px-3 py-4 max-w-5xl"> <h1 class="text-xl font-bold text-center mb-4 border-b pb-1">
+            MATH114: Quantitative Reasoning - Test 3 Formula Sheet
+        </h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-0 mb-4 formula-grid"> <div class="section-block">
+                <h2 class="text-lg font-semibold mb-2 text-blue-700">Growth Models</h2> <div class="ml-2 mb-2"> <h3 class="text-base font-semibold mb-1">Linear Growth</h3> <ul class="list-none ml-3"> <li><code>New Value = Initial Value + (Growth Rate × Time)</code></li>
+                    </ul>
+                </div>
+                <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Exponential Growth</h3>
+                    <ul class="list-none ml-3 space-y-1"> <li>Formula (rate 'r'): <code>New Value = Init × (1 + r)<sup>t</sup></code></li>
+                        <li>Growth Factor (doubling): <code>2<sup>n</sup></code></li>
+                        <li>Approx. Doubling (<code>T<sub>dbl</sub></code>): <code>T<sub>dbl</sub> ≈ 70 / P</code></li>
+                        <li>Exact Doubling (<code>T<sub>dbl</sub></code>): <code>T<sub>dbl</sub> = log(2)/log(1+r)</code></li>
+                        <li>Formula (doubling): <code>New Value = Init × 2<sup>(t/T<sub>dbl</sub>)</sup></code></li>
+                    </ul>
+                </div>
+                <div class="ml-2">
+                    <h3 class="text-base font-semibold mb-1">Exponential Decay (Half-Life)</h3>
+                    <ul class="list-none ml-3">
+                        <li>Formula (<code>T<sub>half</sub></code>): <code>New Value = Init × (0.5)<sup>(t/T<sub>half</sub>)</sup></code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-block mb-3"> <h2 class="text-lg font-semibold mb-2 text-blue-700">Descriptive Statistics</h2>
+                    <div class="ml-2 mb-2">
+                        <h3 class="text-base font-semibold mb-1">Mean (μ or x̄)</h3>
+                        <ul class="list-none ml-3">
+                            <li><code>Sum of values / Count of values</code></li>
+                        </ul>
+                    </div>
+                    <div class="ml-2 mb-2">
+                        <h3 class="text-base font-semibold mb-1">Range</h3>
+                        <ul class="list-none ml-3">
+                            <li><code>Highest Value - Lowest Value</code></li>
+                        </ul>
+                    </div>
+                    <div class="ml-2">
+                        <h3 class="text-base font-semibold mb-1">Range Rule of Thumb</h3>
+                        <ul class="list-none ml-3">
+                        <li><code>Std Dev ≈ Range / 4</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h2 class="text-lg font-semibold mb-2 text-blue-700">Distributions</h2>
+                    <div class="ml-2 mb-2">
+                        <h3 class="text-base font-semibold mb-1">Standard Score (z-score)</h3>
+                        <ul class="list-none ml-3">
+                            <li><code>z = (x - μ) / σ</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div> <div class="pt-3 border-t section-block excel-formulas mb-4"> <h2 class="text-lg font-semibold mb-2 text-green-700">Relevant Excel Formulas</h2> <p class="text-xs text-gray-600 mb-2 ml-2">Note: Replace <code>range</code> with cells (e.g., <code>A1:A10</code>).</p> <div class="ml-2 grid grid-cols-1 sm:grid-cols-2 gap-x-4"> <div>
+                     <h3 class="text-base font-semibold">Basic Calculations</h3>
+                     <ul>
+                         <li>Power: <code>=POWER(n, p)</code> or <code>=n^p</code></li>
+                         <li>Log (Base 10): <code>=LOG10(n)</code></li>
+                         <li>Log (Natural): <code>=LN(n)</code></li>
+                     </ul>
+
+                     <h3 class="text-base font-semibold">Descriptive Statistics</h3>
+                     <ul>
+                         <li>Mean: <code>=AVERAGE(range)</code></li>
+                         <li>Median: <code>=MEDIAN(range)</code></li>
+                         <li>Mode (Single): <code>=MODE.SNGL(range)</code></li>
+                         <li>Mode (Multi): <code>=MODE.MULT(range)</code></li>
+                         <li>Min: <code>=MIN(range)</code></li>
+                         <li>Max: <code>=MAX(range)</code></li>
+                         <li>Range: <code>=MAX(range)-MIN(range)</code></li>
+                         <li>Std Dev (Sample): <code>=STDEV.S(range)</code></li>
+                         <li>Std Dev (Pop.): <code>=STDEV.P(range)</code></li>
+                         <li>Quartiles: <code>=QUARTILE.INC(range, q)</code></li>
+                     </ul>
+                 </div>
+                 <div>
+                     <h3 class="text-base font-semibold">Normal Distribution</h3>
+                     <ul>
+                         <li>Z-Score: <code>=STANDARDIZE(x, μ, σ)</code></li>
+                         <li>Area left of Z: <code>=NORM.S.DIST(z, TRUE)</code></li>
+                         <li>Z from Area: <code>=NORM.S.INV(area)</code></li>
+                     </ul>
+
+                     <h3 class="text-base font-semibold">Growth/Trend</h3>
+                     <ul>
+                        <li>Linear Forecast: <code>=FORECAST.LINEAR(x, y's, x's)</code></li>
+                        <li>Exponential Forecast: <code>=GROWTH(y's, x's, new_x's)</code></li>
+                     </ul>
+                 </div>
+             </div>
+        </div><div class="pt-3 border-t section-block"> <h2 class="text-lg font-semibold mb-1 text-center text-blue-700">Standard Normal (Z) Table - Percentiles</h2> <p class="text-xs text-center text-gray-600 mb-2">Table shows percentile (area to LEFT * 100) for Z-score.</p> <table class="w-full z-table">
+                <thead>
+                    <tr>
+                        <th>Z</th><th>Pct(%)</th><th>Z</th><th>Pct(%)</th>
+                        <th>Z</th><th>Pct(%)</th><th>Z</th><th>Pct(%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-3.0</td><td>0.13</td> <td>-1.4</td><td>8.08</td>
+                        <td>0.2</td><td>57.93</td> <td>1.8</td><td>96.41</td>
+                    </tr>
+                    <tr>
+                        <td>-2.9</td><td>0.19</td> <td>-1.3</td><td>9.68</td>
+                        <td>0.3</td><td>61.79</td> <td>1.9</td><td>97.13</td>
+                    </tr>
+                    <tr>
+                        <td>-2.8</td><td>0.26</td> <td>-1.2</td><td>11.51</td>
+                        <td>0.4</td><td>65.54</td> <td>2.0</td><td>97.72</td>
+                    </tr>
+                    <tr>
+                        <td>-2.7</td><td>0.35</td> <td>-1.1</td><td>13.57</td>
+                        <td>0.5</td><td>69.15</td> <td>2.1</td><td>98.21</td>
+                    </tr>
+                    <tr>
+                        <td>-2.6</td><td>0.47</td> <td>-1.0</td><td>15.87</td>
+                        <td>0.6</td><td>72.57</td> <td>2.2</td><td>98.61</td>
+                    </tr>
+                    <tr>
+                        <td>-2.5</td><td>0.62</td> <td>-0.9</td><td>18.41</td>
+                        <td>0.7</td><td>75.80</td> <td>2.3</td><td>98.93</td>
+                    </tr>
+                    <tr>
+                        <td>-2.4</td><td>0.82</td> <td>-0.8</td><td>21.19</td>
+                        <td>0.8</td><td>78.81</td> <td>2.4</td><td>99.18</td>
+                    </tr>
+                    <tr>
+                        <td>-2.3</td><td>1.07</td> <td>-0.7</td><td>24.20</td>
+                        <td>0.9</td><td>81.59</td> <td>2.5</td><td>99.38</td>
+                    </tr>
+                    <tr>
+                        <td>-2.2</td><td>1.39</td> <td>-0.6</td><td>27.43</td>
+                        <td>1.0</td><td>84.13</td> <td>2.6</td><td>99.53</td>
+                    </tr>
+                    <tr>
+                        <td>-2.1</td><td>1.79</td> <td>-0.5</td><td>30.85</td>
+                        <td>1.1</td><td>86.43</td> <td>2.7</td><td>99.65</td>
+                    </tr>
+                    <tr>
+                        <td>-2.0</td><td>2.28</td> <td>-0.4</td><td>34.46</td>
+                        <td>1.2</td><td>88.49</td> <td>2.8</td><td>99.74</td>
+                    </tr>
+                    <tr>
+                        <td>-1.9</td><td>2.87</td> <td>-0.3</td><td>38.21</td>
+                        <td>1.3</td><td>90.32</td> <td>2.9</td><td>99.81</td>
+                    </tr>
+                    <tr>
+                        <td>-1.8</td><td>3.59</td> <td>-0.2</td><td>42.07</td>
+                        <td>1.4</td><td>91.92</td> <td>3.0</td><td>99.87</td>
+                    </tr>
+                    <tr>
+                        <td>-1.7</td><td>4.46</td> <td>-0.1</td><td>46.02</td>
+                        <td>1.5</td><td>93.32</td> <td>&nbsp;</td><td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>-1.6</td><td>5.48</td> <td>0.0</td><td>50.00</td>
+                        <td>1.6</td><td>94.52</td> <td>&nbsp;</td><td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>-1.5</td><td>6.68</td> <td>0.1</td><td>53.98</td>
+                        <td>1.7</td><td>95.54</td> <td>&nbsp;</td><td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> </div> </body>
+</html>

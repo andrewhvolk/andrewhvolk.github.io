@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task App V2</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+  <script src="https://unpkg.com/heroicons@2.0.16/dist/heroicons.min.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <div class="topbar">
+      <div class="topbar__left">
+        <h1 class="topbar__title">Task App V2</h1>
+        <p id="current-date" class="topbar__date"></p>
+      </div>
+      <div class="topbar__controls">
+        <select id="sort-select" class="select">
+          <option value="none">Sort: None</option>
+          <option value="dueDate">Due Date</option>
+          <option value="priority">Priority</option>
+          <option value="createdAt">Created Date</option>
+        </select>
+        <select id="filter-select" class="select">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="incomplete">Incomplete</option>
+        </select>
+        <input type="text" id="task-input" placeholder="Add a new task..." class="add-task__input" />
+        <button id="add-task-btn" class="btn btn--primary add-task__button">Add</button>
+        <button id="toggle-view" class="btn btn--secondary">Toggle View</button>
+        <button id="dark-mode-toggle" class="btn btn--secondary">Dark Mode</button>
+      </div>
+    </div>
+    <div id="calendar-view" class="hidden"></div>
+    <div id="list-view">
+    </div>
+
+    <div class="task-lists">
+      <!-- Today Bucket -->
+      <section class="task-list">
+        <h2 class="task-list__title">
+          <span class="task-list__icon">📆</span> Today
+        </h2>
+        <ul id="today-list" class="task-list__items"></ul>
+      </section>
+
+      <!-- Future Bucket -->
+      <section class="task-list">
+        <h2 class="task-list__title">
+          <span class="task-list__icon">📁</span> Future
+        </h2>
+        <ul id="future-list" class="task-list__items"></ul>
+      </section>
+    </div>
+
+    <!-- AI Tools Panel -->
+    <section class="bg-white p-3 rounded-lg shadow border border-gray-200">
+      <h2 class="text-base font-semibold mb-2">AI Tools</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-1 text-xs">
+        <!-- General Chat & Coding -->
+        <h3 class="col-span-2 md:col-span-4 font-semibold text-gray-700 dark:text-gray-300 mt-2 mb-1 border-b border-gray-200 dark:border-gray-600 pb-1">General Chat & Coding</h3>
+        <a href="https://chat.openai.com" target="_blank" class="text-blue-600 hover:underline">ChatGPT</a>
+        <a href="https://claude.ai/" target="_blank" class="text-blue-600 hover:underline">Claude</a>
+        <a href="https://gemini.google.com/app" target="_blank" class="text-blue-600 hover:underline">Gemini</a>
+        <a href="https://copilot.microsoft.com" target="_blank" class="text-blue-600 hover:underline">Copilot</a>
+        <a href="https://www.perplexity.ai" target="_blank" class="text-blue-600 hover:underline">Perplexity</a>
+        <a href="https://you.com/chat" target="_blank" class="text-blue-600 hover:underline">You.com</a>
+        <a href="https://www.phind.com" target="_blank" class="text-blue-600 hover:underline">Phind</a>
+
+        <!-- Research & Summarization -->
+        <h3 class="col-span-2 md:col-span-4 font-semibold text-gray-700 dark:text-gray-300 mt-2 mb-1 border-b border-gray-200 dark:border-gray-600 pb-1">Research & Summarization</h3>
+        <a href="https://notebooklm.google.com/" target="_blank" class="text-blue-600 hover:underline">NotebookLM</a>
+        <a href="https://chat.deepseek.com/" target="_blank" class="text-blue-600 hover:underline">DeepSeek</a>
+        <a href="https://huggingface.co/chat/" target="_blank" class="text-blue-600 hover:underline">HuggingChat</a>
+        <a href="https://reka.ai" target="_blank" class="text-blue-600 hover:underline">Reka.ai</a>
+        <a href="https://pi.ai" target="_blank" class="text-blue-600 hover:underline">Pi.ai</a>
+
+        <!-- Model Playground & APIs -->
+        <h3 class="col-span-2 md:col-span-4 font-semibold text-gray-700 dark:text-gray-300 mt-2 mb-1 border-b border-gray-200 dark:border-gray-600 pb-1">Model Playground & APIs</h3>
+        <a href="https://openrouter.ai/chat" target="_blank" class="text-blue-600 hover:underline">OpenRouter</a>
+        <a href="https://llama.meta.com" target="_blank" class="text-blue-600 hover:underline">Llama 2</a>
+        <a href="https://chat.qwen.ai/" target="_blank" class="text-blue-600 hover:underline">Qwen</a>
+        <a href="https://chat.mistral.ai" target="_blank" class="text-blue-600 hover:underline">Mistral</a>
+        <a href="https://aistudio.google.com/" target="_blank" class="text-blue-600 hover:underline">AI Studio</a>
+      </div>
+    </section>
+
+    <!-- ARIA Live Region for accessibility updates -->
+    <div id="aria-live-region" aria-live="polite" class="sr-only"></div>
+
+</div> <!-- end of #list-view -->
+  </div>
+
+<!-- Edit Modal -->
+<div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 space-y-4">
+    <h2 class="text-xl font-semibold">Edit Task</h2>
+    <div class="space-y-2">
+      <div>
+        <label class="block font-medium">Title</label>
+        <input id="modal-title" type="text" class="w-full border border-gray-300 dark:border-gray-600 rounded p-2" />
+      </div>
+      <div>
+        <label class="block font-medium">Description</label>
+        <textarea id="modal-description" class="w-full border border-gray-300 dark:border-gray-600 rounded p-2"></textarea>
+      </div>
+      <div>
+        <label class="block font-medium">Due Date</label>
+        <input id="modal-due-date" type="date" class="w-full border border-gray-300 dark:border-gray-600 rounded p-2" />
+      </div>
+      <div>
+        <label class="block font-medium">Priority</label>
+        <select id="modal-priority" class="w-full border border-gray-300 dark:border-gray-600 rounded p-2">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex justify-end space-x-2 pt-4">
+      <button id="modal-cancel" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Cancel</button>
+      <button id="modal-save" class="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600">Save</button>
+    </div>
+  </div>
+</div>
+<script src="dragAndDrop.js"></script>
+  <script src="uiEnhancements.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>

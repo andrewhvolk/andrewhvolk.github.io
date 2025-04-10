@@ -1,0 +1,186 @@
+Developer Guideline: Personal Task Manager
+
+Version: 1.0
+Date: April 9, 2025
+
+## 1. Introduction & Project Goal
+
+This document provides guidelines for developing the Personal Task Manager application. The primary goal is to create an efficient, intuitive web application for capturing tasks and ensuring they are deliberately processed by assigning a due date and time estimate before entering a structured workflow based on time-based lists.
+
+The core workflow emphasizes:
+
+1.  Effortless Capture: Tasks are added quickly to an "Inbox".
+2.  Mandatory Processing: Tasks must receive a Due Date and Time Estimate via editing to leave the Inbox.
+3.  Automatic Categorization: Processed tasks are automatically displayed in fixed, time-based lists (Today, This Week, etc.).
+4.  Overdue Handling: Tasks past their due date are automatically returned to the Inbox for re-processing.
+5.  Completed Task Management: Completed tasks are moved to a separate list and can be bulk deleted.
+
+This guideline assumes development according to the workflow depicted in flow diagram `personal_task_app_flow_diagram_v1` (Version 1.1) and utilizes the recommended tech stack for minimal build complexity.
+
+## 2. Tech Stack & Setup
+
+This project aims for minimal dependencies and no build step.
+
+* HTML: Standard semantic HTML5.
+* CSS: Tailwind CSS via Play CDN. Use utility classes for all styling. Configure for dark mode support.
+    * Include in `<head>`:
+        ```html
+        <script src="[https://cdn.tailwindcss.com?plugins=forms,typography](https://cdn.tailwindcss.com?plugins=forms,typography)"></script>
+        <script>
+          tailwind.config = {
+            darkMode: 'class', // Use class-based dark mode toggling
+            theme: { extend: {} }
+          }
+        </script>
+        ```
+* JavaScript Core Logic: Vanilla JavaScript (ES6+) organized using Native JS Modules (`<script type="module">`).
+* Reactivity & DOM Updates: Alpine.js via CDN. Use Alpine for managing UI state derived from the core task data and for handling reactive DOM updates.
+    * Include in `<head>` (defer ensures it runs after DOM is parsed):
+        ```html
+        <script defer src="[https://unpkg.com/alpinejs@3.13.8/dist/cdn.min.js](https://unpkg.com/alpinejs@3.13.8/dist/cdn.min.js)"></script>
+        ```
+        *(Check CDN for the latest version)*
+* Date Handling: Day.js via CDN. Use Day.js for all date parsing, comparison, manipulation, and formatting.
+    * Include in `<head>`:
+        ```html
+        <script src="[https://unpkg.com/dayjs@1.11.10/dayjs.min.js](https://unpkg.com/dayjs@1.11.10/dayjs.min.js)"></script>
+        ```
+        *(Check CDN for the latest version)*
+* Data Storage: Browser Local Storage. All task data will be stored client-side. Be mindful of storage limits (5-10MB) and the synchronous nature of the API.
+* Development Server: Use a simple local server (like `live-server` via npm/npx) during development to avoid potential CORS issues when using JS Modules.
+
+## 3. Data Model
+
+Store tasks as an array of objects in Local Storage under a single key (e.g., `personalTasksApp_tasks`).
+
+Task Object Structure:
+
+```javascript
+{
+  id: String,           // Unique identifier (e.g., `Date.now().toString(36) + Math.random().toString(36).substr(2)`)
+  title: String,          // Task title (required)
+  description: String,      // Optional longer notes
+  isCompleted: Boolean,     // Default: false
+  // isProcessed: Boolean,  // Implicitly true if dueDate is not null
+  dueDate: String | null, // ISO 8601 format (YYYY-MM-DD) when set, null otherwise. Required to leave Inbox.
+  timeEstimate: String | null, // '5m', '20m', '1h', '3h', '6h', 'Supertask', or null. Required to leave Inbox.
+  // Optional fields below (not required for core processing logic)
+  // ---
+  createdAt: String,        // ISO 8601 Timestamp (when created)
+  updatedAt: String         // ISO 8601 Timestamp (last modified)
+}
+```
+
+## 4. Core Feature Implementation Details
+
+### 4.1. Application State (Alpine.js + JS Modules)
+
+* Define a main Alpine component (e.g., on the `<body>` tag) using `x-data`. This component will hold the reactive state needed for the UI.
+    ```javascript
+    // Example Alpine data structure within x-data
+    {
+        tasks: [], // The master list of all tasks, loaded from Local Storage
+        currentView: 'inbox', // Tracks the active view ('inbox', 'today', 'week', etc.)
+        // Computed properties (using functions or getters) for filtered lists:
+        get inboxTasks() { return this.tasks.filter(t => t.dueDate === null && !t.isCompleted); },
+        get todayTasks() { /* JS logic using Day.js to filter tasks for today */ },
+        get weekTasks() { /* JS logic using Day.js to filter tasks for this week */ },
+        // ... other list getters (month, year, future, completed)
+        get completedTasks() { return this.tasks.filter(t => t.isCompleted); },
+        // Methods for actions:
+        init() { this.loadTasks(); this.runOverdueCheck(); }, // Load data on init
+        loadTasks() { /* Load from Local Storage, parse JSON, assign to this.tasks */ },
+        saveTasks() { /* Stringify this.tasks, save to Local Storage */ },
+        addTask(title) { /* Create new task object, add to this.tasks, call saveTasks */ },
+        updateTask(taskId, updatedData) { /* Find task, merge data, update updatedAt, call saveTasks */ },
+        deleteTask(taskId) { /* Filter out task, call saveTasks */ },
+        toggleComplete(taskId) { /* Find task, toggle isCompleted, update updatedAt, call saveTasks */ },
+        bulkDeleteCompleted() { /* Filter out completed tasks, call saveTasks after confirmation */ },
+        runOverdueCheck() { /* Logic from section 4.6, updates this.tasks, call saveTasks */ },
+        // ... potentially methods for editing state, navigation etc.
+    }
+    ```
+* Use JS Modules (`import`/`export`) to organize data persistence logic (interacting with Local Storage), date calculations (potentially wrapping Day.js functions), and potentially complex business logic, keeping the Alpine `x-data` focused on UI state and simple actions.
+
+### 4.2. Task Capture
+
+* Use a simple HTML `<input type="text">`.
+* Use Alpine's `@submit.prevent` or `@keydown.enter` to call an `addTask(newTitle)` method within your Alpine component.
+* The `addTask` method creates the new task object (with `dueDate` and `timeEstimate` as `null`), adds it to the reactive `tasks` array, and triggers saving to Local Storage. Alpine handles rendering the new task in the Inbox list automatically.
+
+### 4.3. Viewing Tasks
+
+* Use Alpine's `x-for` directive to iterate over the computed task arrays (e.g., `inboxTasks`, `todayTasks`) and render the task elements.
+    ```html
+    <div x-show="currentView === 'inbox'">
+        <h2>Inbox</h2>
+        <ul>
+            <template x-for="task in inboxTasks" :key="task.id">
+                <li class="border p-2 mb-2 dark:bg-gray-700 dark:text-white">
+                    <span x-text="task.title"></span>
+                    </li>
+            </template>
+        </ul>
+    </div>
+    ```
+* Use `x-show` or conditional templates (`<template x-if="...">`) to display the correct view based on the `currentView` state variable.
+* Navigation elements (buttons, links) use `@click` to update the `currentView` variable in the Alpine component.
+* Use Day.js within the computed property functions (`todayTasks`, `weekTasks`, etc.) for accurate date comparisons. Ensure comparisons handle date boundaries correctly.
+* Apply Tailwind CSS classes for styling lists and tasks, including `dark:` variants.
+
+### 4.4. Task Editing & Processing
+
+* Clicking an "Edit" button on a task (using `@click`) can set state variables in Alpine to show a modal/form (using `x-show`) and populate it with the selected task's data.
+* Use standard HTML inputs (`<input type="date">`, `<select>`) bound to temporary state variables within the modal's Alpine scope using `x-model`.
+* The `<select>` for Time Estimate must contain the specified options ('5m', '20m', '1h', '3h', '6h', 'Supertask').
+* Saving the form (`@submit.prevent` or `@click` on Save button) calls an `updateTask(taskId, updatedData)` method in the main Alpine component.
+* This method updates the task in the main `tasks` array and saves to Local Storage.
+* Crucially: If editing an Inbox task, saving *requires* both `dueDate` and `timeEstimate` to be set. If they are, the task is now "processed".
+* Alpine's reactivity handles updating the task's display in its *new* list (if the due date was added/changed) automatically when the `tasks` array is modified. Use Day.js to parse the date input value into the required format (YYYY-MM-DD).
+
+### 4.5. Task Completion
+
+* Use an HTML checkbox (`<input type="checkbox">`) for each task.
+* Bind its state using `x-model` or trigger an action using `@change`. A simpler way might be a dedicated "Complete" button with `@click="toggleComplete(task.id)"`.
+* The `toggleComplete` method updates the `isCompleted` flag in the `tasks` array and saves.
+* Use Alpine's `x-bind:class` to conditionally apply Tailwind's `line-through` utility class based on the `task.isCompleted` status.
+* Alpine's `x-for` combined with the filtered computed properties will automatically remove the task from active views and show it in the Completed view.
+
+### 4.6. Overdue Task Handling
+
+* Implement the `runOverdueCheck()` method within the main Alpine component's `init()` method (or trigger it periodically if the app stays open long-term, though `init` is simpler).
+* This method iterates through `this.tasks`.
+* Use Day.js `isBefore()` comparison to find tasks where `task.dueDate` is not null, `task.isCompleted` is false, and `dayjs(task.dueDate).isBefore(dayjs(), 'day')`.
+* For each overdue task found, update its `dueDate` to `null` within the `this.tasks` array.
+* Call `saveTasks()` after the loop finishes. Alpine's reactivity will move the updated tasks back to the Inbox view.
+
+### 4.7. Completed List & Bulk Delete
+
+* The "Completed List" view (Y) uses `x-for` to iterate over the `completedTasks` computed property.
+* A "Bulk Delete Completed" button uses `@click="confirmBulkDelete"`.
+* The `confirmBulkDelete` method uses `if (window.confirm('Are you sure...?')) { bulkDeleteCompleted(); }`.
+* The `bulkDeleteCompleted` method filters the main `tasks` array, keeping only items where `isCompleted` is false, updates `this.tasks` with the filtered result, and calls `saveTasks()`. Alpine handles updating the (now empty) Completed view.
+
+### 4.8. Individual Task Deletion
+
+* Add a delete button to each task rendered by `x-for`.
+* Use `@click="confirmDelete(task.id)"`.
+* Implement `confirmDelete(taskId)` similar to bulk delete, using `window.confirm()` and then calling `deleteTask(taskId)`.
+* `deleteTask(taskId)` filters the task out of `this.tasks` and calls `saveTasks()`. Alpine handles removing it from the view.
+
+## 5. UI/UX Guidelines
+
+* Layout: Use Tailwind CSS for a clean, responsive layout. Ensure usability on mobile devices.
+* Dark Mode: Implement thoroughly using Tailwind's `dark:` variants. Ensure a toggle mechanism exists (e.g., a button that adds/removes a 'dark' class on the `<html>` or `<body>` element, managed by Alpine state).
+* Clarity: Clearly distinguish between views. Use visual cues (strikethrough) for completed tasks. Make the Add Task input prominent.
+* Feedback: Provide subtle visual feedback for actions (saving, deleting) if possible, though Alpine's reactivity often makes this implicit. Use standard browser confirms for destructive actions.
+
+## 6. Development Notes
+
+* Modularity: Use JS Modules (`import`/`export`) extensively to separate concerns (e.g., `localStorageStore.js`, `alpineComponent.js`, `dateUtils.js`).
+* Alpine.js Focus: Let Alpine handle DOM manipulation and reactivity. Keep Vanilla JS focused on data logic, interacting with the Alpine data store, and interfacing with Local Storage and Day.js.
+* Error Handling: Wrap Local Storage interactions in `try...catch` blocks to handle potential quota errors or parsing issues.
+* Date Consistency: Use Day.js consistently for all date operations and ensure dates are stored in a standard format (ISO 8601 recommended) in Local Storage.
+* Performance: Be mindful that all data is loaded client-side. For significant task numbers (>1000s), performance may degrade. Optimize JS loops and filtering logic.
+
+This guideline provides a detailed plan for building the application using the recommended lightweight stack, focusing on the specific workflow requirements.
