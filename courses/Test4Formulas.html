@@ -66,7 +66,10 @@
              .z-table th, .z-table td { padding: 1px; }
              .excel-formulas ul { padding-left: 0.8rem; }
              .excel-formulas li { margin-bottom: 0.1rem; }
-             .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; } /* Force 2 columns for print */
+             /* Apply 2-column grid only to the specific container for print */
+             .stats-dist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+             /* Ensure sections outside the grid don't break weirdly */
+             .full-width-section { page-break-inside: avoid; }
              /* Hide LaTeX source in print */
              .latex-formula .latex-source { display: none; }
              /* Ensure rendered math fits */
@@ -127,8 +130,11 @@
          /* Add a little more bottom margin to sections */
          .section-block {
              margin-bottom: 1rem;
+             padding: 0.5rem; /* Add some padding for visual separation */
+             border: 1px solid #e5e7eb; /* Add subtle border */
+             border-radius: 0.375rem; /* Add rounded corners */
          }
-         /* Style for LaTeX formulas */
+          /* Style for LaTeX formulas */
          .latex-formula {
              margin: 0.3rem 0;
          }
@@ -149,13 +155,12 @@
 <body class="font-sans bg-white text-gray-800">
 
     <div class="container mx-auto px-3 py-4 max-w-5xl">
-        <h1 class="text-xl font-bold text-center mb-4 border-b pb-1">
+        <h1 class="text-xl font-bold text-center mb-6 border-b pb-2">
             MATH114: Quantitative Reasoning - Test 4 Formula Sheet
         </h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-0 mb-4 formula-grid">
-
-            <div class="section-block">
+        <div class="space-y-4 mb-4"> {/* Container for single-column sections */}
+            <div class="section-block full-width-section">
                 <h2 class="text-lg font-semibold mb-2 text-blue-700">Growth Models</h2>
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Linear Growth (Basic)</h3>
@@ -181,7 +186,7 @@
                 </div>
             </div>
 
-            <div class="section-block">
+            <div class="section-block full-width-section">
                 <h2 class="text-lg font-semibold mb-2 text-teal-700">Linear Modeling</h2>
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Slope (Rate of Change)</h3>
@@ -207,7 +212,7 @@
                 </div>
             </div>
 
-            <div class="section-block">
+            <div class="section-block full-width-section">
                 <h2 class="text-lg font-semibold mb-2 text-purple-700">Financial Formulas</h2>
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Simple Interest</h3>
@@ -251,7 +256,9 @@
                     </ul>
                 </div>
             </div>
+        </div>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 stats-dist-grid"> {/* Container for two-column sections */}
             <div class="section-block">
                 <h2 class="text-lg font-semibold mb-2 text-blue-700">Descriptive Statistics & Change</h2>
                 <div class="ml-2 mb-2">
@@ -300,95 +307,96 @@
                      </ul>
                  </div>
             </div>
-
-             <div></div>
-
-
-        </div> <div class="pt-3 border-t section-block excel-formulas mb-4">
-            <h2 class="text-lg font-semibold mb-2 text-green-700">Relevant Excel Formulas</h2>
-            <p class="text-xs text-gray-600 mb-2 ml-2">Note: Replace <code>range</code> with cells (e.g., <code>A1:A10</code>), <code>n</code> with number, <code>p</code> with power, <code>x</code> with value, <code>μ</code> with mean, <code>σ</code> with std dev, <code>y's</code>/<code>x's</code> with known data ranges, <code>rate</code> with periodic rate, <code>nper</code> with total periods, <code>pmt</code> with periodic payment, <code>pv</code> with present value, <code>fv</code> with future value, <code>nominal_rate</code> with APR, <code>npery</code> with compoundings per year.</p>
-            <div class="ml-2 grid grid-cols-1 sm:grid-cols-3 gap-x-4">
-                <div>
-                     <h3 class="text-base font-semibold">Basic Calculations</h3>
-                     <ul>
-                         <li>Power: <code>=POWER(n, p)</code> or <code>=n^p</code></li>
-                         <li>Log (Base 10): <code>=LOG10(n)</code></li>
-                         <li>Log (Natural): <code>=LN(n)</code></li>
-                         <li>Exponential ($e^n$): <code>=EXP(n)</code></li>
-                     </ul>
-
-                     <h3 class="text-base font-semibold">Descriptive Statistics</h3>
-                     <ul>
-                         <li>Mean: <code>=AVERAGE(range)</code></li>
-                         <li>Median: <code>=MEDIAN(range)</code></li>
-                         <li>Mode (Single): <code>=MODE.SNGL(range)</code></li>
-                         <li>Mode (Multi): <code>=MODE.MULT(range)</code></li>
-                         <li>Min: <code>=MIN(range)</code></li>
-                         <li>Max: <code>=MAX(range)</code></li>
-                         <li>Range: <code>=MAX(range)-MIN(range)</code></li>
-                         <li>Std Dev (Sample): <code>=STDEV.S(range)</code></li>
-                         <li>Std Dev (Pop.): <code>=STDEV.P(range)</code></li>
-                         <li>Quartiles: <code>=QUARTILE.INC(range, q)</code> (q=0,1,2,3,4)</li>
-                     </ul>
-                 </div>
-                 <div>
-                     <h3 class="text-base font-semibold">Normal Distribution</h3>
-                     <ul>
-                         <li>Z-Score: <code>=STANDARDIZE(x, μ, σ)</code></li>
-                         <li>Area left of Z: <code>=NORM.S.DIST(z, TRUE)</code></li>
-                         <li>Z from Area: <code>=NORM.S.INV(area)</code></li>
-                         <li>Area left of x: <code>=NORM.DIST(x, μ, σ, TRUE)</code></li>
-                         <li>x from Area: <code>=NORM.INV(area, μ, σ)</code></li>
-                     </ul>
-
-                     <h3 class="text-base font-semibold">Growth/Trend</h3>
-                     <ul>
-                        <li>Linear Forecast: <code>=FORECAST.LINEAR(x, known_y's, known_x's)</code></li>
-                        <li>Exponential Forecast: <code>=GROWTH(known_y's, [known_x's], [new_x's], [const])</code></li>
-                     </ul>
-                 </div>
-                  <div>
-                     <h3 class="text-base font-semibold">Financial Functions</h3>
-                     <ul>
-                         <li>Present Value: <code>=PV(rate, nper, pmt, [fv], [type])</code></li>
-                         <li>Future Value: <code>=FV(rate, nper, pmt, [pv], [type])</code></li>
-                         <li>Payment: <code>=PMT(rate, nper, pv, [fv], [type])</code></li>
-                         <li>Number of Periods: <code>=NPER(rate, pmt, pv, [fv], [type])</code></li>
-                         <li>Rate: <code>=RATE(nper, pmt, pv, [fv], [type], [guess])</code></li>
-                         <li>Effective Rate (APY): <code>=EFFECT(nominal_rate, npery)</code></li>
-                     </ul>
-                 </div>
-             </div>
         </div>
 
-        <div class="pt-3 border-t section-block">
-            <h2 class="text-lg font-semibold mb-1 text-center text-blue-700">Standard Normal (Z) Table - Percentiles</h2>
-            <p class="text-xs text-center text-gray-600 mb-2">Table shows percentile (area to LEFT × 100) for Z-score.</p>
-            <table class="w-full z-table">
-                <thead>
-                    <tr>
-                        <th>Z</th><th>Pct(%)</th><th>Z</th><th>Pct(%)</th>
-                        <th>Z</th><th>Pct(%)</th><th>Z</th><th>Pct(%)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>-3.0</td><td>0.13</td> <td>-1.4</td><td>8.08</td> <td>0.2</td><td>57.93</td> <td>1.8</td><td>96.41</td></tr>
-                    <tr><td>-2.9</td><td>0.19</td> <td>-1.3</td><td>9.68</td> <td>0.3</td><td>61.79</td> <td>1.9</td><td>97.13</td></tr>
-                    <tr><td>-2.8</td><td>0.26</td> <td>-1.2</td><td>11.51</td> <td>0.4</td><td>65.54</td> <td>2.0</td><td>97.72</td></tr>
-                    <tr><td>-2.7</td><td>0.35</td> <td>-1.1</td><td>13.57</td> <td>0.5</td><td>69.15</td> <td>2.1</td><td>98.21</td></tr>
-                    <tr><td>-2.6</td><td>0.47</td> <td>-1.0</td><td>15.87</td> <td>0.6</td><td>72.57</td> <td>2.2</td><td>98.61</td></tr>
-                    <tr><td>-2.5</td><td>0.62</td> <td>-0.9</td><td>18.41</td> <td>0.7</td><td>75.80</td> <td>2.3</td><td>98.93</td></tr>
-                    <tr><td>-2.4</td><td>0.82</td> <td>-0.8</td><td>21.19</td> <td>0.8</td><td>78.81</td> <td>2.4</td><td>99.18</td></tr>
-                    <tr><td>-2.3</td><td>1.07</td> <td>-0.7</td><td>24.20</td> <td>0.9</td><td>81.59</td> <td>2.5</td><td>99.38</td></tr>
-                    <tr><td>-2.2</td><td>1.39</td> <td>-0.6</td><td>27.43</td> <td>1.0</td><td>84.13</td> <td>2.6</td><td>99.53</td></tr>
-                    <tr><td>-2.1</td><td>1.79</td> <td>-0.5</td><td>30.85</td> <td>1.1</td><td>86.43</td> <td>2.7</td><td>99.65</td></tr>
-                    <tr><td>-2.0</td><td>2.28</td> <td>-0.4</td><td>34.46</td> <td>1.2</td><td>88.49</td> <td>2.8</td><td>99.74</td></tr>
-                    <tr><td>-1.9</td><td>2.87</td> <td>-0.3</td><td>38.21</td> <td>1.3</td><td>90.32</td> <td>2.9</td><td>99.81</td></tr>
-                    <tr><td>-1.8</td><td>3.59</td> <td>-0.2</td><td>42.07</td> <td>1.4</td><td>91.92</td> <td>3.0</td><td>99.87</td></tr>
-                    <tr><td>-1.7</td><td>4.46</td> <td>-0.1</td><td>46.02</td> <td>1.5</td><td>93.32</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
-                    <tr><td>-1.6</td><td>5.48</td> <td>0.0</td><td>50.00</td> <td>1.6</td><td>94.52</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
-                    <tr><td>-1.5</td><td>6.68</td> <td>0.1</td><td>53.98</td> <td>1.7</td><td>95.54</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
-                </tbody>
-            </table>
-        </div> </div> </body>
+        <div class="space-y-4"> {/* Container for remaining full-width sections */}
+            <div class="section-block excel-formulas full-width-section">
+                <h2 class="text-lg font-semibold mb-2 text-green-700">Relevant Excel Formulas</h2>
+                <p class="text-xs text-gray-600 mb-2 ml-2">Note: Replace <code>range</code> with cells (e.g., <code>A1:A10</code>), <code>n</code> with number, <code>p</code> with power, <code>x</code> with value, <code>μ</code> with mean, <code>σ</code> with std dev, <code>y's</code>/<code>x's</code> with known data ranges, <code>rate</code> with periodic rate, <code>nper</code> with total periods, <code>pmt</code> with periodic payment, <code>pv</code> with present value, <code>fv</code> with future value, <code>nominal_rate</code> with APR, <code>npery</code> with compoundings per year.</p>
+                <div class="ml-2 grid grid-cols-1 sm:grid-cols-3 gap-x-4">
+                    <div>
+                         <h3 class="text-base font-semibold">Basic Calculations</h3>
+                         <ul>
+                             <li>Power: <code>=POWER(n, p)</code> or <code>=n^p</code></li>
+                             <li>Log (Base 10): <code>=LOG10(n)</code></li>
+                             <li>Log (Natural): <code>=LN(n)</code></li>
+                             <li>Exponential ($e^n$): <code>=EXP(n)</code></li>
+                         </ul>
+
+                         <h3 class="text-base font-semibold">Descriptive Statistics</h3>
+                         <ul>
+                             <li>Mean: <code>=AVERAGE(range)</code></li>
+                             <li>Median: <code>=MEDIAN(range)</code></li>
+                             <li>Mode (Single): <code>=MODE.SNGL(range)</code></li>
+                             <li>Mode (Multi): <code>=MODE.MULT(range)</code></li>
+                             <li>Min: <code>=MIN(range)</code></li>
+                             <li>Max: <code>=MAX(range)</code></li>
+                             <li>Range: <code>=MAX(range)-MIN(range)</code></li>
+                             <li>Std Dev (Sample): <code>=STDEV.S(range)</code></li>
+                             <li>Std Dev (Pop.): <code>=STDEV.P(range)</code></li>
+                             <li>Quartiles: <code>=QUARTILE.INC(range, q)</code> (q=0,1,2,3,4)</li>
+                         </ul>
+                     </div>
+                     <div>
+                         <h3 class="text-base font-semibold">Normal Distribution</h3>
+                         <ul>
+                             <li>Z-Score: <code>=STANDARDIZE(x, μ, σ)</code></li>
+                             <li>Area left of Z: <code>=NORM.S.DIST(z, TRUE)</code></li>
+                             <li>Z from Area: <code>=NORM.S.INV(area)</code></li>
+                             <li>Area left of x: <code>=NORM.DIST(x, μ, σ, TRUE)</code></li>
+                             <li>x from Area: <code>=NORM.INV(area, μ, σ)</code></li>
+                         </ul>
+
+                         <h3 class="text-base font-semibold">Growth/Trend</h3>
+                         <ul>
+                            <li>Linear Forecast: <code>=FORECAST.LINEAR(x, known_y's, known_x's)</code></li>
+                            <li>Exponential Forecast: <code>=GROWTH(known_y's, [known_x's], [new_x's], [const])</code></li>
+                         </ul>
+                     </div>
+                      <div>
+                         <h3 class="text-base font-semibold">Financial Functions</h3>
+                         <ul>
+                             <li>Present Value: <code>=PV(rate, nper, pmt, [fv], [type])</code></li>
+                             <li>Future Value: <code>=FV(rate, nper, pmt, [pv], [type])</code></li>
+                             <li>Payment: <code>=PMT(rate, nper, pv, [fv], [type])</code></li>
+                             <li>Number of Periods: <code>=NPER(rate, pmt, pv, [fv], [type])</code></li>
+                             <li>Rate: <code>=RATE(nper, pmt, pv, [fv], [type], [guess])</code></li>
+                             <li>Effective Rate (APY): <code>=EFFECT(nominal_rate, npery)</code></li>
+                         </ul>
+                     </div>
+                 </div>
+            </div>
+
+            <div class="section-block full-width-section">
+                <h2 class="text-lg font-semibold mb-1 text-center text-blue-700">Standard Normal (Z) Table - Percentiles</h2>
+                <p class="text-xs text-center text-gray-600 mb-2">Table shows percentile (area to LEFT × 100) for Z-score.</p>
+                <table class="w-full z-table">
+                    <thead>
+                        <tr>
+                            <th>Z</th><th>Pct(%)</th><th>Z</th><th>Pct(%)</th>
+                            <th>Z</th><th>Pct(%)</th><th>Z</th><th>Pct(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>-3.0</td><td>0.13</td> <td>-1.4</td><td>8.08</td> <td>0.2</td><td>57.93</td> <td>1.8</td><td>96.41</td></tr>
+                        <tr><td>-2.9</td><td>0.19</td> <td>-1.3</td><td>9.68</td> <td>0.3</td><td>61.79</td> <td>1.9</td><td>97.13</td></tr>
+                        <tr><td>-2.8</td><td>0.26</td> <td>-1.2</td><td>11.51</td> <td>0.4</td><td>65.54</td> <td>2.0</td><td>97.72</td></tr>
+                        <tr><td>-2.7</td><td>0.35</td> <td>-1.1</td><td>13.57</td> <td>0.5</td><td>69.15</td> <td>2.1</td><td>98.21</td></tr>
+                        <tr><td>-2.6</td><td>0.47</td> <td>-1.0</td><td>15.87</td> <td>0.6</td><td>72.57</td> <td>2.2</td><td>98.61</td></tr>
+                        <tr><td>-2.5</td><td>0.62</td> <td>-0.9</td><td>18.41</td> <td>0.7</td><td>75.80</td> <td>2.3</td><td>98.93</td></tr>
+                        <tr><td>-2.4</td><td>0.82</td> <td>-0.8</td><td>21.19</td> <td>0.8</td><td>78.81</td> <td>2.4</td><td>99.18</td></tr>
+                        <tr><td>-2.3</td><td>1.07</td> <td>-0.7</td><td>24.20</td> <td>0.9</td><td>81.59</td> <td>2.5</td><td>99.38</td></tr>
+                        <tr><td>-2.2</td><td>1.39</td> <td>-0.6</td><td>27.43</td> <td>1.0</td><td>84.13</td> <td>2.6</td><td>99.53</td></tr>
+                        <tr><td>-2.1</td><td>1.79</td> <td>-0.5</td><td>30.85</td> <td>1.1</td><td>86.43</td> <td>2.7</td><td>99.65</td></tr>
+                        <tr><td>-2.0</td><td>2.28</td> <td>-0.4</td><td>34.46</td> <td>1.2</td><td>88.49</td> <td>2.8</td><td>99.74</td></tr>
+                        <tr><td>-1.9</td><td>2.87</td> <td>-0.3</td><td>38.21</td> <td>1.3</td><td>90.32</td> <td>2.9</td><td>99.81</td></tr>
+                        <tr><td>-1.8</td><td>3.59</td> <td>-0.2</td><td>42.07</td> <td>1.4</td><td>91.92</td> <td>3.0</td><td>99.87</td></tr>
+                        <tr><td>-1.7</td><td>4.46</td> <td>-0.1</td><td>46.02</td> <td>1.5</td><td>93.32</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>-1.6</td><td>5.48</td> <td>0.0</td><td>50.00</td> <td>1.6</td><td>94.52</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
+                        <tr><td>-1.5</td><td>6.68</td> <td>0.1</td><td>53.98</td> <td>1.7</td><td>95.54</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
+                    </tbody>
+                </table>
+            </div> </div>
+
+    </div> </body>
 </html>
