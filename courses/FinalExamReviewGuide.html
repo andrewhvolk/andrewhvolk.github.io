@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Exam Review Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configure Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // Use Inter font
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']], // Define inline math delimiters
+            displayMath: [['$$', '$$'], ['\\[', '\\]']] // Define display math delimiters
+          },
+          svg: {
+            fontCache: 'global' // Use global font cache for SVG output
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"> // Load MathJax library
+    </script>
+    <style>
+        /* Basic styles */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style for code blocks */
+        code {
+            font-family: monospace;
+            background-color: #f3f4f6; /* Tailwind gray-100 */
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+            font-size: 0.9em; /* Slightly smaller code font */
+            display: inline-block;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+        /* Style for question sections */
+        .question-guide {
+            border-bottom: 1px solid #e5e7eb; /* gray-200 */
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .question-guide h2 {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* semibold */
+            margin-bottom: 0.5rem;
+        }
+        .question-guide ul {
+            list-style-type: disc;
+            margin-left: 1.5rem; /* Indent list */
+        }
+        .question-guide li {
+            margin-bottom: 0.25rem;
+        }
+        /* Ensure rendered math fits */
+         mjx-container {
+             overflow-x: auto; /* Allow horizontal scroll for wide math */
+             overflow-y: hidden;
+             max-width: 100%;
+         }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 p-4 md:p-8">
+
+    <div class="container mx-auto max-w-4xl bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-center mb-6 border-b pb-3 text-blue-700">Final Exam Review Guide</h1>
+
+        <div class="question-guide">
+            <h2>1. Hourly Wage:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Rate calculation (Total Pay / Hours Worked).</li>
+                <li><strong>Formula Sheet:</strong> Basic arithmetic, no specific formula listed.</li>
+                <li><strong>Desmos/Excel:</strong> Use for the division calculation: <code>460 / 28</code>.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>2. Unit Conversion (Time):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Dimensional analysis.</li>
+                <li><strong>Formula Sheet:</strong> No specific conversion formulas listed, but requires knowing: 1 year ≈ 365 days, 1 day = 24 hours.</li>
+                <li><strong>Desmos/Excel:</strong> Use for calculation: <code>2 * 365 * 24</code>.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>3. Unit Conversion (Weight):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Using a given conversion factor.</li>
+                <li><strong>Formula Sheet:</strong> No specific conversion formulas listed, but the factor (1 lb = 0.4536 kg) is provided in the question.</li>
+                <li><strong>Desmos/Excel:</strong> Use for calculation: <code>16 * 0.4536</code>.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>4. Temperature Conversion:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Applying specific conversion formulas.</li>
+                <li><strong>Formula Sheet:</strong> The necessary formulas ($C = (F-32)/1.8$, $F = 1.8C + 32$) are provided in the question itself.</li>
+                <li><strong>Desmos/Excel:</strong> Use for plugging values into the formulas.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>5. Percentage Calculation:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Understanding percentage decrease. 50% less means the price is (1 - 0.50) = 0.50 times the original price.</li>
+                <li><strong>Formula Sheet:</strong> Basic percentage concept, related to Relative Change if needed, but simpler here.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>6. Weighted Averages:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Understanding that averaging percentages directly only works if the quantities they represent have equal weight (which is often not the case with course grades where exams might be weighted differently).</li>
+                <li><strong>Formula Sheet:</strong> No specific formula, relies on conceptual understanding of averages.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>7. Scientific Notation Conversion:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Converting from scientific notation (with a negative exponent) to ordinary notation by moving the decimal point to the left.</li>
+                <li><strong>Formula Sheet:</strong> No specific formula, relies on understanding scientific notation.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>8. Scientific Notation Conversion:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Converting from ordinary notation to scientific notation (with a positive exponent).</li>
+                <li><strong>Formula Sheet:</strong> No specific formula, relies on understanding scientific notation.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>9. Prorating Expenses:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating total annual cost from monthly cost (Monthly * 12) and comparing annual costs.</li>
+                <li><strong>Formula Sheet:</strong> Basic arithmetic.</li>
+                <li><strong>Excel:</strong> Useful for organizing and calculating: Cell A1: <code>=75*12</code>, Cell A2: <code>350</code>, then compare A1 and A2.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>10. Prorating Expenses:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Finding the average monthly cost by converting all expenses to monthly equivalents (Semiannual / 6, Annual / 12) and summing them.</li>
+                <li><strong>Formula Sheet:</strong> Basic arithmetic.</li>
+                <li><strong>Excel:</strong> Useful for calculation: <code>=(600/6) + 105 + (400/12)</code>.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>11. Compound Interest (Monthly):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating future value with compound interest.</li>
+                <li><strong>Formula Sheet:</strong> Financial Formulas -> Compound Interest -> Compounded n times/year: $ A = P \times \left(1 + \frac{APR}{n}\right)^{(nY)} $. (Here P=6000, APR=0.06, n=12, Y=13).</li>
+                <li><strong>Excel:</strong> Use the <code>FV</code> function: <code>=FV(0.06/12, 13*12, 0, -6000)</code>.</li>
+                <li><strong>Desmos:</strong> Calculate using the formula directly: $6000*(1 + 0.06/12)^(12*13)$.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>12. Compound Interest (Annually):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating future value with annual compounding.</li>
+                <li><strong>Formula Sheet:</strong> Financial Formulas -> Compound Interest -> Compounded Annually: $ A = P \times (1 + APR)^Y $. (Here P=2000, APR=0.05, Y=2).</li>
+                <li><strong>Excel:</strong> Use the <code>FV</code> function: <code>=FV(0.05, 2, 0, -2000)</code>.</li>
+                <li><strong>Desmos:</strong> Calculate using the formula directly: $2000*(1 + 0.05)^2$.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>13. Savings Plan Balance (Future Value of Annuity):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating the future value of regular monthly deposits.</li>
+                <li><strong>Formula Sheet:</strong> While the mathematical formula isn't explicitly listed for FV of an annuity, the concept is covered by the Excel <code>FV</code> function reference.</li>
+                <li><strong>Excel:</strong> Use the <code>FV</code> function: <code>=FV(0.04/12, 2*12, -250, 0)</code>. (Rate=APR/n, Nper=Y*n, Pmt is negative as it's an outflow).</li>
+                <li><strong>Desmos:</strong> Could calculate using the full FV of annuity formula if known, but Excel is more direct here. The formula is $ FV = PMT \times \frac{\left(1 + \frac{APR}{n}\right)^{(nY)} - 1}{\left(\frac{APR}{n}\right)} $.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>14. Investment Returns:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating total and annualized returns.</li>
+                <li><strong>Formula Sheet:</strong> Financial Formulas -> Investment Returns -> Total Return: $ \frac{(A - P)}{P} \times 100\% $ and Annual Return: $ \left(\frac{A}{P}\right)^{(1/Y)} - 1 $.</li>
+                <li>First calculate Initial Principal (P): <code>150 * 60 = 9000</code>.</li>
+                <li>A = $12900$, Y = 4 years.</li>
+                <li><strong>Excel/Desmos:</strong> Use for the calculations after finding P.
+                    <ul>
+                        <li>Total Return: <code>((12900 - 9000) / 9000) * 100</code></li>
+                        <li>Annual Return: <code>((12900 / 9000)^(1/4) - 1) * 100</code></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>15. Loan Comparison:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Analyzing trade-offs between loan term, APR, monthly payment, and total interest paid.</li>
+                <li><strong>Formula Sheet:</strong> Financial Formulas -> Savings/Loan Payments -> PMT based on PV: $ PMT = \frac{PV \times \left(\frac{APR}{n}\right)}{\left[1 - \left(1 + \frac{APR}{n}\right)^{(-nY)}\right]} $.</li>
+                <li><strong>Excel:</strong> Use the <code>PMT</code> function to calculate payments for both scenarios:
+                    <ul>
+                        <li>Scenario 1 (3yr, 5%): <code>=PMT(0.05/12, 3*12, 100000)</code></li>
+                        <li>Scenario 2 (5yr, 6%): <code>=PMT(0.06/12, 5*12, 100000)</code></li>
+                    </ul>
+                </li>
+                <li>Compare payments and calculate total paid (PMT * term * 12) to compare total interest. Shorter term = higher payment, less total interest.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>16. Mortgage Calculations:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating mortgage payment, total cost, and interest/principal portions.</li>
+                <li><strong>Formula Sheet:</strong>
+                    <ul>
+                        <li>a. Monthly Payment: Financial Formulas -> Savings/Loan Payments -> PMT based on PV.</li>
+                        <li>b. Total Paid: Basic arithmetic (Monthly Payment * n * Y).</li>
+                        <li>c. Total Interest = Total Paid - Principal (PV). Calculate percentages.</li>
+                    </ul>
+                </li>
+                <li><strong>Excel:</strong>
+                    <ul>
+                        <li>a. <code>=PMT(0.03/12, 15*12, 225000)</code></li>
+                        <li>b. Result from (a) * 15 * 12</li>
+                        <li>c. Principal Percentage: <code>=225000 / Result from (b)</code>. Interest Percentage: <code>=(Result from (b) - 225000) / Result from (b)</code> or <code>=1 - Principal Percentage</code>. Format as percentage.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>17. Statistics Concepts:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Definitions of Population, Sample, Population Parameters, and Sample Statistics.</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, no specific formulas.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>18. Survey Bias:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Identifying biased questions (specifically, leading questions).</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, no specific formulas.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>19. Data Types:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Distinguishing between Qualitative (categorical) and Quantitative (numerical) data.</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, no specific formulas.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>20. Data Types:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Distinguishing between Qualitative and Quantitative data.</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, no specific formulas.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>21. Graph Interpretation (Bar Chart):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Reading and comparing values from a double bar chart.</li>
+                <li><strong>Formula Sheet:</strong> No formulas needed.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>22. Graph Interpretation (Scatter Plot):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Identifying the type (positive/negative/none) and strength (strong/weak) of correlation shown in a scatter plot.</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, no specific formulas.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>23. Graph Interpretation (Scatter Plot):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Identifying the type and strength of correlation.</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, no specific formulas.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>24. Descriptive Statistics:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating measures of central tendency.</li>
+                <li><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Center -> Mean, Median, Mode.</li>
+                <li><strong>Excel:</strong> Enter the data into a column. Use <code>=AVERAGE(range)</code>, <code>=MEDIAN(range)</code>, <code>=MODE.SNGL(range)</code> or <code>=MODE.MULT(range)</code>.</li>
+                <li><strong>Desmos:</strong> Can calculate mean and median using `mean()` and `median()` functions on a list. Mode needs manual identification.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>25. Descriptive Statistics:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Definition of Range.</li>
+                <li><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Variation -> Range: $\text{Highest Value} - \text{Lowest Value}$.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>26. Descriptive Statistics:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating Mean and Median.</li>
+                <li><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Center -> Mean, Median.</li>
+                <li><strong>Excel:</strong> <code>=AVERAGE(range)</code>, <code>=MEDIAN(range)</code>.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>27. Normal Distribution Validity:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Understanding properties of normal distribution and standard deviation. A standard deviation (7 lbs) cannot be larger than the mean (6.8 lbs) for a variable like baby weight which must be non-negative. A value 1 standard deviation below the mean would be negative (6.8 - 7 = -0.2 lbs), which is impossible.</li>
+                <li><strong>Formula Sheet:</strong> Conceptual understanding related to Distributions section.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>28. Normal Distribution (Z-score & Percentiles):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating z-scores and finding corresponding percentiles using a table.</li>
+                <li><strong>Formula Sheet:</strong> Distributions -> Standard Score (z-score): $ z = \frac{(x - \mu)}{\sigma} $. Use the provided Z-Table (or the one in the question).</li>
+                <li><strong>Excel:</strong> Calculate z-score using the formula or <code>=STANDARDIZE(x, mean, stdev)</code>. Find percentile using <code>=NORM.S.DIST(z, TRUE)</code>.</li>
+                <li><strong>Desmos:</strong> Calculate z-score using the formula: $(x - 62.6) / 2.5$.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>29. Exponential Decay:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Modeling exponential decrease and calculating future value.</li>
+                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. Note that for decay, 'r' is negative (r = -0.09).</li>
+                <li><strong>Excel:</strong> Calculate directly: <code>=120*(1-0.09)^3</code>. Or use <code>=FV( -0.09, 3, 0, -120)</code> (treating decay rate like a negative interest rate).</li>
+                <li><strong>Desmos:</strong> Calculate using the formula: $120*(1-0.09)^3$.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>30. Linear Growth:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Modeling linear increase and calculating future value.</li>
+                <li><strong>Formula Sheet:</strong> Growth Models -> Linear Growth (Basic): $\text{New Value} = \text{Initial Value} + (\text{Growth Rate} \times \text{Time})$. Or Linear Modeling -> General Form. (Initial Value = 100000, Growth Rate = 1600, Time = 4).</li>
+                <li><strong>Excel/Desmos:</strong> Calculate using the formula: $100000 + (1600 * 4)$.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>31. Exponential Growth (Doubling Time):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Understanding doubling time and its relation to growth factor over multiple periods. If doubling time is $T_{dbl}$, then in time $t$, the factor of growth is $2^{(t/T_{dbl})}$.</li>
+                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $. Here t=40, $T_{dbl}$=10. Growth factor = $2^{(40/10)} = 2^4$.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>32. Population Growth Rate:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Definition of overall population growth rate.</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, no specific formula.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>33. Exponential Growth (Approx. Doubling Time):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Using the approximate doubling time formula to estimate growth.</li>
+                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Approx. Doubling Time ($ T_{dbl} \approx \frac{70}{P} $) and Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $.</li>
+                <li>Step 1: Find approx. $T_{dbl}$: $70 / 0.6 \approx 116.67$ years.</li>
+                <li>Step 2: Calculate population for t = 2059-2020 = 39 years: $ 330 \times 2^{(39 / 116.67)} $.</li>
+                <li>Step 3: Calculate population for t = 2098-2020 = 78 years: $ 330 \times 2^{(78 / 116.67)} $.</li>
+                <li><strong>Excel/Desmos:</strong> Use for calculations in steps 1, 2, and 3.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>34. Function Relationships:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Describing the relationship between two variables as a function.</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, related to Linear Modeling/Growth Models definitions.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>35. Function Representation (Table, Graph):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Identifying independent/dependent variables, domain/range from a table, and matching to a graph. Plotting points.</li>
+                <li><strong>Formula Sheet:</strong> No formulas needed.</li>
+                <li><strong>Desmos:</strong> Useful for plotting the points from the table `(speed, stopping distance)` to visualize the shape and verify the correct graph.</li>
+                <li><strong>Excel:</strong> Can create a scatter plot from the data.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>36. Linear Functions:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Definition of a linear function and its graphical representation (a straight line).</li>
+                <li><strong>Formula Sheet:</strong> Conceptual, see Linear Modeling section definition.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>37. Linear Functions (Graph Interpretation):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Describing the function shown in a graph and calculating its slope (rate of change).</li>
+                <li><strong>Formula Sheet:</strong> Linear Modeling -> Slope (Rate of Change): $ m = \frac{y_2 - y_1}{x_2 - x_1} $. Pick two points from the graph (e.g., (0,0) and (4,3)). Slope = $(3-0)/(4-0) = 3/4$.</li>
+                <li><strong>Desmos:</strong> Can plot points and find the equation of the line passing through them.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>38. Linear Modeling:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Finding a linear equation from two data points and using it for prediction.</li>
+                <li><strong>Formula Sheet:</strong> Linear Modeling -> Slope ($ m = \frac{y_2 - y_1}{x_2 - x_1} $) and Equation of a Line ($ y = mx + b $).</li>
+                <li>Points: (0, 2.4) and (1, 15.9).</li>
+                <li>Calculate slope (m): $(15.9 - 2.4) / (1 - 0) = 13.5$.</li>
+                <li>Use point (0, 2.4) to find b (y-intercept): $2.4 = 13.5(0) + b \implies b = 2.4$.</li>
+                <li>Write the equation $w = 13.5t + 2.4$.</li>
+                <li>Plug in t=5: $w = 13.5(5) + 2.4$.</li>
+                <li>Plug in t=11: $w = 13.5(11) + 2.4$.</li>
+                <li><strong>Excel:</strong> Use <code>=FORECAST.LINEAR(new_t, known_w, known_t)</code> after setting up the known data points (t=0, w=2.4; t=1, w=15.9).</li>
+                <li><strong>Desmos:</strong> Plot the two points, find the line equation, and evaluate for t=5 and t=11.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>39. Exponential Growth (Inflation):</h2>
+            <ul>
+                <li><strong>Concept:</strong> Calculating future cost based on an annual inflation rate (exponential growth).</li>
+                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. (Q₀=59, r=0.01, t=2002-1998=4).</li>
+                <li><strong>Excel:</strong> Calculate directly: <code>=59*(1+0.01)^4</code>. Or use <code>=FV(0.01, 4, 0, -59)</code>.</li>
+                <li><strong>Desmos:</strong> Calculate using the formula: $59*(1.01)^4$.</li>
+            </ul>
+        </div>
+
+        <div class="question-guide">
+            <h2>40. Exponential Growth:</h2>
+            <ul>
+                <li><strong>Concept:</strong> Creating an exponential function and calculating future values.</li>
+                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. (Q₀=177000, r=0.06).</li>
+                <li><strong>Excel/Desmos:</strong> Use the formula $177000 \times (1.06)^t$ to calculate values for t=1, 2, 3, 4, 5. Excel is good for creating the table quickly.</li>
+            </ul>
+        </div>
+
+    </div> </body>
+</html>

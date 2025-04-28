@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH114 Test 4 - Formula Reference Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configure Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // Use Inter font
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <style>
+        /* Basic print styles */
+        @media print {
+            body {
+                color: #000;
+                margin: 0.35in; /* Print margin */
+                font-size: 7.5pt; /* Base print font size */
+            }
+            .no-print { display: none; }
+             .container { max-width: 100%; width: 100%; padding: 0; margin: 0; }
+             .section-block { page-break-inside: avoid; margin-bottom: 0.5rem; } /* Avoid breaking sections */
+             code { /* Style for code elements in print */
+                font-family: monospace;
+                background-color: #f0f0f0 !important; /* Light gray background */
+                padding: 0.05em 0.2em;
+                border-radius: 2px;
+                font-size: 0.95em;
+                color: #000;
+                border: 1px solid #ccc;
+             }
+             h1 { font-size: 14pt; margin-bottom: 0.5rem; }
+             h2 { font-size: 11pt; margin-bottom: 0.3rem; }
+             h3 { font-size: 9pt; margin-bottom: 0.2rem; }
+             p { font-size: 7.5pt; margin-bottom: 0.3rem;}
+             .section-block + .section-block { border-top: 1px solid #ccc; padding-top: 0.5rem; margin-top: 0.5rem;}
+             table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+             th, td { border: 1px solid #ccc; text-align: center; }
+             th { background-color: #e0e0e0 !important; font-size: 6.5pt; padding: 1px; }
+             td { font-size: 6.5pt; padding: 1px; }
+             .z-table th, .z-table td { padding: 1px; }
+             .excel-formulas ul { padding-left: 0.8rem; }
+             .excel-formulas li { margin-bottom: 0.1rem; }
+             .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; } /* Force 2 columns for print */
+             /* Hide LaTeX source in print */
+             .latex-formula .latex-source { display: none; }
+             /* Ensure rendered math fits */
+             mjx-container { overflow-x: auto; overflow-y: hidden; }
+        }
+
+        /* Base styles for screen */
+        body {
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.4; /* Adjust line height */
+        }
+
+        /* Style for code blocks */
+        code {
+            font-family: monospace;
+            background-color: #f3f4f6; /* Tailwind gray-100 */
+            padding: 0.1em 0.3em;
+            border-radius: 3px;
+            font-size: 0.85em; /* Slightly smaller code font */
+            display: inline-block;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+        /* Reduce list item spacing */
+        ul > li {
+            margin-bottom: 0.25rem;
+        }
+        /* Z-Table specific styles */
+        .z-table th, .z-table td {
+            border: 1px solid #d1d5db; /* gray-300 */
+            padding: 0.1rem 0.05rem; /* Minimal padding */
+            text-align: center;
+            font-size: 0.7rem; /* Smaller font size */
+        }
+        .z-table th {
+            background-color: #f3f4f6; /* gray-100 */
+            font-weight: 600; /* semibold */
+            font-size: 0.65rem; /* Smaller header font */
+        }
+        .z-table {
+             table-layout: fixed;
+             width: 100%;
+        }
+        /* Excel formulas section style */
+        .excel-formulas h3 {
+            margin-top: 0.5rem;
+            font-size: 0.95rem; /* Smaller heading */
+            margin-bottom: 0.2rem;
+        }
+         .excel-formulas ul {
+            list-style: none;
+            padding-left: 1rem;
+         }
+         .excel-formulas li {
+             margin-bottom: 0.15rem;
+         }
+         /* Add a little more bottom margin to sections */
+         .section-block {
+             margin-bottom: 1rem;
+         }
+         /* Style for LaTeX formulas */
+         .latex-formula {
+             margin: 0.3rem 0;
+         }
+         .latex-formula .latex-source {
+            font-family: monospace;
+            font-size: 0.75em;
+            color: #6b7280; /* gray-500 */
+            margin-left: 0.5rem;
+            display: block; /* Show source on screen */
+         }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-800">
+
+    <div class="container mx-auto px-3 py-4 max-w-5xl">
+        <h1 class="text-xl font-bold text-center mb-4 border-b pb-1">
+            MATH114: Quantitative Reasoning - Test 4 Formula Sheet
+        </h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-0 mb-4 formula-grid">
+
+            <div class="section-block">
+                <h2 class="text-lg font-semibold mb-2 text-blue-700">Growth Models</h2>
+                <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Linear Growth (Basic)</h3>
+                    <ul class="list-none ml-3">
+                        <li><code>New Value = Initial Value + (Growth Rate × Time)</code></li>
+                    </ul>
+                </div>
+                <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Exponential Growth</h3>
+                    <ul class="list-none ml-3 space-y-1">
+                        <li>Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $</li>
+                        <li>Approx. Doubling Time ($T_{dbl}$): $ T_{dbl} \approx \frac{70}{P} $ (where P is % growth rate)</li>
+                        <li>Exact Doubling Time ($T_{dbl}$): $ T_{dbl} = \frac{\log(2)}{\log(1 + r)} $</li>
+                        <li>Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $</li>
+                    </ul>
+                </div>
+                <div class="ml-2">
+                    <h3 class="text-base font-semibold mb-1">Exponential Decay (Half-Life)</h3>
+                    <ul class="list-none ml-3">
+                        <li>Formula (half-life $T_{half}$): $ Q = Q_0 \times (0.5)^{(t / T_{half})} $</li>
+                        <li>Alternate form: $ Q = Q_0 \times \left(\frac{1}{2}\right)^{(t / T_{half})} $</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-block">
+                <h2 class="text-lg font-semibold mb-2 text-teal-700">Linear Modeling</h2>
+                <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Slope (Rate of Change)</h3>
+                    <ul class="list-none ml-3">
+                        <li>Rate of Change = Slope (m) = $\frac{\text{Change in Dependent Variable}}{\text{Change in Independent Variable}}$</li>
+                        <li>$ m = \frac{y_2 - y_1}{x_2 - x_1} $</li>
+                    </ul>
+                </div>
+                <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Equation of a Line</h3>
+                    <ul class="list-none ml-3 space-y-1">
+                        <li>General Form: $\text{Dependent Variable} = \text{Initial Value} + (\text{Rate of Change} \times \text{Independent Variable})$</li>
+                        <li>Slope-Intercept Form: $ y = mx + b $</li>
+                        <li>y: Dependent Variable, x: Independent Variable, m: Slope, b: y-intercept (Initial Value)</li>
+                    </ul>
+                </div>
+                 <div class="ml-2">
+                    <h3 class="text-base font-semibold mb-1">Rate of Change Rule</h3>
+                    <ul class="list-none ml-3">
+                        <li>$\text{Change in Dependent Var} = \text{Rate of Change} \times \text{Change in Independent Var}$</li>
+                        <li>$ \Delta y = m \times \Delta x $</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-block">
+                <h2 class="text-lg font-semibold mb-2 text-purple-700">Financial Formulas</h2>
+                <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Simple Interest</h3>
+                    <ul class="list-none ml-3">
+                        <li>Interest = $ P \times r \times t $</li>
+                        <li>Amount $ A = P \times (1 + r \times t) $</li>
+                        <li>P: Principal, r: annual rate (decimal), t: time (years), A: Amount</li>
+                    </ul>
+                </div>
+                <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Compound Interest</h3>
+                    <ul class="list-none ml-3 space-y-1">
+                        <li>Compounded Annually: $ A = P \times (1 + APR)^Y $</li>
+                        <li>Compounded n times/year: $ A = P \times \left(1 + \frac{APR}{n}\right)^{(nY)} $</li>
+                        <li>Compounded Continuously: $ A = P \times e^{(APR \times Y)} $</li>
+                        <li>A: Accumulated Balance (FV), P: Principal (PV), APR: Annual Rate, Y: Years, n: compounding periods/year, $e \approx 2.71828$</li>
+                        <li>APY (Annual Percentage Yield): Effective annual rate</li>
+                         <li>$ APY = \left(1 + \frac{APR}{n}\right)^n - 1 $ (for n compoundings)</li>
+                         <li>$ APY = e^{APR} - 1 $ (for continuous compounding)</li>
+                    </ul>
+                </div>
+                 <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Savings/Loan Payments (Ordinary Annuity)</h3>
+                    <ul class="list-none ml-3">
+                         <li class="latex-formula">Payment (PMT) based on desired Future Value (FV):
+                            $$ PMT = \frac{FV \times \left(\frac{APR}{n}\right)}{\left[\left(1 + \frac{APR}{n}\right)^{(nY)} - 1\right]} $$
+                            <span class="latex-source">PMT = (FV * (APR/n)) / (((1 + APR/n)^(nY)) - 1)</span>
+                         </li>
+                         <li class="latex-formula">Payment (PMT) based on Loan Principal (PV):
+                            $$ PMT = \frac{PV \times \left(\frac{APR}{n}\right)}{\left[1 - \left(1 + \frac{APR}{n}\right)^{(-nY)}\right]} $$
+                             <span class="latex-source">PMT = (PV * (APR/n)) / (1 - (1 + APR/n)^(-nY))</span>
+                         </li>
+                         <li>PMT: Regular Payment, PV: Principal/Loan Amount, FV: Future Value</li>
+                    </ul>
+                </div>
+                 <div class="ml-2">
+                    <h3 class="text-base font-semibold mb-1">Investment Returns</h3>
+                    <ul class="list-none ml-3">
+                        <li>Total Return: $ \frac{(A - P)}{P} \times 100\% $</li>
+                        <li>Annual Return: $ \left(\frac{A}{P}\right)^{(1/Y)} - 1 $ (decimal, multiply by 100 for %)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-block">
+                <h2 class="text-lg font-semibold mb-2 text-blue-700">Descriptive Statistics & Change</h2>
+                <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Measures of Center</h3>
+                    <ul class="list-none ml-3">
+                        <li>Mean ($\mu$ or $\bar{x}$): $\frac{\text{Sum of values}}{\text{Count of values}}$</li>
+                        <li>Median: Middle value of sorted data.</li>
+                        <li>Mode: Most frequent value(s).</li>
+                    </ul>
+                </div>
+                 <div class="ml-2 mb-2">
+                    <h3 class="text-base font-semibold mb-1">Measures of Variation</h3>
+                    <ul class="list-none ml-3">
+                        <li>Range: $\text{Highest Value} - \text{Lowest Value}$</li>
+                        <li>Standard Deviation ($\sigma$ or s): Measures data spread.</li>
+                        <li>Range Rule of Thumb: $ \text{Std Dev} \approx \frac{\text{Range}}{4} $</li>
+                    </ul>
+                </div>
+                 <div class="ml-2">
+                    <h3 class="text-base font-semibold mb-1">Change Metrics</h3>
+                    <ul class="list-none ml-3">
+                        <li>Absolute Change: $\text{New Value} - \text{Reference Value}$</li>
+                        <li>Relative Change: $ \frac{\text{Absolute Change}}{\text{Reference Value}} \times 100\% $</li>
+                        <li>Or: $ \frac{(\text{New Value} - \text{Reference Value})}{\text{Reference Value}} \times 100\% $</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-block">
+                 <h2 class="text-lg font-semibold mb-2 text-blue-700">Distributions</h2>
+                 <div class="ml-2 mb-2">
+                     <h3 class="text-base font-semibold mb-1">Standard Score (z-score)</h3>
+                     <ul class="list-none ml-3">
+                         <li>$ z = \frac{(x - \mu)}{\sigma} $</li>
+                         <li>x: data value, $\mu$: population mean, $\sigma$: population std dev</li>
+                     </ul>
+                 </div>
+                 <div class="ml-2">
+                     <h3 class="text-base font-semibold mb-1">Empirical Rule (68-95-99.7)</h3>
+                     <ul class="list-none ml-3">
+                        <li>Approx. 68% of data within 1 std dev of the mean ($\mu \pm \sigma$).</li>
+                        <li>Approx. 95% of data within 2 std dev of the mean ($\mu \pm 2\sigma$).</li>
+                        <li>Approx. 99.7% of data within 3 std dev of the mean ($\mu \pm 3\sigma$).</li>
+                     </ul>
+                 </div>
+            </div>
+
+             <div></div>
+
+
+        </div> <div class="pt-3 border-t section-block excel-formulas mb-4">
+            <h2 class="text-lg font-semibold mb-2 text-green-700">Relevant Excel Formulas</h2>
+            <p class="text-xs text-gray-600 mb-2 ml-2">Note: Replace <code>range</code> with cells (e.g., <code>A1:A10</code>), <code>n</code> with number, <code>p</code> with power, <code>x</code> with value, <code>μ</code> with mean, <code>σ</code> with std dev, <code>y's</code>/<code>x's</code> with known data ranges, <code>rate</code> with periodic rate, <code>nper</code> with total periods, <code>pmt</code> with periodic payment, <code>pv</code> with present value, <code>fv</code> with future value, <code>nominal_rate</code> with APR, <code>npery</code> with compoundings per year.</p>
+            <div class="ml-2 grid grid-cols-1 sm:grid-cols-3 gap-x-4">
+                <div>
+                     <h3 class="text-base font-semibold">Basic Calculations</h3>
+                     <ul>
+                         <li>Power: <code>=POWER(n, p)</code> or <code>=n^p</code></li>
+                         <li>Log (Base 10): <code>=LOG10(n)</code></li>
+                         <li>Log (Natural): <code>=LN(n)</code></li>
+                         <li>Exponential ($e^n$): <code>=EXP(n)</code></li>
+                     </ul>
+
+                     <h3 class="text-base font-semibold">Descriptive Statistics</h3>
+                     <ul>
+                         <li>Mean: <code>=AVERAGE(range)</code></li>
+                         <li>Median: <code>=MEDIAN(range)</code></li>
+                         <li>Mode (Single): <code>=MODE.SNGL(range)</code></li>
+                         <li>Mode (Multi): <code>=MODE.MULT(range)</code></li>
+                         <li>Min: <code>=MIN(range)</code></li>
+                         <li>Max: <code>=MAX(range)</code></li>
+                         <li>Range: <code>=MAX(range)-MIN(range)</code></li>
+                         <li>Std Dev (Sample): <code>=STDEV.S(range)</code></li>
+                         <li>Std Dev (Pop.): <code>=STDEV.P(range)</code></li>
+                         <li>Quartiles: <code>=QUARTILE.INC(range, q)</code> (q=0,1,2,3,4)</li>
+                     </ul>
+                 </div>
+                 <div>
+                     <h3 class="text-base font-semibold">Normal Distribution</h3>
+                     <ul>
+                         <li>Z-Score: <code>=STANDARDIZE(x, μ, σ)</code></li>
+                         <li>Area left of Z: <code>=NORM.S.DIST(z, TRUE)</code></li>
+                         <li>Z from Area: <code>=NORM.S.INV(area)</code></li>
+                         <li>Area left of x: <code>=NORM.DIST(x, μ, σ, TRUE)</code></li>
+                         <li>x from Area: <code>=NORM.INV(area, μ, σ)</code></li>
+                     </ul>
+
+                     <h3 class="text-base font-semibold">Growth/Trend</h3>
+                     <ul>
+                        <li>Linear Forecast: <code>=FORECAST.LINEAR(x, known_y's, known_x's)</code></li>
+                        <li>Exponential Forecast: <code>=GROWTH(known_y's, [known_x's], [new_x's], [const])</code></li>
+                     </ul>
+                 </div>
+                  <div>
+                     <h3 class="text-base font-semibold">Financial Functions</h3>
+                     <ul>
+                         <li>Present Value: <code>=PV(rate, nper, pmt, [fv], [type])</code></li>
+                         <li>Future Value: <code>=FV(rate, nper, pmt, [pv], [type])</code></li>
+                         <li>Payment: <code>=PMT(rate, nper, pv, [fv], [type])</code></li>
+                         <li>Number of Periods: <code>=NPER(rate, pmt, pv, [fv], [type])</code></li>
+                         <li>Rate: <code>=RATE(nper, pmt, pv, [fv], [type], [guess])</code></li>
+                         <li>Effective Rate (APY): <code>=EFFECT(nominal_rate, npery)</code></li>
+                     </ul>
+                 </div>
+             </div>
+        </div>
+
+        <div class="pt-3 border-t section-block">
+            <h2 class="text-lg font-semibold mb-1 text-center text-blue-700">Standard Normal (Z) Table - Percentiles</h2>
+            <p class="text-xs text-center text-gray-600 mb-2">Table shows percentile (area to LEFT × 100) for Z-score.</p>
+            <table class="w-full z-table">
+                <thead>
+                    <tr>
+                        <th>Z</th><th>Pct(%)</th><th>Z</th><th>Pct(%)</th>
+                        <th>Z</th><th>Pct(%)</th><th>Z</th><th>Pct(%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>-3.0</td><td>0.13</td> <td>-1.4</td><td>8.08</td> <td>0.2</td><td>57.93</td> <td>1.8</td><td>96.41</td></tr>
+                    <tr><td>-2.9</td><td>0.19</td> <td>-1.3</td><td>9.68</td> <td>0.3</td><td>61.79</td> <td>1.9</td><td>97.13</td></tr>
+                    <tr><td>-2.8</td><td>0.26</td> <td>-1.2</td><td>11.51</td> <td>0.4</td><td>65.54</td> <td>2.0</td><td>97.72</td></tr>
+                    <tr><td>-2.7</td><td>0.35</td> <td>-1.1</td><td>13.57</td> <td>0.5</td><td>69.15</td> <td>2.1</td><td>98.21</td></tr>
+                    <tr><td>-2.6</td><td>0.47</td> <td>-1.0</td><td>15.87</td> <td>0.6</td><td>72.57</td> <td>2.2</td><td>98.61</td></tr>
+                    <tr><td>-2.5</td><td>0.62</td> <td>-0.9</td><td>18.41</td> <td>0.7</td><td>75.80</td> <td>2.3</td><td>98.93</td></tr>
+                    <tr><td>-2.4</td><td>0.82</td> <td>-0.8</td><td>21.19</td> <td>0.8</td><td>78.81</td> <td>2.4</td><td>99.18</td></tr>
+                    <tr><td>-2.3</td><td>1.07</td> <td>-0.7</td><td>24.20</td> <td>0.9</td><td>81.59</td> <td>2.5</td><td>99.38</td></tr>
+                    <tr><td>-2.2</td><td>1.39</td> <td>-0.6</td><td>27.43</td> <td>1.0</td><td>84.13</td> <td>2.6</td><td>99.53</td></tr>
+                    <tr><td>-2.1</td><td>1.79</td> <td>-0.5</td><td>30.85</td> <td>1.1</td><td>86.43</td> <td>2.7</td><td>99.65</td></tr>
+                    <tr><td>-2.0</td><td>2.28</td> <td>-0.4</td><td>34.46</td> <td>1.2</td><td>88.49</td> <td>2.8</td><td>99.74</td></tr>
+                    <tr><td>-1.9</td><td>2.87</td> <td>-0.3</td><td>38.21</td> <td>1.3</td><td>90.32</td> <td>2.9</td><td>99.81</td></tr>
+                    <tr><td>-1.8</td><td>3.59</td> <td>-0.2</td><td>42.07</td> <td>1.4</td><td>91.92</td> <td>3.0</td><td>99.87</td></tr>
+                    <tr><td>-1.7</td><td>4.46</td> <td>-0.1</td><td>46.02</td> <td>1.5</td><td>93.32</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>-1.6</td><td>5.48</td> <td>0.0</td><td>50.00</td> <td>1.6</td><td>94.52</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
+                    <tr><td>-1.5</td><td>6.68</td> <td>0.1</td><td>53.98</td> <td>1.7</td><td>95.54</td> <td>&nbsp;</td><td>&nbsp;</td></tr>
+                </tbody>
+            </table>
+        </div> </div> </body>
+</html>
