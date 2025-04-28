@@ -89,6 +89,7 @@
             display: inline-block;
             margin-top: 1px;
             margin-bottom: 1px;
+            vertical-align: baseline; /* Helps align code with text */
         }
         /* Reduce list item spacing */
         ul > li {
@@ -131,12 +132,17 @@
          .latex-formula {
              margin: 0.3rem 0;
          }
+         /* Hide LaTeX source code on screen by default */
          .latex-formula .latex-source {
-            font-family: monospace;
-            font-size: 0.75em;
-            color: #6b7280; /* gray-500 */
-            margin-left: 0.5rem;
-            display: block; /* Show source on screen */
+            display: none; /* Hide the source code */
+         }
+         /* Ensure rendered math fits */
+         mjx-container {
+             overflow-x: auto; /* Allow horizontal scroll for wide math */
+             overflow-y: hidden;
+             max-width: 100%;
+             display: inline-block; /* Treat math blocks more like text */
+             vertical-align: middle; /* Align math vertically */
          }
     </style>
 </head>
@@ -160,17 +166,17 @@
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Exponential Growth</h3>
                     <ul class="list-none ml-3 space-y-1">
-                        <li>Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $</li>
-                        <li>Approx. Doubling Time ($T_{dbl}$): $ T_{dbl} \approx \frac{70}{P} $ (where P is % growth rate)</li>
-                        <li>Exact Doubling Time ($T_{dbl}$): $ T_{dbl} = \frac{\log(2)}{\log(1 + r)} $</li>
-                        <li>Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $</li>
+                        <li class="latex-formula">Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $ <span class="latex-source">Q = Q_0 * (1 + r)^t</span></li>
+                        <li class="latex-formula">Approx. Doubling Time ($T_{dbl}$): $ T_{dbl} \approx \frac{70}{P} $ (where P is % growth rate) <span class="latex-source">T_dbl ≈ 70 / P</span></li>
+                        <li class="latex-formula">Exact Doubling Time ($T_{dbl}$): $ T_{dbl} = \frac{\log(2)}{\log(1 + r)} $ <span class="latex-source">T_dbl = log(2) / log(1 + r)</span></li>
+                        <li class="latex-formula">Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $ <span class="latex-source">Q = Q_0 * 2^(t / T_dbl)</span></li>
                     </ul>
                 </div>
                 <div class="ml-2">
                     <h3 class="text-base font-semibold mb-1">Exponential Decay (Half-Life)</h3>
                     <ul class="list-none ml-3">
-                        <li>Formula (half-life $T_{half}$): $ Q = Q_0 \times (0.5)^{(t / T_{half})} $</li>
-                        <li>Alternate form: $ Q = Q_0 \times \left(\frac{1}{2}\right)^{(t / T_{half})} $</li>
+                        <li class="latex-formula">Formula (half-life $T_{half}$): $ Q = Q_0 \times (0.5)^{(t / T_{half})} $ <span class="latex-source">Q = Q_0 * (0.5)^(t / T_half)</span></li>
+                        <li class="latex-formula">Alternate form: $ Q = Q_0 \times \left(\frac{1}{2}\right)^{(t / T_{half})} $ <span class="latex-source">Q = Q_0 * (1/2)^(t / T_half)</span></li>
                     </ul>
                 </div>
             </div>
@@ -180,23 +186,23 @@
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Slope (Rate of Change)</h3>
                     <ul class="list-none ml-3">
-                        <li>Rate of Change = Slope (m) = $\frac{\text{Change in Dependent Variable}}{\text{Change in Independent Variable}}$</li>
-                        <li>$ m = \frac{y_2 - y_1}{x_2 - x_1} $</li>
+                        <li class="latex-formula">Rate of Change = Slope (m) = $\frac{\text{Change in Dependent Variable}}{\text{Change in Independent Variable}}$ <span class="latex-source">(Change in Dependent Variable) / (Change in Independent Variable)</span></li>
+                        <li class="latex-formula">$ m = \frac{y_2 - y_1}{x_2 - x_1} $ <span class="latex-source">m = (y2 - y1) / (x2 - x1)</span></li>
                     </ul>
                 </div>
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Equation of a Line</h3>
                     <ul class="list-none ml-3 space-y-1">
-                        <li>General Form: $\text{Dependent Variable} = \text{Initial Value} + (\text{Rate of Change} \times \text{Independent Variable})$</li>
-                        <li>Slope-Intercept Form: $ y = mx + b $</li>
+                        <li class="latex-formula">General Form: $\text{Dependent Variable} = \text{Initial Value} + (\text{Rate of Change} \times \text{Independent Variable})$ <span class="latex-source">Dependent Var = Initial Value + (Rate of Change * Independent Var)</span></li>
+                        <li class="latex-formula">Slope-Intercept Form: $ y = mx + b $ <span class="latex-source">y = mx + b</span></li>
                         <li>y: Dependent Variable, x: Independent Variable, m: Slope, b: y-intercept (Initial Value)</li>
                     </ul>
                 </div>
                  <div class="ml-2">
                     <h3 class="text-base font-semibold mb-1">Rate of Change Rule</h3>
                     <ul class="list-none ml-3">
-                        <li>$\text{Change in Dependent Var} = \text{Rate of Change} \times \text{Change in Independent Var}$</li>
-                        <li>$ \Delta y = m \times \Delta x $</li>
+                        <li class="latex-formula">$\text{Change in Dependent Var} = \text{Rate of Change} \times \text{Change in Independent Var}$ <span class="latex-source">Change in Dependent Var = Rate of Change * Change in Independent Var</span></li>
+                        <li class="latex-formula">$ \Delta y = m \times \Delta x $ <span class="latex-source">Δy = m * Δx</span></li>
                     </ul>
                 </div>
             </div>
@@ -206,21 +212,21 @@
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Simple Interest</h3>
                     <ul class="list-none ml-3">
-                        <li>Interest = $ P \times r \times t $</li>
-                        <li>Amount $ A = P \times (1 + r \times t) $</li>
+                        <li class="latex-formula">Interest = $ P \times r \times t $ <span class="latex-source">Interest = P * r * t</span></li>
+                        <li class="latex-formula">Amount $ A = P \times (1 + r \times t) $ <span class="latex-source">A = P * (1 + r * t)</span></li>
                         <li>P: Principal, r: annual rate (decimal), t: time (years), A: Amount</li>
                     </ul>
                 </div>
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Compound Interest</h3>
                     <ul class="list-none ml-3 space-y-1">
-                        <li>Compounded Annually: $ A = P \times (1 + APR)^Y $</li>
-                        <li>Compounded n times/year: $ A = P \times \left(1 + \frac{APR}{n}\right)^{(nY)} $</li>
-                        <li>Compounded Continuously: $ A = P \times e^{(APR \times Y)} $</li>
+                        <li class="latex-formula">Compounded Annually: $ A = P \times (1 + APR)^Y $ <span class="latex-source">A = P * (1 + APR)^Y</span></li>
+                        <li class="latex-formula">Compounded n times/year: $ A = P \times \left(1 + \frac{APR}{n}\right)^{(nY)} $ <span class="latex-source">A = P * (1 + APR/n)^(nY)</span></li>
+                        <li class="latex-formula">Compounded Continuously: $ A = P \times e^{(APR \times Y)} $ <span class="latex-source">A = P * e^(APR * Y)</span></li>
                         <li>A: Accumulated Balance (FV), P: Principal (PV), APR: Annual Rate, Y: Years, n: compounding periods/year, $e \approx 2.71828$</li>
                         <li>APY (Annual Percentage Yield): Effective annual rate</li>
-                         <li>$ APY = \left(1 + \frac{APR}{n}\right)^n - 1 $ (for n compoundings)</li>
-                         <li>$ APY = e^{APR} - 1 $ (for continuous compounding)</li>
+                         <li class="latex-formula">$ APY = \left(1 + \frac{APR}{n}\right)^n - 1 $ (for n compoundings) <span class="latex-source">APY = (1 + APR/n)^n - 1</span></li>
+                         <li class="latex-formula">$ APY = e^{APR} - 1 $ (for continuous compounding) <span class="latex-source">APY = e^APR - 1</span></li>
                     </ul>
                 </div>
                  <div class="ml-2 mb-2">
@@ -240,8 +246,8 @@
                  <div class="ml-2">
                     <h3 class="text-base font-semibold mb-1">Investment Returns</h3>
                     <ul class="list-none ml-3">
-                        <li>Total Return: $ \frac{(A - P)}{P} \times 100\% $</li>
-                        <li>Annual Return: $ \left(\frac{A}{P}\right)^{(1/Y)} - 1 $ (decimal, multiply by 100 for %)</li>
+                        <li class="latex-formula">Total Return: $ \frac{(A - P)}{P} \times 100\% $ <span class="latex-source">(A - P) / P * 100%</span></li>
+                        <li class="latex-formula">Annual Return: $ \left(\frac{A}{P}\right)^{(1/Y)} - 1 $ (decimal, multiply by 100 for %) <span class="latex-source">(A / P)^(1/Y) - 1</span></li>
                     </ul>
                 </div>
             </div>
@@ -251,7 +257,7 @@
                 <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Measures of Center</h3>
                     <ul class="list-none ml-3">
-                        <li>Mean ($\mu$ or $\bar{x}$): $\frac{\text{Sum of values}}{\text{Count of values}}$</li>
+                        <li class="latex-formula">Mean ($\mu$ or $\bar{x}$): $\frac{\sum x}{n} = \frac{\text{Sum of values}}{\text{Count of values}}$ <span class="latex-source">Mean (μ or x̄): Sum of values / Count of values</span></li>
                         <li>Median: Middle value of sorted data.</li>
                         <li>Mode: Most frequent value(s).</li>
                     </ul>
@@ -259,17 +265,17 @@
                  <div class="ml-2 mb-2">
                     <h3 class="text-base font-semibold mb-1">Measures of Variation</h3>
                     <ul class="list-none ml-3">
-                        <li>Range: $\text{Highest Value} - \text{Lowest Value}$</li>
+                        <li class="latex-formula">Range: $\text{Highest Value} - \text{Lowest Value}$ <span class="latex-source">Range: Highest Value - Lowest Value</span></li>
                         <li>Standard Deviation ($\sigma$ or s): Measures data spread.</li>
-                        <li>Range Rule of Thumb: $ \text{Std Dev} \approx \frac{\text{Range}}{4} $</li>
+                        <li class="latex-formula">Range Rule of Thumb: $ \text{Std Dev} \approx \frac{\text{Range}}{4} $ <span class="latex-source">Std Dev ≈ Range / 4</span></li>
                     </ul>
                 </div>
                  <div class="ml-2">
                     <h3 class="text-base font-semibold mb-1">Change Metrics</h3>
                     <ul class="list-none ml-3">
-                        <li>Absolute Change: $\text{New Value} - \text{Reference Value}$</li>
-                        <li>Relative Change: $ \frac{\text{Absolute Change}}{\text{Reference Value}} \times 100\% $</li>
-                        <li>Or: $ \frac{(\text{New Value} - \text{Reference Value})}{\text{Reference Value}} \times 100\% $</li>
+                        <li class="latex-formula">Absolute Change: $\text{New Value} - \text{Reference Value}$ <span class="latex-source">Absolute Change: New Value - Reference Value</span></li>
+                        <li class="latex-formula">Relative Change: $ \frac{\text{Absolute Change}}{\text{Reference Value}} \times 100\% $ <span class="latex-source">Relative Change: (Absolute Change / Reference Value) * 100%</span></li>
+                        <li class="latex-formula">Or: $ \frac{(\text{New Value} - \text{Reference Value})}{\text{Reference Value}} \times 100\% $ <span class="latex-source">Or: ((New Value - Reference Value) / Reference Value) * 100%</span></li>
                     </ul>
                 </div>
             </div>
@@ -278,17 +284,19 @@
                  <h2 class="text-lg font-semibold mb-2 text-blue-700">Distributions</h2>
                  <div class="ml-2 mb-2">
                      <h3 class="text-base font-semibold mb-1">Standard Score (z-score)</h3>
-                     <ul class="list-none ml-3">
-                         <li>$ z = \frac{(x - \mu)}{\sigma} $</li>
-                         <li>x: data value, $\mu$: population mean, $\sigma$: population std dev</li>
+                     <ul class="list-none ml-3 space-y-1"> {/* Added space-y-1 for slight separation */}
+                         <li class="latex-formula">$ z = \frac{(x - \mu)}{\sigma} $ <span class="latex-source">z = (x - μ) / σ</span></li>
+                         <li><code>x</code>: data value</li>
+                         <li><code>&mu;</code>: population mean</li>
+                         <li><code>&sigma;</code>: population std dev</li>
                      </ul>
                  </div>
                  <div class="ml-2">
                      <h3 class="text-base font-semibold mb-1">Empirical Rule (68-95-99.7)</h3>
-                     <ul class="list-none ml-3">
-                        <li>Approx. 68% of data within 1 std dev of the mean ($\mu \pm \sigma$).</li>
-                        <li>Approx. 95% of data within 2 std dev of the mean ($\mu \pm 2\sigma$).</li>
-                        <li>Approx. 99.7% of data within 3 std dev of the mean ($\mu \pm 3\sigma$).</li>
+                     <ul class="list-none ml-3 space-y-1"> {/* Added space-y-1 */}
+                        <li>Approx. 68% of data within 1 std dev of the mean (<code>&mu; &plusmn; &sigma;</code>).</li>
+                        <li>Approx. 95% of data within 2 std dev of the mean (<code>&mu; &plusmn; 2&sigma;</code>).</li>
+                        <li>Approx. 99.7% of data within 3 std dev of the mean (<code>&mu; &plusmn; 3&sigma;</code>).</li>
                      </ul>
                  </div>
             </div>

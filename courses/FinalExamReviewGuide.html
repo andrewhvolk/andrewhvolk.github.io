@@ -49,6 +49,7 @@
             display: inline-block;
             margin-top: 1px;
             margin-bottom: 1px;
+            vertical-align: baseline; /* Helps align code with text */
         }
         /* Style for question sections */
         .question-guide {
@@ -73,6 +74,12 @@
              overflow-x: auto; /* Allow horizontal scroll for wide math */
              overflow-y: hidden;
              max-width: 100%;
+             display: inline-block; /* Treat math blocks more like text */
+             vertical-align: middle; /* Align math vertically */
+         }
+         /* Hide LaTeX source code */
+         .latex-formula .latex-source {
+            display: none;
          }
     </style>
 </head>
@@ -171,7 +178,7 @@
             <h2>11. Compound Interest (Monthly):</h2>
             <ul>
                 <li><strong>Concept:</strong> Calculating future value with compound interest.</li>
-                <li><strong>Formula Sheet:</strong> Financial Formulas -> Compound Interest -> Compounded n times/year: $ A = P \times \left(1 + \frac{APR}{n}\right)^{(nY)} $. (Here P=6000, APR=0.06, n=12, Y=13).</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Financial Formulas -> Compound Interest -> Compounded n times/year: $ A = P \times \left(1 + \frac{APR}{n}\right)^{(nY)} $. <span class="latex-source">A = P * (1 + APR/n)^(nY)</span> (Here P=6000, APR=0.06, n=12, Y=13).</li>
                 <li><strong>Excel:</strong> Use the <code>FV</code> function: <code>=FV(0.06/12, 13*12, 0, -6000)</code>.</li>
                 <li><strong>Desmos:</strong> Calculate using the formula directly: $6000*(1 + 0.06/12)^(12*13)$.</li>
             </ul>
@@ -181,7 +188,7 @@
             <h2>12. Compound Interest (Annually):</h2>
             <ul>
                 <li><strong>Concept:</strong> Calculating future value with annual compounding.</li>
-                <li><strong>Formula Sheet:</strong> Financial Formulas -> Compound Interest -> Compounded Annually: $ A = P \times (1 + APR)^Y $. (Here P=2000, APR=0.05, Y=2).</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Financial Formulas -> Compound Interest -> Compounded Annually: $ A = P \times (1 + APR)^Y $. <span class="latex-source">A = P * (1 + APR)^Y</span> (Here P=2000, APR=0.05, Y=2).</li>
                 <li><strong>Excel:</strong> Use the <code>FV</code> function: <code>=FV(0.05, 2, 0, -2000)</code>.</li>
                 <li><strong>Desmos:</strong> Calculate using the formula directly: $2000*(1 + 0.05)^2$.</li>
             </ul>
@@ -191,9 +198,9 @@
             <h2>13. Savings Plan Balance (Future Value of Annuity):</h2>
             <ul>
                 <li><strong>Concept:</strong> Calculating the future value of regular monthly deposits.</li>
-                <li><strong>Formula Sheet:</strong> While the mathematical formula isn't explicitly listed for FV of an annuity, the concept is covered by the Excel <code>FV</code> function reference.</li>
+                <li><strong>Formula Sheet:</strong> The Excel function <code>=FV(rate, nper, pmt, [pv], [type])</code> is listed under Financial Functions. The sheet provides the mathematical formula for PMT based on FV, but not FV based on PMT.</li>
                 <li><strong>Excel:</strong> Use the <code>FV</code> function: <code>=FV(0.04/12, 2*12, -250, 0)</code>. (Rate=APR/n, Nper=Y*n, Pmt is negative as it's an outflow).</li>
-                <li><strong>Desmos:</strong> Could calculate using the full FV of annuity formula if known, but Excel is more direct here. The formula is $ FV = PMT \times \frac{\left(1 + \frac{APR}{n}\right)^{(nY)} - 1}{\left(\frac{APR}{n}\right)} $.</li>
+                <li><strong>Desmos:</strong> Could calculate using the full FV of annuity formula if known: $ FV = PMT \times \frac{\left(1 + \frac{APR}{n}\right)^{(nY)} - 1}{\left(\frac{APR}{n}\right)} $.</li>
             </ul>
         </div>
 
@@ -201,7 +208,7 @@
             <h2>14. Investment Returns:</h2>
             <ul>
                 <li><strong>Concept:</strong> Calculating total and annualized returns.</li>
-                <li><strong>Formula Sheet:</strong> Financial Formulas -> Investment Returns -> Total Return: $ \frac{(A - P)}{P} \times 100\% $ and Annual Return: $ \left(\frac{A}{P}\right)^{(1/Y)} - 1 $.</li>
+                <li><strong>Formula Sheet:</strong> Financial Formulas -> Investment Returns -> Total Return: $ \frac{(A - P)}{P} \times 100\% $ <span class="latex-source">(A - P) / P * 100%</span> and Annual Return: $ \left(\frac{A}{P}\right)^{(1/Y)} - 1 $ <span class="latex-source">(A / P)^(1/Y) - 1</span>.</li>
                 <li>First calculate Initial Principal (P): <code>150 * 60 = 9000</code>.</li>
                 <li>A = $12900$, Y = 4 years.</li>
                 <li><strong>Excel/Desmos:</strong> Use for the calculations after finding P.
@@ -217,7 +224,7 @@
             <h2>15. Loan Comparison:</h2>
             <ul>
                 <li><strong>Concept:</strong> Analyzing trade-offs between loan term, APR, monthly payment, and total interest paid.</li>
-                <li><strong>Formula Sheet:</strong> Financial Formulas -> Savings/Loan Payments -> PMT based on PV: $ PMT = \frac{PV \times \left(\frac{APR}{n}\right)}{\left[1 - \left(1 + \frac{APR}{n}\right)^{(-nY)}\right]} $.</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Financial Formulas -> Savings/Loan Payments -> PMT based on PV: $$ PMT = \frac{PV \times \left(\frac{APR}{n}\right)}{\left[1 - \left(1 + \frac{APR}{n}\right)^{(-nY)}\right]} $$ <span class="latex-source">PMT = (PV * (APR/n)) / (1 - (1 + APR/n)^(-nY))</span>.</li>
                 <li><strong>Excel:</strong> Use the <code>PMT</code> function to calculate payments for both scenarios:
                     <ul>
                         <li>Scenario 1 (3yr, 5%): <code>=PMT(0.05/12, 3*12, 100000)</code></li>
@@ -234,9 +241,9 @@
                 <li><strong>Concept:</strong> Calculating mortgage payment, total cost, and interest/principal portions.</li>
                 <li><strong>Formula Sheet:</strong>
                     <ul>
-                        <li>a. Monthly Payment: Financial Formulas -> Savings/Loan Payments -> PMT based on PV.</li>
+                        <li>a. Monthly Payment: Financial Formulas -> Savings/Loan Payments -> PMT based on PV formula (see Q15).</li>
                         <li>b. Total Paid: Basic arithmetic (Monthly Payment * n * Y).</li>
-                        <li>c. Total Interest = Total Paid - Principal (PV). Calculate percentages.</li>
+                        <li>c. Total Interest = Total Paid - Principal (PV). Calculate percentages using Relative Change formula if needed.</li>
                     </ul>
                 </li>
                 <li><strong>Excel:</strong>
@@ -309,7 +316,7 @@
             <h2>24. Descriptive Statistics:</h2>
             <ul>
                 <li><strong>Concept:</strong> Calculating measures of central tendency.</li>
-                <li><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Center -> Mean, Median, Mode.</li>
+                <li><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Center -> Mean, Median, Mode definitions.</li>
                 <li><strong>Excel:</strong> Enter the data into a column. Use <code>=AVERAGE(range)</code>, <code>=MEDIAN(range)</code>, <code>=MODE.SNGL(range)</code> or <code>=MODE.MULT(range)</code>.</li>
                 <li><strong>Desmos:</strong> Can calculate mean and median using `mean()` and `median()` functions on a list. Mode needs manual identification.</li>
             </ul>
@@ -319,7 +326,7 @@
             <h2>25. Descriptive Statistics:</h2>
             <ul>
                 <li><strong>Concept:</strong> Definition of Range.</li>
-                <li><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Variation -> Range: $\text{Highest Value} - \text{Lowest Value}$.</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Variation -> Range: $\text{Highest Value} - \text{Lowest Value}$ <span class="latex-source">Range: Highest Value - Lowest Value</span>.</li>
             </ul>
         </div>
 
@@ -327,7 +334,7 @@
             <h2>26. Descriptive Statistics:</h2>
             <ul>
                 <li><strong>Concept:</strong> Calculating Mean and Median.</li>
-                <li><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Center -> Mean, Median.</li>
+                <li><strong>Formula Sheet:</strong> Descriptive Statistics & Change -> Measures of Center -> Mean, Median definitions.</li>
                 <li><strong>Excel:</strong> <code>=AVERAGE(range)</code>, <code>=MEDIAN(range)</code>.</li>
             </ul>
         </div>
@@ -344,7 +351,7 @@
             <h2>28. Normal Distribution (Z-score & Percentiles):</h2>
             <ul>
                 <li><strong>Concept:</strong> Calculating z-scores and finding corresponding percentiles using a table.</li>
-                <li><strong>Formula Sheet:</strong> Distributions -> Standard Score (z-score): $ z = \frac{(x - \mu)}{\sigma} $. Use the provided Z-Table (or the one in the question).</li>
+                <li><strong>Formula Sheet:</strong> Distributions -> Standard Score (z-score): $ z = \frac{(x - \mu)}{\sigma} $ <span class="latex-source">z = (x - μ) / σ</span>. Variable definitions use <code>code</code> tags: <code>x</code> (data value), <code>&mu;</code> (population mean), <code>&sigma;</code> (population std dev). Use the Z-Table on the sheet or in the question.</li>
                 <li><strong>Excel:</strong> Calculate z-score using the formula or <code>=STANDARDIZE(x, mean, stdev)</code>. Find percentile using <code>=NORM.S.DIST(z, TRUE)</code>.</li>
                 <li><strong>Desmos:</strong> Calculate z-score using the formula: $(x - 62.6) / 2.5$.</li>
             </ul>
@@ -354,7 +361,7 @@
             <h2>29. Exponential Decay:</h2>
             <ul>
                 <li><strong>Concept:</strong> Modeling exponential decrease and calculating future value.</li>
-                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. Note that for decay, 'r' is negative (r = -0.09).</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. <span class="latex-source">Q = Q_0 * (1 + r)^t</span> Note that for decay, 'r' is negative (r = -0.09).</li>
                 <li><strong>Excel:</strong> Calculate directly: <code>=120*(1-0.09)^3</code>. Or use <code>=FV( -0.09, 3, 0, -120)</code> (treating decay rate like a negative interest rate).</li>
                 <li><strong>Desmos:</strong> Calculate using the formula: $120*(1-0.09)^3$.</li>
             </ul>
@@ -364,7 +371,7 @@
             <h2>30. Linear Growth:</h2>
             <ul>
                 <li><strong>Concept:</strong> Modeling linear increase and calculating future value.</li>
-                <li><strong>Formula Sheet:</strong> Growth Models -> Linear Growth (Basic): $\text{New Value} = \text{Initial Value} + (\text{Growth Rate} \times \text{Time})$. Or Linear Modeling -> General Form. (Initial Value = 100000, Growth Rate = 1600, Time = 4).</li>
+                <li><strong>Formula Sheet:</strong> Growth Models -> Linear Growth (Basic): <code>New Value = Initial Value + (Growth Rate × Time)</code>. Or Linear Modeling -> General Form. (Initial Value = 100000, Growth Rate = 1600, Time = 4).</li>
                 <li><strong>Excel/Desmos:</strong> Calculate using the formula: $100000 + (1600 * 4)$.</li>
             </ul>
         </div>
@@ -373,7 +380,7 @@
             <h2>31. Exponential Growth (Doubling Time):</h2>
             <ul>
                 <li><strong>Concept:</strong> Understanding doubling time and its relation to growth factor over multiple periods. If doubling time is $T_{dbl}$, then in time $t$, the factor of growth is $2^{(t/T_{dbl})}$.</li>
-                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $. Here t=40, $T_{dbl}$=10. Growth factor = $2^{(40/10)} = 2^4$.</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $. <span class="latex-source">Q = Q_0 * 2^(t / T_dbl)</span> Here t=40, $T_{dbl}$=10. Growth factor = $2^{(40/10)} = 2^4$.</li>
             </ul>
         </div>
 
@@ -389,7 +396,7 @@
             <h2>33. Exponential Growth (Approx. Doubling Time):</h2>
             <ul>
                 <li><strong>Concept:</strong> Using the approximate doubling time formula to estimate growth.</li>
-                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Approx. Doubling Time ($ T_{dbl} \approx \frac{70}{P} $) and Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $.</li>
+                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Approx. Doubling Time ($ T_{dbl} \approx \frac{70}{P} $ <span class="latex-source">T_dbl ≈ 70 / P</span>) and Formula (doubling time): $ Q = Q_0 \times 2^{(t / T_{dbl})} $ <span class="latex-source">Q = Q_0 * 2^(t / T_dbl)</span>.</li>
                 <li>Step 1: Find approx. $T_{dbl}$: $70 / 0.6 \approx 116.67$ years.</li>
                 <li>Step 2: Calculate population for t = 2059-2020 = 39 years: $ 330 \times 2^{(39 / 116.67)} $.</li>
                 <li>Step 3: Calculate population for t = 2098-2020 = 78 years: $ 330 \times 2^{(78 / 116.67)} $.</li>
@@ -427,7 +434,7 @@
             <h2>37. Linear Functions (Graph Interpretation):</h2>
             <ul>
                 <li><strong>Concept:</strong> Describing the function shown in a graph and calculating its slope (rate of change).</li>
-                <li><strong>Formula Sheet:</strong> Linear Modeling -> Slope (Rate of Change): $ m = \frac{y_2 - y_1}{x_2 - x_1} $. Pick two points from the graph (e.g., (0,0) and (4,3)). Slope = $(3-0)/(4-0) = 3/4$.</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Linear Modeling -> Slope (Rate of Change): $ m = \frac{y_2 - y_1}{x_2 - x_1} $. <span class="latex-source">m = (y2 - y1) / (x2 - x1)</span> Pick two points from the graph (e.g., (0,0) and (4,3)). Slope = $(3-0)/(4-0) = 3/4$.</li>
                 <li><strong>Desmos:</strong> Can plot points and find the equation of the line passing through them.</li>
             </ul>
         </div>
@@ -436,7 +443,7 @@
             <h2>38. Linear Modeling:</h2>
             <ul>
                 <li><strong>Concept:</strong> Finding a linear equation from two data points and using it for prediction.</li>
-                <li><strong>Formula Sheet:</strong> Linear Modeling -> Slope ($ m = \frac{y_2 - y_1}{x_2 - x_1} $) and Equation of a Line ($ y = mx + b $).</li>
+                <li><strong>Formula Sheet:</strong> Linear Modeling -> Slope ($ m = \frac{y_2 - y_1}{x_2 - x_1} $ <span class="latex-source">m = (y2 - y1) / (x2 - x1)</span>) and Equation of a Line ($ y = mx + b $ <span class="latex-source">y = mx + b</span>).</li>
                 <li>Points: (0, 2.4) and (1, 15.9).</li>
                 <li>Calculate slope (m): $(15.9 - 2.4) / (1 - 0) = 13.5$.</li>
                 <li>Use point (0, 2.4) to find b (y-intercept): $2.4 = 13.5(0) + b \implies b = 2.4$.</li>
@@ -452,7 +459,7 @@
             <h2>39. Exponential Growth (Inflation):</h2>
             <ul>
                 <li><strong>Concept:</strong> Calculating future cost based on an annual inflation rate (exponential growth).</li>
-                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. (Q₀=59, r=0.01, t=2002-1998=4).</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. <span class="latex-source">Q = Q_0 * (1 + r)^t</span> (Q₀=59, r=0.01, t=2002-1998=4).</li>
                 <li><strong>Excel:</strong> Calculate directly: <code>=59*(1+0.01)^4</code>. Or use <code>=FV(0.01, 4, 0, -59)</code>.</li>
                 <li><strong>Desmos:</strong> Calculate using the formula: $59*(1.01)^4$.</li>
             </ul>
@@ -462,7 +469,7 @@
             <h2>40. Exponential Growth:</h2>
             <ul>
                 <li><strong>Concept:</strong> Creating an exponential function and calculating future values.</li>
-                <li><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. (Q₀=177000, r=0.06).</li>
+                <li class="latex-formula"><strong>Formula Sheet:</strong> Growth Models -> Exponential Growth -> Formula (rate 'r'): $ Q = Q_0 \times (1 + r)^t $. <span class="latex-source">Q = Q_0 * (1 + r)^t</span> (Q₀=177000, r=0.06).</li>
                 <li><strong>Excel/Desmos:</strong> Use the formula $177000 \times (1.06)^t$ to calculate values for t=1, 2, 3, 4, 5. Excel is good for creating the table quickly.</li>
             </ul>
         </div>
