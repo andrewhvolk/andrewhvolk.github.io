@@ -1,0 +1,218 @@
+/* Core Theme Variables */
+:root {
+    --primary: #2c3e50; /* Dark Blue-Gray */
+    --secondary: #3498db; /* Bright Blue */
+    --accent: #e74c3c; /* Red */
+    --bg: #f4f6f9; /* Lighter Gray Background */
+    --card: #ffffff; /* White */
+    --text: #333333; /* Dark Gray Text */
+    --text-light: #ffffff; /* White text */
+    --border: #e1e4e8; /* Light Gray Border */
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --hover-bg: #eef5fc; /* Light blue hover */
+  }
+
+  /* Basic Reset & Body Styling */
+  body {
+    margin: 0;
+    padding: 20px; /* Add padding around the whole page */
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Modern font stack */
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1600px; /* Slightly wider max-width */
+    margin: 20px auto; /* Center container with margin */
+    padding: 0 20px; /* Padding inside container */
+  }
+
+  /* Heading */
+  h1 {
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+
+  /* Legend Styling */
+  .legend {
+    background-color: var(--card);
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    margin-bottom: 25px; /* Space below legend */
+    text-align: center; /* Center legend items */
+    font-size: 0.95em;
+  }
+  .legend span {
+      margin: 0 10px; /* Spacing between legend items */
+      white-space: nowrap; /* Prevent wrapping of individual legend items */
+  }
+
+  /* Main Content Area (Map + Table Wrapper) */
+  .main-content {
+    display: grid;
+    gap: 25px;
+    /* Default: single column for smaller screens */
+    grid-template-columns: 1fr;
+  }
+
+  /* Map Styling */
+  #map {
+    height: 500px; /* Default height */
+    width: 100%; /* Ensure map takes full width of its container */
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    background-color: #eee; /* Light background while map tiles load */
+  }
+
+  /* Table Section Wrapper */
+  .table-section {
+    background-color: var(--card);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    overflow: hidden; /* Keep shadows contained */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack children vertically */
+    max-height: 500px; /* Match map height by default */
+  }
+
+  /* Table Container - THIS WILL HANDLE SCROLLING */
+  .table-container {
+      overflow-y: auto; /* Enable vertical scrolling */
+      flex-grow: 1; /* Allow this container to fill available space */
+  }
+
+  /* Table Styling */
+  #retreatTable {
+    width: 100%;
+    border-collapse: collapse;
+    /* table-layout: fixed; */ /* Removed: Let browser auto-layout columns, often better unless specific widths needed */
+  }
+
+  #retreatTable thead {
+    position: sticky; /* Make header sticky within .table-container */
+    top: 0; /* Stick to the top */
+    z-index: 10; /* Ensure header stays above scrolling content */
+    background-color: var(--primary); /* Background needed for sticky header */
+  }
+
+  #retreatTable th {
+    /* background-color: var(--primary); */ /* Moved background to thead */
+    color: var(--text-light);
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    /* cursor: pointer; */ /* Add if implementing sorting */
+    white-space: nowrap; /* Prevent header text wrapping */
+    border-bottom: 1px solid var(--border); /* Add border for separation */
+  }
+
+  /* Style for sort icons (optional, needs JS) */
+  .sort-icon {
+    display: inline-block;
+    margin-left: 5px;
+    opacity: 0.6;
+    /* Example using pseudo-elements for arrows if needed */
+    /* &::after { content: '↕'; } */
+  }
+  /* th.sort-asc .sort-icon::after { content: ' ▲'; opacity: 1; } */
+  /* th.sort-desc .sort-icon::after { content: ' ▼'; opacity: 1; } */
+
+  /* Removed tbody specific display/overflow rules */
+  /* #retreatTable tbody { ... } */
+
+  /* Removed tr specific display/table-layout rules */
+  /* #retreatTable tr { ... } */
+
+
+  #retreatTable td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle; /* Align cell content vertically */
+  }
+
+  #retreatTable tbody tr:nth-child(even) {
+    background-color: #f9fafb; /* Subtle striping */
+  }
+
+  #retreatTable tbody tr:hover {
+    background-color: var(--hover-bg);
+    cursor: pointer; /* Indicate rows are clickable */
+  }
+
+  #retreatTable a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  #retreatTable a:hover {
+    text-decoration: underline;
+  }
+
+  /* No Results Message */
+  #noResults {
+    display: none; /* Hidden by default, shown via JS */
+    padding: 30px;
+    text-align: center;
+    color: var(--accent);
+    font-weight: 600;
+    /* Uses flex properties from JS now */
+    /* flex-grow: 1; */
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--border); /* Add border if shown after table */
+  }
+
+  /* Responsive Layout - Adjust for larger screens */
+  @media (min-width: 992px) {
+    .main-content {
+      /* Two equal columns for map and table */
+      grid-template-columns: 1fr 1fr;
+    }
+
+    #map,
+    .table-section {
+      height: 650px; /* Taller map/table on larger screens */
+      max-height: 650px; /* Ensure table section matches */
+    }
+  }
+
+  @media (min-width: 1200px) {
+    /* Optional: Adjust column ratio for very wide screens */
+    /* .main-content { */
+      /* grid-template-columns: 1.2fr 1fr; */ /* Example: Give map slightly more space */
+    /* } */
+  }
+
+  /* Emoji Icon Styling (for map markers) */
+  .emoji-icon {
+      background: none !important; /* Remove default Leaflet icon background/border */
+      border: none !important;
+      box-shadow: none !important; /* Remove default Leaflet icon shadow */
+      text-align: center;
+      line-height: 30px; /* Center emoji vertically */
+      /* Optional: Add a slight text shadow for visibility on complex backgrounds */
+      /* text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5); */
+  }
+
+  /* Visually hidden class for accessibility */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }

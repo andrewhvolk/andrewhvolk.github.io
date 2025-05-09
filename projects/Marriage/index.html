@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2025 Christian Marriage Retreats</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>2025 Christian Marriage Retreats</h1>
+
+    <aside class="legend">
+        <strong>Legend:</strong>&nbsp;
+        <span title="Cruise">🛳️ Cruise</span> &nbsp;
+        <span title="Castle">🏰 Castle</span> &nbsp;
+        <span title="Mountain">⛰️ Mountain</span> &nbsp;
+        <span title="Beach">🏖️ Beach</span> &nbsp;
+        <span title="Other">🏠 Other</span>
+    </aside>
+
+    <div class="main-content">
+        <div id="map"></div>
+        <section class="table-section">
+          <table id="retreatTable">
+            <thead>
+              <tr>
+                <th>Name <span class="sort-icon"></span></th>
+                <th>City <span class="sort-icon"></span></th>
+                <th>Dates <span class="sort-icon"></span></th>
+                <th>Price <span class="sort-icon"></span></th>
+              </tr>
+            </thead>
+            <tbody>
+              </tbody>
+          </table>
+          <div id="noResults">No retreats match the filters.</div>
+        </section>
+    </div>
+  </div> <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+  <script type="module">
+    // Ensure app.js is correctly imported and functions are called
+    import { retreats, renderTable, initMap } from './app.js';
+    // Wait for the DOM to be fully loaded before running scripts
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTable(retreats);
+        initMap(retreats);
+        // Add any other initialization logic here (e.g., filter/sort setup)
+    });
+  </script>
+</body>
+</html>
