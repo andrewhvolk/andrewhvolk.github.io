@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>References (APA 7th Edition) - With Working Links</title>
+    <title>References (APA 7th Edition) - With Working Links and QR Code</title>
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
@@ -30,6 +30,12 @@
         }
         .reference a:hover {
             text-decoration: underline; /* Underline on hover for better UX */
+        }
+        .qr-code {
+            display: block; /* Ensures it takes up its own block and allows auto margins */
+            margin: 40px auto 20px auto; /* Top margin for spacing, auto for horizontal centering, bottom margin */
+            max-width: 150px; /* Adjust as needed for desired size */
+            height: auto; /* Maintain aspect ratio */
         }
     </style>
 </head>
@@ -148,6 +154,8 @@
     <div class="reference">
         Swezey, J. A. (2009). Faculty sense of religious calling at a Christian university. <i>Journal of Research on Christian Education</i>, <i>18</i>(3), 316-332. <a href="https://doi.org/10.1080/10656210903333400" target="_blank" rel="noopener noreferrer">https://doi.org/10.1080/10656210903333400</a>
     </div>
+
+    <img src="qrcode.png" alt="QR Code" class="qr-code">
 
 </body>
 </html>
