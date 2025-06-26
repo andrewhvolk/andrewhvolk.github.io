@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Question Game</title>
+    <!-- Tailwind CSS for basic styling, though custom styles are also present -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the game, overriding or complementing Tailwind as needed */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font to a sans-serif style */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            min-height: 100vh; /* Ensure body takes full viewport height */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            color: #333;
+            text-shadow: 2px 2px #fff;
+        }
+        button {
+            margin: 1rem auto;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 12px;
+            border: 2px solid #4682b4;
+            background: #87cefa;
+            color: #fff;
+            transition: transform 0.2s ease;
+            display: block;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Added subtle shadow */
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: #6aadda; /* Darker on hover */
+        }
+        #question, #player, #scores, #turns, #round, #startScreen {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border: 3px dashed #4682b4;
+            border-radius: 12px;
+            background-color: #ffffffdd;
+            width: 90%; /* Increased width for better responsiveness */
+            max-width: 600px; /* Max width to keep it contained on large screens */
+            text-align: center;
+            font-size: 1.2rem;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+        }
+        /* Specific min-height for the question box to prevent layout shifts */
+        #question {
+            min-height: 80px; /* Adjust as needed to accommodate 2-3 lines of text */
+            display: flex; /* Use flexbox to center content vertically */
+            align-items: center; /* Vertically center content */
+            justify-content: center; /* Horizontally center content */
+            text-align: center; /* Ensure text is centered within flex item */
+        }
+        .hidden { display: none; }
+        .score-buttons button {
+            margin: 0.25rem;
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: background-color 0.2s ease; /* Smooth transition for score buttons */
+        }
+        .score-buttons button:hover {
+            background-color: #ff85c1;
+            transform: none; /* Prevent scale on these buttons */
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+        .active-player {
+            background-color: #ffe680;
+            border-radius: 8px;
+            padding: 0.25rem 0.5rem;
+            display: inline-block;
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.1); /* Subtle shadow for active player */
+        }
+        /* Score colors for visual distinction */
+        .score-0 { color: #888; }
+        .score-1 { color: #1e90ff; }
+        .score-2 { color: #32cd32; }
+        .score-3 { color: #ff4500; }
+        .score-4 { color: #9400d3; }
+        .score-5 { color: #ffd700; } /* Added score-5 color */
+
+        #turnList li .question-log {
+            font-size: 0.9em;
+            color: #555;
+            display: block;
+            margin-top: 0.2em;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Start Screen - displayed initially to set game parameters -->
+    <div id="startScreen" class="rounded-xl shadow-lg p-6 bg-white bg-opacity-90">
+        <h1 class="text-3xl font-bold text-gray-800">🎯 Welcome to The Question Game 🎯</h1>
+        <p class="mt-4 text-lg text-gray-600">Choose your win condition and enter player names (one per line).</p>
+        <div class="mt-6 space-y-3">
+            <label class="block text-left">
+                <input type="radio" name="winType" value="score" checked class="mr-2 accent-blue-500">
+                <span class="text-gray-700">First to reach score:</span>
+                <input type="number" id="scoreTarget" value="10" min="1" class="ml-2 w-20 p-2 border border-gray-300 rounded-md text-center">
+            </label>
+            <label class="block text-left">
+                <input type="radio" name="winType" value="round" class="mr-2 accent-blue-500">
+                <span class="text-gray-700">Most points after rounds:</span>
+                <input type="number" id="roundTarget" value="5" min="1" class="ml-2 w-20 p-2 border border-gray-300 rounded-md text-center">
+            </label>
+            <div class="mt-4">
+                <label for="playerNames" class="block text-gray-700 font-semibold mb-2">Player Names (one per line):</label>
+                <textarea id="playerNames" rows="5" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Enter player names here... e.g.,&#10;Makenna&#10;Micah&#10;Lilah&#10;Ashley&#10;Andy"></textarea>
+            </div>
+            <div class="mt-4">
+                <label for="pointValuesInput" class="block text-gray-700 font-semibold mb-2">Available Points (comma-separated):</label>
+                <input type="text" id="pointValuesInput" value="1,2,3" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., 1,2,3 or 1,5,10">
+            </div>
+        </div>
+        <button onclick="startGame()" class="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">Start Game</button>
+    </div>
+
+    <!-- Main Game Screen - hidden until the game starts -->
+    <div id="mainGame" class="hidden rounded-xl shadow-lg p-6 bg-white bg-opacity-90">
+        <h1 class="text-3xl font-bold text-gray-800">🎉 The Question Game 🎉</h1>
+        <div id="round" class="text-2xl mt-4">
+            <h2 class="text-blue-700">📅 Round: <span id="roundCount" class="font-extrabold">1</span></h2>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4 mt-6">
+            <button onclick="nextTurn()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">▶️ Next Turn</button>
+            <button onclick="spinQuestion()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">🔁 New Question</button>
+        </div>
+
+        <div id="player" class="mt-8 p-4 bg-yellow-100 border border-yellow-300 rounded-lg text-xl font-semibold">Waiting to spin...</div>
+        <div id="question" class="mt-4 p-4 bg-blue-100 border border-blue-300 rounded-lg text-xl font-semibold">Waiting to spin...</div>
+
+        <div id="scores" class="mt-8 p-4 bg-gray-100 border border-gray-300 rounded-lg">
+            <h2 class="text-2xl font-bold text-gray-700">🏆 Scores</h2>
+            <ul id="scoreList" class="mt-4 text-left"></ul>
+        </div>
+
+        <div id="turns" class="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-lg">
+            <h2 class="text-2xl font-bold text-gray-700">🔄 Turns Taken</h2>
+            <ul id="turnList" class="mt-4 text-left"></ul>
+        </div>
+
+        <button onclick="confirmReset()" class="mt-8 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">🔄 Reset Game</button>
+    </div>
+
+    <script>
+        // Array to store player names, now dynamic from user input
+        let players = [];
+        // Object to store player scores, initialized to 0
+        let scores = {};
+        // Object to store player turns taken, initialized to 0. Each player's value will be an array of questions asked.
+        let turns = {};
+        // Variable to keep track of the current player
+        let currentPlayer = null;
+        // The current question being displayed (needed to log it to turns)
+        let currentQuestion = "";
+        // Target score for winning in "score" mode
+        let WIN_SCORE = 10;
+        // Maximum rounds for winning in "round" mode
+        let MAX_ROUNDS = null;
+        // Array to hold available point values, configurable by the user
+        let availablePoints = [1, 2, 3]; // Default values
+        // Current game win mode ("score" or "round")
+        let winMode = "score";
+
+        // Array of questions for the game - NOW INCLUDES ALL 100 QUESTIONS + NEW ONES
+        const questions = [
+            "Would you rather fly or be invisible?",
+            "What’s your favorite movie?",
+            "If you had a secret hideout, what would be in it?",
+            "Ice cream or cake?",
+            "What’s your favorite family tradition?",
+            "What’s one thing you’re really good at?",
+            "If your clothes could talk, what would they say?",
+            "What does it mean to be a good friend?",
+            "What’s your favorite part of the school day?",
+            "If you could visit any country, where would you go?",
+            "If you could have any superpower, what would it be?",
+            "What's your dream job?",
+            "What's the funniest thing that ever happened to you?",
+            "If you had a pet dragon, what would you name it?",
+            "Would you rather live in a treehouse or a castle?",
+            "What is your favorite holiday and why?",
+            "What's something new you want to try this year?",
+            "If you could meet any character from a book or movie, who would it be?",
+            "What's your favorite thing to do with family?",
+            "If you were an animal for a day, which one would you be?",
+            "If you could invent a new ice cream flavor, what would it be and what would you call it?",
+            "What's one magical power you wish you had and why?",
+            "If animals could talk, which animal would be the funniest?",
+            "Describe your dream treehouse/fort.",
+            "If you could design a new amusement park ride, what would it be like?",
+            "What would you do if you found a secret door in your house?",
+            "If you could be any character from a book or movie, who would you be?",
+            "What's the most amazing thing you've ever imagined?",
+            "If you could have a conversation with any historical figure, who would it be?",
+            "What's a new game you would invent?",
+            "If you could visit any planet, which one would it be and why?",
+            "What's a silly rule you would make if you were in charge for a day?",
+            "If you could draw anything and make it real, what would it be?",
+            "What's a weird dream you've had recently?",
+            "If you could have a job doing anything for one day, what would it be?",
+            "What's a hidden talent you wish you had?",
+            "If you were a superhero, what would your name be and what would your costume look like?",
+            "What's the most creative thing you've ever built or made?",
+            "If you could bring any fictional creature to life, which one would it be?",
+            "What's one thing you're excited to learn how to do?",
+            "What's your favorite animal and why?",
+            "What's your favorite book or movie?",
+            "What's your favorite subject in school?",
+            "What's your favorite thing to do on a rainy day?",
+            "What's your favorite song to sing or dance to?",
+            "What's your favorite holiday and why?",
+            "What's your favorite type of food?",
+            "What's your favorite sport or game to play?",
+            "What's your favorite color and why?",
+            "What's your favorite place you've ever visited?",
+            "What's the best part about being your age?",
+            "What's your favorite season of the year?",
+            "What's one thing that always makes you laugh?",
+            "What's your favorite memory with your family?",
+            "What's your favorite outdoor activity?",
+            "What's your favorite board game or card game?",
+            "What's your favorite dessert?",
+            "What's your favorite kind of weather?",
+            "What's your favorite cartoon character?",
+            "What's your favorite school memory?",
+            "What's one thing you're really good at?",
+            "What does it mean to be a good friend?",
+            "What's something new you want to try this year?",
+            "What's one thing you're grateful for today?",
+            "What's something that makes you feel proud?",
+            "What's the kindest thing someone has done for you?",
+            "What's a challenge you've overcome recently?",
+            "What's one goal you have for yourself?",
+            "What's something you like about yourself?",
+            "What's a small act of kindness you can do for someone today?",
+            "What's something you're looking forward to?",
+            "What's the most important thing you've learned outside of school?",
+            "What's a way you like to help others?",
+            "What's one thing you're good at teaching someone else?",
+            "What's a new skill you'd like to learn?",
+            "What's something you do to relax?",
+            "What's a piece of advice you'd give to a younger kid?",
+            "What's something you wish adults understood better about kids?",
+            "What's one thing you'd like to change about the world?",
+            "What makes you feel happy?",
+            "If you had to wear one animal costume for a whole day, which one would it be?",
+            "What's the funniest sound you can make?",
+            "If you could only eat one color of food for a week, what color would it be?",
+            "What's the silliest thing you've ever done?",
+            "If you found a talking shoe, what would it say?",
+            "What's your favorite silly dance move?",
+            "If you could trade places with any cartoon character for a day, who would it be?",
+            "What's the weirdest food combination you've ever tried?",
+            "If your pet could talk, what's the first thing it would say?",
+            "What's a word that always makes you giggle?",
+            "If you had an invisible friend, what would you do with them?",
+            "What's the most ridiculous thing you've seen someone do?",
+            "If you woke up with a superpower but it was really inconvenient, what would it be? (e.g., ability to turn things into jello, but only on Tuesdays)",
+            "What's the funniest joke you know?",
+            "If you could wear mismatched socks for the rest of your life, would you?",
+            "What's a funny nickname you have or would like to have?",
+            "If you could make one animal sound every time you sneezed, what would it be?",
+            "What's the silliest thing you believe?",
+            "If you could jump into a video game and live there for a day, which game would it be?",
+            "What's one thing you're sure no one else in the room knows about you?",
+            "What is your favorite card game or board game?",
+            "What is your favorite candy?",
+            "What is your favorite plant?",
+            "What song do you know the most words of?",
+            "If you could talk to God, what would you say?",
+            "What would be a good name for a pet unicorn?"
+        ];
+
+        /**
+         * Initializes and starts the game based on user selections.
+         * Sets up initial scores, turns, win mode, and displays the main game screen.
+         */
+        function startGame() {
+            // Get player names from the textarea, split by new line, trim whitespace, and filter out empty strings
+            const playerNamesInput = document.getElementById("playerNames").value;
+            players = playerNamesInput.split('\n')
+                                     .map(name => name.trim())
+                                     .filter(name => name.length > 0);
+
+            if (players.length === 0) {
+                showModal("Please enter at least one player name to start the game.");
+                return; // Stop game start if no players
+            }
+
+            // Parse available point values from input
+            const pointsInput = document.getElementById("pointValuesInput").value;
+            const parsedPoints = pointsInput.split(',')
+                                            .map(p => parseInt(p.trim()))
+                                            .filter(p => !isNaN(p)); // Filter out any non-numeric values
+
+            // Set availablePoints, defaulting if no valid numbers are provided
+            if (parsedPoints.length > 0) {
+                availablePoints = parsedPoints;
+            } else {
+                availablePoints = [1, 2, 3]; // Default to 1, 2, 3 if input is empty or invalid
+            }
+
+
+            // Initialize scores for all players to 0
+            scores = Object.fromEntries(players.map(p => [p, 0]));
+            // Initialize turns for all players to empty arrays
+            turns = Object.fromEntries(players.map(p => [p, []])); // Initialize to empty array
+            
+            // Determine win mode based on selected radio button
+            winMode = document.querySelector('input[name="winType"]:checked').value;
+            // Parse the score target, defaulting to 1 if input is invalid
+            WIN_SCORE = parseInt(document.getElementById("scoreTarget").value) || 1;
+            // Parse the round target, defaulting to 1 if input is invalid
+            MAX_ROUNDS = parseInt(document.getElementById("roundTarget").value) || 1;
+
+            // Hide the start screen and show the main game screen
+            document.getElementById("startScreen").classList.add("hidden");
+            document.getElementById("mainGame").classList.remove("hidden");
+
+            // Update UI elements for scores, turns, and round count
+            updateScoreButtons();
+            updateTurnList();
+            updateRound();
+        }
+
+        /**
+         * Advances the game to the next turn.
+         * Spins a player, spins a question, updates the round, and checks for round-based win condition.
+         */
+        function nextTurn() {
+            spinPlayer(); // Selects the next player
+            spinQuestion(); // Selects a new question, setting currentQuestion
+
+            // Log the current question for the current player's turn
+            if (currentPlayer && currentQuestion) {
+                turns[currentPlayer].push(currentQuestion);
+            }
+            
+            updateTurnList(); // Update the turns list display
+            updateRound(); // Updates the current round display
+
+            // Check for game over condition if in "round" mode
+            if (winMode === "round") {
+                const totalTurns = players.reduce((sum, p) => sum + turns[p].length, 0); // Use .length
+                // Calculate current round (e.g., if 5 players, 5 turns = 1 round)
+                const currentRound = Math.floor(totalTurns / players.length);
+
+                if (currentRound >= MAX_ROUNDS) {
+                    // Determine the maximum score achieved
+                    const maxScore = Math.max(...Object.values(scores));
+                    // Find all players who achieved the maximum score
+                    const winners = players.filter(player => scores[player] === maxScore);
+                    
+                    let message = "";
+                    if (winners.length > 1) {
+                        // If there's a tie, list all tied winners
+                        message = `🏁 Game Over! It's a tie! ${winners.join(" and ")} win with ${maxScore} points!`;
+                    } else {
+                        // If there's a single winner
+                        message = `🏁 Game Over! ${winners[0]} wins with ${maxScore} points!`;
+                    }
+                    
+                    // Display game over message using a custom modal
+                    showModal(message);
+                    resetGame(); // Reset the game after winning
+                }
+            }
+        }
+
+        /**
+         * Selects the next player for the turn.
+         * Prioritizes players with fewer turns taken to ensure fairness.
+         */
+        function spinPlayer() {
+            // Find the minimum number of turns taken by any player (using .length)
+            const minTurns = Math.min(...players.map(p => turns[p].length));
+            // Filter to get only players who have taken the minimum number of turns
+            const eligiblePlayers = players.filter(p => turns[p].length === minTurns);
+            // Randomly select the current player from the eligible players
+            currentPlayer = eligiblePlayers[Math.floor(Math.random() * eligiblePlayers.length)];
+
+            // Update the display to show the current player
+            document.getElementById("player").innerHTML = `🎯 Player: <span class='active-player'>${currentPlayer}</span>`;
+            // Note: Turn count increment moved to nextTurn after question is spun
+            updateTurnList(); // Update the turns list display
+        }
+
+        /**
+         * Selects a random question that hasn't been used recently.
+         * Resets the used questions list once all questions have been asked.
+         */
+        function spinQuestion() {
+            // Initialize an array to keep track of used question indices if not already present
+            if (!spinQuestion.usedIndices) {
+                spinQuestion.usedIndices = [];
+            }
+
+            // If all questions have been used, reset the used list
+            if (spinQuestion.usedIndices.length === questions.length) {
+                spinQuestion.usedIndices = [];
+            }
+
+            let index;
+            // Loop until an unused question index is found
+            do {
+                index = Math.floor(Math.random() * questions.length);
+            } while (spinQuestion.usedIndices.includes(index));
+
+            // Add the new question's index to the used list
+            spinQuestion.usedIndices.push(index);
+            currentQuestion = questions[index]; // Store the question globally
+            // Display the selected question
+            document.getElementById("question").textContent = `❓ Question: ${currentQuestion}`;
+            // Update the score buttons to reflect the current player and allow score addition
+            updateScoreButtons();
+        }
+
+        /**
+         * Updates the list of scores and dynamically creates buttons for adding points.
+         * Checks for win condition in "score" mode after score updates.
+         */
+        function updateScoreButtons() {
+            const scoreList = document.getElementById("scoreList");
+            scoreList.innerHTML = ""; // Clear existing score list
+
+            players.forEach(player => {
+                const li = document.createElement("li");
+                const score = scores[player];
+                // Apply a color class based on the score (modulo 6 for cycling colors)
+                const scoreClass = `score-${score % 6}`;
+                li.innerHTML = `<span class="${scoreClass}">${player}: ${score} point${score !== 1 ? 's' : ''}</span>`;
+
+                // If this is the current player, add point-scoring buttons
+                if (currentPlayer === player) {
+                    const scoreDiv = document.createElement("div");
+                    scoreDiv.className = "score-buttons flex justify-center mt-2"; // Added flex for button layout
+                    // Create buttons based on the dynamically configured availablePoints
+                    availablePoints.forEach(point => {
+                        const btn = document.createElement("button");
+                        btn.textContent = `${point >= 0 ? '+' : ''}${point}`; // Prepend '+' for positive points, or keep '-' for negative
+                        btn.onclick = () => {
+                            scores[player] += point; // Add points to the player's score
+
+                            // Check for win condition if in "score" mode
+                            if (winMode === "score" && scores[player] >= WIN_SCORE) {
+                                // Display win message using a custom modal
+                                showModal(`🎉 ${player} wins the game!`);
+                                resetGame(); // Reset the game after winning
+                                return; // Exit function after game reset
+                            }
+                            updateScoreButtons(); // Re-render score list after points are added
+                        };
+                        scoreDiv.appendChild(btn);
+                    });
+                    li.appendChild(scoreDiv); // Append buttons to the player's list item
+                }
+                scoreList.appendChild(li); // Add player's score item to the list
+            });
+        }
+
+        /**
+         * Updates the display list of turns taken by each player, including the questions asked.
+         */
+        function updateTurnList() {
+            const turnList = document.getElementById("turnList");
+            turnList.innerHTML = ""; // Clear existing turn list
+            players.forEach(player => {
+                const playerTurns = turns[player];
+                if (playerTurns.length > 0) {
+                    // Create a list item for the player's name and total turns
+                    const playerLi = document.createElement("li");
+                    playerLi.innerHTML = `<strong>${player}: ${playerTurns.length} turn${playerTurns.length !== 1 ? 's' : ''}</strong>`;
+                    turnList.appendChild(playerLi);
+
+                    // Create an unordered list for the questions asked during their turns
+                    const questionsUl = document.createElement("ul");
+                    questionsUl.className = "ml-4 text-left"; // Indent the question log
+                    playerTurns.forEach((question, index) => {
+                        const questionLi = document.createElement("li");
+                        // Display turn number and the question asked
+                        questionLi.innerHTML = `Turn ${index + 1}: <span class="question-log">"${question}"</span>`;
+                        questionsUl.appendChild(questionLi);
+                    });
+                    turnList.appendChild(questionsUl);
+                } else {
+                    const li = document.createElement("li");
+                    li.textContent = `${player}: 0 turns`;
+                    turnList.appendChild(li);
+                }
+            });
+        }
+
+        /**
+         * Calculates and updates the current round count display.
+         * A round is considered complete when all players have taken one turn.
+         */
+        function updateRound() {
+            // Sum up total turns by checking the length of each player's turns array
+            const totalTurns = players.reduce((sum, p) => sum + turns[p].length, 0);
+            // Calculate the current round (e.g., if 5 players, 5 total turns = 1 round)
+            const round = Math.floor(totalTurns / players.length) + 1;
+            document.getElementById("roundCount").textContent = round;
+        }
+
+        /**
+         * Prompts the user for confirmation before resetting the game.
+         * Replaces the native `confirm()` with a custom modal.
+         */
+        function confirmReset() {
+            showModal("Are you sure you want to reset the game? This will clear all scores and turns.", true, resetGame);
+        }
+
+        /**
+         * Resets all game state variables and updates the UI to its initial state.
+         */
+        function resetGame() {
+            // IMPORTANT: 'players' array is NOT reset here, as it should retain user-defined players
+            scores = Object.fromEntries(players.map(p => [p, 0])); // Reset all scores to 0
+            // Reset turns for all players to empty arrays
+            turns = Object.fromEntries(players.map(p => [p, []])); // Reset to empty array
+            currentPlayer = null; // Clear the current player
+            currentQuestion = ""; // Clear the current question
+            document.getElementById("player").textContent = "Waiting to spin..."; // Reset player display
+            document.getElementById("question").textContent = "Waiting to spin..."; // Reset question display
+            spinQuestion.usedIndices = []; // Reset used questions for a fresh start
+
+            // Update UI elements
+            updateScoreButtons();
+            updateTurnList();
+            updateRound();
+
+            // Show start screen again
+            document.getElementById("mainGame").classList.add("hidden");
+            document.getElementById("startScreen").classList.remove("hidden");
+        }
+
+        /**
+         * Creates and displays a custom modal dialog.
+         * @param {string} message The message to display in the modal.
+         * @param {boolean} isConfirm If true, shows OK and Cancel buttons. Otherwise, only OK.
+         * @param {Function} onConfirm Callback function to execute if OK is clicked in a confirm modal.
+         */
+        function showModal(message, isConfirm = false, onConfirm = null) {
+            // Remove any existing modal to prevent duplicates
+            const existingModal = document.getElementById('customModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            const modalOverlay = document.createElement('div');
+            modalOverlay.id = 'customModal';
+            modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modalOverlay.innerHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-sm w-full relative">
+                    <p class="text-lg font-semibold mb-4">${message}</p>
+                    <div class="flex justify-center space-x-4">
+                        <button id="modalOkBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition-all duration-200">OK</button>
+                        ${isConfirm ? `<button id="modalCancelBtn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md transition-all duration-200">Cancel</button>` : ''}
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modalOverlay);
+
+            document.getElementById('modalOkBtn').onclick = () => {
+                modalOverlay.remove();
+                if (isConfirm && onConfirm) {
+                    onConfirm();
+                }
+            };
+
+            if (isConfirm) {
+                document.getElementById('modalCancelBtn').onclick = () => {
+                    modalOverlay.remove();
+                };
+            }
+        }
+    </script>
+</body>
+</html>
