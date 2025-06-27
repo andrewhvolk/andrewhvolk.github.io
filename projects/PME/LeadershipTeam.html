@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liberty University Math Club - Leadership Team</title>
+    <style>
+        /* Using the same styles from your other pages for consistency */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a; --light-blue: #3b82f6; --gold: #f59e0b;
+            --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-700: #374151;
+            --gray-800: #1f2937; --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; color: var(--gray-800);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .card {
+            background: var(--white); border-radius: 15px; padding: 25px;
+            margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .card h1 {
+            color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 10px;
+        }
+        .card h2 {
+            color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 20px;
+            padding-bottom: 10px; border-bottom: 3px solid var(--light-blue);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .card h3 {
+            color: var(--light-blue); font-size: 1.3rem; margin: 20px 0 10px 0;
+        }
+        .info-box {
+            background: var(--gray-100); padding: 15px; border-radius: 8px;
+            border-left: 4px solid var(--light-blue); margin-top: 15px;
+        }
+        .emoji { font-size: 1.2em; margin-right: 5px; }
+        .officer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px; margin: 20px 0;
+        }
+        .officer-card {
+            background: var(--gray-100); padding: 20px; border-radius: 10px;
+            border-left: 4px solid var(--light-blue);
+        }
+        .officer-title {
+            font-weight: bold; color: var(--primary-blue);
+            margin-bottom: 8px; font-size: 1.1rem;
+        }
+        .members-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; margin-top: 20px;
+        }
+        .member-list {
+            background: var(--gray-100); padding: 15px; border-radius: 8px;
+        }
+        .member-list h4 {
+            color: var(--primary-blue); margin-bottom: 10px; font-size: 1rem;
+        }
+        .member-list ul { list-style: none; }
+        .member-list li {
+            margin: 8px 0; padding: 5px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .member-list li:last-child { border-bottom: none; }
+        .member-email {
+            font-size: 0.85rem; color: var(--gray-700); font-style: italic;
+        }
+        .past-role {
+            background: var(--gold); color: white; padding: 2px 6px;
+            border-radius: 12px; font-size: 0.7rem; margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div style="text-align:center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 3px solid var(--light-blue);">
+                <h1><span class="emoji">🧠</span> Math Club Leadership Team</h1>
+                <p style="color: var(--gray-700); font-size: 1.1rem;">Structure, Roles, and Members for 2025-2026</p>
+                <p style="font-size: 0.9rem; margin-top: 5px;"><strong>Faculty Advisor:</strong> Mr. Andrew Volk</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="emoji">🎯</span> Our Mission</h2>
+            <p>The Math Club Leadership Team is dedicated to fostering a vibrant mathematical community at Liberty University. Our mission is to plan and execute engaging events, provide academic and professional resources for members, and create an inclusive environment where students from all backgrounds can explore their passion for mathematics.</p>
+        </div>
+
+        <div class="card">
+            <h2><span class="emoji">👥</span> Officer Roles & Responsibilities</h2>
+            <div class="officer-grid">
+                <div class="officer-card">
+                    <div class="officer-title">🗣️ President</div>
+                    <p>Acts as the primary spokesperson and provides oversight for all club activities. Responsible for liaising with faculty and members, organizing meetings, and guiding the club's overall direction.</p>
+                </div>
+                <div class="officer-card">
+                    <div class="officer-title">🎯 Vice President</div>
+                    <p>Assists the President with facilitating club activities and provides oversight in their absence. Aids in the planning and preparation of club events and supports other officers.</p>
+                </div>
+                <div class="officer-card">
+                    <div class="officer-title">📋 Secretary</div>
+                    <p>Responsible for all club records, including meeting minutes and attendance. Assists with projects and ensures that information is organized and distributed effectively to members.</p>
+                </div>
+                <div class="officer-card">
+                    <div class="officer-title">💰 Treasurer</div>
+                    <p>Manages the club's finances, including receiving and handling money and monitoring the budget. Keeps a record of all transactions and ensures financial guidelines are met.</p>
+                </div>
+            </div>
+            <div class="officer-card" style="margin-top: 20px;">
+                <div class="officer-title">🧠 Leadership Advisory Council</div>
+                <p>Consists of active members who contribute ideas and support planning without holding formal officer roles. Council members are an extension of the leadership team and may lead projects, subcommittees, or represent student feedback.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="emoji">📅</span> Fall 2025 Leadership Team</h2>
+            <div class="info-box" style="border-left-color: #dc2626; margin-bottom: 20px;">
+                <strong>All formal officer positions are currently open.</strong> The 2025-2026 Leadership Team will be finalized during the first two weeks of July. The members below have expressed interest in serving.
+            </div>
+            <div class="members-section">
+                <div class="member-list">
+                    <h4>✅ Confirmed Interested Members</h4>
+                    <ul>
+                        <li>Alexa Cramer<br><span class="member-email">avcramer@liberty.edu</span></li>
+                        <li>Annee DeFelice <span class="past-role">24/25: 📋</span><br><span class="member-email">aidefelice@liberty.edu</span></li>
+                        <li>Avery Morrison <span class="past-role">24/25: 📋</span><br><span class="member-email">ajmorrison1@liberty.edu</span></li>
+                        <li>Emma Kay<br><span class="member-email">epkay@liberty.edu</span></li>
+                        <li>Isaiah Mellace <span class="past-role">24/25: 🎯</span><br><span class="member-email">inmellace@liberty.edu</span></li>
+                        <li>Shane Weimar<br><span class="member-email">smweimar@liberty.edu</span></li>
+                    </ul>
+                </div>
+                
+                <div class="member-list">
+                    <h4>📬 Additional Members Invited</h4>
+                    <ul>
+                        <li>Heidi Jackson<br><span class="member-email">hljackson5@liberty.edu</span></li>
+                        <li>Jayden Broach<br><span class="member-email">jbroach1@liberty.edu</span></li>
+                        <li>Joshua Kroeker<br><span class="member-email">jrkroeker@liberty.edu</span></li>
+                        <li>Nathanael Krug <span class="past-role">24/25: 🗣️</span><br><span class="member-email">nckrug@liberty.edu</span></li>
+                        <li>Ryan Miller<br><span class="member-email">rtmiller@liberty.edu</span></li>
+                        <li>Sierra Evans<br><span class="member-email">seevans3@liberty.edu</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="emoji">💡</span> How to Get Involved</h2>
+            <h3>Finalizing Officer Roles</h3>
+            <p>The formal officer positions for 2025-2026 will be finalized during the first two weeks of July. If you are on the interested or invited lists below, please respond to Mr. Volk's email to confirm your desired role and willingness to serve.</p>
+            <h3>Leadership Advisory Council</h3>
+            <p>The Advisory Council is always open to new members. If you want to contribute to planning and have your voice heard without the commitment of a formal officer role, simply attend our meetings and get involved! It's a great way to help shape the future of the club.</p>
+        </div>
+
+    </div>
+</body>
+</html>

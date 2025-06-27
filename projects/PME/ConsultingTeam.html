@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liberty University Math Club - Interdisciplinary Team Plan</title>
+    <style>
+        /* Using the same styles from your other pages for consistency */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-blue: #1e3a8a; --light-blue: #3b82f6; --gold: #f59e0b;
+            --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-700: #374151;
+            --gray-800: #1f2937; --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; color: var(--gray-800);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .card {
+            background: var(--white); border-radius: 15px; padding: 25px;
+            margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .card h1 {
+            color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 10px;
+        }
+        .card h2 {
+            color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 20px;
+            padding-bottom: 10px; border-bottom: 3px solid var(--light-blue);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .card h3 {
+            color: var(--light-blue); font-size: 1.3rem; margin: 20px 0 10px 0;
+        }
+        .timeline { list-style: none; padding-left: 10px; }
+        .timeline li {
+            position: relative; padding-left: 30px; margin-bottom: 15px;
+            border-left: 2px solid var(--gray-200);
+            padding-bottom: 15px;
+        }
+        .timeline li:last-child {
+            border-left: 2px solid transparent;
+        }
+        .timeline li::before {
+            content: '●'; font-size: 1.5rem; position: absolute; left: -11px;
+            top: -5px; color: var(--light-blue); background-color: white;
+            line-height: 1;
+        }
+        .timeline-title { font-weight: 600; color: var(--primary-blue); }
+        .timeline-date { font-size: 0.9rem; color: var(--gold); font-weight: bold; margin-bottom: 4px; }
+        .info-box {
+            background: var(--gray-100); padding: 15px; border-radius: 8px;
+            border-left: 4px solid var(--light-blue); margin-top: 15px;
+        }
+        .emoji { font-size: 1.2em; margin-right: 5px; }
+        a { color: var(--light-blue); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div style="text-align:center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 3px solid var(--light-blue);">
+                <h1><span class="emoji">🤝</span> Math Club Interdisciplinary Team Plan</h1>
+                <p style="color: var(--gray-700); font-size: 1.1rem;">Structure, Goals, and Timeline for 2025-2026</p>
+                <p style="font-size: 0.9rem; margin-top: 5px;"><strong>Faculty Advisor:</strong> Mr. Andrew Volk</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="emoji">🎯</span> Mission & Core Goals</h2>
+            <p>The Interdisciplinary Team acts as a bridge between the mathematical sciences and other departments at Liberty University. Our mission is to apply quantitative skills to real-world problems on campus, providing math students with practical consulting experience while offering valuable analytical support to the wider academic community.</p>
+            <div class="info-box">
+                <strong>Our primary goals for the 2025-2026 academic year are:</strong>
+                <ul>
+                    <li>To establish consulting partnerships with at least two other academic departments.</li>
+                    <li>To match math majors with students and faculty from other disciplines who need quantitative support for their research.</li>
+                    <li>To complete at least one collaborative project per semester.</li>
+                    <li>To host a "Project Pitch" event where other departments can present problems for our team to tackle.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><span class="emoji">🏗️</span> Team Structure & Process</h2>
+            <h3>Consulting Model</h3>
+            <p>The team operates on a project-based consulting model. When a request is received from another department, a small team of 2-3 math students will be assigned to work directly with the client, guided by the faculty advisor.</p>
+            
+            <h3>How to Join</h3>
+            <p>The Interdisciplinary Team is perfect for students who enjoy applying mathematics to diverse fields and want to develop communication and project management skills. An interest meeting will be held early in the Fall semester to outline our goals and current project opportunities.</p>
+        </div>
+
+        <div class="card">
+            <h2><span class="emoji">🗓️</span> Proposed Semester Timeline</h2>
+            <p>This schedule is focused on building relationships, sourcing impactful projects, and delivering results for our campus partners.</p>
+
+            <h3>Fall 2025 Semester</h3>
+            <div class="info-box" style="border-left-color: var(--gold);">
+                <strong>Primary Target:</strong> Establish partnerships and launch initial projects.
+            </div>
+            <ul class="timeline" style="margin-top: 20px;">
+                <li>
+                    <div class="timeline-date">September 2025</div>
+                    <div class="timeline-title">Outreach & Partnership Building</div>
+                    <p>Contact department heads in fields like Biology, Business, Psychology, and Engineering to introduce the team and its services.</p>
+                </li>
+                <li>
+                    <div class="timeline-date">October 2025</div>
+                    <div class="timeline-title">Interdisciplinary Project Pitch Event</div>
+                    <p>Host an event where faculty and students from other departments can "pitch" their research problems to the Math Club. Form project teams based on interest and skills.</p>
+                </li>
+                <li>
+                    <div class="timeline-date">November 2025</div>
+                    <div class="timeline-title">Project Work & Initial Analysis</div>
+                    <p>Begin work on selected projects, focusing on understanding the problem, cleaning data, and performing initial analyses.</p>
+                </li>
+            </ul>
+
+            <h3>Spring 2026 Semester</h3>
+            <div class="info-box" style="border-left-color: var(--gold);">
+                <strong>Primary Target:</strong> Deliver project results and showcase collaborations.
+            </div>
+            <ul class="timeline" style="margin-top: 20px;">
+                <li>
+                    <div class="timeline-date">January & February 2026</div>
+                    <div class="timeline-title">Deep Dive & Model Development</div>
+                    <p>Continue project work, focusing on developing mathematical models, running simulations, or conducting in-depth statistical tests.</p>
+                </li>
+                <li>
+                    <div class="timeline-date">March 2026</div>
+                    <div class="timeline-title">Final Reporting & Presentation Prep</div>
+                    <p>Finalize project results and create reports or presentations to deliver to the client departments.</p>
+                </li>
+                <li>
+                    <div class="timeline-date">April 2026</div>
+                    <div class="timeline-title">Collaborative Showcase</div>
+                    <p>Host an end-of-year showcase where the Interdisciplinary Team and their partners present the results of their collaborative work to the university community.</p>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2><span class="emoji">💡</span> Potential Project Areas</h2>
+            <p>We are equipped to help with a wide range of quantitative challenges, including:</p>
+            <ul>
+                <li><strong>Data Analysis & Visualization:</strong> Helping a research group from the School of Business analyze customer survey data.</li>
+                <li><strong>Statistical Consulting:</strong> Assisting psychology students with the experimental design and statistical analysis for their senior thesis.</li>
+                <li><strong>Mathematical Modeling:</strong> Building a population dynamics model for a biology class experiment.</li>
+                <li><strong>Process Optimization:</strong> Working with the School of Engineering on a logistics or scheduling problem.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

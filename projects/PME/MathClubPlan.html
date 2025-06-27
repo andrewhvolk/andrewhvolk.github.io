@@ -386,6 +386,33 @@
                 padding: 8px 10px;
             }
         }
+
+        .team-button {
+            display: inline-block; /* Allows padding and margin to apply correctly */
+            background-color: var(--gold); /* Use your gold color for a highlight */
+            color: var(--white); /* White text for contrast */
+            padding: 10px 20px; /* Comfortable clickable area */
+            border-radius: 25px; /* Fully rounded corners for a modern look */
+            text-decoration: none; /* Remove underline from links */
+            font-weight: 600; /* Make the text bold */
+            margin-top: 15px; /* Add some space above the button */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            cursor: pointer; /* Indicate it's clickable */
+            border: none; /* Remove default button border if applied */
+        }
+
+        .team-button:hover {
+            background-color: #e08e00; /* Slightly darker gold on hover */
+            transform: translateY(-2px); /* Slight lift effect on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+
+        .team-button:active {
+            transform: translateY(0); /* "Press down" effect on click */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Smaller shadow on click */
+        }
+
     </style>
 </head>
 <body>
@@ -428,40 +455,9 @@
 
             <h3>📅 Leadership Titles for Fall 2025</h3>
             <div style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid var(--gold); margin: 15px 0;">
-                <strong>All officer positions currently open</strong>
+                <strong>All formal officer positions are currently open.</strong> The 2025-2026 Leadership Team will be finalized during the first two weeks of July. If you are interested, please reach out to Mr. Volk's email to confirm your desired role and willingness to serve.
             </div>
 
-            <div class="members-section">
-                <div class="member-list">
-                    <h4>✅ Confirmed Interested Leadership Team Members</h4>
-                    <ul>
-                        <li>Alexa Cramer<br><span class="member-email">avcramer@liberty.edu</span></li>
-                        <li>Annee DeFelice <span class="past-role">24/25: 📋</span><br><span class="member-email">aidefelice@liberty.edu</span></li>
-                        <li>Avery Morrison <span class="past-role">24/25: 📋</span><br><span class="member-email">ajmorrison1@liberty.edu</span></li>
-                        <li>Emma Kay<br><span class="member-email">epkay@liberty.edu</span></li>
-                        <li>Isaiah Mellace <span class="past-role">24/25: 🎯</span><br><span class="member-email">inmellace@liberty.edu</span></li>
-                        <li>Shane Weimar<br><span class="member-email">smweimar@liberty.edu</span></li>
-                    </ul>
-                </div>
-                
-                <div class="member-list">
-                    <h4>📬 Additional Members Invited to Leadership Team</h4>
-                    <ul>
-                        <li>Heidi Jackson<br><span class="member-email">hljackson5@liberty.edu</span></li>
-                        <li>Jayden Broach<br><span class="member-email">jbroach1@liberty.edu</span></li>
-                        <li>Joshua Kroeker<br><span class="member-email">jrkroeker@liberty.edu</span></li>
-                        <li>Nathanael Krug <span class="past-role">24/25: 🗣️</span><br><span class="member-email">nckrug@liberty.edu</span></li>
-                        <li>Ryan Miller<br><span class="member-email">rtmiller@liberty.edu</span></li>
-                        <li>Sierra Evans<br><span class="member-email">seevans3@liberty.edu</span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div style="background: var(--gray-100); padding: 15px; border-radius: 8px; margin-top: 20px;">
-                <strong>Faculty Advisor:</strong> Mr. Andrew Volk<br>
-                <strong style="color: #dc2626;">Immediate Needs:</strong> Confirm Fall 2025 Officers
-            </div>
-        </div>
 
         <div class="card">
             <h2><span class="emoji">🎯</span>Club Structure & Engagement Tracks</h2>
@@ -475,6 +471,7 @@
                         <li>Monthly all-officer meetings (hybrid format)</li>
                         <li>Open Advisory Council for active members</li>
                     </ul>
+                    <a href="LeadershipTeam.html" class="team-button">Learn More</a>
                 </div>
                 
                 <div class="track-card">
@@ -485,6 +482,7 @@
                         <li>Conference submission opportunities</li>
                         <li>Ideal for graduate school prep</li>
                     </ul>
+                    <a href="ResearchTeam.html" class="team-button">Learn More</a>
                 </div>
                 
                 <div class="track-card">
@@ -495,6 +493,7 @@
                         <li>Strategy workshops</li>
                         <li>Open to all majors and levels</li>
                     </ul>
+                    <a href="CompetitionTeam.html" class="team-button">Learn More</a>
                 </div>
                 
                 <div class="track-card">
@@ -505,6 +504,7 @@
                         <li>Quantitative analysis support</li>
                         <li>Cross-discipline collaboration</li>
                     </ul>
+                    <a href="ConsultingTeam.html" class="team-button">Learn More</a>
                 </div>
             </div>
         </div>
@@ -615,7 +615,6 @@
                 </li>
             </ul>
         </div>
-
         <div class="contact-section">
             <h3>📞 Contact Information</h3>
             <div style="margin: 15px 0;">

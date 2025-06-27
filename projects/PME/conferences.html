@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Research Conferences - Sorted by Date</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3b82f6;
+        }
+        
+        .header h1 {
+            color: #1e3a8a;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .sort-info {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .events-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .events-table th {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .events-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+        
+        .events-table tr:nth-child(even) {
+            background: #f9fafb;
+        }
+        
+        .events-table tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+        
+        .conference-name {
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 2px;
+        }
+        
+        .date-highlight {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .upcoming-soon {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .location {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .tba {
+            color: #dc2626;
+            font-style: italic;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 1024px) {
+            .events-table {
+                font-size: 0.9rem;
+            }
+            
+            .events-table th,
+            .events-table td {
+                padding: 10px 8px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .events-table th,
+            .events-table td {
+                padding: 8px 6px;
+                font-size: 0.85rem;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Undergraduate Friendly Math Research Conferences</h1>
+            <p>Liberty University Math Club - Conference Planning Resource</p>
+        </div>
+        
+        <table class="events-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Conference Name</th>
+                    <th style="width: 18%;">Next Occurrence</th>
+                    <th style="width: 22%;">Next Location</th>
+                    <th style="width: 18%;">Last Occurrence</th>
+                    <th style="width: 17%;">Last Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="conference-name">NCRC (National Collegiate Research Conference)</div></td>
+                    <td><span class="date-highlight upcoming-soon">January 2026</span></td>
+                    <td><div class="location">Harvard University, Cambridge, MA</div></td>
+                    <td>January 2025</td>
+                    <td><div class="location">Harvard University, Cambridge, MA</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">Joint Mathematics Meetings (JMM)</div></td>
+                    <td><span class="date-highlight upcoming-soon"> January 4–7, 2026</span></td>
+                    <td><div class="location">Washington, DC</div></td>
+                    <td>January 14–17, 2025</td>
+                    <td><div class="location">Seattle, WA</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">Rose-Hulman Undergraduate Math Conference</div></td>
+                    <td><span class="date-highlight">April 2026</span></td>
+                    <td><div class="location">Terre Haute, IN</div></td>
+                    <td>April, 2025</td>
+                    <td><div class="location">Terre Haute, IN</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">MAA MathFest</div></td>
+                    <td><span class="date-highlight">August 6–9, 2025</span></td>
+                    <td><div class="location">Sacramento, CA</div></td>
+                    <td>Aug 7, 2024</td>
+                    <td><div class="location">Indianapolis, IN</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">SUMS</div></td>
+                    <td><span class="date-highlight">Oct/Nov 2025</span></td>
+                    <td><div class="location">JMU, Harrisonburg, VA</div></td>
+                    <td>Nov 2, 2024</td>
+                    <td><div class="location">JMU, Harrisonburg, VA</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">NURVa – Network for Undergraduate Research in Virginia</div></td>
+                    <td><span class="date-highlight">November 1, 2025</span></td>
+                    <td><div class="location">University of Mary Washington, Fredericksburg, VA</div></td>
+                    <td>October 26, 2024</td>
+                    <td><div class="location">Virginia State University, Petersburg, VA</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">MARCUS</div></td>
+                    <td><span class="date-highlight">Nov 8, 2025</span></td>
+                    <td><div class="location">Randolph College, VA</div></td>
+                    <td>Fall 2024</td>
+                    <td><div class="location">Randolph College, VA</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">MD-DC-VA MAA Section Meeting</div></td>
+                    <td><span class="date-highlight">Nov. 14–15, 2025</span></td>
+                    <td><div class="location">University of Mary Washington</div></td>
+                    <td>April 2024</td>
+                    <td><div class="location">Salisbury University, MD</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">PME Regional Conference (YSU Chapter)</div></td>
+                    <td><span class="date-highlight">February 21, 2026</span></td>
+                    <td><div class="location">Youngstown State University</div></td>
+                    <td>February 2025</td>
+                    <td><div class="location">Youngstown State University</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">HRUMC (Hudson River Undergraduate Math Conference)</div></td>
+                    <td><span class="date-highlight">SPRING 2026</span></td>
+                    <td><div class="location">NY State</div></td>
+                    <td>April 5, 2025</td>
+                    <td><div class="location">Union College in Schenectady, NY</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">MORE</div></td>
+                    <td><span class="date-highlight">Spring 2026</span></td>
+                    <td><div class="location">VT or Clemson</div></td>
+                    <td>Apr 26–27, 2025</td>
+                    <td><div class="location">Virginia Tech, Blacksburg, VA</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">YMC – Young Mathematicians Conference</div></td>
+                    <td><span class="date-highlight">July 2026</span></td>
+                    <td><div class="location">Ohio State University, Columbus, OH</div></td>
+                    <td>July 30 – August 1, 2025</td>
+                    <td><div class="location">The Ohio State University, Columbus, OH</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">AWM Research Symposium</div></td>
+                    <td><span class="date-highlight tba">TBA</span></td>
+                    <td><div class="location tba">Location TBD</div></td>
+                    <td>May 16 - 18, 2025</td>
+                    <td><div class="location">University of Wisconsin</div></td>
+                </tr>
+                <tr>
+                    <td><div class="conference-name">WiDS VT</div></td>
+                    <td><span class="date-highlight tba">TBD</span></td>
+                    <td><div class="location tba">TBD</div></td>
+                    <td>Feb 18–19, 2025</td>
+                    <td><div class="location">Virginia Tech, Blacksburg, VA</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
