@@ -1,160 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liberty University Math Club - Competition Team Plan</title>
-    <style>
-        /* Using the same styles from your other pages for consistency */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary-blue: #1e3a8a; --light-blue: #3b82f6; --gold: #f59e0b;
-            --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-700: #374151;
-            --gray-800: #1f2937; --white: #ffffff;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6; color: var(--gray-800);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .card {
-            background: var(--white); border-radius: 15px; padding: 25px;
-            margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-        .card h1 {
-            color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 10px;
-        }
-        .card h2 {
-            color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 20px;
-            padding-bottom: 10px; border-bottom: 3px solid var(--light-blue);
-            display: flex; align-items: center; gap: 10px;
-        }
-        .card h3 {
-            color: var(--light-blue); font-size: 1.3rem; margin: 20px 0 10px 0;
-        }
-        .timeline { list-style: none; padding-left: 10px; }
-        .timeline li {
-            position: relative; padding-left: 30px; margin-bottom: 15px;
-            border-left: 2px solid var(--gray-200);
-            padding-bottom: 15px;
-        }
-        .timeline li:last-child {
-            border-left: 2px solid transparent;
-        }
-        .timeline li::before {
-            content: '●'; font-size: 1.5rem; position: absolute; left: -11px;
-            top: -5px; color: var(--light-blue); background-color: white;
-            line-height: 1;
-        }
-        .timeline-title { font-weight: 600; color: var(--primary-blue); }
-        .timeline-date { font-size: 0.9rem; color: var(--gold); font-weight: bold; margin-bottom: 4px; }
-        .info-box {
-            background: var(--gray-100); padding: 15px; border-radius: 8px;
-            border-left: 4px solid var(--light-blue); margin-top: 15px;
-        }
-        .emoji { font-size: 1.2em; margin-right: 5px; }
-        a { color: var(--light-blue); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liberty University Math Club - Competition Team Plan</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary-blue: #1e3a8a; --light-blue: #3b82f6; --gold: #f59e0b;
+      --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-700: #374151;
+      --gray-800: #1f2937; --white: #ffffff;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6; color: var(--gray-800);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .card {
+      background: var(--white); border-radius: 15px; padding: 25px;
+      margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+    .card h1 {
+      color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 10px;
+    }
+    .card h2 {
+      color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 20px;
+      padding-bottom: 10px; border-bottom: 3px solid var(--light-blue);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card h3 {
+      color: var(--light-blue); font-size: 1.3rem; margin: 20px 0 10px 0;
+    }
+    .timeline { list-style: none; padding-left: 10px; }
+    .timeline li {
+      position: relative; padding-left: 30px; margin-bottom: 15px;
+      border-left: 2px solid var(--gray-200); padding-bottom: 15px;
+    }
+    .timeline li:last-child {
+      border-left: 2px solid transparent;
+    }
+    .timeline li::before {
+      content: '●'; font-size: 1.5rem; position: absolute; left: -11px;
+      top: -5px; color: var(--light-blue); background-color: white; line-height: 1;
+    }
+    .timeline-title { font-weight: 600; color: var(--primary-blue); }
+    .timeline-date { font-size: 0.9rem; color: var(--gold); font-weight: bold; margin-bottom: 4px; }
+    .info-box {
+      background: var(--gray-100); padding: 15px; border-radius: 8px;
+      border-left: 4px solid var(--light-blue); margin-top: 15px;
+    }
+    .emoji { font-size: 1.2em; margin-right: 5px; }
+    a { color: var(--light-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div style="text-align:center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 3px solid var(--light-blue);">
-                <h1><span class="emoji">🏆</span> Math Club Competition Team Plan</h1>
-                <p style="color: var(--gray-700); font-size: 1.1rem;">Structure, Goals, and Timeline for 2025-2026</p>
-                <p style="font-size: 0.9rem; margin-top: 5px;"><strong>Faculty Advisor:</strong> Mr. Andrew Volk</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2><span class="emoji">🎯</span> Mission & Core Goals</h2>
-            <p>The Competition Team track is for students who enjoy collaborative problem-solving and want to represent Liberty University at regional and national mathematics competitions. Participation sharpens analytical skills, builds teamwork, and provides a fun, challenging outlet for mathematical talent.</p>
-            <div class="info-box">
-                <strong>Our primary goals for the 2025-2026 academic year are:</strong>
-                <ul>
-                    <li>To field a competitive team for at least one major competition each semester.</li>
-                    <li>To host regular training sessions and workshops focused on problem-solving strategies.</li>
-                    <li>To increase student participation and confidence in tackling challenging math problems.</li>
-                    <li>To host an engaging internal competition (the Integration Bee) during the spring semester.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2><span class="emoji">🏗️</span> Team Structure & Process</h2>
-            <h3>Practice Sessions</h3>
-            <p>The team will meet regularly for practice sessions. These sessions will involve working through problems from past competitions, discussing different approaches, and learning advanced problem-solving techniques.</p>
-            
-            <h3>How to Join</h3>
-            <p>The Competition Team is open to all undergraduate students, regardless of major. An interest meeting will be held at the beginning of the Fall semester. Come ready to solve some fun problems!</p>
-        </div>
-
-        <div class="card">
-            <h2><span class="emoji">🗓️</span> Proposed Semester Timeline</h2>
-            <p>This schedule is designed to prepare our team for key competitions and build a strong problem-solving culture within the club.</p>
-
-            <h3>Fall 2025 Semester</h3>
-            <div class="info-box" style="border-left-color: var(--gold);">
-                <strong>Primary Target:</strong> William Lowell Putnam Mathematical Competition in December.
-            </div>
-            <ul class="timeline" style="margin-top: 20px;">
-                <li>
-                    <div class="timeline-date">September 2025</div>
-                    <div class="timeline-title">Team Kickoff & Putnam Prep Begins</div>
-                    <p>Hold interest meeting, form the team, and begin weekly practice sessions focused on core Putnam Competition topics (calculus, linear algebra, abstract algebra, etc.).</p>
-                </li>
-                <li>
-                    <div class="timeline-date">October 2025</div>
-                    <div class="timeline-title">Intensive Training & Mock Exam</div>
-                    <p>Deepen the training on specific proof techniques and problem areas. Hold a full-length mock Putnam exam to simulate test conditions.</p>
-                </li>
-                <li>
-                    <div class="timeline-date">November 2025</div>
-                    <div class="timeline-title">Advanced Strategy & Problem Workshops</div>
-                    <p>Focus on analyzing past Putnam problems, discussing high-level strategies, and refining proof-writing skills.</p>
-                </li>
-                <li>
-                    <div class="timeline-date">December 2025</div>
-                    <div class="timeline-title">Final Review & Putnam Competition</div>
-                    <p>Participate in the Putnam exam on the first Saturday of December.</p>
-                </li>
-            </ul>
-
-            <h3>Spring 2026 Semester</h3>
-            <div class="info-box" style="border-left-color: var(--gold);">
-                <strong>Primary Target:</strong> Host the Liberty University Integration Bee.
-            </div>
-            <ul class="timeline" style="margin-top: 20px;">
-                <li>
-                    <div class="timeline-date">January & February 2026</div>
-                    <div class="timeline-title">Problem-Solving Workshops</div>
-                    <p>Host workshops open to all students on topics like combinatorics, number theory, and advanced calculus problem-solving.</p>
-                </li>
-                <li>
-                    <div class="timeline-date">March 2026</div>
-                    <div class="timeline-title">Integration Bee Training</div>
-                    <p>Focus practice sessions on integration techniques, speed, and accuracy in preparation for the internal competition.</p>
-                </li>
-                <li>
-                    <div class="timeline-date">April 2026</div>
-                    <div class="timeline-title">Integration Bee Competition</div>
-                    <p>Host the fast-paced, bracket-style Integration Bee in collaboration with Dr. Schmidt. Open to all LU students.</p>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="card">
-            <h2><span class="emoji">📚</span> Resources</h2>
-            <p>The Math Club provides several resources to support the Competition Team:</p>
-            <ul>
-                <li><strong>Problem Archives:</strong> Access to past problems from the VTRMC, Putnam, and other competitions.</li>
-                <li><strong>Faculty Coaching:</strong> Direct guidance from faculty on advanced topics and competition strategies.</li>
-                <li><strong>Strategy Workshops:</strong> Sessions focused not just on solving problems, but on how to approach competitions strategically.</li>
-            </ul>
-        </div>
+  <div class="container">
+    <div class="card">
+      <div style="text-align:center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 3px solid var(--light-blue);">
+        <h1><span class="emoji">🏆</span> Math Club Competition Team Plan</h1>
+        <p style="color: var(--gray-700); font-size: 1.1rem;">Structure, Goals, and Timeline for 2025-2026</p>
+        <p style="font-size: 0.9rem; margin-top: 5px;"><strong>Faculty Advisor:</strong> Mr. Andrew Volk</p>
+      </div>
     </div>
+
+    <div class="card">
+      <h2><span class="emoji">🎯</span> Mission & Core Goals</h2>
+      <p>The Competition Team track is for students who enjoy collaborative problem-solving and want to represent Liberty University at regional and national mathematics competitions. Participation sharpens analytical skills, builds teamwork, and provides a fun, challenging outlet for mathematical talent.</p>
+      <div class="info-box">
+        <strong>Our primary goals for the 2025-2026 academic year are:</strong>
+        <ul>
+          <li>To field a competitive team for at least one major competition each semester.</li>
+          <li>To host regular training sessions and workshops focused on problem-solving strategies.</li>
+          <li>To increase student participation and confidence in tackling challenging math problems.</li>
+          <li>To host an engaging internal competition (the Integration Bee) during the spring semester.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🏗️</span> Team Structure & Process</h2>
+      <h3>Practice Sessions</h3>
+      <p>The team will meet regularly for practice sessions. These sessions will involve working through problems from past competitions, discussing different approaches, and learning advanced problem-solving techniques.</p>
+
+      <h3>How to Join</h3>
+      <p>The Competition Team is open to all undergraduate students, regardless of major. An interest meeting will be held at the beginning of the Fall semester. Come ready to solve some fun problems!</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🗓️</span> Proposed Semester Timeline</h2>
+      <p>This schedule is designed to prepare our team for key competitions and build a strong problem-solving culture within the club.</p>
+
+      <h3>Fall 2025 Semester</h3>
+      <div class="info-box" style="border-left-color: var(--gold);">
+        <strong>Primary Target:</strong> William Lowell Putnam Mathematical Competition in December.
+      </div>
+      <ul class="timeline" style="margin-top: 20px;">
+        <li>
+          <div class="timeline-date">September 2025</div>
+          <div class="timeline-title">Team Kickoff & Putnam Prep Begins</div>
+          <p>
+            Host an initial interest meeting during a Math Club convo slot or evening, depending on availability.
+            Prior to the meeting, assign two Putnam problems (e.g., A1 and A2) for students to attempt.
+            During the meeting, discuss the format of the competition (two 3-hour sessions, no partial credit,
+            focus on number theory/combinatorics/probability), and have students present solutions on a whiteboard.
+          </p>
+        </li>
+        <li>
+          <div class="timeline-date">October 2025</div>
+          <div class="timeline-title">Intensive Training & Mock Exam</div>
+          <p>Deepen the training on specific proof techniques and problem areas. Hold a full-length mock Putnam exam to simulate test conditions.</p>
+        </li>
+        <li>
+          <div class="timeline-date">November 2025</div>
+          <div class="timeline-title">Advanced Strategy & Problem Workshops</div>
+          <p>Focus on analyzing past Putnam problems, discussing high-level strategies, and refining proof-writing skills.</p>
+        </li>
+        <li>
+          <div class="timeline-date">December 2025</div>
+          <div class="timeline-title">Final Review & Putnam Competition</div>
+          <p>Participate in the Putnam exam on the first Saturday of December.</p>
+        </li>
+      </ul>
+
+      <h3>Strategy & Collaboration Tools</h3>
+      <div class="info-box">
+        <ul>
+          <li>Maintain a shared Google Doc with key theorems and problem-solving strategies.</li>
+          <li>Create a dedicated Putnam practice channel in the Math Club Discord.</li>
+          <li>Encourage team members to solve and discuss additional A-level problems collaboratively each week.</li>
+        </ul>
+      </div>
+
+      <h3>Spring 2026 Semester</h3>
+      <div class="info-box" style="border-left-color: var(--gold);">
+        <strong>Primary Target:</strong> Host the Liberty University Integration Bee.
+      </div>
+      <ul class="timeline" style="margin-top: 20px;">
+        <li>
+          <div class="timeline-date">January & February 2026</div>
+          <div class="timeline-title">Problem-Solving Workshops</div>
+          <p>Host workshops open to all students on topics like combinatorics, number theory, and advanced calculus problem-solving.</p>
+        </li>
+        <li>
+          <div class="timeline-date">March 2026</div>
+          <div class="timeline-title">Integration Bee Training</div>
+          <p>Focus practice sessions on integration techniques, speed, and accuracy in preparation for the internal competition.</p>
+        </li>
+        <li>
+          <div class="timeline-date">April 2026</div>
+          <div class="timeline-title">Integration Bee Competition</div>
+          <p>Host the fast-paced, bracket-style Integration Bee in collaboration with Dr. Schmidt. Open to all LU students.</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">📚</span> Resources</h2>
+      <p>The Math Club provides several resources to support the Competition Team:</p>
+      <ul>
+        <li><strong>Problem Archives:</strong> Access to past problems from the VTRMC, Putnam, and other competitions.</li>
+        <li><strong>Faculty Coaching:</strong> Direct guidance from faculty on advanced topics and competition strategies.</li>
+        <li><strong>Strategy Workshops:</strong> Sessions focused not just on solving problems, but on how to approach competitions strategically.</li>
+      </ul>
+    </div>
+  </div>
 </body>
 </html>
