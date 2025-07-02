@@ -3,163 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liberty University Math Club - Research Team Plan</title>
-    <style>
-        /* Using the same styles from your other pages for consistency */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary-blue: #1e3a8a; --light-blue: #3b82f6; --gold: #f59e0b;
-            --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-700: #374151;
-            --gray-800: #1f2937; --white: #ffffff;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6; color: var(--gray-800);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .card {
-            background: var(--white); border-radius: 15px; padding: 25px;
-            margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-        .card h1 {
-            color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 10px;
-        }
-        .card h2 {
-            color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 20px;
-            padding-bottom: 10px; border-bottom: 3px solid var(--light-blue);
-            display: flex; align-items: center; gap: 10px;
-        }
-        .card h3 {
-            color: var(--light-blue); font-size: 1.3rem; margin: 20px 0 10px 0;
-        }
-        .timeline { list-style: none; padding-left: 10px; }
-        .timeline li {
-            position: relative; padding-left: 30px; margin-bottom: 15px;
-            border-left: 2px solid var(--gray-200);
-            padding-bottom: 15px;
-        }
-        .timeline li:last-child {
-            border-left: 2px solid transparent; /* Hide line for the last item */
-        }
-        .timeline li::before {
-            content: '●'; font-size: 1.5rem; position: absolute; left: -11px;
-            top: -5px; color: var(--light-blue); background-color: white;
-            line-height: 1;
-        }
-        .timeline-title { font-weight: 600; color: var(--primary-blue); }
-        .timeline-date { font-size: 0.9rem; color: var(--gold); font-weight: bold; margin-bottom: 4px; }
-        .info-box {
-            background: var(--gray-100); padding: 15px; border-radius: 8px;
-            border-left: 4px solid var(--light-blue); margin-top: 15px;
-        }
-        .emoji { font-size: 1.2em; margin-right: 5px; }
-        a { color: var(--light-blue); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
+    <title>Liberty University Math Club - Research Team</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div style="text-align:center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 3px solid var(--light-blue);">
-                <h1><span class="emoji">🔬</span> Math Club Research Team Plan</h1>
-                <p style="color: var(--gray-700); font-size: 1.1rem;">Structure, Goals, and Timeline for 2025-2026</p>
-                <p style="font-size: 0.9rem; margin-top: 5px;"><strong>Faculty Advisor:</strong> Mr. Andrew Volk</p>
-            </div>
-        </div>
+    <!-- Simplified Navigation Bar -->
+    <nav class="navbar">
+        <a href="MathClubPlan.html">Math Club</a>
+        <a href="LeadershipTeam.html">Officers</a>
+        <a href="ResearchTeam.html">Research</a>
+        <a href="CompetitionTeam.html">Competition</a>
+        <a href="ConsultingTeam.html">Consulting</a>
+    </nav>
 
-        <div class="card">
+    <main class="container">
+        <header class="card">
+            <div class="page-header-container">
+                <h1><span class="emoji">🔬</span> Math Club Research Team</h1>
+                <p class="section-summary">Structure, Goals, and Getting Started</p>
+                <p class="advisor-text"><strong>Faculty Advisor:</strong> Mr. Andrew Volk</p>
+            </div>
+        </header>
+
+        <section class="card">
             <h2><span class="emoji">🎯</span> Mission & Core Goals</h2>
             <p>The Research Team track is designed to provide students with hands-on research experience under faculty mentorship. It is ideal for students preparing for graduate school or careers that require analytical and problem-solving skills.</p>
             <div class="info-box">
-                <strong>Our primary goals for the 2025-2026 academic year are:</strong>
+                <strong>Our primary goals are:</strong>
                 <ul>
                     <li>To produce one scholarly product per semester, such as a research paper or poster.</li>
-                    <li>To provide opportunities for students to submit and present their work at a regional undergraduate research conference.</li>
-                    <li>To develop practical skills in mathematical software (like Overleaf, Sage, etc.), literature review, and formal presentation.</li>
+                    <li>To provide opportunities for students to present their work at a regional undergraduate research conference.</li>
+                    <li>To develop practical skills in mathematical software, literature review, and formal presentation.</li>
                     <li>To foster direct faculty mentorship relationships that guide students through the research process.</li>
                 </ul>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
+        <!-- New, prominent section linking to ResearchStyles.html -->
+        <section class="card callout-card">
+            <h2><span class="emoji">🗺️</span> Explore Research Project Types</h2>
+            <p>The first step in any research journey is understanding the landscape. We have compiled a comprehensive guide to over a dozen different research methodologies, from literature reviews to computational simulations. This guide is your starting point for finding a project that matches your interests and skills.</p>
+            <div class="button-container-center">
+                <a href="ResearchStyles.html" class="team-button">View All Research Styles</a>
+            </div>
+        </section>
+
+        <section class="card">
             <h2><span class="emoji">🏗️</span> Team Structure & Process</h2>
             <h3>Project Formation</h3>
             <p>At the beginning of each semester, the faculty advisor will propose a few potential research problems. Students will form small teams (2-4 members) based on their interest in these problems.</p>
             
             <h3>How to Join</h3>
             <p>An interest meeting will be held in the first two weeks of the Fall semester. All members with a passion for problem-solving are welcome. A background in foundational math courses is helpful but not required.</p>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2><span class="emoji">🗓️</span> Proposed Semester Timeline</h2>
-            <p>This timeline provides a framework for achieving our goal of completing one project and presenting at a conference each semester.</p>
-
-            <h3>Fall 2025 Semester</h3>
-            <div class="info-box" style="border-left-color: var(--gold);">
-                <strong>Primary Target:</strong> SUMS Conference at JMU (Oct/Nov 2025) or NURVa Conference (Nov 1, 2025).
-            </div>
-            <ul class="timeline" style="margin-top: 20px;">
+        <section class="card">
+            <h2><span class="emoji">🗓️</span> General Research Timeline</h2>
+            <p>While every project is unique, most follow a similar semester-long pattern:</p>
+            <ul class="timeline">
                 <li>
-                    <div class="timeline-date">September 2025</div>
-                    <div class="timeline-title">Team Formation & Problem Selection</div>
-                    <p>Form research teams, select a research problem, and begin initial literature review.</p>
+                    <div class="timeline-date">Weeks 1-4</div>
+                    <div class="timeline-title">Problem Selection & Background Research</div>
+                    <p>Form teams, choose a problem, and dive into the existing literature. Submit conference abstracts if applicable.</p>
                 </li>
                 <li>
-                    <div class="timeline-date">October 2025</div>
-                    <div class="timeline-title">Active Research & Abstract Submission</div>
-                    <p>Dive into the problem-solving phase. Draft and submit abstracts to target conferences like SUMS or NURVa.</p>
+                    <div class="timeline-date">Weeks 5-11</div>
+                    <div class="timeline-title">Active Research & Analysis</div>
+                    <p>This is the core problem-solving phase. Work with your team and faculty advisor to make progress on your project.</p>
                 </li>
                 <li>
-                    <div class="timeline-date">November 2025</div>
-                    <div class="timeline-title">Finalize Results & Conference Presentation</div>
-                    <p>Complete the research phase, create a poster or slide deck, and present at the conference.</p>
-                </li>
-                <li>
-                    <div class="timeline-date">December 2025</div>
-                    <div class="timeline-title">Project Write-Up</div>
-                    <p>Begin drafting a formal paper summarizing the research question, methodology, and findings.</p>
+                    <div class="timeline-date">Weeks 12-15</div>
+                    <div class="timeline-title">Finalize Results & Prepare Presentation</div>
+                    <p>Complete the research, create a poster or slide deck, and prepare a formal paper or presentation.</p>
                 </li>
             </ul>
-
-            <h3>Spring 2026 Semester</h3>
-            <div class="info-box" style="border-left-color: var(--gold);">
-                <strong>Primary Target:</strong> Rose-Hulman Conference (April 2026) or MORE Conference (Spring 2026).
-            </div>
-            <ul class="timeline" style="margin-top: 20px;">
-                <li>
-                    <div class="timeline-date">January 2026</div>
-                    <div class="timeline-title">Project Refinement or Selection</div>
-                    <p>Either continue and deepen the Fall project or select a new problem to tackle.</p>
-                </li>
-                <li>
-                    <div class="timeline-date">February 2026</div>
-                    <div class="timeline-title">Intensive Research & Paper Writing</div>
-                    <p>Focus on advancing the research and making significant progress on the formal paper. Submit abstracts to spring conferences.</p>
-                </li>
-                <li>
-                    <div class="timeline-date">March 2026</div>
-                    <div class="timeline-title">Prepare for Presentation</div>
-                    <p>Finalize the research paper and develop the accompanying presentation materials for the upcoming conference.</p>
-                </li>
-                <li>
-                    <div class="timeline-date">April 2026</div>
-                    <div class="timeline-title">Conference Presentation & Final Submission</div>
-                    <p>Travel to and present at the target conference. Finalize the scholarly paper for the semester.</p>
-                </li>
-            </ul>
-        </div>
+        </section>
         
-        <div class="card">
-            <h2><span class="emoji">📚</span> Resources</h2>
-            <p>The Math Club provides several resources to support the Research Team:</p>
+        <section class="card">
+            <h2><span class="emoji">📚</span> Additional Resources</h2>
             <ul>
-                <li><strong>Conference Planning Resource:</strong> We maintain a comprehensive <a href="./conferences.html" target="_blank">list of undergraduate-friendly conferences</a> to help teams identify suitable venues for presentation.</li>
                 <li><strong>Faculty Mentorship:</strong> Direct access to the faculty advisor for guidance, problem-solving, and networking.</li>
                 <li><strong>Software Workshops:</strong> Opportunities to learn relevant software for research and typesetting, such as Overleaf (for LaTeX), Sage, or Jupyter Notebooks, through club-wide workshops.</li>
+                <li><strong>Conference Opportunities:</strong> We actively encourage and support students in presenting their work at local and regional conferences.</li>
             </ul>
-        </div>
-    </div>
+        </section>
+    </main>
 </body>
 </html>

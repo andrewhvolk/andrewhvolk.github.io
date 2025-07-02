@@ -4,432 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liberty University Math Club 2025–2026 Plan</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-blue: #1e3a8a;
-            --light-blue: #3b82f6;
-            --gold: #f59e0b;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-800: #1f2937;
-            --white: #ffffff;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--gray-800);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue), var(--gold));
-        }
-        
-        .header h1 {
-            color: var(--primary-blue);
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .header-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .header-info div {
-            background: var(--gray-100);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--gray-700);
-        }
-        
-        .card {
-            background: var(--white);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-        
-        .card h2 {
-            color: var(--primary-blue);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--light-blue);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .card h3 {
-            color: var(--light-blue);
-            font-size: 1.3rem;
-            margin: 20px 0 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .officer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .officer-card {
-            background: var(--gray-100);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid var(--light-blue);
-        }
-        
-        .officer-title {
-            font-weight: bold;
-            color: var(--primary-blue);
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-        
-        .members-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .member-list {
-            background: var(--gray-100);
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .member-list h4 {
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-        
-        .member-list ul {
-            list-style: none;
-        }
-        
-        .member-list li {
-            margin: 8px 0;
-            padding: 5px 0;
-            border-bottom: 1px solid var(--gray-200);
-        }
-        
-        .member-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .member-email {
-            font-size: 0.85rem;
-            color: var(--gray-700);
-            font-style: italic;
-        }
-        
-        .past-role {
-            background: var(--gold);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            margin-left: 5px;
-        }
-        
-        .tracks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .track-card {
-            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .track-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
-        
-        .track-card ul {
-            list-style: none;
-            text-align: left;
-        }
-        
-        .track-card li {
-            margin: 8px 0;
-            padding-left: 15px;
-            position: relative;
-        }
-        
-        .track-card li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--gold);
-            font-weight: bold;
-        }
-        
-        .events-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-        }
-        
-        .events-table th {
-            background: var(--primary-blue);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .events-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--gray-200);
-        }
-        
-        .events-table tr:nth-child(even) {
-            background: var(--gray-100);
-        }
-        
-        .events-table tr:hover {
-            background: rgba(59, 130, 246, 0.1);
-        }
-        
-        .semester-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .fall {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--gold);
-        }
-        
-        .spring {
-            background: rgba(34, 197, 94, 0.2);
-            color: #16a34a;
-        }
-        
-        .both {
-            background: rgba(139, 92, 246, 0.2);
-            color: #8b5cf6;
-        }
-        
-        .pme-section {
-            background: linear-gradient(135deg, var(--gold), #f97316);
-            color: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 20px 0;
-        }
-        
-        .pme-section h3 {
-            color: white;
-            margin-bottom: 15px;
-        }
-        
-        .pme-section ul {
-            list-style: none;
-        }
-        
-        .pme-section li {
-            margin: 10px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-        
-        .pme-section li::before {
-            content: '★';
-            position: absolute;
-            left: 0;
-            color: white;
-        }
-        
-        .questions-list {
-            list-style: none;
-        }
-        
-        .questions-list li {
-            margin: 15px 0;
-            padding: 15px;
-            background: var(--gray-100);
-            border-radius: 8px;
-            border-left: 4px solid var(--light-blue);
-        }
-        
-        .question-title {
-            font-weight: bold;
-            color: var(--primary-blue);
-            margin-bottom: 5px;
-        }
-        
-        .contact-section {
-            background: var(--primary-blue);
-            color: white;
-            text-align: center;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 30px;
-        }
-        
-        .contact-section h3 {
-            color: white;
-            margin-bottom: 15px;
-        }
-        
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .contact-item {
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .emoji {
-            font-size: 1.2em;
-            margin-right: 5px;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .header-info {
-                justify-content: center;
-            }
-            
-            .officer-grid,
-            .members-section,
-            .tracks-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .events-table {
-                font-size: 0.9rem;
-            }
-            
-            .events-table th,
-            .events-table td {
-                padding: 8px 10px;
-            }
-        }
-
-        .team-button {
-            display: inline-block; /* Allows padding and margin to apply correctly */
-            background-color: var(--gold); /* Use your gold color for a highlight */
-            color: var(--white); /* White text for contrast */
-            padding: 10px 20px; /* Comfortable clickable area */
-            border-radius: 25px; /* Fully rounded corners for a modern look */
-            text-decoration: none; /* Remove underline from links */
-            font-weight: 600; /* Make the text bold */
-            margin-top: 15px; /* Add some space above the button */
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-            cursor: pointer; /* Indicate it's clickable */
-            border: none; /* Remove default button border if applied */
-        }
-
-        .team-button:hover {
-            background-color: #e08e00; /* Slightly darker gold on hover */
-            transform: translateY(-2px); /* Slight lift effect on hover */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
-        }
-
-        .team-button:active {
-            transform: translateY(0); /* "Press down" effect on click */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Smaller shadow on click */
-        }
-
-    </style>
+    <!-- Link to the unified external stylesheet. The <style> block has been removed. -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Simplified Navigation Bar -->
+    <nav class="navbar">
+        <a href="MathClubPlan.html">Math Club</a>
+        <a href="LeadershipTeam.html">Officers</a>
+        <a href="ResearchTeam.html">Research</a>
+        <a href="CompetitionTeam.html">Competition</a>
+        <a href="ConsultingTeam.html">Consulting</a>
+    </nav>
+
     <div class="container">
-        <div class="header">
+        <!-- Main Header Section -->
+        <header class="header card">
             <h1>🔢 Liberty University Math Club</h1>
-            <h2 style="color: var(--light-blue); margin: 10px 0;">2025–2026 Plan</h2>
+            <!-- The inline style has been removed from this h2 element. -->
+            <h2>2025–2026 Plan</h2>
             <div class="header-info">
                 <div><strong>Prepared by:</strong> Mr. Andrew Volk, Faculty Advisor</div>
-                <div><strong>Updated:</strong> June 30, 2025</div>
+                <div><strong>Updated:</strong> July 2, 2025</div>
             </div>
-        </div>
+        </header>
 
-        <div class="card">
-        <div class="card">
-            <h2><span class="emoji">🎯</span>Club Structure & Engagement Tracks</h2>
-            
+        <!-- Engagement Tracks Section -->
+        <section class="card">
+            <h2><span class="emoji">🎯</span> Club Structure & Engagement Tracks</h2>
             <div class="tracks-grid">
                 <div class="track-card">
                     <h4>🧠 Leadership Team</h4>
@@ -441,7 +43,6 @@
                     </ul>
                     <a href="LeadershipTeam.html" class="team-button">Learn More</a>
                 </div>
-                
                 <div class="track-card">
                     <h4>📚 Research Team</h4>
                     <ul>
@@ -452,7 +53,6 @@
                     </ul>
                     <a href="ResearchTeam.html" class="team-button">Learn More</a>
                 </div>
-                
                 <div class="track-card">
                     <h4>🏆 Competition Team</h4>
                     <ul>
@@ -463,7 +63,6 @@
                     </ul>
                     <a href="CompetitionTeam.html" class="team-button">Learn More</a>
                 </div>
-                
                 <div class="track-card">
                     <h4>🤝 Interdisciplinary Team</h4>
                     <ul>
@@ -475,11 +74,13 @@
                     <a href="ConsultingTeam.html" class="team-button">Learn More</a>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2><span class="emoji">📅</span>Summary of Planned Events</h2>
+        <!-- Planned Events Section -->
+        <section class="card">
+            <h2><span class="emoji">📅</span> Summary of Planned Events</h2>
             <table class="events-table">
+                <caption>A summary of planned Math Club events for the 2025-2026 academic year.</caption>
                 <thead>
                     <tr>
                         <th>Event</th>
@@ -497,7 +98,8 @@
                         <td><strong>Putnam Challenge Mondays</strong></td>
                         <td><strong>First Mondays (10:20-11:45):</strong> Go over Putnam questions and strategies</td>
                         <td><span class="semester-badge fall">Fall</span></td>
-                    </tr>                    <tr>
+                    </tr>
+                    <tr>
                         <td><strong>Flatland Movie Night</strong></td>
                         <td>Educational and social event with math-themed film discussion with Dr. Sprano</td>
                         <td><span class="semester-badge fall">Fall</span></td>
@@ -549,10 +151,11 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2><span class="emoji">🏛️</span>PME Chapter Notes</h2>
+        <!-- PME Chapter Section -->
+        <section class="card">
+            <h2><span class="emoji">🏛️</span> PME Chapter Notes</h2>
             <div class="pme-section">
                 <h3>Pi Mu Epsilon Integration</h3>
                 <ul>
@@ -561,18 +164,18 @@
                     <li>All PME events coordinated by Math Club; no parallel governance structure</li>
                     <li>Special considerations being discussed regarding online student eligibility</li>
                 </ul>
-                
-                <h3 style="margin-top: 20px;">PME Structure Alignment</h3>
+                <h3 class="pme-subtitle">PME Structure Alignment</h3>
                 <ul>
                     <li>PME President = Highest-ranking PME-inducted Math Club officer</li>
                     <li>All PME events and responsibilities coordinated through Math Club</li>
                     <li>No separate PME leadership team; positions mirror Math Club roles</li>
                 </ul>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2><span class="emoji">❓</span>Outstanding Questions</h2>
+        <!-- Outstanding Questions Section -->
+        <section class="card">
+            <h2><span class="emoji">❓</span> Outstanding Questions</h2>
             <ul class="questions-list">
                 <li>
                     <div class="question-title">Trip Planning</div>
@@ -591,10 +194,12 @@
                     What software do students most want to learn? Who can lead these workshops?
                 </li>
             </ul>
-        </div>
-        <div class="contact-section">
+        </section>
+
+        <!-- Contact Section -->
+        <footer class="contact-section card">
             <h3>📞 Contact Information</h3>
-            <div style="margin: 15px 0;">
+            <div class="contact-details">
                 <strong>Mr. Andrew Volk</strong><br>
                 Faculty Advisor, Liberty University Math Club<br>
                 Assistant Professor of Mathematics and Physics
@@ -609,7 +214,7 @@
                     <div>(434) 841-5810<br><small>(call or text)</small></div>
                 </div>
             </div>
-        </div>
+        </footer>
     </div>
 </body>
 </html>

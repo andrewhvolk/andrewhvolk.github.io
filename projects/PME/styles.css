@@ -1,0 +1,423 @@
+/*
+  styles.css
+  Unified and Improved Stylesheet for the LU Math Club Website
+
+  Changelog:
+  - Added Google Font import for 'Inter' for a modern, clean look.
+  - Expanded CSS variables for typography, spacing, and shadows for better consistency.
+  - Refactored to a "mobile-first" responsive design approach using min-width.
+  - Simplified typography rules to avoid redundancy.
+  - Used 'gap' property for cleaner spacing in flex/grid layouts (e.g., navbar).
+  - Added comments to suggest semantic HTML improvements (e.g., using <main>, <section>).
+  - Moved timeline styles from individual template pages into this main stylesheet.
+  - Added track-card styles for the homepage.
+  - Added callout-card and other helper classes for better component styling.
+*/
+
+/* -------------------
+   1. Font Import
+------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* -------------------
+   2. Root Variables
+------------------- */
+:root {
+  /* Colors */
+  --primary-blue: #1e3a8a;
+  --light-blue: #3b82f6;
+  --gold: #f59e0b;
+  --gold-darker: #e08e00;
+  --green: #10b981;
+  --red: #ef4444;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --white: #ffffff;
+
+  /* Typography */
+  --font-main: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --fs-h1: 2.2rem;
+  --fs-h2: 1.8rem;
+  --fs-h3: 1.3rem;
+  --fs-body: 1rem;
+  --line-height-base: 1.6;
+
+  /* Spacing */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Borders & Radius */
+  --border-radius-sm: 8px;
+  --border-radius-md: 15px;
+  --border-radius-lg: 25px;
+
+  /* Shadows */
+  --shadow-sm: 0 3px 15px rgba(0,0,0,0.08);
+  --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+/* -------------------
+   3. General & Base Styles (Mobile-First)
+------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  line-height: var(--line-height-base);
+  color: var(--gray-800);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+/* -------------------
+   4. Navigation Bar
+------------------- */
+.navbar {
+  background: var(--primary-blue);
+  color: var(--white);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin: var(--spacing-md) auto;
+  display: flex;
+  flex-direction: column; /* Mobile default */
+  align-items: center;
+  gap: var(--spacing-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.navbar a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  transition: background-color 0.2s ease-in-out;
+  width: 100%; /* Full width on mobile */
+  text-align: center;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  background-color: var(--light-blue);
+  outline: none;
+}
+
+/* -------------------
+   5. Typography
+------------------- */
+h1, h2, h3 {
+  line-height: 1.2;
+}
+
+h1 {
+  color: var(--primary-blue);
+  font-size: var(--fs-h1);
+  margin-bottom: var(--spacing-md);
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--primary-blue);
+  font-size: var(--fs-h2);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 3px solid var(--light-blue);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+h3 {
+  color: var(--light-blue);
+  font-size: var(--fs-h3);
+  margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+}
+
+.emoji {
+  font-size: 1.2em;
+  margin-right: 5px;
+}
+
+/* -------------------
+   6. Cards & Layout
+------------------- */
+.card {
+  background: var(--white);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.officer-grid,
+.members-section,
+.tracks-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile default */
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+/* -------------------
+   7. Buttons
+------------------- */
+.team-button {
+  display: inline-block;
+  background-color: var(--gold);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: var(--border-radius-lg);
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: var(--spacing-md);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  border: none;
+}
+
+.team-button:hover,
+.team-button:focus {
+  background-color: var(--gold-darker);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  outline: none;
+}
+
+.button-container-center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* -------------------
+   8. Tables
+------------------- */
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacing-lg);
+  background: var(--white);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.events-table th,
+.events-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.events-table th {
+  background: var(--primary-blue);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.events-table tr:nth-child(even) {
+  background: var(--gray-100);
+}
+
+.events-table tr:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* -------------------
+   9. Component-Specific Styles
+------------------- */
+.page-header-container {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--light-blue);
+}
+
+.advisor-text {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.info-box {
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  border-left: 4px solid var(--light-blue);
+  background: var(--gray-100);
+}
+
+.box-header {
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.info-box--warning {
+  background: #fef2f2;
+  border-left-color: var(--red);
+}
+
+.info-box--tools {
+  background: #fffbeb;
+  border-left-color: var(--gold);
+}
+
+.callout-card {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.callout-card h2 {
+    color: var(--white);
+    border-bottom-color: var(--light-blue);
+}
+
+details.project-template {
+  margin: 1em 0 1.5em 0;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8efff 100%);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+details.project-template:hover {
+  border-color: var(--light-blue);
+}
+
+details.project-template summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--primary-blue);
+  font-size: 1.1rem;
+}
+
+details.project-template[open] summary {
+  margin-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--light-blue);
+  padding-bottom: 0.6em;
+}
+
+/* Timeline Component Styles */
+.timeline {
+    list-style: none;
+    padding-left: 10px;
+    margin-top: var(--spacing-lg);
+}
+.timeline li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: var(--spacing-md);
+    border-left: 2px solid var(--gray-200);
+    padding-bottom: var(--spacing-md);
+}
+.timeline li:last-child {
+    border-left: 2px solid transparent;
+    padding-bottom: 0;
+}
+.timeline li::before {
+    content: '●';
+    font-size: 1.5rem;
+    position: absolute;
+    left: -11px;
+    top: -5px;
+    color: var(--light-blue);
+    background-color: white;
+    line-height: 1;
+}
+.timeline-title {
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* Engagement Track Card Styles */
+.track-card {
+    background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+.track-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+.track-card ul {
+    list-style: none;
+    text-align: left;
+    padding-left: 0;
+}
+.track-card li {
+    margin: 8px 0;
+    padding-left: 15px;
+    position: relative;
+}
+.track-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: bold;
+}
+
+
+/* -------------------
+   10. Responsive Design (Mobile-First)
+------------------- */
+
+/* Tablet and larger */
+@media (min-width: 768px) {
+  :root {
+    --fs-h1: 2.5rem;
+  }
+
+  .navbar {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: var(--spacing-md);
+  }
+
+  .navbar a {
+    width: auto; /* Auto width on larger screens */
+  }
+
+  .officer-grid,
+  .members-section {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .tracks-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
