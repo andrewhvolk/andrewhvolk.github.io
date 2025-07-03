@@ -5,26 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LU Math Club Events</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Custom styles for semester badges */
+        .semester-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .semester-badge.both {
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+        }
+        .semester-badge.fall {
+            background-color: var(--color-accent);
+            color: var(--color-surface);
+        }
+        .semester-badge.spring {
+            background-color: var(--color-primary-light);
+            color: var(--color-surface);
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <a href="MathClubPlan.html">Math Club</a>
+        <a href="MathClubPlan.html">Math Club Home</a>
         <a href="LeadershipTeam.html">Officers</a>
         <a href="ResearchTeam.html">Research</a>
         <a href="CompetitionTeam.html">Competition</a>
         <a href="ConsultingTeam.html">Consulting</a>
+        <a href="MathHonorsSociety.html">Honors</a>
     </nav>
 
     <div class="container">
         <!-- Page Header -->
-        <header class="header card">
+        <div class="card">
             <h1><span class="emoji">📅</span> Math Club Events</h1>
-            <h2>2025–2026 Schedule</h2>
-            <p class="section-summary" style="margin-top: var(--spacing-md);">
+            <h2 style="border-bottom: none; text-align: center; margin-bottom: var(--spacing-sm);">2025–2026 Schedule</h2>
+            <p class="section-summary" style="margin-top: var(--spacing-md); text-align: center;">
                 A summary of our planned activities for the upcoming academic year. Join us for workshops, competitions, social events, and more!
             </p>
-        </header>
+        </div>
 
         <!-- Main Events Table -->
         <section class="card">

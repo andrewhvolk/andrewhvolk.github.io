@@ -1,12 +1,13 @@
 /*
   styles.css
   Updated and Refactored Stylesheet for the LU Math Club Website
-  Version: 2.4
+  Version: 2.5
   Date: July 2, 2025
 
   Changelog:
   - Replaced gray background with a light blue for better contrast and a more modern feel.
   - Adjusted border and table hover colors to complement the new palette.
+  - Made cards tighter with reduced padding for more efficient space usage
 */
 
 /* -------------------
@@ -24,7 +25,7 @@
   --color-surface: #ffffff;        /* True white - card backgrounds */
   --color-text-primary: #1f2937;   /* Near-black - main text */
   --color-text-secondary: #405168; /* Steel blue-gray - subtitles */
-  --color-border: #ffffff;         /* Cool gray - borders */
+  --color-border: #e5e7eb;         /* Light gray - borders */
 
   /* Enhanced Typography */
   --font-family-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
@@ -37,7 +38,7 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
 
-  /* Spacing & Sizing */
+  /* Spacing & Sizing - Reduced for tighter layouts */
   --spacing-xs: 0.25rem;  /* 4px */
   --spacing-sm: 0.5rem;   /* 8px */
   --spacing-md: 1rem;     /* 16px */
@@ -87,8 +88,8 @@ h1, h2, h3 {
   color: var(--color-primary);
 }
 h1 { font-size: var(--font-size-h1); }
-h2 { font-size: var(--font-size-h2); margin-bottom: var(--spacing-lg); padding-bottom: var(--spacing-sm); border-bottom: 3px solid var(--color-primary-light); }
-h3 { font-size: var(--font-size-h3); margin: var(--spacing-lg) 0 var(--spacing-md) 0; color: var(--color-primary-light); }
+h2 { font-size: var(--font-size-h2); margin-bottom: var(--spacing-md); padding-bottom: var(--spacing-xs); border-bottom: 3px solid var(--color-primary-light); }
+h3 { font-size: var(--font-size-h3); margin: var(--spacing-md) 0 var(--spacing-sm) 0; color: var(--color-primary-light); }
 
 p { margin-bottom: var(--spacing-md); }
 ul, ol { padding-left: var(--spacing-lg); }
@@ -101,18 +102,25 @@ a:hover { text-decoration: underline; color: var(--color-primary); }
    4. Component Library
 ------------------- */
 
-/* --- Cards --- */
+/* --- Cards (Tighter spacing) --- */
 .card {
   background-color: var(--color-surface);
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md); /* Reduced from spacing-lg */
+  margin-bottom: var(--spacing-md); /* Reduced from spacing-lg */
   box-shadow: var(--shadow-md);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
+}
+
+/* Special tight cards for grids */
+.officer-grid .card,
+.tracks-grid .card {
+  padding: var(--spacing-sm) var(--spacing-md); /* Even tighter for grid items */
+  margin-bottom: 0; /* Remove bottom margin in grids */
 }
 
 /* --- Buttons --- */
@@ -168,18 +176,18 @@ a:hover { text-decoration: underline; color: var(--color-primary); }
   text-decoration: none;
 }
 
-/* --- Grids --- */
+/* --- Grids (Tighter gaps) --- */
 .tracks-grid, .officer-grid, .members-section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
+  gap: var(--spacing-md); /* Reduced from spacing-lg */
+  margin-top: var(--spacing-md); /* Reduced from spacing-lg */
 }
 
 /* --- Info Box & Callout Card --- */
 .info-box {
   background: #f9fafb; /* Use a near-white for info boxes */
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md); /* Reduced from spacing-lg */
   border-radius: var(--border-radius-sm);
   border-left: 4px solid var(--color-primary-light);
 }
@@ -251,14 +259,14 @@ a:hover { text-decoration: underline; color: var(--color-primary); }
 .track-card {
   background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
   color: var(--color-surface);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md); /* Reduced from spacing-lg */
   border-radius: var(--border-radius-md);
   text-align: center;
 }
-.track-card h4 { color: var(--color-surface); margin-bottom: var(--spacing-md); }
+.track-card h4 { color: var(--color-surface); margin-bottom: var(--spacing-sm); } /* Reduced margin */
 .track-card ul { list-style: none; text-align: left; padding: 0; }
-.track-card li { margin: var(--spacing-sm) 0; }
-.member-list { background: #f9fafb; padding: var(--spacing-lg); border-radius: var(--border-radius-sm); }
+.track-card li { margin: var(--spacing-xs) 0; } /* Reduced margin */
+.member-list { background: #f9fafb; padding: var(--spacing-md); border-radius: var(--border-radius-sm); } /* Reduced padding */
 .member-email { font-size: 0.9rem; color: var(--color-text-secondary); }
 .past-role { background: var(--color-accent); color: var(--color-surface); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 5px; }
 
