@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Kinematics Tutorial - Master Physics Motion</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            font-size: 1.8em;
+        }
+        h3 {
+            color: #7f8c8d;
+            font-size: 1.4em;
+        }
+        .equation-box {
+            background-color: #ecf0f1;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            margin: 25px 0;
+            font-size: 1.3em;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .example-box {
+            background-color: #e8f5e9;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #81c784;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-left: 5px solid #f39c12;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+        .concept-box {
+            background-color: #f3e5f5;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #ba68c8;
+        }
+        .real-world-box {
+            background-color: #fce4ec;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #f06292;
+        }
+        .step-by-step {
+            background-color: #e3f2fd;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #64b5f6;
+        }
+        .step {
+            margin: 15px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .step::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+        }
+        .interactive-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+            color: white;
+        }
+        .interactive-demo h3 {
+            color: white;
+        }
+        input {
+            padding: 10px;
+            margin: 8px;
+            width: 120px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            background-color: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e8f5e9;
+        }
+        .nav-menu {
+            background-color: #34495e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .nav-menu a:hover {
+            background-color: #2c3e50;
+        }
+        .quiz-box {
+            background-color: #e1f5fe;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 1px solid #4fc3f7;
+        }
+        .video-placeholder {
+            background-color: #263238;
+            color: white;
+            padding: 60px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .formula-derivation {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+        }
+        .animation-placeholder {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 80px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Complete Kinematics Tutorial: Master Physics Motion</h1>
+        
+        <div class="nav-menu">
+            <a href="#intro">Introduction</a>
+            <a href="#fundamentals">Fundamentals</a>
+            <a href="#equations">Key Equations</a>
+            <a href="#vertical">Vertical Motion</a>
+            <a href="#freefall">Free Fall</a>
+            <a href="#practice">Practice</a>
+            <a href="#resources">Resources</a>
+        </div>
+
+        <section id="intro">
+            <h2>📚 Introduction: What is Kinematics?</h2>
+            
+            <div class="concept-box">
+                <h3>The Big Picture</h3>
+                <p><strong>Kinematics</strong> is the branch of physics that describes motion without considering what causes it. Think of it as the "geometry of motion" - we're interested in <em>how</em> things move, not <em>why</em> they move.</p>
+                
+                <p>In this tutorial, you'll master the fundamental concepts needed to ace your kinematics assignment and understand motion in the real world. Whether it's a car accelerating on a highway, a basketball arcing through the air, or a skydiver falling toward Earth, kinematics helps us predict and understand these motions mathematically.</p>
+            </div>
+
+            <div class="real-world-box">
+                <h3>🌍 Why Kinematics Matters</h3>
+                <ul>
+                    <li><strong>Engineering:</strong> Designing roller coasters, calculating safe stopping distances for vehicles</li>
+                    <li><strong>Sports:</strong> Optimizing projectile paths in basketball, golf, and baseball</li>
+                    <li><strong>Space Exploration:</strong> Planning rocket trajectories and satellite orbits</li>
+                    <li><strong>Safety:</strong> Understanding car crashes, designing airbags, and setting speed limits</li>
+                    <li><strong>Animation & Gaming:</strong> Creating realistic motion in movies and video games</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="fundamentals">
+            <h2>1. The Fundamental Concepts of Motion</h2>
+            
+            <h3>Understanding Motion Variables</h3>
+            <p>Before we dive into equations, let's build a solid understanding of what each variable represents and how they relate to each other:</p>
+            
+            <table>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Quantity</th>
+                    <th>Definition</th>
+                    <th>Units (SI)</th>
+                    <th>Real-World Example</th>
+                </tr>
+                <tr>
+                    <td><strong>d</strong> or <strong>x</strong></td>
+                    <td>Displacement</td>
+                    <td>Change in position</td>
+                    <td>meters (m)</td>
+                    <td>Distance from home to school</td>
+                </tr>
+                <tr>
+                    <td><strong>v₀</strong></td>
+                    <td>Initial velocity</td>
+                    <td>Speed at start</td>
+                    <td>m/s</td>
+                    <td>Car's speed when light turns yellow</td>
+                </tr>
+                <tr>
+                    <td><strong>v</strong></td>
+                    <td>Final velocity</td>
+                    <td>Speed at end</td>
+                    <td>m/s</td>
+                    <td>Car's speed when it stops</td>
+                </tr>
+                <tr>
+                    <td><strong>a</strong></td>
+                    <td>Acceleration</td>
+                    <td>Rate of velocity change</td>
+                    <td>m/s²</td>
+                    <td>How quickly a car speeds up</td>
+                </tr>
+                <tr>
+                    <td><strong>t</strong></td>
+                    <td>Time</td>
+                    <td>Duration of motion</td>
+                    <td>seconds (s)</td>
+                    <td>How long the trip takes</td>
+                </tr>
+                <tr>
+                    <td><strong>g</strong></td>
+                    <td>Gravity</td>
+                    <td>Earth's acceleration</td>
+                    <td>9.8 m/s²</td>
+                    <td>Why things fall down</td>
+                </tr>
+            </table>
+
+            <div class="concept-box">
+                <h3>🔍 Deeper Understanding: Velocity vs. Speed</h3>
+                <p><strong>Speed</strong> is a scalar quantity (just a number) - it tells you how fast something is moving.</p>
+                <p><strong>Velocity</strong> is a vector quantity - it tells you both speed AND direction.</p>
+                <p>Example: A car going 60 mph has a speed of 60 mph. A car going 60 mph north has a velocity of 60 mph north.</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Common Misconception Alert!</h3>
+                <p>Many students confuse <strong>distance</strong> with <strong>displacement</strong>:</p>
+                <ul>
+                    <li><strong>Distance:</strong> Total path traveled (always positive)</li>
+                    <li><strong>Displacement:</strong> Straight-line change in position (can be negative)</li>
+                </ul>
+                <p>If you walk 3 blocks east then 3 blocks west, your distance is 6 blocks but your displacement is 0!</p>
+            </div>
+        </section>
+
+        <section id="equations">
+            <h2>2. The Key Kinematic Equations</h2>
+            
+            <h3>The Big Four Equations</h3>
+            <p>There are four fundamental kinematic equations. Each is useful in different situations:</p>
+
+            <div class="equation-box">
+                <h4>Equation 1: Position as a function of time</h4>
+                <strong>d = v₀t + ½at²</strong>
+                <p style="font-size: 0.9em; margin-top: 10px;">Use when you know: initial velocity, acceleration, and time</p>
+            </div>
+
+            <div class="formula-derivation">
+                <h4>Where does this equation come from?</h4>
+                <p>This equation combines two ideas:</p>
+                <ol>
+                    <li>Distance from constant velocity: d = v₀t</li>
+                    <li>Additional distance from acceleration: ½at²</li>
+                </ol>
+                <p>The ½ appears because acceleration gradually increases velocity over time, creating a triangular area under the velocity-time graph.</p>
+            </div>
+
+            <div class="equation-box">
+                <h4>Equation 2: Final velocity</h4>
+                <strong>v = v₀ + at</strong>
+                <p style="font-size: 0.9em; margin-top: 10px;">Use when you need final velocity</p>
+            </div>
+
+            <div class="equation-box">
+                <h4>Equation 3: Velocity-displacement relationship</h4>
+                <strong>v² = v₀² + 2ad</strong>
+                <p style="font-size: 0.9em; margin-top: 10px;">Use when time is unknown</p>
+            </div>
+
+            <div class="equation-box">
+                <h4>Equation 4: Average velocity</h4>
+                <strong>d = ½(v₀ + v)t</strong>
+                <p style="font-size: 0.9em; margin-top: 10px;">Use for constant acceleration problems</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🚗 Example 1: Car Accelerating from Stop Sign</h4>
+                <p>A car starts from rest (v₀ = 0 m/s) at a stop sign and accelerates uniformly at 2 m/s² for 5 seconds. Let's find how far it travels.</p>
+                
+                <div class="step-by-step">
+                    <div class="step"><strong>Given:</strong> v₀ = 0 m/s, a = 2 m/s², t = 5 s</div>
+                    <div class="step"><strong>Find:</strong> d = ?</div>
+                    <div class="step"><strong>Equation:</strong> d = v₀t + ½at²</div>
+                    <div class="step"><strong>Substitute:</strong> d = (0)(5) + ½(2)(5)²</div>
+                    <div class="step"><strong>Calculate:</strong> d = 0 + ½(2)(25) = 25 meters</div>
+                    <div class="step"><strong>Answer:</strong> The car travels 25 meters in 5 seconds</div>
+                </div>
+                
+                <p style="margin-top: 20px;"><strong>Real-world context:</strong> This is about the length of 5-6 car lengths, showing why maintaining safe following distance is crucial!</p>
+            </div>
+        </section>
+
+        <section id="vertical">
+            <h2>3. Vertical Motion - The Special Case</h2>
+            
+            <div class="concept-box">
+                <h3>🎯 Understanding Vertical Motion</h3>
+                <p>When objects move vertically near Earth's surface, they experience a constant downward acceleration due to gravity: <strong>g = 9.8 m/s²</strong></p>
+                
+                <p>This value is the same for all objects, regardless of their mass! A feather and a hammer fall at the same rate in a vacuum (as demonstrated on the Moon by Apollo 15 astronauts).</p>
+            </div>
+
+            <h3>Position Equation for Vertical Motion</h3>
+            <p>When a ball is thrown straight up with initial velocity v₀:</p>
+            
+            <div class="equation-box">
+                <strong>Y(t) = v₀t - ½gt²</strong>
+                <p style="font-size: 0.9em; margin-top: 10px;">Note: We use minus because gravity acts downward</p>
+            </div>
+
+            <div class="formula-derivation">
+                <h4>Sign Convention Matters!</h4>
+                <p>In vertical motion problems:</p>
+                <ul>
+                    <li>✅ <strong>Positive direction:</strong> Upward</li>
+                    <li>❌ <strong>Negative direction:</strong> Downward</li>
+                    <li>Therefore, g = -9.8 m/s² (negative because it points down)</li>
+                </ul>
+                <p>This is why we write Y(t) = v₀t - ½gt² instead of Y(t) = v₀t + ½at²</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🏀 Example 2: Basketball Free Throw</h4>
+                <p>A basketball is thrown upward with an initial velocity of 8 m/s. Let's analyze its motion:</p>
+                
+                <h5>Part A: Position after 0.5 seconds</h5>
+                <div class="step-by-step">
+                    <div class="step">Y(t) = v₀t - ½gt²</div>
+                    <div class="step">Y(0.5) = 8(0.5) - ½(9.8)(0.5)²</div>
+                    <div class="step">Y(0.5) = 4 - ½(9.8)(0.25)</div>
+                    <div class="step">Y(0.5) = 4 - 1.225 = 2.775 meters</div>
+                </div>
+                
+                <h5>Part B: Maximum height</h5>
+                <p>At maximum height, velocity = 0. Using v = v₀ - gt:</p>
+                <div class="step-by-step">
+                    <div class="step">0 = 8 - 9.8t</div>
+                    <div class="step">t = 8/9.8 = 0.816 seconds</div>
+                    <div class="step">Y(max) = 8(0.816) - ½(9.8)(0.816)²</div>
+                    <div class="step">Y(max) = 3.27 meters</div>
+                </div>
+            </div>
+
+            <div class="real-world-box">
+                <h3>🌍 Real-World Applications of Vertical Motion</h3>
+                <ul>
+                    <li><strong>Fountain Design:</strong> Engineers use these equations to create water fountains with specific heights</li>
+                    <li><strong>Fireworks:</strong> Pyrotechnicians calculate when shells will explode at the perfect height</li>
+                    <li><strong>Sports:</strong> Athletes optimize their jumps and throws using these principles</li>
+                    <li><strong>Safety Testing:</strong> Drop tests for phones and equipment use free fall equations</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="freefall">
+            <h2>4. Free Fall - When Objects Drop</h2>
+            
+            <div class="concept-box">
+                <h3>🪂 What is Free Fall?</h3>
+                <p>Free fall occurs when an object moves under the influence of gravity alone. In true free fall:</p>
+                <ul>
+                    <li>The only force is gravity (no air resistance)</li>
+                    <li>Initial velocity in the vertical direction is zero (for dropped objects)</li>
+                    <li>Acceleration is constant at g = 9.8 m/s²</li>
+                </ul>
+            </div>
+
+            <h3>Key Free Fall Equations</h3>
+            
+            <div class="equation-box">
+                <h4>For an object dropped from height h:</h4>
+                <strong>Time to fall: t = √(2h/g)</strong><br>
+                <strong>Final velocity: v = gt</strong><br>
+                <strong>Alternative: v = √(2gh)</strong>
+            </div>
+
+            <div class="step-by-step">
+                <h4>📝 Solving Your Assignment's Building Problem</h4>
+                <p>Your assignment asks about a ball falling from a building of height = 6 × Day (in meters)</p>
+                <div class="step"><strong>Step 1:</strong> Identify your due date's day number</div>
+                <div class="step"><strong>Step 2:</strong> Calculate height: h = 6 × Day</div>
+                <div class="step"><strong>Step 3:</strong> Find time using t = √(2h/g)</div>
+                <div class="step"><strong>Step 4:</strong> Find final velocity using v = gt</div>
+                <div class="step"><strong>Step 5:</strong> Include units and show all work!</div>
+            </div>
+
+            <div class="example-box">
+                <h4>🎾 Complete Example: Tennis Ball Dropped from a Cliff</h4>
+                <p><strong>Given:</strong> A tennis ball is dropped from a 50-meter high cliff, g = 9.8 m/s²</p>
+                
+                <h5>Finding Time to Fall:</h5>
+                <div class="step-by-step">
+                    <div class="step">Start with: h = ½gt²</div>
+                    <div class="step">Rearrange: t² = 2h/g</div>
+                    <div class="step">Take square root: t = √(2h/g)</div>
+                    <div class="step">Substitute: t = √(2 × 50 / 9.8)</div>
+                    <div class="step">Calculate: t = √(100 / 9.8) = √10.20</div>
+                    <div class="step">Final: t = 3.19 seconds</div>
+                </div>
+                
+                <h5>Finding Final Velocity:</h5>
+                <div class="step-by-step">
+                    <div class="step">Use: v = gt</div>
+                    <div class="step">Substitute: v = 9.8 × 3.19</div>
+                    <div class="step">Calculate: v = 31.3 m/s</div>
+                    <div class="step">Convert for perspective: 31.3 m/s ≈ 70 mph!</div>
+                </div>
+                
+                <p style="margin-top: 20px;"><strong>Note:</strong> This example uses the same method you'll need for your building problem, just with different numbers!</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Important Reality Check</h3>
+                <p>In real life, air resistance significantly affects falling objects, especially at high speeds. Our calculations assume ideal conditions (no air resistance). Real objects would fall slightly slower due to air resistance, reaching a terminal velocity where drag force equals gravitational force.</p>
+            </div>
+
+            <div class="real-world-box">
+                <h3>🌍 Free Fall in Different Contexts</h3>
+                <table>
+                    <tr>
+                        <th>Location</th>
+                        <th>Gravity (m/s²)</th>
+                        <th>90m Fall Time</th>
+                        <th>Notes</th>
+                    </tr>
+                    <tr>
+                        <td>Earth</td>
+                        <td>9.8</td>
+                        <td>4.29 s</td>
+                        <td>Standard conditions</td>
+                    </tr>
+                    <tr>
+                        <td>Moon</td>
+                        <td>1.6</td>
+                        <td>10.6 s</td>
+                        <td>1/6 Earth's gravity</td>
+                    </tr>
+                    <tr>
+                        <td>Mars</td>
+                        <td>3.7</td>
+                        <td>6.97 s</td>
+                        <td>About 38% of Earth's</td>
+                    </tr>
+                    <tr>
+                        <td>Jupiter</td>
+                        <td>24.8</td>
+                        <td>2.69 s</td>
+                        <td>Much stronger gravity!</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="practice">
+            <h2>5. Interactive Practice Tools</h2>
+            
+            <div class="warning-box">
+                <h3>💡 Important Study Tip</h3>
+                <p><strong>Try solving problems on your own first!</strong> The real learning happens when you work through the steps yourself. Use the practice problems below to build your skills.</p>
+            </div>
+
+            <div class="concept-box">
+                <h3>🚨 Common Arithmetic Mistakes to Avoid</h3>
+                <ol>
+                    <li><strong>Order of Operations:</strong> Remember PEMDAS! 
+                        <ul>
+                            <li>❌ Wrong: 1/2 × 9.8 × 5² = 1/2 × 9.8 × 25 = 1/2 × 245 = 122.5</li>
+                            <li>✅ Right: 1/2 × 9.8 × 5² = 0.5 × 9.8 × 25 = 122.5</li>
+                        </ul>
+                    </li>
+                    <li><strong>Square vs. Square Root:</strong>
+                        <ul>
+                            <li>❌ Don't confuse: 5² = 25 (squaring)</li>
+                            <li>✅ With: √25 = 5 (square root)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Unit Conversions:</strong>
+                        <ul>
+                            <li>Always keep units throughout your calculation</li>
+                            <li>❌ Wrong: t = √(180/9.8) = 4.29 (missing units!)</li>
+                            <li>✅ Right: t = √(180 m / 9.8 m/s²) = √(18.37 s²) = 4.29 s</li>
+                        </ul>
+                    </li>
+                    <li><strong>Rounding Too Early:</strong>
+                        <ul>
+                            <li>Keep at least 3 significant figures during calculations</li>
+                            <li>Only round your final answer</li>
+                        </ul>
+                    </li>
+                    <li><strong>Calculator Errors:</strong>
+                        <ul>
+                            <li>Make sure your calculator is in the right mode (degrees vs. radians doesn't matter here, but good habit)</li>
+                            <li>Use parentheses liberally: √(2×h/g) not √2×h/g</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="step-by-step">
+                <h3>📝 How to Format Your Written Responses</h3>
+                <h4>For the equation questions:</h4>
+                <div class="step">State the equation clearly: "The kinematic equation for distance is: d = v₀t + ½at²"</div>
+                <div class="step">Define variables: "where d is distance, v₀ is initial velocity, a is acceleration, and t is time"</div>
+                
+                <h4>For calculation problems:</h4>
+                <div class="step"><strong>Given:</strong> List all known values with units</div>
+                <div class="step"><strong>Find:</strong> State what you're solving for</div>
+                <div class="step"><strong>Solution:</strong> Show each step on a new line</div>
+                <div class="step"><strong>Answer:</strong> Box or underline your final answer with units</div>
+                
+                <h4>Example format:</h4>
+                <div style="background-color: #f9f9f9; padding: 15px; margin: 10px 0; border: 1px solid #ddd;">
+                    <p><strong>Given:</strong> h = 90 m, g = 9.8 m/s², v₀ = 0 m/s (dropped)</p>
+                    <p><strong>Find:</strong> time to fall (t)</p>
+                    <p><strong>Solution:</strong></p>
+                    <p style="margin-left: 20px;">Using h = ½gt²</p>
+                    <p style="margin-left: 20px;">90 = ½(9.8)t²</p>
+                    <p style="margin-left: 20px;">90 = 4.9t²</p>
+                    <p style="margin-left: 20px;">t² = 90/4.9 = 18.37</p>
+                    <p style="margin-left: 20px;">t = √18.37 = 4.29 s</p>
+                    <p><strong>Answer:</strong> <span style="border: 2px solid #333; padding: 2px 5px;">t = 4.29 seconds</span></p>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h3>📚 Additional Practice Problems</h3>
+                <p>Try these problems using the same methods. Solutions are hidden - try them first!</p>
+                
+                <h4>Problem 1: Dropped Penny</h4>
+                <p>A penny is dropped from the Empire State Building (380 m). How long does it take to hit the ground?</p>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor: pointer; color: #3498db;">Show Solution</summary>
+                    <p style="margin-top: 10px;">t = √(2h/g) = √(2×380/9.8) = √77.55 = 8.81 seconds</p>
+                </details>
+                
+                <h4>Problem 2: Thrown Baseball</h4>
+                <p>A baseball is thrown upward at 20 m/s. What is its position after 1.5 seconds?</p>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor: pointer; color: #3498db;">Show Solution</summary>
+                    <p style="margin-top: 10px;">Y(1.5) = 20(1.5) - ½(9.8)(1.5)² = 30 - 11.025 = 18.975 m</p>
+                </details>
+                
+                <h4>Problem 3: Car Braking</h4>
+                <p>A car traveling at 25 m/s applies brakes with acceleration a = -5 m/s². How far does it travel in 3 seconds?</p>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor: pointer; color: #3498db;">Show Solution</summary>
+                    <p style="margin-top: 10px;">d = v₀t + ½at² = 25(3) + ½(-5)(3)² = 75 - 22.5 = 52.5 m</p>
+                </details>
+                
+                <h4>Problem 4: Your Assignment Problem Template</h4>
+                <p>An object falls from height h = 6 × [your day]. Find the time and final velocity.</p>
+                <p style="color: #e74c3c;"><strong>Remember:</strong> Use YOUR actual due date, not someone else's!</p>
+            </div>
+
+            <div class="quiz-box">
+                <h3>✅ Self-Check Questions</h3>
+                <p>Before submitting your assignment, make sure you can answer these:</p>
+                <ol>
+                    <li>What's the difference between v₀ (initial velocity) and v (final velocity)?</li>
+                    <li>Why do we use a negative sign for gravity in the vertical motion equation?</li>
+                    <li>If you drop two objects of different masses from the same height, which hits the ground first? (Ignore air resistance)</li>
+                    <li>What are the units for acceleration?</li>
+                    <li>How do you convert m/s to mph? (Hint: 1 m/s ≈ 2.24 mph)</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="resources">
+            <h2>6. Additional Learning Resources</h2>
+            
+            <div class="concept-box">
+                <h3>📚 Study Tips for Success</h3>
+                <ol>
+                    <li><strong>Draw diagrams:</strong> Always sketch the problem before solving</li>
+                    <li><strong>List knowns and unknowns:</strong> Organize your information</li>
+                    <li><strong>Choose the right equation:</strong> Pick based on what you know and need</li>
+                    <li><strong>Check units:</strong> Make sure your answer has the right units</li>
+                    <li><strong>Verify reasonableness:</strong> Does your answer make physical sense?</li>
+                </ol>
+            </div>
+
+            <div class="video-placeholder">
+                <h3>🎥 Recommended Video Topics</h3>
+                <p>Search for these topics on educational platforms:</p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>"Kinematic equations explained"</li>
+                    <li>"Free fall physics problems"</li>
+                    <li>"Vertical projectile motion"</li>
+                    <li>"1D kinematics problem solving"</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h3>📋 Assignment Submission Checklist</h3>
+                <p>Before submitting, ensure you have:</p>
+                <ul>
+                    <li>☐ Written the kinematic equation for distance: d = v₀t + ½at²</li>
+                    <li>☐ Written the vertical position equation: Y(t) = v₀t - ½gt²</li>
+                    <li>☐ Clearly stated your assignment due date (Month and Day)</li>
+                    <li>☐ Calculated the building height (6 × Day) with units</li>
+                    <li>☐ Shown all steps for calculating fall time</li>
+                    <li>☐ Shown all steps for calculating final velocity</li>
+                    <li>☐ Included proper units (m, s, m/s) throughout</li>
+                    <li>☐ Double-checked your arithmetic</li>
+                </ul>
+            </div>
+
+            <div class="formula-derivation">
+                <h3>🔬 Going Deeper: Calculus Connection</h3>
+                <p>For those interested in the mathematical foundation:</p>
+                <ul>
+                    <li>Velocity is the derivative of position: v = dx/dt</li>
+                    <li>Acceleration is the derivative of velocity: a = dv/dt</li>
+                    <li>The kinematic equations come from integrating these relationships</li>
+                </ul>
+                <p>This is why the position equation has a t² term - it's from integrating acceleration twice!</p>
+            </div>
+
+            <div class="real-world-box">
+                <h3>🚀 Career Connections</h3>
+                <p>Understanding kinematics opens doors to exciting careers:</p>
+                <ul>
+                    <li><strong>Aerospace Engineer:</strong> Design spacecraft trajectories</li>
+                    <li><strong>Biomechanics Specialist:</strong> Analyze athlete performance</li>
+                    <li><strong>Accident Reconstructionist:</strong> Determine what happened in crashes</li>
+                    <li><strong>Video Game Developer:</strong> Create realistic physics engines</li>
+                    <li><strong>Robotics Engineer:</strong> Program precise movements</li>
+                    <li><strong>Theme Park Designer:</strong> Calculate safe roller coaster speeds</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="concept-box" style="margin-top: 40px;">
+            <h2>🎯 Final Thoughts</h2>
+            <p>Kinematics is the foundation of understanding motion in our universe. From the smallest particles to the largest celestial bodies, everything follows these same fundamental principles. By mastering these concepts, you're not just completing an assignment - you're gaining tools to understand and predict the physical world around you.</p>
+            
+            <p>Remember: Physics is about understanding patterns and relationships. Once you see how position, velocity, and acceleration connect, you'll find these problems become much more intuitive. Keep practicing, stay curious, and don't hesitate to work through multiple examples!</p>
+        </div>
+
+    </div>
+
+    <script>
+        // Add smooth scrolling for navigation
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
