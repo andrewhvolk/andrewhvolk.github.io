@@ -23,25 +23,22 @@ Private, comprehensive Christian university
 
 **E. Accreditations:**
 - Southern Association of Colleges and Schools Commission on Colleges (SACSCOC)
-- [PLEASE ADD ANY SPECIFIC PROGRAM ACCREDITATIONS]
 
 **F. Contact Information:**
-- Primary Contact: [NAME]
-- Email: [EMAIL]@liberty.edu
+- Primary Contact: Mr. Andrew H. Volk Assistant Professor of Mathematics
+- Email: ahvolk@liberty.edu
 - Postal Address: Department of Mathematics, DeMoss Hall, Liberty University, 1971 University Blvd, Lynchburg, VA 24515
-- County: Campbell County (City of Lynchburg)
 - Phone: (434) 582-2093
-- Fax: [FAX NUMBER]
-- Proposed Chapter Advisor: [NAME], Email: [EMAIL]@liberty.edu, Phone: [PHONE]
-- Proposed Permanent Faculty Correspondent: [NAME], Email: [EMAIL]@liberty.edu, Phone: [PHONE]
+- Proposed Chapter Advisor: Mr. Andrew H. Volk, Email: ahvolk@liberty.edu, Phone: 434-841-5810 (cell)
+- Proposed Permanent Faculty Correspondent: Mr. Andrew H. Volk, Email: ahvolk@liberty.edu, Phone: 434-841-5810 (cell)
 
 **G. Other pertinent information about the institution:**
 Liberty University is a private Christian comprehensive university founded in 1971. Recognized as the #4 Best College Campus in America by Niche.com, Liberty combines quality academics with a world-class campus approximately 3 hours from Washington, DC. The university offers over 700 programs of study and is home to students from over 70 countries. The campus features state-of-the-art facilities including an Astronomical Observatory with prime viewing for stargazing.
 
 **H. Administrative Contacts:**
-- Department Chair (Residential): Dr. Robert Young (Mathematics and General Math & Science), Email: [EMAIL]@liberty.edu
-- Department Chair (Online): Cindi Perry (Mathematics and General Math & Science), Email: [EMAIL]@liberty.edu
-- Dean/Provost: [NAME], Email: [EMAIL]@liberty.edu
+- Department Chair (Residential): Dr. Robert Young (Mathematics and General Math & Science), Email: rbyoung@liberty.edu
+- Department Chair (Online): Cindi Perry (Mathematics and General Math & Science), Email: cperry@liberty.edu
+- Dean: [NAME], Email: [EMAIL]@liberty.edu
 
 ---
 
@@ -49,7 +46,7 @@ Liberty University is a private Christian comprehensive university founded in 19
 
 **A. List of members initiating the petition:**
 Faculty:
-- [NAME], [TITLE]
+- Mr. Andrew H. Volk, Assistant Professor of Mathematics
 - [NAME], [TITLE]
 
 Students:
@@ -79,8 +76,8 @@ Students:
 **A. Full-time faculty (arranged by rank):**
 
 ### Department Chairs:
-1. Dr. Robert Young - Residential Chair, Mathematics and General Math & Science
-   - Highest degree: Ph.D., [INSTITUTION], [YEAR]
+1. Mr. Robert Young - Residential Chair, Mathematics and General Math & Science
+   - Highest degree: M.S., North Carolina State University, [YEAR]
    - Professional Background: Former U.S. Air Force officer and pilot; instructor pilot in T-3, T-6, T-37, T-38, and C-130 aircraft
    - Previous Positions: Taught mathematics at the Air Force Academy; commanded Air Education and Training Command's Studies and Analysis Squadron; commanded AFROTC detachment at University of South Carolina
    - Professional Memberships: Mathematics Association of America

@@ -228,7 +228,7 @@ Assistant Professor
 Mathematics and Physics
 Liberty University | Training Champions for Christ Since 1971
 
-# Week 4 Final Reminder: Newton's Laws Assignment & Quiz Due Monday
+# Week 4 Reminder: Newton's Laws Assignment & Quiz Due Monday
 Good morning, Physics students!
 
 No lab report this week, but there is a Short Answer Assignment (Newton's Laws) and a Quiz.
