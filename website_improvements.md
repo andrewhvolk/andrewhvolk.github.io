@@ -5,12 +5,11 @@ Based on a review of the website files (`index.html`, `CV.html`, `projects.html`
 ## 1. Content & Structure
 
 *   **Projects Page (`projects.html`):**
-    *   This page currently contains placeholder content ("Project One", "Project Two", etc.) and non-functional links (`#`).
-    *   **Suggestion:** Replace placeholders with actual project details, descriptions, and potentially links to demos, repositories, or related publications. If there are no current projects to display, consider removing the page or adding a note indicating it's under construction.
+    *   The page now highlights real initiatives including an Undergraduate Math Journals guide, TaskAppV3, and PrayerAppV1, each linked to live resources.
+    *   **Suggestion:** Continue updating the project cards as new work is published and consider adding brief metrics or outcomes (e.g., user adoption, publication venues) to showcase impact.
 *   **Learning Resources (`learn.html`):**
-    *   The link for "ENGI 220: Engineering Economy" points to `engi220.html`, which doesn't exist in the provided file list.
-    *   **Suggestion:** Verify if `engi220.html` exists or needs to be created. If not, update the link to point to the correct resource page or remove the card if no resources are available yet.
-    *   Consider adding more context or specific resources (like links to PDFs, videos, or external sites) directly on the course pages linked from `learn.html` (e.g., `courses/math114.html`). Many course pages seem to be missing or potentially basic.
+    *   The ENGI 220 card now links to `courses/engi220.html`, providing a high-level course overview and curated external references.
+    *   **Suggestion:** Add downloadable course documents (syllabus, assignment templates) directly to the new page and continue enriching other course pages with concrete study aids.
 *   **CV Page (`CV.html`):**
     *   The page is very comprehensive but long. The sticky navigation helps, but users might still find it dense.
     *   **Suggestion:** Consider minor restructuring or visual breaks. Perhaps use accordions for lengthy sections like "Professional Experience" or "Conference Presentations" to make the initial view less overwhelming.
