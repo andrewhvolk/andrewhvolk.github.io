@@ -17,16 +17,47 @@
     --red: #f87171; --red-bg: rgba(248, 113, 113, 0.1);
     --blue: #60a5fa; --blue-bg: rgba(96, 165, 250, 0.1);
     --radius: 12px;
+    --grid-line: rgba(108,99,255,0.03);
+    --h1-from: #e2e4ef; --h1-to: #9d98ff;
+    --green-border: rgba(52,211,153,0.2); --green-step: rgba(52,211,153,0.25);
+    --red-border: rgba(248,113,113,0.2);
+    --accent-hover: rgba(108,99,255,0.3); --accent-chip: rgba(108,99,255,0.12);
+    --check-bg: rgba(52,211,153,0.04); --check-border: rgba(52,211,153,0.3);
+    --got-border: rgba(52,211,153,0.4); --miss-border: rgba(248,113,113,0.4);
+  }
+  body.light {
+    --bg: #f4f5f7; --surface: #ffffff; --surface2: #eef0f4; --border: #d5d8e0;
+    --text: #1a1d2b; --text-muted: #5c6070;
+    --accent: #5046e5; --accent-glow: rgba(80, 70, 229, 0.18);
+    --green: #0d9668; --green-bg: rgba(13, 150, 104, 0.08);
+    --amber: #b8860b; --amber-bg: rgba(184, 134, 11, 0.08);
+    --red: #dc2626; --red-bg: rgba(220, 38, 38, 0.07);
+    --blue: #2563eb; --blue-bg: rgba(37, 99, 235, 0.08);
+    --grid-line: rgba(80,70,229,0.04);
+    --h1-from: #1a1d2b; --h1-to: #5046e5;
+    --green-border: rgba(13,150,104,0.2); --green-step: rgba(13,150,104,0.2);
+    --red-border: rgba(220,38,38,0.18);
+    --accent-hover: rgba(80,70,229,0.25); --accent-chip: rgba(80,70,229,0.1);
+    --check-bg: rgba(13,150,104,0.05); --check-border: rgba(13,150,104,0.3);
+    --got-border: rgba(13,150,104,0.4); --miss-border: rgba(220,38,38,0.35);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; min-height: 100vh; }
-  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; min-height: 100vh; transition: background 0.3s, color 0.3s; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
+
+  /* Theme toggle */
+  .theme-toggle { position: absolute; top: 1rem; right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 50px; padding: 0.4rem; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; transition: all 0.3s; z-index: 5; }
+  .theme-toggle:hover { border-color: var(--accent); }
+  .theme-toggle .toggle-track { width: 40px; height: 22px; border-radius: 11px; background: var(--surface2); position: relative; transition: background 0.3s; }
+  .theme-toggle .toggle-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); position: absolute; top: 2px; left: 2px; transition: transform 0.3s; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+  body.light .theme-toggle .toggle-thumb { transform: translateX(18px); }
+  .theme-toggle .toggle-icon { font-size: 0.85rem; line-height: 1; }
   .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; position: relative; z-index: 1; }
 
   header { text-align: center; padding: 3rem 0 2.5rem; position: relative; }
   header::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--accent); border-radius: 2px; }
   .course-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; letter-spacing: -0.5px; margin-bottom: 0.75rem; background: linear-gradient(135deg, #e2e4ef, #9d98ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; letter-spacing: -0.5px; margin-bottom: 0.75rem; background: linear-gradient(135deg, var(--h1-from), var(--h1-to)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .subtitle { color: var(--text-muted); font-size: 0.95rem; max-width: 460px; margin: 0 auto; }
 
   .info-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
@@ -55,9 +86,9 @@
 
   /* Topic Cards */
   .topic-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; transition: border-color 0.3s; }
-  .topic-card:hover { border-color: rgba(108,99,255,0.3); }
+  .topic-card:hover { border-color: var(--accent-hover); }
   .topic-header { padding: 1.1rem 1.25rem; cursor: pointer; display: flex; align-items: center; gap: 1rem; user-select: none; }
-  .topic-number { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); background: rgba(108,99,255,0.12); padding: 0.3rem 0.55rem; border-radius: 6px; flex-shrink: 0; }
+  .topic-number { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); background: var(--accent-chip); padding: 0.3rem 0.55rem; border-radius: 6px; flex-shrink: 0; }
   .topic-title { font-weight: 600; font-size: 1rem; flex: 1; }
   .topic-chevron { color: var(--text-muted); transition: transform 0.3s; font-size: 0.8rem; }
   .topic-card.open .topic-chevron { transform: rotate(180deg); }
@@ -90,15 +121,15 @@
   .practice-btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .solution-toggle, .practice-action-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
   .solution-toggle:hover, .practice-action-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .practice-action-btn.got-it { border-color: rgba(52,211,153,0.4); color: var(--green); }
+  .practice-action-btn.got-it { border-color: var(--got-border); color: var(--green); }
   .practice-action-btn.got-it:hover { background: var(--green-bg); border-color: var(--green); }
-  .practice-action-btn.missed { border-color: rgba(248,113,113,0.4); color: var(--red); }
+  .practice-action-btn.missed { border-color: var(--miss-border); color: var(--red); }
   .practice-action-btn.missed:hover { background: var(--red-bg); border-color: var(--red); }
 
   .solution { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
   .solution.show { max-height: 2000px; }
-  .solution-inner { margin-top: 1rem; padding: 1rem; background: var(--green-bg); border: 1px solid rgba(52,211,153,0.2); border-radius: 8px; font-size: 0.92rem; color: var(--green); }
-  .solution-inner .step { margin-bottom: 0.5rem; padding-left: 0.75rem; border-left: 2px solid rgba(52,211,153,0.25); }
+  .solution-inner { margin-top: 1rem; padding: 1rem; background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 8px; font-size: 0.92rem; color: var(--green); }
+  .solution-inner .step { margin-bottom: 0.5rem; padding-left: 0.75rem; border-left: 2px solid var(--green-step); }
   .solution-inner .step:last-child { margin-bottom: 0; }
 
   .practice-complete { text-align: center; padding: 3rem 1rem; }
@@ -131,8 +162,8 @@
   .quiz-option.wrong .letter { background: var(--red); color: #fff; }
   .quiz-option.disabled { pointer-events: none; }
   .quiz-explanation { margin-top: 1rem; padding: 1rem; border-radius: 8px; font-size: 0.9rem; animation: fadeUp 0.3s ease; }
-  .quiz-explanation.correct-exp { background: var(--green-bg); border: 1px solid rgba(52,211,153,0.2); color: var(--green); }
-  .quiz-explanation.wrong-exp { background: var(--red-bg); border: 1px solid rgba(248,113,113,0.2); color: var(--red); }
+  .quiz-explanation.correct-exp { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+  .quiz-explanation.wrong-exp { background: var(--red-bg); border: 1px solid var(--red-border); color: var(--red); }
   .quiz-next-btn { margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .quiz-next-btn:hover { box-shadow: 0 4px 16px var(--accent-glow); }
   .quiz-results { text-align: center; padding: 2.5rem 1rem; }
@@ -150,14 +181,46 @@
 
   /* Checklist */
   .checklist-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s; user-select: none; }
-  .checklist-item:hover { border-color: rgba(108,99,255,0.3); }
-  .checklist-item.checked { border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.04); }
+  .checklist-item:hover { border-color: var(--accent-hover); }
+  .checklist-item.checked { border-color: var(--check-border); background: var(--check-bg); }
   .check-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 0.75rem; }
   .checklist-item.checked .check-box { background: var(--green); border-color: var(--green); color: #fff; }
   .check-label { font-size: 0.93rem; }
   .checklist-item.checked .check-label { text-decoration: line-through; color: var(--text-muted); }
   .progress-summary { text-align: center; padding: 1rem; color: var(--text-muted); font-size: 0.9rem; }
   .progress-summary strong { color: var(--green); }
+
+  /* Progress History */
+  .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+  .progress-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-weight: 400; }
+  .reset-btn { padding: 0.45rem 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: 8px; color: var(--red); font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .reset-btn:hover { background: var(--red); color: #fff; }
+  .reset-confirm { padding: 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: var(--radius); margin-bottom: 1rem; text-align: center; animation: fadeUp 0.2s ease; }
+  .reset-confirm p { font-size: 0.9rem; color: var(--red); margin-bottom: 0.75rem; }
+  .reset-confirm button { padding: 0.4rem 1.25rem; border: none; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; margin: 0 0.25rem; }
+  .reset-confirm .confirm-yes { background: var(--red); color: #fff; }
+  .reset-confirm .confirm-no { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+
+  .history-section { margin-bottom: 1.5rem; }
+  .history-section h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .history-empty { text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.9rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+
+  .history-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .history-table th { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 0.7rem 1rem; background: var(--surface2); border-bottom: 1px solid var(--border); }
+  .history-table td { font-size: 0.88rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); }
+  .history-table tr:last-child td { border-bottom: none; }
+  .history-table .best-row td { background: var(--green-bg); }
+
+  .history-badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .badge-green { background: var(--green-bg); color: var(--green); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber); }
+  .badge-red { background: var(--red-bg); color: var(--red); }
+  .badge-best { background: var(--green); color: #fff; font-size: 0.65rem; margin-left: 0.35rem; vertical-align: middle; padding: 0.1rem 0.4rem; }
+
+  .stats-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .stats-overview .overview-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
+  .stats-overview .overview-num { font-family: 'DM Serif Display', serif; font-size: 1.8rem; line-height: 1; margin-bottom: 0.2rem; }
+  .stats-overview .overview-lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
 
   .katex { font-size: 1.05em; }
   .formula-box .katex { font-size: 1.1em; }
@@ -181,8 +244,8 @@
     body { font-size: 11pt; line-height: 1.4; }
     body::before { display: none; }
     .container { max-width: 100%; padding: 0; }
-    header, .info-bar, .tab-nav-wrapper, .print-btn,
-    #tab-topics, #tab-practice, #tab-quiz, #tab-checklist { display: none !important; }
+    header, .info-bar, .tab-nav-wrapper, .print-btn, .theme-toggle,
+    #tab-topics, #tab-practice, #tab-quiz, #tab-checklist, #tab-progress { display: none !important; }
     #tab-formulas { display: block !important; }
     .formula-section { break-inside: avoid; border: 1px solid #ccc; margin-bottom: 0.6rem; padding: 0.6rem; }
     .formula-section h3 { font-size: 11pt; margin-bottom: 0.4rem; }
@@ -198,6 +261,11 @@
 <body>
 <div class="container">
   <header>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+      <span class="toggle-icon">🌙</span>
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span class="toggle-icon">☀️</span>
+    </button>
     <div class="course-label">Spring 2026</div>
     <h1>Math 130 — Test 1</h1>
     <p class="subtitle">Interactive study guide covering all tested topics. Review concepts, practice problems, and quiz yourself.</p>
@@ -217,6 +285,7 @@
       <button class="tab-btn" data-tab="practice">Practice</button>
       <button class="tab-btn" data-tab="quiz">Self-Quiz</button>
       <button class="tab-btn" data-tab="checklist">Checklist</button>
+      <button class="tab-btn" data-tab="progress">Progress</button>
     </nav>
     <div class="tab-fade-right" id="fade-right"></div>
   </div>
@@ -293,6 +362,11 @@
     <div class="progress-summary" id="checklist-progress">0 of 12 complete</div>
     <div id="checklist-items"></div>
   </div>
+
+  <!-- PROGRESS -->
+  <div id="tab-progress" class="tab-content">
+    <div id="progress-container"></div>
+  </div>
 </div>
 
 <script>
@@ -305,7 +379,7 @@ const tabNav=document.getElementById('tabNav'),fadeL=document.getElementById('fa
 function updateFades(){const sl=tabNav.scrollLeft,mx=tabNav.scrollWidth-tabNav.clientWidth;fadeL.classList.toggle('visible',sl>5);fadeR.classList.toggle('visible',sl<mx-5)}
 tabNav.addEventListener('scroll',updateFades);window.addEventListener('resize',updateFades);setTimeout(updateFades,100);
 
-document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{const n=btn.dataset.tab;document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');btn.classList.add('active');btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});if(n==='quiz'&&!quizStarted)initQuizView();if(n==='practice'&&!practiceInit)initPracticeView();setTimeout(renderMath,50)})});
+document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{const n=btn.dataset.tab;document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');btn.classList.add('active');btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});if(n==='quiz'&&!quizStarted)initQuizView();if(n==='practice'&&!practiceInit)initPracticeView();if(n==='progress')renderProgress();setTimeout(renderMath,50)})});
 function toggleTopic(c){c.classList.toggle('open');setTimeout(renderMath,100)}
 
 // ═══ PRACTICE SYSTEM ═══
@@ -353,7 +427,9 @@ function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.fl
 
 function initPracticeView(){
   practiceInit=true;
-  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:'DM Serif Display';font-size:1.8rem;margin-bottom:0.5rem">Practice Mode</h2><p>${allProblems.length} problems in random order. Work each on paper, reveal the solution, then mark it. Missed problems recycle until you get them all right.</p><button class="practice-start-btn" onclick="startPractice()">Start Practice</button></div>`;
+  const hist=loadHist().practice;
+  const bestLine=hist.length?`<div style="margin-bottom:1rem"><span class="history-badge badge-green">Best: ${Math.min(...hist.map(h=>h.retries))} retries</span> <span style="color:var(--text-muted);font-size:0.82rem">across ${hist.length} session${hist.length>1?'s':''}</span></div>`:'';
+  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:'DM Serif Display';font-size:1.8rem;margin-bottom:0.5rem">Practice Mode</h2><p>${allProblems.length} problems in random order. Work each on paper, reveal the solution, then mark it. Missed problems recycle until you get them all right.</p>${bestLine}<button class="practice-start-btn" onclick="startPractice()">Start Practice</button></div>`;
 }
 
 function startPractice(){
@@ -374,6 +450,8 @@ function pGot(){practiceCorrect++;practiceIdx++;practiceIdx>=practiceQueue.lengt
 function pMiss(){const pi=practiceQueue[practiceIdx];allProblems[pi]._missed=true;practiceQueue.push(pi);practiceMissed++;practiceIdx++;practiceIdx>=practiceQueue.length?showPC():showPP()}
 
 function showPC(){
+  // Save session
+  saveSession('practice',{correct:practiceCorrect,retries:practiceMissed,total:allProblems.length});
   document.getElementById('practice-container').innerHTML=`<div class="practice-complete"><div class="big-check">🎉</div><h2>All Problems Cleared!</h2><div class="practice-stats-final"><div class="final-stat"><span class="num stat-green">${practiceCorrect}</span><span class="lbl">Correct</span></div><div class="final-stat"><span class="num stat-red">${practiceMissed}</span><span class="lbl">Retries</span></div><div class="final-stat"><span class="num stat-blue">${allProblems.length}</span><span class="lbl">Problems</span></div></div><p>${practiceMissed===0?'Perfect run — every problem on the first try!':'You cleared them all. Review the retried topics before test day.'}</p><button class="practice-start-btn" onclick="startPractice()">Practice Again</button></div>`;
 }
 
@@ -394,7 +472,11 @@ const quizQ=[
 ];
 
 let quizStarted=false,quizIdx=0,quizScore=0,quizAns=false;
-function initQuizView(){document.getElementById('quiz-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:'DM Serif Display';font-size:1.8rem;margin-bottom:0.5rem">Test Your Knowledge</h2><p>12 questions covering all topics. No time limit.</p><button class="quiz-start-btn" onclick="startQuiz()">Begin Quiz</button></div>`}
+function initQuizView(){
+  const hist=loadHist().quiz;
+  const bestLine=hist.length?`<div style="margin-bottom:1rem"><span class="history-badge badge-green">Best: ${Math.max(...hist.map(h=>h.score))}/${quizQ.length} (${Math.max(...hist.map(h=>h.pct))}%)</span> <span style="color:var(--text-muted);font-size:0.82rem">across ${hist.length} attempt${hist.length>1?'s':''}</span></div>`:'';
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:'DM Serif Display';font-size:1.8rem;margin-bottom:0.5rem">Test Your Knowledge</h2><p>12 questions covering all topics. No time limit.</p>${bestLine}<button class="quiz-start-btn" onclick="startQuiz()">Begin Quiz</button></div>`;
+}
 
 function startQuiz(){quizStarted=true;quizIdx=0;quizScore=0;for(let i=quizQ.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[quizQ[i],quizQ[j]]=[quizQ[j],quizQ[i]]}showQ()}
 
@@ -407,7 +489,12 @@ function showQ(){
 
 function selAns(i){if(quizAns)return;quizAns=true;const q=quizQ[quizIdx],ok=i===q.ans;if(ok)quizScore++;document.querySelectorAll('.quiz-option').forEach(o=>o.classList.add('disabled'));document.getElementById('opt-'+i).classList.add(ok?'correct':'wrong');if(!ok)document.getElementById('opt-'+q.ans).classList.add('correct');document.getElementById('quiz-feedback').innerHTML=`<div class="quiz-explanation ${ok?'correct-exp':'wrong-exp'}">${ok?'✓ Correct!':'✗ Not quite.'} ${q.exp}</div><button class="quiz-next-btn" onclick="${quizIdx<quizQ.length-1?'nextQ()':'showRes()'}"> ${quizIdx<quizQ.length-1?'Next →':'Results'}</button>`;setTimeout(renderMath,50)}
 function nextQ(){quizIdx++;showQ()}
-function showRes(){const p=Math.round(quizScore/quizQ.length*100);document.getElementById('quiz-container').innerHTML=`<div class="quiz-results"><div class="quiz-score">${quizScore}/${quizQ.length}</div><p>${p}% — ${p>=90?"Excellent!":p>=70?"Good! Review missed topics.":"Keep studying."}</p><button class="quiz-start-btn" onclick="startQuiz()">Retake</button></div>`}
+function showRes(){
+  const p=Math.round(quizScore/quizQ.length*100);
+  saveSession('quiz',{score:quizScore,total:quizQ.length,pct:p});
+  const best=Math.max(...loadHist().quiz.map(h=>h.pct));
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-results"><div class="quiz-score">${quizScore}/${quizQ.length}</div><p>${p}% — ${p>=90?"Excellent!":p>=70?"Good! Review missed topics.":"Keep studying."}</p><div style="margin-bottom:1.25rem"><span class="history-badge badge-green">Personal best: ${best}%</span></div><button class="quiz-start-btn" onclick="startQuiz()">Retake</button></div>`;
+}
 
 // ═══ CHECKLIST ═══
 const clTopics=['Sets — set-builder to interval notation','Sets — union & intersection of finite sets','Sets — union & intersection of intervals','Absolute value simplification','Exponent rules — positive exponents','Factoring — GCF, trinomials, grouping','Factoring — difference of squares & cubes','Rational expressions — all operations','Solve linear equations (with fractions)','Solve quadratic equations','Midpoint, distance, lines, circles','Vertex formula — max/min of quadratic'];
@@ -416,6 +503,123 @@ function storeOk(){try{localStorage.setItem('__t','t');localStorage.removeItem('
 function initCL(){if(storeOk())ckState=JSON.parse(localStorage.getItem('m130cl')||'{}');document.getElementById('checklist-items').innerHTML=clTopics.map((t,i)=>`<div class="checklist-item ${ckState[i]?'checked':''}" onclick="togCk(this,${i})"><div class="check-box">${ckState[i]?'✓':''}</div><span class="check-label">${t}</span></div>`).join('');updProg()}
 function togCk(el,i){el.classList.toggle('checked');const c=el.classList.contains('checked');el.querySelector('.check-box').textContent=c?'✓':'';ckState[i]=c;if(storeOk())localStorage.setItem('m130cl',JSON.stringify(ckState));updProg()}
 function updProg(){document.getElementById('checklist-progress').innerHTML=`<strong>${document.querySelectorAll('.checklist-item.checked').length}</strong> of ${clTopics.length} complete`}
+
+// ═══ PROGRESS PERSISTENCE ═══
+function loadHist(){
+  if(!storeOk()) return {quiz:[],practice:[]};
+  try { return JSON.parse(localStorage.getItem('m130hist')||'{"quiz":[],"practice":[]}'); }
+  catch(e){ return {quiz:[],practice:[]}; }
+}
+
+function saveSession(type, data){
+  if(!storeOk()) return;
+  const hist=loadHist();
+  data.date=new Date().toISOString();
+  hist[type].push(data);
+  localStorage.setItem('m130hist',JSON.stringify(hist));
+}
+
+function fmtDate(iso){
+  const d=new Date(iso);
+  const mon=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const hr=d.getHours(),min=String(d.getMinutes()).padStart(2,'0');
+  const ampm=hr>=12?'PM':'AM';
+  return `${mon[d.getMonth()]} ${d.getDate()}, ${hr%12||12}:${min} ${ampm}`;
+}
+
+function pctBadge(p){ return p>=90?'badge-green':p>=70?'badge-amber':'badge-red'; }
+
+function renderProgress(){
+  const c=document.getElementById('progress-container');
+  const hist=loadHist();
+  const qh=hist.quiz, ph=hist.practice;
+  const totalSessions=qh.length+ph.length;
+
+  // Overview stats
+  const bestQuiz=qh.length?Math.max(...qh.map(h=>h.pct)):'-';
+  const avgQuiz=qh.length?Math.round(qh.reduce((s,h)=>s+h.pct,0)/qh.length):'-';
+  const bestPractice=ph.length?Math.min(...ph.map(h=>h.retries)):'-';
+  const perfectRuns=ph.filter(h=>h.retries===0).length;
+
+  let html=`<div class="progress-header"><h2>Study Progress</h2>${totalSessions>0?'<button class="reset-btn" onclick="showResetConfirm()">Reset All Progress</button>':''}</div>`;
+  html+=`<div id="reset-area"></div>`;
+
+  if(totalSessions===0){
+    html+=`<div class="history-empty">No sessions recorded yet. Complete a quiz or practice session to start tracking your progress.</div>`;
+    c.innerHTML=html;
+    return;
+  }
+
+  // Overview cards
+  html+=`<div class="stats-overview">
+    <div class="overview-card"><div class="overview-num stat-blue">${totalSessions}</div><div class="overview-lbl">Total Sessions</div></div>
+    <div class="overview-card"><div class="overview-num stat-green">${bestQuiz}${typeof bestQuiz==='number'?'%':''}</div><div class="overview-lbl">Best Quiz</div></div>
+    <div class="overview-card"><div class="overview-num" style="color:var(--accent)">${avgQuiz}${typeof avgQuiz==='number'?'%':''}</div><div class="overview-lbl">Avg Quiz</div></div>
+    <div class="overview-card"><div class="overview-num stat-green">${perfectRuns}</div><div class="overview-lbl">Perfect Practice Runs</div></div>
+  </div>`;
+
+  // Quiz history
+  html+=`<div class="history-section"><h3>📝 Quiz History (${qh.length} attempt${qh.length!==1?'s':''})</h3>`;
+  if(qh.length===0){
+    html+=`<div class="history-empty">No quiz attempts yet.</div>`;
+  } else {
+    const bestPct=Math.max(...qh.map(h=>h.pct));
+    html+=`<table class="history-table"><thead><tr><th>#</th><th>Date</th><th>Score</th><th>Result</th></tr></thead><tbody>`;
+    [...qh].reverse().forEach((h,i)=>{
+      const num=qh.length-i;
+      const isBest=h.pct===bestPct;
+      html+=`<tr${isBest?' class="best-row"':''}><td>${num}</td><td>${fmtDate(h.date)}</td><td>${h.score}/${h.total}</td><td><span class="history-badge ${pctBadge(h.pct)}">${h.pct}%</span>${isBest?'<span class="badge-best">BEST</span>':''}</td></tr>`;
+    });
+    html+=`</tbody></table>`;
+  }
+  html+=`</div>`;
+
+  // Practice history
+  html+=`<div class="history-section"><h3>🔄 Practice History (${ph.length} session${ph.length!==1?'s':''})</h3>`;
+  if(ph.length===0){
+    html+=`<div class="history-empty">No practice sessions yet.</div>`;
+  } else {
+    html+=`<table class="history-table"><thead><tr><th>#</th><th>Date</th><th>First Try</th><th>Retries</th><th>Result</th></tr></thead><tbody>`;
+    [...ph].reverse().forEach((h,i)=>{
+      const num=ph.length-i;
+      const firstTry=h.correct-h.retries;
+      const isPerfect=h.retries===0;
+      html+=`<tr${isPerfect?' class="best-row"':''}><td>${num}</td><td>${fmtDate(h.date)}</td><td>${firstTry}/${h.total}</td><td>${h.retries}</td><td><span class="history-badge ${isPerfect?'badge-green':h.retries<=3?'badge-amber':'badge-red'}">${isPerfect?'PERFECT':h.retries+' retry'+(h.retries>1?'s':'')}</span></td></tr>`;
+    });
+    html+=`</tbody></table>`;
+  }
+  html+=`</div>`;
+
+  c.innerHTML=html;
+}
+
+function showResetConfirm(){
+  document.getElementById('reset-area').innerHTML=`<div class="reset-confirm"><p>This will permanently delete all quiz scores, practice history, and checklist progress.</p><button class="confirm-yes" onclick="doReset()">Yes, Reset Everything</button> <button class="confirm-no" onclick="cancelReset()">Cancel</button></div>`;
+}
+function cancelReset(){ document.getElementById('reset-area').innerHTML=''; }
+function doReset(){
+  if(storeOk()){
+    localStorage.removeItem('m130hist');
+    localStorage.removeItem('m130cl');
+  }
+  ckState={};
+  initCL();
+  renderProgress();
+}
+
+// Theme toggle
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  const isLight = document.body.classList.contains('light');
+  if(storeOk()) localStorage.setItem('m130theme', isLight ? 'light' : 'dark');
+}
+// Restore saved theme
+(function(){
+  if(storeOk()){
+    const saved = localStorage.getItem('m130theme');
+    if(saved === 'light') document.body.classList.add('light');
+  }
+})();
 
 initCL();initQuizView();initPracticeView();renderMath();
 </script>
