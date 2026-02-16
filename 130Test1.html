@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math 130 – Test 1 Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+  :root {
+    --bg: #0f1117; --surface: #181a24; --surface2: #1f2233; --border: #2a2d42;
+    --text: #e2e4ef; --text-muted: #8b8fa8;
+    --accent: #6c63ff; --accent-glow: rgba(108, 99, 255, 0.25);
+    --green: #34d399; --green-bg: rgba(52, 211, 153, 0.1);
+    --amber: #fbbf24; --amber-bg: rgba(251, 191, 36, 0.1);
+    --red: #f87171; --red-bg: rgba(248, 113, 113, 0.1);
+    --blue: #60a5fa; --blue-bg: rgba(96, 165, 250, 0.1);
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; min-height: 100vh; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; position: relative; z-index: 1; }
+
+  header { text-align: center; padding: 3rem 0 2.5rem; position: relative; }
+  header::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--accent); border-radius: 2px; }
+  .course-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; letter-spacing: -0.5px; margin-bottom: 0.75rem; background: linear-gradient(135deg, #e2e4ef, #9d98ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { color: var(--text-muted); font-size: 0.95rem; max-width: 460px; margin: 0 auto; }
+
+  .info-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 0.85rem; }
+  .info-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
+  .info-card:nth-child(1) .info-icon { background: var(--blue-bg); }
+  .info-card:nth-child(2) .info-icon { background: var(--green-bg); }
+  .info-card:nth-child(3) .info-icon { background: var(--amber-bg); }
+  .info-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .info-value { font-weight: 600; font-size: 0.95rem; }
+
+  /* Tab Nav with mobile scroll fades */
+  .tab-nav-wrapper { position: relative; margin-bottom: 2rem; }
+  .tab-nav { display: flex; gap: 0.25rem; background: var(--surface); border-radius: var(--radius); padding: 0.3rem; border: 1px solid var(--border); overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-fade-left, .tab-fade-right { position: absolute; top: 0; bottom: 0; width: 40px; pointer-events: none; z-index: 2; transition: opacity 0.3s; opacity: 0; }
+  .tab-fade-left { left: 0; background: linear-gradient(90deg, var(--surface) 0%, transparent 100%); border-radius: var(--radius) 0 0 var(--radius); }
+  .tab-fade-right { right: 0; background: linear-gradient(-90deg, var(--surface) 0%, transparent 100%); border-radius: 0 var(--radius) var(--radius) 0; }
+  .tab-fade-left.visible, .tab-fade-right.visible { opacity: 1; }
+  .tab-btn { flex: 1; padding: 0.7rem 1rem; border: none; background: transparent; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; border-radius: 9px; cursor: pointer; transition: all 0.25s; white-space: nowrap; min-width: max-content; }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { background: var(--accent); color: #fff; box-shadow: 0 2px 12px var(--accent-glow); }
+  .tab-content { display: none; animation: fadeUp 0.35s ease; }
+  .tab-content.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Topic Cards */
+  .topic-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; transition: border-color 0.3s; }
+  .topic-card:hover { border-color: rgba(108,99,255,0.3); }
+  .topic-header { padding: 1.1rem 1.25rem; cursor: pointer; display: flex; align-items: center; gap: 1rem; user-select: none; }
+  .topic-number { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); background: rgba(108,99,255,0.12); padding: 0.3rem 0.55rem; border-radius: 6px; flex-shrink: 0; }
+  .topic-title { font-weight: 600; font-size: 1rem; flex: 1; }
+  .topic-chevron { color: var(--text-muted); transition: transform 0.3s; font-size: 0.8rem; }
+  .topic-card.open .topic-chevron { transform: rotate(180deg); }
+  .topic-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .topic-card.open .topic-body { max-height: 3000px; }
+  .topic-content { padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--border); padding-top: 1.1rem; }
+  .topic-content h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 0.6rem; margin-top: 1.1rem; }
+  .topic-content h4:first-child { margin-top: 0; }
+  .topic-content p, .topic-content li { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 0.4rem; }
+  .topic-content ul { list-style: none; padding-left: 0; }
+  .topic-content li::before { content: '\2192'; color: var(--accent); margin-right: 0.5rem; font-weight: 600; }
+  .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; margin: 0.6rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; text-align: center; overflow-x: auto; }
+  .tip-box { background: var(--amber-bg); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.88rem; color: var(--amber); }
+
+  /* Practice */
+  .practice-dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .practice-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
+  .practice-stat .stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; line-height: 1; margin-bottom: 0.25rem; }
+  .practice-stat .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+  .stat-green { color: var(--green); }
+  .stat-red { color: var(--red); }
+  .stat-blue { color: var(--blue); }
+
+  .problem-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+  .problem-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .problem-pts { background: var(--surface2); padding: 0.15rem 0.5rem; border-radius: 5px; font-size: 0.72rem; color: var(--accent); }
+  .problem-tag-retry { background: var(--red-bg); color: var(--red); padding: 0.15rem 0.55rem; border-radius: 5px; font-size: 0.72rem; font-weight: 600; margin-left: 0.5rem; }
+  .problem-text { font-size: 0.95rem; margin-bottom: 1rem; }
+
+  .practice-btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .solution-toggle, .practice-action-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .solution-toggle:hover, .practice-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .practice-action-btn.got-it { border-color: rgba(52,211,153,0.4); color: var(--green); }
+  .practice-action-btn.got-it:hover { background: var(--green-bg); border-color: var(--green); }
+  .practice-action-btn.missed { border-color: rgba(248,113,113,0.4); color: var(--red); }
+  .practice-action-btn.missed:hover { background: var(--red-bg); border-color: var(--red); }
+
+  .solution { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .solution.show { max-height: 2000px; }
+  .solution-inner { margin-top: 1rem; padding: 1rem; background: var(--green-bg); border: 1px solid rgba(52,211,153,0.2); border-radius: 8px; font-size: 0.92rem; color: var(--green); }
+  .solution-inner .step { margin-bottom: 0.5rem; padding-left: 0.75rem; border-left: 2px solid rgba(52,211,153,0.25); }
+  .solution-inner .step:last-child { margin-bottom: 0; }
+
+  .practice-complete { text-align: center; padding: 3rem 1rem; }
+  .practice-complete .big-check { font-size: 3.5rem; margin-bottom: 0.75rem; }
+  .practice-complete h2 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 0.75rem; background: linear-gradient(135deg, var(--green), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .practice-complete p { color: var(--text-muted); margin-bottom: 1.5rem; }
+  .practice-stats-final { display: inline-flex; gap: 2rem; margin-bottom: 1.5rem; }
+  .final-stat { text-align: center; }
+  .final-stat .num { font-family: 'DM Serif Display', serif; font-size: 2rem; display: block; }
+  .final-stat .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+
+  /* Quiz */
+  .quiz-intro { text-align: center; padding: 3rem 1rem; }
+  .quiz-intro p { color: var(--text-muted); margin-bottom: 1.5rem; }
+  .quiz-start-btn, .practice-start-btn { padding: 0.75rem 2rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px var(--accent-glow); }
+  .quiz-start-btn:hover, .practice-start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--accent-glow); }
+  .quiz-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .quiz-progress-bar { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .quiz-progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.4s ease; }
+  .quiz-counter { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+  .quiz-question-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
+  .quiz-question { font-size: 1.05rem; margin-bottom: 1.25rem; }
+  .quiz-options { display: flex; flex-direction: column; gap: 0.6rem; }
+  .quiz-option { display: flex; align-items: center; gap: 0.85rem; padding: 0.85rem 1rem; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.93rem; }
+  .quiz-option:hover { border-color: var(--accent); }
+  .quiz-option .letter { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; flex-shrink: 0; }
+  .quiz-option.correct { border-color: var(--green); background: var(--green-bg); }
+  .quiz-option.correct .letter { background: var(--green); color: #fff; }
+  .quiz-option.wrong { border-color: var(--red); background: var(--red-bg); }
+  .quiz-option.wrong .letter { background: var(--red); color: #fff; }
+  .quiz-option.disabled { pointer-events: none; }
+  .quiz-explanation { margin-top: 1rem; padding: 1rem; border-radius: 8px; font-size: 0.9rem; animation: fadeUp 0.3s ease; }
+  .quiz-explanation.correct-exp { background: var(--green-bg); border: 1px solid rgba(52,211,153,0.2); color: var(--green); }
+  .quiz-explanation.wrong-exp { background: var(--red-bg); border: 1px solid rgba(248,113,113,0.2); color: var(--red); }
+  .quiz-next-btn { margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .quiz-next-btn:hover { box-shadow: 0 4px 16px var(--accent-glow); }
+  .quiz-results { text-align: center; padding: 2.5rem 1rem; }
+  .quiz-score { font-family: 'DM Serif Display', serif; font-size: 3.5rem; background: linear-gradient(135deg, var(--accent), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+  .quiz-results p { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+  /* Formula Sheet */
+  .formula-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem; }
+  .formula-section h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.5rem; }
+  .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.6rem; }
+  .formula-item { background: var(--surface2); border-radius: 8px; padding: 0.75rem 1rem; }
+  .formula-item .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.35rem; }
+  .print-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.25rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-bottom: 1.25rem; }
+  .print-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Checklist */
+  .checklist-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s; user-select: none; }
+  .checklist-item:hover { border-color: rgba(108,99,255,0.3); }
+  .checklist-item.checked { border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.04); }
+  .check-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 0.75rem; }
+  .checklist-item.checked .check-box { background: var(--green); border-color: var(--green); color: #fff; }
+  .check-label { font-size: 0.93rem; }
+  .checklist-item.checked .check-label { text-decoration: line-through; color: var(--text-muted); }
+  .progress-summary { text-align: center; padding: 1rem; color: var(--text-muted); font-size: 0.9rem; }
+  .progress-summary strong { color: var(--green); }
+
+  .katex { font-size: 1.05em; }
+  .formula-box .katex { font-size: 1.1em; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .tab-btn { flex: 0 0 auto; font-size: 0.8rem; padding: 0.6rem 0.85rem; }
+    .info-bar { grid-template-columns: 1fr; }
+    .practice-dashboard { gap: 0.5rem; }
+    .practice-stat .stat-num { font-size: 1.5rem; }
+    .practice-btn-row { flex-direction: column; }
+    .practice-btn-row > * { text-align: center; justify-content: center; }
+    .practice-stats-final { gap: 1rem; }
+  }
+
+  /* PRINT STYLES */
+  @media print {
+    *, *::before, *::after { background: #fff !important; color: #000 !important; box-shadow: none !important; border-color: #ccc !important; -webkit-text-fill-color: #000 !important; }
+    body { font-size: 11pt; line-height: 1.4; }
+    body::before { display: none; }
+    .container { max-width: 100%; padding: 0; }
+    header, .info-bar, .tab-nav-wrapper, .print-btn,
+    #tab-topics, #tab-practice, #tab-quiz, #tab-checklist { display: none !important; }
+    #tab-formulas { display: block !important; }
+    .formula-section { break-inside: avoid; border: 1px solid #ccc; margin-bottom: 0.6rem; padding: 0.6rem; }
+    .formula-section h3 { font-size: 11pt; margin-bottom: 0.4rem; }
+    .formula-grid { grid-template-columns: repeat(2, 1fr); gap: 0.35rem; }
+    .formula-item { border: 1px solid #ddd; padding: 0.35rem 0.5rem; }
+    .formula-item .label { font-size: 7.5pt; }
+    .formula-box { border: 1px solid #ddd; padding: 0.3rem; margin: 0.2rem 0; font-size: 10pt; }
+    .katex { font-size: 1em; }
+    #tab-formulas::before { content: 'Math 130 \2014  Test 1 Formula Sheet'; display: block; font-size: 16pt; font-weight: bold; text-align: center; margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 2px solid #000; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="course-label">Spring 2026</div>
+    <h1>Math 130 — Test 1</h1>
+    <p class="subtitle">Interactive study guide covering all tested topics. Review concepts, practice problems, and quiz yourself.</p>
+  </header>
+
+  <div class="info-bar">
+    <div class="info-card"><div class="info-icon">📝</div><div><div class="info-label">Format</div><div class="info-value">Paper Test</div></div></div>
+    <div class="info-card"><div class="info-icon">💻</div><div><div class="info-label">ALEKS Practice</div><div class="info-value">Up to 10 Attempts</div></div></div>
+    <div class="info-card"><div class="info-icon">📐</div><div><div class="info-label">Topics</div><div class="info-value">10 Core Areas</div></div></div>
+  </div>
+
+  <div class="tab-nav-wrapper">
+    <div class="tab-fade-left" id="fade-left"></div>
+    <nav class="tab-nav" id="tabNav">
+      <button class="tab-btn active" data-tab="topics">Topics Review</button>
+      <button class="tab-btn" data-tab="formulas">Formula Sheet</button>
+      <button class="tab-btn" data-tab="practice">Practice</button>
+      <button class="tab-btn" data-tab="quiz">Self-Quiz</button>
+      <button class="tab-btn" data-tab="checklist">Checklist</button>
+    </nav>
+    <div class="tab-fade-right" id="fade-right"></div>
+  </div>
+
+  <!-- TOPICS -->
+  <div id="tab-topics" class="tab-content active">
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">01</span><span class="topic-title">Sets — Intervals, Union, Intersection</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><b>Set-builder notation</b>: e.g. <span class="k">\{x \mid x \geq 3\}</span></li><li><b>Interval notation</b>: brackets [ ] include; parentheses ( ) exclude</li><li><b>Union</b> <span class="k">A \cup B</span>: elements in <em>either</em> set</li><li><b>Intersection</b> <span class="k">A \cap B</span>: elements in <em>both</em> sets</li></ul><h4>Common Intervals</h4><div class="formula-box"><span class="k">[a, b] \quad (a, b) \quad [a, \infty) \quad (-\infty, b]</span></div><div class="tip-box">⚡ ∞ and −∞ always get parentheses, never brackets!</div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">02</span><span class="topic-title">Absolute Value</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><span class="k">|a|</span> = distance from <span class="k">a</span> to 0 — always ≥ 0</li><li><span class="k">|a| = a</span> if <span class="k">a \geq 0</span>; <span class="k">|a| = -a</span> if <span class="k">a < 0</span></li></ul><div class="formula-box"><span class="k">|x| = c \implies x = c \text{ or } x = -c \quad(c \geq 0)</span></div><div class="tip-box">⚡ Remember: <span class="k">\sqrt{x^2} = |x|</span></div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">03</span><span class="topic-title">Exponents</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Core Laws</h4><ul><li><span class="k">a^m \cdot a^n = a^{m+n}</span></li><li><span class="k">\frac{a^m}{a^n} = a^{m-n}</span></li><li><span class="k">(a^m)^n = a^{mn}</span></li><li><span class="k">(ab)^n = a^n b^n</span></li><li><span class="k">a^{-n} = \frac{1}{a^n}</span></li></ul><div class="tip-box">⚡ Write all final answers with <b>positive exponents only</b>.</div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">04</span><span class="topic-title">Factoring</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Methods (always start with GCF!)</h4><ul><li><b>GCF</b> — always factor out first</li><li><b>Grouping</b> — split into pairs</li><li><b>Difference of squares</b>: <span class="k">a^2 - b^2 = (a-b)(a+b)</span></li><li><b>Difference of cubes</b>: <span class="k">a^3 - b^3 = (a-b)(a^2+ab+b^2)</span></li><li><b>Sum of cubes</b>: <span class="k">a^3 + b^3 = (a+b)(a^2-ab+b^2)</span></li><li><b>Trinomials</b>: find two numbers that multiply to <span class="k">ac</span> and add to <span class="k">b</span></li></ul><div class="tip-box">⚡ Mnemonic for cubes: "SOAP" — Same, Opposite, Always Positive.</div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">05</span><span class="topic-title">Operations with Fractions & Rational Expressions</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><ul><li><b>Always factor first</b></li><li><b>Add/subtract</b>: find LCD, rewrite, combine numerators</li><li><b>Multiply</b>: factor → cancel → multiply</li><li><b>Divide</b>: flip second fraction → multiply</li></ul><div class="tip-box">⚡ Factor first! This is the #1 mistake on rational expression problems.</div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">06</span><span class="topic-title">Equations — Linear & Quadratic</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Linear</h4><ul><li>Distribute, combine like terms, isolate variable</li><li>With fractions: multiply by LCD</li><li>Watch for no solution or all reals</li></ul><h4>Quadratic</h4><ul><li>Factor or use quadratic formula</li><li>Rational equations: check for extraneous solutions!</li></ul><div class="formula-box"><span class="k">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</span></div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">07</span><span class="topic-title">Midpoint & Distance Formula</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">\text{Midpoint} = \left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)</span></div><div class="formula-box"><span class="k">d = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</span></div><div class="tip-box">⚡ Round to one decimal place when instructed!</div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">08</span><span class="topic-title">Equation of a Circle</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">(x-h)^2 + (y-k)^2 = r^2</span></div><p>Center = <span class="k">(h,k)</span>, Radius = <span class="k">r</span></p><div class="tip-box">⚡ Right side is r², not r. Radius 5 → write 25.</div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">09</span><span class="topic-title">Lines — Slope, Forms, Parallel & Perpendicular</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><ul><li><b>Slope-intercept</b>: <span class="k">y = mx + b</span></li><li><b>Point-slope</b>: <span class="k">y - y_1 = m(x - x_1)</span></li><li><b>General</b>: <span class="k">Ax + By + C = 0</span></li></ul><div class="formula-box"><span class="k">\text{Parallel: } m_1 = m_2 \qquad \text{Perp: } m_1 \cdot m_2 = -1</span></div><div class="tip-box">⚡ Perpendicular: flip and negate. Slope 3 → perp slope −1/3.</div></div></div></div>
+
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">10</span><span class="topic-title">Maximum/Minimum of a Quadratic — Vertex</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">x = -\frac{b}{2a}</span></div><p>Plug back into <span class="k">f(x)</span> for the max/min <b>value</b>.</p><ul><li><span class="k">a > 0</span> → minimum</li><li><span class="k">a < 0</span> → maximum</li></ul><div class="tip-box">⚡ The question usually wants the y-value (height, etc.), not the x-value.</div></div></div></div>
+  </div>
+
+  <!-- FORMULAS -->
+  <div id="tab-formulas" class="tab-content">
+    <button class="print-btn" onclick="window.print()">🖨️ Print Formula Sheet</button>
+
+    <div class="formula-section"><h3>📐 Core Algebra</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Difference of Squares</div><div class="formula-box"><span class="k">a^2-b^2=(a-b)(a+b)</span></div></div>
+      <div class="formula-item"><div class="label">Difference of Cubes</div><div class="formula-box"><span class="k">a^3-b^3=(a-b)(a^2+ab+b^2)</span></div></div>
+      <div class="formula-item"><div class="label">Sum of Cubes</div><div class="formula-box"><span class="k">a^3+b^3=(a+b)(a^2-ab+b^2)</span></div></div>
+      <div class="formula-item"><div class="label">Quadratic Formula</div><div class="formula-box"><span class="k">x=\frac{-b \pm \sqrt{b^2-4ac}}{2a}</span></div></div>
+    </div></div>
+
+    <div class="formula-section"><h3>📏 Coordinate Geometry</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Midpoint</div><div class="formula-box"><span class="k">M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)</span></div></div>
+      <div class="formula-item"><div class="label">Distance</div><div class="formula-box"><span class="k">d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</span></div></div>
+      <div class="formula-item"><div class="label">Slope</div><div class="formula-box"><span class="k">m=\frac{y_2-y_1}{x_2-x_1}</span></div></div>
+      <div class="formula-item"><div class="label">Circle</div><div class="formula-box"><span class="k">(x-h)^2+(y-k)^2=r^2</span></div></div>
+    </div></div>
+
+    <div class="formula-section"><h3>📈 Lines</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Point-Slope</div><div class="formula-box"><span class="k">y-y_1=m(x-x_1)</span></div></div>
+      <div class="formula-item"><div class="label">Slope-Intercept</div><div class="formula-box"><span class="k">y=mx+b</span></div></div>
+      <div class="formula-item"><div class="label">Parallel</div><div class="formula-box"><span class="k">m_1=m_2</span></div></div>
+      <div class="formula-item"><div class="label">Perpendicular</div><div class="formula-box"><span class="k">m_1 \cdot m_2=-1</span></div></div>
+    </div></div>
+
+    <div class="formula-section"><h3>⛰️ Quadratic Vertex</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Vertex x-coordinate</div><div class="formula-box"><span class="k">x=-\frac{b}{2a}</span></div></div>
+      <div class="formula-item"><div class="label">Rule</div><div class="formula-box" style="font-family:'DM Sans';font-size:0.85rem;color:var(--text-muted)">a &gt; 0 → min | a &lt; 0 → max</div></div>
+    </div></div>
+
+    <div class="formula-section"><h3>🔢 Exponent Rules</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Product</div><div class="formula-box"><span class="k">a^m \cdot a^n=a^{m+n}</span></div></div>
+      <div class="formula-item"><div class="label">Quotient</div><div class="formula-box"><span class="k">\frac{a^m}{a^n}=a^{m-n}</span></div></div>
+      <div class="formula-item"><div class="label">Power</div><div class="formula-box"><span class="k">(a^m)^n=a^{mn}</span></div></div>
+      <div class="formula-item"><div class="label">Negative</div><div class="formula-box"><span class="k">a^{-n}=\frac{1}{a^n}</span></div></div>
+    </div></div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div id="tab-practice" class="tab-content"><div id="practice-container"></div></div>
+
+  <!-- QUIZ -->
+  <div id="tab-quiz" class="tab-content"><div id="quiz-container"></div></div>
+
+  <!-- CHECKLIST -->
+  <div id="tab-checklist" class="tab-content">
+    <div class="progress-summary" id="checklist-progress">0 of 12 complete</div>
+    <div id="checklist-items"></div>
+  </div>
+</div>
+
+<script>
+// KaTeX
+function renderMath(){document.querySelectorAll('.k').forEach(el=>{if(el.dataset.rendered)return;try{katex.render(el.textContent,el,{throwOnError:false});el.dataset.rendered='true';}catch(e){}})}
+function renderLatexString(s){return s.replace(/\\?\\\((.+?)\\?\\\)/g,(_,t)=>{const sp=document.createElement('span');try{katex.render(t,sp,{throwOnError:false})}catch(e){sp.textContent=t}return sp.outerHTML})}
+
+// Tab nav + fades
+const tabNav=document.getElementById('tabNav'),fadeL=document.getElementById('fade-left'),fadeR=document.getElementById('fade-right');
+function updateFades(){const sl=tabNav.scrollLeft,mx=tabNav.scrollWidth-tabNav.clientWidth;fadeL.classList.toggle('visible',sl>5);fadeR.classList.toggle('visible',sl<mx-5)}
+tabNav.addEventListener('scroll',updateFades);window.addEventListener('resize',updateFades);setTimeout(updateFades,100);
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{const n=btn.dataset.tab;document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');btn.classList.add('active');btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});if(n==='quiz'&&!quizStarted)initQuizView();if(n==='practice'&&!practiceInit)initPracticeView();setTimeout(renderMath,50)})});
+function toggleTopic(c){c.classList.toggle('open');setTimeout(renderMath,100)}
+
+// ═══ PRACTICE SYSTEM ═══
+const allProblems=[
+// Factoring
+{id:'factor-a',label:'Factoring',pts:'4 pts',text:'Factor completely: <span class="k">2x^2-6x-108</span>',solution:'<div class="step">GCF = 2: <span class="k">2(x^2-3x-54)</span>. Numbers that multiply to −54 and add to −3: −9 and +6.<br><span class="k">=2(x-9)(x+6)</span></div>'},
+{id:'factor-b',label:'Factoring',pts:'4 pts',text:'Factor completely: <span class="k">2x^5-18x^4+28x^3</span>',solution:'<div class="step">GCF = <span class="k">2x^3</span>: <span class="k">2x^3(x^2-9x+14)</span>. Numbers: −7 and −2.<br><span class="k">=2x^3(x-7)(x-2)</span></div>'},
+// Sets & Intervals
+{id:'sets-int-a',label:'Sets & Intervals',pts:'4 pts',text:'Let <span class="k">B=\\{x\\mid x\\geq -5\\}</span> and <span class="k">C=\\{x\\mid x<2\\}</span>.<br><br>Write <span class="k">B\\cap C</span> in interval notation.',solution:'<div class="step">B = [−5, ∞) and C = (−∞, 2). The overlap is <span class="k">[-5,\\;2)</span></div>'},
+{id:'sets-int-b',label:'Sets & Intervals',pts:'4 pts',text:'Let <span class="k">A=\\{x\\mid x\\geq 9\\}</span> and <span class="k">B=\\{x\\mid x\\geq -5\\}</span>.<br><br>Write <span class="k">A\\cup B</span> in interval notation.',solution:'<div class="step">A = [9, ∞) and B = [−5, ∞). B already contains A, so <span class="k">A\\cup B=[-5,\\;\\infty)</span></div>'},
+// Finite Sets
+{id:'sets-fin-a',label:'Finite Sets',pts:'4 pts',text:'Let <span class="k">A=\\{3,4,5,7,8,9\\}</span> and <span class="k">C=\\{1,3,5,7,9\\}</span>.<br><br>Find <span class="k">A\\cup C</span>.',solution:'<div class="step">Combine all elements: <span class="k">\\{1,3,4,5,7,8,9\\}</span></div>'},
+{id:'sets-fin-b',label:'Finite Sets',pts:'4 pts',text:'Let <span class="k">A=\\{3,4,5,7,8,9\\}</span> and <span class="k">B=\\{2,4,6,8,10\\}</span>.<br><br>Find <span class="k">A\\cap B</span>.',solution:'<div class="step">Elements in both: <span class="k">\\{4,8\\}</span></div>'},
+// Midpoint, Distance, Line
+{id:'midpoint',label:'Midpoint',pts:'4 pts',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the midpoint of <span class="k">\\overline{AB}</span>.',solution:'<div class="step"><span class="k">M=\\left(\\frac{8+1}{2},\\;\\frac{-8+16}{2}\\right)=(4.5,\\;4)</span></div>'},
+{id:'distance',label:'Distance Formula',pts:'4 pts',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the distance from A to B.',solution:'<div class="step"><span class="k">d=\\sqrt{(1-8)^2+(16-(-8))^2}=\\sqrt{49+576}=\\sqrt{625}=25</span></div>'},
+{id:'line-eq',label:'Equation of a Line',pts:'4 pts',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the equation of line AB.',solution:'<div class="step">Slope: <span class="k">m=\\frac{16-(-8)}{1-8}=-\\frac{24}{7}</span>. Point-slope with A:<br><span class="k">y+8=-\\frac{24}{7}(x-8) \\implies y=-\\frac{24}{7}x+\\frac{136}{7}</span></div>'},
+// Circle
+{id:'circle',label:'Circle Equation',pts:'3 pts',text:'Write an equation of the circle with center (4, 2) and radius 5.',solution:'<div class="step"><span class="k">(x-4)^2+(y-2)^2=25</span></div>'},
+// Exponents
+{id:'exp-a',label:'Exponent Simplification',pts:'4 pts',text:'Simplify with positive exponents only: <span class="k">\\dfrac{m^2 n^{-1} p^{-5}}{m^{-6} n^3 p^7}</span>',solution:'<div class="step">Subtract exponents: <span class="k">m^{2-(-6)}n^{-1-3}p^{-5-7}=m^8 n^{-4}p^{-12}=\\dfrac{m^8}{n^4 p^{12}}</span></div>'},
+{id:'exp-b',label:'Exponent Simplification',pts:'4 pts',text:'Simplify with positive exponents only: <span class="k">\\left(\\dfrac{3x}{y^{-3}\\cdot 6z^2}\\right)^4</span>',solution:'<div class="step">Simplify inside: <span class="k">\\frac{3x\\cdot y^3}{6z^2}=\\frac{xy^3}{2z^2}</span>. Raise to 4th power: <span class="k">\\frac{x^4 y^{12}}{16z^8}</span></div>'},
+// Lines
+{id:'line-par',label:'Parallel Line',pts:'3 pts',text:'Find the equation of the line <b>parallel</b> to <span class="k">y=3x+3</span> that passes through (−6, 2).',solution:'<div class="step">Parallel → same slope m = 3. <span class="k">y-2=3(x+6) \\implies y=3x+20</span></div>'},
+{id:'line-perp',label:'Perpendicular Line',pts:'3 pts',text:'Find the equation of the line <b>perpendicular</b> to <span class="k">y=3x+3</span> that passes through (−6, 2).',solution:'<div class="step">Perpendicular → m = −1/3. <span class="k">y-2=-\\frac{1}{3}(x+6) \\implies y=-\\frac{1}{3}x</span></div>'},
+// Vertex
+{id:'vertex',label:'Maximum of a Quadratic',pts:'3 pts',text:'<span class="k">h(t)=80t-16t^2</span>. What is the maximum height?',solution:'<div class="step"><span class="k">t=-\\frac{80}{2(-16)}=2.5</span> sec</div><div class="step"><span class="k">h(2.5)=200-100=100</span> feet</div>'},
+// Rational expressions
+{id:'rat-add',label:'Add Rational Expressions',pts:'5 pts',text:'Simplify: <span class="k">\\dfrac{2}{7d}+\\dfrac{7}{3}</span>',solution:'<div class="step">LCD = 21d. <span class="k">\\frac{6}{21d}+\\frac{49d}{21d}=\\frac{49d+6}{21d}</span></div>'},
+{id:'rat-sub',label:'Subtract Rational Expressions',pts:'5 pts',text:'Simplify: <span class="k">\\dfrac{7}{2x}-\\dfrac{6}{x-1}</span>',solution:'<div class="step">LCD = 2x(x−1). <span class="k">\\frac{7(x-1)-12x}{2x(x-1)}=\\frac{-5x-7}{2x(x-1)}</span></div>'},
+{id:'rat-mult',label:'Multiply Rational Expressions',pts:'5 pts',text:'Simplify: <span class="k">\\dfrac{3x-27}{x-8}\\cdot\\dfrac{5x-40}{6x-54}</span>',solution:'<div class="step">Factor: <span class="k">\\frac{3(x-9)}{x-8}\\cdot\\frac{5(x-8)}{6(x-9)}</span>. Cancel (x−9) and (x−8): <span class="k">=\\frac{5}{2}</span></div>'},
+// Solve linear
+{id:'solve-lin-a',label:'Solve Linear Equation',pts:'5 pts',text:'Solve for x: <span class="k">-9x+26=-4(x-9)</span>',solution:'<div class="step">−9x + 26 = −4x + 36 → −5x = 10 → <span class="k">x=-2</span></div>'},
+{id:'solve-lin-b',label:'Solve Linear Equation (Fractions)',pts:'5 pts',text:'Solve for x: <span class="k">-\\frac{1}{2}x-\\frac{4}{3}=\\frac{7x-7}{3}</span>',solution:'<div class="step">Multiply both sides by 6: −3x − 8 = 14x − 14 → −17x = −6 → <span class="k">x=\\frac{6}{17}</span></div>'},
+// Solve rational
+{id:'solve-rat-a',label:'Solve Rational Equation',pts:'5 pts',text:'Solve for x: <span class="k">\\dfrac{6}{x-4}=\\dfrac{10}{x-2}</span>',solution:'<div class="step">Cross-multiply: 6(x−2) = 10(x−4) → 6x−12 = 10x−40 → −4x = −28 → <span class="k">x=7</span></div>'},
+{id:'solve-rat-b',label:'Solve Rational Equation',pts:'5 pts',text:'Solve for x: <span class="k">\\dfrac{3}{x-3}=\\dfrac{x}{x-3}+7</span>',solution:'<div class="step">Multiply by (x−3): 3 = x + 7(x−3) → 3 = 8x − 21 → x = 3. But x = 3 makes the denominator 0 → <b>No solution</b></div>'},
+// Solve quadratic
+{id:'solve-quad-a',label:'Solve Quadratic Equation',pts:'5 pts',text:'Solve for x: <span class="k">5x^2=-3x+2</span>',solution:'<div class="step">5x² + 3x − 2 = 0 → (5x−2)(x+1) = 0 → <span class="k">x=\\frac{2}{5}</span> or <span class="k">x=-1</span></div>'},
+{id:'solve-quad-b',label:'Solve Quadratic Equation',pts:'5 pts',text:'Solve for x: <span class="k">2x^2-4x+9=x+12</span>',solution:'<div class="step">2x² − 5x − 3 = 0 → (2x+1)(x−3) = 0 → <span class="k">x=-\\frac{1}{2}</span> or <span class="k">x=3</span></div>'}
+];
+
+let practiceInit=false,practiceQueue=[],practiceCorrect=0,practiceMissed=0,practiceIdx=0,practiceSolShown=false;
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+
+function initPracticeView(){
+  practiceInit=true;
+  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:'DM Serif Display';font-size:1.8rem;margin-bottom:0.5rem">Practice Mode</h2><p>${allProblems.length} problems in random order. Work each on paper, reveal the solution, then mark it. Missed problems recycle until you get them all right.</p><button class="practice-start-btn" onclick="startPractice()">Start Practice</button></div>`;
+}
+
+function startPractice(){
+  allProblems.forEach(p=>p._missed=false);
+  practiceQueue=shuffle(allProblems.map((_,i)=>i));practiceCorrect=0;practiceMissed=0;practiceIdx=0;showPP();
+}
+
+function showPP(){
+  const c=document.getElementById('practice-container'),pi=practiceQueue[practiceIdx],p=allProblems[pi],rem=practiceQueue.length-practiceIdx;
+  practiceSolShown=false;
+  c.innerHTML=`<div class="practice-dashboard"><div class="practice-stat"><div class="stat-num stat-green">${practiceCorrect}</div><div class="stat-label">Correct</div></div><div class="practice-stat"><div class="stat-num stat-red">${practiceMissed}</div><div class="stat-label">To Retry</div></div><div class="practice-stat"><div class="stat-num stat-blue">${rem}</div><div class="stat-label">Remaining</div></div></div><div class="problem-card"><div class="problem-label"><span>${p.label}${p._missed?'<span class="problem-tag-retry">RETRY</span>':''}</span><span class="problem-pts">${p.pts}</span></div><div class="problem-text">${p.text}</div><div class="practice-btn-row" id="pbtns"><button class="solution-toggle" onclick="revealPS()">Show Solution ▾</button></div><div class="solution" id="psol"><div class="solution-inner">${p.solution}</div></div></div>`;
+  setTimeout(renderMath,50);
+}
+
+function revealPS(){if(practiceSolShown)return;practiceSolShown=true;document.getElementById('psol').classList.add('show');document.getElementById('pbtns').innerHTML='<button class="practice-action-btn got-it" onclick="pGot()">✓ Got It</button><button class="practice-action-btn missed" onclick="pMiss()">✗ Missed It</button>';setTimeout(renderMath,50)}
+
+function pGot(){practiceCorrect++;practiceIdx++;practiceIdx>=practiceQueue.length?showPC():showPP()}
+function pMiss(){const pi=practiceQueue[practiceIdx];allProblems[pi]._missed=true;practiceQueue.push(pi);practiceMissed++;practiceIdx++;practiceIdx>=practiceQueue.length?showPC():showPP()}
+
+function showPC(){
+  document.getElementById('practice-container').innerHTML=`<div class="practice-complete"><div class="big-check">🎉</div><h2>All Problems Cleared!</h2><div class="practice-stats-final"><div class="final-stat"><span class="num stat-green">${practiceCorrect}</span><span class="lbl">Correct</span></div><div class="final-stat"><span class="num stat-red">${practiceMissed}</span><span class="lbl">Retries</span></div><div class="final-stat"><span class="num stat-blue">${allProblems.length}</span><span class="lbl">Problems</span></div></div><p>${practiceMissed===0?'Perfect run — every problem on the first try!':'You cleared them all. Review the retried topics before test day.'}</p><button class="practice-start-btn" onclick="startPractice()">Practice Again</button></div>`;
+}
+
+// ═══ QUIZ ═══
+const quizQ=[
+{q:'What is the factored form of \\(x^2-49\\)?',opts:['(x-7)(x+7)','(x-49)(x+1)','(x-7)^2','(x+7)^2'],ans:0,exp:'Difference of squares: a²−b²=(a−b)(a+b).'},
+{q:'Interval notation for \\(\\{x\\mid x\\geq 3\\}\\):',opts:['(3,\\infty)','[3,\\infty)','[3,\\infty]','(3,\\infty]'],ans:1,exp:'≥ includes 3 → bracket. ∞ → always parenthesis.'},
+{q:'\\(A\\cap B\\) if \\(A=\\{1,2,3\\}\\), \\(B=\\{2,3,4\\}\\)?',opts:['\\{1,2,3,4\\}','\\{2,3\\}','\\{1,4\\}','\\{2\\}'],ans:1,exp:'Intersection = elements in BOTH sets.'},
+{q:'Simplify \\(x^5\\cdot x^{-2}\\):',opts:['x^{10}','x^7','x^3','\\frac{1}{x^3}'],ans:2,exp:'Product rule: 5+(−2)=3.'},
+{q:'Midpoint of \\((2,6)\\) and \\((8,10)\\):',opts:['(5,8)','(10,16)','(6,4)','(3,2)'],ans:0,exp:'((2+8)/2,(6+10)/2)=(5,8).'},
+{q:'Circle with center \\((0,3)\\), radius 4:',opts:['x^2+(y-3)^2=4','x^2+(y-3)^2=16','(x-3)^2+y^2=16','x^2+(y+3)^2=16'],ans:1,exp:'(x−0)²+(y−3)²=4²=16.'},
+{q:'Slope perpendicular to \\(y=2x+1\\):',opts:['2','-2','\\frac{1}{2}','-\\frac{1}{2}'],ans:3,exp:'Perp slopes multiply to −1. 2→−1/2.'},
+{q:'Vertex x-coord of \\(f(x)=-3x^2+12x+5\\):',opts:['x=-2','x=2','x=4','x=-4'],ans:1,exp:'x=−12/(2·(−3))=2.'},
+{q:'Factor \\(x^3-8\\):',opts:['(x-2)(x^2+2x+4)','(x-2)(x^2-2x+4)','(x-2)(x+2)^2','(x-8)(x^2+1)'],ans:0,exp:'Diff of cubes: (a−b)(a²+ab+b²).'},
+{q:'Solve \\(3x^2+x-2=0\\):',opts:['x=\\frac{2}{3},\\;x=-1','x=\\frac{1}{3},\\;x=-2','x=-\\frac{2}{3},\\;x=1','x=2,\\;x=-\\frac{1}{3}'],ans:0,exp:'(3x−2)(x+1)=0.'},
+{q:'Distance from \\((0,0)\\) to \\((3,4)\\):',opts:['7','5','25','\\sqrt{7}'],ans:1,exp:'√(9+16)=√25=5.'},
+{q:'Rational equation with variables in denominator — you must:',opts:['Cross multiply only','Check for extraneous solutions','Use quadratic formula','Factor numerators'],ans:1,exp:'Excluded values make denominators 0. Always check.'}
+];
+
+let quizStarted=false,quizIdx=0,quizScore=0,quizAns=false;
+function initQuizView(){document.getElementById('quiz-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:'DM Serif Display';font-size:1.8rem;margin-bottom:0.5rem">Test Your Knowledge</h2><p>12 questions covering all topics. No time limit.</p><button class="quiz-start-btn" onclick="startQuiz()">Begin Quiz</button></div>`}
+
+function startQuiz(){quizStarted=true;quizIdx=0;quizScore=0;for(let i=quizQ.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[quizQ[i],quizQ[j]]=[quizQ[j],quizQ[i]]}showQ()}
+
+function showQ(){
+  quizAns=false;const q=quizQ[quizIdx],L=['A','B','C','D'],pct=(quizIdx/quizQ.length)*100,c=document.getElementById('quiz-container');
+  const rQ=renderLatexString(q.q),rO=q.opts.map(o=>{const s=document.createElement('span');try{katex.render(o,s,{throwOnError:false})}catch(e){s.textContent=o}return s.outerHTML});
+  c.innerHTML=`<div class="quiz-progress"><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div><span class="quiz-counter">${quizIdx+1}/${quizQ.length}</span></div><div class="quiz-question-card"><div class="quiz-question">${rQ}</div><div class="quiz-options">${rO.map((o,i)=>`<div class="quiz-option" onclick="selAns(${i})" id="opt-${i}"><span class="letter">${L[i]}</span><span>${o}</span></div>`).join('')}</div><div id="quiz-feedback"></div></div>`;
+  setTimeout(renderMath,50);
+}
+
+function selAns(i){if(quizAns)return;quizAns=true;const q=quizQ[quizIdx],ok=i===q.ans;if(ok)quizScore++;document.querySelectorAll('.quiz-option').forEach(o=>o.classList.add('disabled'));document.getElementById('opt-'+i).classList.add(ok?'correct':'wrong');if(!ok)document.getElementById('opt-'+q.ans).classList.add('correct');document.getElementById('quiz-feedback').innerHTML=`<div class="quiz-explanation ${ok?'correct-exp':'wrong-exp'}">${ok?'✓ Correct!':'✗ Not quite.'} ${q.exp}</div><button class="quiz-next-btn" onclick="${quizIdx<quizQ.length-1?'nextQ()':'showRes()'}"> ${quizIdx<quizQ.length-1?'Next →':'Results'}</button>`;setTimeout(renderMath,50)}
+function nextQ(){quizIdx++;showQ()}
+function showRes(){const p=Math.round(quizScore/quizQ.length*100);document.getElementById('quiz-container').innerHTML=`<div class="quiz-results"><div class="quiz-score">${quizScore}/${quizQ.length}</div><p>${p}% — ${p>=90?"Excellent!":p>=70?"Good! Review missed topics.":"Keep studying."}</p><button class="quiz-start-btn" onclick="startQuiz()">Retake</button></div>`}
+
+// ═══ CHECKLIST ═══
+const clTopics=['Sets — set-builder to interval notation','Sets — union & intersection of finite sets','Sets — union & intersection of intervals','Absolute value simplification','Exponent rules — positive exponents','Factoring — GCF, trinomials, grouping','Factoring — difference of squares & cubes','Rational expressions — all operations','Solve linear equations (with fractions)','Solve quadratic equations','Midpoint, distance, lines, circles','Vertex formula — max/min of quadratic'];
+let ckState={};
+function storeOk(){try{localStorage.setItem('__t','t');localStorage.removeItem('__t');return true}catch(e){return false}}
+function initCL(){if(storeOk())ckState=JSON.parse(localStorage.getItem('m130cl')||'{}');document.getElementById('checklist-items').innerHTML=clTopics.map((t,i)=>`<div class="checklist-item ${ckState[i]?'checked':''}" onclick="togCk(this,${i})"><div class="check-box">${ckState[i]?'✓':''}</div><span class="check-label">${t}</span></div>`).join('');updProg()}
+function togCk(el,i){el.classList.toggle('checked');const c=el.classList.contains('checked');el.querySelector('.check-box').textContent=c?'✓':'';ckState[i]=c;if(storeOk())localStorage.setItem('m130cl',JSON.stringify(ckState));updProg()}
+function updProg(){document.getElementById('checklist-progress').innerHTML=`<strong>${document.querySelectorAll('.checklist-item.checked').length}</strong> of ${clTopics.length} complete`}
+
+initCL();initQuizView();initPracticeView();renderMath();
+</script>
+</body>
+</html>
