@@ -100,7 +100,7 @@
   .topic-content p, .topic-content li { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 0.4rem; }
   .topic-content ul { list-style: none; padding-left: 0; }
   .topic-content li::before { content: '\2192'; color: var(--accent); margin-right: 0.5rem; font-weight: 600; }
-  .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; margin: 0.6rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; text-align: center; overflow-x: auto; }
+  .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; margin: 0.6rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; text-align: center; overflow: visible; }
   .tip-box { background: var(--amber-bg); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.88rem; color: var(--amber); }
 
   /* Practice */
@@ -190,6 +190,25 @@
   .progress-summary { text-align: center; padding: 1rem; color: var(--text-muted); font-size: 0.9rem; }
   .progress-summary strong { color: var(--green); }
 
+
+  /* Warning callout */
+  .warning-box { background: var(--amber-bg); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.65rem 1rem; margin-top: 0.75rem; font-size: 0.85rem; color: var(--amber); animation: fadeUp 0.3s ease; }
+  .warning-box b { color: var(--amber); }
+
+  /* Review topic button */
+  .review-topic-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--blue-bg); border: 1px solid var(--blue); border-radius: 8px; color: var(--blue); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; opacity: 0.7; }
+  .review-topic-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); opacity: 1; }
+
+  /* Video link card */
+  .video-link { display: flex; align-items: center; gap: 1rem; margin: 0.75rem 0; padding: 0.85rem 1rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); transition: all 0.2s; cursor: pointer; }
+  .video-link:hover { border-color: var(--red); background: var(--red-bg); }
+  .video-link .yt-icon { width: 44px; height: 32px; background: #ff0000; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .video-link .yt-icon::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent #fff; margin-left: 2px; }
+  .video-link .yt-info { flex: 1; min-width: 0; }
+  .video-link .yt-title { font-weight: 600; font-size: 0.9rem; }
+  .video-link .yt-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
+  .video-embed-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; margin-top: 1.1rem; font-weight: 600; }
+
   /* Progress History */
   .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
   .progress-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-weight: 400; }
@@ -240,20 +259,51 @@
 
   /* PRINT STYLES */
   @media print {
-    *, *::before, *::after { background: #fff !important; color: #000 !important; box-shadow: none !important; border-color: #ccc !important; -webkit-text-fill-color: #000 !important; }
-    body { font-size: 11pt; line-height: 1.4; }
+    /* Targeted resets - NO blanket border-color or background on * */
+    * { color: #000 !important; box-shadow: none !important; -webkit-text-fill-color: #000 !important; }
+    body { font-size: 11pt; line-height: 1.4; background: #fff !important; }
     body::before { display: none; }
-    .container { max-width: 100%; padding: 0; }
-    header, .info-bar, .tab-nav-wrapper, .print-btn, .theme-toggle,
+    .container { max-width: 100%; padding: 0; background: #fff !important; }
+
+    /* White backgrounds for UI chrome only */
+    .formula-section, .formula-item, .formula-box,
+    .info-card, .topic-card, .problem-card, .quiz-question-card,
+    .checklist-item, .tab-nav, .tab-btn { background: #fff !important; border-color: #ccc !important; }
+
+    /* Hide everything except formula sheet */
+    header, .info-bar, .tab-nav-wrapper, .print-btn, .theme-toggle, .video-link, .video-embed-label,
     #tab-topics, #tab-practice, #tab-quiz, #tab-checklist, #tab-progress { display: none !important; }
     #tab-formulas { display: block !important; }
-    .formula-section { break-inside: avoid; border: 1px solid #ccc; margin-bottom: 0.6rem; padding: 0.6rem; }
+
+    /* Formula layout */
+    .formula-section { break-inside: avoid; border: 1px solid #ccc; margin-bottom: 0.6rem; padding: 0.6rem; border-radius: 0 !important; }
     .formula-section h3 { font-size: 11pt; margin-bottom: 0.4rem; }
     .formula-grid { grid-template-columns: repeat(2, 1fr); gap: 0.35rem; }
-    .formula-item { border: 1px solid #ddd; padding: 0.35rem 0.5rem; }
+    .formula-item { border: 1px solid #ddd; padding: 0.5rem 0.6rem; border-radius: 0 !important; overflow: visible !important; }
     .formula-item .label { font-size: 7.5pt; }
-    .formula-box { border: 1px solid #ddd; padding: 0.3rem; margin: 0.2rem 0; font-size: 10pt; }
-    .katex { font-size: 1em; }
+    .formula-box { border: 1px solid #ddd !important; padding: 0.8rem 0.5rem; margin: 0.2rem 0; font-size: 10pt; border-radius: 0 !important; overflow: visible !important; min-height: 2.5em; }
+
+    /* KaTeX: preserve ALL math rendering lines */
+    .katex { font-size: 1.1em !important; overflow: visible !important; }
+    .katex * { border-color: inherit !important; }
+    .katex .frac-line,
+    .katex .frac-line::before,
+    .katex .frac-line::after { background: currentColor !important; border-color: currentColor !important; }
+    .katex .sqrt-line,
+    .katex .sqrt-line::before,
+    .katex .sqrt-line::after { background: currentColor !important; border-color: currentColor !important; }
+    .katex .overline .overline-line,
+    .katex .underline .underline-line { background: currentColor !important; }
+    .katex .rule { background: currentColor !important; }
+    .katex svg line, .katex svg path { stroke: currentColor !important; }
+    .katex .vlist span { border-color: currentColor !important; }
+    .katex-html, .katex .base, .katex .strut,
+    .katex .vlist-t, .katex .vlist-t2, .katex .vlist-r,
+    .katex .vlist, .katex .vlist-s, .katex .mfrac,
+    .katex .mord, .katex .minner, .katex .msqrt,
+    .katex .sqrt, .katex .stretchy { overflow: visible !important; }
+
+    /* Title */
     #tab-formulas::before { content: 'Math 130 \2014  Test 1 Formula Sheet'; display: block; font-size: 16pt; font-weight: bold; text-align: center; margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 2px solid #000; }
   }
 </style>
@@ -292,25 +342,25 @@
 
   <!-- TOPICS -->
   <div id="tab-topics" class="tab-content active">
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">01</span><span class="topic-title">Sets — Intervals, Union, Intersection</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><b>Set-builder notation</b>: e.g. <span class="k">\{x \mid x \geq 3\}</span></li><li><b>Interval notation</b>: brackets [ ] include; parentheses ( ) exclude</li><li><b>Union</b> <span class="k">A \cup B</span>: elements in <em>either</em> set</li><li><b>Intersection</b> <span class="k">A \cap B</span>: elements in <em>both</em> sets</li></ul><h4>Common Intervals</h4><div class="formula-box"><span class="k">[a, b] \quad (a, b) \quad [a, \infty) \quad (-\infty, b]</span></div><div class="tip-box">⚡ ∞ and −∞ always get parentheses, never brackets!</div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">01</span><span class="topic-title">Sets — Intervals, Union, Intersection</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><b>Set-builder notation</b>: e.g. <span class="k">\{x \mid x \geq 3\}</span></li><li><b>Interval notation</b>: brackets [ ] include; parentheses ( ) exclude</li><li><b>Union</b> <span class="k">A \cup B</span>: elements in <em>either</em> set</li><li><b>Intersection</b> <span class="k">A \cap B</span>: elements in <em>both</em> sets</li></ul><h4>Common Intervals</h4><div class="formula-box"><span class="k">[a, b] \quad (a, b) \quad [a, \infty) \quad (-\infty, b]</span></div><div class="tip-box">⚡ ∞ and −∞ always get parentheses, never brackets!</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link" href="https://www.youtube.com/watch?v=lsvjiAsBZUM" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Intersection and Union of Two Intervals</div><div class="yt-sub">Interval notation with number line visuals</div></div></a><a class="video-link" href="https://www.youtube.com/watch?v=fezDDJij25U" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Intersection and Union of Discrete Sets</div><div class="yt-sub">Working with finite sets — listing elements in ∩ and ∪</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">02</span><span class="topic-title">Absolute Value</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><span class="k">|a|</span> = distance from <span class="k">a</span> to 0 — always ≥ 0</li><li><span class="k">|a| = a</span> if <span class="k">a \geq 0</span>; <span class="k">|a| = -a</span> if <span class="k">a < 0</span></li></ul><div class="formula-box"><span class="k">|x| = c \implies x = c \text{ or } x = -c \quad(c \geq 0)</span></div><div class="tip-box">⚡ Remember: <span class="k">\sqrt{x^2} = |x|</span></div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">02</span><span class="topic-title">Absolute Value</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><span class="k">|a|</span> = distance from <span class="k">a</span> to 0 — always ≥ 0</li><li><span class="k">|a| = a</span> if <span class="k">a \geq 0</span>; <span class="k">|a| = -a</span> if <span class="k">a < 0</span></li></ul><div class="formula-box"><span class="k">|x| = c \implies x = c \text{ or } x = -c \quad(c \geq 0)</span></div><div class="tip-box">⚡ Remember: <span class="k">\sqrt{x^2} = |x|</span></div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://youtube.com/shorts/alBGenaCn40" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Challenging Absolute Value Equations</div><div class="yt-sub">Quick walkthrough of tricky absolute value problems</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">03</span><span class="topic-title">Exponents</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Core Laws</h4><ul><li><span class="k">a^m \cdot a^n = a^{m+n}</span></li><li><span class="k">\frac{a^m}{a^n} = a^{m-n}</span></li><li><span class="k">(a^m)^n = a^{mn}</span></li><li><span class="k">(ab)^n = a^n b^n</span></li><li><span class="k">a^{-n} = \frac{1}{a^n}</span></li></ul><div class="tip-box">⚡ Write all final answers with <b>positive exponents only</b>.</div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">03</span><span class="topic-title">Exponents</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Core Laws</h4><ul><li><span class="k">a^m \cdot a^n = a^{m+n}</span></li><li><span class="k">\frac{a^m}{a^n} = a^{m-n}</span></li><li><span class="k">(a^m)^n = a^{mn}</span></li><li><span class="k">(ab)^n = a^n b^n</span></li><li><span class="k">a^{-n} = \frac{1}{a^n}</span></li></ul><div class="tip-box">⚡ Write all final answers with <b>positive exponents only</b>.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://youtu.be/o2B0IohGKNI" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Rational Exponents with a Few Examples</div><div class="yt-sub">Converting between radicals and fractional exponents</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">04</span><span class="topic-title">Factoring</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Methods (always start with GCF!)</h4><ul><li><b>GCF</b> — always factor out first</li><li><b>Grouping</b> — split into pairs</li><li><b>Difference of squares</b>: <span class="k">a^2 - b^2 = (a-b)(a+b)</span></li><li><b>Difference of cubes</b>: <span class="k">a^3 - b^3 = (a-b)(a^2+ab+b^2)</span></li><li><b>Sum of cubes</b>: <span class="k">a^3 + b^3 = (a+b)(a^2-ab+b^2)</span></li><li><b>Trinomials</b>: find two numbers that multiply to <span class="k">ac</span> and add to <span class="k">b</span></li></ul><div class="tip-box">⚡ Mnemonic for cubes: "SOAP" — Same, Opposite, Always Positive.</div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">04</span><span class="topic-title">Factoring</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Methods (always start with GCF!)</h4><ul><li><b>GCF</b> — always factor out first</li><li><b>Grouping</b> — split into pairs</li><li><b>Difference of squares</b>: <span class="k">a^2 - b^2 = (a-b)(a+b)</span></li><li><b>Difference of cubes</b>: <span class="k">a^3 - b^3 = (a-b)(a^2+ab+b^2)</span></li><li><b>Sum of cubes</b>: <span class="k">a^3 + b^3 = (a+b)(a^2-ab+b^2)</span></li><li><b>Trinomials</b>: find two numbers that multiply to <span class="k">ac</span> and add to <span class="k">b</span></li></ul><div class="tip-box">⚡ Mnemonic for cubes: "SOAP" — Same, Opposite, Always Positive.</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link" href="https://youtu.be/-CyiqgtA2_U" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Factor a Quadratic with Lead Coefficient = 1</div><div class="yt-sub">Finding two numbers that multiply and add correctly</div></div></a><a class="video-link" href="https://youtu.be/5aPaldvXCmw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Factor Quadratics with a Lead Coefficient</div><div class="yt-sub">AC method for trinomials when a ≠ 1</div></div></a><a class="video-link" href="https://youtu.be/7GQvKh6Tmgk" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Solve Quadratics by Factoring</div><div class="yt-sub">GCF, trinomials without &amp; with lead coefficients</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">05</span><span class="topic-title">Operations with Fractions & Rational Expressions</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><ul><li><b>Always factor first</b></li><li><b>Add/subtract</b>: find LCD, rewrite, combine numerators</li><li><b>Multiply</b>: factor → cancel → multiply</li><li><b>Divide</b>: flip second fraction → multiply</li></ul><div class="tip-box">⚡ Factor first! This is the #1 mistake on rational expression problems.</div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">05</span><span class="topic-title">Operations with Fractions & Rational Expressions</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><ul><li><b>Always factor first</b></li><li><b>Add/subtract</b>: find LCD, rewrite, combine numerators</li><li><b>Multiply</b>: factor → cancel → multiply</li><li><b>Divide</b>: flip second fraction → multiply</li></ul><div class="tip-box">⚡ Factor first! This is the #1 mistake on rational expression problems.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://youtu.be/LH40X-gPLOw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Solving Rational Equations</div><div class="yt-sub">Finding LCD, clearing fractions, checking for extraneous solutions</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">06</span><span class="topic-title">Equations — Linear & Quadratic</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Linear</h4><ul><li>Distribute, combine like terms, isolate variable</li><li>With fractions: multiply by LCD</li><li>Watch for no solution or all reals</li></ul><h4>Quadratic</h4><ul><li>Factor or use quadratic formula</li><li>Rational equations: check for extraneous solutions!</li></ul><div class="formula-box"><span class="k">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</span></div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">06</span><span class="topic-title">Equations — Linear & Quadratic</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><h4>Linear</h4><ul><li>Distribute, combine like terms, isolate variable</li><li>With fractions: multiply by LCD</li><li>Watch for no solution or all reals</li></ul><h4>Quadratic</h4><ul><li>Factor or use quadratic formula</li><li>Rational equations: check for extraneous solutions!</li></ul><div class="formula-box"><span class="k">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</span></div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link" href="https://youtu.be/7GQvKh6Tmgk" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Solve Quadratics by Factoring</div><div class="yt-sub">GCF, trinomials without &amp; with lead coefficients</div></div></a><a class="video-link" href="https://youtu.be/LH40X-gPLOw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Solving Rational Equations</div><div class="yt-sub">Finding LCD, clearing fractions, checking for extraneous solutions</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">07</span><span class="topic-title">Midpoint & Distance Formula</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">\text{Midpoint} = \left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)</span></div><div class="formula-box"><span class="k">d = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</span></div><div class="tip-box">⚡ Round to one decimal place when instructed!</div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">07</span><span class="topic-title">Midpoint & Distance Formula</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">\text{Midpoint} = \left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)</span></div><div class="formula-box"><span class="k">d = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</span></div><div class="tip-box">⚡ Round to one decimal place when instructed!</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://www.youtube.com/watch?v=dxskClJTbPQ" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Midpoint &amp; Distance Formula</div><div class="yt-sub">Step-by-step examples with coordinate pairs</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">08</span><span class="topic-title">Equation of a Circle</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">(x-h)^2 + (y-k)^2 = r^2</span></div><p>Center = <span class="k">(h,k)</span>, Radius = <span class="k">r</span></p><div class="tip-box">⚡ Right side is r², not r. Radius 5 → write 25.</div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">08</span><span class="topic-title">Equation of a Circle</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">(x-h)^2 + (y-k)^2 = r^2</span></div><p>Center = <span class="k">(h,k)</span>, Radius = <span class="k">r</span></p><div class="tip-box">⚡ Right side is r², not r. Radius 5 → write 25.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://youtu.be/golqytjtN-c?si=PLdB6fAKGrhVcuZo" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Standard Equation of a Circle Formula Explained!</div><div class="yt-sub">Center, radius, and writing the equation step by step</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">09</span><span class="topic-title">Lines — Slope, Forms, Parallel & Perpendicular</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><ul><li><b>Slope-intercept</b>: <span class="k">y = mx + b</span></li><li><b>Point-slope</b>: <span class="k">y - y_1 = m(x - x_1)</span></li><li><b>General</b>: <span class="k">Ax + By + C = 0</span></li></ul><div class="formula-box"><span class="k">\text{Parallel: } m_1 = m_2 \qquad \text{Perp: } m_1 \cdot m_2 = -1</span></div><div class="tip-box">⚡ Perpendicular: flip and negate. Slope 3 → perp slope −1/3.</div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">09</span><span class="topic-title">Lines — Slope, Forms, Parallel & Perpendicular</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><ul><li><b>Slope-intercept</b>: <span class="k">y = mx + b</span></li><li><b>Point-slope</b>: <span class="k">y - y_1 = m(x - x_1)</span></li><li><b>General</b>: <span class="k">Ax + By + C = 0</span></li></ul><div class="formula-box"><span class="k">\text{Parallel: } m_1 = m_2 \qquad \text{Perp: } m_1 \cdot m_2 = -1</span></div><div class="tip-box">⚡ Perpendicular: flip and negate. Slope 3 → perp slope −1/3.</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link" href="https://www.youtube.com/watch?v=4umbDjZ2R1I" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Slope Intercept vs Point Slope Form</div><div class="yt-sub">When to use each form and converting between them</div></div></a><a class="video-link" href="https://www.youtube.com/watch?v=acsR7w0I__w" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Finding Slopes of Parallel and Perpendicular Lines</div><div class="yt-sub">Identifying slopes and graphing parallel &amp; perpendicular lines</div></div></a></div></div></div>
 
-    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">10</span><span class="topic-title">Maximum/Minimum of a Quadratic — Vertex</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">x = -\frac{b}{2a}</span></div><p>Plug back into <span class="k">f(x)</span> for the max/min <b>value</b>.</p><ul><li><span class="k">a > 0</span> → minimum</li><li><span class="k">a < 0</span> → maximum</li></ul><div class="tip-box">⚡ The question usually wants the y-value (height, etc.), not the x-value.</div></div></div></div>
+    <div class="topic-card" onclick="toggleTopic(this)"><div class="topic-header"><span class="topic-number">10</span><span class="topic-title">Maximum/Minimum of a Quadratic — Vertex</span><span class="topic-chevron">▼</span></div><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">x = -\frac{b}{2a}</span></div><p>Plug back into <span class="k">f(x)</span> for the max/min <b>value</b>.</p><ul><li><span class="k">a > 0</span> → minimum</li><li><span class="k">a < 0</span> → maximum</li></ul><div class="tip-box">⚡ The question usually wants the y-value (height, etc.), not the x-value.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://www.youtube.com/watch?v=ygH-Y5YG5kE" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Vertex of a Parabola</div><div class="yt-sub">NancyPi — clear walkthrough of the vertex formula</div></div></a></div></div></div>
   </div>
 
   <!-- FORMULAS -->
@@ -381,45 +431,57 @@ tabNav.addEventListener('scroll',updateFades);window.addEventListener('resize',u
 
 document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{const n=btn.dataset.tab;document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');btn.classList.add('active');btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});if(n==='quiz'&&!quizStarted)initQuizView();if(n==='practice'&&!practiceInit)initPracticeView();if(n==='progress')renderProgress();setTimeout(renderMath,50)})});
 function toggleTopic(c){c.classList.toggle('open');setTimeout(renderMath,100)}
+function goToTopic(idx){
+  // Switch to topics tab
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-topics').classList.add('active');
+  document.querySelectorAll('.tab-btn')[0].classList.add('active');
+  // Open the card and scroll to it
+  const cards=document.querySelectorAll('.topic-card');
+  const card=cards[idx];
+  if(!card.classList.contains('open'))card.classList.add('open');
+  setTimeout(()=>{card.scrollIntoView({behavior:'smooth',block:'start'});renderMath();},100);
+}
 
 // ═══ PRACTICE SYSTEM ═══
 const allProblems=[
 // Factoring
-{id:'factor-a',label:'Factoring',pts:'4 pts',text:'Factor completely: <span class="k">2x^2-6x-108</span>',solution:'<div class="step">GCF = 2: <span class="k">2(x^2-3x-54)</span>. Numbers that multiply to −54 and add to −3: −9 and +6.<br><span class="k">=2(x-9)(x+6)</span></div>'},
-{id:'factor-b',label:'Factoring',pts:'4 pts',text:'Factor completely: <span class="k">2x^5-18x^4+28x^3</span>',solution:'<div class="step">GCF = <span class="k">2x^3</span>: <span class="k">2x^3(x^2-9x+14)</span>. Numbers: −7 and −2.<br><span class="k">=2x^3(x-7)(x-2)</span></div>'},
+{id:'factor-a',label:'Factoring',pts:'4 pts',topicIdx:3,warning:'Don\'t forget to pull out the GCF before trying to factor the trinomial.',text:'Factor completely: <span class="k">2x^2-6x-108</span>',solution:'<div class="step">GCF = 2: <span class="k">2(x^2-3x-54)</span>. Numbers that multiply to \u221254 and add to \u22123: \u22129 and +6.<br><span class="k">=2(x-9)(x+6)</span></div>'},
+{id:'factor-b',label:'Factoring',pts:'4 pts',topicIdx:3,warning:'Look for variable GCF too \u2014 factor out the highest power of the variable common to all terms.',text:'Factor completely: <span class="k">2x^5-18x^4+28x^3</span>',solution:'<div class="step">GCF = <span class="k">2x^3</span>: <span class="k">2x^3(x^2-9x+14)</span>. Numbers: \u22127 and \u22122.<br><span class="k">=2x^3(x-7)(x-2)</span></div>'},
 // Sets & Intervals
-{id:'sets-int-a',label:'Sets & Intervals',pts:'4 pts',text:'Let <span class="k">B=\\{x\\mid x\\geq -5\\}</span> and <span class="k">C=\\{x\\mid x<2\\}</span>.<br><br>Write <span class="k">B\\cap C</span> in interval notation.',solution:'<div class="step">B = [−5, ∞) and C = (−∞, 2). The overlap is <span class="k">[-5,\\;2)</span></div>'},
-{id:'sets-int-b',label:'Sets & Intervals',pts:'4 pts',text:'Let <span class="k">A=\\{x\\mid x\\geq 9\\}</span> and <span class="k">B=\\{x\\mid x\\geq -5\\}</span>.<br><br>Write <span class="k">A\\cup B</span> in interval notation.',solution:'<div class="step">A = [9, ∞) and B = [−5, ∞). B already contains A, so <span class="k">A\\cup B=[-5,\\;\\infty)</span></div>'},
+{id:'sets-int-a',label:'Sets & Intervals',pts:'4 pts',topicIdx:0,warning:'\u2229 means overlap/intersection. Draw both intervals on a number line to see where they share space.',text:'Let <span class="k">B=\\{x\\mid x\\geq -5\\}</span> and <span class="k">C=\\{x\\mid x<2\\}</span>.<br><br>Write <span class="k">B\\cap C</span> in interval notation.',solution:'<div class="step">B = [\u22125, \u221e) and C = (\u2212\u221e, 2). The overlap is <span class="k">[-5,\\;2)</span></div>'},
+{id:'sets-int-b',label:'Sets & Intervals',pts:'4 pts',topicIdx:0,warning:'When one set contains the other entirely, the union is just the larger set.',text:'Let <span class="k">A=\\{x\\mid x\\geq 9\\}</span> and <span class="k">B=\\{x\\mid x\\geq -5\\}</span>.<br><br>Write <span class="k">A\\cup B</span> in interval notation.',solution:'<div class="step">A = [9, \u221e) and B = [\u22125, \u221e). B already contains A, so <span class="k">A\\cup B=[-5,\\;\\infty)</span></div>'},
 // Finite Sets
-{id:'sets-fin-a',label:'Finite Sets',pts:'4 pts',text:'Let <span class="k">A=\\{3,4,5,7,8,9\\}</span> and <span class="k">C=\\{1,3,5,7,9\\}</span>.<br><br>Find <span class="k">A\\cup C</span>.',solution:'<div class="step">Combine all elements: <span class="k">\\{1,3,4,5,7,8,9\\}</span></div>'},
-{id:'sets-fin-b',label:'Finite Sets',pts:'4 pts',text:'Let <span class="k">A=\\{3,4,5,7,8,9\\}</span> and <span class="k">B=\\{2,4,6,8,10\\}</span>.<br><br>Find <span class="k">A\\cap B</span>.',solution:'<div class="step">Elements in both: <span class="k">\\{4,8\\}</span></div>'},
+{id:'sets-fin-a',label:'Finite Sets',pts:'4 pts',topicIdx:0,warning:'Union means list ALL elements from both sets, but don\'t repeat any element.',text:'Let <span class="k">A=\\{3,4,5,7,8,9\\}</span> and <span class="k">C=\\{1,3,5,7,9\\}</span>.<br><br>Find <span class="k">A\\cup C</span>.',solution:'<div class="step">Combine all elements: <span class="k">\\{1,3,4,5,7,8,9\\}</span></div>'},
+{id:'sets-fin-b',label:'Finite Sets',pts:'4 pts',topicIdx:0,warning:'Intersection means ONLY elements that appear in BOTH sets \u2014 leave everything else out.',text:'Let <span class="k">A=\\{3,4,5,7,8,9\\}</span> and <span class="k">B=\\{2,4,6,8,10\\}</span>.<br><br>Find <span class="k">A\\cap B</span>.',solution:'<div class="step">Elements in both: <span class="k">\\{4,8\\}</span></div>'},
 // Midpoint, Distance, Line
-{id:'midpoint',label:'Midpoint',pts:'4 pts',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the midpoint of <span class="k">\\overline{AB}</span>.',solution:'<div class="step"><span class="k">M=\\left(\\frac{8+1}{2},\\;\\frac{-8+16}{2}\\right)=(4.5,\\;4)</span></div>'},
-{id:'distance',label:'Distance Formula',pts:'4 pts',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the distance from A to B.',solution:'<div class="step"><span class="k">d=\\sqrt{(1-8)^2+(16-(-8))^2}=\\sqrt{49+576}=\\sqrt{625}=25</span></div>'},
-{id:'line-eq',label:'Equation of a Line',pts:'4 pts',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the equation of line AB.',solution:'<div class="step">Slope: <span class="k">m=\\frac{16-(-8)}{1-8}=-\\frac{24}{7}</span>. Point-slope with A:<br><span class="k">y+8=-\\frac{24}{7}(x-8) \\implies y=-\\frac{24}{7}x+\\frac{136}{7}</span></div>'},
+{id:'midpoint',label:'Midpoint',pts:'4 pts',topicIdx:6,warning:'Average the x-coordinates and y-coordinates separately \u2014 don\'t mix them up.',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the midpoint of <span class="k">\\overline{AB}</span>.',solution:'<div class="step"><span class="k">M=\\left(\\frac{8+1}{2},\\;\\frac{-8+16}{2}\\right)=(4.5,\\;4)</span></div>'},
+{id:'distance',label:'Distance Formula',pts:'4 pts',topicIdx:6,warning:'Watch the signs carefully \u2014 subtracting a negative becomes addition inside the squared terms.',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the distance from A to B.',solution:'<div class="step"><span class="k">d=\\sqrt{(1-8)^2+(16-(-8))^2}=\\sqrt{49+576}=\\sqrt{625}=25</span></div>'},
+{id:'line-eq',label:'Equation of a Line',pts:'4 pts',topicIdx:8,warning:'Double-check your slope sign when subtracting negatives in the rise/run calculation.',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the equation of line AB.',solution:'<div class="step">Slope: <span class="k">m=\\frac{16-(-8)}{1-8}=-\\frac{24}{7}</span>. Point-slope with A:<br><span class="k">y+8=-\\frac{24}{7}(x-8) \\implies y=-\\frac{24}{7}x+\\frac{136}{7}</span></div>'},
 // Circle
-{id:'circle',label:'Circle Equation',pts:'3 pts',text:'Write an equation of the circle with center (4, 2) and radius 5.',solution:'<div class="step"><span class="k">(x-4)^2+(y-2)^2=25</span></div>'},
+{id:'circle',label:'Circle Equation',pts:'3 pts',topicIdx:7,warning:'The right side is r\u00b2, not r. Radius 5 means you write 25 on the right side.',text:'Write an equation of the circle with center (4, 2) and radius 5.',solution:'<div class="step"><span class="k">(x-4)^2+(y-2)^2=25</span></div>'},
 // Exponents
-{id:'exp-a',label:'Exponent Simplification',pts:'4 pts',text:'Simplify with positive exponents only: <span class="k">\\dfrac{m^2 n^{-1} p^{-5}}{m^{-6} n^3 p^7}</span>',solution:'<div class="step">Subtract exponents: <span class="k">m^{2-(-6)}n^{-1-3}p^{-5-7}=m^8 n^{-4}p^{-12}=\\dfrac{m^8}{n^4 p^{12}}</span></div>'},
-{id:'exp-b',label:'Exponent Simplification',pts:'4 pts',text:'Simplify with positive exponents only: <span class="k">\\left(\\dfrac{3x}{y^{-3}\\cdot 6z^2}\\right)^4</span>',solution:'<div class="step">Simplify inside: <span class="k">\\frac{3x\\cdot y^3}{6z^2}=\\frac{xy^3}{2z^2}</span>. Raise to 4th power: <span class="k">\\frac{x^4 y^{12}}{16z^8}</span></div>'},
+{id:'exp-a',label:'Exponent Simplification',pts:'4 pts',topicIdx:2,warning:'When dividing, subtract exponents: top minus bottom. Subtracting a negative means adding.',text:'Simplify with positive exponents only: <span class="k">\\dfrac{m^2 n^{-1} p^{-5}}{m^{-6} n^3 p^7}</span>',solution:'<div class="step">Subtract exponents: <span class="k">m^{2-(-6)}n^{-1-3}p^{-5-7}=m^8 n^{-4}p^{-12}=\\dfrac{m^8}{n^4 p^{12}}</span></div>'},
+{id:'exp-b',label:'Exponent Simplification',pts:'4 pts',topicIdx:2,warning:'Simplify inside the parentheses FIRST (including flipping negative exponents), then raise to the power.',text:'Simplify with positive exponents only: <span class="k">\\left(\\dfrac{3x}{y^{-3}\\cdot 6z^2}\\right)^4</span>',solution:'<div class="step">Simplify inside: <span class="k">\\frac{3x\\cdot y^3}{6z^2}=\\frac{xy^3}{2z^2}</span>. Raise to 4th power: <span class="k">\\frac{x^4 y^{12}}{16z^8}</span></div>'},
 // Lines
-{id:'line-par',label:'Parallel Line',pts:'3 pts',text:'Find the equation of the line <b>parallel</b> to <span class="k">y=3x+3</span> that passes through (−6, 2).',solution:'<div class="step">Parallel → same slope m = 3. <span class="k">y-2=3(x+6) \\implies y=3x+20</span></div>'},
-{id:'line-perp',label:'Perpendicular Line',pts:'3 pts',text:'Find the equation of the line <b>perpendicular</b> to <span class="k">y=3x+3</span> that passes through (−6, 2).',solution:'<div class="step">Perpendicular → m = −1/3. <span class="k">y-2=-\\frac{1}{3}(x+6) \\implies y=-\\frac{1}{3}x</span></div>'},
+{id:'line-par',label:'Parallel Line',pts:'3 pts',topicIdx:8,warning:'Parallel lines have the SAME slope. Don\'t accidentally negate or flip it.',text:'Find the equation of the line <b>parallel</b> to <span class="k">y=3x+3</span> that passes through (\u22126, 2).',solution:'<div class="step">Parallel \u2192 same slope m = 3. <span class="k">y-2=3(x+6) \\implies y=3x+20</span></div>'},
+{id:'line-perp',label:'Perpendicular Line',pts:'3 pts',topicIdx:8,warning:'Perpendicular slope is the NEGATIVE RECIPROCAL \u2014 flip the fraction AND change the sign.',text:'Find the equation of the line <b>perpendicular</b> to <span class="k">y=3x+3</span> that passes through (\u22126, 2).',solution:'<div class="step">Perpendicular \u2192 m = \u22121/3. <span class="k">y-2=-\\frac{1}{3}(x+6) \\implies y=-\\frac{1}{3}x</span></div>'},
 // Vertex
-{id:'vertex',label:'Maximum of a Quadratic',pts:'3 pts',text:'<span class="k">h(t)=80t-16t^2</span>. What is the maximum height?',solution:'<div class="step"><span class="k">t=-\\frac{80}{2(-16)}=2.5</span> sec</div><div class="step"><span class="k">h(2.5)=200-100=100</span> feet</div>'},
+{id:'vertex',label:'Maximum of a Quadratic',pts:'3 pts',topicIdx:9,warning:'The question asks for the HEIGHT (the y-value), not the time/x-value. Don\'t stop after finding x.',text:'<span class="k">h(t)=80t-16t^2</span>. What is the maximum height?',solution:'<div class="step"><span class="k">t=-\\frac{80}{2(-16)}=2.5</span> sec</div><div class="step"><span class="k">h(2.5)=200-100=100</span> feet</div>'},
 // Rational expressions
-{id:'rat-add',label:'Add Rational Expressions',pts:'5 pts',text:'Simplify: <span class="k">\\dfrac{2}{7d}+\\dfrac{7}{3}</span>',solution:'<div class="step">LCD = 21d. <span class="k">\\frac{6}{21d}+\\frac{49d}{21d}=\\frac{49d+6}{21d}</span></div>'},
-{id:'rat-sub',label:'Subtract Rational Expressions',pts:'5 pts',text:'Simplify: <span class="k">\\dfrac{7}{2x}-\\dfrac{6}{x-1}</span>',solution:'<div class="step">LCD = 2x(x−1). <span class="k">\\frac{7(x-1)-12x}{2x(x-1)}=\\frac{-5x-7}{2x(x-1)}</span></div>'},
-{id:'rat-mult',label:'Multiply Rational Expressions',pts:'5 pts',text:'Simplify: <span class="k">\\dfrac{3x-27}{x-8}\\cdot\\dfrac{5x-40}{6x-54}</span>',solution:'<div class="step">Factor: <span class="k">\\frac{3(x-9)}{x-8}\\cdot\\frac{5(x-8)}{6(x-9)}</span>. Cancel (x−9) and (x−8): <span class="k">=\\frac{5}{2}</span></div>'},
+{id:'rat-add',label:'Add Rational Expressions',pts:'5 pts',topicIdx:4,warning:'The LCD must account for BOTH denominators. Don\'t forget variables in the LCD.',text:'Simplify: <span class="k">\\dfrac{2}{7d}+\\dfrac{7}{3}</span>',solution:'<div class="step">LCD = 21d. <span class="k">\\frac{6}{21d}+\\frac{49d}{21d}=\\frac{49d+6}{21d}</span></div>'},
+{id:'rat-sub',label:'Subtract Rational Expressions',pts:'5 pts',topicIdx:4,warning:'Distribute the negative sign to ALL terms in the second numerator \u2014 this is the #1 error.',text:'Simplify: <span class="k">\\dfrac{7}{2x}-\\dfrac{6}{x-1}</span>',solution:'<div class="step">LCD = 2x(x\u22121). <span class="k">\\frac{7(x-1)-12x}{2x(x-1)}=\\frac{-5x-7}{2x(x-1)}</span></div>'},
+{id:'rat-mult',label:'Multiply Rational Expressions',pts:'5 pts',topicIdx:4,warning:'Always factor BEFORE canceling. Never cancel terms across addition/subtraction.',text:'Simplify: <span class="k">\\dfrac{3x-27}{x-8}\\cdot\\dfrac{5x-40}{6x-54}</span>',solution:'<div class="step">Factor: <span class="k">\\frac{3(x-9)}{x-8}\\cdot\\frac{5(x-8)}{6(x-9)}</span>. Cancel (x\u22129) and (x\u22128): <span class="k">=\\frac{5}{2}</span></div>'},
 // Solve linear
-{id:'solve-lin-a',label:'Solve Linear Equation',pts:'5 pts',text:'Solve for x: <span class="k">-9x+26=-4(x-9)</span>',solution:'<div class="step">−9x + 26 = −4x + 36 → −5x = 10 → <span class="k">x=-2</span></div>'},
-{id:'solve-lin-b',label:'Solve Linear Equation (Fractions)',pts:'5 pts',text:'Solve for x: <span class="k">-\\frac{1}{2}x-\\frac{4}{3}=\\frac{7x-7}{3}</span>',solution:'<div class="step">Multiply both sides by 6: −3x − 8 = 14x − 14 → −17x = −6 → <span class="k">x=\\frac{6}{17}</span></div>'},
+{id:'solve-lin-a',label:'Solve Linear Equation',pts:'5 pts',topicIdx:5,warning:'When distributing a negative, it flips the sign of EVERY term inside the parentheses.',text:'Solve for x: <span class="k">-9x+26=-4(x-9)</span>',solution:'<div class="step">\u22129x + 26 = \u22124x + 36 \u2192 \u22125x = 10 \u2192 <span class="k">x=-2</span></div>'},
+{id:'solve-lin-b',label:'Solve Linear Equation (Fractions)',pts:'5 pts',topicIdx:5,warning:'When clearing fractions, multiply EVERY term on BOTH sides by the LCD \u2014 don\'t miss any.',text:'Solve for x: <span class="k">-\\frac{1}{2}x-\\frac{4}{3}=\\frac{7x-7}{3}</span>',solution:'<div class="step">Multiply both sides by 6: \u22123x \u2212 8 = 14x \u2212 14 \u2192 \u221217x = \u22126 \u2192 <span class="k">x=\\frac{6}{17}</span></div>'},
 // Solve rational
-{id:'solve-rat-a',label:'Solve Rational Equation',pts:'5 pts',text:'Solve for x: <span class="k">\\dfrac{6}{x-4}=\\dfrac{10}{x-2}</span>',solution:'<div class="step">Cross-multiply: 6(x−2) = 10(x−4) → 6x−12 = 10x−40 → −4x = −28 → <span class="k">x=7</span></div>'},
-{id:'solve-rat-b',label:'Solve Rational Equation',pts:'5 pts',text:'Solve for x: <span class="k">\\dfrac{3}{x-3}=\\dfrac{x}{x-3}+7</span>',solution:'<div class="step">Multiply by (x−3): 3 = x + 7(x−3) → 3 = 8x − 21 → x = 3. But x = 3 makes the denominator 0 → <b>No solution</b></div>'},
+{id:'solve-rat-a',label:'Solve Rational Equation',pts:'5 pts',topicIdx:5,warning:'Cross-multiplication only works when there\'s a SINGLE fraction on each side of the equals sign.',text:'Solve for x: <span class="k">\\dfrac{6}{x-4}=\\dfrac{10}{x-2}</span>',solution:'<div class="step">Cross-multiply: 6(x\u22122) = 10(x\u22124) \u2192 6x\u221212 = 10x\u221240 \u2192 \u22124x = \u221228 \u2192 <span class="k">x=7</span></div>'},
+{id:'solve-rat-b',label:'Solve Rational Equation',pts:'5 pts',topicIdx:5,warning:'ALWAYS check your answer in the original equation. If it makes any denominator zero, it\'s extraneous \u2014 no solution.',text:'Solve for x: <span class="k">\\dfrac{3}{x-3}=\\dfrac{x}{x-3}+7</span>',solution:'<div class="step">Multiply by (x\u22123): 3 = x + 7(x\u22123) \u2192 3 = 8x \u2212 21 \u2192 x = 3. But x = 3 makes the denominator 0 \u2192 <b>No solution</b></div>'},
 // Solve quadratic
-{id:'solve-quad-a',label:'Solve Quadratic Equation',pts:'5 pts',text:'Solve for x: <span class="k">5x^2=-3x+2</span>',solution:'<div class="step">5x² + 3x − 2 = 0 → (5x−2)(x+1) = 0 → <span class="k">x=\\frac{2}{5}</span> or <span class="k">x=-1</span></div>'},
-{id:'solve-quad-b',label:'Solve Quadratic Equation',pts:'5 pts',text:'Solve for x: <span class="k">2x^2-4x+9=x+12</span>',solution:'<div class="step">2x² − 5x − 3 = 0 → (2x+1)(x−3) = 0 → <span class="k">x=-\\frac{1}{2}</span> or <span class="k">x=3</span></div>'}
+{id:'solve-quad-a',label:'Solve Quadratic Equation',pts:'5 pts',topicIdx:5,warning:'Move ALL terms to one side first (set equal to 0) before factoring.',text:'Solve for x: <span class="k">5x^2=-3x+2</span>',solution:'<div class="step">5x\u00b2 + 3x \u2212 2 = 0 \u2192 (5x\u22122)(x+1) = 0 \u2192 <span class="k">x=\\frac{2}{5}</span> or <span class="k">x=-1</span></div>'},
+{id:'solve-quad-b',label:'Solve Quadratic Equation',pts:'5 pts',topicIdx:5,warning:'Combine like terms carefully before factoring. Double-check all signs when moving terms across.',text:'Solve for x: <span class="k">2x^2-4x+9=x+12</span>',solution:'<div class="step">2x\u00b2 \u2212 5x \u2212 3 = 0 \u2192 (2x+1)(x\u22123) = 0 \u2192 <span class="k">x=-\\frac{1}{2}</span> or <span class="k">x=3</span></div>'}
 ];
 
 let practiceInit=false,practiceQueue=[],practiceCorrect=0,practiceMissed=0,practiceIdx=0,practiceSolShown=false;
@@ -444,10 +506,25 @@ function showPP(){
   setTimeout(renderMath,50);
 }
 
-function revealPS(){if(practiceSolShown)return;practiceSolShown=true;document.getElementById('psol').classList.add('show');document.getElementById('pbtns').innerHTML='<button class="practice-action-btn got-it" onclick="pGot()">✓ Got It</button><button class="practice-action-btn missed" onclick="pMiss()">✗ Missed It</button>';setTimeout(renderMath,50)}
+function revealPS(){
+  if(practiceSolShown)return;practiceSolShown=true;
+  const pi=practiceQueue[practiceIdx],p=allProblems[pi];
+  document.getElementById('psol').classList.add('show');
+  const warnHtml=p.warning?'<div class="warning-box"><b>Watch out:</b> '+p.warning+'</div>':'';
+  document.getElementById('pbtns').innerHTML='<button class="practice-action-btn got-it" onclick="pGot()">✓ Got It</button><button class="practice-action-btn missed" onclick="pMiss()">✗ Missed It</button>'+warnHtml;
+  setTimeout(renderMath,50);
+}
 
 function pGot(){practiceCorrect++;practiceIdx++;practiceIdx>=practiceQueue.length?showPC():showPP()}
-function pMiss(){const pi=practiceQueue[practiceIdx];allProblems[pi]._missed=true;practiceQueue.push(pi);practiceMissed++;practiceIdx++;practiceIdx>=practiceQueue.length?showPC():showPP()}
+function pMiss(){
+  const pi=practiceQueue[practiceIdx],p=allProblems[pi];
+  p._missed=true;practiceQueue.push(pi);practiceMissed++;practiceIdx++;
+  if(practiceIdx>=practiceQueue.length){showPC();return;}
+  showPP();
+  // Show review link after re-render
+  const reviewHtml=typeof p.topicIdx==='number'?'<button class="review-topic-btn" onclick="goToTopic('+p.topicIdx+')">\uD83D\uDCD6 Review: '+document.querySelectorAll('.topic-card')[p.topicIdx].querySelector('.topic-title').textContent+'</button>':'';
+  if(reviewHtml){const c=document.getElementById('practice-container');c.insertAdjacentHTML('beforeend',reviewHtml);}
+}
 
 function showPC(){
   // Save session
