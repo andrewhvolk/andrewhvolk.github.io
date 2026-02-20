@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math 130 – Test 2 Review (Spring 2026)</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Dark Theme (Default) */
+            --bg: #0f1117; 
+            --surface: #181a24; 
+            --surface2: #1f2233; 
+            --border: #2a2d42;
+            --text: #e2e4ef; 
+            --text-muted: #8b8fa8;
+            --accent: #6c63ff; 
+            --accent-glow: rgba(108, 99, 255, 0.25);
+            --accent-hover: #5a52d5;
+            --green: #34d399; 
+            --green-bg: rgba(52, 211, 153, 0.1);
+            --amber: #fbbf24; 
+            --amber-bg: rgba(251, 191, 36, 0.1);
+            --red: #f87171; 
+            --red-bg: rgba(248, 113, 113, 0.1);
+            --shadow: 0 8px 32px rgba(0,0,0,0.3);
+            --radius: 16px;
+        }
+
+        body.light {
+            /* Light Theme */
+            --bg: #f8fafc; 
+            --surface: #ffffff; 
+            --surface2: #f1f5f9; 
+            --border: #e2e8f0;
+            --text: #0f172a; 
+            --text-muted: #64748b;
+            --shadow: 0 8px 32px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+        h1 { font-size: 2.5rem; color: var(--accent); }
+        h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        
+        .theme-toggle {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.75rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--border);
+            transform: scale(1.05);
+        }
+
+        /* Nav Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn:hover { background: var(--surface2); color: var(--text); }
+        .tab-btn.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px var(--accent-glow); }
+
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        /* Checklist */
+        .checklist-section { margin-bottom: 2rem; }
+        .checklist-section h3 { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+        .check-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; user-select: none; }
+        .check-item:hover { border-color: var(--accent); }
+        .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+        .check-item.done .check-box { background: var(--accent); border-color: var(--accent); }
+        .check-item.done { opacity: 0.7; }
+        .check-item.done span { text-decoration: line-through; }
+        
+        .practice-link {
+            margin-left: auto;
+            color: var(--accent);
+            opacity: 0.5;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border-radius: 6px;
+        }
+        .check-item:hover .practice-link { opacity: 1; }
+        .practice-link:hover { background: var(--accent-glow); transform: scale(1.1); }
+
+        /* Formulas */
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+        .formula-card { background: var(--surface2); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
+        .formula-title { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 600; }
+        .formula-math { font-size: 1.25rem; color: var(--text); }
+
+        /* Quiz Section */
+        .quiz-selector { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem; justify-content: center;}
+        .quiz-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
+        .quiz-btn:hover { border-color: var(--accent); }
+        .quiz-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+        .quiz-box { text-align: center; padding: 1rem 0; }
+        .question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.8; }
+        
+        .svg-canvas { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin: 0 auto 1.5rem auto; display: block; max-width: 100%; height: auto; }
+
+        /* Multi-Inputs */
+        .input-group { display: flex; justify-content: center; align-items: center; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .input-group input { background: var(--bg); border: 2px solid var(--border); color: var(--text); padding: 1rem; border-radius: 12px; font-size: 1.2rem; font-family: 'JetBrains Mono', monospace; text-align: center; transition: border-color 0.2s; outline: none; }
+        .input-group input:focus { border-color: var(--accent); }
+        
+        .inp-standard { width: 200px; }
+        .inp-small { width: 80px; padding: 0.75rem !important; }
+        .inp-tiny { width: 60px; padding: 0.5rem !important; font-size: 1rem !important; transform: translateY(10px); }
+        .math-text { font-size: 1.5rem; font-family: 'DM Serif Display', serif; }
+
+        /* Buttons */
+        .btn-primary { background: var(--accent); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .btn-primary:active { transform: translateY(0); }
+        .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-left: 0.5rem;}
+        .btn-secondary:hover { background: var(--surface2); }
+
+        /* Feedback */
+        .feedback { margin-top: 1.5rem; padding: 1.25rem; border-radius: 12px; font-weight: 500; display: none; animation: fadeIn 0.3s ease; text-align: left; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct { display: block; background: var(--green-bg); color: var(--green); border: 1px solid var(--green); text-align: center; }
+        .feedback.incorrect { display: block; background: var(--surface2); color: var(--text); border: 1px solid var(--red); border-left: 6px solid var(--red); }
+        .solution-step { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border); color: var(--text-muted); font-size: 1.05rem; }
+
+        /* Progress Stats & History Table */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--surface2); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
+        .stat-val { font-size: 2.5rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; }
+        .stat-label { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .history-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95rem; }
+        .history-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; padding: 1rem; border-bottom: 2px solid var(--border); text-align: left;}
+        .history-table td { padding: 1rem; border-bottom: 1px solid var(--border); }
+        .history-table tr:hover { background: var(--surface2); }
+        .best-row { background: var(--green-bg); }
+        
+        .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .badge-perfect { background: var(--green); color: #000; }
+        .badge-retry { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber); }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 2rem; }
+            .tabs { flex-direction: column; }
+            .history-table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>Math 130 – Test 2 Review</h1>
+            <p style="color: var(--text-muted); margin-top: 0.5rem; font-weight: 500;">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
+            <p style="color: var(--text-muted); margin-top: 0.25rem; font-size: 0.9rem;">Topics: Geometry, Exponentials &amp; Logarithms</p>
+        </div>
+        <button class="theme-toggle" id="theme-btn" title="Toggle Theme">
+            <i data-lucide="moon"></i>
+        </button>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="schedule">
+            <i data-lucide="calendar"></i> Schedule
+        </button>
+        <button class="tab-btn" data-tab="formulas">
+            <i data-lucide="sigma"></i> Formulas
+        </button>
+        <button class="tab-btn" data-tab="practice">
+            <i data-lucide="pen-tool"></i> Interactive Practice
+        </button>
+        <button class="tab-btn" data-tab="progress">
+            <i data-lucide="bar-chart-2"></i> Checklist &amp; Progress
+        </button>
+    </div>
+
+    <!-- SCHEDULE TAB -->
+    <div id="tab-schedule" class="tab-content active">
+        <div class="card">
+            <h2>Course Schedule</h2>
+            <div style="overflow-x: auto;">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Topic / Section</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fri, 2/20</td>
+                            <td>Section 4.2</td>
+                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mon, 2/23</td>
+                            <td>Section 4.2</td>
+                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Wed, 2/25</td>
+                            <td>Section 4.3 & Quiz 5</td>
+                            <td>
+                                <span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span>
+                                <span class="badge" style="background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px;">QUIZ</span>
+                                <span class="badge" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red); margin-left: 4px;">4.2 DUE</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Fri, 2/27</td>
+                            <td>Section 4.3</td>
+                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mon, 3/2</td>
+                            <td>Geometry: Polygons</td>
+                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Wed, 3/4</td>
+                            <td>Geometry: Polygons & Quiz 6</td>
+                            <td>
+                                <span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span>
+                                <span class="badge" style="background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px;">QUIZ</span>
+                                <span class="badge" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red); margin-left: 4px;">4.3 DUE</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Fri, 3/6</td>
+                            <td>Geometry: Polygons</td>
+                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mon, 3/9</td>
+                            <td>Geometry: Circles</td>
+                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Wed, 3/11</td>
+                            <td>Geometry: Circles & Quiz 7</td>
+                            <td>
+                                <span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span>
+                                <span class="badge" style="background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px;">QUIZ</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Fri, 3/13</td>
+                            <td>Geometry: Circles</td>
+                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mar 16 - 20</td>
+                            <td>Spring Break</td>
+                            <td><span class="badge" style="background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber);">NO CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mon, 3/23</td>
+                            <td>Test 2 Review</td>
+                            <td><span class="badge badge-retry">REVIEW</span></td>
+                        </tr>
+                        <tr>
+                            <td>Wed, 3/25</td>
+                            <td>Assessment Day</td>
+                            <td><span class="badge" style="background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber);">NO CLASS</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fri, 3/27</td>
+                            <td>Test 2 Review & Quiz 8</td>
+                            <td>
+                                <span class="badge badge-retry">REVIEW</span>
+                                <span class="badge" style="background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px;">QUIZ</span>
+                                <span class="badge" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red); margin-left: 4px;">GEOM DUE</span>
+                            </td>
+                        </tr>
+                        <tr class="best-row">
+                            <td><strong>Mon, 3/30</strong></td>
+                            <td><strong>Test 2: Geometry, 4.2, 4.3</strong></td>
+                            <td>
+                                <span class="badge" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red);">EXAM</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>ALEKS Modules</h2>
+            <div style="overflow-x: auto;">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Opens</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Section 4.2</strong></td>
+                            <td>Feb 18 at 2:11 PM</td>
+                            <td><strong>Feb 25 at 2:10 PM</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Section 4.3</strong></td>
+                            <td>Feb 25 at 2:11 PM</td>
+                            <td><strong>Mar 4 at 2:10 PM</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Geometry</strong></td>
+                            <td>Mar 4 at 2:11 PM</td>
+                            <td><strong>Mar 27 at 2:10 PM</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORMULAS TAB -->
+    <div id="tab-formulas" class="tab-content">
+        <div class="card">
+            <h2>Essential Formulas</h2>
+            <div class="formula-grid">
+                <div class="formula-card"><div class="formula-title">Compound Interest</div><div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div></div>
+                <div class="formula-card"><div class="formula-title">Continuous Compounding</div><div class="formula-math">$$A = Pe^{rt}$$</div></div>
+                <div class="formula-card"><div class="formula-title">Arc Length</div><div class="formula-math">$$s = r\theta \quad \text{(in rad)}$$</div></div>
+                <div class="formula-card"><div class="formula-title">Sector Area</div><div class="formula-math">$$A = \frac{1}{2}r^2\theta \quad \text{(in rad)}$$</div></div>
+                <div class="formula-card"><div class="formula-title">Heron's Formula</div><div class="formula-math">$$A = \sqrt{s(s-a)(s-b)(s-c)}$$</div></div>
+                <div class="formula-card"><div class="formula-title">Trapezoid Area</div><div class="formula-math">$$A = \frac{1}{2}h(b_1 + b_2)$$</div></div>
+                <div class="formula-card"><div class="formula-title">Triangle Area</div><div class="formula-math">$$A = \frac{1}{2}bh$$</div></div>
+                <div class="formula-card"><div class="formula-title">Logarithmic Form</div><div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div></div>
+                <div class="formula-card"><div class="formula-title">Change of Base</div><div class="formula-math">$$\log_b(x) = \frac{\ln(x)}{\ln(b)}$$</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRACTICE TAB -->
+    <div id="tab-practice" class="tab-content">
+        <div class="card">
+            <h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
+            
+            <div class="quiz-selector" id="quiz-categories"></div>
+
+            <div class="quiz-box" id="quiz-active-area" style="display: none; border-top: 1px solid var(--border); padding-top: 2rem;">
+                <div id="svg-display"></div>
+                <div class="question-text" id="question-display"></div>
+                
+                <div class="input-group" id="dynamic-inputs">
+                    <!-- Inputs injected here based on type -->
+                </div>
+                
+                <div>
+                    <button class="btn-primary" id="btn-submit">Check Answer</button>
+                    <button class="btn-secondary" id="btn-next" style="display: none;">Next Question</button>
+                </div>
+                
+                <div id="feedback-display" class="feedback"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKLIST & PROGRESS TAB -->
+    <div id="tab-progress" class="tab-content">
+        <div class="card">
+            <h2>Topics Checklist</h2>
+            <div id="checklist-container"></div>
+        </div>
+
+        <div class="card">
+            <h2>Your Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-attempted">0</div>
+                    <div class="stat-label">Questions Solved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-perfect">0</div>
+                    <div class="stat-label">Perfect First Tries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-accuracy">0%</div>
+                    <div class="stat-label">Overall Accuracy</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Practice History</h3>
+            <div style="overflow-x: auto;">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date / Time</th>
+                            <th>Topic</th>
+                            <th>Retries</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <!-- History injected here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="btn-secondary" onclick="resetProgress()" style="color: var(--red); border-color: var(--red-bg);">
+                    <i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
+                    Reset All Progress
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- STATE MANAGEMENT ---
+    const STORAGE_KEY = 'math130_test2_state_v5'; // Bumped version for expanded practice generators
+    
+    let state = {
+        theme: 'dark',
+        checklist: [
+            // Section 4.2
+            { id: '42_1', cat: 'Section 4.2', label: 'Table for an exponential function', done: false },
+            { id: '42_2', cat: 'Section 4.2', label: 'Graphing an exponential function and its asymptote: $f(x)=b^x$', done: false },
+            { id: '42_3', cat: 'Section 4.2', label: 'Using a calculator to evaluate exponential expressions', done: false, practiceId: 'eval_exp' },
+            { id: '42_4', cat: 'Section 4.2', label: 'Evaluating an exponential function that models a real-world situation', done: false, practiceId: 'eval_exp' },
+            { id: '42_5', cat: 'Section 4.2', label: 'Using a calculator to evaluate exponential expressions involving base $e$', done: false, practiceId: 'eval_exp' },
+            { id: '42_6', cat: 'Section 4.2', label: 'Calculating and comparing simple interest and compound interest', done: false, practiceId: 'interest' },
+            { id: '42_7', cat: 'Section 4.2', label: 'Finding a final amount in a word problem on exponential growth or decay', done: false, practiceId: 'exp_growth' },
+            { id: '42_8', cat: 'Section 4.2', label: 'Finding the final amount in a word problem on compound interest', done: false, practiceId: 'interest' },
+            { id: '42_9', cat: 'Section 4.2', label: 'Finding the final amount in a word problem on continuous compound interest', done: false, practiceId: 'interest' },
+            
+            // Section 4.3
+            { id: '43_1', cat: 'Section 4.3', label: 'Using a calculator to evaluate natural and common logarithmic expressions', done: false, practiceId: 'eval_exp' },
+            { id: '43_2', cat: 'Section 4.3', label: 'Converting between logarithmic and exponential equations', done: false, practiceId: 'logexp_conv' },
+            { id: '43_3', cat: 'Section 4.3', label: 'Converting between natural logarithmic and exponential equations', done: false, practiceId: 'logexp_conv' },
+            { id: '43_4', cat: 'Section 4.3', label: 'Evaluating logarithmic expressions', done: false, practiceId: 'logexp' },
+            { id: '43_5', cat: 'Section 4.3', label: 'Solving an equation of the form $\\log_b(a)=c$', done: false, practiceId: 'logexp' },
+            { id: '43_6', cat: 'Section 4.3', label: 'Solving an exponential equation by using logarithms (decimal answers, basic)', done: false, practiceId: 'logexp' },
+            { id: '43_7', cat: 'Section 4.3', label: 'Solving an exponential equation by using natural logarithms (decimal answers)', done: false, practiceId: 'logexp' },
+
+            // Geometry
+            { id: 'geo_1', cat: 'Geometry', label: 'Area of a piecewise rectangular figure', done: false },
+            { id: 'geo_2', cat: 'Geometry', label: 'Area of a triangle', done: false, practiceId: 'basic_areas' },
+            { id: 'geo_3', cat: 'Geometry', label: 'Area of a parallelogram', done: false, practiceId: 'basic_areas' },
+            { id: 'geo_4', cat: 'Geometry', label: 'Area of a trapezoid', done: false, practiceId: 'basic_areas' },
+            { id: 'geo_5', cat: 'Geometry', label: 'Circumference of a circle', done: false, practiceId: 'basic_circles' },
+            { id: 'geo_6', cat: 'Geometry', label: 'Circumference and area of a circle', done: false, practiceId: 'basic_circles' },
+            { id: 'geo_7', cat: 'Geometry', label: 'Circumference and area of a circle (exact answers in terms of $\\pi$)', done: false, practiceId: 'basic_circles' },
+            { id: 'geo_8', cat: 'Geometry', label: 'Word problem involving the area between two concentric circles', done: false, practiceId: 'basic_circles' },
+            { id: 'geo_9', cat: 'Geometry', label: 'Converting degrees-minutes-seconds to decimal degrees', done: false },
+            { id: 'geo_10', cat: 'Geometry', label: 'Converting decimal degrees to degrees-minutes-seconds', done: false, practiceId: 'dms' },
+            { id: 'geo_11', cat: 'Geometry', label: 'Converting degrees to radians and radians to degrees (Problem type 1)', done: false, practiceId: 'rad_deg' },
+            { id: 'geo_12', cat: 'Geometry', label: 'Converting degrees to radians and radians to degrees (Problem type 2)', done: false, practiceId: 'rad_deg' },
+            { id: 'geo_13', cat: 'Geometry', label: 'Sketching an angle with absolute value less than $2\\pi$ radians in standard position', done: false },
+            { id: 'geo_14', cat: 'Geometry', label: 'Drawing an arc to find a central angle or an arc length on the unit circle', done: false, practiceId: 'circles' },
+            { id: 'geo_15', cat: 'Geometry', label: 'Drawing an arc to find a central angle or an arc length on a non-unit circle', done: false, practiceId: 'circles' },
+            { id: 'geo_16', cat: 'Geometry', label: 'Arc length and central angle measure', done: false, practiceId: 'circles' },
+            { id: 'geo_17', cat: 'Geometry', label: 'Area of a sector of a circle', done: false, practiceId: 'circles' },
+            { id: 'geo_18', cat: 'Geometry', label: 'Using the area formula for a sector of a circle in a real-world situation', done: false, practiceId: 'circles' },
+            { id: 'geo_19', cat: 'Geometry', label: 'Angular and linear speed', done: false, practiceId: 'speed' }
+        ],
+        history: [] // { topic: string, date: string, tries: number }
+    };
+
+    function loadState() {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                state = { ...state, ...parsed };
+            }
+        } catch (e) { console.error("Could not load state", e); }
+    }
+
+    function saveState() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { console.error("Could not save state", e); }
+        updateStatsUI();
+        renderHistory();
+    }
+
+    // --- GENERATORS LOGIC ---
+    const generators = [
+        {
+            id: 'eval_exp',
+            label: 'Evaluate Exponentials',
+            generate: () => {
+                const isE = Math.random() > 0.5;
+                const coeff = Math.floor(Math.random() * 40) + 10;
+                const rate = (Math.random() * 0.15 + 0.05).toFixed(2);
+                const x = Math.floor(Math.random() * 8) + 2;
+                
+                let ans, q, sol;
+                if (isE) {
+                    ans = coeff * Math.exp(rate * x);
+                    q = `Evaluate the exponential function $f(x) = ${coeff}e^{${rate}x}$ for $x = ${x}$. (Round to 2 decimal places)`;
+                    sol = `$f(${x}) = ${coeff}e^{(${rate})(${x})} = ${coeff}e^{${(rate*x).toFixed(2)}} = ${ans.toFixed(2)}$`;
+                } else {
+                    const b = Math.floor(Math.random() * 4) + 2;
+                    ans = coeff * Math.pow(b, x);
+                    q = `Evaluate the exponential function $f(x) = ${coeff}(${b})^x$ for $x = ${x}$.`;
+                    sol = `$f(${x}) = ${coeff}(${b})^{${x}} = ${coeff}(${Math.pow(b,x)}) = ${ans}$`;
+                }
+                
+                return { q: q, inputType: 'number', a: ans, tol: 0.05, solution: sol };
+            }
+        },
+        {
+            id: 'exp_growth',
+            label: 'Growth & Decay',
+            generate: () => {
+                const isGrowth = Math.random() > 0.5;
+                const P = (Math.floor(Math.random() * 40) + 10) * 100;
+                const r = (Math.floor(Math.random() * 15) + 2); // 2 to 16%
+                const t = Math.floor(Math.random() * 10) + 3;
+                
+                const rate = isGrowth ? (r/100) : -(r/100);
+                const word = isGrowth ? "grows" : "decays";
+                const ans = P * Math.exp(rate * t);
+                
+                return {
+                    q: `A population initially has $${P}$ individuals and ${word} continuously at a rate of $${r}\\%$ per year. Find the population after $${t}$ years. (Round to the nearest whole number)`,
+                    inputType: 'number', a: Math.round(ans), tol: 0.5,
+                    solution: `Use the continuous growth/decay formula $A = Pe^{rt}$. <br> $A = ${P}e^{${rate} \\cdot ${t}} = ${ans.toFixed(2)} \\approx ${Math.round(ans)}$`
+                };
+            }
+        },
+        {
+            id: 'interest',
+            label: 'Compound Interest',
+            generate: () => {
+                const p = (Math.floor(Math.random() * 40) + 10) * 100;
+                const r = (Math.floor(Math.random() * 60) + 20) / 10;
+                const t = Math.floor(Math.random() * 15) + 5;
+                const types = [
+                    {n: 1, label: "annually"}, {n: 12, label: "monthly"}, {n: 365, label: "daily"}, {n: 'c', label: "continuously"}
+                ];
+                const type = types[Math.floor(Math.random() * types.length)];
+
+                let ans, sol;
+                if (type.n === 'c') {
+                    ans = p * Math.exp((r/100) * t);
+                    sol = `For continuous compounding, use $A = Pe^{rt}$. <br> $A = ${p} e^{(${r/100})(${t})} = ${ans.toFixed(2)}$`;
+                } else {
+                    ans = p * Math.pow(1 + (r/100)/type.n, type.n * t);
+                    sol = `For discrete compounding, use $A = P\\left(1+\\frac{r}{n}\\right)^{nt}$. <br> $A = ${p}\\left(1+\\frac{${r/100}}{${type.n}}\\right)^{(${type.n})(${t})} = ${ans.toFixed(2)}$`;
+                }
+
+                return {
+                    q: `Find the amount $A$ for $\\$${p}$ invested at $${r}\\%$ for $${t}$ years compounded ${type.label}. (Round to the nearest cent)`,
+                    inputType: 'number', a: ans, tol: 0.05, solution: sol
+                };
+            }
+        },
+        {
+            id: 'rad_deg',
+            label: 'Radians ↔ Degrees',
+            generate: () => {
+                if (Math.random() > 0.5) {
+                    const d = (Math.floor(Math.random() * 23) + 1) * 15;
+                    const ans = d * Math.PI / 180;
+                    return {
+                        q: `Convert $${d}^\\circ$ to radians. (Round to 3 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.005,
+                        solution: `Multiply by $\\frac{\\pi}{180^\\circ}$: $${d} \\cdot \\frac{\\pi}{180} = ${ans.toFixed(3)}$`
+                    };
+                } else {
+                    const num = Math.floor(Math.random() * 11) + 1;
+                    const den = [2, 3, 4, 6][Math.floor(Math.random() * 4)];
+                    const ans = (num * 180) / den;
+                    return {
+                        q: `Convert $\\frac{${num}\\pi}{${den}}$ radians to degrees.`,
+                        inputType: 'number', a: ans, tol: 0.1,
+                        solution: `Multiply by $\\frac{180^\\circ}{\\pi}$: $\\frac{${num}\\pi}{${den}} \\cdot \\frac{180}{\\pi} = \\frac{${num * 180}}{${den}} = ${ans}^\\circ$`
+                    };
+                }
+            }
+        },
+        {
+            id: 'dms',
+            label: 'Convert DMS',
+            generate: () => {
+                const deg = (Math.random() * 80 + 10).toFixed(4);
+                const d = Math.floor(deg);
+                const rem = (deg - d) * 60;
+                const m = Math.floor(rem);
+                const s = Math.round((rem - m) * 60);
+                
+                return {
+                    q: `Convert $${deg}^\\circ$ to degrees, minutes, and seconds. (Round to the nearest second)`,
+                    inputType: 'dms', a: { d, m, s },
+                    solution: `Multiply the decimal by 60 to get minutes, then multiply the remaining decimal by 60 to get seconds. <br> $${deg}^\\circ = ${d}^\\circ ${m}' ${s}''$`
+                };
+            }
+        },
+        {
+            id: 'logexp_conv',
+            label: 'Log ↔ Exp Conversions',
+            generate: () => {
+                const b = Math.floor(Math.random()*6)+2;
+                const y = Math.floor(Math.random()*4)+2;
+                const x = Math.pow(b, y);
+                
+                if(Math.random() > 0.5) {
+                    return {
+                        q: `Write the exponential equation in logarithmic form: $${b}^{${y}} = ${x}$`,
+                        inputType: 'log_form', a: { base: b, arg: x, ans: y },
+                        solution: `The base of the exponent becomes the base of the log: $\\log_{${b}}(${x}) = ${y}$`
+                    };
+                } else {
+                    return {
+                        q: `Write the logarithmic equation in exponential form: $\\log_{${b}}(${x}) = ${y}$`,
+                        inputType: 'exp_form', a: { base: b, exp: y, ans: x },
+                        solution: `The base of the log becomes the base of the exponent: $${b}^{${y}} = ${x}$`
+                    };
+                }
+            }
+        },
+        {
+            id: 'basic_areas',
+            label: 'Basic Areas (Visual)',
+            generate: () => {
+                const randType = Math.random();
+                if(randType > 0.66) {
+                    // Trapezoid
+                    const b1 = Math.floor(Math.random() * 8) + 3;
+                    const b2 = b1 + Math.floor(Math.random() * 6) + 2;
+                    const h = Math.floor(Math.random() * 6) + 3;
+                    const ans = 0.5 * h * (b1 + b2);
+                    const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
+                        <polygon points="60,30 ${60+b1*10},30 ${40+b2*10},90 40,90" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                        <line x1="60" y1="30" x2="60" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
+                        <rect x="60" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
+                        <text x="${60+(b1*10)/2}" y="20" fill="var(--text)" font-size="14" text-anchor="middle">${b1} m</text>
+                        <text x="${40+(b2*10)/2}" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b2} m</text>
+                        <text x="35" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
+                    </svg>`;
+                    return {
+                        q: `Find the area of the trapezoid.`,
+                        svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                        solution: `Area of a trapezoid: $A = \\frac{1}{2}h(b_1 + b_2) = \\frac{1}{2}(${h})(${b1} + ${b2}) = ${ans}$`
+                    };
+                } else if(randType > 0.33) {
+                    // Parallelogram
+                    const b = Math.floor(Math.random() * 10) + 5;
+                    const h = Math.floor(Math.random() * 8) + 4;
+                    const ans = b * h;
+                    const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
+                        <polygon points="50,90 170,90 130,30 10,30" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                        <line x1="50" y1="30" x2="50" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
+                        <rect x="50" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
+                        <text x="110" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b} m</text>
+                        <text x="40" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
+                    </svg>`;
+                    return {
+                        q: `Find the area of the parallelogram.`,
+                        svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                        solution: `Area of a parallelogram: $A = bh = (${b})(${h}) = ${ans}$`
+                    };
+                } else {
+                    // Triangle
+                    const b = Math.floor(Math.random() * 10) + 5;
+                    const h = Math.floor(Math.random() * 8) + 4;
+                    const ans = 0.5 * b * h;
+                    const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
+                        <polygon points="50,90 150,90 90,30" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                        <line x1="90" y1="30" x2="90" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
+                        <rect x="90" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
+                        <text x="100" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b} m</text>
+                        <text x="80" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
+                    </svg>`;
+                    return {
+                        q: `Find the area of the triangle.`,
+                        svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                        solution: `Area of a triangle: $A = \\frac{1}{2}bh = \\frac{1}{2}(${b})(${h}) = ${ans}$`
+                    };
+                }
+            }
+        },
+        {
+            id: 'basic_circles',
+            label: 'Basic Circles',
+            generate: () => {
+                const r = Math.floor(Math.random() * 15) + 3;
+                if (Math.random() > 0.6) {
+                    const R = r + Math.floor(Math.random() * 5) + 2;
+                    const ans = Math.PI * (R*R - r*r);
+                    return {
+                        q: `Find the area between two concentric circles with radii $r_1 = ${r}$ and $r_2 = ${R}$. (Round to 2 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.05,
+                        solution: `Subtract the inner area from the outer area: $A = \\pi(${R})^2 - \\pi(${r})^2 = ${ans.toFixed(2)}$`
+                    };
+                } else if (Math.random() > 0.5) {
+                    const ans = Math.PI * r * r;
+                    return {
+                        q: `Find the area of a circle with radius $r = ${r}$. (Round to 2 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.05,
+                        solution: `$A = \\pi r^2 = \\pi(${r})^2 = ${ans.toFixed(2)}$`
+                    };
+                } else {
+                    const ans = 2 * Math.PI * r;
+                    return {
+                        q: `Find the circumference of a circle with radius $r = ${r}$. (Round to 2 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.05,
+                        solution: `$C = 2\\pi r = 2\\pi(${r}) = ${ans.toFixed(2)}$`
+                    };
+                }
+            }
+        },
+        {
+            id: 'transversals',
+            label: 'Similar Triangles (Transversals)',
+            generate: () => {
+                const a = Math.floor(Math.random()*15)+10;
+                const b = Math.floor(Math.random()*15)+10;
+                const c = Math.floor(Math.random()*15)+10;
+                const x = (b * c) / a;
+                
+                const svg = `<svg viewBox="0 0 300 150" class="svg-canvas" width="500" height="250">
+                    <!-- Parallel lines -->
+                    <line x1="10" y1="30" x2="290" y2="30" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="10" y1="80" x2="290" y2="80" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="10" y1="130" x2="290" y2="130" stroke="var(--text)" stroke-width="2"/>
+                    <!-- Transversals -->
+                    <line x1="80" y1="10" x2="140" y2="140" stroke="var(--accent)" stroke-width="2"/>
+                    <line x1="220" y1="10" x2="160" y2="140" stroke="var(--accent)" stroke-width="2"/>
+                    <!-- Labels -->
+                    <text x="95" y="60" fill="var(--text)" font-size="14">${a}</text>
+                    <text x="125" y="110" fill="var(--text)" font-size="14">${b}</text>
+                    <text x="195" y="60" fill="var(--text)" font-size="14">${c}</text>
+                    <text x="175" y="110" fill="var(--accent)" font-weight="bold" font-size="14">x</text>
+                </svg>`;
+
+                return {
+                    q: `Lines $l$, $m$, and $n$ are parallel. Find the length of $x$. (Round to 1 decimal place)`,
+                    svg: svg, inputType: 'number', a: x, tol: 0.1,
+                    solution: `By similar proportions across parallel lines: $\\frac{${a}}{${b}} = \\frac{${c}}{x} \\implies x = \\frac{${b} \\cdot ${c}}{${a}} = ${x.toFixed(1)}$`
+                }
+            }
+        },
+        {
+            id: 'circles',
+            label: 'Sectors & Arcs (Visual)',
+            generate: () => {
+                const rNum = (Math.random() * 10 + 2).toFixed(1);
+                const isDeg = Math.random() > 0.5;
+                let thetaStr, thetaRad;
+
+                if (isDeg) {
+                    const deg = Math.floor(Math.random() * 120) + 30;
+                    thetaStr = `${deg}^\\circ`;
+                    thetaRad = deg * Math.PI / 180;
+                } else {
+                    const num = Math.floor(Math.random() * 3) + 1;
+                    const den = Math.floor(Math.random() * 4) + 3;
+                    thetaStr = `\\frac{${num}\\pi}{${den}}`;
+                    thetaRad = (num * Math.PI) / den;
+                }
+
+                const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
+                    <path d="M60,60 L110,60 A50,50 0 0,0 25,25 Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
+                    <text x="85" y="75" fill="var(--text)" font-size="12">r = ${rNum}</text>
+                    <text x="45" y="45" fill="var(--text)" font-size="12">${isDeg ? thetaStr.replace('^\\circ','°') : thetaStr}</text>
+                </svg>`;
+
+                if (Math.random() > 0.5) {
+                    return {
+                        q: `Find the arc length $s$ given radius $r=${rNum}$ and central angle $\\theta=${thetaStr}$. (Round to 1 decimal place)`,
+                        svg: svg, inputType: 'number', a: rNum * thetaRad, tol: 0.05,
+                        solution: `First, ensure $\\theta$ is in radians: ${thetaRad.toFixed(3)}. <br> $s = r\\theta = (${rNum})(${thetaRad.toFixed(3)}) = ${(rNum * thetaRad).toFixed(1)}$`
+                    };
+                } else {
+                    return {
+                        q: `Find the area $A$ of the sector given radius $r=${rNum}$ and central angle $\\theta=${thetaStr}$. (Round to 1 decimal place)`,
+                        svg: svg, inputType: 'number', a: 0.5 * rNum * rNum * thetaRad, tol: 0.05,
+                        solution: `First, ensure $\\theta$ is in radians: ${thetaRad.toFixed(3)}. <br> $A = \\frac{1}{2}r^2\\theta = \\frac{1}{2}(${rNum})^2(${thetaRad.toFixed(3)}) = ${(0.5 * rNum * rNum * thetaRad).toFixed(1)}$`
+                    };
+                }
+            }
+        },
+        {
+            id: 'speed',
+            label: 'Angular & Linear Speed',
+            generate: () => {
+                const r = Math.floor(Math.random() * 15) + 5;
+                const rpm = Math.floor(Math.random() * 50) + 10;
+                
+                if (Math.random() > 0.5) {
+                    const ans = 2 * Math.PI * rpm;
+                    return {
+                        q: `A wheel is rotating at $${rpm}$ revolutions per minute (rpm). Find the angular speed $\\omega$ in radians per minute. (Round to 1 decimal place)`,
+                        inputType: 'number', a: ans, tol: 0.5,
+                        solution: `One revolution is $2\\pi$ radians. $\\omega = ${rpm} \\text{ rev/min} \\cdot 2\\pi \\text{ rad/rev} = ${ans.toFixed(1)}$`
+                    };
+                } else {
+                    const ans = 2 * Math.PI * rpm * r;
+                    return {
+                        q: `A wheel with radius $r = ${r}$ inches is rotating at $${rpm}$ rpm. Find the linear speed $v$ in inches per minute. (Round to 1 decimal place)`,
+                        inputType: 'number', a: ans, tol: 0.5,
+                        solution: `First find angular speed $\\omega = ${rpm} \\cdot 2\\pi$. Then $v = r\\omega = ${r}(${rpm} \\cdot 2\\pi) = ${ans.toFixed(1)}$`
+                    };
+                }
+            }
+        },
+        {
+            id: 'logexp',
+            label: 'Solve Log Equations',
+            generate: () => {
+                const type = Math.random();
+                if (type < 0.5) {
+                    const b = Math.floor(Math.random() * 6) + 2; 
+                    const c = Math.floor(Math.random() * 800) + 50; 
+                    const ans = Math.log(c) / Math.log(b);
+                    return {
+                        q: `Solve for $x$: $${b}^x = ${c}$. (Round to 3 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.0005,
+                        solution: `Take the natural log of both sides: $\\ln(${b}^x) = \\ln(${c}) \\implies x\\ln(${b}) = \\ln(${c}) \\implies x = \\frac{\\ln(${c})}{\\ln(${b})} = ${ans.toFixed(3)}$`
+                    };
+                } else {
+                    const b = Math.floor(Math.random() * 5) + 3;
+                    const c = Math.floor(Math.random() * 200) + 20;
+                    const ans = Math.log(c) / Math.log(b);
+                    return {
+                        q: `Evaluate using the change of base formula: $\\log_{${b}} ${c}$. (Round to 3 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.0005,
+                        solution: `Change of Base: $\\log_{${b}}(${c}) = \\frac{\\ln(${c})}{\\ln(${b})} = ${ans.toFixed(3)}$`
+                    };
+                }
+            }
+        }
+    ];
+
+    let currentQuiz = null;
+    let currentQuestion = null;
+    let currentRetries = 0;
+
+    // --- UI INITIATION & EVENT LISTENERS ---
+    document.addEventListener('DOMContentLoaded', () => {
+        lucide.createIcons();
+        loadState();
+        applyTheme(state.theme);
+        renderChecklist();
+        renderQuizCategories();
+        updateStatsUI();
+        renderHistory();
+        // Wait briefly for elements to be injected, then render math
+        setTimeout(renderMath, 100);
+
+        document.getElementById('theme-btn').addEventListener('click', () => {
+            const newTheme = state.theme === 'dark' ? 'light' : 'dark';
+            state.theme = newTheme; applyTheme(newTheme); saveState();
+        });
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                const target = e.currentTarget;
+                target.classList.add('active');
+                document.getElementById('tab-' + target.dataset.tab).classList.add('active');
+            });
+        });
+
+        document.getElementById('btn-submit').addEventListener('click', checkAnswer);
+        document.getElementById('btn-next').addEventListener('click', loadQuestion);
+        
+        // Enter key submission for dynamic inputs
+        document.getElementById('dynamic-inputs').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkAnswer();
+        });
+    });
+
+    function applyTheme(theme) {
+        if (theme === 'light') {
+            document.body.classList.add('light');
+            document.getElementById('theme-btn').innerHTML = '<i data-lucide="sun"></i>';
+        } else {
+            document.body.classList.remove('light');
+            document.getElementById('theme-btn').innerHTML = '<i data-lucide="moon"></i>';
+        }
+        lucide.createIcons();
+    }
+
+    function renderChecklist() {
+        const container = document.getElementById('checklist-container');
+        container.innerHTML = '';
+        
+        const categories = [...new Set(state.checklist.map(item => item.cat))];
+        
+        categories.forEach(cat => {
+            const section = document.createElement('div');
+            section.className = 'checklist-section';
+            section.innerHTML = `<h3>${cat}</h3><div class="checklist-grid"></div>`;
+            const grid = section.querySelector('.checklist-grid');
+            
+            const items = state.checklist.filter(i => i.cat === cat);
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `check-item ${item.done ? 'done' : ''}`;
+                div.innerHTML = `
+                    <div class="check-box">${item.done ? '<i data-lucide="check" style="width:16px; color:white;"></i>' : ''}</div>
+                    <span style="flex: 1;">${item.label}</span>
+                    ${item.practiceId ? `<div class="practice-link" onclick="goToPractice('${item.practiceId}', event)" title="Jump to Interactive Practice"><i data-lucide="pen-tool" style="width:18px; height:18px;"></i></div>` : ''}
+                `;
+                div.addEventListener('click', () => { 
+                    item.done = !item.done; 
+                    saveState(); 
+                    renderChecklist(); 
+                });
+                grid.appendChild(div);
+            });
+            
+            container.appendChild(section);
+        });
+        
+        lucide.createIcons();
+        renderMath();
+    }
+
+    // Function to jump to a specific practice generator
+    window.goToPractice = function(id, event) {
+        event.stopPropagation(); // Prevents the checklist item from toggling when you click the pen
+        
+        // Switch to the Practice Tab
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        document.querySelector('.tab-btn[data-tab="practice"]').classList.add('active');
+        document.getElementById('tab-practice').classList.add('active');
+        
+        // Select the specific quiz button
+        document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
+        const targetBtn = document.querySelector(`.quiz-btn[data-id="${id}"]`);
+        if (targetBtn) targetBtn.classList.add('active');
+        
+        // Start the quiz and scroll to the top
+        startQuiz(id);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    function renderQuizCategories() {
+        const container = document.getElementById('quiz-categories');
+        container.innerHTML = '';
+        generators.forEach(gen => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-btn';
+            btn.textContent = gen.label;
+            btn.dataset.id = gen.id; // Added to easily find it later
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                startQuiz(gen.id);
+            });
+            container.appendChild(btn);
+        });
+    }
+
+    function updateStatsUI() {
+        const total = state.history.length;
+        const perfect = state.history.filter(h => h.tries === 0).length;
+        const accuracy = total === 0 ? 0 : Math.round((perfect / total) * 100);
+        
+        document.getElementById('stat-attempted').textContent = total;
+        document.getElementById('stat-perfect').textContent = perfect;
+        document.getElementById('stat-accuracy').textContent = accuracy + '%';
+    }
+
+    function renderHistory() {
+        const tbody = document.getElementById('history-body');
+        tbody.innerHTML = '';
+        
+        // Show last 10
+        const recent = [...state.history].slice(0, 10);
+        
+        recent.forEach((h, i) => {
+            const tr = document.createElement('tr');
+            if(h.tries === 0) tr.className = 'best-row';
+            
+            const d = new Date(h.date);
+            const dateStr = `${d.getMonth()+1}/${d.getDate()} at ${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
+            
+            const badge = h.tries === 0 
+                ? `<span class="badge badge-perfect">PERFECT</span>` 
+                : `<span class="badge badge-retry">${h.tries} RETRY</span>`;
+
+            tr.innerHTML = `
+                <td>${dateStr}</td>
+                <td><strong>${h.topic}</strong></td>
+                <td>${h.tries}</td>
+                <td>${badge}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function startQuiz(id) {
+        currentQuiz = generators.find(g => g.id === id);
+        document.getElementById('quiz-active-area').style.display = 'block';
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        if (!currentQuiz) return;
+        currentRetries = 0;
+        currentQuestion = currentQuiz.generate();
+        
+        document.getElementById('question-display').innerHTML = currentQuestion.q;
+        
+        // Handle SVG injection
+        const svgContainer = document.getElementById('svg-display');
+        if(currentQuestion.svg) {
+            svgContainer.innerHTML = currentQuestion.svg;
+            svgContainer.style.display = 'block';
+        } else {
+            svgContainer.style.display = 'none';
+        }
+        
+        // Build Input UI based on Type
+        const inputArea = document.getElementById('dynamic-inputs');
+        inputArea.innerHTML = '';
+        
+        if (currentQuestion.inputType === 'dms') {
+            inputArea.innerHTML = `
+                <input type="number" id="inp-d" class="inp-small"> <span class="math-text">°</span>
+                <input type="number" id="inp-m" class="inp-small"> <span class="math-text">'</span>
+                <input type="number" id="inp-s" class="inp-small"> <span class="math-text">"</span>
+            `;
+        } else if (currentQuestion.inputType === 'log_form') {
+            inputArea.innerHTML = `
+                <span class="math-text">log</span>
+                <input type="number" id="inp-base" class="inp-tiny">
+                <span class="math-text">(</span>
+                <input type="number" id="inp-arg" class="inp-small">
+                <span class="math-text">) =</span>
+                <input type="number" id="inp-ans" class="inp-small">
+            `;
+        } else if (currentQuestion.inputType === 'exp_form') {
+            inputArea.innerHTML = `
+                <input type="number" id="inp-base" class="inp-small">
+                <span class="math-text" style="transform: translateY(-10px)">^</span>
+                <input type="number" id="inp-exp" class="inp-tiny" style="transform: translateY(-15px)">
+                <span class="math-text">=</span>
+                <input type="number" id="inp-ans" class="inp-small">
+            `;
+        } else {
+            inputArea.innerHTML = `<input type="number" step="any" id="answer-input" class="inp-standard" placeholder="Your Answer" autocomplete="off">`;
+        }
+        
+        // Focus first input
+        setTimeout(() => { const firstInp = inputArea.querySelector('input'); if(firstInp) firstInp.focus(); }, 50);
+        
+        document.getElementById('btn-submit').style.display = 'inline-block';
+        document.getElementById('btn-next').style.display = 'none';
+        
+        const feedback = document.getElementById('feedback-display');
+        feedback.className = 'feedback';
+        feedback.innerHTML = '';
+        
+        renderMath();
+    }
+
+    function checkAnswer() {
+        if (!currentQuestion) return;
+        
+        let isCorrect = false;
+        
+        // Validate based on input type
+        if (currentQuestion.inputType === 'dms') {
+            const ud = parseInt(document.getElementById('inp-d').value);
+            const um = parseInt(document.getElementById('inp-m').value);
+            const us = parseInt(document.getElementById('inp-s').value);
+            if(isNaN(ud) || isNaN(um) || isNaN(us)) return;
+            isCorrect = (ud === currentQuestion.a.d && um === currentQuestion.a.m && us === currentQuestion.a.s);
+        } else if (currentQuestion.inputType === 'log_form') {
+            const ub = parseFloat(document.getElementById('inp-base').value);
+            const uarg = parseFloat(document.getElementById('inp-arg').value);
+            const uans = parseFloat(document.getElementById('inp-ans').value);
+            if(isNaN(ub) || isNaN(uarg) || isNaN(uans)) return;
+            isCorrect = (ub === currentQuestion.a.base && uarg === currentQuestion.a.arg && uans === currentQuestion.a.ans);
+        } else if (currentQuestion.inputType === 'exp_form') {
+            const ub = parseFloat(document.getElementById('inp-base').value);
+            const uexp = parseFloat(document.getElementById('inp-exp').value);
+            const uans = parseFloat(document.getElementById('inp-ans').value);
+            if(isNaN(ub) || isNaN(uexp) || isNaN(uans)) return;
+            isCorrect = (ub === currentQuestion.a.base && uexp === currentQuestion.a.exp && uans === currentQuestion.a.ans);
+        } else {
+            const input = document.getElementById('answer-input');
+            const userVal = parseFloat(input.value);
+            if (isNaN(userVal)) return;
+            isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol;
+        }
+
+        const feedback = document.getElementById('feedback-display');
+
+        if (isCorrect) {
+            // Save to gamified history
+            state.history.unshift({ topic: currentQuiz.label, date: new Date().toISOString(), tries: currentRetries });
+            if(state.history.length > 50) state.history.pop(); // keep last 50
+            saveState();
+
+            // Disable inputs
+            document.querySelectorAll('#dynamic-inputs input').forEach(inp => inp.disabled = true);
+            document.getElementById('btn-submit').style.display = 'none';
+            document.getElementById('btn-next').style.display = 'inline-block';
+            document.getElementById('btn-next').focus();
+
+            feedback.className = 'feedback correct';
+            const badgeMsg = currentRetries === 0 ? "Perfect!" : "You got it!";
+            feedback.innerHTML = `<i data-lucide="check-circle" style="display:inline-block; vertical-align:middle; margin-right:8px;"></i> ${badgeMsg}`;
+        } else {
+            currentRetries++;
+            feedback.className = 'feedback incorrect';
+            feedback.innerHTML = `
+                <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--red);"></i> Not quite right. Try again!</div>
+                <div class="solution-step"><strong>Hint:</strong> ${currentQuestion.solution}</div>
+            `;
+        }
+        
+        lucide.createIcons();
+        renderMath();
+    }
+
+    function resetProgress() {
+        if (confirm("Are you sure you want to delete all your checklist progress and history?")) {
+            state.history = [];
+            state.checklist.forEach(c => c.done = false);
+            saveState();
+            renderChecklist();
+        }
+    }
+
+    function renderMath() {
+        if (window.renderMathInElement) {
+            renderMathInElement(document.body, {
+                delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ],
+                throwOnError: false
+            });
+        }
+    }
+</script>
+</body>
+</html>
