@@ -10,11 +10,11 @@
     
     <!-- KaTeX for Math Rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 
     <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
 
     <style>
         :root {
@@ -46,6 +46,15 @@
             --border: #e2e8f0;
             --text: #0f172a; 
             --text-muted: #64748b;
+            --accent: #5b52e0;
+            --accent-glow: rgba(91, 82, 224, 0.12);
+            --accent-hover: #4a42c0;
+            --green: #059669;
+            --green-bg: rgba(5, 150, 105, 0.08);
+            --amber: #d97706;
+            --amber-bg: rgba(217, 119, 6, 0.08);
+            --red: #dc2626;
+            --red-bg: rgba(220, 38, 38, 0.08);
             --shadow: 0 8px 32px rgba(0,0,0,0.06);
         }
 
@@ -110,7 +119,7 @@
             background: var(--surface);
             border: 1px solid var(--border);
             color: var(--text-muted);
-            padding: 0.75rem 1.5rem;
+            padding: 0.7rem 1.25rem;
             border-radius: 30px;
             font-family: 'DM Sans', sans-serif;
             font-size: 1rem;
@@ -139,7 +148,7 @@
         /* Checklist */
         .checklist-section { margin-bottom: 2rem; }
         .checklist-section h3 { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
-        .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+        .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
         .check-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; user-select: none; }
         .check-item:hover { border-color: var(--accent); }
         .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
@@ -150,25 +159,27 @@
         .practice-link {
             margin-left: auto;
             color: var(--accent);
-            opacity: 0.5;
+            opacity: 0.75;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 4px;
             border-radius: 6px;
+            flex-shrink: 0;
         }
         .check-item:hover .practice-link { opacity: 1; }
         .practice-link:hover { background: var(--accent-glow); transform: scale(1.1); }
 
         /* Formulas */
-        .formula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+        .formula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr)); gap: 1.5rem; }
         .formula-card { background: var(--surface2); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
         .formula-title { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 600; }
         .formula-math { font-size: 1.25rem; color: var(--text); }
+        .formula-vars { color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem; line-height: 1.5; }
 
         /* Quiz Section */
-        .quiz-selector { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem; justify-content: center;}
+        .quiz-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
         .quiz-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
         .quiz-btn:hover { border-color: var(--accent); }
         .quiz-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
@@ -217,14 +228,50 @@
         .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .badge-perfect { background: var(--green); color: #000; }
         .badge-retry { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber); }
+        .badge-class { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+        .badge-quiz { background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px; }
+        .badge-due { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); margin-left: 4px; }
+        .badge-exam { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
+        .badge-noclass { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber); }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
 
+        /* Schedule date states */
+        .schedule-past td { opacity: 0.4; }
+        .schedule-past td .badge { opacity: 0.6; }
+        .schedule-today { background: var(--accent-glow) !important; border-left: 4px solid var(--accent); }
+        .schedule-next { background: var(--surface2); }
+
+        /* Section progress bars */
+        .progress-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .progress-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+        .progress-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .progress-item-label { font-weight: 600; font-size: 0.9rem; }
+        .progress-item-count { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted); }
+        .progress-bar-track { background: var(--border); border-radius: 6px; height: 8px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; border-radius: 6px; background: var(--accent); transition: width 0.4s ease; }
+        .progress-bar-fill.complete { background: var(--green); }
+
+        /* Video link & watched state */
+        .video-link { color: var(--text); }
+        .video-link span { color: var(--text); font-weight: 500; }
+        .video-link:visited { color: var(--text); }
+        .video-link:visited span { color: var(--text); }
+        .video-link i[data-lucide] { color: var(--green) !important; flex-shrink: 0; opacity: 0.85; }
+        .video-link:hover { border-color: var(--green); }
+        .video-link:hover i[data-lucide] { opacity: 1; }
+        .video-link.watched { border-color: var(--green); background: var(--green-bg); }
+        .video-link.watched i[data-lucide] { color: var(--green) !important; opacity: 0.5; }
+        .video-link.watched span { opacity: 0.5; text-decoration: line-through; }
+        .video-link::after { content: '↗'; font-size: 0.8rem; color: var(--text); opacity: 0.35; margin-left: auto; padding-left: 0.5rem; flex-shrink: 0; }
+
         @media (max-width: 768px) {
             .container { padding: 1rem; }
             h1 { font-size: 2rem; }
-            .tabs { flex-direction: column; }
+            .tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; scrollbar-width: thin; }
+            .tab-btn { white-space: nowrap; flex-shrink: 0; padding: 0.6rem 1rem; font-size: 0.9rem; }
+            .svg-canvas { width: 100% !important; height: auto !important; }
             .history-table { display: block; overflow-x: auto; white-space: nowrap; }
         }
     </style>
@@ -238,12 +285,12 @@
             <p style="color: var(--text-muted); margin-top: 0.5rem; font-weight: 500;">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
             <p style="color: var(--text-muted); margin-top: 0.25rem; font-size: 0.9rem;">Topics: Geometry, Exponentials &amp; Logarithms</p>
         </div>
-        <button class="theme-toggle" id="theme-btn" title="Toggle Theme">
+        <button class="theme-toggle" id="theme-btn" title="Toggle Theme" aria-label="Toggle dark and light theme">
             <i data-lucide="moon"></i>
         </button>
     </header>
 
-    <div class="tabs">
+    <div class="tabs" role="tablist" aria-label="Review tool sections">
         <button class="tab-btn active" data-tab="schedule">
             <i data-lucide="calendar"></i> Schedule
         </button>
@@ -251,17 +298,23 @@
             <i data-lucide="sigma"></i> Formulas
         </button>
         <button class="tab-btn" data-tab="practice">
-            <i data-lucide="pen-tool"></i> Interactive Practice
+            <i data-lucide="pen-tool"></i> Practice
         </button>
         <button class="tab-btn" data-tab="progress">
-            <i data-lucide="bar-chart-2"></i> Checklist &amp; Progress
+            <i data-lucide="bar-chart-2"></i> Progress
+        </button>
+        <button class="tab-btn" data-tab="videos">
+            <i data-lucide="play-circle"></i> Videos
         </button>
     </div>
 
     <!-- SCHEDULE TAB -->
     <div id="tab-schedule" class="tab-content active">
         <div class="card">
-            <h2>Course Schedule</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                <h2 style="margin-bottom: 0;">Course Schedule</h2>
+                <div id="exam-countdown" style="background: var(--red-bg); border: 1px solid var(--red); color: var(--red); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;"></div>
+            </div>
             <div style="overflow-x: auto;">
                 <table class="history-table">
                     <thead>
@@ -271,97 +324,97 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="schedule-body">
+                        <tr data-date="2026-02-20">
                             <td>Fri, 2/20</td>
                             <td>Section 4.2</td>
-                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                            <td><span class="badge badge-class">CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-02-23">
                             <td>Mon, 2/23</td>
                             <td>Section 4.2</td>
-                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                            <td><span class="badge badge-class">CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-02-25">
                             <td>Wed, 2/25</td>
                             <td>Section 4.3 & Quiz 5</td>
                             <td>
-                                <span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span>
-                                <span class="badge" style="background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px;">QUIZ</span>
-                                <span class="badge" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red); margin-left: 4px;">4.2 DUE</span>
+                                <span class="badge badge-class">CLASS</span>
+                                <span class="badge badge-quiz">QUIZ</span>
+                                <span class="badge badge-due">4.2 DUE</span>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-02-27">
                             <td>Fri, 2/27</td>
                             <td>Section 4.3</td>
-                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                            <td><span class="badge badge-class">CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-02">
                             <td>Mon, 3/2</td>
                             <td>Geometry: Polygons</td>
-                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                            <td><span class="badge badge-class">CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-04">
                             <td>Wed, 3/4</td>
                             <td>Geometry: Polygons & Quiz 6</td>
                             <td>
-                                <span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span>
-                                <span class="badge" style="background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px;">QUIZ</span>
-                                <span class="badge" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red); margin-left: 4px;">4.3 DUE</span>
+                                <span class="badge badge-class">CLASS</span>
+                                <span class="badge badge-quiz">QUIZ</span>
+                                <span class="badge badge-due">4.3 DUE</span>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-06">
                             <td>Fri, 3/6</td>
                             <td>Geometry: Polygons</td>
-                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                            <td><span class="badge badge-class">CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-09">
                             <td>Mon, 3/9</td>
                             <td>Geometry: Circles</td>
-                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                            <td><span class="badge badge-class">CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-11">
                             <td>Wed, 3/11</td>
                             <td>Geometry: Circles & Quiz 7</td>
                             <td>
-                                <span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span>
-                                <span class="badge" style="background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px;">QUIZ</span>
+                                <span class="badge badge-class">CLASS</span>
+                                <span class="badge badge-quiz">QUIZ</span>
                             </td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-13">
                             <td>Fri, 3/13</td>
                             <td>Geometry: Circles</td>
-                            <td><span class="badge" style="background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border);">CLASS</span></td>
+                            <td><span class="badge badge-class">CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-16">
                             <td>Mar 16 - 20</td>
                             <td>Spring Break</td>
-                            <td><span class="badge" style="background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber);">NO CLASS</span></td>
+                            <td><span class="badge badge-noclass">NO CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-23">
                             <td>Mon, 3/23</td>
                             <td>Test 2 Review</td>
                             <td><span class="badge badge-retry">REVIEW</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-25">
                             <td>Wed, 3/25</td>
                             <td>Assessment Day</td>
-                            <td><span class="badge" style="background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber);">NO CLASS</span></td>
+                            <td><span class="badge badge-noclass">NO CLASS</span></td>
                         </tr>
-                        <tr>
+                        <tr data-date="2026-03-27">
                             <td>Fri, 3/27</td>
                             <td>Test 2 Review & Quiz 8</td>
                             <td>
                                 <span class="badge badge-retry">REVIEW</span>
-                                <span class="badge" style="background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px;">QUIZ</span>
-                                <span class="badge" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red); margin-left: 4px;">GEOM DUE</span>
+                                <span class="badge badge-quiz">QUIZ</span>
+                                <span class="badge badge-due">GEOM DUE</span>
                             </td>
                         </tr>
-                        <tr class="best-row">
+                        <tr data-date="2026-03-30" class="best-row">
                             <td><strong>Mon, 3/30</strong></td>
                             <td><strong>Test 2: Geometry, 4.2, 4.3</strong></td>
                             <td>
-                                <span class="badge" style="background: var(--red-bg); color: var(--red); border: 1px solid var(--red);">EXAM</span>
+                                <span class="badge badge-exam">EXAM</span>
                             </td>
                         </tr>
                     </tbody>
@@ -378,23 +431,27 @@
                             <th>Module</th>
                             <th>Opens</th>
                             <th>Due Date</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="aleks-body">
+                        <tr data-due="2026-02-25T14:10:00">
                             <td><strong>Section 4.2</strong></td>
                             <td>Feb 18 at 2:11 PM</td>
                             <td><strong>Feb 25 at 2:10 PM</strong></td>
+                            <td class="aleks-status"></td>
                         </tr>
-                        <tr>
+                        <tr data-due="2026-03-04T14:10:00">
                             <td><strong>Section 4.3</strong></td>
                             <td>Feb 25 at 2:11 PM</td>
                             <td><strong>Mar 4 at 2:10 PM</strong></td>
+                            <td class="aleks-status"></td>
                         </tr>
-                        <tr>
+                        <tr data-due="2026-03-27T14:10:00">
                             <td><strong>Geometry</strong></td>
                             <td>Mar 4 at 2:11 PM</td>
                             <td><strong>Mar 27 at 2:10 PM</strong></td>
+                            <td class="aleks-status"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -406,16 +463,45 @@
     <div id="tab-formulas" class="tab-content">
         <div class="card">
             <h2>Essential Formulas</h2>
-            <div class="formula-grid">
-                <div class="formula-card"><div class="formula-title">Compound Interest</div><div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div></div>
-                <div class="formula-card"><div class="formula-title">Continuous Compounding</div><div class="formula-math">$$A = Pe^{rt}$$</div></div>
-                <div class="formula-card"><div class="formula-title">Arc Length</div><div class="formula-math">$$s = r\theta \quad \text{(in rad)}$$</div></div>
-                <div class="formula-card"><div class="formula-title">Sector Area</div><div class="formula-math">$$A = \frac{1}{2}r^2\theta \quad \text{(in rad)}$$</div></div>
-                <div class="formula-card"><div class="formula-title">Heron's Formula</div><div class="formula-math">$$A = \sqrt{s(s-a)(s-b)(s-c)}$$</div></div>
-                <div class="formula-card"><div class="formula-title">Trapezoid Area</div><div class="formula-math">$$A = \frac{1}{2}h(b_1 + b_2)$$</div></div>
-                <div class="formula-card"><div class="formula-title">Triangle Area</div><div class="formula-math">$$A = \frac{1}{2}bh$$</div></div>
-                <div class="formula-card"><div class="formula-title">Logarithmic Form</div><div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div></div>
-                <div class="formula-card"><div class="formula-title">Change of Base</div><div class="formula-math">$$\log_b(x) = \frac{\ln(x)}{\ln(b)}$$</div></div>
+
+            <div class="checklist-section">
+                <h3>Section 4.2: Exponentials &amp; Interest</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><div class="formula-title">Simple Interest</div><div class="formula-math">$$A = P(1 + rt)$$</div><div class="formula-vars">$P$ = principal, $r$ = annual rate (decimal), $t$ = years</div></div>
+                    <div class="formula-card"><div class="formula-title">Compound Interest</div><div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div><div class="formula-vars">$n$ = compounds/year (1 = annually, 12 = monthly, 365 = daily)</div></div>
+                    <div class="formula-card"><div class="formula-title">Continuous Compounding</div><div class="formula-math">$$A = Pe^{rt}$$</div><div class="formula-vars">$e \approx 2.71828$</div></div>
+                </div>
+            </div>
+
+            <div class="checklist-section" style="margin-top: 2rem;">
+                <h3>Section 4.3: Logarithms</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><div class="formula-title">Log ↔ Exp Form</div><div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div><div class="formula-vars">$b$ = base, $x$ = argument, $y$ = exponent</div></div>
+                    <div class="formula-card"><div class="formula-title">Change of Base</div><div class="formula-math">$$\log_b(x) = \frac{\ln(x)}{\ln(b)}$$</div><div class="formula-vars">Use to evaluate any log on a calculator</div></div>
+                    <div class="formula-card"><div class="formula-title">Solving $b^x = c$</div><div class="formula-math">$$x = \frac{\ln(c)}{\ln(b)}$$</div><div class="formula-vars">Take $\ln$ of both sides, then isolate $x$</div></div>
+                </div>
+            </div>
+
+            <div class="checklist-section" style="margin-top: 2rem;">
+                <h3>Geometry: Areas</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><div class="formula-title">Triangle Area</div><div class="formula-math">$$A = \frac{1}{2}bh$$</div><div class="formula-vars">$b$ = base, $h$ = height</div></div>
+                    <div class="formula-card"><div class="formula-title">Parallelogram Area</div><div class="formula-math">$$A = bh$$</div><div class="formula-vars">$b$ = base, $h$ = perpendicular height</div></div>
+                    <div class="formula-card"><div class="formula-title">Trapezoid Area</div><div class="formula-math">$$A = \frac{1}{2}h(b_1 + b_2)$$</div><div class="formula-vars">$b_1, b_2$ = parallel sides, $h$ = height</div></div>
+                    <div class="formula-card"><div class="formula-title">Heron's Formula</div><div class="formula-math">$$A = \sqrt{s(s-a)(s-b)(s-c)}$$</div><div class="formula-vars">$s = \frac{a+b+c}{2}$ (semi-perimeter)</div></div>
+                </div>
+            </div>
+
+            <div class="checklist-section" style="margin-top: 2rem;">
+                <h3>Geometry: Circles &amp; Angles</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><div class="formula-title">Circle Area</div><div class="formula-math">$$A = \pi r^2$$</div><div class="formula-vars">$r$ = radius</div></div>
+                    <div class="formula-card"><div class="formula-title">Circumference</div><div class="formula-math">$$C = 2\pi r$$</div><div class="formula-vars">$r$ = radius</div></div>
+                    <div class="formula-card"><div class="formula-title">Arc Length</div><div class="formula-math">$$s = r\theta$$</div><div class="formula-vars">$\theta$ must be in radians</div></div>
+                    <div class="formula-card"><div class="formula-title">Sector Area</div><div class="formula-math">$$A = \frac{1}{2}r^2\theta$$</div><div class="formula-vars">$\theta$ must be in radians</div></div>
+                    <div class="formula-card"><div class="formula-title">Degree ↔ Radian</div><div class="formula-math">$$\theta_{rad} = \theta_{deg} \cdot \frac{\pi}{180}$$</div><div class="formula-vars">$180° = \pi$ rad; $1° = 60', \; 1' = 60''$</div></div>
+                    <div class="formula-card"><div class="formula-title">Angular &amp; Linear Speed</div><div class="formula-math">$$\omega = 2\pi \cdot \text{rpm}, \quad v = r\omega$$</div><div class="formula-vars">$\omega$ = angular speed (rad/time), $v$ = linear speed</div></div>
+                </div>
             </div>
         </div>
     </div>
@@ -450,6 +536,7 @@
     <div id="tab-progress" class="tab-content">
         <div class="card">
             <h2>Topics Checklist</h2>
+            <div id="progress-summary" class="progress-summary"></div>
             <div id="checklist-container"></div>
         </div>
 
@@ -496,37 +583,119 @@
         </div>
     </div>
 
+    <!-- VIDEOS TAB -->
+    <div id="tab-videos" class="tab-content">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                <h2>Study Videos</h2>
+                <div id="video-progress" style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;"></div>
+            </div>
+
+            <div class="checklist-section">
+                <h3>Section 4.2: Exponentials</h3>
+                <div class="checklist-grid">
+                    <a href="http://www.youtube.com/watch?v=kikGvjKFN8Q" target="_blank" class="check-item video-link" data-video-id="v42_1" data-practice-id="eval_exp" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Graphing &amp; Tables</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=aix8TLHdKgc" target="_blank" class="check-item video-link" data-video-id="v42_2" data-practice-id="eval_exp" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Calculator: Decimal Exponents</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=NCYNXkbTTUo" target="_blank" class="check-item video-link" data-video-id="v42_3" data-practice-id="interest" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Simple vs Compound Interest</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=2S4vK30dII0" target="_blank" class="check-item video-link" data-video-id="v42_4" data-practice-id="interest" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Continuous Compounding</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="checklist-section" style="margin-top: 2rem;">
+                <h3>Section 4.3: Logarithms</h3>
+                <div class="checklist-grid">
+                    <a href="http://www.youtube.com/watch?v=-ZQvz4bc2Eg" target="_blank" class="check-item video-link" data-video-id="v43_1" data-practice-id="logexp_conv" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Log ↔ Exp Conversions</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=eL2FhO11mf0" target="_blank" class="check-item video-link" data-video-id="v43_2" data-practice-id="logexp" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Evaluating Log Expressions</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=3Rf8KEhY0ts" target="_blank" class="check-item video-link" data-video-id="v43_3" data-practice-id="logexp" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Logarithm Change of Base</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=fnhFneOz6n8" target="_blank" class="check-item video-link" data-video-id="v43_4" data-practice-id="logexp" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Solving Exponential Eqns using Logs</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="checklist-section" style="margin-top: 2rem;">
+                <h3>Geometry &amp; Circles</h3>
+                <div class="checklist-grid">
+                    <a href="http://www.youtube.com/watch?v=8ysZhPknfYY" target="_blank" class="check-item video-link" data-video-id="vgeo_1" data-practice-id="piecewise_rect" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Piecewise Rectangular Areas</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=FcDyaiHO4GQ" target="_blank" class="check-item video-link" data-video-id="vgeo_2" data-practice-id="dms_to_dec" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>DMS to Decimal Conversion</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=JmLN3QxshlE" target="_blank" class="check-item video-link" data-video-id="vgeo_3" data-practice-id="rad_deg" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Radians &amp; Degrees Intro</span>
+                    </a>
+                    <a href="http://www.youtube.com/watch?v=XUus6-9E9sQ" target="_blank" class="check-item video-link" data-video-id="vgeo_4" data-practice-id="circles" style="text-decoration: none;">
+                        <i data-lucide="play" style="color: var(--accent);"></i>
+                        <span>Circle Sectors &amp; Arc Length</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
+    // --- ICON REFRESH (debounced to prevent redundant DOM walks) ---
+    let _iconTimer = null;
+    function refreshIcons() {
+        clearTimeout(_iconTimer);
+        _iconTimer = setTimeout(() => { if (window.lucide) lucide.createIcons(); }, 20);
+    }
+
     // --- STATE MANAGEMENT ---
-    const STORAGE_KEY = 'math130_test2_state_v5'; // Bumped version for expanded practice generators
-    
-    let state = {
-        theme: 'dark',
-        checklist: [
+    const STORAGE_KEY = 'math130_test2_state_v6'; // Bumped for video tracking + new generators
+
+    // Keep default checklist as source of truth for structure
+    const DEFAULT_CHECKLIST = [
             // Section 4.2
-            { id: '42_1', cat: 'Section 4.2', label: 'Table for an exponential function', done: false },
-            { id: '42_2', cat: 'Section 4.2', label: 'Graphing an exponential function and its asymptote: $f(x)=b^x$', done: false },
-            { id: '42_3', cat: 'Section 4.2', label: 'Using a calculator to evaluate exponential expressions', done: false, practiceId: 'eval_exp' },
-            { id: '42_4', cat: 'Section 4.2', label: 'Evaluating an exponential function that models a real-world situation', done: false, practiceId: 'eval_exp' },
-            { id: '42_5', cat: 'Section 4.2', label: 'Using a calculator to evaluate exponential expressions involving base $e$', done: false, practiceId: 'eval_exp' },
-            { id: '42_6', cat: 'Section 4.2', label: 'Calculating and comparing simple interest and compound interest', done: false, practiceId: 'interest' },
-            { id: '42_7', cat: 'Section 4.2', label: 'Finding a final amount in a word problem on exponential growth or decay', done: false, practiceId: 'exp_growth' },
-            { id: '42_8', cat: 'Section 4.2', label: 'Finding the final amount in a word problem on compound interest', done: false, practiceId: 'interest' },
-            { id: '42_9', cat: 'Section 4.2', label: 'Finding the final amount in a word problem on continuous compound interest', done: false, practiceId: 'interest' },
+            { id: '42_1', cat: 'Section 4.2', label: 'Table for an exponential function', done: false, videoUrl: 'http://www.youtube.com/watch?v=kikGvjKFN8Q' },
+            { id: '42_2', cat: 'Section 4.2', label: 'Graphing an exponential function and its asymptote: $f(x)=b^x$', done: false, videoUrl: 'http://www.youtube.com/watch?v=kikGvjKFN8Q' },
+            { id: '42_3', cat: 'Section 4.2', label: 'Using a calculator to evaluate exponential expressions', done: false, practiceId: 'eval_exp', videoUrl: 'http://www.youtube.com/watch?v=aix8TLHdKgc' },
+            { id: '42_4', cat: 'Section 4.2', label: 'Evaluating an exponential function that models a real-world situation', done: false, practiceId: 'eval_exp', videoUrl: 'http://www.youtube.com/watch?v=kikGvjKFN8Q' },
+            { id: '42_5', cat: 'Section 4.2', label: 'Using a calculator to evaluate exponential expressions involving base $e$', done: false, practiceId: 'eval_exp', videoUrl: 'http://www.youtube.com/watch?v=aix8TLHdKgc' },
+            { id: '42_6', cat: 'Section 4.2', label: 'Calculating and comparing simple interest and compound interest', done: false, practiceId: 'interest', videoUrl: 'http://www.youtube.com/watch?v=NCYNXkbTTUo' },
+            { id: '42_7', cat: 'Section 4.2', label: 'Finding a final amount in a word problem on exponential growth or decay', done: false, practiceId: 'exp_growth', videoUrl: 'http://www.youtube.com/watch?v=2S4vK30dII0' },
+            { id: '42_8', cat: 'Section 4.2', label: 'Finding the final amount in a word problem on compound interest', done: false, practiceId: 'interest', videoUrl: 'http://www.youtube.com/watch?v=NCYNXkbTTUo' },
+            { id: '42_9', cat: 'Section 4.2', label: 'Finding the final amount in a word problem on continuous compound interest', done: false, practiceId: 'interest', videoUrl: 'http://www.youtube.com/watch?v=2S4vK30dII0' },
             
             // Section 4.3
-            { id: '43_1', cat: 'Section 4.3', label: 'Using a calculator to evaluate natural and common logarithmic expressions', done: false, practiceId: 'eval_exp' },
-            { id: '43_2', cat: 'Section 4.3', label: 'Converting between logarithmic and exponential equations', done: false, practiceId: 'logexp_conv' },
-            { id: '43_3', cat: 'Section 4.3', label: 'Converting between natural logarithmic and exponential equations', done: false, practiceId: 'logexp_conv' },
-            { id: '43_4', cat: 'Section 4.3', label: 'Evaluating logarithmic expressions', done: false, practiceId: 'logexp' },
-            { id: '43_5', cat: 'Section 4.3', label: 'Solving an equation of the form $\\log_b(a)=c$', done: false, practiceId: 'logexp' },
-            { id: '43_6', cat: 'Section 4.3', label: 'Solving an exponential equation by using logarithms (decimal answers, basic)', done: false, practiceId: 'logexp' },
-            { id: '43_7', cat: 'Section 4.3', label: 'Solving an exponential equation by using natural logarithms (decimal answers)', done: false, practiceId: 'logexp' },
+            { id: '43_1', cat: 'Section 4.3', label: 'Using a calculator to evaluate natural and common logarithmic expressions', done: false, practiceId: 'eval_exp', videoUrl: 'http://www.youtube.com/watch?v=eL2FhO11mf0' },
+            { id: '43_2', cat: 'Section 4.3', label: 'Converting between logarithmic and exponential equations', done: false, practiceId: 'logexp_conv', videoUrl: 'http://www.youtube.com/watch?v=-ZQvz4bc2Eg' },
+            { id: '43_3', cat: 'Section 4.3', label: 'Converting between natural logarithmic and exponential equations', done: false, practiceId: 'logexp_conv', videoUrl: 'http://www.youtube.com/watch?v=-ZQvz4bc2Eg' },
+            { id: '43_4', cat: 'Section 4.3', label: 'Evaluating logarithmic expressions', done: false, practiceId: 'logexp', videoUrl: 'http://www.youtube.com/watch?v=eL2FhO11mf0' },
+            { id: '43_5', cat: 'Section 4.3', label: 'Solving an equation of the form $\\log_b(a)=c$', done: false, practiceId: 'logexp', videoUrl: 'http://www.youtube.com/watch?v=fnhFneOz6n8' },
+            { id: '43_6', cat: 'Section 4.3', label: 'Solving an exponential equation by using logarithms (decimal answers, basic)', done: false, practiceId: 'logexp', videoUrl: 'http://www.youtube.com/watch?v=fnhFneOz6n8' },
+            { id: '43_7', cat: 'Section 4.3', label: 'Solving an exponential equation by using natural logarithms (decimal answers)', done: false, practiceId: 'logexp', videoUrl: 'http://www.youtube.com/watch?v=fnhFneOz6n8' },
 
             // Geometry
-            { id: 'geo_1', cat: 'Geometry', label: 'Area of a piecewise rectangular figure', done: false },
+            { id: 'geo_1', cat: 'Geometry', label: 'Area of a piecewise rectangular figure', done: false, practiceId: 'piecewise_rect', videoUrl: 'http://www.youtube.com/watch?v=8ysZhPknfYY' },
             { id: 'geo_2', cat: 'Geometry', label: 'Area of a triangle', done: false, practiceId: 'basic_areas' },
             { id: 'geo_3', cat: 'Geometry', label: 'Area of a parallelogram', done: false, practiceId: 'basic_areas' },
             { id: 'geo_4', cat: 'Geometry', label: 'Area of a trapezoid', done: false, practiceId: 'basic_areas' },
@@ -534,27 +703,48 @@
             { id: 'geo_6', cat: 'Geometry', label: 'Circumference and area of a circle', done: false, practiceId: 'basic_circles' },
             { id: 'geo_7', cat: 'Geometry', label: 'Circumference and area of a circle (exact answers in terms of $\\pi$)', done: false, practiceId: 'basic_circles' },
             { id: 'geo_8', cat: 'Geometry', label: 'Word problem involving the area between two concentric circles', done: false, practiceId: 'basic_circles' },
-            { id: 'geo_9', cat: 'Geometry', label: 'Converting degrees-minutes-seconds to decimal degrees', done: false },
-            { id: 'geo_10', cat: 'Geometry', label: 'Converting decimal degrees to degrees-minutes-seconds', done: false, practiceId: 'dms' },
-            { id: 'geo_11', cat: 'Geometry', label: 'Converting degrees to radians and radians to degrees (Problem type 1)', done: false, practiceId: 'rad_deg' },
-            { id: 'geo_12', cat: 'Geometry', label: 'Converting degrees to radians and radians to degrees (Problem type 2)', done: false, practiceId: 'rad_deg' },
-            { id: 'geo_13', cat: 'Geometry', label: 'Sketching an angle with absolute value less than $2\\pi$ radians in standard position', done: false },
-            { id: 'geo_14', cat: 'Geometry', label: 'Drawing an arc to find a central angle or an arc length on the unit circle', done: false, practiceId: 'circles' },
-            { id: 'geo_15', cat: 'Geometry', label: 'Drawing an arc to find a central angle or an arc length on a non-unit circle', done: false, practiceId: 'circles' },
-            { id: 'geo_16', cat: 'Geometry', label: 'Arc length and central angle measure', done: false, practiceId: 'circles' },
-            { id: 'geo_17', cat: 'Geometry', label: 'Area of a sector of a circle', done: false, practiceId: 'circles' },
-            { id: 'geo_18', cat: 'Geometry', label: 'Using the area formula for a sector of a circle in a real-world situation', done: false, practiceId: 'circles' },
+            { id: 'geo_9', cat: 'Geometry', label: 'Converting degrees-minutes-seconds to decimal degrees', done: false, practiceId: 'dms_to_dec', videoUrl: 'http://www.youtube.com/watch?v=FcDyaiHO4GQ' },
+            { id: 'geo_10', cat: 'Geometry', label: 'Converting decimal degrees to degrees-minutes-seconds', done: false, practiceId: 'dms', videoUrl: 'http://www.youtube.com/watch?v=FcDyaiHO4GQ' },
+            { id: 'geo_11', cat: 'Geometry', label: 'Converting degrees to radians and radians to degrees (Problem type 1)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_12', cat: 'Geometry', label: 'Converting degrees to radians and radians to degrees (Problem type 2)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_13', cat: 'Geometry', label: 'Sketching an angle with absolute value less than $2\\pi$ radians in standard position', done: false, videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_14', cat: 'Geometry', label: 'Drawing an arc to find a central angle or an arc length on the unit circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_15', cat: 'Geometry', label: 'Drawing an arc to find a central angle or an arc length on a non-unit circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_16', cat: 'Geometry', label: 'Arc length and central angle measure', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_17', cat: 'Geometry', label: 'Area of a sector of a circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_18', cat: 'Geometry', label: 'Using the area formula for a sector of a circle in a real-world situation', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
             { id: 'geo_19', cat: 'Geometry', label: 'Angular and linear speed', done: false, practiceId: 'speed' }
-        ],
-        history: [] // { topic: string, date: string, tries: number }
+    ];
+
+    let state = {
+        theme: 'dark',
+        checklist: DEFAULT_CHECKLIST.map(item => ({...item})),
+        history: [],
+        videosWatched: []
     };
 
     function loadState() {
         try {
-            const saved = localStorage.getItem(STORAGE_KEY);
+            // Also try migrating from old storage keys
+            let saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) {
+                const oldKey = localStorage.getItem('math130_test2_state_v5');
+                if (oldKey) saved = oldKey;
+            }
             if (saved) {
                 const parsed = JSON.parse(saved);
-                state = { ...state, ...parsed };
+                state.theme = parsed.theme || state.theme;
+                state.history = parsed.history || [];
+                state.videosWatched = parsed.videosWatched || [];
+                // Reconcile checklist: keep done states, but use defaults as source of truth
+                if (parsed.checklist) {
+                    const savedMap = {};
+                    parsed.checklist.forEach(c => { savedMap[c.id] = c.done; });
+                    state.checklist = DEFAULT_CHECKLIST.map(item => ({
+                        ...item,
+                        done: savedMap[item.id] || false
+                    }));
+                }
             }
         } catch (e) { console.error("Could not load state", e); }
     }
@@ -568,7 +758,7 @@
     // --- GENERATORS LOGIC ---
     const generators = [
         {
-            id: 'eval_exp',
+            id: 'eval_exp', section: 'Section 4.2',
             label: 'Evaluate Exponentials',
             generate: () => {
                 const isE = Math.random() > 0.5;
@@ -592,7 +782,7 @@
             }
         },
         {
-            id: 'exp_growth',
+            id: 'exp_growth', section: 'Section 4.2',
             label: 'Growth & Decay',
             generate: () => {
                 const isGrowth = Math.random() > 0.5;
@@ -612,7 +802,7 @@
             }
         },
         {
-            id: 'interest',
+            id: 'interest', section: 'Section 4.2',
             label: 'Compound Interest',
             generate: () => {
                 const p = (Math.floor(Math.random() * 40) + 10) * 100;
@@ -639,7 +829,7 @@
             }
         },
         {
-            id: 'rad_deg',
+            id: 'rad_deg', section: 'Geometry',
             label: 'Radians ↔ Degrees',
             generate: () => {
                 if (Math.random() > 0.5) {
@@ -663,7 +853,7 @@
             }
         },
         {
-            id: 'dms',
+            id: 'dms', section: 'Geometry',
             label: 'Convert DMS',
             generate: () => {
                 const deg = (Math.random() * 80 + 10).toFixed(4);
@@ -680,7 +870,48 @@
             }
         },
         {
-            id: 'logexp_conv',
+            id: 'dms_to_dec', section: 'Geometry',
+            label: 'DMS → Decimal Degrees',
+            generate: () => {
+                const d = Math.floor(Math.random() * 80) + 10;
+                const m = Math.floor(Math.random() * 59) + 1;
+                const s = Math.floor(Math.random() * 59) + 1;
+                const ans = d + m / 60 + s / 3600;
+                
+                return {
+                    q: `Convert $${d}^\\circ\\, ${m}'\\, ${s}''$ to decimal degrees. (Round to 4 decimal places)`,
+                    inputType: 'number', a: ans, tol: 0.0005,
+                    solution: `Decimal degrees $= ${d} + \\frac{${m}}{60} + \\frac{${s}}{3600} = ${ans.toFixed(4)}^\\circ$`
+                };
+            }
+        },
+        {
+            id: 'piecewise_rect', section: 'Geometry',
+            label: 'Piecewise Rectangular Area',
+            generate: () => {
+                // L-shaped figure: big rectangle with a notch cut out
+                const w1 = Math.floor(Math.random() * 6) + 4;
+                const h1 = Math.floor(Math.random() * 6) + 6;
+                const w2 = Math.floor(Math.random() * (w1 - 2)) + 2;
+                const h2 = Math.floor(Math.random() * (h1 - 2)) + 2;
+                const ans = w1 * h1 - w2 * h2;
+                const s = 10; // scale factor for SVG
+                const svg = `<svg viewBox="0 0 ${(w1+4)*s} ${(h1+4)*s}" class="svg-canvas" style="max-width: 400px; width: 100%; height: auto;">
+                    <polygon points="${2*s},${2*s} ${(w1+2)*s},${2*s} ${(w1+2)*s},${(h1-h2+2)*s} ${(w1-w2+2)*s},${(h1-h2+2)*s} ${(w1-w2+2)*s},${(h1+2)*s} ${2*s},${(h1+2)*s}" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                    <text x="${(w1/2+2)*s}" y="${1.4*s}" fill="var(--text)" font-size="13" text-anchor="middle">${w1}</text>
+                    <text x="${0.8*s}" y="${(h1/2+2)*s}" fill="var(--text)" font-size="13" text-anchor="middle">${h1}</text>
+                    <text x="${(w1-w2/2+2)*s}" y="${(h1+2)*s + 14}" fill="var(--text)" font-size="13" text-anchor="middle">${w2}</text>
+                    <text x="${(w1+2)*s + 14}" y="${(h1-h2/2-h2+4)*s/2 + 10}" fill="var(--text)" font-size="13" text-anchor="start">${h2}</text>
+                </svg>`;
+                return {
+                    q: `Find the total area of the L-shaped figure.`,
+                    svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                    solution: `Decompose into rectangles: Full rectangle $${w1} \\times ${h1} = ${w1*h1}$, minus notch $${w2} \\times ${h2} = ${w2*h2}$. <br> Area $= ${w1*h1} - ${w2*h2} = ${ans}$`
+                };
+            }
+        },
+        {
+            id: 'logexp_conv', section: 'Section 4.3',
             label: 'Log ↔ Exp Conversions',
             generate: () => {
                 const b = Math.floor(Math.random()*6)+2;
@@ -703,7 +934,7 @@
             }
         },
         {
-            id: 'basic_areas',
+            id: 'basic_areas', section: 'Geometry',
             label: 'Basic Areas (Visual)',
             generate: () => {
                 const randType = Math.random();
@@ -764,7 +995,7 @@
             }
         },
         {
-            id: 'basic_circles',
+            id: 'basic_circles', section: 'Geometry',
             label: 'Basic Circles',
             generate: () => {
                 const r = Math.floor(Math.random() * 15) + 3;
@@ -794,7 +1025,7 @@
             }
         },
         {
-            id: 'transversals',
+            id: 'transversals', section: 'Geometry',
             label: 'Similar Triangles (Transversals)',
             generate: () => {
                 const a = Math.floor(Math.random()*15)+10;
@@ -825,7 +1056,7 @@
             }
         },
         {
-            id: 'circles',
+            id: 'circles', section: 'Geometry',
             label: 'Sectors & Arcs (Visual)',
             generate: () => {
                 const rNum = (Math.random() * 10 + 2).toFixed(1);
@@ -865,7 +1096,7 @@
             }
         },
         {
-            id: 'speed',
+            id: 'speed', section: 'Geometry',
             label: 'Angular & Linear Speed',
             generate: () => {
                 const r = Math.floor(Math.random() * 15) + 5;
@@ -889,7 +1120,7 @@
             }
         },
         {
-            id: 'logexp',
+            id: 'logexp', section: 'Section 4.3',
             label: 'Solve Log Equations',
             generate: () => {
                 const type = Math.random();
@@ -920,15 +1151,116 @@
     let currentQuestion = null;
     let currentRetries = 0;
 
+    // --- VIDEO WATCH TRACKING ---
+    function renderVideoState() {
+        const links = document.querySelectorAll('.video-link');
+        let watchedCount = 0;
+        links.forEach(link => {
+            const vid = link.dataset.videoId;
+            if (state.videosWatched.includes(vid)) {
+                link.classList.add('watched');
+                watchedCount++;
+            } else {
+                link.classList.remove('watched');
+            }
+        });
+        const el = document.getElementById('video-progress');
+        if (el) el.textContent = `${watchedCount} / ${links.length} watched`;
+    }
+
+    function initVideoTracking() {
+        document.querySelectorAll('.video-link').forEach(link => {
+            // Inject practice crosslink icon if available
+            const pid = link.dataset.practiceId;
+            if (pid) {
+                const practiceBtn = document.createElement('div');
+                practiceBtn.className = 'practice-link';
+                practiceBtn.title = 'Practice This Topic';
+                practiceBtn.setAttribute('aria-label', 'Jump to practice');
+                practiceBtn.innerHTML = '<i data-lucide="pen-tool" style="width:16px; height:16px;"></i>';
+                practiceBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    goToPractice(pid, e);
+                });
+                // Insert before the ::after pseudo-element (at end of link)
+                link.appendChild(practiceBtn);
+            }
+
+            link.addEventListener('click', () => {
+                const vid = link.dataset.videoId;
+                if (!state.videosWatched.includes(vid)) {
+                    state.videosWatched.push(vid);
+                    saveState();
+                    renderVideoState();
+                }
+            });
+        });
+        renderVideoState();
+        refreshIcons();
+    }
+
+    // --- SCHEDULE DATE HIGHLIGHTING ---
+    function highlightScheduleDates() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const rows = document.querySelectorAll('#schedule-body tr[data-date]');
+        let foundNext = false;
+        rows.forEach(row => {
+            const d = new Date(row.dataset.date + 'T00:00:00');
+            if (d < today) {
+                row.classList.add('schedule-past');
+            } else if (d.toDateString() === today.toDateString()) {
+                row.classList.add('schedule-today');
+                foundNext = true;
+            } else if (!foundNext) {
+                row.classList.add('schedule-next');
+                foundNext = true;
+            }
+        });
+        // Exam countdown
+        const examDate = new Date('2026-03-30T00:00:00');
+        const diff = Math.ceil((examDate - today) / (1000 * 60 * 60 * 24));
+        const el = document.getElementById('exam-countdown');
+        if (diff > 0) {
+            el.textContent = `📅 Test 2 in ${diff} day${diff === 1 ? '' : 's'}`;
+        } else if (diff === 0) {
+            el.textContent = '🚨 Test 2 is TODAY';
+        } else {
+            el.textContent = 'Test 2 has passed';
+            el.style.opacity = '0.5';
+        }
+
+        // ALEKS module status
+        const now = new Date();
+        document.querySelectorAll('#aleks-body tr[data-due]').forEach(row => {
+            const due = new Date(row.dataset.due);
+            const cell = row.querySelector('.aleks-status');
+            if (now > due) {
+                cell.innerHTML = '<span class="badge badge-exam">PAST DUE</span>';
+                row.classList.add('schedule-past');
+            } else {
+                const daysLeft = Math.ceil((due - now) / (1000 * 60 * 60 * 24));
+                if (daysLeft <= 3) {
+                    cell.innerHTML = `<span class="badge badge-noclass">Due in ${daysLeft}d</span>`;
+                } else {
+                    cell.innerHTML = `<span class="badge badge-class">${daysLeft} days left</span>`;
+                }
+            }
+        });
+    }
+
     // --- UI INITIATION & EVENT LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
-        lucide.createIcons();
+        refreshIcons();
         loadState();
         applyTheme(state.theme);
         renderChecklist();
         renderQuizCategories();
         updateStatsUI();
         renderHistory();
+        highlightScheduleDates();
+        initVideoTracking();
         // Wait briefly for elements to be injected, then render math
         setTimeout(renderMath, 100);
 
@@ -944,6 +1276,7 @@
                 const target = e.currentTarget;
                 target.classList.add('active');
                 document.getElementById('tab-' + target.dataset.tab).classList.add('active');
+                refreshIcons();
             });
         });
 
@@ -964,7 +1297,7 @@
             document.body.classList.remove('light');
             document.getElementById('theme-btn').innerHTML = '<i data-lucide="moon"></i>';
         }
-        lucide.createIcons();
+        refreshIcons();
     }
 
     function renderChecklist() {
@@ -972,6 +1305,27 @@
         container.innerHTML = '';
         
         const categories = [...new Set(state.checklist.map(item => item.cat))];
+
+        // Render progress summary bars
+        const summaryEl = document.getElementById('progress-summary');
+        summaryEl.innerHTML = '';
+        categories.forEach(cat => {
+            const items = state.checklist.filter(i => i.cat === cat);
+            const doneCount = items.filter(i => i.done).length;
+            const pct = Math.round((doneCount / items.length) * 100);
+            const div = document.createElement('div');
+            div.className = 'progress-item';
+            div.innerHTML = `
+                <div class="progress-item-header">
+                    <span class="progress-item-label">${cat}</span>
+                    <span class="progress-item-count">${doneCount} / ${items.length}</span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill ${pct === 100 ? 'complete' : ''}" style="width: ${pct}%"></div>
+                </div>
+            `;
+            summaryEl.appendChild(div);
+        });
         
         categories.forEach(cat => {
             const section = document.createElement('div');
@@ -986,6 +1340,7 @@
                 div.innerHTML = `
                     <div class="check-box">${item.done ? '<i data-lucide="check" style="width:16px; color:white;"></i>' : ''}</div>
                     <span style="flex: 1;">${item.label}</span>
+                    ${item.videoUrl ? `<a href="${item.videoUrl}" target="_blank" class="practice-link" onclick="event.stopPropagation()" title="Watch Video" aria-label="Watch related video"><i data-lucide="play" style="width:18px; height:18px;"></i></a>` : ''}
                     ${item.practiceId ? `<div class="practice-link" onclick="goToPractice('${item.practiceId}', event)" title="Jump to Interactive Practice"><i data-lucide="pen-tool" style="width:18px; height:18px;"></i></div>` : ''}
                 `;
                 div.addEventListener('click', () => { 
@@ -999,7 +1354,7 @@
             container.appendChild(section);
         });
         
-        lucide.createIcons();
+        refreshIcons();
         renderMath();
     }
 
@@ -1027,17 +1382,27 @@
     function renderQuizCategories() {
         const container = document.getElementById('quiz-categories');
         container.innerHTML = '';
-        generators.forEach(gen => {
-            const btn = document.createElement('button');
-            btn.className = 'quiz-btn';
-            btn.textContent = gen.label;
-            btn.dataset.id = gen.id; // Added to easily find it later
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                startQuiz(gen.id);
+        const sections = [...new Set(generators.map(g => g.section))];
+        sections.forEach(sec => {
+            const group = document.createElement('div');
+            group.style.cssText = 'width: 100%; margin-bottom: 0.5rem;';
+            group.innerHTML = `<div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">${sec}</div>`;
+            const btnRow = document.createElement('div');
+            btnRow.style.cssText = 'display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;';
+            generators.filter(g => g.section === sec).forEach(gen => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-btn';
+                btn.textContent = gen.label;
+                btn.dataset.id = gen.id;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    startQuiz(gen.id);
+                });
+                btnRow.appendChild(btn);
             });
-            container.appendChild(btn);
+            group.appendChild(btnRow);
+            container.appendChild(group);
         });
     }
 
@@ -1055,6 +1420,13 @@
         const tbody = document.getElementById('history-body');
         tbody.innerHTML = '';
         
+        if (state.history.length === 0) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">Complete practice questions to track your progress here.</td>`;
+            tbody.appendChild(tr);
+            return;
+        }
+
         // Show last 10
         const recent = [...state.history].slice(0, 10);
         
@@ -1202,16 +1574,18 @@
             `;
         }
         
-        lucide.createIcons();
+        refreshIcons();
         renderMath();
     }
 
     function resetProgress() {
-        if (confirm("Are you sure you want to delete all your checklist progress and history?")) {
+        if (confirm("Are you sure you want to delete all your checklist progress, video history, and practice history?")) {
             state.history = [];
+            state.videosWatched = [];
             state.checklist.forEach(c => c.done = false);
             saveState();
             renderChecklist();
+            renderVideoState();
         }
     }
 
