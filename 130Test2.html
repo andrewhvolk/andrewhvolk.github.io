@@ -266,6 +266,30 @@
         .video-link.watched span { opacity: 0.5; text-decoration: line-through; }
         .video-link::after { content: '↗'; font-size: 0.8rem; color: var(--text); opacity: 0.35; margin-left: auto; padding-left: 0.5rem; flex-shrink: 0; }
 
+
+/* Status Badge Styling */
+.formula-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+.status-provided { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+.status-memorize { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
+.status-supplemental { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
+
+/* Print Configuration */
+@media print {
+    .theme-toggle, .tabs, .status-supplemental-section, .quiz-selector, .btn-primary, .btn-secondary {
+        display: none !important;
+    }
+    body { background: white; color: black; }
+    .card { border: none; box-shadow: none; }
+}
+
         @media (max-width: 768px) {
             .container { padding: 1rem; }
             h1 { font-size: 2rem; }
@@ -460,53 +484,88 @@
     </div>
 
     <!-- FORMULAS TAB -->
-    <div id="tab-formulas" class="tab-content">
+    
+<div id="tab-formulas" class="tab-content">
         <div class="card">
-            <h2>Essential Formulas</h2>
+            <h2>Formulas for Test 2</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 500;">
+                Badges indicate what is provided on the exam and what you must memorize.
+            </p>
 
             <div class="checklist-section">
-                <h3>Section 4.2: Exponentials &amp; Interest</h3>
+                <h3>Algebra &amp; Interest</h3>
                 <div class="formula-grid">
-                    <div class="formula-card"><div class="formula-title">Simple Interest</div><div class="formula-math">$$A = P(1 + rt)$$</div><div class="formula-vars">$P$ = principal, $r$ = annual rate (decimal), $t$ = years</div></div>
-                    <div class="formula-card"><div class="formula-title">Compound Interest</div><div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div><div class="formula-vars">$n$ = compounds/year (1 = annually, 12 = monthly, 365 = daily)</div></div>
-                    <div class="formula-card"><div class="formula-title">Continuous Compounding</div><div class="formula-math">$$A = Pe^{rt}$$</div><div class="formula-vars">$e \approx 2.71828$</div></div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-provided">Provided</div>
+                        <div class="formula-title">Compound Interest</div>
+                        <div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-provided">Provided</div>
+                        <div class="formula-title">Continuous Compounding</div>
+                        <div class="formula-math">$$A = Pe^{rt}$$</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Log ↔ Exp Form</div>
+                        <div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Change of Base</div>
+                        <div class="formula-math">$$\log_b(a) = \frac{\ln(a)}{\ln(b)}$$</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-section status-supplemental-section" style="margin-top: 2rem;">
+                <h3>Algebra &amp; Interest (Supplemental)</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-badge status-supplemental">Supplemental</div>
+                        <div class="formula-title">Simple Interest</div>
+                        <div class="formula-math">$$A = P(1 + rt)$$</div>
+                    </div>
                 </div>
             </div>
 
             <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Section 4.3: Logarithms</h3>
+                <h3>Geometry (Must Memorize)</h3>
                 <div class="formula-grid">
-                    <div class="formula-card"><div class="formula-title">Log ↔ Exp Form</div><div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div><div class="formula-vars">$b$ = base, $x$ = argument, $y$ = exponent</div></div>
-                    <div class="formula-card"><div class="formula-title">Change of Base</div><div class="formula-math">$$\log_b(x) = \frac{\ln(x)}{\ln(b)}$$</div><div class="formula-vars">Use to evaluate any log on a calculator</div></div>
-                    <div class="formula-card"><div class="formula-title">Solving $b^x = c$</div><div class="formula-math">$$x = \frac{\ln(c)}{\ln(b)}$$</div><div class="formula-vars">Take $\ln$ of both sides, then isolate $x$</div></div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Inscribed Angle Theorem</div>
+                        <div class="formula-math">$$\angle = \frac{1}{2}(\text{Arc})$$</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">DMS to Decimal Degrees</div>
+                        <div class="formula-math">$$D + \frac{M}{60} + \frac{S}{3600}$$</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Heron's Formula</div>
+                        <div class="formula-math">$$A = \sqrt{s(s-a)(s-b)(s-c)}$$</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Sector Area</div>
+                        <div class="formula-math">$$A = \frac{1}{2}r^2\theta$$</div>
+                        <div class="formula-vars">where $\theta$ is in radians</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Arc Length</div>
+                        <div class="formula-math">$$s = r\theta$$</div>
+                        <div class="formula-vars">where $\theta$ is in radians</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Geometry: Areas</h3>
-                <div class="formula-grid">
-                    <div class="formula-card"><div class="formula-title">Triangle Area</div><div class="formula-math">$$A = \frac{1}{2}bh$$</div><div class="formula-vars">$b$ = base, $h$ = height</div></div>
-                    <div class="formula-card"><div class="formula-title">Parallelogram Area</div><div class="formula-math">$$A = bh$$</div><div class="formula-vars">$b$ = base, $h$ = perpendicular height</div></div>
-                    <div class="formula-card"><div class="formula-title">Trapezoid Area</div><div class="formula-math">$$A = \frac{1}{2}h(b_1 + b_2)$$</div><div class="formula-vars">$b_1, b_2$ = parallel sides, $h$ = height</div></div>
-                    <div class="formula-card"><div class="formula-title">Heron's Formula</div><div class="formula-math">$$A = \sqrt{s(s-a)(s-b)(s-c)}$$</div><div class="formula-vars">$s = \frac{a+b+c}{2}$ (semi-perimeter)</div></div>
-                </div>
-            </div>
-
-            <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Geometry: Circles &amp; Angles</h3>
-                <div class="formula-grid">
-                    <div class="formula-card"><div class="formula-title">Circle Area</div><div class="formula-math">$$A = \pi r^2$$</div><div class="formula-vars">$r$ = radius</div></div>
-                    <div class="formula-card"><div class="formula-title">Circumference</div><div class="formula-math">$$C = 2\pi r$$</div><div class="formula-vars">$r$ = radius</div></div>
-                    <div class="formula-card"><div class="formula-title">Arc Length</div><div class="formula-math">$$s = r\theta$$</div><div class="formula-vars">$\theta$ must be in radians</div></div>
-                    <div class="formula-card"><div class="formula-title">Sector Area</div><div class="formula-math">$$A = \frac{1}{2}r^2\theta$$</div><div class="formula-vars">$\theta$ must be in radians</div></div>
-                    <div class="formula-card"><div class="formula-title">Degree ↔ Radian</div><div class="formula-math">$$\theta_{rad} = \theta_{deg} \cdot \frac{\pi}{180}$$</div><div class="formula-vars">$180° = \pi$ rad; $1° = 60', \; 1' = 60''$</div></div>
-                    <div class="formula-card"><div class="formula-title">Angular &amp; Linear Speed</div><div class="formula-math">$$\omega = 2\pi \cdot \text{rpm}, \quad v = r\omega$$</div><div class="formula-vars">$\omega$ = angular speed (rad/time), $v$ = linear speed</div></div>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- PRACTICE TAB -->
+<!-- PRACTICE TAB -->
     <div id="tab-practice" class="tab-content">
         <div class="card">
             <h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
@@ -594,19 +653,19 @@
             <div class="checklist-section">
                 <h3>Section 4.2: Exponentials</h3>
                 <div class="checklist-grid">
-                    <a href="http://www.youtube.com/watch?v=kikGvjKFN8Q" target="_blank" class="check-item video-link" data-video-id="v42_1" data-practice-id="eval_exp" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=kikGvjKFN8Q" target="_blank" class="check-item video-link" data-video-id="v42_1" data-practice-id="eval_exp" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Graphing &amp; Tables</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=aix8TLHdKgc" target="_blank" class="check-item video-link" data-video-id="v42_2" data-practice-id="eval_exp" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=aix8TLHdKgc" target="_blank" class="check-item video-link" data-video-id="v42_2" data-practice-id="eval_exp" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Calculator: Decimal Exponents</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=NCYNXkbTTUo" target="_blank" class="check-item video-link" data-video-id="v42_3" data-practice-id="interest" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=NCYNXkbTTUo" target="_blank" class="check-item video-link" data-video-id="v42_3" data-practice-id="interest" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Simple vs Compound Interest</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=2S4vK30dII0" target="_blank" class="check-item video-link" data-video-id="v42_4" data-practice-id="interest" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=2S4vK30dII0" target="_blank" class="check-item video-link" data-video-id="v42_4" data-practice-id="interest" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Continuous Compounding</span>
                     </a>
@@ -616,19 +675,19 @@
             <div class="checklist-section" style="margin-top: 2rem;">
                 <h3>Section 4.3: Logarithms</h3>
                 <div class="checklist-grid">
-                    <a href="http://www.youtube.com/watch?v=-ZQvz4bc2Eg" target="_blank" class="check-item video-link" data-video-id="v43_1" data-practice-id="logexp_conv" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" target="_blank" class="check-item video-link" data-video-id="v43_1" data-practice-id="logexp_conv" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Log ↔ Exp Conversions</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=eL2FhO11mf0" target="_blank" class="check-item video-link" data-video-id="v43_2" data-practice-id="logexp" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=eL2FhO11mf0" target="_blank" class="check-item video-link" data-video-id="v43_2" data-practice-id="logexp" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Evaluating Log Expressions</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=3Rf8KEhY0ts" target="_blank" class="check-item video-link" data-video-id="v43_3" data-practice-id="logexp" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=3Rf8KEhY0ts" target="_blank" class="check-item video-link" data-video-id="v43_3" data-practice-id="logexp" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Logarithm Change of Base</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=fnhFneOz6n8" target="_blank" class="check-item video-link" data-video-id="v43_4" data-practice-id="logexp" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=fnhFneOz6n8" target="_blank" class="check-item video-link" data-video-id="v43_4" data-practice-id="logexp" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Solving Exponential Eqns using Logs</span>
                     </a>
@@ -638,19 +697,19 @@
             <div class="checklist-section" style="margin-top: 2rem;">
                 <h3>Geometry &amp; Circles</h3>
                 <div class="checklist-grid">
-                    <a href="http://www.youtube.com/watch?v=8ysZhPknfYY" target="_blank" class="check-item video-link" data-video-id="vgeo_1" data-practice-id="piecewise_rect" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=8ysZhPknfYY" target="_blank" class="check-item video-link" data-video-id="vgeo_1" data-practice-id="piecewise_rect" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Piecewise Rectangular Areas</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=FcDyaiHO4GQ" target="_blank" class="check-item video-link" data-video-id="vgeo_2" data-practice-id="dms_to_dec" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=FcDyaiHO4GQ" target="_blank" class="check-item video-link" data-video-id="vgeo_2" data-practice-id="dms_to_dec" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>DMS to Decimal Conversion</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=JmLN3QxshlE" target="_blank" class="check-item video-link" data-video-id="vgeo_3" data-practice-id="rad_deg" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=JmLN3QxshlE" target="_blank" class="check-item video-link" data-video-id="vgeo_3" data-practice-id="rad_deg" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Radians &amp; Degrees Intro</span>
                     </a>
-                    <a href="http://www.youtube.com/watch?v=XUus6-9E9sQ" target="_blank" class="check-item video-link" data-video-id="vgeo_4" data-practice-id="circles" style="text-decoration: none;">
+                    <a href="https://www.youtube.com/watch?v=XUus6-9E9sQ" target="_blank" class="check-item video-link" data-video-id="vgeo_4" data-practice-id="circles" style="text-decoration: none;">
                         <i data-lucide="play" style="color: var(--accent);"></i>
                         <span>Circle Sectors &amp; Arc Length</span>
                     </a>
@@ -885,6 +944,49 @@
                 };
             }
         },
+
+{
+    id: 'inscribed_angle', section: 'Geometry',
+    label: 'Inscribed Angles',
+    generate: () => {
+        const arcVal = (Math.floor(Math.random() * 20) + 5) * 4; 
+        const angleVal = arcVal / 2;
+        const isFindingAngle = Math.random() > 0.5;
+
+        const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--text)" stroke-width="2"/>
+            <path d="M60,10 L107,75 L13,75 Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
+            <text x="60" y="90" fill="var(--text)" font-size="10" text-anchor="middle">${isFindingAngle ? '?' : arcVal + '°'}</text>
+            <text x="60" y="25" fill="var(--accent)" font-weight="bold" font-size="10" text-anchor="middle">${isFindingAngle ? 'x' : '?'}</text>
+        </svg>`;
+
+        return {
+            q: isFindingAngle 
+                ? `Find the measure of the inscribed angle $x$ if the intercepted arc is $${arcVal}^\\circ$.` 
+                : `Find the measure of the intercepted arc if the inscribed angle is $${angleVal}^\\circ$.`,
+            svg: svg, inputType: 'number', a: isFindingAngle ? angleVal : arcVal, tol: 0.1,
+            solution: isFindingAngle 
+                ? `The inscribed angle is half the arc: $${arcVal} / 2 = ${angleVal}^\\circ$.` 
+                : `The intercepted arc is twice the angle: $${angleVal} \\cdot 2 = ${arcVal}^\\circ$.`
+        };
+    }
+},
+{
+    id: 'herons', section: 'Geometry',
+    label: "Heron's Formula",
+    generate: () => {
+        const sets = [[18, 17, 29], [13, 14, 15], [7, 24, 25]];
+        const [a, b, c] = sets[Math.floor(Math.random() * sets.length)];
+        const s = (a + b + c) / 2;
+        const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+
+        return {
+            q: `Find the area of a triangle with sides $a = ${a}$, $b = ${b}$, and $c = ${c}$. (Round to 1 decimal place)`,
+            inputType: 'number', a: area, tol: 0.1,
+            solution: `1. Find semi-perimeter $s = (${a}+${b}+${c})/2 = ${s}$. <br> 2. Use $A = \\sqrt{${s}(${s}-${a})(${s}-${b})(${s}-${c})} = ${area.toFixed(1)}$.`
+        };
+    }
+},
         {
             id: 'piecewise_rect', section: 'Geometry',
             label: 'Piecewise Rectangular Area',
