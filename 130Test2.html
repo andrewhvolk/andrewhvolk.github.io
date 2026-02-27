@@ -487,77 +487,139 @@
     
 <div id="tab-formulas" class="tab-content">
         <div class="card">
-            <h2>Formulas for Test 2</h2>
+            <h2>Essential Formulas for Test 2</h2>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 500;">
                 Badges indicate what is provided on the exam and what you must memorize.
             </p>
-
+            
             <div class="checklist-section">
-                <h3>Algebra &amp; Interest</h3>
-                <div class="formula-grid">
-                    <div class="formula-card">
-                        <div class="formula-badge status-provided">Provided</div>
-                        <div class="formula-title">Compound Interest</div>
-                        <div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-provided">Provided</div>
-                        <div class="formula-title">Continuous Compounding</div>
-                        <div class="formula-math">$$A = Pe^{rt}$$</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Log ↔ Exp Form</div>
-                        <div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Change of Base</div>
-                        <div class="formula-math">$$\log_b(a) = \frac{\ln(a)}{\ln(b)}$$</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="checklist-section status-supplemental-section" style="margin-top: 2rem;">
-                <h3>Algebra &amp; Interest (Supplemental)</h3>
+                <h3>Section 4.2: Exponentials &amp; Interest</h3>
                 <div class="formula-grid">
                     <div class="formula-card">
                         <div class="formula-badge status-supplemental">Supplemental</div>
                         <div class="formula-title">Simple Interest</div>
                         <div class="formula-math">$$A = P(1 + rt)$$</div>
+                        <div class="formula-vars">$P$ = principal, $r$ = annual rate (decimal), $t$ = years</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-provided">Provided</div>
+                        <div class="formula-title">Compound Interest</div>
+                        <div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div>
+                        <div class="formula-vars">$n$ = compounds/year<br>(1 = annually, 12 = monthly, 365 = daily)</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-provided">Provided</div>
+                        <div class="formula-title">Continuous Compounding</div>
+                        <div class="formula-math">$$A = Pe^{rt}$$</div>
+                        <div class="formula-vars">$e \approx 2.71828$</div>
                     </div>
                 </div>
             </div>
 
             <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Geometry (Must Memorize)</h3>
+                <h3>Section 4.3: Logarithms</h3>
                 <div class="formula-grid">
                     <div class="formula-card">
                         <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Inscribed Angle Theorem</div>
-                        <div class="formula-math">$$\angle = \frac{1}{2}(\text{Arc})$$</div>
+                        <div class="formula-title">Log ↔ Exp Form</div>
+                        <div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div>
+                        <div class="formula-vars">$b$ = base, $x$ = argument, $y$ = exponent</div>
                     </div>
                     <div class="formula-card">
                         <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">DMS to Decimal Degrees</div>
-                        <div class="formula-math">$$D + \frac{M}{60} + \frac{S}{3600}$$</div>
+                        <div class="formula-title">Change of Base</div>
+                        <div class="formula-math">$$\log_b(a) = \frac{\ln(a)}{\ln(b)}$$</div>
+                        <div class="formula-vars">Use to evaluate any log on a calculator</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Solving $b^x = c$</div>
+                        <div class="formula-math">$$x = \frac{\ln(c)}{\ln(b)}$$</div>
+                        <div class="formula-vars">Take $\ln$ of both sides, then isolate $x$</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-section" style="margin-top: 2rem;">
+                <h3>Geometry: Areas</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Triangle Area</div>
+                        <div class="formula-math">$$A = \frac{1}{2}bh$$</div>
+                        <div class="formula-vars">$b$ = base, $h$ = height</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Parallelogram Area</div>
+                        <div class="formula-math">$$A = bh$$</div>
+                        <div class="formula-vars">$b$ = base, $h$ = perpendicular height</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Trapezoid Area</div>
+                        <div class="formula-math">$$A = \frac{1}{2}h(b_1 + b_2)$$</div>
+                        <div class="formula-vars">$b_1, b_2$ = parallel sides, $h$ = height</div>
                     </div>
                     <div class="formula-card">
                         <div class="formula-badge status-memorize">Memorize</div>
                         <div class="formula-title">Heron's Formula</div>
                         <div class="formula-math">$$A = \sqrt{s(s-a)(s-b)(s-c)}$$</div>
+                        <div class="formula-vars">$s = \frac{a+b+c}{2}$ (semi-perimeter)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-section" style="margin-top: 2rem;">
+                <h3>Geometry: Circles &amp; Angles</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Inscribed Angle Theorem</div>
+                        <div class="formula-math">$$\text{Angle} = \frac{1}{2}(\text{Arc})$$</div>
+                        <div class="formula-vars">Inscribed angle is half the intercepted arc</div>
                     </div>
                     <div class="formula-card">
                         <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Sector Area</div>
-                        <div class="formula-math">$$A = \frac{1}{2}r^2\theta$$</div>
-                        <div class="formula-vars">where $\theta$ is in radians</div>
+                        <div class="formula-title">DMS to Decimal</div>
+                        <div class="formula-math">$$D + \frac{M}{60} + \frac{S}{3600}$$</div>
+                        <div class="formula-vars">$D$ = degrees, $M$ = minutes, $S$ = seconds</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Degree ↔ Radian</div>
+                        <div class="formula-math">$$\text{rad} = \text{deg} \cdot \frac{\pi}{180^\circ}$$</div>
+                        <div class="formula-vars">$180^\circ = \pi\text{ rad}$; $1^\circ = 60', 1' = 60''$</div>
                     </div>
                     <div class="formula-card">
                         <div class="formula-badge status-memorize">Memorize</div>
                         <div class="formula-title">Arc Length</div>
                         <div class="formula-math">$$s = r\theta$$</div>
-                        <div class="formula-vars">where $\theta$ is in radians</div>
+                        <div class="formula-vars">$\theta$ must be in radians</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Sector Area</div>
+                        <div class="formula-math">$$A = \frac{1}{2}r^2\theta$$</div>
+                        <div class="formula-vars">$\theta$ must be in radians</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Circle Area</div>
+                        <div class="formula-math">$$A = \pi r^2$$</div>
+                        <div class="formula-vars">$r$ = radius</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Circumference</div>
+                        <div class="formula-math">$$C = 2\pi r$$</div>
+                        <div class="formula-vars">$r$ = radius</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Angular &amp; Linear Speed</div>
+                        <div class="formula-math">$$\omega = 2\pi \cdot \text{rpm}, \quad v = r\omega$$</div>
+                        <div class="formula-vars">$\omega$ = angular speed, $v$ = linear speed</div>
                     </div>
                 </div>
             </div>
