@@ -199,6 +199,23 @@
         .inp-tiny { width: 60px; padding: 0.5rem !important; font-size: 1rem !important; transform: translateY(10px); }
         .math-text { font-size: 1.5rem; font-family: 'DM Serif Display', serif; }
 
+        /* Multi-input grid (interest table, circle multi-part) */
+        .multi-input-grid { 
+            display: grid; grid-template-columns: 1fr auto; gap: 0.6rem 1rem; 
+            align-items: center; max-width: 420px; margin: 0 auto 1.5rem auto;
+            text-align: left;
+        }
+        .multi-input-grid .mig-label { font-size: 1rem; font-weight: 500; color: var(--text); }
+        .multi-input-grid input { 
+            background: var(--bg); border: 2px solid var(--border); color: var(--text); 
+            padding: 0.75rem 1rem; border-radius: 12px; font-size: 1.1rem; 
+            font-family: 'JetBrains Mono', monospace; text-align: center; width: 160px;
+            transition: border-color 0.2s; outline: none;
+        }
+        .multi-input-grid input:focus { border-color: var(--accent); }
+        .multi-input-grid input.inp-correct { border-color: var(--green); background: var(--green-bg); }
+        .multi-input-grid input.inp-wrong { border-color: var(--red); background: var(--red-bg); }
+
         /* Buttons */
         .btn-primary { background: var(--accent); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
         .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
@@ -531,6 +548,24 @@
                         <div class="formula-math">$$\log_b(a) = \frac{\ln(a)}{\ln(b)}$$</div>
                         <div class="formula-vars">Use to evaluate any log on a calculator</div>
                     </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Product Rule</div>
+                        <div class="formula-math">$$\log_b(MN) = \log_b(M) + \log_b(N)$$</div>
+                        <div class="formula-vars">The log of a product is the sum of the logs</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Quotient Rule</div>
+                        <div class="formula-math">$$\log_b\!\left(\frac{M}{N}\right) = \log_b(M) - \log_b(N)$$</div>
+                        <div class="formula-vars">The log of a quotient is the difference of the logs</div>
+                    </div>
+                    <div class="formula-card">
+                        <div class="formula-badge status-memorize">Memorize</div>
+                        <div class="formula-title">Power Rule</div>
+                        <div class="formula-math">$$\log_b(M^k) = k\log_b(M)$$</div>
+                        <div class="formula-vars">The exponent can be pulled out front</div>
+                    </div>
                 </div>
             </div>
 
@@ -627,6 +662,58 @@
             <h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
             <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
             
+            <!-- Mock Exam CTA -->
+            <div id="exam-cta" style="background: linear-gradient(135deg, var(--accent-glow), var(--red-bg)); border: 2px solid var(--accent); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+                <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">20 exam-matched questions weighted like the real test: ~15% Section 4.2, ~15% Section 4.3, ~70% Geometry. Includes a compound interest table and a multi-part circle theorem problem.</p>
+                <button class="btn-primary" onclick="startMockExam()" id="btn-start-exam">Start Mock Exam</button>
+            </div>
+
+            <!-- Mock Quiz CTA -->
+            <div id="quiz-cta" style="background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
+                <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">8 focused questions matching each weekly quiz. One attempt per question.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
+                    <button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
+                        <div style="font-weight: 600; margin-bottom: 2px;">Quiz 5 — Section 4.2</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Exponentials &amp; Interest</div>
+                    </button>
+                    <button class="btn-secondary" onclick="startMockQuiz(6)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
+                        <div style="font-weight: 600; margin-bottom: 2px;">Quiz 6 — Section 4.3</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Logarithms</div>
+                    </button>
+                    <button class="btn-secondary" onclick="startMockQuiz(7)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
+                        <div style="font-weight: 600; margin-bottom: 2px;">Quiz 7 — Angles &amp; Polygons</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">Similar Triangles, Parallel Lines, Areas, Heron's</div>
+                    </button>
+                    <button class="btn-secondary" onclick="startMockQuiz(8)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
+                        <div style="font-weight: 600; margin-bottom: 2px;">Quiz 8 — Circles</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">DMS, Radians, Arcs, Sectors, Speed, Circle Theorems</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exam Progress Bar (hidden until active) -->
+            <div id="exam-progress-bar" style="display: none; margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span id="exam-mode-label" style="font-weight: 600; color: var(--accent);">Mock Exam</span>
+                    <span id="exam-progress-label" style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.9rem;">1 / 15</span>
+                </div>
+                <div class="progress-bar-track" style="height: 10px;">
+                    <div id="exam-progress-fill" class="progress-bar-fill" style="width: 0%; transition: width 0.4s ease;"></div>
+                </div>
+            </div>
+
+            <!-- Exam Results (hidden until complete) -->
+            <div id="exam-results" style="display: none;" class="card">
+                <h2 style="text-align: center;">📊 Exam Results</h2>
+                <div id="exam-score-display" style="text-align: center; font-size: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin: 1rem 0;"></div>
+                <div id="exam-breakdown" style="margin-top: 1rem;"></div>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <button class="btn-primary" onclick="endMockExam()">Back to Practice</button>
+                </div>
+            </div>
+
             <div class="quiz-selector" id="quiz-categories"></div>
 
             <div class="quiz-box" id="quiz-active-area" style="display: none; border-top: 1px solid var(--border); padding-top: 2rem;">
@@ -637,9 +724,10 @@
                     <!-- Inputs injected here based on type -->
                 </div>
                 
-                <div>
+                <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
                     <button class="btn-primary" id="btn-submit">Check Answer</button>
                     <button class="btn-secondary" id="btn-next" style="display: none;">Next Question</button>
+                    <button id="btn-exit-exam" style="display: none; background: none; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; margin-left: auto;" onclick="confirmExitExam()">✕ Exit</button>
                 </div>
                 
                 <div id="feedback-display" class="feedback"></div>
@@ -649,6 +737,20 @@
 
     <!-- CHECKLIST & PROGRESS TAB -->
     <div id="tab-progress" class="tab-content">
+        <!-- Smart Study Plan -->
+        <div class="card" id="study-plan-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+                <h2 style="margin-bottom: 0;">📋 Smart Study Plan</h2>
+                <button class="btn-secondary" onclick="generateStudyPlan()" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+                    <i data-lucide="refresh-cw" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> Refresh
+                </button>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Personalized recommendations based on your checklist progress and exam performance.</p>
+            <div id="study-plan-content">
+                <p style="color: var(--text-muted); text-align: center; padding: 1rem;">Complete some practice questions or checklist items to generate your study plan.</p>
+            </div>
+        </div>
+
         <div class="card">
             <h2>Topics Checklist</h2>
             <div id="progress-summary" class="progress-summary"></div>
@@ -785,7 +887,7 @@
     }
 
     // --- STATE MANAGEMENT ---
-    const STORAGE_KEY = 'math130_test2_state_v6'; // Bumped for video tracking + new generators
+    const STORAGE_KEY = 'math130_test2_state_v9'; // Bumped for quiz-aligned sections
 
     // Keep default checklist as source of truth for structure
     const DEFAULT_CHECKLIST = [
@@ -808,27 +910,40 @@
             { id: '43_5', cat: 'Section 4.3', label: 'Solving an equation of the form $\\log_b(a)=c$', done: false, practiceId: 'logexp', videoUrl: 'http://www.youtube.com/watch?v=fnhFneOz6n8' },
             { id: '43_6', cat: 'Section 4.3', label: 'Solving an exponential equation by using logarithms (decimal answers, basic)', done: false, practiceId: 'logexp', videoUrl: 'http://www.youtube.com/watch?v=fnhFneOz6n8' },
             { id: '43_7', cat: 'Section 4.3', label: 'Solving an exponential equation by using natural logarithms (decimal answers)', done: false, practiceId: 'logexp', videoUrl: 'http://www.youtube.com/watch?v=fnhFneOz6n8' },
+            { id: '43_7b', cat: 'Section 4.3', label: 'Solving $\\ln(x) = c$ or $\\log(x) = c$ for $x$', done: false, practiceId: 'logexp' },
+            { id: '43_7c', cat: 'Section 4.3', label: 'Converting log/exp forms with fractional exponents (e.g. $25^{5/2}$)', done: false, practiceId: 'logexp_conv' },
+            { id: '43_8', cat: 'Section 4.3', label: 'Using properties of logarithms to condense expressions (Product Rule)', done: false, practiceId: 'log_props' },
+            { id: '43_9', cat: 'Section 4.3', label: 'Using the Power Rule to simplify logarithmic expressions', done: false, practiceId: 'log_props' },
+            { id: '43_10', cat: 'Section 4.3', label: 'Using the Quotient Rule to condense logarithmic expressions', done: false, practiceId: 'log_props' },
 
             // Geometry
-            { id: 'geo_1', cat: 'Geometry', label: 'Area of a piecewise rectangular figure', done: false, practiceId: 'piecewise_rect', videoUrl: 'http://www.youtube.com/watch?v=8ysZhPknfYY' },
-            { id: 'geo_2', cat: 'Geometry', label: 'Area of a triangle', done: false, practiceId: 'basic_areas' },
-            { id: 'geo_3', cat: 'Geometry', label: 'Area of a parallelogram', done: false, practiceId: 'basic_areas' },
-            { id: 'geo_4', cat: 'Geometry', label: 'Area of a trapezoid', done: false, practiceId: 'basic_areas' },
-            { id: 'geo_5', cat: 'Geometry', label: 'Circumference of a circle', done: false, practiceId: 'basic_circles' },
-            { id: 'geo_6', cat: 'Geometry', label: 'Circumference and area of a circle', done: false, practiceId: 'basic_circles' },
-            { id: 'geo_7', cat: 'Geometry', label: 'Circumference and area of a circle (exact answers in terms of $\\pi$)', done: false, practiceId: 'basic_circles' },
-            { id: 'geo_8', cat: 'Geometry', label: 'Word problem involving the area between two concentric circles', done: false, practiceId: 'basic_circles' },
-            { id: 'geo_9', cat: 'Geometry', label: 'Converting degrees-minutes-seconds to decimal degrees', done: false, practiceId: 'dms_to_dec', videoUrl: 'http://www.youtube.com/watch?v=FcDyaiHO4GQ' },
-            { id: 'geo_10', cat: 'Geometry', label: 'Converting decimal degrees to degrees-minutes-seconds', done: false, practiceId: 'dms', videoUrl: 'http://www.youtube.com/watch?v=FcDyaiHO4GQ' },
-            { id: 'geo_11', cat: 'Geometry', label: 'Converting degrees to radians and radians to degrees (Problem type 1)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
-            { id: 'geo_12', cat: 'Geometry', label: 'Converting degrees to radians and radians to degrees (Problem type 2)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
-            { id: 'geo_13', cat: 'Geometry', label: 'Sketching an angle with absolute value less than $2\\pi$ radians in standard position', done: false, videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
-            { id: 'geo_14', cat: 'Geometry', label: 'Drawing an arc to find a central angle or an arc length on the unit circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
-            { id: 'geo_15', cat: 'Geometry', label: 'Drawing an arc to find a central angle or an arc length on a non-unit circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
-            { id: 'geo_16', cat: 'Geometry', label: 'Arc length and central angle measure', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
-            { id: 'geo_17', cat: 'Geometry', label: 'Area of a sector of a circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
-            { id: 'geo_18', cat: 'Geometry', label: 'Using the area formula for a sector of a circle in a real-world situation', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
-            { id: 'geo_19', cat: 'Geometry', label: 'Angular and linear speed', done: false, practiceId: 'speed' }
+            { id: 'geo_1', cat: 'Angles & Polygons', label: 'Area of a piecewise rectangular figure', done: false, practiceId: 'piecewise_rect', videoUrl: 'http://www.youtube.com/watch?v=8ysZhPknfYY' },
+            { id: 'geo_2', cat: 'Angles & Polygons', label: 'Area of a triangle', done: false, practiceId: 'basic_areas' },
+            { id: 'geo_3', cat: 'Angles & Polygons', label: 'Area of a parallelogram', done: false, practiceId: 'basic_areas' },
+            { id: 'geo_4', cat: 'Angles & Polygons', label: 'Area of a trapezoid', done: false, practiceId: 'basic_areas' },
+            { id: 'geo_4b', cat: 'Angles & Polygons', label: "Heron's formula: area from three sides", done: false, practiceId: 'herons' },
+            { id: 'geo_4c', cat: 'Angles & Polygons', label: 'Similar triangles: finding missing angles and sides', done: false, practiceId: 'similar_triangles' },
+            { id: 'geo_4d', cat: 'Angles & Polygons', label: 'Parallel lines: finding angle measures (supplementary, alternate interior, corresponding)', done: false, practiceId: 'parallel_angles' },
+            { id: 'geo_4e', cat: 'Angles & Polygons', label: 'Proportional segments from parallel lines (transversals)', done: false, practiceId: 'transversals' },
+            { id: 'geo_5', cat: 'Circles', label: 'Circumference of a circle', done: false, practiceId: 'basic_circles' },
+            { id: 'geo_6', cat: 'Circles', label: 'Circumference and area of a circle', done: false, practiceId: 'basic_circles' },
+            { id: 'geo_7', cat: 'Circles', label: 'Circumference and area of a circle (exact answers in terms of $\\pi$)', done: false, practiceId: 'basic_circles' },
+            { id: 'geo_8', cat: 'Circles', label: 'Word problem involving the area between two concentric circles', done: false, practiceId: 'basic_circles' },
+            { id: 'geo_9', cat: 'Circles', label: 'Converting degrees-minutes-seconds to decimal degrees', done: false, practiceId: 'dms_to_dec', videoUrl: 'http://www.youtube.com/watch?v=FcDyaiHO4GQ' },
+            { id: 'geo_10', cat: 'Circles', label: 'Converting decimal degrees to degrees-minutes-seconds', done: false, practiceId: 'dms', videoUrl: 'http://www.youtube.com/watch?v=FcDyaiHO4GQ' },
+            { id: 'geo_11', cat: 'Circles', label: 'Converting degrees to radians and radians to degrees (Problem type 1)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_12', cat: 'Circles', label: 'Converting degrees to radians and radians to degrees (Problem type 2)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_12b', cat: 'Circles', label: 'Converting decimal radians to degrees (no $\\pi$, e.g. 4.5 rad)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_13', cat: 'Circles', label: 'Sketching an angle with absolute value less than $2\\pi$ radians in standard position', done: false, videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_14', cat: 'Circles', label: 'Drawing an arc to find a central angle or an arc length on the unit circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_15', cat: 'Circles', label: 'Drawing an arc to find a central angle or an arc length on a non-unit circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_16', cat: 'Circles', label: 'Arc length and central angle measure', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_17', cat: 'Circles', label: 'Area of a sector of a circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_18', cat: 'Circles', label: 'Using the area formula for a sector of a circle in a real-world situation', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
+            { id: 'geo_18b', cat: 'Circles', label: 'Inscribed angle theorem: finding arcs and angles from a diameter', done: false, practiceId: 'inscribed_angle' },
+            { id: 'geo_18c', cat: 'Circles', label: 'Multi-step circle problems: arc addition with diameter constraint', done: false, practiceId: 'inscribed_angle' },
+            { id: 'geo_18d', cat: 'Circles', label: 'Intersecting chords angle theorem', done: false, practiceId: 'inscribed_angle' },
+            { id: 'geo_19', cat: 'Circles', label: 'Angular and linear speed', done: false, practiceId: 'speed' }
     ];
 
     let state = {
@@ -838,12 +953,21 @@
         videosWatched: []
     };
 
+    let examState = {
+        isActive: false,
+        questions: [],
+        currentIndex: 0,
+        results: {},
+        score: 0,
+        total: 0
+    };
+
     function loadState() {
         try {
             // Also try migrating from old storage keys
             let saved = localStorage.getItem(STORAGE_KEY);
             if (!saved) {
-                const oldKey = localStorage.getItem('math130_test2_state_v5');
+                const oldKey = localStorage.getItem('math130_test2_state_v8') || localStorage.getItem('math130_test2_state_v7') || localStorage.getItem('math130_test2_state_v6') || localStorage.getItem('math130_test2_state_v5');
                 if (oldKey) saved = oldKey;
             }
             if (saved) {
@@ -944,31 +1068,70 @@
             }
         },
         {
-            id: 'rad_deg', section: 'Geometry',
+            id: 'interest_table', section: 'Section 4.2',
+            label: 'Interest Table (Multi-Part)',
+            generate: () => {
+                const pVals = [1000, 1500, 2000, 2500, 3000, 4000, 5000];
+                const P = pVals[Math.floor(Math.random() * pVals.length)];
+                const r = Math.floor(Math.random() * 8) + 3; // 3% to 10%
+                const t = Math.floor(Math.random() * 16) + 5; // 5 to 20 years
+                const rd = r / 100;
+
+                const a1 = P * Math.pow(1 + rd/2, 2*t);
+                const a2 = P * Math.pow(1 + rd/12, 12*t);
+                const a3 = P * Math.pow(1 + rd/365, 365*t);
+                const a4 = P * Math.exp(rd * t);
+
+                return {
+                    q: `Complete the table: Find $A$ for $\\$${P.toLocaleString()}$ invested at $r = ${r}\\%$ for $t = ${t}$ years, compounded $n$ times per year. Round to the nearest cent.`,
+                    inputType: 'interest_table',
+                    a: { a1, a2, a3, a4 },
+                    tol: 0.05,
+                    solution: `$n=2$: $A = ${P}(1+\\frac{${rd}}{2})^{2 \\cdot ${t}} = \\$${a1.toFixed(2)}$ <br>
+                        $n=12$: $A = ${P}(1+\\frac{${rd}}{12})^{12 \\cdot ${t}} = \\$${a2.toFixed(2)}$ <br>
+                        $n=365$: $A = ${P}(1+\\frac{${rd}}{365})^{365 \\cdot ${t}} = \\$${a3.toFixed(2)}$ <br>
+                        Continuous: $A = ${P}e^{(${rd})(${t})} = \\$${a4.toFixed(2)}$`
+                };
+            }
+        },
+        {
+            id: 'rad_deg', section: 'Circles',
             label: 'Radians ↔ Degrees',
             generate: () => {
-                if (Math.random() > 0.5) {
+                const type = Math.random();
+                if (type < 0.33) {
+                    // Degrees → Radians
                     const d = (Math.floor(Math.random() * 23) + 1) * 15;
                     const ans = d * Math.PI / 180;
                     return {
-                        q: `Convert $${d}^\\circ$ to radians. (Round to 3 decimal places)`,
+                        q: `Convert $${d}^\\circ$ to radians. (Round to 2 decimal places)`,
                         inputType: 'number', a: ans, tol: 0.005,
-                        solution: `Multiply by $\\frac{\\pi}{180^\\circ}$: $${d} \\cdot \\frac{\\pi}{180} = ${ans.toFixed(3)}$`
+                        solution: `Multiply by $\\frac{\\pi}{180^\\circ}$: $${d} \\cdot \\frac{\\pi}{180} = ${ans.toFixed(2)}$`
                     };
-                } else {
+                } else if (type < 0.66) {
+                    // π-fraction radians → Degrees
                     const num = Math.floor(Math.random() * 11) + 1;
-                    const den = [2, 3, 4, 6][Math.floor(Math.random() * 4)];
+                    const den = [2, 3, 4, 5, 6][Math.floor(Math.random() * 5)];
                     const ans = (num * 180) / den;
                     return {
                         q: `Convert $\\frac{${num}\\pi}{${den}}$ radians to degrees.`,
                         inputType: 'number', a: ans, tol: 0.1,
                         solution: `Multiply by $\\frac{180^\\circ}{\\pi}$: $\\frac{${num}\\pi}{${den}} \\cdot \\frac{180}{\\pi} = \\frac{${num * 180}}{${den}} = ${ans}^\\circ$`
                     };
+                } else {
+                    // Decimal radians → Degrees (like Q7b on the real exam: 4.5 rad)
+                    const rad = (Math.random() * 5 + 0.5).toFixed(1);
+                    const ans = parseFloat(rad) * 180 / Math.PI;
+                    return {
+                        q: `Convert $${rad}$ radians to degrees. (Round to 1 decimal place)`,
+                        inputType: 'number', a: ans, tol: 0.1,
+                        solution: `Multiply by $\\frac{180^\\circ}{\\pi}$: $${rad} \\cdot \\frac{180}{\\pi} = ${ans.toFixed(1)}^\\circ$`
+                    };
                 }
             }
         },
         {
-            id: 'dms', section: 'Geometry',
+            id: 'dms', section: 'Circles',
             label: 'Convert DMS',
             generate: () => {
                 const deg = (Math.random() * 80 + 10).toFixed(4);
@@ -985,7 +1148,7 @@
             }
         },
         {
-            id: 'dms_to_dec', section: 'Geometry',
+            id: 'dms_to_dec', section: 'Circles',
             label: 'DMS → Decimal Degrees',
             generate: () => {
                 const d = Math.floor(Math.random() * 80) + 10;
@@ -1002,36 +1165,306 @@
         },
 
 {
-    id: 'inscribed_angle', section: 'Geometry',
-    label: 'Inscribed Angles',
+    id: 'inscribed_angle', section: 'Circles',
+    label: 'Circle Theorems',
     generate: () => {
-        const arcVal = (Math.floor(Math.random() * 20) + 5) * 4; 
-        const angleVal = arcVal / 2;
-        const isFindingAngle = Math.random() > 0.5;
+        const type = Math.random();
 
-        const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
-            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--text)" stroke-width="2"/>
-            <path d="M60,10 L107,75 L13,75 Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
-            <text x="60" y="90" fill="var(--text)" font-size="10" text-anchor="middle">${isFindingAngle ? '?' : arcVal + '°'}</text>
-            <text x="60" y="25" fill="var(--accent)" font-weight="bold" font-size="10" text-anchor="middle">${isFindingAngle ? 'x' : '?'}</text>
+        if (type < 0.25) {
+            // Basic: inscribed angle = half arc
+            const arcVal = (Math.floor(Math.random() * 20) + 5) * 4; 
+            const angleVal = arcVal / 2;
+            const isFindingAngle = Math.random() > 0.5;
+            const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="var(--text)" stroke-width="2"/>
+                <path d="M60,10 L107,75 L13,75 Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
+                <text x="60" y="90" fill="var(--text)" font-size="10" text-anchor="middle">${isFindingAngle ? '?' : arcVal + '°'}</text>
+                <text x="60" y="25" fill="var(--accent)" font-weight="bold" font-size="10" text-anchor="middle">${isFindingAngle ? 'x' : '?'}</text>
+            </svg>`;
+            return {
+                q: isFindingAngle 
+                    ? `Find the measure of the inscribed angle $x$ if the intercepted arc is $${arcVal}^\\circ$.` 
+                    : `Find the measure of the intercepted arc if the inscribed angle is $${angleVal}^\\circ$.`,
+                svg: svg, inputType: 'number', a: isFindingAngle ? angleVal : arcVal, tol: 0.1,
+                solution: isFindingAngle 
+                    ? `The inscribed angle is half the arc: $${arcVal} / 2 = ${angleVal}^\\circ$.` 
+                    : `The intercepted arc is twice the angle: $${angleVal} \\cdot 2 = ${arcVal}^\\circ$.`
+            };
+        } else if (type < 0.5) {
+            // Diameter + inscribed angle: angle in semicircle = 90°, find missing arc
+            // AC is a diameter → arc ABC = 180°. Given arc AB, find arc BC.
+            const arcAB = (Math.floor(Math.random() * 12) + 3) * 8; // 24 to 120
+            const arcBC = 180 - arcAB;
+            const svg = `<svg viewBox="0 0 200 200" class="svg-canvas" width="280" height="280">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="var(--text)" stroke-width="2"/>
+                <!-- diameter -->
+                <line x1="20" y1="100" x2="180" y2="100" stroke="var(--text)" stroke-width="2"/>
+                <!-- point B on bottom -->
+                <circle cx="60" cy="169" r="3" fill="var(--accent)"/>
+                <line x1="20" y1="100" x2="60" y2="169" stroke="var(--accent)" stroke-width="1.5"/>
+                <line x1="180" y1="100" x2="60" y2="169" stroke="var(--accent)" stroke-width="1.5"/>
+                <text x="15" y="95" fill="var(--text)" font-size="13" font-weight="bold">A</text>
+                <text x="182" y="95" fill="var(--text)" font-size="13" font-weight="bold">C</text>
+                <text x="50" y="185" fill="var(--text)" font-size="13" font-weight="bold">B</text>
+                <text x="30" y="145" fill="var(--accent)" font-size="11">${arcAB}°</text>
+                <text x="125" y="145" fill="var(--text)" font-size="11">?</text>
+            </svg>`;
+            return {
+                q: `$\\overline{AC}$ is a diameter. Arc $\\widehat{AB} = ${arcAB}^\\circ$. Find arc $\\widehat{BC}$.`,
+                svg: svg, inputType: 'number', a: arcBC, tol: 0.1,
+                solution: `Since $\\overline{AC}$ is a diameter, the semicircle $\\widehat{ABC} = 180^\\circ$. <br> $\\widehat{BC} = 180^\\circ - ${arcAB}^\\circ = ${arcBC}^\\circ$`
+            };
+        } else if (type < 0.75) {
+            // Multi-step: Given one inscribed angle, find an arc, then use arc addition to find another arc
+            // Setup: AC is diameter. ∠DBC = α (inscribed angle intercepting arc DC). Arc AB = β.
+            // Find: arc CD = 2α, arc AD = 180 - arcAB - arcCD (since A→B→C is 180° and D is on the major arc side)
+            const angleDBC = Math.floor(Math.random() * 25) + 15; // 15-39°
+            const arcAB = (Math.floor(Math.random() * 8) + 4) * 6; // 24-72°
+            const arcDC = angleDBC * 2; // inscribed angle theorem
+            const arcBC = 180 - arcAB; // semicircle
+            const arcAD = 360 - arcAB - arcBC - arcDC; // full circle
+            // Pick which unknown to ask for
+            const subType = Math.random();
+            let question, answer, solution;
+            if (subType < 0.25) {
+                question = `$\\overline{AC}$ is a diameter. $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$. Find arc $\\widehat{CD}$.`;
+                answer = arcDC;
+                solution = `$\\angle DBC$ is an inscribed angle that intercepts arc $\\widehat{CD}$. <br> $\\widehat{CD} = 2 \\times ${angleDBC}^\\circ = ${arcDC}^\\circ$`;
+            } else if (subType < 0.5) {
+                question = `$\\overline{AC}$ is a diameter. $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$. Find arc $\\widehat{AD}$.`;
+                answer = arcAD;
+                solution = `First, $\\widehat{CD} = 2 \\times ${angleDBC}^\\circ = ${arcDC}^\\circ$. Semicircle: $\\widehat{BC} = 180^\\circ - ${arcAB}^\\circ = ${arcBC}^\\circ$. <br> $\\widehat{AD} = 360^\\circ - ${arcAB}^\\circ - ${arcBC}^\\circ - ${arcDC}^\\circ = ${arcAD}^\\circ$`;
+            } else if (subType < 0.75) {
+                // Find ∠AEB where E is intersection — this is (arcAB + arcDC)/2 as a chord-chord angle
+                const angleAEB = (arcAB + arcDC) / 2;
+                question = `$\\overline{AC}$ is a diameter. $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$. Chords $\\overline{AC}$ and $\\overline{BD}$ intersect at $E$. Find $\\angle AEB$.`;
+                answer = angleAEB;
+                solution = `When two chords intersect, the angle equals half the sum of the intercepted arcs. <br> $\\widehat{CD} = 2 \\times ${angleDBC}^\\circ = ${arcDC}^\\circ$. <br> $\\angle AEB = \\frac{\\widehat{AB} + \\widehat{CD}}{2} = \\frac{${arcAB} + ${arcDC}}{2} = ${angleAEB}^\\circ$`;
+            } else {
+                // Find ∠AED (supplementary to ∠AEB)
+                const angleAEB = (arcAB + arcDC) / 2;
+                const angleAED = 180 - angleAEB;
+                question = `$\\overline{AC}$ is a diameter. $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$. Chords $\\overline{AC}$ and $\\overline{BD}$ intersect at $E$. Find $\\angle AED$.`;
+                answer = angleAED;
+                solution = `First, find $\\angle AEB$: $\\widehat{CD} = 2(${angleDBC}) = ${arcDC}^\\circ$, so $\\angle AEB = \\frac{${arcAB} + ${arcDC}}{2} = ${angleAEB}^\\circ$. <br> $\\angle AED$ and $\\angle AEB$ are supplementary: $\\angle AED = 180 - ${angleAEB} = ${angleAED}^\\circ$.`;
+            }
+            const svg = `<svg viewBox="0 0 220 220" class="svg-canvas" width="280" height="280">
+                <circle cx="110" cy="110" r="85" fill="none" stroke="var(--text)" stroke-width="2"/>
+                <line x1="25" y1="110" x2="195" y2="110" stroke="var(--text)" stroke-width="2"/>
+                <circle cx="65" cy="183" r="3" fill="var(--accent)"/>
+                <circle cx="155" cy="37" r="3" fill="var(--accent)"/>
+                <line x1="65" y1="183" x2="155" y2="37" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4"/>
+                <line x1="25" y1="110" x2="65" y2="183" stroke="var(--accent)" stroke-width="1.5"/>
+                <line x1="195" y1="110" x2="65" y2="183" stroke="var(--accent)" stroke-width="1.5"/>
+                <text x="15" y="107" fill="var(--text)" font-size="13" font-weight="bold">A</text>
+                <text x="197" y="107" fill="var(--text)" font-size="13" font-weight="bold">C</text>
+                <text x="53" y="198" fill="var(--text)" font-size="13" font-weight="bold">B</text>
+                <text x="158" y="33" fill="var(--text)" font-size="13" font-weight="bold">D</text>
+                <text x="108" y="105" fill="var(--text-muted)" font-size="11">E</text>
+                <text x="33" y="152" fill="var(--accent)" font-size="11">${arcAB}°</text>
+                <text x="140" y="170" fill="var(--text-muted)" font-size="11">${angleDBC}°</text>
+            </svg>`;
+            return {
+                q: question, svg: svg, inputType: 'number', a: answer, tol: 0.1, solution: solution
+            };
+        } else {
+            // Supplementary inscribed angles: opposite angles in a cyclic quadrilateral
+            const arcAB = (Math.floor(Math.random() * 10) + 5) * 8; // 40-120
+            const arcBC = (Math.floor(Math.random() * 10) + 5) * 6; // 30-90
+            const arcCD = (Math.floor(Math.random() * 8) + 3) * 8; // 24-80
+            const arcDA = 360 - arcAB - arcBC - arcCD;
+            if (arcDA <= 0 || arcDA >= 180) {
+                // Fallback to simple inscribed angle if bad geometry
+                const arcVal = (Math.floor(Math.random() * 20) + 5) * 4; 
+                const angleVal = arcVal / 2;
+                return {
+                    q: `Find the inscribed angle if the intercepted arc is $${arcVal}^\\circ$.`,
+                    inputType: 'number', a: angleVal, tol: 0.1,
+                    solution: `Inscribed angle $= \\frac{${arcVal}}{2} = ${angleVal}^\\circ$`
+                };
+            }
+            // ∠A inscribes arc BCD = arcBC + arcCD
+            const angleA = (arcBC + arcCD) / 2;
+            // ∠C inscribes arc DAB = arcDA + arcAB 
+            const angleC = (arcDA + arcAB) / 2;
+            const askForAngle = Math.random() > 0.5;
+            return {
+                q: askForAngle
+                    ? `In cyclic quadrilateral $ABCD$: arc $\\widehat{AB} = ${arcAB}^\\circ$, arc $\\widehat{BC} = ${arcBC}^\\circ$, arc $\\widehat{CD} = ${arcCD}^\\circ$. Find $\\angle A$.`
+                    : `In cyclic quadrilateral $ABCD$: arc $\\widehat{AB} = ${arcAB}^\\circ$, arc $\\widehat{BC} = ${arcBC}^\\circ$, arc $\\widehat{CD} = ${arcCD}^\\circ$. Find $\\angle C$.`,
+                inputType: 'number', 
+                a: askForAngle ? angleA : angleC, tol: 0.1,
+                solution: askForAngle
+                    ? `Arc $\\widehat{DA} = 360 - ${arcAB} - ${arcBC} - ${arcCD} = ${arcDA}^\\circ$. <br> $\\angle A$ inscribes $\\widehat{BCD} = ${arcBC} + ${arcCD} = ${arcBC + arcCD}^\\circ$. <br> $\\angle A = \\frac{${arcBC + arcCD}}{2} = ${angleA}^\\circ$`
+                    : `Arc $\\widehat{DA} = 360 - ${arcAB} - ${arcBC} - ${arcCD} = ${arcDA}^\\circ$. <br> $\\angle C$ inscribes $\\widehat{DAB} = ${arcDA} + ${arcAB} = ${arcDA + arcAB}^\\circ$. <br> $\\angle C = \\frac{${arcDA + arcAB}}{2} = ${angleC}^\\circ$`
+            };
+        }
+    }
+},
+{
+    id: 'circle_multi', section: 'Circles',
+    label: 'Circle Theorems (Full Problem)',
+    generate: () => {
+        // Mirrors real exam Q15: AC is diameter, BD is NOT.
+        // Given: ∠DBC = α, arc AB = β
+        // Find all four: ∠AEB, ∠AED, arc CD, arc AD
+        const angleDBC = Math.floor(Math.random() * 20) + 15; // 15-34
+        const arcAB = (Math.floor(Math.random() * 7) + 4) * 8; // 32-80
+        const arcBC = 180 - arcAB;
+        const arcCD = angleDBC * 2;
+        const arcAD = 360 - arcAB - arcBC - arcCD; // = 180 - 2*angleDBC
+        const angleAEB = (arcAB + arcCD) / 2;
+        const angleAED = 180 - angleAEB;
+
+        const svg = `<svg viewBox="0 0 260 260" class="svg-canvas" width="300" height="300">
+            <circle cx="130" cy="130" r="100" fill="none" stroke="var(--text)" stroke-width="2"/>
+            <!-- Diameter AC -->
+            <line x1="30" y1="130" x2="230" y2="130" stroke="var(--text)" stroke-width="2"/>
+            <!-- Point B (bottom-left) -->
+            <circle cx="72" cy="217" r="3" fill="var(--accent)"/>
+            <!-- Point D (top-right) -->
+            <circle cx="205" cy="55" r="3" fill="var(--accent)"/>
+            <!-- Chord BD through E -->
+            <line x1="72" y1="217" x2="205" y2="55" stroke="var(--accent)" stroke-width="1.5" opacity="0.6"/>
+            <!-- Triangle lines -->
+            <line x1="30" y1="130" x2="72" y2="217" stroke="var(--accent)" stroke-width="1.5"/>
+            <line x1="230" y1="130" x2="72" y2="217" stroke="var(--accent)" stroke-width="1.5"/>
+            <line x1="230" y1="130" x2="205" y2="55" stroke="var(--accent)" stroke-width="1.5"/>
+            <!-- Labels -->
+            <text x="14" y="127" fill="var(--text)" font-size="14" font-weight="bold">A</text>
+            <text x="234" y="127" fill="var(--text)" font-size="14" font-weight="bold">C</text>
+            <text x="56" y="235" fill="var(--text)" font-size="14" font-weight="bold">B</text>
+            <text x="210" y="48" fill="var(--text)" font-size="14" font-weight="bold">D</text>
+            <text x="125" y="123" fill="var(--text-muted)" font-size="12">E</text>
+            <!-- Given values -->
+            <text x="38" y="180" fill="var(--accent)" font-size="12">${arcAB}°</text>
+            <text x="165" y="195" fill="var(--text-muted)" font-size="12">${angleDBC}°</text>
         </svg>`;
 
         return {
-            q: isFindingAngle 
-                ? `Find the measure of the inscribed angle $x$ if the intercepted arc is $${arcVal}^\\circ$.` 
-                : `Find the measure of the intercepted arc if the inscribed angle is $${angleVal}^\\circ$.`,
-            svg: svg, inputType: 'number', a: isFindingAngle ? angleVal : arcVal, tol: 0.1,
-            solution: isFindingAngle 
-                ? `The inscribed angle is half the arc: $${arcVal} / 2 = ${angleVal}^\\circ$.` 
-                : `The intercepted arc is twice the angle: $${angleVal} \\cdot 2 = ${arcVal}^\\circ$.`
+            q: `$\\overline{AC}$ is a diameter, but $\\overline{BD}$ is <strong>not</strong>. Given $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$, find all four values:`,
+            svg: svg,
+            inputType: 'circle_multi',
+            a: { c1: angleAEB, c2: angleAED, c3: arcCD, c4: arcAD },
+            tol: 0.5,
+            solution: `<strong>c) arc CD:</strong> $\\angle DBC$ intercepts $\\widehat{CD}$, so $\\widehat{CD} = 2(${angleDBC}) = ${arcCD}^\\circ$. <br>
+                <strong>d) arc AD:</strong> Semicircle $\\widehat{ABC} = 180^\\circ$, so $\\widehat{BC} = 180 - ${arcAB} = ${arcBC}^\\circ$. Full circle: $\\widehat{AD} = 360 - ${arcAB} - ${arcBC} - ${arcCD} = ${arcAD}^\\circ$. <br>
+                <strong>a) ∠AEB:</strong> Intersecting chords: $\\angle AEB = \\frac{\\widehat{AB} + \\widehat{CD}}{2} = \\frac{${arcAB} + ${arcCD}}{2} = ${angleAEB}^\\circ$. <br>
+                <strong>b) ∠AED:</strong> Supplementary: $\\angle AED = 180 - ${angleAEB} = ${angleAED}^\\circ$.`
         };
     }
 },
 {
-    id: 'herons', section: 'Geometry',
+    id: 'similar_triangles', section: 'Angles & Polygons',
+    label: 'Similar Triangles',
+    generate: () => {
+        // Generate two similar triangles with correspondence ΔMNP ~ ΔQRS
+        const names1 = ['M','N','P'];
+        const names2 = ['Q','R','S'];
+        // Angles must sum to 180
+        const a1 = Math.floor(Math.random() * 40) + 30; // 30-69
+        const a2 = Math.floor(Math.random() * 40) + 40; // 40-79
+        const a3 = 180 - a1 - a2;
+        const angles = [a1, a2, a3]; // ∠M, ∠N, ∠P
+
+        // Sides for triangle 1
+        const s1 = Math.floor(Math.random() * 30) + 15; // MN
+        const s2 = Math.floor(Math.random() * 30) + 15; // NP
+        const s3 = Math.floor(Math.random() * 30) + 15; // MP
+
+        // Scale factor for triangle 2
+        const scale = (Math.random() * 0.6 + 0.3).toFixed(2); // 0.30 to 0.90
+        const t1 = parseFloat((s1 * scale).toFixed(1)); // QR
+        const t2 = parseFloat((s2 * scale).toFixed(1)); // RS
+        const t3 = parseFloat((s3 * scale).toFixed(1)); // QS
+
+        // Pick what to ask: 2 angles + 2 sides
+        // Given: ∠P, ∠R(=∠N), MN, QR, RS, MP
+        // Find: ∠N, ∠Q(=∠M), NP, QS
+        const type = Math.floor(Math.random() * 4);
+        let q, ans, sol;
+
+        if (type === 0) {
+            // Find missing angle: ∠N = 180 - ∠M - ∠P, but we give ∠P and ∠R=∠N
+            // Instead: given two angles, find third
+            q = `In similar triangles $\\Delta ${names1.join('')} \\sim \\Delta ${names2.join('')}$, $\\angle ${names1[0]} = ${angles[0]}^\\circ$ and $\\angle ${names1[2]} = ${angles[2]}^\\circ$. Find $\\angle ${names1[1]}$.`;
+            ans = angles[1];
+            sol = `Angles sum to $180^\\circ$: $\\angle ${names1[1]} = 180 - ${angles[0]} - ${angles[2]} = ${angles[1]}^\\circ$`;
+        } else if (type === 1) {
+            // Find corresponding angle
+            q = `In similar triangles $\\Delta ${names1.join('')} \\sim \\Delta ${names2.join('')}$, $\\angle ${names1[0]} = ${angles[0]}^\\circ$ and $\\angle ${names1[1]} = ${angles[1]}^\\circ$. Find $\\angle ${names2[2]}$.`;
+            ans = angles[2]; // ∠S = ∠P
+            sol = `Corresponding angles are equal: $\\angle ${names2[2]} = \\angle ${names1[2]} = 180 - ${angles[0]} - ${angles[1]} = ${angles[2]}^\\circ$`;
+        } else if (type === 2) {
+            // Find missing side using proportion
+            const findSide = parseFloat((s2 * t1 / s1).toFixed(1));
+            q = `In $\\Delta ${names1.join('')} \\sim \\Delta ${names2.join('')}$, $${names1[0]}${names1[1]} = ${s1}$, $${names1[1]}${names1[2]} = ${s2}$, and $${names2[0]}${names2[1]} = ${t1}$. Find $${names2[1]}${names2[2]}$.`;
+            ans = findSide;
+            sol = `Set up proportion: $\\frac{${names1[0]}${names1[1]}}{${names2[0]}${names2[1]}} = \\frac{${names1[1]}${names1[2]}}{${names2[1]}${names2[2]}}$ <br> $\\frac{${s1}}{${t1}} = \\frac{${s2}}{x} \\implies x = \\frac{${s2} \\times ${t1}}{${s1}} = ${findSide}$`;
+        } else {
+            // Find missing side (other direction)
+            const findSide = parseFloat((s3 * t1 / s1).toFixed(1));
+            q = `In $\\Delta ${names1.join('')} \\sim \\Delta ${names2.join('')}$, $${names1[0]}${names1[1]} = ${s1}$, $${names1[0]}${names1[2]} = ${s3}$, and $${names2[0]}${names2[1]} = ${t1}$. Find $${names2[0]}${names2[2]}$.`;
+            ans = findSide;
+            sol = `Set up proportion: $\\frac{${names1[0]}${names1[1]}}{${names2[0]}${names2[1]}} = \\frac{${names1[0]}${names1[2]}}{${names2[0]}${names2[2]}}$ <br> $\\frac{${s1}}{${t1}} = \\frac{${s3}}{x} \\implies x = \\frac{${s3} \\times ${t1}}{${s1}} = ${findSide}$`;
+        }
+
+        return { q: q, inputType: 'number', a: ans, tol: 0.15, solution: sol };
+    }
+},
+{
+    id: 'parallel_angles', section: 'Angles & Polygons',
+    label: 'Parallel Lines: Angles',
+    generate: () => {
+        // Two parallel lines j||k cut by a transversal
+        // Angles at intersection: supplementary pairs, alternate interior, corresponding
+        const angle1 = parseFloat((Math.random() * 50 + 30).toFixed(1)); // 30-80°
+        const angle2 = parseFloat((Math.random() * 50 + 30).toFixed(1)); // another angle
+        const supp1 = parseFloat((180 - angle1).toFixed(1));
+        const supp2 = parseFloat((180 - angle2).toFixed(1));
+
+        const type = Math.floor(Math.random() * 4);
+        let q, ans, sol;
+
+        if (type === 0) {
+            // Supplementary: given ∠2, find ∠1 (linear pair)
+            q = `Lines $j \\| k$. If $\\angle 2 = ${angle1}^\\circ$, find $\\angle 1$ (where $\\angle 1$ and $\\angle 2$ are a linear pair on line $k$).`;
+            ans = supp1;
+            sol = `Linear pair: $\\angle 1 + \\angle 2 = 180^\\circ$, so $\\angle 1 = 180 - ${angle1} = ${supp1}^\\circ$`;
+        } else if (type === 1) {
+            // Alternate interior angles are equal
+            q = `Lines $j \\| k$. If $\\angle 4 = ${angle1}^\\circ$ (between the parallel lines on one transversal side), find the alternate interior angle $\\angle 5$.`;
+            ans = angle1;
+            sol = `Alternate interior angles are equal when lines are parallel: $\\angle 5 = \\angle 4 = ${angle1}^\\circ$`;
+        } else if (type === 2) {
+            // Triangle at transversal intersection: ∠3 = 180 - ∠5 - ∠2
+            // Given ∠2 and ∠5, find ∠3 in the triangle formed
+            const ang3 = parseFloat((180 - angle1 - angle2).toFixed(1));
+            if (ang3 <= 0) {
+                // fallback to simple supplementary
+                q = `Lines $j \\| k$. If $\\angle 2 = ${angle1}^\\circ$, find the supplementary angle $\\angle 1$.`;
+                ans = supp1;
+                sol = `$\\angle 1 = 180 - ${angle1} = ${supp1}^\\circ$`;
+            } else {
+                q = `Lines $j \\| k$ with two transversals forming a triangle. $\\angle 2 = ${angle1}^\\circ$ and $\\angle 5 = ${angle2}^\\circ$. Find $\\angle 3$ (the angle at the triangle's vertex between the parallels).`;
+                ans = ang3;
+                sol = `The three angles in the triangle sum to $180^\\circ$: <br> $\\angle 3 = 180 - \\angle 5 - \\angle 2 = 180 - ${angle2} - ${angle1} = ${ang3}^\\circ$`;
+            }
+        } else {
+            // Exterior angle: ∠6 = 180 - ∠5 (linear pair on line j)
+            q = `Lines $j \\| k$. If $\\angle 5 = ${angle1}^\\circ$, find $\\angle 6$ (where $\\angle 5$ and $\\angle 6$ are a linear pair on line $j$).`;
+            ans = supp1;
+            sol = `Linear pair: $\\angle 6 = 180 - \\angle 5 = 180 - ${angle1} = ${supp1}^\\circ$`;
+        }
+
+        return { q: q, inputType: 'number', a: ans, tol: 0.15, solution: sol };
+    }
+},
+{
+    id: 'herons', section: 'Angles & Polygons',
     label: "Heron's Formula",
     generate: () => {
-        const sets = [[18, 17, 29], [13, 14, 15], [7, 24, 25]];
+        const sets = [[18, 17, 29], [13, 14, 15], [7, 24, 25], [1.7, 2.1, 3.2], [5.4, 7.2, 8.1], [10, 12, 16], [20, 21, 29], [2.5, 3.8, 4.6]];
         const [a, b, c] = sets[Math.floor(Math.random() * sets.length)];
         const s = (a + b + c) / 2;
         const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
@@ -1044,7 +1477,7 @@
     }
 },
         {
-            id: 'piecewise_rect', section: 'Geometry',
+            id: 'piecewise_rect', section: 'Angles & Polygons',
             label: 'Piecewise Rectangular Area',
             generate: () => {
                 // L-shaped figure: big rectangle with a notch cut out
@@ -1072,6 +1505,41 @@
             id: 'logexp_conv', section: 'Section 4.3',
             label: 'Log ↔ Exp Conversions',
             generate: () => {
+                const useFraction = Math.random() > 0.5;
+
+                if (useFraction) {
+                    // Fractional exponent like real exam: 25^(5/2) = 3125
+                    const bases = [4, 8, 9, 16, 25, 27, 32, 36, 49, 64];
+                    const b = bases[Math.floor(Math.random() * bases.length)];
+                    const numChoices = [
+                        {n: 3, d: 2}, {n: 5, d: 2}, {n: 1, d: 2}, 
+                        {n: 2, d: 3}, {n: 4, d: 3}, {n: 5, d: 3}
+                    ];
+                    const frac = numChoices[Math.floor(Math.random() * numChoices.length)];
+                    const x = Math.pow(b, frac.n / frac.d);
+                    const yStr = `${frac.n}/${frac.d}`;
+                    const yVal = frac.n / frac.d;
+                    
+                    // Only use if result is a clean number
+                    if (Number.isInteger(x) || Math.abs(x - Math.round(x)) < 0.001) {
+                        const xClean = Math.round(x);
+                        if(Math.random() > 0.5) {
+                            return {
+                                q: `Write the exponential equation in logarithmic form: $${b}^{${yStr}} = ${xClean}$. <br><small>Enter the base, argument, and answer of the log equation.</small>`,
+                                inputType: 'log_form', a: { base: b, arg: xClean, ans: yVal },
+                                solution: `$\\log_{${b}}(${xClean}) = ${yStr} = ${yVal}$`
+                            };
+                        } else {
+                            return {
+                                q: `Write the logarithmic equation in exponential form: $\\log_{${b}}(${xClean}) = ${yVal}$. <br><small>Enter the base, exponent, and result of the exponential equation.</small>`,
+                                inputType: 'exp_form', a: { base: b, exp: yVal, ans: xClean },
+                                solution: `$${b}^{${yStr}} = ${xClean}$`
+                            };
+                        }
+                    }
+                }
+
+                // Integer exponent (original behavior / fallback)
                 const b = Math.floor(Math.random()*6)+2;
                 const y = Math.floor(Math.random()*4)+2;
                 const x = Math.pow(b, y);
@@ -1092,7 +1560,7 @@
             }
         },
         {
-            id: 'basic_areas', section: 'Geometry',
+            id: 'basic_areas', section: 'Angles & Polygons',
             label: 'Basic Areas (Visual)',
             generate: () => {
                 const randType = Math.random();
@@ -1153,7 +1621,7 @@
             }
         },
         {
-            id: 'basic_circles', section: 'Geometry',
+            id: 'basic_circles', section: 'Circles',
             label: 'Basic Circles',
             generate: () => {
                 const r = Math.floor(Math.random() * 15) + 3;
@@ -1183,7 +1651,7 @@
             }
         },
         {
-            id: 'transversals', section: 'Geometry',
+            id: 'transversals', section: 'Angles & Polygons',
             label: 'Similar Triangles (Transversals)',
             generate: () => {
                 const a = Math.floor(Math.random()*15)+10;
@@ -1214,7 +1682,7 @@
             }
         },
         {
-            id: 'circles', section: 'Geometry',
+            id: 'circles', section: 'Circles',
             label: 'Sectors & Arcs (Visual)',
             generate: () => {
                 const rNum = (Math.random() * 10 + 2).toFixed(1);
@@ -1254,7 +1722,7 @@
             }
         },
         {
-            id: 'speed', section: 'Geometry',
+            id: 'speed', section: 'Circles',
             label: 'Angular & Linear Speed',
             generate: () => {
                 const r = Math.floor(Math.random() * 15) + 5;
@@ -1282,7 +1750,8 @@
             label: 'Solve Log Equations',
             generate: () => {
                 const type = Math.random();
-                if (type < 0.5) {
+                if (type < 0.3) {
+                    // Solve b^x = c
                     const b = Math.floor(Math.random() * 6) + 2; 
                     const c = Math.floor(Math.random() * 800) + 50; 
                     const ans = Math.log(c) / Math.log(b);
@@ -1291,7 +1760,8 @@
                         inputType: 'number', a: ans, tol: 0.0005,
                         solution: `Take the natural log of both sides: $\\ln(${b}^x) = \\ln(${c}) \\implies x\\ln(${b}) = \\ln(${c}) \\implies x = \\frac{\\ln(${c})}{\\ln(${b})} = ${ans.toFixed(3)}$`
                     };
-                } else {
+                } else if (type < 0.55) {
+                    // Change of base evaluation
                     const b = Math.floor(Math.random() * 5) + 3;
                     const c = Math.floor(Math.random() * 200) + 20;
                     const ans = Math.log(c) / Math.log(b);
@@ -1299,6 +1769,56 @@
                         q: `Evaluate using the change of base formula: $\\log_{${b}} ${c}$. (Round to 3 decimal places)`,
                         inputType: 'number', a: ans, tol: 0.0005,
                         solution: `Change of Base: $\\log_{${b}}(${c}) = \\frac{\\ln(${c})}{\\ln(${b})} = ${ans.toFixed(3)}$`
+                    };
+                } else if (type < 0.8) {
+                    // NEW: Solve ln(x) = c  (real exam Q4a: ln x = 2.2)
+                    const c = (Math.random() * 4 + 0.5).toFixed(1);
+                    const ans = Math.exp(parseFloat(c));
+                    return {
+                        q: `Solve for $x$: $\\ln\\, x = ${c}$. (Round to 3 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.005,
+                        solution: `Rewrite in exponential form: $\\ln\\, x = ${c}$ means $x = e^{${c}}$. <br> $x = e^{${c}} = ${ans.toFixed(3)}$`
+                    };
+                } else {
+                    // NEW: Solve log(x) = c  (common log base 10)
+                    const c = (Math.random() * 3 + 0.5).toFixed(1);
+                    const ans = Math.pow(10, parseFloat(c));
+                    return {
+                        q: `Solve for $x$: $\\log\\, x = ${c}$. (Round to 3 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.005,
+                        solution: `Rewrite in exponential form: $\\log\\, x = ${c}$ means $x = 10^{${c}}$. <br> $x = 10^{${c}} = ${ans.toFixed(3)}$`
+                    };
+                }
+            }
+        },
+        {
+            id: 'log_props', section: 'Section 4.3',
+            label: 'Laws of Logarithms',
+            generate: () => {
+                const b = Math.floor(Math.random() * 8) + 2;
+                const x = Math.floor(Math.random() * 10) + 2;
+                const y = Math.floor(Math.random() * 10) + 2;
+                const type = Math.random();
+
+                if (type < 0.33) {
+                    return {
+                        q: `Condense into a single logarithm: $\\log_{${b}}(${x}) + \\log_{${b}}(${y})$`,
+                        inputType: 'number', a: x * y, tol: 0.1,
+                        solution: `Use the Product Rule: $\\log_b(M) + \\log_b(N) = \\log_b(MN)$. <br> $\\log_{${b}}(${x} \\cdot ${y}) = \\log_{${b}}(${x * y})$`
+                    };
+                } else if (type < 0.66) {
+                    const k = Math.floor(Math.random() * 4) + 2;
+                    return {
+                        q: `Use the Power Rule to simplify: $${k}\\log_{${b}}(${x})$`,
+                        inputType: 'number', a: Math.pow(x, k), tol: 0.1,
+                        solution: `Use the Power Rule: $k\\log_b(M) = \\log_b(M^k)$. <br> $\\log_{${b}}(${x}^{${k}}) = \\log_{${b}}(${Math.pow(x, k)})$`
+                    };
+                } else {
+                    const big = x * y;
+                    return {
+                        q: `Condense into a single logarithm: $\\log_{${b}}(${big}) - \\log_{${b}}(${y})$`,
+                        inputType: 'number', a: x, tol: 0.1,
+                        solution: `Use the Quotient Rule: $\\log_b(M) - \\log_b(N) = \\log_b\\left(\\frac{M}{N}\\right)$. <br> $\\log_{${b}}\\left(\\frac{${big}}{${y}}\\right) = \\log_{${b}}(${x})$`
                     };
                 }
             }
@@ -1389,16 +1909,22 @@
             el.style.opacity = '0.5';
         }
 
-        // ALEKS module status
+        // ALEKS module status with urgency alerts
         const now = new Date();
         document.querySelectorAll('#aleks-body tr[data-due]').forEach(row => {
             const due = new Date(row.dataset.due);
             const cell = row.querySelector('.aleks-status');
+            const timeDiff = due - now;
             if (now > due) {
                 cell.innerHTML = '<span class="badge badge-exam">PAST DUE</span>';
                 row.classList.add('schedule-past');
+            } else if (timeDiff > 0 && timeDiff < 86400000) {
+                // Due within 24 hours
+                const hoursLeft = Math.ceil(timeDiff / (1000 * 60 * 60));
+                cell.innerHTML = `<span class="badge badge-exam">DUE IN ${hoursLeft}h</span> <span class="badge badge-due">DUE SOON</span>`;
+                row.classList.add('schedule-today');
             } else {
-                const daysLeft = Math.ceil((due - now) / (1000 * 60 * 60 * 24));
+                const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
                 if (daysLeft <= 3) {
                     cell.innerHTML = `<span class="badge badge-noclass">Due in ${daysLeft}d</span>`;
                 } else {
@@ -1419,6 +1945,7 @@
         renderHistory();
         highlightScheduleDates();
         initVideoTracking();
+        generateStudyPlan();
         // Wait briefly for elements to be injected, then render math
         setTimeout(renderMath, 100);
 
@@ -1462,7 +1989,8 @@
         const container = document.getElementById('checklist-container');
         container.innerHTML = '';
         
-        const categories = [...new Set(state.checklist.map(item => item.cat))];
+        const catOrder = ['Section 4.2', 'Section 4.3', 'Angles & Polygons', 'Circles'];
+        const categories = catOrder.filter(c => state.checklist.some(item => item.cat === c));
 
         // Render progress summary bars
         const summaryEl = document.getElementById('progress-summary');
@@ -1540,7 +2068,9 @@
     function renderQuizCategories() {
         const container = document.getElementById('quiz-categories');
         container.innerHTML = '';
-        const sections = [...new Set(generators.map(g => g.section))];
+        // Explicit section order: 4.2, 4.3, Angles & Polygons, Circles
+        const sectionOrder = ['Section 4.2', 'Section 4.3', 'Angles & Polygons', 'Circles'];
+        const sections = sectionOrder.filter(s => generators.some(g => g.section === s));
         sections.forEach(sec => {
             const group = document.createElement('div');
             group.style.cssText = 'width: 100%; margin-bottom: 0.5rem;';
@@ -1590,19 +2120,26 @@
         
         recent.forEach((h, i) => {
             const tr = document.createElement('tr');
-            if(h.tries === 0) tr.className = 'best-row';
+            if(!h.isExam && h.tries === 0) tr.className = 'best-row';
             
             const d = new Date(h.date);
             const dateStr = `${d.getMonth()+1}/${d.getDate()} at ${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
             
-            const badge = h.tries === 0 
-                ? `<span class="badge badge-perfect">PERFECT</span>` 
-                : `<span class="badge badge-retry">${h.tries} RETRY</span>`;
+            let badge;
+            if (h.isExam) {
+                const pct = h.examScore !== undefined ? h.examScore + '%' : '';
+                badge = `<span class="badge badge-quiz">EXAM</span> ${pct}`;
+                tr.style.background = 'var(--accent-glow)';
+            } else if (h.tries === 0) {
+                badge = `<span class="badge badge-perfect">PERFECT</span>`;
+            } else {
+                badge = `<span class="badge badge-retry">${h.tries} RETRY</span>`;
+            }
 
             tr.innerHTML = `
                 <td>${dateStr}</td>
                 <td><strong>${h.topic}</strong></td>
-                <td>${h.tries}</td>
+                <td>${h.isExam ? '—' : h.tries}</td>
                 <td>${badge}</td>
             `;
             tbody.appendChild(tr);
@@ -1616,9 +2153,27 @@
     }
 
     function loadQuestion() {
-        if (!currentQuiz) return;
-        currentRetries = 0;
-        currentQuestion = currentQuiz.generate();
+        if (examState.isActive) {
+            // Exam mode: advance to next question or show results
+            examState.currentIndex++;
+            if (examState.currentIndex >= examState.total) {
+                showExamResults();
+                return;
+            }
+            // Update progress bar
+            document.getElementById('exam-progress-label').textContent = `${examState.currentIndex + 1} / ${examState.total}`;
+            document.getElementById('exam-progress-fill').style.width = `${((examState.currentIndex) / examState.total) * 100}%`;
+            
+            // Generate from the shuffled generator
+            const gen = examState.questions[examState.currentIndex];
+            currentQuiz = gen;
+            currentRetries = 0;
+            currentQuestion = gen.generate();
+        } else {
+            if (!currentQuiz) return;
+            currentRetries = 0;
+            currentQuestion = currentQuiz.generate();
+        }
         
         document.getElementById('question-display').innerHTML = currentQuestion.q;
         
@@ -1658,6 +2213,32 @@
                 <span class="math-text">=</span>
                 <input type="number" id="inp-ans" class="inp-small">
             `;
+        } else if (currentQuestion.inputType === 'interest_table') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">$n = 2$ (semiannually):</span>
+                    <input type="number" step="any" id="inp-a1" placeholder="$">
+                    <span class="mig-label">$n = 12$ (monthly):</span>
+                    <input type="number" step="any" id="inp-a2" placeholder="$">
+                    <span class="mig-label">$n = 365$ (daily):</span>
+                    <input type="number" step="any" id="inp-a3" placeholder="$">
+                    <span class="mig-label">Continuous ($e^{rt}$):</span>
+                    <input type="number" step="any" id="inp-a4" placeholder="$">
+                </div>
+            `;
+        } else if (currentQuestion.inputType === 'circle_multi') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">a) $\\angle AEB =$</span>
+                    <input type="number" step="any" id="inp-c1" placeholder="°">
+                    <span class="mig-label">b) $\\angle AED =$</span>
+                    <input type="number" step="any" id="inp-c2" placeholder="°">
+                    <span class="mig-label">c) arc $\\widehat{CD} =$</span>
+                    <input type="number" step="any" id="inp-c3" placeholder="°">
+                    <span class="mig-label">d) arc $\\widehat{AD} =$</span>
+                    <input type="number" step="any" id="inp-c4" placeholder="°">
+                </div>
+            `;
         } else {
             inputArea.innerHTML = `<input type="number" step="any" id="answer-input" class="inp-standard" placeholder="Your Answer" autocomplete="off">`;
         }
@@ -1667,6 +2248,7 @@
         
         document.getElementById('btn-submit').style.display = 'inline-block';
         document.getElementById('btn-next').style.display = 'none';
+        document.getElementById('btn-next').textContent = 'Next Question';
         
         const feedback = document.getElementById('feedback-display');
         feedback.className = 'feedback';
@@ -1699,6 +2281,39 @@
             const uans = parseFloat(document.getElementById('inp-ans').value);
             if(isNaN(ub) || isNaN(uexp) || isNaN(uans)) return;
             isCorrect = (ub === currentQuestion.a.base && uexp === currentQuestion.a.exp && uans === currentQuestion.a.ans);
+        } else if (currentQuestion.inputType === 'interest_table') {
+            const u1 = parseFloat(document.getElementById('inp-a1').value);
+            const u2 = parseFloat(document.getElementById('inp-a2').value);
+            const u3 = parseFloat(document.getElementById('inp-a3').value);
+            const u4 = parseFloat(document.getElementById('inp-a4').value);
+            if(isNaN(u1) || isNaN(u2) || isNaN(u3) || isNaN(u4)) return;
+            const t = currentQuestion.tol;
+            const r1 = Math.abs(u1 - currentQuestion.a.a1) <= t;
+            const r2 = Math.abs(u2 - currentQuestion.a.a2) <= t;
+            const r3 = Math.abs(u3 - currentQuestion.a.a3) <= t;
+            const r4 = Math.abs(u4 - currentQuestion.a.a4) <= t;
+            // Visual feedback per input
+            document.getElementById('inp-a1').classList.add(r1 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-a2').classList.add(r2 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-a3').classList.add(r3 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-a4').classList.add(r4 ? 'inp-correct' : 'inp-wrong');
+            isCorrect = r1 && r2 && r3 && r4;
+        } else if (currentQuestion.inputType === 'circle_multi') {
+            const u1 = parseFloat(document.getElementById('inp-c1').value);
+            const u2 = parseFloat(document.getElementById('inp-c2').value);
+            const u3 = parseFloat(document.getElementById('inp-c3').value);
+            const u4 = parseFloat(document.getElementById('inp-c4').value);
+            if(isNaN(u1) || isNaN(u2) || isNaN(u3) || isNaN(u4)) return;
+            const t = currentQuestion.tol;
+            const r1 = Math.abs(u1 - currentQuestion.a.c1) <= t;
+            const r2 = Math.abs(u2 - currentQuestion.a.c2) <= t;
+            const r3 = Math.abs(u3 - currentQuestion.a.c3) <= t;
+            const r4 = Math.abs(u4 - currentQuestion.a.c4) <= t;
+            document.getElementById('inp-c1').classList.add(r1 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-c2').classList.add(r2 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-c3').classList.add(r3 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-c4').classList.add(r4 ? 'inp-correct' : 'inp-wrong');
+            isCorrect = r1 && r2 && r3 && r4;
         } else {
             const input = document.getElementById('answer-input');
             const userVal = parseFloat(input.value);
@@ -1708,32 +2323,387 @@
 
         const feedback = document.getElementById('feedback-display');
 
-        if (isCorrect) {
-            // Save to gamified history
-            state.history.unshift({ topic: currentQuiz.label, date: new Date().toISOString(), tries: currentRetries });
-            if(state.history.length > 50) state.history.pop(); // keep last 50
-            saveState();
+        if (examState.isActive) {
+            // Exam mode: record result and move on after one attempt
+            const section = examState.questions[examState.currentIndex].section;
+            if (!examState.results[section]) examState.results[section] = { correct: 0, total: 0 };
+            examState.results[section].total++;
+            if (isCorrect) {
+                examState.results[section].correct++;
+                examState.score++;
+            }
 
             // Disable inputs
             document.querySelectorAll('#dynamic-inputs input').forEach(inp => inp.disabled = true);
             document.getElementById('btn-submit').style.display = 'none';
             document.getElementById('btn-next').style.display = 'inline-block';
+            document.getElementById('btn-next').textContent = examState.currentIndex < examState.total - 1 ? 'Next Question' : 'See Results';
             document.getElementById('btn-next').focus();
 
-            feedback.className = 'feedback correct';
-            const badgeMsg = currentRetries === 0 ? "Perfect!" : "You got it!";
-            feedback.innerHTML = `<i data-lucide="check-circle" style="display:inline-block; vertical-align:middle; margin-right:8px;"></i> ${badgeMsg}`;
+            if (isCorrect) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = `<i data-lucide="check-circle" style="display:inline-block; vertical-align:middle; margin-right:8px;"></i> Correct!`;
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `
+                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--red);"></i> Incorrect.</div>
+                    <div class="solution-step"><strong>Solution:</strong> ${currentQuestion.solution}</div>
+                `;
+            }
         } else {
-            currentRetries++;
-            feedback.className = 'feedback incorrect';
-            feedback.innerHTML = `
-                <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--red);"></i> Not quite right. Try again!</div>
-                <div class="solution-step"><strong>Hint:</strong> ${currentQuestion.solution}</div>
-            `;
+            // Normal practice mode
+            if (isCorrect) {
+                state.history.unshift({ topic: currentQuiz.label, date: new Date().toISOString(), tries: currentRetries });
+                if(state.history.length > 50) state.history.pop();
+                saveState();
+
+                document.querySelectorAll('#dynamic-inputs input').forEach(inp => inp.disabled = true);
+                document.getElementById('btn-submit').style.display = 'none';
+                document.getElementById('btn-next').style.display = 'inline-block';
+                document.getElementById('btn-next').textContent = 'Next Question';
+                document.getElementById('btn-next').focus();
+
+                feedback.className = 'feedback correct';
+                const badgeMsg = currentRetries === 0 ? "Perfect!" : "You got it!";
+                feedback.innerHTML = `<i data-lucide="check-circle" style="display:inline-block; vertical-align:middle; margin-right:8px;"></i> ${badgeMsg}`;
+            } else {
+                currentRetries++;
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `
+                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--red);"></i> Not quite right. Try again!</div>
+                    <div class="solution-step"><strong>Hint:</strong> ${currentQuestion.solution}</div>
+                `;
+            }
         }
         
         refreshIcons();
         renderMath();
+    }
+
+    // --- MOCK EXAM MODE ---
+    function startMockExam() {
+        // Only use generators that match real exam content
+        const examIds = [
+            'interest', 'interest_table',
+            'logexp_conv', 'logexp',
+            'dms_to_dec', 'dms', 'rad_deg', 'circles', 'herons',
+            'basic_areas', 'transversals', 'inscribed_angle', 'circle_multi',
+            'similar_triangles', 'parallel_angles'
+        ];
+        const examGens = generators.filter(g => examIds.includes(g.id));
+
+        // Weight to match real exam: ~15% 4.2, ~15% 4.3, ~70% Geometry
+        // 20 questions: 3 from 4.2, 3 from 4.3, 14 from Geometry
+        const selected = [];
+
+        // Mandatory: 1 interest_table + 1 circle_multi
+        selected.push(examGens.find(g => g.id === 'interest_table'));
+        selected.push(examGens.find(g => g.id === 'circle_multi'));
+
+        // Section 4.2: 2 more (interest single questions)
+        const pool42 = examGens.filter(g => g.section === 'Section 4.2' && g.id !== 'interest_table');
+        for (let i = 0; i < 2 && pool42.length > 0; i++) {
+            selected.push(pool42[Math.floor(Math.random() * pool42.length)]);
+        }
+
+        // Section 4.3: 3 questions
+        const pool43 = examGens.filter(g => g.section === 'Section 4.3');
+        const shuffled43 = [...pool43].sort(() => Math.random() - 0.5);
+        // Ensure both logexp_conv and logexp appear at least once
+        const conv = shuffled43.find(g => g.id === 'logexp_conv');
+        const solv = shuffled43.find(g => g.id === 'logexp');
+        if (conv) selected.push(conv);
+        if (solv) selected.push(solv);
+        // Fill to 3 total for 4.3
+        while (selected.filter(g => g.section === 'Section 4.3').length < 3) {
+            selected.push(pool43[Math.floor(Math.random() * pool43.length)]);
+        }
+
+        // Geometry: fill remaining to reach 20 total (14 - 1 circle_multi = 13 more)
+        const poolGeo = examGens.filter(g => (g.section === 'Angles & Polygons' || g.section === 'Circles') && g.id !== 'circle_multi');
+        const shuffledGeo = [...poolGeo].sort(() => Math.random() - 0.5);
+        // First pass: one of each generator for variety
+        let geoAdded = 0;
+        for (const gen of shuffledGeo) {
+            if (selected.length >= 20) break;
+            selected.push(gen);
+            geoAdded++;
+        }
+        // Second pass: fill remaining with random geometry if needed
+        while (selected.length < 20) {
+            selected.push(poolGeo[Math.floor(Math.random() * poolGeo.length)]);
+        }
+
+        // Final shuffle
+        selected.sort(() => Math.random() - 0.5);
+
+        examState = {
+            isActive: true,
+            questions: selected,
+            currentIndex: -1, // loadQuestion will increment to 0
+            results: {},
+            score: 0,
+            total: selected.length,
+            label: 'Mock Exam'
+        };
+
+        // UI: hide selector, show progress bar
+        document.getElementById('exam-cta').style.display = 'none';
+        document.getElementById('quiz-cta').style.display = 'none';
+        document.getElementById('quiz-categories').style.display = 'none';
+        document.getElementById('exam-results').style.display = 'none';
+        document.getElementById('exam-progress-bar').style.display = 'block';
+        document.getElementById('quiz-active-area').style.display = 'block';
+
+        // Reset progress bar label
+        document.getElementById('exam-mode-label').textContent = 'Mock Exam';
+        document.getElementById('btn-exit-exam').style.display = 'inline-block';
+
+        // Load first question via shared loadQuestion path
+        loadQuestion();
+    }
+
+    function showExamResults() {
+        const pct = Math.round((examState.score / examState.total) * 100);
+        const label = examState.label || 'Mock Exam';
+
+        // Save exam to history
+        state.history.unshift({
+            topic: label,
+            date: new Date().toISOString(),
+            tries: 0,
+            isExam: true,
+            examScore: pct
+        });
+        if (state.history.length > 50) state.history.pop();
+        saveState();
+
+        // Hide quiz area, show results
+        document.getElementById('quiz-active-area').style.display = 'none';
+        document.getElementById('exam-progress-bar').style.display = 'none';
+        document.getElementById('exam-results').style.display = 'block';
+
+        // Update results heading
+        document.querySelector('#exam-results h2').textContent = `📊 ${label} Results`;
+
+        const color = pct >= 85 ? 'var(--green)' : pct >= 70 ? 'var(--amber)' : 'var(--red)';
+        document.getElementById('exam-score-display').innerHTML = `<span style="color: ${color}">${pct}%</span>`;
+
+        // Breakdown by section
+        const breakdown = document.getElementById('exam-breakdown');
+        breakdown.innerHTML = '';
+        Object.entries(examState.results).forEach(([section, data]) => {
+            const secPct = Math.round((data.correct / data.total) * 100);
+            const secColor = secPct >= 85 ? 'var(--green)' : secPct >= 70 ? 'var(--amber)' : 'var(--red)';
+            const bar = document.createElement('div');
+            bar.className = 'progress-item';
+            bar.innerHTML = `
+                <div class="progress-item-header">
+                    <span class="progress-item-label">${section}</span>
+                    <span class="progress-item-count" style="color: ${secColor}">${data.correct}/${data.total} (${secPct}%)</span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill ${secPct === 100 ? 'complete' : ''}" style="width: ${secPct}%; background: ${secColor};"></div>
+                </div>
+            `;
+            breakdown.appendChild(bar);
+        });
+
+        // Auto-generate study plan based on exam results
+        generateStudyPlan();
+        renderMath();
+        refreshIcons();
+    }
+
+    function endMockExam() {
+        examState.isActive = false;
+        examState.label = null;
+        document.getElementById('exam-cta').style.display = '';
+        document.getElementById('quiz-cta').style.display = '';
+        document.getElementById('quiz-categories').style.display = '';
+        document.getElementById('exam-results').style.display = 'none';
+        document.getElementById('exam-progress-bar').style.display = 'none';
+        document.getElementById('quiz-active-area').style.display = 'none';
+        document.getElementById('btn-exit-exam').style.display = 'none';
+        refreshIcons();
+    }
+
+    function confirmExitExam() {
+        if (confirm('Exit this ' + (examState.label || 'Mock Exam') + '? Your progress will not be saved.')) {
+            endMockExam();
+        }
+    }
+
+    // --- MOCK QUIZ MODE ---
+    const QUIZ_CONFIG = {
+        5: {
+            label: 'Quiz 5 — Section 4.2',
+            ids: ['eval_exp', 'exp_growth', 'interest', 'interest_table'],
+            count: 8,
+            mandatory: ['interest_table'] // always include the table question
+        },
+        6: {
+            label: 'Quiz 6 — Section 4.3',
+            ids: ['logexp_conv', 'logexp', 'log_props'],
+            count: 8,
+            mandatory: []
+        },
+        7: {
+            label: 'Quiz 7 — Angles & Polygons',
+            ids: ['similar_triangles', 'parallel_angles', 'basic_areas', 'transversals', 'herons', 'piecewise_rect'],
+            count: 8,
+            mandatory: ['similar_triangles', 'parallel_angles']
+        },
+        8: {
+            label: 'Quiz 8 — Circles',
+            ids: ['rad_deg', 'dms', 'dms_to_dec', 'circles', 'basic_circles', 'speed', 'inscribed_angle', 'circle_multi'],
+            count: 8,
+            mandatory: ['circle_multi']
+        }
+    };
+
+    function startMockQuiz(quizNum) {
+        const config = QUIZ_CONFIG[quizNum];
+        if (!config) return;
+
+        const pool = generators.filter(g => config.ids.includes(g.id));
+        const selected = [];
+
+        // Add mandatory generators first
+        config.mandatory.forEach(id => {
+            const gen = pool.find(g => g.id === id);
+            if (gen) selected.push(gen);
+        });
+
+        // First pass: one of each non-mandatory generator for variety
+        const shuffled = [...pool].filter(g => !config.mandatory.includes(g.id)).sort(() => Math.random() - 0.5);
+        for (const gen of shuffled) {
+            if (selected.length >= config.count) break;
+            selected.push(gen);
+        }
+
+        // Fill remaining by re-sampling
+        while (selected.length < config.count && pool.length > 0) {
+            selected.push(pool[Math.floor(Math.random() * pool.length)]);
+        }
+
+        // Final shuffle
+        selected.sort(() => Math.random() - 0.5);
+
+        examState = {
+            isActive: true,
+            questions: selected,
+            currentIndex: -1,
+            results: {},
+            score: 0,
+            total: selected.length,
+            label: config.label
+        };
+
+        // UI
+        document.getElementById('exam-cta').style.display = 'none';
+        document.getElementById('quiz-cta').style.display = 'none';
+        document.getElementById('quiz-categories').style.display = 'none';
+        document.getElementById('exam-results').style.display = 'none';
+        document.getElementById('exam-progress-bar').style.display = 'block';
+        document.getElementById('quiz-active-area').style.display = 'block';
+
+        // Update progress label to show quiz name
+        document.getElementById('exam-progress-label').textContent = `1 / ${examState.total}`;
+        document.getElementById('exam-mode-label').textContent = config.label;
+        document.getElementById('btn-exit-exam').style.display = 'inline-block';
+
+        loadQuestion();
+    }
+
+    // --- PERSONALIZED STUDY PLAN ---
+    function generateStudyPlan() {
+        const container = document.getElementById('study-plan-content');
+        const catOrder = ['Section 4.2', 'Section 4.3', 'Angles & Polygons', 'Circles'];
+        const categories = catOrder.filter(c => state.checklist.some(item => item.cat === c));
+        
+        // Calculate mastery per section from checklist
+        const sectionData = {};
+        categories.forEach(cat => {
+            const items = state.checklist.filter(i => i.cat === cat);
+            const doneCount = items.filter(i => i.done).length;
+            const pct = Math.round((doneCount / items.length) * 100);
+            const unchecked = items.filter(i => !i.done);
+            sectionData[cat] = { pct, total: items.length, done: doneCount, unchecked };
+        });
+
+        // Cross-reference with exam results if available
+        const examResults = examState.results || {};
+        
+        // Build recommendations: prioritize sections with < 85% mastery
+        const recommendations = [];
+        categories.forEach(cat => {
+            const data = sectionData[cat];
+            const examData = examResults[cat];
+            const examPct = examData ? Math.round((examData.correct / examData.total) * 100) : null;
+            
+            let priority = 0;
+            let reason = '';
+            
+            if (data.pct < 50) {
+                priority = 3;
+                reason = `Only ${data.pct}% of checklist items completed — focus here first.`;
+            } else if (data.pct < 85) {
+                priority = 2;
+                reason = `${data.pct}% checklist mastery — keep building.`;
+            } else {
+                priority = 0;
+                reason = `${data.pct}% complete — looking great!`;
+            }
+            
+            if (examPct !== null && examPct < 70) {
+                priority = Math.max(priority, 3);
+                reason += ` Mock exam score: ${examPct}% — needs extra work.`;
+            } else if (examPct !== null && examPct < 85) {
+                priority = Math.max(priority, 2);
+                reason += ` Mock exam score: ${examPct}% — room to improve.`;
+            }
+
+            recommendations.push({ cat, priority, reason, unchecked: data.unchecked, pct: data.pct, examPct });
+        });
+
+        // Sort by priority (highest first)
+        recommendations.sort((a, b) => b.priority - a.priority);
+
+        // Render
+        if (recommendations.every(r => r.pct >= 85 && (r.examPct === null || r.examPct >= 85))) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 1.5rem; background: var(--green-bg); border-radius: 12px; border: 1px solid var(--green);">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎉</div>
+                    <p style="font-weight: 600; color: var(--green);">You're in great shape! Keep reviewing and take a Mock Exam to stay sharp.</p>
+                </div>
+            `;
+        } else {
+            let html = '';
+            recommendations.forEach(rec => {
+                const color = rec.priority >= 3 ? 'var(--red)' : rec.priority >= 2 ? 'var(--amber)' : 'var(--green)';
+                const icon = rec.priority >= 3 ? '🔴' : rec.priority >= 2 ? '🟡' : '🟢';
+                const uncheckedHtml = rec.unchecked.length > 0 
+                    ? `<div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                        <strong>Review these:</strong> ${rec.unchecked.slice(0, 4).map(u => u.label).join(', ')}${rec.unchecked.length > 4 ? ` and ${rec.unchecked.length - 4} more` : ''}
+                       </div>` 
+                    : '';
+                html += `
+                    <div style="background: var(--surface2); border-left: 4px solid ${color}; border-radius: 0 12px 12px 0; padding: 1rem 1.25rem; margin-bottom: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 600;">${icon} ${rec.cat}</span>
+                            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: ${color};">${rec.pct}%${rec.examPct !== null ? ` / Exam: ${rec.examPct}%` : ''}</span>
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">${rec.reason}</div>
+                        ${uncheckedHtml}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        
+        renderMath();
+        refreshIcons();
     }
 
     function resetProgress() {
