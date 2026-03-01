@@ -543,6 +543,299 @@
                 padding: 1.25rem;
             }
         }
+
+
+        /* Lecture slides */
+        .slides-shell {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .slides-intro {
+            display: grid;
+            grid-template-columns: minmax(320px, 1.5fr) minmax(220px, 0.9fr);
+            gap: 1rem;
+            align-items: stretch;
+        }
+        .slides-overview,
+        .slides-tip-box {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.15rem 1.2rem;
+        }
+        .slides-overview {
+            position: relative;
+            overflow: hidden;
+        }
+        .slides-overview::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 4px;
+            background: var(--accent);
+        }
+        .slides-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+        .slides-note {
+            color: var(--text-muted);
+            line-height: 1.65;
+            max-width: 62ch;
+        }
+        .slides-tip-box {
+            display: grid;
+            gap: 0.7rem;
+            align-content: start;
+        }
+        .slides-tip-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .slides-tips {
+            display: grid;
+            gap: 0.65rem;
+        }
+        .slides-tip {
+            display: flex;
+            gap: 0.7rem;
+            align-items: flex-start;
+            color: var(--text-muted);
+            font-size: 0.94rem;
+            line-height: 1.5;
+        }
+        .slides-tip i {
+            color: var(--accent);
+            width: 1rem;
+            height: 1rem;
+            margin-top: 0.18rem;
+            flex-shrink: 0;
+        }
+        .slides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: 1rem;
+            align-items: stretch;
+        }
+        .slide-card {
+            position: relative;
+            display: grid;
+            gap: 0.95rem;
+            background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.15rem;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            overflow: hidden;
+        }
+        .slide-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+        }
+        .slide-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+        }
+        .slide-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+        .slide-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.38rem 0.72rem;
+            border-radius: 999px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid rgba(108, 99, 255, 0.28);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .slide-badge i {
+            width: 0.9rem;
+            height: 0.9rem;
+        }
+        .slide-format-tags {
+            display: flex;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .slide-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.28rem 0.55rem;
+            border-radius: 999px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-muted);
+        }
+        .slide-tag.pdf { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+        .slide-tag.pptx { border-color: var(--border); color: var(--text-muted); }
+        .slide-card h3 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.35rem;
+            line-height: 1.2;
+            color: var(--text);
+            margin: 0;
+        }
+        .slide-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.55;
+            margin-top: -0.2rem;
+        }
+        .slide-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: auto;
+        }
+        .slide-actions .btn-primary,
+        .slide-actions .btn-secondary {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-left: 0;
+            padding: 0.82rem 1.08rem;
+            font-size: 0.95rem;
+            flex: 1 1 150px;
+        }
+        .slide-actions .btn-secondary {
+            background: var(--surface);
+        }
+        .slide-actions i {
+            width: 1rem;
+            height: 1rem;
+        }
+        @media (max-width: 900px) {
+            .slides-intro {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .slide-thumb-wrap {
+            position: relative;
+            display: block;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(108, 99, 255, 0.08) 0%, rgba(108, 99, 255, 0.02) 100%), var(--surface);
+            aspect-ratio: 16 / 9;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+            text-decoration: none;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            cursor: pointer;
+        }
+        .slide-thumb-wrap:hover {
+            transform: translateY(-2px);
+            border-color: rgba(108, 99, 255, 0.45);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.03);
+        }
+        .slide-thumb-wrap:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+        .slide-thumb {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            background: var(--surface);
+        }
+        .slide-thumb-wrap.is-missing .slide-thumb {
+            display: none;
+        }
+        .slide-thumb-placeholder {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-muted);
+            background:
+                linear-gradient(135deg, rgba(108, 99, 255, 0.08) 0%, transparent 100%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0,
+                    transparent 12px,
+                    rgba(255,255,255,0.025) 12px,
+                    rgba(255,255,255,0.025) 24px
+                ),
+                var(--surface);
+        }
+        .slide-thumb-wrap.is-missing .slide-thumb-placeholder {
+            display: flex;
+        }
+        .slide-thumb-placeholder i {
+            width: 1.2rem;
+            height: 1.2rem;
+            color: var(--accent);
+        }
+        .slide-thumb-label {
+            font-size: 0.76rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .slide-thumb-note {
+            font-size: 0.84rem;
+            line-height: 1.45;
+            max-width: 18ch;
+        }
+
+        @media (max-width: 640px) {
+            .slide-card-top {
+                flex-direction: column;
+            }
+            .slide-format-tags {
+                justify-content: flex-start;
+            }
+            .slide-actions {
+                flex-direction: column;
+            }
+            .slide-actions .btn-primary,
+            .slide-actions .btn-secondary {
+                width: 100%;
+            }
+        }
+
 </style>
 </head>
 <body>
@@ -572,6 +865,10 @@
         </button>
 <button class="tab-btn" data-tab="videos">
 <i data-lucide="play-circle"></i> Videos
+        </button>
+
+<button class="tab-btn" data-tab="slides">
+<i data-lucide="monitor"></i> Lecture Slides
         </button>
 </div>
 <!-- SCHEDULE TAB -->
@@ -1112,6 +1409,130 @@
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Circle Sectors &amp; Arc Length</span>
 </a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- LECTURE SLIDES TAB -->
+<div class="tab-content" id="tab-slides">
+<div class="card">
+<h2>Lecture Slides</h2>
+<div class="slides-shell">
+<div class="slides-intro">
+<div class="slides-overview">
+<div class="slides-kicker"><i data-lucide="presentation"></i> Unit 2 Resources</div>
+<p class="slides-note">Use the PDF for the fastest browser-friendly viewing experience. Keep the PowerPoint link available when you want the original editable file or need to download the deck for offline use.</p>
+</div>
+<div class="slides-tip-box">
+<div class="slides-tip-title">Best use</div>
+<div class="slides-tips">
+<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
+<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text);">Download PPTX</strong> when you need the original slide deck.</span></div>
+</div>
+</div>
+</div>
+<div class="slides-grid">
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2A</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2A.pdf" target="_blank" aria-label="Open Unit 2A PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2A lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2A.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2A.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2A: 4.2 Exponential Functions</h3>
+<p class="slide-subtitle">Covers exponential functions, tables, graphs, growth and decay, and the core algebraic ideas from Section 4.2.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2A.pdf" target="_blank"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2A.pptx" target="_blank"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2B</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2B.pdf" target="_blank" aria-label="Open Unit 2B PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2B lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2B.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2B.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2B: 4.3 Logarithmic Functions</h3>
+<p class="slide-subtitle">Covers logarithmic functions, inverse relationships with exponentials, evaluation, rewriting, and graph interpretation from Section 4.3.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2B.pdf" target="_blank"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2B.pptx" target="_blank"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2C</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2C.pdf" target="_blank" aria-label="Open Unit 2C PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2C lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2C.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2C.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2C: Geometry Angles and Polygons</h3>
+<p class="slide-subtitle">Covers angle relationships, parallel lines, polygon angle sums, and the main geometry vocabulary and problem types for this unit.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2C.pdf" target="_blank"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2C.pptx" target="_blank"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2D</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2D.pdf" target="_blank" aria-label="Open Unit 2D PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2D lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2D.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2D.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2D: Geometry Circles and Solids</h3>
+<p class="slide-subtitle">Covers circle measures, arc and sector ideas, and solid geometry topics such as surface area and volume.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2D.pdf" target="_blank"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2D.pptx" target="_blank"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2E</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2E.pdf" target="_blank" aria-label="Open Unit 2E PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2E lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2E.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2E.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2E: Test Review</h3>
+<p class="slide-subtitle">Consolidates the major skills across exponentials, logarithms, and geometry into a focused review deck for Test 2.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2E.pdf" target="_blank"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2E.pptx" target="_blank"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
 </div>
 </div>
 </div>
