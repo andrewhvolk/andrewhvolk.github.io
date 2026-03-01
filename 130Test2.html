@@ -1,22 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math 130 – Test 2 Review (Spring 2026)</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- KaTeX for Math Rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-
-    <!-- Icons -->
-    <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Math 130 – Test 2 Review (Spring 2026)</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=DM+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- KaTeX for Math Rendering -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<!-- Icons -->
+<script defer="" src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+<style>
         :root {
             /* Dark Theme (Default) */
             --bg: #0f1117; 
@@ -172,10 +169,122 @@
         .practice-link:hover { background: var(--accent-glow); transform: scale(1.1); }
 
         /* Formulas */
-        .formula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr)); gap: 1.5rem; }
-        .formula-card { background: var(--surface2); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
-        .formula-title { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 600; }
-        .formula-math { font-size: 1.25rem; color: var(--text); }
+        .formula-intro {
+            display: grid;
+            grid-template-columns: minmax(280px, 1.3fr) minmax(240px, 0.9fr);
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+            align-items: stretch;
+        }
+        .formula-priority-note,
+        .formula-legend {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+        }
+        .formula-priority-note {
+            border-left: 4px solid var(--accent);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .formula-priority-note strong { color: var(--text); }
+        .formula-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            align-content: flex-start;
+        }
+        .legend-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-muted);
+        }
+        .legend-chip::before {
+            content: "";
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            background: var(--border);
+            flex-shrink: 0;
+        }
+        .legend-chip.legend-memorize { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+        .legend-chip.legend-memorize::before { background: var(--red); }
+        .legend-chip.legend-provided { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+        .legend-chip.legend-provided::before { background: var(--green); }
+        .legend-chip.legend-useful::before { background: var(--text-muted); }
+        .formula-section-note {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: -0.35rem 0 1rem;
+            padding-left: 0.15rem;
+        }
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+        .formula-card {
+            position: relative;
+            background: var(--surface2);
+            padding: 1.5rem 1.25rem;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+        .formula-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+        }
+        .formula-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--border);
+        }
+        .formula-card.memorize-card {
+            border-color: var(--red);
+            background: linear-gradient(180deg, var(--surface2) 0%, var(--red-bg) 100%);
+        }
+        .formula-card.memorize-card::before { background: var(--red); }
+        .formula-card.memorize-card .formula-title { color: var(--text); }
+        .formula-card.provided-card {
+            border-color: var(--green);
+            background: linear-gradient(180deg, var(--surface2) 0%, var(--green-bg) 100%);
+        }
+        .formula-card.provided-card::before { background: var(--green); }
+        .formula-card.useful-card {
+            background: var(--surface);
+            border-style: dashed;
+            opacity: 0.94;
+        }
+        .formula-card.useful-card::before { background: var(--text-muted); }
+        .formula-title { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700; }
+        .formula-math { font-size: clamp(0.98rem, 1.45vw, 1.18rem); color: var(--text); max-width: 100%; overflow: visible; }
+        .formula-math .katex-display { margin: 0.35rem auto; max-width: 100%; overflow: visible; padding: 0; }
+        .formula-math .katex-display > .katex { white-space: normal; max-width: 100%; }
+        .formula-math .katex { max-width: 100%; }
+        .formula-math.dual-line .katex-display { margin: 0.2rem auto; }
+        .formula-math.compact-math { font-size: clamp(0.92rem, 1.25vw, 1.05rem); }
+        .formula-math.steps-math { display: grid; gap: 0.25rem; }
+        .formula-math.steps-math .formula-step { display: flex; justify-content: center; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
+        .formula-math.steps-math .step-label { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.02em; color: var(--text-muted); text-transform: uppercase; }
+        .formula-math.steps-math .katex-display { margin: 0.05rem 0; }
         .formula-vars { color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem; line-height: 1.5; }
 
         /* Quiz Section */
@@ -198,6 +307,21 @@
         .inp-small { width: 80px; padding: 0.75rem !important; }
         .inp-tiny { width: 60px; padding: 0.5rem !important; font-size: 1rem !important; transform: translateY(10px); }
         .math-text { font-size: 1.5rem; font-family: 'DM Serif Display', serif; }
+        .question-note { 
+            max-width: 720px; margin: -0.5rem auto 1.25rem auto; padding: 0.9rem 1rem;
+            background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+            color: var(--text-muted); font-size: 0.98rem; line-height: 1.55; text-align: left;
+        }
+        .log-arg-template { 
+            display: inline-flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
+            padding: 0.5rem 0.75rem; border-radius: 14px; background: var(--surface2); border: 1px solid var(--border);
+        }
+        .log-base-stack {
+            display: inline-flex; flex-direction: column; align-items: center; justify-content: flex-end;
+            min-width: 18px; transform: translateY(8px); font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;
+            color: var(--text);
+        }
+        .log-arg-input { width: 140px; }
 
         /* Multi-input grid (interest table, circle multi-part) */
         .multi-input-grid { 
@@ -287,11 +411,12 @@
 /* Status Badge Styling */
 .formula-badge {
     display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    margin-bottom: 8px;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.7rem;
     text-transform: uppercase;
 }
 .status-provided { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
@@ -307,6 +432,27 @@
     .card { border: none; box-shadow: none; }
 }
 
+
+        .formula-card.wide { grid-column: 1 / -1; }
+
+        @media (max-width: 900px) {
+            .formula-intro { grid-template-columns: 1fr; }
+            .formula-grid { grid-template-columns: 1fr; }
+        }
+
+
+        @media (max-width: 900px) {
+            .formula-grid { grid-template-columns: 1fr; }
+            .formula-card.wide { grid-column: auto; }
+            .formula-math { font-size: clamp(0.92rem, 3.4vw, 1.05rem); }
+            .formula-math.compact-math { font-size: clamp(0.88rem, 3vw, 0.98rem); }
+        }
+
+        @media (max-width: 768px) {
+            .formula-card { padding: 1.25rem 1rem; }
+            .formula-math { font-size: 1rem; }
+        }
+
         @media (max-width: 768px) {
             .container { padding: 1rem; }
             h1 { font-size: 2rem; }
@@ -315,569 +461,662 @@
             .svg-canvas { width: 100% !important; height: auto !important; }
             .history-table { display: block; overflow-x: auto; white-space: nowrap; }
         }
-    </style>
+    
+
+        /* Two-column formula study sheet cleanup */
+        #tab-formulas .card {
+            padding: 1.5rem;
+        }
+        #tab-formulas .checklist-section {
+            margin-bottom: 1.35rem;
+        }
+        #tab-formulas .checklist-section h3 {
+            margin-bottom: 0.6rem;
+        }
+        #tab-formulas .formula-intro {
+            margin-bottom: 1rem;
+            gap: 0.75rem;
+        }
+        #tab-formulas .formula-priority-note {
+            padding: 0.85rem 1rem;
+        }
+        #tab-formulas .formula-legend {
+            gap: 0.5rem;
+        }
+        #tab-formulas .formula-section-note {
+            margin: -0.2rem 0 0.8rem;
+            font-size: 0.86rem;
+        }
+        #tab-formulas .formula-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+        #tab-formulas .formula-card,
+        #tab-formulas .formula-card.wide {
+            grid-column: auto;
+            padding: 1rem 0.95rem;
+            border-radius: 12px;
+        }
+        #tab-formulas .formula-card:hover {
+            transform: none;
+        }
+        #tab-formulas .formula-title {
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+        }
+        #tab-formulas .formula-badge {
+            margin-bottom: 0.55rem;
+        }
+        #tab-formulas .formula-math {
+            font-size: clamp(0.98rem, 1.8vw, 1.16rem);
+            line-height: 1.3;
+        }
+        #tab-formulas .formula-math.compact-math {
+            font-size: clamp(0.9rem, 1.6vw, 1.03rem);
+        }
+        #tab-formulas .formula-math .katex-display {
+            margin: 0.18em 0;
+        }
+        #tab-formulas .formula-vars {
+            font-size: 0.79rem;
+            line-height: 1.42;
+            margin-top: 0.45rem;
+        }
+        #tab-formulas .formula-step {
+            gap: 0.4rem;
+            align-items: center;
+        }
+        #tab-formulas .step-label {
+            min-width: 4.5rem;
+            font-size: 0.72rem;
+        }
+        #tab-formulas .formula-card.useful-card {
+            opacity: 0.92;
+        }
+
+        @media (max-width: 900px) {
+            #tab-formulas .formula-grid {
+                grid-template-columns: 1fr;
+            }
+            #tab-formulas .card {
+                padding: 1.25rem;
+            }
+        }
+</style>
 </head>
 <body>
-
 <div class="container">
-    <header>
-        <div>
-            <h1>Math 130 – Test 2 Review</h1>
-            <p style="color: var(--text-muted); margin-top: 0.5rem; font-weight: 500;">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
-            <p style="color: var(--text-muted); margin-top: 0.25rem; font-size: 0.9rem;">Topics: Geometry, Exponentials &amp; Logarithms</p>
-        </div>
-        <button class="theme-toggle" id="theme-btn" title="Toggle Theme" aria-label="Toggle dark and light theme">
-            <i data-lucide="moon"></i>
+<header>
+<div>
+<h1>Math 130 – Test 2 Review</h1>
+<p style="color: var(--text-muted); margin-top: 0.5rem; font-weight: 500;">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
+<p style="color: var(--text-muted); margin-top: 0.25rem; font-size: 0.9rem;">Topics: Geometry, Exponentials &amp; Logarithms</p>
+</div>
+<button aria-label="Toggle dark and light theme" class="theme-toggle" id="theme-btn" title="Toggle Theme">
+<i data-lucide="moon"></i>
+</button>
+</header>
+<div aria-label="Review tool sections" class="tabs" role="tablist">
+<button class="tab-btn active" data-tab="schedule">
+<i data-lucide="calendar"></i> Schedule
         </button>
-    </header>
-
-    <div class="tabs" role="tablist" aria-label="Review tool sections">
-        <button class="tab-btn active" data-tab="schedule">
-            <i data-lucide="calendar"></i> Schedule
+<button class="tab-btn" data-tab="formulas">
+<i data-lucide="sigma"></i> Formulas
         </button>
-        <button class="tab-btn" data-tab="formulas">
-            <i data-lucide="sigma"></i> Formulas
+<button class="tab-btn" data-tab="practice">
+<i data-lucide="pen-tool"></i> Practice
         </button>
-        <button class="tab-btn" data-tab="practice">
-            <i data-lucide="pen-tool"></i> Practice
+<button class="tab-btn" data-tab="progress">
+<i data-lucide="bar-chart-2"></i> Progress
         </button>
-        <button class="tab-btn" data-tab="progress">
-            <i data-lucide="bar-chart-2"></i> Progress
+<button class="tab-btn" data-tab="videos">
+<i data-lucide="play-circle"></i> Videos
         </button>
-        <button class="tab-btn" data-tab="videos">
-            <i data-lucide="play-circle"></i> Videos
-        </button>
-    </div>
-
-    <!-- SCHEDULE TAB -->
-    <div id="tab-schedule" class="tab-content active">
-        <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-                <h2 style="margin-bottom: 0;">Course Schedule</h2>
-                <div id="exam-countdown" style="background: var(--red-bg); border: 1px solid var(--red); color: var(--red); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;"></div>
-            </div>
-            <div style="overflow-x: auto;">
-                <table class="history-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Topic / Section</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="schedule-body">
-                        <tr data-date="2026-02-20">
-                            <td>Fri, 2/20</td>
-                            <td>Section 4.2</td>
-                            <td><span class="badge badge-class">CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-02-23">
-                            <td>Mon, 2/23</td>
-                            <td>Section 4.2</td>
-                            <td><span class="badge badge-class">CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-02-25">
-                            <td>Wed, 2/25</td>
-                            <td>Section 4.3 & Quiz 5</td>
-                            <td>
-                                <span class="badge badge-class">CLASS</span>
-                                <span class="badge badge-quiz">QUIZ</span>
-                                <span class="badge badge-due">4.2 DUE</span>
-                            </td>
-                        </tr>
-                        <tr data-date="2026-02-27">
-                            <td>Fri, 2/27</td>
-                            <td>Section 4.3</td>
-                            <td><span class="badge badge-class">CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-03-02">
-                            <td>Mon, 3/2</td>
-                            <td>Geometry: Polygons</td>
-                            <td><span class="badge badge-class">CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-03-04">
-                            <td>Wed, 3/4</td>
-                            <td>Geometry: Polygons & Quiz 6</td>
-                            <td>
-                                <span class="badge badge-class">CLASS</span>
-                                <span class="badge badge-quiz">QUIZ</span>
-                                <span class="badge badge-due">4.3 DUE</span>
-                            </td>
-                        </tr>
-                        <tr data-date="2026-03-06">
-                            <td>Fri, 3/6</td>
-                            <td>Geometry: Polygons</td>
-                            <td><span class="badge badge-class">CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-03-09">
-                            <td>Mon, 3/9</td>
-                            <td>Geometry: Circles</td>
-                            <td><span class="badge badge-class">CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-03-11">
-                            <td>Wed, 3/11</td>
-                            <td>Geometry: Circles & Quiz 7</td>
-                            <td>
-                                <span class="badge badge-class">CLASS</span>
-                                <span class="badge badge-quiz">QUIZ</span>
-                            </td>
-                        </tr>
-                        <tr data-date="2026-03-13">
-                            <td>Fri, 3/13</td>
-                            <td>Geometry: Circles</td>
-                            <td><span class="badge badge-class">CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-03-16">
-                            <td>Mar 16 - 20</td>
-                            <td>Spring Break</td>
-                            <td><span class="badge badge-noclass">NO CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-03-23">
-                            <td>Mon, 3/23</td>
-                            <td>Test 2 Review</td>
-                            <td><span class="badge badge-retry">REVIEW</span></td>
-                        </tr>
-                        <tr data-date="2026-03-25">
-                            <td>Wed, 3/25</td>
-                            <td>Assessment Day</td>
-                            <td><span class="badge badge-noclass">NO CLASS</span></td>
-                        </tr>
-                        <tr data-date="2026-03-27">
-                            <td>Fri, 3/27</td>
-                            <td>Test 2 Review & Quiz 8</td>
-                            <td>
-                                <span class="badge badge-retry">REVIEW</span>
-                                <span class="badge badge-quiz">QUIZ</span>
-                                <span class="badge badge-due">GEOM DUE</span>
-                            </td>
-                        </tr>
-                        <tr data-date="2026-03-30" class="best-row">
-                            <td><strong>Mon, 3/30</strong></td>
-                            <td><strong>Test 2: Geometry, 4.2, 4.3</strong></td>
-                            <td>
-                                <span class="badge badge-exam">EXAM</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>ALEKS Modules</h2>
-            <div style="overflow-x: auto;">
-                <table class="history-table">
-                    <thead>
-                        <tr>
-                            <th>Module</th>
-                            <th>Opens</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="aleks-body">
-                        <tr data-due="2026-02-25T14:10:00">
-                            <td><strong>Section 4.2</strong></td>
-                            <td>Feb 18 at 2:11 PM</td>
-                            <td><strong>Feb 25 at 2:10 PM</strong></td>
-                            <td class="aleks-status"></td>
-                        </tr>
-                        <tr data-due="2026-03-04T14:10:00">
-                            <td><strong>Section 4.3</strong></td>
-                            <td>Feb 25 at 2:11 PM</td>
-                            <td><strong>Mar 4 at 2:10 PM</strong></td>
-                            <td class="aleks-status"></td>
-                        </tr>
-                        <tr data-due="2026-03-27T14:10:00">
-                            <td><strong>Geometry</strong></td>
-                            <td>Mar 4 at 2:11 PM</td>
-                            <td><strong>Mar 27 at 2:10 PM</strong></td>
-                            <td class="aleks-status"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- FORMULAS TAB -->
-    
-<div id="tab-formulas" class="tab-content">
-        <div class="card">
-            <h2>Essential Formulas for Test 2</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 500;">
-                Badges indicate what is provided on the exam and what you must memorize.
+</div>
+<!-- SCHEDULE TAB -->
+<div class="tab-content active" id="tab-schedule">
+<div class="card">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+<h2 style="margin-bottom: 0;">Course Schedule</h2>
+<div id="exam-countdown" style="background: var(--red-bg); border: 1px solid var(--red); color: var(--red); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;"></div>
+</div>
+<div style="overflow-x: auto;">
+<table class="history-table">
+<thead>
+<tr>
+<th>Date</th>
+<th>Topic / Section</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="schedule-body">
+<tr data-date="2026-02-20">
+<td>Fri, 2/20</td>
+<td>Section 4.2</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-02-23">
+<td>Mon, 2/23</td>
+<td>Section 4.2</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-02-25">
+<td>Wed, 2/25</td>
+<td>Section 4.3 &amp; Quiz 5</td>
+<td>
+<span class="badge badge-class">CLASS</span>
+<span class="badge badge-quiz">QUIZ</span>
+<span class="badge badge-due">4.2 DUE</span>
+</td>
+</tr>
+<tr data-date="2026-02-27">
+<td>Fri, 2/27</td>
+<td>Section 4.3</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-02">
+<td>Mon, 3/2</td>
+<td>Geometry: Polygons</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-04">
+<td>Wed, 3/4</td>
+<td>Geometry: Polygons &amp; Quiz 6</td>
+<td>
+<span class="badge badge-class">CLASS</span>
+<span class="badge badge-quiz">QUIZ</span>
+<span class="badge badge-due">4.3 DUE</span>
+</td>
+</tr>
+<tr data-date="2026-03-06">
+<td>Fri, 3/6</td>
+<td>Geometry: Polygons</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-09">
+<td>Mon, 3/9</td>
+<td>Geometry: Circles</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-11">
+<td>Wed, 3/11</td>
+<td>Geometry: Circles &amp; Quiz 7</td>
+<td>
+<span class="badge badge-class">CLASS</span>
+<span class="badge badge-quiz">QUIZ</span>
+</td>
+</tr>
+<tr data-date="2026-03-13">
+<td>Fri, 3/13</td>
+<td>Geometry: Circles</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-16">
+<td>Mar 16 - 20</td>
+<td>Spring Break</td>
+<td><span class="badge badge-noclass">NO CLASS</span></td>
+</tr>
+<tr data-date="2026-03-23">
+<td>Mon, 3/23</td>
+<td>Test 2 Review</td>
+<td><span class="badge badge-retry">REVIEW</span></td>
+</tr>
+<tr data-date="2026-03-25">
+<td>Wed, 3/25</td>
+<td>Assessment Day</td>
+<td><span class="badge badge-noclass">NO CLASS</span></td>
+</tr>
+<tr data-date="2026-03-27">
+<td>Fri, 3/27</td>
+<td>Test 2 Review &amp; Quiz 8</td>
+<td>
+<span class="badge badge-retry">REVIEW</span>
+<span class="badge badge-quiz">QUIZ</span>
+<span class="badge badge-due">GEOM DUE</span>
+</td>
+</tr>
+<tr class="best-row" data-date="2026-03-30">
+<td><strong>Mon, 3/30</strong></td>
+<td><strong>Test 2: Geometry, 4.2, 4.3</strong></td>
+<td>
+<span class="badge badge-exam">EXAM</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="card">
+<h2>ALEKS Modules</h2>
+<div style="overflow-x: auto;">
+<table class="history-table">
+<thead>
+<tr>
+<th>Module</th>
+<th>Opens</th>
+<th>Due Date</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="aleks-body">
+<tr data-due="2026-02-25T14:10:00">
+<td><strong>Section 4.2</strong></td>
+<td>Feb 18 at 2:11 PM</td>
+<td><strong>Feb 25 at 2:10 PM</strong></td>
+<td class="aleks-status"></td>
+</tr>
+<tr data-due="2026-03-04T14:10:00">
+<td><strong>Section 4.3</strong></td>
+<td>Feb 25 at 2:11 PM</td>
+<td><strong>Mar 4 at 2:10 PM</strong></td>
+<td class="aleks-status"></td>
+</tr>
+<tr data-due="2026-03-27T14:10:00">
+<td><strong>Geometry</strong></td>
+<td>Mar 4 at 2:11 PM</td>
+<td><strong>Mar 27 at 2:10 PM</strong></td>
+<td class="aleks-status"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- FORMULAS TAB -->
+<div class="tab-content" id="tab-formulas">
+<div class="card">
+<h2>Essential Formulas for Test 2</h2>
+<p style="color: var(--text-muted); margin-bottom: 1rem; font-weight: 500;">
+                Badges show whether a formula is provided on the exam, must be memorized, or is useful but not required on this specific test.
             </p>
-            
-            <div class="checklist-section">
-                <h3>Section 4.2: Exponentials &amp; Interest</h3>
-                <div class="formula-grid">
-                    <div class="formula-card">
-                        <div class="formula-badge status-supplemental">Supplemental</div>
-                        <div class="formula-title">Simple Interest</div>
-                        <div class="formula-math">$$A = P(1 + rt)$$</div>
-                        <div class="formula-vars">$P$ = principal, $r$ = annual rate (decimal), $t$ = years</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-provided">Provided</div>
-                        <div class="formula-title">Compound Interest</div>
-                        <div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div>
-                        <div class="formula-vars">$n$ = compounds/year<br>(1 = annually, 12 = monthly, 365 = daily)</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-provided">Provided</div>
-                        <div class="formula-title">Continuous Compounding</div>
-                        <div class="formula-math">$$A = Pe^{rt}$$</div>
-                        <div class="formula-vars">$e \approx 2.71828$</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Section 4.3: Logarithms</h3>
-                <div class="formula-grid">
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Log ↔ Exp Form</div>
-                        <div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div>
-                        <div class="formula-vars">$b$ = base, $x$ = argument, $y$ = exponent</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Change of Base</div>
-                        <div class="formula-math">$$\log_b(a) = \frac{\ln(a)}{\ln(b)}$$</div>
-                        <div class="formula-vars">Use to evaluate any log on a calculator</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Product Rule</div>
-                        <div class="formula-math">$$\log_b(MN) = \log_b(M) + \log_b(N)$$</div>
-                        <div class="formula-vars">The log of a product is the sum of the logs</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Quotient Rule</div>
-                        <div class="formula-math">$$\log_b\!\left(\frac{M}{N}\right) = \log_b(M) - \log_b(N)$$</div>
-                        <div class="formula-vars">The log of a quotient is the difference of the logs</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Power Rule</div>
-                        <div class="formula-math">$$\log_b(M^k) = k\log_b(M)$$</div>
-                        <div class="formula-vars">The exponent can be pulled out front</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Geometry: Areas</h3>
-                <div class="formula-grid">
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Triangle Area</div>
-                        <div class="formula-math">$$A = \frac{1}{2}bh$$</div>
-                        <div class="formula-vars">$b$ = base, $h$ = height</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Parallelogram Area</div>
-                        <div class="formula-math">$$A = bh$$</div>
-                        <div class="formula-vars">$b$ = base, $h$ = perpendicular height</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Trapezoid Area</div>
-                        <div class="formula-math">$$A = \frac{1}{2}h(b_1 + b_2)$$</div>
-                        <div class="formula-vars">$b_1, b_2$ = parallel sides, $h$ = height</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Heron's Formula</div>
-                        <div class="formula-math">$$A = \sqrt{s(s-a)(s-b)(s-c)}$$</div>
-                        <div class="formula-vars">$s = \frac{a+b+c}{2}$ (semi-perimeter)</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Geometry: Circles &amp; Angles</h3>
-                <div class="formula-grid">
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Inscribed Angle Theorem</div>
-                        <div class="formula-math">$$\text{Angle} = \frac{1}{2}(\text{Arc})$$</div>
-                        <div class="formula-vars">Inscribed angle is half the intercepted arc</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">DMS to Decimal</div>
-                        <div class="formula-math">$$D + \frac{M}{60} + \frac{S}{3600}$$</div>
-                        <div class="formula-vars">$D$ = degrees, $M$ = minutes, $S$ = seconds</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Degree ↔ Radian</div>
-                        <div class="formula-math">$$\text{rad} = \text{deg} \cdot \frac{\pi}{180^\circ}$$</div>
-                        <div class="formula-vars">$180^\circ = \pi\text{ rad}$; $1^\circ = 60', 1' = 60''$</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Arc Length</div>
-                        <div class="formula-math">$$s = r\theta$$</div>
-                        <div class="formula-vars">$\theta$ must be in radians</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Sector Area</div>
-                        <div class="formula-math">$$A = \frac{1}{2}r^2\theta$$</div>
-                        <div class="formula-vars">$\theta$ must be in radians</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Circle Area</div>
-                        <div class="formula-math">$$A = \pi r^2$$</div>
-                        <div class="formula-vars">$r$ = radius</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Circumference</div>
-                        <div class="formula-math">$$C = 2\pi r$$</div>
-                        <div class="formula-vars">$r$ = radius</div>
-                    </div>
-                    <div class="formula-card">
-                        <div class="formula-badge status-memorize">Memorize</div>
-                        <div class="formula-title">Angular &amp; Linear Speed</div>
-                        <div class="formula-math">$$\omega = 2\pi \cdot \text{rpm}, \quad v = r\omega$$</div>
-                        <div class="formula-vars">$\omega$ = angular speed, $v$ = linear speed</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
+<div class="formula-intro">
+<div class="formula-priority-note"><strong>Study order:</strong> memorize cards first, then learn where the provided formulas appear on the exam, and use the useful cards only as background support.</div>
+<div aria-label="Formula badge legend" class="formula-legend">
+<div class="legend-chip legend-memorize">Memorize first</div>
+<div class="legend-chip legend-provided">Recognize on test</div>
+<div class="legend-chip legend-useful">Background only</div>
+</div>
+</div>
+<div class="checklist-section">
+<h3>Section 4.2: Exponentials &amp; Interest</h3>
+<div class="formula-section-note">Focus: recognize the two provided interest formulas and when each model is used.</div>
+<div class="formula-grid">
+<div class="formula-card provided-card">
+<div class="formula-badge status-provided">Provided</div>
+<div class="formula-title">Compound Interest</div>
+<div class="formula-math">$$A = P\left(1+\frac{r}{n}\right)^{nt}$$</div>
+<div class="formula-vars">Printed on the exam.<br/>$n$ = compounds per year (1 annually, 12 monthly, 365 daily)</div>
+</div>
+<div class="formula-card provided-card">
+<div class="formula-badge status-provided">Provided</div>
+<div class="formula-title">Continuous Compounding</div>
+<div class="formula-math">$$A = Pe^{rt}$$</div>
+<div class="formula-vars">Printed on the exam.<br/>$e \approx 2.71828$</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Simple Interest</div>
+<div class="formula-math">$$A = P(1 + rt)$$</div>
+<div class="formula-vars">Useful for comparison problems.<br/>$P$ = principal, $r$ = annual rate (decimal), $t$ = years</div>
+</div>
+</div>
+</div>
+<div class="checklist-section" style="margin-top: 2rem;">
+<h3>Section 4.3: Logarithms</h3>
+<div class="formula-section-note">Focus: memorize log-to-exponential conversion, inverse log equations, and change of base. The log property rules are support only.</div>
+<div class="formula-grid">
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Log ↔ Exponential Form</div>
+<div class="formula-math">$$\log_b(x) = y \iff b^y = x$$</div>
+<div class="formula-vars">Needed for converting between log and exponential forms.<br/>$\log(x)=\log_{10}(x)$ and $\ln(x)=\log_e(x)$</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Inverse Log Equations</div>
+<div class="formula-math dual-line">$$\ln(x)=c \iff x=e^c$$ $$\log(x)=c \iff x=10^c$$</div>
+<div class="formula-vars">Directly useful when solving basic logarithmic equations on the test</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Change of Base</div>
+<div class="formula-math dual-line compact-math">$$\log_b(a)=\frac{\ln(a)}{\ln(b)}$$ $$\log_b(a)=\frac{\log(a)}{\log(b)}$$</div>
+<div class="formula-vars">Use to evaluate logs with any base on a calculator</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Product Rule</div>
+<div class="formula-math">$$\log_b(MN) = \log_b(M) + \log_b(N)$$</div>
+<div class="formula-vars">Helpful for Section 4.3, but not directly needed on this test</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Quotient Rule</div>
+<div class="formula-math">$$\log_b\!\left(\frac{M}{N}\right) = \log_b(M) - \log_b(N)$$</div>
+<div class="formula-vars">Helpful for Section 4.3, but not directly needed on this test</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Power Rule</div>
+<div class="formula-math">$$\log_b(M^k) = k\log_b(M)$$</div>
+<div class="formula-vars">Helpful for Section 4.3, but not directly needed on this test</div>
+</div>
+</div>
+</div>
+<div class="checklist-section" style="margin-top: 2rem;">
+<h3>Geometry: Polygons &amp; Area</h3>
+<div class="formula-section-note">Focus: triangle area, trapezoid area, proportional segments, and Heron's formula as a provided reference.</div>
+<div class="formula-grid">
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Triangle Area</div>
+<div class="formula-math">$$A = \frac{1}{2}bh$$</div>
+<div class="formula-vars">Used when a base and perpendicular height are given</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Trapezoid Area</div>
+<div class="formula-math">$$A = \frac{1}{2}h(b_1 + b_2)$$</div>
+<div class="formula-vars">$b_1$ and $b_2$ are the parallel sides</div>
+</div>
+<div class="formula-card provided-card">
+<div class="formula-badge status-provided">Provided</div>
+<div class="formula-title">Heron's Formula</div>
+<div class="formula-math dual-line">$$A = \sqrt{s(s-a)(s-b)(s-c)}$$ $$s = \frac{a+b+c}{2}$$</div>
+<div class="formula-vars">Printed on the exam for the three-side triangle problem</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Parallel Lines / Segment Proportions</div>
+<div class="formula-math">$$\frac{AC}{CE} = \frac{BD}{DE}$$</div>
+<div class="formula-vars">When parallel lines cut transversals, corresponding segments are proportional. Match top-to-top and bottom-to-bottom segments.</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Parallelogram Area</div>
+<div class="formula-math">$$A = bh$$</div>
+<div class="formula-vars">Part of the topic set, but not directly used on this test</div>
+</div>
+</div>
+</div>
+<div class="checklist-section" style="margin-top: 2rem;">
+<h3>Geometry: Angle, Arc, and Circle Relationships</h3>
+<div class="formula-section-note">Focus: DMS conversions, radian-degree conversion, arc and sector formulas, circle angle theorems, and linear speed.</div>
+<div class="formula-grid">
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">DMS to Decimal Degrees</div>
+<div class="formula-math">$$\text{decimal degrees} = D + \frac{M}{60} + \frac{S}{3600}$$</div>
+<div class="formula-vars">$D$ = degrees, $M$ = minutes, $S$ = seconds</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Decimal Degrees to DMS</div>
+<div class="formula-math steps-math compact-math"><div class="formula-step"><span class="step-label">Step 1</span><span>$$M=(\text{decimal part})\cdot 60$$</span></div><div class="formula-step"><span class="step-label">Step 2</span><span>$$S=(\text{new decimal part})\cdot 60$$</span></div></div>
+<div class="formula-vars">Keep the whole-number degrees. Multiply the decimal part by 60, then repeat once more for seconds.</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Degree ↔ Radian Conversion</div>
+<div class="formula-math dual-line">$$\text{radians} = \text{degrees}\cdot\frac{\pi}{180}$$ $$\text{degrees} = \text{radians}\cdot\frac{180}{\pi}$$</div>
+<div class="formula-vars">Use both directions. Also remember $180^\circ = \pi$ radians.</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Arc Length</div>
+<div class="formula-math dual-line">$$s = r\theta$$ $$s = \frac{\theta}{360}(2\pi r)$$</div>
+<div class="formula-vars">Use $s=r\theta$ when $\theta$ is in radians, or use the degree form directly</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Sector Area</div>
+<div class="formula-math dual-line">$$A = \frac{1}{2}r^2\theta$$ $$A = \frac{\theta}{360}\pi r^2$$</div>
+<div class="formula-vars">Use the radian form when $\theta$ is in radians, or use the degree form directly</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Central Angle and Arc</div>
+<div class="formula-math compact-math">$$m(\angle\,\text{central}) = m(\text{intercepted arc})$$</div>
+<div class="formula-vars">A diameter splits the circle into two semicircles of $180^\circ$ each</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Inscribed Angle Theorem</div>
+<div class="formula-math compact-math">$$m(\angle\,\text{inscribed}) = \frac{1}{2}m(\text{intercepted arc})$$</div>
+<div class="formula-vars">An inscribed angle is half of its intercepted arc</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Intersecting Chords Angle Theorem</div>
+<div class="formula-math dual-line compact-math">$$m\angle = \frac{1}{2}\big(m(\text{arc }1)+m(\text{arc }2)\big)$$</div>
+<div class="formula-vars">For angles formed by two chords intersecting inside a circle</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Angular and Linear Speed</div>
+<div class="formula-math dual-line">$$v = r\omega$$ $$v = (\text{rpm})(2\pi r)$$</div>
+<div class="formula-vars">Helpful for the propeller problem. Also remember $1\text{ mile}=5280\text{ ft}$ and $60\text{ min}=1\text{ hr}$.</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Circle Area</div>
+<div class="formula-math">$$A = \pi r^2$$</div>
+<div class="formula-vars">Useful background for sector area problems, but not directly required on this test</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Circumference</div>
+<div class="formula-math">$$C = 2\pi r$$</div>
+<div class="formula-vars">Useful background for arc length and linear speed</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <!-- PRACTICE TAB -->
-    <div id="tab-practice" class="tab-content">
-        <div class="card">
-            <h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
-            
-            <!-- Mock Exam CTA -->
-            <div id="exam-cta" style="background: linear-gradient(135deg, var(--accent-glow), var(--red-bg)); border: 2px solid var(--accent); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
-                <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">20 exam-matched questions weighted like the real test: ~15% Section 4.2, ~15% Section 4.3, ~70% Geometry. Includes a compound interest table and a multi-part circle theorem problem.</p>
-                <button class="btn-primary" onclick="startMockExam()" id="btn-start-exam">Start Mock Exam</button>
-            </div>
-
-            <!-- Mock Quiz CTA -->
-            <div id="quiz-cta" style="background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
-                <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">8 focused questions matching each weekly quiz. One attempt per question.</p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
-                    <button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-                        <div style="font-weight: 600; margin-bottom: 2px;">Quiz 5 — Section 4.2</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Exponentials &amp; Interest</div>
-                    </button>
-                    <button class="btn-secondary" onclick="startMockQuiz(6)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-                        <div style="font-weight: 600; margin-bottom: 2px;">Quiz 6 — Section 4.3</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Logarithms</div>
-                    </button>
-                    <button class="btn-secondary" onclick="startMockQuiz(7)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-                        <div style="font-weight: 600; margin-bottom: 2px;">Quiz 7 — Angles &amp; Polygons</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Similar Triangles, Parallel Lines, Areas, Heron's</div>
-                    </button>
-                    <button class="btn-secondary" onclick="startMockQuiz(8)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-                        <div style="font-weight: 600; margin-bottom: 2px;">Quiz 8 — Circles</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">DMS, Radians, Arcs, Sectors, Speed, Circle Theorems</div>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Exam Progress Bar (hidden until active) -->
-            <div id="exam-progress-bar" style="display: none; margin-bottom: 1.5rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <span id="exam-mode-label" style="font-weight: 600; color: var(--accent);">Mock Exam</span>
-                    <span id="exam-progress-label" style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.9rem;">1 / 15</span>
-                </div>
-                <div class="progress-bar-track" style="height: 10px;">
-                    <div id="exam-progress-fill" class="progress-bar-fill" style="width: 0%; transition: width 0.4s ease;"></div>
-                </div>
-            </div>
-
-            <!-- Exam Results (hidden until complete) -->
-            <div id="exam-results" style="display: none;" class="card">
-                <h2 style="text-align: center;">📊 Exam Results</h2>
-                <div id="exam-score-display" style="text-align: center; font-size: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin: 1rem 0;"></div>
-                <div id="exam-breakdown" style="margin-top: 1rem;"></div>
-                <div style="text-align: center; margin-top: 1.5rem;">
-                    <button class="btn-primary" onclick="endMockExam()">Back to Practice</button>
-                </div>
-            </div>
-
-            <div class="quiz-selector" id="quiz-categories"></div>
-
-            <div class="quiz-box" id="quiz-active-area" style="display: none; border-top: 1px solid var(--border); padding-top: 2rem;">
-                <div id="svg-display"></div>
-                <div class="question-text" id="question-display"></div>
-                
-                <div class="input-group" id="dynamic-inputs">
-                    <!-- Inputs injected here based on type -->
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                    <button class="btn-primary" id="btn-submit">Check Answer</button>
-                    <button class="btn-secondary" id="btn-next" style="display: none;">Next Question</button>
-                    <button id="btn-exit-exam" style="display: none; background: none; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; margin-left: auto;" onclick="confirmExitExam()">✕ Exit</button>
-                </div>
-                
-                <div id="feedback-display" class="feedback"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CHECKLIST & PROGRESS TAB -->
-    <div id="tab-progress" class="tab-content">
-        <!-- Smart Study Plan -->
-        <div class="card" id="study-plan-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
-                <h2 style="margin-bottom: 0;">📋 Smart Study Plan</h2>
-                <button class="btn-secondary" onclick="generateStudyPlan()" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
-                    <i data-lucide="refresh-cw" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> Refresh
+<div class="tab-content" id="tab-practice">
+<div class="card">
+<h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
+<p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
+<!-- Mock Exam CTA -->
+<div id="exam-cta" style="background: linear-gradient(135deg, var(--accent-glow), var(--red-bg)); border: 2px solid var(--accent); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+<h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
+<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">20 exam-matched questions weighted like the real test: ~15% Section 4.2, ~15% Section 4.3, ~70% Geometry. Includes a compound interest table and a multi-part circle theorem problem.</p>
+<button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
+</div>
+<!-- Mock Quiz CTA -->
+<div id="quiz-cta" style="background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
+<h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
+<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">8 focused questions matching each weekly quiz. One attempt per question.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
+<button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
+<div style="font-weight: 600; margin-bottom: 2px;">Quiz 5 — Section 4.2</div>
+<div style="font-size: 0.8rem; color: var(--text-muted);">Exponentials &amp; Interest</div>
+</button>
+<button class="btn-secondary" onclick="startMockQuiz(6)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
+<div style="font-weight: 600; margin-bottom: 2px;">Quiz 6 — Section 4.3</div>
+<div style="font-size: 0.8rem; color: var(--text-muted);">Logarithms</div>
+</button>
+<button class="btn-secondary" onclick="startMockQuiz(7)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
+<div style="font-weight: 600; margin-bottom: 2px;">Quiz 7 — Angles &amp; Polygons</div>
+<div style="font-size: 0.8rem; color: var(--text-muted);">Similar Triangles, Parallel Lines, Areas, Heron's</div>
+</button>
+<button class="btn-secondary" onclick="startMockQuiz(8)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
+<div style="font-weight: 600; margin-bottom: 2px;">Quiz 8 — Circles</div>
+<div style="font-size: 0.8rem; color: var(--text-muted);">DMS, Radians, Arcs, Sectors, Speed, Circle Theorems</div>
+</button>
+</div>
+</div>
+<!-- Exam Progress Bar (hidden until active) -->
+<div id="exam-progress-bar" style="display: none; margin-bottom: 1.5rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+<span id="exam-mode-label" style="font-weight: 600; color: var(--accent);">Mock Exam</span>
+<span id="exam-progress-label" style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.9rem;">1 / 15</span>
+</div>
+<div class="progress-bar-track" style="height: 10px;">
+<div class="progress-bar-fill" id="exam-progress-fill" style="width: 0%; transition: width 0.4s ease;"></div>
+</div>
+</div>
+<!-- Exam Results (hidden until complete) -->
+<div class="card" id="exam-results" style="display: none;">
+<h2 style="text-align: center;">📊 Exam Results</h2>
+<div id="exam-score-display" style="text-align: center; font-size: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin: 1rem 0;"></div>
+<div id="exam-breakdown" style="margin-top: 1rem;"></div>
+<div style="text-align: center; margin-top: 1.5rem;">
+<button class="btn-primary" onclick="endMockExam()">Back to Practice</button>
+</div>
+</div>
+<div class="quiz-selector" id="quiz-categories"></div>
+<div class="quiz-box" id="quiz-active-area" style="display: none; border-top: 1px solid var(--border); padding-top: 2rem;">
+<div id="svg-display"></div>
+<div class="question-text" id="question-display"></div>
+<div class="question-note" id="question-note" style="display:none;"></div>
+<div class="input-group" id="dynamic-inputs">
+<!-- Inputs injected here based on type -->
+</div>
+<div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+<button class="btn-primary" id="btn-submit">Check Answer</button>
+<button class="btn-secondary" id="btn-next" style="display: none;">Next Question</button>
+<button id="btn-exit-exam" onclick="confirmExitExam()" style="display: none; background: none; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; margin-left: auto;">✕ Exit</button>
+</div>
+<div class="feedback" id="feedback-display"></div>
+</div>
+</div>
+</div>
+<!-- CHECKLIST & PROGRESS TAB -->
+<div class="tab-content" id="tab-progress">
+<!-- Smart Study Plan -->
+<div class="card" id="study-plan-card">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+<h2 style="margin-bottom: 0;">📋 Smart Study Plan</h2>
+<button class="btn-secondary" onclick="generateStudyPlan()" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+<i data-lucide="refresh-cw" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i> Refresh
                 </button>
-            </div>
-            <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Personalized recommendations based on your checklist progress and exam performance.</p>
-            <div id="study-plan-content">
-                <p style="color: var(--text-muted); text-align: center; padding: 1rem;">Complete some practice questions or checklist items to generate your study plan.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Topics Checklist</h2>
-            <div id="progress-summary" class="progress-summary"></div>
-            <div id="checklist-container"></div>
-        </div>
-
-        <div class="card">
-            <h2>Your Statistics</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-attempted">0</div>
-                    <div class="stat-label">Questions Solved</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-perfect">0</div>
-                    <div class="stat-label">Perfect First Tries</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-accuracy">0%</div>
-                    <div class="stat-label">Overall Accuracy</div>
-                </div>
-            </div>
-            
-            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Practice History</h3>
-            <div style="overflow-x: auto;">
-                <table class="history-table">
-                    <thead>
-                        <tr>
-                            <th>Date / Time</th>
-                            <th>Topic</th>
-                            <th>Retries</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="history-body">
-                        <!-- History injected here -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <button class="btn-secondary" onclick="resetProgress()" style="color: var(--red); border-color: var(--red-bg);">
-                    <i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
+</div>
+<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Personalized recommendations based on your checklist progress and exam performance.</p>
+<div id="study-plan-content">
+<p style="color: var(--text-muted); text-align: center; padding: 1rem;">Complete some practice questions or checklist items to generate your study plan.</p>
+</div>
+</div>
+<div class="card">
+<h2>Topics Checklist</h2>
+<div class="progress-summary" id="progress-summary"></div>
+<div id="checklist-container"></div>
+</div>
+<div class="card">
+<h2>Your Statistics</h2>
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-val" id="stat-attempted">0</div>
+<div class="stat-label">Questions Solved</div>
+</div>
+<div class="stat-card">
+<div class="stat-val" id="stat-perfect">0</div>
+<div class="stat-label">Perfect First Tries</div>
+</div>
+<div class="stat-card">
+<div class="stat-val" id="stat-accuracy">0%</div>
+<div class="stat-label">Overall Accuracy</div>
+</div>
+</div>
+<h3 style="margin-top: 2rem; margin-bottom: 1rem;">Practice History</h3>
+<div style="overflow-x: auto;">
+<table class="history-table">
+<thead>
+<tr>
+<th>Date / Time</th>
+<th>Topic</th>
+<th>Retries</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="history-body">
+<!-- History injected here -->
+</tbody>
+</table>
+</div>
+<div style="text-align: center; margin-top: 3rem;">
+<button class="btn-secondary" onclick="resetProgress()" style="color: var(--red); border-color: var(--red-bg);">
+<i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
                     Reset All Progress
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- VIDEOS TAB -->
-    <div id="tab-videos" class="tab-content">
-        <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
-                <h2>Study Videos</h2>
-                <div id="video-progress" style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;"></div>
-            </div>
-
-            <div class="checklist-section">
-                <h3>Section 4.2: Exponentials</h3>
-                <div class="checklist-grid">
-                    <a href="https://www.youtube.com/watch?v=kikGvjKFN8Q" target="_blank" class="check-item video-link" data-video-id="v42_1" data-practice-id="eval_exp" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Graphing &amp; Tables</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=aix8TLHdKgc" target="_blank" class="check-item video-link" data-video-id="v42_2" data-practice-id="eval_exp" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Calculator: Decimal Exponents</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=NCYNXkbTTUo" target="_blank" class="check-item video-link" data-video-id="v42_3" data-practice-id="interest" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Simple vs Compound Interest</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=2S4vK30dII0" target="_blank" class="check-item video-link" data-video-id="v42_4" data-practice-id="interest" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Continuous Compounding</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Section 4.3: Logarithms</h3>
-                <div class="checklist-grid">
-                    <a href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" target="_blank" class="check-item video-link" data-video-id="v43_1" data-practice-id="logexp_conv" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Log ↔ Exp Conversions</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=eL2FhO11mf0" target="_blank" class="check-item video-link" data-video-id="v43_2" data-practice-id="logexp" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Evaluating Log Expressions</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=3Rf8KEhY0ts" target="_blank" class="check-item video-link" data-video-id="v43_3" data-practice-id="logexp" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Logarithm Change of Base</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=fnhFneOz6n8" target="_blank" class="check-item video-link" data-video-id="v43_4" data-practice-id="logexp" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Solving Exponential Eqns using Logs</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="checklist-section" style="margin-top: 2rem;">
-                <h3>Geometry &amp; Circles</h3>
-                <div class="checklist-grid">
-                    <a href="https://www.youtube.com/watch?v=8ysZhPknfYY" target="_blank" class="check-item video-link" data-video-id="vgeo_1" data-practice-id="piecewise_rect" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Piecewise Rectangular Areas</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=FcDyaiHO4GQ" target="_blank" class="check-item video-link" data-video-id="vgeo_2" data-practice-id="dms_to_dec" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>DMS to Decimal Conversion</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=JmLN3QxshlE" target="_blank" class="check-item video-link" data-video-id="vgeo_3" data-practice-id="rad_deg" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Radians &amp; Degrees Intro</span>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=XUus6-9E9sQ" target="_blank" class="check-item video-link" data-video-id="vgeo_4" data-practice-id="circles" style="text-decoration: none;">
-                        <i data-lucide="play" style="color: var(--accent);"></i>
-                        <span>Circle Sectors &amp; Arc Length</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
-
+</div>
+</div>
+<!-- VIDEOS TAB -->
+<div class="tab-content" id="tab-videos">
+<div class="card">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+<h2>Study Videos</h2>
+<div id="video-progress" style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;"></div>
+</div>
+<div class="checklist-section">
+<h3>Section 4.2: Exponentials</h3>
+<div class="checklist-grid">
+<a class="check-item video-link" data-practice-id="eval_exp" data-video-id="v42_1" href="https://www.youtube.com/watch?v=kikGvjKFN8Q" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Graphing &amp; Tables</span>
+</a>
+<a class="check-item video-link" data-practice-id="eval_exp" data-video-id="v42_2" href="https://www.youtube.com/watch?v=aix8TLHdKgc" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Calculator: Decimal Exponents</span>
+</a>
+<a class="check-item video-link" data-practice-id="interest" data-video-id="v42_3" href="https://www.youtube.com/watch?v=NCYNXkbTTUo" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Simple vs Compound Interest</span>
+</a>
+<a class="check-item video-link" data-practice-id="interest" data-video-id="v42_4" href="https://www.youtube.com/watch?v=2S4vK30dII0" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Continuous Compounding</span>
+</a>
+</div>
+</div>
+<div class="checklist-section" style="margin-top: 2rem;">
+<h3>Section 4.3: Logarithms</h3>
+<div class="checklist-grid">
+<a class="check-item video-link" data-practice-id="logexp_conv" data-video-id="v43_1" href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Log ↔ Exp Conversions</span>
+</a>
+<a class="check-item video-link" data-practice-id="logexp" data-video-id="v43_2" href="https://www.youtube.com/watch?v=eL2FhO11mf0" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Evaluating Log Expressions</span>
+</a>
+<a class="check-item video-link" data-practice-id="logexp" data-video-id="v43_3" href="https://www.youtube.com/watch?v=3Rf8KEhY0ts" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Logarithm Change of Base</span>
+</a>
+<a class="check-item video-link" data-practice-id="logexp" data-video-id="v43_4" href="https://www.youtube.com/watch?v=fnhFneOz6n8" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Solving Exponential Eqns using Logs</span>
+</a>
+</div>
+</div>
+<div class="checklist-section" style="margin-top: 2rem;">
+<h3>Geometry &amp; Circles</h3>
+<div class="checklist-grid">
+<a class="check-item video-link" data-practice-id="piecewise_rect" data-video-id="vgeo_1" href="https://www.youtube.com/watch?v=8ysZhPknfYY" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Piecewise Rectangular Areas</span>
+</a>
+<a class="check-item video-link" data-practice-id="dms_to_dec" data-video-id="vgeo_2" href="https://www.youtube.com/watch?v=FcDyaiHO4GQ" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>DMS to Decimal Conversion</span>
+</a>
+<a class="check-item video-link" data-practice-id="rad_deg" data-video-id="vgeo_3" href="https://www.youtube.com/watch?v=JmLN3QxshlE" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Radians &amp; Degrees Intro</span>
+</a>
+<a class="check-item video-link" data-practice-id="circles" data-video-id="vgeo_4" href="https://www.youtube.com/watch?v=XUus6-9E9sQ" style="text-decoration: none;" target="_blank">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Circle Sectors &amp; Arc Length</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
 <script>
     // --- ICON REFRESH (debounced to prevent redundant DOM walks) ---
     let _iconTimer = null;
@@ -1802,23 +2041,26 @@
 
                 if (type < 0.33) {
                     return {
-                        q: `Condense into a single logarithm: $\\log_{${b}}(${x}) + \\log_{${b}}(${y})$`,
-                        inputType: 'number', a: x * y, tol: 0.1,
-                        solution: `Use the Product Rule: $\\log_b(M) + \\log_b(N) = \\log_b(MN)$. <br> $\\log_{${b}}(${x} \\cdot ${y}) = \\log_{${b}}(${x * y})$`
+                        q: `Condense into a single logarithm: $\log_{${b}}(${x}) + \log_{${b}}(${y})$`,
+                        entryNote: `Condense into a single logarithm. Enter only the argument of the final logarithm. Example: if the result is $\log_{${b}}(21)$, enter <strong>21</strong>.`,
+                        inputType: 'log_argument', a: x * y, tol: 0.1, displayBase: b,
+                        solution: `Use the Product Rule: $\log_b(M) + \log_b(N) = \log_b(MN)$. <br> $\log_{${b}}(${x} \cdot ${y}) = \log_{${b}}(${x * y})$`
                     };
                 } else if (type < 0.66) {
                     const k = Math.floor(Math.random() * 4) + 2;
                     return {
-                        q: `Use the Power Rule to simplify: $${k}\\log_{${b}}(${x})$`,
-                        inputType: 'number', a: Math.pow(x, k), tol: 0.1,
-                        solution: `Use the Power Rule: $k\\log_b(M) = \\log_b(M^k)$. <br> $\\log_{${b}}(${x}^{${k}}) = \\log_{${b}}(${Math.pow(x, k)})$`
+                        q: `Rewrite as a single logarithm: $${k}\log_{${b}}(${x})$`,
+                        entryNote: `Rewrite as one logarithm. Enter only the argument of the final logarithm. Example: if the result is $\log_{${b}}(16)$, enter <strong>16</strong>.`,
+                        inputType: 'log_argument', a: Math.pow(x, k), tol: 0.1, displayBase: b,
+                        solution: `Use the Power Rule: $k\log_b(M) = \log_b(M^k)$. <br> $\log_{${b}}(${x}^{${k}}) = \log_{${b}}(${Math.pow(x, k)})$`
                     };
                 } else {
                     const big = x * y;
                     return {
-                        q: `Condense into a single logarithm: $\\log_{${b}}(${big}) - \\log_{${b}}(${y})$`,
-                        inputType: 'number', a: x, tol: 0.1,
-                        solution: `Use the Quotient Rule: $\\log_b(M) - \\log_b(N) = \\log_b\\left(\\frac{M}{N}\\right)$. <br> $\\log_{${b}}\\left(\\frac{${big}}{${y}}\\right) = \\log_{${b}}(${x})$`
+                        q: `Condense into a single logarithm: $\log_{${b}}(${big}) - \log_{${b}}(${y})$`,
+                        entryNote: `Condense into a single logarithm. Enter only the argument of the final logarithm. Example: if the result is $\log_{${b}}(7)$, enter <strong>7</strong>.`,
+                        inputType: 'log_argument', a: x, tol: 0.1, displayBase: b,
+                        solution: `Use the Quotient Rule: $\log_b(M) - \log_b(N) = \log_b\left(\frac{M}{N}\right)$. <br> $\log_{${b}}\left(\frac{${big}}{${y}}\right) = \log_{${b}}(${x})$`
                     };
                 }
             }
@@ -2176,6 +2418,16 @@
         }
         
         document.getElementById('question-display').innerHTML = currentQuestion.q;
+        const questionNote = document.getElementById('question-note');
+        if (questionNote) {
+            if (currentQuestion.entryNote) {
+                questionNote.innerHTML = currentQuestion.entryNote;
+                questionNote.style.display = 'block';
+            } else {
+                questionNote.innerHTML = '';
+                questionNote.style.display = 'none';
+            }
+        }
         
         // Handle SVG injection
         const svgContainer = document.getElementById('svg-display');
@@ -2212,6 +2464,16 @@
                 <input type="number" id="inp-exp" class="inp-tiny" style="transform: translateY(-15px)">
                 <span class="math-text">=</span>
                 <input type="number" id="inp-ans" class="inp-small">
+            `;
+        } else if (currentQuestion.inputType === 'log_argument') {
+            inputArea.innerHTML = `
+                <div class="log-arg-template" aria-label="Enter the argument of the logarithm">
+                    <span class="math-text">log</span>
+                    <span class="log-base-stack">${currentQuestion.displayBase}</span>
+                    <span class="math-text">(</span>
+                    <input type="number" step="any" id="answer-input" class="inp-standard log-arg-input" placeholder="argument only" autocomplete="off">
+                    <span class="math-text">)</span>
+                </div>
             `;
         } else if (currentQuestion.inputType === 'interest_table') {
             inputArea.innerHTML = `
@@ -2314,6 +2576,11 @@
             document.getElementById('inp-c3').classList.add(r3 ? 'inp-correct' : 'inp-wrong');
             document.getElementById('inp-c4').classList.add(r4 ? 'inp-correct' : 'inp-wrong');
             isCorrect = r1 && r2 && r3 && r4;
+        } else if (currentQuestion.inputType === 'log_argument') {
+            const input = document.getElementById('answer-input');
+            const userVal = parseFloat(input.value);
+            if (isNaN(userVal)) return;
+            isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol;
         } else {
             const input = document.getElementById('answer-input');
             const userVal = parseFloat(input.value);
