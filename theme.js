@@ -1,5 +1,11 @@
-// 1. Check local storage and system preference IMMEDIATELY to prevent white flash
-const savedTheme = localStorage.getItem('theme');
+// 1. Check local storage safely
+let savedTheme = null;
+try {
+    savedTheme = localStorage.getItem('theme');
+} catch (error) {
+    console.warn("localStorage is unavailable, defaulting to system preference.");
+}
+
 const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 // Set the theme before the DOM fully loads
@@ -32,8 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Apply new theme
         document.documentElement.setAttribute('data-theme', newTheme);
         
-        // Save to local storage for other pages
-        localStorage.setItem('theme', newTheme);
+        // Save to local storage safely
+        try {
+            localStorage.setItem('theme', newTheme);
+        } catch (error) {
+            console.warn("Could not save theme to localStorage.");
+        }
         
         // Update the button icon
         updateIcon();

@@ -31,6 +31,7 @@ body {
     padding: 0;
     color: var(--text-color);
     background-color: var(--background-color);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add this line! */
 }
 
 /* Layout containers */
@@ -500,8 +501,9 @@ main.error-main {
     }
 }
 
+
 /* Dark Theme Variables applied via JS */
-[data-theme="dark"] {
+:root[data-theme="dark"] {
     --text-color: #f0f0f0;
     --background-color: #121212;
     --card-background: #1e1e1e;
@@ -509,11 +511,11 @@ main.error-main {
     --shadow-hover: 0 8px 16px rgba(0,0,0,0.4);
 }
 
-[data-theme="dark"] .profile-image {
+:root[data-theme="dark"] .profile-image {
     border-color: var(--secondary-color);
 }
 
-[data-theme="dark"] .item-date {
+:root[data-theme="dark"] .item-date {
     color: #aaa;
 }
 
