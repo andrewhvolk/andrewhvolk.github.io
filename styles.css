@@ -670,6 +670,69 @@ section:nth-child(5) { animation-delay: 0.25s; }
         border: 1px solid CanvasText;
     }
 }
+/* Modern Standard Navbar */
+.navbar {
+    background-color: var(--secondary-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+}
+
+.nav-links a {
+    display: block;
+    padding: 1rem 0.75rem;
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--accent-color);
+}
+
+/* Ensure the toggle button aligns perfectly in the new layout */
+.navbar .theme-toggle {
+    margin: 0; 
+}
+
+/* Mobile responsiveness: stack the nav links neatly on small screens */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .nav-links a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
 .shortcut-bar {
     display: flex;
     align-items: center;
