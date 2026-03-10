@@ -62,8 +62,33 @@
       width: 100%;
     }
   </style>
+
+<style>
+  .top-nav { position: sticky; top: 0; z-index: 1000; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(148, 163, 184, 0.25); }
+  .top-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .top-nav-title { color: #f8fafc; font-weight: 700; text-decoration: none; margin-right: 0.5rem; }
+  .top-nav-links { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
+  .top-nav-links a { color: #e2e8f0; text-decoration: none; font-size: 0.95rem; }
+  .top-nav-links a:hover { color: #93c5fd; }
+</style>
+
 </head>
 <body>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
+    <div class="top-nav-links">
+      <a href="index.html">Home</a>
+      <a href="CV.html">About Me</a>
+      <a href="learn.html">Course Resources</a>
+      <a href="projects.html">Projects</a>
+      <a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a>
+      <a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="mailto:ahvolk@liberty.edu">Contact</a>
+    </div>
+  </div>
+</nav>
+
   <h1>Should You Work On That Task Right Now?</h1>
   
   <div class="flowchart">
