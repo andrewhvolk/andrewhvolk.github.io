@@ -27,10 +27,10 @@ Private, comprehensive Christian university
 **F. Contact Information:**
 - Primary Contact: Mr. Andrew H. Volk Assistant Professor of Mathematics
 - Email: ahvolk@liberty.edu
-- Postal Address: Department of Mathematics, DeMoss Hall, Liberty University, 1971 University Blvd, Lynchburg, VA 24515
-- Phone: (434) 582-2093
-- Proposed Chapter Advisor: Mr. Andrew H. Volk, Email: ahvolk@liberty.edu, Phone: 434-841-5810 (cell)
-- Proposed Permanent Faculty Correspondent: Mr. Andrew H. Volk, Email: ahvolk@liberty.edu, Phone: 434-841-5810 (cell)
+- Postal Address: Department of Mathematics, Liberty University
+- Phone: [REDACTED - add department office phone before submission]
+- Proposed Chapter Advisor: Mr. Andrew H. Volk, Email: ahvolk@liberty.edu, Phone: [REDACTED]
+- Proposed Permanent Faculty Correspondent: Mr. Andrew H. Volk, Email: ahvolk@liberty.edu, Phone: [REDACTED]
 
 **G. Other pertinent information about the institution:**
 Liberty University is a private Christian comprehensive university founded in 1971. Recognized as the #4 Best College Campus in America by Niche.com, Liberty combines quality academics with a world-class campus approximately 3 hours from Washington, DC. The university offers over 700 programs of study and is home to students from over 70 countries. The campus features state-of-the-art facilities including an Astronomical Observatory with prime viewing for stargazing.
@@ -144,7 +144,7 @@ Students:
    - Highest degree: Ph.D. in Educational Leadership, Liberty University, [YEAR]
    - Department: General Math & Science
    - Role: Coordinator of Math Emporium
-   - Contact: DeMoss 2332E, mgibson2@liberty.edu, (434) 592-7347
+   - Contact: mgibson2@liberty.edu, [REDACTED]
 
 4. Dr. Gail McGowan - Assistant Professor
    - Highest degree: Ph.D., [INSTITUTION], [YEAR]
@@ -160,7 +160,7 @@ Students:
 
 ### Staff:
 Karen Guthrie - Administrative Assistant (General Math & Science)
-- Contact: klguthrie@liberty.edu, (434) 582-2093
+- Contact: klguthrie@liberty.edu, [REDACTED]
 
 **Note on Faculty Listings:** 
 - Several faculty members serve in both the Mathematics Department and General Math & Science Department
