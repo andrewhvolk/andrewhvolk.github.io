@@ -88,7 +88,7 @@ Andrew H. Volk
 Assistant Professor
 Mathematics and Physics
 Liberty University | Training Champions for Christ Since 1971
-Cell: 434-841-5810
+Cell: [REDACTED]
 
 # Week 1 Midweek Reminder: Graphing & Safety Quiz Due Monday
 Good Morning,
