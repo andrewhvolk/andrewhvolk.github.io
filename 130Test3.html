@@ -1973,16 +1973,26 @@
             id: 'dms', section: 'Section 8.4',
             label: 'Convert DMS',
             generate: () => {
-                const deg = (Math.random() * 80 + 10).toFixed(4);
-                const d = Math.floor(deg);
+                const deg = Number((Math.random() * 80 + 10).toFixed(4));
+                let d = Math.floor(deg);
                 const rem = (deg - d) * 60;
-                const m = Math.floor(rem);
-                const s = Math.round((rem - m) * 60);
-                
+                let m = Math.floor(rem);
+                let s = Math.round((rem - m) * 60);
+
+                // Normalize edge cases like 59.9999 seconds -> 60 seconds
+                if (s === 60) {
+                    s = 0;
+                    m += 1;
+                }
+                if (m === 60) {
+                    m = 0;
+                    d += 1;
+                }
+
                 return {
-                    q: `Convert $${deg}^\\circ$ to degrees, minutes, and seconds. (Round to the nearest second)`,
+                    q: `Convert $${deg.toFixed(4)}^\circ$ to degrees, minutes, and seconds. (Round to the nearest second)`,
                     inputType: 'dms', a: { d, m, s },
-                    solution: `Multiply the decimal by 60 to get minutes, then multiply the remaining decimal by 60 to get seconds. <br> $${deg}^\\circ = ${d}^\\circ ${m}' ${s}''$`
+                    solution: `Multiply the decimal by 60 to get minutes, then multiply the remaining decimal by 60 to get seconds. <br> $${deg.toFixed(4)}^\circ = ${d}^\circ ${m}' ${s}''$`
                 };
             }
         },
