@@ -3133,6 +3133,7 @@
         if (!currentQuestion) return;
         
         let isCorrect = false;
+        const nearlyEqual = (a, b, tolerance = 0.001) => Math.abs(a - b) <= tolerance;
         
         // Validate based on input type
         if (currentQuestion.inputType === 'dms') {
