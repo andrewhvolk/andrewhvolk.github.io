@@ -1884,6 +1884,62 @@
             id: 'solve_side', section: 'Section 5.2',
             label: 'Find a Missing Side',
             generate: () => {
+                const type = Math.random();
+                if (type < 0.33) {
+                    // Degrees → Radians
+                    const d = (Math.floor(Math.random() * 23) + 1) * 15;
+                    const ans = d * Math.PI / 180;
+                    return {
+                        q: `Convert $${d}^\\circ$ to radians. (Round to 2 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.005,
+                        solution: `Multiply by $\\frac{\\pi}{180^\\circ}$: $${d} \\cdot \\frac{\\pi}{180} = ${ans.toFixed(2)}$`
+                    };
+                } else if (type < 0.66) {
+                    // π-fraction radians → Degrees
+                    const num = Math.floor(Math.random() * 11) + 1;
+                    const den = [2, 3, 4, 5, 6][Math.floor(Math.random() * 5)];
+                    const ans = (num * 180) / den;
+                    return {
+                        q: `Convert $\\frac{${num}\\pi}{${den}}$ radians to degrees.`,
+                        inputType: 'number', a: ans, tol: 0.1,
+                        solution: `Multiply by $\\frac{180^\\circ}{\\pi}$: $\\frac{${num}\\pi}{${den}} \\cdot \\frac{180}{\\pi} = \\frac{${num * 180}}{${den}} = ${ans}^\\circ$`
+                    };
+                } else {
+                    // Decimal radians → Degrees (like Q7b on the real exam: 4.5 rad)
+                    const rad = (Math.random() * 5 + 0.5).toFixed(1);
+                    const ans = parseFloat(rad) * 180 / Math.PI;
+                    return {
+                        q: `Convert $${rad}$ radians to degrees. (Round to 1 decimal place)`,
+                        inputType: 'number', a: ans, tol: 0.1,
+                        solution: `Multiply by $\\frac{180^\\circ}{\\pi}$: $${rad} \\cdot \\frac{180}{\\pi} = ${ans.toFixed(1)}^\\circ$`
+                    };
+                }
+            }
+        },
+        {
+            id: 'dms', section: 'Section 8.4',
+            label: 'Convert DMS',
+            generate: () => {
+                const deg = Number((Math.random() * 80 + 10).toFixed(4));
+                let d = Math.floor(deg);
+                const rem = (deg - d) * 60;
+                let m = Math.floor(rem);
+                let s = Math.round((rem - m) * 60);
+
+                // Normalize edge cases like 59.9999 seconds -> 60 seconds
+                if (s === 60) {
+                    s = 0;
+                    m += 1;
+                }
+                if (m === 60) {
+                    m = 0;
+                    d += 1;
+                }
+
+                return {
+                    q: `Convert $${deg.toFixed(4)}^\circ$ to degrees, minutes, and seconds. (Round to the nearest second)`,
+                    inputType: 'dms', a: { d, m, s },
+                    solution: `Multiply the decimal by 60 to get minutes, then multiply the remaining decimal by 60 to get seconds. <br> $${deg.toFixed(4)}^\circ = ${d}^\circ ${m}' ${s}''$`
                 const angle = [25, 30, 35, 40, 45, 50, 60][Math.floor(Math.random()*7)];
                 const known = Math.floor(Math.random()*14)+6;
                 const type = Math.random() > 0.5 ? 'opp' : 'adj';
@@ -2490,6 +2546,7 @@
         if (!currentQuestion) return;
         
         let isCorrect = false;
+        const nearlyEqual = (a, b, tolerance = 0.001) => Math.abs(a - b) <= tolerance;
         
         // Validate based on input type
         if (currentQuestion.inputType === 'dms') {
@@ -2509,7 +2566,12 @@
             const uexp = parseFloat(document.getElementById('inp-exp').value);
             const uans = parseFloat(document.getElementById('inp-ans').value);
             if(isNaN(ub) || isNaN(uexp) || isNaN(uans)) return;
-            isCorrect = (ub === currentQuestion.a.base && uexp === currentQuestion.a.exp && uans === currentQuestion.a.ans);
+            const expTolerance = currentQuestion.expTol || 0.005;
+            isCorrect = (
+                ub === currentQuestion.a.base &&
+                Math.abs(uexp - currentQuestion.a.exp) <= expTolerance &&
+                uans === currentQuestion.a.ans
+            );
         } else if (currentQuestion.inputType === 'interest_table') {
             const u1 = parseFloat(document.getElementById('inp-a1').value);
             const u2 = parseFloat(document.getElementById('inp-a2').value);
