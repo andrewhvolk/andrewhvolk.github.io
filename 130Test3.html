@@ -1940,10 +1940,17 @@
                     q: `Convert $${deg.toFixed(4)}^\circ$ to degrees, minutes, and seconds. (Round to the nearest second)`,
                     inputType: 'dms', a: { d, m, s },
                     solution: `Multiply the decimal by 60 to get minutes, then multiply the remaining decimal by 60 to get seconds. <br> $${deg.toFixed(4)}^\circ = ${d}^\circ ${m}' ${s}''$`
-                const angle = [25, 30, 35, 40, 45, 50, 60][Math.floor(Math.random()*7)];
-                const known = Math.floor(Math.random()*14)+6;
+                };
+            }
+        },
+        {
+            id: 'solve_right_triangle_side', section: 'Section 7.1',
+            label: 'Solve Right Triangle Side',
+            generate: () => {
+                const angle = [25, 30, 35, 40, 45, 50, 60][Math.floor(Math.random() * 7)];
+                const known = Math.floor(Math.random() * 14) + 6;
                 const type = Math.random() > 0.5 ? 'opp' : 'adj';
-                const ans = type === 'opp' ? known * Math.tan(angle*Math.PI/180) : known / Math.tan(angle*Math.PI/180);
+                const ans = type === 'opp' ? known * Math.tan(angle * Math.PI / 180) : known / Math.tan(angle * Math.PI / 180);
                 return {
                     q: type === 'opp' ? `A right triangle has angle $${angle}^\circ$ and adjacent side $${known}$. Find the opposite side. (Round to 2 decimals)` : `A right triangle has angle $${angle}^\circ$ and opposite side $${known}$. Find the adjacent side. (Round to 2 decimals)`,
                     inputType: 'number', a: ans, tol: 0.05,
