@@ -2576,6 +2576,21 @@
         renderMath();
     }
 
+    function parseStrictNumber(rawValue) {
+        const trimmed = rawValue.trim();
+        if (!trimmed) return null;
+        const strictNumberPattern = /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/;
+        if (!strictNumberPattern.test(trimmed)) return null;
+        const parsed = Number(trimmed);
+        return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    function showInvalidNumberFeedback() {
+        const feedback = document.getElementById('feedback-display');
+        feedback.className = 'feedback incorrect';
+        feedback.textContent = 'Please enter a valid number.';
+    }
+
     function checkAnswer() {
         if (!currentQuestion) return;
         
@@ -2590,16 +2605,22 @@
             if(isNaN(ud) || isNaN(um) || isNaN(us)) return;
             isCorrect = (ud === currentQuestion.a.d && um === currentQuestion.a.m && us === currentQuestion.a.s);
         } else if (currentQuestion.inputType === 'log_form') {
-            const ub = parseFloat(document.getElementById('inp-base').value);
-            const uarg = parseFloat(document.getElementById('inp-arg').value);
-            const uans = parseFloat(document.getElementById('inp-ans').value);
-            if(isNaN(ub) || isNaN(uarg) || isNaN(uans)) return;
+            const ub = parseStrictNumber(document.getElementById('inp-base').value);
+            const uarg = parseStrictNumber(document.getElementById('inp-arg').value);
+            const uans = parseStrictNumber(document.getElementById('inp-ans').value);
+            if (ub === null || uarg === null || uans === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
             isCorrect = (ub === currentQuestion.a.base && uarg === currentQuestion.a.arg && uans === currentQuestion.a.ans);
         } else if (currentQuestion.inputType === 'exp_form') {
-            const ub = parseFloat(document.getElementById('inp-base').value);
-            const uexp = parseFloat(document.getElementById('inp-exp').value);
-            const uans = parseFloat(document.getElementById('inp-ans').value);
-            if(isNaN(ub) || isNaN(uexp) || isNaN(uans)) return;
+            const ub = parseStrictNumber(document.getElementById('inp-base').value);
+            const uexp = parseStrictNumber(document.getElementById('inp-exp').value);
+            const uans = parseStrictNumber(document.getElementById('inp-ans').value);
+            if (ub === null || uexp === null || uans === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
             const expTolerance = currentQuestion.expTol || 0.005;
             isCorrect = (
                 ub === currentQuestion.a.base &&
@@ -2607,11 +2628,14 @@
                 uans === currentQuestion.a.ans
             );
         } else if (currentQuestion.inputType === 'interest_table') {
-            const u1 = parseFloat(document.getElementById('inp-a1').value);
-            const u2 = parseFloat(document.getElementById('inp-a2').value);
-            const u3 = parseFloat(document.getElementById('inp-a3').value);
-            const u4 = parseFloat(document.getElementById('inp-a4').value);
-            if(isNaN(u1) || isNaN(u2) || isNaN(u3) || isNaN(u4)) return;
+            const u1 = parseStrictNumber(document.getElementById('inp-a1').value);
+            const u2 = parseStrictNumber(document.getElementById('inp-a2').value);
+            const u3 = parseStrictNumber(document.getElementById('inp-a3').value);
+            const u4 = parseStrictNumber(document.getElementById('inp-a4').value);
+            if (u1 === null || u2 === null || u3 === null || u4 === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
             const t = currentQuestion.tol;
             const r1 = Math.abs(u1 - currentQuestion.a.a1) <= t;
             const r2 = Math.abs(u2 - currentQuestion.a.a2) <= t;
@@ -2624,11 +2648,14 @@
             document.getElementById('inp-a4').classList.add(r4 ? 'inp-correct' : 'inp-wrong');
             isCorrect = r1 && r2 && r3 && r4;
         } else if (currentQuestion.inputType === 'circle_multi') {
-            const u1 = parseFloat(document.getElementById('inp-c1').value);
-            const u2 = parseFloat(document.getElementById('inp-c2').value);
-            const u3 = parseFloat(document.getElementById('inp-c3').value);
-            const u4 = parseFloat(document.getElementById('inp-c4').value);
-            if(isNaN(u1) || isNaN(u2) || isNaN(u3) || isNaN(u4)) return;
+            const u1 = parseStrictNumber(document.getElementById('inp-c1').value);
+            const u2 = parseStrictNumber(document.getElementById('inp-c2').value);
+            const u3 = parseStrictNumber(document.getElementById('inp-c3').value);
+            const u4 = parseStrictNumber(document.getElementById('inp-c4').value);
+            if (u1 === null || u2 === null || u3 === null || u4 === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
             const t = currentQuestion.tol;
             const r1 = Math.abs(u1 - currentQuestion.a.c1) <= t;
             const r2 = Math.abs(u2 - currentQuestion.a.c2) <= t;
@@ -2641,21 +2668,30 @@
             isCorrect = r1 && r2 && r3 && r4;
         } else if (currentQuestion.inputType === 'log_argument') {
             const input = document.getElementById('answer-input');
-            const userVal = parseFloat(input.value);
-            if (isNaN(userVal)) return;
+            const userVal = parseStrictNumber(input.value);
+            if (userVal === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
             isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol;
         } else if (currentQuestion.inputType === 'coterminal_deg') {
             const input = document.getElementById('answer-input');
-            const userVal = parseFloat(input.value);
-            if (isNaN(userVal)) return;
+            const userVal = parseStrictNumber(input.value);
+            if (userVal === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
             const tol = currentQuestion.tol ?? 0.1;
             const baseTheta = currentQuestion.baseTheta;
             const k = Math.round((userVal - baseTheta) / 360);
             isCorrect = Math.abs(userVal - (baseTheta + 360 * k)) <= tol;
         } else {
             const input = document.getElementById('answer-input');
-            const userVal = parseFloat(input.value);
-            if (isNaN(userVal)) return;
+            const userVal = parseStrictNumber(input.value);
+            if (userVal === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
             isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol;
         }
 
