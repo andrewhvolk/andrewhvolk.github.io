@@ -3133,6 +3133,7 @@
         if (!currentQuestion) return;
         
         let isCorrect = false;
+        const nearlyEqual = (a, b, tolerance = 0.001) => Math.abs(a - b) <= tolerance;
         
         // Validate based on input type
         if (currentQuestion.inputType === 'dms') {
@@ -3152,7 +3153,11 @@
             const uexp = parseFloat(document.getElementById('inp-exp').value);
             const uans = parseFloat(document.getElementById('inp-ans').value);
             if(isNaN(ub) || isNaN(uexp) || isNaN(uans)) return;
-            isCorrect = (ub === currentQuestion.a.base && uexp === currentQuestion.a.exp && uans === currentQuestion.a.ans);
+            isCorrect = (
+                ub === currentQuestion.a.base &&
+                nearlyEqual(uexp, currentQuestion.a.exp) &&
+                uans === currentQuestion.a.ans
+            );
         } else if (currentQuestion.inputType === 'interest_table') {
             const u1 = parseFloat(document.getElementById('inp-a1').value);
             const u2 = parseFloat(document.getElementById('inp-a2').value);
