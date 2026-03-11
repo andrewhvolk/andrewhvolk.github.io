@@ -3153,9 +3153,10 @@
             const uexp = parseFloat(document.getElementById('inp-exp').value);
             const uans = parseFloat(document.getElementById('inp-ans').value);
             if(isNaN(ub) || isNaN(uexp) || isNaN(uans)) return;
+            const expTolerance = currentQuestion.expTol || 0.005;
             isCorrect = (
                 ub === currentQuestion.a.base &&
-                nearlyEqual(uexp, currentQuestion.a.exp) &&
+                Math.abs(uexp - currentQuestion.a.exp) <= expTolerance &&
                 uans === currentQuestion.a.ans
             );
         } else if (currentQuestion.inputType === 'interest_table') {
