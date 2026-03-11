@@ -1845,8 +1845,8 @@
                 const ans = theta + 360 * (Math.random() > 0.5 ? k : -k);
                 return {
                     q: `Find one coterminal angle (in degrees) for $\theta = ${theta}^\circ$.`,
-                    inputType: 'number', a: ans, tol: 0.1,
-                    solution: `Coterminal angles differ by multiples of $360^\circ$. One valid answer is $${theta} ${ans > theta ? '+' : '-'} ${Math.abs(ans - theta)} = ${ans}^\circ$.`
+                    inputType: 'coterminal_deg', baseTheta: theta, tol: 0.1,
+                    solution: `Coterminal angles differ by multiples of $360^\circ$, so infinitely many answers are valid. One sample valid answer is $${theta} ${ans > theta ? '+' : '-'} ${Math.abs(ans - theta)} = ${ans}^\circ$.`
                 };
             }
         },
@@ -2617,6 +2617,14 @@
             const userVal = parseFloat(input.value);
             if (isNaN(userVal)) return;
             isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol;
+        } else if (currentQuestion.inputType === 'coterminal_deg') {
+            const input = document.getElementById('answer-input');
+            const userVal = parseFloat(input.value);
+            if (isNaN(userVal)) return;
+            const tol = currentQuestion.tol ?? 0.1;
+            const baseTheta = currentQuestion.baseTheta;
+            const k = Math.round((userVal - baseTheta) / 360);
+            isCorrect = Math.abs(userVal - (baseTheta + 360 * k)) <= tol;
         } else {
             const input = document.getElementById('answer-input');
             const userVal = parseFloat(input.value);
