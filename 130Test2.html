@@ -1313,7 +1313,7 @@
 <div class="formula-card memorize-card">
 <div class="formula-badge status-memorize">Memorize</div>
 <div class="formula-title">Trapezoid Area</div>
-<div class="formula-math">$$A = \frac{1}{2}h(b_1 + b_2)$$</div>
+<div class="formula-math">$$A = \\frac{1}{2}h(b_1 + b_2)$$</div>
 <div class="formula-vars">$b_1$ and $b_2$ are the parallel sides</div>
 </div>
 <div class="formula-card provided-card">
@@ -1764,9 +1764,9 @@
 
             // Geometry
             { id: 'geo_1', cat: 'Angles & Polygons', label: 'Area of a piecewise rectangular figure', done: false, practiceId: 'piecewise_rect', videoUrl: 'http://www.youtube.com/watch?v=8ysZhPknfYY' },
-            { id: 'geo_2', cat: 'Angles & Polygons', label: 'Area of a triangle', done: false, practiceId: 'basic_areas' },
-            { id: 'geo_3', cat: 'Angles & Polygons', label: 'Area of a parallelogram', done: false, practiceId: 'basic_areas' },
-            { id: 'geo_4', cat: 'Angles & Polygons', label: 'Area of a trapezoid', done: false, practiceId: 'basic_areas' },
+            { id: 'geo_2', cat: 'Angles & Polygons', label: 'Area of a right triangle', done: false, practiceId: 'right_triangle_area' },
+            { id: 'geo_3', cat: 'Angles & Polygons', label: 'Area of a parallelogram', done: false, practiceId: 'parallelogram_area' },
+            { id: 'geo_4', cat: 'Angles & Polygons', label: 'Area of a trapezoid', done: false, practiceId: 'trapezoid_area' },
             { id: 'geo_4b', cat: 'Angles & Polygons', label: "Heron's formula: area from three sides", done: false, practiceId: 'herons' },
             { id: 'geo_4c', cat: 'Angles & Polygons', label: 'Similar triangles: finding missing angles and sides', done: false, practiceId: 'similar_triangles' },
             { id: 'geo_4d', cat: 'Angles & Polygons', label: 'Parallel lines: finding angle measures (supplementary, alternate interior, corresponding)', done: false, practiceId: 'parallel_angles' },
@@ -2474,64 +2474,77 @@
             }
         },
         {
+            id: 'trapezoid_area', section: 'Angles & Polygons',
+            label: 'Area of a Trapezoid',
+            generate: () => {
+                const b1 = Math.floor(Math.random() * 8) + 3;
+                const b2 = b1 + Math.floor(Math.random() * 6) + 2;
+                const h = Math.floor(Math.random() * 6) + 3;
+                const ans = 0.5 * h * (b1 + b2);
+                const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
+                    <polygon points="60,30 ${60+b1*10},30 ${40+b2*10},90 40,90" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                    <line x1="60" y1="30" x2="60" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
+                    <rect x="60" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
+                    <text x="${60+(b1*10)/2}" y="20" fill="var(--text)" font-size="14" text-anchor="middle">${b1} m</text>
+                    <text x="${40+(b2*10)/2}" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b2} m</text>
+                    <text x="35" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
+                </svg>`;
+                return {
+                    q: `Find the area of the trapezoid shown.`,
+                    svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                    solution: `Area of a trapezoid: $A = \\frac{1}{2}h(b_1 + b_2) = \\frac{1}{2}(${h})(${b1} + ${b2}) = ${ans}$`
+                };
+            }
+        },
+        {
+            id: 'parallelogram_area', section: 'Angles & Polygons',
+            label: 'Area of a Parallelogram',
+            generate: () => {
+                const b = Math.floor(Math.random() * 10) + 5;
+                const h = Math.floor(Math.random() * 8) + 4;
+                const ans = b * h;
+                const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
+                    <polygon points="50,90 170,90 130,30 10,30" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                    <line x1="50" y1="30" x2="50" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
+                    <rect x="50" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
+                    <text x="110" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b} m</text>
+                    <text x="40" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
+                </svg>`;
+                return {
+                    q: `Find the area of the parallelogram shown.`,
+                    svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                    solution: `Area of a parallelogram: $A = bh = (${b})(${h}) = ${ans}$`
+                };
+            }
+        },
+        {
+            id: 'right_triangle_area', section: 'Angles & Polygons',
+            label: 'Area of a Right Triangle',
+            generate: () => {
+                const base = Math.floor(Math.random() * 10) + 5;
+                const height = Math.floor(Math.random() * 8) + 4;
+                const ans = 0.5 * base * height;
+                const svg = `<svg viewBox="0 0 220 140" class="svg-canvas" width="400" height="240">
+                    <polygon points="40,110 180,110 40,35" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                    <rect x="40" y="100" width="10" height="10" fill="none" stroke="var(--text-muted)" stroke-width="2"/>
+                    <text x="110" y="128" fill="var(--text)" font-size="14" text-anchor="middle">${base} m</text>
+                    <text x="28" y="75" fill="var(--text)" font-size="14" text-anchor="end">${height} m</text>
+                    <text x="24" y="120" fill="var(--text-muted)" font-size="12" text-anchor="start">90°</text>
+                </svg>`;
+                return {
+                    q: `Find the area of the right triangle shown.`,
+                    svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                    solution: `For a right triangle, the legs are base and height, so $A = \\frac{1}{2}(\\text{base})(\\text{height}) = \\frac{1}{2}(${base})(${height}) = ${ans}$.`
+                };
+            }
+        },
+        {
             id: 'basic_areas', section: 'Angles & Polygons',
             label: 'Basic Areas (Visual)',
             generate: () => {
-                const randType = Math.random();
-                if(randType > 0.66) {
-                    // Trapezoid
-                    const b1 = Math.floor(Math.random() * 8) + 3;
-                    const b2 = b1 + Math.floor(Math.random() * 6) + 2;
-                    const h = Math.floor(Math.random() * 6) + 3;
-                    const ans = 0.5 * h * (b1 + b2);
-                    const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
-                        <polygon points="60,30 ${60+b1*10},30 ${40+b2*10},90 40,90" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
-                        <line x1="60" y1="30" x2="60" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
-                        <rect x="60" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
-                        <text x="${60+(b1*10)/2}" y="20" fill="var(--text)" font-size="14" text-anchor="middle">${b1} m</text>
-                        <text x="${40+(b2*10)/2}" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b2} m</text>
-                        <text x="35" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
-                    </svg>`;
-                    return {
-                        q: `Find the area of the trapezoid.`,
-                        svg: svg, inputType: 'number', a: ans, tol: 0.1,
-                        solution: `Area of a trapezoid: $A = \\frac{1}{2}h(b_1 + b_2) = \\frac{1}{2}(${h})(${b1} + ${b2}) = ${ans}$`
-                    };
-                } else if(randType > 0.33) {
-                    // Parallelogram
-                    const b = Math.floor(Math.random() * 10) + 5;
-                    const h = Math.floor(Math.random() * 8) + 4;
-                    const ans = b * h;
-                    const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
-                        <polygon points="50,90 170,90 130,30 10,30" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
-                        <line x1="50" y1="30" x2="50" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
-                        <rect x="50" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
-                        <text x="110" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b} m</text>
-                        <text x="40" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
-                    </svg>`;
-                    return {
-                        q: `Find the area of the parallelogram.`,
-                        svg: svg, inputType: 'number', a: ans, tol: 0.1,
-                        solution: `Area of a parallelogram: $A = bh = (${b})(${h}) = ${ans}$`
-                    };
-                } else {
-                    // Triangle
-                    const b = Math.floor(Math.random() * 10) + 5;
-                    const h = Math.floor(Math.random() * 8) + 4;
-                    const ans = 0.5 * b * h;
-                    const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
-                        <polygon points="50,90 150,90 90,30" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
-                        <line x1="90" y1="30" x2="90" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
-                        <rect x="90" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
-                        <text x="100" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b} m</text>
-                        <text x="80" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
-                    </svg>`;
-                    return {
-                        q: `Find the area of the triangle.`,
-                        svg: svg, inputType: 'number', a: ans, tol: 0.1,
-                        solution: `Area of a triangle: $A = \\frac{1}{2}bh = \\frac{1}{2}(${b})(${h}) = ${ans}$`
-                    };
-                }
+                const areaGenerators = ['trapezoid_area', 'parallelogram_area', 'right_triangle_area'];
+                const pick = areaGenerators[Math.floor(Math.random() * areaGenerators.length)];
+                return generators.find(g => g.id === pick).generate();
             }
         },
         {
@@ -3503,7 +3516,7 @@
         },
         7: {
             label: 'Quiz 7 — Angles & Polygons',
-            blueprint: ['similar_triangles', 'parallel_angles', 'basic_areas', 'basic_areas', 'basic_areas', 'herons', 'dms', 'dms_to_dec']
+            blueprint: ['similar_triangles', 'parallel_angles', 'trapezoid_area', 'parallelogram_area', 'right_triangle_area', 'herons', 'dms', 'dms_to_dec']
         },
         8: {
             label: 'Quiz 8 — Circles',
