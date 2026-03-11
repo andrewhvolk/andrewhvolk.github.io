@@ -2040,10 +2040,19 @@
             label: 'Convert DMS',
             generate: () => {
                 const deg = (Math.random() * 80 + 10).toFixed(4);
-                const d = Math.floor(deg);
+                let d = Math.floor(deg);
                 const rem = (deg - d) * 60;
-                const m = Math.floor(rem);
-                const s = Math.round((rem - m) * 60);
+                let m = Math.floor(rem);
+                let s = Math.round((rem - m) * 60);
+
+                if (s === 60) {
+                    s = 0;
+                    m += 1;
+                }
+                if (m === 60) {
+                    m = 0;
+                    d += 1;
+                }
                 
                 return {
                     q: `Convert $${deg}^\\circ$ to degrees, minutes, and seconds. (Round to the nearest second)`,
@@ -3201,7 +3210,9 @@
             const um = parseInt(document.getElementById('inp-m').value);
             const us = parseInt(document.getElementById('inp-s').value);
             if(isNaN(ud) || isNaN(um) || isNaN(us)) return;
-            isCorrect = (ud === currentQuestion.a.d && um === currentQuestion.a.m && us === currentQuestion.a.s);
+            const userTotalSeconds = ud * 3600 + um * 60 + us;
+            const answerTotalSeconds = currentQuestion.a.d * 3600 + currentQuestion.a.m * 60 + currentQuestion.a.s;
+            isCorrect = userTotalSeconds === answerTotalSeconds;
         } else if (currentQuestion.inputType === 'log_form') {
             const ub = parseFloat(document.getElementById('inp-base').value);
             const uarg = parseFloat(document.getElementById('inp-arg').value);
