@@ -3503,8 +3503,7 @@
         },
         7: {
             label: 'Quiz 7 — Angles & Polygons',
-            section: 'Angles & Polygons',
-            count: 5
+            blueprint: ['similar_triangles', 'parallel_angles', 'basic_areas', 'basic_areas', 'basic_areas', 'herons', 'dms', 'dms_to_dec']
         },
         8: {
             label: 'Quiz 8 — Circles',
@@ -3525,25 +3524,50 @@
         const config = QUIZ_CONFIG[quizNum];
         if (!config) return;
 
-        const pool = generators.filter(g => g.section === config.section);
-        if (pool.length === 0) return;
-
         const selected = [];
-        const uniquePool = shuffleInPlace([...pool]);
+        const examResults = document.getElementById('exam-results');
+        const quizActiveArea = document.getElementById('quiz-active-area');
 
-        // First pass: sample without replacement from every generator in the section
-        for (const gen of uniquePool) {
-            if (selected.length >= config.count) break;
-            selected.push(gen);
+        if (Array.isArray(config.blueprint)) {
+            const missingBlueprintIds = [];
+
+            for (const genId of config.blueprint) {
+                const gen = generators.find(g => g.id === genId);
+                if (!gen) {
+                    missingBlueprintIds.push(genId);
+                    continue;
+                }
+                selected.push(gen);
+            }
+
+            if (missingBlueprintIds.length > 0) {
+                examResults.style.display = 'block';
+                quizActiveArea.style.display = 'none';
+                document.getElementById('exam-progress-bar').style.display = 'none';
+                document.getElementById('exam-score-display').innerHTML = '<div style="font-size:1.1rem; color: var(--red);">Unable to start this quiz.</div>';
+                document.getElementById('exam-breakdown').innerHTML = `<div style="color: var(--text-muted); text-align: center;">Missing generator IDs: <code>${missingBlueprintIds.join(', ')}</code></div>`;
+                return;
+            }
+        } else {
+            const pool = generators.filter(g => g.section === config.section);
+            if (pool.length === 0) return;
+
+            const uniquePool = shuffleInPlace([...pool]);
+
+            // First pass: sample without replacement from every generator in the section
+            for (const gen of uniquePool) {
+                if (selected.length >= config.count) break;
+                selected.push(gen);
+            }
+
+            // If the section has fewer generators than the quiz length, fill by random re-sampling
+            while (selected.length < config.count) {
+                selected.push(pool[Math.floor(Math.random() * pool.length)]);
+            }
+
+            // Final shuffle
+            shuffleInPlace(selected);
         }
-
-        // If the section has fewer generators than the quiz length, fill by random re-sampling
-        while (selected.length < config.count) {
-            selected.push(pool[Math.floor(Math.random() * pool.length)]);
-        }
-
-        // Final shuffle
-        shuffleInPlace(selected);
 
         examState = {
             isActive: true,
