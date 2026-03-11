@@ -1843,9 +1843,9 @@
                 const k = Math.floor(Math.random() * 3) + 1;
                 const ans = theta + 360 * (Math.random() > 0.5 ? k : -k);
                 return {
-                    q: `Find one coterminal angle (in degrees) for $\theta = ${theta}^\circ$.`,
+                    q: `Find one coterminal angle (in degrees) for $\\theta = ${theta}^\\circ$.`,
                     inputType: 'number', a: ans, tol: 0.1,
-                    solution: `Coterminal angles differ by multiples of $360^\circ$. One valid answer is $${theta} ${ans > theta ? '+' : '-'} ${Math.abs(ans - theta)} = ${ans}^\circ$.`
+                    solution: `Coterminal angles differ by multiples of $360^\\circ$. One valid answer is $${theta} ${ans > theta ? '+' : '-'} ${Math.abs(ans - theta)} = ${ans}^\\circ$.`
                 };
             }
         },
@@ -1859,7 +1859,7 @@
                 return {
                     q: `A circle has radius $r=${r}$. Find the arc length for a central angle of $${theta===Math.PI/6?'\\frac{\\pi}{6}':theta===Math.PI/4?'\\frac{\\pi}{4}':theta===Math.PI/3?'\\frac{\\pi}{3}':theta===Math.PI/2?'\\frac{\\pi}{2}':'\\frac{2\\pi}{3}'}$ radians. (Round to 3 decimals)`,
                     inputType: 'number', a: ans, tol: 0.005,
-                    solution: `Use $s=r\theta$: $s=${r}(${theta.toFixed(4)})=${ans.toFixed(3)}$.`
+                    solution: `Use $s=r\\theta$: $s=${r}(${theta.toFixed(4)})=${ans.toFixed(3)}$.`
                 };
             }
         },
@@ -1873,9 +1873,9 @@
                 const pick = ['sin','cos','tan'][Math.floor(Math.random()*3)];
                 const ans = pick === 'sin' ? opp/hyp : pick === 'cos' ? adj/hyp : opp/adj;
                 return {
-                    q: `In a right triangle, opposite side $=${opp}$ and adjacent side $=${adj}$. Find $${pick}(\theta)$. (Round to 4 decimals)`,
+                    q: `In a right triangle, opposite side $=${opp}$ and adjacent side $=${adj}$. Find $${pick}(\\theta)$. (Round to 4 decimals)`,
                     inputType: 'number', a: ans, tol: 0.0006,
-                    solution: pick === 'sin' ? `Hypotenuse $=\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\sin\theta=\frac{${opp}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : pick === 'cos' ? `Hypotenuse $=\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\cos\theta=\frac{${adj}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : `$\tan\theta=\frac{\text{opp}}{\text{adj}}=\frac{${opp}}{${adj}}=${ans.toFixed(4)}$.`
+                    solution: pick === 'sin' ? `Hypotenuse $=\\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\sin\\theta=\\frac{${opp}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : pick === 'cos' ? `Hypotenuse $=\\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\cos\\theta=\\frac{${adj}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : `$\\tan\\theta=\\frac{\\text{opp}}{\\text{adj}}=\\frac{${opp}}{${adj}}=${ans.toFixed(4)}$.`
                 };
             }
         },
@@ -1888,9 +1888,9 @@
                 const type = Math.random() > 0.5 ? 'opp' : 'adj';
                 const ans = type === 'opp' ? known * Math.tan(angle*Math.PI/180) : known / Math.tan(angle*Math.PI/180);
                 return {
-                    q: type === 'opp' ? `A right triangle has angle $${angle}^\circ$ and adjacent side $${known}$. Find the opposite side. (Round to 2 decimals)` : `A right triangle has angle $${angle}^\circ$ and opposite side $${known}$. Find the adjacent side. (Round to 2 decimals)`,
+                    q: type === 'opp' ? `A right triangle has angle $${angle}^\\circ$ and adjacent side $${known}$. Find the opposite side. (Round to 2 decimals)` : `A right triangle has angle $${angle}^\\circ$ and opposite side $${known}$. Find the adjacent side. (Round to 2 decimals)`,
                     inputType: 'number', a: ans, tol: 0.05,
-                    solution: type === 'opp' ? `$\tan(${angle}^\circ)=\frac{x}{${known}}\Rightarrow x=${known}\tan(${angle}^\circ)=${ans.toFixed(2)}$.` : `$\tan(${angle}^\circ)=\frac{${known}}{x}\Rightarrow x=\frac{${known}}{\tan(${angle}^\circ)}=${ans.toFixed(2)}$.`
+                    solution: type === 'opp' ? `$\\tan(${angle}^\\circ)=\\frac{x}{${known}}\\Rightarrow x=${known}\\tan(${angle}^\\circ)=${ans.toFixed(2)}$.` : `$\\tan(${angle}^\\circ)=\\frac{${known}}{x}\\Rightarrow x=\\frac{${known}}{\\tan(${angle}^\\circ)}=${ans.toFixed(2)}$.`
                 };
             }
         },
@@ -1905,9 +1905,9 @@
                 if (t > 180) ans = 360 - t;
                 if (t > 90 && t < 180) ans = 180 - t;
                 return {
-                    q: `Find the reference angle for $${raw}^\circ$.`,
+                    q: `Find the reference angle for $${raw}^\\circ$.`,
                     inputType: 'number', a: ans, tol: 0.1,
-                    solution: `First find a coterminal angle between $0^\circ$ and $360^\circ$: $${t}^\circ$. Its reference angle is $${ans}^\circ$.`
+                    solution: `First find a coterminal angle between $0^\\circ$ and $360^\\circ$: $${t}^\\circ$. Its reference angle is $${ans}^\\circ$.`
                 };
             }
         },
@@ -1916,18 +1916,18 @@
             label: 'Quadrant from Signs',
             generate: () => {
                 const options = [
-                    {q:'$\sin\theta>0$ and $\cos\theta>0$', a:1},
-                    {q:'$\sin\theta>0$ and $\cos\theta<0$', a:2},
-                    {q:'$\sin\theta<0$ and $\cos\theta<0$', a:3},
-                    {q:'$\sin\theta<0$ and $\cos\theta>0$', a:4},
-                    {q:'$\tan\theta>0$ and $\sin\theta<0$', a:3},
-                    {q:'$\tan\theta<0$ and $\cos\theta<0$', a:2}
+                    {q:'$\\sin\\theta>0$ and $\\cos\\theta>0$', a:1},
+                    {q:'$\\sin\\theta>0$ and $\\cos\\theta<0$', a:2},
+                    {q:'$\\sin\\theta<0$ and $\\cos\\theta<0$', a:3},
+                    {q:'$\\sin\\theta<0$ and $\\cos\\theta>0$', a:4},
+                    {q:'$\\tan\\theta>0$ and $\\sin\\theta<0$', a:3},
+                    {q:'$\\tan\\theta<0$ and $\\cos\\theta<0$', a:2}
                 ];
                 const pick = options[Math.floor(Math.random()*options.length)];
                 return {
-                    q: `Determine the quadrant number where $\theta$ can lie if ${pick.q}.`,
+                    q: `Determine the quadrant number where $\\theta$ can lie if ${pick.q}.`,
                     inputType: 'number', a: pick.a, tol: 0.1,
-                    solution: `Use ASTC signs. The condition places $\theta$ in Quadrant ${pick.a}.`
+                    solution: `Use ASTC signs. The condition places $\\theta$ in Quadrant ${pick.a}.`
                 };
             }
         },
@@ -1939,9 +1939,9 @@
                 const adj = Math.floor(Math.random()*18)+4;
                 const ans = Math.atan(opp/adj)*180/Math.PI;
                 return {
-                    q: `In a right triangle, opposite side is ${opp} and adjacent side is ${adj}. Find $\theta$ in degrees. (Round to 1 decimal)`,
+                    q: `In a right triangle, opposite side is ${opp} and adjacent side is ${adj}. Find $\\theta$ in degrees. (Round to 1 decimal)`,
                     inputType: 'number', a: ans, tol: 0.15,
-                    solution: `$\tan\theta=\frac{${opp}}{${adj}}$, so $\theta=\tan^{-1}\!\left(\frac{${opp}}{${adj}}\right)=${ans.toFixed(1)}^\circ$.`
+                    solution: `$\\tan\\theta=\\frac{${opp}}{${adj}}$, so $\\theta=\\tan^{-1}\\!\\left(\\frac{${opp}}{${adj}}\\right)=${ans.toFixed(1)}^\\circ$.`
                 };
             }
         },
@@ -1955,7 +1955,7 @@
                 return {
                     q: `A point on the ground is ${d} ft from a building. The top is ${h} ft above eye level. Find the angle of elevation. (Round to 1 decimal)`,
                     inputType: 'number', a: ans, tol: 0.15,
-                    solution: `$\tan\theta=\frac{${h}}{${d}}$, so $\theta=\tan^{-1}\!\left(\frac{${h}}{${d}}\right)=${ans.toFixed(1)}^\circ$.`
+                    solution: `$\\tan\\theta=\\frac{${h}}{${d}}$, so $\\theta=\\tan^{-1}\\!\\left(\\frac{${h}}{${d}}\\right)=${ans.toFixed(1)}^\\circ$.`
                 };
             }
         },
@@ -1968,9 +1968,9 @@
                 const t = Math.floor(Math.random()*4)+2;
                 const ans = speed * t * Math.sin(angle*Math.PI/180);
                 return {
-                    q: `A plane travels ${speed} miles/hour for ${t} hours at an angle of elevation of ${angle}^\circ$. Approximate the vertical rise. (Round to 1 decimal)`,
+                    q: `A plane travels ${speed} miles/hour for ${t} hours at an angle of elevation of ${angle}^\\circ$. Approximate the vertical rise. (Round to 1 decimal)`,
                     inputType: 'number', a: ans, tol: 0.2,
-                    solution: `Distance traveled is $d=rt=${speed}(${t})=${speed*t}$. Vertical rise $=d\sin(${angle}^\circ)=${ans.toFixed(1)}$.`
+                    solution: `Distance traveled is $d=rt=${speed}(${t})=${speed*t}$. Vertical rise $=d\\sin(${angle}^\\circ)=${ans.toFixed(1)}$.`
                 };
             }
         },
@@ -1983,9 +1983,9 @@
                 if (x2===x1) x2 += 2;
                 const ans = x2-x1;
                 return {
-                    q: `Given points $P(${x1},${y1})$ and $Q(${x2},${y2})$, find the $x$-component of $\vec{PQ}$.`,
+                    q: `Given points $P(${x1},${y1})$ and $Q(${x2},${y2})$, find the $x$-component of $\\vec{PQ}$.`,
                     inputType: 'number', a: ans, tol: 0.1,
-                    solution: `$\vec{PQ}=\langle x_2-x_1, y_2-y_1\rangle=\langle ${x2}-${x1}, ${y2}-${y1}\rangle$, so the $x$-component is ${ans}.`
+                    solution: `$\\vec{PQ}=\\langle x_2-x_1, y_2-y_1\\rangle=\\langle ${x2}-${x1}, ${y2}-${y1}\\rangle$, so the $x$-component is ${ans}.`
                 };
             }
         },
@@ -1998,9 +1998,9 @@
                 if (a===0 && b===0) b=5;
                 const ans = Math.sqrt(a*a+b*b);
                 return {
-                    q: `Find the magnitude of vector $\langle ${a}, ${b}\rangle$. (Round to 3 decimals)`,
+                    q: `Find the magnitude of vector $\\langle ${a}, ${b}\\rangle$. (Round to 3 decimals)`,
                     inputType: 'number', a: ans, tol: 0.005,
-                    solution: `$|\vec v|=\sqrt{a^2+b^2}=\sqrt{(${a})^2+(${b})^2}=${ans.toFixed(3)}$.`
+                    solution: `$|\\vec v|=\\sqrt{a^2+b^2}=\\sqrt{(${a})^2+(${b})^2}=${ans.toFixed(3)}$.`
                 };
             }
         },
@@ -2015,9 +2015,9 @@
                 let ans = Math.atan2(b,a)*180/Math.PI;
                 if (ans < 0) ans += 360;
                 return {
-                    q: `Find the direction angle (between $0^\circ$ and $360^\circ$) of vector $\langle ${a}, ${b}\rangle$. Round to 1 decimal.`,
+                    q: `Find the direction angle (between $0^\\circ$ and $360^\\circ$) of vector $\\langle ${a}, ${b}\\rangle$. Round to 1 decimal.`,
                     inputType: 'number', a: ans, tol: 0.15,
-                    solution: `Use $\theta=\tan^{-1}(b/a)$ and adjust for quadrant. Final direction angle: ${ans.toFixed(1)}^\circ$.`
+                    solution: `Use $\\theta=\\tan^{-1}(b/a)$ and adjust for quadrant. Final direction angle: ${ans.toFixed(1)}^\\circ$.`
                 };
             }
         }
