@@ -2375,6 +2375,92 @@
     }
 },
 {
+    id: 'quiz7_similar_multi', section: 'Angles & Polygons',
+    label: 'Quiz 7: Similar Triangles (Multi-Part)',
+    generate: () => {
+        const angleA = Math.floor(Math.random() * 26) + 34; // 34-59
+        const angleC = Math.floor(Math.random() * 26) + 34; // 34-59
+        const angleB = 180 - angleA - angleC;
+
+        const ab = Math.floor(Math.random() * 15) + 16;
+        const bc = Math.floor(Math.random() * 15) + 14;
+        const ac = Math.floor(Math.random() * 15) + 18;
+        const scale = [0.5, 0.6, 0.75, 0.8, 1.2, 1.25, 1.5][Math.floor(Math.random() * 7)];
+
+        const de = parseFloat((ab * scale).toFixed(1));
+        const ef = parseFloat((bc * scale).toFixed(1));
+        const df = parseFloat((ac * scale).toFixed(1));
+
+        const svg = `<svg viewBox="0 0 520 230" class="svg-canvas" style="max-width: 520px; width: 100%; height: auto;">
+            <polygon points="70,185 180,55 235,185" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+            <text x="58" y="200" fill="var(--text)" font-size="14">A</text>
+            <text x="178" y="45" fill="var(--text)" font-size="14">B</text>
+            <text x="238" y="200" fill="var(--text)" font-size="14">C</text>
+            <text x="121" y="116" fill="var(--text-muted)" font-size="12">AB = ${ab}</text>
+            <text x="200" y="126" fill="var(--text-muted)" font-size="12">BC = ${bc}</text>
+            <text x="136" y="198" fill="var(--text-muted)" font-size="12">AC = ${ac}</text>
+            <text x="85" y="174" fill="var(--text-muted)" font-size="12">${angleA}°</text>
+            <text x="212" y="174" fill="var(--text-muted)" font-size="12">${angleC}°</text>
+
+            <polygon points="305,185 390,90 450,185" fill="none" stroke="var(--green)" stroke-width="2.5"/>
+            <text x="293" y="200" fill="var(--text)" font-size="14">D</text>
+            <text x="388" y="80" fill="var(--text)" font-size="14">E</text>
+            <text x="453" y="200" fill="var(--text)" font-size="14">F</text>
+            <text x="335" y="132" fill="var(--text-muted)" font-size="12">DE = ${de}</text>
+            <text x="410" y="136" fill="var(--text-muted)" font-size="12">EF = ?</text>
+            <text x="367" y="198" fill="var(--text-muted)" font-size="12">DF = ?</text>
+        </svg>`;
+
+        return {
+            q: `In the diagram, triangles are similar: $\\triangle ABC \\sim \\triangle DEF$. Fill in all 4 blanks: <br>
+                (1) $\\angle B$ in $\\triangle ABC$, (2) corresponding angle $\\angle E$ in $\\triangle DEF$, <br>
+                (3) side $EF$, and (4) side $DF$.`,
+            svg,
+            inputType: 'quiz7_similar_multi',
+            a: { s1: angleB, s2: angleB, s3: ef, s4: df },
+            tol: 0.2,
+            solution: `Angle sum: $\\angle B = 180 - ${angleA} - ${angleC} = ${angleB}^\\circ$. <br>
+                Similar triangles give corresponding angles equal, so $\\angle E = \\angle B = ${angleB}^\\circ$. <br>
+                Scale factor from $\\triangle ABC$ to $\\triangle DEF$ is $k = \\frac{DE}{AB} = \\frac{${de}}{${ab}} = ${scale}$. <br>
+                Then $EF = BC \\cdot k = ${bc}(${scale}) = ${ef}$ and $DF = AC \\cdot k = ${ac}(${scale}) = ${df}$.`
+        };
+    }
+},
+{
+    id: 'quiz7_parallel_multi', section: 'Angles & Polygons',
+    label: 'Quiz 7: Parallel Lines (Multi-Part)',
+    generate: () => {
+        const acute = Math.floor(Math.random() * 36) + 37; // 37-72
+        const obtuse = 180 - acute;
+
+        const svg = `<svg viewBox="0 0 500 250" class="svg-canvas" style="max-width: 500px; width: 100%; height: auto;">
+            <line x1="40" y1="70" x2="460" y2="70" stroke="var(--accent)" stroke-width="3"/>
+            <line x1="40" y1="180" x2="460" y2="180" stroke="var(--accent)" stroke-width="3"/>
+            <line x1="130" y1="20" x2="350" y2="230" stroke="var(--green)" stroke-width="3"/>
+            <text x="28" y="72" fill="var(--text-muted)" font-size="12">j</text>
+            <text x="28" y="182" fill="var(--text-muted)" font-size="12">k</text>
+            <text x="92" y="58" fill="var(--text)" font-size="12">∠1 = ${acute}°</text>
+            <text x="348" y="205" fill="var(--text)" font-size="12">∠8 = ${obtuse}°</text>
+            <text x="185" y="46" fill="var(--text-muted)" font-size="12">∠2 = ?</text>
+            <text x="141" y="96" fill="var(--text-muted)" font-size="12">∠3 = ?</text>
+            <text x="223" y="156" fill="var(--text-muted)" font-size="12">∠6 = ?</text>
+            <text x="314" y="165" fill="var(--text-muted)" font-size="12">∠7 = ?</text>
+        </svg>`;
+
+        return {
+            q: `Lines $j \\parallel k$. Given $\\angle 1 = ${acute}^\\circ$ and $\\angle 8 = ${obtuse}^\\circ$, find all four requested angles from the diagram: $\\angle 2, \\angle 3, \\angle 6, \\angle 7$.`,
+            svg,
+            inputType: 'quiz7_parallel_multi',
+            a: { p1: obtuse, p2: acute, p3: acute, p4: obtuse },
+            tol: 0.2,
+            solution: `$\\angle 1$ and $\\angle 2$ are a linear pair: $\\angle 2 = 180 - ${acute} = ${obtuse}^\\circ$. <br>
+                $\\angle 3$ is vertical to $\\angle 1$, so $\\angle 3 = ${acute}^\\circ$. <br>
+                $\\angle 6$ corresponds to $\\angle 1$ (parallel lines), so $\\angle 6 = ${acute}^\\circ$. <br>
+                $\\angle 7$ is supplementary to $\\angle 6$ (or corresponding to $\\angle 2$), so $\\angle 7 = ${obtuse}^\\circ$.`
+        };
+    }
+},
+{
     id: 'herons', section: 'Angles & Polygons',
     label: "Heron's Formula",
     generate: () => {
@@ -3181,6 +3267,32 @@
                     <input type="number" step="any" id="inp-c4" placeholder="°">
                 </div>
             `;
+        } else if (currentQuestion.inputType === 'quiz7_similar_multi') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">a) $\\angle B =$</span>
+                    <input type="number" step="any" id="inp-s1" placeholder="°">
+                    <span class="mig-label">b) $\\angle E =$</span>
+                    <input type="number" step="any" id="inp-s2" placeholder="°">
+                    <span class="mig-label">c) $EF =$</span>
+                    <input type="number" step="any" id="inp-s3">
+                    <span class="mig-label">d) $DF =$</span>
+                    <input type="number" step="any" id="inp-s4">
+                </div>
+            `;
+        } else if (currentQuestion.inputType === 'quiz7_parallel_multi') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">a) $\\angle 2 =$</span>
+                    <input type="number" step="any" id="inp-p1" placeholder="°">
+                    <span class="mig-label">b) $\\angle 3 =$</span>
+                    <input type="number" step="any" id="inp-p2" placeholder="°">
+                    <span class="mig-label">c) $\\angle 6 =$</span>
+                    <input type="number" step="any" id="inp-p3" placeholder="°">
+                    <span class="mig-label">d) $\\angle 7 =$</span>
+                    <input type="number" step="any" id="inp-p4" placeholder="°">
+                </div>
+            `;
         } else {
             inputArea.innerHTML = `<input type="number" step="any" id="answer-input" class="inp-standard" placeholder="Your Answer" autocomplete="off">`;
         }
@@ -3265,6 +3377,38 @@
             document.getElementById('inp-c2').classList.add(r2 ? 'inp-correct' : 'inp-wrong');
             document.getElementById('inp-c3').classList.add(r3 ? 'inp-correct' : 'inp-wrong');
             document.getElementById('inp-c4').classList.add(r4 ? 'inp-correct' : 'inp-wrong');
+            isCorrect = r1 && r2 && r3 && r4;
+        } else if (currentQuestion.inputType === 'quiz7_similar_multi') {
+            const u1 = parseFloat(document.getElementById('inp-s1').value);
+            const u2 = parseFloat(document.getElementById('inp-s2').value);
+            const u3 = parseFloat(document.getElementById('inp-s3').value);
+            const u4 = parseFloat(document.getElementById('inp-s4').value);
+            if(isNaN(u1) || isNaN(u2) || isNaN(u3) || isNaN(u4)) return;
+            const t = currentQuestion.tol;
+            const r1 = Math.abs(u1 - currentQuestion.a.s1) <= t;
+            const r2 = Math.abs(u2 - currentQuestion.a.s2) <= t;
+            const r3 = Math.abs(u3 - currentQuestion.a.s3) <= t;
+            const r4 = Math.abs(u4 - currentQuestion.a.s4) <= t;
+            document.getElementById('inp-s1').classList.add(r1 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-s2').classList.add(r2 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-s3').classList.add(r3 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-s4').classList.add(r4 ? 'inp-correct' : 'inp-wrong');
+            isCorrect = r1 && r2 && r3 && r4;
+        } else if (currentQuestion.inputType === 'quiz7_parallel_multi') {
+            const u1 = parseFloat(document.getElementById('inp-p1').value);
+            const u2 = parseFloat(document.getElementById('inp-p2').value);
+            const u3 = parseFloat(document.getElementById('inp-p3').value);
+            const u4 = parseFloat(document.getElementById('inp-p4').value);
+            if(isNaN(u1) || isNaN(u2) || isNaN(u3) || isNaN(u4)) return;
+            const t = currentQuestion.tol;
+            const r1 = Math.abs(u1 - currentQuestion.a.p1) <= t;
+            const r2 = Math.abs(u2 - currentQuestion.a.p2) <= t;
+            const r3 = Math.abs(u3 - currentQuestion.a.p3) <= t;
+            const r4 = Math.abs(u4 - currentQuestion.a.p4) <= t;
+            document.getElementById('inp-p1').classList.add(r1 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-p2').classList.add(r2 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-p3').classList.add(r3 ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-p4').classList.add(r4 ? 'inp-correct' : 'inp-wrong');
             isCorrect = r1 && r2 && r3 && r4;
         } else if (currentQuestion.inputType === 'log_argument') {
             const input = document.getElementById('answer-input');
