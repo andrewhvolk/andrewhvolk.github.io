@@ -2016,8 +2016,8 @@
                 ];
                 const pick = options[Math.floor(Math.random()*options.length)];
                 return {
-                    q: `Determine the quadrant number where $\theta$ can lie if ${pick.q}.`,
-                    inputType: 'number', a: pick.a, tol: 0.1,
+                    q: `Determine the quadrant number where $\theta$ can lie if ${pick.q}. Enter 1, 2, 3, or 4.`,
+                    inputType: 'quadrant_int', a: pick.a,
                     solution: `Use ASTC signs. The condition places $\theta$ in Quadrant ${pick.a}.`
                 };
             }
@@ -2558,6 +2558,8 @@
                     <input type="number" step="any" id="inp-c4" placeholder="°">
                 </div>
             `;
+        } else if (currentQuestion.inputType === 'quadrant_int') {
+            inputArea.innerHTML = `<input type="number" min="1" max="4" step="1" id="answer-input" class="inp-standard" placeholder="1-4" autocomplete="off">`;
         } else {
             inputArea.innerHTML = `<input type="number" step="any" id="answer-input" class="inp-standard" placeholder="Your Answer" autocomplete="off">`;
         }
@@ -2685,6 +2687,14 @@
             const baseTheta = currentQuestion.baseTheta;
             const k = Math.round((userVal - baseTheta) / 360);
             isCorrect = Math.abs(userVal - (baseTheta + 360 * k)) <= tol;
+        } else if (currentQuestion.inputType === 'quadrant_int') {
+            const input = document.getElementById('answer-input');
+            const userVal = parseStrictNumber(input.value);
+            if (userVal === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
+            isCorrect = Number.isInteger(userVal) && userVal === currentQuestion.a;
         } else {
             const input = document.getElementById('answer-input');
             const userVal = parseStrictNumber(input.value);
