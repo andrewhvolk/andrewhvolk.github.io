@@ -1922,7 +1922,7 @@
                     sol = `$f(${x}) = ${coeff}(${b})^{${x}} = ${coeff}(${Math.pow(b,x)}) = ${ans}$`;
                 }
                 
-                return { q: q, inputType: 'number', a: ans, tol: 0.05, solution: sol };
+                return { q: q, inputType: 'number', a: ans, tol: 0.005, solution: sol };
             }
         },
         {
@@ -1968,7 +1968,7 @@
 
                 return {
                     q: `Find the amount $A$ for $\\$${p}$ invested at $${r}\\%$ for $${t}$ years compounded ${type.label}. (Round to the nearest cent)`,
-                    inputType: 'number', a: ans, tol: 0.05, solution: sol
+                    inputType: 'number', a: ans, tol: 0.005, solution: sol
                 };
             }
         },
@@ -1991,7 +1991,7 @@
                     q: `Complete the table: Find $A$ for $\\$${P.toLocaleString()}$ invested at $r = ${r}\\%$ for $t = ${t}$ years, compounded $n$ times per year. Round to the nearest cent.`,
                     inputType: 'interest_table',
                     a: { a1, a2, a3, a4 },
-                    tol: 0.05,
+                    tol: 0.005,
                     solution: `$n=2$: $A = ${P}(1+\\frac{${rd}}{2})^{2 \\cdot ${t}} = \\$${a1.toFixed(2)}$ <br>
                         $n=12$: $A = ${P}(1+\\frac{${rd}}{12})^{12 \\cdot ${t}} = \\$${a2.toFixed(2)}$ <br>
                         $n=365$: $A = ${P}(1+\\frac{${rd}}{365})^{365 \\cdot ${t}} = \\$${a3.toFixed(2)}$ <br>
@@ -2063,7 +2063,7 @@
                 
                 return {
                     q: `Convert $${d}^\\circ\\, ${m}'\\, ${s}''$ to decimal degrees. (Round to 4 decimal places)`,
-                    inputType: 'number', a: ans, tol: 0.0005,
+                    inputType: 'number', a: ans, tol: 0.00005,
                     solution: `Decimal degrees $= ${d} + \\frac{${m}}{60} + \\frac{${s}}{3600} = ${ans.toFixed(4)}^\\circ$`
                 };
             }
@@ -2376,7 +2376,7 @@
 
         return {
             q: `Find the area of a triangle with sides $a = ${a}$, $b = ${b}$, and $c = ${c}$. (Round to 1 decimal place)`,
-            inputType: 'number', a: area, tol: 0.1,
+            inputType: 'number', a: area, tol: 0.05,
             solution: `1. Find semi-perimeter $s = (${a}+${b}+${c})/2 = ${s}$. <br> 2. Use $A = \\sqrt{${s}(${s}-${a})(${s}-${b})(${s}-${c})} = ${area.toFixed(1)}$.`
         };
     }
@@ -2535,21 +2535,21 @@
                     const ans = Math.PI * (R*R - r*r);
                     return {
                         q: `Find the area between two concentric circles with radii $r_1 = ${r}$ and $r_2 = ${R}$. (Round to 2 decimal places)`,
-                        inputType: 'number', a: ans, tol: 0.05,
+                        inputType: 'number', a: ans, tol: 0.005,
                         solution: `Subtract the inner area from the outer area: $A = \\pi(${R})^2 - \\pi(${r})^2 = ${ans.toFixed(2)}$`
                     };
                 } else if (Math.random() > 0.5) {
                     const ans = Math.PI * r * r;
                     return {
                         q: `Find the area of a circle with radius $r = ${r}$. (Round to 2 decimal places)`,
-                        inputType: 'number', a: ans, tol: 0.05,
+                        inputType: 'number', a: ans, tol: 0.005,
                         solution: `$A = \\pi r^2 = \\pi(${r})^2 = ${ans.toFixed(2)}$`
                     };
                 } else {
                     const ans = 2 * Math.PI * r;
                     return {
                         q: `Find the circumference of a circle with radius $r = ${r}$. (Round to 2 decimal places)`,
-                        inputType: 'number', a: ans, tol: 0.05,
+                        inputType: 'number', a: ans, tol: 0.005,
                         solution: `$C = 2\\pi r = 2\\pi(${r}) = ${ans.toFixed(2)}$`
                     };
                 }
@@ -2581,7 +2581,7 @@
 
                 return {
                     q: `Lines $l$, $m$, and $n$ are parallel. Find the length of $x$. (Round to 1 decimal place)`,
-                    svg: svg, inputType: 'number', a: x, tol: 0.1,
+                    svg: svg, inputType: 'number', a: x, tol: 0.05,
                     solution: `By similar proportions across parallel lines: $\\frac{${a}}{${b}} = \\frac{${c}}{x} \\implies x = \\frac{${b} \\cdot ${c}}{${a}} = ${x.toFixed(1)}$`
                 }
             }
@@ -2637,14 +2637,14 @@
                     const ans = 2 * Math.PI * rpm;
                     return {
                         q: `A wheel is rotating at $${rpm}$ revolutions per minute (rpm). Find the angular speed $\\omega$ in radians per minute. (Round to 1 decimal place)`,
-                        inputType: 'number', a: ans, tol: 0.5,
+                        inputType: 'number', a: ans, tol: 0.05,
                         solution: `One revolution is $2\\pi$ radians. $\\omega = ${rpm} \\text{ rev/min} \\cdot 2\\pi \\text{ rad/rev} = ${ans.toFixed(1)}$`
                     };
                 } else {
                     const ans = 2 * Math.PI * rpm * r;
                     return {
                         q: `A wheel with radius $r = ${r}$ inches is rotating at $${rpm}$ rpm. Find the linear speed $v$ in inches per minute. (Round to 1 decimal place)`,
-                        inputType: 'number', a: ans, tol: 0.5,
+                        inputType: 'number', a: ans, tol: 0.05,
                         solution: `First find angular speed $\\omega = ${rpm} \\cdot 2\\pi$. Then $v = r\\omega = ${r}(${rpm} \\cdot 2\\pi) = ${ans.toFixed(1)}$`
                     };
                 }
@@ -2681,7 +2681,7 @@
                     const ans = Math.exp(parseFloat(c));
                     return {
                         q: `Solve for $x$: $\\ln\\, x = ${c}$. (Round to 3 decimal places)`,
-                        inputType: 'number', a: ans, tol: 0.005,
+                        inputType: 'number', a: ans, tol: 0.0005,
                         solution: `Rewrite in exponential form: $\\ln\\, x = ${c}$ means $x = e^{${c}}$. <br> $x = e^{${c}} = ${ans.toFixed(3)}$`
                     };
                 } else {
@@ -2690,7 +2690,7 @@
                     const ans = Math.pow(10, parseFloat(c));
                     return {
                         q: `Solve for $x$: $\\log\\, x = ${c}$. (Round to 3 decimal places)`,
-                        inputType: 'number', a: ans, tol: 0.005,
+                        inputType: 'number', a: ans, tol: 0.0005,
                         solution: `Rewrite in exponential form: $\\log\\, x = ${c}$ means $x = 10^{${c}}$. <br> $x = 10^{${c}} = ${ans.toFixed(3)}$`
                     };
                 }
