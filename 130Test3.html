@@ -1835,6 +1835,28 @@
     }
 
     // --- GENERATORS LOGIC ---
+    function normalizeDegrees(angle) {
+        let t = angle % 360;
+        if (t < 0) t += 360;
+        return t;
+    }
+
+    function getReferenceAngleDegrees(rawAngle) {
+        const t = normalizeDegrees(rawAngle);
+        // Axis-aligned terminal sides (0, 90, 180, 270) are excluded in this generator.
+        if (t % 90 === 0) return null;
+        if (t < 90) return t;
+        if (t < 180) return 180 - t;
+        if (t < 270) return t - 180;
+        return 360 - t;
+    }
+
+    function assertReferenceAngleConvention(ans) {
+        if (!(ans > 0 && ans < 90)) {
+            throw new Error(`Reference-angle convention failed: expected 0 < ans < 90, got ${ans}`);
+        }
+    }
+
     const generators = [
         {
             id: 'angle_coterminal', section: 'Section 5.1',
@@ -1962,16 +1984,21 @@
             id: 'reference_angle_deg', section: 'Section 5.3',
             label: 'Reference Angle (Degrees)',
             generate: () => {
-                const raw = (Math.floor(Math.random()*32)+1)*15 * (Math.random()>0.5?1:-1);
-                let t = raw % 360;
-                if (t < 0) t += 360;
-                let ans = t;
-                if (t > 180) ans = 360 - t;
-                if (t > 90 && t < 180) ans = 180 - t;
+                let raw;
+                let t;
+                let ans;
+                do {
+                    raw = (Math.floor(Math.random()*32)+1)*15 * (Math.random()>0.5?1:-1);
+                    t = normalizeDegrees(raw);
+                    ans = getReferenceAngleDegrees(raw);
+                } while (ans === null);
+
+                // Guard: by our convention with non-axis terminal sides, answer must be acute.
+                assertReferenceAngleConvention(ans);
                 return {
                     q: `Find the reference angle for $${raw}^\circ$.`,
                     inputType: 'number', a: ans, tol: 0.1,
-                    solution: `First find a coterminal angle between $0^\circ$ and $360^\circ$: $${t}^\circ$. Its reference angle is $${ans}^\circ$.`
+                    solution: `First find a coterminal angle between $0^\circ$ and $360^\circ$: $${t}^\circ$. This generator excludes axis cases (${0}^\circ, ${90}^\circ, ${180}^\circ, ${270}^\circ), so the reference angle is the acute angle to the $x$-axis: $${ans}^\circ$.`
                 };
             }
         },
