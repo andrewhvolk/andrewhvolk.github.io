@@ -3218,13 +3218,21 @@
             const uarg = parseFloat(document.getElementById('inp-arg').value);
             const uans = parseFloat(document.getElementById('inp-ans').value);
             if(isNaN(ub) || isNaN(uarg) || isNaN(uans)) return;
-            isCorrect = (ub === currentQuestion.a.base && uarg === currentQuestion.a.arg && uans === currentQuestion.a.ans);
+            const eps = 1e-6;
+            const bOk = Math.abs(ub - currentQuestion.a.base) <= eps;
+            const argOk = Math.abs(uarg - currentQuestion.a.arg) <= eps;
+            const ansOk = Math.abs(uans - currentQuestion.a.ans) <= eps;
+            isCorrect = bOk && argOk && ansOk;
         } else if (currentQuestion.inputType === 'exp_form') {
             const ub = parseFloat(document.getElementById('inp-base').value);
             const uexp = parseFloat(document.getElementById('inp-exp').value);
             const uans = parseFloat(document.getElementById('inp-ans').value);
             if(isNaN(ub) || isNaN(uexp) || isNaN(uans)) return;
-            isCorrect = (ub === currentQuestion.a.base && uexp === currentQuestion.a.exp && uans === currentQuestion.a.ans);
+            const eps = 1e-6;
+            const bOk = Math.abs(ub - currentQuestion.a.base) <= eps;
+            const expOk = Math.abs(uexp - currentQuestion.a.exp) <= eps;
+            const ansOk = Math.abs(uans - currentQuestion.a.ans) <= eps;
+            isCorrect = bOk && expOk && ansOk;
         } else if (currentQuestion.inputType === 'interest_table') {
             const u1 = parseFloat(document.getElementById('inp-a1').value);
             const u2 = parseFloat(document.getElementById('inp-a2').value);
