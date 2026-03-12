@@ -1414,7 +1414,9 @@
 <div class="tab-content" id="tab-practice">
 <div class="card">
 <h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
+<p style="text-align: center; color: var(--text-muted); margin-bottom: 0.6rem;">Select a topic to generate infinite, exam-style questions.</p>
+<p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.92rem;">For decimal answers, enter rounded values as directed. Repeating decimals are accepted within tolerance (for example, $0.3333$ for $0.\overline{3}$).</p>
+<p id="coverage-audit" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;"></p>
 <!-- Mock Exam CTA -->
 <div id="exam-cta" style="background: linear-gradient(135deg, var(--accent-glow), var(--red-bg)); border: 2px solid var(--accent); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
@@ -3059,6 +3061,7 @@
         applyTheme(state.theme);
         renderChecklist();
         renderQuizCategories();
+        renderCoverageAudit();
         updateStatsUI();
         renderHistory();
         highlightScheduleDates();
@@ -3215,6 +3218,19 @@
             group.appendChild(btnRow);
             container.appendChild(group);
         });
+    }
+
+
+    function renderCoverageAudit() {
+        const coverageEl = document.getElementById('coverage-audit');
+        if (!coverageEl) return;
+
+        const checklistPracticeIds = [...new Set(state.checklist.map(item => item.practiceId).filter(Boolean))];
+        const generatorIds = new Set(generators.map(gen => gen.id));
+        const covered = checklistPracticeIds.filter(id => generatorIds.has(id));
+        const missing = checklistPracticeIds.filter(id => !generatorIds.has(id));
+
+        coverageEl.textContent = `Checklist coverage audit: ${covered.length}/${checklistPracticeIds.length} checklist-linked topics have matching practice generators${missing.length ? `. Missing: ${missing.join(', ')}` : ' (full coverage).'}`;
     }
 
     function updateStatsUI() {
@@ -3906,12 +3922,19 @@
         }
     }
 
-    function renderMath() {
+    let _mathRetryTimer = null;
+    function renderMath(retries = 8) {
         if (window.renderMathInElement) {
             renderMathInElement(document.body, {
                 delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ],
                 throwOnError: false
             });
+            return;
+        }
+
+        if (retries > 0) {
+            clearTimeout(_mathRetryTimer);
+            _mathRetryTimer = setTimeout(() => renderMath(retries - 1), 150);
         }
     }
 </script>
