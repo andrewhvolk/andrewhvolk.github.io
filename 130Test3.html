@@ -2215,7 +2215,8 @@
                 // Guard: by our convention with non-axis terminal sides, answer must be acute.
                 assertReferenceAngleConvention(ans);
                 const turnCount = Math.round((raw - t) / 360);
-                const fallbackText = `Angle ${raw} degrees in standard position. Terminal side matches ${t} degrees with ${turnCount > 0 ? `${turnCount} counterclockwise` : `${Math.abs(turnCount)} clockwise`} full turn${Math.abs(turnCount) === 1 ? '' : 's'}, and reference angle is ${ans} degrees.`;
+                const fallbackText = `Angle ${raw} degrees in standard position. Terminal side matches ${t} degrees with ${turnCount > 0 ? `${turnCount} counterclockwise` : `${Math.abs(turnCount)} clockwise`} full turn${Math.abs(turnCount) === 1 ? '' : 's'}.`;
+                const entryNote = 'Use the diagram to locate the terminal side, then measure the acute angle to the x-axis. The visual intentionally does not label the reference angle value.';
                 return {
                     q: `Find the reference angle for $${raw}^\\circ$.`,
                     svg: createAngleSvg({
@@ -2223,11 +2224,10 @@
                         labelText: `${raw}\u00b0`,
                         fallbackText,
                         originalThetaDeg: raw,
-                        turnCount,
-                        referenceDeg: ans,
-                        showReferenceLabel: true
+                        turnCount
                     }),
                     svgAltText: fallbackText,
+                    entryNote,
                     inputType: 'number', a: ans, tol: 0.1,
                     solution: `First find a coterminal angle between $0^\\circ$ and $360^\\circ$: $${t}^\\circ$. This generator excludes axis cases (${0}^\\circ, ${90}^\\circ, ${180}^\\circ, ${270}^\\circ), so the reference angle is the acute angle to the $x$-axis: $${ans}^\\circ$.`
                 };
