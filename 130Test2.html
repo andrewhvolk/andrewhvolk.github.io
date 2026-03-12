@@ -424,6 +424,14 @@
             background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
             color: var(--text-muted); font-size: 0.98rem; line-height: 1.55; text-align: left;
         }
+        .quiz-instruction-banner {
+            max-width: 860px; margin: 0 auto 1.25rem auto; padding: 0.9rem 1rem;
+            border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--border));
+            border-left: 6px solid var(--accent); border-radius: 12px;
+            background: color-mix(in srgb, var(--accent) 12%, var(--surface2));
+            color: var(--text); font-size: 0.97rem; line-height: 1.5; text-align: left;
+            display: none;
+        }
         .log-arg-template { 
             display: inline-flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
             padding: 0.5rem 0.75rem; border-radius: 14px; background: var(--surface2); border: 1px solid var(--border);
@@ -1465,6 +1473,7 @@
 </div>
 <div class="quiz-selector" id="quiz-categories"></div>
 <div class="quiz-box" id="quiz-active-area" style="display: none; border-top: 1px solid var(--border); padding-top: 2rem;">
+<div class="quiz-instruction-banner" id="quiz-instruction-banner"></div>
 <div id="svg-display"></div>
 <div class="question-text" id="question-display"></div>
 <div class="question-note" id="question-note" style="display:none;"></div>
@@ -2265,6 +2274,100 @@
                 <strong>d) arc AD:</strong> Semicircle $\\widehat{ABC} = 180^\\circ$, so $\\widehat{BC} = 180 - ${arcAB} = ${arcBC}^\\circ$. Full circle: $\\widehat{AD} = 360 - ${arcAB} - ${arcBC} - ${arcCD} = ${arcAD}^\\circ$. <br>
                 <strong>a) ∠AEB:</strong> Intersecting chords: $\\angle AEB = \\frac{\\widehat{AB} + \\widehat{CD}}{2} = \\frac{${arcAB} + ${arcCD}}{2} = ${angleAEB}^\\circ$. <br>
                 <strong>b) ∠AED:</strong> Supplementary: $\\angle AED = 180 - ${angleAEB} = ${angleAED}^\\circ$.`
+        };
+    }
+},
+
+{
+    id: 'quiz7_similar_multi', section: 'Angles & Polygons',
+    label: 'Quiz 7 Similar Triangles (Multi-Part)',
+    generate: () => {
+        const aM = Math.floor(Math.random() * 30) + 35;
+        const aN = Math.floor(Math.random() * 35) + 45;
+        const aP = 180 - aM - aN;
+
+        const mn = Math.floor(Math.random() * 18) + 12;
+        const np = Math.floor(Math.random() * 14) + 10;
+        const mp = Math.floor(Math.random() * 16) + 14;
+        const scale = parseFloat((Math.random() * 0.7 + 0.6).toFixed(1));
+
+        const qr = parseFloat((mn * scale).toFixed(1));
+        const rs = parseFloat((np * scale).toFixed(1));
+        const qs = parseFloat((mp * scale).toFixed(1));
+
+        return {
+            q: `Given $\Delta MNP \sim \Delta QRS$ with $MN = ${mn}$, $NP = ${np}$, $MP = ${mp}$, and $QR = ${qr}$. Also $\angle M = ${aM}^\circ$ and $\angle N = ${aN}^\circ$. Find all four values below.`,
+            inputType: 'quiz7_similar_multi',
+            a: { s1: aP, s2: aP, s3: rs, s4: qs },
+            tol: [0.1, 0.1, 0.1, 0.1],
+            solution: `First, $\angle P = 180 - ${aM} - ${aN} = ${aP}^\circ$. Since triangles are similar, $\angle S = \angle P = ${aP}^\circ$.<br>
+            Scale factor (small to large): $\frac{QR}{MN} = \frac{${qr}}{${mn}} = ${scale.toFixed(1)}$.<br>
+            So $RS = ${np}(${scale.toFixed(1)}) = ${rs.toFixed(1)}$ and $QS = ${mp}(${scale.toFixed(1)}) = ${qs.toFixed(1)}$.`
+        };
+    }
+},
+{
+    id: 'quiz7_parallel_multi', section: 'Angles & Polygons',
+    label: 'Quiz 7 Parallel Lines (Multi-Part)',
+    generate: () => {
+        const a2 = parseFloat((Math.random() * 45 + 35).toFixed(1));
+        const a5 = parseFloat((Math.random() * 35 + 25).toFixed(1));
+        const a1 = parseFloat((180 - a2).toFixed(1));
+        const a4 = a2;
+        const a6 = parseFloat((180 - a5).toFixed(1));
+        const a3 = parseFloat((180 - a2 - a5).toFixed(1));
+
+        return {
+            q: `Lines $j \| k$ are parallel. Given $\angle 2 = ${a2}^\circ$ and $\angle 5 = ${a5}^\circ$, find the four requested angles.`,
+            inputType: 'quiz7_parallel_multi',
+            a: { p1: a1, p2: a4, p3: a6, p4: a3 },
+            tol: [0.1, 0.1, 0.1, 0.1],
+            solution: `$\angle 1$ is supplementary to $\angle 2$: $180 - ${a2} = ${a1}^\circ$.<br>
+            $\angle 4$ corresponds to (or is alternate interior with) $\angle 2$: ${a4}^\circ$.<br>
+            $\angle 6$ is supplementary to $\angle 5$: $180 - ${a5} = ${a6}^\circ$.<br>
+            Triangle sum gives $\angle 3 = 180 - ${a2} - ${a5} = ${a3}^\circ$.`
+        };
+    }
+},
+{
+    id: 'quiz7_dms_to_dec', section: 'Angles & Polygons',
+    label: 'Quiz 7 DMS → Decimal Degrees',
+    generate: () => {
+        const d = Math.floor(Math.random() * 70) + 10;
+        const m = Math.floor(Math.random() * 59) + 1;
+        const s = Math.floor(Math.random() * 59) + 1;
+        const ans = d + m / 60 + s / 3600;
+
+        return {
+            q: `Convert $${d}^\circ\, ${m}'\, ${s}''$ to decimal degrees. (Round to 1 decimal place)`,
+            inputType: 'number', a: ans, tol: 0.05,
+            solution: `Decimal degrees $= ${d} + \frac{${m}}{60} + \frac{${s}}{3600} = ${ans.toFixed(1)}^\circ$`
+        };
+    }
+},
+{
+    id: 'quiz7_dms', section: 'Angles & Polygons',
+    label: 'Quiz 7 Convert DMS',
+    generate: () => {
+        const deg = (Math.random() * 80 + 10).toFixed(4);
+        let d = Math.floor(deg);
+        const rem = (deg - d) * 60;
+        let m = Math.floor(rem);
+        let s = Math.round((rem - m) * 60);
+
+        if (s === 60) {
+            s = 0;
+            m += 1;
+        }
+        if (m === 60) {
+            m = 0;
+            d += 1;
+        }
+
+        return {
+            q: `Convert $${deg}^\circ$ to degrees, minutes, and seconds. (Round to the nearest second)`,
+            inputType: 'dms', a: { d, m, s },
+            solution: `Multiply the decimal by 60 to get minutes, then multiply the remaining decimal by 60 to get seconds. <br> $${deg}^\circ = ${d}^\circ ${m}' ${s}''$`
         };
     }
 },
@@ -3108,6 +3211,17 @@
                 questionNote.style.display = 'none';
             }
         }
+
+        const quizBanner = document.getElementById('quiz-instruction-banner');
+        if (quizBanner) {
+            if (examState.isActive && examState.label === 'Quiz 7 — Angles & Polygons') {
+                quizBanner.innerHTML = `<strong>Quiz 7 instructions:</strong> Show work. Round numerical answers to one decimal place unless the prompt specifies otherwise.`;
+                quizBanner.style.display = 'block';
+            } else {
+                quizBanner.innerHTML = '';
+                quizBanner.style.display = 'none';
+            }
+        }
         
         // Handle SVG injection
         const svgContainer = document.getElementById('svg-display');
@@ -3179,6 +3293,45 @@
                     <input type="number" step="any" id="inp-c3" placeholder="°">
                     <span class="mig-label">d) arc $\\widehat{AD} =$</span>
                     <input type="number" step="any" id="inp-c4" placeholder="°">
+                </div>
+            `;
+        } else if (currentQuestion.inputType === 'quiz7_similar_multi') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">a) $\angle P =$</span>
+                    <input type="number" step="any" id="inp-q7s1" placeholder="°">
+                    <span class="mig-label">b) $\angle S =$</span>
+                    <input type="number" step="any" id="inp-q7s2" placeholder="°">
+                    <span class="mig-label">c) $RS =$</span>
+                    <input type="number" step="any" id="inp-q7s3" placeholder="units">
+                    <span class="mig-label">d) $QS =$</span>
+                    <input type="number" step="any" id="inp-q7s4" placeholder="units">
+                </div>
+            `;
+        } else if (currentQuestion.inputType === 'quiz7_parallel_multi') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">a) $\angle 1 =$</span>
+                    <input type="number" step="any" id="inp-q7p1" placeholder="°">
+                    <span class="mig-label">b) $\angle 4 =$</span>
+                    <input type="number" step="any" id="inp-q7p2" placeholder="°">
+                    <span class="mig-label">c) $\angle 6 =$</span>
+                    <input type="number" step="any" id="inp-q7p3" placeholder="°">
+                    <span class="mig-label">d) $\angle 3 =$</span>
+                    <input type="number" step="any" id="inp-q7p4" placeholder="°">
+                </div>
+            `;
+        } else if (currentQuestion.inputType === 'quiz7_triangle_pair') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">a) Triangle 1 area</span>
+                    <input type="number" step="any" id="inp-q7t1" placeholder="sq units">
+                    <span class="mig-label">b) Triangle 2 area</span>
+                    <input type="number" step="any" id="inp-q7t2" placeholder="sq units">
+                    <span class="mig-label">c) Total area</span>
+                    <input type="number" step="any" id="inp-q7t3" placeholder="sq units">
+                    <span class="mig-label">d) Perimeter (if asked)</span>
+                    <input type="number" step="any" id="inp-q7t4" placeholder="units">
                 </div>
             `;
         } else {
@@ -3266,6 +3419,51 @@
             document.getElementById('inp-c3').classList.add(r3 ? 'inp-correct' : 'inp-wrong');
             document.getElementById('inp-c4').classList.add(r4 ? 'inp-correct' : 'inp-wrong');
             isCorrect = r1 && r2 && r3 && r4;
+        } else if (currentQuestion.inputType === 'quiz7_similar_multi') {
+            const ids = ['inp-q7s1', 'inp-q7s2', 'inp-q7s3', 'inp-q7s4'];
+            const keys = ['s1', 's2', 's3', 's4'];
+            const vals = ids.map(id => parseFloat(document.getElementById(id).value));
+            if (vals.some(v => isNaN(v))) return;
+            const tolerances = Array.isArray(currentQuestion.tol)
+                ? currentQuestion.tol
+                : [currentQuestion.tol, currentQuestion.tol, currentQuestion.tol, currentQuestion.tol];
+            const checks = vals.map((v, idx) => Math.abs(v - currentQuestion.a[keys[idx]]) <= tolerances[idx]);
+            ids.forEach((id, idx) => {
+                const inp = document.getElementById(id);
+                inp.classList.remove('inp-correct', 'inp-wrong');
+                inp.classList.add(checks[idx] ? 'inp-correct' : 'inp-wrong');
+            });
+            isCorrect = checks.every(Boolean);
+        } else if (currentQuestion.inputType === 'quiz7_parallel_multi') {
+            const ids = ['inp-q7p1', 'inp-q7p2', 'inp-q7p3', 'inp-q7p4'];
+            const keys = ['p1', 'p2', 'p3', 'p4'];
+            const vals = ids.map(id => parseFloat(document.getElementById(id).value));
+            if (vals.some(v => isNaN(v))) return;
+            const tolerances = Array.isArray(currentQuestion.tol)
+                ? currentQuestion.tol
+                : [currentQuestion.tol, currentQuestion.tol, currentQuestion.tol, currentQuestion.tol];
+            const checks = vals.map((v, idx) => Math.abs(v - currentQuestion.a[keys[idx]]) <= tolerances[idx]);
+            ids.forEach((id, idx) => {
+                const inp = document.getElementById(id);
+                inp.classList.remove('inp-correct', 'inp-wrong');
+                inp.classList.add(checks[idx] ? 'inp-correct' : 'inp-wrong');
+            });
+            isCorrect = checks.every(Boolean);
+        } else if (currentQuestion.inputType === 'quiz7_triangle_pair') {
+            const ids = ['inp-q7t1', 'inp-q7t2', 'inp-q7t3', 'inp-q7t4'];
+            const keys = ['t1', 't2', 't3', 't4'];
+            const vals = ids.map(id => parseFloat(document.getElementById(id).value));
+            if (vals.some(v => isNaN(v))) return;
+            const tolerances = Array.isArray(currentQuestion.tol)
+                ? currentQuestion.tol
+                : [currentQuestion.tol, currentQuestion.tol, currentQuestion.tol, currentQuestion.tol];
+            const checks = vals.map((v, idx) => Math.abs(v - currentQuestion.a[keys[idx]]) <= tolerances[idx]);
+            ids.forEach((id, idx) => {
+                const inp = document.getElementById(id);
+                inp.classList.remove('inp-correct', 'inp-wrong');
+                inp.classList.add(checks[idx] ? 'inp-correct' : 'inp-wrong');
+            });
+            isCorrect = checks.every(Boolean);
         } else if (currentQuestion.inputType === 'log_argument') {
             const input = document.getElementById('answer-input');
             const userVal = parseFloat(input.value);
@@ -3480,6 +3678,11 @@
         document.getElementById('exam-progress-bar').style.display = 'none';
         document.getElementById('quiz-active-area').style.display = 'none';
         document.getElementById('btn-exit-exam').style.display = 'none';
+        const quizBanner = document.getElementById('quiz-instruction-banner');
+        if (quizBanner) {
+            quizBanner.innerHTML = '';
+            quizBanner.style.display = 'none';
+        }
         refreshIcons();
     }
 
@@ -3503,7 +3706,7 @@
         },
         7: {
             label: 'Quiz 7 — Angles & Polygons',
-            blueprint: ['similar_triangles', 'parallel_angles', 'basic_areas', 'basic_areas', 'basic_areas', 'herons', 'dms', 'dms_to_dec']
+            blueprint: ['quiz7_similar_multi', 'quiz7_parallel_multi', 'basic_areas', 'basic_areas', 'basic_areas', 'herons', 'quiz7_dms', 'quiz7_dms_to_dec']
         },
         8: {
             label: 'Quiz 8 — Circles',
