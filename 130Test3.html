@@ -2207,14 +2207,54 @@
             id: 'vector_components', section: 'Section 8.4',
             label: 'Vector Components from Points',
             generate: () => {
-                const x1 = Math.floor(Math.random()*8)-4, y1 = Math.floor(Math.random()*8)-4;
-                let x2 = Math.floor(Math.random()*12)-6, y2 = Math.floor(Math.random()*12)-6;
-                if (x2===x1) x2 += 2;
-                const ans = x2-x1;
+                const x1 = Math.floor(Math.random() * 8) - 4;
+                const y1 = Math.floor(Math.random() * 8) - 4;
+                let x2 = Math.floor(Math.random() * 12) - 6;
+                let y2 = Math.floor(Math.random() * 12) - 6;
+                if (x2 === x1 && y2 === y1) x2 += 2;
+                const dx = x2 - x1;
+                const dy = y2 - y1;
+                const useGraphVariant = Math.random() < 0.5;
+
+                let svg = null;
+                let q = `Given points $P(${x1},${y1})$ and $Q(${x2},${y2})$, find $\vec{PQ}$ in component form.`;
+
+                if (useGraphVariant) {
+                    const px = 140 + x1 * 20;
+                    const py = 140 - y1 * 20;
+                    const qx = 140 + x2 * 20;
+                    const qy = 140 - y2 * 20;
+                    svg = `
+                        <svg viewBox="0 0 280 280" width="280" height="280" role="img" aria-label="Coordinate plane with vector from P to Q">
+                            <defs>
+                                <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 8 3.5, 0 7" fill="#ff4d4d"></polygon>
+                                </marker>
+                            </defs>
+                            <rect x="0" y="0" width="280" height="280" fill="#0f172a"></rect>
+                            <g stroke="#334155" stroke-width="1">
+                                ${Array.from({ length: 15 }, (_, i) => `<line x1="${i * 20}" y1="0" x2="${i * 20}" y2="280"></line>`).join('')}
+                                ${Array.from({ length: 15 }, (_, i) => `<line x1="0" y1="${i * 20}" x2="280" y2="${i * 20}"></line>`).join('')}
+                            </g>
+                            <line x1="0" y1="140" x2="280" y2="140" stroke="#e2e8f0" stroke-width="2"></line>
+                            <line x1="140" y1="0" x2="140" y2="280" stroke="#e2e8f0" stroke-width="2"></line>
+                            <line x1="${px}" y1="${py}" x2="${qx}" y2="${qy}" stroke="#ff4d4d" stroke-width="3" marker-end="url(#arrowhead)"></line>
+                            <circle cx="${px}" cy="${py}" r="4" fill="#38bdf8"></circle>
+                            <circle cx="${qx}" cy="${qy}" r="4" fill="#22c55e"></circle>
+                            <text x="${px + 6}" y="${py - 8}" fill="#38bdf8" font-size="14">P(${x1},${y1})</text>
+                            <text x="${qx + 6}" y="${qy - 8}" fill="#22c55e" font-size="14">Q(${x2},${y2})</text>
+                        </svg>
+                    `;
+                    q = `Use the graph to find $\vec{PQ}$ in component form.`;
+                }
+
                 return {
-                    q: `Given points $P(${x1},${y1})$ and $Q(${x2},${y2})$, find the $x$-component of $\vec{PQ}$.`,
-                    inputType: 'number', a: ans, tol: 0.1,
-                    solution: `$\vec{PQ}=\langle x_2-x_1, y_2-y_1\rangle=\langle ${x2}-${x1}, ${y2}-${y1}\rangle$, so the $x$-component is ${ans}.`
+                    q,
+                    svg,
+                    inputType: 'vector_xy',
+                    a: { x: dx, y: dy },
+                    tol: { x: 0.1, y: 0.1 },
+                    solution: `$\vec{PQ}=\langle x_2-x_1, y_2-y_1\rangle=\langle ${x2}-${x1}, ${y2}-${y1}\rangle=\langle ${dx}, ${dy}\rangle$. So the components are $x=${dx}$ and $y=${dy}$.`
                 };
             }
         },
@@ -2233,9 +2273,11 @@
                 const x = a + k * c;
                 const y = b + k * d;
                 return {
-                    q: `Let $\vec u = \langle ${a}, ${b}\rangle$ and $\vec v = \langle ${c}, ${d}\rangle$. Find the $x$-component of $\vec u ${k >= 0 ? '+' : '-'} ${Math.abs(k)}\vec v$.`,
-                    inputType: 'number', a: x, tol: 0.1,
-                    solution: `Compute $${k}\vec v = \langle ${k*c}, ${k*d}\rangle$, then add to $\vec u$: $\langle ${a}, ${b}\rangle + \langle ${k*c}, ${k*d}\rangle = \langle ${x}, ${y}\rangle$. The $x$-component is ${x}.`
+                    q: `Let $\vec u = \langle ${a}, ${b}\rangle$ and $\vec v = \langle ${c}, ${d}\rangle$. Find the full vector $\vec u ${k >= 0 ? '+' : '-'} ${Math.abs(k)}\vec v$ in component form.`,
+                    inputType: 'vector_xy',
+                    a: { x, y },
+                    tol: { x: 0.1, y: 0.1 },
+                    solution: `First multiply each component of $\vec v$: $${k}\vec v = \langle ${k}(${c}), ${k}(${d})\rangle = \langle ${k * c}, ${k * d}\rangle$. Then add componentwise: $\vec u + ${k}\vec v = \langle ${a} + (${k * c}), ${b} + (${k * d})\rangle = \langle ${x}, ${y}\rangle$.`
                 };
             }
         },
@@ -2750,6 +2792,15 @@
                     <input type="number" step="any" id="inp-c4" placeholder="°">
                 </div>
             `;
+        } else if (currentQuestion.inputType === 'vector_xy') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">$x$-component =</span>
+                    <input type="number" step="any" id="inp-vx" placeholder="x">
+                    <span class="mig-label">$y$-component =</span>
+                    <input type="number" step="any" id="inp-vy" placeholder="y">
+                </div>
+            `;
         } else if (currentQuestion.inputType === 'vector_mag_dir') {
             inputArea.innerHTML = `
                 <div class="multi-input-grid">
@@ -2935,6 +2986,20 @@
             document.getElementById('inp-vmag').classList.add(magOk ? 'inp-correct' : 'inp-wrong');
             document.getElementById('inp-vdir').classList.add(dirOk ? 'inp-correct' : 'inp-wrong');
             isCorrect = magOk && dirOk;
+        } else if (currentQuestion.inputType === 'vector_xy') {
+            const ux = parseStrictNumber(document.getElementById('inp-vx').value);
+            const uy = parseStrictNumber(document.getElementById('inp-vy').value);
+            if (ux === null || uy === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
+            const tX = currentQuestion.tol?.x ?? 0.1;
+            const tY = currentQuestion.tol?.y ?? 0.1;
+            const xOk = Math.abs(ux - currentQuestion.a.x) <= tX;
+            const yOk = Math.abs(uy - currentQuestion.a.y) <= tY;
+            document.getElementById('inp-vx').classList.add(xOk ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-vy').classList.add(yOk ? 'inp-correct' : 'inp-wrong');
+            isCorrect = xOk && yOk;
         } else if (currentQuestion.inputType === 'quadrant_int') {
             const input = document.getElementById('answer-input');
             const userVal = parseStrictNumber(input.value);
