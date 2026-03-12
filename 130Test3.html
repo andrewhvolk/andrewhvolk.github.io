@@ -2623,10 +2623,10 @@
 
         const moduleGroups = [
             { key: 'm10', label: 'Trig Foundations (5.1–5.2)', cats: ['Section 5.1', 'Section 5.2'] },
+            { key: 'm10sup', label: 'Module 10 Supplementary Refreshers (not core 33 topics)', cats: ['Section 5.2 Supplementary'] },
             { key: 'm11', label: 'Reference Angles and Trig Signs (5.3)', cats: ['Section 5.3'] },
             { key: 'm12', label: 'Right-Triangle Applications (7.1)', cats: ['Section 7.1'] },
-            { key: 'm13', label: 'Vectors (8.4)', cats: ['Section 8.4', 'Chapter 8 Supplementary'] },
-            { key: 'm10sup', label: 'Section 5.2 Supplementary (Angle Unit Conversion)', cats: ['Section 5.2 Supplementary'] }
+            { key: 'm13', label: 'Vectors (8.4)', cats: ['Section 8.4', 'Chapter 8 Supplementary'] }
         ];
         const groups = moduleGroups.filter(g => state.checklist.some(item => g.cats.includes(item.cat)));
 
