@@ -1358,7 +1358,7 @@
 <div class="card">
 <h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
 <p style="text-align: center; color: var(--text-muted); margin-bottom: 0.6rem;">Practice generators are live for Unit 13 and aligned to Sections 5.1, 5.2, 5.3, 7.1, and 8.4.</p>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.92rem;">For decimal answers, enter rounded values as directed. Repeating decimals are accepted within tolerance (for example, $0.6667$ for $0.\overline{6}$).</p>
+<p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.92rem;">For decimal answers, enter rounded values as directed. Repeating decimals are accepted within tolerance (for example, $0.6667$ for $0.\overline{6}$). Unless a question explicitly says otherwise, enter a decimal number only (not $\pi$ notation).</p>
 <p id="coverage-audit" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;"></p>
 <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
 <!-- Mock Exam CTA -->
@@ -1889,7 +1889,7 @@
                 return {
                     q: `Find one coterminal angle (in radians) for $\theta = \frac{${baseNum}\pi}{6}$. (Round to 3 decimals if entering a decimal.)`,
                     inputType: 'coterminal_rad', baseThetaRad: baseTheta, tol: 0.01,
-                    entryNote: 'Any answer of the form $\theta + 2\pi k$ is valid, where $k$ is an integer.',
+                    entryNote: 'Any answer of the form $\theta + 2\pi k$ is valid, where $k$ is an integer. For this input, you may enter either a decimal or simple $\pi$ notation such as $\pi$, $2\pi/3$, or $-5\pi/6$.',
                     solution: `Coterminal angles differ by multiples of $2\pi$. One sample valid answer is $\frac{${baseNum}\pi}{6} ${k >= 0 ? '+' : '-'}${Math.abs(k)}(2\pi) = ${ans.toFixed(3)}$ radians.`
                 };
             }
@@ -2738,10 +2738,29 @@
         return Number.isFinite(parsed) ? parsed : null;
     }
 
-    function showInvalidNumberFeedback() {
+    function parsePiRadiansExpression(rawValue) {
+        const trimmed = rawValue.trim().toLowerCase().replace(/\s+/g, '').replace(/π/g, 'pi');
+        if (!trimmed) return null;
+        const piPattern = /^([+-]?\d*(?:\.\d+)?)?\*?pi(?:\/(\d+(?:\.\d+)?))?$/;
+        const match = trimmed.match(piPattern);
+        if (!match) return null;
+
+        let coeffRaw = match[1];
+        let coeff;
+        if (coeffRaw === undefined || coeffRaw === '') coeff = 1;
+        else if (coeffRaw === '+') coeff = 1;
+        else if (coeffRaw === '-') coeff = -1;
+        else coeff = Number(coeffRaw);
+
+        const denom = match[2] ? Number(match[2]) : 1;
+        if (!Number.isFinite(coeff) || !Number.isFinite(denom) || denom === 0) return null;
+        return coeff * Math.PI / denom;
+    }
+
+    function showInvalidNumberFeedback(message = 'Enter a decimal number only (not π notation).') {
         const feedback = document.getElementById('feedback-display');
         feedback.className = 'feedback incorrect';
-        feedback.textContent = 'Please enter a valid number.';
+        feedback.textContent = message;
     }
 
     function checkAnswer() {
@@ -2840,9 +2859,12 @@
             isCorrect = Math.abs(userVal - (baseTheta + 360 * k)) <= tol;
         } else if (currentQuestion.inputType === 'coterminal_rad') {
             const input = document.getElementById('answer-input');
-            const userVal = parseStrictNumber(input.value);
+            let userVal = parseStrictNumber(input.value);
             if (userVal === null) {
-                showInvalidNumberFeedback();
+                userVal = parsePiRadiansExpression(input.value);
+            }
+            if (userVal === null) {
+                showInvalidNumberFeedback('Enter a decimal or simple π expression (e.g., pi, 2pi/3, -5pi/6).');
                 return;
             }
             const tol = currentQuestion.tol ?? 0.01;
