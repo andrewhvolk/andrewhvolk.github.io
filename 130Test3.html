@@ -1684,7 +1684,7 @@
             // Section 5.1 (5 topics)
             { id: '51_1', cat: 'Section 5.1', label: 'Sketching an angle with absolute value less than 360 degrees in standard position', done: false, practiceId: 'angle_coterminal' },
             { id: '51_2', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in degrees and finding a coterminal angle', done: false, practiceId: 'angle_coterminal' },
-            { id: '51_3', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in radians and finding a coterminal angle', done: false, practiceId: 'angle_coterminal' },
+            { id: '51_3', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in radians and finding a coterminal angle', done: false, practiceId: 'angle_coterminal_rad' },
             { id: '51_4', cat: 'Section 5.1', label: 'Sketching an angle with absolute value greater than 360 degrees in standard position', done: false, practiceId: 'angle_coterminal' },
             { id: '51_5', cat: 'Section 5.1', label: 'Arc length and central angle measure', done: false, practiceId: 'arc_length' },
 
@@ -1696,7 +1696,7 @@
             { id: '52_5', cat: 'Section 5.2', label: 'Using the Pythagorean Theorem to find several trigonometric ratios in a right triangle', done: false, practiceId: 'trig_ratio' },
             { id: '52_6', cat: 'Section 5.2', label: 'Using a trigonometric ratio to find a side length in a right triangle', done: false, practiceId: 'solve_right_triangle_side_52' },
             { id: '52_7', cat: 'Section 5.2', label: 'Using trigonometry to find a length in a word problem with one right triangle', done: false, practiceId: 'solve_right_triangle_side_52' },
-            { id: '52_8', cat: 'Section 5.2', label: 'Using trigonometry to find lengths in a figure involving two right triangles', done: false, practiceId: 'solve_right_triangle_side_52' },
+            { id: '52_8', cat: 'Section 5.2', label: 'Using trigonometry to find lengths in a figure involving two right triangles', done: false, practiceId: 'two_right_triangles' },
 
             // Section 5.3 (8 topics)
             { id: '53_1', cat: 'Section 5.3', label: 'Sketching an angle with absolute value less than 360 degrees, and also its reference angle', done: false, practiceId: 'reference_angle_deg' },
@@ -1719,8 +1719,8 @@
 
             // Section 8.4 (4 topics)
             { id: '84_1', cat: 'Section 8.4', label: 'Writing a vector in component form given its initial and terminal points', done: false, practiceId: 'vector_components' },
-            { id: '84_2', cat: 'Section 8.4', label: 'Vector addition and scalar multiplication: Component form', done: false, practiceId: 'vector_components' },
-            { id: '84_3', cat: 'Section 8.4', label: 'Finding the magnitude and direction of a vector given its graph', done: false, practiceId: 'vector_magnitude' },
+            { id: '84_2', cat: 'Section 8.4', label: 'Vector addition and scalar multiplication: Component form', done: false, practiceId: 'vector_operations' },
+            { id: '84_3', cat: 'Section 8.4', label: 'Finding the magnitude and direction of a vector given its graph', done: false, practiceId: 'vector_mag_direction' },
             { id: '84_4', cat: 'Section 8.4', label: 'Finding the direction angle of a vector given in ai+bj form', done: false, practiceId: 'vector_direction' },
 
             // Chapter 8 supplementary topic (1 topic)
@@ -1869,6 +1869,24 @@
                     q: `Find one coterminal angle (in degrees) for $\theta = ${theta}^\circ$.`,
                     inputType: 'coterminal_deg', baseTheta: theta, tol: 0.1,
                     solution: `Coterminal angles differ by multiples of $360^\circ$, so infinitely many answers are valid. One sample valid answer is $${theta} ${ans > theta ? '+' : '-'} ${Math.abs(ans - theta)} = ${ans}^\circ$.`
+                };
+            }
+        },
+        {
+            id: 'angle_coterminal_rad', section: 'Section 5.1',
+            label: 'Coterminal Angles (Radians)',
+            generate: () => {
+                const n = Math.floor(Math.random() * 9) + 2;
+                const sign = Math.random() > 0.5 ? 1 : -1;
+                const baseNum = sign * n;
+                const baseTheta = baseNum * Math.PI / 6;
+                const k = (Math.floor(Math.random() * 4) + 1) * (Math.random() > 0.5 ? 1 : -1);
+                const ans = baseTheta + 2 * Math.PI * k;
+                return {
+                    q: `Find one coterminal angle (in radians) for $\theta = \frac{${baseNum}\pi}{6}$. (Round to 3 decimals if entering a decimal.)`,
+                    inputType: 'coterminal_rad', baseThetaRad: baseTheta, tol: 0.01,
+                    entryNote: 'Any answer of the form $\theta + 2\pi k$ is valid, where $k$ is an integer.',
+                    solution: `Coterminal angles differ by multiples of $2\pi$. One sample valid answer is $\frac{${baseNum}\pi}{6} ${k >= 0 ? '+' : '-'}${Math.abs(k)}(2\pi) = ${ans.toFixed(3)}$ radians.`
                 };
             }
         },
@@ -2143,6 +2161,46 @@
                     q: `Given points $P(${x1},${y1})$ and $Q(${x2},${y2})$, find the $x$-component of $\vec{PQ}$.`,
                     inputType: 'number', a: ans, tol: 0.1,
                     solution: `$\vec{PQ}=\langle x_2-x_1, y_2-y_1\rangle=\langle ${x2}-${x1}, ${y2}-${y1}\rangle$, so the $x$-component is ${ans}.`
+                };
+            }
+        },
+        {
+            id: 'vector_operations', section: 'Section 8.4',
+            label: 'Vector Addition and Scalar Multiplication',
+            generate: () => {
+                const a = Math.floor(Math.random() * 9) - 4;
+                const b = Math.floor(Math.random() * 9) - 4;
+                const c = Math.floor(Math.random() * 9) - 4;
+                const d = Math.floor(Math.random() * 9) - 4;
+                let k = [-3, -2, 2, 3][Math.floor(Math.random() * 4)];
+                if (a === 0 && b === 0 && c === 0 && d === 0) {
+                    k = 2;
+                }
+                const x = a + k * c;
+                const y = b + k * d;
+                return {
+                    q: `Let $\vec u = \langle ${a}, ${b}\rangle$ and $\vec v = \langle ${c}, ${d}\rangle$. Find the $x$-component of $\vec u ${k >= 0 ? '+' : '-'} ${Math.abs(k)}\vec v$.`,
+                    inputType: 'number', a: x, tol: 0.1,
+                    solution: `Compute $${k}\vec v = \langle ${k*c}, ${k*d}\rangle$, then add to $\vec u$: $\langle ${a}, ${b}\rangle + \langle ${k*c}, ${k*d}\rangle = \langle ${x}, ${y}\rangle$. The $x$-component is ${x}.`
+                };
+            }
+        },
+        {
+            id: 'vector_mag_direction', section: 'Section 8.4',
+            label: 'Vector Magnitude and Direction',
+            generate: () => {
+                let a = Math.floor(Math.random() * 16) - 8;
+                let b = Math.floor(Math.random() * 16) - 8;
+                if (a === 0 && b === 0) b = 6;
+                let direction = Math.atan2(b, a) * 180 / Math.PI;
+                if (direction < 0) direction += 360;
+                const magnitude = Math.sqrt(a * a + b * b);
+                return {
+                    q: `For vector $\langle ${a}, ${b}\rangle$, enter BOTH the magnitude and direction angle (in degrees, from $0^\circ$ to $360^\circ$).`,
+                    inputType: 'vector_mag_dir',
+                    a: { mag: magnitude, dir: direction },
+                    tol: { mag: 0.005, dir: 0.15 },
+                    solution: `Magnitude: $\sqrt{(${a})^2 + (${b})^2} = ${magnitude.toFixed(3)}$. Direction: use $\theta = \operatorname{atan2}(${b}, ${a}) = ${direction.toFixed(1)}^\circ$.`
                 };
             }
         },
@@ -2624,6 +2682,15 @@
                     <input type="number" step="any" id="inp-c4" placeholder="°">
                 </div>
             `;
+        } else if (currentQuestion.inputType === 'vector_mag_dir') {
+            inputArea.innerHTML = `
+                <div class="multi-input-grid">
+                    <span class="mig-label">Magnitude $|\vec v| =$</span>
+                    <input type="number" step="any" id="inp-vmag" placeholder="magnitude">
+                    <span class="mig-label">Direction angle $\theta =$</span>
+                    <input type="number" step="any" id="inp-vdir" placeholder="degrees">
+                </div>
+            `;
         } else if (currentQuestion.inputType === 'quadrant_int') {
             inputArea.innerHTML = `<input type="number" min="1" max="4" step="1" id="answer-input" class="inp-standard" placeholder="1-4" autocomplete="off">`;
         } else {
@@ -2753,6 +2820,31 @@
             const baseTheta = currentQuestion.baseTheta;
             const k = Math.round((userVal - baseTheta) / 360);
             isCorrect = Math.abs(userVal - (baseTheta + 360 * k)) <= tol;
+        } else if (currentQuestion.inputType === 'coterminal_rad') {
+            const input = document.getElementById('answer-input');
+            const userVal = parseStrictNumber(input.value);
+            if (userVal === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
+            const tol = currentQuestion.tol ?? 0.01;
+            const baseThetaRad = currentQuestion.baseThetaRad;
+            const k = Math.round((userVal - baseThetaRad) / (2 * Math.PI));
+            isCorrect = Math.abs(userVal - (baseThetaRad + 2 * Math.PI * k)) <= tol;
+        } else if (currentQuestion.inputType === 'vector_mag_dir') {
+            const umag = parseStrictNumber(document.getElementById('inp-vmag').value);
+            const udir = parseStrictNumber(document.getElementById('inp-vdir').value);
+            if (umag === null || udir === null) {
+                showInvalidNumberFeedback();
+                return;
+            }
+            const mTol = currentQuestion.tol?.mag ?? 0.005;
+            const dTol = currentQuestion.tol?.dir ?? 0.15;
+            const magOk = Math.abs(umag - currentQuestion.a.mag) <= mTol;
+            const dirOk = Math.abs(udir - currentQuestion.a.dir) <= dTol;
+            document.getElementById('inp-vmag').classList.add(magOk ? 'inp-correct' : 'inp-wrong');
+            document.getElementById('inp-vdir').classList.add(dirOk ? 'inp-correct' : 'inp-wrong');
+            isCorrect = magOk && dirOk;
         } else if (currentQuestion.inputType === 'quadrant_int') {
             const input = document.getElementById('answer-input');
             const userVal = parseStrictNumber(input.value);
