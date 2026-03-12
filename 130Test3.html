@@ -1842,6 +1842,15 @@
         renderHistory();
     }
 
+    function escapeHtml(text) {
+        return String(text)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#39;');
+    }
+
     // --- GENERATORS LOGIC ---
     function normalizeDegrees(angle) {
         let t = angle % 360;
@@ -2059,7 +2068,7 @@
                 return {
                     q: `In a right triangle, opposite side $=${opp}$ and adjacent side $=${adj}$. Find $${pick}(\\theta)$. (Round to 4 decimals)`,
                     inputType: 'number', a: ans, tol: 0.0006,
-                    solution: pick === 'sin' ? `Hypotenuse $=\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\sin\\theta=\\frac{${opp}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : pick === 'cos' ? `Hypotenuse $=\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\cos\\theta=\\frac{${adj}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : `$\\tan\\theta=\\frac{\text{opp}}{\text{adj}}=\\frac{${opp}}{${adj}}=${ans.toFixed(4)}$.`
+                    solution: pick === 'sin' ? `Hypotenuse $=\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\sin\\theta=\\frac{${opp}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : pick === 'cos' ? `Hypotenuse $=\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\cos\\theta=\\frac{${adj}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : `$\\tan\\theta=\\frac{\\text{opp}}{\\text{adj}}=\\frac{${opp}}{${adj}}=${ans.toFixed(4)}$.`
                 };
             }
         },
@@ -2443,7 +2452,7 @@
                     inputType: 'vector_mag_dir',
                     a: { mag: magnitude, dir: direction },
                     tol: { mag: 0.005, dir: 0.15 },
-                    solution: `Magnitude: $\sqrt{(${a})^2 + (${b})^2} = ${magnitude.toFixed(3)}$. Direction: use $\\theta = \operatorname{atan2}(${b}, ${a}) = ${direction.toFixed(1)}^\\circ$.`
+                    solution: `Magnitude: $\sqrt{(${a})^2 + (${b})^2} = ${magnitude.toFixed(3)}$. Direction: use $\\theta = \\operatorname{atan2}(${b}, ${a}) = ${direction.toFixed(1)}^\\circ$.`
                 };
             }
         },
@@ -2871,8 +2880,14 @@
         // Handle SVG injection
         const svgContainer = document.getElementById('svg-display');
         if(currentQuestion.svg) {
-            const fallback = currentQuestion.svgAltText ? `<p class="svg-fallback"><strong>Text fallback:</strong> ${currentQuestion.svgAltText}</p>` : '';
+            const fallbackLabel = currentQuestion.svgAltText || 'Diagram for this question. Use the written prompt and labels to interpret the figure.';
+            const safeFallback = escapeHtml(fallbackLabel);
+            const fallback = `<p class="svg-fallback"><strong>Text fallback:</strong> ${safeFallback}</p>`;
             svgContainer.innerHTML = `${currentQuestion.svg}${fallback}`;
+            svgContainer.querySelectorAll('svg').forEach(svg => {
+                if (!svg.getAttribute('role')) svg.setAttribute('role', 'img');
+                if (!svg.getAttribute('aria-label')) svg.setAttribute('aria-label', fallbackLabel);
+            });
             svgContainer.style.display = 'block';
         } else {
             svgContainer.style.display = 'none';
