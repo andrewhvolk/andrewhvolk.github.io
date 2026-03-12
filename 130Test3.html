@@ -1710,7 +1710,7 @@
             { id: '53_5', cat: 'Section 5.3', label: 'Sketching an angle with absolute value less than 2π radians, and also its reference angle', done: false, practiceId: 'reference_angle_rad' },
             { id: '53_6', cat: 'Section 5.3', label: 'Reference angles in radians: Problem type 1', done: false, practiceId: 'reference_angle_rad' },
             { id: '53_7', cat: 'Section 5.3', label: 'Determining the location of a terminal point given the signs of trigonometric values', done: false, practiceId: 'quadrant_signs' },
-            { id: '53_8', cat: 'Section 5.3', label: 'Finding values of trigonometric functions given information about an angle: Problem type 1', done: false, practiceId: 'quadrant_signs' },
+            { id: '53_8', cat: 'Section 5.3', label: 'Finding values of trigonometric functions given information about an angle: Problem type 1', done: false, practiceId: 'trig_values_from_info' },
 
             // Section 7.1 (7 topics)
             { id: '71_1', cat: 'Section 7.1', label: 'Using a trigonometric ratio to find a side length in a right triangle', done: false, practiceId: 'solve_right_triangle_side' },
@@ -2090,6 +2090,56 @@
                     q: `Determine the quadrant number where $\theta$ can lie if ${pick.q}. Enter 1, 2, 3, or 4.`,
                     inputType: 'quadrant_int', a: pick.a,
                     solution: `Use ASTC signs. The condition places $\theta$ in Quadrant ${pick.a}.`
+                };
+            }
+        },
+
+        {
+            id: 'trig_values_from_info', section: 'Section 5.3',
+            label: 'Trig Values from Quadrant/Reference Angle',
+            generate: () => {
+                const specialAngles = [
+                    { deg: 30, sin: 0.5, cos: Math.sqrt(3)/2, tan: Math.sqrt(3)/3 },
+                    { deg: 45, sin: Math.sqrt(2)/2, cos: Math.sqrt(2)/2, tan: 1 },
+                    { deg: 60, sin: Math.sqrt(3)/2, cos: 0.5, tan: Math.sqrt(3) }
+                ];
+                const quadrants = [1, 2, 3, 4];
+                const funcs = ['sin', 'cos', 'tan'];
+                const signOf = (func, quadrant) => {
+                    if (func === 'sin') return (quadrant === 1 || quadrant === 2) ? 1 : -1;
+                    if (func === 'cos') return (quadrant === 1 || quadrant === 4) ? 1 : -1;
+                    return (quadrant === 1 || quadrant === 3) ? 1 : -1;
+                };
+
+                const s = specialAngles[Math.floor(Math.random() * specialAngles.length)];
+                const quadrant = quadrants[Math.floor(Math.random() * quadrants.length)];
+                const targetFunc = funcs[Math.floor(Math.random() * funcs.length)];
+                const targetAbs = s[targetFunc];
+                const targetSign = signOf(targetFunc, quadrant);
+                const ans = targetSign * targetAbs;
+                const modeFromGivenRatio = Math.random() < 0.55;
+
+                if (modeFromGivenRatio) {
+                    let knownFunc;
+                    do {
+                        knownFunc = funcs[Math.floor(Math.random() * funcs.length)];
+                    } while (knownFunc === targetFunc);
+
+                    const knownAbs = s[knownFunc];
+                    const knownSign = signOf(knownFunc, quadrant);
+                    const knownVal = knownSign * knownAbs;
+
+                    return {
+                        q: `Suppose $\theta$ is in Quadrant ${quadrant} and $\\${knownFunc}\theta = ${knownVal.toFixed(4)}$. Find $\\${targetFunc}\theta$. (Round to 4 decimals)`,
+                        inputType: 'number', a: ans, tol: 0.002,
+                        solution: `Use the known ratio to identify the reference angle: $|\\${knownFunc}\theta|=${knownAbs.toFixed(4)}$ matches a reference angle of $${s.deg}^\circ$. At a reference angle of $${s.deg}^\circ$, $|\\${targetFunc}\theta|=${targetAbs.toFixed(4)}$. Because $\theta$ is in Quadrant ${quadrant}, $\\${targetFunc}\theta$ is ${targetSign > 0 ? 'positive' : 'negative'}. Therefore $\\${targetFunc}\theta=${ans.toFixed(4)}$.`
+                    };
+                }
+
+                return {
+                    q: `An angle $\theta$ has reference angle $${s.deg}^\circ$ and lies in Quadrant ${quadrant}. Find $\\${targetFunc}\theta$. (Round to 4 decimals)`,
+                    inputType: 'number', a: ans, tol: 0.002,
+                    solution: `Start with the reference-angle value: at $${s.deg}^\circ$, $|\\${targetFunc}\theta|=${targetAbs.toFixed(4)}$. Then apply signs by quadrant: in Quadrant ${quadrant}, $\\${targetFunc}\theta$ is ${targetSign > 0 ? 'positive' : 'negative'}. So $\\${targetFunc}\theta=${ans.toFixed(4)}$.`
                 };
             }
         },
