@@ -1682,14 +1682,14 @@
     // Keep default checklist as source of truth for structure
     const DEFAULT_CHECKLIST = [
             // Section 5.1 (5 topics)
-            { id: '51_1', cat: 'Section 5.1', label: 'Sketching an angle with absolute value less than 360 degrees in standard position', done: false },
+            { id: '51_1', cat: 'Section 5.1', label: 'Sketching an angle with absolute value less than 360 degrees in standard position', done: false, practiceId: 'angle_coterminal' },
             { id: '51_2', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in degrees and finding a coterminal angle', done: false, practiceId: 'angle_coterminal' },
             { id: '51_3', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in radians and finding a coterminal angle', done: false, practiceId: 'angle_coterminal' },
             { id: '51_4', cat: 'Section 5.1', label: 'Sketching an angle with absolute value greater than 360 degrees in standard position', done: false, practiceId: 'angle_coterminal' },
             { id: '51_5', cat: 'Section 5.1', label: 'Arc length and central angle measure', done: false, practiceId: 'arc_length' },
 
             // Section 5.2 (8 topics)
-            { id: '52_1', cat: 'Section 5.2', label: 'Using a calculator to approximate sine, cosine, and tangent values', done: false },
+            { id: '52_1', cat: 'Section 5.2', label: 'Using a calculator to approximate sine, cosine, and tangent values', done: false, practiceId: 'trig_calculator_values' },
             { id: '52_2', cat: 'Section 5.2', label: 'Sine, cosine, and tangent ratios: Numbers for side lengths', done: false, practiceId: 'trig_ratio' },
             { id: '52_3', cat: 'Section 5.2', label: 'Sine, cosine, and tangent ratios: Variables for side lengths', done: false, practiceId: 'trig_ratio' },
             { id: '52_4', cat: 'Section 5.2', label: 'Using the Pythagorean Theorem to find a sine, cosine, or tangent ratio in a right triangle', done: false, practiceId: 'trig_ratio' },
@@ -1703,8 +1703,8 @@
             { id: '53_2', cat: 'Section 5.3', label: 'Reference angles in degrees: Problem type 1', done: false, practiceId: 'reference_angle_deg' },
             { id: '53_3', cat: 'Section 5.3', label: 'Sketching an angle with absolute value greater than 360 degrees, and also its reference angle', done: false, practiceId: 'reference_angle_deg' },
             { id: '53_4', cat: 'Section 5.3', label: 'Reference angles in degrees: Problem type 2', done: false, practiceId: 'reference_angle_deg' },
-            { id: '53_5', cat: 'Section 5.3', label: 'Sketching an angle with absolute value less than 2π radians, and also its reference angle', done: false },
-            { id: '53_6', cat: 'Section 5.3', label: 'Reference angles in radians: Problem type 1', done: false },
+            { id: '53_5', cat: 'Section 5.3', label: 'Sketching an angle with absolute value less than 2π radians, and also its reference angle', done: false, practiceId: 'reference_angle_rad' },
+            { id: '53_6', cat: 'Section 5.3', label: 'Reference angles in radians: Problem type 1', done: false, practiceId: 'reference_angle_rad' },
             { id: '53_7', cat: 'Section 5.3', label: 'Determining the location of a terminal point given the signs of trigonometric values', done: false, practiceId: 'quadrant_signs' },
             { id: '53_8', cat: 'Section 5.3', label: 'Finding values of trigonometric functions given information about an angle: Problem type 1', done: false, practiceId: 'quadrant_signs' },
 
@@ -1715,7 +1715,7 @@
             { id: '71_4', cat: 'Section 7.1', label: 'Using a trigonometric ratio to find an angle measure in a right triangle', done: false, practiceId: 'solve_right_triangle' },
             { id: '71_5', cat: 'Section 7.1', label: 'Using trigonometry to find angles of elevation or depression in a word problem', done: false, practiceId: 'angle_of_elevation' },
             { id: '71_6', cat: 'Section 7.1', label: 'Solving a right triangle', done: false, practiceId: 'solve_right_triangle' },
-            { id: '71_7', cat: 'Section 7.1', label: 'Using trigonometry to find a length in a word problem with two right triangles', done: false },
+            { id: '71_7', cat: 'Section 7.1', label: 'Using trigonometry to find a length in a word problem with two right triangles', done: false, practiceId: 'two_right_triangles' },
 
             // Section 8.4 (4 topics)
             { id: '84_1', cat: 'Section 8.4', label: 'Writing a vector in component form given its initial and terminal points', done: false, practiceId: 'vector_components' },
@@ -1903,6 +1903,39 @@
             }
         },
         {
+            id: 'trig_calculator_values', section: 'Section 5.2',
+            label: 'Calculator Trig Values',
+            generate: () => {
+                const mode = Math.random() > 0.5 ? 'deg' : 'rad';
+                const trigFn = ['sin', 'cos', 'tan'][Math.floor(Math.random() * 3)];
+                let angleText;
+                let angleRad;
+
+                if (mode === 'deg') {
+                    const angleDeg = [15, 20, 25, 35, 40, 55, 70][Math.floor(Math.random() * 7)];
+                    angleRad = angleDeg * Math.PI / 180;
+                    angleText = `${angleDeg}^\circ`;
+                } else {
+                    const radians = [
+                        { text: '\\frac{\\pi}{7}', value: Math.PI / 7 },
+                        { text: '\\frac{2\\pi}{7}', value: 2 * Math.PI / 7 },
+                        { text: '\\frac{3\\pi}{8}', value: 3 * Math.PI / 8 },
+                        { text: '\\frac{5\\pi}{12}', value: 5 * Math.PI / 12 },
+                        { text: '\\frac{7\\pi}{10}', value: 7 * Math.PI / 10 }
+                    ][Math.floor(Math.random() * 5)];
+                    angleRad = radians.value;
+                    angleText = radians.text;
+                }
+
+                const ans = trigFn === 'sin' ? Math.sin(angleRad) : trigFn === 'cos' ? Math.cos(angleRad) : Math.tan(angleRad);
+                return {
+                    q: `Use a calculator to approximate $${trigFn}(${angleText})$. (Round to 4 decimals)`,
+                    inputType: 'number', a: ans, tol: 0.0006,
+                    solution: `Set the calculator to ${mode === 'deg' ? 'degree' : 'radian'} mode, evaluate $${trigFn}(${angleText})$, and round to $${ans.toFixed(4)}$.`
+                };
+            }
+        },
+        {
             id: 'solve_side', section: 'Section 5.2',
             label: 'Find a Missing Side',
             generate: () => {
@@ -1950,6 +1983,34 @@
                     q: type === 'opp' ? `A right triangle has angle $${angle}^\circ$ and adjacent side $${known}$. Find the opposite side. (Round to 2 decimals)` : `A right triangle has angle $${angle}^\circ$ and opposite side $${known}$. Find the adjacent side. (Round to 2 decimals)`,
                     inputType: 'number', a: ans, tol: 0.05,
                     solution: type === 'opp' ? `$\tan(${angle}^\circ)=\frac{x}{${known}}\Rightarrow x=${known}\tan(${angle}^\circ)=${ans.toFixed(2)}$.` : `$\tan(${angle}^\circ)=\frac{${known}}{x}\Rightarrow x=\frac{${known}}{\tan(${angle}^\circ)}=${ans.toFixed(2)}$.`
+                };
+            }
+        },
+        {
+            id: 'reference_angle_rad', section: 'Section 5.3',
+            label: 'Reference Angle (Radians)',
+            generate: () => {
+                const k = Math.floor(Math.random() * 11) + 1;
+                const numerator = 2 * k - 1;
+                const denominator = 12;
+                const theta = numerator * Math.PI / denominator;
+                const thetaText = `\\frac{${numerator}\\pi}{${denominator}}`;
+                let ans;
+
+                if (theta < Math.PI / 2) {
+                    ans = theta;
+                } else if (theta < Math.PI) {
+                    ans = Math.PI - theta;
+                } else if (theta < 3 * Math.PI / 2) {
+                    ans = theta - Math.PI;
+                } else {
+                    ans = 2 * Math.PI - theta;
+                }
+
+                return {
+                    q: `Find the reference angle for $${thetaText}$. Give your answer in radians. (Round to 4 decimals)`,
+                    inputType: 'number', a: ans, tol: 0.0006,
+                    solution: `Place $${thetaText}$ on the unit circle and measure the acute angle to the $x$-axis. The reference angle is $${ans.toFixed(4)}$ radians.`
                 };
             }
         },
@@ -2020,6 +2081,23 @@
                     q: `A point on the ground is ${d} ft from a building. The top is ${h} ft above eye level. Find the angle of elevation. (Round to 1 decimal)`,
                     inputType: 'number', a: ans, tol: 0.15,
                     solution: `$\tan\theta=\frac{${h}}{${d}}$, so $\theta=\tan^{-1}\!\left(\frac{${h}}{${d}}\right)=${ans.toFixed(1)}^\circ$.`
+                };
+            }
+        },
+        {
+            id: 'two_right_triangles', section: 'Section 7.1',
+            label: 'Two Right Triangles (Length)',
+            generate: () => {
+                const gap = Math.floor(Math.random() * 10) + 8;
+                const angleA = [40, 42, 45, 48, 50][Math.floor(Math.random() * 5)];
+                const angleB = [20, 24, 28, 30, 32][Math.floor(Math.random() * 5)];
+                const tanA = Math.tan(angleA * Math.PI / 180);
+                const tanB = Math.tan(angleB * Math.PI / 180);
+                const d = (gap * tanB) / (tanA - tanB);
+                return {
+                    q: `Two observation points $A$ and $B$ are on the same straight line from the base of a tower, with $B$ ${gap} m farther from the tower than $A$. The angle of elevation to the top is $${angleA}^\circ$ at $A$ and $${angleB}^\circ$ at $B$. Find the horizontal distance from $A$ to the tower base. (Round to 2 decimals)`,
+                    inputType: 'number', a: d, tol: 0.05,
+                    solution: `Let $x$ be the distance from $A$ to the tower base and $h$ the tower height. Then $h=x\\tan(${angleA}^\circ)$ and $h=(x+${gap})\\tan(${angleB}^\circ)$. Set equal and solve: $x(\\tan(${angleA}^\circ)-\\tan(${angleB}^\circ))=${gap}\\tan(${angleB}^\circ)$, so $x=${d.toFixed(2)}$ m.`
                 };
             }
         },
