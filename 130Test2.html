@@ -1749,7 +1749,7 @@
             { id: '42_9', cat: 'Section 4.2', label: 'Finding the final amount in a word problem on continuous compound interest', done: false, practiceId: 'interest', videoUrl: 'http://www.youtube.com/watch?v=2S4vK30dII0' },
             
             // Section 4.3
-            { id: '43_1', cat: 'Section 4.3', label: 'Using a calculator to evaluate natural and common logarithmic expressions', done: false, practiceId: 'eval_exp', videoUrl: 'http://www.youtube.com/watch?v=eL2FhO11mf0' },
+            { id: '43_1', cat: 'Section 4.3', label: 'Using a calculator to evaluate natural and common logarithmic expressions', done: false, practiceId: 'eval_log', videoUrl: 'http://www.youtube.com/watch?v=eL2FhO11mf0' },
             { id: '43_2', cat: 'Section 4.3', label: 'Converting between logarithmic and exponential equations', done: false, practiceId: 'logexp_conv', videoUrl: 'http://www.youtube.com/watch?v=-ZQvz4bc2Eg' },
             { id: '43_3', cat: 'Section 4.3', label: 'Converting between natural logarithmic and exponential equations', done: false, practiceId: 'logexp_conv', videoUrl: 'http://www.youtube.com/watch?v=-ZQvz4bc2Eg' },
             { id: '43_4', cat: 'Section 4.3', label: 'Evaluating logarithmic expressions', done: false, practiceId: 'logexp', videoUrl: 'http://www.youtube.com/watch?v=eL2FhO11mf0' },
@@ -2863,6 +2863,38 @@
                         solution: `Rewrite in exponential form: $\\log\\, x = ${c}$ means $x = 10^{${c}}$. <br> $x = 10^{${c}} = ${ans.toFixed(3)}$`
                     };
                 }
+            }
+        },
+        {
+            id: 'eval_log', section: 'Section 4.3',
+            label: 'Evaluate Natural & Common Logs',
+            generate: () => {
+                const isNaturalLog = Math.random() > 0.5;
+                const roundInput = (Math.random() > 0.5);
+
+                if (isNaturalLog) {
+                    const x = roundInput
+                        ? Math.floor(Math.random() * 450) + 50
+                        : (Math.random() * 95 + 5).toFixed(2);
+                    const xVal = parseFloat(x);
+                    const ans = Math.log(xVal);
+                    return {
+                        q: `Use a calculator to evaluate $\\ln(${x})$. (Round to 3 decimal places)`,
+                        inputType: 'number', a: ans, tol: 0.0005,
+                        solution: `Natural logarithm uses base $e$: $\\ln(${x}) = ${ans.toFixed(3)}$.`
+                    };
+                }
+
+                const x = roundInput
+                    ? Math.floor(Math.random() * 900) + 100
+                    : (Math.random() * 90 + 10).toFixed(2);
+                const xVal = parseFloat(x);
+                const ans = Math.log10(xVal);
+                return {
+                    q: `Use a calculator to evaluate $\\log(${x})$. (Round to 3 decimal places)`,
+                    inputType: 'number', a: ans, tol: 0.0005,
+                    solution: `Common logarithm has base $10$: $\\log(${x}) = ${ans.toFixed(3)}$.`
+                };
             }
         },
         {
