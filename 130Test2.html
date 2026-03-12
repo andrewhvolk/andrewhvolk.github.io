@@ -1537,11 +1537,11 @@
 <div class="checklist-section">
 <h3>Section 4.2: Exponentials</h3>
 <div class="checklist-grid">
-<a class="check-item video-link" data-practice-id="eval_exp" data-video-id="v42_1" href="https://www.youtube.com/watch?v=kikGvjKFN8Q" style="text-decoration: none;" target="_blank">
+<a class="check-item video-link" data-practice-id="exp_table_graph" data-video-id="v42_1" href="https://www.youtube.com/watch?v=kikGvjKFN8Q" style="text-decoration: none;" target="_blank">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Graphing &amp; Tables</span>
 </a>
-<a class="check-item video-link" data-practice-id="eval_exp" data-video-id="v42_2" href="https://www.youtube.com/watch?v=aix8TLHdKgc" style="text-decoration: none;" target="_blank">
+<a class="check-item video-link" data-practice-id="exp_table_graph" data-video-id="v42_2" href="https://www.youtube.com/watch?v=aix8TLHdKgc" style="text-decoration: none;" target="_blank">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Calculator: Decimal Exponents</span>
 </a>
@@ -1587,7 +1587,7 @@
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>DMS to Decimal Conversion</span>
 </a>
-<a class="check-item video-link" data-practice-id="rad_deg" data-video-id="vgeo_3" href="https://www.youtube.com/watch?v=JmLN3QxshlE" style="text-decoration: none;" target="_blank">
+<a class="check-item video-link" data-practice-id="std_pos_angle" data-video-id="vgeo_3" href="https://www.youtube.com/watch?v=JmLN3QxshlE" style="text-decoration: none;" target="_blank">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Radians &amp; Degrees Intro</span>
 </a>
@@ -1738,8 +1738,8 @@
     // Keep default checklist as source of truth for structure
     const DEFAULT_CHECKLIST = [
             // Section 4.2
-            { id: '42_1', cat: 'Section 4.2', label: 'Table for an exponential function', done: false, videoUrl: 'http://www.youtube.com/watch?v=kikGvjKFN8Q' },
-            { id: '42_2', cat: 'Section 4.2', label: 'Graphing an exponential function and its asymptote: $f(x)=b^x$', done: false, videoUrl: 'http://www.youtube.com/watch?v=kikGvjKFN8Q' },
+            { id: '42_1', cat: 'Section 4.2', label: 'Table for an exponential function', done: false, practiceId: 'exp_table_graph', videoUrl: 'http://www.youtube.com/watch?v=kikGvjKFN8Q' },
+            { id: '42_2', cat: 'Section 4.2', label: 'Graphing an exponential function and its asymptote: $f(x)=b^x$', done: false, practiceId: 'exp_table_graph', videoUrl: 'http://www.youtube.com/watch?v=kikGvjKFN8Q' },
             { id: '42_3', cat: 'Section 4.2', label: 'Using a calculator to evaluate exponential expressions', done: false, practiceId: 'eval_exp', videoUrl: 'http://www.youtube.com/watch?v=aix8TLHdKgc' },
             { id: '42_4', cat: 'Section 4.2', label: 'Evaluating an exponential function that models a real-world situation', done: false, practiceId: 'eval_exp', videoUrl: 'http://www.youtube.com/watch?v=kikGvjKFN8Q' },
             { id: '42_5', cat: 'Section 4.2', label: 'Using a calculator to evaluate exponential expressions involving base $e$', done: false, practiceId: 'eval_exp', videoUrl: 'http://www.youtube.com/watch?v=aix8TLHdKgc' },
@@ -1780,7 +1780,7 @@
             { id: 'geo_11', cat: 'Circles', label: 'Converting degrees to radians and radians to degrees (Problem type 1)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
             { id: 'geo_12', cat: 'Circles', label: 'Converting degrees to radians and radians to degrees (Problem type 2)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
             { id: 'geo_12b', cat: 'Circles', label: 'Converting decimal radians to degrees (no $\\pi$, e.g. 4.5 rad)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
-            { id: 'geo_13', cat: 'Circles', label: 'Sketching an angle with absolute value less than $2\\pi$ radians in standard position', done: false, videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_13', cat: 'Circles', label: 'Sketching an angle with absolute value less than $2\\pi$ radians in standard position', done: false, practiceId: 'std_pos_angle', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
             { id: 'geo_14', cat: 'Circles', label: 'Drawing an arc to find a central angle or an arc length on the unit circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
             { id: 'geo_15', cat: 'Circles', label: 'Drawing an arc to find a central angle or an arc length on a non-unit circle', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
             { id: 'geo_16', cat: 'Circles', label: 'Arc length and central angle measure', done: false, practiceId: 'circles', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
@@ -1999,6 +1999,47 @@
                 };
             }
         },
+
+        {
+            id: 'exp_table_graph', section: 'Section 4.2',
+            label: 'Exponential Table & Asymptote',
+            generate: () => {
+                const base = Math.floor(Math.random() * 4) + 2;
+                const coeff = Math.floor(Math.random() * 4) + 1;
+                const shift = Math.floor(Math.random() * 9) - 4;
+                const mode = Math.random();
+
+                if (mode < 0.5) {
+                    const x = Math.floor(Math.random() * 5) - 2;
+                    const y = coeff * Math.pow(base, x) + shift;
+                    const xList = [-1, 0, 1];
+                    const rows = xList.map(v => `(${v}, ${(coeff * Math.pow(base, v) + shift).toFixed(2)})`).join(', ');
+
+                    return {
+                        q: `For $f(x) = ${coeff}(${base})^x ${shift >= 0 ? '+' : '-'} ${Math.abs(shift)}$, find $f(${x})$.<br>Reference table values: ${rows}`,
+                        inputType: 'number', a: y, tol: 0.01,
+                        solution: `$f(${x}) = ${coeff}(${base})^{${x}} ${shift >= 0 ? '+' : '-'} ${Math.abs(shift)} = ${y.toFixed(2)}$`
+                    };
+                }
+
+                const svg = `<svg viewBox="0 0 220 160" class="svg-canvas" width="300" height="220">
+                    <line x1="20" y1="80" x2="200" y2="80" stroke="var(--text)" stroke-width="1.5"/>
+                    <line x1="110" y1="15" x2="110" y2="145" stroke="var(--text)" stroke-width="1.5"/>
+                    <line x1="20" y1="${80 - shift * 12}" x2="200" y2="${80 - shift * 12}" stroke="var(--accent)" stroke-dasharray="5,5" stroke-width="2"/>
+                    <path d="M35 ${80 - (coeff * Math.pow(base, -2) + shift) * 12} C 75 ${80 - (coeff * Math.pow(base, -1) + shift) * 12}, 105 ${80 - (coeff + shift) * 12}, 180 ${80 - (coeff * Math.pow(base, 1.3) + shift) * 12}" fill="none" stroke="var(--success)" stroke-width="2.5"/>
+                    <text x="196" y="75" fill="var(--text)" font-size="11">x</text>
+                    <text x="114" y="20" fill="var(--text)" font-size="11">y</text>
+                    <text x="28" y="${76 - shift * 12}" fill="var(--accent)" font-size="11">y = ?</text>
+                </svg>`;
+
+                return {
+                    q: `For $f(x) = ${coeff}(${base})^x ${shift >= 0 ? '+' : '-'} ${Math.abs(shift)}$, identify the horizontal asymptote value (enter just the number).`,
+                    svg,
+                    inputType: 'number', a: shift, tol: 0.001,
+                    solution: `In $f(x)=ab^x+k$, the horizontal asymptote is $y=k$. Here $k=${shift}$, so the asymptote is $y=${shift}$. This is the long-run value the graph approaches.`
+                };
+            }
+        },
         {
             id: 'rad_deg', section: 'Circles',
             label: 'Radians ↔ Degrees',
@@ -2033,6 +2074,39 @@
                         solution: `Multiply by $\\frac{180^\\circ}{\\pi}$: $${rad} \\cdot \\frac{180}{\\pi} = ${ans.toFixed(1)}^\\circ$`
                     };
                 }
+            }
+        },
+
+        {
+            id: 'std_pos_angle', section: 'Circles',
+            label: 'Standard-Position Angle Sketch (Radians)',
+            generate: () => {
+                const denOptions = [2, 3, 4, 6];
+                const den = denOptions[Math.floor(Math.random() * denOptions.length)];
+                const num = Math.floor(Math.random() * (2 * den - 1)) + 1;
+                const theta = (num * Math.PI) / den;
+                const refNum = num <= den ? num : (2 * den - num);
+                const ref = (refNum * Math.PI) / den;
+                const deg = theta * 180 / Math.PI;
+                const refDeg = ref * 180 / Math.PI;
+                const x2 = 110 + 55 * Math.cos(theta);
+                const y2 = 80 - 55 * Math.sin(theta);
+
+                const svg = `<svg viewBox="0 0 220 160" class="svg-canvas" width="300" height="220">
+                    <circle cx="110" cy="80" r="55" fill="none" stroke="var(--text)" stroke-width="1.5"/>
+                    <line x1="25" y1="80" x2="195" y2="80" stroke="var(--text)" stroke-width="1.5"/>
+                    <line x1="110" y1="20" x2="110" y2="140" stroke="var(--text)" stroke-width="1.5"/>
+                    <line x1="110" y1="80" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--success)" stroke-width="2.5"/>
+                    <path d="M150,80 A40,40 0 0,0 ${110 + 40 * Math.cos(theta)},${80 - 40 * Math.sin(theta)}" fill="none" stroke="var(--accent)" stroke-width="2"/>
+                    <text x="154" y="75" fill="var(--accent)" font-size="11">θ</text>
+                </svg>`;
+
+                return {
+                    q: `Sketch/interpret $\\theta = \\frac{${num}\\pi}{${den}}$ in standard position. Find its reference angle in radians (decimal accepted).`,
+                    svg,
+                    inputType: 'number', a: ref, tol: 0.01,
+                    solution: `$\\theta = \\frac{${num}\\pi}{${den}}$ is ${deg.toFixed(1)}^\\circ. The reference angle is the acute angle to the x-axis: $\\theta_{ref}=\\frac{${refNum}\\pi}{${den}}\\approx ${ref.toFixed(2)}$ rad (${refDeg.toFixed(1)}^\\circ).`
+                };
             }
         },
         {
