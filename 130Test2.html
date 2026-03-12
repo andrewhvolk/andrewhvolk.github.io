@@ -2296,12 +2296,12 @@
         const qs = parseFloat((mp * scale).toFixed(1));
 
         return {
-            q: `Given $\Delta MNP \sim \Delta QRS$ with $MN = ${mn}$, $NP = ${np}$, $MP = ${mp}$, and $QR = ${qr}$. Also $\angle M = ${aM}^\circ$ and $\angle N = ${aN}^\circ$. Find all four values below.`,
+            q: `Given $\\Delta MNP \\sim \\Delta QRS$ with $MN = ${mn}$, $NP = ${np}$, $MP = ${mp}$, and $QR = ${qr}$. Also $\\angle M = ${aM}^\\circ$ and $\\angle N = ${aN}^\\circ$. Find all four values below.`,
             inputType: 'quiz7_similar_multi',
             a: { s1: aP, s2: aP, s3: rs, s4: qs },
             tol: [0.1, 0.1, 0.1, 0.1],
-            solution: `First, $\angle P = 180 - ${aM} - ${aN} = ${aP}^\circ$. Since triangles are similar, $\angle S = \angle P = ${aP}^\circ$.<br>
-            Scale factor (small to large): $\frac{QR}{MN} = \frac{${qr}}{${mn}} = ${scale.toFixed(1)}$.<br>
+            solution: `First, $\\angle P = 180 - ${aM} - ${aN} = ${aP}^\\circ$. Since triangles are similar, $\\angle S = \\angle P = ${aP}^\\circ$.<br>
+            Scale factor (small to large): $\\frac{QR}{MN} = \\frac{${qr}}{${mn}} = ${scale.toFixed(1)}$.<br>
             So $RS = ${np}(${scale.toFixed(1)}) = ${rs.toFixed(1)}$ and $QS = ${mp}(${scale.toFixed(1)}) = ${qs.toFixed(1)}$.`
         };
     }
@@ -2318,14 +2318,14 @@
         const a3 = parseFloat((180 - a2 - a5).toFixed(1));
 
         return {
-            q: `Lines $j \| k$ are parallel. Given $\angle 2 = ${a2}^\circ$ and $\angle 5 = ${a5}^\circ$, find the four requested angles.`,
+            q: `Lines $j \\| k$ are parallel. Given $\\angle 2 = ${a2}^\\circ$ and $\\angle 5 = ${a5}^\\circ$, find the four requested angles.`,
             inputType: 'quiz7_parallel_multi',
             a: { p1: a1, p2: a4, p3: a6, p4: a3 },
             tol: [0.1, 0.1, 0.1, 0.1],
-            solution: `$\angle 1$ is supplementary to $\angle 2$: $180 - ${a2} = ${a1}^\circ$.<br>
-            $\angle 4$ corresponds to (or is alternate interior with) $\angle 2$: ${a4}^\circ$.<br>
-            $\angle 6$ is supplementary to $\angle 5$: $180 - ${a5} = ${a6}^\circ$.<br>
-            Triangle sum gives $\angle 3 = 180 - ${a2} - ${a5} = ${a3}^\circ$.`
+            solution: `$\\angle 1$ is supplementary to $\\angle 2$: $180 - ${a2} = ${a1}^\\circ$.<br>
+            $\\angle 4$ corresponds to (or is alternate interior with) $\\angle 2$: ${a4}^\\circ$.<br>
+            $\\angle 6$ is supplementary to $\\angle 5$: $180 - ${a5} = ${a6}^\\circ$.<br>
+            Triangle sum gives $\\angle 3 = 180 - ${a2} - ${a5} = ${a3}^\\circ$.`
         };
     }
 },
