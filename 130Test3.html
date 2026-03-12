@@ -1368,10 +1368,10 @@
 <!-- Mock Quiz CTA -->
 <div id="quiz-cta" style="background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
-<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Each mock quiz has 5 one-attempt questions sampled from its listed section pool (Quiz 10 combines Sections 5.1/5.2; Quizzes 11–13 use Sections 5.3, 7.1, and 8.4).</p>
+<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Each mock quiz has 5 one-attempt questions sampled from its listed section pool (Quiz 10 uses Section 5.2; Quizzes 11–13 use Sections 5.3, 7.1, and 8.4).</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
 <button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 10 — Section 5.1/5.2</div>
+<div style="font-weight: 600; margin-bottom: 2px;">Quiz 10 — Section 5.2</div>
 <div style="font-size: 0.8rem; color: var(--text-muted);">Angles, Coterminal Angles, Arc Length, and Basic Trig Ratios</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(6)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
@@ -1489,11 +1489,11 @@
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Calculator: Decimal Exponents</span>
 </a>
-<a class="check-item video-link" data-practice-id="solve_right_triangle_side" data-video-id="v42_3" href="https://www.youtube.com/watch?v=NCYNXkbTTUo" style="text-decoration: none;" target="_blank">
+<a class="check-item video-link" data-practice-id="angle_unit_conversion" data-video-id="v42_3" href="https://www.youtube.com/watch?v=NCYNXkbTTUo" style="text-decoration: none;" target="_blank">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Simple vs Compound Interest</span>
 </a>
-<a class="check-item video-link" data-practice-id="solve_right_triangle_side" data-video-id="v42_4" href="https://www.youtube.com/watch?v=2S4vK30dII0" style="text-decoration: none;" target="_blank">
+<a class="check-item video-link" data-practice-id="angle_unit_conversion" data-video-id="v42_4" href="https://www.youtube.com/watch?v=2S4vK30dII0" style="text-decoration: none;" target="_blank">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Continuous Compounding</span>
 </a>
@@ -1694,9 +1694,9 @@
             { id: '52_3', cat: 'Section 5.2', label: 'Sine, cosine, and tangent ratios: Variables for side lengths', done: false, practiceId: 'trig_ratio' },
             { id: '52_4', cat: 'Section 5.2', label: 'Using the Pythagorean Theorem to find a sine, cosine, or tangent ratio in a right triangle', done: false, practiceId: 'trig_ratio' },
             { id: '52_5', cat: 'Section 5.2', label: 'Using the Pythagorean Theorem to find several trigonometric ratios in a right triangle', done: false, practiceId: 'trig_ratio' },
-            { id: '52_6', cat: 'Section 5.2', label: 'Using a trigonometric ratio to find a side length in a right triangle', done: false, practiceId: 'solve_right_triangle_side' },
-            { id: '52_7', cat: 'Section 5.2', label: 'Using trigonometry to find a length in a word problem with one right triangle', done: false, practiceId: 'solve_right_triangle_side' },
-            { id: '52_8', cat: 'Section 5.2', label: 'Using trigonometry to find lengths in a figure involving two right triangles', done: false, practiceId: 'solve_right_triangle_side' },
+            { id: '52_6', cat: 'Section 5.2', label: 'Using a trigonometric ratio to find a side length in a right triangle', done: false, practiceId: 'solve_right_triangle_side_52' },
+            { id: '52_7', cat: 'Section 5.2', label: 'Using trigonometry to find a length in a word problem with one right triangle', done: false, practiceId: 'solve_right_triangle_side_52' },
+            { id: '52_8', cat: 'Section 5.2', label: 'Using trigonometry to find lengths in a figure involving two right triangles', done: false, practiceId: 'solve_right_triangle_side_52' },
 
             // Section 5.3 (8 topics)
             { id: '53_1', cat: 'Section 5.3', label: 'Sketching an angle with absolute value less than 360 degrees, and also its reference angle', done: false, practiceId: 'reference_angle_deg' },
@@ -1936,8 +1936,8 @@
             }
         },
         {
-            id: 'solve_side', section: 'Section 5.2',
-            label: 'Find a Missing Side',
+            id: 'angle_unit_conversion', section: 'Section 5.2',
+            label: 'Convert Degrees and Radians',
             generate: () => {
                 const type = Math.random();
                 if (type < 0.33) {
@@ -1972,8 +1972,23 @@
             }
         },
         {
+            id: 'solve_right_triangle_side_52', section: 'Section 5.2',
+            label: 'Solve Right Triangle Side (Section 5.2)',
+            generate: () => {
+                const angle = [25, 30, 35, 40, 45, 50, 60][Math.floor(Math.random() * 7)];
+                const known = Math.floor(Math.random() * 14) + 6;
+                const type = Math.random() > 0.5 ? 'opp' : 'adj';
+                const ans = type === 'opp' ? known * Math.tan(angle * Math.PI / 180) : known / Math.tan(angle * Math.PI / 180);
+                return {
+                    q: type === 'opp' ? `A right triangle has angle $${angle}^\circ$ and adjacent side $${known}$. Find the opposite side. (Round to 2 decimals)` : `A right triangle has angle $${angle}^\circ$ and opposite side $${known}$. Find the adjacent side. (Round to 2 decimals)`,
+                    inputType: 'number', a: ans, tol: 0.05,
+                    solution: type === 'opp' ? `$\tan(${angle}^\circ)=\frac{x}{${known}}\Rightarrow x=${known}\tan(${angle}^\circ)=${ans.toFixed(2)}$.` : `$\tan(${angle}^\circ)=\frac{${known}}{x}\Rightarrow x=\frac{${known}}{\tan(${angle}^\circ)}=${ans.toFixed(2)}$.`
+                };
+            }
+        },
+        {
             id: 'solve_right_triangle_side', section: 'Section 7.1',
-            label: 'Solve Right Triangle Side',
+            label: 'Solve Right Triangle Side (Section 7.1)',
             generate: () => {
                 const angle = [25, 30, 35, 40, 45, 50, 60][Math.floor(Math.random() * 7)];
                 const known = Math.floor(Math.random() * 14) + 6;
@@ -2932,7 +2947,7 @@
     // --- MOCK QUIZ MODE ---
     const QUIZ_CONFIG = {
         5: {
-            label: 'Quiz 10 — Section 5.1/5.2',
+            label: 'Quiz 10 — Section 5.2',
             section: 'Section 5.2',
             count: 5
         },
@@ -2965,9 +2980,7 @@
         const config = QUIZ_CONFIG[quizNum];
         if (!config) return;
 
-        const pool = quizNum === 5
-            ? generators.filter(g => g.section === 'Section 5.1' || g.section === 'Section 5.2')
-            : generators.filter(g => g.section === config.section);
+        const pool = generators.filter(g => g.section === config.section);
         if (pool.length === 0) return;
 
         const selected = [];
