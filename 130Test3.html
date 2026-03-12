@@ -1865,7 +1865,15 @@
         }
     }
 
-    function createAngleSvg({ thetaDeg, labelText, fallbackText, referenceDeg = null, showReferenceLabel = false }) {
+    function createAngleSvg({
+        thetaDeg,
+        labelText,
+        fallbackText,
+        referenceDeg = null,
+        showReferenceLabel = false,
+        originalThetaDeg = thetaDeg,
+        turnCount = null
+    }) {
         const size = 300;
         const center = size / 2;
         const radius = 105;
@@ -1882,6 +1890,18 @@
         const arcEndY = center - arcR * Math.sin(thetaRad);
         const thetaLabelX = center + (arcR + 20) * Math.cos(thetaRad / 2);
         const thetaLabelY = center - (arcR + 20) * Math.sin(thetaRad / 2);
+        const rawTurnCount = turnCount === null
+            ? (Number.isFinite(originalThetaDeg) ? (originalThetaDeg - norm) / 360 : 0)
+            : turnCount;
+        const resolvedTurnCount = Number.isFinite(rawTurnCount)
+            ? Math.round(rawTurnCount)
+            : 0;
+        const hasExtraTurns = resolvedTurnCount !== 0;
+        const wrapR = 30;
+        const wrapMidX = center - wrapR;
+        const wrapMidY = center;
+        const wrapSweepFlag = resolvedTurnCount > 0 ? 0 : 1;
+        const turnLabel = `${resolvedTurnCount > 0 ? '+' : ''}${resolvedTurnCount} turn${Math.abs(resolvedTurnCount) === 1 ? '' : 's'}`;
 
         const refMarkup = referenceDeg === null ? '' : (() => {
             const refR = 66;
@@ -1905,6 +1925,13 @@
             `;
         })();
 
+        const turnMarkup = hasExtraTurns ? `
+            <path d="M ${center + wrapR} ${center} A ${wrapR} ${wrapR} 0 1 ${wrapSweepFlag} ${wrapMidX} ${wrapMidY}
+                A ${wrapR} ${wrapR} 0 1 ${wrapSweepFlag} ${center + wrapR} ${center}"
+                fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="3 4" opacity="0.75"></path>
+            <text x="36" y="42" fill="#94a3b8" font-size="12" font-weight="600">${turnLabel}</text>
+        ` : '';
+
         return `
             <svg viewBox="0 0 ${size} ${size}" width="300" height="300" role="img" aria-label="${fallbackText.replace(/"/g, '&quot;')}">
                 <rect x="0" y="0" width="${size}" height="${size}" fill="#0f172a"></rect>
@@ -1924,6 +1951,7 @@
                     fill="none" stroke="#22c55e" stroke-width="3"></path>
                 <text x="${thetaLabelX.toFixed(2)}" y="${thetaLabelY.toFixed(2)}" fill="#22c55e" font-size="13" font-weight="600">${labelText}</text>
                 <text x="36" y="286" fill="#94a3b8" font-size="12">grid: 1 square = 1 unit</text>
+                ${turnMarkup}
                 ${refMarkup}
             </svg>
         `;
@@ -1970,13 +1998,16 @@
                 const k = Math.floor(Math.random() * 3) + 1;
                 const ans = theta + 360 * (Math.random() > 0.5 ? k : -k);
                 const normalizedTheta = normalizeDegrees(theta);
-                const fallbackText = `Standard-position angle theta = ${theta} degrees. Terminal side matches ${normalizedTheta} degrees.`;
+                const turnCount = Math.round((theta - normalizedTheta) / 360);
+                const fallbackText = `Standard-position angle theta = ${theta} degrees. Terminal side matches ${normalizedTheta} degrees, with ${turnCount > 0 ? `${turnCount} counterclockwise` : `${Math.abs(turnCount)} clockwise`} full turn${Math.abs(turnCount) === 1 ? '' : 's'}.`;
                 return {
                     q: `Find one coterminal angle (in degrees) for $\theta = ${theta}^\circ$.`,
                     svg: createAngleSvg({
                         thetaDeg: normalizedTheta,
                         labelText: `\u03b8=${theta}\u00b0`,
-                        fallbackText
+                        fallbackText,
+                        originalThetaDeg: theta,
+                        turnCount
                     }),
                     svgAltText: fallbackText,
                     inputType: 'coterminal_deg', baseTheta: theta, tol: 0.1,
@@ -2174,13 +2205,16 @@
 
                 // Guard: by our convention with non-axis terminal sides, answer must be acute.
                 assertReferenceAngleConvention(ans);
-                const fallbackText = `Angle ${raw} degrees in standard position. Reference angle is ${ans} degrees.`;
+                const turnCount = Math.round((raw - t) / 360);
+                const fallbackText = `Angle ${raw} degrees in standard position. Terminal side matches ${t} degrees with ${turnCount > 0 ? `${turnCount} counterclockwise` : `${Math.abs(turnCount)} clockwise`} full turn${Math.abs(turnCount) === 1 ? '' : 's'}, and reference angle is ${ans} degrees.`;
                 return {
                     q: `Find the reference angle for $${raw}^\circ$.`,
                     svg: createAngleSvg({
                         thetaDeg: t,
                         labelText: `${raw}\u00b0`,
                         fallbackText,
+                        originalThetaDeg: raw,
+                        turnCount,
                         referenceDeg: ans,
                         showReferenceLabel: true
                     }),
