@@ -2759,7 +2759,7 @@
             id: 'circles', section: 'Circles',
             label: 'Sectors & Arcs (Visual)',
             generate: () => {
-                const rNum = (Math.random() * 10 + 2).toFixed(1);
+                const rNum = Number((Math.random() * 10 + 2).toFixed(1));
                 const isDeg = Math.random() > 0.5;
                 let thetaStr, thetaRad;
 
@@ -2774,8 +2774,17 @@
                     thetaRad = (num * Math.PI) / den;
                 }
 
+                const centerX = 60;
+                const centerY = 60;
+                const radius = 50;
+                const startX = centerX + radius;
+                const startY = centerY;
+                const endX = centerX + radius * Math.cos(thetaRad);
+                const endY = centerY - radius * Math.sin(thetaRad);
+                const largeArcFlag = thetaRad > Math.PI ? 1 : 0;
+
                 const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
-                    <path d="M60,60 L110,60 A50,50 0 0,0 25,25 Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
+                    <path d="M${centerX},${centerY} L${startX},${startY} A${radius},${radius} 0 ${largeArcFlag},0 ${endX.toFixed(2)},${endY.toFixed(2)} Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
                     <text x="85" y="75" fill="var(--text)" font-size="12">r = ${rNum}</text>
                     <text x="45" y="45" fill="var(--text)" font-size="12">${isDeg ? thetaStr.replace('^\\circ','°') : thetaStr}</text>
                 </svg>`;
