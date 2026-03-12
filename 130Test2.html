@@ -1424,7 +1424,7 @@
 <!-- Mock Quiz CTA -->
 <div id="quiz-cta" style="background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
-<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">5 focused questions randomly drawn from all skill generators in the section. One attempt per question.</p>
+<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Quizzes 5, 6, and 8 use 5 focused questions. Quiz 7 uses a fixed 8-question blueprint. One attempt per question.</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
 <button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
 <div style="font-weight: 600; margin-bottom: 2px;">Quiz 5 — Section 4.2</div>
@@ -1435,7 +1435,7 @@
 <div style="font-size: 0.8rem; color: var(--text-muted);">Logarithms</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(7)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 7 — Triangles, Lines &amp; Areas</div>
+<div style="font-weight: 600; margin-bottom: 2px;">Quiz 7 — Triangles, Lines &amp; Areas (8 Questions)</div>
 <div style="font-size: 0.8rem; color: var(--text-muted);">Similar Triangles, Parallel Lines, Triangle/Polygon Areas, DMS Conversions</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(8)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
@@ -3646,7 +3646,7 @@
             count: 5
         },
         7: {
-            label: 'Quiz 7 — Angles & Polygons',
+            label: 'Quiz 7 — Triangles, Lines & Areas',
             // Quiz 7 membership is controlled only by this explicit generator blueprint.
             // Do not infer membership from any section label.
             blueprint: ['similar_triangles', 'parallel_angles', 'basic_areas', 'basic_areas', 'basic_areas', 'herons', 'dms', 'dms_to_dec']
