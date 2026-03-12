@@ -1683,48 +1683,48 @@
     const DEFAULT_CHECKLIST = [
             // Section 5.1 (5 topics)
             { id: '51_1', cat: 'Section 5.1', label: 'Sketching an angle with absolute value less than 360 degrees in standard position', done: false },
-            { id: '51_2', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in degrees and finding a coterminal angle', done: false },
-            { id: '51_3', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in radians and finding a coterminal angle', done: false },
-            { id: '51_4', cat: 'Section 5.1', label: 'Sketching an angle with absolute value greater than 360 degrees in standard position', done: false },
-            { id: '51_5', cat: 'Section 5.1', label: 'Arc length and central angle measure', done: false },
+            { id: '51_2', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in degrees and finding a coterminal angle', done: false, practiceId: 'angle_coterminal' },
+            { id: '51_3', cat: 'Section 5.1', label: 'Sketching an angle in standard position given in radians and finding a coterminal angle', done: false, practiceId: 'angle_coterminal' },
+            { id: '51_4', cat: 'Section 5.1', label: 'Sketching an angle with absolute value greater than 360 degrees in standard position', done: false, practiceId: 'angle_coterminal' },
+            { id: '51_5', cat: 'Section 5.1', label: 'Arc length and central angle measure', done: false, practiceId: 'arc_length' },
 
             // Section 5.2 (8 topics)
             { id: '52_1', cat: 'Section 5.2', label: 'Using a calculator to approximate sine, cosine, and tangent values', done: false },
-            { id: '52_2', cat: 'Section 5.2', label: 'Sine, cosine, and tangent ratios: Numbers for side lengths', done: false },
-            { id: '52_3', cat: 'Section 5.2', label: 'Sine, cosine, and tangent ratios: Variables for side lengths', done: false },
-            { id: '52_4', cat: 'Section 5.2', label: 'Using the Pythagorean Theorem to find a sine, cosine, or tangent ratio in a right triangle', done: false },
-            { id: '52_5', cat: 'Section 5.2', label: 'Using the Pythagorean Theorem to find several trigonometric ratios in a right triangle', done: false },
-            { id: '52_6', cat: 'Section 5.2', label: 'Using a trigonometric ratio to find a side length in a right triangle', done: false },
-            { id: '52_7', cat: 'Section 5.2', label: 'Using trigonometry to find a length in a word problem with one right triangle', done: false },
-            { id: '52_8', cat: 'Section 5.2', label: 'Using trigonometry to find lengths in a figure involving two right triangles', done: false },
+            { id: '52_2', cat: 'Section 5.2', label: 'Sine, cosine, and tangent ratios: Numbers for side lengths', done: false, practiceId: 'trig_ratio' },
+            { id: '52_3', cat: 'Section 5.2', label: 'Sine, cosine, and tangent ratios: Variables for side lengths', done: false, practiceId: 'trig_ratio' },
+            { id: '52_4', cat: 'Section 5.2', label: 'Using the Pythagorean Theorem to find a sine, cosine, or tangent ratio in a right triangle', done: false, practiceId: 'trig_ratio' },
+            { id: '52_5', cat: 'Section 5.2', label: 'Using the Pythagorean Theorem to find several trigonometric ratios in a right triangle', done: false, practiceId: 'trig_ratio' },
+            { id: '52_6', cat: 'Section 5.2', label: 'Using a trigonometric ratio to find a side length in a right triangle', done: false, practiceId: 'solve_side' },
+            { id: '52_7', cat: 'Section 5.2', label: 'Using trigonometry to find a length in a word problem with one right triangle', done: false, practiceId: 'solve_side' },
+            { id: '52_8', cat: 'Section 5.2', label: 'Using trigonometry to find lengths in a figure involving two right triangles', done: false, practiceId: 'solve_side' },
 
             // Section 5.3 (8 topics)
-            { id: '53_1', cat: 'Section 5.3', label: 'Sketching an angle with absolute value less than 360 degrees, and also its reference angle', done: false },
-            { id: '53_2', cat: 'Section 5.3', label: 'Reference angles in degrees: Problem type 1', done: false },
-            { id: '53_3', cat: 'Section 5.3', label: 'Sketching an angle with absolute value greater than 360 degrees, and also its reference angle', done: false },
-            { id: '53_4', cat: 'Section 5.3', label: 'Reference angles in degrees: Problem type 2', done: false },
+            { id: '53_1', cat: 'Section 5.3', label: 'Sketching an angle with absolute value less than 360 degrees, and also its reference angle', done: false, practiceId: 'reference_angle_deg' },
+            { id: '53_2', cat: 'Section 5.3', label: 'Reference angles in degrees: Problem type 1', done: false, practiceId: 'reference_angle_deg' },
+            { id: '53_3', cat: 'Section 5.3', label: 'Sketching an angle with absolute value greater than 360 degrees, and also its reference angle', done: false, practiceId: 'reference_angle_deg' },
+            { id: '53_4', cat: 'Section 5.3', label: 'Reference angles in degrees: Problem type 2', done: false, practiceId: 'reference_angle_deg' },
             { id: '53_5', cat: 'Section 5.3', label: 'Sketching an angle with absolute value less than 2π radians, and also its reference angle', done: false },
             { id: '53_6', cat: 'Section 5.3', label: 'Reference angles in radians: Problem type 1', done: false },
-            { id: '53_7', cat: 'Section 5.3', label: 'Determining the location of a terminal point given the signs of trigonometric values', done: false },
-            { id: '53_8', cat: 'Section 5.3', label: 'Finding values of trigonometric functions given information about an angle: Problem type 1', done: false },
+            { id: '53_7', cat: 'Section 5.3', label: 'Determining the location of a terminal point given the signs of trigonometric values', done: false, practiceId: 'quadrant_signs' },
+            { id: '53_8', cat: 'Section 5.3', label: 'Finding values of trigonometric functions given information about an angle: Problem type 1', done: false, practiceId: 'quadrant_signs' },
 
             // Section 7.1 (7 topics)
-            { id: '71_1', cat: 'Section 7.1', label: 'Using a trigonometric ratio to find a side length in a right triangle', done: false },
-            { id: '71_2', cat: 'Section 7.1', label: 'Using trigonometry to find a length in a word problem with one right triangle', done: false },
-            { id: '71_3', cat: 'Section 7.1', label: 'Using trigonometric functions and the formula d=rt in a real-world situation', done: false },
-            { id: '71_4', cat: 'Section 7.1', label: 'Using a trigonometric ratio to find an angle measure in a right triangle', done: false },
-            { id: '71_5', cat: 'Section 7.1', label: 'Using trigonometry to find angles of elevation or depression in a word problem', done: false },
-            { id: '71_6', cat: 'Section 7.1', label: 'Solving a right triangle', done: false },
+            { id: '71_1', cat: 'Section 7.1', label: 'Using a trigonometric ratio to find a side length in a right triangle', done: false, practiceId: 'solve_right_triangle_side' },
+            { id: '71_2', cat: 'Section 7.1', label: 'Using trigonometry to find a length in a word problem with one right triangle', done: false, practiceId: 'solve_right_triangle_side' },
+            { id: '71_3', cat: 'Section 7.1', label: 'Using trigonometric functions and the formula d=rt in a real-world situation', done: false, practiceId: 'distance_rate_time' },
+            { id: '71_4', cat: 'Section 7.1', label: 'Using a trigonometric ratio to find an angle measure in a right triangle', done: false, practiceId: 'solve_right_triangle' },
+            { id: '71_5', cat: 'Section 7.1', label: 'Using trigonometry to find angles of elevation or depression in a word problem', done: false, practiceId: 'angle_of_elevation' },
+            { id: '71_6', cat: 'Section 7.1', label: 'Solving a right triangle', done: false, practiceId: 'solve_right_triangle' },
             { id: '71_7', cat: 'Section 7.1', label: 'Using trigonometry to find a length in a word problem with two right triangles', done: false },
 
             // Section 8.4 (4 topics)
-            { id: '84_1', cat: 'Section 8.4', label: 'Writing a vector in component form given its initial and terminal points', done: false },
-            { id: '84_2', cat: 'Section 8.4', label: 'Vector addition and scalar multiplication: Component form', done: false },
-            { id: '84_3', cat: 'Section 8.4', label: 'Finding the magnitude and direction of a vector given its graph', done: false },
-            { id: '84_4', cat: 'Section 8.4', label: 'Finding the direction angle of a vector given in ai+bj form', done: false },
+            { id: '84_1', cat: 'Section 8.4', label: 'Writing a vector in component form given its initial and terminal points', done: false, practiceId: 'vector_components' },
+            { id: '84_2', cat: 'Section 8.4', label: 'Vector addition and scalar multiplication: Component form', done: false, practiceId: 'vector_components' },
+            { id: '84_3', cat: 'Section 8.4', label: 'Finding the magnitude and direction of a vector given its graph', done: false, practiceId: 'vector_magnitude' },
+            { id: '84_4', cat: 'Section 8.4', label: 'Finding the direction angle of a vector given in ai+bj form', done: false, practiceId: 'vector_direction' },
 
             // Chapter 8 supplementary topic (1 topic)
-            { id: '8sup_1', cat: 'Chapter 8 Supplementary', label: 'Finding the components of a vector given its graph', done: false }
+            { id: '8sup_1', cat: 'Chapter 8 Supplementary', label: 'Finding the components of a vector given its graph', done: false, practiceId: 'vector_components' }
     ];
 
     let state = {
