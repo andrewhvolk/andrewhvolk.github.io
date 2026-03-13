@@ -2866,16 +2866,27 @@
             generate: () => {
                 const rNum = Number((Math.random() * 10 + 2).toFixed(1));
                 const isDeg = Math.random() > 0.5;
-                let thetaStr, thetaRad;
+                let thetaStr, thetaSvgLabel, thetaRad;
 
                 if (isDeg) {
                     const deg = Math.floor(Math.random() * 120) + 30;
                     thetaStr = `${deg}^\\circ`;
+                    thetaSvgLabel = `${deg}°`;
                     thetaRad = deg * Math.PI / 180;
                 } else {
                     const num = Math.floor(Math.random() * 3) + 1;
                     const den = Math.floor(Math.random() * 4) + 3;
                     thetaStr = `\\frac{${num}\\pi}{${den}}`;
+                    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+                    const divisor = gcd(num, den);
+                    const reducedNum = num / divisor;
+                    const reducedDen = den / divisor;
+
+                    if (reducedDen === 1) {
+                        thetaSvgLabel = `${reducedNum === 1 ? '' : reducedNum}π`;
+                    } else {
+                        thetaSvgLabel = `${reducedNum === 1 ? '' : reducedNum}π/${reducedDen}`;
+                    }
                     thetaRad = (num * Math.PI) / den;
                 }
 
@@ -2891,7 +2902,7 @@
                 const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
                     <path d="M${centerX},${centerY} L${startX},${startY} A${radius},${radius} 0 ${largeArcFlag},0 ${endX.toFixed(2)},${endY.toFixed(2)} Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
                     <text x="85" y="75" fill="var(--text)" font-size="12">r = ${rNum}</text>
-                    <text x="45" y="45" fill="var(--text)" font-size="12">${isDeg ? thetaStr.replace('^\\circ','°') : thetaStr}</text>
+                    <text x="45" y="45" fill="var(--text)" font-size="12">${thetaSvgLabel}</text>
                 </svg>`;
 
                 if (Math.random() > 0.5) {
