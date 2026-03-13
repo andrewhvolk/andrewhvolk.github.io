@@ -91,6 +91,33 @@
             max-width: 42rem;
         }
 
+
+        .breadcrumb {
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a {
+            color: var(--text);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent);
+        }
+
+        .breadcrumb-sep,
+        .breadcrumb-current {
+            color: var(--text-muted);
+        }
+
         .header-meta {
             color: var(--text-muted);
             margin-top: 0.35rem;
@@ -1046,6 +1073,13 @@
 <div class="container">
 <header>
 <div class="header-copy">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+<a href="learn.html">Course Resources</a>
+<span aria-hidden="true" class="breadcrumb-sep">›</span>
+<a href="courses/math130.html">MATH 130</a>
+<span aria-hidden="true" class="breadcrumb-sep">›</span>
+<span class="breadcrumb-current">Test 2 Review</span>
+</nav>
 <h1>Math 130 – Test 2 Review</h1>
 <p class="header-meta">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
 <p class="header-subtitle">Topics: Geometry, Exponentials &amp; Logarithms</p>
