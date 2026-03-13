@@ -2855,12 +2855,17 @@
                     const b = Math.floor(Math.random() * 10) + 5;
                     const h = Math.floor(Math.random() * 8) + 4;
                     const ans = 0.5 * b * h;
+                    const altitudeX = 90;
+                    const altitudeTop = 30;
+                    const altitudeBottom = 90;
+                    const altitudeMidY = (altitudeTop + altitudeBottom) / 2;
                     const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
                         <polygon points="50,90 150,90 90,30" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
-                        <line x1="90" y1="30" x2="90" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
-                        <rect x="90" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
+                        <line x1="${altitudeX}" y1="${altitudeTop}" x2="${altitudeX}" y2="${altitudeBottom}" stroke="var(--text-muted)" stroke-dasharray="4"/>
+                        <rect x="${altitudeX}" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
                         <text x="100" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b} m</text>
-                        <text x="80" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
+                        <line x1="${altitudeX + 2}" y1="${altitudeMidY}" x2="${altitudeX + 10}" y2="${altitudeMidY}" stroke="var(--text-muted)" stroke-width="1.5"/>
+                        ${svgOutlinedText({ x: altitudeX + 13, y: altitudeMidY + 4.5, text: `${h} m`, fill: 'var(--text)', fontSize: 14, fontWeight: '600', textAnchor: 'start' })}
                     </svg>`;
                     return {
                         q: `Find the area of the triangle.`,
