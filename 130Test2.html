@@ -2928,6 +2928,11 @@
                 const b = Math.floor(Math.random()*15)+10;
                 const c = Math.floor(Math.random()*15)+10;
                 const x = (b * c) / a;
+                const integerEpsilon = 1e-9;
+                const roundedX = Math.round(x);
+                const isIntegerX = Math.abs(x - roundedX) < integerEpsilon;
+                const xDisplay = isIntegerX ? `${roundedX}` : x.toFixed(1);
+                const roundingInstruction = isIntegerX ? '' : ' (Round to 1 decimal place)';
                 
                 const leftTransversal = [80, 10, 140, 140];
                 const rightTransversal = [220, 10, 160, 140];
@@ -2960,10 +2965,10 @@
                 </svg>`;
 
                 return {
-                    q: `Lines $l$, $m$, and $n$ are parallel. Find the length of $x$. (Round to 1 decimal place)`,
+                    q: `Lines $l$, $m$, and $n$ are parallel. Find the length of $x$.${roundingInstruction}`,
                     svg: svg, inputType: 'number', a: x, tol: 0.05,
                     svgAltText: `Three parallel lines l, m, and n are cut by two transversals. On one transversal, adjacent segments are ${a} and ${b}; on the other, corresponding segments are ${c} and x. Use proportional segments to solve for x.`,
-                    solution: `By similar proportions across parallel lines: $\\frac{${a}}{${b}} = \\frac{${c}}{x} \\implies x = \\frac{${b} \\cdot ${c}}{${a}} = ${x.toFixed(1)}$`
+                    solution: `By similar proportions across parallel lines: $\\frac{${a}}{${b}} = \\frac{${c}}{x} \\implies x = \\frac{${b} \\cdot ${c}}{${a}} = ${xDisplay}$`
                 }
             }
         },
