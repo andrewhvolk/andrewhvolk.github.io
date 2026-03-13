@@ -1917,6 +1917,86 @@
     }
 
     // --- GENERATORS LOGIC ---
+    function normalizeAngle(theta) {
+        const fullTurn = 2 * Math.PI;
+        return ((theta % fullTurn) + fullTurn) % fullTurn;
+    }
+
+    function computeReferenceAngle(theta) {
+        const thetaNorm = normalizeAngle(theta);
+        const halfTurn = Math.PI;
+        const quarterTurn = Math.PI / 2;
+        let ref;
+
+        if (thetaNorm <= quarterTurn) {
+            // QI
+            ref = thetaNorm;
+        } else if (thetaNorm <= halfTurn) {
+            // QII
+            ref = Math.PI - thetaNorm;
+        } else if (thetaNorm <= 3 * quarterTurn) {
+            // QIII
+            ref = thetaNorm - Math.PI;
+        } else {
+            // QIV
+            ref = 2 * Math.PI - thetaNorm;
+        }
+
+        return { thetaNorm, ref };
+    }
+
+    function gcd(a, b) {
+        let x = Math.abs(a);
+        let y = Math.abs(b);
+        while (y !== 0) {
+            const t = y;
+            y = x % y;
+            x = t;
+        }
+        return x || 1;
+    }
+
+    function formatReferencePiText(ref) {
+        const ratio = ref / Math.PI;
+        const candidates = [1, 2, 3, 4, 6, 12];
+
+        for (const den of candidates) {
+            const numApprox = ratio * den;
+            const num = Math.round(numApprox);
+            if (Math.abs(numApprox - num) < 1e-9) {
+                if (num === 0) return '0';
+                const factor = gcd(num, den);
+                const reducedNum = num / factor;
+                const reducedDen = den / factor;
+                if (reducedDen === 1) {
+                    return reducedNum === 1 ? '\\pi' : `${reducedNum}\\pi`;
+                }
+                return `\\frac{${reducedNum}\\pi}{${reducedDen}}`;
+            }
+        }
+
+        return null;
+    }
+
+    function runStdPosAngleUnitTests() {
+        const canonicalCases = [
+            { theta: Math.PI / 6, expectedRef: Math.PI / 6 },
+            { theta: Math.PI / 4, expectedRef: Math.PI / 4 },
+            { theta: Math.PI / 3, expectedRef: Math.PI / 3 },
+            { theta: 2 * Math.PI / 3, expectedRef: Math.PI / 3 },
+            { theta: 3 * Math.PI / 4, expectedRef: Math.PI / 4 },
+            { theta: 4 * Math.PI / 3, expectedRef: Math.PI / 3 },
+            { theta: 5 * Math.PI / 3, expectedRef: Math.PI / 3 }
+        ];
+
+        canonicalCases.forEach(({ theta, expectedRef }) => {
+            const { ref } = computeReferenceAngle(theta);
+            if (Math.abs(ref - expectedRef) > 1e-10) {
+                throw new Error(`std_pos_angle unit test failed for theta=${theta}: expected ${expectedRef}, got ${ref}`);
+            }
+        });
+    }
+
     const generators = [
         {
             id: 'eval_exp', section: 'Section 4.2',
@@ -2102,10 +2182,10 @@
                 const den = denOptions[Math.floor(Math.random() * denOptions.length)];
                 const num = Math.floor(Math.random() * (2 * den - 1)) + 1;
                 const theta = (num * Math.PI) / den;
-                const refNum = num <= den ? num : (2 * den - num);
-                const ref = (refNum * Math.PI) / den;
+                const { thetaNorm, ref } = computeReferenceAngle(theta);
                 const deg = theta * 180 / Math.PI;
                 const refDeg = ref * 180 / Math.PI;
+                const refPiText = formatReferencePiText(ref);
                 const x2 = 110 + 55 * Math.cos(theta);
                 const y2 = 80 - 55 * Math.sin(theta);
 
@@ -2122,7 +2202,7 @@
                     q: `Sketch/interpret $\\theta = \\frac{${num}\\pi}{${den}}$ in standard position. Find its reference angle in radians (decimal accepted).`,
                     svg,
                     inputType: 'number', a: ref, tol: 0.01,
-                    solution: `$\\theta = \\frac{${num}\\pi}{${den}}$ is ${deg.toFixed(1)}^\\circ. The reference angle is the acute angle to the x-axis: $\\theta_{ref}=\\frac{${refNum}\\pi}{${den}}\\approx ${ref.toFixed(2)}$ rad (${refDeg.toFixed(1)}^\\circ).`
+                    solution: `$\\theta = \\frac{${num}\\pi}{${den}}$ is ${deg.toFixed(1)}^\\circ$, so $\\theta_{norm}=${thetaNorm.toFixed(2)}$ rad. The reference angle is the acute angle to the x-axis: $\\theta_{ref}=${refPiText ? refPiText : ref.toFixed(2)}\\approx ${ref.toFixed(2)}$ rad (${refDeg.toFixed(1)}^\\circ).`
                 };
             }
         },
@@ -3071,6 +3151,7 @@
 
     // --- UI INITIATION & EVENT LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
+        runStdPosAngleUnitTests();
         refreshIcons();
         loadState();
         applyTheme(state.theme);
