@@ -2435,8 +2435,9 @@
         </svg>`;
 
         return {
-            q: `$\\overline{AC}$ is a diameter, but $\\overline{BD}$ is <strong>not</strong>. Given $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$, find all four values:`,
+            q: `$\\overline{AC}$ is a diameter, but $\\overline{BD}$ is <strong>not</strong>. Chords $\\overline{AC}$ and $\\overline{BD}$ intersect at $E$. Given $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$, find all four values:`,
             svg: svg,
+            svgAltText: `Circle with $\\overline{AC}$ as a diameter and chord $\\overline{BD}$ (not a diameter). Chords $\\overline{AC}$ and $\\overline{BD}$ intersect at $E$. Given $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$, find $\\angle AEB$, $\\angle AED$, arc $\\widehat{CD}$, and arc $\\widehat{AD}$.`,
             inputType: 'circle_multi',
             a: { c1: angleAEB, c2: angleAED, c3: arcCD, c4: arcAD },
             tol: 0.5,
