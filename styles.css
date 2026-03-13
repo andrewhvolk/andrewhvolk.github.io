@@ -694,6 +694,10 @@ section:nth-child(5) { animation-delay: 0.25s; }
     gap: 0.5rem;
 }
 
+.nav-links li {
+    position: relative;
+}
+
 .nav-links a {
     display: block;
     padding: 1rem 0.75rem;
@@ -708,6 +712,53 @@ section:nth-child(5) { animation-delay: 0.25s; }
 .nav-links a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--accent-color);
+}
+
+.dropdown-trigger {
+    display: block;
+    padding: 1rem 0.75rem;
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 4px;
+    font-size: 1rem;
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.dropdown-trigger:hover,
+.dropdown-trigger:focus-visible,
+.nav-links .dropdown-menu a:hover,
+.nav-links .dropdown-menu a:focus-visible {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--accent-color);
+}
+
+.nav-links .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    left: 0;
+    min-width: 220px;
+    padding: 0.35rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav-links .dropdown:hover .dropdown-menu,
+.nav-links .dropdown:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.nav-links .dropdown-menu a {
+    padding: 0.6rem 0.75rem;
+    white-space: nowrap;
 }
 
 /* Ensure the toggle button aligns perfectly in the new layout */
@@ -727,8 +778,30 @@ section:nth-child(5) { animation-delay: 0.25s; }
         justify-content: center;
         margin-bottom: 0.5rem;
     }
+
+    .nav-links .dropdown-menu {
+        position: static;
+        min-width: 0;
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        margin-top: 0;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .nav-links .dropdown:hover .dropdown-menu,
+    .nav-links .dropdown:focus-within .dropdown-menu {
+        display: block;
+    }
     
     .nav-links a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .dropdown-trigger {
         padding: 0.5rem;
         font-size: 0.9rem;
     }
