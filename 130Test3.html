@@ -1288,7 +1288,7 @@
 <div class="formula-badge status-memorize">Memorize</div>
 <div class="formula-title">Arc Length</div>
 <div class="formula-math dual-line">$$s=r\theta$$ $$s=\frac{\theta}{360}(2\pi r)$$</div>
-<div class="formula-vars">Use radian form when $\theta$ is in radians, degree form when in degrees.</div>
+<div class="formula-vars">Use radian form when $\\theta$ is in radians, degree form when in degrees.</div>
 </div>
 <div class="formula-card memorize-card">
 <div class="formula-badge status-memorize">Memorize</div>
@@ -1377,23 +1377,23 @@
 <!-- Mock Quiz CTA -->
 <div id="quiz-cta" style="background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
-<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Each mock quiz has 5 one-attempt questions sampled from its listed section pool (Quiz 10 uses Section 5.2; Quizzes 11–13 use Sections 5.3, 7.1, and 8.4).</p>
+<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
 <button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 10 — Section 5.2 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-muted);">Calculator trig values + right-triangle side-length skills</div>
+<div style="font-weight: 600; margin-bottom: 2px;">Quiz 10 — Sections 5.1–5.2 (Core Skills)</div>
+<div style="font-size: 0.8rem; color: var(--text-muted);">Coterminal angles + exact trig triangle skills</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(6)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
 <div style="font-weight: 600; margin-bottom: 2px;">Quiz 11 — Section 5.3 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-muted);">Reference Angles and Signs of Trig Functions</div>
+<div style="font-size: 0.8rem; color: var(--text-muted);">Reference angles, signs, and solving trig equations on 0°–360°</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(7)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
 <div style="font-weight: 600; margin-bottom: 2px;">Quiz 12 — Section 7.1 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-muted);">Right-Triangle Applications and Solving Triangles</div>
+<div style="font-size: 0.8rem; color: var(--text-muted);">Airplane applications, angle of elevation, and bearings</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(8)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
 <div style="font-weight: 600; margin-bottom: 2px;">Quiz 13 — Section 8.4 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-muted);">Vector Components, Magnitude, and Direction Angles</div>
+<div style="font-size: 0.8rem; color: var(--text-muted);">Graph/resultant vectors and magnitude-direction conversions</div>
 </button>
 </div>
 </div>
@@ -1509,7 +1509,7 @@
 </div>
 </div>
 <div class="checklist-section" style="margin-top: 2rem;">
-<h3>Section 5.3: Reference Angles and Signs of Trig Functions</h3>
+<h3>Section 5.3: Reference angles, signs, and solving trig equations on 0°–360°</h3>
 <div class="checklist-grid">
 <a class="check-item video-link" data-practice-id="reference_angle_deg" data-video-id="v43_1" href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
@@ -2493,6 +2493,124 @@
                 };
             }
         }
+        ,
+        {
+            id: 'trig_from_given_ratio', section: 'Section 5.2',
+            label: 'Exact-Trig Style: Find Another Ratio from One Ratio',
+            generate: () => {
+                const triples = [{adj: 3, opp: 4, hyp: 5}, {adj: 5, opp: 12, hyp: 13}, {adj: 8, opp: 15, hyp: 17}];
+                const t = triples[Math.floor(Math.random() * triples.length)];
+                const knownType = Math.random() < 0.5 ? 'cos' : 'sin';
+                const targetType = knownType === 'cos' ? 'tan' : 'cos';
+                const known = knownType === 'cos' ? t.adj / t.hyp : t.opp / t.hyp;
+                const ans = targetType === 'tan' ? t.opp / t.adj : t.adj / t.hyp;
+                return {
+                    q: `For an acute angle $\\theta$ in a right triangle, suppose $\\${knownType}\\theta=${known.toFixed(4)}$. Find $\\${targetType}\\theta$. (Round to 4 decimals)`,
+                    inputType: 'number', a: ans, tol: 0.002,
+                    solution: `Use a compatible right-triangle ratio and the Pythagorean relationship. The corresponding value is $\\${targetType}\\theta=${ans.toFixed(4)}$.`
+                };
+            }
+        },
+        {
+            id: 'solve_trig_equation_special', section: 'Section 5.3',
+            label: 'Solve Trig Equation on 0° to 360°',
+            generate: () => {
+                const opts = [
+                    {func:'sin', val:0.5, a1:30, a2:150},
+                    {func:'cos', val:0.5, a1:60, a2:300},
+                    {func:'sin', val:Math.sqrt(2)/2, a1:45, a2:135},
+                    {func:'cos', val:Math.sqrt(3)/2, a1:30, a2:330}
+                ];
+                const p = opts[Math.floor(Math.random()*opts.length)];
+                return {
+                    q: `Solve $\\${p.func}\\theta=${p.val.toFixed(4)}$ for $0^\\circ \\le \\theta < 360^\\circ$. Enter the smaller angle in x and larger angle in y.`,
+                    inputType: 'vector_xy', a: { x: p.a1, y: p.a2 }, tol: { x: 0.1, y: 0.1 },
+                    solution: `Using special-angle unit-circle values, the two solutions in one rotation are $${p.a1}^\\circ$ and $${p.a2}^\\circ$.`
+                };
+            }
+        },
+        {
+            id: 'bearing_navigation', section: 'Section 7.1',
+            label: 'Bearing / Navigation Distance',
+            generate: () => {
+                const north = Math.floor(Math.random()*70)+80;
+                const east = Math.floor(Math.random()*90)+40;
+                const ans = Math.sqrt(north*north + east*east);
+                return {
+                    q: `A plane travels ${north} miles north, then ${east} miles east. Find the direct distance from start to finish. (Round to 1 decimal)`,
+                    inputType: 'number', a: ans, tol: 0.15,
+                    solution: `Treat north/east as perpendicular legs: $d=\\sqrt{${north}^2+${east}^2}=${ans.toFixed(1)}$ miles.`
+                };
+            }
+        },
+        {
+            id: 'oblique_triangle_area', section: 'Section 7.1',
+            label: 'Area of Non-Right Triangle',
+            generate: () => {
+                const b = Math.floor(Math.random()*14)+8;
+                const c = Math.floor(Math.random()*14)+8;
+                const A = [30,45,60,120][Math.floor(Math.random()*4)];
+                const ans = 0.5*b*c*Math.sin(A*Math.PI/180);
+                return {
+                    q: `Find the area of a triangle with sides $b=${b}$, $c=${c}$ and included angle $A=${A}^\\circ$. (Round to 2 decimals)`,
+                    inputType: 'number', a: ans, tol: 0.05,
+                    solution: `Use $K=\\frac12 bc\\sin A$: $K=\\frac12(${b})(${c})\\sin(${A}^\\circ)=${ans.toFixed(2)}$.`
+                };
+            }
+        },
+        {
+            id: 'vector_from_mag_dir', section: 'Section 8.4',
+            label: 'Vector from Magnitude and Direction to Components',
+            generate: () => {
+                const mag = [6,8,10,12][Math.floor(Math.random()*4)];
+                const dir = [30,45,60,120,135,210,315][Math.floor(Math.random()*7)];
+                const x = mag*Math.cos(dir*Math.PI/180);
+                const y = mag*Math.sin(dir*Math.PI/180);
+                return {
+                    q: `A vector has magnitude ${mag} and direction angle ${dir}^\\circ$. Enter its components in x and y. (Round to 3 decimals)`,
+                    inputType: 'vector_xy', a: {x, y}, tol: {x: 0.01, y: 0.01},
+                    solution: `Use $\\langle a,b\\rangle=\\langle r\\cos\\theta, r\\sin\\theta\\rangle$: $x=${x.toFixed(3)}, y=${y.toFixed(3)}$.`
+                };
+            }
+        },
+        {
+            id: 'resultant_from_direction_vectors', section: 'Section 8.4',
+            label: 'Resultant from Direction-Form Vectors',
+            generate: () => {
+                const r1 = [8,10,12][Math.floor(Math.random()*3)];
+                const r2 = [6,8,10][Math.floor(Math.random()*3)];
+                const t1 = [0,30,45,60][Math.floor(Math.random()*4)];
+                const t2 = [120,135,150,210,300][Math.floor(Math.random()*5)];
+                const x = r1*Math.cos(t1*Math.PI/180) + r2*Math.cos(t2*Math.PI/180);
+                const y = r1*Math.sin(t1*Math.PI/180) + r2*Math.sin(t2*Math.PI/180);
+                const mag = Math.sqrt(x*x+y*y);
+                let dir = Math.atan2(y,x)*180/Math.PI;
+                if (dir < 0) dir += 360;
+                return {
+                    q: `Vectors $\\vec u$ and $\\vec v$ have magnitudes/directions (${r1}, ${t1}^\\circ) and (${r2}, ${t2}^\\circ). Find the resultant magnitude and direction.`,
+                    inputType: 'vector_mag_dir', a: {mag, dir}, tol: {mag: 0.02, dir: 0.2},
+                    solution: `Convert each to components, add components, then compute resultant magnitude/direction. Final: magnitude ${mag.toFixed(3)}, direction ${dir.toFixed(1)}^\\circ.`
+                };
+            }
+        },
+        {
+            id: 'graph_vector_addition', section: 'Section 8.4',
+            label: 'Graph-Style Vector Addition Resultant',
+            generate: () => {
+                const ux = Math.floor(Math.random()*9)-4;
+                const uy = Math.floor(Math.random()*9)-4;
+                const vx = Math.floor(Math.random()*9)-4;
+                const vy = Math.floor(Math.random()*9)-4;
+                const x = ux + vx;
+                const y = uy + vy;
+                return {
+                    q: `On a coordinate grid, add vectors $\\langle ${ux}, ${uy}\\rangle$ and $\\langle ${vx}, ${vy}\\rangle$. Enter resultant components in x and y.`,
+                    inputType: 'vector_xy', a: {x, y}, tol: {x: 0.1, y: 0.1},
+                    solution: `Resultant is componentwise sum: $\\langle ${ux}+${vx}, ${uy}+${vy}\\rangle=\\langle ${x}, ${y}\\rangle$.`
+                };
+            }
+        }
+
     ];
 
     let currentQuiz = null;
@@ -3376,27 +3494,31 @@
     // --- MOCK QUIZ MODE ---
     const QUIZ_CONFIG = {
         5: {
-            label: 'Quiz 10 — Section 5.2 (Core Skills)',
-            section: 'Section 5.2',
+            label: 'Quiz 10 — Sections 5.1–5.2 (Core Skills)',
+            sections: ['Section 5.1', 'Section 5.2'],
+            requiredIds: ['angle_coterminal', 'angle_coterminal_rad', 'trig_ratio', 'solve_right_triangle_side_52', 'trig_from_given_ratio'],
+            excludedIds: ['trig_calculator_values', 'angle_unit_conversion'],
             count: 5
         },
         6: {
             label: 'Quiz 11 — Section 5.3 (Core Skills)',
-            section: 'Section 5.3',
+            sections: ['Section 5.3'],
+            requiredIds: ['reference_angle_deg', 'quadrant_signs', 'trig_values_from_info', 'solve_trig_equation_special'],
             count: 5
         },
         7: {
             label: 'Quiz 12 — Section 7.1 (Core Skills)',
-            section: 'Section 7.1',
+            sections: ['Section 7.1'],
+            requiredIds: ['angle_of_elevation', 'distance_rate_time', 'two_right_triangles', 'bearing_navigation', 'oblique_triangle_area'],
             count: 5
         },
         8: {
             label: 'Quiz 13 — Section 8.4 (Core Skills)',
-            section: 'Section 8.4',
+            sections: ['Section 8.4'],
+            requiredIds: ['vector_components', 'graph_vector_addition', 'vector_from_mag_dir', 'resultant_from_direction_vectors', 'vector_mag_direction'],
             count: 5
         }
     };
-
     function shuffleInPlace(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -3409,24 +3531,31 @@
         const config = QUIZ_CONFIG[quizNum];
         if (!config) return;
 
-        const pool = generators.filter(g => g.section === config.section);
+        const sections = config.sections || (config.section ? [config.section] : []);
+        let pool = generators.filter(g => sections.includes(g.section));
+        if (config.excludedIds && config.excludedIds.length) {
+            const excluded = new Set(config.excludedIds);
+            pool = pool.filter(g => !excluded.has(g.id));
+        }
         if (pool.length === 0) return;
 
         const selected = [];
-        const uniquePool = shuffleInPlace([...pool]);
+        if (config.requiredIds && config.requiredIds.length) {
+            config.requiredIds.forEach(id => {
+                const gen = generators.find(g => g.id === id);
+                if (gen) selected.push(gen);
+            });
+        }
 
-        // First pass: sample without replacement from every generator in the section
-        for (const gen of uniquePool) {
+        const selectedIds = new Set(selected.map(g => g.id));
+        const fillerPool = shuffleInPlace(pool.filter(g => !selectedIds.has(g.id)));
+        for (const gen of fillerPool) {
             if (selected.length >= config.count) break;
             selected.push(gen);
         }
-
-        // If the section has fewer generators than the quiz length, fill by random re-sampling
         while (selected.length < config.count) {
             selected.push(pool[Math.floor(Math.random() * pool.length)]);
         }
-
-        // Final shuffle
         shuffleInPlace(selected);
 
         examState = {
