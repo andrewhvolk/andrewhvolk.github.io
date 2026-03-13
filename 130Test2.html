@@ -2196,6 +2196,7 @@
                 return {
                     q: `For $f(x) = ${coeff}(${base})^x ${shift >= 0 ? '+' : '-'} ${Math.abs(shift)}$, identify the horizontal asymptote value (enter just the number).`,
                     svg,
+                    svgAltText: `Coordinate graph of exponential function f(x) = ${coeff}(${base})^x ${shift >= 0 ? '+' : '-'} ${Math.abs(shift)} with x- and y-axes and a dashed horizontal asymptote at y = ${shift}.`,
                     inputType: 'number', a: shift, tol: 0.001,
                     solution: `In $f(x)=ab^x+k$, the horizontal asymptote is $y=k$. Here $k=${shift}$, so the asymptote is $y=${shift}$. This is the long-run value the graph approaches.`
                 };
@@ -2265,6 +2266,7 @@
                 return {
                     q: `Sketch/interpret $\\theta = \\frac{${num}\\pi}{${den}}$ in standard position. Find its reference angle in radians (decimal accepted).`,
                     svg,
+                    svgAltText: `Unit-circle style angle in standard position with initial side on the positive x-axis and terminal side at θ = ${num}π/${den} radians (about ${deg.toFixed(1)}°); find the acute reference angle to the x-axis.`,
                     inputType: 'number', a: ref, tol: 0.01,
                     solution: `$\\theta = \\frac{${num}\\pi}{${den}}$ is ${deg.toFixed(1)}^\\circ$, so $\\theta_{norm}=${thetaNorm.toFixed(2)}$ rad. The reference angle is the acute angle to the x-axis: $\\theta_{ref}=${refPiText ? refPiText : ref.toFixed(2)}\\approx ${ref.toFixed(2)}$ rad (${refDeg.toFixed(1)}^\\circ).`
                 };
@@ -2335,6 +2337,9 @@
                     ? `Find the measure of the inscribed angle $x$ if the intercepted arc is $${arcVal}^\\circ$.` 
                     : `Find the measure of the intercepted arc if the inscribed angle is $${angleVal}^\\circ$.`,
                 svg: svg, inputType: 'number', a: isFindingAngle ? angleVal : arcVal, tol: 0.1,
+                svgAltText: isFindingAngle
+                    ? `Circle with an inscribed angle marked x intercepting an arc labeled ${arcVal}°. Compute the inscribed angle.`
+                    : `Circle with an inscribed angle of ${angleVal}° intercepting an arc marked unknown. Compute the intercepted arc measure.`,
                 solution: isFindingAngle 
                     ? `The inscribed angle is half the arc: $${arcVal} / 2 = ${angleVal}^\\circ$.` 
                     : `The intercepted arc is twice the angle: $${angleVal} \\cdot 2 = ${arcVal}^\\circ$.`
@@ -2361,6 +2366,7 @@
             return {
                 q: `$\\overline{AC}$ is a diameter. Arc $\\widehat{AB} = ${arcAB}^\\circ$. Find arc $\\widehat{BC}$.`,
                 svg: svg, inputType: 'number', a: arcBC, tol: 0.1,
+                svgAltText: `Circle with diameter AC and point B on the semicircle. Arc AB is ${arcAB}° and arc BC is unknown on semicircle ABC.`,
                 solution: `Since $\\overline{AC}$ is a diameter, the semicircle $\\widehat{ABC} = 180^\\circ$. <br> $\\widehat{BC} = 180^\\circ - ${arcAB}^\\circ = ${arcBC}^\\circ$`
             };
         } else if (type < 0.75) {
@@ -2414,7 +2420,10 @@
                 <text x="140" y="170" fill="var(--text-muted)" font-size="11">${angleDBC}°</text>
             </svg>`;
             return {
-                q: question, svg: svg, inputType: 'number', a: answer, tol: 0.1, solution: solution
+                q: question,
+                svg: svg,
+                svgAltText: `Circle with diameter AC and non-diameter chord BD intersecting at point E. Given ∠DBC = ${angleDBC}° and arc AB = ${arcAB}°, use inscribed-angle and arc relationships to find the requested value.`,
+                inputType: 'number', a: answer, tol: 0.1, solution: solution
             };
         } else {
             // Supplementary inscribed angles: opposite angles in a cyclic quadrilateral
@@ -2666,6 +2675,7 @@
                 (1) $\\angle B$ in $\\triangle ABC$, (2) corresponding angle $\\angle E$ in $\\triangle DEF$, <br>
                 (3) side $EF$, and (4) side $DF$.`,
             svg,
+            svgAltText: `Two similar triangles, ABC and DEF. Triangle ABC shows sides AB = ${ab}, BC = ${bc}, AC = ${ac} with angles at A = ${angleA}° and C = ${angleC}°. Triangle DEF shows corresponding side DE = ${de} and unknowns EF and DF; solve corresponding angle and side values by similarity.`,
             inputType: 'quiz7_similar_multi',
             a: { s1: angleB, s2: angleB, s3: ef, s4: df },
             tol: 0.2,
@@ -2700,6 +2710,7 @@
         return {
             q: `Lines $j \\parallel k$. Given $\\angle 1 = ${acute}^\\circ$ and $\\angle 8 = ${obtuse}^\\circ$, find all four requested angles from the diagram: $\\angle 2, \\angle 3, \\angle 6, \\angle 7$.`,
             svg,
+            svgAltText: `Two parallel lines j and k are cut by a transversal. Given ∠1 = ${acute}° and ∠8 = ${obtuse}°, find unknown angles ∠2, ∠3, ∠6, and ∠7 using linear-pair, vertical, and corresponding-angle relationships.`,
             inputType: 'quiz7_parallel_multi',
             a: { p1: obtuse, p2: acute, p3: acute, p4: obtuse },
             tol: 0.2,
@@ -2747,6 +2758,7 @@
                 return {
                     q: `Find the total area of the L-shaped figure.`,
                     svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                    svgAltText: `L-shaped figure made from an outer rectangle ${w1} by ${h1} with a rectangular notch ${w2} by ${h2} removed. Find the remaining area.`,
                     solution: `Decompose into rectangles: Full rectangle $${w1} \\times ${h1} = ${w1*h1}$, minus notch $${w2} \\times ${h2} = ${w2*h2}$. <br> Area $= ${w1*h1} - ${w2*h2} = ${ans}$`
                 };
             }
@@ -2831,6 +2843,7 @@
                     return {
                         q: `Find the area of the trapezoid.`,
                         svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                        svgAltText: `Trapezoid with parallel bases ${b1} m and ${b2} m and perpendicular height ${h} m. Find its area.`,
                         solution: `Area of a trapezoid: $A = \\frac{1}{2}h(b_1 + b_2) = \\frac{1}{2}(${h})(${b1} + ${b2}) = ${ans}$`
                     };
                 } else if(randType > 0.33) {
@@ -2848,6 +2861,7 @@
                     return {
                         q: `Find the area of the parallelogram.`,
                         svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                        svgAltText: `Parallelogram with base ${b} m and perpendicular height ${h} m marked by a dashed altitude. Find its area.`,
                         solution: `Area of a parallelogram: $A = bh = (${b})(${h}) = ${ans}$`
                     };
                 } else {
@@ -2870,6 +2884,7 @@
                     return {
                         q: `Find the area of the triangle.`,
                         svg: svg, inputType: 'number', a: ans, tol: 0.1,
+                        svgAltText: `Triangle with base ${b} m and altitude ${h} m shown as a dashed perpendicular from the top vertex to the base. Find its area.`,
                         solution: `Area of a triangle: $A = \\frac{1}{2}bh = \\frac{1}{2}(${b})(${h}) = ${ans}$`
                     };
                 }
@@ -2947,6 +2962,7 @@
                 return {
                     q: `Lines $l$, $m$, and $n$ are parallel. Find the length of $x$. (Round to 1 decimal place)`,
                     svg: svg, inputType: 'number', a: x, tol: 0.05,
+                    svgAltText: `Three parallel lines l, m, and n are cut by two transversals. On one transversal, adjacent segments are ${a} and ${b}; on the other, corresponding segments are ${c} and x. Use proportional segments to solve for x.`,
                     solution: `By similar proportions across parallel lines: $\\frac{${a}}{${b}} = \\frac{${c}}{x} \\implies x = \\frac{${b} \\cdot ${c}}{${a}} = ${x.toFixed(1)}$`
                 }
             }
@@ -3000,12 +3016,14 @@
                     return {
                         q: `Find the arc length $s$ given radius $r=${rNum}$ and central angle $\\theta=${thetaStr}$. (Round to 1 decimal place)`,
                         svg: svg, inputType: 'number', a: rNum * thetaRad, tol: 0.05,
+                        svgAltText: `Sector of a circle with radius ${rNum} and central angle ${thetaSvgLabel}. Find arc length s of the highlighted arc.`,
                         solution: `First, ensure $\\theta$ is in radians: ${thetaRad.toFixed(3)}. <br> $s = r\\theta = (${rNum})(${thetaRad.toFixed(3)}) = ${(rNum * thetaRad).toFixed(1)}$`
                     };
                 } else {
                     return {
                         q: `Find the area $A$ of the sector given radius $r=${rNum}$ and central angle $\\theta=${thetaStr}$. (Round to 1 decimal place)`,
                         svg: svg, inputType: 'number', a: 0.5 * rNum * rNum * thetaRad, tol: 0.05,
+                        svgAltText: `Sector of a circle with radius ${rNum} and central angle ${thetaSvgLabel}. Find the shaded sector area A.`,
                         solution: `First, ensure $\\theta$ is in radians: ${thetaRad.toFixed(3)}. <br> $A = \\frac{1}{2}r^2\\theta = \\frac{1}{2}(${rNum})^2(${thetaRad.toFixed(3)}) = ${(0.5 * rNum * rNum * thetaRad).toFixed(1)}$`
                     };
                 }
@@ -3548,7 +3566,15 @@
         // Handle SVG injection
         const svgContainer = document.getElementById('svg-display');
         if(currentQuestion.svg) {
-            const fallbackLabel = currentQuestion.svgAltText || 'Diagram for this question. Use the written prompt and labels to interpret the figure.';
+            const hasSvgAltText = typeof currentQuestion.svgAltText === 'string' && currentQuestion.svgAltText.trim().length > 0;
+            if (!hasSvgAltText) {
+                console.warn(`[accessibility] Missing svgAltText for question generator: ${currentQuiz?.id || 'unknown'}`);
+            }
+            const questionTextFallback = String(currentQuestion.q || '')
+                .replace(/<[^>]+>/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+            const fallbackLabel = hasSvgAltText ? currentQuestion.svgAltText.trim() : `Diagram for: ${questionTextFallback}`;
             const safeFallback = escapeHtml(fallbackLabel);
             const fallback = `<p class="svg-fallback"><strong>Text fallback:</strong> ${safeFallback}</p>`;
             svgContainer.innerHTML = `${currentQuestion.svg}${fallback}`;
