@@ -18,6 +18,13 @@ This repository contains the source for a static academic website with course ma
 3. Verify that all local links still resolve.
 4. Commit and publish.
 
+## Repository Conventions
+
+- Use lowercase kebab-case for new HTML filenames (example: `simple-pendulum-lab-manual.html`).
+- Use the `.html` extension (avoid `.htm`) for page files.
+- Keep Office/Word export support bundles (for example, `*_files` directories) under `courses/legacy/` unless those assets are actively used by current pages.
+- When renaming files or moving legacy assets, update all `href`/`src` references in related pages and metadata files.
+
 ## Recommended Validation
 
 Run this local check before pushing to catch broken local `href` links:

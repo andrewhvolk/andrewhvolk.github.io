@@ -16,8 +16,8 @@ This document captures high-impact improvements identified from a quick reposito
      - Replace placeholders with real URLs where available.
      - If links are intentionally pending, render them as disabled UI elements with clear “coming soon” text rather than active anchors.
 
-2. **Fix missing auxiliary files referenced by `courses/Data Sheet for Electric Circuits.html`.**
-   - This file references local assets in a `Data Sheet for Electric Circuits_files/` directory that is not present.
+2. **Fix missing auxiliary files referenced by `courses/data-sheet-for-electric-circuits.html`.**
+   - This file references local assets in a `legacy/data-sheet-for-electric-circuits-files/` directory that is not present.
    - Recommendation:
      - Either commit the missing companion directory,
      - or regenerate/export the page as a self-contained HTML/PDF,
@@ -71,7 +71,7 @@ This document captures high-impact improvements identified from a quick reposito
 ## Suggested next sprint (small, high ROI)
 
 - [ ] Resolve placeholders in `courses/math114.html`.
-- [ ] Fix or replace `courses/Data Sheet for Electric Circuits.html` dependencies.
+- [ ] Fix or replace `courses/data-sheet-for-electric-circuits.html` dependencies.
 - [ ] Add an automated local-link checker and run it in CI.
 - [ ] Replace top-level `README.md` with site-specific docs.
 
