@@ -3,6 +3,30 @@
 <head>
 <title>Electrical Circuits Lab Data Sheet</title>
 <script src="../theme.js"></script>
+<style>
+@media print {
+  body {
+    margin: 1cm;
+    font-size: 12pt;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  input[type="text"] {
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+  ol {
+    page-break-inside: avoid;
+  }
+}
+</style>
 </head>
 <body>
 <nav class="navbar">
@@ -34,8 +58,8 @@
   Why?
   <input type="text" id="why1" name="why1"><br><br>
   </li>
-  <img src="Data Sheet for Electric Circuits_files/image003.gif" alt="Figure 11-A">
-  <img src="Data Sheet for Electric Circuits_files/image004.jpg" alt="Figure 11-B">
+  <img src="legacy/data-sheet-for-electric-circuits-files/image003.gif" alt="Figure 11-A">
+  <img src="legacy/data-sheet-for-electric-circuits-files/image004.jpg" alt="Figure 11-B">
   <li>Tighten the bulb (not too tight). Turn off the switch. Use another wire to set up the circuit shown in Figure 11-B, where a metal spoon is made part of the circuit.
   <br>Turn on the switch. What is observed?
   <input type="text" id="observation3" name="observation3"><br><br>
@@ -47,7 +71,7 @@
   Is the plastic spoon a conductor, or an insulator?
   <input type="text" id="conductor2" name="conductor2"><br><br>
   </li>
-  <img src="Data Sheet for Electric Circuits_files/image006.jpg" alt="Ammeter">
+  <img src="legacy/data-sheet-for-electric-circuits-files/image006.jpg" alt="Ammeter">
   <li>Turn off the switch, remove the plastic spoon, and connect the ammeter in its place as shown in the figure to the right.
   <br>Turn on the switch and measure and record the current to the nearest 0.01 A.
   <input type="text" id="current1" name="current1"><br><br>
@@ -57,7 +81,7 @@
   Was the current the same (within experimental error) on both sides of the circuit?
   <input type="text" id="sameCurrent" name="sameCurrent"><br><br>
   </li>
-  <img src="Data Sheet for Electric Circuits_files/image008.jpg" alt="Voltmeter">
+  <img src="legacy/data-sheet-for-electric-circuits-files/image008.jpg" alt="Voltmeter">
   <li>Turn off the switch, disconnect the ammeter, and again use one wire to connect the positive terminal of the battery to the bulb. Connect a wire to the common input of the <b>voltmeter</b> and a wire to its middle input, where the scale will read 0 to 3 V.
   <br>Turn on the switch. Touch the voltmeter’s red connection (+) to the positive side of the bulb and the black connection (-) to the negative side of the bulb as shown in the figure above. This measures the voltage across the bulb. <i>Read the voltage, to the nearest 0.05V, on the scale that goes from 0 to 3V.</i>
   <input type="text" id="voltageBulb" name="voltageBulb"><br><br>
@@ -77,7 +101,7 @@
 </ol>
 
 <h2>Part B: The Effect on Current of Changes in Voltage and Resistance</h2>
-<img src="Data Sheet for Electric Circuits_files/image010.jpg" alt="Resistor">
+<img src="legacy/data-sheet-for-electric-circuits-files/image010.jpg" alt="Resistor">
 <ol>
  <li>Use the same setup as in A.3, with the <b>ammeter</b> in the circuit. Turn on the switch and note the brightness of the bulb.
   <br>Turn off the switch and replace the regular bulb with one that has lower resistance as shown in the figure on the right.
@@ -92,7 +116,7 @@
   <input type="text" id="consistentOhm" name="consistentOhm"> (yes/no)<br><br>
   Turn off the switch and <b>replace the low resistance bulb with the original bulb</b>.
  </li>
- <img src="Data Sheet for Electric Circuits_files/image012.jpg" alt="Voltmeter">
+ <img src="legacy/data-sheet-for-electric-circuits-files/image012.jpg" alt="Voltmeter">
  <li><b>Change the voltage from 3V to 6V</b>. Keep the ammeter connected as shown in the figure below. According to Ohm’s law, if the resistance stays the same and the voltage increases, what <i>should</i> happen to the current?
   <input type="text" id="currentPredict2" name="currentPredict2"><br><br>
   (larger/smaller/same)<br>
@@ -124,7 +148,7 @@
 
 <h2>Part C: A Series Circuit</h2>
 <p><b>Note: Be sure to switch the voltage back to 3 V!</b></p>
-<img src="Data Sheet for Electric Circuits_files/image014.jpg" alt="Series Circuit">
+<img src="legacy/data-sheet-for-electric-circuits-files/image014.jpg" alt="Series Circuit">
 <ol>
  <li>Set up the bulb board, the <b>3 V battery,</b> and the <b>ammeter</b> so that <b>two</b> regular bulbs are connected <b>in series</b> as shown in the figure below. In the space at the right, sketch a schematic of the circuit using the shorthand notation shown on page 129 of the lab manual.
   <br>Get the instructor’s approval (<b>initials</b>) here <i>before turning on the switch</i>.
@@ -160,9 +184,9 @@
 </ol>
 
 <h2>Part D: A Parallel Circuit</h2>
-<img src="Data Sheet for Electric Circuits_files/image016.jpg" alt="Parallel Circuit">
+<img src="legacy/data-sheet-for-electric-circuits-files/image016.jpg" alt="Parallel Circuit">
 <ol>
- <li>Set up the bulb board, the <b>3V battery,</b> and the <b>ammeter</b>, so that <b>two</b> bulbs are connected in <b>parallel</b> as shown in the figure below. In the space at the right, sketch a schematic of the circuit using the shorthand notation shown on page 129.
+ <li>Set up the bulb board, the <b>3V battery,</b> and the <b>ammeter</b>, so that <b>two</b> bulbs are connected <b>in parallel</b> as shown in the figure below. In the space at the right, sketch a schematic of the circuit using the shorthand notation shown on page 129.
   <br>Get the instructor’s approval (<b>initials)</b> here <i>before turning on the switch</i>.
   <input type="text" id="instructorApproval2" name="instructorApproval2"><br><br>
   According to the reading assignment in the lab manual, should the current through each of the two bulbs be greater, or less, than when the two were in series?
@@ -187,7 +211,7 @@
   <br>What is the current?
   <input type="text" id="currentValue6" name="currentValue6"><br><br>
  </li>
- <img src="Data Sheet for Electric Circuits_files/image018.jpg" alt="Ammeter Through One Bulb">
+ <img src="legacy/data-sheet-for-electric-circuits-files/image018.jpg" alt="Ammeter Through One Bulb">
  <li>Connect the ammeter to measure the current through the other bulb as shown in the figure below. Repeat the current measurement. What is the current?
   <input type="text" id="currentValue7" name="currentValue7"><br><br>
   Do the last two current values add up to the total current (allowing for experimental error)?
