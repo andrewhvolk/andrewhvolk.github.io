@@ -122,7 +122,7 @@ header h1 {
 }
 
 /* Navigation styling */
-nav.navbar {
+.cv-section-nav {
     position: sticky;
     top: 0;
     background-color: var(--secondary-color);
@@ -130,7 +130,7 @@ nav.navbar {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-nav.navbar ul {
+.cv-section-nav ul {
     display: flex;
     justify-content: center;
     list-style: none;
@@ -138,11 +138,11 @@ nav.navbar ul {
     padding: 0;
 }
 
-nav.navbar li {
+.cv-section-nav li {
     position: relative;
 }
 
-nav.navbar a {
+.cv-section-nav a {
     display: block;
     padding: 1rem 1.5rem;
     color: var(--light-text);
@@ -150,12 +150,12 @@ nav.navbar a {
     transition: var(--transition);
 }
 
-nav.navbar a:hover {
+.cv-section-nav a:hover {
     background-color: var(--primary-color);
 }
 
 /* Dropdown menu styling - Updated */
-.dropdown-menu {
+.cv-dropdown-menu {
     position: absolute;
     top: calc(100% - 2px);
     left: 0;
@@ -168,22 +168,22 @@ nav.navbar a:hover {
     z-index: 1000;
 }
 
-nav.navbar li:hover .dropdown-menu {
+.cv-section-nav li:hover .cv-dropdown-menu {
     opacity: 1;
     visibility: visible;
 }
 
-.dropdown-menu li {
+.cv-dropdown-menu li {
     width: 100%;
 }
 
-.dropdown-menu a {
+.cv-dropdown-menu a {
     padding: 0.75rem 1.5rem;
     white-space: nowrap;
 }
 
 /* Hamburger menu for mobile */
-.menu-toggle {
+.cv-menu-toggle {
     display: none;
     background-color: var(--secondary-color);
     color: var(--light-text);
@@ -455,7 +455,7 @@ main.error-main {
 @media print {
     nav, 
     .download-container, 
-    .menu-toggle,
+    .cv-menu-toggle,
     footer {
         display: none !important;
     }
@@ -575,7 +575,7 @@ section:nth-child(5) { animation-delay: 0.25s; }
 /* Media queries for responsive design */
 @media (max-width: 768px) {
     /* Hamburger menu toggle */
-    .menu-toggle {
+    .cv-menu-toggle {
         display: flex;
         width: 100%;
         text-align: left;
@@ -585,18 +585,18 @@ section:nth-child(5) { animation-delay: 0.25s; }
     }
     
     /* Mobile navigation structure */
-    nav.navbar ul#nav-menu {
+    .cv-section-nav ul#cv-nav-menu {
         display: none;
         flex-direction: column;
         width: 100%;
     }
     
-    nav.navbar ul#nav-menu.open {
+    .cv-section-nav ul#cv-nav-menu.open {
         display: flex;
     }
     
     /* Consistent dropdown handling - Updated for mobile */
-    .dropdown-menu {
+    .cv-dropdown-menu {
         position: static;
         width: 100%;
         box-shadow: none;
@@ -607,7 +607,7 @@ section:nth-child(5) { animation-delay: 0.25s; }
         transition: max-height 0.3s ease-out, opacity 0.2s ease-out, visibility 0.2s ease-out;
     }
     
-    .dropdown-open {
+    .cv-dropdown-open {
         max-height: 500px;
         opacity: 1;
         visibility: visible;
@@ -615,7 +615,7 @@ section:nth-child(5) { animation-delay: 0.25s; }
     }
     
     /* Dropdown menu styling for mobile */
-    .dropdown-menu a {
+    .cv-dropdown-menu a {
         padding-left: 2.5rem;
     }
     
@@ -737,7 +737,7 @@ section:nth-child(5) { animation-delay: 0.25s; }
     color: var(--accent-color);
 }
 
-.nav-links .dropdown-menu {
+.nav-links .cv-dropdown-menu {
     position: absolute;
     top: calc(100% + 0.25rem);
     left: 0;
@@ -751,12 +751,12 @@ section:nth-child(5) { animation-delay: 0.25s; }
 }
 
 .nav-links .dropdown:hover .dropdown-menu,
-.nav-links .dropdown:focus-within .dropdown-menu {
+.nav-links .dropdown:focus-within .cv-dropdown-menu {
     opacity: 1;
     visibility: visible;
 }
 
-.nav-links .dropdown-menu a {
+.nav-links .cv-dropdown-menu a {
     padding: 0.6rem 0.75rem;
     white-space: nowrap;
 }
@@ -779,7 +779,7 @@ section:nth-child(5) { animation-delay: 0.25s; }
         margin-bottom: 0.5rem;
     }
 
-    .nav-links .dropdown-menu {
+    .nav-links .cv-dropdown-menu {
         position: static;
         min-width: 0;
         width: 100%;
@@ -792,7 +792,7 @@ section:nth-child(5) { animation-delay: 0.25s; }
     }
 
     .nav-links .dropdown:hover .dropdown-menu,
-    .nav-links .dropdown:focus-within .dropdown-menu {
+    .nav-links .dropdown:focus-within .cv-dropdown-menu {
         display: block;
     }
     

@@ -10,29 +10,10 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="theme.js"></script>
+  <script src="nav-include.js" data-site-root="./" defer></script>
 </head>
 <body>
- <nav class="navbar">
-  <div class="container nav-container">
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="CV.html">About Me</a></li>
-      <li class="dropdown">
-        <button class="dropdown-trigger" type="button" aria-haspopup="true">Course Resources ▾</button>
-        <ul class="dropdown-menu">
-          <li><a href="learn.html">All Courses</a></li>
-          <li><a href="courses/math130.html">MATH 130 Home</a></li>
-        </ul>
-      </li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank">Math Club</a></li>
-      <li><a href="https://www.youtube.com/learnabundantly" target="_blank">YouTube</a></li>
-      <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
-    </ul>
-    
-    <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
-  </div>
-</nav>
+ <div data-site-nav></div>
     <!-- Header with profile image and name -->
     <header>
         <div class="profile-image">
@@ -57,21 +38,21 @@
     </header>
 
     <!-- Sticky Navigation Bar with Dropdowns -->
-    <nav class="navbar">
-        <button class="menu-toggle" aria-label="Toggle navigation menu">
+    <nav class="cv-section-nav" aria-label="CV section navigation">
+        <button class="cv-menu-toggle" aria-label="Toggle navigation menu">
             <i class="fas fa-bars"></i>
         </button>
-        <ul id="nav-menu">
+        <ul id="cv-nav-menu">
             <li>
                 <a href="#!">About</a>
-                <ul class="dropdown-menu">
+                <ul class="cv-dropdown-menu">
                     <li><a href="#about">Biography</a></li>
                     <li><a href="#philosophy">Teaching Philosophy</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#!">Academics</a>
-                <ul class="dropdown-menu">
+                <ul class="cv-dropdown-menu">
                     <li><a href="#education">Education</a></li>
                     <li><a href="#courses">Courses Taught</a></li>
                     <li><a href="#publications">Publications</a></li>
@@ -80,14 +61,14 @@
             </li>
             <li>
                 <a href="#!">Experience</a>
-                <ul class="dropdown-menu">
+                <ul class="cv-dropdown-menu">
                     <li><a href="#experience">Professional Experience</a></li>
                     <li><a href="#presentations">Conference Presentations</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#!">Service</a>
-                <ul class="dropdown-menu">
+                <ul class="cv-dropdown-menu">
                     <li><a href="#community">Community &amp; Church Service</a></li>
                     <li><a href="#mentoring">Advising &amp; Mentoring</a></li>
                     <li><a href="#youtube">Educational Media</a></li>
@@ -509,30 +490,30 @@
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
             // Add event listener for menu toggle button
-            document.querySelector('.menu-toggle').addEventListener('click', function() {
-                const navMenu = document.getElementById('nav-menu');
+            document.querySelector('.cv-menu-toggle').addEventListener('click', function() {
+                const navMenu = document.getElementById('cv-nav-menu');
                 navMenu.classList.toggle('open');
             });
 
             // Toggle dropdowns on mobile click
             document.addEventListener('click', function(event) {
                 // If a top-level nav link was clicked
-                if (event.target.matches('#nav-menu > li > a')) {
+                if (event.target.matches('#cv-nav-menu > li > a')) {
                     // Check if it's mobile view (menu toggle is visible)
-                    const isMobileView = window.getComputedStyle(document.querySelector('.menu-toggle')).display !== 'none';
+                    const isMobileView = window.getComputedStyle(document.querySelector('.cv-menu-toggle')).display !== 'none';
                     if (isMobileView) {
                         event.preventDefault();
                         // Find the dropdown menu associated with this link
                         const dropdown = event.target.nextElementSibling;
-                        if (dropdown && dropdown.classList.contains('dropdown-menu')) {
+                        if (dropdown && dropdown.classList.contains('cv-dropdown-menu')) {
                             // Close all other open dropdowns first
-                            document.querySelectorAll('.dropdown-menu.dropdown-open').forEach(function(openDropdown) {
+                            document.querySelectorAll('.cv-dropdown-menu.cv-dropdown-open').forEach(function(openDropdown) {
                                 if (openDropdown !== dropdown) {
-                                    openDropdown.classList.remove('dropdown-open');
+                                    openDropdown.classList.remove('cv-dropdown-open');
                                 }
                             });
                             // Toggle this dropdown
-                            dropdown.classList.toggle('dropdown-open');
+                            dropdown.classList.toggle('cv-dropdown-open');
                         }
                     }
                 }
@@ -541,13 +522,13 @@
             // Close dropdowns when clicking outside
             document.addEventListener('click', function(event) {
                 // If click is outside of navigation
-                if (!event.target.closest('#nav-menu') && !event.target.closest('.menu-toggle')) {
+                if (!event.target.closest('#cv-nav-menu') && !event.target.closest('.cv-menu-toggle')) {
                     // Close all open dropdowns
-                    document.querySelectorAll('.dropdown-menu.dropdown-open').forEach(function(dropdown) {
-                        dropdown.classList.remove('dropdown-open');
+                    document.querySelectorAll('.cv-dropdown-menu.cv-dropdown-open').forEach(function(dropdown) {
+                        dropdown.classList.remove('cv-dropdown-open');
                     });
                     // Close the entire menu if it's open (on mobile)
-                    const navMenu = document.getElementById('nav-menu');
+                    const navMenu = document.getElementById('cv-nav-menu');
                     if (navMenu.classList.contains('open')) {
                         navMenu.classList.remove('open');
                     }
@@ -557,4 +538,3 @@
     </footer>
 </body>
 </html>
-```

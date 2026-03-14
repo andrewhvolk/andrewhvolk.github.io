@@ -26,6 +26,16 @@ This repository contains the source for a static academic website with course ma
 - When renaming files or moving legacy assets, update all `href`/`src` references in related pages and metadata files.
 - Keep shared JavaScript utilities at the repository root (for example, `theme.js`) and reference them from subdirectories with relative paths like `../theme.js` instead of duplicating script files.
 
+## New Page Checklist
+
+When creating a new page in the repository root or `courses/`, use this quick checklist:
+
+- [ ] Add `<div data-site-nav></div>` directly after `<body>`.
+- [ ] Include `nav-include.js` with the correct path and `data-site-root` value:
+  - Root pages: `<script src="nav-include.js" data-site-root="./" defer></script>`
+  - `courses/` pages: `<script src="../nav-include.js" data-site-root="../" defer></script>`
+- [ ] Ensure external nav links opened from shared nav use `target="_blank"` and `rel="noopener noreferrer"` (already handled by `partials/site-nav.html`).
+
 ## Recommended Validation
 
 Run this local check before pushing to catch broken local `href` links:
