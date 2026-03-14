@@ -24,6 +24,7 @@ This repository contains the source for a static academic website with course ma
 - Use the `.html` extension (avoid `.htm`) for page files.
 - Keep Office/Word export support bundles (for example, `*_files` directories) under `courses/legacy/` unless those assets are actively used by current pages.
 - When renaming files or moving legacy assets, update all `href`/`src` references in related pages and metadata files.
+- Keep shared JavaScript utilities at the repository root (for example, `theme.js`) and reference them from subdirectories with relative paths like `../theme.js` instead of duplicating script files.
 
 ## Recommended Validation
 
