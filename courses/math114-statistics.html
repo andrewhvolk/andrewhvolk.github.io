@@ -1,86 +1,363 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MATH 114 Statistics Unit</title>
-  <link rel="stylesheet" href="../styles.css">
-  <script src="../theme.js"></script>
-</head>
-<body>
-<nav class="navbar">
-  <div class="container nav-container">
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../CV.html">About Me</a></li>
-      <li class="dropdown">
-        <button class="dropdown-trigger" type="button" aria-haspopup="true">Course Resources ▾</button>
-        <ul class="dropdown-menu">
-          <li><a href="../learn.html">All Courses</a></li>
-          <li><a href="math114.html">MATH 114 Home</a></li>
-          <li><a href="math130.html">MATH 130 Home</a></li>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MATH 114 Statistics Unit</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../theme.js"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container nav-container">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../CV.html">About Me</a></li>
+          <li class="dropdown">
+            <button class="dropdown-trigger" type="button" aria-haspopup="true">
+              Course Resources ▾
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="../learn.html">All Courses</a></li>
+              <li><a href="math114.html">MATH 114 Home</a></li>
+              <li><a href="math130.html">MATH 130 Home</a></li>
+            </ul>
+          </li>
+          <li><a href="../projects.html">Projects</a></li>
+          <li>
+            <a
+              href="https://andrewhvolk.github.io/LibertyMathClub/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Math Club</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.youtube.com/learnabundantly"
+              target="_blank"
+              rel="noopener noreferrer"
+              >YouTube</a
+            >
+          </li>
+          <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
         </ul>
-      </li>
-      <li><a href="../projects.html">Projects</a></li>
-      <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
-      <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-      <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
-    </ul>
-
-    <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
-  </div>
-</nav>
-  <header class="course-header course-header--unit">
-    <div class="container">
-      <h1>MATH 114: Statistics Unit</h1>
-      <p class="subtitle">Modules 9–11 resources for descriptive statistics, normal models, and spreadsheets.</p>
-    </div>
-  </header>
-
-  <div class="course-identity-wrap">
-    <div class="container">
-      <div class="course-identity" aria-label="Course identity">
-        <div class="course-identity__item">
-          <span class="course-identity__label">Course</span>
-          <p class="course-identity__value">MATH 114: Quantitative Reasoning</p>
-        </div>
-        <div class="course-identity__item">
-          <span class="course-identity__label">Term</span>
-          <p class="course-identity__value">Spring R 2025</p>
-        </div>
-        <div class="course-identity__item">
-          <span class="course-identity__label">Instructor</span>
-          <p class="course-identity__value">Mr. Andrew Harrison Volk</p>
-        </div>
-        <div class="course-identity__item">
-          <span class="course-identity__label">Home Page</span>
-          <p class="course-identity__value course-identity__value--link"><a href="math114.html">MATH 114 Home</a></p>
-        </div>
-        <div class="course-identity__item">
-          <span class="course-identity__label">Current Unit</span>
-          <p class="course-identity__value"><span class="course-identity__pill">Modules 9–11</span></p>
+        <button
+          id="theme-toggle-btn"
+          class="theme-toggle"
+          aria-label="Toggle Theme"
+        ></button>
+      </div>
+    </nav>
+    <header class="course-header course-header--unit">
+      <div class="container">
+        <h1>MATH 114: Statistics Unit</h1>
+        <p class="subtitle">
+          Modules 9–11 resources for descriptive statistics, normal models, and
+          spreadsheets.
+        </p>
+      </div>
+    </header>
+    <div class="course-identity-wrap">
+      <div class="container">
+        <div class="course-identity" aria-label="Course identity">
+          <div class="course-identity__item">
+            <span class="course-identity__label">Course</span>
+            <p class="course-identity__value">
+              MATH 114: Quantitative Reasoning
+            </p>
+          </div>
+          <div class="course-identity__item">
+            <span class="course-identity__label">Term</span>
+            <p class="course-identity__value">Spring R 2025</p>
+          </div>
+          <div class="course-identity__item">
+            <span class="course-identity__label">Instructor</span>
+            <p class="course-identity__value">Mr. Andrew Harrison Volk</p>
+          </div>
+          <div class="course-identity__item">
+            <span class="course-identity__label">Home Page</span>
+            <p class="course-identity__value course-identity__value--link">
+              <a href="math114.html">MATH 114 Home</a>
+            </p>
+          </div>
+          <div class="course-identity__item">
+            <span class="course-identity__label">Current Unit</span>
+            <p class="course-identity__value">
+              <span class="course-identity__pill">Modules 9–11</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <main class="container course-page">
-
-    <section class="unit-overview-block"><h2>Unit Overview</h2><p>This section groups the statistics modules so students can quickly find homework, quizzes, slides, and reference tools for data summaries and normal distribution topics.</p></section>
-    <section><h2>Module 9</h2><table class="assignment-resource-table"><thead><tr><th>Assignment</th><th>Due Date</th><th>Points</th><th>Links</th></tr></thead><tbody><tr><td>Module 9 Homework (6A &amp; 6B)</td><td>Mar 23, 11:59pm</td><td>20</td><td><a href="https://canvas.liberty.edu/courses/735702/assignments/11455483">Section 2</a> | <a href="https://canvas.liberty.edu/courses/735705/assignments/11455486">Section 3</a></td></tr><tr><td>Module 9 Quiz (6A &amp; 6B)</td><td>Mar 24, 11:59pm</td><td>10</td><td><a href="https://canvas.liberty.edu/courses/735702/assignments/11455488">Section 2</a> | <a href="https://canvas.liberty.edu/courses/735705/assignments/11455489">Section 3</a></td></tr></tbody></table><table class="assignment-resource-table"><thead><tr><th>Slides</th><th>Tools</th></tr></thead><tbody><tr><td><a href="../pdfs/114Module9Spring25.pdf">Lecture Slides</a></td><td><a href="basic-statistical-measures.html">One Page Summary</a><br><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a><br><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a><br><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></td></tr></tbody></table></section>
-    <section><h2>Module 10</h2><table class="assignment-resource-table"><thead><tr><th>Assignment</th><th>Due Date</th><th>Points</th><th>Links</th></tr></thead><tbody><tr><td>Module 10 Homework (6C &amp; 8A)</td><td>Mar 30, 11:59pm</td><td>20</td><td><a href="https://canvas.liberty.edu/courses/735702/assignments/11455376">Section 2</a> | <a href="https://canvas.liberty.edu/courses/735705/assignments/11455377">Section 3</a></td></tr><tr><td>Module 10 Quiz (6C &amp; 8A)</td><td>Mar 31, 11:59pm</td><td>10</td><td><a href="https://canvas.liberty.edu/courses/735702/assignments/11455380">Section 2</a> | <a href="https://canvas.liberty.edu/courses/735705/assignments/11455381">Section 3</a></td></tr></tbody></table><table class="assignment-resource-table"><thead><tr><th>Slides</th><th>Prof. Volk&apos;s Videos</th><th>Tools</th></tr></thead><tbody><tr><td><a href="../pdfs/114Module10Spring25.pdf">Lecture Slides</a></td><td><a href="https://youtu.be/rWprz1MvhOI">How to use the 68-95-99.7 rule</a><br><a href="https://youtu.be/j9V6rJrq-6s">Old Lecture Video</a></td><td><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a><br><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a><br><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></td></tr></tbody></table></section>
-    <section><h2>Module 11</h2><table class="assignment-resource-table"><thead><tr><th>Assignment</th><th>Due Date</th><th>Points</th><th>Links</th></tr></thead><tbody><tr><td>Module 11 Homework (8B &amp; 8C)</td><td>Apr 6, 11:59pm</td><td>20</td><td><a href="https://canvas.liberty.edu/courses/735702/assignments/11455384">Section 2</a> | <a href="https://canvas.liberty.edu/courses/735705/assignments/11455385">Section 3</a></td></tr><tr><td>Module 11 Quiz (8B &amp; 8C)</td><td>Apr 7, 11:59pm</td><td>10</td><td><a href="https://canvas.liberty.edu/courses/735702/assignments/11455388">Section 2</a> | <a href="https://canvas.liberty.edu/courses/735705/assignments/11455389">Section 3</a></td></tr></tbody></table><table class="assignment-resource-table"><thead><tr><th>Slides</th><th>Videos</th><th>Tools</th></tr></thead><tbody><tr><td>Slides will be posted as available.</td><td>Additional videos will be posted as available.</td><td><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a><br><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a><br><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></td></tr></tbody></table><div class="course-back-row">
+    <main class="container course-page">
+      <section class="unit-overview-block">
+        <h2>Statistics Overview</h2>
+        <p>
+          This unit keeps the statistics modules aligned with the MATH 114
+          home-page navigation cards by highlighting what to do next and placing
+          slides, summaries, videos, and tools in a separate resources area.
+        </p>
+      </section>
+      <div class="unit-module-stack">
+        <section class="unit-module-card">
+          <h2>Module 9</h2>
+          <p class="unit-module-summary">
+            Start the statistics unit with descriptive statistics practice,
+            including the homework and quiz set plus a one-page summary and
+            spreadsheet-friendly tools.
+          </p>
+          <div class="unit-task-grid">
+            <article class="unit-task-card">
+              <h3>Module 9 Homework (6A &amp; 6B)</h3>
+              <ul class="unit-task-meta">
+                <li><strong>Due:</strong> Mar 23, 11:59pm</li>
+                <li><strong>Points:</strong> 20</li>
+                <li>
+                  <a
+                    href="https://canvas.liberty.edu/courses/735702/assignments/11455483"
+                    >Section 2</a
+                  >
+                  |
+                  <a
+                    href="https://canvas.liberty.edu/courses/735705/assignments/11455486"
+                    >Section 3</a
+                  >
+                </li>
+              </ul>
+            </article>
+            <article class="unit-task-card">
+              <h3>Module 9 Quiz (6A &amp; 6B)</h3>
+              <ul class="unit-task-meta">
+                <li><strong>Due:</strong> Mar 24, 11:59pm</li>
+                <li><strong>Points:</strong> 10</li>
+                <li>
+                  <a
+                    href="https://canvas.liberty.edu/courses/735702/assignments/11455488"
+                    >Section 2</a
+                  >
+                  |
+                  <a
+                    href="https://canvas.liberty.edu/courses/735705/assignments/11455489"
+                    >Section 3</a
+                  >
+                </li>
+              </ul>
+            </article>
+          </div>
+          <div class="unit-resource-grid">
+            <article class="unit-resource-card">
+              <h3>Slides &amp; summaries</h3>
+              <ul>
+                <li>
+                  <a href="../pdfs/114Module9Spring25.pdf">Lecture slides</a>
+                </li>
+                <li>
+                  <a href="basic-statistical-measures.html">One Page Summary</a>
+                </li>
+              </ul>
+            </article>
+            <article class="unit-resource-card">
+              <h3>Tools</h3>
+              <ul>
+                <li>
+                  <a href="https://www.desmos.com/scientific"
+                    >Desmos Scientific Calculator</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.desmos.com/graphing"
+                    >Desmos Graphing Calculator</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.microsoft365.com/launch/excel?"
+                    >Excel Online</a
+                  >
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+        <section class="unit-module-card">
+          <h2>Module 10</h2>
+          <p class="unit-module-summary">
+            Move into normal models and empirical-rule applications with the
+            next homework and quiz set, supported by slides and walkthrough
+            videos.
+          </p>
+          <div class="unit-task-grid">
+            <article class="unit-task-card">
+              <h3>Module 10 Homework (6C &amp; 8A)</h3>
+              <ul class="unit-task-meta">
+                <li><strong>Due:</strong> Mar 30, 11:59pm</li>
+                <li><strong>Points:</strong> 20</li>
+                <li>
+                  <a
+                    href="https://canvas.liberty.edu/courses/735702/assignments/11455376"
+                    >Section 2</a
+                  >
+                  |
+                  <a
+                    href="https://canvas.liberty.edu/courses/735705/assignments/11455377"
+                    >Section 3</a
+                  >
+                </li>
+              </ul>
+            </article>
+            <article class="unit-task-card">
+              <h3>Module 10 Quiz (6C &amp; 8A)</h3>
+              <ul class="unit-task-meta">
+                <li><strong>Due:</strong> Mar 31, 11:59pm</li>
+                <li><strong>Points:</strong> 10</li>
+                <li>
+                  <a
+                    href="https://canvas.liberty.edu/courses/735702/assignments/11455380"
+                    >Section 2</a
+                  >
+                  |
+                  <a
+                    href="https://canvas.liberty.edu/courses/735705/assignments/11455381"
+                    >Section 3</a
+                  >
+                </li>
+              </ul>
+            </article>
+          </div>
+          <div class="unit-resource-grid">
+            <article class="unit-resource-card">
+              <h3>Slides</h3>
+              <ul>
+                <li>
+                  <a href="../pdfs/114Module10Spring25.pdf">Lecture slides</a>
+                </li>
+              </ul>
+            </article>
+            <article class="unit-resource-card">
+              <h3>Videos</h3>
+              <ul>
+                <li>
+                  <a href="https://youtu.be/rWprz1MvhOI"
+                    >How to use the 68-95-99.7 rule</a
+                  >
+                </li>
+                <li>
+                  <a href="https://youtu.be/j9V6rJrq-6s">Old Lecture Video</a>
+                </li>
+              </ul>
+            </article>
+            <article class="unit-resource-card">
+              <h3>Tools</h3>
+              <ul>
+                <li>
+                  <a href="https://www.desmos.com/scientific"
+                    >Desmos Scientific Calculator</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.desmos.com/graphing"
+                    >Desmos Graphing Calculator</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.microsoft365.com/launch/excel?"
+                    >Excel Online</a
+                  >
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+        <section class="unit-module-card">
+          <h2>Module 11</h2>
+          <p class="unit-module-summary">
+            Complete the statistics content before Test 3 with the final
+            homework and quiz pair in this unit, while keeping the core tools
+            ready for spreadsheet and calculator work.
+          </p>
+          <div class="unit-task-grid">
+            <article class="unit-task-card">
+              <h3>Module 11 Homework (8B &amp; 8C)</h3>
+              <ul class="unit-task-meta">
+                <li><strong>Due:</strong> Apr 6, 11:59pm</li>
+                <li><strong>Points:</strong> 20</li>
+                <li>
+                  <a
+                    href="https://canvas.liberty.edu/courses/735702/assignments/11455384"
+                    >Section 2</a
+                  >
+                  |
+                  <a
+                    href="https://canvas.liberty.edu/courses/735705/assignments/11455385"
+                    >Section 3</a
+                  >
+                </li>
+              </ul>
+            </article>
+            <article class="unit-task-card">
+              <h3>Module 11 Quiz (8B &amp; 8C)</h3>
+              <ul class="unit-task-meta">
+                <li><strong>Due:</strong> Apr 7, 11:59pm</li>
+                <li><strong>Points:</strong> 10</li>
+                <li>
+                  <a
+                    href="https://canvas.liberty.edu/courses/735702/assignments/11455388"
+                    >Section 2</a
+                  >
+                  |
+                  <a
+                    href="https://canvas.liberty.edu/courses/735705/assignments/11455389"
+                    >Section 3</a
+                  >
+                </li>
+              </ul>
+            </article>
+          </div>
+          <div class="unit-resource-grid">
+            <article class="unit-resource-card">
+              <h3>Slides</h3>
+              <p>Slides will be posted as available.</p>
+            </article>
+            <article class="unit-resource-card">
+              <h3>Videos</h3>
+              <p>Additional videos will be posted as available.</p>
+            </article>
+            <article class="unit-resource-card">
+              <h3>Tools</h3>
+              <ul>
+                <li>
+                  <a href="https://www.desmos.com/scientific"
+                    >Desmos Scientific Calculator</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.desmos.com/graphing"
+                    >Desmos Graphing Calculator</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.microsoft365.com/launch/excel?"
+                    >Excel Online</a
+                  >
+                </li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </div>
+      <div class="course-back-row">
         <a href="math114.html" class="button">Back to MATH 114 Home</a>
-      </div></section>
-
-  </main>
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 - All Rights Reserved</p>
-      <div class="social-links">
-        <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
       </div>
-    </div>
-  </footer>
-</body>
+    </main>
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 - All Rights Reserved</p>
+        <div class="social-links">
+          <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube"
+            >📺</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
