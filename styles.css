@@ -379,6 +379,69 @@ section h2 {
     margin-right: auto;
 }
 
+.course-identity-wrap {
+    margin-top: -1.25rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    z-index: 2;
+}
+
+.course-identity {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+    background: var(--card-background);
+    border: 1px solid rgba(52, 152, 219, 0.18);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1rem 1.25rem;
+}
+
+.course-identity__item {
+    min-width: 0;
+}
+
+.course-identity__label {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+.course-identity__value {
+    margin: 0;
+    color: var(--secondary-color);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.course-identity__value--link a {
+    font-weight: 700;
+}
+
+.course-identity__pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(52, 152, 219, 0.12);
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+:root[data-theme="dark"] .course-identity {
+    border-color: rgba(240, 240, 240, 0.12);
+}
+
+:root[data-theme="dark"] .course-identity__pill {
+    background: rgba(52, 152, 219, 0.22);
+}
+
 .course-meta-grid,
 .quick-link-grid {
     display: grid;
