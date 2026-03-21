@@ -6,10 +6,52 @@
   <title>MATH 114: Quantitative Reasoning - Spring R 2025</title>
   <link rel="stylesheet" href="../styles.css">
   <style>
-    table { width: 100%; border-collapse: collapse; margin-bottom: 2em; }
-    th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }
-    th { background-color: #f4f4f4; }
-    a[aria-disabled="true"] { pointer-events: none; color: #777; text-decoration: none; font-style: italic; }
+    .course-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .meta-card,
+    .quick-start-card {
+      background: var(--card-background);
+      border: 1px solid rgba(52, 152, 219, 0.18);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+    }
+
+    .meta-card p:last-child,
+    .quick-start-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .quick-start-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .quick-start-card ul {
+      list-style: disc;
+      margin: 0.75rem 0 0 1.25rem;
+      padding: 0;
+    }
+
+    .quick-start-card li + li {
+      margin-top: 0.5rem;
+    }
+
+    .card {
+      max-width: 330px;
+    }
+
+    .card .button {
+      width: 100%;
+      box-sizing: border-box;
+    }
   </style>
   <script src="../theme.js"></script>
 </head>
@@ -23,6 +65,7 @@
         <button class="dropdown-trigger" type="button" aria-haspopup="true">Course Resources ▾</button>
         <ul class="dropdown-menu">
           <li><a href="../learn.html">All Courses</a></li>
+          <li><a href="../courses/math114.html">MATH 114 Home</a></li>
           <li><a href="../courses/math130.html">MATH 130 Home</a></li>
         </ul>
       </li>
@@ -31,7 +74,7 @@
       <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
       <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
     </ul>
-    
+
     <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
   </div>
 </nav>
@@ -48,1283 +91,113 @@
     <section>
       <h2>Course Overview</h2>
       <p>This course applies mathematical tools and analysis to practical contexts. Emphasis is placed on using proportions, ratios, and basic statistics to solve real‐world problems, with a focus on financial applications and data interpretation.</p>
-      <p><strong>Meeting Times Section 2:</strong> Monday, Wednesday, Friday, 9:20 AM – 10:10 AM (DH 2443)</p>
-      <p><strong>Meeting Times Section 3:</strong> Monday, Wednesday, Friday, 12:00 PM – 12:50 PM (DH 2446)</p>
-      <p><strong>Instructor:</strong> Mr. Andrew Harrison Volk (<a href="mailto:ahvolk@liberty.edu">ahvolk@liberty.edu</a>), Office: DH 4284N</p>
-      <p><strong>Office Hours:</strong> Tuesday (8:15 AM – 12:15 PM), Thursday (8:15 AM – 12:15 PM), Friday (1:00 PM – 3:00 PM)</p>
+      <div class="course-meta">
+        <div class="meta-card">
+          <h3>Meeting Times</h3>
+          <p><strong>Section 2:</strong> Monday, Wednesday, Friday, 9:20 AM – 10:10 AM (DH 2443)</p>
+          <p><strong>Section 3:</strong> Monday, Wednesday, Friday, 12:00 PM – 12:50 PM (DH 2446)</p>
+        </div>
+        <div class="meta-card">
+          <h3>Instructor &amp; Office</h3>
+          <p><strong>Instructor:</strong> Mr. Andrew Harrison Volk</p>
+          <p><strong>Email:</strong> <a href="mailto:ahvolk@liberty.edu">ahvolk@liberty.edu</a></p>
+          <p><strong>Office:</strong> DH 4284N</p>
+        </div>
+        <div class="meta-card">
+          <h3>Office Hours</h3>
+          <p>Tuesday (8:15 AM – 12:15 PM)</p>
+          <p>Thursday (8:15 AM – 12:15 PM)</p>
+          <p>Friday (1:00 PM – 3:00 PM)</p>
+        </div>
+      </div>
     </section>
 
     <section>
-      <h2>Syllabus & Course Schedule</h2>
+      <h2>Syllabus &amp; Course Schedule</h2>
       <p>For a complete outline of topics, assignments, policies, and grading, please review the full syllabus.</p>
-      <ul>
-        <li><a href="../pdfs/Quantitative_Reasoning_MATH_114_Spring_R_2025.pdf" target="_blank" rel="noopener noreferrer">Download Syllabus for Spring 2025</a></li>
-      </ul>
+      <p><a href="../pdfs/Quantitative_Reasoning_MATH_114_Spring_R_2025.pdf" target="_blank" rel="noopener noreferrer" class="button">Download Syllabus for Spring 2025</a></p>
     </section>
+
+    <section class="welcome-section">
+      <h2>Course Modules &amp; Study Materials</h2>
+      <p>Use the pages below to move through the course by unit. Each page groups together assignments, lecture slides, videos, review items, and helpful tools so the course home stays focused on navigation.</p>
+    </section>
+
+    <div class="card-container">
+      <div class="card">
+        <div class="card-icon">🧭</div>
+        <h2>Orientation &amp; Foundations</h2>
+        <p>Module 1 through Module 3, including introductions, quantitative reasoning basics, homework, quizzes, slides, and starter tools.</p>
+        <a href="math114-foundations.html" class="button">View Modules 1–3</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <h2>Test 1 Unit</h2>
+        <p>Module 4 review materials, Project 1, Test 1 links, and the supporting videos for Chapters 2 and 3.</p>
+        <a href="math114-test1.html" class="button">View Test 1 Unit</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💵</div>
+        <h2>Financial Math Unit</h2>
+        <p>Module 5 through Module 7 resources on percentages, finance topics, and practice tools before the second test.</p>
+        <a href="math114-financial-math.html" class="button">View Modules 5–7</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h2>Test 2 Unit</h2>
+        <p>Module 8 review materials, Project 2, formula sheet access, and the exam links for Chapters 4 and 5.</p>
+        <a href="math114-test2.html" class="button">View Test 2 Unit</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📈</div>
+        <h2>Statistics Unit</h2>
+        <p>Module 9 through Module 11 materials covering descriptive statistics, normal models, spreadsheets, and common reference tools.</p>
+        <a href="math114-statistics.html" class="button">View Modules 9–11</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📚</div>
+        <h2>Test 3 Unit</h2>
+        <p>Module 12 review materials, Project 3 support, and exam resources for the Chapter 6 and Chapter 8 assessment.</p>
+        <a href="math114-test3.html" class="button">View Test 3 Unit</a>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h2>Final Review &amp; Exam</h2>
+        <p>Module 13, Module 14, and final exam links gathered in one place for the last unit and cumulative course wrap-up.</p>
+        <a href="math114-final-review.html" class="button">View Final Review</a>
+      </div>
+    </div>
 
     <section>
-      <h2>Assignments and Resources by Module</h2>
-      <!-- Module 1 -->
-      <h3>Module 1</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Course Requirements Checklist (Course Overview Module)</td>
-            <td>Jan 17, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455349">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455348">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 1 Homework (Introductions, 1A, 1E Module)</td>
-            <td>Jan 19, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455368">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455369">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 1 Quiz (Introductions, 1A, 1E Module)</td>
-            <td>Jan 20, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455372">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455373">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Math Autobiography (Module 1: Introductions, 1A, 1E)</td>
-            <td>Jan 24, 11:59pm</td>
-            <td>5</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/12119641">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/12119877">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <ul>
-                <li><a href="../pdfs/114Module1Spring25.pdf">Lecture Slides</a></li>
-              </ul>
-            </td>
-            <td>
-              <ul>
-                <li><a href="https://youtu.be/sYTCd1L2Rps">Welcome to Math 114!</a></li>
-                <li><a href="https://youtu.be/T_xHzUHMRQI">Homework 1 Help</a></li>
-                <li><a href="https://youtu.be/mHV3Yqk7QwA">Math 114 HW 1 #8</a></li>
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated
-               <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <li><a href="114-module1-summary.html">Module 1 Summary</a></li>
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 2 -->
-      <h3>Module 2</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 2 Homework (2A, 2B, 2C)</td>
-            <td>Jan 26, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455420">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455421">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 2 Quiz (2A, 2B, 2C)</td>
-            <td>Jan 27, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455424">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455425">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <ul>
-                <li><a href="../pdfs/114Module2Spring25.pdf">Lecture Slides</a></li>
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Video (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Homework 2 Help (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Help with excel (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 2 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 3 -->
-      <h3>Module 3</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 3 Homework (3A &amp; 3B)</td>
-            <td>Feb 2, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455428">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455429">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 3 Quiz (3A &amp; 3B)</td>
-            <td>Feb 3, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455432">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455434">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <ul>
-                <li><a href="../pdfs/114Module3Spring25.pdf">Lecture Slides</a></li>
-              </ul>
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Video (coming soon)</a></li>
-              -->
-                <li><a href="https://youtu.be/wpSkYpF03BE">Homework 3 Help</a></li>
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 3 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 4 -->
-      <h3>Module 4</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment / Project</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 4 Test 1 Review (Ch 2 &amp; Ch 3)</td>
-            <td>Feb 9, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455440">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455442">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 4 Test 1 (Ch 2 &amp; Ch 3)</td>
-            <td>Feb 10, 11:59pm</td>
-            <td>125</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455436">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455438">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 4: Project 1 (Test 1: Ch 2 &amp; Ch 3)</td>
-            <td>Feb 7, 11:59pm</td>
-            <td>25</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455446">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455448">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <ul>
-                <li><a href="../pdfs/114Module4Spring25.pdf">Lecture Slides</a></li>
-              </ul>
-            </td>
-            <td>
-              <ul>
-                <li><a href="https://youtu.be/m4i2FI82RPs">28 Math Problems (HW 8 Help)</a></li>
-                <li><a href="https://youtu.be/d0QyrtXzmfQ">How to complete a frequency table (by example)</a></li>
-                <li><a href="https://youtu.be/2T34DvLslhg">Math 114: Project 1 Instructions (Mortgages)</a></li>
-                <li><a href="https://youtu.be/HFo9cDZW2X0">Loan Payment #Short</a></li>
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated  
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 4 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 5 -->
-      <h3>Module 5</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 5 Homework (4A, 4B, 4C, 4D)</td>
-            <td>Feb 18, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455447">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455450">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 5 Quiz (4A, 4B, 4C, 4D)</td>
-            <td>Feb 19, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455452">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455454">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <ul>
-                <li><a href="../pdfs/114Module5Spring25.pdf">Lecture Slides</a></li>
-              </ul>
-            </td>
-            <td>
-              <ul>
-                <li><a href="https://youtu.be/jIGUzHvs25g">Lecture Video</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Homework 5 Help (coming soon)</a></li>
-                <li><a href="https://youtu.be/HFo9cDZW2X0">Loan Payment #Short</a></li>
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 5 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 6 -->
-      <h3>Module 6</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 6 Quiz (5A, 5B, 5C)</td>
-            <td>Feb 24, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455460">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455462">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 6 Homework (5A, 5B, 5C Module)</td>
-            <td>Feb 23, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455456">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455458">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Slides (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <li><a href="https://youtu.be/AVUpJVBRsfI">Lecture Video</a></li>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Homework 6 Help (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Help with excel (coming soon)</a></li>
-              -->
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 6 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 7 -->
-      <h3>Module 7</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 7 Homework (5D &amp; 5E)</td>
-            <td>Mar 2, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455464">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455466">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 7 Quiz (5D &amp; 5E)</td>
-            <td>Mar 3, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455468">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455470">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Slides (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Video (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Homework 7 Help (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Help with excel (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-                
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 7 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 8 -->
-      <h3>Module 8</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment / Project</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 8 Test 2 (Ch 4 &amp; 5)</td>
-            <td>Mar 19, 11:59pm</td>
-            <td>125</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455472">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455474">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 8 Test 2 Review (Ch 4 &amp; 5)</td>
-            <td>Mar 7, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455476">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455479">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 8: Project 2 (Test 2: Ch 4 &amp; 5)</td>
-            <td>Mar 7, 11:59pm</td>
-            <td>25</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455481">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455485">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Slides (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <li><a href="https://youtu.be/3TJFd5SLkFE">37 Math Problems (HW 8 Help)</a></li>
-                <li><a href="https://youtu.be/d0QyrtXzmfQ">How to complete a frequency table (by example)</a></li>
-                <li><a href="https://youtu.be/AqI10auGYWU">Help with Project 2</a></li>
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <li><a href="../pdfs/FormulaSheet.pdf">Formula Sheet for Test 2</a></li>
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-                <li><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 9 -->
-      <h3>Module 9</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 9 Homework (6A &amp; 6B)</td>
-            <td>Mar 23, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455483">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455486">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 9 Quiz (6A &amp; 6B)</td>
-            <td>Mar 24, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455488">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455489">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-
-              <ul>
-                <li><a href="../pdfs/114Module9Spring25.pdf">Lecture Slides</a></li>
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Video (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Homework 9 Help (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Help with excel (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <li><a href="basic-statistical-measures.html">One Page Summary</a></li>
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-                <li><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 10 -->
-      <h3>Module 10</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 10 Homework (6C &amp; 8A)</td>
-            <td>Mar 30, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455376">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455377">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 10 Quiz (6C &amp; 8A)</td>
-            <td>Mar 31, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455380">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455381">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-
-              <ul>
-                <li><a href="../pdfs/114Module10Spring25.pdf">Lecture Slides</a></li>
-              </ul>
-            </td>
-            <td>
-              <ul>
-                <li><a href="https://youtu.be/rWprz1MvhOI">How to use 68-95-99.7 rule</a></li>
-                <li><a href="https://youtu.be/j9V6rJrq-6s">Old Lecture Video</a></li>
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 10 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-                <li><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 11 -->
-      <h3>Module 11</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 11 Quiz (8B &amp; 8C)</td>
-            <td>Apr 7, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455388">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455389">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 11 Homework (8B &amp; 8C)</td>
-            <td>Apr 6, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455384">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455385">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Slides (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Video (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Homework 11 Help (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Help with excel (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 11 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-                <li><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 12 -->
-      <h3>Module 12</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment / Project</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 12 Test 3 (Ch 6 &amp; 8)</td>
-            <td>Apr 14, 11:59pm</td>
-            <td>125</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455392">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455393">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 12 Test 3 Review (Ch 6 &amp; 8)</td>
-            <td>Apr 13, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455396">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455397">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 12: Project 3 (Test 3: Ch 6 &amp; 8)</td>
-            <td>Apr 11, 11:59pm</td>
-            <td>25</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455401">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455403">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Slides (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <li><a href="https://youtu.be/RUz9L_W9Mp4">Help with Project 3</a></li>
-              </ul>
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 12 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-                <li><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 13 -->
-      <h3>Module 13</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 13 Quiz (9A &amp; 9B)</td>
-            <td>Apr 21, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455408">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455409">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 13 Homework (9A &amp; 9B)</td>
-            <td>Apr 20, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455404">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455405">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Slides (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Video (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Homework 13 Help (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Help with excel (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 13 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-                <li><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Module 14 -->
-      <h3>Module 14</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Assignment</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Module 14 Homework (9B &amp; 9C)</td>
-            <td>Apr 27, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455412">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455413">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Module 14 Quiz (9B &amp; 9C)</td>
-            <td>Apr 28, 11:59pm</td>
-            <td>10</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455416">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455417">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Slides (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Video (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Homework 14 Help (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Help with excel (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-            <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Module 14 (coming soon)</a></li>
-                -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-                <li><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Final Exam (not a module, so no resources table inserted) -->
-      <h3>Final Exam</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Exam</th>
-            <th>Due Date</th>
-            <th>Points</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Final Exam Review (Test 4: Ch 9 + cumulative)</td>
-            <td>Apr 30, 11:59pm</td>
-            <td>20</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455364">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455365">Section 3</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Final Exam (Test 4: Ch 9 + cumulative)</td>
-            <td>May 1, 11:59pm</td>
-            <td>140</td>
-            <td>
-              <a href="https://canvas.liberty.edu/courses/735702/assignments/11455361">Section 2</a> |
-              <a href="https://canvas.liberty.edu/courses/735705/assignments/11455360">Section 3</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Prof. Volk's Slides</th>
-            <th>Prof. Volk's Videos</th>
-            <th>Extra Videos</th>
-            <th>Other Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Slides (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Lecture Video (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Review Assignment Help (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Help with excel (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <!-- Commented until content updated
-              <ul>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 1 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 2 (coming soon)</a></li>
-                <li><a href="#" aria-disabled="true" tabindex="-1">Extra Video 3 (coming soon)</a></li>
-              </ul>
-            -->
-            </td>
-            <td>
-              <ul>
-                <!-- Commented until content updated
-                <li><a href="#" aria-disabled="true" tabindex="-1">Key Facts of Math 114 (coming soon)</a></li>
-              -->
-                <li><a href="https://www.desmos.com/scientific">Desmos Scientific Calculator</a></li>
-                <li><a href="https://www.desmos.com/graphing">Desmos Graphing Calculator</a></li>
-                <li><a href="https://www.microsoft365.com/launch/excel?">Excel Online</a></li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <h2>Quick Start</h2>
+      <p>Start here for the most frequently used course links.</p>
+      <div class="quick-start-grid">
+        <div class="quick-start-card">
+          <h3>Syllabus</h3>
+          <p>Review policies, grading, and the full semester schedule before you begin.</p>
+          <a href="../pdfs/Quantitative_Reasoning_MATH_114_Spring_R_2025.pdf" target="_blank" rel="noopener noreferrer" class="button">Open Syllabus</a>
+        </div>
+        <div class="quick-start-card">
+          <h3>Current Module</h3>
+          <p>Jump to the most recent set of posted materials in this Spring 2025 archive.</p>
+          <a href="math114-final-review.html" class="button">Open Final Review &amp; Exam</a>
+        </div>
+        <div class="quick-start-card">
+          <h3>Common Tools</h3>
+          <ul>
+            <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific Calculator</a></li>
+            <li><a href="https://www.desmos.com/graphing" target="_blank" rel="noopener noreferrer">Desmos Graphing Calculator</a></li>
+            <li><a href="https://www.microsoft365.com/launch/excel?" target="_blank" rel="noopener noreferrer">Excel Online</a></li>
+          </ul>
+        </div>
+      </div>
     </section>
-<!-- Commented until content updated
-    <section>
-      <h2>Resources</h2>
-      <ul>
-        <li><a href="#">Data Sets</a></li>
-        <li><a href="#">Case Study Materials</a></li>
-        <li><a href="#">Supplementary Readings</a></li>
-      </ul>
-    </section>
-  -->
   </main>
 
   <footer>
