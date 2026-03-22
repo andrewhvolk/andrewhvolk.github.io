@@ -1014,140 +1014,304 @@ section:nth-child(5) {
     border: 1px solid CanvasText;
   }
 }
-/* Modern Standard Navbar */
-.navbar {
-  background-color: var(--secondary-color);
+/* Canonical Global Site Navbar */
+.top-nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.12);
 }
 
-.nav-container {
+.top-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.nav-links {
+.top-nav-branding {
   display: flex;
-  list-style: none;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.top-nav-title {
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.top-nav-title:hover,
+.top-nav-title:focus-visible {
+  color: #bfdbfe;
+}
+
+.top-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  gap: 0.5rem;
+  list-style: none;
 }
 
-.nav-links li {
+.top-nav-links li,
+.top-nav-links .dropdown {
   position: relative;
 }
 
-.nav-links a {
+.top-nav-links > li > a,
+.top-nav-links > li > button,
+.top-nav-links > a,
+.top-nav-links .dropdown-menu a {
   display: block;
-  padding: 1rem 0.75rem;
-  color: var(--light-text);
+  color: #e2e8f0;
   text-decoration: none;
+  font-size: 0.95rem;
   font-weight: 500;
-  transition: var(--transition);
-  border-radius: 4px;
-  font-size: 1rem;
+  line-height: 1.2;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.nav-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--accent-color);
+.top-nav-links > li > a:hover,
+.top-nav-links > li > a:focus-visible,
+.top-nav-links > li > button:hover,
+.top-nav-links > li > button:focus-visible,
+.top-nav-links > a:hover,
+.top-nav-links > a:focus-visible,
+.top-nav-links .dropdown-menu a:hover,
+.top-nav-links .dropdown-menu a:focus-visible {
+  color: #93c5fd;
+  background: rgba(148, 163, 184, 0.14);
+  outline: none;
 }
 
-.dropdown-trigger {
-  display: block;
-  padding: 1rem 0.75rem;
-  color: var(--light-text);
-  text-decoration: none;
-  font-weight: 500;
-  transition: var(--transition);
-  border-radius: 4px;
-  font-size: 1rem;
+.top-nav-links .dropdown-trigger {
   background: transparent;
-  border: 0;
-  font-family: inherit;
+  border: none;
+  font: inherit;
   cursor: pointer;
 }
 
-.dropdown-trigger:hover,
-.dropdown-trigger:focus-visible,
-.nav-links .dropdown-menu a:hover,
-.nav-links .dropdown-menu a:focus-visible {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--accent-color);
+.top-nav-links .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  min-width: 190px;
+  margin: 0;
+  padding: 0.4rem;
+  list-style: none;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.35);
 }
 
-.nav-links .dropdown-menu {
+.top-nav-links .dropdown:hover .dropdown-menu,
+.top-nav-links .dropdown:focus-within .dropdown-menu {
+  display: block;
+}
+
+.top-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.top-nav .theme-toggle {
+  margin: 0;
+}
+
+.cv-section-nav {
+  position: sticky;
+  top: 4.6rem;
+  z-index: 900;
+  background: var(--card-background);
+  border-top: 1px solid rgba(52, 152, 219, 0.15);
+  border-bottom: 1px solid rgba(52, 152, 219, 0.15);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+.cv-section-nav .cv-section-nav__inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.35rem 1.5rem;
+}
+
+.cv-section-nav .menu-toggle {
+  background: transparent;
+  color: var(--secondary-color);
+}
+
+.cv-section-nav #nav-menu {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.cv-section-nav #nav-menu > li {
+  position: relative;
+}
+
+.cv-section-nav #nav-menu > li > a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: var(--secondary-color);
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.cv-section-nav #nav-menu > li > a:hover,
+.cv-section-nav #nav-menu > li > a:focus-visible,
+.cv-section-nav #nav-menu .dropdown-menu a:hover,
+.cv-section-nav #nav-menu .dropdown-menu a:focus-visible {
+  background: rgba(52, 152, 219, 0.12);
+  color: var(--primary-color);
+  outline: none;
+}
+
+.cv-section-nav .dropdown-menu {
   position: absolute;
   top: calc(100% + 0.25rem);
   left: 0;
   min-width: 220px;
+  margin: 0;
   padding: 0.35rem;
-  background-color: var(--secondary-color);
-  border-radius: 8px;
+  background: var(--card-background);
+  border: 1px solid rgba(52, 152, 219, 0.18);
+  border-radius: 0.75rem;
   box-shadow: var(--shadow);
   opacity: 0;
   visibility: hidden;
 }
 
-.nav-links .dropdown:hover .dropdown-menu,
-.nav-links .dropdown:focus-within .dropdown-menu {
+.cv-section-nav li:hover .dropdown-menu,
+.cv-section-nav li:focus-within .dropdown-menu {
   opacity: 1;
   visibility: visible;
 }
 
-.nav-links .dropdown-menu a {
-  padding: 0.6rem 0.75rem;
-  white-space: nowrap;
+.cv-section-nav .dropdown-menu a {
+  display: block;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.6rem;
+  color: var(--text-color);
 }
 
-/* Ensure the toggle button aligns perfectly in the new layout */
-.navbar .theme-toggle {
-  margin: 0;
-}
-
-/* Mobile responsiveness: stack the nav links neatly on small screens */
 @media (max-width: 768px) {
-  .nav-container {
-    flex-direction: column;
-    padding: 0.5rem;
+  .top-nav-inner {
+    align-items: flex-start;
   }
 
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 0.5rem;
+  .top-nav-branding,
+  .top-nav-actions {
+    width: 100%;
   }
 
-  .nav-links .dropdown-menu {
+  .top-nav-actions {
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  .top-nav-links {
+    width: 100%;
+    gap: 0.4rem;
+  }
+
+  .top-nav-links > li,
+  .top-nav-links > a,
+  .top-nav-links .dropdown {
+    width: 100%;
+  }
+
+  .top-nav-links > li > a,
+  .top-nav-links > li > button,
+  .top-nav-links > a {
+    width: 100%;
+  }
+
+  .top-nav-links .dropdown-menu {
     position: static;
+    display: block;
     min-width: 0;
     width: 100%;
+    margin-top: 0.35rem;
+    box-shadow: none;
+    border-radius: 0.75rem;
+  }
+
+  .top-nav-links .dropdown:not(:hover):not(:focus-within) .dropdown-menu {
+    display: none;
+  }
+
+  .cv-section-nav {
+    top: 0;
+  }
+
+  .cv-section-nav .cv-section-nav__inner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem 1rem;
+  }
+
+  .cv-section-nav #nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cv-section-nav #nav-menu.open {
+    display: flex;
+  }
+
+  .cv-section-nav .dropdown-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height 0.3s ease-out,
+      opacity 0.2s ease-out,
+      visibility 0.2s ease-out;
+  }
+
+  .cv-section-nav .dropdown-open {
+    max-height: 500px;
     opacity: 1;
     visibility: visible;
-    display: none;
-    margin-top: 0;
-    box-shadow: none;
-    padding: 0;
+    transition:
+      max-height 0.5s ease-in,
+      opacity 0.3s ease-in,
+      visibility 0.3s ease-in;
   }
 
-  .nav-links .dropdown:hover .dropdown-menu,
-  .nav-links .dropdown:focus-within .dropdown-menu {
-    display: block;
-  }
-
-  .nav-links a {
-    padding: 0.5rem;
-    font-size: 0.9rem;
-  }
-
-  .dropdown-trigger {
-    padding: 0.5rem;
-    font-size: 0.9rem;
+  .cv-section-nav .dropdown-menu a {
+    padding-left: 2rem;
   }
 }
 .shortcut-bar {
