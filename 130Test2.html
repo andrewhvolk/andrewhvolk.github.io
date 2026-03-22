@@ -1026,14 +1026,18 @@
 
 <style>
   .top-nav { position: sticky; top: 0; z-index: 1000; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(148, 163, 184, 0.25); }
-  .top-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .top-nav-title { color: #f8fafc; font-weight: 700; text-decoration: none; margin-right: 0.5rem; }
-  .top-nav-links { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
-  .top-nav-links > a,
-  .dropdown-trigger,
-  .dropdown-menu a { color: #e2e8f0; text-decoration: none; font-size: 0.95rem; }
-  .top-nav-links > a:hover,
-  .top-nav-links > a:focus-visible,
+  .top-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .top-nav-branding { display: flex; align-items: center; }
+  .top-nav-title { color: #f8fafc; font-weight: 700; text-decoration: none; }
+  .top-nav-actions { display: flex; align-items: center; gap: 1rem; flex: 1; justify-content: flex-end; flex-wrap: wrap; }
+  .top-nav-links, .top-nav-utilities { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+  .top-nav-links a,
+  .top-nav-utilities a,
+  .dropdown-trigger { color: #e2e8f0; text-decoration: none; font-size: 0.95rem; }
+  .top-nav-links a:hover,
+  .top-nav-links a:focus-visible,
+  .top-nav-utilities a:hover,
+  .top-nav-utilities a:focus-visible,
   .dropdown-trigger:hover,
   .dropdown-trigger:focus-visible,
   .dropdown-menu a:hover,
@@ -1041,6 +1045,7 @@
   .dropdown { position: relative; }
   .dropdown-trigger { background: transparent; border: none; padding: 0; font: inherit; cursor: pointer; }
   .dropdown-menu { display: none; position: absolute; top: calc(100% + 0.35rem); left: 0; min-width: 190px; list-style: none; margin: 0; padding: 0.4rem 0; background: rgba(15, 23, 42, 0.98); border: 1px solid rgba(148, 163, 184, 0.3); border-radius: 0.5rem; box-shadow: 0 12px 30px rgba(2, 6, 23, 0.35); }
+  .dropdown-menu--right { right: 0; left: auto; }
   .dropdown-menu li { margin: 0; }
   .dropdown-menu a { display: block; padding: 0.4rem 0.8rem; }
   .dropdown:hover .dropdown-menu,
@@ -1051,21 +1056,36 @@
 <body>
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
-    <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
-    <div class="top-nav-links">
-      <a href="index.html">Home</a>
-      <a href="CV.html">About Me</a>
-      <div class="dropdown">
-        <button class="dropdown-trigger" type="button" aria-haspopup="true">Course Resources ▾</button>
-        <ul class="dropdown-menu">
-          <li><a href="learn.html">All Courses</a></li>
-          <li><a href="courses/math130.html">MATH 130 Home</a></li>
-        </ul>
-      </div>
-      <a href="projects.html">Projects</a>
-      <a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a>
-      <a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a>
-      <a href="mailto:ahvolk@liberty.edu">Contact</a>
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="CV.html">About</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-current="page">Courses ▾</button>
+          <ul class="dropdown-menu">
+            <li><a href="learn.html">All Courses</a></li>
+            <li><a href="courses/math130.html">MATH 130</a></li>
+            <li><a href="130Test2.html" aria-current="page">MATH 130 Test 2</a></li>
+          </ul>
+        </li>
+        <li><a href="projects.html">Projects</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
+            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button aria-label="Toggle dark and light theme" class="theme-toggle" id="theme-toggle-btn" title="Toggle Theme">
+        <i data-lucide="moon"></i>
+      </button>
     </div>
   </div>
 </nav>
@@ -1090,9 +1110,6 @@
 <span class="header-chip"><i data-lucide="calendar-clock"></i> Test 2: Mon, Mar 30</span>
 </div>
 </div>
-<button aria-label="Toggle dark and light theme" class="theme-toggle" id="theme-btn" title="Toggle Theme">
-<i data-lucide="moon"></i>
-</button>
 </header>
 <div aria-label="Review tool sections" class="tabs" role="tablist">
 <button class="tab-btn active priority" data-tab="slides">
@@ -3354,7 +3371,7 @@
         // Wait briefly for elements to be injected, then render math
         setTimeout(renderMath, 100);
 
-        document.getElementById('theme-btn').addEventListener('click', () => {
+        document.getElementById('theme-toggle-btn').addEventListener('click', () => {
             const newTheme = state.theme === 'dark' ? 'light' : 'dark';
             state.theme = newTheme; applyTheme(newTheme); saveState();
         });
@@ -3392,10 +3409,10 @@
     function applyTheme(theme) {
         if (theme === 'light') {
             document.body.classList.add('light');
-            document.getElementById('theme-btn').innerHTML = '<i data-lucide="sun"></i>';
+            document.getElementById('theme-toggle-btn').innerHTML = '<i data-lucide="sun"></i>';
         } else {
             document.body.classList.remove('light');
-            document.getElementById('theme-btn').innerHTML = '<i data-lucide="moon"></i>';
+            document.getElementById('theme-toggle-btn').innerHTML = '<i data-lucide="moon"></i>';
         }
         refreshIcons();
     }

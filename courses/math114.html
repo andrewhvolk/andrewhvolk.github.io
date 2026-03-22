@@ -8,26 +8,37 @@
   <script src="../theme.js"></script>
 </head>
 <body>
-<nav class="navbar">
-  <div class="container nav-container">
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../CV.html">About Me</a></li>
-      <li class="dropdown">
-        <button class="dropdown-trigger" type="button" aria-haspopup="true">Course Resources ▾</button>
-        <ul class="dropdown-menu">
-          <li><a href="../learn.html">All Courses</a></li>
-          <li><a href="../courses/math114.html" aria-current="page">MATH 114 Home</a></li>
-          <li><a href="../courses/math130.html">MATH 130 Home</a></li>
-        </ul>
-      </li>
-      <li><a href="../projects.html">Projects</a></li>
-      <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
-      <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-      <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
-    </ul>
-
-    <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="../index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../CV.html">About</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-current="page">Courses ▾</button>
+          <ul class="dropdown-menu">
+            <li><a href="../learn.html">All Courses</a></li>
+            <li><a href="../courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="../courses/math130.html">MATH 130</a></li>
+          </ul>
+        </li>
+        <li><a href="../projects.html">Projects</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
+            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
   </div>
 </nav>
 
