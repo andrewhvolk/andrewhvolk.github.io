@@ -606,43 +606,47 @@
 
         .formula-card.wide { grid-column: 1 / -1; }
 
-        @media (max-width: 900px) {
-            .formula-intro { grid-template-columns: 1fr; }
-            .formula-grid { grid-template-columns: 1fr; }
-        }
-
-
-        @media (max-width: 900px) {
-            .formula-grid { grid-template-columns: 1fr; }
-            .formula-card.wide { grid-column: auto; }
-            .formula-math { font-size: clamp(0.92rem, 3.4vw, 1.05rem); }
-            .formula-math.compact-math { font-size: clamp(0.88rem, 3vw, 0.98rem); }
-        }
-
-        @media (max-width: 768px) {
-            .formula-card { padding: 1.25rem 1rem; }
-            .formula-math { font-size: 1rem; }
-        }
-
-        @media (max-width: 900px) {
-        }
-
-
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
+            .container { padding: 1.5rem; }
             .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .tab-btn { min-height: 76px; padding: 0.88rem 0.95rem; }
+            .formula-intro,
+            .slides-intro {
+                grid-template-columns: 1fr;
+            }
+            .formula-grid,
+            #tab-formulas .formula-grid,
+            .slides-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .formula-card.wide {
+                grid-column: 1 / -1;
+            }
+            .formula-math { font-size: clamp(0.95rem, 2vw, 1.08rem); }
+            .formula-math.compact-math { font-size: clamp(0.9rem, 1.8vw, 1rem); }
+            #tab-formulas .card { padding: 1.4rem; }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 780px) {
             .container { padding: 1rem; }
             header { margin-bottom: 1.25rem; }
             h1 { font-size: 2rem; }
-            .tab-btn { min-height: 74px; padding: 0.82rem 0.9rem; }
+            .tab-btn { min-height: 72px; padding: 0.82rem 0.88rem; }
+            .formula-grid,
+            #tab-formulas .formula-grid,
+            .slides-grid {
+                grid-template-columns: 1fr;
+            }
+            .formula-card,
+            #tab-formulas .formula-card,
+            #tab-formulas .formula-card.wide { padding: 1.15rem 1rem; }
+            .formula-card.wide { grid-column: auto; }
             .svg-canvas { width: 100% !important; height: auto !important; }
             .history-table { display: block; overflow-x: auto; white-space: nowrap; }
             .header-chips { margin-top: 0.65rem; }
         }
 
-        @media (max-width: 560px) {
+        @media (max-width: 640px) {
             header { align-items: flex-start; }
             .tabs { grid-template-columns: 1fr; }
             .tab-btn { min-height: auto; }
@@ -721,16 +725,6 @@
         #tab-formulas .formula-card.useful-card {
             opacity: 0.92;
         }
-
-        @media (max-width: 900px) {
-            #tab-formulas .formula-grid {
-                grid-template-columns: 1fr;
-            }
-            #tab-formulas .card {
-                padding: 1.25rem;
-            }
-        }
-
 
         /* Lecture slides */
         .slides-shell {
@@ -925,12 +919,6 @@
             width: 1rem;
             height: 1rem;
         }
-        @media (max-width: 900px) {
-            .slides-intro {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .slide-thumb-wrap {
             position: relative;
             display: block;
