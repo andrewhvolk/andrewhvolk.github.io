@@ -1100,6 +1100,17 @@ section:nth-child(5) {
   position: relative;
 }
 
+.top-nav-links .dropdown::after,
+.top-nav-utilities .dropdown::after,
+nav.navbar .dropdown::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 0.7rem;
+}
+
 .top-nav-links > li > a,
 .top-nav-links > li > button,
 .top-nav-links > a,
@@ -1238,7 +1249,7 @@ nav.navbar .nav-links button[aria-current="page"]:focus-visible {
 .top-nav-utilities .dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 0.35rem);
+  top: calc(100% + 0.2rem);
   left: 0;
   min-width: 190px;
   margin: 0;
