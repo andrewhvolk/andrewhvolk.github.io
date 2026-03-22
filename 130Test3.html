@@ -273,13 +273,89 @@
 
         /* Cards */
         .card {
-            background: var(--surface);
+            background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, transparent), var(--surface));
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 2rem;
             margin-bottom: 1.5rem;
             box-shadow: var(--shadow);
-            transition: transform 0.2s;
+            transition: transform 0.2s, border-color 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+        .card > h2 {
+            margin-bottom: 0.7rem;
+        }
+        .card-tier-primary {
+            padding: 2.25rem;
+            border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
+            box-shadow: 0 18px 42px rgba(0,0,0,0.18);
+            background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)) 0%, var(--surface) 100%);
+            overflow: hidden;
+        }
+        .card-tier-primary::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 5px;
+            background: linear-gradient(180deg, var(--accent), transparent 88%);
+        }
+        .card-tier-secondary {
+            background: linear-gradient(180deg, color-mix(in srgb, var(--surface2) 55%, var(--surface)) 0%, var(--surface) 100%);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        .card-tier-reference {
+            background: linear-gradient(180deg, color-mix(in srgb, var(--surface2) 88%, transparent) 0%, var(--surface) 100%);
+            border-style: dashed;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .section-lead {
+            display: grid;
+            gap: 0.45rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.1rem;
+            border-bottom: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+        }
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .section-lead p {
+            color: var(--text-muted);
+            max-width: 70ch;
+        }
+        .section-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.9rem;
+            margin: 1.35rem 0 1.75rem;
+        }
+        .section-summary-card {
+            padding: 1rem 1.05rem;
+            border-radius: 14px;
+            border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+            background: color-mix(in srgb, var(--surface2) 70%, var(--surface));
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+        }
+        .section-summary-label {
+            display: block;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+        .section-summary-value {
+            display: block;
+            color: var(--text);
+            font-weight: 700;
+            line-height: 1.45;
         }
 
         /* Checklist */
@@ -607,43 +683,54 @@
 
         .formula-card.wide { grid-column: 1 / -1; }
 
-        @media (max-width: 900px) {
-            .formula-intro { grid-template-columns: 1fr; }
-            .formula-grid { grid-template-columns: 1fr; }
-        }
-
-
-        @media (max-width: 900px) {
-            .formula-grid { grid-template-columns: 1fr; }
-            .formula-card.wide { grid-column: auto; }
-            .formula-math { font-size: clamp(0.92rem, 3.4vw, 1.05rem); }
-            .formula-math.compact-math { font-size: clamp(0.88rem, 3vw, 0.98rem); }
-        }
-
-        @media (max-width: 768px) {
-            .formula-card { padding: 1.25rem 1rem; }
-            .formula-math { font-size: 1rem; }
-        }
-
-        @media (max-width: 900px) {
-        }
-
-
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
+            .container { padding: 1.5rem; }
             .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .tab-btn { min-height: 76px; padding: 0.88rem 0.95rem; }
+            .formula-intro,
+            .slides-intro {
+                grid-template-columns: 1fr;
+            }
+            .formula-grid,
+            #tab-formulas .formula-grid,
+            .slides-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .formula-card.wide,
+            .slide-card-featured {
+                grid-column: 1 / -1;
+            }
+            .formula-math { font-size: clamp(0.95rem, 2vw, 1.08rem); }
+            .formula-math.compact-math { font-size: clamp(0.9rem, 1.8vw, 1rem); }
+            #tab-formulas .card { padding: 1.4rem; }
+            .section-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 780px) {
             .container { padding: 1rem; }
             header { margin-bottom: 1.25rem; }
             h1 { font-size: 2rem; }
-            .tab-btn { min-height: 74px; padding: 0.82rem 0.9rem; }
+            .tab-btn { min-height: 72px; padding: 0.82rem 0.88rem; }
+            .card-tier-primary { padding: 1.5rem 1.25rem; }
+            .section-lead { margin-bottom: 1.2rem; padding-bottom: 0.95rem; }
+            .section-summary-grid,
+            .formula-grid,
+            #tab-formulas .formula-grid,
+            .slides-grid {
+                grid-template-columns: 1fr;
+                margin: 1rem 0 1.35rem;
+            }
+            .formula-card,
+            #tab-formulas .formula-card,
+            #tab-formulas .formula-card.wide { padding: 1.15rem 1rem; }
+            .formula-card.wide,
+            .slide-card-featured { grid-column: auto; }
             .svg-canvas { width: 100% !important; height: auto !important; }
             .history-table { display: block; overflow-x: auto; white-space: nowrap; }
             .header-chips { margin-top: 0.65rem; }
         }
 
-        @media (max-width: 560px) {
+        @media (max-width: 640px) {
             header { align-items: flex-start; }
             .tabs { grid-template-columns: 1fr; }
             .tab-btn { min-height: auto; }
@@ -722,16 +809,6 @@
         #tab-formulas .formula-card.useful-card {
             opacity: 0.92;
         }
-
-        @media (max-width: 900px) {
-            #tab-formulas .formula-grid {
-                grid-template-columns: 1fr;
-            }
-            #tab-formulas .card {
-                padding: 1.25rem;
-            }
-        }
-
 
         /* Lecture slides */
         .slides-shell {
@@ -842,6 +919,17 @@
             border-color: var(--accent);
             box-shadow: 0 14px 28px rgba(0,0,0,0.12);
         }
+        .slide-card-featured {
+            order: -1;
+            grid-column: span 2;
+            border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+            background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 12%, var(--surface2)) 0%, var(--surface) 100%);
+            box-shadow: 0 18px 38px rgba(108, 99, 255, 0.14);
+        }
+        .slide-card-featured::before {
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 55%, transparent) 100%);
+        }
         .slide-card-top {
             display: flex;
             justify-content: space-between;
@@ -926,12 +1014,6 @@
             width: 1rem;
             height: 1rem;
         }
-        @media (max-width: 900px) {
-            .slides-intro {
-                grid-template-columns: 1fr;
-            }
-        }
-
         .slide-thumb-wrap {
             position: relative;
             display: block;
@@ -1009,6 +1091,9 @@
         }
 
         @media (max-width: 640px) {
+            .slide-card-featured {
+                grid-column: auto;
+            }
             .slide-card-top {
                 flex-direction: column;
             }
@@ -1290,12 +1375,25 @@
 </div>
 <!-- FORMULAS TAB -->
 <div class="tab-content" id="tab-formulas">
-<div class="card">
+<div class="card card-tier-primary">
+<div class="section-lead">
+<div class="section-eyebrow"><i data-lucide="sigma"></i> Formula priorities</div>
 <h2>Essential Formulas for Test 3</h2>
-<p style="color: var(--text-muted); margin-bottom: 1rem; font-weight: 500;">
+<p style="color: var(--text-muted); margin-bottom: 0; font-weight: 500;">
                 Covers formulas relevant to Modules 10–13 (Sections 5.1, 5.2, 5.3, 7.1, and 8.4).
                 <strong>Only the three formulas marked “Provided on Test 3” are given on the exam.</strong>
             </p>
+</div>
+<div class="section-summary-grid">
+<div class="section-summary-card">
+<span class="section-summary-label">Memorize first</span>
+<span class="section-summary-value">Arc length, right-triangle trig, inverse trig, and vector formulas.</span>
+</div>
+<div class="section-summary-card">
+<span class="section-summary-label">Use as references</span>
+<span class="section-summary-value">Formula-box identities and the supporting “Useful” relations.</span>
+</div>
+</div>
 <div class="formula-intro">
 <div class="formula-priority-note"><strong>Study order:</strong> memorize cards first, then practice identifying when to apply each provided formula.</div>
 <div aria-label="Formula badge legend" class="formula-legend">
@@ -1410,20 +1508,33 @@
 </div>
 </div>
 <div class="tab-content" id="tab-practice">
-<div class="card">
-<h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
+<div class="card card-tier-primary">
+<div class="section-lead" style="text-align: center; justify-items: center;">
+<div class="section-eyebrow"><i data-lucide="pen-tool"></i> Interactive review</div>
+<h2 style="text-align: center; margin-bottom: 0;">Practice Generators</h2>
 <p style="text-align: center; color: var(--text-muted); margin-bottom: 0.6rem;">Practice generators are live for Unit 3 and aligned to Sections 5.1, 5.2, 5.3, 7.1, and 8.4.</p>
 <p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.92rem;">By default, enter decimal answers rounded as directed. Repeating decimals are accepted within tolerance (for example, $0.6667$ for $0.\overline{6}$). Some generators may allow additional formats noted in the question (for example, $\pi$ forms), including coterminal-radian items that accept simple $\pi$ expressions.</p>
 <p id="coverage-audit" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;"></p>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
+<p style="text-align: center; color: var(--text-muted); margin-bottom: 0;">Select a topic to generate infinite, exam-style questions.</p>
+</div>
+<div class="section-summary-grid">
+<div class="section-summary-card">
+<span class="section-summary-label">Primary mode</span>
+<span class="section-summary-value">Mock Exam for full mixed review across Sections 5.1–8.4.</span>
+</div>
+<div class="section-summary-card">
+<span class="section-summary-label">Secondary mode</span>
+<span class="section-summary-value">Mock Quizzes for focused skill checks tied to specific sections.</span>
+</div>
+</div>
 <!-- Mock Exam CTA -->
-<div id="exam-cta" style="background: linear-gradient(135deg, var(--accent-glow), var(--red-bg)); border: 2px solid var(--accent); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+<div id="exam-cta" style="background: linear-gradient(135deg, var(--accent-glow), var(--red-bg)); border: 2px solid var(--accent); border-radius: 18px; padding: 1.75rem; margin-bottom: 2rem; text-align: center; box-shadow: 0 18px 36px rgba(108, 99, 255, 0.16);">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
 <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">20 mixed Unit 3 review questions with coverage from Sections 5.1, 5.2, 5.3, 7.1, and 8.4 (at least one per section).</p>
 <button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
 </div>
 <!-- Mock Quiz CTA -->
-<div id="quiz-cta" style="background: var(--surface2); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
+<div id="quiz-cta" style="background: linear-gradient(180deg, var(--surface2), var(--surface)); border: 1px solid var(--border); border-radius: 16px; padding: 1.35rem 1.5rem; margin-bottom: 2rem;">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
 <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
@@ -1483,12 +1594,16 @@
 </div>
 <!-- CHECKLIST & PROGRESS TAB -->
 <div class="tab-content" id="tab-progress">
-<div class="card">
+<div class="card card-tier-primary">
+<div class="section-lead">
+<div class="section-eyebrow"><i data-lucide="check-square"></i> Study progress</div>
 <h2>Topics Checklist</h2>
+<p>Use the progress bars as your top-level map, then work through each checklist group below so dense topic lists feel subordinate to the overall study plan.</p>
+</div>
 <div class="progress-summary" id="progress-summary"></div>
 <div id="checklist-container"></div>
 </div>
-<div class="card">
+<div class="card card-tier-reference">
 <h2>Your Statistics</h2>
 <div class="stats-grid">
 <div class="stat-card">
@@ -1603,8 +1718,22 @@
 
 <!-- LECTURE SLIDES TAB -->
 <div class="tab-content active" id="tab-slides">
-<div class="card">
+<div class="card card-tier-primary">
+<div class="section-lead">
+<div class="section-eyebrow"><i data-lucide="layers-3"></i> Start here</div>
 <h2>Lecture Slides</h2>
+<p>Open the lead deck first, then work forward through the supporting modules so the highest-priority review materials stand out immediately.</p>
+</div>
+<div class="section-summary-grid">
+<div class="section-summary-card">
+<span class="section-summary-label">Lead review deck</span>
+<span class="section-summary-value">Math 130 Unit 3: Test 3 Review (Module 3E)</span>
+</div>
+<div class="section-summary-card">
+<span class="section-summary-label">Support sequence</span>
+<span class="section-summary-value">Modules 10–13 for foundations, then Unit 3E for final consolidation.</span>
+</div>
+</div>
 <div class="slides-shell">
 <div class="slides-intro">
 <div class="slides-overview">
@@ -1700,7 +1829,7 @@
 <a class="btn-secondary" href="slides/Math130Unit3D.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
 </div>
 </div>
-<div class="slide-card">
+<div class="slide-card slide-card-featured">
 <div class="slide-card-top">
 <div class="slide-badge"><i data-lucide="presentation"></i> Unit 3 Review</div>
 <div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
