@@ -41,12 +41,15 @@ function closeOtherDropdowns(currentDropdown, navRoot) {
 }
 
 function setupGlobalNav(navRoot, index) {
-    const links = navRoot.querySelector(':scope .top-nav-links, :scope .nav-links');
-    if (!links) return;
+    const menuGroups = Array.from(navRoot.querySelectorAll(':scope .top-nav-links, :scope .top-nav-utilities, :scope .nav-links'));
+    if (menuGroups.length === 0) return;
 
-    const navId = links.id || `global-nav-menu-${index + 1}`;
-    links.id = navId;
-    links.dataset.navMenu = 'true';
+    const primaryMenu = menuGroups[0];
+    const navId = primaryMenu.id || `global-nav-menu-${index + 1}`;
+    primaryMenu.id = navId;
+    menuGroups.forEach((group) => {
+        group.dataset.navMenu = 'true';
+    });
 
     const existingToggle = navRoot.querySelector(':scope .menu-toggle, :scope .nav-toggle');
     const toggleButton = existingToggle || document.createElement('button');
@@ -59,9 +62,9 @@ function setupGlobalNav(navRoot, index) {
         const topNavActions = navRoot.querySelector(':scope .top-nav-actions');
         const navContainer = navRoot.querySelector(':scope .nav-container, :scope .top-nav-inner');
         if (topNavActions) {
-            topNavActions.insertBefore(toggleButton, links);
+            topNavActions.insertBefore(toggleButton, primaryMenu);
         } else if (navContainer) {
-            navContainer.insertBefore(toggleButton, links);
+            navContainer.insertBefore(toggleButton, primaryMenu);
         }
     }
 
@@ -69,25 +72,32 @@ function setupGlobalNav(navRoot, index) {
     toggleButton.setAttribute('aria-expanded', 'false');
     toggleButton.setAttribute('aria-label', menuToggleLabel(false));
 
+    const closeOpenDropdowns = () => {
+        navRoot.querySelectorAll('.dropdown[data-mobile-open="true"], .dropdown[data-desktop-open="true"]').forEach((dropdown) => {
+            dropdown.dataset.mobileOpen = 'false';
+            dropdown.dataset.desktopOpen = 'false';
+            const trigger = dropdown.querySelector('.dropdown-trigger');
+            if (trigger) {
+                trigger.setAttribute('aria-expanded', 'false');
+                trigger.setAttribute('aria-label', submenuToggleLabel(false));
+            }
+        });
+    };
+
     const setMenuExpanded = (expanded, { focusTarget } = {}) => {
-        links.dataset.open = expanded ? 'true' : 'false';
+        menuGroups.forEach((group) => {
+            group.dataset.open = expanded ? 'true' : 'false';
+        });
         navRoot.dataset.menuOpen = expanded ? 'true' : 'false';
         toggleButton.setAttribute('aria-expanded', String(expanded));
         toggleButton.setAttribute('aria-label', menuToggleLabel(expanded));
 
         if (!expanded) {
-            navRoot.querySelectorAll('.dropdown[data-mobile-open="true"]').forEach((dropdown) => {
-                dropdown.dataset.mobileOpen = 'false';
-                const trigger = dropdown.querySelector('.dropdown-trigger');
-                if (trigger) {
-                    trigger.setAttribute('aria-expanded', 'false');
-                    trigger.setAttribute('aria-label', submenuToggleLabel(false));
-                }
-            });
+            closeOpenDropdowns();
         }
 
         if (focusTarget === 'first') {
-            const [firstFocusable] = getFocusableElements(links);
+            const firstFocusable = menuGroups.flatMap((group) => getFocusableElements(group))[0];
             firstFocusable?.focus();
         } else if (focusTarget === 'toggle') {
             toggleButton.focus();
@@ -99,41 +109,34 @@ function setupGlobalNav(navRoot, index) {
         setMenuExpanded(!expanded, { focusTarget: !expanded ? 'first' : 'toggle' });
     });
 
-    links.addEventListener('keydown', (event) => {
-        if (event.key !== 'Escape') return;
+    menuGroups.forEach((group) => {
+        group.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') return;
 
-        const openDropdown = event.target.closest('.dropdown[data-mobile-open="true"], .dropdown[data-desktop-open="true"]');
-        if (openDropdown) {
-            event.preventDefault();
-            openDropdown.dataset.mobileOpen = 'false';
-            openDropdown.dataset.desktopOpen = 'false';
-            const trigger = openDropdown.querySelector('.dropdown-trigger');
-            if (trigger) {
-                trigger.setAttribute('aria-expanded', 'false');
-                trigger.setAttribute('aria-label', submenuToggleLabel(false));
-                trigger.focus();
+            const openDropdown = event.target.closest('.dropdown[data-mobile-open="true"], .dropdown[data-desktop-open="true"]');
+            if (openDropdown) {
+                event.preventDefault();
+                openDropdown.dataset.mobileOpen = 'false';
+                openDropdown.dataset.desktopOpen = 'false';
+                const trigger = openDropdown.querySelector('.dropdown-trigger');
+                if (trigger) {
+                    trigger.setAttribute('aria-expanded', 'false');
+                    trigger.setAttribute('aria-label', submenuToggleLabel(false));
+                    trigger.focus();
+                }
+                return;
             }
-            return;
-        }
 
-        if (toggleButton.getAttribute('aria-expanded') === 'true') {
-            event.preventDefault();
-            setMenuExpanded(false, { focusTarget: 'toggle' });
-        }
+            if (toggleButton.getAttribute('aria-expanded') === 'true') {
+                event.preventDefault();
+                setMenuExpanded(false, { focusTarget: 'toggle' });
+            }
+        });
     });
 
     document.addEventListener('click', (event) => {
         if (!navRoot.contains(event.target)) {
             setMenuExpanded(false);
-            navRoot.querySelectorAll('.dropdown').forEach((dropdown) => {
-                dropdown.dataset.mobileOpen = 'false';
-                dropdown.dataset.desktopOpen = 'false';
-                const trigger = dropdown.querySelector('.dropdown-trigger');
-                if (trigger) {
-                    trigger.setAttribute('aria-expanded', 'false');
-                    trigger.setAttribute('aria-label', submenuToggleLabel(false));
-                }
-            });
         }
     });
 
@@ -232,23 +235,21 @@ function setupGlobalNav(navRoot, index) {
 
     const handleViewportChange = () => {
         if (!mobileNavMediaQuery.matches) {
-            links.dataset.open = 'true';
-            navRoot.dataset.menuOpen = 'false';
-            toggleButton.setAttribute('aria-expanded', 'false');
-            toggleButton.setAttribute('aria-label', menuToggleLabel(false));
-            navRoot.querySelectorAll('.dropdown').forEach((dropdown) => {
-                dropdown.dataset.mobileOpen = 'false';
-                const trigger = dropdown.querySelector('.dropdown-trigger');
-                if (trigger) {
-                    trigger.setAttribute('aria-expanded', 'false');
-                    trigger.setAttribute('aria-label', submenuToggleLabel(false));
-                }
+            menuGroups.forEach((group) => {
+                group.dataset.open = 'true';
             });
-        } else {
-            links.dataset.open = 'false';
             navRoot.dataset.menuOpen = 'false';
             toggleButton.setAttribute('aria-expanded', 'false');
             toggleButton.setAttribute('aria-label', menuToggleLabel(false));
+            closeOpenDropdowns();
+        } else {
+            menuGroups.forEach((group) => {
+                group.dataset.open = 'false';
+            });
+            navRoot.dataset.menuOpen = 'false';
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.setAttribute('aria-label', menuToggleLabel(false));
+            closeOpenDropdowns();
         }
     };
 
