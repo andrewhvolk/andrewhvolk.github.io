@@ -64,29 +64,33 @@
         .review-shell { max-width: 1180px; padding-top: 2.5rem; }
         .review-header {
             margin-bottom: 2.5rem;
-            padding: clamp(1.75rem, 3vw, 2.5rem);
-            background: var(--gradient-library-glow);
+            padding: clamp(1.9rem, 3vw, 2.8rem);
+            background:
+                radial-gradient(circle at top left, rgba(58, 102, 92, 0.16), transparent 34%),
+                linear-gradient(135deg, rgba(255,255,255,0.94), rgba(242,244,241,0.98));
             border-radius: 1.5rem;
-            color: var(--on-primary);
+            color: var(--text);
             overflow: hidden;
+            box-shadow: 0 24px 54px rgba(0, 29, 23, 0.08);
         }
-        .review-header::after { display: none; }
-        .review-hero-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1.7fr) minmax(18rem, 0.9fr);
-            gap: 1.5rem;
-            align-items: end;
+        .review-header::after {
+            display: block;
+            inset: auto auto 0 0;
+            width: min(18rem, 42%);
+            height: 0.4rem;
+            background: linear-gradient(90deg, var(--secondary), color-mix(in srgb, var(--primary-container) 55%, transparent));
+            opacity: 0.9;
         }
         .review-header .breadcrumb,
         .review-header h1,
         .review-header .header-meta,
         .review-header .review-subtitle,
-        .review-header .header-chip { color: var(--on-primary); }
+        .review-header .header-chip { color: var(--text); }
         .review-header .breadcrumb a,
         .review-header .breadcrumb-current,
-        .review-header .breadcrumb-sep { color: rgba(255,255,255,0.82); }
+        .review-header .breadcrumb-sep { color: color-mix(in srgb, var(--text) 72%, white 28%); }
         .review-header h1 {
-            color: var(--on-primary);
+            color: var(--primary);
             font-size: clamp(2.8rem, 6vw, 4.5rem);
             margin-bottom: 1rem;
             max-width: 12ch;
@@ -96,7 +100,7 @@
             text-transform: uppercase;
             letter-spacing: 0.12em;
             font-size: 0.78rem;
-            opacity: 0.82;
+            color: var(--text-body-muted);
             margin: 0 0 0.85rem;
         }
         .review-subtitle {
@@ -104,49 +108,19 @@
             line-height: 1.75;
             max-width: 44rem;
             margin-bottom: 0;
-            color: rgba(255,255,255,0.86);
+            color: var(--text-body-muted);
         }
         .review-chip, .header-chip, .chip {
             border: 0;
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.72);
+            color: var(--text);
             backdrop-filter: blur(12px);
         }
-        .review-chip i, .header-chip i, .chip i { color: color-mix(in srgb, white 80%, var(--secondary)); }
+        .review-chip i, .header-chip i, .chip i { color: var(--secondary); }
         .review-chip.is-accent, .header-chip.accent, .chip.accent {
-            background: rgba(26, 86, 219, 0.22);
-            color: white;
+            background: rgba(26, 86, 219, 0.14);
+            color: var(--text);
         }
-        .review-hero-aside {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 1.25rem;
-            padding: 1.25rem;
-            align-self: stretch;
-        }
-        .hero-aside-kicker {
-            font-family: var(--type-meta-family);
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            font-size: 0.74rem;
-            color: rgba(255,255,255,0.72);
-            margin-bottom: 0.6rem;
-        }
-        .hero-aside-title {
-            font-family: var(--type-display-family);
-            font-size: 1.5rem;
-            line-height: 1.15;
-            margin: 0 0 0.9rem;
-        }
-        .hero-aside-copy {
-            margin: 0 0 1rem;
-            color: rgba(255,255,255,0.84);
-            line-height: 1.65;
-        }
-        .hero-aside-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
-        .hero-aside-list li { display: grid; gap: 0.2rem; }
-        .hero-aside-list strong { font-size: 0.92rem; }
-        .hero-aside-list span { color: rgba(255,255,255,0.76); font-size: 0.92rem; line-height: 1.5; }
 
         .review-overview-grid {
             display: grid;
@@ -198,7 +172,6 @@
 
 
         @media (max-width: 980px) {
-            .review-hero-layout,
             .review-overview-grid { grid-template-columns: 1fr; }
             .overview-stat-grid { grid-template-columns: 1fr; }
             .review-header h1 { max-width: none; }
@@ -206,7 +179,6 @@
 
         @media (max-width: 640px) {
             .review-header { padding: 1.35rem; }
-            .hero-aside-title { font-size: 1.3rem; }
             .overview-stat-value { font-size: 1.65rem; }
         }
 
@@ -1004,7 +976,6 @@
 
 <div class="container review-shell">
 <header class="review-header">
-<div class="review-hero-layout">
 <div class="header-copy review-title-group">
 <nav class="breadcrumb" aria-label="Breadcrumb">
 <a href="index.html">Home</a>
@@ -1022,17 +993,6 @@
 <span class="header-chip review-chip accent is-accent"><i data-lucide="route"></i> Recommended order: Slides/Overview → Formulas → Practice → Videos → Schedule → Progress</span>
 <span class="header-chip review-chip"><i data-lucide="calendar-clock"></i> Test 2: Mon, Mar 30</span>
 </div>
-</div>
-<aside class="review-hero-aside" aria-label="Test 2 study priorities">
-<div class="hero-aside-kicker">Digital curator plan</div>
-<h2 class="hero-aside-title">Study the exam like a polished review packet, not a dashboard.</h2>
-<p class="hero-aside-copy">This page now leads with orientation, narrows the reading measure, and uses tonal layering so formulas, practice, and logistics feel placed with intention.</p>
-<ul class="hero-aside-list">
-<li><strong>Memorize first.</strong><span>Log conversions, geometry area formulas, and circle relationships should become recall-level knowledge.</span></li>
-<li><strong>Use the blue accents sparingly.</strong><span>They now flag actions, not entire sections, so your attention stays on the math.</span></li>
-<li><strong>End with logistics.</strong><span>Check the schedule and your saved progress after the active review work is done.</span></li>
-</ul>
-</aside>
 </div>
 </header>
 
