@@ -30,8 +30,6 @@
         }
 
         /* Checklist */
-        .checklist-section { margin-bottom: 2rem; }
-        .checklist-section h3 { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
         .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
         .check-item { display: flex; width: 100%; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; user-select: none; }
         .check-item:hover { border-color: var(--accent); }
@@ -311,19 +309,6 @@
         .progress-bar-track { background: var(--border); border-radius: 6px; height: 8px; overflow: hidden; }
         .progress-bar-fill { height: 100%; border-radius: 6px; background: var(--accent); transition: width 0.4s ease; }
         .progress-bar-fill.complete { background: var(--green); }
-
-        /* Video link & watched state */
-        .video-link { color: var(--text); }
-        .video-link span { color: var(--text); font-weight: 500; }
-        .video-link:visited { color: var(--text); }
-        .video-link:visited span { color: var(--text); }
-        .video-link i[data-lucide] { color: var(--green) !important; flex-shrink: 0; opacity: 0.85; }
-        .video-link:hover { border-color: var(--green); }
-        .video-link:hover i[data-lucide] { opacity: 1; }
-        .video-link.watched { border-color: var(--green); background: var(--green-bg); }
-        .video-link.watched i[data-lucide] { color: var(--green) !important; opacity: 0.5; }
-        .video-link.watched span { opacity: 0.5; text-decoration: line-through; }
-        .video-link::after { content: '↗'; font-size: 0.8rem; color: var(--text); opacity: 0.35; margin-left: auto; padding-left: 0.5rem; flex-shrink: 0; }
 
 
 /* Status Badge Styling */
@@ -1238,37 +1223,37 @@
 <!-- PRACTICE TAB -->
 <div class="tab-content" id="tab-practice">
 <div class="card review-card">
-<h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 0.6rem;">Practice generators are live for Test 2 topics and aligned to Sections 4.2, 4.3, and the geometry material covered before the exam.</p>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.92rem;">By default, enter decimal answers rounded as directed. Repeating decimals are accepted within tolerance (for example, $0.3333$ for $0.\overline{3}$). Some generators may allow additional formats noted in the question (for example, $\pi$ forms).</p>
-<p id="coverage-audit" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;"></p>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
+<h2 class="u-text-center u-mb-xs">Practice Generators</h2>
+<p class="u-text-center u-mb-sm" style="color: var(--text-muted);">Practice generators are live for Test 2 topics and aligned to Sections 4.2, 4.3, and the geometry material covered before the exam.</p>
+<p class="u-text-center u-mb-md" style="color: var(--text-muted); font-size: 0.92rem;">By default, enter decimal answers rounded as directed. Repeating decimals are accepted within tolerance (for example, $0.3333$ for $0.\overline{3}$). Some generators may allow additional formats noted in the question (for example, $\pi$ forms).</p>
+<p id="coverage-audit" class="u-text-center u-mb-lg" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+<p class="u-text-center u-mb-lg" style="color: var(--text-muted);">Select a topic to generate infinite, exam-style questions.</p>
 <!-- Mock Exam CTA -->
-<div id="exam-cta" class="review-callout review-callout--exam">
-<h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
-<p style="color: var(--text-body-muted, var(--text-muted)); margin-bottom: 1rem; font-size: 0.95rem;">20 exam-matched questions weighted like the real test: ~15% Section 4.2, ~15% Section 4.3, ~70% Geometry. Includes a compound interest table and a multi-part circle theorem problem.</p>
+<div id="exam-cta" class="review-callout review-callout--exam review-callout--highlight">
+<h3 class="review-callout__title review-callout__title--exam">🎯 Mock Exam Mode</h3>
+<p class="review-callout__body review-callout__body--md">20 exam-matched questions weighted like the real test: ~15% Section 4.2, ~15% Section 4.3, ~70% Geometry. Includes a compound interest table and a multi-part circle theorem problem.</p>
 <button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
 </div>
 <!-- Mock Quiz CTA -->
-<div id="quiz-cta" style="background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 8%, var(--surface)), var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border)); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem;">
-<h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
-<p style="color: var(--text-body-muted, var(--text-muted)); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Quizzes 5, 6, and 8 use 5 focused questions. Quiz 7 uses a fixed 8-question blueprint. One attempt per question.</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
-<button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 5 — Section 4.2</div>
-<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Exponentials &amp; Interest</div>
+<div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg" style="padding: 1.5rem;">
+<h3 class="review-callout__title u-text-center">📝 Mock Quiz Mode</h3>
+<p class="review-callout__body review-callout__body--sm u-text-center">Quizzes 5, 6, and 8 use 5 focused questions. Quiz 7 uses a fixed 8-question blueprint. One attempt per question.</p>
+<div class="review-option-grid">
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(5)">
+<div class="review-option-title">Quiz 5 — Section 4.2</div>
+<div class="review-option-copy">Exponentials &amp; Interest</div>
 </button>
-<button class="btn-secondary" onclick="startMockQuiz(6)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 6 — Section 4.3</div>
-<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Logarithms</div>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(6)">
+<div class="review-option-title">Quiz 6 — Section 4.3</div>
+<div class="review-option-copy">Logarithms</div>
 </button>
-<button class="btn-secondary" onclick="startMockQuiz(7)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 7 — Triangles, Lines &amp; Areas (8 Questions)</div>
-<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Similar Triangles, Parallel Lines, Triangle/Polygon Areas, DMS Conversions</div>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
+<div class="review-option-title">Quiz 7 — Triangles, Lines &amp; Areas (8 Questions)</div>
+<div class="review-option-copy">Similar Triangles, Parallel Lines, Triangle/Polygon Areas, DMS Conversions</div>
 </button>
-<button class="btn-secondary" onclick="startMockQuiz(8)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 8 — Circles</div>
-<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">DMS, Radians, Arcs, Sectors, Speed, Circle Theorems</div>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(8)">
+<div class="review-option-title">Quiz 8 — Circles</div>
+<div class="review-option-copy">DMS, Radians, Arcs, Sectors, Speed, Circle Theorems</div>
 </button>
 </div>
 </div>
@@ -1284,10 +1269,10 @@
 </div>
 <!-- Exam Results (hidden until complete) -->
 <div class="card review-card" id="exam-results" style="display: none;">
-<h2 style="text-align: center;">📊 Exam Results</h2>
-<div id="exam-score-display" style="text-align: center; font-size: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin: 1rem 0;"></div>
+<h2 class="u-text-center">📊 Exam Results</h2>
+<div id="exam-score-display" class="review-results-score"></div>
 <div id="exam-breakdown" style="margin-top: 1rem;"></div>
-<div style="text-align: center; margin-top: 1.5rem;">
+<div class="review-results-actions">
 <button class="btn-primary" onclick="endMockExam()">Back to Practice</button>
 </div>
 </div>
