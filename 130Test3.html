@@ -106,8 +106,6 @@
         }
 
         /* Checklist */
-        .checklist-section { margin-bottom: 2rem; }
-        .checklist-section h3 { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
         .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
         .check-item { display: flex; width: 100%; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; user-select: none; }
         .check-item:hover { border-color: var(--accent); }
@@ -388,19 +386,6 @@
         .progress-bar-track { background: var(--border); border-radius: 6px; height: 8px; overflow: hidden; }
         .progress-bar-fill { height: 100%; border-radius: 6px; background: var(--accent); transition: width 0.4s ease; }
         .progress-bar-fill.complete { background: var(--green); }
-
-        /* Video link & watched state */
-        .video-link { color: var(--text); }
-        .video-link span { color: var(--text); font-weight: 500; }
-        .video-link:visited { color: var(--text); }
-        .video-link:visited span { color: var(--text); }
-        .video-link i[data-lucide] { color: var(--green) !important; flex-shrink: 0; opacity: 0.85; }
-        .video-link:hover { border-color: var(--green); }
-        .video-link:hover i[data-lucide] { opacity: 1; }
-        .video-link.watched { border-color: var(--green); background: var(--green-bg); }
-        .video-link.watched i[data-lucide] { color: var(--green) !important; opacity: 0.5; }
-        .video-link.watched span { opacity: 0.5; text-decoration: line-through; }
-        .video-link::after { content: '↗'; font-size: 0.8rem; color: var(--text); opacity: 0.35; margin-left: auto; padding-left: 0.5rem; flex-shrink: 0; }
 
 
 /* Status Badge Styling */
@@ -1291,13 +1276,13 @@
 </div>
 <div class="tab-content" id="tab-practice">
 <div class="card card-tier-primary">
-<div class="section-lead" style="text-align: center; justify-items: center;">
+<div class="section-lead section-lead--center">
 <div class="section-eyebrow"><i data-lucide="pen-tool"></i> Interactive review</div>
-<h2 style="text-align: center; margin-bottom: 0;">Practice Generators</h2>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 0.6rem;">Practice generators are live for Unit 3 and aligned to Sections 5.1, 5.2, 5.3, 7.1, and 8.4.</p>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.92rem;">By default, enter decimal answers rounded as directed. Repeating decimals are accepted within tolerance (for example, $0.6667$ for $0.\overline{6}$). Some generators may allow additional formats noted in the question (for example, $\pi$ forms), including coterminal-radian items that accept simple $\pi$ expressions.</p>
-<p id="coverage-audit" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;"></p>
-<p style="text-align: center; color: var(--text-muted); margin-bottom: 0;">Select a topic to generate infinite, exam-style questions.</p>
+<h2 class="u-mb-0">Practice Generators</h2>
+<p class="u-mb-sm" style="color: var(--text-muted);">Practice generators are live for Unit 3 and aligned to Sections 5.1, 5.2, 5.3, 7.1, and 8.4.</p>
+<p class="u-mb-md" style="color: var(--text-muted); font-size: 0.92rem;">By default, enter decimal answers rounded as directed. Repeating decimals are accepted within tolerance (for example, $0.6667$ for $0.\overline{6}$). Some generators may allow additional formats noted in the question (for example, $\pi$ forms), including coterminal-radian items that accept simple $\pi$ expressions.</p>
+<p id="coverage-audit" class="u-mb-lg" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+<p class="u-mb-0" style="color: var(--text-muted);">Select a topic to generate infinite, exam-style questions.</p>
 </div>
 <div class="section-summary-grid">
 <div class="section-summary-card review-summary-card">
@@ -1310,31 +1295,31 @@
 </div>
 </div>
 <!-- Mock Exam CTA -->
-<div id="exam-cta" class="review-callout review-callout--exam">
-<h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
-<p style="color: var(--text-body-muted, var(--text-muted)); margin-bottom: 1rem; font-size: 0.95rem;">20 mixed Unit 3 review questions with coverage from Sections 5.1, 5.2, 5.3, 7.1, and 8.4 (at least one per section).</p>
+<div id="exam-cta" class="review-callout review-callout--exam review-callout--highlight">
+<h3 class="review-callout__title review-callout__title--exam">🎯 Mock Exam Mode</h3>
+<p class="review-callout__body review-callout__body--md">20 mixed Unit 3 review questions with coverage from Sections 5.1, 5.2, 5.3, 7.1, and 8.4 (at least one per section).</p>
 <button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
 </div>
 <!-- Mock Quiz CTA -->
-<div id="quiz-cta" style="background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border)); border-radius: 16px; padding: 1.35rem 1.5rem; margin-bottom: 2rem;">
-<h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
-<p style="color: var(--text-body-muted, var(--text-muted)); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
-<button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 10 — Sections 5.1–5.2 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Coterminal angles + exact trig triangle skills</div>
+<div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg" style="padding: 1.35rem 1.5rem;">
+<h3 class="review-callout__title u-text-center">📝 Mock Quiz Mode</h3>
+<p class="review-callout__body review-callout__body--sm u-text-center">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
+<div class="review-option-grid">
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(5)">
+<div class="review-option-title">Quiz 10 — Sections 5.1–5.2 (Core Skills)</div>
+<div class="review-option-copy">Coterminal angles + exact trig triangle skills</div>
 </button>
-<button class="btn-secondary" onclick="startMockQuiz(6)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 11 — Section 5.3 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Reference angles, signs, and solving trig equations on 0°–360°</div>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(6)">
+<div class="review-option-title">Quiz 11 — Section 5.3 (Core Skills)</div>
+<div class="review-option-copy">Reference angles, signs, and solving trig equations on 0°–360°</div>
 </button>
-<button class="btn-secondary" onclick="startMockQuiz(7)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 12 — Section 7.1 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Airplane applications, angle of elevation, and bearings</div>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
+<div class="review-option-title">Quiz 12 — Section 7.1 (Core Skills)</div>
+<div class="review-option-copy">Airplane applications, angle of elevation, and bearings</div>
 </button>
-<button class="btn-secondary" onclick="startMockQuiz(8)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
-<div style="font-weight: 600; margin-bottom: 2px;">Quiz 13 — Section 8.4 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Graph/resultant vectors and magnitude-direction conversions</div>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(8)">
+<div class="review-option-title">Quiz 13 — Section 8.4 (Core Skills)</div>
+<div class="review-option-copy">Graph/resultant vectors and magnitude-direction conversions</div>
 </button>
 </div>
 </div>
@@ -1349,11 +1334,11 @@
 </div>
 </div>
 <!-- Exam Results (hidden until complete) -->
-<div class="card review-card" id="exam-results" style="display: none;">
-<h2 style="text-align: center;">📊 Exam Results</h2>
-<div id="exam-score-display" style="text-align: center; font-size: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin: 1rem 0;"></div>
+<div class="card review-card section-lead--results" id="exam-results" style="display: none;">
+<h2>📊 Exam Results</h2>
+<div id="exam-score-display" class="review-results-score"></div>
 <div id="exam-breakdown" style="margin-top: 1rem;"></div>
-<div style="text-align: center; margin-top: 1.5rem;">
+<div class="review-results-actions">
 <button class="btn-primary" onclick="endMockExam()">Back to Practice</button>
 </div>
 </div>
