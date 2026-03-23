@@ -52,9 +52,12 @@
   --background-color: var(--surface);
   --card-background: var(--surface-container-lowest);
 
-  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", serif;
-  --font-body: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --font-meta: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-body: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-meta: var(--font-body);
+  --type-display-family: var(--font-display);
+  --type-body-family: var(--font-body);
+  --type-meta-family: var(--font-meta);
   --display-lg: clamp(3rem, 5vw, 3.5rem);
   --display-md: clamp(2.3rem, 4vw, 2.8rem);
   --title-lg: 1.65rem;
@@ -62,6 +65,8 @@
   --body-md: 1rem;
   --body-sm: 0.95rem;
   --meta-sm: 0.78rem;
+  --meta-tracking: 0.12em;
+  --meta-weight: 600;
   --line-height-body: 1.7;
   --line-height-tight: 1.2;
 
@@ -133,7 +138,7 @@ ul {
 
 /* Base styles */
 body {
-  font-family: var(--font-body);
+  font-family: var(--type-body-family);
   line-height: var(--line-height-body);
   margin: 0;
   padding: 0;
@@ -166,7 +171,7 @@ h6 {
   margin-top: 0;
   color: var(--secondary-color);
   line-height: 1.3;
-  font-family: var(--font-display);
+  font-family: var(--type-display-family);
 }
 
 a {
@@ -225,9 +230,10 @@ header h1 {
 
 .page-shell-header__eyebrow {
   margin-bottom: 0.8rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  font-weight: var(--meta-weight);
+  letter-spacing: var(--meta-tracking);
   text-transform: uppercase;
   opacity: 0.88;
 }
@@ -449,6 +455,10 @@ section h2 {
 }
 
 .item-date {
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--muted-text-color);
 }
 
@@ -624,11 +634,12 @@ section h2 {
 .course-identity__label {
   display: block;
   margin-bottom: 0.2rem;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  font-weight: var(--meta-weight);
+  letter-spacing: var(--meta-tracking);
   text-transform: uppercase;
-  color: var(--secondary);
+  color: color-mix(in srgb, var(--secondary) 72%, var(--muted-text-color));
 }
 
 .course-identity__value {
@@ -645,12 +656,15 @@ section h2 {
 .course-identity__pill {
   display: inline-flex;
   align-items: center;
-  padding: 0.3rem 0.75rem;
+  padding: 0.32rem 0.78rem;
   border-radius: 999px;
-  background: rgba(13, 80, 213, 0.1);
+  background: color-mix(in srgb, var(--secondary) 8%, var(--surface));
   color: var(--secondary-color);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  font-weight: var(--meta-weight);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 :root[data-theme="dark"] .course-identity {
@@ -1091,6 +1105,10 @@ main.error-main {
 }
 
 :root[data-theme="dark"] .item-date {
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: #aaa;
 }
 
@@ -1433,7 +1451,11 @@ section:nth-child(5) {
   flex-wrap: wrap;
   gap: 0.45rem;
   margin: 0;
-  font-size: 0.9rem;
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  font-weight: var(--meta-weight);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--muted-text-color);
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius-pill);
@@ -1886,7 +1908,7 @@ body.review-page,
   --green-step: var(--review-green-step);
   --h1-from: var(--review-h1-from);
   --h1-to: var(--review-h1-to);
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--type-body-family);
   background: var(--bg);
   color: var(--text);
   line-height: var(--line-height-body);
@@ -1944,7 +1966,7 @@ body.review-page::before {
 .math-review-page {
   position: relative;
   width: 100%;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--type-body-family);
   color: var(--text);
   isolation: isolate;
   background:
@@ -1993,7 +2015,7 @@ body.review-page::before {
 .review-header h1,
 .math-review-page h1.review-title,
 .review-page h1.review-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--type-display-family);
   font-weight: 400;
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.05;
@@ -2005,10 +2027,10 @@ body.review-page::before {
 .math-review-page h4,
 .review-page h2,
 .review-page h3,
-.review-page h4 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+.review-page h4 { font-family: var(--type-display-family); font-weight: 400; }
 .math-review-page h2,
 .review-page h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
-.review-kicker, .course-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.55rem; }
+.review-kicker, .course-label { font-family: var(--type-meta-family); font-size: var(--meta-sm); font-weight: var(--meta-weight); letter-spacing: calc(var(--meta-tracking) + 0.04em); text-transform: uppercase; color: color-mix(in srgb, var(--accent) 72%, var(--text-body-muted)); margin-bottom: 0.55rem; }
 .review-subtitle, .header-subtitle, .subtitle { color: var(--text-body-muted); font-size: 0.98rem; max-width: 52rem; }
 .review-meta-chips, .header-chips {
   display: flex;
@@ -2023,10 +2045,13 @@ body.review-page::before {
   padding: 0.42rem 0.75rem;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 92%, var(--surface2));
   color: var(--text-body-muted);
-  font-size: 0.82rem;
-  font-weight: 600;
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  font-weight: var(--meta-weight);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   line-height: 1;
 }
 .review-chip i, .header-chip i, .chip i { width: 0.9rem; height: 0.9rem; color: var(--accent); flex-shrink: 0; }
@@ -2059,7 +2084,7 @@ body.review-page::before {
   color: var(--text);
   padding: 0.9rem 1rem;
   border-radius: 16px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--type-body-family);
   font-size: 0.98rem;
   font-weight: 600;
   cursor: pointer;
@@ -2131,7 +2156,7 @@ body.review-page::before {
 .review-card, .card, .formula-section { padding: var(--spacing-6); margin-bottom: 1.5rem; }
 
 .review-checklist-section, .checklist-section { margin-bottom: var(--spacing-8); }
-.review-checklist-section > h3, .checklist-section > h3 { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.review-checklist-section > h3, .checklist-section > h3 { font-family: var(--type-body-family); font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
 .review-checklist-row, .check-item, .checklist-item {
   display: flex;
   align-items: center;
@@ -2233,7 +2258,7 @@ body.review-page::before {
   border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
   background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface));
 }
-.review-callout__title { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; }
+.review-callout__title { font-family: var(--type-display-family); font-size: 1.25rem; margin-bottom: 0.75rem; }
 .review-callout__title--exam { font-size: 1.4rem; margin-bottom: 0.5rem; }
 .review-callout__body { color: var(--text-body-muted, var(--text-muted)); margin-bottom: 1rem; }
 .review-callout__body--sm { font-size: 0.9rem; }
@@ -2244,7 +2269,7 @@ body.review-page::before {
 .review-option-title { font-weight: 600; margin-bottom: 2px; }
 .review-option-copy { font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted)); }
 
-.review-results-score { text-align: center; font-size: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin: 1rem 0; }
+.review-results-score { text-align: center; font-size: 3rem; font-family: var(--type-meta-family); color: var(--accent); margin: 1rem 0; }
 .review-results-actions { text-align: center; margin-top: 1.5rem; }
 
 .review-formula-section,
@@ -2355,7 +2380,7 @@ body.math130-course-page {
 .math130-hero h1,
 .math130-progress h2,
 .math130-order-strip h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family: var(--type-display-family);
   font-weight: 400;
 }
 
@@ -2409,9 +2434,10 @@ body.math130-course-page {
 }
 
 .math130-order-strip__eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  font-weight: var(--meta-weight);
+  letter-spacing: calc(var(--meta-tracking) + 0.02em);
   text-transform: uppercase;
   opacity: 0.9;
 }

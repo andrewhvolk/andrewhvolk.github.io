@@ -18,7 +18,7 @@
   .journey-panel p { color: var(--text-muted); margin-bottom: 1rem; }
   .journey-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.75rem; }
   .journey-step { background: color-mix(in srgb, var(--surface2) 78%, var(--surface)); border: 1px solid var(--border); border-radius: 14px; padding: 0.9rem 1rem; }
-  .journey-step-num { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+  .journey-step-num { display: block; font-family: var(--type-meta-family); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
   .journey-step-title { display: block; font-weight: 700; margin-bottom: 0.2rem; }
   .journey-step-copy { font-size: 0.88rem; color: var(--text-muted); }
   /* Topic Cards */
@@ -26,7 +26,7 @@
   .topic-card:hover { border-color: var(--accent-hover); transform: translateY(-2px); }
   .topic-header { width: 100%; padding: 1.25rem 1.4rem; cursor: pointer; display: flex; align-items: center; gap: 1rem; user-select: none; border: 0; background: transparent; color: inherit; text-align: left; font: inherit; min-height: 84px; }
   .topic-header:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
-  .topic-number { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--accent); background: var(--accent-chip); padding: 0.38rem 0.62rem; border-radius: 8px; flex-shrink: 0; border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
+  .topic-number { font-family: var(--type-meta-family); font-size: 0.76rem; color: var(--accent); background: var(--accent-chip); padding: 0.38rem 0.62rem; border-radius: 8px; flex-shrink: 0; border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
   .topic-title { font-weight: 700; font-size: 1.02rem; flex: 1; }
   .topic-chevron { color: var(--text-muted); transition: transform 0.3s; font-size: 0.8rem; }
   .topic-card.open .topic-chevron { transform: rotate(180deg); }
@@ -38,26 +38,26 @@
   .topic-content p, .topic-content li { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 0.4rem; }
   .topic-content ul { list-style: none; padding-left: 0; }
   .topic-content li::before { content: '\2192'; color: var(--accent); margin-right: 0.5rem; font-weight: 600; }
-  .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; margin: 0.6rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; text-align: center; overflow: visible; }
+  .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; margin: 0.6rem 0; font-family: var(--type-meta-family); font-size: 0.88rem; text-align: center; overflow: visible; }
   .tip-box { background: color-mix(in srgb, var(--amber) 10%, var(--surface)); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.88rem; color: var(--text); }
 
   /* Practice */
   .practice-dashboard { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.75rem; }
   .practice-stat { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--border); border-radius: 18px; padding: 1.2rem; text-align: center; box-shadow: var(--shadow); min-height: 132px; display: flex; flex-direction: column; justify-content: center; }
-  .practice-stat .stat-num { font-family: 'DM Serif Display', serif; font-size: 2rem; line-height: 1; margin-bottom: 0.25rem; }
+  .practice-stat .stat-num { font-family: var(--type-display-family); font-size: 2rem; line-height: 1; margin-bottom: 0.25rem; }
   .practice-stat .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
   .stat-green { color: var(--green); }
   .stat-red { color: var(--red); }
   .stat-blue { color: var(--blue); }
 
   .problem-card { background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--surface) 72%, var(--surface2))); border: 1px solid var(--border); border-radius: 18px; padding: 1.4rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
-  .problem-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .problem-label { font-family: var(--type-meta-family); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
   .problem-pts { background: var(--surface2); padding: 0.15rem 0.5rem; border-radius: 5px; font-size: 0.72rem; color: var(--accent); }
   .problem-tag-retry { background: var(--red-bg); color: var(--red); padding: 0.15rem 0.55rem; border-radius: 5px; font-size: 0.72rem; font-weight: 600; margin-left: 0.5rem; }
   .problem-text { font-size: 0.95rem; margin-bottom: 1rem; }
 
   .practice-btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .solution-toggle, .practice-action-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .solution-toggle, .practice-action-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-family: var(--type-body-family); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
   .solution-toggle:hover, .practice-action-btn:hover { border-color: var(--accent); color: var(--accent); }
   .practice-action-btn.got-it { border-color: var(--got-border); color: var(--green); }
   .practice-action-btn.got-it:hover { background: var(--green-bg); border-color: var(--green); }
@@ -72,28 +72,28 @@
 
   .practice-complete { text-align: center; padding: 3rem 1rem; }
   .practice-complete .big-check { font-size: 3.5rem; margin-bottom: 0.75rem; }
-  .practice-complete h2 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 0.75rem; background: linear-gradient(135deg, var(--green), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .practice-complete h2 { font-family: var(--type-display-family); font-size: 1.8rem; margin-bottom: 0.75rem; background: linear-gradient(135deg, var(--green), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .practice-complete p { color: var(--text-muted); margin-bottom: 1.5rem; }
   .practice-stats-final { display: inline-flex; gap: 2rem; margin-bottom: 1.5rem; }
   .final-stat { text-align: center; }
-  .final-stat .num { font-family: 'DM Serif Display', serif; font-size: 2rem; display: block; }
+  .final-stat .num { font-family: var(--type-display-family); font-size: 2rem; display: block; }
   .final-stat .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
 
   /* Quiz */
   .quiz-intro { text-align: center; padding: 3rem 1rem; }
   .quiz-intro p { color: var(--text-muted); margin-bottom: 1.5rem; }
-  .quiz-start-btn, .practice-start-btn { padding: 0.75rem 2rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px var(--accent-glow); }
+  .quiz-start-btn, .practice-start-btn { padding: 0.75rem 2rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: var(--type-body-family); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px var(--accent-glow); }
   .quiz-start-btn:hover, .practice-start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--accent-glow); }
   .quiz-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
   .quiz-progress-bar { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
   .quiz-progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.4s ease; }
-  .quiz-counter { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+  .quiz-counter { font-family: var(--type-meta-family); font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
   .quiz-question-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
   .quiz-question { font-size: 1.05rem; margin-bottom: 1.25rem; }
   .quiz-options { display: flex; flex-direction: column; gap: 0.6rem; }
   .quiz-option { display: flex; align-items: center; gap: 0.85rem; padding: 0.85rem 1rem; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.93rem; }
   .quiz-option:hover { border-color: var(--accent); }
-  .quiz-option .letter { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; flex-shrink: 0; }
+  .quiz-option .letter { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: var(--border); font-family: var(--type-meta-family); font-size: 0.8rem; font-weight: 600; flex-shrink: 0; }
   .quiz-option.correct { border-color: var(--green); background: var(--green-bg); }
   .quiz-option.correct .letter { background: var(--green); color: #fff; }
   .quiz-option.wrong { border-color: var(--red); background: var(--red-bg); }
@@ -102,10 +102,10 @@
   .quiz-explanation { margin-top: 1rem; padding: 1rem; border-radius: 8px; font-size: 0.9rem; animation: fadeUp 0.3s ease; }
   .quiz-explanation.correct-exp { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
   .quiz-explanation.wrong-exp { background: var(--red-bg); border: 1px solid var(--red-border); color: var(--red); }
-  .quiz-next-btn { margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .quiz-next-btn { margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: var(--type-body-family); font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .quiz-next-btn:hover { box-shadow: 0 4px 16px var(--accent-glow); }
   .quiz-results { text-align: center; padding: 2.5rem 1rem; }
-  .quiz-score { font-family: 'DM Serif Display', serif; font-size: 3.5rem; background: linear-gradient(135deg, var(--accent), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+  .quiz-score { font-family: var(--type-display-family); font-size: 3.5rem; background: linear-gradient(135deg, var(--accent), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
   .quiz-results p { color: var(--text-muted); margin-bottom: 1.5rem; }
 
   /* Formula Sheet */
@@ -114,7 +114,7 @@
   .formula-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.6rem; }
   .formula-item { background: var(--surface2); border-radius: 8px; padding: 0.75rem 1rem; }
   .formula-item .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.35rem; }
-  .print-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.25rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-bottom: 1.25rem; }
+  .print-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.25rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-family: var(--type-body-family); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-bottom: 1.25rem; }
   .print-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   /* Checklist */
@@ -134,7 +134,7 @@
   .warning-box b { color: var(--amber); }
 
   /* Review topic button */
-  .review-topic-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--blue-bg); border: 1px solid var(--blue); border-radius: 8px; color: var(--blue); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; opacity: 0.7; }
+  .review-topic-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--blue-bg); border: 1px solid var(--blue); border-radius: 8px; color: var(--blue); font-family: var(--type-body-family); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; opacity: 0.7; }
   .review-topic-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); opacity: 1; }
 
   /* Video link card */
@@ -149,12 +149,12 @@
 
   /* Progress History */
   .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
-  .progress-header h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-weight: 400; }
-  .reset-btn { padding: 0.45rem 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: 8px; color: var(--red); font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .progress-header h2 { font-family: var(--type-display-family); font-size: 1.5rem; font-weight: 400; }
+  .reset-btn { padding: 0.45rem 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: 8px; color: var(--red); font-family: var(--type-body-family); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .reset-btn:hover { background: var(--red); color: #fff; }
   .reset-confirm { padding: 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: var(--radius); margin-bottom: 1rem; text-align: center; animation: fadeUp 0.2s ease; }
   .reset-confirm p { font-size: 0.9rem; color: var(--red); margin-bottom: 0.75rem; }
-  .reset-confirm button { padding: 0.4rem 1.25rem; border: none; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; margin: 0 0.25rem; }
+  .reset-confirm button { padding: 0.4rem 1.25rem; border: none; border-radius: 6px; font-family: var(--type-body-family); font-size: 0.85rem; font-weight: 600; cursor: pointer; margin: 0 0.25rem; }
   .reset-confirm .confirm-yes { background: var(--red); color: #fff; }
   .reset-confirm .confirm-no { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
 
@@ -163,12 +163,12 @@
   .history-empty { text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.9rem; background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
 
   .history-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .history-table th { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 0.7rem 1rem; background: var(--surface2); border-bottom: 1px solid var(--border); }
+  .history-table th { font-family: var(--type-meta-family); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 0.7rem 1rem; background: var(--surface2); border-bottom: 1px solid var(--border); }
   .history-table td { font-size: 0.88rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); }
   .history-table tr:last-child td { border-bottom: none; }
   .history-table .best-row td { background: var(--green-bg); }
 
-  .history-badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .history-badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700; font-family: var(--type-meta-family); }
   .badge-green { background: var(--green-bg); color: var(--green); }
   .badge-amber { background: var(--amber-bg); color: var(--amber); }
   .badge-red { background: var(--red-bg); color: var(--red); }
@@ -176,7 +176,7 @@
 
   .stats-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
   .stats-overview .overview-card { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--border); border-radius: 18px; padding: 1rem; text-align: center; box-shadow: var(--shadow); }
-  .stats-overview .overview-num { font-family: 'DM Serif Display', serif; font-size: 1.8rem; line-height: 1; margin-bottom: 0.2rem; }
+  .stats-overview .overview-num { font-family: var(--type-display-family); font-size: 1.8rem; line-height: 1; margin-bottom: 0.2rem; }
   .stats-overview .overview-lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
 
   .katex { font-size: 1.05em; }
@@ -426,7 +426,7 @@
 
     <div class="formula-section review-formula-section"><h3>⛰️ Quadratic Vertex</h3><div class="formula-grid">
       <div class="formula-item"><div class="label">Vertex x-coordinate</div><div class="formula-box review-formula-box"><span class="k">x=-\frac{b}{2a}</span></div></div>
-      <div class="formula-item"><div class="label">Rule</div><div class="formula-box review-formula-box" style="font-family:'DM Sans';font-size:0.85rem;color:var(--text-muted)">a &gt; 0 → min | a &lt; 0 → max</div></div>
+      <div class="formula-item"><div class="label">Rule</div><div class="formula-box review-formula-box" style="font-family:var(--type-body-family);font-size:0.85rem;color:var(--text-muted)">a &gt; 0 → min | a &lt; 0 → max</div></div>
     </div></div>
 
     <div class="formula-section review-formula-section"><h3>🔢 Exponent Rules</h3><div class="formula-grid">
@@ -546,7 +546,7 @@ function initPracticeView(){
   practiceInit=true;
   const hist=loadHist().practice;
   const bestLine=hist.length?`<div style="margin-bottom:1rem"><span class="history-badge badge-green">Best: ${Math.min(...hist.map(h=>h.retries))} retries</span> <span style="color:var(--text-muted);font-size:0.82rem">across ${hist.length} session${hist.length>1?'s':''}</span></div>`:'';
-  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:'DM Serif Display';font-size:1.8rem;margin-bottom:0.5rem">Practice Mode</h2><p>${allProblems.length} problems in random order. Work each on paper, reveal the solution, then mark it. Missed problems recycle until you get them all right.</p>${bestLine}<button class="practice-start-btn" onclick="startPractice()">Start Practice</button></div>`;
+  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:var(--type-display-family);font-size:1.8rem;margin-bottom:0.5rem">Practice Mode</h2><p>${allProblems.length} problems in random order. Work each on paper, reveal the solution, then mark it. Missed problems recycle until you get them all right.</p>${bestLine}<button class="practice-start-btn" onclick="startPractice()">Start Practice</button></div>`;
 }
 
 function startPractice(){
@@ -607,7 +607,7 @@ let quizStarted=false,quizIdx=0,quizScore=0,quizAns=false;
 function initQuizView(){
   const hist=loadHist().quiz;
   const bestLine=hist.length?`<div style="margin-bottom:1rem"><span class="history-badge badge-green">Best: ${Math.max(...hist.map(h=>h.score))}/${quizQ.length} (${Math.max(...hist.map(h=>h.pct))}%)</span> <span style="color:var(--text-muted);font-size:0.82rem">across ${hist.length} attempt${hist.length>1?'s':''}</span></div>`:'';
-  document.getElementById('quiz-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:'DM Serif Display';font-size:1.8rem;margin-bottom:0.5rem">Test Your Knowledge</h2><p>12 questions covering all topics. No time limit.</p>${bestLine}<button class="quiz-start-btn" onclick="startQuiz()">Begin Quiz</button></div>`;
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:var(--type-display-family);font-size:1.8rem;margin-bottom:0.5rem">Test Your Knowledge</h2><p>12 questions covering all topics. No time limit.</p>${bestLine}<button class="quiz-start-btn" onclick="startQuiz()">Begin Quiz</button></div>`;
 }
 
 function startQuiz(){quizStarted=true;quizIdx=0;quizScore=0;for(let i=quizQ.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[quizQ[i],quizQ[j]]=[quizQ[j],quizQ[i]]}showQ()}

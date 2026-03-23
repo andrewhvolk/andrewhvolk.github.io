@@ -6,9 +6,6 @@
     <title>Chessboard Rice Growth</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
       @font-face {
         font-family: 'LucideIcons';
@@ -19,9 +16,6 @@
         font-family: 'LucideIcons';
         font-size: 1.25rem; /* Adjust size as needed */
         line-height: 1;
-      }
-      body {
-        font-family: 'Inter', sans-serif;
       }
       /* Style for chessboard squares */
       .square {
@@ -68,7 +62,8 @@
         position: absolute;
         text-align: center;
         padding: 8px;
-        font: 12px sans-serif;
+        font-family: var(--type-meta-family);
+        font-size: 0.75rem;
         background: rgba(50, 50, 50, 0.8); /* Darker tooltip */
         color: white;
         border: 0px;

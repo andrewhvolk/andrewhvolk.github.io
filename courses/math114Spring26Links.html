@@ -5,23 +5,10 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>MATH 114 Spring Assignment Links</title>
 <style>
-    :root{
-      --blue:#1e3a8a;
-      --blue2:#2563eb;
-      --gold:#f59e0b;
-      --bg:#f8fafc;
-      --card:#ffffff;
-      --line:#dbe4f0;
-      --text:#0f172a;
-      --muted:#475569;
-    }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.35;
+      line-height:var(--line-height-body);
     }
     .wrap{
       max-width:1200px;
@@ -29,16 +16,17 @@
       padding:24px 18px 40px;
     }
     .hero{
-      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      background:linear-gradient(135deg,var(--primary-container),var(--secondary));
       color:white;
       border-radius:18px;
       padding:24px 22px;
       box-shadow:0 10px 24px rgba(30,58,138,.18);
       margin-bottom:18px;
     }
-    h1{
+    .hero h1{
       margin:0 0 8px 0;
-      font-size:1.8rem;
+      font-size:clamp(2rem, 3.6vw, 2.6rem);
+      color:var(--on-primary);
     }
     .subtitle{
       margin:0;
@@ -52,92 +40,97 @@
     }
     .top-links a{
       text-decoration:none;
-      color:var(--blue);
-      background:white;
+      color:var(--secondary-color);
+      background:rgba(255,255,255,.92);
       padding:10px 14px;
       border-radius:999px;
-      font-weight:700;
       border:1px solid rgba(255,255,255,.25);
+      font-family:var(--type-meta-family);
+      font-size:var(--meta-sm);
+      font-weight:var(--meta-weight);
+      letter-spacing:0.06em;
+      text-transform:uppercase;
     }
     .card{
-      background:var(--card);
-      border:1px solid var(--line);
+      background:var(--card-background);
+      border:1px solid var(--outline-variant);
       border-radius:18px;
       padding:16px 16px 8px;
       box-shadow:0 8px 20px rgba(15,23,42,.05);
     }
     .note{
-      color:var(--muted);
+      color:var(--muted-text-color);
       margin:0 0 12px 0;
       font-size:.96rem;
     }
     .table-wrap{
       overflow:auto;
       border-radius:14px;
-      border:1px solid var(--line);
+      border:1px solid var(--outline-variant);
     }
     table{
       width:100%;
       border-collapse:collapse;
       min-width:920px;
-      background:white;
+      background:var(--surface-container-lowest);
     }
     thead th{
-      background:#eff6ff;
-      color:var(--blue);
+      background:color-mix(in srgb, var(--surface-container) 72%, white);
+      color:var(--secondary-color);
       text-align:left;
-      font-size:.95rem;
+      font-family:var(--type-meta-family);
+      font-size:var(--meta-sm);
+      font-weight:var(--meta-weight);
+      letter-spacing:0.08em;
+      text-transform:uppercase;
       padding:12px 10px;
-      border-bottom:1px solid var(--line);
+      border-bottom:1px solid var(--outline-variant);
       position:sticky;
       top:0;
       z-index:1;
     }
     tbody td{
       padding:10px;
-      border-bottom:1px solid var(--line);
+      border-bottom:1px solid var(--outline-variant);
       vertical-align:top;
       font-size:.95rem;
     }
     tbody tr:nth-child(even){
-      background:#fcfdff;
+      background:color-mix(in srgb, var(--surface) 92%, white);
     }
     tbody tr:hover{
-      background:#f8fbff;
+      background:color-mix(in srgb, var(--surface-container-low) 84%, white);
     }
-    .module{
-      font-weight:700;
-      color:var(--blue);
-      white-space:nowrap;
-    }
-    .assign{
-      font-weight:600;
-    }
-    .due{
-      color:var(--muted);
-      white-space:nowrap;
-    }
-
+    .module,
+    .due,
     .points{
+      font-family:var(--type-meta-family);
+      font-size:var(--meta-sm);
+      font-weight:var(--meta-weight);
+      letter-spacing:0.05em;
+      text-transform:uppercase;
       white-space:nowrap;
-      font-weight:700;
-      color:#92400e;
     }
+    .module{ color:var(--secondary-color); }
+    .assign{ font-weight:600; }
+    .due{ color:var(--muted-text-color); }
+    .points{ color:var(--tertiary); }
     a.assignment-link{
       text-decoration:none;
-      color:var(--blue);
-      font-weight:700;
+      color:var(--secondary);
+      font-family:var(--type-meta-family);
+      font-size:var(--meta-sm);
+      font-weight:var(--meta-weight);
+      letter-spacing:0.05em;
+      text-transform:uppercase;
     }
-    a.assignment-link:hover{
-      text-decoration:underline;
-    }
+    a.assignment-link:hover{ text-decoration:underline; }
     .footer{
       margin-top:14px;
-      color:var(--muted);
+      color:var(--muted-text-color);
       font-size:.9rem;
     }
     @media (max-width: 700px){
-      h1{font-size:1.45rem}
       .hero{padding:20px 16px}
       .card{padding:14px 12px 8px}
     }
