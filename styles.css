@@ -3362,11 +3362,53 @@ body.math130-course-page {
   text-decoration-color: rgba(255, 255, 255, 0.35);
 }
 
-.cv-band {
-  margin-bottom: var(--spacing-10);
+.cv-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(16rem, 0.95fr);
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
+  margin-bottom: var(--section-space);
+  padding-bottom: var(--spacing-10);
+  border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 78%, transparent);
 }
 
-.cv-band__header {
+.cv-intro__main h2,
+.cv-section__header h2 {
+  margin-bottom: 0.8rem;
+}
+
+.cv-intro__main p,
+.cv-entry p,
+.cv-entry li,
+.cv-section > p {
+  max-width: 72ch;
+}
+
+.cv-facts-rail {
+  display: grid;
+  gap: var(--spacing-6);
+  padding-top: 0.2rem;
+}
+
+.cv-fact-group {
+  padding-left: var(--spacing-5);
+  border-left: 2px solid color-mix(in srgb, var(--outline-variant) 70%, transparent);
+}
+
+.cv-fact-group h3 {
+  margin-bottom: 0.65rem;
+  font-size: 1rem;
+}
+
+.cv-fact-group--featured {
+  border-left-color: color-mix(in srgb, var(--secondary) 48%, var(--surface-tint));
+}
+
+.cv-section {
+  margin-bottom: var(--section-space);
+}
+
+.cv-section__header {
   margin-bottom: var(--spacing-6);
 }
 
@@ -3380,73 +3422,44 @@ body.math130-course-page {
   color: var(--tertiary);
 }
 
-.cv-band--summary {
-  background: linear-gradient(180deg, rgba(220, 230, 224, 0.42), rgba(255, 255, 255, 0.92));
-}
-
-.cv-band--academic {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(235, 238, 234, 0.9));
-}
-
-.cv-band--narrative,
-.cv-band--experience,
-.cv-band--scholarship,
-.cv-band--service,
-.cv-band--honors {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(242, 244, 241, 0.94));
-}
-
-.cv-band--narrative-alt,
-.cv-band--scholarship-alt,
-.cv-band--service-alt,
-.cv-band--service-media {
-  background: linear-gradient(180deg, rgba(236, 240, 237, 0.9), rgba(255, 255, 255, 0.88));
-}
-
-.summary-grid,
-.cv-record-grid,
-.course-groups,
-.research-grid {
+.cv-entries {
   display: grid;
   gap: var(--spacing-6);
 }
 
-.summary-grid,
-.cv-record-grid {
-  grid-template-columns: minmax(0, 1.7fr) minmax(18rem, 1fr);
+.cv-entry {
+  padding-bottom: var(--spacing-6);
+  border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 72%, transparent);
 }
 
-.cv-panel,
-.cv-mini-panel,
-.course-group-card,
-.highlight-panel {
-  background: rgba(255, 255, 255, 0.68);
-  border-radius: var(--radius-lg);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 85%, transparent);
+.cv-entry:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
-.cv-panel {
-  padding: clamp(1.4rem, 2.8vw, 2rem);
+.cv-entry--current .item-title::after {
+  content: 'Current';
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.75rem;
+  padding: 0.16rem 0.55rem;
+  border-radius: 999px;
+  font-family: var(--type-meta-family);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  background: color-mix(in srgb, var(--secondary) 12%, white 88%);
+  vertical-align: middle;
 }
 
-.cv-panel--stacked {
-  display: grid;
-  gap: var(--spacing-5);
-  align-content: start;
-  background: transparent;
-  box-shadow: none;
-  padding: 0;
+.cv-entry--citation {
+  padding-bottom: var(--spacing-4);
 }
 
-.cv-mini-panel,
-.course-group-card,
-.highlight-panel {
-  padding: 1.35rem 1.4rem;
-}
-
-.course-groups,
-.research-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.cv-entry--citation p {
+  margin: 0;
 }
 
 .compact-list,
@@ -3463,43 +3476,30 @@ body.math130-course-page {
 }
 
 .compact-list li + li,
-.award-list li + li,
-.highlights-list li + li {
+.award-list li + li {
   margin-top: 0.6rem;
 }
 
+.compact-list--tight li + li {
+  margin-top: 0.45rem;
+}
+
 .compact-list li::before,
-.award-list li::before,
-.highlights-list li::before {
+.award-list li::before {
   content: "";
   position: absolute;
   top: 0.7rem;
   left: 0;
-  width: 0.4rem;
-  height: 0.4rem;
+  width: 0.38rem;
+  height: 0.38rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--secondary) 70%, var(--surface-tint));
 }
 
-.highlights-list li {
-  position: relative;
-  padding-left: 1.1rem;
-}
-
-.cv-timeline .experience-item,
-.cv-timeline .presentation-item,
-.cv-panel--timeline .education-item,
-.cv-panel--research .experience-item {
-  margin-bottom: 0;
-  padding: 1rem 0 1rem 1.5rem;
-  border-left: 1px solid color-mix(in srgb, var(--outline-variant) 75%, transparent);
-}
-
-.cv-timeline .experience-item + .experience-item,
-.cv-timeline .presentation-item + .presentation-item,
-.cv-panel--timeline .education-item + .education-item,
-.cv-panel--research .experience-item + .experience-item {
-  margin-top: 0.25rem;
+.cv-split-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-8);
 }
 
 .item-header {
@@ -3542,7 +3542,6 @@ body.math130-course-page {
   font-size: 0.93rem;
 }
 
-.cv-section-nav #nav-menu > li > .cv-nav-trigger,
 .cv-section-nav #nav-menu > li > .cv-nav-link {
   display: block;
   padding: 0.8rem 1rem;
@@ -3556,28 +3555,11 @@ body.math130-course-page {
   text-decoration: none;
 }
 
-.cv-section-nav #nav-menu > li > .cv-nav-trigger::after {
-  content: "▾";
-  margin-left: 0.45rem;
-  font-size: 0.8em;
-}
-
-.cv-section-nav #nav-menu > li > .cv-nav-trigger:hover,
-.cv-section-nav #nav-menu > li > .cv-nav-trigger:focus-visible,
 .cv-section-nav #nav-menu > li > .cv-nav-link:hover,
-.cv-section-nav #nav-menu > li > .cv-nav-link:focus-visible,
-.cv-section-nav #nav-menu .dropdown-menu a:hover,
-.cv-section-nav #nav-menu .dropdown-menu a:focus-visible {
+.cv-section-nav #nav-menu > li > .cv-nav-link:focus-visible {
   background: rgba(13, 80, 213, 0.1);
   color: var(--secondary);
   outline: none;
-}
-
-.cv-section-nav .cv-nav-group[data-open="true"] .dropdown-menu,
-.cv-section-nav .cv-nav-group:hover .dropdown-menu,
-.cv-section-nav .cv-nav-group:focus-within .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
 }
 
 .download-container {
@@ -3605,10 +3587,8 @@ body.math130-course-page {
 
 @media (max-width: 900px) {
   .cv-hero__grid,
-  .summary-grid,
-  .cv-record-grid,
-  .course-groups,
-  .research-grid {
+  .cv-intro,
+  .cv-split-list {
     grid-template-columns: 1fr;
   }
 
@@ -3633,14 +3613,9 @@ body.math130-course-page {
     text-align: left;
   }
 
-  .cv-section-nav #nav-menu > li > .cv-nav-trigger,
   .cv-section-nav #nav-menu > li > .cv-nav-link {
     width: 100%;
     text-align: left;
-  }
-
-  .cv-section-nav .dropdown-menu {
-    margin-top: 0.2rem;
   }
 
   .download-container {
