@@ -6,6 +6,8 @@ This design system is built upon the concept of **The Digital Curator**. It move
 
 To achieve an editorial feel, we reject the rigid 12-column "box" mentality. Instead, we embrace **intentional asymmetry** and **breathable whitespace**. Content should feel "placed" rather than "pushed." By using significant vertical offsets and overlapping elements, we create a sense of depth that feels custom-built and authoritative.
 
+**Clarification:** asymmetry is a tool for emphasis, not a requirement on every page or in every section. Use it to create hierarchy, spotlight a key idea, or give a hero area an authored feel. For long-form reading, straightforward single-column layouts are often the better editorial choice.
+
 ---
 
 ## 2. Colors & Tonal Depth
@@ -46,7 +48,88 @@ The tension between the serif and sans-serif defines our brand's personality.
 
 ---
 
-## 4. Elevation & Depth: Tonal Layering
+## 4. Reading Experience
+
+Long-form educational pages must read as comfortably as a printed essay or carefully typeset manual, not as compressed marketing copy.
+
+### Measure & Line Length
+
+- Default body-copy measure should land around **60–72 characters per line**.
+- In implementation terms, aim for a text column of roughly **42rem to 48rem max width** for paragraph-heavy sections.
+- Wider page shells are acceptable, but the reading column itself should remain controlled even when media, side notes, or tools sit beside it.
+
+### Paragraph Spacing
+
+- Use a default paragraph rhythm of **0.9rem to 1.25rem** between paragraphs, with enough separation to scan without creating a disconnected, "bullet-point" feel.
+- Paragraph spacing should usually be **smaller than heading-to-paragraph spacing**, so the reader can distinguish a new thought from a new section.
+
+### Heading Spacing Rhythm
+
+- Headings should create a predictable vertical rhythm:
+  - **H1 / page title:** generous separation from following copy (`spacing-8` to `spacing-10`).
+  - **H2:** typically `spacing-10` or `spacing-12` above, `spacing-4` to `spacing-5` below.
+  - **H3:** typically `spacing-8` above, `spacing-3` to `spacing-4` below.
+- Avoid stranded headings. A heading should visually attach to the content that follows more strongly than to the block above it.
+
+### Body-Copy Links
+
+- Links inside running text must remain clearly identifiable **without relying on color alone**.
+- Default treatment for body-copy links should be a tasteful underline or underline-like affordance, using the accent blue (`secondary`) as the primary signal.
+- Hover states may shift toward `tertiary` or deepen the underline treatment, but links should still look like links at rest.
+- On dense course pages, avoid making inline links look like buttons; they should remain typographic.
+
+### Lists for Instructional Content
+
+- Instructional lists should prioritize **scanability, nesting clarity, and step order**.
+- Ordered lists should be preferred for procedures, labs, and assignments with sequence.
+- Unordered lists are acceptable for concept summaries, reading goals, or resource groupings, but they should still show visible structure rather than collapsing into plain paragraphs.
+- Use comfortable item spacing (`spacing-2` to `spacing-4`) and allow nested lists to indent cleanly.
+- If global styles suppress bullets, instructional contexts should restore meaningful markers or numbers so the structure remains obvious.
+
+### Theme Modes & Long-Form Reading
+
+- The light/dark toggle should change **tone**, not the core readability contract. Measure, spacing, hierarchy, and link affordances should remain consistent across modes.
+- **Light mode** remains the default expression of the "sun-drenched parchment" brand and should be preferred for marketing/editorial storytelling.
+- **Dark mode** should reduce glare for prolonged reading or tool use, especially on course pages and interactive review pages, without becoming pure-black or neon-heavy.
+- In dark mode, body copy should stay high-contrast against deep, softened surfaces; long paragraphs should not sit on harsh black backgrounds or inside overly glossy cards.
+- Accent usage should usually become slightly more restrained in dark mode: preserve the blue for links, focus, and key actions, but avoid saturating entire long-form sections with bright chroma.
+- If a page uses tonal layers, ensure the dark-mode version preserves the same hierarchy with adjusted surface tokens rather than inventing an unrelated visual system.
+
+---
+
+## 5. Accessibility Guardrails
+
+Prestige is only successful if the interface remains legible, navigable, and low-friction over long sessions.
+
+### Minimum Contrast
+
+- Body text and essential UI text should meet at least **WCAG AA contrast expectations**.
+- This applies in both light mode and dark mode; the theme toggle must not create a lower-readability variant of the same page.
+- Large display text may use more expressive tonal shifts, but only if readability remains strong against its background.
+- Decorative emerald-on-emerald or muted-on-parchment combinations are acceptable only for non-essential ornament, never for critical instructions or metadata needed to complete a task.
+
+### Keyboard Focus Principles
+
+- Every interactive element must have a **clearly visible focus state** that is at least as obvious as hover.
+- Focus styling should respect the system aesthetic by using accent color, tonal shift, glow, or ghost-outline logic—but it must remain unmistakable.
+- Do not hide focus rings on links, buttons, form controls, or custom widgets simply for visual neatness.
+
+### Motion & Animation Restraint
+
+- Long educational pages should feel calm. Motion should support orientation, not spectacle.
+- Prefer subtle fades, color transitions, or small positional shifts over large parallax, scroll-driven theatrics, or persistent animated backgrounds.
+- Animation should be brief, infrequent, and easy to ignore; avoid repeating motion near body copy.
+- For long pages, honor reduced-motion preferences and treat them as a first-class requirement.
+
+### When a Subtle Boundary Is Allowed
+
+- A subtle boundary is allowed when it materially improves usability: for example, clarifying form fields, separating sticky navigation from content, defining draggable or interactive regions, or preserving table/list comprehension.
+- When needed, the boundary should use the existing **ghost-border** logic (`outline-variant` at low opacity) or a tonal surface change before resorting to a conventional rule.
+- The goal is not border purity for its own sake; the goal is calm, usable separation.
+
+---
+
+## 6. Elevation & Depth: Tonal Layering
 
 We do not use shadows to create hierarchy; we use light and opacity.
 
@@ -67,7 +150,7 @@ If a border is legally or functionally required for accessibility, use the `outl
 
 ---
 
-## 5. Components & Primitive Styling
+## 7. Components & Primitive Styling
 
 ### Buttons: The Signature Action
 
@@ -77,7 +160,8 @@ If a border is legally or functionally required for accessibility, use the `outl
 
 ### Cards & Lists
 
-- **No Dividers:** Forbid the use of 1px lines between list items. Use `spacing-4` (1.4rem) gaps or alternating subtle background shifts (`surface-container-low` vs `surface-container`).
+- **No Dividers:** Forbid the use of 1px lines between list items in editorial and marketing layouts. Use `spacing-4` (1.4rem) gaps or alternating subtle background shifts (`surface-container-low` vs `surface-container`).
+- **Instructional Exception:** In course and manual contexts, prioritize comprehension over purity; visible markers, numbering, or very subtle separators may be used when they improve step tracking.
 - **Asymmetric Cards:** Experiment with image placement that breaks the card boundary, using the `rounding-lg` (1rem) on the container but keeping the image sharp-edged or differently rounded.
 
 ### Input Fields
@@ -87,12 +171,60 @@ If a border is legally or functionally required for accessibility, use the `outl
 
 ---
 
-## 6. Do’s and Don’ts
+## 8. Page Type Adaptation
+
+The system should flex by page purpose. Not every page needs the same density, asymmetry, or dramatic treatment.
+
+### Marketing / Editorial Pages (e.g. `index.html`)
+
+- Lean hardest into the cinematic editorial voice: dramatic hero treatments, strong tonal layering, selective asymmetry, and larger vertical whitespace.
+- Use display typography and gradients to establish prestige and memorability.
+- Keep supporting copy readable, but allow more visual staging and surprise than on academic utility pages.
+
+### Profile / CV Pages
+
+- Preserve polish and authority, but reduce flourish in favor of trust, clarity, and quick scanning.
+- Asymmetry can help spotlight credentials or featured sections, yet the core résumé/CV structure should remain orderly.
+- Metadata, dates, institutional affiliations, and contact information should feel precise and easy to scan.
+
+### Content-Dense Course and Lab-Manual Pages under `courses/`
+
+- These pages should optimize for **reading endurance and instructional clarity** first.
+- Favor restrained asymmetry or even symmetric single-column layouts for dense prose.
+- Increase structural cues: clearer section headings, stronger list treatment, dependable link styling, and predictable spacing between instructions, examples, and notes.
+- Decorative gradients and deep emerald blocks should be used more sparingly so they do not exhaust the reader over long sessions.
+
+### Interactive Tool / Review Pages
+
+- Balance editorial style with operational clarity.
+- Tool chrome, controls, output panels, and feedback states should prioritize usability and focus handling over atmospheric composition.
+- Use surface layering and restrained accent color to separate controls from results, and allow subtle boundaries when interaction would otherwise become ambiguous.
+
+---
+
+## 9. Mapping Design Language to Existing CSS Primitives
+
+To keep implementation aligned with the current codebase, prefer the tokens and primitives already established in `styles.css`.
+
+- **Scholarly emerald base / authority text:** `--primary`, `--primary-container`, `--on-surface`.
+- **Energetic professional accent:** `--secondary` for actions, links, focus, and highlights.
+- **Sun-drenched parchment surfaces / dark reading surfaces:** `--surface`, `--surface-container-low`, `--surface-container-lowest`, `--surface-container-highest`, with dark-mode overrides under `:root[data-theme="dark"]`.
+- **Editorial typography split:** `--font-display` / `--type-display-family` for titles; `--font-body` / `--type-body-family` for reading text.
+- **Readable rhythm:** `--line-height-body`, `--spacing-3`, `--spacing-4`, `--spacing-5`, `--spacing-8`, `--spacing-10`, `--spacing-12`, and `--section-space`.
+- **Soft prestige effects:** `--gradient-library-glow`, `--glass-surface`, `--ghost-outline`, `--ambient-outline`, and the shared `--transition` timing.
+- **Rounded editorial surfaces:** `--radius-md`, `--radius-lg`, and `--radius-pill`.
+
+When translating this document into CSS, prefer composing with those variables before inventing new tokens. If a page type needs different spacing or measure, derive it from the existing scale so the site still feels like one system. The nav-bar theme toggle should primarily swap token values and gradients, not introduce a separate readability model for dark mode.
+
+---
+
+## 10. Do’s and Don’ts
 
 ### Do:
 
-- **Do** use asymmetrical layouts (e.g., a 7-column main area with a 3-column sidebar that has a significant top offset).
-- **Do** use large amounts of "Sun-Drenched" whitespace (`spacing-20` or `spacing-24`) between major sections.
+- **Do** use asymmetrical layouts when they create a clearer focal point, stronger hierarchy, or more memorable editorial composition.
+- **Do** use straightforward, highly readable single-column structures when the content is long, technical, or instructional.
+- **Do** use large amounts of "Sun-Drenched" whitespace (`spacing-20` or `spacing-24`) between major sections on marketing/editorial pages, then scale that rhythm down appropriately for denser academic pages.
 - **Do** use `tertiary` (Burnt Earth #3e271f) for small, scholarly details like captions, "Published on" dates, or metadata labels.
 
 ### Don’t:
@@ -100,4 +232,5 @@ If a border is legally or functionally required for accessibility, use the `outl
 - **Don’t** use pure black (#000000). Use `on-surface` (#191c1b) for readability.
 - **Don’t** use standard "Drop Shadows." If you must lift an object, use an ambient blur tinted with `surface-tint` (#3a665c) at 5% opacity.
 - **Don’t** crowd the "Scholarly Emerald." It is a heavy color; balance it with at least 60% neutral `surface` colors to maintain the "sun-drenched" feel.
-- **Don't** use 1px borders. Ever.
+- **Don’t** force asymmetry into every page or every section; unnecessary tension harms readability.
+- **Don’t** default to visible borders when spacing, surface shifts, or a ghost-outline will solve the problem more elegantly.
