@@ -4,47 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="theme.js" defer></script>
     <title>Who Earns More? Fixed vs. Doubling Pay</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Basic body styling */
         body {
-            background-color: #f0f9ff; /* Light blue background */
+            background-color: var(--surface);
         }
         /* Ensure chart container takes up space */
         .chart-container {
-            position: relative;
-            height: 55vh; /* Slightly smaller height */
-            width: 90vw; /* Adjust width as needed */
-            max-width: 900px; /* Max width for larger screens */
-            margin: 1.5rem auto; /* Center the chart */
-            margin-bottom: 3rem; /* Add space between charts */
-            background-color: #ffffff; /* White background for chart area */
-            border-radius: 0.75rem; /* Rounded corners */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
-            padding: 1rem; /* Padding inside chart container */
+            height: 55vh;
+            margin-bottom: 3rem;
         }
         /* Styling for the person intro boxes */
         .person-box {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             text-align: center;
-            border: 2px solid; /* Add border for definition */
+            border: 1px solid var(--ghost-outline);
         }
     </style>
 
 </head>
-<body class="p-4 md:p-8">
+<body class="tool-page-body">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
       <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
     </div>
     <div class="top-nav-actions">
-      <ul class="top-nav-links">
+      <button class="menu-toggle global-nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav-links primary-nav-utilities" aria-label="Toggle navigation">
+        <span>Menu</span>
+        <span class="menu-toggle__icon" aria-hidden="true"></span>
+      </button>
+      <ul class="top-nav-links" id="primary-nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="CV.html">About</a></li>
         <li class="dropdown">
@@ -58,7 +51,7 @@
         </li>
         <li><a href="projects.html">Tools</a></li>
       </ul>
-      <ul class="top-nav-utilities" aria-label="More">
+      <ul class="top-nav-utilities" id="primary-nav-utilities" aria-label="More">
         <li class="dropdown">
           <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
           <ul class="dropdown-menu dropdown-menu--right">
@@ -73,8 +66,9 @@
   </div>
 </nav>
 
+<main class="tool-page-main">
 
-    <h1 class="text-2xl md:text-4xl font-bold text-center text-sky-800 mb-6">
+    <section class="tool-page-shell max-w-6xl mx-auto"><h1 class="text-2xl md:text-4xl font-bold text-center text-sky-800 mb-6">
         Who Earns More Money?
     </h1>
 
@@ -82,12 +76,12 @@
         Let's see how two people get paid for 30 days of work! One gets the same amount each day, and the other starts super small, but their pay doubles every day. Watch what happens!
     </p>
     <div class="max-w-3xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-        <div class="person-box border-blue-400">
+        <div class="person-box tool-info-box border-blue-400">
             <span class="text-5xl mb-2 block" role="img" aria-label="Steady Worker">👨‍💼</span>
             <h3 class="text-xl font-semibold text-blue-700 mb-1">Person 1: Steady Sam</h3>
             <p class="text-gray-600">Gets <strong class="font-bold">$1,000</strong> every single day.</p>
         </div>
-        <div class="person-box border-red-400">
+        <div class="person-box tool-info-box border-red-400">
              <span class="text-5xl mb-2 block" role="img" aria-label="Rocket Growth">🚀</span>
             <h3 class="text-xl font-semibold text-red-700 mb-1">Person 2: Doubling Penny</h3>
             <p class="text-gray-600">Starts with <strong class="font-bold">1 penny</strong> ($0.01). Pay <strong class="font-bold">doubles</strong> each day!</p>
@@ -96,14 +90,14 @@
     <h2 class="text-xl md:text-2xl font-semibold text-center text-sky-700 mb-4">
         Chart 1: Seeing the Start (Log View)
     </h2>
-    <div class="chart-container">
+    <div class="chart-container tool-chart-box">
         <canvas id="earningsChartLog"></canvas>
     </div>
 
     <h2 class="text-xl md:text-2xl font-semibold text-center text-sky-700 mt-10 mb-4">
         Chart 2: Seeing the End (Normal View)
     </h2>
-    <div class="chart-container">
+    <div class="chart-container tool-chart-box">
         <canvas id="earningsChartLinear"></canvas>
     </div>
 
@@ -257,6 +251,7 @@
             }
         });
     </script>
+</main>
 
 </body>
 </html>

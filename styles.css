@@ -1413,6 +1413,207 @@ main.error-main {
 }
 
 /* Print styles */
+
+
+.tool-page-body {
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--secondary) 8%, transparent), transparent 28%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-container-low) 86%, transparent), transparent 22%),
+    var(--surface);
+}
+
+.tool-page-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-10) var(--container-space) var(--section-space);
+}
+
+.tool-page-shell,
+.practice-sheet,
+.tool-surface-card {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 2vw, 2rem);
+  box-shadow: 0 20px 42px color-mix(in srgb, var(--surface-tint) 8%, transparent);
+}
+
+.tool-page-shell {
+  display: grid;
+  gap: var(--spacing-8);
+}
+
+.tool-panel,
+.tool-control-panel,
+.tool-result-panel,
+.tool-callout,
+.tool-chart-box,
+.tool-info-box,
+.review-callout,
+.recommended-order-panel,
+.journey-panel {
+  background: var(--surface-container-low);
+  border: 1px solid var(--ghost-outline);
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+}
+
+.tool-panel,
+.tool-control-panel,
+.tool-result-panel,
+.tool-callout,
+.tool-chart-box,
+.tool-info-box {
+  padding: clamp(1rem, 1.8vw, 1.4rem);
+}
+
+.tool-control-panel,
+.tool-chart-box,
+.tool-info-box,
+.review-option-button,
+.recommended-order-step,
+.journey-step,
+.practice-stat,
+.stat-card,
+.person-box,
+.chart-container {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--ghost-outline);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.tool-result-panel,
+#info-box,
+.review-results-panel {
+  background: var(--surface-container-highest);
+}
+
+.tool-callout,
+.review-callout,
+.recommended-order-panel,
+.journey-panel {
+  border-color: color-mix(in srgb, var(--secondary) 24%, var(--ghost-outline));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--secondary) 7%, var(--surface-container-low)), var(--surface-container-low));
+}
+
+.tool-chart-box,
+.chart-container,
+#linear-chart-container {
+  background: var(--surface-container-lowest);
+}
+
+.tool-eyebrow,
+.journey-kicker,
+.recommended-order-panel .order-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 0.7rem;
+}
+
+.tool-button,
+.tool-button--secondary,
+.btn-primary,
+.btn-secondary,
+.quiz-start-btn,
+.practice-start-btn,
+.solution-toggle,
+.practice-action-btn,
+.review-topic-btn,
+.print-btn,
+.reset-btn,
+.quiz-next-btn {
+  border-radius: var(--radius-md);
+  font-family: var(--type-body-family);
+  transition: var(--transition), box-shadow 0.2s ease;
+}
+
+.tool-button,
+.btn-primary,
+.quiz-start-btn,
+.practice-start-btn,
+.quiz-next-btn {
+  background: var(--primary-container);
+  color: var(--on-primary);
+  box-shadow: none;
+}
+
+.tool-button:hover,
+.tool-button:focus-visible,
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.quiz-start-btn:hover,
+.quiz-start-btn:focus-visible,
+.practice-start-btn:hover,
+.practice-start-btn:focus-visible,
+.quiz-next-btn:hover,
+.quiz-next-btn:focus-visible {
+  background: color-mix(in srgb, var(--primary-container) 88%, var(--secondary));
+}
+
+.tool-button--secondary,
+.btn-secondary,
+.solution-toggle,
+.practice-action-btn,
+.review-topic-btn,
+.print-btn,
+.reset-btn {
+  background: var(--surface-container-lowest);
+  color: var(--on-surface);
+  border: 1px solid var(--ghost-outline);
+}
+
+.tool-button--secondary:hover,
+.tool-button--secondary:focus-visible,
+.btn-secondary:hover,
+.btn-secondary:focus-visible,
+.solution-toggle:hover,
+.solution-toggle:focus-visible,
+.practice-action-btn:hover,
+.practice-action-btn:focus-visible,
+.review-topic-btn:hover,
+.review-topic-btn:focus-visible,
+.print-btn:hover,
+.print-btn:focus-visible,
+.reset-btn:hover,
+.reset-btn:focus-visible {
+  border-color: color-mix(in srgb, var(--secondary) 48%, var(--ghost-outline));
+  background: color-mix(in srgb, var(--secondary) 8%, var(--surface-container-lowest));
+  color: var(--secondary);
+}
+
+.tool-button:focus-visible,
+.tool-button--secondary:focus-visible,
+.tool-panel :is(button, a, input, select, textarea):focus-visible,
+.tool-page-shell :is(button, a, input, select, textarea):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--secondary) 36%, transparent);
+  outline-offset: 2px;
+}
+
+.chart-container {
+  position: relative;
+  min-height: 320px;
+  width: min(100%, 900px);
+  margin: 1.5rem auto;
+  padding: 1rem;
+}
+
+.person-box {
+  text-align: center;
+  padding: 1rem;
+}
+
+.tool-page-main h1,
+.tool-page-main h2,
+.tool-page-main h3 {
+  color: var(--primary);
+}
+
 @media print {
   nav,
   .download-container,
@@ -2756,6 +2957,8 @@ body.review-page::before {
 .formula-section {
   break-inside: avoid;
 }
+
+
 
 @media print {
   body.review-page,
