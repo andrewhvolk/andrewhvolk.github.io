@@ -61,37 +61,48 @@
                 var(--surface);
         }
         body.review-page::before { opacity: 0.28; }
-        .review-shell { max-width: 1180px; padding-top: 2.5rem; }
+        .review-shell { max-width: 1180px; padding-top: clamp(2.5rem, 5vw, 4rem); }
         .review-header {
             margin-bottom: 2.5rem;
-            padding: clamp(1.9rem, 3vw, 2.8rem);
-            background:
-                radial-gradient(circle at top left, rgba(58, 102, 92, 0.16), transparent 34%),
-                linear-gradient(135deg, rgba(255,255,255,0.94), rgba(242,244,241,0.98));
+            padding: clamp(2.35rem, 5vw, 4rem);
+            background: var(--gradient-library-glow);
             border-radius: 1.5rem;
-            color: var(--text);
+            color: var(--on-primary);
             overflow: hidden;
-            box-shadow: 0 24px 54px rgba(0, 29, 23, 0.08);
+            box-shadow: 0 28px 60px rgba(0, 29, 23, 0.16);
+            text-align: left;
+        }
+        .review-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(58, 102, 92, 0.16), rgba(13, 80, 213, 0.14));
+            pointer-events: none;
         }
         .review-header::after {
             display: block;
             inset: auto auto 0 0;
             width: min(18rem, 42%);
             height: 0.4rem;
-            background: linear-gradient(90deg, var(--secondary), color-mix(in srgb, var(--primary-container) 55%, transparent));
-            opacity: 0.9;
+            background: linear-gradient(90deg, rgba(255,255,255,0.92), color-mix(in srgb, var(--secondary) 78%, transparent));
+            opacity: 0.92;
         }
+        .review-header > * { position: relative; z-index: 1; }
         .review-header .breadcrumb,
         .review-header h1,
         .review-header .header-meta,
         .review-header .review-subtitle,
-        .review-header .header-chip { color: var(--text); }
+        .review-header .header-chip { color: var(--on-primary); }
+        .review-header .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+        }
         .review-header .breadcrumb a,
         .review-header .breadcrumb-current,
-        .review-header .breadcrumb-sep { color: color-mix(in srgb, var(--text) 72%, white 28%); }
+        .review-header .breadcrumb-sep { color: rgba(255,255,255,0.82); }
         .review-header h1 {
-            color: var(--primary);
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            color: var(--on-primary);
+            font-size: clamp(2.8rem, 6vw, 4.4rem);
             margin-bottom: 1rem;
             max-width: 12ch;
         }
@@ -100,38 +111,39 @@
             text-transform: uppercase;
             letter-spacing: 0.12em;
             font-size: 0.78rem;
-            color: var(--text-body-muted);
+            color: rgba(255,255,255,0.78);
             margin: 0 0 0.85rem;
         }
         .review-subtitle {
-            font-size: 1.08rem;
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
             line-height: 1.75;
-            max-width: 44rem;
+            max-width: 40rem;
             margin-bottom: 0;
-            color: var(--text-body-muted);
+            color: rgba(255,255,255,0.88);
         }
         .review-chip, .header-chip, .chip {
             border: 0;
-            background: rgba(255,255,255,0.72);
-            color: var(--text);
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.92);
             backdrop-filter: blur(12px);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
         }
-        .review-chip i, .header-chip i, .chip i { color: var(--secondary); }
+        .review-chip i, .header-chip i, .chip i { color: color-mix(in srgb, white 72%, var(--secondary)); }
         .review-chip.is-accent, .header-chip.accent, .chip.accent {
-            background: rgba(26, 86, 219, 0.14);
-            color: var(--text);
+            background: rgba(255,255,255,0.14);
+            color: white;
         }
 
         .tabs.review-tabs, .tab-nav.review-tabs { gap: 0.9rem; margin: 1.75rem 0 1.5rem; }
         .tab-btn.review-tab-btn, .review-tabs .tab-btn {
-            background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(242,244,241,0.96));
+            background: var(--gradient-editorial-panel);
             border: 0;
-            box-shadow: var(--review-shadow);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 82%, transparent);
             min-height: 84px;
         }
         .tab-btn.review-tab-btn.active, .review-tabs .tab-btn.active {
-            background: linear-gradient(180deg, rgba(26,86,219,0.12), rgba(255,255,255,0.96));
-            box-shadow: 0 20px 40px rgba(0, 29, 23, 0.12);
+            background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest)), color-mix(in srgb, var(--surface-container-low) 92%, white));
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent), 0 14px 30px rgba(0, 29, 23, 0.08);
         }
 
 
@@ -140,17 +152,17 @@
         }
 
         @media (max-width: 640px) {
-            .review-header { padding: 1.35rem; }
+            .review-header { padding: 1.5rem; }
         }
 
         /* Cards */
         .card {
-            background: var(--surface);
+            background: var(--gradient-editorial-panel);
             border: 0;
-            border-radius: var(--radius);
+            border-radius: 1rem;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 78%, transparent), 0 18px 40px rgba(0, 29, 23, 0.06);
             transition: transform 0.2s;
         }
 
@@ -672,12 +684,12 @@
             position: relative;
             display: grid;
             gap: 0.95rem;
-            background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
-            border: 1px solid var(--border);
+            background: var(--gradient-card-surface);
+            border: 0;
             border-radius: 14px;
             padding: 1.15rem;
-            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 76%, transparent), 0 14px 28px rgba(0, 29, 23, 0.07);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
             overflow: hidden;
         }
         .slide-card::before {
@@ -691,8 +703,7 @@
         }
         .slide-card:hover {
             transform: translateY(-2px);
-            border-color: var(--accent);
-            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent), 0 18px 34px rgba(0, 29, 23, 0.09);
         }
         .slide-card-top {
             display: flex;
@@ -783,18 +794,17 @@
             display: block;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid var(--border);
+            border: 0;
             background: linear-gradient(180deg, rgba(26, 86, 219, 0.08) 0%, rgba(26, 86, 219, 0.02) 100%), var(--surface);
             aspect-ratio: 16 / 9;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 74%, transparent);
             text-decoration: none;
-            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
             cursor: pointer;
         }
         .slide-thumb-wrap:hover {
             transform: translateY(-2px);
-            border-color: rgba(26, 86, 219, 0.45);
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.03);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent), 0 12px 24px rgba(0, 29, 23, 0.1);
         }
         .slide-thumb-wrap:focus-visible {
             outline: 2px solid var(--accent);
