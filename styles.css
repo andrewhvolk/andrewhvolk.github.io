@@ -2583,18 +2583,18 @@ main.error-main {
 
 /* Math 130 review layer */
 :root {
-  --review-bg: #0f1117;
-  --review-surface: #181a24;
-  --review-surface-2: #1f2233;
-  --review-border: #2a2d42;
-  --review-accent: #6c63ff;
-  --review-accent-soft: rgba(108, 99, 255, 0.12);
-  --review-accent-glow: rgba(108, 99, 255, 0.25);
-  --review-muted: #9ca0b8;
-  --review-text: #e2e4ef;
-  --review-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
-  --review-grid: rgba(108, 99, 255, 0.03);
-  --review-accent-hover: rgba(108, 99, 255, 0.3);
+  --review-bg: var(--surface-dim);
+  --review-surface: var(--surface-container-low);
+  --review-surface-2: var(--surface-container-lowest);
+  --review-border: var(--surface-container-highest);
+  --review-accent: var(--secondary);
+  --review-accent-soft: rgba(126, 168, 255, 0.12);
+  --review-accent-glow: rgba(126, 168, 255, 0.25);
+  --review-muted: var(--on-surface-variant);
+  --review-text: var(--on-surface);
+  --review-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  --review-grid: rgba(126, 168, 255, 0.03);
+  --review-accent-hover: rgba(126, 168, 255, 0.3);
   --review-green-border: rgba(52, 211, 153, 0.2);
   --review-red-border: rgba(248, 113, 113, 0.2);
   --review-check-bg: rgba(52, 211, 153, 0.04);
@@ -2602,18 +2602,18 @@ main.error-main {
   --review-got-border: rgba(52, 211, 153, 0.4);
   --review-miss-border: rgba(248, 113, 113, 0.4);
   --review-green-step: rgba(52, 211, 153, 0.25);
-  --review-h1-from: #e2e4ef;
-  --review-h1-to: #9d98ff;
-  --review-body-muted: #9aa3bd;
-  --review-semantic-body: #d7dcef;
+  --review-h1-from: var(--on-surface);
+  --review-h1-to: var(--secondary);
+  --review-body-muted: color-mix(in srgb, var(--on-surface-variant) 88%, var(--on-surface) 12%);
+  --review-semantic-body: var(--on-surface);
   --review-success: #34d399;
   --review-success-bg: rgba(52, 211, 153, 0.1);
   --review-warning: #f59e0b;
   --review-warning-bg: rgba(245, 158, 11, 0.1);
   --review-error: #f87171;
   --review-error-bg: rgba(248, 113, 113, 0.1);
-  --review-info: #60a5fa;
-  --review-info-bg: rgba(96, 165, 250, 0.1);
+  --review-info: var(--secondary);
+  --review-info-bg: rgba(126, 168, 255, 0.1);
   --review-radius: 16px;
   --review-shell-width: min(1100px, calc(100vw - 2rem));
 }
@@ -2663,18 +2663,18 @@ body.review-page,
 body.review-page.light,
 body.light .math-review-page,
 .math-review-page.is-light {
-  --review-bg: #f8fafc;
-  --review-surface: #ffffff;
-  --review-surface-2: #f1f5f9;
-  --review-border: #e2e8f0;
-  --review-accent: #5b52e0;
-  --review-accent-soft: rgba(91, 82, 224, 0.08);
-  --review-accent-glow: rgba(91, 82, 224, 0.12);
-  --review-muted: #586879;
-  --review-text: #0f172a;
-  --review-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
-  --review-grid: rgba(91, 82, 224, 0.04);
-  --review-accent-hover: rgba(91, 82, 224, 0.25);
+  --review-bg: var(--surface);
+  --review-surface: var(--surface-container-lowest);
+  --review-surface-2: var(--surface-container-low);
+  --review-border: var(--ghost-outline);
+  --review-accent: var(--secondary);
+  --review-accent-soft: rgba(26, 86, 219, 0.08);
+  --review-accent-glow: rgba(26, 86, 219, 0.14);
+  --review-muted: var(--on-surface-variant);
+  --review-text: var(--on-surface);
+  --review-shadow: 0 8px 32px rgba(0, 29, 23, 0.06);
+  --review-grid: rgba(58, 102, 92, 0.02);
+  --review-accent-hover: rgba(26, 86, 219, 0.2);
   --review-green-border: rgba(5, 150, 105, 0.2);
   --review-red-border: rgba(220, 38, 38, 0.18);
   --review-check-bg: rgba(5, 150, 105, 0.05);
@@ -2682,30 +2682,20 @@ body.light .math-review-page,
   --review-got-border: rgba(5, 150, 105, 0.4);
   --review-miss-border: rgba(220, 38, 38, 0.35);
   --review-green-step: rgba(5, 150, 105, 0.2);
-  --review-h1-from: #1a1d2b;
-  --review-h1-to: #5046e5;
-  --review-body-muted: #3e4a5c;
-  --review-semantic-body: #1e293b;
+  --review-h1-from: var(--primary);
+  --review-h1-to: var(--secondary);
+  --review-body-muted: color-mix(in srgb, var(--on-surface-variant) 86%, var(--primary) 14%);
+  --review-semantic-body: var(--on-surface);
   --review-success: #059669;
   --review-success-bg: rgba(5, 150, 105, 0.08);
   --review-warning: #d97706;
   --review-warning-bg: rgba(217, 119, 6, 0.08);
   --review-error: #dc2626;
   --review-error-bg: rgba(220, 38, 38, 0.08);
-  --review-info: #2563eb;
-  --review-info-bg: rgba(37, 99, 235, 0.08);
+  --review-info: var(--secondary);
+  --review-info-bg: rgba(26, 86, 219, 0.08);
 }
 
-body.review-page::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.45;
-  pointer-events: none;
-  z-index: 0;
-}
 
 .math-review-page {
   position: relative;
@@ -2726,14 +2716,6 @@ body.review-page::before {
   z-index: 1;
 }
 
-.math-review-page > header,
-.math-review-page .review-header {
-  background: transparent;
-  color: inherit;
-  text-align: left;
-  padding: 0;
-  box-shadow: none;
-}
 
 .review-shell {
   width: var(--review-shell-width);
@@ -2926,14 +2908,14 @@ body.review-page::before {
   width: 100%;
   padding: 1rem;
   background: var(--surface2);
-  border: 1px solid var(--border);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 72%, transparent);
   border-radius: 12px;
   transition: all 0.2s;
 }
 
 .review-formula-box, .formula-box {
   background: var(--surface2);
-  border: 1px solid var(--border);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
   border-radius: 8px;
   padding: 0.85rem 1rem;
   margin: 0.6rem 0;
@@ -2962,7 +2944,7 @@ body.review-page::before {
   margin: 0.75rem 0;
   padding: 0.85rem 1rem;
   background: var(--surface2);
-  border: 1px solid var(--border);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
   border-radius: 10px;
   color: var(--text);
   text-decoration: none;
@@ -2972,9 +2954,9 @@ body.review-page::before {
 .review-video-link:visited, .video-link:visited { color: var(--text); }
 .review-video-link:visited span, .video-link:visited span { color: var(--text); }
 .review-video-link i[data-lucide], .video-link i[data-lucide] { color: var(--green, var(--accent)) !important; flex-shrink: 0; opacity: 0.85; }
-.review-video-link:hover, .video-link:hover { border-color: var(--green, var(--accent)); }
+.review-video-link:hover, .video-link:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green, var(--accent)) 38%, transparent); }
 .review-video-link:hover i[data-lucide], .video-link:hover i[data-lucide] { opacity: 1; }
-.review-video-link.watched, .video-link.watched { border-color: var(--green, var(--accent)); background: var(--green-bg); }
+.review-video-link.watched, .video-link.watched { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green, var(--accent)) 32%, transparent); background: var(--green-bg); }
 .review-video-link.watched i[data-lucide], .video-link.watched i[data-lucide] { color: var(--green, var(--accent)) !important; opacity: 0.5; }
 .review-video-link.watched span, .video-link.watched span { opacity: 0.5; text-decoration: line-through; }
 .review-video-link::after, .video-link::after { content: '↗'; font-size: 0.8rem; color: var(--text); opacity: 0.35; margin-left: auto; padding-left: 0.5rem; flex-shrink: 0; }
@@ -2983,19 +2965,18 @@ body.review-page::before {
   padding: 1rem 1.1rem;
   margin: 1rem 0;
   border-radius: 14px;
-  border: 1px solid var(--border);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
   background: linear-gradient(135deg, color-mix(in srgb, var(--surface2) 84%, transparent), var(--surface));
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
-.review-callout--exam { text-align:center; border-width: 2px; border-color: color-mix(in srgb, var(--accent) 52%, var(--border)); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, var(--surface)), color-mix(in srgb, var(--surface2) 88%, var(--surface))); }
+.review-callout--exam { text-align:center; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, var(--surface)), color-mix(in srgb, var(--surface2) 88%, var(--surface))); }
 .review-callout--tip, .tip-box,
 .review-callout--warning, .warning-box,
 .review-callout--info,
 .review-callout--success { color: var(--semantic-body); }
-.review-callout--tip, .tip-box { background: color-mix(in srgb, var(--amber) 10%, var(--surface)); border-color: color-mix(in srgb, var(--amber) 35%, var(--border)); }
-.review-callout--warning, .warning-box { background: color-mix(in srgb, var(--red) 9%, var(--surface)); border-color: color-mix(in srgb, var(--red) 35%, var(--border)); }
-.review-callout--info { background: color-mix(in srgb, var(--blue) 9%, var(--surface)); border-color: color-mix(in srgb, var(--blue) 35%, var(--border)); }
-.review-callout--success { background: color-mix(in srgb, var(--green) 10%, var(--surface)); border-color: color-mix(in srgb, var(--green) 35%, var(--border)); }
+.review-callout--tip, .tip-box { background: color-mix(in srgb, var(--amber) 10%, var(--surface)); border-left: 4px solid color-mix(in srgb, var(--amber) 72%, transparent); }
+.review-callout--warning, .warning-box { background: color-mix(in srgb, var(--red) 9%, var(--surface)); border-left: 4px solid color-mix(in srgb, var(--red) 72%, transparent); }
+.review-callout--info { background: color-mix(in srgb, var(--blue) 9%, var(--surface)); border-left: 4px solid color-mix(in srgb, var(--blue) 72%, transparent); }
+.review-callout--success { background: color-mix(in srgb, var(--green) 10%, var(--surface)); border-left: 4px solid color-mix(in srgb, var(--green) 72%, transparent); }
 .review-callout--tip i, .tip-box i, .review-callout--tip strong, .tip-box strong { color: var(--amber); }
 .review-callout--warning i, .warning-box i, .review-callout--warning strong, .warning-box strong { color: var(--red); }
 .review-callout--info i, .review-callout--info strong { color: var(--blue); }
@@ -3017,7 +2998,7 @@ body.review-page::before {
 .section-lead--results h2 { text-align: center; }
 
 .review-callout--highlight {
-  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent);
   background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface));
 }
 .review-callout__title { font-family: var(--type-display-family); font-size: 1.25rem; margin-bottom: 0.75rem; }
