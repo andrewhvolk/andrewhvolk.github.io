@@ -29,7 +29,7 @@
   .topic-content ul { list-style: none; padding-left: 0; }
   .topic-content li::before { content: '\2192'; color: var(--accent); margin-right: 0.5rem; font-weight: 600; }
   .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; margin: 0.6rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; text-align: center; overflow: visible; }
-  .tip-box { background: var(--amber-bg); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.88rem; color: var(--amber); }
+  .tip-box { background: color-mix(in srgb, var(--amber) 10%, var(--surface)); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.88rem; color: var(--text); }
 
   /* Practice */
   .practice-dashboard { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1.75rem; }
@@ -120,7 +120,7 @@
 
 
   /* Warning callout */
-  .warning-box { background: var(--amber-bg); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.65rem 1rem; margin-top: 0.75rem; font-size: 0.85rem; color: var(--amber); animation: fadeUp 0.3s ease; }
+  .warning-box { background: color-mix(in srgb, var(--amber) 10%, var(--surface)); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.65rem 1rem; margin-top: 0.75rem; font-size: 0.85rem; color: var(--text); animation: fadeUp 0.3s ease; }
   .warning-box b { color: var(--amber); }
 
   /* Review topic button */

@@ -153,7 +153,7 @@
         }
         .formula-priority-note {
             border-left: 4px solid var(--accent);
-            color: var(--text-muted);
+            color: var(--text-body-muted, var(--text-muted));
             font-size: 0.95rem;
             line-height: 1.6;
         }
@@ -190,7 +190,7 @@
         .legend-chip.legend-provided::before { background: var(--green); }
         .legend-chip.legend-useful::before { background: var(--text-muted); }
         .formula-section-note {
-            color: var(--text-muted);
+            color: var(--text-body-muted, var(--text-muted));
             font-size: 0.9rem;
             margin: -0.35rem 0 1rem;
             padding-left: 0.15rem;
@@ -362,13 +362,13 @@
         .best-row { background: var(--green-bg); }
         
         .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
-        .badge-perfect { background: var(--green); color: #000; }
-        .badge-retry { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber); }
-        .badge-class { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
-        .badge-quiz { background: var(--accent-glow); color: var(--accent); border: 1px solid var(--accent); margin-left: 4px; }
-        .badge-due { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); margin-left: 4px; }
-        .badge-exam { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
-        .badge-noclass { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber); }
+        .badge-perfect { background: color-mix(in srgb, var(--green) 18%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--green) 48%, var(--border)); }
+        .badge-retry { background: color-mix(in srgb, var(--amber) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--amber) 45%, var(--border)); }
+        .badge-class { background: var(--surface2); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border); }
+        .badge-quiz { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border)); margin-left: 4px; }
+        .badge-due { background: color-mix(in srgb, var(--red) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 45%, var(--border)); margin-left: 4px; }
+        .badge-exam { background: color-mix(in srgb, var(--red) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 48%, var(--border)); }
+        .badge-noclass { background: color-mix(in srgb, var(--amber) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--amber) 42%, var(--border)); }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
@@ -414,9 +414,9 @@
     margin-bottom: 0.7rem;
     text-transform: uppercase;
 }
-.status-provided { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
-.status-memorize { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
-.status-supplemental { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
+.status-provided { background: color-mix(in srgb, var(--green) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--green) 45%, var(--border)); }
+.status-memorize { background: color-mix(in srgb, var(--red) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 45%, var(--border)); }
+.status-supplemental { background: var(--surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border); }
 
 /* Print Configuration */
 @media print {
@@ -689,9 +689,9 @@
             gap: 0.45rem;
             padding: 0.38rem 0.72rem;
             border-radius: 999px;
-            background: var(--accent-glow);
-            color: var(--accent);
-            border: 1px solid rgba(108, 99, 255, 0.28);
+            background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+            color: var(--text);
+            border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 0.04em;
@@ -1277,29 +1277,29 @@
 <!-- Mock Exam CTA -->
 <div id="exam-cta" class="review-callout review-callout--exam">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
-<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">20 mixed Unit 3 review questions with coverage from Sections 5.1, 5.2, 5.3, 7.1, and 8.4 (at least one per section).</p>
+<p style="color: var(--text-body-muted, var(--text-muted)); margin-bottom: 1rem; font-size: 0.95rem;">20 mixed Unit 3 review questions with coverage from Sections 5.1, 5.2, 5.3, 7.1, and 8.4 (at least one per section).</p>
 <button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
 </div>
 <!-- Mock Quiz CTA -->
-<div id="quiz-cta" style="background: linear-gradient(180deg, var(--surface2), var(--surface)); border: 1px solid var(--border); border-radius: 16px; padding: 1.35rem 1.5rem; margin-bottom: 2rem;">
+<div id="quiz-cta" style="background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border)); border-radius: 16px; padding: 1.35rem 1.5rem; margin-bottom: 2rem;">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.75rem; text-align: center;">📝 Mock Quiz Mode</h3>
-<p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
+<p style="color: var(--text-body-muted, var(--text-muted)); margin-bottom: 1rem; font-size: 0.9rem; text-align: center;">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
 <button class="btn-secondary" onclick="startMockQuiz(5)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
 <div style="font-weight: 600; margin-bottom: 2px;">Quiz 10 — Sections 5.1–5.2 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-muted);">Coterminal angles + exact trig triangle skills</div>
+<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Coterminal angles + exact trig triangle skills</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(6)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
 <div style="font-weight: 600; margin-bottom: 2px;">Quiz 11 — Section 5.3 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-muted);">Reference angles, signs, and solving trig equations on 0°–360°</div>
+<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Reference angles, signs, and solving trig equations on 0°–360°</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(7)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
 <div style="font-weight: 600; margin-bottom: 2px;">Quiz 12 — Section 7.1 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-muted);">Airplane applications, angle of elevation, and bearings</div>
+<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Airplane applications, angle of elevation, and bearings</div>
 </button>
 <button class="btn-secondary" onclick="startMockQuiz(8)" style="padding: 0.85rem; text-align: left; border-radius: 12px;">
 <div style="font-weight: 600; margin-bottom: 2px;">Quiz 13 — Section 8.4 (Core Skills)</div>
-<div style="font-size: 0.8rem; color: var(--text-muted);">Graph/resultant vectors and magnitude-direction conversions</div>
+<div style="font-size: 0.8rem; color: var(--text-body-muted, var(--text-muted));">Graph/resultant vectors and magnitude-direction conversions</div>
 </button>
 </div>
 </div>
