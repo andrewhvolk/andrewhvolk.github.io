@@ -160,9 +160,12 @@ If a border is legally or functionally required for accessibility, use the `outl
 
 ### Cards & Lists
 
+- **Cards Are Selective, Not Default:** Cards are an emphasis tool, not the baseline layout primitive. Use them for featured content, interaction affordances, compact previews, or places where a distinct surface materially helps comprehension.
 - **No Dividers:** Forbid the use of 1px lines between list items in editorial and marketing layouts. Use `spacing-4` (1.4rem) gaps or alternating subtle background shifts (`surface-container-low` vs `surface-container`).
 - **Instructional Exception:** In course and manual contexts, prioritize comprehension over purity; visible markers, numbering, or very subtle separators may be used when they improve step tracking.
-- **Asymmetric Cards:** Experiment with image placement that breaks the card boundary, using the `rounding-lg` (1rem) on the container but keeping the image sharp-edged or differently rounded.
+- **Hierarchy Before Uniformity:** When content has a clear primary/secondary relationship, express it through composition, scale, spacing, and placement before reaching for equal card grids.
+- **Equal Cards Only for True Peers:** Use a uniform card grid only when items are genuinely parallel, equally important, and benefit from side-by-side comparison.
+- **Asymmetric Cards:** When cards are appropriate, experiment with image placement that breaks the card boundary, using the `rounding-lg` (1rem) on the container but keeping the image sharp-edged or differently rounded.
 
 ### Input Fields
 
@@ -180,12 +183,24 @@ The system should flex by page purpose. Not every page needs the same density, a
 - Lean hardest into the cinematic editorial voice: dramatic hero treatments, strong tonal layering, selective asymmetry, and larger vertical whitespace.
 - Use display typography and gradients to establish prestige and memorability.
 - Keep supporting copy readable, but allow more visual staging and surprise than on academic utility pages.
+- Prefer a **staged-discovery** structure: one primary hero, one dominant next-step section, and one quieter supporting section.
+- Do not give every homepage destination equal visual weight if user intent has a likely priority order. A homepage should visibly lead visitors toward the most useful first action.
+- Supporting destinations should usually appear as companion blocks, link columns, or quieter secondary modules rather than as peers to the main path.
+- Avoid stacking multiple promo bands that repeat the same message in slightly different wording. Each homepage section should have a distinct communication job.
+- Preferred homepage patterns include: hero + featured path, hero + split narrative/utility rail, and hero + editorial link columns.
+- Avoid defaulting to repeated three-up card rows on editorial landing pages unless the items are truly parallel.
 
 ### Profile / CV Pages
 
 - Preserve polish and authority, but reduce flourish in favor of trust, clarity, and quick scanning.
 - Asymmetry can help spotlight credentials or featured sections, yet the core résumé/CV structure should remain orderly.
 - Metadata, dates, institutional affiliations, and contact information should feel precise and easy to scan.
+- Prefer chronological or category-based document flow over dashboard-style panel collections.
+- Use cards sparingly on profile/CV pages; most sections should read as structured text, grouped lists, timeline rows, or metadata rails.
+- Align dates, titles, and institutions into a predictable scanning pattern across sections so the page behaves like a professional record rather than a marketing surface.
+- Reserve stronger visual treatment for the identity header, summary/facts rail, and a small number of featured distinctions.
+- Preferred CV patterns include: identity header + summary + metadata rail, single-column chronology with occasional side notes, and grouped list/timeline hybrids.
+- Avoid nested card groups, over-panelization, or application-like navigation unless the content volume genuinely demands it.
 
 ### Content-Dense Course and Lab-Manual Pages under `courses/`
 
@@ -199,6 +214,26 @@ The system should flex by page purpose. Not every page needs the same density, a
 - Balance editorial style with operational clarity.
 - Tool chrome, controls, output panels, and feedback states should prioritize usability and focus handling over atmospheric composition.
 - Use surface layering and restrained accent color to separate controls from results, and allow subtle boundaries when interaction would otherwise become ambiguous.
+
+### Layout Anti-Patterns to Avoid
+
+- Avoid pages composed primarily of repeated, equal-weight cards when the content has a clear hierarchy.
+- Avoid stacking multiple promo bands or intro blocks that restate the same value proposition in slightly different wording.
+- Avoid turning profile or CV pages into dashboard-style panel collections; credentials should scan as structured information, not as feature marketing.
+- Avoid giving every destination the same visual weight. Editorial pages should establish a primary path, then secondary and tertiary paths.
+- Avoid using card grids as a default layout primitive. Use them only when the items are truly parallel and benefit from equal treatment.
+- Avoid "boxiness by accumulation": even tasteful containers can recreate a modular SaaS feel when too many appear adjacent to one another.
+
+### Content Hierarchy Before Components
+
+Before choosing cards, panels, rails, or grids, determine:
+
+1. What is the single primary action or takeaway on this page?
+2. What content is secondary support rather than the main destination?
+3. What can be demoted to text links, compact lists, or side notes?
+4. Which content is sequential, and which is genuinely parallel?
+
+Layout should reflect those answers. Components exist to reinforce hierarchy, not replace it. When refactoring an existing page, prefer removing or collapsing containers before inventing new ones. A successful editorial refactor often has fewer boxes, fewer repeated intros, and stronger visual priority.
 
 ---
 
@@ -226,6 +261,8 @@ When translating this document into CSS, prefer composing with those variables b
 - **Do** use straightforward, highly readable single-column structures when the content is long, technical, or instructional.
 - **Do** use large amounts of "Sun-Drenched" whitespace (`spacing-20` or `spacing-24`) between major sections on marketing/editorial pages, then scale that rhythm down appropriately for denser academic pages.
 - **Do** use `tertiary` (Burnt Earth #3e271f) for small, scholarly details like captions, "Published on" dates, or metadata labels.
+- **Do** establish hierarchy before choosing components: decide what is primary, secondary, and optional before reaching for cards or grids.
+- **Do** let fewer, larger compositional moves carry the page before introducing additional containers.
 
 ### Don’t:
 
@@ -234,3 +271,8 @@ When translating this document into CSS, prefer composing with those variables b
 - **Don’t** crowd the "Scholarly Emerald." It is a heavy color; balance it with at least 60% neutral `surface` colors to maintain the "sun-drenched" feel.
 - **Don’t** force asymmetry into every page or every section; unnecessary tension harms readability.
 - **Don’t** default to visible borders when spacing, surface shifts, or a ghost-outline will solve the problem more elegantly.
+- **Don’t** build editorial pages as a sequence of interchangeable, equal-weight cards.
+- **Don’t** default to repeated three-column promo bands on homepages when one path is clearly primary.
+- **Don’t** make every major destination look equally important if users should be guided toward a likely next step.
+- **Don’t** wrap every CV subsection in its own panel if spacing, typography, or timeline structure would communicate the content more clearly.
+- **Don’t** confuse modularity with hierarchy; reusable components should support the information architecture rather than flatten it.
