@@ -16,233 +16,7 @@
 <!-- Icons -->
 <script defer="" src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
 <style>
-        :root {
-            /* Dark Theme (Default) */
-            --bg: #0f1117; 
-            --surface: #181a24; 
-            --surface2: #1f2233; 
-            --border: #2a2d42;
-            --text: #e2e4ef; 
-            --text-muted: #8b8fa8;
-            --accent: #6c63ff; 
-            --accent-glow: rgba(108, 99, 255, 0.25);
-            --accent-hover: #5a52d5;
-            --green: #34d399; 
-            --green-bg: rgba(52, 211, 153, 0.1);
-            --amber: #fbbf24; 
-            --amber-bg: rgba(251, 191, 36, 0.1);
-            --red: #f87171; 
-            --red-bg: rgba(248, 113, 113, 0.1);
-            --shadow: 0 8px 32px rgba(0,0,0,0.3);
-            --radius: 16px;
-        }
-
-        body.light {
-            /* Light Theme */
-            --bg: #f8fafc; 
-            --surface: #ffffff; 
-            --surface2: #f1f5f9; 
-            --border: #e2e8f0;
-            --text: #0f172a; 
-            --text-muted: #64748b;
-            --accent: #5b52e0;
-            --accent-glow: rgba(91, 82, 224, 0.12);
-            --accent-hover: #4a42c0;
-            --green: #059669;
-            --green-bg: rgba(5, 150, 105, 0.08);
-            --amber: #d97706;
-            --amber-bg: rgba(217, 119, 6, 0.08);
-            --red: #dc2626;
-            --red-bg: rgba(220, 38, 38, 0.08);
-            --shadow: 0 8px 32px rgba(0,0,0,0.06);
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.6rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
-        h1 { font-size: 2.35rem; color: var(--accent); line-height: 1.05; }
-        h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
-
-        .header-copy {
-            max-width: 42rem;
-        }
-
-        .header-meta {
-            color: var(--text-muted);
-            margin-top: 0.35rem;
-            font-weight: 600;
-            letter-spacing: 0.01em;
-        }
-
-        .header-subtitle {
-            color: var(--text-muted);
-            margin-top: 0.12rem;
-            font-size: 0.95rem;
-        }
-
-        .header-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 0.75rem;
-        }
-
-        .header-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            padding: 0.42rem 0.75rem;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text-muted);
-            font-size: 0.82rem;
-            font-weight: 600;
-            line-height: 1;
-        }
-
-        .header-chip i {
-            width: 0.9rem;
-            height: 0.9rem;
-            color: var(--accent);
-            flex-shrink: 0;
-        }
-
-        .header-chip.accent {
-            background: var(--accent-glow);
-            border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
-            color: var(--text);
-        }
-        
-        .theme-toggle {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.75rem;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .theme-toggle:hover {
-            background: var(--border);
-            transform: scale(1.05);
-        }
-
-        /* Dashboard Navigation */
-        .tabs {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.75rem;
-            margin-bottom: 1.1rem;
-        }
-
-        .tab-btn {
-            background: linear-gradient(180deg, var(--surface), var(--surface2));
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.85rem 0.95rem;
-            border-radius: 16px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-align: left;
-            min-height: 78px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-        }
-
-        .tab-btn:hover {
-            transform: translateY(-2px);
-            border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
-            box-shadow: 0 10px 24px rgba(0,0,0,0.10);
-        }
-
-        .tab-btn.active {
-            background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface));
-            border-color: var(--accent);
-            box-shadow: 0 10px 24px var(--accent-glow);
-        }
-
-        .tab-btn.priority {
-            position: relative;
-        }
-
-        .tab-btn.priority::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 18px;
-            right: 18px;
-            height: 3px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-            opacity: 0.85;
-        }
-
-        .tab-icon-wrap {
-            width: 38px;
-            height: 38px;
-            border-radius: 11px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: color-mix(in srgb, var(--accent) 12%, var(--surface2));
-            color: var(--accent);
-            flex-shrink: 0;
-        }
-
-        .tab-btn.active .tab-icon-wrap {
-            background: color-mix(in srgb, var(--accent) 18%, var(--surface2));
-            color: var(--accent);
-        }
-
-        .tab-copy {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            min-width: 0;
-        }
-
-        .tab-label {
-            font-weight: 700;
-            color: var(--text);
-            line-height: 1.2;
-            font-size: 0.98rem;
-        }
+        /* Page-specific styles only; shared Math 130 review tokens/components live in styles.css. */
 
         /* Cards */
         .card {
@@ -988,7 +762,7 @@
 
 
 </head>
-<body>
+<body class="review-page">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
@@ -1019,16 +793,16 @@
           </ul>
         </li>
       </ul>
-      <button aria-label="Toggle dark and light theme" class="theme-toggle" id="theme-toggle-btn" title="Toggle Theme">
+      <button aria-label="Toggle dark and light theme" class="theme-toggle review-theme-toggle" id="theme-toggle-btn" title="Toggle Theme">
         <i data-lucide="moon"></i>
       </button>
     </div>
   </div>
 </nav>
 
-<div class="container">
-<header>
-<div class="header-copy">
+<div class="container review-shell">
+<header class="review-header">
+<div class="header-copy review-title-group">
 <nav class="breadcrumb" aria-label="Breadcrumb">
 <a href="index.html">Home</a>
 <span aria-hidden="true" class="breadcrumb-sep">›</span>
@@ -1040,54 +814,54 @@
 </nav>
 <h1>Math 130 – Test 2 Review</h1>
 <p class="header-meta">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
-<p class="header-subtitle">Topics: Geometry, Exponentials &amp; Logarithms</p>
-<div class="header-chips">
-<span class="header-chip accent"><i data-lucide="route"></i> Recommended order: Slides → Formulas → Practice</span>
-<span class="header-chip"><i data-lucide="calendar-clock"></i> Test 2: Mon, Mar 30</span>
+<p class="header-subtitle review-subtitle">Topics: Geometry, Exponentials &amp; Logarithms</p>
+<div class="header-chips review-meta-chips">
+<span class="header-chip review-chip accent is-accent"><i data-lucide="route"></i> Recommended order: Slides → Formulas → Practice</span>
+<span class="header-chip review-chip"><i data-lucide="calendar-clock"></i> Test 2: Mon, Mar 30</span>
 </div>
 </div>
 </header>
-<div aria-label="Review tool sections" class="tabs" role="tablist">
-<button class="tab-btn active priority" data-tab="slides">
-<span class="tab-icon-wrap"><i data-lucide="monitor"></i></span>
-<span class="tab-copy">
-<span class="tab-label">Slides</span>
+<div aria-label="Review tool sections" class="tabs review-tabs review-tabs-3" role="tablist">
+<button class="tab-btn review-tab-btn active priority" data-tab="slides">
+<span class="tab-icon-wrap review-tab-icon"><i data-lucide="monitor"></i></span>
+<span class="tab-copy review-tab-copy">
+<span class="tab-label review-tab-label">Slides</span>
 </span>
         </button>
-<button class="tab-btn priority" data-tab="formulas">
-<span class="tab-icon-wrap"><i data-lucide="sigma"></i></span>
-<span class="tab-copy">
-<span class="tab-label">Formulas</span>
+<button class="tab-btn review-tab-btn priority" data-tab="formulas">
+<span class="tab-icon-wrap review-tab-icon"><i data-lucide="sigma"></i></span>
+<span class="tab-copy review-tab-copy">
+<span class="tab-label review-tab-label">Formulas</span>
 </span>
         </button>
-<button class="tab-btn priority" data-tab="practice">
-<span class="tab-icon-wrap"><i data-lucide="pen-tool"></i></span>
-<span class="tab-copy">
-<span class="tab-label">Practice</span>
+<button class="tab-btn review-tab-btn priority" data-tab="practice">
+<span class="tab-icon-wrap review-tab-icon"><i data-lucide="pen-tool"></i></span>
+<span class="tab-copy review-tab-copy">
+<span class="tab-label review-tab-label">Practice</span>
 </span>
         </button>
-<button class="tab-btn" data-tab="videos">
-<span class="tab-icon-wrap"><i data-lucide="play-circle"></i></span>
-<span class="tab-copy">
-<span class="tab-label">Videos</span>
+<button class="tab-btn review-tab-btn" data-tab="videos">
+<span class="tab-icon-wrap review-tab-icon"><i data-lucide="play-circle"></i></span>
+<span class="tab-copy review-tab-copy">
+<span class="tab-label review-tab-label">Videos</span>
 </span>
         </button>
-<button class="tab-btn" data-tab="schedule">
-<span class="tab-icon-wrap"><i data-lucide="calendar"></i></span>
-<span class="tab-copy">
-<span class="tab-label">Schedule</span>
+<button class="tab-btn review-tab-btn" data-tab="schedule">
+<span class="tab-icon-wrap review-tab-icon"><i data-lucide="calendar"></i></span>
+<span class="tab-copy review-tab-copy">
+<span class="tab-label review-tab-label">Schedule</span>
 </span>
         </button>
-<button class="tab-btn" data-tab="progress">
-<span class="tab-icon-wrap"><i data-lucide="bar-chart-2"></i></span>
-<span class="tab-copy">
-<span class="tab-label">Progress</span>
+<button class="tab-btn review-tab-btn" data-tab="progress">
+<span class="tab-icon-wrap review-tab-icon"><i data-lucide="bar-chart-2"></i></span>
+<span class="tab-copy review-tab-copy">
+<span class="tab-label review-tab-label">Progress</span>
 </span>
         </button>
 </div>
 <!-- SCHEDULE TAB -->
 <div class="tab-content" id="tab-schedule">
-<div class="card">
+<div class="card review-card">
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
 <h2 style="margin-bottom: 0;">Course Schedule</h2>
 <div id="exam-countdown" style="background: var(--red-bg); border: 1px solid var(--red); color: var(--red); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;"></div>
@@ -1198,7 +972,7 @@
 </table>
 </div>
 </div>
-<div class="card">
+<div class="card review-card">
 <h2>ALEKS Modules</h2>
 <div style="overflow-x: auto;">
 <table class="history-table">
@@ -1236,7 +1010,7 @@
 </div>
 <!-- FORMULAS TAB -->
 <div class="tab-content" id="tab-formulas">
-<div class="card">
+<div class="card review-card">
 <h2>Essential Formulas for Test 2</h2>
 <p style="color: var(--text-muted); margin-bottom: 1rem; font-weight: 500;">
                 Covers formulas relevant to Sections 4.2, 4.3, and the Test 2 geometry topics.
@@ -1250,7 +1024,7 @@
 <div class="legend-chip legend-useful">Useful relation</div>
 </div>
 </div>
-<div class="checklist-section">
+<div class="checklist-section review-checklist-section">
 <h3>Section 4.2: Exponentials &amp; Interest</h3>
 <div class="formula-section-note">Focus: recognize the two provided interest formulas and when each model is used.</div>
 <div class="formula-grid">
@@ -1274,7 +1048,7 @@
 </div>
 </div>
 </div>
-<div class="checklist-section" style="margin-top: 2rem;">
+<div class="checklist-section review-checklist-section review-stack-gap">
 <h3>Section 4.3: Logarithms</h3>
 <div class="formula-section-note">Focus: memorize log-to-exponential conversion, inverse log equations, and change of base. The log property rules are support only.</div>
 <div class="formula-grid">
@@ -1316,7 +1090,7 @@
 </div>
 </div>
 </div>
-<div class="checklist-section" style="margin-top: 2rem;">
+<div class="checklist-section review-checklist-section review-stack-gap">
 <h3>Geometry: Polygons &amp; Area</h3>
 <div class="formula-section-note">Focus: triangle area, trapezoid area, proportional segments, and Heron's formula as a provided reference.</div>
 <div class="formula-grid">
@@ -1352,7 +1126,7 @@
 </div>
 </div>
 </div>
-<div class="checklist-section" style="margin-top: 2rem;">
+<div class="checklist-section review-checklist-section review-stack-gap">
 <h3>Geometry: Angle, Arc, and Circle Relationships</h3>
 <div class="formula-section-note">Focus: DMS conversions, radian-degree conversion, arc and sector formulas, circle angle theorems, and linear speed.</div>
 <div class="formula-grid">
@@ -1428,14 +1202,14 @@
 </div>
 <!-- PRACTICE TAB -->
 <div class="tab-content" id="tab-practice">
-<div class="card">
+<div class="card review-card">
 <h2 style="text-align: center; margin-bottom: 0.5rem;">Practice Generators</h2>
 <p style="text-align: center; color: var(--text-muted); margin-bottom: 0.6rem;">Practice generators are live for Test 2 topics and aligned to Sections 4.2, 4.3, and the geometry material covered before the exam.</p>
 <p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.92rem;">By default, enter decimal answers rounded as directed. Repeating decimals are accepted within tolerance (for example, $0.3333$ for $0.\overline{3}$). Some generators may allow additional formats noted in the question (for example, $\pi$ forms).</p>
 <p id="coverage-audit" style="text-align: center; color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;"></p>
 <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Select a topic to generate infinite, exam-style questions.</p>
 <!-- Mock Exam CTA -->
-<div id="exam-cta" style="background: linear-gradient(135deg, var(--accent-glow), var(--red-bg)); border: 2px solid var(--accent); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
+<div id="exam-cta" class="review-callout review-callout--exam">
 <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem;">🎯 Mock Exam Mode</h3>
 <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">20 exam-matched questions weighted like the real test: ~15% Section 4.2, ~15% Section 4.3, ~70% Geometry. Includes a compound interest table and a multi-part circle theorem problem.</p>
 <button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
@@ -1469,12 +1243,12 @@
 <span id="exam-mode-label" style="font-weight: 600; color: var(--accent);">Mock Exam</span>
 <span id="exam-progress-label" style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.9rem;">1 / 15</span>
 </div>
-<div class="progress-bar-track" style="height: 10px;">
-<div class="progress-bar-fill" id="exam-progress-fill" style="width: 0%; transition: width 0.4s ease;"></div>
+<div class="progress-bar-track review-progress-track" style="height: 10px;">
+<div class="progress-bar-fill review-progress-fill" id="exam-progress-fill" style="width: 0%; transition: width 0.4s ease;"></div>
 </div>
 </div>
 <!-- Exam Results (hidden until complete) -->
-<div class="card" id="exam-results" style="display: none;">
+<div class="card review-card" id="exam-results" style="display: none;">
 <h2 style="text-align: center;">📊 Exam Results</h2>
 <div id="exam-score-display" style="text-align: center; font-size: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin: 1rem 0;"></div>
 <div id="exam-breakdown" style="margin-top: 1rem;"></div>
@@ -1501,12 +1275,12 @@
 </div>
 <!-- CHECKLIST & PROGRESS TAB -->
 <div class="tab-content" id="tab-progress">
-<div class="card">
+<div class="card review-card">
 <h2>Topics Checklist</h2>
 <div class="progress-summary" id="progress-summary"></div>
 <div id="checklist-container"></div>
 </div>
-<div class="card">
+<div class="card review-card">
 <h2>Your Statistics</h2>
 <div class="stats-grid">
 <div class="stat-card">
@@ -1548,69 +1322,69 @@
 </div>
 <!-- VIDEOS TAB -->
 <div class="tab-content" id="tab-videos">
-<div class="card">
+<div class="card review-card">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
 <h2>Study Videos</h2>
 <div id="video-progress" style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;"></div>
 </div>
-<div class="checklist-section">
+<div class="checklist-section review-checklist-section">
 <h3>Section 4.2: Exponentials</h3>
 <div class="checklist-grid">
-<a class="check-item video-link" data-practice-id="exp_table_graph" data-video-id="v42_1" href="https://www.youtube.com/watch?v=kikGvjKFN8Q" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="exp_table_graph" data-video-id="v42_1" href="https://www.youtube.com/watch?v=kikGvjKFN8Q" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Graphing &amp; Tables</span>
 </a>
-<a class="check-item video-link" data-practice-id="exp_table_graph" data-video-id="v42_2" href="https://www.youtube.com/watch?v=aix8TLHdKgc" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="exp_table_graph" data-video-id="v42_2" href="https://www.youtube.com/watch?v=aix8TLHdKgc" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Calculator: Decimal Exponents</span>
 </a>
-<a class="check-item video-link" data-practice-id="interest" data-video-id="v42_3" href="https://www.youtube.com/watch?v=NCYNXkbTTUo" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="interest" data-video-id="v42_3" href="https://www.youtube.com/watch?v=NCYNXkbTTUo" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Simple vs Compound Interest</span>
 </a>
-<a class="check-item video-link" data-practice-id="interest" data-video-id="v42_4" href="https://www.youtube.com/watch?v=2S4vK30dII0" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="interest" data-video-id="v42_4" href="https://www.youtube.com/watch?v=2S4vK30dII0" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Continuous Compounding</span>
 </a>
 </div>
 </div>
-<div class="checklist-section" style="margin-top: 2rem;">
+<div class="checklist-section review-checklist-section review-stack-gap">
 <h3>Section 4.3: Logarithms</h3>
 <div class="checklist-grid">
-<a class="check-item video-link" data-practice-id="logexp_conv" data-video-id="v43_1" href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="logexp_conv" data-video-id="v43_1" href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Log ↔ Exp Conversions</span>
 </a>
-<a class="check-item video-link" data-practice-id="logexp" data-video-id="v43_2" href="https://www.youtube.com/watch?v=eL2FhO11mf0" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="logexp" data-video-id="v43_2" href="https://www.youtube.com/watch?v=eL2FhO11mf0" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Evaluating Log Expressions</span>
 </a>
-<a class="check-item video-link" data-practice-id="logexp" data-video-id="v43_3" href="https://www.youtube.com/watch?v=3Rf8KEhY0ts" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="logexp" data-video-id="v43_3" href="https://www.youtube.com/watch?v=3Rf8KEhY0ts" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Logarithm Change of Base</span>
 </a>
-<a class="check-item video-link" data-practice-id="logexp" data-video-id="v43_4" href="https://www.youtube.com/watch?v=fnhFneOz6n8" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="logexp" data-video-id="v43_4" href="https://www.youtube.com/watch?v=fnhFneOz6n8" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Solving Exponential Eqns using Logs</span>
 </a>
 </div>
 </div>
-<div class="checklist-section" style="margin-top: 2rem;">
+<div class="checklist-section review-checklist-section review-stack-gap">
 <h3>Geometry &amp; Circles</h3>
 <div class="checklist-grid">
-<a class="check-item video-link" data-practice-id="piecewise_rect" data-video-id="vgeo_1" href="https://www.youtube.com/watch?v=8ysZhPknfYY" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="piecewise_rect" data-video-id="vgeo_1" href="https://www.youtube.com/watch?v=8ysZhPknfYY" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Piecewise Rectangular Areas</span>
 </a>
-<a class="check-item video-link" data-practice-id="dms_to_dec" data-video-id="vgeo_2" href="https://www.youtube.com/watch?v=FcDyaiHO4GQ" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="dms_to_dec" data-video-id="vgeo_2" href="https://www.youtube.com/watch?v=FcDyaiHO4GQ" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>DMS to Decimal Conversion</span>
 </a>
-<a class="check-item video-link" data-practice-id="std_pos_angle" data-video-id="vgeo_3" href="https://www.youtube.com/watch?v=JmLN3QxshlE" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="std_pos_angle" data-video-id="vgeo_3" href="https://www.youtube.com/watch?v=JmLN3QxshlE" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Radians &amp; Degrees Intro</span>
 </a>
-<a class="check-item video-link" data-practice-id="circles" data-video-id="vgeo_4" href="https://www.youtube.com/watch?v=XUus6-9E9sQ" style="text-decoration: none;" target="_blank" rel="noopener noreferrer">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="circles" data-video-id="vgeo_4" href="https://www.youtube.com/watch?v=XUus6-9E9sQ" target="_blank" rel="noopener noreferrer">
 <i data-lucide="play" style="color: var(--accent);"></i>
 <span>Circle Sectors &amp; Arc Length</span>
 </a>
@@ -1621,7 +1395,7 @@
 
 <!-- LECTURE SLIDES TAB -->
 <div class="tab-content active" id="tab-slides">
-<div class="card">
+<div class="card review-card">
 <h2>Lecture Slides</h2>
 <div class="slides-shell">
 <div class="slides-intro">
@@ -3376,7 +3150,7 @@
                     <span class="progress-item-label">${cat}</span>
                     <span class="progress-item-count">${doneCount} / ${items.length}</span>
                 </div>
-                <div class="progress-bar-track">
+                <div class="progress-bar-track review-progress-track">
                     <div class="progress-bar-fill ${pct === 100 ? 'complete' : ''}" style="width: ${pct}%"></div>
                 </div>
             `;
@@ -4041,7 +3815,7 @@
                     <span class="progress-item-label">${section}</span>
                     <span class="progress-item-count" style="color: ${secColor}">${data.correct}/${data.total} (${secPct}%)</span>
                 </div>
-                <div class="progress-bar-track">
+                <div class="progress-bar-track review-progress-track">
                     <div class="progress-bar-fill ${secPct === 100 ? 'complete' : ''}" style="width: ${secPct}%; background: ${secColor};"></div>
                 </div>
             `;
