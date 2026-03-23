@@ -285,20 +285,13 @@ a:focus-visible {
 
 /* Header styling */
 header {
-  background:
-    radial-gradient(circle at top center, rgba(255, 255, 255, 0.08), transparent 38%),
-    var(--gradient-library-glow);
-  color: var(--light-text);
-  text-align: center;
-  padding: clamp(4rem, 8vw, 6.5rem) 0;
-  position: relative;
-  border: none;
+  margin: 0;
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
 }
 
 header h1 {
   margin: 0;
   font-size: var(--display-md);
-  color: var(--light-text);
 }
 
 .page-shell-header {
@@ -352,6 +345,125 @@ header h1 {
 .page-shell-main {
   padding-top: var(--spacing-12);
   padding-bottom: var(--spacing-12);
+}
+
+
+.reading-page {
+  --reading-measure: clamp(42rem, 88vw, 48rem);
+  --reading-block-space: clamp(1.75rem, 3vw, 2.5rem);
+  display: grid;
+  gap: var(--spacing-10);
+}
+
+.reading-page > * {
+  min-width: 0;
+}
+
+.reading-flow,
+.reading-surface,
+.reading-block {
+  max-width: var(--reading-measure);
+  width: 100%;
+  margin-inline: auto;
+}
+
+.reading-flow {
+  background: var(--surface-container-low);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  box-shadow: none;
+}
+
+.reading-flow > * + * {
+  margin-top: var(--reading-block-space);
+}
+
+.reading-flow h1,
+.reading-flow h2,
+.reading-flow h3,
+.reading-flow h4 {
+  color: var(--secondary-color);
+}
+
+.reading-flow h1,
+.reading-page > h1,
+.reading-page .reading-title {
+  margin-bottom: var(--spacing-8);
+}
+
+.reading-flow h2,
+.reading-page h2 {
+  margin-top: var(--spacing-12);
+  margin-bottom: var(--spacing-4);
+}
+
+.reading-flow h3,
+.reading-page h3 {
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-3);
+}
+
+.reading-flow p,
+.reading-flow ul,
+.reading-flow ol,
+.reading-flow pre,
+.reading-flow table,
+.reading-flow blockquote,
+.reading-page .reading-block {
+  margin-bottom: 0;
+}
+
+.reading-page .reading-block,
+.reading-page .question-guide,
+.reading-page .unit-overview-block,
+.reading-page .unit-module-card,
+.reading-page .summary-sheet,
+.reading-page .practice-sheet {
+  max-width: var(--reading-measure);
+  margin-inline: auto;
+  background: var(--surface-container-low);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.35rem, 2.6vw, 2rem);
+  box-shadow: none;
+}
+
+.reading-page .question-guide,
+.reading-page .unit-module-card,
+.reading-page .unit-overview-block,
+.reading-page .summary-sheet,
+.reading-page .practice-sheet {
+  margin-bottom: 0;
+}
+
+.reading-page .unit-task-card,
+.reading-page .unit-resource-card,
+.reading-page .course-meta-card,
+.reading-page .quick-link-card {
+  background: var(--surface-container-lowest);
+  box-shadow: none;
+}
+
+.reading-page .unit-task-grid,
+.reading-page .unit-resource-grid {
+  gap: 0.85rem;
+}
+
+.reading-page .question-guide + .question-guide,
+.reading-page .unit-module-card + .unit-module-card,
+.reading-page .reading-block + .reading-block {
+  margin-top: var(--spacing-6);
+}
+
+.reading-page :where(p, li) {
+  max-width: 72ch;
+}
+
+.reading-page :where(pre, table) {
+  overflow-x: auto;
+}
+
+.reading-page :where(p, li, dd, figcaption, blockquote) a {
+  text-decoration-color: color-mix(in srgb, var(--secondary) 82%, transparent);
 }
 
 .subtitle {
@@ -408,26 +520,14 @@ main {
   padding: var(--spacing-12) 0;
 }
 
-/* Section styling */
+/* Section defaults */
 section {
-  background:
-    var(--gradient-editorial-tier),
-    var(--gradient-editorial-panel);
-  border-radius: var(--radius-lg);
-  padding: clamp(2rem, 4vw, 3rem);
-  margin-bottom: var(--section-space);
-  transition: var(--transition);
-  outline: 1px solid transparent;
-  -webkit-animation: fadeIn 0.5s ease-out forwards;
-  animation: fadeIn 0.5s ease-out forwards;
-  opacity: 0;
+  margin: 0 0 var(--section-space);
+  padding: 0;
 }
 
-section:hover {
-  background:
-    var(--gradient-editorial-hover-tier),
-    var(--gradient-editorial-hover-panel);
-  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
+section:last-child {
+  margin-bottom: 0;
 }
 
 section h2 {
@@ -435,6 +535,33 @@ section h2 {
   margin-bottom: var(--spacing-5);
   padding-bottom: 0;
   border-bottom: none;
+}
+
+.editorial-panel,
+.marketing-card,
+.feature-section,
+.promo-band {
+  position: relative;
+  background:
+    var(--gradient-editorial-tier),
+    var(--gradient-editorial-panel);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 4vw, 3rem);
+  transition: var(--transition);
+  outline: 1px solid transparent;
+  -webkit-animation: fadeIn 0.5s ease-out forwards;
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.editorial-panel:hover,
+.marketing-card:hover,
+.feature-section:hover,
+.promo-band:hover {
+  background:
+    var(--gradient-editorial-hover-tier),
+    var(--gradient-editorial-hover-panel);
+  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
 }
 
 /* Two-column layout */
@@ -1267,7 +1394,10 @@ main.error-main {
     color: black;
   }
 
-  section,
+  .editorial-panel,
+  .feature-section,
+  .promo-band,
+  .marketing-card,
   .container {
     margin: 0;
     padding: 0.5in;
@@ -1472,19 +1602,19 @@ main.error-main {
  }
 
 /* Stagger section animations for smoother page load */
-section:nth-child(1) {
+:is(.editorial-panel, .feature-section, .promo-band, .marketing-card):nth-child(1) {
   animation-delay: 0.05s;
 }
-section:nth-child(2) {
+:is(.editorial-panel, .feature-section, .promo-band, .marketing-card):nth-child(2) {
   animation-delay: 0.1s;
 }
-section:nth-child(3) {
+:is(.editorial-panel, .feature-section, .promo-band, .marketing-card):nth-child(3) {
   animation-delay: 0.15s;
 }
-section:nth-child(4) {
+:is(.editorial-panel, .feature-section, .promo-band, .marketing-card):nth-child(4) {
   animation-delay: 0.2s;
 }
-section:nth-child(5) {
+:is(.editorial-panel, .feature-section, .promo-band, .marketing-card):nth-child(5) {
   animation-delay: 0.25s;
 }
 
@@ -1543,7 +1673,10 @@ section:nth-child(5) {
     padding: 0 1rem;
   }
 
-  section {
+  .editorial-panel,
+  .feature-section,
+  .promo-band,
+  .marketing-card {
     padding: var(--spacing-6);
   }
 
