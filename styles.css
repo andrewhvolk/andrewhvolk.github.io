@@ -1619,7 +1619,8 @@ nav.navbar .dropdown[data-desktop-open="true"] .dropdown-menu {
   --review-shell-width: min(1100px, calc(100vw - 2rem));
 }
 
-body.review-page {
+body.review-page,
+.math-review-page {
   --bg: var(--review-bg);
   --surface: var(--review-surface);
   --surface2: var(--review-surface-2);
@@ -1660,7 +1661,9 @@ body.review-page {
   transition: background-color 0.3s, color 0.3s;
 }
 
-body.review-page.light {
+body.review-page.light,
+body.light .math-review-page,
+.math-review-page.is-light {
   --review-bg: #f8fafc;
   --review-surface: #ffffff;
   --review-surface-2: #f1f5f9;
@@ -1705,6 +1708,34 @@ body.review-page::before {
   z-index: 0;
 }
 
+.math-review-page {
+  position: relative;
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  isolation: isolate;
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--accent) 10%, transparent), transparent 36%),
+    var(--bg);
+}
+
+.math-review-page .container,
+.math-review-page main,
+.math-review-page section,
+.math-review-page header {
+  position: relative;
+  z-index: 1;
+}
+
+.math-review-page > header,
+.math-review-page .review-header {
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  padding: 0;
+  box-shadow: none;
+}
+
 .review-shell {
   width: var(--review-shell-width);
   max-width: 1100px;
@@ -1727,6 +1758,7 @@ body.review-page::before {
 
 .review-title-group { max-width: 52rem; }
 .review-header h1,
+.math-review-page h1.review-title,
 .review-page h1.review-title {
   font-family: 'DM Serif Display', serif;
   font-weight: 400;
@@ -1735,9 +1767,13 @@ body.review-page::before {
   color: var(--accent);
   margin: 0 0 0.35rem;
 }
+.math-review-page h2,
+.math-review-page h3,
+.math-review-page h4,
 .review-page h2,
 .review-page h3,
 .review-page h4 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+.math-review-page h2,
 .review-page h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
 .review-kicker, .course-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.55rem; }
 .review-subtitle, .header-subtitle, .subtitle { color: var(--text-body-muted); font-size: 0.98rem; max-width: 52rem; }
@@ -1838,7 +1874,9 @@ body.review-page::before {
 .review-tab-copy, .tab-copy { display:flex; flex-direction:column; gap:0.1rem; min-width:0; }
 .review-tab-label, .tab-label { color: var(--text); font-weight: 700; line-height: 1.2; }
 .review-tab-meta, .tab-meta, .tab-sub { color: var(--text-body-muted); font-size: 0.82rem; line-height: 1.25; }
+.math-review-page .tab-content,
 .review-page .tab-content { display:none; }
+.math-review-page .tab-content.active,
 .review-page .tab-content.active { display:block; animation: fadeUp 0.28s ease; }
 
 .review-panel, .review-card, .card, .formula-section, .info-card, .practice-stat, .problem-card, .topic-card, .section-summary-card {
@@ -1975,6 +2013,56 @@ body.review-page::before {
 
 .review-results-score { text-align: center; font-size: 3rem; font-family: 'JetBrains Mono', monospace; color: var(--accent); margin: 1rem 0; }
 .review-results-actions { text-align: center; margin-top: 1.5rem; }
+
+.review-formula-section,
+.formula-section {
+  break-inside: avoid;
+}
+
+@media print {
+  body.review-page,
+  .math-review-page {
+    background: #fff !important;
+    color: #111827 !important;
+  }
+
+  body.review-page::before {
+    display: none;
+  }
+
+  .math-review-page {
+    width: 100%;
+  }
+
+  .math-review-page .review-card,
+  .math-review-page .card,
+  .math-review-page .formula-section,
+  .math-review-page .review-callout,
+  .math-review-page .formula-card,
+  .math-review-page .formula-item {
+    background: #fff !important;
+    box-shadow: none !important;
+    color: #111827 !important;
+    border-color: #cbd5e1 !important;
+  }
+
+  .math-review-page .review-theme-toggle,
+  .math-review-page .theme-toggle,
+  .math-review-page .tabs.review-tabs,
+  .math-review-page .quiz-selector,
+  .math-review-page .btn-primary,
+  .math-review-page .btn-secondary {
+    display: none !important;
+  }
+
+  .math-review-page .formula-box,
+  .math-review-page .review-formula-box,
+  .math-review-page .formula-math {
+    overflow: visible !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
 
 @media (max-width: 1024px) {
   .tabs.review-tabs.review-tabs-3, .tab-nav.review-tabs.review-tabs-3, .tabs.review-tabs.review-tabs-4, .tab-nav.review-tabs.review-tabs-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
