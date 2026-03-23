@@ -60,6 +60,11 @@
                 linear-gradient(180deg, rgba(225, 227, 224, 0.46), transparent 24%),
                 var(--surface);
         }
+        body.review-page:not(.light) .math-review-page {
+            background:
+                radial-gradient(circle at top left, rgba(108, 99, 255, 0.06), transparent 28%),
+                var(--surface);
+        }
         body.review-page::before { opacity: 0.28; }
         .review-shell { max-width: 1180px; padding-top: clamp(2.5rem, 5vw, 4rem); }
         .review-header {
@@ -229,7 +234,7 @@
             gap: 0.45rem;
             padding: 0.5rem 0.7rem;
             border-radius: 999px;
-            font-size: 0.82rem;
+            font-size: 0.88rem;
             font-weight: 600;
             border: 1px solid var(--border);
             background: var(--surface);
@@ -271,6 +276,9 @@
             box-shadow: 0 10px 24px rgba(0,0,0,0.08);
             transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
         }
+        body.review-page:not(.light) .formula-card {
+            box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+        }
         .formula-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 14px 28px rgba(0,0,0,0.12);
@@ -306,6 +314,7 @@
         .formula-math .katex-display { margin: 0.35rem auto; max-width: 100%; overflow: visible; padding: 0; }
         .formula-math .katex-display > .katex { white-space: normal; max-width: 100%; }
         .formula-math .katex { max-width: 100%; }
+        body.review-page .katex { color: inherit; }
         .formula-math.dual-line .katex-display { margin: 0.2rem auto; }
         .formula-math.compact-math { font-size: clamp(0.92rem, 1.25vw, 1.05rem); }
         .formula-math.steps-math { display: grid; gap: 0.25rem; }
@@ -330,6 +339,11 @@
         .input-group { display: flex; justify-content: center; align-items: center; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .input-group input { background: var(--bg); border: 2px solid var(--border); color: var(--text); padding: 1rem; border-radius: 12px; font-size: 1.2rem; font-family: var(--type-meta-family); text-align: center; transition: border-color 0.2s; outline: none; }
         .input-group input:focus { border-color: var(--accent); }
+        body.review-page:not(.light) .input-group input,
+        body.review-page:not(.light) .multi-input-grid input {
+            background: var(--surface2);
+            border-color: color-mix(in srgb, var(--accent) 24%, var(--border));
+        }
         
         .inp-standard { width: 200px; }
         .inp-small { width: 80px; padding: 0.75rem !important; }
@@ -432,7 +446,7 @@
         .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
 
         /* Schedule date states */
-        .schedule-past td { opacity: 0.4; }
+        .schedule-past td { opacity: 0.55; }
         .schedule-past td .badge { opacity: 0.6; }
         .schedule-today { background: var(--accent-glow) !important; border-left: 4px solid var(--accent); }
         .schedule-next { background: var(--surface2); }
@@ -3264,6 +3278,7 @@ function initTopNav(){
     });
 
     function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
         if (theme === 'light') {
             document.body.classList.add('light');
             document.getElementById('theme-toggle-btn').innerHTML = '<i data-lucide="sun"></i>';
