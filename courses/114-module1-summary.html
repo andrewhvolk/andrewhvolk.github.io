@@ -2,70 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Module 1: Critical Thinking and Introductory Math Concepts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 1 Summary: Critical Thinking and Introductory Math Concepts</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../theme.js"></script>
   <style>
-    /* General Styling */
-    body {
+    .summary-page {
+      max-width: 860px;
+      padding-bottom: 3rem;
+    }
+    .summary-sheet {
+      background: #fff;
+      border: 1px solid var(--border-color, #d9e2ec);
+      border-radius: 18px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+      padding: 2rem 2.5rem;
       font-family: "Times New Roman", serif;
       font-size: 12pt;
-      line-height: 1.2; /* Tighter line spacing */
-      margin: 0.5in 1in 1in 1in; /* Reduced top margin, standard elsewhere */
+      line-height: 1.35;
     }
-
-    h1 {
-      font-size: 16pt;
-      margin-top: 0.5em;
-      margin-bottom: 0.3em;
-    }
-
-    h2 {
-      font-size: 14pt;
-      margin-top: 0.5em;
-      margin-bottom: 0.3em;
-    }
-
-    h3 {
-      font-size: 12pt;
-      margin-top: 0.5em;
-      margin-bottom: 0.3em;
-    }
-
-    /* Reduce spacing before/after lists */
-    ul, ol {
-      margin-left: 1em;
-      margin-bottom: 0.5em;
-    }
-    ul ul, ul ol, ol ul, ol ol {
-      margin-bottom: 0.3em; /* Nested lists even tighter */
-    }
-
-    /* Keep blocks together when printing */
-    h2, h3, ul, ol, p {
-      page-break-inside: avoid;
-    }
-
-    /* Ensure consistent page margins when printing */
-    @page {
-      size: A4;
-      margin: 1in;
-    }
-
-    /* Name field styling */
-    .name-field {
-      margin-top: 0;
-      margin-bottom: 1em;
-    }
-
-    /* Copyright styling */
-    .copyright {
-      text-align: center;
-      margin-top: 1em;
-      font-size: 10pt;
-      color: #666;
+    .summary-sheet h1 { font-size: 1.6rem; margin-top: 0.5em; margin-bottom: 0.3em; }
+    .summary-sheet h2 { font-size: 1.3rem; margin-top: 1.25em; margin-bottom: 0.3em; }
+    .summary-sheet h3 { font-size: 1.05rem; margin-top: 1em; margin-bottom: 0.3em; }
+    .summary-sheet ul, .summary-sheet ol { margin-left: 1.25em; margin-bottom: 0.75em; }
+    .summary-sheet ul ul, .summary-sheet ul ol, .summary-sheet ol ul, .summary-sheet ol ol { margin-bottom: 0.3em; }
+    .name-field { margin-top: 0; margin-bottom: 1em; }
+    .copyright { text-align: center; margin-top: 1em; font-size: 10pt; color: #666; }
+    @media print {
+      body { background: #fff; }
+      .top-nav, .page-context-bar, .course-header { display: none !important; }
+      .summary-page { max-width: none; padding: 0; }
+      .summary-sheet { border: none; box-shadow: none; border-radius: 0; padding: 0; }
+      @page { size: A4; margin: 1in; }
+      h2, h3, ul, ol, p { page-break-inside: avoid; }
     }
   </style>
 </head>
 <body>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="../index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../CV.html">About</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-current="page">Courses ▾</button>
+          <ul class="dropdown-menu">
+            <li><a href="../learn.html">All Courses</a></li>
+            <li><a href="../courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="../courses/math130.html">MATH 130</a></li>
+            <li><a href="../courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="../projects.html">Tools</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
+            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="../learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 1 Summary</span>
+    </nav>
+  </div>
+</div>
+<header class="course-header course-header--unit">
+  <div class="container">
+    <h1>Module 1 Summary</h1>
+    <p class="subtitle">Critical thinking, foundational numerical skills, and the first module outcomes for MATH 114.</p>
+  </div>
+</header>
+<main class="container course-page summary-page">
+  <article class="summary-sheet">
+
   <h1>Math 114 Module 1: Critical Thinking and Introductory Math Concepts</h1>
   
   <p class="name-field">
@@ -173,5 +202,8 @@
   <p class="copyright">
     © Andrew H Volk 2025
   </p>
+
+  </article>
+</main>
 </body>
 </html>
