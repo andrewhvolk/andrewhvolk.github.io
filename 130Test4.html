@@ -577,9 +577,9 @@
     }
 </style>
 </head>
-<body>
-<div class="container">
-    <header>
+<body class="review-page">
+<div class="container review-shell">
+    <header class="review-header">
         <div class="breadcrumb">
             <a href="#">Math 130</a>
             <span>›</span>
@@ -589,53 +589,53 @@
         </div>
 
         <h1>Final Week Review</h1>
-        <p class="header-subtitle">A simplified final-week page modeled after the earlier review pages. This one only covers the last week: Quiz 13 on vectors, reading day, and the comprehensive final.</p>
+        <p class="header-subtitle review-subtitle">A simplified final-week page modeled after the earlier review pages. This one only covers the last week: Quiz 13 on vectors, reading day, and the comprehensive final.</p>
 
-        <div class="header-chips">
+        <div class="header-chips review-meta-chips">
             <span class="chip accent"><i data-lucide="route"></i> Suggested order: Schedule → Quiz 13 → Final Exam → Formulas</span>
             <span class="chip"><i data-lucide="calendar-clock"></i> Quiz 13: Mon, 5/4</span>
             <span class="chip"><i data-lucide="graduation-cap"></i> Final Exam: Thu, 5/7</span>
             <span class="chip"><i data-lucide="layers-3"></i> Final week only</span>
         </div>
 
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <button class="theme-toggle review-theme-toggle" id="themeToggle" aria-label="Toggle theme">
             <i data-lucide="sun-moon"></i>
         </button>
     </header>
 
-    <nav class="tabs" aria-label="Final week navigation">
-        <button class="tab-btn active" data-tab="schedule">
+    <nav class="tabs review-tabs review-tabs-4" aria-label="Final week navigation">
+        <button class="tab-btn review-tab-btn active" data-tab="schedule">
             <span class="tab-icon"><i data-lucide="calendar-range"></i></span>
-            <span class="tab-copy">
-                <span class="tab-label">Schedule</span>
+            <span class="tab-copy review-tab-copy">
+                <span class="tab-label review-tab-label">Schedule</span>
                 <span class="tab-sub">Only the final week</span>
             </span>
         </button>
-        <button class="tab-btn" data-tab="quiz13">
+        <button class="tab-btn review-tab-btn" data-tab="quiz13">
             <span class="tab-icon"><i data-lucide="move-3d"></i></span>
-            <span class="tab-copy">
-                <span class="tab-label">Quiz 13</span>
+            <span class="tab-copy review-tab-copy">
+                <span class="tab-label review-tab-label">Quiz 13</span>
                 <span class="tab-sub">Section 8.4 vectors</span>
             </span>
         </button>
-        <button class="tab-btn" data-tab="finalexam">
+        <button class="tab-btn review-tab-btn" data-tab="finalexam">
             <span class="tab-icon"><i data-lucide="book-open-check"></i></span>
-            <span class="tab-copy">
-                <span class="tab-label">Final Exam</span>
+            <span class="tab-copy review-tab-copy">
+                <span class="tab-label review-tab-label">Final Exam</span>
                 <span class="tab-sub">Fall 2025 alignment</span>
             </span>
         </button>
-        <button class="tab-btn" data-tab="formulas">
+        <button class="tab-btn review-tab-btn" data-tab="formulas">
             <span class="tab-icon"><i data-lucide="sigma"></i></span>
-            <span class="tab-copy">
-                <span class="tab-label">Formulas</span>
+            <span class="tab-copy review-tab-copy">
+                <span class="tab-label review-tab-label">Formulas</span>
                 <span class="tab-sub">Provided + must know</span>
             </span>
         </button>
     </nav>
 
     <section class="tab-content active" id="tab-schedule">
-        <div class="card">
+        <div class="card review-card">
             <div class="eyebrow"><i data-lucide="calendar-days"></i> Final week schedule</div>
             <h2>What happens this week</h2>
             <p class="muted">This page intentionally leaves out lecture-slide sections, checklist trackers, and ALEKS items. The goal is to keep final-week navigation clean and focused.</p>
@@ -717,7 +717,7 @@
             </div>
         </div>
 
-        <div class="card" style="margin-top:1rem;">
+        <div class="card review-card" style="margin-top:1rem;">
             <div class="eyebrow"><i data-lucide="compass"></i> Core vector moves</div>
             <h2>Quiz 13 essentials</h2>
             <div class="formula-grid">
@@ -792,7 +792,7 @@
             </div>
         </div>
 
-        <div class="card" style="margin-top:1rem;">
+        <div class="card review-card" style="margin-top:1rem;">
             <div class="eyebrow"><i data-lucide="clipboard-list"></i> Official review categories</div>
             <h2>Review sheet structure</h2>
 
@@ -910,7 +910,7 @@
     </section>
 
     <section class="tab-content" id="tab-formulas">
-        <div class="card">
+        <div class="card review-card">
             <div class="eyebrow"><i data-lucide="sigma"></i> Formula focus</div>
             <h2>Provided on the Fall 2025 final</h2>
             <p class="muted" style="margin-bottom:1rem;">These formulas were printed on the final. They still require recognition and correct setup.</p>
@@ -949,7 +949,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card review-card">
             <h3>Know these cold</h3>
             <div class="formula-grid">
                 <div class="formula-card core">

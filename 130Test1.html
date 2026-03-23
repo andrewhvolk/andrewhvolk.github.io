@@ -9,89 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <style>
-  :root {
-    --bg: #0f1117; --surface: #181a24; --surface2: #1f2233; --border: #2a2d42;
-    --text: #e2e4ef; --text-muted: #8b8fa8;
-    --accent: #6c63ff; --accent-glow: rgba(108, 99, 255, 0.25);
-    --green: #34d399; --green-bg: rgba(52, 211, 153, 0.1);
-    --amber: #fbbf24; --amber-bg: rgba(251, 191, 36, 0.1);
-    --red: #f87171; --red-bg: rgba(248, 113, 113, 0.1);
-    --blue: #60a5fa; --blue-bg: rgba(96, 165, 250, 0.1);
-    --radius: 16px;
-    --shadow: 0 12px 36px rgba(0,0,0,0.22);
-    --shell: min(1100px, calc(100vw - 2rem));
-    --grid-line: rgba(108,99,255,0.03);
-    --h1-from: #e2e4ef; --h1-to: #9d98ff;
-    --green-border: rgba(52,211,153,0.2); --green-step: rgba(52,211,153,0.25);
-    --red-border: rgba(248,113,113,0.2);
-    --accent-hover: rgba(108,99,255,0.3); --accent-chip: rgba(108,99,255,0.12);
-    --check-bg: rgba(52,211,153,0.04); --check-border: rgba(52,211,153,0.3);
-    --got-border: rgba(52,211,153,0.4); --miss-border: rgba(248,113,113,0.4);
-  }
-  body.light {
-    --bg: #f4f5f7; --surface: #ffffff; --surface2: #eef0f4; --border: #d5d8e0;
-    --text: #1a1d2b; --text-muted: #5c6070;
-    --accent: #5046e5; --accent-glow: rgba(80, 70, 229, 0.18);
-    --green: #0d9668; --green-bg: rgba(13, 150, 104, 0.08);
-    --amber: #b8860b; --amber-bg: rgba(184, 134, 11, 0.08);
-    --red: #dc2626; --red-bg: rgba(220, 38, 38, 0.07);
-    --blue: #2563eb; --blue-bg: rgba(37, 99, 235, 0.08);
-    --grid-line: rgba(80,70,229,0.04);
-    --h1-from: #1a1d2b; --h1-to: #5046e5;
-    --green-border: rgba(13,150,104,0.2); --green-step: rgba(13,150,104,0.2);
-    --red-border: rgba(220,38,38,0.18);
-    --accent-hover: rgba(80,70,229,0.25); --accent-chip: rgba(80,70,229,0.1);
-    --check-bg: rgba(13,150,104,0.05); --check-border: rgba(13,150,104,0.3);
-    --got-border: rgba(13,150,104,0.4); --miss-border: rgba(220,38,38,0.35);
-    --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
-    --shell: min(1100px, calc(100vw - 2rem));
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; min-height: 100vh; transition: background 0.3s, color 0.3s; }
-  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
-
-  /* Theme toggle */
-  .theme-toggle { position: static; background: var(--surface); border: 1px solid var(--border); border-radius: 50px; padding: 0.4rem; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; transition: all 0.3s; z-index: 5; box-shadow: var(--shadow); }
-  .theme-toggle:hover { border-color: var(--accent); }
-  .theme-toggle .toggle-track { width: 40px; height: 22px; border-radius: 11px; background: var(--surface2); position: relative; transition: background 0.3s; }
-  .theme-toggle .toggle-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); position: absolute; top: 2px; left: 2px; transition: transform 0.3s; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-  body.light .theme-toggle .toggle-thumb { transform: translateX(18px); }
-  .theme-toggle .toggle-icon { font-size: 0.85rem; line-height: 1; }
-  .container { width: var(--shell); margin: 0 auto; padding: 2rem 0 4.5rem; position: relative; z-index: 1; }
-
-  header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; padding: 1.1rem 0 1.5rem; border-bottom: 1px solid var(--border); }
-  .header-copy { flex: 1; min-width: 0; }
-  .header-actions { display: flex; align-items: flex-start; justify-content: flex-end; }
-  .course-label { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.55rem; }
-  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 400; letter-spacing: -0.5px; margin-bottom: 0.75rem; background: linear-gradient(135deg, var(--h1-from), var(--h1-to)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .subtitle { color: var(--text-muted); font-size: 0.98rem; max-width: 52rem; }
-
-  .info-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 0 0 1.75rem; }
-  .info-card { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.15rem 1.25rem; display: flex; align-items: center; gap: 0.9rem; min-height: 92px; box-shadow: var(--shadow); }
-  .info-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
-  .info-card:nth-child(1) .info-icon { background: var(--blue-bg); }
-  .info-card:nth-child(2) .info-icon { background: var(--green-bg); }
-  .info-card:nth-child(3) .info-icon { background: var(--amber-bg); }
-  .info-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-  .info-value { font-weight: 600; font-size: 0.95rem; }
-
-  /* Dashboard-style tab nav */
-  .tab-nav-wrapper { margin-bottom: 2rem; }
-  .tab-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; }
-  .tab-fade-left, .tab-fade-right { display: none; }
-  .tab-btn { position: relative; width: 100%; padding: 0.95rem 1rem; border: 1px solid var(--border); background: linear-gradient(180deg, var(--surface), var(--surface2)); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; border-radius: 16px; cursor: pointer; transition: all 0.25s; min-height: 92px; text-align: left; display: flex; align-items: center; gap: 0.9rem; box-shadow: var(--shadow); }
-  .tab-btn::before { content: ''; position: absolute; top: 0; left: 18px; right: 18px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0.7; }
-  .tab-btn:hover { color: var(--text); transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }
-  .tab-btn.active { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, var(--surface)), var(--surface)); color: var(--text); border-color: var(--accent); box-shadow: 0 10px 24px var(--accent-glow); }
-  .tab-btn:focus-visible, .video-link:focus-visible, .review-topic-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-  .tab-icon { width: 42px; height: 42px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--accent) 12%, var(--surface2)); color: var(--accent); flex-shrink: 0; font-size: 1.1rem; }
-  .tab-btn.active .tab-icon { background: color-mix(in srgb, var(--accent) 18%, var(--surface2)); }
-  .tab-copy { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
-  .tab-label { font-weight: 700; line-height: 1.2; }
-  .tab-meta { font-size: 0.8rem; color: var(--text-muted); line-height: 1.3; }
-  .tab-content { display: none; animation: fadeUp 0.35s ease; margin-bottom: 2rem; }
-  .tab-content.active { display: block; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  /* Page-specific styles only; shared Math 130 review tokens/components live in styles.css. */
 
   /* Topic Cards */
   .topic-card { background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--surface) 72%, var(--surface2))); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 1.15rem; overflow: hidden; transition: border-color 0.3s, transform 0.25s; box-shadow: var(--shadow); }
@@ -351,7 +269,7 @@
 
 
 </head>
-<body>
+<body class="review-page">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
@@ -386,9 +304,9 @@
   </div>
 </nav>
 
-<div class="container">
-  <header>
-    <div class="header-copy">
+<div class="container review-shell">
+  <header class="review-header">
+    <div class="header-copy review-title-group">
       <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="index.html">Home</a>
       <span class="breadcrumb-sep" aria-hidden="true">›</span>
@@ -400,7 +318,7 @@
     </nav>
     <div class="course-label">Spring 2026</div>
     <h1>Math 130 — Test 1</h1>
-    <p class="subtitle">Interactive study guide covering all tested topics. Review concepts, practice problems, and quiz yourself.</p>
+    <p class="subtitle review-subtitle">Interactive study guide covering all tested topics. Review concepts, practice problems, and quiz yourself.</p>
     </div>
     <div class="header-actions">
       <button id="theme-toggle-btn" class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle dark and light theme">
@@ -411,83 +329,83 @@
     </div>
   </header>
 
-  <div class="info-bar">
-    <div class="info-card"><div class="info-icon">📝</div><div><div class="info-label">Format</div><div class="info-value">Paper Test</div></div></div>
-    <div class="info-card"><div class="info-icon">💻</div><div><div class="info-label">ALEKS Practice</div><div class="info-value">Up to 10 Attempts</div></div></div>
-    <div class="info-card"><div class="info-icon">📐</div><div><div class="info-label">Topics</div><div class="info-value">10 Core Areas</div></div></div>
+  <div class="info-bar review-meta-chips">
+    <div class="info-card review-chip"><div class="info-icon">📝</div><div><div class="info-label">Format</div><div class="info-value">Paper Test</div></div></div>
+    <div class="info-card review-chip"><div class="info-icon">💻</div><div><div class="info-label">ALEKS Practice</div><div class="info-value">Up to 10 Attempts</div></div></div>
+    <div class="info-card review-chip"><div class="info-icon">📐</div><div><div class="info-label">Topics</div><div class="info-value">10 Core Areas</div></div></div>
   </div>
 
   <div class="tab-nav-wrapper">
     <div class="tab-fade-left" id="fade-left"></div>
-    <nav class="tab-nav" id="tabNav">
-      <button class="tab-btn active" data-tab="topics"><span class="tab-icon">📚</span><span class="tab-copy"><span class="tab-label">Topics Review</span><span class="tab-meta">Core ideas and worked examples</span></span></button>
-      <button class="tab-btn" data-tab="formulas"><span class="tab-icon">🧾</span><span class="tab-copy"><span class="tab-label">Formula Sheet</span><span class="tab-meta">Quick reference before practice</span></span></button>
-      <button class="tab-btn" data-tab="practice"><span class="tab-icon">✍️</span><span class="tab-copy"><span class="tab-label">Practice</span><span class="tab-meta">Track wins and retry misses</span></span></button>
-      <button class="tab-btn" data-tab="quiz"><span class="tab-icon">🎯</span><span class="tab-copy"><span class="tab-label">Self-Quiz</span><span class="tab-meta">Check recall under test pacing</span></span></button>
-      <button class="tab-btn" data-tab="checklist"><span class="tab-icon">✅</span><span class="tab-copy"><span class="tab-label">Checklist</span><span class="tab-meta">Mark each objective complete</span></span></button>
-      <button class="tab-btn" data-tab="progress"><span class="tab-icon">📈</span><span class="tab-copy"><span class="tab-label">Progress</span><span class="tab-meta">Review history and best attempts</span></span></button>
+    <nav class="tab-nav review-tabs review-tabs-3" id="tabNav">
+      <button class="tab-btn review-tab-btn active" data-tab="topics"><span class="tab-icon review-tab-icon">📚</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Topics Review</span><span class="tab-meta review-tab-meta">Core ideas and worked examples</span></span></button>
+      <button class="tab-btn review-tab-btn" data-tab="formulas"><span class="tab-icon review-tab-icon">🧾</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Formula Sheet</span><span class="tab-meta review-tab-meta">Quick reference before practice</span></span></button>
+      <button class="tab-btn review-tab-btn" data-tab="practice"><span class="tab-icon review-tab-icon">✍️</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Practice</span><span class="tab-meta review-tab-meta">Track wins and retry misses</span></span></button>
+      <button class="tab-btn review-tab-btn" data-tab="quiz"><span class="tab-icon review-tab-icon">🎯</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Self-Quiz</span><span class="tab-meta review-tab-meta">Check recall under test pacing</span></span></button>
+      <button class="tab-btn review-tab-btn" data-tab="checklist"><span class="tab-icon review-tab-icon">✅</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Checklist</span><span class="tab-meta review-tab-meta">Mark each objective complete</span></span></button>
+      <button class="tab-btn review-tab-btn" data-tab="progress"><span class="tab-icon review-tab-icon">📈</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Progress</span><span class="tab-meta review-tab-meta">Review history and best attempts</span></span></button>
     </nav>
     <div class="tab-fade-right" id="fade-right"></div>
   </div>
 
   <!-- TOPICS -->
   <div id="tab-topics" class="tab-content active">
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">01</span><span class="topic-title">Sets — Intervals, Union, Intersection</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><b>Set-builder notation</b>: e.g. <span class="k">\{x \mid x \geq 3\}</span></li><li><b>Interval notation</b>: brackets [ ] include; parentheses ( ) exclude</li><li><b>Union</b> <span class="k">A \cup B</span>: elements in <em>either</em> set</li><li><b>Intersection</b> <span class="k">A \cap B</span>: elements in <em>both</em> sets</li></ul><h4>Common Intervals</h4><div class="formula-box"><span class="k">[a, b] \quad (a, b) \quad [a, \infty) \quad (-\infty, b]</span></div><div class="tip-box">⚡ ∞ and −∞ always get parentheses, never brackets!</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link" href="https://www.youtube.com/watch?v=lsvjiAsBZUM" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Intersection and Union of Two Intervals</div><div class="yt-sub">Interval notation with number line visuals</div></div></a><a class="video-link" href="https://www.youtube.com/watch?v=fezDDJij25U" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Intersection and Union of Discrete Sets</div><div class="yt-sub">Working with finite sets — listing elements in ∩ and ∪</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">01</span><span class="topic-title">Sets — Intervals, Union, Intersection</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><b>Set-builder notation</b>: e.g. <span class="k">\{x \mid x \geq 3\}</span></li><li><b>Interval notation</b>: brackets [ ] include; parentheses ( ) exclude</li><li><b>Union</b> <span class="k">A \cup B</span>: elements in <em>either</em> set</li><li><b>Intersection</b> <span class="k">A \cap B</span>: elements in <em>both</em> sets</li></ul><h4>Common Intervals</h4><div class="formula-box review-formula-box"><span class="k">[a, b] \quad (a, b) \quad [a, \infty) \quad (-\infty, b]</span></div><div class="tip-box review-callout review-callout--tip">⚡ ∞ and −∞ always get parentheses, never brackets!</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=lsvjiAsBZUM" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Intersection and Union of Two Intervals</div><div class="yt-sub">Interval notation with number line visuals</div></div></a><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=fezDDJij25U" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Intersection and Union of Discrete Sets</div><div class="yt-sub">Working with finite sets — listing elements in ∩ and ∪</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">02</span><span class="topic-title">Absolute Value</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><span class="k">|a|</span> = distance from <span class="k">a</span> to 0 — always ≥ 0</li><li><span class="k">|a| = a</span> if <span class="k">a \geq 0</span>; <span class="k">|a| = -a</span> if <span class="k">a < 0</span></li></ul><div class="formula-box"><span class="k">|x| = c \implies x = c \text{ or } x = -c \quad(c \geq 0)</span></div><div class="tip-box">⚡ Remember: <span class="k">\sqrt{x^2} = |x|</span></div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://youtube.com/shorts/alBGenaCn40" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Challenging Absolute Value Equations</div><div class="yt-sub">Quick walkthrough of tricky absolute value problems</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">02</span><span class="topic-title">Absolute Value</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><span class="k">|a|</span> = distance from <span class="k">a</span> to 0 — always ≥ 0</li><li><span class="k">|a| = a</span> if <span class="k">a \geq 0</span>; <span class="k">|a| = -a</span> if <span class="k">a < 0</span></li></ul><div class="formula-box review-formula-box"><span class="k">|x| = c \implies x = c \text{ or } x = -c \quad(c \geq 0)</span></div><div class="tip-box review-callout review-callout--tip">⚡ Remember: <span class="k">\sqrt{x^2} = |x|</span></div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link review-video-link" href="https://youtube.com/shorts/alBGenaCn40" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Challenging Absolute Value Equations</div><div class="yt-sub">Quick walkthrough of tricky absolute value problems</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">03</span><span class="topic-title">Exponents</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Core Laws</h4><ul><li><span class="k">a^m \cdot a^n = a^{m+n}</span></li><li><span class="k">\frac{a^m}{a^n} = a^{m-n}</span></li><li><span class="k">(a^m)^n = a^{mn}</span></li><li><span class="k">(ab)^n = a^n b^n</span></li><li><span class="k">a^{-n} = \frac{1}{a^n}</span></li></ul><div class="tip-box">⚡ Write all final answers with <b>positive exponents only</b>.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://youtu.be/o2B0IohGKNI" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Rational Exponents with a Few Examples</div><div class="yt-sub">Converting between radicals and fractional exponents</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">03</span><span class="topic-title">Exponents</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Core Laws</h4><ul><li><span class="k">a^m \cdot a^n = a^{m+n}</span></li><li><span class="k">\frac{a^m}{a^n} = a^{m-n}</span></li><li><span class="k">(a^m)^n = a^{mn}</span></li><li><span class="k">(ab)^n = a^n b^n</span></li><li><span class="k">a^{-n} = \frac{1}{a^n}</span></li></ul><div class="tip-box review-callout review-callout--tip">⚡ Write all final answers with <b>positive exponents only</b>.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link review-video-link" href="https://youtu.be/o2B0IohGKNI" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Rational Exponents with a Few Examples</div><div class="yt-sub">Converting between radicals and fractional exponents</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">04</span><span class="topic-title">Factoring</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Methods (always start with GCF!)</h4><ul><li><b>GCF</b> — always factor out first</li><li><b>Grouping</b> — split into pairs</li><li><b>Difference of squares</b>: <span class="k">a^2 - b^2 = (a-b)(a+b)</span></li><li><b>Difference of cubes</b>: <span class="k">a^3 - b^3 = (a-b)(a^2+ab+b^2)</span></li><li><b>Sum of cubes</b>: <span class="k">a^3 + b^3 = (a+b)(a^2-ab+b^2)</span></li><li><b>Trinomials</b>: find two numbers that multiply to <span class="k">ac</span> and add to <span class="k">b</span></li></ul><div class="tip-box">⚡ Mnemonic for cubes: "SOAP" — Same, Opposite, Always Positive.</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link" href="https://youtu.be/-CyiqgtA2_U" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Factor a Quadratic with Lead Coefficient = 1</div><div class="yt-sub">Finding two numbers that multiply and add correctly</div></div></a><a class="video-link" href="https://youtu.be/5aPaldvXCmw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Factor Quadratics with a Lead Coefficient</div><div class="yt-sub">AC method for trinomials when a ≠ 1</div></div></a><a class="video-link" href="https://youtu.be/7GQvKh6Tmgk" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Solve Quadratics by Factoring</div><div class="yt-sub">GCF, trinomials without &amp; with lead coefficients</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">04</span><span class="topic-title">Factoring</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Methods (always start with GCF!)</h4><ul><li><b>GCF</b> — always factor out first</li><li><b>Grouping</b> — split into pairs</li><li><b>Difference of squares</b>: <span class="k">a^2 - b^2 = (a-b)(a+b)</span></li><li><b>Difference of cubes</b>: <span class="k">a^3 - b^3 = (a-b)(a^2+ab+b^2)</span></li><li><b>Sum of cubes</b>: <span class="k">a^3 + b^3 = (a+b)(a^2-ab+b^2)</span></li><li><b>Trinomials</b>: find two numbers that multiply to <span class="k">ac</span> and add to <span class="k">b</span></li></ul><div class="tip-box review-callout review-callout--tip">⚡ Mnemonic for cubes: "SOAP" — Same, Opposite, Always Positive.</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link review-video-link" href="https://youtu.be/-CyiqgtA2_U" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Factor a Quadratic with Lead Coefficient = 1</div><div class="yt-sub">Finding two numbers that multiply and add correctly</div></div></a><a class="video-link review-video-link" href="https://youtu.be/5aPaldvXCmw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Factor Quadratics with a Lead Coefficient</div><div class="yt-sub">AC method for trinomials when a ≠ 1</div></div></a><a class="video-link review-video-link" href="https://youtu.be/7GQvKh6Tmgk" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Solve Quadratics by Factoring</div><div class="yt-sub">GCF, trinomials without &amp; with lead coefficients</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">05</span><span class="topic-title">Operations with Fractions & Rational Expressions</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><ul><li><b>Always factor first</b></li><li><b>Add/subtract</b>: find LCD, rewrite, combine numerators</li><li><b>Multiply</b>: factor → cancel → multiply</li><li><b>Divide</b>: flip second fraction → multiply</li></ul><div class="tip-box">⚡ Factor first! This is the #1 mistake on rational expression problems.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://youtu.be/LH40X-gPLOw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Solving Rational Equations</div><div class="yt-sub">Finding LCD, clearing fractions, checking for extraneous solutions</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">05</span><span class="topic-title">Operations with Fractions & Rational Expressions</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><ul><li><b>Always factor first</b></li><li><b>Add/subtract</b>: find LCD, rewrite, combine numerators</li><li><b>Multiply</b>: factor → cancel → multiply</li><li><b>Divide</b>: flip second fraction → multiply</li></ul><div class="tip-box review-callout review-callout--tip">⚡ Factor first! This is the #1 mistake on rational expression problems.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link review-video-link" href="https://youtu.be/LH40X-gPLOw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Solving Rational Equations</div><div class="yt-sub">Finding LCD, clearing fractions, checking for extraneous solutions</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">06</span><span class="topic-title">Equations — Linear & Quadratic</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Linear</h4><ul><li>Distribute, combine like terms, isolate variable</li><li>With fractions: multiply by LCD</li><li>Watch for no solution or all reals</li></ul><h4>Quadratic</h4><ul><li>Factor or use quadratic formula</li><li>Rational equations: check for extraneous solutions!</li></ul><div class="formula-box"><span class="k">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</span></div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link" href="https://youtu.be/7GQvKh6Tmgk" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Solve Quadratics by Factoring</div><div class="yt-sub">GCF, trinomials without &amp; with lead coefficients</div></div></a><a class="video-link" href="https://youtu.be/LH40X-gPLOw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Solving Rational Equations</div><div class="yt-sub">Finding LCD, clearing fractions, checking for extraneous solutions</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">06</span><span class="topic-title">Equations — Linear & Quadratic</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Linear</h4><ul><li>Distribute, combine like terms, isolate variable</li><li>With fractions: multiply by LCD</li><li>Watch for no solution or all reals</li></ul><h4>Quadratic</h4><ul><li>Factor or use quadratic formula</li><li>Rational equations: check for extraneous solutions!</li></ul><div class="formula-box review-formula-box"><span class="k">x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}</span></div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link review-video-link" href="https://youtu.be/7GQvKh6Tmgk" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Solve Quadratics by Factoring</div><div class="yt-sub">GCF, trinomials without &amp; with lead coefficients</div></div></a><a class="video-link review-video-link" href="https://youtu.be/LH40X-gPLOw" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Solving Rational Equations</div><div class="yt-sub">Finding LCD, clearing fractions, checking for extraneous solutions</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">07</span><span class="topic-title">Midpoint & Distance Formula</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">\text{Midpoint} = \left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)</span></div><div class="formula-box"><span class="k">d = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</span></div><div class="tip-box">⚡ Round to one decimal place when instructed!</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://www.youtube.com/watch?v=dxskClJTbPQ" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Midpoint &amp; Distance Formula</div><div class="yt-sub">Step-by-step examples with coordinate pairs</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">07</span><span class="topic-title">Midpoint & Distance Formula</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><div class="formula-box review-formula-box"><span class="k">\text{Midpoint} = \left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)</span></div><div class="formula-box review-formula-box"><span class="k">d = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</span></div><div class="tip-box review-callout review-callout--tip">⚡ Round to one decimal place when instructed!</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=dxskClJTbPQ" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Midpoint &amp; Distance Formula</div><div class="yt-sub">Step-by-step examples with coordinate pairs</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">08</span><span class="topic-title">Equation of a Circle</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">(x-h)^2 + (y-k)^2 = r^2</span></div><p>Center = <span class="k">(h,k)</span>, Radius = <span class="k">r</span></p><div class="tip-box">⚡ Right side is r², not r. Radius 5 → write 25.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://youtu.be/golqytjtN-c?si=PLdB6fAKGrhVcuZo" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Standard Equation of a Circle Formula Explained!</div><div class="yt-sub">Center, radius, and writing the equation step by step</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">08</span><span class="topic-title">Equation of a Circle</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><div class="formula-box review-formula-box"><span class="k">(x-h)^2 + (y-k)^2 = r^2</span></div><p>Center = <span class="k">(h,k)</span>, Radius = <span class="k">r</span></p><div class="tip-box review-callout review-callout--tip">⚡ Right side is r², not r. Radius 5 → write 25.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link review-video-link" href="https://youtu.be/golqytjtN-c?si=PLdB6fAKGrhVcuZo" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Standard Equation of a Circle Formula Explained!</div><div class="yt-sub">Center, radius, and writing the equation step by step</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">09</span><span class="topic-title">Lines — Slope, Forms, Parallel & Perpendicular</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><ul><li><b>Slope-intercept</b>: <span class="k">y = mx + b</span></li><li><b>Point-slope</b>: <span class="k">y - y_1 = m(x - x_1)</span></li><li><b>General</b>: <span class="k">Ax + By + C = 0</span></li></ul><div class="formula-box"><span class="k">\text{Parallel: } m_1 = m_2 \qquad \text{Perp: } m_1 \cdot m_2 = -1</span></div><div class="tip-box">⚡ Perpendicular: flip and negate. Slope 3 → perp slope −1/3.</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link" href="https://www.youtube.com/watch?v=4umbDjZ2R1I" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Slope Intercept vs Point Slope Form</div><div class="yt-sub">When to use each form and converting between them</div></div></a><a class="video-link" href="https://www.youtube.com/watch?v=acsR7w0I__w" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Finding Slopes of Parallel and Perpendicular Lines</div><div class="yt-sub">Identifying slopes and graphing parallel &amp; perpendicular lines</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">09</span><span class="topic-title">Lines — Slope, Forms, Parallel & Perpendicular</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><ul><li><b>Slope-intercept</b>: <span class="k">y = mx + b</span></li><li><b>Point-slope</b>: <span class="k">y - y_1 = m(x - x_1)</span></li><li><b>General</b>: <span class="k">Ax + By + C = 0</span></li></ul><div class="formula-box review-formula-box"><span class="k">\text{Parallel: } m_1 = m_2 \qquad \text{Perp: } m_1 \cdot m_2 = -1</span></div><div class="tip-box review-callout review-callout--tip">⚡ Perpendicular: flip and negate. Slope 3 → perp slope −1/3.</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=4umbDjZ2R1I" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Slope Intercept vs Point Slope Form</div><div class="yt-sub">When to use each form and converting between them</div></div></a><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=acsR7w0I__w" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Finding Slopes of Parallel and Perpendicular Lines</div><div class="yt-sub">Identifying slopes and graphing parallel &amp; perpendicular lines</div></div></a></div></div></div>
 
-    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">10</span><span class="topic-title">Maximum/Minimum of a Quadratic — Vertex</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><div class="formula-box"><span class="k">x = -\frac{b}{2a}</span></div><p>Plug back into <span class="k">f(x)</span> for the max/min <b>value</b>.</p><ul><li><span class="k">a > 0</span> → minimum</li><li><span class="k">a < 0</span> → maximum</li></ul><div class="tip-box">⚡ The question usually wants the y-value (height, etc.), not the x-value.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link" href="https://www.youtube.com/watch?v=ygH-Y5YG5kE" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Vertex of a Parabola</div><div class="yt-sub">NancyPi — clear walkthrough of the vertex formula</div></div></a></div></div></div>
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">10</span><span class="topic-title">Maximum/Minimum of a Quadratic — Vertex</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><div class="formula-box review-formula-box"><span class="k">x = -\frac{b}{2a}</span></div><p>Plug back into <span class="k">f(x)</span> for the max/min <b>value</b>.</p><ul><li><span class="k">a > 0</span> → minimum</li><li><span class="k">a < 0</span> → maximum</li></ul><div class="tip-box review-callout review-callout--tip">⚡ The question usually wants the y-value (height, etc.), not the x-value.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=ygH-Y5YG5kE" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Vertex of a Parabola</div><div class="yt-sub">NancyPi — clear walkthrough of the vertex formula</div></div></a></div></div></div>
   </div>
 
   <!-- FORMULAS -->
   <div id="tab-formulas" class="tab-content">
     <button class="print-btn" onclick="window.print()">🖨️ Print Formula Sheet</button>
 
-    <div class="formula-section"><h3>📐 Core Algebra</h3><div class="formula-grid">
-      <div class="formula-item"><div class="label">Difference of Squares</div><div class="formula-box"><span class="k">a^2-b^2=(a-b)(a+b)</span></div></div>
-      <div class="formula-item"><div class="label">Difference of Cubes</div><div class="formula-box"><span class="k">a^3-b^3=(a-b)(a^2+ab+b^2)</span></div></div>
-      <div class="formula-item"><div class="label">Sum of Cubes</div><div class="formula-box"><span class="k">a^3+b^3=(a+b)(a^2-ab+b^2)</span></div></div>
-      <div class="formula-item"><div class="label">Quadratic Formula</div><div class="formula-box"><span class="k">x=\frac{-b \pm \sqrt{b^2-4ac}}{2a}</span></div></div>
+    <div class="formula-section review-formula-section"><h3>📐 Core Algebra</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Difference of Squares</div><div class="formula-box review-formula-box"><span class="k">a^2-b^2=(a-b)(a+b)</span></div></div>
+      <div class="formula-item"><div class="label">Difference of Cubes</div><div class="formula-box review-formula-box"><span class="k">a^3-b^3=(a-b)(a^2+ab+b^2)</span></div></div>
+      <div class="formula-item"><div class="label">Sum of Cubes</div><div class="formula-box review-formula-box"><span class="k">a^3+b^3=(a+b)(a^2-ab+b^2)</span></div></div>
+      <div class="formula-item"><div class="label">Quadratic Formula</div><div class="formula-box review-formula-box"><span class="k">x=\frac{-b \pm \sqrt{b^2-4ac}}{2a}</span></div></div>
     </div></div>
 
-    <div class="formula-section"><h3>📏 Coordinate Geometry</h3><div class="formula-grid">
-      <div class="formula-item"><div class="label">Midpoint</div><div class="formula-box"><span class="k">M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)</span></div></div>
-      <div class="formula-item"><div class="label">Distance</div><div class="formula-box"><span class="k">d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</span></div></div>
-      <div class="formula-item"><div class="label">Slope</div><div class="formula-box"><span class="k">m=\frac{y_2-y_1}{x_2-x_1}</span></div></div>
-      <div class="formula-item"><div class="label">Circle</div><div class="formula-box"><span class="k">(x-h)^2+(y-k)^2=r^2</span></div></div>
+    <div class="formula-section review-formula-section"><h3>📏 Coordinate Geometry</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Midpoint</div><div class="formula-box review-formula-box"><span class="k">M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)</span></div></div>
+      <div class="formula-item"><div class="label">Distance</div><div class="formula-box review-formula-box"><span class="k">d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}</span></div></div>
+      <div class="formula-item"><div class="label">Slope</div><div class="formula-box review-formula-box"><span class="k">m=\frac{y_2-y_1}{x_2-x_1}</span></div></div>
+      <div class="formula-item"><div class="label">Circle</div><div class="formula-box review-formula-box"><span class="k">(x-h)^2+(y-k)^2=r^2</span></div></div>
     </div></div>
 
-    <div class="formula-section"><h3>📈 Lines</h3><div class="formula-grid">
-      <div class="formula-item"><div class="label">Point-Slope</div><div class="formula-box"><span class="k">y-y_1=m(x-x_1)</span></div></div>
-      <div class="formula-item"><div class="label">Slope-Intercept</div><div class="formula-box"><span class="k">y=mx+b</span></div></div>
-      <div class="formula-item"><div class="label">Parallel</div><div class="formula-box"><span class="k">m_1=m_2</span></div></div>
-      <div class="formula-item"><div class="label">Perpendicular</div><div class="formula-box"><span class="k">m_1 \cdot m_2=-1</span></div></div>
+    <div class="formula-section review-formula-section"><h3>📈 Lines</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Point-Slope</div><div class="formula-box review-formula-box"><span class="k">y-y_1=m(x-x_1)</span></div></div>
+      <div class="formula-item"><div class="label">Slope-Intercept</div><div class="formula-box review-formula-box"><span class="k">y=mx+b</span></div></div>
+      <div class="formula-item"><div class="label">Parallel</div><div class="formula-box review-formula-box"><span class="k">m_1=m_2</span></div></div>
+      <div class="formula-item"><div class="label">Perpendicular</div><div class="formula-box review-formula-box"><span class="k">m_1 \cdot m_2=-1</span></div></div>
     </div></div>
 
-    <div class="formula-section"><h3>⛰️ Quadratic Vertex</h3><div class="formula-grid">
-      <div class="formula-item"><div class="label">Vertex x-coordinate</div><div class="formula-box"><span class="k">x=-\frac{b}{2a}</span></div></div>
-      <div class="formula-item"><div class="label">Rule</div><div class="formula-box" style="font-family:'DM Sans';font-size:0.85rem;color:var(--text-muted)">a &gt; 0 → min | a &lt; 0 → max</div></div>
+    <div class="formula-section review-formula-section"><h3>⛰️ Quadratic Vertex</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Vertex x-coordinate</div><div class="formula-box review-formula-box"><span class="k">x=-\frac{b}{2a}</span></div></div>
+      <div class="formula-item"><div class="label">Rule</div><div class="formula-box review-formula-box" style="font-family:'DM Sans';font-size:0.85rem;color:var(--text-muted)">a &gt; 0 → min | a &lt; 0 → max</div></div>
     </div></div>
 
-    <div class="formula-section"><h3>🔢 Exponent Rules</h3><div class="formula-grid">
-      <div class="formula-item"><div class="label">Product</div><div class="formula-box"><span class="k">a^m \cdot a^n=a^{m+n}</span></div></div>
-      <div class="formula-item"><div class="label">Quotient</div><div class="formula-box"><span class="k">\frac{a^m}{a^n}=a^{m-n}</span></div></div>
-      <div class="formula-item"><div class="label">Power</div><div class="formula-box"><span class="k">(a^m)^n=a^{mn}</span></div></div>
-      <div class="formula-item"><div class="label">Negative</div><div class="formula-box"><span class="k">a^{-n}=\frac{1}{a^n}</span></div></div>
+    <div class="formula-section review-formula-section"><h3>🔢 Exponent Rules</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Product</div><div class="formula-box review-formula-box"><span class="k">a^m \cdot a^n=a^{m+n}</span></div></div>
+      <div class="formula-item"><div class="label">Quotient</div><div class="formula-box review-formula-box"><span class="k">\frac{a^m}{a^n}=a^{m-n}</span></div></div>
+      <div class="formula-item"><div class="label">Power</div><div class="formula-box review-formula-box"><span class="k">(a^m)^n=a^{mn}</span></div></div>
+      <div class="formula-item"><div class="label">Negative</div><div class="formula-box review-formula-box"><span class="k">a^{-n}=\frac{1}{a^n}</span></div></div>
     </div></div>
   </div>
 
@@ -603,7 +521,7 @@ function revealPS(){
   if(practiceSolShown)return;practiceSolShown=true;
   const pi=practiceQueue[practiceIdx],p=allProblems[pi];
   document.getElementById('psol').classList.add('show');
-  const warnHtml=p.warning?'<div class="warning-box"><b>Watch out:</b> '+p.warning+'</div>':'';
+  const warnHtml=p.warning?'<div class="warning-box review-callout review-callout--warning"><b>Watch out:</b> '+p.warning+'</div>':'';
   document.getElementById('pbtns').innerHTML='<button class="practice-action-btn got-it" onclick="pGot()">✓ Got It</button><button class="practice-action-btn missed" onclick="pMiss()">✗ Missed It</button>'+warnHtml;
   setTimeout(renderMath,50);
 }
