@@ -42,14 +42,22 @@
     </div>
   </div>
 </nav>
-  <header>
-    <div class="container">
-      <h1>Welcome to Prof. Volk's Office!</h1>
-      <p class="subtitle">Exploring Education, Engineering, Math, Physics and Growth</p>
-    </div>
-  </header>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <span class="breadcrumb-current" aria-current="page">Home</span>
+    </nav>
+  </div>
+</div>
+<header class="page-shell-header">
+  <div class="container">
+    <div class="page-shell-header__eyebrow">Home</div>
+    <h1>Welcome to Prof. Volk's Office</h1>
+    <p class="subtitle">Exploring education, engineering, mathematics, physics, and growth.</p>
+  </div>
+</header>
   
-  <main class="container">
+  <main class="container page-shell-main">
     <section class="welcome-section">
       <h2>Hello, I'm glad you're here!</h2>
       <p>Welcome to my personal website. I'm passionate about education, engineering, and creating resources to help others learn. Please explore the various sections of my site to discover more about my work, projects, and educational content.</p>
@@ -84,10 +92,10 @@
         <a href="learn.html" class="button">Start Learning</a>
       </div>
       <div class="card">
-        <a href="projects.html" aria-label="Tools and Resources" title="Tools and Resources">
+        <a href="projects.html" aria-label="Tools" title="Tools">
           <div class="card-icon">🔧</div>
         </a>
-        <h2>Tools and Resources</h2>
+        <h2>Tools</h2>
         <p>Explore featured tools, classroom activities, reference pages, and other practical resources collected on the Tools page.</p>
         <a href="projects.html" class="button">Explore Tools</a>
       </div>
@@ -112,11 +120,12 @@
   
   <footer>
     <div class="container">
-      <p>&copy; 2025 - All Rights Reserved</p>
+      <p>&copy; <span id="current-year">2025</span> Andrew H. Volk. All rights reserved.</p>
       <div class="social-links">
         <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
       </div>
     </div>
   </footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

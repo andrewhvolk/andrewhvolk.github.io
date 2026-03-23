@@ -42,15 +42,24 @@
     </div>
   </div>
 </nav>
-
-  <header>
-    <div class="container">
-      <h1>Tools</h1>
-      <p class="subtitle">Research, Tools, and Initiatives</p>
-    </div>
-  </header>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Tools</span>
+    </nav>
+  </div>
+</div>
+<header class="page-shell-header">
+  <div class="container">
+    <div class="page-shell-header__eyebrow">Tools</div>
+    <h1>Tools</h1>
+    <p class="subtitle">Research, tools, and initiatives collected across courses and classroom projects.</p>
+  </div>
+</header>
   
-  <main class="container">
+  <main class="container page-shell-main">
     <section class="welcome-section">
       <h2>Highlighted Works</h2>
       <p>Below are some of my featured projects, each dedicated to advancing education, engineering, or mathematics.</p>
@@ -223,11 +232,12 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2025 - All Rights Reserved</p>
+      <p>&copy; <span id="current-year">2025</span> Andrew H. Volk. All rights reserved.</p>
       <div class="social-links">
         <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
       </div>
     </div>
   </footer>
+<script>document.getElementById("current-year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
