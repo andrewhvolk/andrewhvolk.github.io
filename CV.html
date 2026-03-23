@@ -55,254 +55,288 @@
     </nav>
   </div>
 </div>
-    <!-- Header with profile image and name -->
-    <header class="page-shell-header page-shell-header--profile">
+    <header class="page-shell-header page-shell-header--profile cv-hero">
         <div class="profile-image">
             <img src="headshot150.jpg" alt="Headshot of Andrew H. Volk">
         </div>
-        <h1>Andrew H. Volk</h1>
-        <p class="subtitle">Assistant Professor of Mathematics and Physics</p>
-        <div class="contact-info">
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>ahvolk@liberty.edu</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <span>(434) 582-2863</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>1971 University Blvd, Lynchburg, VA 24515</span>
-            </div>
+        <div class="cv-hero__body">
+            <p class="cv-hero__eyebrow">Curriculum Vitae</p>
+            <h1>Andrew H. Volk</h1>
+            <p class="subtitle cv-hero__subtitle">Assistant Professor of Mathematics and Physics</p>
+            <div class="cv-hero__affiliation">Liberty University · Lynchburg, Virginia</div>
+            <dl class="contact-info contact-info--compact">
+                <div class="contact-chip">
+                    <dt><i class="fas fa-envelope" aria-hidden="true"></i><span>Email</span></dt>
+                    <dd><a href="mailto:ahvolk@liberty.edu">ahvolk@liberty.edu</a></dd>
+                </div>
+                <div class="contact-chip">
+                    <dt><i class="fas fa-phone" aria-hidden="true"></i><span>Phone</span></dt>
+                    <dd><a href="tel:+14345822863">(434) 582-2863</a></dd>
+                </div>
+                <div class="contact-chip contact-chip--wide">
+                    <dt><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span>Office</span></dt>
+                    <dd>1971 University Blvd, Lynchburg, VA 24515</dd>
+                </div>
+            </dl>
         </div>
     </header>
 
-    <!-- Sticky Navigation Bar with Dropdowns -->
     <nav class="cv-section-nav" aria-label="CV sections">
         <div class="container cv-section-nav__inner">
-        <button class="menu-toggle" aria-label="Toggle CV section navigation">
-            <i class="fas fa-bars"></i>
+        <button class="menu-toggle" type="button" aria-label="Toggle CV section navigation" aria-controls="nav-menu" aria-expanded="false">
+            <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
         <ul id="nav-menu">
-            <li>
-                <a href="#!">About</a>
-                <ul class="dropdown-menu">
+            <li class="cv-nav-group">
+                <button class="cv-nav-trigger" type="button" aria-expanded="false" aria-controls="cv-nav-about">About</button>
+                <ul class="dropdown-menu" id="cv-nav-about">
                     <li><a href="#about">Biography</a></li>
                     <li><a href="#philosophy">Teaching Philosophy</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#!">Academics</a>
-                <ul class="dropdown-menu">
-                    <li><a href="#education">Education</a></li>
+            <li class="cv-nav-group">
+                <button class="cv-nav-trigger" type="button" aria-expanded="false" aria-controls="cv-nav-academics">Academics</button>
+                <ul class="dropdown-menu" id="cv-nav-academics">
+                    <li><a href="#summary">Profile</a></li>
+                    <li><a href="#academic-record">Academic Record</a></li>
                     <li><a href="#courses">Courses Taught</a></li>
                     <li><a href="#publications">Publications</a></li>
                     <li><a href="#research">Research Interests</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#!">Experience</a>
-                <ul class="dropdown-menu">
+            <li class="cv-nav-group">
+                <button class="cv-nav-trigger" type="button" aria-expanded="false" aria-controls="cv-nav-experience">Experience</button>
+                <ul class="dropdown-menu" id="cv-nav-experience">
                     <li><a href="#experience">Professional Experience</a></li>
                     <li><a href="#presentations">Conference Presentations</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#!">Service</a>
-                <ul class="dropdown-menu">
+            <li class="cv-nav-group">
+                <button class="cv-nav-trigger" type="button" aria-expanded="false" aria-controls="cv-nav-service">Service</button>
+                <ul class="dropdown-menu" id="cv-nav-service">
                     <li><a href="#community">Community &amp; Church Service</a></li>
                     <li><a href="#mentoring">Advising &amp; Mentoring</a></li>
                     <li><a href="#youtube">Educational Media</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#honors">Honors &amp; Awards</a>
-            </li>
+            <li><a class="cv-nav-link" href="#honors">Honors &amp; Awards</a></li>
         </ul>
         </div>
     </nav>
 
-    <div class="container">
-        <!-- Two-Column Section (Education and Courses) moved to the top -->
-        <div class="two-column">
-            <section id="education">
-                <h2>Education</h2>
-                <div class="education-item">
-                    <div class="item-header">
-                        <span class="item-title">Ph.D. Engineering Education (In Progress - ABD)</span>
-                        <span class="item-date">Current</span>
-                    </div>
-                    <div class="item-subtitle">Mississippi State University, Starkville, MS</div>
+    <div class="container cv-layout">
+        <section id="summary" class="cv-section cv-section--summary">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Summary</p>
+                <h2>Academic profile</h2>
+            </div>
+            <div class="summary-grid">
+                <div class="summary-panel">
+                    <p>
+                        Dedicated Assistant Professor and researcher with significant experience in
+                        <strong>mathematics education, physics instruction, and curriculum design</strong>.
+                        Proven track record of integrating technology and assessment strategies to
+                        <em>enhance student engagement</em> and foster academic growth.
+                    </p>
                 </div>
-                <div class="education-item">
-                    <div class="item-header">
-                        <span class="item-title">M.A. Science Education (Secondary Physics)</span>
-                        <span class="item-date">July 2023</span>
-                    </div>
-                    <div class="item-subtitle">Western Governors University, Salt Lake City, UT</div>
-                    <div>32 Credit Hours</div>
+                <div class="summary-panel summary-panel--highlights">
+                    <h3>Selected highlights</h3>
+                    <ul class="highlights-list">
+                        <li>Recipient of multiple teaching and service awards, including the VCTM William C. Lowry Math Educator of the Year Award.</li>
+                        <li>Authored and co-authored publications on mathematics pedagogy, educational technology, and mathematical culture.</li>
+                        <li>Presented scholarship at national, regional, and interdisciplinary academic conferences.</li>
+                    </ul>
                 </div>
-                <div class="education-item">
-                    <div class="item-header">
-                        <span class="item-title">M.S. Mathematics</span>
-                        <span class="item-date">May 2021</span>
+            </div>
+        </section>
+
+        <section id="academic-record" class="cv-section cv-section--academic">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Academic record</p>
+                <h2>Education, credentials, and teaching portfolio</h2>
+            </div>
+            <div class="cv-record-grid">
+                <section id="education" class="cv-panel cv-panel--list">
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <span class="item-title">Ph.D. Engineering Education (ABD)</span>
+                            <span class="item-date">Current</span>
+                        </div>
+                        <div class="item-subtitle">Mississippi State University · Starkville, Mississippi</div>
                     </div>
-                    <div class="item-subtitle">Central Methodist University, Fayette, MO</div>
-                    <div>32 Credit Hours</div>
-                </div>
-                <div class="education-item">
-                    <div class="item-header">
-                        <span class="item-title">M.Ed. Instructional Design</span>
-                        <span class="item-date">November 2018</span>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <span class="item-title">M.A. Science Education (Secondary Physics)</span>
+                            <span class="item-date">July 2023</span>
+                        </div>
+                        <div class="item-subtitle">Western Governors University · Salt Lake City, Utah</div>
+                        <div class="item-meta">32 credit hours</div>
                     </div>
-                    <div class="item-subtitle">Western Governors University, Salt Lake City, UT</div>
-                    <div>30 Credit Hours</div>
-                </div>
-                <div class="education-item">
-                    <div class="item-header">
-                        <span class="item-title">B.S. Mathematics & B.A. Spanish</span>
-                        <span class="item-date">May 2011</span>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <span class="item-title">M.S. Mathematics</span>
+                            <span class="item-date">May 2021</span>
+                        </div>
+                        <div class="item-subtitle">Central Methodist University · Fayette, Missouri</div>
+                        <div class="item-meta">32 credit hours</div>
                     </div>
-                    <div class="item-subtitle">Liberty University, Lynchburg, VA</div>
-                    <div>184 Credit Hours</div>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <span class="item-title">M.Ed. Instructional Design</span>
+                            <span class="item-date">November 2018</span>
+                        </div>
+                        <div class="item-subtitle">Western Governors University · Salt Lake City, Utah</div>
+                        <div class="item-meta">30 credit hours</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <span class="item-title">B.S. Mathematics &amp; B.A. Spanish</span>
+                            <span class="item-date">May 2011</span>
+                        </div>
+                        <div class="item-subtitle">Liberty University · Lynchburg, Virginia</div>
+                        <div class="item-meta">184 credit hours</div>
+                    </div>
+                </section>
+
+                <aside class="cv-panel cv-panel--stacked">
+                    <section class="cv-mini-panel">
+                        <h3>Licensure &amp; certifications</h3>
+                        <ul class="cv-plain-list">
+                            <li>Virginia Department of Education Collegiate Professional License</li>
+                            <li>Secondary Mathematics License (6-12)</li>
+                            <li>Secondary Physics License (6-12)</li>
+                        </ul>
+                    </section>
+                    <section class="cv-mini-panel">
+                        <h3>Professional membership</h3>
+                        <ul class="cv-plain-list">
+                            <li>Virginia Council of Teachers of Mathematics</li>
+                        </ul>
+                    </section>
+                </aside>
+            </div>
+
+            <section id="courses" class="cv-panel cv-panel--courses">
+                <h3>Courses taught</h3>
+                <div class="course-groups">
+                    <article class="course-group-card">
+                        <h4>Liberty University</h4>
+                        <ul>
+                            <li>PHYS 103: Elements of Physics Lab</li>
+                            <li>PHYS 201L/231L: Physics Lab</li>
+                            <li>PHYS 202L/232L: Physics Lab</li>
+                            <li>MATH 100: Fundamentals of Mathematics</li>
+                            <li>MATH 105: Algebra for Non-STEM Majors</li>
+                            <li>MATH 110: Intermediate Algebra</li>
+                            <li>MATH 114: Quantitative Reasoning</li>
+                            <li>MATH 121: College Algebra</li>
+                            <li>ENGI 220: Engineering Economy</li>
+                        </ul>
+                    </article>
+                    <article class="course-group-card">
+                        <h4>Franklin University</h4>
+                        <ul>
+                            <li>MATH 280: Introduction to Probability and Statistics</li>
+                        </ul>
+                    </article>
                 </div>
             </section>
+        </section>
 
-            <section id="courses">
-                <h2>Courses Taught</h2>
-                <h3>Liberty University</h3>
-                <ul>
-                    <li>PHYS 103: Elements of Physics Lab</li>
-                    <li>PHYS 201L/231L: Physics Lab</li>
-                    <li>PHYS 202L/232L: Physics Lab</li>
-                    <li>MATH 100: Fundamentals of Mathematics</li>
-                    <li>MATH 105: Algebra for Non-STEM Majors</li>
-                    <li>MATH 110: Intermediate Algebra</li>
-                    <li>MATH 114: Quantitative Reasoning</li>
-                    <li>MATH 121: College Algebra</li>
-                    <li>ENGI 220: Engineering Economy</li>
-                </ul>
-                <h3>Franklin University</h3>
-                <ul>
-                    <li>MATH 280: Intro to Probability/Stats</li>
-                </ul>
-                <h3>Professional Memberships</h3>
-                <ul>
-                    <li>Virginia Council of Teachers of Mathematics</li>
-                </ul>
-                <h3>Licensures & Certifications</h3>
-                <ul>
-                    <li>Virginia Department of Education Collegiate Professional License</li>
-                    <li>Secondary Math License (6-12)</li>
-                    <li>Secondary Physics License (6-12)</li>
-                </ul>
-            </section>
-        </div>
-
-        <!-- Professional Summary -->
-        <section>
-            <h2>Professional Summary</h2>
+        <section id="about" class="cv-section cv-section--narrative">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Narrative</p>
+                <h2>Biography</h2>
+            </div>
             <p>
-                Dedicated Assistant Professor and researcher with significant experience in
-                <strong>mathematics education, physics instruction, and curriculum design</strong>.
-                Proven track record of integrating technology and assessment strategies to
-                <em>enhance student engagement</em> and foster academic growth. Skilled in
-                leading collaborative teaching initiatives, publishing peer-reviewed articles,
-                and presenting at national conferences.
+                Mr. Andrew Volk serves as an Assistant Professor at Liberty University. He began his career
+                as a mathematics teacher after graduating with a B.S. degree in Mathematics from Liberty in 2011
+                and has taught across school districts, universities, and online environments with a sustained focus on student growth.
+                He has also worked periodically as a software engineer and developer, complementing his academic work with technical practice.
+            </p>
+            <p>
+                With graduate study in Mathematics, Science Education, and Instructional Design,
+                Mr. Volk brings an interdisciplinary perspective to teaching and scholarship. Currently pursuing a Ph.D. in
+                Engineering Education at Mississippi State University, he is especially interested in growth and mastery,
+                assessment practices, and the human dimensions of mathematics that make the subject more accessible and engaging.
             </p>
         </section>
 
-        <!-- Key Achievements (Highlights) -->
-        <section>
-            <h2>Key Achievements</h2>
-            <ul class="highlights-list">
-                <li>Recipient of multiple teaching and service awards (e.g., VCTM Educator of the Year)</li>
-                <li>Authored and co-authored publications on mathematics pedagogy and educational technology</li>
-                <li>Led cross-disciplinary research projects integrating math, physics, and digital humanities</li>
-            </ul>
-        </section>
-
-        <section id="about">
-            <h2>Biography</h2>
+        <section id="philosophy" class="cv-section cv-section--narrative">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Pedagogy</p>
+                <h2>Teaching philosophy</h2>
+            </div>
             <p>
-                Mr. Andrew Volk serves as an Assistant Professor at Liberty University. He began his career 
-                as a mathematics teacher after graduating with a B.S. degree in Mathematics from Liberty in 2011 
-                and has taught in multiple school districts and levels with a focus on promoting student growth. 
-                He has also occasionally worked as a Software Engineer and/or developer. Today, Professor Volk 
-                enjoys teaching math and physics, collaborating with faculty, and ministering to the campus and 
-                the local community.
+                Learning is about <em>change and growth</em>. It is not simply about gaining knowledge or facts,
+                but about becoming something new and better than before. In that way, teaching becomes focused on
+                cultivating the student as a person. A major thread throughout my career has been helping students
+                develop the mindset necessary for that growth.
             </p>
             <p>
-                With multiple master's degrees in Mathematics, Science Education, and Instructional Design, 
-                Mr. Volk brings a diverse educational background to his work. Currently pursuing a Ph.D. in 
-                Engineering Education at Mississippi State University, he is particularly interested in teaching 
-                for growth and mastery, assessment practices, and connecting the human elements of mathematics 
-                to make the subject more accessible and engaging.
+                This means empowering students to take ownership of their learning and creating environments where growth
+                is visible in ways that are richer than a letter grade alone. My teaching emphasizes clarity, reflection,
+                and assessment practices that support durable understanding.
             </p>
         </section>
 
-        <section id="philosophy">
-            <h2>Teaching Philosophy</h2>
-            <p>
-                Learning is about <em>change and growth</em>. It is not simply about gaining knowledge or facts, 
-                but rather changing who the learner is and growing to be something new and better than they were 
-                before. In that way, teaching becomes focused on growing, developing, and cultivating the student 
-                as a person. A big part of what I have been focused on during my career as an educator is 
-                developing student mindsets for that growth. That involves empowering students to take control 
-                of their learning and providing an environment where they can see their growth in a way that is 
-                more than a letter grade.
-            </p>
-        </section>
-
-        <section id="publications">
-            <h2>Publications</h2>
+        <section id="publications" class="cv-section cv-section--scholarship">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Scholarship</p>
+                <h2>Publications</h2>
+            </div>
             <div class="publications-item">
-                <p>Volk, A. H. (2021, Sep 1). A Practitioner's Review of Visible Learning for Mathematics Classrooms. MathBits. 
-                    <a href="http://www.mctmmathbits.org/?p=3510" target="_blank" rel="noopener noreferrer">
-                        http://www.mctmmathbits.org/?p=3510
-                    </a>
+                <p>Volk, A. H. (2021, Sep 1). <em>A Practitioner's Review of Visible Learning for Mathematics Classrooms</em>. MathBits.
+                    <a href="http://www.mctmmathbits.org/?p=3510" target="_blank" rel="noopener noreferrer">http://www.mctmmathbits.org/?p=3510</a>
                 </p>
             </div>
             <div class="publications-item">
-                <p>Volk, A. H. (2019). Euclidea: The game of geometric constructions. Virginia Mathematics Teacher, 46(1), 56-57</p>
+                <p>Volk, A. H. (2019). <em>Euclidea: The game of geometric constructions</em>. <em>Virginia Mathematics Teacher</em>, 46(1), 56-57.</p>
             </div>
             <div class="publications-item">
-                <p>Volk, A. H. (2019). Flatland by Edwin Abbott Abbott. Virginia Mathematics Teacher, 45(2), 36-36</p>
+                <p>Volk, A. H. (2019). <em>Flatland by Edwin Abbott Abbott</em>. <em>Virginia Mathematics Teacher</em>, 45(2), 36.</p>
             </div>
         </section>
 
-        <section id="research">
-            <h2>Research Interests</h2>
-            <div class="experience-item">
-                <div class="item-title">Teaching for Growth and Mastery</div>
-                <p>Research topics within this broader category including growth mindset, grit, U-PACE, and learning retention.</p>
+        <section id="research" class="cv-section cv-section--scholarship">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Scholarship agenda</p>
+                <h2>Research interests</h2>
             </div>
-            <div class="experience-item">
-                <div class="item-title">Assessing Consistently and Grading Sparingly</div>
-                <p>Assessment practices in the classroom and in business environments are an area full of interesting and very meaningful research on how to best motivate and affect change.</p>
-            </div>
-            <div class="experience-item">
-                <div class="item-title">Humanity and Curiosity in Mathematics</div>
-                <p>There are too many people that disconnect mathematics from the humans that create it. There is room for mathematics research to connect the narrative and human elements of mathematics and its history in a way that demystifies the subject.</p>
-            </div>
-            <div class="experience-item">
-                <div class="item-title">Mathematics and Education</div>
-                <p>Research on effective teaching methods and learning outcomes in mathematics education.</p>
-            </div>
-            <div class="experience-item">
-                <div class="item-title">Digital Humanities</div>
-                <p>Exploring the intersection of technology, computational methods, and humanities disciplines.</p>
-            </div>
-            <div class="experience-item">
-                <div class="item-title">Math History</div>
-                <p>Studying the historical development of mathematical concepts and the people behind them.</p>
+            <div class="research-grid">
+                <article class="research-card">
+                    <h3 class="item-title">Teaching for growth and mastery</h3>
+                    <p>Research topics within this broader category include growth mindset, grit, U-PACE, and learning retention.</p>
+                </article>
+                <article class="research-card">
+                    <h3 class="item-title">Assessing consistently and grading sparingly</h3>
+                    <p>Assessment practices in classrooms and organizations remain a meaningful area for understanding how evaluation motivates and shapes change.</p>
+                </article>
+                <article class="research-card">
+                    <h3 class="item-title">Humanity and curiosity in mathematics</h3>
+                    <p>Research that reconnects mathematics with the people and stories behind it can demystify the discipline and invite broader participation.</p>
+                </article>
+                <article class="research-card">
+                    <h3 class="item-title">Mathematics education</h3>
+                    <p>Investigation of effective teaching methods, curriculum design, and learning outcomes in undergraduate and secondary mathematics.</p>
+                </article>
+                <article class="research-card">
+                    <h3 class="item-title">Digital humanities</h3>
+                    <p>Exploring the intersection of computational methods, technology, and humanities inquiry.</p>
+                </article>
+                <article class="research-card">
+                    <h3 class="item-title">History of mathematics</h3>
+                    <p>Studying the development of mathematical ideas and the people whose work shaped the field.</p>
+                </article>
             </div>
         </section>
 
-        <!-- PROFESSIONAL EXPERIENCE -->
-        <section id="experience">
-            <h2>Professional Experience</h2>
+        <section id="experience" class="cv-section cv-section--experience">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Professional experience</p>
+                <h2>Appointments and teaching roles</h2>
+            </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Assistant Professor of Mathematics and Physics</span>
@@ -323,7 +357,7 @@
                     <span class="item-date">2022 - Present</span>
                 </div>
                 <div class="item-subtitle">Liberty University</div>
-                <p>Design, development, and evaluation of Quantitative Reasoning (MATH 114) for residential program.</p>
+                <p>Design, development, and evaluation of Quantitative Reasoning (MATH 114) for the residential program.</p>
             </div>
             <div class="experience-item">
                 <div class="item-header">
@@ -337,84 +371,92 @@
                     <span class="item-title">Math Department Chair and Teacher</span>
                     <span class="item-date">2017 - 2020</span>
                 </div>
-                <div class="item-subtitle">Lynchburg City Schools, Lynchburg, VA</div>
-                <p>Taught Algebra I, Algebra II, Math 8, and Remedial Math. Used effective practices to improve student learning and performance.</p>
+                <div class="item-subtitle">Lynchburg City Schools · Lynchburg, Virginia</div>
+                <p>Taught Algebra I, Algebra II, Math 8, and Remedial Math while implementing practices designed to improve student learning and performance.</p>
             </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Intro Programming Instructor</span>
                     <span class="item-date">2016 - 2022</span>
                 </div>
-                <div class="item-subtitle">Udemy.com</div>
+                <div class="item-subtitle">Udemy</div>
             </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Math/CS Teacher</span>
                     <span class="item-date">2014 - 2017</span>
                 </div>
-                <div class="item-subtitle">Courtland High School, Spotsylvania, VA</div>
-                <p>Taught Algebra I, Geometry, C++, AP Computer Science Principles, and Applied Math. Used effective practices to improve student learning and performance.</p>
+                <div class="item-subtitle">Courtland High School · Spotsylvania, Virginia</div>
+                <p>Taught Algebra I, Geometry, C++, AP Computer Science Principles, and Applied Math using evidence-based instructional practices.</p>
             </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Earlier Teaching Positions</span>
                     <span class="item-date">2011 - 2014</span>
                 </div>
-                <div class="item-subtitle">Various Schools</div>
-                <p>Math Teacher at Mountain View High (Stafford, VA), Classical School Teacher at Nova Classical Academy (St. Paul, MN), Middle School Teacher at Andersen United School (Minneapolis, MN), Math Teacher at City West Academy (Eden Prairie, MN), Middle & High School Teacher at Lynchburg City Schools (Lynchburg, VA)</p>
+                <div class="item-subtitle">Various schools</div>
+                <p>Math Teacher at Mountain View High (Stafford, Virginia), Classical School Teacher at Nova Classical Academy (St. Paul, Minnesota), Middle School Teacher at Andersen United School (Minneapolis, Minnesota), Math Teacher at City West Academy (Eden Prairie, Minnesota), and Middle &amp; High School Teacher at Lynchburg City Schools (Lynchburg, Virginia).</p>
             </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Software Engineer / Developer</span>
-                    <span class="item-date">Various Times</span>
+                    <span class="item-date">Various times</span>
                 </div>
-                <div class="item-subtitle">Various Companies</div>
+                <div class="item-subtitle">Various companies</div>
             </div>
         </section>
 
-        <!-- CONFERENCE PRESENTATIONS -->
-        <section id="presentations">
-            <h2>Conference Presentations</h2>
+        <section id="presentations" class="cv-section cv-section--scholarship">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Scholarly presentations</p>
+                <h2>Conference presentations</h2>
+            </div>
             <div class="presentation-item">
                 <div class="item-header">
                     <span class="item-title">NCTM 2024 Virtual Conference</span>
                     <span class="item-date">April 2024</span>
                 </div>
-                <p>Title: Cultivating Reflective Practice in Math Education: A Dual Perspective (Volk &amp; McGowan)</p>
+                <div class="item-subtitle">National Council of Teachers of Mathematics</div>
+                <p>“Cultivating Reflective Practice in Math Education: A Dual Perspective” (Volk &amp; McGowan)</p>
             </div>
             <div class="presentation-item">
                 <div class="item-header">
                     <span class="item-title">Virginia Council of Teachers of Mathematics Annual Conference</span>
                     <span class="item-date">March 2023</span>
                 </div>
-                <p>Title: Exploring the Capabilities of OpenAI to Write Mathematical Proofs: Implications for Mathematics Educators (Volk)</p>
+                <div class="item-subtitle">Virginia Council of Teachers of Mathematics</div>
+                <p>“Exploring the Capabilities of OpenAI to Write Mathematical Proofs: Implications for Mathematics Educators” (Volk)</p>
             </div>
             <div class="presentation-item">
                 <div class="item-header">
                     <span class="item-title">Indiana College English Association: 86th Annual Conference</span>
                     <span class="item-date">October 2021</span>
                 </div>
-                <p>Title: Vocabulary and Dr. Seuss: A Study in Zipf's Law Search Frequency (Underwood and Volk)</p>
+                <div class="item-subtitle">Indiana College English Association</div>
+                <p>“Vocabulary and Dr. Seuss: A Study in Zipf's Law Search Frequency” (Underwood and Volk)</p>
             </div>
             <div class="presentation-item">
                 <div class="item-header">
                     <span class="item-title">XXVII Congreso Internacional de Literatura Hispánica</span>
                     <span class="item-date">June 2021</span>
                 </div>
-                <p>Title: La cuantificación del estilo: los prefijos positivos y negativos en La Celestina (Milacci and Volk)</p>
+                <div class="item-subtitle">Congreso Internacional de Literatura Hispánica</div>
+                <p>“La cuantificación del estilo: los prefijos positivos y negativos en <em>La Celestina</em>” (Milacci and Volk)</p>
             </div>
             <div class="presentation-item">
                 <div class="item-header">
                     <span class="item-title">Mathematical Association of America MD-DC-VA Section Meeting</span>
                     <span class="item-date">November 2020</span>
                 </div>
-                <p>Title: Zipf's Law of Baseball Career Leaderboards (Volk)</p>
+                <div class="item-subtitle">Mathematical Association of America</div>
+                <p>“Zipf's Law of Baseball Career Leaderboards” (Volk)</p>
             </div>
             <div class="presentation-item">
                 <div class="item-header">
                     <span class="item-title">Earlier Presentations</span>
-                    <span class="item-date">2014-2019</span>
+                    <span class="item-date">2014 - 2019</span>
                 </div>
+                <div class="item-subtitle">Regional and school-based professional development venues</div>
                 <ul>
                     <li>Techstravaganza 2019: Embedding Formative Assessment in Instruction</li>
                     <li>LCS PD Day 2018: Using Nearpod for Formative Assessment</li>
@@ -428,88 +470,87 @@
             </div>
         </section>
 
-        <!-- COMMUNITY SERVICE -->
-        <section id="community">
-            <h2>Community &amp; Church Service</h2>
+        <section id="community" class="cv-section cv-section--service">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Service</p>
+                <h2>Community &amp; church service</h2>
+            </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Small Group Leader</span>
                     <span class="item-date">January 2018 - Present</span>
                 </div>
-                <div class="item-subtitle">Crosspoint Church, Lynchburg, VA</div>
-                <p>Host a bible study and small group in my home weekly or biweekly.</p>
+                <div class="item-subtitle">Crosspoint Church · Lynchburg, Virginia</div>
+                <p>Host a Bible study and small group in my home weekly or biweekly.</p>
             </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Kid's Ministry Volunteer</span>
                     <span class="item-date">January 2018 - Present</span>
                 </div>
-                <div class="item-subtitle">Crosspoint Church, Lynchburg, VA</div>
-                <p>Serve 2-4 times per month serving the kids ministry as a host, helper, or teacher.</p>
+                <div class="item-subtitle">Crosspoint Church · Lynchburg, Virginia</div>
+                <p>Serve 2-4 times per month in children’s ministry as a host, helper, or teacher.</p>
             </div>
         </section>
 
-        <!-- MENTORING -->
-        <section id="mentoring">
-            <h2>Student Advising &amp; Mentoring</h2>
+        <section id="mentoring" class="cv-section cv-section--service">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Service to students</p>
+                <h2>Advising &amp; mentoring</h2>
+            </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Honor Thesis Committee Chair</span>
                     <span class="item-date">October 2023 - Present</span>
                 </div>
-                <p>Served as a Chair to support a student's honor's thesis project. Provided direction, advice, and feedback.</p>
+                <div class="item-subtitle">Liberty University</div>
+                <p>Provided direction, advice, and feedback in support of an honors thesis project.</p>
             </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Honor Thesis Committee Reader</span>
                     <span class="item-date">January 2024 - Present</span>
                 </div>
-                <p>Served as a reader to support a student's honor's thesis project. Provided advice and feedback.</p>
+                <div class="item-subtitle">Liberty University</div>
+                <p>Served as a reader for an honors thesis project, offering guidance and evaluative feedback.</p>
             </div>
         </section>
 
-        <!-- EDUCATIONAL MEDIA -->
-        <section id="youtube">
-            <h2>Educational Media &amp; Content Creation</h2>
+        <section id="youtube" class="cv-section cv-section--service">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Educational media</p>
+                <h2>Content creation</h2>
+            </div>
             <div class="experience-item">
                 <div class="item-header">
                     <span class="item-title">Learn Abundantly YouTube Channel</span>
                     <span class="item-date">Current</span>
                 </div>
-                <div class="item-subtitle">Creator, Instructor, and Educational Content Developer</div>
+                <div class="item-subtitle">Creator, instructor, and educational content developer</div>
                 <p>
-                    Founded and manage an educational YouTube channel dedicated to mathematics instruction and 
-                    problem-solving strategies. The channel serves as a supplemental learning resource for students 
-                    at various levels, aligning with my teaching philosophy of making mathematics more accessible 
-                    and engaging.
+                    Founded and manage an educational YouTube channel dedicated to mathematics instruction and
+                    problem-solving strategies. The channel extends classroom teaching by providing students with
+                    additional resources for review and practice.
                 </p>
-                <h3>Featured Content</h3>
+                <h3>Featured content</h3>
                 <ul>
-                    <li><strong>“Algebra: Graph Piecewise Functions in Desmos”</strong> – Interactive tutorial demonstrating practical applications of graphing technology in algebra education.</li>
+                    <li><strong>“Algebra: Graph Piecewise Functions in Desmos”</strong> – Interactive tutorial demonstrating practical graphing applications.</li>
                     <li><strong>“How to Solve Combination Word Problems FAST!”</strong> – Strategic approach to combinatorial mathematics with real-world applications.</li>
-                    <li><strong>“28 Math Questions Everyone Should Know!”</strong> – Comprehensive review of essential mathematical concepts designed to build foundational skills.</li>
+                    <li><strong>“28 Math Questions Everyone Should Know!”</strong> – Review of essential mathematical concepts designed to build foundational skills.</li>
                 </ul>
-                <h3>Impact &amp; Reach</h3>
-                <p>
-                    The channel serves as an extension of classroom teaching, providing students with additional 
-                    resources for review and practice. Content development reflects research interests in making 
-                    mathematics more accessible and connecting mathematical concepts to practical applications.
-                </p>
-                <p>Channel URL: 
-                    <a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">
-                        https://www.youtube.com/learnabundantly
-                    </a>
-                </p>
+                <p>Channel URL: <a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">https://www.youtube.com/learnabundantly</a></p>
             </div>
         </section>
 
-        <!-- HONORS & AWARDS -->
-        <section id="honors">
-            <h2>Honors &amp; Awards</h2>
-            <ul>
+        <section id="honors" class="cv-section cv-section--honors">
+            <div class="cv-section-heading">
+                <p class="section-kicker">Recognition</p>
+                <h2>Honors &amp; awards</h2>
+            </div>
+            <ul class="cv-plain-list cv-plain-list--awards">
                 <li>LMS Impact Educator of the Year Award, Lynchburg City Schools, 2020</li>
                 <li>MathCounts Team 3rd Place Regional Finish as Coach, 2020</li>
-                <li>VCTM William C. Lowry Math Educator of The Year Award, 2019</li>
+                <li>VCTM William C. Lowry Math Educator of the Year Award, 2019</li>
                 <li>Above and Beyond Call of Duty Award, 2015</li>
                 <li>Teacher of Promise Institute, 2011</li>
                 <li>SDP Distinguished Service Award, 2011</li>
@@ -519,9 +560,8 @@
             </ul>
         </section>
 
-        <!-- Download as PDF button moved to the bottom -->
-        <div class="download-container">
-            <button class="download-btn" onclick="window.print()">Download as PDF</button>
+        <div class="download-container download-container--utility">
+            <button class="download-btn download-btn--utility" type="button" onclick="window.print()">Print / Save as PDF</button>
         </div>
     </div>
 
@@ -533,52 +573,80 @@
             </div>
         </div>
         <script>
-            // Update footer year
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Add event listener for menu toggle button
-            document.querySelector('.menu-toggle').addEventListener('click', function() {
-                const navMenu = document.getElementById('nav-menu');
-                navMenu.classList.toggle('open');
-            });
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const navTriggers = document.querySelectorAll('.cv-nav-trigger');
+            const navLinks = navMenu.querySelectorAll('a');
 
-            // Toggle dropdowns on mobile click
-            document.addEventListener('click', function(event) {
-                // If a top-level nav link was clicked
-                if (event.target.matches('#nav-menu > li > a')) {
-                    // Check if it's mobile view (menu toggle is visible)
-                    const isMobileView = window.getComputedStyle(document.querySelector('.menu-toggle')).display !== 'none';
-                    if (isMobileView) {
-                        event.preventDefault();
-                        // Find the dropdown menu associated with this link
-                        const dropdown = event.target.nextElementSibling;
-                        if (dropdown && dropdown.classList.contains('dropdown-menu')) {
-                            // Close all other open dropdowns first
-                            document.querySelectorAll('.dropdown-menu.dropdown-open').forEach(function(openDropdown) {
-                                if (openDropdown !== dropdown) {
-                                    openDropdown.classList.remove('dropdown-open');
-                                }
-                            });
-                            // Toggle this dropdown
-                            dropdown.classList.toggle('dropdown-open');
-                        }
+            function isMobileView() {
+                return window.getComputedStyle(menuToggle).display !== 'none';
+            }
+
+            function closeAllDropdowns() {
+                navTriggers.forEach((trigger) => {
+                    trigger.setAttribute('aria-expanded', 'false');
+                    const dropdown = document.getElementById(trigger.getAttribute('aria-controls'));
+                    if (dropdown) {
+                        dropdown.classList.remove('dropdown-open');
                     }
+                });
+            }
+
+            menuToggle.addEventListener('click', function() {
+                const isOpen = navMenu.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', String(isOpen));
+                if (!isOpen) {
+                    closeAllDropdowns();
                 }
             });
 
-            // Close dropdowns when clicking outside
-            document.addEventListener('click', function(event) {
-                // If click is outside of navigation
-                if (!event.target.closest('#nav-menu') && !event.target.closest('.menu-toggle')) {
-                    // Close all open dropdowns
-                    document.querySelectorAll('.dropdown-menu.dropdown-open').forEach(function(dropdown) {
-                        dropdown.classList.remove('dropdown-open');
-                    });
-                    // Close the entire menu if it's open (on mobile)
-                    const navMenu = document.getElementById('nav-menu');
-                    if (navMenu.classList.contains('open')) {
-                        navMenu.classList.remove('open');
+            navTriggers.forEach((trigger) => {
+                trigger.addEventListener('click', function() {
+                    const dropdown = document.getElementById(trigger.getAttribute('aria-controls'));
+                    const willOpen = trigger.getAttribute('aria-expanded') !== 'true';
+
+                    if (isMobileView()) {
+                        closeAllDropdowns();
+                        if (willOpen && dropdown) {
+                            trigger.setAttribute('aria-expanded', 'true');
+                            dropdown.classList.add('dropdown-open');
+                        }
+                        return;
                     }
+
+                    navTriggers.forEach((otherTrigger) => {
+                        if (otherTrigger !== trigger) {
+                            otherTrigger.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                    trigger.setAttribute('aria-expanded', String(willOpen));
+                });
+            });
+
+            navLinks.forEach((link) => {
+                link.addEventListener('click', function() {
+                    closeAllDropdowns();
+                    navMenu.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.cv-section-nav')) {
+                    closeAllDropdowns();
+                    navMenu.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeAllDropdowns();
+                    navMenu.classList.remove('open');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.focus();
                 }
             });
         </script>
