@@ -368,6 +368,9 @@
           </ul>
         </li>
       </ul>
+      <button aria-label="Toggle dark and light theme" class="theme-toggle review-theme-toggle" id="theme-toggle-btn" title="Toggle Theme">
+        <i data-lucide="moon"></i>
+      </button>
     </div>
   </div>
 </nav>
@@ -392,11 +395,7 @@
             <span class="chip"><i data-lucide="graduation-cap"></i> Final Exam: Thu, 5/7</span>
             <span class="chip"><i data-lucide="layers-3"></i> Final week only</span>
         </div>
-
-        <button class="theme-toggle review-theme-toggle" id="themeToggle" aria-label="Toggle theme">
-            <i data-lucide="sun-moon"></i>
-        </button>
-    </header>
+</header>
 
 
     <section class="recommended-order-panel" aria-label="Recommended study order">
@@ -822,7 +821,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const savedTheme = localStorage.getItem('math130-final-theme');
     if (savedTheme === 'light') body.classList.add('light');
 
-    const themeToggle = document.getElementById('themeToggle');
+    const themeToggle = document.getElementById('theme-toggle-btn');
     themeToggle?.addEventListener('click', function () {
         body.classList.toggle('light');
         localStorage.setItem('math130-final-theme', body.classList.contains('light') ? 'light' : 'dark');
