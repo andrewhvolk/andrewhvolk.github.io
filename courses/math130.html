@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MATH 130: Advanced Technical Mathematics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <script src="../theme.js"></script>
 </head>
-<body>
+<body class="math130-course-page">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
@@ -54,64 +57,119 @@
   </div>
 </div>
 
-  <header>
-    <div class="container">
-      <h1>MATH 130: Advanced Technical Mathematics</h1>
-      <p class="subtitle">Advanced mathematical concepts, problem-solving techniques, and practical applications in technical fields.</p>
-    </div>
-  </header>
-
-  <main class="container">
-    <section>
-      <h2>Course Overview</h2>
-      <p>This course explores advanced mathematical topics designed for technical and engineering applications. The curriculum is divided into four main units, each concluding with a comprehensive exam designed to test your mastery of the material.</p>
+<main class="math130-dashboard">
+  <div class="container math130-dashboard__stack">
+    <section class="math130-hero review-card" aria-labelledby="math130-course-title">
+      <div class="math130-hero__content">
+        <div class="course-label">MATH 130 Course Dashboard</div>
+        <h1 id="math130-course-title">Advanced Technical Mathematics</h1>
+        <p class="review-subtitle">Use this page as the visual home base for all four Math 130 review units. Each unit card below points to the same review pages you already use, but now highlights where to begin, what each test emphasizes, and which study tools are waiting on the next page.</p>
+        <div class="header-chips" aria-label="Course highlights">
+          <span class="chip accent">4 review units</span>
+          <span class="chip">Slides, videos, and review tools</span>
+          <span class="chip">Exam-by-exam study flow</span>
+        </div>
+      </div>
+      <aside class="math130-hero__summary review-callout review-callout--info" aria-labelledby="math130-usage-title">
+        <h2 id="math130-usage-title">How to use this course site</h2>
+        <ul class="math130-summary-list">
+          <li>Open the unit that matches your current test window or review goal.</li>
+          <li>Start with the recommended entry point before branching into videos, practice, or formula review.</li>
+          <li>Return here any time you need the full course roadmap across all four exams.</li>
+        </ul>
+      </aside>
     </section>
 
-    <section class="welcome-section">
-      <h2>Course Units & Study Materials</h2>
-      <p>Select a unit below to access lecture slides, videos, assignments, formula sheets, and review materials.</p>
+    <section class="math130-order-strip review-callout review-callout--exam" aria-labelledby="math130-order-title">
+      <div class="math130-order-strip__eyebrow">Start with this order</div>
+      <div class="math130-order-strip__content">
+        <h2 id="math130-order-title">Follow the same study rhythm for every unit.</h2>
+        <div class="review-meta-chips" aria-label="Recommended study order">
+          <span class="chip accent">1. Preview the unit focus</span>
+          <span class="chip">2. Open the linked review page</span>
+          <span class="chip">3. Work the core practice resources</span>
+          <span class="chip">4. Finish with the test-specific review tools</span>
+        </div>
+      </div>
     </section>
 
-    <div class="card-container">
-      
-      <div class="card">
-        <div class="card-icon">📐</div>
-        <h2>Unit 1 (Test 1)</h2>
-        <p>Foundational concepts, algebraic operations, and introductory problem-solving techniques.</p>
-        <a href="../130Test1.html" class="button">View Unit 1 Resources</a>
+    <section class="math130-progress" aria-labelledby="math130-progress-title">
+      <div class="math130-section-heading">
+        <div>
+          <div class="course-label">Course Units &amp; Study Materials</div>
+          <h2 id="math130-progress-title">Choose a unit and jump straight into the matching review hub.</h2>
+        </div>
+        <p class="review-subtitle">The cards below reuse the Math 130 review card system so the landing page feels like the parent dashboard for Test 1 through Final Exam resources.</p>
       </div>
 
-      <div class="card">
-        <div class="card-icon">📈</div>
-        <h2>Unit 2 (Test 2)</h2>
-        <p>Advanced functions, equations, graphing, and specialized technical applications.</p>
-        <a href="../130Test2.html" class="button">View Unit 2 Resources</a>
-      </div>
+      <div class="tabs review-tabs review-tabs-4 math130-unit-grid card-container">
+        <article class="tab-btn review-tab-btn is-priority math130-unit-card">
+          <div class="review-tab-icon math130-unit-card__icon" aria-hidden="true">📐</div>
+          <div class="review-tab-copy math130-unit-card__copy">
+            <span class="review-tab-label">Unit 1 · Test 1</span>
+            <span class="review-tab-meta">Foundations, algebra fluency, and setup skills for later units.</span>
+            <div class="math130-meta-stack">
+              <div><strong>Topic focus:</strong> Foundational concepts, algebraic operations, and introductory problem-solving.</div>
+              <div><strong>Recommended start:</strong> Begin with the main overview and foundational examples.</div>
+              <div><strong>Main resources:</strong> Lecture slides, videos, assignments, and review materials.</div>
+            </div>
+            <a href="../130Test1.html" class="button math130-unit-card__button">View Unit 1 Resources</a>
+          </div>
+        </article>
 
-      <div class="card">
-        <div class="card-icon">⚙️</div>
-        <h2>Unit 3 (Test 3)</h2>
-        <p>Trigonometry and vectors: Sections 5.1, 5.2, 5.3, 7.1, and 8.4 with targeted Test 3 review tools.</p>
-        <a href="../130Test3.html" class="button">View Unit 3 Resources</a>
-      </div>
+        <article class="tab-btn review-tab-btn math130-unit-card">
+          <div class="review-tab-icon math130-unit-card__icon" aria-hidden="true">📈</div>
+          <div class="review-tab-copy math130-unit-card__copy">
+            <span class="review-tab-label">Unit 2 · Test 2</span>
+            <span class="review-tab-meta">Functions, equations, graphing, and technical modeling tools.</span>
+            <div class="math130-meta-stack">
+              <div><strong>Topic focus:</strong> Advanced functions, equations, graphing, and specialized applications.</div>
+              <div><strong>Recommended start:</strong> Open the Test 2 review tabs and follow the guided checklist flow.</div>
+              <div><strong>Main resources:</strong> Review tabs, formula work, practice sets, and quiz-style checks.</div>
+            </div>
+            <a href="../130Test2.html" class="button math130-unit-card__button">View Unit 2 Resources</a>
+          </div>
+        </article>
 
-      <div class="card">
-        <div class="card-icon">📝</div>
-        <h2>Unit 4 (Final Exam)</h2>
-        <p>Culminating concepts and comprehensive review materials for the final exam.</p>
-        <a href="../130Test4.html" class="button">View Unit 4 Resources</a>
-      </div>
+        <article class="tab-btn review-tab-btn math130-unit-card">
+          <div class="review-tab-icon math130-unit-card__icon" aria-hidden="true">⚙️</div>
+          <div class="review-tab-copy math130-unit-card__copy">
+            <span class="review-tab-label">Unit 3 · Test 3</span>
+            <span class="review-tab-meta">Trigonometry, vectors, and targeted mid-course review support.</span>
+            <div class="math130-meta-stack">
+              <div><strong>Topic focus:</strong> Sections 5.1, 5.2, 5.3, 7.1, and 8.4 with Test 3 review tools.</div>
+              <div><strong>Recommended start:</strong> Use the section overview first, then move into formulas and practice.</div>
+              <div><strong>Main resources:</strong> Guided summaries, checklist items, formulas, and mock quiz tools.</div>
+            </div>
+            <a href="../130Test3.html" class="button math130-unit-card__button">View Unit 3 Resources</a>
+          </div>
+        </article>
 
+        <article class="tab-btn review-tab-btn math130-unit-card">
+          <div class="review-tab-icon math130-unit-card__icon" aria-hidden="true">📝</div>
+          <div class="review-tab-copy math130-unit-card__copy">
+            <span class="review-tab-label">Unit 4 · Final Exam</span>
+            <span class="review-tab-meta">Cumulative review and final-week preparation across the course.</span>
+            <div class="math130-meta-stack">
+              <div><strong>Topic focus:</strong> Culminating concepts and comprehensive final exam review.</div>
+              <div><strong>Recommended start:</strong> Begin with the final-week plan and identify the highest-priority refreshers.</div>
+              <div><strong>Main resources:</strong> Final review guides, summary cards, formula refreshers, and practice prompts.</div>
+            </div>
+            <a href="../130Test4.html" class="button math130-unit-card__button">View Unit 4 Resources</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 - All Rights Reserved</p>
+    <div class="social-links">
+      <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
     </div>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 - All Rights Reserved</p>
-      <div class="social-links">
-        <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
-      </div>
-    </div>
-  </footer>
+  </div>
+</footer>
 </body>
 </html>
