@@ -1094,7 +1094,68 @@ Do not let the output format change the evaluation itself. CSV, Markdown, and HT
 
 ---
 
-## 16. Calibration Recommendation for Teams
+## 16. Foreseeable Sources of Confusion and How to Resolve Them
+
+Even with a detailed rubric, teams may still encounter recurring ambiguities. To preserve interrater reliability, reviewers should use the following resolution rules.
+
+### 16.1 Confusing originality with alignment
+A page can feel distinctive but still violate the framework. Reviewers should not reward novelty by itself. The question is not whether the page is visually interesting; the question is whether it expresses the documented philosophy through readable hierarchy, tonal restraint, and purpose-fit composition.
+
+**Resolution rule:** If a page is memorable but weak in hierarchy, readability, or accessibility, score the weak category directly rather than inflating its brand-tone score.
+
+### 16.2 Over-penalizing restrained pages
+Some reviewers may equate “editorial” with “dramatic.” That can create unfair penalties for course pages, CVs, or tools that are intentionally calm.
+
+**Resolution rule:** Score visual restraint positively when it matches page purpose. Page-Type Fit should control the interpretation of Editorial Identity, not the other way around.
+
+### 16.3 Confusion between page-level and template-level findings
+A large site may contain many pages generated from the same template with small local variations. Reviewers may disagree on whether a problem belongs to one page or the template.
+
+**Resolution rule:** Record both fields when relevant: `template_issue` and `page_instance_issue`. If the problem appears in repeated pages, classify it as a template issue first and then note any page-specific amplifiers.
+
+### 16.4 Inconsistent treatment of “Not Present”
+Some reviewers may treat a missing feature, such as dark mode, as a failure, while others may exclude it.
+
+**Resolution rule:** If a capability does not exist, mark it **Not Present** and follow the framework’s scoring rule for that category. Do not convert absence into a negative score unless the page type or explicit requirements demand the missing feature.
+
+### 16.5 Scoring from implementation knowledge instead of the rendered result
+Developers or designers familiar with the codebase may be tempted to score based on intended architecture instead of what users actually see.
+
+**Resolution rule:** The rendered page always wins. Implementation notes may be recorded for remediation routing, but the score must be based on visible output and interaction behavior.
+
+### 16.6 Disagreement about whether an issue is structural or cosmetic
+Spacing, card usage, and asymmetry can look minor to one reviewer and structural to another.
+
+**Resolution rule:** Treat an issue as structural if it changes primary-path clarity, reading comfort, page-type fit, or accessibility. Treat it as cosmetic only if the page’s comprehension and task flow remain intact.
+
+### 16.7 Ambiguity in mixed-purpose pages
+Some pages blend editorial content, utility controls, and profile information. Reviewers may disagree on the correct benchmark.
+
+**Resolution rule:** Declare one primary page type before scoring. If a page is hybrid, record the secondary type in notes, but score it against the dominant user task.
+
+### 16.8 Confusion caused by missing screenshots or state capture
+If reviewers do not compare the same states, disagreements will rise quickly.
+
+**Resolution rule:** For team audits, store screenshots or equivalent state captures for every audited viewport/theme combination. If a state was not captured, reviewers should not speculate about it.
+
+### 16.9 Drift over time as the team gets faster
+Teams often become less strict after several audit cycles and start using shorthand instead of the full rubric.
+
+**Resolution rule:** Re-run calibration periodically and require at least one fully documented audit per cycle to verify that the checklist, evidence model, and severity labels are still being applied consistently.
+
+### 16.10 Recommended operating rule
+If a reviewer says “this just feels wrong,” they must translate that statement into one of the following before scoring:
+- a failed checklist item,
+- a violated anti-pattern,
+- a triggered score cap,
+- a page-type mismatch, or
+- an accessibility/usability failure.
+
+If they cannot translate the reaction into one of those forms, it should not affect the score.
+
+---
+
+## 17. Calibration Recommendation for Teams
 
 If multiple reviewers will use this framework regularly, run a calibration exercise.
 
@@ -1113,7 +1174,7 @@ The framework is working well when category-level disagreement is usually within
 
 ---
 
-## 17. Quick Reviewer Summary
+## 18. Quick Reviewer Summary
 
 When in doubt, remember the core test:
 
