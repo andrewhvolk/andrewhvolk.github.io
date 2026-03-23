@@ -1325,11 +1325,11 @@
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
 <div class="review-option-title">Quiz 7 — Triangles, Lines &amp; Areas (8 Questions)</div>
-<div class="review-option-copy">Similar Triangles, Parallel Lines, Triangle/Polygon Areas, DMS Conversions</div>
+<div class="review-option-copy">Similar Triangles, Parallel Lines, Triangle/Polygon Areas, Degrees ↔ DMS Conversions</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(8)">
 <div class="review-option-title">Quiz 8 — Circles</div>
-<div class="review-option-copy">DMS, Radians, Arcs, Sectors, Speed, Circle Theorems</div>
+<div class="review-option-copy">Radians, Arcs, Sectors, Speed, Circle Theorems</div>
 </button>
 </div>
 </div>
@@ -2154,7 +2154,7 @@
             }
         },
         {
-            id: 'dms', section: 'Circles',
+            id: 'dms', section: 'Triangles, Lines & Areas',
             label: 'Convert DMS',
             generate: () => {
                 const deg = (Math.random() * 80 + 10).toFixed(4);
@@ -2180,7 +2180,7 @@
             }
         },
         {
-            id: 'dms_to_dec', section: 'Circles',
+            id: 'dms_to_dec', section: 'Triangles, Lines & Areas',
             label: 'DMS → Decimal Degrees',
             generate: () => {
                 const d = Math.floor(Math.random() * 80) + 10;
