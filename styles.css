@@ -365,104 +365,7 @@ header h1 {
   color: var(--secondary-color);
 }
 
-/* Navigation styling */
-nav.navbar {
-  position: sticky;
-  top: 0;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--surface-container-lowest) 92%, transparent), color-mix(in srgb, var(--surface-container-low) 88%, transparent));
-  z-index: 999;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--ghost-outline) 72%, transparent);
-}
-
-nav.navbar .nav-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
-nav.navbar ul {
-  display: flex;
-  flex: 1 1 auto;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav.navbar li {
-  position: relative;
-}
-
-nav.navbar a,
-nav.navbar button.dropdown-trigger {
-  display: block;
-  padding: 1rem 1.5rem;
-  color: var(--secondary-color);
-  text-decoration: none;
-  transition: var(--transition);
-  background: transparent;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-}
-
-nav.navbar a:hover,
-nav.navbar a:focus-visible,
-nav.navbar button.dropdown-trigger:hover,
-nav.navbar button.dropdown-trigger:focus-visible {
-  background: rgba(13, 80, 213, 0.12);
-}
-
-/* Dropdown menu styling - Updated */
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% - 2px);
-  left: 0;
-  background: var(--glass-surface);
-  min-width: 200px;
-  margin-top: 0.35rem;
-  padding: 0.35rem;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
-  border-radius: var(--radius-md);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 82%, transparent);
-  z-index: 1000;
-}
-
-nav.navbar li:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-}
-
-.dropdown-menu li {
-  width: 100%;
-}
-
-.dropdown-menu a {
-  padding: 0.75rem 1.5rem;
-  white-space: nowrap;
-}
-
-/* Hamburger menu for mobile */
-.menu-toggle {
-  display: none;
-  background: var(--glass-surface);
-  color: var(--secondary-color);
-  border: none;
-  font-size: 1.5rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
+/* Legacy nav.navbar styling removed: use the .top-nav system site-wide. */
 
 /* Main content area */
 main {
@@ -1513,17 +1416,6 @@ section:nth-child(5) {
     padding: 0.75rem 1rem;
     justify-content: space-between;
     align-items: center;
-  }
-
-  /* Mobile navigation structure */
-  nav.navbar ul#nav-menu {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  nav.navbar ul#nav-menu.open {
-    display: flex;
   }
 
   /* Consistent dropdown handling - Updated for mobile */
