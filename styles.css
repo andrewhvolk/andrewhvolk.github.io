@@ -51,6 +51,10 @@
   --light-text: var(--on-primary);
   --background-color: var(--surface);
   --card-background: var(--surface-container-lowest);
+  --featured-card-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)), linear-gradient(135deg, rgba(0, 29, 23, 0.96), rgba(0, 52, 43, 0.92));
+  --featured-card-base: #002720;
+  --featured-card-text: var(--on-primary);
+  --featured-card-accent: color-mix(in srgb, var(--secondary) 78%, white 22%);
 
   --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   --font-body: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
@@ -655,10 +659,9 @@ section h2 {
   position: relative;
   padding: clamp(1.75rem, 3vw, 2.5rem);
   border-radius: var(--radius-lg);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)),
-    linear-gradient(135deg, rgba(0, 29, 23, 0.96), rgba(0, 52, 43, 0.92));
-  color: var(--light-text);
+  background-color: var(--featured-card-base);
+  background-image: var(--featured-card-surface);
+  color: var(--featured-card-text);
   transform: translateY(var(--spacing-8));
 }
 
@@ -666,7 +669,7 @@ section h2 {
 .highlighted-destination-card p,
 .highlighted-destination-card li,
 .highlighted-destination-card a {
-  color: var(--light-text);
+  color: var(--featured-card-text);
 }
 
 .highlighted-destination-card h3 {
@@ -676,8 +679,9 @@ section h2 {
 
 .highlighted-destination-card .button:hover,
 .highlighted-destination-card .button:focus-visible {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0)), var(--secondary);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0)), var(--featured-card-accent);
 }
+
 
 .supporting-link-list {
   margin: var(--spacing-6) 0 var(--spacing-8);
@@ -1389,6 +1393,10 @@ main.error-main {
   --light-text: var(--on-surface);
   --background-color: var(--surface);
   --card-background: var(--surface-container-lowest);
+  --featured-card-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)), linear-gradient(135deg, rgba(22, 29, 27, 0.95), rgba(33, 72, 62, 0.88));
+  --featured-card-base: #16211d;
+  --featured-card-text: var(--on-surface);
+  --featured-card-accent: color-mix(in srgb, var(--secondary) 82%, var(--primary-container));
   --glass-surface: rgba(31, 39, 36, 0.85);
   --ghost-outline: rgba(94, 107, 102, 0.18);
   --ambient-outline: rgba(94, 107, 102, 0.36);
