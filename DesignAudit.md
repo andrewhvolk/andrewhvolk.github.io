@@ -624,6 +624,69 @@ Always write findings in this order:
 
 This ordering improves consistency across reviewers.
 
+### Step 9: Use iterative passes for large page sets
+When auditing many pages, reviewers should not try to do a full deep audit on every page in one pass. Instead, use an iterative workflow so the framework scales while preserving consistency.
+
+#### Iteration 1: Inventory pass
+Create a page inventory and record for each page:
+- page URL or file path,
+- page type,
+- primary user task,
+- whether light/dark and desktop/mobile states exist,
+- whether the page appears to be a template instance or a unique layout.
+
+The goal of this pass is coverage, not deep scoring.
+
+#### Iteration 2: Fast triage pass
+Do a short audit of every page using only:
+- first impression,
+- hierarchy,
+- reading comfort,
+- obvious accessibility failures,
+- obvious anti-patterns.
+
+At the end of this pass, label pages as:
+- **Green:** likely aligned; full audit optional
+- **Yellow:** mixed; full audit recommended
+- **Red:** clearly misaligned; full audit required
+
+#### Iteration 3: Full audit pass
+Run the complete rubric on:
+- all Red pages,
+- all Yellow pages,
+- one or more representative Green pages per template family.
+
+If many pages share one template, reviewers may audit the template deeply and then spot-check instances, but they must record any page-level deviations separately.
+
+#### Iteration 4: Remediation pass
+After fixes are made, re-audit only:
+- categories previously scored 3 or below,
+- any category affected by the fix,
+- one adjacent category if the fix could shift hierarchy, readability, or page-type fit.
+
+This keeps repeated audits efficient while still catching regressions.
+
+#### Iteration 5: Trend tracking pass
+For large sites, maintain a running log of:
+- average score by template,
+- average score by page type,
+- number of Red/Yellow/Green pages,
+- most common failed checklist items,
+- most common high-severity findings.
+
+This converts one-off audits into a continuous improvement process.
+
+### Sampling rules for large sites
+To preserve reliability at scale, use these rules:
+
+1. Audit every unique page template at least once.
+2. If a template has many instances, fully audit at least 3 examples or 10 percent of instances, whichever is greater, unless the population is extremely large.
+3. Always include pages with the highest traffic, highest business importance, or highest content density.
+4. If a template appears in multiple states driven by data, audit examples representing the smallest, median, and largest content loads.
+5. If a fix changes shared CSS or JS behavior, recheck all page types that depend on that shared behavior.
+
+These iterative rules should be used whenever the site is too large for a full deep audit of every page in a single cycle.
+
 ---
 
 ## 9. Evidence Recording Rules
@@ -673,7 +736,75 @@ Large score jumps require observable failures, not preference differences.
 
 ---
 
-## 11. Scoring Worksheet
+## 11. Mapping Audit Findings to HTML, CSS, and JavaScript
+
+The audit scores the rendered page, but remediation usually requires teams to trace issues back to HTML, CSS, and JavaScript. To keep implementation reviews consistent, use the following mapping rules.
+
+### 11.1 HTML evaluation
+HTML should be evaluated for whether the document structure supports the design philosophy semantically and structurally. Reviewers should check whether HTML:
+
+- establishes a clear content hierarchy through heading levels and document order,
+- preserves meaningful reading order independent of styling,
+- uses appropriate semantic elements for navigation, main content, lists, forms, and supporting regions,
+- exposes lists, procedures, metadata, and chronology in a way that matches the page type,
+- supports accessible naming and focus behavior for interactive elements.
+
+HTML is the main source of truth for:
+- hierarchy clarity,
+- reading structure,
+- list and instructional semantics,
+- page-type fit for CV, course, and tool pages,
+- accessibility of links, buttons, inputs, and landmarks.
+
+### 11.2 CSS evaluation
+CSS should be evaluated for whether visual presentation matches the philosophy. Reviewers should check whether CSS:
+
+- creates hierarchy through spacing, typography, placement, and tonal layering,
+- keeps long-form text within a comfortable measure,
+- uses surfaces rather than visible borders for most structural separation,
+- keeps cards, shadows, outlines, and hover treatments restrained,
+- preserves readability and hierarchy across light and dark modes,
+- makes focus states visible and consistent with the design system.
+
+CSS is the main source of truth for:
+- editorial tone,
+- whitespace rhythm,
+- surface and boundary discipline,
+- component restraint,
+- dark-mode consistency,
+- visible accessibility affordances such as contrast and focus.
+
+### 11.3 JavaScript evaluation
+JavaScript should be evaluated for whether behavior supports rather than undermines the philosophy. Reviewers should check whether JavaScript:
+
+- preserves stable hierarchy and reading flow during dynamic updates,
+- keeps navigation, tabs, disclosure panels, and filters understandable,
+- avoids motion, animation, or state changes that distract from reading,
+- preserves keyboard usability and focus management,
+- applies theme toggles without breaking readability or surface hierarchy,
+- does not inject repetitive UI chrome that turns editorial pages into app-like dashboards.
+
+JavaScript is the main source of truth for:
+- dynamic focus handling,
+- motion and transition behavior,
+- theme switching logic,
+- stateful tool interfaces,
+- progressive disclosure patterns,
+- runtime content insertion that may flatten hierarchy or overload the page.
+
+### 11.4 How to assign responsibility when a score is low
+When a category scores poorly, reviewers should identify the most likely implementation layer responsible:
+
+- **Primarily HTML:** structural or semantic problems such as wrong heading hierarchy, missing list semantics, poor document order, or unclear landmark structure.
+- **Primarily CSS:** visual hierarchy failures, poor spacing, weak tonal layering, border-heavy design, unreadable measure, or weak focus styling.
+- **Primarily JavaScript:** unstable interactions, broken focus management, disruptive motion, unreadable theme switching, or dynamic UI that obscures the primary path.
+- **Shared responsibility:** issues that span markup, styling, and behavior, such as a tool interface whose HTML lacks structure, whose CSS hides emphasis, and whose JS scrambles focus.
+
+Review reports should identify both the failing rubric category and the likely implementation layer so engineering teams can route fixes efficiently.
+
+---
+
+## 12. Scoring Worksheet
 
 Use this worksheet during audits.
 
@@ -752,7 +883,7 @@ Use this worksheet during audits.
 
 ---
 
-## 12. Final Score Calculation
+## 13. Final Score Calculation
 
 Calculate each weighted score as:
 
@@ -775,7 +906,7 @@ Then sum all weighted category scores.
 
 ---
 
-## 13. Standardized Audit Report Template
+## 14. Standardized Audit Report Template
 
 Use this exact template for final reporting.
 
@@ -868,7 +999,102 @@ Use this exact template for final reporting.
 
 ---
 
-## 14. Calibration Recommendation for Teams
+## 15. Reporting Formats for CSV, Markdown, and HTML
+
+To make audit results easy to digest across design, engineering, and leadership audiences, every audit should be exportable to CSV, Markdown, or HTML. The underlying data should stay the same; only the presentation format should change.
+
+### 15.1 Canonical row structure
+Each audited page should produce one canonical record with these fields:
+
+- page
+- page_type
+- reviewer
+- review_date
+- desktop_reviewed
+- mobile_reviewed
+- light_mode_reviewed
+- dark_mode_reviewed
+- primary_user_goal
+- primary_takeaway
+- score_editorial_identity
+- score_hierarchy
+- score_reading
+- score_surface
+- score_components
+- score_accessibility
+- score_theme
+- score_page_type_fit
+- total_score
+- severity_top_issue
+- top_issue_summary
+- status_red_yellow_green
+- notes
+
+This row structure makes it possible to summarize the same audit in multiple output formats without rewriting the evaluation itself.
+
+### 15.2 CSV reporting
+Use CSV when teams need sorting, filtering, trend analysis, or spreadsheet workflows. CSV is best for:
+
+- large multi-page audits,
+- tracking changes across audit cycles,
+- identifying common failing categories,
+- grouping by template or page type,
+- calculating averages and distributions.
+
+#### Recommended CSV outputs
+1. **Page summary CSV:** one row per page with category scores and top issues.
+2. **Issue CSV:** one row per finding with page, category, severity, implementation layer, and recommendation.
+3. **Trend CSV:** one row per audit cycle with averages, counts, and progress over time.
+
+### 15.3 Markdown reporting
+Use Markdown when teams need a human-readable narrative report that works well in pull requests, repositories, and documentation systems. Markdown is best for:
+
+- single-page audits,
+- template-level reviews,
+- PR discussions,
+- design critique archives,
+- handoff to content and design teams.
+
+A Markdown report should include:
+- metadata,
+- category scores,
+- strengths,
+- misalignments,
+- priority fixes,
+- evidence by category,
+- final verdict.
+
+The standardized report template in this document is the recommended Markdown structure.
+
+### 15.4 HTML reporting
+Use HTML when teams need a browsable dashboard or stakeholder-friendly report. HTML is best for:
+
+- leadership summaries,
+- filterable audit dashboards,
+- cross-linking pages to screenshots or live URLs,
+- visual trend displays by template or page type.
+
+A good HTML report should provide:
+- sortable tables of page scores,
+- color-coded Red/Yellow/Green status,
+- drill-down views for each page,
+- links to screenshots and evidence,
+- charts for score distribution and recurring failures.
+
+### 15.5 Output consistency rule
+Regardless of output format, the same audit should preserve:
+
+- the same category names,
+- the same numeric scores,
+- the same severity labels,
+- the same evidence summaries,
+- the same page-type classification.
+
+Do not let the output format change the evaluation itself. CSV, Markdown, and HTML are presentation layers over the same canonical audit data.
+
+---
+
+## 16. Calibration Recommendation for Teams
 
 If multiple reviewers will use this framework regularly, run a calibration exercise.
 
@@ -887,7 +1113,7 @@ The framework is working well when category-level disagreement is usually within
 
 ---
 
-## 15. Quick Reviewer Summary
+## 17. Quick Reviewer Summary
 
 When in doubt, remember the core test:
 
