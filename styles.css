@@ -2583,15 +2583,15 @@ main.error-main {
 
 /* Math 130 review layer */
 :root {
-  --review-bg: var(--surface-dim);
-  --review-surface: var(--surface-container-low);
-  --review-surface-2: var(--surface-container-lowest);
-  --review-border: var(--surface-container-highest);
-  --review-accent: var(--secondary);
+  --review-bg: var(--surface-dim, #111614);
+  --review-surface: var(--surface-container-low, #18201d);
+  --review-surface-2: var(--surface-container-lowest, #1f2724);
+  --review-border: var(--surface-container-highest, #2b3531);
+  --review-accent: var(--secondary, #7ea8ff);
   --review-accent-soft: rgba(126, 168, 255, 0.12);
   --review-accent-glow: rgba(126, 168, 255, 0.25);
-  --review-muted: var(--on-surface-variant);
-  --review-text: var(--on-surface);
+  --review-muted: var(--on-surface-variant, #bac4bf);
+  --review-text: var(--on-surface, #f2f5f2);
   --review-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
   --review-grid: rgba(126, 168, 255, 0.03);
   --review-accent-hover: rgba(126, 168, 255, 0.3);
@@ -2602,17 +2602,17 @@ main.error-main {
   --review-got-border: rgba(52, 211, 153, 0.4);
   --review-miss-border: rgba(248, 113, 113, 0.4);
   --review-green-step: rgba(52, 211, 153, 0.25);
-  --review-h1-from: var(--on-surface);
-  --review-h1-to: var(--secondary);
-  --review-body-muted: color-mix(in srgb, var(--on-surface-variant) 88%, var(--on-surface) 12%);
-  --review-semantic-body: var(--on-surface);
+  --review-h1-from: var(--on-surface, #f2f5f2);
+  --review-h1-to: var(--secondary, #7ea8ff);
+  --review-body-muted: var(--on-surface-variant, #bac4bf);
+  --review-semantic-body: var(--on-surface, #f2f5f2);
   --review-success: #34d399;
   --review-success-bg: rgba(52, 211, 153, 0.1);
   --review-warning: #f59e0b;
   --review-warning-bg: rgba(245, 158, 11, 0.1);
   --review-error: #f87171;
   --review-error-bg: rgba(248, 113, 113, 0.1);
-  --review-info: var(--secondary);
+  --review-info: var(--secondary, #7ea8ff);
   --review-info-bg: rgba(126, 168, 255, 0.1);
   --review-radius: 16px;
   --review-shell-width: min(1100px, calc(100vw - 2rem));
@@ -2663,17 +2663,17 @@ body.review-page,
 body.review-page.light,
 body.light .math-review-page,
 .math-review-page.is-light {
-  --review-bg: var(--surface);
-  --review-surface: var(--surface-container-lowest);
-  --review-surface-2: var(--surface-container-low);
-  --review-border: var(--ghost-outline);
-  --review-accent: var(--secondary);
+  --review-bg: var(--surface, #f8faf7);
+  --review-surface: var(--surface-container-lowest, #ffffff);
+  --review-surface-2: var(--surface-container-low, #f2f4f1);
+  --review-border: rgba(192, 200, 196, 0.18);
+  --review-accent: var(--secondary, #1A56DB);
   --review-accent-soft: rgba(26, 86, 219, 0.08);
   --review-accent-glow: rgba(26, 86, 219, 0.14);
-  --review-muted: var(--on-surface-variant);
-  --review-text: var(--on-surface);
+  --review-muted: var(--on-surface-variant, #3d4a44);
+  --review-text: var(--on-surface, #001d17);
   --review-shadow: 0 8px 32px rgba(0, 29, 23, 0.06);
-  --review-grid: rgba(58, 102, 92, 0.02);
+  --review-grid: rgba(58, 102, 92, 0.035);
   --review-accent-hover: rgba(26, 86, 219, 0.2);
   --review-green-border: rgba(5, 150, 105, 0.2);
   --review-red-border: rgba(220, 38, 38, 0.18);
@@ -2682,17 +2682,17 @@ body.light .math-review-page,
   --review-got-border: rgba(5, 150, 105, 0.4);
   --review-miss-border: rgba(220, 38, 38, 0.35);
   --review-green-step: rgba(5, 150, 105, 0.2);
-  --review-h1-from: var(--primary);
-  --review-h1-to: var(--secondary);
+  --review-h1-from: var(--primary, #001d17);
+  --review-h1-to: var(--primary-container, #00342b);
   --review-body-muted: color-mix(in srgb, var(--on-surface-variant) 86%, var(--primary) 14%);
-  --review-semantic-body: var(--on-surface);
+  --review-semantic-body: var(--on-surface, #001d17);
   --review-success: #059669;
   --review-success-bg: rgba(5, 150, 105, 0.08);
   --review-warning: #d97706;
   --review-warning-bg: rgba(217, 119, 6, 0.08);
   --review-error: #dc2626;
   --review-error-bg: rgba(220, 38, 38, 0.08);
-  --review-info: var(--secondary);
+  --review-info: var(--secondary, #1A56DB);
   --review-info-bg: rgba(26, 86, 219, 0.08);
 }
 
@@ -2704,7 +2704,7 @@ body.light .math-review-page,
   color: var(--text);
   isolation: isolate;
   background:
-    radial-gradient(circle at top, color-mix(in srgb, var(--accent) 10%, transparent), transparent 36%),
+    radial-gradient(circle at top, color-mix(in srgb, var(--surface-tint) 10%, transparent), transparent 36%),
     var(--bg);
 }
 
@@ -2736,16 +2736,6 @@ body.light .math-review-page,
   position: relative;
 }
 
-.review-header::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 0.5rem;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 18%, transparent), transparent 72%);
-  opacity: 0.7;
-}
 
 .review-title-group { max-width: 52rem; }
 .review-header h1,
@@ -3029,9 +3019,6 @@ body.light .math-review-page,
     color: #111827 !important;
   }
 
-  body.review-page::before {
-    display: none;
-  }
 
   .math-review-page {
     width: 100%;
@@ -3082,7 +3069,7 @@ body.light .math-review-page,
 /* Math 130 course dashboard */
 body.math130-course-page {
   background:
-    radial-gradient(circle at top, color-mix(in srgb, var(--accent) 10%, transparent), transparent 36%),
+    radial-gradient(circle at top, color-mix(in srgb, var(--surface-tint) 10%, transparent), transparent 36%),
     var(--background-color);
 }
 
