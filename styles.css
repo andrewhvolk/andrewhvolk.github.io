@@ -1894,6 +1894,19 @@ main.error-main {
   color: var(--emerald-deep);
 }
 
+/* Dark mode: math130 unit card refinements */
+:root[data-theme="dark"] .math130-unit-card {
+  outline: 1px solid color-mix(in srgb, var(--ghost-outline) 82%, transparent);
+}
+
+:root[data-theme="dark"] .math130-unit-card--priority::before {
+  background: linear-gradient(90deg, var(--secondary), transparent 70%);
+}
+
+:root[data-theme="dark"] .math130-unit-card:hover {
+  outline-color: color-mix(in srgb, var(--secondary) 28%, var(--ghost-outline));
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -3069,187 +3082,231 @@ body.light .math-review-page,
 /* Math 130 course dashboard */
 body.math130-course-page {
   background:
-    radial-gradient(circle at top, color-mix(in srgb, var(--surface-tint) 10%, transparent), transparent 36%),
+    radial-gradient(circle at top, rgba(58, 102, 92, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(220, 230, 224, 0.24), transparent 24%),
     var(--background-color);
 }
 
-.math130-dashboard {
-  padding: 2.25rem 0 3.5rem;
+/* Math 130 header — mirrors .page-shell-header / .cv-hero */
+.math130-header {
+  padding: clamp(2.8rem, 6vw, 4.5rem) 0;
 }
 
-.math130-dashboard__stack {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.math130-hero,
-.math130-progress,
-.math130-order-strip {
+.math130-header__grid {
   position: relative;
-  overflow: hidden;
-}
-
-.math130-hero {
+  z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.9fr);
-  gap: 1.25rem;
-  padding: var(--spacing-8);
-  border-radius: var(--radius, 16px);
-  box-shadow: 0 18px 40px rgba(0, 29, 23, 0.06);
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
 }
 
-.math130-hero::before,
-.math130-progress::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent), transparent 68%);
+.math130-header__identity h1 {
+  margin-bottom: 0.4rem;
+}
+
+.math130-header__identity .subtitle {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  max-width: 42rem;
   opacity: 0.9;
 }
 
-.math130-hero h1,
-.math130-progress h2,
-.math130-order-strip h2 {
-  font-family: var(--type-display-family);
-  font-weight: 400;
+.math130-header__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.25rem;
 }
 
-.math130-hero h1 {
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
-  margin-bottom: 0.65rem;
-  color: var(--accent);
+.math130-header__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.38rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  color: var(--on-primary);
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  font-weight: var(--meta-weight);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
-.math130-hero__content,
-.math130-hero__summary,
-.math130-progress {
-  position: relative;
-  z-index: 1;
+.math130-header__chip--accent {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
 }
 
-.math130-hero__summary {
-  margin: 0;
+.math130-header__usage {
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-radius: var(--radius-lg);
+  background-color: rgba(255, 255, 255, 0.08);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  color: var(--on-primary);
   align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.math130-hero__summary h2 {
-  font-size: 1.35rem;
+.math130-header__usage h2 {
+  font-size: 1.3rem;
   margin-bottom: 0.85rem;
+  color: var(--on-primary);
 }
 
 .math130-summary-list {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.75rem;
   padding-left: 0;
   list-style: none;
+  margin: 0;
 }
 
 .math130-summary-list li {
   position: relative;
   padding-left: 1.1rem;
-  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  opacity: 0.92;
 }
 
 .math130-summary-list li::before {
   content: "•";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 700;
 }
 
-.math130-order-strip {
-  display: grid;
-  gap: 0.65rem;
-  align-items: start;
-}
-
-.math130-order-strip__eyebrow {
-  font-family: var(--type-meta-family);
-  font-size: var(--meta-sm);
-  font-weight: var(--meta-weight);
-  letter-spacing: calc(var(--meta-tracking) + 0.02em);
-  text-transform: uppercase;
-  opacity: 0.9;
-}
-
-.math130-order-strip__content {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.math130-order-strip .review-meta-chips {
-  margin-top: 0;
+/* Dashboard content area — mirrors .cv-page */
+.math130-dashboard {
+  padding-top: var(--spacing-12);
+  padding-bottom: var(--spacing-12);
 }
 
 .math130-progress {
-  padding: 1.8rem;
-  border-radius: var(--radius, 16px);
+  margin-bottom: 0;
 }
 
 .math130-section-heading {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: end;
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--spacing-8);
+  padding-bottom: var(--spacing-6);
+  border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 78%, transparent);
+}
+
+.math130-section-heading .section-kicker {
+  margin-bottom: 0.5rem;
 }
 
 .math130-section-heading h2 {
-  margin: 0.25rem 0 0;
+  margin: 0;
+  font-family: var(--type-display-family);
+  font-weight: 400;
 }
 
-.math130-section-heading .review-subtitle {
+.math130-section-heading__sub {
   max-width: 28rem;
   margin: 0;
+  color: var(--muted-text-color);
+  font-size: 0.95rem;
+  text-align: right;
 }
 
+/* Unit grid — mirrors CV entry cards */
 .math130-unit-grid {
-  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-6);
 }
 
 .math130-unit-card {
-  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  background: var(--gradient-card-surface);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  transition: var(--transition);
+  outline: 1px solid transparent;
   min-height: 100%;
-  height: 100%;
 }
 
-.math130-unit-card__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  font-size: 1.25rem;
+.math130-unit-card:hover {
+  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
+  outline-color: color-mix(in srgb, var(--secondary) 18%, var(--outline-variant));
+  transform: translateY(-2px);
+}
+
+.math130-unit-card--priority {
+  position: relative;
+}
+
+.math130-unit-card--priority::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: linear-gradient(90deg, var(--secondary), transparent 70%);
 }
 
 .math130-unit-card__copy {
-  gap: 0.65rem;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex: 1;
+}
+
+.math130-unit-card__label {
+  font-weight: 700;
+  color: var(--secondary-color);
+  font-size: 1.02rem;
+  line-height: 1.2;
+}
+
+.math130-unit-card__meta {
+  color: var(--muted-text-color);
+  font-size: 0.88rem;
+  line-height: 1.4;
 }
 
 .math130-meta-stack {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.5rem;
   width: 100%;
-  color: var(--text-muted);
+  color: var(--muted-text-color);
   font-size: 0.86rem;
   line-height: 1.45;
+  margin-top: auto;
+  padding-top: 0.5rem;
 }
 
 .math130-meta-stack strong {
-  color: var(--text);
+  color: var(--secondary-color);
 }
 
 .math130-unit-card__button {
-  margin-top: 0.2rem;
+  margin-top: 0.75rem;
   width: 100%;
-  border-radius: 12px;
 }
 
 @media (max-width: 980px) {
-  .math130-hero {
+  .math130-header__grid {
     grid-template-columns: 1fr;
+  }
+
+  .math130-unit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .math130-section-heading {
@@ -3257,19 +3314,20 @@ body.math130-course-page {
     align-items: flex-start;
   }
 
-  .math130-section-heading .review-subtitle {
+  .math130-section-heading__sub {
     max-width: none;
+    text-align: left;
   }
 }
 
-@media (max-width: 720px) {
-  .math130-dashboard {
-    padding-top: 1.5rem;
+@media (max-width: 640px) {
+  .math130-unit-grid {
+    grid-template-columns: 1fr;
   }
 
-  .math130-hero,
-  .math130-progress {
-    padding: 1.25rem;
+  .math130-dashboard {
+    padding-top: var(--spacing-8);
+    padding-bottom: var(--spacing-8);
   }
 }
 
