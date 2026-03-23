@@ -873,7 +873,11 @@
       <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
     </div>
     <div class="top-nav-actions">
-      <ul class="top-nav-links">
+      <button class="menu-toggle global-nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav-links primary-nav-utilities" aria-label="Toggle navigation">
+        <span>Menu</span>
+        <span class="menu-toggle__icon" aria-hidden="true"></span>
+      </button>
+      <ul class="top-nav-links" id="primary-nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="CV.html">About</a></li>
         <li class="dropdown">
@@ -887,7 +891,7 @@
         </li>
         <li><a href="projects.html">Tools</a></li>
       </ul>
-      <ul class="top-nav-utilities" aria-label="More">
+      <ul class="top-nav-utilities" id="primary-nav-utilities" aria-label="More">
         <li class="dropdown">
           <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
           <ul class="dropdown-menu dropdown-menu--right">
@@ -2667,8 +2671,25 @@
         });
     }
 
+
+function initTopNav(){
+  const nav=document.querySelector('.top-nav');
+  if(!nav)return;
+  const menuToggle=nav.querySelector('.menu-toggle.global-nav-toggle');
+  const navLinks=nav.querySelector('.top-nav-links');
+  const navUtilities=nav.querySelector('.top-nav-utilities');
+  const dropdowns=[...nav.querySelectorAll('.dropdown')];
+  const closeDropdowns=(keep)=>dropdowns.forEach(drop=>{if(drop!==keep){drop.removeAttribute('data-desktop-open');drop.removeAttribute('data-mobile-open');const trigger=drop.querySelector('.dropdown-trigger');if(trigger)trigger.setAttribute('aria-expanded','false');}});
+  const syncMenuState=()=>{const expanded=menuToggle && menuToggle.getAttribute('aria-expanded')==='true';nav.toggleAttribute('data-menu-open',expanded);if(navLinks)navLinks.dataset.open=expanded?'true':'false';if(navUtilities)navUtilities.dataset.open=expanded?'true':'false';if(!expanded)closeDropdowns();};
+  if(menuToggle){menuToggle.addEventListener('click',()=>{const expanded=menuToggle.getAttribute('aria-expanded')==='true';menuToggle.setAttribute('aria-expanded',String(!expanded));syncMenuState();});syncMenuState();}
+  dropdowns.forEach(drop=>{const trigger=drop.querySelector('.dropdown-trigger');if(!trigger)return;trigger.setAttribute('aria-expanded','false');trigger.addEventListener('click',(e)=>{e.stopPropagation();const mobile=window.matchMedia('(max-width: 768px)').matches;const attr=mobile?'data-mobile-open':'data-desktop-open';const isOpen=drop.getAttribute(attr)==='true';closeDropdowns(drop);if(isOpen){drop.removeAttribute(attr);trigger.setAttribute('aria-expanded','false');}else{drop.setAttribute(attr,'true');trigger.setAttribute('aria-expanded','true');}});});
+  document.addEventListener('click',(e)=>{if(!nav.contains(e.target))closeDropdowns();});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if(menuToggle){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}closeDropdowns();}});
+  window.addEventListener('resize',()=>{closeDropdowns();if(menuToggle&&window.matchMedia('(min-width: 769px)').matches){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}});
+}
     // --- UI INITIATION & EVENT LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
+        initTopNav();
         refreshIcons();
         loadState();
         applyTheme(state.theme);
