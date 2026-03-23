@@ -4,44 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math 130 Unit 3 Practice Questions</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="theme.js"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: #333;
+        .practice-page {
             max-width: 900px;
-            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+        .practice-sheet {
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color, #d9e2ec);
+            border-radius: 18px;
+            box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
             padding: 2rem;
-            background-color: #fcfcfc;
         }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 0.5rem;
-            margin-bottom: 2rem;
-        }
-        h2 {
+        .practice-sheet h2 {
             color: #2980b9;
             margin-top: 3rem;
             border-bottom: 1px solid #bdc3c7;
             padding-bottom: 0.3rem;
         }
-        h3 {
+        .practice-sheet h3 {
             color: #d35400;
             margin-top: 2rem;
         }
-        h4 {
+        .practice-sheet h4 {
             color: #2c3e50;
             font-size: 1.1rem;
             margin-bottom: 0.2rem;
             margin-top: 1.5rem;
         }
-        p {
+        .practice-sheet p {
             margin-top: 0.2rem;
         }
         .assessment {
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: #52616b;
             font-weight: bold;
             background-color: #ecf0f1;
             padding: 0.2rem 0.5rem;
@@ -49,17 +47,17 @@
             display: inline-block;
             margin-bottom: 0.5rem;
         }
-        ul {
+        .practice-sheet ul {
             background: #fff;
             padding: 1.5rem 2.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             border: 1px solid #e0e0e0;
         }
-        li {
+        .practice-sheet li {
             margin-bottom: 0.8rem;
         }
-        li:last-child {
+        .practice-sheet li:last-child {
             margin-bottom: 0;
         }
         .image-placeholder {
@@ -72,15 +70,79 @@
             font-size: 0.9rem;
             margin: 1rem 0;
         }
-        hr {
+        .practice-sheet hr {
             border: 0;
             height: 1px;
             background: #bdc3c7;
             margin: 3rem 0;
         }
+        @media (max-width: 700px) {
+            .practice-sheet {
+                padding: 1.25rem;
+            }
+            .practice-sheet ul {
+                padding: 1rem 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="CV.html">About</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-current="page">Courses ▾</button>
+          <ul class="dropdown-menu">
+            <li><a href="learn.html">All Courses</a></li>
+            <li><a href="courses/math114.html">MATH 114</a></li>
+            <li><a href="courses/math130.html" aria-current="page">MATH 130</a></li>
+            <li><a href="courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="projects.html">Tools</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
+            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="courses/math130.html">MATH 130</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Unit 3 Practice</span>
+    </nav>
+  </div>
+</div>
+<header class="course-header course-header--unit">
+  <div class="container">
+    <h1>Math 130 Unit 3 Practice Questions</h1>
+    <p class="subtitle">A consolidated review set for Modules 10 through 13 covering trigonometry, applications, and vectors.</p>
+  </div>
+</header>
+<main class="container course-page practice-page">
+  <section class="practice-sheet">
+
 
     <h1>Math 130 Unit 3 Practice Questions</h1>
     <p>Here is a comprehensive set of practice questions covering all 33 objectives for Modules 10 through 13 in Unit 3. These questions are correlated with the provided past assessments (Test 3, Quiz 9, Quiz 10, Quiz 11, Quiz 12, and Quiz 13).</p>
@@ -381,5 +443,8 @@
         <li><strong>Q3:</strong> From a graph showing u and v added head-to-tail, determine the component form of the resultant r.</li>
     </ul>
 
+
+  </section>
+</main>
 </body>
 </html>

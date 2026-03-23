@@ -33,6 +33,8 @@
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200 antialiased min-h-screen">
+    <!-- Standalone decision: keep this app independent from the site shell because it behaves like a focused single-page utility with its own full-screen UI. Avoid mixing in partial shared-shell markup that would imply a standard content page. -->
+
 
     <div class="container mx-auto max-w-3xl p-4 md:p-8"
          x-data="prayerApp()"
