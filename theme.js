@@ -17,7 +17,7 @@ if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
 }
 
 const menuToggleLabel = (expanded) => expanded ? 'Close navigation menu' : 'Open navigation menu';
-const submenuToggleLabel = (expanded) => expanded ? 'Close Course Resources submenu' : 'Open Course Resources submenu';
+const submenuToggleLabel = (expanded) => expanded ? 'Close Courses submenu' : 'Open Courses submenu';
 
 function getFocusableElements(container) {
     if (!container) return [];
