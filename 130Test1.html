@@ -11,6 +11,16 @@
 <style>
   /* Page-specific styles only; shared Math 130 review tokens/components live in styles.css. */
 
+
+  .journey-panel { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border)); border-radius: 20px; padding: 1.35rem 1.4rem; margin: 1.25rem 0 1.5rem; box-shadow: var(--shadow); }
+  .journey-kicker { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem; }
+  .journey-panel h2 { font-size: 1.2rem; margin-bottom: 0.35rem; }
+  .journey-panel p { color: var(--text-muted); margin-bottom: 1rem; }
+  .journey-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.75rem; }
+  .journey-step { background: color-mix(in srgb, var(--surface2) 78%, var(--surface)); border: 1px solid var(--border); border-radius: 14px; padding: 0.9rem 1rem; }
+  .journey-step-num { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+  .journey-step-title { display: block; font-weight: 700; margin-bottom: 0.2rem; }
+  .journey-step-copy { font-size: 0.88rem; color: var(--text-muted); }
   /* Topic Cards */
   .topic-card { background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--surface) 72%, var(--surface2))); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 1.15rem; overflow: hidden; transition: border-color 0.3s, transform 0.25s; box-shadow: var(--shadow); }
   .topic-card:hover { border-color: var(--accent-hover); transform: translateY(-2px); }
@@ -335,14 +345,27 @@
     <div class="info-card review-chip"><div class="info-icon">📐</div><div><div class="info-label">Topics</div><div class="info-value">10 Core Areas</div></div></div>
   </div>
 
+
+  <section class="journey-panel review-card" aria-label="Recommended study order">
+    <div class="journey-kicker">🧭 Recommended order</div>
+    <h2>Follow the same study path each time</h2>
+    <p>Start with the overview tab, move to the formula sheet, then complete practice before using the extra recall tools and progress tracker.</p>
+    <div class="journey-steps">
+      <div class="journey-step"><span class="journey-step-num">Step 1</span><span class="journey-step-title">Start Here / Overview</span><span class="journey-step-copy">Open the overview tab to review the tested topics and linked walkthroughs.</span></div>
+      <div class="journey-step"><span class="journey-step-num">Step 2</span><span class="journey-step-title">Formulas / Key Concepts</span><span class="journey-step-copy">Scan the core formulas before you begin solving problems.</span></div>
+      <div class="journey-step"><span class="journey-step-num">Step 3</span><span class="journey-step-title">Practice</span><span class="journey-step-copy">Work the generators first, then use the self-quiz and checklist as extra practice support.</span></div>
+      <div class="journey-step"><span class="journey-step-num">Step 4</span><span class="journey-step-title">Progress</span><span class="journey-step-copy">Finish by checking your saved completion and retry history.</span></div>
+    </div>
+  </section>
+
   <div class="tab-nav-wrapper">
     <div class="tab-fade-left" id="fade-left"></div>
     <nav class="tab-nav review-tabs review-tabs-3" id="tabNav">
-      <button class="tab-btn review-tab-btn active" data-tab="topics"><span class="tab-icon review-tab-icon">📚</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Topics Review</span><span class="tab-meta review-tab-meta">Core ideas and worked examples</span></span></button>
-      <button class="tab-btn review-tab-btn" data-tab="formulas"><span class="tab-icon review-tab-icon">🧾</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Formula Sheet</span><span class="tab-meta review-tab-meta">Quick reference before practice</span></span></button>
+      <button class="tab-btn review-tab-btn active" data-tab="topics"><span class="tab-icon review-tab-icon">📚</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Start Here</span><span class="tab-meta review-tab-meta">Overview of topics and walkthroughs</span></span></button>
+      <button class="tab-btn review-tab-btn" data-tab="formulas"><span class="tab-icon review-tab-icon">🧾</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Formulas</span><span class="tab-meta review-tab-meta">Key rules and test-day formulas</span></span></button>
       <button class="tab-btn review-tab-btn" data-tab="practice"><span class="tab-icon review-tab-icon">✍️</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Practice</span><span class="tab-meta review-tab-meta">Track wins and retry misses</span></span></button>
-      <button class="tab-btn review-tab-btn" data-tab="quiz"><span class="tab-icon review-tab-icon">🎯</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Self-Quiz</span><span class="tab-meta review-tab-meta">Check recall under test pacing</span></span></button>
-      <button class="tab-btn review-tab-btn" data-tab="checklist"><span class="tab-icon review-tab-icon">✅</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Checklist</span><span class="tab-meta review-tab-meta">Mark each objective complete</span></span></button>
+      <button class="tab-btn review-tab-btn" data-tab="quiz"><span class="tab-icon review-tab-icon">🎯</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Practice Quiz</span><span class="tab-meta review-tab-meta">Extra recall after generators</span></span></button>
+      <button class="tab-btn review-tab-btn" data-tab="checklist"><span class="tab-icon review-tab-icon">✅</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Practice Checklist</span><span class="tab-meta review-tab-meta">Wrap up each study objective</span></span></button>
       <button class="tab-btn review-tab-btn" data-tab="progress"><span class="tab-icon review-tab-icon">📈</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Progress</span><span class="tab-meta review-tab-meta">Review history and best attempts</span></span></button>
     </nav>
     <div class="tab-fade-right" id="fade-right"></div>

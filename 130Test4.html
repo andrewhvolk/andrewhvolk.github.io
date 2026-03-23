@@ -181,6 +181,34 @@
         color: var(--text);
     }
 
+
+    .recommended-order-panel {
+        margin: 1rem 0 1.5rem;
+        padding: 1.35rem 1.4rem;
+        border-radius: 20px;
+        border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+        background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface));
+        box-shadow: var(--shadow);
+    }
+    .recommended-order-panel .order-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.7rem;
+    }
+    .recommended-order-panel h2 { margin-bottom: 0.35rem; }
+    .recommended-order-panel p { color: var(--text-muted); margin-bottom: 1rem; max-width: 70ch; }
+    .recommended-order-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.75rem; }
+    .recommended-order-step { background: color-mix(in srgb, var(--surface2) 78%, var(--surface)); border: 1px solid var(--border); border-radius: 14px; padding: 0.9rem 1rem; }
+    .recommended-order-step .step-num { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+    .recommended-order-step strong { display: block; margin-bottom: 0.2rem; }
+    .recommended-order-step span { display: block; color: var(--text-muted); font-size: 0.88rem; }
+
     .tabs {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -594,7 +622,7 @@
         <p class="header-subtitle review-subtitle">A simplified final-week page modeled after the earlier review pages. This one only covers the last week: Quiz 13 on vectors, reading day, and the comprehensive final.</p>
 
         <div class="header-chips review-meta-chips">
-            <span class="chip accent"><i data-lucide="route"></i> Suggested order: Schedule → Quiz 13 → Final Exam → Formulas</span>
+            <span class="chip accent"><i data-lucide="route"></i> Recommended order: Overview → Formulas → Practice → Schedule</span>
             <span class="chip"><i data-lucide="calendar-clock"></i> Quiz 13: Mon, 5/4</span>
             <span class="chip"><i data-lucide="graduation-cap"></i> Final Exam: Thu, 5/7</span>
             <span class="chip"><i data-lucide="layers-3"></i> Final week only</span>
@@ -605,26 +633,25 @@
         </button>
     </header>
 
+
+    <section class="recommended-order-panel" aria-label="Recommended study order">
+        <div class="order-kicker"><i data-lucide="route"></i> Recommended order</div>
+        <h2>Use the same final-week journey as the earlier review pages</h2>
+        <p>This page does not need separate slides, videos, or progress tabs, so it keeps the same logic with only the relevant steps: start with the final overview, review formulas, practice with the Quiz 13 tools, then confirm the schedule.</p>
+        <div class="recommended-order-grid">
+            <div class="recommended-order-step"><span class="step-num">Step 1</span><strong>Start Here / Overview</strong><span>Read the final exam overview first so you know the scope.</span></div>
+            <div class="recommended-order-step"><span class="step-num">Step 2</span><strong>Formulas / Key Concepts</strong><span>Scan the provided formulas before attempting review tasks.</span></div>
+            <div class="recommended-order-step"><span class="step-num">Step 3</span><strong>Practice</strong><span>Use the Quiz 13 vector practice and worked review materials.</span></div>
+            <div class="recommended-order-step"><span class="step-num">Step 4</span><strong>Schedule / Logistics</strong><span>Finish by confirming quiz, reading day, and final exam timing.</span></div>
+        </div>
+    </section>
+
     <nav class="tabs review-tabs review-tabs-4" aria-label="Final week navigation">
-        <button class="tab-btn review-tab-btn active" data-tab="schedule">
-            <span class="tab-icon"><i data-lucide="calendar-range"></i></span>
-            <span class="tab-copy review-tab-copy">
-                <span class="tab-label review-tab-label">Schedule</span>
-                <span class="tab-sub">Only the final week</span>
-            </span>
-        </button>
-        <button class="tab-btn review-tab-btn" data-tab="quiz13">
-            <span class="tab-icon"><i data-lucide="move-3d"></i></span>
-            <span class="tab-copy review-tab-copy">
-                <span class="tab-label review-tab-label">Quiz 13</span>
-                <span class="tab-sub">Section 8.4 vectors</span>
-            </span>
-        </button>
-        <button class="tab-btn review-tab-btn" data-tab="finalexam">
+        <button class="tab-btn review-tab-btn active" data-tab="finalexam">
             <span class="tab-icon"><i data-lucide="book-open-check"></i></span>
             <span class="tab-copy review-tab-copy">
-                <span class="tab-label review-tab-label">Final Exam</span>
-                <span class="tab-sub">Fall 2025 alignment</span>
+                <span class="tab-label review-tab-label">Start Here</span>
+                <span class="tab-sub">Final exam overview</span>
             </span>
         </button>
         <button class="tab-btn review-tab-btn" data-tab="formulas">
@@ -634,9 +661,23 @@
                 <span class="tab-sub">Provided + must know</span>
             </span>
         </button>
+        <button class="tab-btn review-tab-btn" data-tab="quiz13">
+            <span class="tab-icon"><i data-lucide="move-3d"></i></span>
+            <span class="tab-copy review-tab-copy">
+                <span class="tab-label review-tab-label">Practice</span>
+                <span class="tab-sub">Quiz 13 vector review</span>
+            </span>
+        </button>
+        <button class="tab-btn review-tab-btn" data-tab="schedule">
+            <span class="tab-icon"><i data-lucide="calendar-range"></i></span>
+            <span class="tab-copy review-tab-copy">
+                <span class="tab-label review-tab-label">Schedule</span>
+                <span class="tab-sub">Only the final week</span>
+            </span>
+        </button>
     </nav>
 
-    <section class="tab-content active" id="tab-schedule">
+    <section class="tab-content" id="tab-schedule">
         <div class="card review-card">
             <div class="eyebrow"><i data-lucide="calendar-days"></i> Final week schedule</div>
             <h2>What happens this week</h2>
@@ -757,7 +798,7 @@
         </div>
     </section>
 
-    <section class="tab-content" id="tab-finalexam">
+    <section class="tab-content active" id="tab-finalexam">
         <div class="intro-note">
             <div class="callout">
                 <strong>Actual Fall 2025 final snapshot.</strong> The final was comprehensive and included 27 questions spanning algebra, geometry, trigonometry, logarithms, applications, and vectors.
