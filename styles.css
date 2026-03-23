@@ -309,7 +309,9 @@ header h1 {
   object-fit: cover;
   border: none;
   margin-bottom: 1rem;
-  outline: 1px solid var(--ghost-outline);
+  box-shadow:
+    0 0 0 0.45rem color-mix(in srgb, var(--surface-container-high) 56%, transparent),
+    0 18px 36px rgba(0, 29, 23, 0.08);
   margin: 0 auto 1rem;
   overflow: hidden;
   background: var(--surface-container-high);
@@ -344,11 +346,12 @@ header h1 {
 nav.navbar {
   position: sticky;
   top: 0;
-  background: var(--glass-surface);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(242, 244, 241, 0.84));
   z-index: 999;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  outline: 1px solid var(--ghost-outline);
+  box-shadow: 0 12px 28px rgba(0, 29, 23, 0.06);
 }
 
 nav.navbar .nav-container {
@@ -399,14 +402,18 @@ nav.navbar button.dropdown-trigger:focus-visible {
   position: absolute;
   top: calc(100% - 2px);
   left: 0;
-  background: var(--glass-surface);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(242, 244, 241, 0.92));
   min-width: 200px;
+  margin-top: 0.35rem;
+  padding: 0.35rem;
   opacity: 0;
   visibility: hidden;
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
-  outline: 1px solid var(--ghost-outline);
+  border-radius: var(--radius-md);
+  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.08);
   z-index: 1000;
 }
 
@@ -459,7 +466,7 @@ section:hover {
   background:
     linear-gradient(180deg, rgba(220, 230, 224, 0.36), rgba(255, 255, 255, 0)),
     linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(242, 244, 241, 0.94));
-  outline-color: var(--ghost-outline);
+  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
 }
 
 section h2 {
@@ -510,14 +517,19 @@ section h2 {
 /* Publications styling */
 .publications-item {
   margin-bottom: 1rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--primary-color);
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(90deg, rgba(58, 102, 92, 0.12), rgba(58, 102, 92, 0.03) 24%, transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(242, 244, 241, 0.72));
   transition: var(--transition);
 }
 
 .publications-item:hover {
   transform: translateX(5px);
-  border-left-color: var(--accent-color);
+  background:
+    linear-gradient(90deg, rgba(13, 80, 213, 0.14), rgba(58, 102, 92, 0.06) 28%, transparent 74%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(242, 244, 241, 0.82));
 }
 
 /* Button styles */
@@ -578,7 +590,7 @@ section h2 {
   width: 100%;
   max-width: 300px;
   transition: var(--transition);
-  outline: 1px solid transparent;
+  box-shadow: 0 14px 32px rgba(0, 29, 23, 0.05);
 }
 
 .card:hover {
@@ -586,7 +598,7 @@ section h2 {
   background:
     linear-gradient(180deg, rgba(220, 230, 224, 0.3), rgba(255, 255, 255, 0.02)),
     linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 244, 241, 0.96));
-  outline-color: var(--ghost-outline);
+  box-shadow: 0 20px 40px rgba(0, 29, 23, 0.08);
 }
 
 .card h2 {
@@ -661,8 +673,7 @@ section h2 {
   gap: 1rem;
   align-items: stretch;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(242, 244, 241, 0.88));
-  border: none;
-  outline: 1px solid var(--ghost-outline);
+  box-shadow: 0 16px 34px rgba(0, 29, 23, 0.05);
   border-radius: var(--border-radius);
   padding: 1rem 1.25rem;
 }
@@ -727,10 +738,9 @@ section h2 {
 .quick-link-card,
 .unit-overview-block {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(242, 244, 241, 0.88));
-  border: none;
-  outline: 1px solid var(--ghost-outline);
   border-radius: var(--border-radius);
   padding: 1.25rem;
+  box-shadow: 0 16px 34px rgba(0, 29, 23, 0.05);
 }
 
 .course-meta-card p:last-child,
@@ -771,10 +781,9 @@ section h2 {
 
 .unit-module-card {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(242, 244, 241, 0.88));
-  border: none;
-  outline: 1px solid var(--ghost-outline);
   border-radius: var(--border-radius);
   padding: var(--spacing-6);
+  box-shadow: 0 16px 34px rgba(0, 29, 23, 0.05);
 }
 
 .unit-module-card + .unit-module-card {
@@ -800,11 +809,12 @@ section h2 {
 
 .unit-task-card,
 .unit-resource-card {
-  background: rgba(13, 80, 213, 0.06);
-  border: none;
-  outline: 1px solid var(--ghost-outline);
+  background:
+    linear-gradient(180deg, rgba(13, 80, 213, 0.06), rgba(13, 80, 213, 0.02)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(242, 244, 241, 0.8));
   border-radius: var(--border-radius);
   padding: 1rem;
+  box-shadow: 0 12px 28px rgba(0, 29, 23, 0.04);
 }
 
 .unit-task-card h3,
@@ -861,24 +871,33 @@ section h2 {
 
 .assignment-resource-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin: 1rem 0 2rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(242, 244, 241, 0.88));
   overflow: hidden;
   border-radius: var(--border-radius);
+  box-shadow: 0 14px 32px rgba(0, 29, 23, 0.05);
 }
 
 .assignment-resource-table th,
 .assignment-resource-table td {
-  border: 1px solid var(--ghost-outline);
   padding: 0.75em;
   text-align: left;
   vertical-align: top;
 }
 
 .assignment-resource-table th {
-  background-color: rgba(13, 80, 213, 0.12);
+  background: linear-gradient(180deg, rgba(13, 80, 213, 0.14), rgba(13, 80, 213, 0.08));
   color: var(--secondary-color);
+}
+
+.assignment-resource-table tbody tr:nth-child(even) td {
+  background: rgba(58, 102, 92, 0.04);
+}
+
+.assignment-resource-table tbody tr + tr td {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .course-sequence-nav {
@@ -921,12 +940,13 @@ section h2 {
 
 /* Footer styling */
 footer {
-  background: linear-gradient(180deg, rgba(242, 244, 241, 0.96), rgba(232, 235, 231, 0.98));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(220, 230, 224, 0.18) 14%, rgba(232, 235, 231, 0.98)),
+    linear-gradient(180deg, rgba(242, 244, 241, 0.96), rgba(232, 235, 231, 0.98));
   color: var(--secondary-color);
   text-align: center;
-  padding: 2rem 0;
-  margin-top: 3rem;
-  border-top: 1px solid var(--ghost-outline);
+  padding: 2.75rem 0 2.25rem;
+  margin-top: 4rem;
 }
 
 footer .container {
@@ -961,9 +981,11 @@ footer p {
 
 /* 404 error page styling */
 .error-container {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(242, 244, 241, 0.88));
+  background:
+    linear-gradient(180deg, rgba(220, 230, 224, 0.2), rgba(255, 255, 255, 0)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(242, 244, 241, 0.88));
   border-radius: var(--border-radius);
-  outline: 1px solid var(--ghost-outline);
+  box-shadow: 0 18px 40px rgba(0, 29, 23, 0.06);
   padding: 2.5rem;
   width: 100%;
   max-width: 500px;
@@ -1336,8 +1358,7 @@ section:nth-child(5) {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: none;
-  box-shadow: none;
-  outline: 1px solid var(--ghost-outline);
+  box-shadow: 0 14px 32px rgba(0, 29, 23, 0.06);
 }
 
 .top-nav-inner {
@@ -1440,8 +1461,9 @@ section:nth-child(5) {
 
 .top-nav a:focus-visible,
 .top-nav button:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--accent-action) 38%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--accent-action) 62%, white 12%);
   outline-offset: 3px;
+  box-shadow: 0 0 0 0.35rem color-mix(in srgb, var(--accent-action) 14%, transparent);
 }
 
 .top-nav-links .dropdown-trigger,
@@ -1459,8 +1481,7 @@ section:nth-child(5) {
 .top-nav-utilities button[aria-current="page"] {
   color: var(--secondary-color);
   background: linear-gradient(135deg, color-mix(in srgb, var(--surface-container-high) 78%, transparent), color-mix(in srgb, var(--surface-container-lowest) 86%, transparent));
-  box-shadow: none;
-  outline: 1px solid var(--ghost-outline);
+  box-shadow: inset 0 0 0 999px rgba(255, 255, 255, 0.08);
 }
 
 .top-nav-links a[aria-current="page"]:hover,
@@ -1499,8 +1520,9 @@ section:nth-child(5) {
   color: var(--muted-text-color);
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius-pill);
-  background: var(--nav-pill-surface);
-  outline: 1px solid var(--ghost-outline);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(242, 244, 241, 0.8));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .breadcrumb a {
@@ -1547,11 +1569,10 @@ section:nth-child(5) {
   margin: 0;
   padding: 0.4rem;
   list-style: none;
-  background: var(--glass-surface);
-  border: none;
-  outline: 1px solid var(--ghost-outline);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(242, 244, 241, 0.92));
   border-radius: 0.75rem;
-  box-shadow: none;
+  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.08);
 }
 
 .top-nav-links .dropdown:hover .dropdown-menu,
@@ -1593,13 +1614,14 @@ section:nth-child(5) {
   min-height: 2.75rem;
   padding: 0.65rem 0.9rem;
   border: none;
-  outline: 1px solid var(--ambient-outline);
   border-radius: 0.85rem;
-  background: var(--glass-surface);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(242, 244, 241, 0.86));
   color: var(--secondary-color);
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 29, 23, 0.06);
 }
 
 .menu-toggle.global-nav-toggle .menu-toggle__icon::before {
@@ -1687,9 +1709,8 @@ section:nth-child(5) {
   margin: 0;
   padding: 0.35rem;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(242, 244, 241, 0.88));
-  border: none;
-  outline: 1px solid var(--ghost-outline);
   border-radius: 0.75rem;
+  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.08);
   opacity: 0;
   visibility: hidden;
 }
@@ -1743,7 +1764,7 @@ section:nth-child(5) {
     padding: 0.6rem;
     border-radius: 1rem;
     background: linear-gradient(180deg, var(--nav-mobile-panel-start), var(--nav-mobile-panel-end));
-    outline: 1px solid var(--ghost-outline);
+    box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
   }
 
   .top-nav-links[data-open="true"],
@@ -1785,8 +1806,7 @@ section:nth-child(5) {
     margin-top: 0.35rem;
     padding: 0.45rem;
     background: var(--nav-mobile-menu-surface);
-    outline: 1px solid var(--ghost-outline);
-    box-shadow: none;
+    box-shadow: inset 0 0 0 999px rgba(255, 255, 255, 0.08);
     border-radius: 0.75rem;
   }
 
@@ -2046,9 +2066,19 @@ body.review-page::before {
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1.6rem;
-  padding-bottom: 1.15rem;
-  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.35rem;
   position: relative;
+}
+
+.review-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0.5rem;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 18%, transparent), transparent 72%);
+  opacity: 0.7;
 }
 
 .review-title-group { max-width: 52rem; }
@@ -2180,9 +2210,8 @@ body.review-page::before {
 .review-panel, .review-card, .card, .formula-section, .info-card, .practice-stat, .problem-card, .topic-card, .section-summary-card {
   position: relative;
   background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--surface) 78%, var(--surface2)));
-  border: 1px solid var(--border);
   border-radius: var(--radius);
-  outline: 1px solid var(--ghost-outline);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.08);
 }
 .review-panel::before, .review-card::before, .card::before, .formula-section::before, .section-summary-card::before {
   content: '';
@@ -2196,7 +2225,7 @@ body.review-page::before {
 .review-card, .card, .formula-section { padding: var(--spacing-6); margin-bottom: 1.5rem; }
 
 .review-checklist-section, .checklist-section { margin-bottom: var(--spacing-8); }
-.review-checklist-section > h3, .checklist-section > h3 { font-family: var(--type-body-family); font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.review-checklist-section > h3, .checklist-section > h3 { font-family: var(--type-body-family); font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; padding-bottom: 0.7rem; background: linear-gradient(180deg, transparent calc(100% - 0.45rem), color-mix(in srgb, var(--accent) 10%, transparent)); }
 .review-checklist-row, .check-item, .checklist-item {
   display: flex;
   align-items: center;
@@ -2263,7 +2292,7 @@ body.review-page::before {
   border-radius: 14px;
   border: 1px solid var(--border);
   background: linear-gradient(135deg, color-mix(in srgb, var(--surface2) 84%, transparent), var(--surface));
-  outline: 1px solid var(--ghost-outline);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 .review-callout--exam { text-align:center; border-width: 2px; border-color: color-mix(in srgb, var(--accent) 52%, var(--border)); background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, var(--surface)), color-mix(in srgb, var(--surface2) 88%, var(--surface))); }
 .review-callout--tip, .tip-box,
@@ -2403,7 +2432,7 @@ body.math130-course-page {
   gap: 1.25rem;
   padding: var(--spacing-8);
   border-radius: var(--radius, 16px);
-  outline: 1px solid var(--ghost-outline);
+  box-shadow: 0 18px 40px rgba(0, 29, 23, 0.06);
 }
 
 .math130-hero::before,
