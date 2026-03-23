@@ -34,7 +34,7 @@ Treat the interface as a physical stack of fine parchment. Use the surface tiers
 Flat color is the enemy of prestige.
 
 - **The Library Glow:** Use subtle radial gradients on hero backgrounds, transitioning from `primary` (#001d17) to `primary-container` (#00342b) to mimic the way light hits a leather-bound book.
-- **Vibrant Accents:** Use the `secondary` blue (#0d50d5) sparingly for high-action CTAs or data highlights to inject "energetic professionalism" into the scholarly emerald base.
+- **Vibrant Accents:** Use the `secondary` blue (#1A56DB) sparingly for high-action CTAs, links, or data highlights to inject "energetic professionalism" into the scholarly emerald base.
 
 ---
 
@@ -155,12 +155,13 @@ If a border is legally or functionally required for accessibility, use the `outl
 ### Buttons: The Signature Action
 
 - **Primary:** `primary-container` (#00342b) background with `on-primary` (#ffffff) text. Use `rounding-md` (0.75rem). Add a subtle inner-glow gradient (top-to-bottom) for a "pressed silk" feel.
-- **Secondary:** Use the vibrant `secondary` blue (#0d50d5) for conversion-focused actions.
+- **Secondary:** Use the vibrant `secondary` blue (#1A56DB) for conversion-focused actions.
 - **Tertiary:** No background. `primary` text with an underline that only appears on hover.
 
 ### Cards & Lists
 
 - **Cards Are Selective, Not Default:** Cards are an emphasis tool, not the baseline layout primitive. Use them for featured content, interaction affordances, compact previews, or places where a distinct surface materially helps comprehension.
+- **Hover Behavior:** Panels, sections, and marketing cards should not change background fills on hover; use shadow and subtle outline emphasis only so the surface hierarchy stays stable.
 - **No Dividers:** Forbid the use of 1px lines between list items in editorial and marketing layouts. Use `spacing-4` (1.4rem) gaps or alternating subtle background shifts (`surface-container-low` vs `surface-container`).
 - **Instructional Exception:** In course and manual contexts, prioritize comprehension over purity; visible markers, numbering, or very subtle separators may be used when they improve step tracking.
 - **Hierarchy Before Uniformity:** When content has a clear primary/secondary relationship, express it through composition, scale, spacing, and placement before reaching for equal card grids.
@@ -242,6 +243,7 @@ Layout should reflect those answers. Components exist to reinforce hierarchy, no
 To keep implementation aligned with the current codebase, prefer the tokens and primitives already established in `styles.css`.
 
 - **Scholarly emerald base / authority text:** `--primary`, `--primary-container`, `--on-surface`.
+- **Header gradient legibility:** Inside `.page-shell-header` and `.course-header`, heading text should inherit `--light-text` so display headings remain readable over dark gradients.
 - **Energetic professional accent:** `--secondary` for actions, links, focus, and highlights.
 - **Sun-drenched parchment surfaces / dark reading surfaces:** `--surface`, `--surface-container-low`, `--surface-container-lowest`, `--surface-container-highest`, with dark-mode overrides under `:root[data-theme="dark"]`.
 - **Editorial typography split:** `--font-display` / `--type-display-family` for titles; `--font-body` / `--type-body-family` for reading text.
