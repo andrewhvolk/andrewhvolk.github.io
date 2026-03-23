@@ -129,13 +129,6 @@
   --nav-mobile-panel-end: rgba(242, 244, 241, 0.9);
   --nav-mobile-menu-surface: rgba(255, 255, 255, 0.96);
 }
-/* No bullet points */
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 /* Base styles */
 body {
   font-family: var(--type-body-family);
@@ -182,6 +175,53 @@ a {
 
 a:hover {
   color: var(--tertiary);
+}
+
+
+.list-reset,
+.list-reset ul,
+.list-reset ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.top-nav-links,
+.top-nav-utilities,
+.dropdown-menu,
+.highlights-list,
+.unit-task-meta,
+.cv-section-nav #nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.course-page, .review-shell, .summary-sheet, .question-guide, .answer-content) :where(ul, ol):not(.list-reset):not(.top-nav-links):not(.top-nav-utilities):not(.dropdown-menu):not(.highlights-list):not(.unit-task-meta):not(.math130-summary-list) {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+:where(.course-page, .review-shell, .summary-sheet, .question-guide, .answer-content) :where(li):not(.highlights-list li):not(.math130-summary-list li) + li {
+  margin-top: 0.55rem;
+}
+
+:where(.course-page, .review-shell, .summary-sheet, .question-guide, .answer-content) ul:not(.list-reset):not(.top-nav-links):not(.top-nav-utilities):not(.dropdown-menu):not(.highlights-list):not(.unit-task-meta):not(.math130-summary-list) {
+  list-style: disc;
+}
+
+:where(.course-page, .review-shell, .summary-sheet, .question-guide, .answer-content) ol:not(.list-reset):not(.top-nav-links):not(.top-nav-utilities):not(.dropdown-menu):not(.highlights-list):not(.unit-task-meta):not(.math130-summary-list) {
+  list-style: decimal;
+}
+
+:where(.course-page, .review-shell, .summary-sheet, .question-guide, .answer-content) :where(ul, ol):not(.list-reset):not(.top-nav-links):not(.top-nav-utilities):not(.dropdown-menu):not(.highlights-list):not(.unit-task-meta):not(.math130-summary-list) ::marker {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+:where(.course-page, .review-shell, .summary-sheet, .question-guide, .answer-content) :where(ul, ol) :where(ul, ol):not(.list-reset):not(.top-nav-links):not(.top-nav-utilities):not(.dropdown-menu):not(.highlights-list):not(.unit-task-meta):not(.math130-summary-list) {
+  margin-top: 0.55rem;
+  margin-bottom: 0.35rem;
 }
 
 /* Header styling */
