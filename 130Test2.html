@@ -8,7 +8,7 @@
 <title>Math 130 – Test 2 Review (Spring 2026)</title>
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=DM+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&amp;display=swap" rel="stylesheet"/>
 <!-- KaTeX for Math Rendering -->
 <link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
 <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -18,20 +18,157 @@
 <style>
         /* Page-specific styles only; shared Math 130 review tokens/components live in styles.css. */
 
+        body.review-page.light,
+        body.light .math-review-page,
+        .math-review-page.is-light {
+            --review-bg: var(--surface);
+            --review-surface: var(--surface-container-lowest);
+            --review-surface-2: var(--surface-container-low);
+            --review-border: rgba(192, 200, 196, 0.18);
+            --review-accent: var(--secondary);
+            --review-accent-soft: rgba(26, 86, 219, 0.08);
+            --review-accent-glow: rgba(26, 86, 219, 0.14);
+            --review-muted: var(--on-surface-variant);
+            --review-text: var(--on-surface);
+            --review-shadow: 0 22px 48px rgba(0, 29, 23, 0.08);
+            --review-grid: rgba(58, 102, 92, 0.035);
+            --review-accent-hover: rgba(26, 86, 219, 0.2);
+            --review-green-border: rgba(15, 118, 110, 0.22);
+            --review-red-border: rgba(185, 28, 28, 0.18);
+            --review-check-bg: rgba(15, 118, 110, 0.06);
+            --review-check-border: rgba(15, 118, 110, 0.22);
+            --review-got-border: rgba(15, 118, 110, 0.3);
+            --review-miss-border: rgba(185, 28, 28, 0.28);
+            --review-green-step: rgba(15, 118, 110, 0.16);
+            --review-h1-from: var(--primary);
+            --review-h1-to: var(--primary-container);
+            --review-body-muted: color-mix(in srgb, var(--on-surface-variant) 86%, var(--primary) 14%);
+            --review-semantic-body: var(--on-surface);
+            --review-success: #0f766e;
+            --review-success-bg: rgba(15, 118, 110, 0.08);
+            --review-warning: #b45309;
+            --review-warning-bg: rgba(180, 83, 9, 0.08);
+            --review-error: #b91c1c;
+            --review-error-bg: rgba(185, 28, 28, 0.08);
+            --review-info: var(--secondary);
+            --review-info-bg: rgba(26, 86, 219, 0.08);
+        }
+
+        .math-review-page {
+            background:
+                radial-gradient(circle at top left, rgba(58, 102, 92, 0.12), transparent 28%),
+                linear-gradient(180deg, rgba(225, 227, 224, 0.46), transparent 24%),
+                var(--surface);
+        }
+        body.review-page::before { opacity: 0.28; }
+        .review-shell { max-width: 1180px; padding-top: clamp(2.5rem, 5vw, 4rem); }
+        .review-header {
+            margin-bottom: 2.5rem;
+            padding: clamp(2.35rem, 5vw, 4rem);
+            background: var(--gradient-library-glow);
+            border-radius: 1.5rem;
+            color: var(--on-primary);
+            overflow: hidden;
+            box-shadow: 0 28px 60px rgba(0, 29, 23, 0.16);
+            text-align: left;
+        }
+        .review-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(58, 102, 92, 0.16), rgba(13, 80, 213, 0.14));
+            pointer-events: none;
+        }
+        .review-header::after {
+            display: block;
+            inset: auto auto 0 0;
+            width: min(18rem, 42%);
+            height: 0.4rem;
+            background: linear-gradient(90deg, rgba(255,255,255,0.92), color-mix(in srgb, var(--secondary) 78%, transparent));
+            opacity: 0.92;
+        }
+        .review-header > * { position: relative; z-index: 1; }
+        .review-header .breadcrumb,
+        .review-header h1,
+        .review-header .header-meta,
+        .review-header .review-subtitle,
+        .review-header .header-chip { color: var(--on-primary); }
+        .review-header .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+        }
+        .review-header .breadcrumb a,
+        .review-header .breadcrumb-current,
+        .review-header .breadcrumb-sep { color: rgba(255,255,255,0.82); }
+        .review-header h1 {
+            color: var(--on-primary);
+            font-size: clamp(2.8rem, 6vw, 4.4rem);
+            margin-bottom: 1rem;
+            max-width: 12ch;
+        }
+        .header-meta {
+            font-family: var(--type-meta-family);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.78);
+            margin: 0 0 0.85rem;
+        }
+        .review-subtitle {
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
+            line-height: 1.75;
+            max-width: 40rem;
+            margin-bottom: 0;
+            color: rgba(255,255,255,0.88);
+        }
+        .review-chip, .header-chip, .chip {
+            border: 0;
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
+        }
+        .review-chip i, .header-chip i, .chip i { color: color-mix(in srgb, white 72%, var(--secondary)); }
+        .review-chip.is-accent, .header-chip.accent, .chip.accent {
+            background: rgba(255,255,255,0.14);
+            color: white;
+        }
+
+        .tabs.review-tabs, .tab-nav.review-tabs { gap: 0.9rem; margin: 1.75rem 0 1.5rem; }
+        .tab-btn.review-tab-btn, .review-tabs .tab-btn {
+            background: var(--gradient-editorial-panel);
+            border: 0;
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 82%, transparent);
+            min-height: 84px;
+        }
+        .tab-btn.review-tab-btn.active, .review-tabs .tab-btn.active {
+            background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest)), color-mix(in srgb, var(--surface-container-low) 92%, white));
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent), 0 14px 30px rgba(0, 29, 23, 0.08);
+        }
+
+
+        @media (max-width: 980px) {
+            .review-header h1 { max-width: none; }
+        }
+
+        @media (max-width: 640px) {
+            .review-header { padding: 1.5rem; }
+        }
+
         /* Cards */
         .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+            background: var(--gradient-editorial-panel);
+            border: 0;
+            border-radius: 1rem;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 78%, transparent), 0 18px 40px rgba(0, 29, 23, 0.06);
             transition: transform 0.2s;
         }
 
         /* Checklist */
         .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
-        .check-item { display: flex; width: 100%; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; user-select: none; }
+        .check-item { display: flex; width: 100%; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 0; cursor: pointer; transition: all 0.2s; user-select: none; }
         .check-item:hover { border-color: var(--accent); }
         .check-item:focus-visible, .practice-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
         .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
@@ -327,24 +464,6 @@
 .status-supplemental { background: var(--surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border); }
 
 
-.recommended-order-panel {
-    margin: 1rem 0 1.5rem;
-    padding: 1.35rem 1.4rem;
-    border-radius: 20px;
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
-    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface));
-    box-shadow: var(--shadow);
-}
-.recommended-order-panel .order-kicker {
-    display: inline-flex; align-items: center; gap: 0.45rem; color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.7rem;
-}
-.recommended-order-panel h2 { margin-bottom: 0.35rem; }
-.recommended-order-panel p { color: var(--text-muted); margin-bottom: 1rem; max-width: 70ch; }
-.recommended-order-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; }
-.recommended-order-step { background: color-mix(in srgb, var(--surface2) 78%, var(--surface)); border: 1px solid var(--border); border-radius: 14px; padding: 0.9rem 1rem; }
-.recommended-order-step strong { display: block; margin-bottom: 0.22rem; }
-.recommended-order-step span { display: block; color: var(--text-muted); font-size: 0.88rem; }
-.recommended-order-step .step-num { font-family: var(--type-meta-family); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
 
 /* Print Configuration */
 @media print {
@@ -565,12 +684,12 @@
             position: relative;
             display: grid;
             gap: 0.95rem;
-            background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
-            border: 1px solid var(--border);
+            background: var(--gradient-card-surface);
+            border: 0;
             border-radius: 14px;
             padding: 1.15rem;
-            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 76%, transparent), 0 14px 28px rgba(0, 29, 23, 0.07);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
             overflow: hidden;
         }
         .slide-card::before {
@@ -584,8 +703,7 @@
         }
         .slide-card:hover {
             transform: translateY(-2px);
-            border-color: var(--accent);
-            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent), 0 18px 34px rgba(0, 29, 23, 0.09);
         }
         .slide-card-top {
             display: flex;
@@ -676,18 +794,17 @@
             display: block;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid var(--border);
-            background: linear-gradient(180deg, rgba(108, 99, 255, 0.08) 0%, rgba(108, 99, 255, 0.02) 100%), var(--surface);
+            border: 0;
+            background: linear-gradient(180deg, rgba(26, 86, 219, 0.08) 0%, rgba(26, 86, 219, 0.02) 100%), var(--surface);
             aspect-ratio: 16 / 9;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 74%, transparent);
             text-decoration: none;
-            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
             cursor: pointer;
         }
         .slide-thumb-wrap:hover {
             transform: translateY(-2px);
-            border-color: rgba(108, 99, 255, 0.45);
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.03);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent), 0 12px 24px rgba(0, 29, 23, 0.1);
         }
         .slide-thumb-wrap:focus-visible {
             outline: 2px solid var(--accent);
@@ -716,7 +833,7 @@
             text-align: center;
             color: var(--text-muted);
             background:
-                linear-gradient(135deg, rgba(108, 99, 255, 0.08) 0%, transparent 100%),
+                linear-gradient(135deg, rgba(26, 86, 219, 0.08) 0%, transparent 100%),
                 repeating-linear-gradient(
                     45deg,
                     transparent 0,
@@ -824,27 +941,13 @@
 </nav>
 <h1>Math 130 – Test 2 Review</h1>
 <p class="header-meta">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
-<p class="header-subtitle review-subtitle">Topics: Geometry, Exponentials &amp; Logarithms</p>
+<p class="header-subtitle review-subtitle">Reviewing geometry, exponentials, and logarithms.</p>
 <div class="header-chips review-meta-chips">
-<span class="header-chip review-chip accent is-accent"><i data-lucide="route"></i> Recommended order: Slides/Overview → Formulas → Practice → Videos → Schedule → Progress</span>
+<span class="header-chip review-chip accent is-accent"><i data-lucide="route"></i> Study flow: Slides → Formulas → Practice → Videos → Schedule → Progress</span>
 <span class="header-chip review-chip"><i data-lucide="calendar-clock"></i> Test 2: Mon, Mar 30</span>
 </div>
 </div>
 </header>
-
-<section class="recommended-order-panel" aria-label="Recommended study order">
-<div class="order-kicker"><i data-lucide="route"></i> Recommended order</div>
-<h2>Use the same study journey on every review page</h2>
-<p>Move left to right through the tabs so the review always starts with orientation, then shifts into memorization, active practice, targeted help, logistics, and finally your saved progress.</p>
-<div class="recommended-order-grid">
-<div class="recommended-order-step"><div class="step-num">Step 1</div><strong>Start Here / Slides</strong><span>Open the lecture materials first to set the scope for the test.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 2</div><strong>Formulas / Key Concepts</strong><span>Review what must be memorized versus what is provided.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 3</div><strong>Practice</strong><span>Work generators and mock-style questions before checking help resources.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 4</div><strong>Videos</strong><span>Use videos only for targeted reteaching on weak spots.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 5</div><strong>Schedule / Logistics</strong><span>Confirm due dates, exam timing, and class pacing at the end.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 6</div><strong>Progress</strong><span>Finish by checking off what you can now do independently.</span></div>
-</div>
-</section>
 
 <div aria-label="Review tool sections" class="tabs review-tabs review-tabs-3" role="tablist">
 <button class="tab-btn review-tab-btn active priority" data-tab="slides">
@@ -1635,7 +1738,7 @@
         },
         formulas: {
             title: 'Formulas',
-            note: 'Focus first on memorize and provided badges. Useful formulas are background support, not the main study target.',
+            note: 'Start with the memorize and provided formulas. Treat the useful formulas as background support, not the main target.',
             next: 'practice',
             nextLabel: 'Next: Practice'
         },
@@ -1653,13 +1756,13 @@
         },
         schedule: {
             title: 'Schedule',
-            note: 'Use this section to confirm due dates, quiz timing, and the test countdown. It is reference material, not your first study stop.',
+            note: 'Use this section to confirm due dates, quiz timing, and the test countdown. Save it for logistics after you finish the main review work.',
             next: 'progress',
             nextLabel: 'Track Progress'
         },
         progress: {
             title: 'Progress',
-            note: 'Mark items only after you can solve them with limited help. This section helps you find what still needs review.',
+            note: 'Mark items only after you can solve them with limited help. Use it to spot what still needs review.',
             next: 'slides',
             nextLabel: 'Back to Slides'
         }
