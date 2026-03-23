@@ -6,21 +6,6 @@
     <title>Final Exam Review Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Configure Tailwind CSS
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'], // Use Inter font
-                    },
-                }
-            }
-        }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <script>
         MathJax = {
           tex: {
             inlineMath: [['$', '$'], ['\\(', '\\)']], // Define inline math delimiters
@@ -35,13 +20,9 @@
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"> // Load MathJax library
     </script>
     <style>
-        /* Basic styles */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
         /* Style for code blocks */
         code {
-            font-family: monospace;
+            font-family: var(--type-meta-family);
             background-color: #f3f4f6; /* Tailwind gray-100 */
             padding: 0.1em 0.3em;
             border-radius: 3px;
