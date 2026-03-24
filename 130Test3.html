@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
     <title>Math 130 – Test 3 Review (Spring 2026)</title>
 
 <!-- Fonts -->
@@ -45,10 +46,6 @@
             inset: 0 auto 0 0;
             width: 5px;
             background: linear-gradient(180deg, var(--accent), transparent 88%);
-        }
-        .card-tier-secondary {
-            background: linear-gradient(180deg, color-mix(in srgb, var(--surface2) 55%, var(--surface)) 0%, var(--surface) 100%);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
         }
         .card-tier-reference {
             background: linear-gradient(180deg, color-mix(in srgb, var(--surface2) 88%, transparent) 0%, var(--surface) 100%);
@@ -107,7 +104,7 @@
 
         /* Checklist */
         .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
-        .check-item { display: flex; width: 100%; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; user-select: none; }
+        .check-item { display: flex; box-sizing: border-box; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; user-select: none; }
         .check-item:hover { border-color: var(--accent); }
         .check-item:focus-visible, .practice-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
         .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
@@ -187,12 +184,6 @@
         .legend-chip.legend-provided { border-color: var(--green); color: var(--green); background: var(--green-bg); }
         .legend-chip.legend-provided::before { background: var(--green); }
         .legend-chip.legend-useful::before { background: var(--text-muted); }
-        .formula-section-note {
-            color: var(--text-body-muted, var(--text-muted));
-            font-size: 0.9rem;
-            margin: -0.35rem 0 1rem;
-            padding-left: 0.15rem;
-        }
         .formula-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
@@ -262,8 +253,6 @@
         .quiz-box { text-align: center; padding: 1rem 0; }
         .question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.8; }
         
-        .svg-canvas { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin: 0 auto 1.5rem auto; display: block; max-width: 100%; height: auto; }
-
         .svg-fallback { margin: -0.9rem auto 1.2rem auto; max-width: 640px; color: var(--text-muted); font-size: 0.92rem; text-align: left; }
 
         /* Multi-Inputs */
@@ -404,28 +393,10 @@
 .status-supplemental { background: var(--surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border); }
 
 
-.recommended-order-panel {
-    margin: 1rem 0 1.5rem;
-    padding: 1.35rem 1.4rem;
-    border-radius: 20px;
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
-    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface));
-    box-shadow: var(--shadow);
-}
-.recommended-order-panel .order-kicker {
-    display: inline-flex; align-items: center; gap: 0.45rem; color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.7rem;
-}
-.recommended-order-panel h2 { margin-bottom: 0.35rem; }
-.recommended-order-panel p { color: var(--text-muted); margin-bottom: 1rem; max-width: 70ch; }
-.recommended-order-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; }
-.recommended-order-step { background: color-mix(in srgb, var(--surface2) 78%, var(--surface)); border: 1px solid var(--border); border-radius: 14px; padding: 0.9rem 1rem; }
-.recommended-order-step strong { display: block; margin-bottom: 0.22rem; }
-.recommended-order-step span { display: block; color: var(--text-muted); font-size: 0.88rem; }
-.recommended-order-step .step-num { font-family: var(--type-meta-family); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
-
 /* Print Configuration */
 @media print {
-    .theme-toggle, .tabs, .status-supplemental-section, .quiz-selector, .btn-primary, .btn-secondary {
+    .review-section-nav, .review-page-header, .page-context-bar,
+    .theme-toggle, .quiz-selector, .btn-primary, .btn-secondary {
         display: none !important;
     }
     body { background: white; color: black; }
@@ -437,8 +408,6 @@
 
         @media (max-width: 1024px) {
             .container { padding: 1.5rem; }
-            .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .tab-btn { min-height: 76px; padding: 0.88rem 0.95rem; }
             .formula-intro,
             .slides-intro {
                 grid-template-columns: 1fr;
@@ -460,9 +429,6 @@
 
         @media (max-width: 780px) {
             .container { padding: 1rem; }
-            header { margin-bottom: 1.25rem; }
-            h1 { font-size: 2rem; }
-            .tab-btn { min-height: 72px; padding: 0.82rem 0.88rem; }
             .card-tier-primary { padding: 1.5rem 1.25rem; }
             .section-lead { margin-bottom: 1.2rem; padding-bottom: 0.95rem; }
             .section-summary-grid,
@@ -477,16 +443,7 @@
             #tab-formulas .formula-card.wide { padding: 1.15rem 1rem; }
             .formula-card.wide,
             .slide-card-featured { grid-column: auto; }
-            .svg-canvas { width: 100% !important; height: auto !important; }
             .history-table { display: block; overflow-x: auto; white-space: nowrap; }
-            .header-chips { margin-top: 0.65rem; }
-        }
-
-        @media (max-width: 640px) {
-            header { align-items: flex-start; }
-            .tabs { grid-template-columns: 1fr; }
-            .tab-btn { min-height: auto; }
-            .header-chip { width: 100%; justify-content: flex-start; }
         }
     
 
@@ -509,10 +466,6 @@
         }
         #tab-formulas .formula-legend {
             gap: 0.5rem;
-        }
-        #tab-formulas .formula-section-note {
-            margin: -0.2rem 0 0.8rem;
-            font-size: 0.86rem;
         }
         #tab-formulas .formula-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -865,7 +818,7 @@
 
 
 </head>
-<body class="review-page">
+<body class="review-page review-page--sections">
 <div class="math-review-page">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
@@ -897,92 +850,450 @@
           <ul class="dropdown-menu dropdown-menu--right">
             <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
             <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#c1a0a9b7aeadaa81ada8a3a4b3b5b8efa4a5b4">Contact</a></li>
           </ul>
         </li>
       </ul>
-      <button aria-label="Toggle dark and light theme" class="theme-toggle review-theme-toggle" id="theme-toggle-btn" title="Toggle Theme">
-        <i data-lucide="moon"></i>
-      </button>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
     </div>
   </div>
 </nav>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="courses/math130.html">MATH 130</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Test 3 Review</span>
+    </nav>
+  </div>
+</div>
 
-<div class="container review-shell">
-<header class="review-header">
-<div class="header-copy review-title-group">
-<nav class="breadcrumb" aria-label="Breadcrumb">
-<a href="index.html">Home</a>
-<span aria-hidden="true" class="breadcrumb-sep">›</span>
-<a href="learn.html">Courses</a>
-<span aria-hidden="true" class="breadcrumb-sep">›</span>
-<a href="courses/math130.html">MATH 130</a>
-<span aria-hidden="true" class="breadcrumb-sep">›</span>
-<span class="breadcrumb-current" aria-current="page">Test 3 Review</span>
-</nav>
-<h1>Math 130 – Test 3 Review</h1>
-<p class="header-meta">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
-<p class="header-subtitle review-subtitle">Topics: Sections 5.1–5.3, 7.1, and 8.4</p>
-<div class="header-chips review-meta-chips">
-<span class="header-chip review-chip accent is-accent"><i data-lucide="route"></i> Recommended order: Slides/Overview → Formulas → Practice → Videos → Schedule → Progress</span>
-<span class="header-chip review-chip"><i data-lucide="calendar-clock"></i> Test 3: Fri, May 1</span>
-</div>
-</div>
+<header class="page-shell-header review-page-header">
+  <div class="container">
+    <p class="page-shell-header__eyebrow">Spring 2026 · Prof. Young &amp; Prof. Volk</p>
+    <h1>Math 130 – Test 3 Review</h1>
+    <p class="subtitle">Topics: Sections 5.1–5.3, 7.1, and 8.4</p>
+  </div>
 </header>
 
-<section class="recommended-order-panel" aria-label="Recommended study order">
-<div class="order-kicker"><i data-lucide="route"></i> Recommended order</div>
-<h2>Use the same study journey on every review page</h2>
-<p>Move left to right through the tabs so the review always starts with orientation, then shifts into memorization, active practice, targeted help, logistics, and finally your saved progress.</p>
-<div class="recommended-order-grid">
-<div class="recommended-order-step"><div class="step-num">Step 1</div><strong>Start Here / Slides</strong><span>Open the lecture materials first to set the scope for the test.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 2</div><strong>Formulas / Key Concepts</strong><span>Review what must be memorized versus what is provided.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 3</div><strong>Practice</strong><span>Work generators and mock-style questions before checking help resources.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 4</div><strong>Videos</strong><span>Use videos only for targeted reteaching on weak spots.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 5</div><strong>Schedule / Logistics</strong><span>Confirm due dates, exam timing, and class pacing at the end.</span></div>
-<div class="recommended-order-step"><div class="step-num">Step 6</div><strong>Progress</strong><span>Finish by checking off what you can now do independently.</span></div>
-</div>
-</section>
+<nav class="review-section-nav" aria-label="Page sections">
+  <div class="review-section-nav__inner">
+    <a href="#tab-slides">Slides</a>
+    <a href="#tab-formulas">Formulas</a>
+    <a href="#tab-practice">Practice</a>
+    <a href="#tab-videos">Videos</a>
+    <a href="#tab-schedule">Schedule</a>
+    <a href="#tab-progress">Progress</a>
+  </div>
+</nav>
 
-<div aria-label="Review tool sections" class="tabs review-tabs review-tabs-3" role="tablist">
-<button class="tab-btn review-tab-btn active priority" data-tab="slides">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="monitor"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Slides</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn priority" data-tab="formulas">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="sigma"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Formulas</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn priority" data-tab="practice">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="pen-tool"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Practice</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn" data-tab="videos">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="play-circle"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Videos</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn" data-tab="schedule">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="calendar"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Schedule</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn" data-tab="progress">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="bar-chart-2"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Progress</span>
-</span>
-        </button>
-</div>
+<div class="container review-shell review-shell--below-banner">
+
 <!-- SCHEDULE TAB -->
+<div class="tab-content" id="tab-slides">
+<div class="card card-tier-primary">
+<div class="section-lead">
+<div class="section-eyebrow"><i data-lucide="layers-3"></i> Start here</div>
+<h2>Lecture Slides</h2>
+<p>Open the lead deck first, then work forward through the supporting modules so the highest-priority review materials stand out immediately.</p>
+</div>
+<div class="section-summary-grid">
+<div class="section-summary-card review-summary-card">
+<span class="section-summary-label">Lead review deck</span>
+<span class="section-summary-value">Math 130 Unit 3: Test 3 Review (Module 3E)</span>
+</div>
+<div class="section-summary-card review-summary-card">
+<span class="section-summary-label">Support sequence</span>
+<span class="section-summary-value">Modules 10–13 for foundations, then Unit 3E for final consolidation.</span>
+</div>
+</div>
+<div class="slides-shell">
+<div class="slides-intro">
+<div class="slides-overview">
+<div class="slides-kicker"><i data-lucide="presentation"></i> Unit 3 Resources</div>
+<p class="slides-note">Use the PDF for the fastest browser-friendly viewing experience. Keep the PowerPoint link available when you want the original editable file or need to download the deck for offline use.</p>
+</div>
+<div class="slides-tip-box">
+<div class="slides-tip-title">Best use</div>
+<div class="slides-tips">
+<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
+<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text);">Download PPTX</strong> when you need the original slide deck.</span></div>
+</div>
+</div>
+</div>
+<div class="slides-grid">
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Module 10</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit3A.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Module 10 PDF slides">
+<img alt="Thumbnail preview for Math 130 Module 10 lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3A.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit3A.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Trig Foundations (5.1–5.2)</h3>
+<p class="slide-subtitle">Covers angle sketching, coterminal angles, and arc length/central-angle skills from Sections 5.1 and 5.2.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit3A.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit3A.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Module 11</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit3B.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Module 11 PDF slides">
+<img alt="Thumbnail preview for Math 130 Module 11 lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3B.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit3B.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Reference Angles and Trig Signs (5.3)</h3>
+<p class="slide-subtitle">Covers reference angles plus trig-function sign/value reasoning from Section 5.3.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit3B.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit3B.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Module 12</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit3C.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Module 12 PDF slides">
+<img alt="Thumbnail preview for Math 130 Module 12 lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3C.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit3C.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Right-Triangle Applications (7.1)</h3>
+<p class="slide-subtitle">Covers right-triangle trigonometry applications and modeling problems from Section 7.1.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit3C.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit3C.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Module 13</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit3D.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Module 13 PDF slides">
+<img alt="Thumbnail preview for Math 130 Module 13 lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3D.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit3D.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Vectors (8.4)</h3>
+<p class="slide-subtitle">Covers vector component form, operations, magnitude, and direction from Section 8.4.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit3D.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit3D.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card slide-card-featured">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 3 Review</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit3E.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 3 Review PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 3 Review lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3E.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit3E.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 3: Test 3 Review</h3>
+<p class="slide-subtitle">Consolidates Modules 10–13 into a focused Test 3 review aligned to the Unit 3 checklist.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit3E.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit3E.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="tab-formulas">
+<div class="card card-tier-primary">
+<div class="section-lead">
+<div class="section-eyebrow"><i data-lucide="sigma"></i> Formula priorities</div>
+<h2>Essential Formulas for Test 3</h2>
+</div>
+<div class="formula-intro">
+<div aria-label="Formula badge legend" class="formula-legend">
+<div class="legend-chip legend-memorize">Memorize</div>
+<div class="legend-chip legend-provided">Provided on Test 3</div>
+<div class="legend-chip legend-useful">Useful relation</div>
+</div>
+</div>
+
+<div class="checklist-section review-checklist-section">
+<h3>Provided Formulas (Exact Test 3 Formula Box)</h3>
+<div class="formula-grid">
+<div class="formula-card provided-card">
+<div class="formula-badge status-provided">Provided on Test 3</div>
+<div class="formula-title">Pythagorean Identity</div>
+<div class="formula-math">$$\sin^2 x + \cos^2 x = 1$$</div>
+<div class="formula-vars">Use to connect sine and cosine values.</div>
+</div>
+<div class="formula-card provided-card">
+<div class="formula-badge status-provided">Provided on Test 3</div>
+<div class="formula-title">Tangent/Secant Identity</div>
+<div class="formula-math">$$1 + \tan^2 x = \sec^2 x$$</div>
+<div class="formula-vars">Use when tangent or secant is known and you need the other.</div>
+</div>
+<div class="formula-card provided-card">
+<div class="formula-badge status-provided">Provided on Test 3</div>
+<div class="formula-title">Area of a Triangle (SAS form)</div>
+<div class="formula-math">$$\text{Area} = \frac{1}{2}bc\sin A$$</div>
+<div class="formula-vars">Use when two sides and the included angle are given.</div>
+</div>
+</div>
+</div>
+
+<div class="checklist-section review-checklist-section review-stack-gap">
+<h3>Section 5.1–5.2 Foundations</h3>
+<div class="formula-grid">
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Arc Length</div>
+<div class="formula-math dual-line">$$s=r\theta$$ $$s=\frac{\theta}{360}(2\pi r)$$</div>
+<div class="formula-vars">Use radian form when $\\theta$ is in radians, degree form when in degrees.</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Right-Triangle Ratios</div>
+<div class="formula-math steps-math compact-math"><div class="formula-step"><span>$$\sin\theta=\frac{\text{opp}}{\text{hyp}}$$</span></div><div class="formula-step"><span>$$\cos\theta=\frac{\text{adj}}{\text{hyp}}$$</span></div><div class="formula-step"><span>$$\tan\theta=\frac{\text{opp}}{\text{adj}}$$</span></div></div>
+<div class="formula-vars">Core relationships for side/angle solving in right triangles.</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Coterminal Angles</div>
+<div class="formula-math">$$\theta_{\text{coterminal}} = \theta + 360^\circ k \quad \text{or} \quad \theta + 2\pi k$$</div>
+<div class="formula-vars">Use integer $k$ to generate coterminal angles in degrees or radians.</div>
+</div>
+</div>
+</div>
+
+<div class="checklist-section review-checklist-section review-stack-gap">
+<h3>Section 5.3 &amp; 7.1 Applications</h3>
+<div class="formula-grid">
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Reference Angle by Quadrant</div>
+<div class="formula-math steps-math compact-math"><div class="formula-step"><span>$$QII:\ \alpha=180^\circ-\theta$$</span></div><div class="formula-step"><span>$$QIII:\ \alpha=\theta-180^\circ$$</span></div><div class="formula-step"><span>$$QIV:\ \alpha=360^\circ-\theta$$</span></div></div>
+<div class="formula-vars">Use degree equivalents with $\pi$ for radian forms.</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Distance-Rate-Time</div>
+<div class="formula-math">$$d=rt$$</div>
+<div class="formula-vars">Used with trig setup in many Section 7.1 word problems.</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Solve Right Triangle via Inverse Trig</div>
+<div class="formula-math steps-math compact-math"><div class="formula-step"><span>$$\theta=\sin^{-1}\!\left(\frac{\text{opp}}{\text{hyp}}\right)$$</span></div><div class="formula-step"><span>$$\theta=\cos^{-1}\!\left(\frac{\text{adj}}{\text{hyp}}\right)$$</span></div><div class="formula-step"><span>$$\theta=\tan^{-1}\!\left(\frac{\text{opp}}{\text{adj}}\right)$$</span></div></div>
+<div class="formula-vars">Pick the inverse function matching known sides.</div>
+</div>
+</div>
+</div>
+
+<div class="checklist-section review-checklist-section review-stack-gap">
+<h3>Section 8.4 Vectors</h3>
+<div class="formula-grid">
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Component Form from Points</div>
+<div class="formula-math">$$\vec v=\langle x_2-x_1,\ y_2-y_1\rangle$$</div>
+<div class="formula-vars">From initial point $(x_1,y_1)$ to terminal point $(x_2,y_2)$.</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Vector Magnitude</div>
+<div class="formula-math">$$|\vec v|=\sqrt{a^2+b^2}\quad \text{for }\vec v=\langle a,b\rangle$$</div>
+<div class="formula-vars">Length of a vector in component form.</div>
+</div>
+<div class="formula-card memorize-card">
+<div class="formula-badge status-memorize">Memorize</div>
+<div class="formula-title">Direction Angle</div>
+<div class="formula-math">$$\theta=\tan^{-1}\!\left(\frac{b}{a}\right)$$</div>
+<div class="formula-vars">Adjust for quadrant when determining the final direction angle.</div>
+</div>
+<div class="formula-card useful-card">
+<div class="formula-badge status-supplemental">Useful</div>
+<div class="formula-title">Vector from Magnitude &amp; Direction</div>
+<div class="formula-math">$$\vec v=\langle |\vec v|\cos\theta,\ |\vec v|\sin\theta\rangle$$</div>
+<div class="formula-vars">Useful when converting directional information to components.</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="tab-content" id="tab-practice">
+<div class="card card-tier-primary">
+<div class="section-lead section-lead--center">
+<div class="section-eyebrow"><i data-lucide="pen-tool"></i> Interactive review</div>
+<h2 class="u-mb-0">Practice Generators</h2>
+</div>
+<p id="coverage-audit" style="display:none;"></p>
+<!-- Mock Exam CTA -->
+<div id="exam-cta" class="review-callout review-callout--exam review-callout--highlight">
+<h3 class="review-callout__title review-callout__title--exam">🎯 Mock Exam Mode</h3>
+<p class="review-callout__body review-callout__body--md">20 mixed Unit 3 review questions with coverage from Sections 5.1, 5.2, 5.3, 7.1, and 8.4 (at least one per section).</p>
+<button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
+</div>
+<!-- Mock Quiz CTA -->
+<div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg" style="padding: 1.35rem 1.5rem;">
+<h3 class="review-callout__title u-text-center">📝 Mock Quiz Mode</h3>
+<p class="review-callout__body review-callout__body--sm u-text-center">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
+<div class="review-option-grid">
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(5)">
+<div class="review-option-title">Quiz 10 — Sections 5.1–5.2 (Core Skills)</div>
+<div class="review-option-copy">Coterminal angles + exact trig triangle skills</div>
+</button>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(6)">
+<div class="review-option-title">Quiz 11 — Section 5.3 (Core Skills)</div>
+<div class="review-option-copy">Reference angles, signs, and solving trig equations on 0°–360°</div>
+</button>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
+<div class="review-option-title">Quiz 12 — Section 7.1 (Core Skills)</div>
+<div class="review-option-copy">Airplane applications, angle of elevation, and bearings</div>
+</button>
+<button class="btn-secondary review-option-button" onclick="startMockQuiz(8)">
+<div class="review-option-title">Quiz 13 — Section 8.4 (Core Skills)</div>
+<div class="review-option-copy">Graph/resultant vectors and magnitude-direction conversions</div>
+</button>
+</div>
+</div>
+<!-- Exam Progress Bar (hidden until active) -->
+<div id="exam-progress-bar" style="display: none; margin-bottom: 1.5rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+<span id="exam-mode-label" style="font-weight: 600; color: var(--accent);">Mock Exam</span>
+<span id="exam-progress-label" style="font-family: var(--type-meta-family); color: var(--text-muted); font-size: 0.9rem;">1 / 15</span>
+</div>
+<div class="progress-bar-track review-progress-track" style="height: 10px;">
+<div class="progress-bar-fill review-progress-fill" id="exam-progress-fill" style="width: 0%; transition: width 0.4s ease;"></div>
+</div>
+</div>
+<!-- Exam Results (hidden until complete) -->
+<div class="card review-card section-lead--results" id="exam-results" style="display: none;">
+<h2>📊 Exam Results</h2>
+<div id="exam-score-display" class="review-results-score"></div>
+<div id="exam-breakdown" style="margin-top: 1rem;"></div>
+<div class="review-results-actions">
+<button class="btn-primary" onclick="endMockExam()">Back to Practice</button>
+</div>
+</div>
+<div class="quiz-selector" id="quiz-categories"></div>
+<div class="quiz-box" id="quiz-active-area" style="display: none; border-top: 1px solid var(--border); padding-top: 2rem;">
+<div id="svg-display"></div>
+<div class="question-text" id="question-display"></div>
+<div class="question-note" id="question-note" style="display:none;"></div>
+<div class="input-group" id="dynamic-inputs">
+<!-- Inputs injected here based on type -->
+</div>
+<div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+<button class="btn-primary" id="btn-submit">Check Answer</button>
+<button class="btn-secondary" id="btn-next" style="display: none;">Next Question</button>
+<button id="btn-exit-exam" onclick="confirmExitExam()" style="display: none; background: none; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; margin-left: auto;">✕ Exit</button>
+</div>
+<div class="feedback" id="feedback-display"></div>
+</div>
+</div>
+</div>
+<!-- CHECKLIST & PROGRESS TAB -->
+<div class="tab-content" id="tab-videos">
+<div class="card review-card">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+<h2>Study Videos</h2>
+<div id="video-progress" style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;"></div>
+</div>
+<div class="checklist-section review-checklist-section">
+<h3>Section 5.2: Right-Triangle Trigonometry</h3>
+<div class="checklist-grid">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="trig_ratio" data-video-id="v42_1" href="https://www.youtube.com/watch?v=kikGvjKFN8Q" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Trig Ratios from Right Triangles</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="trig_ratio" data-video-id="v42_2" href="https://www.youtube.com/watch?v=aix8TLHdKgc" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Calculator Trig Values (Degree/Radian Mode)</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_unit_conversion" data-video-id="v42_3" href="https://www.youtube.com/watch?v=NCYNXkbTTUo" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Degree/Radian Unit Conversion</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_unit_conversion" data-video-id="v42_4" href="https://www.youtube.com/watch?v=2S4vK30dII0" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Side Lengths from Trig Ratios</span>
+</a>
+</div>
+</div>
+<div class="checklist-section review-checklist-section review-stack-gap">
+<h3>Section 5.3: Reference angles, signs, and solving trig equations on 0°–360°</h3>
+<div class="checklist-grid">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="reference_angle_deg" data-video-id="v43_1" href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Reference Angles (Degrees and Radians)</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_2" href="https://www.youtube.com/watch?v=eL2FhO11mf0" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Quadrant Signs (ASTC)</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_3" href="https://www.youtube.com/watch?v=3Rf8KEhY0ts" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Reference Angles: Extra Practice</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_4" href="https://www.youtube.com/watch?v=fnhFneOz6n8" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Trig Values from Quadrant + Reference Angle</span>
+</a>
+</div>
+</div>
+<div class="checklist-section review-checklist-section review-stack-gap">
+<h3>Geometry &amp; Section 8.4</h3>
+<div class="checklist-grid">
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="solve_right_triangle" data-video-id="vgeo_1" href="https://www.youtube.com/watch?v=8ysZhPknfYY" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Solve a Right Triangle</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_of_elevation" data-video-id="vgeo_2" href="https://www.youtube.com/watch?v=FcDyaiHO4GQ" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Angle of Elevation/Depression</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="distance_rate_time" data-video-id="vgeo_3" href="https://www.youtube.com/watch?v=JmLN3QxshlE" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Distance-Rate-Time with Trig</span>
+</a>
+<a class="check-item video-link review-video-link review-link-reset" data-practice-id="vector_magnitude" data-video-id="vgeo_4" href="https://www.youtube.com/watch?v=XUus6-9E9sQ" target="_blank" rel="noopener noreferrer">
+<i data-lucide="play" style="color: var(--accent);"></i>
+<span>Vector Magnitude and Direction</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- LECTURE SLIDES TAB -->
 <div class="tab-content" id="tab-schedule">
 <div class="card review-card">
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
@@ -1146,225 +1457,6 @@
 </div>
 </div>
 <!-- FORMULAS TAB -->
-<div class="tab-content" id="tab-formulas">
-<div class="card card-tier-primary">
-<div class="section-lead">
-<div class="section-eyebrow"><i data-lucide="sigma"></i> Formula priorities</div>
-<h2>Essential Formulas for Test 3</h2>
-<p style="color: var(--text-muted); margin-bottom: 0; font-weight: 500;">
-                Covers formulas relevant to Modules 10–13 (Sections 5.1, 5.2, 5.3, 7.1, and 8.4).
-                <strong>Only the three formulas marked “Provided on Test 3” are given on the exam.</strong>
-            </p>
-</div>
-<div class="section-summary-grid">
-<div class="section-summary-card review-summary-card">
-<span class="section-summary-label">Memorize first</span>
-<span class="section-summary-value">Arc length, right-triangle trig, inverse trig, and vector formulas.</span>
-</div>
-<div class="section-summary-card review-summary-card">
-<span class="section-summary-label">Use as references</span>
-<span class="section-summary-value">Formula-box identities and the supporting “Useful” relations.</span>
-</div>
-</div>
-<div class="formula-intro">
-<div class="formula-priority-note"><strong>Study order:</strong> memorize cards first, then practice identifying when to apply each provided formula.</div>
-<div aria-label="Formula badge legend" class="formula-legend">
-<div class="legend-chip legend-memorize">Memorize</div>
-<div class="legend-chip legend-provided">Provided on Test 3</div>
-<div class="legend-chip legend-useful">Useful relation</div>
-</div>
-</div>
-
-<div class="checklist-section review-checklist-section">
-<h3>Provided Formulas (Exact Test 3 Formula Box)</h3>
-<div class="formula-grid">
-<div class="formula-card provided-card">
-<div class="formula-badge status-provided">Provided on Test 3</div>
-<div class="formula-title">Pythagorean Identity</div>
-<div class="formula-math">$$\sin^2 x + \cos^2 x = 1$$</div>
-<div class="formula-vars">Use to connect sine and cosine values.</div>
-</div>
-<div class="formula-card provided-card">
-<div class="formula-badge status-provided">Provided on Test 3</div>
-<div class="formula-title">Tangent/Secant Identity</div>
-<div class="formula-math">$$1 + \tan^2 x = \sec^2 x$$</div>
-<div class="formula-vars">Use when tangent or secant is known and you need the other.</div>
-</div>
-<div class="formula-card provided-card">
-<div class="formula-badge status-provided">Provided on Test 3</div>
-<div class="formula-title">Area of a Triangle (SAS form)</div>
-<div class="formula-math">$$\text{Area} = \frac{1}{2}bc\sin A$$</div>
-<div class="formula-vars">Use when two sides and the included angle are given.</div>
-</div>
-</div>
-</div>
-
-<div class="checklist-section review-checklist-section review-stack-gap">
-<h3>Section 5.1–5.2 Foundations</h3>
-<div class="formula-grid">
-<div class="formula-card memorize-card">
-<div class="formula-badge status-memorize">Memorize</div>
-<div class="formula-title">Arc Length</div>
-<div class="formula-math dual-line">$$s=r\theta$$ $$s=\frac{\theta}{360}(2\pi r)$$</div>
-<div class="formula-vars">Use radian form when $\\theta$ is in radians, degree form when in degrees.</div>
-</div>
-<div class="formula-card memorize-card">
-<div class="formula-badge status-memorize">Memorize</div>
-<div class="formula-title">Right-Triangle Ratios</div>
-<div class="formula-math steps-math compact-math"><div class="formula-step"><span>$$\sin\theta=\frac{\text{opp}}{\text{hyp}}$$</span></div><div class="formula-step"><span>$$\cos\theta=\frac{\text{adj}}{\text{hyp}}$$</span></div><div class="formula-step"><span>$$\tan\theta=\frac{\text{opp}}{\text{adj}}$$</span></div></div>
-<div class="formula-vars">Core relationships for side/angle solving in right triangles.</div>
-</div>
-<div class="formula-card useful-card">
-<div class="formula-badge status-supplemental">Useful</div>
-<div class="formula-title">Coterminal Angles</div>
-<div class="formula-math">$$\theta_{\text{coterminal}} = \theta + 360^\circ k \quad \text{or} \quad \theta + 2\pi k$$</div>
-<div class="formula-vars">Use integer $k$ to generate coterminal angles in degrees or radians.</div>
-</div>
-</div>
-</div>
-
-<div class="checklist-section review-checklist-section review-stack-gap">
-<h3>Section 5.3 &amp; 7.1 Applications</h3>
-<div class="formula-grid">
-<div class="formula-card memorize-card">
-<div class="formula-badge status-memorize">Memorize</div>
-<div class="formula-title">Reference Angle by Quadrant</div>
-<div class="formula-math steps-math compact-math"><div class="formula-step"><span>$$QII:\ \alpha=180^\circ-\theta$$</span></div><div class="formula-step"><span>$$QIII:\ \alpha=\theta-180^\circ$$</span></div><div class="formula-step"><span>$$QIV:\ \alpha=360^\circ-\theta$$</span></div></div>
-<div class="formula-vars">Use degree equivalents with $\pi$ for radian forms.</div>
-</div>
-<div class="formula-card memorize-card">
-<div class="formula-badge status-memorize">Memorize</div>
-<div class="formula-title">Distance-Rate-Time</div>
-<div class="formula-math">$$d=rt$$</div>
-<div class="formula-vars">Used with trig setup in many Section 7.1 word problems.</div>
-</div>
-<div class="formula-card memorize-card">
-<div class="formula-badge status-memorize">Memorize</div>
-<div class="formula-title">Solve Right Triangle via Inverse Trig</div>
-<div class="formula-math steps-math compact-math"><div class="formula-step"><span>$$\theta=\sin^{-1}\!\left(\frac{\text{opp}}{\text{hyp}}\right)$$</span></div><div class="formula-step"><span>$$\theta=\cos^{-1}\!\left(\frac{\text{adj}}{\text{hyp}}\right)$$</span></div><div class="formula-step"><span>$$\theta=\tan^{-1}\!\left(\frac{\text{opp}}{\text{adj}}\right)$$</span></div></div>
-<div class="formula-vars">Pick the inverse function matching known sides.</div>
-</div>
-</div>
-</div>
-
-<div class="checklist-section review-checklist-section review-stack-gap">
-<h3>Section 8.4 Vectors</h3>
-<div class="formula-grid">
-<div class="formula-card memorize-card">
-<div class="formula-badge status-memorize">Memorize</div>
-<div class="formula-title">Component Form from Points</div>
-<div class="formula-math">$$\vec v=\langle x_2-x_1,\ y_2-y_1\rangle$$</div>
-<div class="formula-vars">From initial point $(x_1,y_1)$ to terminal point $(x_2,y_2)$.</div>
-</div>
-<div class="formula-card memorize-card">
-<div class="formula-badge status-memorize">Memorize</div>
-<div class="formula-title">Vector Magnitude</div>
-<div class="formula-math">$$|\vec v|=\sqrt{a^2+b^2}\quad \text{for }\vec v=\langle a,b\rangle$$</div>
-<div class="formula-vars">Length of a vector in component form.</div>
-</div>
-<div class="formula-card memorize-card">
-<div class="formula-badge status-memorize">Memorize</div>
-<div class="formula-title">Direction Angle</div>
-<div class="formula-math">$$\theta=\tan^{-1}\!\left(\frac{b}{a}\right)$$</div>
-<div class="formula-vars">Adjust for quadrant when determining the final direction angle.</div>
-</div>
-<div class="formula-card useful-card">
-<div class="formula-badge status-supplemental">Useful</div>
-<div class="formula-title">Vector from Magnitude &amp; Direction</div>
-<div class="formula-math">$$\vec v=\langle |\vec v|\cos\theta,\ |\vec v|\sin\theta\rangle$$</div>
-<div class="formula-vars">Useful when converting directional information to components.</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-<div class="tab-content" id="tab-practice">
-<div class="card card-tier-primary">
-<div class="section-lead section-lead--center">
-<div class="section-eyebrow"><i data-lucide="pen-tool"></i> Interactive review</div>
-<h2 class="u-mb-0">Practice Generators</h2>
-<p class="u-mb-sm" style="color: var(--text-muted);">Practice generators are live for Unit 3 and aligned to Sections 5.1, 5.2, 5.3, 7.1, and 8.4.</p>
-<p class="u-mb-md" style="color: var(--text-muted); font-size: 0.92rem;">By default, enter decimal answers rounded as directed. Repeating decimals are accepted within tolerance (for example, $0.6667$ for $0.\overline{6}$). Some generators may allow additional formats noted in the question (for example, $\pi$ forms), including coterminal-radian items that accept simple $\pi$ expressions.</p>
-<p id="coverage-audit" class="u-mb-lg" style="color: var(--text-muted); font-size: 0.9rem;"></p>
-<p class="u-mb-0" style="color: var(--text-muted);">Select a topic to generate infinite, exam-style questions.</p>
-</div>
-<div class="section-summary-grid">
-<div class="section-summary-card review-summary-card">
-<span class="section-summary-label">Primary mode</span>
-<span class="section-summary-value">Mock Exam for full mixed review across Sections 5.1–8.4.</span>
-</div>
-<div class="section-summary-card review-summary-card">
-<span class="section-summary-label">Secondary mode</span>
-<span class="section-summary-value">Mock Quizzes for focused skill checks tied to specific sections.</span>
-</div>
-</div>
-<!-- Mock Exam CTA -->
-<div id="exam-cta" class="review-callout review-callout--exam review-callout--highlight">
-<h3 class="review-callout__title review-callout__title--exam">🎯 Mock Exam Mode</h3>
-<p class="review-callout__body review-callout__body--md">20 mixed Unit 3 review questions with coverage from Sections 5.1, 5.2, 5.3, 7.1, and 8.4 (at least one per section).</p>
-<button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
-</div>
-<!-- Mock Quiz CTA -->
-<div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg" style="padding: 1.35rem 1.5rem;">
-<h3 class="review-callout__title u-text-center">📝 Mock Quiz Mode</h3>
-<p class="review-callout__body review-callout__body--sm u-text-center">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
-<div class="review-option-grid">
-<button class="btn-secondary review-option-button" onclick="startMockQuiz(5)">
-<div class="review-option-title">Quiz 10 — Sections 5.1–5.2 (Core Skills)</div>
-<div class="review-option-copy">Coterminal angles + exact trig triangle skills</div>
-</button>
-<button class="btn-secondary review-option-button" onclick="startMockQuiz(6)">
-<div class="review-option-title">Quiz 11 — Section 5.3 (Core Skills)</div>
-<div class="review-option-copy">Reference angles, signs, and solving trig equations on 0°–360°</div>
-</button>
-<button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
-<div class="review-option-title">Quiz 12 — Section 7.1 (Core Skills)</div>
-<div class="review-option-copy">Airplane applications, angle of elevation, and bearings</div>
-</button>
-<button class="btn-secondary review-option-button" onclick="startMockQuiz(8)">
-<div class="review-option-title">Quiz 13 — Section 8.4 (Core Skills)</div>
-<div class="review-option-copy">Graph/resultant vectors and magnitude-direction conversions</div>
-</button>
-</div>
-</div>
-<!-- Exam Progress Bar (hidden until active) -->
-<div id="exam-progress-bar" style="display: none; margin-bottom: 1.5rem;">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-<span id="exam-mode-label" style="font-weight: 600; color: var(--accent);">Mock Exam</span>
-<span id="exam-progress-label" style="font-family: var(--type-meta-family); color: var(--text-muted); font-size: 0.9rem;">1 / 15</span>
-</div>
-<div class="progress-bar-track review-progress-track" style="height: 10px;">
-<div class="progress-bar-fill review-progress-fill" id="exam-progress-fill" style="width: 0%; transition: width 0.4s ease;"></div>
-</div>
-</div>
-<!-- Exam Results (hidden until complete) -->
-<div class="card review-card section-lead--results" id="exam-results" style="display: none;">
-<h2>📊 Exam Results</h2>
-<div id="exam-score-display" class="review-results-score"></div>
-<div id="exam-breakdown" style="margin-top: 1rem;"></div>
-<div class="review-results-actions">
-<button class="btn-primary" onclick="endMockExam()">Back to Practice</button>
-</div>
-</div>
-<div class="quiz-selector" id="quiz-categories"></div>
-<div class="quiz-box" id="quiz-active-area" style="display: none; border-top: 1px solid var(--border); padding-top: 2rem;">
-<div id="svg-display"></div>
-<div class="question-text" id="question-display"></div>
-<div class="question-note" id="question-note" style="display:none;"></div>
-<div class="input-group" id="dynamic-inputs">
-<!-- Inputs injected here based on type -->
-</div>
-<div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-<button class="btn-primary" id="btn-submit">Check Answer</button>
-<button class="btn-secondary" id="btn-next" style="display: none;">Next Question</button>
-<button id="btn-exit-exam" onclick="confirmExitExam()" style="display: none; background: none; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; margin-left: auto;">✕ Exit</button>
-</div>
-<div class="feedback" id="feedback-display"></div>
-</div>
-</div>
-</div>
-<!-- CHECKLIST & PROGRESS TAB -->
 <div class="tab-content" id="tab-progress">
 <div class="card card-tier-primary">
 <div class="section-lead">
@@ -1415,218 +1507,8 @@
 </div>
 </div>
 </div>
-<!-- VIDEOS TAB -->
-<div class="tab-content" id="tab-videos">
-<div class="card review-card">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
-<h2>Study Videos</h2>
-<div id="video-progress" style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;"></div>
 </div>
-<div class="checklist-section review-checklist-section">
-<h3>Section 5.2: Right-Triangle Trigonometry</h3>
-<div class="checklist-grid">
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="trig_ratio" data-video-id="v42_1" href="https://www.youtube.com/watch?v=kikGvjKFN8Q" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Trig Ratios from Right Triangles</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="trig_ratio" data-video-id="v42_2" href="https://www.youtube.com/watch?v=aix8TLHdKgc" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Calculator Trig Values (Degree/Radian Mode)</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_unit_conversion" data-video-id="v42_3" href="https://www.youtube.com/watch?v=NCYNXkbTTUo" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Degree/Radian Unit Conversion</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_unit_conversion" data-video-id="v42_4" href="https://www.youtube.com/watch?v=2S4vK30dII0" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Side Lengths from Trig Ratios</span>
-</a>
-</div>
-</div>
-<div class="checklist-section review-checklist-section review-stack-gap">
-<h3>Section 5.3: Reference angles, signs, and solving trig equations on 0°–360°</h3>
-<div class="checklist-grid">
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="reference_angle_deg" data-video-id="v43_1" href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Reference Angles (Degrees and Radians)</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_2" href="https://www.youtube.com/watch?v=eL2FhO11mf0" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Quadrant Signs (ASTC)</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_3" href="https://www.youtube.com/watch?v=3Rf8KEhY0ts" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Reference Angles: Extra Practice</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_4" href="https://www.youtube.com/watch?v=fnhFneOz6n8" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Trig Values from Quadrant + Reference Angle</span>
-</a>
-</div>
-</div>
-<div class="checklist-section review-checklist-section review-stack-gap">
-<h3>Geometry &amp; Section 8.4</h3>
-<div class="checklist-grid">
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="solve_right_triangle" data-video-id="vgeo_1" href="https://www.youtube.com/watch?v=8ysZhPknfYY" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Solve a Right Triangle</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_of_elevation" data-video-id="vgeo_2" href="https://www.youtube.com/watch?v=FcDyaiHO4GQ" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Angle of Elevation/Depression</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="distance_rate_time" data-video-id="vgeo_3" href="https://www.youtube.com/watch?v=JmLN3QxshlE" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Distance-Rate-Time with Trig</span>
-</a>
-<a class="check-item video-link review-video-link review-link-reset" data-practice-id="vector_magnitude" data-video-id="vgeo_4" href="https://www.youtube.com/watch?v=XUus6-9E9sQ" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
-<span>Vector Magnitude and Direction</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-
-<!-- LECTURE SLIDES TAB -->
-<div class="tab-content active" id="tab-slides">
-<div class="card card-tier-primary">
-<div class="section-lead">
-<div class="section-eyebrow"><i data-lucide="layers-3"></i> Start here</div>
-<h2>Lecture Slides</h2>
-<p>Open the lead deck first, then work forward through the supporting modules so the highest-priority review materials stand out immediately.</p>
-</div>
-<div class="section-summary-grid">
-<div class="section-summary-card review-summary-card">
-<span class="section-summary-label">Lead review deck</span>
-<span class="section-summary-value">Math 130 Unit 3: Test 3 Review (Module 3E)</span>
-</div>
-<div class="section-summary-card review-summary-card">
-<span class="section-summary-label">Support sequence</span>
-<span class="section-summary-value">Modules 10–13 for foundations, then Unit 3E for final consolidation.</span>
-</div>
-</div>
-<div class="slides-shell">
-<div class="slides-intro">
-<div class="slides-overview">
-<div class="slides-kicker"><i data-lucide="presentation"></i> Unit 3 Resources</div>
-<p class="slides-note">Use the PDF for the fastest browser-friendly viewing experience. Keep the PowerPoint link available when you want the original editable file or need to download the deck for offline use.</p>
-</div>
-<div class="slides-tip-box">
-<div class="slides-tip-title">Best use</div>
-<div class="slides-tips">
-<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
-<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text);">Download PPTX</strong> when you need the original slide deck.</span></div>
-</div>
-</div>
-</div>
-<div class="slides-grid">
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Module 10</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit3A.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Module 10 PDF slides">
-<img alt="Thumbnail preview for Math 130 Module 10 lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3A.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit3A.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Trig Foundations (5.1–5.2)</h3>
-<p class="slide-subtitle">Covers angle sketching, coterminal angles, and arc length/central-angle skills from Sections 5.1 and 5.2.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit3A.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit3A.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
-</div>
-</div>
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Module 11</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit3B.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Module 11 PDF slides">
-<img alt="Thumbnail preview for Math 130 Module 11 lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3B.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit3B.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Reference Angles and Trig Signs (5.3)</h3>
-<p class="slide-subtitle">Covers reference angles plus trig-function sign/value reasoning from Section 5.3.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit3B.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit3B.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
-</div>
-</div>
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Module 12</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit3C.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Module 12 PDF slides">
-<img alt="Thumbnail preview for Math 130 Module 12 lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3C.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit3C.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Right-Triangle Applications (7.1)</h3>
-<p class="slide-subtitle">Covers right-triangle trigonometry applications and modeling problems from Section 7.1.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit3C.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit3C.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
-</div>
-</div>
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Module 13</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit3D.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Module 13 PDF slides">
-<img alt="Thumbnail preview for Math 130 Module 13 lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3D.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit3D.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Vectors (8.4)</h3>
-<p class="slide-subtitle">Covers vector component form, operations, magnitude, and direction from Section 8.4.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit3D.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit3D.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
-</div>
-</div>
-<div class="slide-card slide-card-featured">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Unit 3 Review</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit3E.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 3 Review PDF slides">
-<img alt="Thumbnail preview for Math 130 Unit 3 Review lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit3E.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit3E.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Math 130 Unit 3: Test 3 Review</h3>
-<p class="slide-subtitle">Consolidates Modules 10–13 into a focused Test 3 review aligned to the Unit 3 checklist.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit3E.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit3E.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // --- ICON REFRESH (debounced to prevent redundant DOM walks) ---
     let _iconTimer = null;
     function refreshIcons() {
@@ -1705,63 +1587,11 @@
         total: 0
     };
 
-    const TAB_META = {
-        slides: {
-            title: 'Slides',
-            note: 'Start with Units 3A–3D for content review, then use 3E as your final pass before practice.',
-            next: 'formulas',
-            nextLabel: 'Next: Formulas'
-        },
-        formulas: {
-            title: 'Formulas',
-            note: 'Focus first on memorize and provided badges. Useful formulas are background support, not the main study target.',
-            next: 'practice',
-            nextLabel: 'Next: Practice'
-        },
-        practice: {
-            title: 'Practice',
-            note: 'Try problems without notes first. Use the linked videos only when you miss a skill or need a quick refresher.',
-            next: 'videos',
-            nextLabel: 'Need help? Open Videos'
-        },
-        videos: {
-            title: 'Videos',
-            note: 'Use these as targeted refreshers for weak spots rather than watching everything from start to finish.',
-            next: 'schedule',
-            nextLabel: 'Check Schedule'
-        },
-        schedule: {
-            title: 'Schedule',
-            note: 'Use this section to confirm due dates, quiz timing, and the test countdown. It is reference material, not your first study stop.',
-            next: 'progress',
-            nextLabel: 'Track Progress'
-        },
-        progress: {
-            title: 'Progress',
-            note: 'Mark items only after you can solve them with limited help. This section helps you find what still needs review.',
-            next: 'slides',
-            nextLabel: 'Back to Slides'
-        }
-    };
-
     function showTab(tabName, options = {}) {
-        const { updateHash = true } = options;
-        const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+        // Long-page mode: scroll to section instead of toggling
         const targetPanel = document.getElementById('tab-' + tabName);
-        if (!targetBtn || !targetPanel) return;
-
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            const isActive = btn === targetBtn;
-            btn.classList.toggle('active', isActive);
-            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
-        document.querySelectorAll('.tab-content').forEach(panel => panel.classList.remove('active'));
-        targetPanel.classList.add('active');
-
-        if (updateHash) {
-            history.replaceState(null, '', '#' + tabName);
-        }
-        refreshIcons();
+        if (!targetPanel) return;
+        targetPanel.scrollIntoView({behavior:'smooth', block:'start'});
     }
 
     function loadState() {
@@ -2672,24 +2502,9 @@
     }
 
 
-function initTopNav(){
-  const nav=document.querySelector('.top-nav');
-  if(!nav)return;
-  const menuToggle=nav.querySelector('.menu-toggle.global-nav-toggle');
-  const navLinks=nav.querySelector('.top-nav-links');
-  const navUtilities=nav.querySelector('.top-nav-utilities');
-  const dropdowns=[...nav.querySelectorAll('.dropdown')];
-  const closeDropdowns=(keep)=>dropdowns.forEach(drop=>{if(drop!==keep){drop.removeAttribute('data-desktop-open');drop.removeAttribute('data-mobile-open');const trigger=drop.querySelector('.dropdown-trigger');if(trigger)trigger.setAttribute('aria-expanded','false');}});
-  const syncMenuState=()=>{const expanded=menuToggle && menuToggle.getAttribute('aria-expanded')==='true';nav.toggleAttribute('data-menu-open',expanded);if(navLinks)navLinks.dataset.open=expanded?'true':'false';if(navUtilities)navUtilities.dataset.open=expanded?'true':'false';if(!expanded)closeDropdowns();};
-  if(menuToggle){menuToggle.addEventListener('click',()=>{const expanded=menuToggle.getAttribute('aria-expanded')==='true';menuToggle.setAttribute('aria-expanded',String(!expanded));syncMenuState();});syncMenuState();}
-  dropdowns.forEach(drop=>{const trigger=drop.querySelector('.dropdown-trigger');if(!trigger)return;trigger.setAttribute('aria-expanded','false');trigger.addEventListener('click',(e)=>{e.stopPropagation();const mobile=window.matchMedia('(max-width: 768px)').matches;const attr=mobile?'data-mobile-open':'data-desktop-open';const isOpen=drop.getAttribute(attr)==='true';closeDropdowns(drop);if(isOpen){drop.removeAttribute(attr);trigger.setAttribute('aria-expanded','false');}else{drop.setAttribute(attr,'true');trigger.setAttribute('aria-expanded','true');}});});
-  document.addEventListener('click',(e)=>{if(!nav.contains(e.target))closeDropdowns();});
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if(menuToggle){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}closeDropdowns();}});
-  window.addEventListener('resize',()=>{closeDropdowns();if(menuToggle&&window.matchMedia('(min-width: 769px)').matches){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}});
-}
+// Top nav handled by theme.js setupGlobalNav
     // --- UI INITIATION & EVENT LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
-        initTopNav();
         refreshIcons();
         loadState();
         applyTheme(state.theme);
@@ -2703,31 +2518,52 @@ function initTopNav(){
         // Wait briefly for elements to be injected, then render math
         setTimeout(renderMath, 100);
 
-        document.getElementById('theme-toggle-btn').addEventListener('click', () => {
-            const newTheme = state.theme === 'dark' ? 'light' : 'dark';
-            state.theme = newTheme; applyTheme(newTheme); saveState();
-        });
+        // Theme toggle handled by theme.js
+        document.addEventListener('theme-changed', () => applyTheme());
 
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.setAttribute('role', 'tab');
-            btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
-            btn.addEventListener('click', (e) => {
-                showTab(e.currentTarget.dataset.tab);
+        // Section nav: highlight active link on scroll
+        (function(){
+          const navLinks = document.querySelectorAll('.review-section-nav__inner a');
+          const sections = [];
+          navLinks.forEach(link => {
+            const id = link.getAttribute('href').replace('#','');
+            const el = document.getElementById(id);
+            if(el) sections.push({id, el, link});
+          });
+          const offset = 140;
+          function updateActive(){
+            let current = sections[0];
+            for(const s of sections){
+              if(s.el.getBoundingClientRect().top <= offset) current = s;
+            }
+            navLinks.forEach(l => l.classList.remove('is-active'));
+            if(current) current.link.classList.add('is-active');
+          }
+          window.addEventListener('scroll', updateActive, {passive:true});
+          updateActive();
+          navLinks.forEach(link => {
+            link.addEventListener('click', e => {
+              e.preventDefault();
+              const el = document.getElementById(link.getAttribute('href').replace('#',''));
+              if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
             });
-        });
+          });
+        })();
 
+        // data-go-tab buttons scroll to section
         document.addEventListener('click', (e) => {
             const goTabBtn = e.target.closest('[data-go-tab]');
             if (!goTabBtn) return;
             const tab = goTabBtn.dataset.goTab;
-            if (tab) {
-                showTab(tab);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            if (tab) showTab(tab);
         });
 
-        const initialTab = window.location.hash ? window.location.hash.replace('#', '') : 'slides';
-        showTab(TAB_META[initialTab] ? initialTab : 'slides', { updateHash: false });
+        // Scroll to hash section on load
+        const initialHash = window.location.hash ? window.location.hash.replace('#', '') : null;
+        if (initialHash) {
+            const target = document.getElementById('tab-' + initialHash) || document.getElementById(initialHash);
+            if (target) setTimeout(() => target.scrollIntoView({behavior:'smooth', block:'start'}), 300);
+        }
 
         document.getElementById('btn-submit').addEventListener('click', checkAnswer);
         document.getElementById('btn-next').addEventListener('click', loadQuestion);
@@ -2739,12 +2575,13 @@ function initTopNav(){
     });
 
     function applyTheme(theme) {
-        if (theme === 'light') {
+        // Theme application handled by theme.js; sync internal state to match
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        state.theme = current;
+        if (current === 'light') {
             document.body.classList.add('light');
-            document.getElementById('theme-toggle-btn').innerHTML = '<i data-lucide="sun"></i>';
         } else {
             document.body.classList.remove('light');
-            document.getElementById('theme-toggle-btn').innerHTML = '<i data-lucide="moon"></i>';
         }
         refreshIcons();
     }

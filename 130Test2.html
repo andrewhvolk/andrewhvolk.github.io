@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
 <title>Math 130 – Test 2 Review (Spring 2026)</title>
 
 <!-- Fonts -->
@@ -29,103 +30,9 @@
                 radial-gradient(circle at top left, rgba(126, 168, 255, 0.08), transparent 28%),
                 var(--surface);
         }
-        .review-shell { max-width: 1180px; padding-top: clamp(2.5rem, 5vw, 4rem); }
-        .review-header.review-header--hero {
-            margin-bottom: 2.5rem;
-            padding: clamp(2.35rem, 5vw, 4rem);
-            background: var(--gradient-library-glow);
-            border-radius: 1.5rem;
-            color: var(--on-primary);
-            overflow: hidden;
-            box-shadow: 0 22px 48px rgba(0, 29, 23, 0.10);
-            text-align: left;
-        }
-        .review-header.review-header--hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(58, 102, 92, 0.16), rgba(13, 80, 213, 0.14));
-            pointer-events: none;
-        }
-        .review-header.review-header--hero::after {
-            display: block;
-            inset: auto auto 0 0;
-            width: min(18rem, 42%);
-            height: 0.4rem;
-            background: linear-gradient(90deg, rgba(255,255,255,0.92), color-mix(in srgb, var(--secondary) 78%, transparent));
-            opacity: 0.92;
-        }
-        .review-header.review-header--hero > * { position: relative; z-index: 1; }
-        .review-header.review-header--hero .breadcrumb,
-        .review-header.review-header--hero h1,
-        .review-header.review-header--hero .header-meta,
-        .review-header.review-header--hero .review-subtitle,
-        .review-header.review-header--hero .header-chip { color: var(--on-primary); }
-        .review-header.review-header--hero .breadcrumb {
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
-        }
-        .review-header.review-header--hero .breadcrumb a,
-        .review-header.review-header--hero .breadcrumb-current,
-        .review-header.review-header--hero .breadcrumb-sep { color: rgba(255,255,255,0.82); }
-        .review-header.review-header--hero h1 {
-            color: var(--on-primary);
-            font-size: clamp(2.8rem, 6vw, 4.4rem);
-            margin-bottom: 1rem;
-            max-width: 12ch;
-        }
-        .header-meta {
-            font-family: var(--type-meta-family);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-size: 0.78rem;
-            color: rgba(255,255,255,0.78);
-            margin: 0 0 0.85rem;
-        }
-        .review-subtitle {
-            font-size: clamp(1.05rem, 2vw, 1.2rem);
-            line-height: 1.75;
-            max-width: 40rem;
-            margin-bottom: 0;
-            color: rgba(255,255,255,0.88);
-        }
-        .review-chip, .header-chip, .chip {
-            border: 0;
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.92);
-            backdrop-filter: blur(12px);
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
-        }
-        .review-chip i, .header-chip i, .chip i { color: color-mix(in srgb, white 72%, var(--secondary)); }
-        .review-chip.is-accent, .header-chip.accent, .chip.accent {
-            background: rgba(255,255,255,0.14);
-            color: white;
-        }
-
-        .tabs.review-tabs, .tab-nav.review-tabs { gap: 0.9rem; margin: 1.75rem 0 1.5rem; }
-        .tab-btn.review-tab-btn, .review-tabs .tab-btn {
-            background: var(--gradient-editorial-panel);
-            border: 0;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 82%, transparent);
-            min-height: 84px;
-        }
-        .tab-btn.review-tab-btn.active, .review-tabs .tab-btn.active {
-            background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface-container-lowest)), color-mix(in srgb, var(--surface-container-low) 92%, white));
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent);
-        }
-
-
         .review-section--open {
             padding: 0.5rem 0 1rem;
             margin-bottom: 2rem;
-        }
-
-        @media (max-width: 980px) {
-            .review-header.review-header--hero h1 { max-width: none; }
-        }
-
-        @media (max-width: 640px) {
-            .review-header.review-header--hero { padding: 1.5rem; }
         }
 
         /* Cards */
@@ -141,7 +48,7 @@
 
         /* Checklist */
         .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
-        .check-item { display: flex; width: 100%; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 0; cursor: pointer; transition: all 0.2s; user-select: none; }
+        .check-item { display: flex; box-sizing: border-box; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 0; cursor: pointer; transition: all 0.2s; user-select: none; }
         .check-item:hover { border-color: var(--accent); }
         .check-item:focus-visible, .practice-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
         .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
@@ -447,8 +354,6 @@
 
         @media (max-width: 1024px) {
             .container { padding: 1.5rem; }
-            .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .tab-btn { min-height: 76px; padding: 0.88rem 0.95rem; }
             .formula-intro,
             .slides-intro {
                 grid-template-columns: 1fr;
@@ -468,9 +373,6 @@
 
         @media (max-width: 780px) {
             .container { padding: 1rem; }
-            header { margin-bottom: 1.25rem; }
-            h1 { font-size: 2rem; }
-            .tab-btn { min-height: 72px; padding: 0.82rem 0.88rem; }
             .formula-grid,
             #tab-formulas .formula-grid,
             .slides-grid {
@@ -482,14 +384,6 @@
             .formula-card.wide { grid-column: auto; }
             .svg-canvas { width: 100% !important; height: auto !important; }
             .history-table { display: block; overflow-x: auto; white-space: nowrap; }
-            .header-chips { margin-top: 0.65rem; }
-        }
-
-        @media (max-width: 640px) {
-            header { align-items: flex-start; }
-            .tabs { grid-template-columns: 1fr; }
-            .tab-btn { min-height: auto; }
-            .header-chip { width: 100%; justify-content: flex-start; }
         }
     
 
@@ -852,7 +746,7 @@
 
 
 </head>
-<body class="review-page">
+<body class="review-page review-page--sections">
 <div class="math-review-page">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
@@ -884,242 +778,175 @@
           <ul class="dropdown-menu dropdown-menu--right">
             <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
             <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#aecfc6d8c1c2c5eec2c7cccbdcdad780cbcadb">Contact</a></li>
           </ul>
         </li>
       </ul>
-      <button aria-label="Toggle dark and light theme" class="theme-toggle review-theme-toggle" id="theme-toggle-btn" title="Toggle Theme">
-        <i data-lucide="moon"></i>
-      </button>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
     </div>
   </div>
 </nav>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="courses/math130.html">MATH 130</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Test 2 Review</span>
+    </nav>
+  </div>
+</div>
 
-<div class="container review-shell">
-<header class="review-header review-header--hero">
-<div class="header-copy review-title-group">
-<nav class="breadcrumb" aria-label="Breadcrumb">
-<a href="index.html">Home</a>
-<span aria-hidden="true" class="breadcrumb-sep">›</span>
-<a href="learn.html">Courses</a>
-<span aria-hidden="true" class="breadcrumb-sep">›</span>
-<a href="courses/math130.html">MATH 130</a>
-<span aria-hidden="true" class="breadcrumb-sep">›</span>
-<span class="breadcrumb-current" aria-current="page">Test 2 Review</span>
-</nav>
-<h1>Math 130 – Test 2 Review</h1>
-<p class="header-meta">Spring 2026 | Prof. Young &amp; Prof. Volk</p>
-<p class="header-subtitle review-subtitle">Reviewing geometry, exponentials, and logarithms.</p>
-<div class="header-chips review-meta-chips">
-<span class="header-chip review-chip accent is-accent"><i data-lucide="route"></i> Study flow: Slides → Formulas → Practice → Videos → Schedule → Progress</span>
-<span class="header-chip review-chip"><i data-lucide="calendar-clock"></i> Test 2: Mon, Mar 30</span>
-</div>
-</div>
+<header class="page-shell-header review-page-header">
+  <div class="container">
+    <p class="page-shell-header__eyebrow">Spring 2026 · Prof. Young &amp; Prof. Volk</p>
+    <h1>Math 130 – Test 2 Review</h1>
+    <p class="subtitle">Reviewing geometry, exponentials, and logarithms.</p>
+  </div>
 </header>
 
-<div aria-label="Review tool sections" class="tabs review-tabs review-tabs-3" role="tablist">
-<button class="tab-btn review-tab-btn active priority" data-tab="slides">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="monitor"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Slides</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn priority" data-tab="formulas">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="sigma"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Formulas</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn priority" data-tab="practice">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="pen-tool"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Practice</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn" data-tab="videos">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="play-circle"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Videos</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn" data-tab="schedule">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="calendar"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Schedule</span>
-</span>
-        </button>
-<button class="tab-btn review-tab-btn" data-tab="progress">
-<span class="tab-icon-wrap review-tab-icon"><i data-lucide="bar-chart-2"></i></span>
-<span class="tab-copy review-tab-copy">
-<span class="tab-label review-tab-label">Progress</span>
-</span>
-        </button>
-</div>
+<nav class="review-section-nav" aria-label="Page sections">
+  <div class="review-section-nav__inner">
+    <a href="#tab-slides">Slides</a>
+    <a href="#tab-formulas">Formulas</a>
+    <a href="#tab-practice">Practice</a>
+    <a href="#tab-videos">Videos</a>
+    <a href="#tab-schedule">Schedule</a>
+    <a href="#tab-progress">Progress</a>
+  </div>
+</nav>
+
+<div class="container review-shell review-shell--below-banner">
+
 <!-- SCHEDULE TAB -->
-<div class="tab-content" id="tab-schedule">
-<section class="review-section review-section--open">
-<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-<h2 style="margin-bottom: 0;">Course Schedule</h2>
-<div id="exam-countdown" style="background: var(--red-bg); border: 1px solid var(--red); color: var(--red); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 600; font-family: var(--type-meta-family); font-size: 0.95rem;"></div>
+<div class="tab-content" id="tab-slides">
+<div class="card review-card">
+<h2>Lecture Slides</h2>
+<div class="slides-shell">
+<div class="slides-intro">
+<div class="slides-overview">
+<div class="slides-kicker"><i data-lucide="presentation"></i> Unit 2 Resources</div>
+<p class="slides-note">Use the PDF for the fastest browser-friendly viewing experience. Keep the PowerPoint link available when you want the original editable file or need to download the deck for offline use.</p>
 </div>
-<div style="overflow-x: auto;">
-<table class="history-table">
-<thead>
-<tr>
-<th>Date</th>
-<th>Topic / Section</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id="schedule-body">
-<tr data-date="2026-02-20">
-<td>Fri, 2/20</td>
-<td>Section 4.2</td>
-<td><span class="badge badge-class">CLASS</span></td>
-</tr>
-<tr data-date="2026-02-23">
-<td>Mon, 2/23</td>
-<td>Section 4.2</td>
-<td><span class="badge badge-class">CLASS</span></td>
-</tr>
-<tr data-date="2026-02-25">
-<td>Wed, 2/25</td>
-<td>Section 4.3 &amp; Quiz 5</td>
-<td>
-<span class="badge badge-class">CLASS</span>
-<span class="badge badge-quiz">QUIZ</span>
-<span class="badge badge-due">4.2 DUE</span>
-</td>
-</tr>
-<tr data-date="2026-02-27">
-<td>Fri, 2/27</td>
-<td>Section 4.3</td>
-<td><span class="badge badge-class">CLASS</span></td>
-</tr>
-<tr data-date="2026-03-02">
-<td>Mon, 3/2</td>
-<td>Geometry: Polygons</td>
-<td><span class="badge badge-class">CLASS</span></td>
-</tr>
-<tr data-date="2026-03-04">
-<td>Wed, 3/4</td>
-<td>Geometry: Polygons &amp; Quiz 6</td>
-<td>
-<span class="badge badge-class">CLASS</span>
-<span class="badge badge-quiz">QUIZ</span>
-<span class="badge badge-due">4.3 DUE</span>
-</td>
-</tr>
-<tr data-date="2026-03-06">
-<td>Fri, 3/6</td>
-<td>Geometry: Polygons</td>
-<td><span class="badge badge-class">CLASS</span></td>
-</tr>
-<tr data-date="2026-03-09">
-<td>Mon, 3/9</td>
-<td>Geometry: Circles</td>
-<td><span class="badge badge-class">CLASS</span></td>
-</tr>
-<tr data-date="2026-03-11">
-<td>Wed, 3/11</td>
-<td>Geometry: Circles &amp; Quiz 7</td>
-<td>
-<span class="badge badge-class">CLASS</span>
-<span class="badge badge-quiz">QUIZ</span>
-</td>
-</tr>
-<tr data-date="2026-03-13">
-<td>Fri, 3/13</td>
-<td>Geometry: Circles</td>
-<td><span class="badge badge-class">CLASS</span></td>
-</tr>
-<tr data-date="2026-03-16">
-<td>Mar 16 - 20</td>
-<td>Spring Break</td>
-<td><span class="badge badge-noclass">NO CLASS</span></td>
-</tr>
-<tr data-date="2026-03-23">
-<td>Mon, 3/23</td>
-<td>Test 2 Review</td>
-<td><span class="badge badge-retry">REVIEW</span></td>
-</tr>
-<tr data-date="2026-03-25">
-<td>Wed, 3/25</td>
-<td>Assessment Day</td>
-<td><span class="badge badge-noclass">NO CLASS</span></td>
-</tr>
-<tr data-date="2026-03-27">
-<td>Fri, 3/27</td>
-<td>Test 2 Review &amp; Quiz 8</td>
-<td>
-<span class="badge badge-retry">REVIEW</span>
-<span class="badge badge-quiz">QUIZ</span>
-<span class="badge badge-due">GEOM DUE</span>
-</td>
-</tr>
-<tr class="best-row" data-date="2026-03-30">
-<td><strong>Mon, 3/30</strong></td>
-<td><strong>Test 2: Geometry, 4.2, 4.3</strong></td>
-<td>
-<span class="badge badge-exam">EXAM</span>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="slides-tip-box">
+<div class="slides-tip-title">Best use</div>
+<div class="slides-tips">
+<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
+<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text);">Download PPTX</strong> when you need the original slide deck.</span></div>
 </div>
-</section>
-<section class="review-section review-section--open">
-<h2>ALEKS Modules</h2>
-<div style="overflow-x: auto;">
-<table class="history-table">
-<thead>
-<tr>
-<th>Module</th>
-<th>Opens</th>
-<th>Due Date</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id="aleks-body">
-<tr data-due="2026-02-25T14:10:00">
-<td><strong>Section 4.2</strong></td>
-<td>Feb 18 at 2:11 PM</td>
-<td><strong>Feb 25 at 2:10 PM</strong></td>
-<td class="aleks-status"></td>
-</tr>
-<tr data-due="2026-03-04T14:10:00">
-<td><strong>Section 4.3</strong></td>
-<td>Feb 25 at 2:11 PM</td>
-<td><strong>Mar 4 at 2:10 PM</strong></td>
-<td class="aleks-status"></td>
-</tr>
-<tr data-due="2026-03-27T14:10:00">
-<td><strong>Geometry</strong></td>
-<td>Mar 4 at 2:11 PM</td>
-<td><strong>Mar 27 at 2:10 PM</strong></td>
-<td class="aleks-status"></td>
-</tr>
-</tbody>
-</table>
 </div>
-</section>
 </div>
-<!-- FORMULAS TAB -->
+<div class="slides-grid">
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2A</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2A.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2A PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2A lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2A.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2A.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2A: 4.2 Exponential Functions</h3>
+<p class="slide-subtitle">Covers exponential functions, tables, graphs, growth and decay, and the core algebraic ideas from Section 4.2.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2A.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2A.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2B</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2B.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2B PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2B lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2B.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2B.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2B: 4.3 Logarithmic Functions</h3>
+<p class="slide-subtitle">Covers logarithmic functions, inverse relationships with exponentials, evaluation, rewriting, and graph interpretation from Section 4.3.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2B.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2B.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2C</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2C.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2C PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2C lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2C.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2C.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2C: Geometry Angles and Polygons</h3>
+<p class="slide-subtitle">Covers angle relationships, parallel lines, polygon angle sums, and the main geometry vocabulary and problem types for this unit.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2C.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2C.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2D</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2D.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2D PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2D lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2D.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2D.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2D: Geometry Circles and Solids</h3>
+<p class="slide-subtitle">Covers circle measures, arc and sector ideas, and solid geometry topics such as surface area and volume.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2D.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2D.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+<div class="slide-card">
+<div class="slide-card-top">
+<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2E</div>
+<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+</div>
+<a class="slide-thumb-wrap" href="slides/Math130Unit2E.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2E PDF slides">
+<img alt="Thumbnail preview for Math 130 Unit 2E lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2E.png"/>
+<div class="slide-thumb-placeholder">
+<i data-lucide="image"></i>
+<div class="slide-thumb-label">Click to Open PDF</div>
+<div class="slide-thumb-note">Add <code>Math130Unit2E.png</code> to the slides folder.</div>
+</div>
+</a>
+<h3>Math 130 Unit 2E: Test Review</h3>
+<p class="slide-subtitle">Consolidates the major skills across exponentials, logarithms, and geometry into a focused review deck for Test 2.</p>
+<div class="slide-actions">
+<a class="btn-primary" href="slides/Math130Unit2E.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
+<a class="btn-secondary" href="slides/Math130Unit2E.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="tab-content" id="tab-formulas">
 <section class="review-section review-section--open">
 <h2>Essential Formulas for Test 2</h2>
-<p style="color: var(--text-muted); margin-bottom: 1rem; font-weight: 500;">
-                Covers formulas relevant to Sections 4.2, 4.3, and the Test 2 geometry topics.
-                <strong>The formulas marked “Provided on Test 2” match the ones students should expect on the exam.</strong>
-            </p>
-<div class="formula-intro">
-<div class="formula-priority-note"><strong>Study order:</strong> memorize cards first, then practice identifying when to use each provided formula during mixed review.</div>
-<div aria-label="Formula badge legend" class="formula-legend">
-<div class="legend-chip legend-memorize">Memorize</div>
-<div class="legend-chip legend-provided">Provided on Test 2</div>
-<div class="legend-chip legend-useful">Useful relation</div>
-</div>
-</div>
 <div class="checklist-section review-checklist-section">
 <h3>Section 4.2: Exponentials &amp; Interest</h3>
 <div class="formula-section-note">Focus: recognize the two provided interest formulas and when each model is used.</div>
@@ -1300,10 +1127,7 @@
 <div class="tab-content" id="tab-practice">
 <div class="card review-card">
 <h2 class="u-text-center u-mb-xs">Practice Generators</h2>
-<p class="u-text-center u-mb-sm" style="color: var(--text-muted);">Practice generators are live for Test 2 topics and aligned to Sections 4.2, 4.3, and the geometry material covered before the exam.</p>
-<p class="u-text-center u-mb-md" style="color: var(--text-muted); font-size: 0.92rem;">By default, enter decimal answers rounded as directed. Repeating decimals are accepted within tolerance (for example, $0.3333$ for $0.\overline{3}$). Some generators may allow additional formats noted in the question (for example, $\pi$ forms).</p>
-<p id="coverage-audit" class="u-text-center u-mb-lg" style="color: var(--text-muted); font-size: 0.9rem;"></p>
-<p class="u-text-center u-mb-lg" style="color: var(--text-muted);">Select a topic to generate infinite, exam-style questions.</p>
+<p id="coverage-audit" style="display:none;"></p>
 <!-- Mock Exam CTA -->
 <div id="exam-cta" class="review-callout review-callout--exam review-callout--highlight">
 <h3 class="review-callout__title review-callout__title--exam">🎯 Mock Exam Mode</h3>
@@ -1370,53 +1194,6 @@
 </div>
 </div>
 <!-- CHECKLIST & PROGRESS TAB -->
-<div class="tab-content" id="tab-progress">
-<div class="card review-card">
-<h2>Topics Checklist</h2>
-<div class="progress-summary" id="progress-summary"></div>
-<div id="checklist-container"></div>
-</div>
-<div class="card review-card">
-<h2>Your Statistics</h2>
-<div class="stats-grid">
-<div class="stat-card">
-<div class="stat-val" id="stat-attempted">0</div>
-<div class="stat-label">Questions Solved</div>
-</div>
-<div class="stat-card">
-<div class="stat-val" id="stat-perfect">0</div>
-<div class="stat-label">Perfect First Tries</div>
-</div>
-<div class="stat-card">
-<div class="stat-val" id="stat-accuracy">0%</div>
-<div class="stat-label">Overall Accuracy</div>
-</div>
-</div>
-<h3 style="margin-top: 2rem; margin-bottom: 1rem;">Practice History</h3>
-<div style="overflow-x: auto;">
-<table class="history-table">
-<thead>
-<tr>
-<th>Date / Time</th>
-<th>Topic</th>
-<th>Retries</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id="history-body">
-<!-- History injected here -->
-</tbody>
-</table>
-</div>
-<div style="text-align: center; margin-top: 3rem;">
-<button class="btn-secondary" onclick="resetProgress()" style="color: var(--red); border-color: var(--red-bg);">
-<i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
-                    Reset All Progress
-                </button>
-</div>
-</div>
-</div>
-<!-- VIDEOS TAB -->
 <div class="tab-content" id="tab-videos">
 <section class="review-section review-section--open">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
@@ -1490,130 +1267,203 @@
 </div>
 
 <!-- LECTURE SLIDES TAB -->
-<div class="tab-content active" id="tab-slides">
+<div class="tab-content" id="tab-schedule">
+<section class="review-section review-section--open">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+<h2 style="margin-bottom: 0;">Course Schedule</h2>
+<div id="exam-countdown" style="background: var(--red-bg); border: 1px solid var(--red); color: var(--red); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 600; font-family: var(--type-meta-family); font-size: 0.95rem;"></div>
+</div>
+<div style="overflow-x: auto;">
+<table class="history-table">
+<thead>
+<tr>
+<th>Date</th>
+<th>Topic / Section</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="schedule-body">
+<tr data-date="2026-02-20">
+<td>Fri, 2/20</td>
+<td>Section 4.2</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-02-23">
+<td>Mon, 2/23</td>
+<td>Section 4.2</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-02-25">
+<td>Wed, 2/25</td>
+<td>Section 4.3 &amp; Quiz 5</td>
+<td>
+<span class="badge badge-class">CLASS</span>
+<span class="badge badge-quiz">QUIZ</span>
+<span class="badge badge-due">4.2 DUE</span>
+</td>
+</tr>
+<tr data-date="2026-02-27">
+<td>Fri, 2/27</td>
+<td>Section 4.3</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-02">
+<td>Mon, 3/2</td>
+<td>Geometry: Polygons</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-04">
+<td>Wed, 3/4</td>
+<td>Geometry: Polygons &amp; Quiz 6</td>
+<td>
+<span class="badge badge-class">CLASS</span>
+<span class="badge badge-quiz">QUIZ</span>
+<span class="badge badge-due">4.3 DUE</span>
+</td>
+</tr>
+<tr data-date="2026-03-06">
+<td>Fri, 3/6</td>
+<td>Geometry: Polygons</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-09">
+<td>Mon, 3/9</td>
+<td>Geometry: Circles</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-11">
+<td>Wed, 3/11</td>
+<td>Geometry: Circles &amp; Quiz 7</td>
+<td>
+<span class="badge badge-class">CLASS</span>
+<span class="badge badge-quiz">QUIZ</span>
+</td>
+</tr>
+<tr data-date="2026-03-13">
+<td>Fri, 3/13</td>
+<td>Geometry: Circles</td>
+<td><span class="badge badge-class">CLASS</span></td>
+</tr>
+<tr data-date="2026-03-16">
+<td>Mar 16 - 20</td>
+<td>Spring Break</td>
+<td><span class="badge badge-noclass">NO CLASS</span></td>
+</tr>
+<tr data-date="2026-03-23">
+<td>Mon, 3/23</td>
+<td>Test 2 Review</td>
+<td><span class="badge badge-retry">REVIEW</span></td>
+</tr>
+<tr data-date="2026-03-25">
+<td>Wed, 3/25</td>
+<td>Assessment Day</td>
+<td><span class="badge badge-noclass">NO CLASS</span></td>
+</tr>
+<tr data-date="2026-03-27">
+<td>Fri, 3/27</td>
+<td>Test 2 Review &amp; Quiz 8</td>
+<td>
+<span class="badge badge-retry">REVIEW</span>
+<span class="badge badge-quiz">QUIZ</span>
+<span class="badge badge-due">GEOM DUE</span>
+</td>
+</tr>
+<tr class="best-row" data-date="2026-03-30">
+<td><strong>Mon, 3/30</strong></td>
+<td><strong>Test 2: Geometry, 4.2, 4.3</strong></td>
+<td>
+<span class="badge badge-exam">EXAM</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="review-section review-section--open">
+<h2>ALEKS Modules</h2>
+<div style="overflow-x: auto;">
+<table class="history-table">
+<thead>
+<tr>
+<th>Module</th>
+<th>Opens</th>
+<th>Due Date</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="aleks-body">
+<tr data-due="2026-02-25T14:10:00">
+<td><strong>Section 4.2</strong></td>
+<td>Feb 18 at 2:11 PM</td>
+<td><strong>Feb 25 at 2:10 PM</strong></td>
+<td class="aleks-status"></td>
+</tr>
+<tr data-due="2026-03-04T14:10:00">
+<td><strong>Section 4.3</strong></td>
+<td>Feb 25 at 2:11 PM</td>
+<td><strong>Mar 4 at 2:10 PM</strong></td>
+<td class="aleks-status"></td>
+</tr>
+<tr data-due="2026-03-27T14:10:00">
+<td><strong>Geometry</strong></td>
+<td>Mar 4 at 2:11 PM</td>
+<td><strong>Mar 27 at 2:10 PM</strong></td>
+<td class="aleks-status"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- FORMULAS TAB -->
+<div class="tab-content" id="tab-progress">
 <div class="card review-card">
-<h2>Lecture Slides</h2>
-<div class="slides-shell">
-<div class="slides-intro">
-<div class="slides-overview">
-<div class="slides-kicker"><i data-lucide="presentation"></i> Unit 2 Resources</div>
-<p class="slides-note">Use the PDF for the fastest browser-friendly viewing experience. Keep the PowerPoint link available when you want the original editable file or need to download the deck for offline use.</p>
+<h2>Topics Checklist</h2>
+<div class="progress-summary" id="progress-summary"></div>
+<div id="checklist-container"></div>
 </div>
-<div class="slides-tip-box">
-<div class="slides-tip-title">Best use</div>
-<div class="slides-tips">
-<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
-<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text);">Download PPTX</strong> when you need the original slide deck.</span></div>
+<div class="card review-card">
+<h2>Your Statistics</h2>
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-val" id="stat-attempted">0</div>
+<div class="stat-label">Questions Solved</div>
 </div>
+<div class="stat-card">
+<div class="stat-val" id="stat-perfect">0</div>
+<div class="stat-label">Perfect First Tries</div>
 </div>
-</div>
-<div class="slides-grid">
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2A</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit2A.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2A PDF slides">
-<img alt="Thumbnail preview for Math 130 Unit 2A lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2A.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit2A.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Math 130 Unit 2A: 4.2 Exponential Functions</h3>
-<p class="slide-subtitle">Covers exponential functions, tables, graphs, growth and decay, and the core algebraic ideas from Section 4.2.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit2A.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit2A.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+<div class="stat-card">
+<div class="stat-val" id="stat-accuracy">0%</div>
+<div class="stat-label">Overall Accuracy</div>
 </div>
 </div>
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2B</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
+<h3 style="margin-top: 2rem; margin-bottom: 1rem;">Practice History</h3>
+<div style="overflow-x: auto;">
+<table class="history-table">
+<thead>
+<tr>
+<th>Date / Time</th>
+<th>Topic</th>
+<th>Retries</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="history-body">
+<!-- History injected here -->
+</tbody>
+</table>
 </div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit2B.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2B PDF slides">
-<img alt="Thumbnail preview for Math 130 Unit 2B lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2B.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit2B.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Math 130 Unit 2B: 4.3 Logarithmic Functions</h3>
-<p class="slide-subtitle">Covers logarithmic functions, inverse relationships with exponentials, evaluation, rewriting, and graph interpretation from Section 4.3.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit2B.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit2B.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
-</div>
-</div>
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2C</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit2C.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2C PDF slides">
-<img alt="Thumbnail preview for Math 130 Unit 2C lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2C.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit2C.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Math 130 Unit 2C: Geometry Angles and Polygons</h3>
-<p class="slide-subtitle">Covers angle relationships, parallel lines, polygon angle sums, and the main geometry vocabulary and problem types for this unit.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit2C.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit2C.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
-</div>
-</div>
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2D</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit2D.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2D PDF slides">
-<img alt="Thumbnail preview for Math 130 Unit 2D lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2D.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit2D.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Math 130 Unit 2D: Geometry Circles and Solids</h3>
-<p class="slide-subtitle">Covers circle measures, arc and sector ideas, and solid geometry topics such as surface area and volume.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit2D.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit2D.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
-</div>
-</div>
-<div class="slide-card">
-<div class="slide-card-top">
-<div class="slide-badge"><i data-lucide="presentation"></i> Unit 2E</div>
-<div class="slide-format-tags"><span class="slide-tag pdf">PDF</span><span class="slide-tag pptx">PPTX</span></div>
-</div>
-<a class="slide-thumb-wrap" href="slides/Math130Unit2E.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Unit 2E PDF slides">
-<img alt="Thumbnail preview for Math 130 Unit 2E lecture slides" class="slide-thumb" loading="lazy" onerror="this.closest('.slide-thumb-wrap').classList.add('is-missing')" src="slides/Math130Unit2E.png"/>
-<div class="slide-thumb-placeholder">
-<i data-lucide="image"></i>
-<div class="slide-thumb-label">Click to Open PDF</div>
-<div class="slide-thumb-note">Add <code>Math130Unit2E.png</code> to the slides folder.</div>
-</div>
-</a>
-<h3>Math 130 Unit 2E: Test Review</h3>
-<p class="slide-subtitle">Consolidates the major skills across exponentials, logarithms, and geometry into a focused review deck for Test 2.</p>
-<div class="slide-actions">
-<a class="btn-primary" href="slides/Math130Unit2E.pdf" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>View PDF</span></a>
-<a class="btn-secondary" href="slides/Math130Unit2E.pptx" target="_blank" rel="noopener noreferrer"><i data-lucide="download"></i><span>Download PPTX</span></a>
+<div style="text-align: center; margin-top: 3rem;">
+<button class="btn-secondary" onclick="resetProgress()" style="color: var(--red); border-color: var(--red-bg);">
+<i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
+                    Reset All Progress
+                </button>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // --- ICON REFRESH (debounced to prevent redundant DOM walks) ---
     let _iconTimer = null;
     function refreshIcons() {
@@ -1697,63 +1547,11 @@
         total: 0
     };
 
-    const TAB_META = {
-        slides: {
-            title: 'Slides',
-            note: 'Start with Units 2A–2D for content review, then use 2E as your final pass before practice.',
-            next: 'formulas',
-            nextLabel: 'Next: Formulas'
-        },
-        formulas: {
-            title: 'Formulas',
-            note: 'Start with the memorize and provided formulas. Treat the useful formulas as background support, not the main target.',
-            next: 'practice',
-            nextLabel: 'Next: Practice'
-        },
-        practice: {
-            title: 'Practice',
-            note: 'Try problems without notes first. Use the linked videos only when you miss a skill or need a quick refresher.',
-            next: 'videos',
-            nextLabel: 'Need help? Open Videos'
-        },
-        videos: {
-            title: 'Videos',
-            note: 'Use these as targeted refreshers for weak spots rather than watching everything from start to finish.',
-            next: 'schedule',
-            nextLabel: 'Check Schedule'
-        },
-        schedule: {
-            title: 'Schedule',
-            note: 'Use this section to confirm due dates, quiz timing, and the test countdown. Save it for logistics after you finish the main review work.',
-            next: 'progress',
-            nextLabel: 'Track Progress'
-        },
-        progress: {
-            title: 'Progress',
-            note: 'Mark items only after you can solve them with limited help. Use it to spot what still needs review.',
-            next: 'slides',
-            nextLabel: 'Back to Slides'
-        }
-    };
-
     function showTab(tabName, options = {}) {
-        const { updateHash = true } = options;
-        const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+        // Long-page mode: scroll to section instead of toggling
         const targetPanel = document.getElementById('tab-' + tabName);
-        if (!targetBtn || !targetPanel) return;
-
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            const isActive = btn === targetBtn;
-            btn.classList.toggle('active', isActive);
-            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
-        document.querySelectorAll('.tab-content').forEach(panel => panel.classList.remove('active'));
-        targetPanel.classList.add('active');
-
-        if (updateHash) {
-            history.replaceState(null, '', '#' + tabName);
-        }
-        refreshIcons();
+        if (!targetPanel) return;
+        targetPanel.scrollIntoView({behavior:'smooth', block:'start'});
     }
 
     function loadState() {
@@ -3164,24 +2962,9 @@
     }
 
 
-function initTopNav(){
-  const nav=document.querySelector('.top-nav');
-  if(!nav)return;
-  const menuToggle=nav.querySelector('.menu-toggle.global-nav-toggle');
-  const navLinks=nav.querySelector('.top-nav-links');
-  const navUtilities=nav.querySelector('.top-nav-utilities');
-  const dropdowns=[...nav.querySelectorAll('.dropdown')];
-  const closeDropdowns=(keep)=>dropdowns.forEach(drop=>{if(drop!==keep){drop.removeAttribute('data-desktop-open');drop.removeAttribute('data-mobile-open');const trigger=drop.querySelector('.dropdown-trigger');if(trigger)trigger.setAttribute('aria-expanded','false');}});
-  const syncMenuState=()=>{const expanded=menuToggle && menuToggle.getAttribute('aria-expanded')==='true';nav.toggleAttribute('data-menu-open',expanded);if(navLinks)navLinks.dataset.open=expanded?'true':'false';if(navUtilities)navUtilities.dataset.open=expanded?'true':'false';if(!expanded)closeDropdowns();};
-  if(menuToggle){menuToggle.addEventListener('click',()=>{const expanded=menuToggle.getAttribute('aria-expanded')==='true';menuToggle.setAttribute('aria-expanded',String(!expanded));syncMenuState();});syncMenuState();}
-  dropdowns.forEach(drop=>{const trigger=drop.querySelector('.dropdown-trigger');if(!trigger)return;trigger.setAttribute('aria-expanded','false');trigger.addEventListener('click',(e)=>{e.stopPropagation();const mobile=window.matchMedia('(max-width: 768px)').matches;const attr=mobile?'data-mobile-open':'data-desktop-open';const isOpen=drop.getAttribute(attr)==='true';closeDropdowns(drop);if(isOpen){drop.removeAttribute(attr);trigger.setAttribute('aria-expanded','false');}else{drop.setAttribute(attr,'true');trigger.setAttribute('aria-expanded','true');}});});
-  document.addEventListener('click',(e)=>{if(!nav.contains(e.target))closeDropdowns();});
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if(menuToggle){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}closeDropdowns();}});
-  window.addEventListener('resize',()=>{closeDropdowns();if(menuToggle&&window.matchMedia('(min-width: 769px)').matches){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}});
-}
+// Top nav handled by theme.js setupGlobalNav
     // --- UI INITIATION & EVENT LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
-        initTopNav();
         runStdPosAngleUnitTests();
         refreshIcons();
         loadState();
@@ -3196,31 +2979,52 @@ function initTopNav(){
         // Wait briefly for elements to be injected, then render math
         setTimeout(renderMath, 100);
 
-        document.getElementById('theme-toggle-btn').addEventListener('click', () => {
-            const newTheme = state.theme === 'dark' ? 'light' : 'dark';
-            state.theme = newTheme; applyTheme(newTheme); saveState();
-        });
+        // Theme toggle handled by theme.js
+        document.addEventListener('theme-changed', () => applyTheme());
 
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.setAttribute('role', 'tab');
-            btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
-            btn.addEventListener('click', (e) => {
-                showTab(e.currentTarget.dataset.tab);
+        // Section nav: highlight active link on scroll
+        (function(){
+          const navLinks = document.querySelectorAll('.review-section-nav__inner a');
+          const sections = [];
+          navLinks.forEach(link => {
+            const id = link.getAttribute('href').replace('#','');
+            const el = document.getElementById(id);
+            if(el) sections.push({id, el, link});
+          });
+          const offset = 140;
+          function updateActive(){
+            let current = sections[0];
+            for(const s of sections){
+              if(s.el.getBoundingClientRect().top <= offset) current = s;
+            }
+            navLinks.forEach(l => l.classList.remove('is-active'));
+            if(current) current.link.classList.add('is-active');
+          }
+          window.addEventListener('scroll', updateActive, {passive:true});
+          updateActive();
+          navLinks.forEach(link => {
+            link.addEventListener('click', e => {
+              e.preventDefault();
+              const el = document.getElementById(link.getAttribute('href').replace('#',''));
+              if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
             });
-        });
+          });
+        })();
 
+        // data-go-tab buttons scroll to section
         document.addEventListener('click', (e) => {
             const goTabBtn = e.target.closest('[data-go-tab]');
             if (!goTabBtn) return;
             const tab = goTabBtn.dataset.goTab;
-            if (tab) {
-                showTab(tab);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            if (tab) showTab(tab);
         });
 
-        const initialTab = window.location.hash ? window.location.hash.replace('#', '') : 'slides';
-        showTab(TAB_META[initialTab] ? initialTab : 'slides', { updateHash: false });
+        // Scroll to hash section on load
+        const initialHash = window.location.hash ? window.location.hash.replace('#', '') : null;
+        if (initialHash) {
+            const target = document.getElementById('tab-' + initialHash) || document.getElementById(initialHash);
+            if (target) setTimeout(() => target.scrollIntoView({behavior:'smooth', block:'start'}), 300);
+        }
 
         document.getElementById('btn-submit').addEventListener('click', checkAnswer);
         document.getElementById('btn-next').addEventListener('click', loadQuestion);
@@ -3232,13 +3036,13 @@ function initTopNav(){
     });
 
     function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        if (theme === 'light') {
+        // Theme application handled by theme.js; sync internal state to match
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        state.theme = current;
+        if (current === 'light') {
             document.body.classList.add('light');
-            document.getElementById('theme-toggle-btn').innerHTML = '<i data-lucide="sun"></i>';
         } else {
             document.body.classList.remove('light');
-            document.getElementById('theme-toggle-btn').innerHTML = '<i data-lucide="moon"></i>';
         }
         refreshIcons();
     }

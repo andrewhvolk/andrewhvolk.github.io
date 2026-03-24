@@ -265,6 +265,16 @@ function setupGlobalNav(navRoot, index) {
 document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('theme-toggle-btn');
 
+    // Bridge data-theme to the review-page .light class used by review pages
+    const syncReviewTheme = (theme) => {
+        if (document.body.classList.contains('review-page')) {
+            document.body.classList.toggle('light', theme === 'light');
+        }
+    };
+
+    // Sync on load
+    syncReviewTheme(document.documentElement.getAttribute('data-theme'));
+
     if (toggleBtn) {
         // Function to update the emoji icon
         const updateIcon = () => {
@@ -283,6 +293,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Apply new theme
             document.documentElement.setAttribute('data-theme', newTheme);
+
+            // Bridge to review-page light class
+            syncReviewTheme(newTheme);
+
+            // Dispatch event so page-specific JS can react (e.g. refresh lucide icons)
+            document.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: newTheme } }));
 
             // Save to local storage safely
             try {

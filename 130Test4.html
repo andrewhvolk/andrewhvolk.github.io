@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Math 130 – Final Week Review (Fall 2025 Alignment)</title>
+<title>Math 130 – Final Exam Review</title>
 
 <link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -213,10 +214,33 @@
     }
 
     .math-review-page .formula-math {
-        font-size: 1.08rem;
+        font-size: clamp(0.95rem, 1.4vw, 1.08rem);
         color: var(--text);
         margin: 0.25rem 0 0.45rem;
         min-height: 2.4rem;
+        max-width: 100%;
+        overflow: visible;
+    }
+
+    .math-review-page .formula-math .katex-display {
+        margin: 0.15rem auto;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0;
+    }
+
+    .math-review-page .formula-math .katex-display > .katex {
+        white-space: normal;
+        max-width: 100%;
+    }
+
+    .math-review-page .formula-math .katex {
+        max-width: 100%;
+    }
+
+    .math-review-page .formula-card {
+        overflow: visible;
     }
 
     .math-review-page .formula-note {
@@ -332,7 +356,7 @@
     }
 </style>
 </head>
-<body class="review-page">
+<body class="review-page review-page--sections">
 <div class="math-review-page">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
@@ -364,238 +388,81 @@
           <ul class="dropdown-menu dropdown-menu--right">
             <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
             <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#14757c627b787f54787d767166606d3a717061">Contact</a></li>
           </ul>
         </li>
       </ul>
-      <button aria-label="Toggle dark and light theme" class="theme-toggle review-theme-toggle" id="theme-toggle-btn" title="Toggle Theme">
-        <i data-lucide="moon"></i>
-      </button>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
     </div>
   </div>
 </nav>
-<div class="container review-shell">
-    <header class="review-header">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="index.html">Home</a>
-            <span class="breadcrumb-sep" aria-hidden="true">›</span>
-            <a href="learn.html">Courses</a>
-            <span class="breadcrumb-sep" aria-hidden="true">›</span>
-            <a href="courses/math130.html">MATH 130</a>
-            <span class="breadcrumb-sep" aria-hidden="true">›</span>
-            <span class="breadcrumb-current" aria-current="page">Final Week Review</span>
-        </nav>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <a href="learn.html">Courses</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <a href="courses/math130.html">MATH 130</a>
+      <span class="breadcrumb-sep" aria-hidden="true">›</span>
+      <span class="breadcrumb-current" aria-current="page">Final Exam</span>
+    </nav>
+  </div>
+</div>
 
-        <h1>Final Week Review</h1>
-        <p class="header-subtitle review-subtitle">A simplified final-week page modeled after the earlier review pages. This one only covers the last week: Quiz 13 on vectors, reading day, and the comprehensive final.</p>
-
-        <div class="header-chips review-meta-chips">
-            <span class="chip accent"><i data-lucide="route"></i> Recommended order: Overview → Formulas → Practice → Schedule</span>
-            <span class="chip"><i data-lucide="calendar-clock"></i> Quiz 13: Mon, 5/4</span>
-            <span class="chip"><i data-lucide="graduation-cap"></i> Final Exam: Thu, 5/7</span>
-            <span class="chip"><i data-lucide="layers-3"></i> Final week only</span>
-        </div>
+<header class="page-shell-header review-page-header">
+  <div class="container">
+    <p class="page-shell-header__eyebrow">MATH 130 · Final Exam</p>
+    <h1>Final Exam Review</h1>
+    <p class="subtitle">Comprehensive review covering Quiz 13 vectors, key formulas, and all tested topics.</p>
+  </div>
 </header>
 
+<nav class="review-section-nav" aria-label="Page sections">
+  <div class="review-section-nav__inner">
+    <a href="#tab-finalexam">Overview</a>
+    <a href="#tab-formulas">Formulas</a>
+    <a href="#tab-quiz13">Practice</a>
+    <a href="#tab-schedule">Schedule</a>
+  </div>
+</nav>
 
-    <section class="recommended-order-panel" aria-label="Recommended study order">
-        <div class="order-kicker"><i data-lucide="route"></i> Recommended order</div>
-        <h2>Use the same final-week journey as the earlier review pages</h2>
-        <p>This page does not need separate slides, videos, or progress tabs, so it keeps the same logic with only the relevant steps: start with the final overview, review formulas, practice with the Quiz 13 tools, then confirm the schedule.</p>
-        <div class="recommended-order-grid">
-            <div class="recommended-order-step"><span class="step-num">Step 1</span><strong>Start Here / Overview</strong><span>Read the final exam overview first so you know the scope.</span></div>
-            <div class="recommended-order-step"><span class="step-num">Step 2</span><strong>Formulas / Key Concepts</strong><span>Scan the provided formulas before attempting review tasks.</span></div>
-            <div class="recommended-order-step"><span class="step-num">Step 3</span><strong>Practice</strong><span>Use the Quiz 13 vector practice and worked review materials.</span></div>
-            <div class="recommended-order-step"><span class="step-num">Step 4</span><strong>Schedule / Logistics</strong><span>Finish by confirming quiz, reading day, and final exam timing.</span></div>
-        </div>
-    </section>
+<div class="container review-shell review-shell--below-banner">
 
-    <nav class="tabs review-tabs review-tabs-4" aria-label="Final week navigation">
-        <button class="tab-btn review-tab-btn active" data-tab="finalexam">
-            <span class="tab-icon"><i data-lucide="book-open-check"></i></span>
-            <span class="tab-copy review-tab-copy">
-                <span class="tab-label review-tab-label">Start Here</span>
-                <span class="tab-sub">Final exam overview</span>
-            </span>
-        </button>
-        <button class="tab-btn review-tab-btn" data-tab="formulas">
-            <span class="tab-icon"><i data-lucide="sigma"></i></span>
-            <span class="tab-copy review-tab-copy">
-                <span class="tab-label review-tab-label">Formulas</span>
-                <span class="tab-sub">Provided + must know</span>
-            </span>
-        </button>
-        <button class="tab-btn review-tab-btn" data-tab="quiz13">
-            <span class="tab-icon"><i data-lucide="move-3d"></i></span>
-            <span class="tab-copy review-tab-copy">
-                <span class="tab-label review-tab-label">Practice</span>
-                <span class="tab-sub">Quiz 13 vector review</span>
-            </span>
-        </button>
-        <button class="tab-btn review-tab-btn" data-tab="schedule">
-            <span class="tab-icon"><i data-lucide="calendar-range"></i></span>
-            <span class="tab-copy review-tab-copy">
-                <span class="tab-label review-tab-label">Schedule</span>
-                <span class="tab-sub">Only the final week</span>
-            </span>
-        </button>
-    </nav>
-
-    <section class="tab-content" id="tab-schedule">
-        <div class="card review-card">
-            <div class="eyebrow"><i data-lucide="calendar-days"></i> Final week schedule</div>
-            <h2>What happens this week</h2>
-            <p class="muted">This page intentionally leaves out lecture-slide sections, checklist trackers, and ALEKS items. The goal is to keep final-week navigation clean and focused.</p>
-
-            <div style="margin-top:1rem;">
-                <table class="schedule-table" aria-label="Final week schedule">
-                    <tbody>
-                        <tr>
-                            <td class="day">Mon, 5/4</td>
-                            <td class="event">Quiz 13 &amp; Review</td>
-                            <td class="tags">
-                                <span class="tag review">Review</span>
-                                <span class="tag quiz">Quiz</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="day">Wed, 5/6</td>
-                            <td class="event">Reading Day</td>
-                            <td class="tags">
-                                <span class="tag noclass">No Class</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="day">Thu, 5/7</td>
-                            <td class="event"><strong>Final Exam</strong> (1:00–3:00 for Section 1, 3:30–5:30 for Section 2)</td>
-                            <td class="tags">
-                                <span class="tag final">Final</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="plan-grid">
-            <div class="plan-card">
-                <h4>Monday focus</h4>
-                <p>Finish vector review first, then use class review time to identify any final-exam weak spots that still need attention.</p>
-            </div>
-            <div class="plan-card">
-                <h4>Wednesday focus</h4>
-                <p>Do cumulative practice across algebra, geometry, trigonometry, logs, and applications. Aim for breadth, not just one topic.</p>
-            </div>
-            <div class="plan-card">
-                <h4>Thursday focus</h4>
-                <p>Before the exam, revisit provided formulas, angle conversions, line formulas, and vector basics so setup work is quick and accurate.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="tab-content" id="tab-quiz13">
+    <section class="tab-content" id="tab-finalexam">
         <div class="intro-note">
             <div class="callout">
-                <strong>Quiz 13 is Section 8.4: Vectors.</strong> The Fall 2025 quiz asked students to work with component form, magnitude, direction, graphical vector addition, and resultant vectors.
-                <div class="pill-row">
-                    <span class="soft-pill">components</span>
-                    <span class="soft-pill">magnitude</span>
-                    <span class="soft-pill">direction</span>
-                    <span class="soft-pill">vector addition</span>
-                </div>
+                <strong>Comprehensive final.</strong> The exam covers all course topics — algebra, geometry, trigonometry, logarithms, applications, and vectors — in roughly 25–30 questions.
             </div>
             <div class="callout">
-                <strong>Fast strategy.</strong> Translate everything into components as early as possible. Once the vector is in component form, magnitude and direction become routine.
-            </div>
-        </div>
-
-        <div class="mini-grid">
-            <div class="mini-card">
-                <h4>Problem 1</h4>
-                <p>Given a vector drawn on the coordinate plane, find its component form \\(\langle v_1, v_2 \rangle\\), then compute direction \\(\theta\\) and magnitude \\(\|v\|\\).</p>
-            </div>
-            <div class="mini-card">
-                <h4>Problem 2</h4>
-                <p>Add vectors graphically by drawing the resultant, then state the resultant components \\(\langle r_1, r_2 \rangle\\) for each graph.</p>
-            </div>
-            <div class="mini-card">
-                <h4>Problem 3</h4>
-                <p>Convert vectors from magnitude-and-direction form to components, add them, then find \\(\mathbf{r}=\mathbf{u}+\mathbf{v}\\), \\(\|\mathbf{r}\|\\), and \\(\theta_r\\).</p>
-            </div>
-        </div>
-
-        <div class="card review-card" style="margin-top:1rem;">
-            <div class="eyebrow"><i data-lucide="compass"></i> Core vector moves</div>
-            <h2>Quiz 13 essentials</h2>
-            <div class="formula-grid">
-                <div class="formula-card core">
-                    <h4>Component form</h4>
-                    <div class="formula-math">\\[\mathbf{v}=\langle a,b\rangle\\]</div>
-                    <div class="formula-note">Read the horizontal and vertical change carefully from tail to head.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Magnitude</h4>
-                    <div class="formula-math">\\[\|\mathbf{v}\|=\sqrt{a^2+b^2}\\]</div>
-                    <div class="formula-note">Use exact work first, then round only when requested.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Direction from components</h4>
-                    <div class="formula-math">\\[\theta=\tan^{-1}\!\left(\frac{b}{a}\right)\\]</div>
-                    <div class="formula-note">Adjust for quadrant. A calculator angle alone is not always the final direction.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>From magnitude and direction</h4>
-                    <div class="formula-math">\\[\langle r\cos\theta,\;r\sin\theta\rangle\\]</div>
-                    <div class="formula-note">This is the standard bridge from polar-style information to components.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Add vectors</h4>
-                    <div class="formula-math">\\[\langle a,b\rangle+\langle c,d\rangle=\langle a+c,\;b+d\rangle\\]</div>
-                    <div class="formula-note">Graphically and algebraically, the same vector rules should agree.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Resultant workflow</h4>
-                    <div class="formula-math">\\[\mathbf{r}=\mathbf{u}+\mathbf{v}\\]</div>
-                    <div class="formula-note">Convert, add, simplify, then find magnitude and direction last.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="tab-content active" id="tab-finalexam">
-        <div class="intro-note">
-            <div class="callout">
-                <strong>Actual Fall 2025 final snapshot.</strong> The final was comprehensive and included 27 questions spanning algebra, geometry, trigonometry, logarithms, applications, and vectors.
-            </div>
-            <div class="callout">
-                <strong>Practical takeaway.</strong> Review broadly. The exam mixed short skill checks with multi-step application problems, so accuracy in setup matters as much as calculation.
+                <strong>Practical takeaway.</strong> Review broadly. The exam mixes short skill checks with multi-step application problems, so accuracy in setup matters as much as calculation.
             </div>
         </div>
 
         <div class="scope-grid">
             <div class="scope-card">
                 <h4>Trig, angles, and circles</h4>
-                <p>Exact trig values from a figure, solving right triangles, arc length, sector area, central angle, degree–radian conversion, DMS conversion, and linear speed all appeared.</p>
+                <p>Exact trig values from a figure, solving right triangles, arc length, sector area, central angle, degree–radian conversion, DMS conversion, and linear speed are all fair game.</p>
             </div>
             <div class="scope-card">
                 <h4>Algebra and equations</h4>
-                <p>Exponent simplification, function evaluation, quadratic equations, rational equations, set notation, and interval union/intersection were part of the final.</p>
+                <p>Exponent simplification, function evaluation, quadratic equations, rational equations, set notation, and interval union/intersection are covered.</p>
             </div>
             <div class="scope-card">
                 <h4>Coordinate geometry</h4>
-                <p>Distance, midpoint, the equation of a line through two points, and the equation of a perpendicular line through the origin were directly tested.</p>
+                <p>Distance, midpoint, the equation of a line through two points, and the equation of a perpendicular line through the origin can all appear.</p>
             </div>
             <div class="scope-card">
                 <h4>Geometry with diagrams</h4>
-                <p>Polygon area, angle-chasing with parallel lines, and angle relationships from diagrams were included, so visual reading mattered.</p>
+                <p>Polygon area, angle-chasing with parallel lines, and angle relationships from diagrams are included — visual reading matters.</p>
             </div>
             <div class="scope-card">
                 <h4>Logs, exponentials, and models</h4>
-                <p>Writing logarithmic and exponential forms, solving those equations, compound interest, and applied motion/descent situations all showed up.</p>
+                <p>Writing logarithmic and exponential forms, solving those equations, compound interest, and applied motion/descent situations are all tested.</p>
             </div>
             <div class="scope-card">
-                <h4>Vectors still matter</h4>
-                <p>The final closed with a vector-resultant problem, so Quiz 13 content is not isolated. It carries forward into the exam.</p>
+                <h4>Vectors</h4>
+                <p>Vector-resultant problems are part of the final, so Quiz 13 content carries forward into the exam.</p>
             </div>
         </div>
 
@@ -672,7 +539,7 @@
                         <li>Linear equations, including fractional forms</li>
                         <li>Applications with linear equations</li>
                         <li>Quadratic equations by any method</li>
-                        <li>Quadratic applications and the maximum/minimum idea \\(f\!\left(\frac{-b}{2a}\right)\\)</li>
+                        <li>Quadratic applications and the maximum/minimum idea $f\!\left(\frac{-b}{2a}\right)$</li>
                         <li>Polynomial, radical, and rational-style equations</li>
                     </ul>
                 </div>
@@ -719,38 +586,38 @@
     <section class="tab-content" id="tab-formulas">
         <div class="card review-card">
             <div class="eyebrow"><i data-lucide="sigma"></i> Formula focus</div>
-            <h2>Provided on the Fall 2025 final</h2>
-            <p class="muted" style="margin-bottom:1rem;">These formulas were printed on the final. They still require recognition and correct setup.</p>
+            <h2>Provided on the Final Exam</h2>
+            <p class="muted" style="margin-bottom:1rem;">These formulas are printed on the exam. They still require recognition and correct setup.</p>
 
             <div class="formula-grid">
                 <div class="formula-card provided">
                     <h4>Heron’s Formula</h4>
-                    <div class="formula-math">\\[\mathcal{A}=\sqrt{s(s-a)(s-b)(s-c)}\\]</div>
-                    <div class="formula-note">Use with \\(s=\frac{a+b+c}{2}\\).</div>
+                    <div class="formula-math">$$\mathcal{A}=\sqrt{s(s-a)(s-b)(s-c)}$$</div>
+                    <div class="formula-note">Use with $s=\frac{a+b+c}{2}$.</div>
                 </div>
                 <div class="formula-card provided">
                     <h4>Semiperimeter</h4>
-                    <div class="formula-math">\\[s=\frac{a+b+c}{2}\\]</div>
+                    <div class="formula-math">$$s=\frac{a+b+c}{2}$$</div>
                     <div class="formula-note">Pairs naturally with Heron’s Formula.</div>
                 </div>
                 <div class="formula-card provided">
                     <h4>Arc length</h4>
-                    <div class="formula-math">\\[s=r\theta\\]</div>
-                    <div class="formula-note">Angle \\(\theta\\) must be in radians.</div>
+                    <div class="formula-math">$$s=r\theta$$</div>
+                    <div class="formula-note">Angle $\theta$ must be in radians.</div>
                 </div>
                 <div class="formula-card provided">
                     <h4>Sector area</h4>
-                    <div class="formula-math">\\[\mathcal{A}=\frac12 r^2\theta\\]</div>
-                    <div class="formula-note">Again, \\(\theta\\) is in radians.</div>
+                    <div class="formula-math">$$\mathcal{A}=\frac12 r^2\theta$$</div>
+                    <div class="formula-note">Again, $\theta$ is in radians.</div>
                 </div>
                 <div class="formula-card provided">
                     <h4>Triangle area</h4>
-                    <div class="formula-math">\\[\mathcal{A}=\frac12 bc\sin A\\]</div>
+                    <div class="formula-math">$$\mathcal{A}=\frac12 bc\sin A$$</div>
                     <div class="formula-note">Useful when two sides and the included angle are known.</div>
                 </div>
                 <div class="formula-card provided">
                     <h4>Circumference</h4>
-                    <div class="formula-math">\\[C=2\pi r\\]</div>
+                    <div class="formula-math">$$C=2\pi r$$</div>
                     <div class="formula-note">Helpful with circle relationships and interpretation.</div>
                 </div>
             </div>
@@ -761,96 +628,221 @@
             <div class="formula-grid">
                 <div class="formula-card core">
                     <h4>Distance</h4>
-                    <div class="formula-math">\\[d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\\]</div>
+                    <div class="formula-math">$$d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$$</div>
                     <div class="formula-note">Needed for coordinate geometry and applications.</div>
                 </div>
                 <div class="formula-card core">
                     <h4>Midpoint</h4>
-                    <div class="formula-math">\\[M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)\\]</div>
+                    <div class="formula-math">$$M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)$$</div>
                     <div class="formula-note">Shows up directly and supports geometry reasoning.</div>
                 </div>
                 <div class="formula-card core">
                     <h4>Compound interest</h4>
-                    <div class="formula-math">\\[A=P\left(1+\frac{r}{n}\right)^{nt} \qquad A=Pe^{rt}\\]</div>
+                    <div class="formula-math">$$A=P\left(1+\frac{r}{n}\right)^{nt} \qquad A=Pe^{rt}$$</div>
                     <div class="formula-note">Be sure you can identify each variable from context.</div>
                 </div>
                 <div class="formula-card core">
                     <h4>Change of base</h4>
-                    <div class="formula-math">\\[\log_b x=\frac{\ln x}{\ln b}=\frac{\log x}{\log b}\\]</div>
+                    <div class="formula-math">$$\log_b x=\frac{\ln x}{\ln b}=\frac{\log x}{\log b}$$</div>
                     <div class="formula-note">Part of the official review topics.</div>
                 </div>
                 <div class="formula-card core">
                     <h4>Vector components</h4>
-                    <div class="formula-math">\\[\langle r\cos\theta,\;r\sin\theta\rangle\\]</div>
+                    <div class="formula-math">$$\langle r\cos\theta,\;r\sin\theta\rangle$$</div>
                     <div class="formula-note">Essential for Quiz 13 and still relevant on the final.</div>
                 </div>
                 <div class="formula-card core">
                     <h4>Trig ratios</h4>
-                    <div class="formula-math">\\[\sin\theta=\frac{\text{opp}}{\text{hyp}},\quad \cos\theta=\frac{\text{adj}}{\text{hyp}},\quad \tan\theta=\frac{\text{opp}}{\text{adj}}\\]</div>
+                    <div class="formula-math">$$\sin\theta=\frac{\text{opp}}{\text{hyp}},\quad \cos\theta=\frac{\text{adj}}{\text{hyp}},\quad \tan\theta=\frac{\text{opp}}{\text{adj}}$$</div>
                     <div class="formula-note">Useful for exact values, solving triangles, and angle applications.</div>
                 </div>
             </div>
         </div>
 
-        <p class="foot">Final-week page: streamlined on purpose for Quiz 13 and the comprehensive final.</p>
+        <p class="foot">Streamlined for Quiz 13 vectors and the comprehensive final exam.</p>
     </section>
+
+    <section class="tab-content" id="tab-quiz13">
+        <div class="intro-note">
+            <div class="callout">
+                <strong>Quiz 13 is Section 8.4: Vectors.</strong> The quiz covers component form, magnitude, direction, graphical vector addition, and resultant vectors.
+                <div class="pill-row">
+                    <span class="soft-pill">components</span>
+                    <span class="soft-pill">magnitude</span>
+                    <span class="soft-pill">direction</span>
+                    <span class="soft-pill">vector addition</span>
+                </div>
+            </div>
+            <div class="callout">
+                <strong>Fast strategy.</strong> Translate everything into components as early as possible. Once the vector is in component form, magnitude and direction become routine.
+            </div>
+        </div>
+
+        <div class="mini-grid">
+            <div class="mini-card">
+                <h4>Problem 1</h4>
+                <p>Given a vector drawn on the coordinate plane, find its component form $\langle v_1, v_2 \rangle$, then compute direction $\theta$ and magnitude $\|v\|$.</p>
+            </div>
+            <div class="mini-card">
+                <h4>Problem 2</h4>
+                <p>Add vectors graphically by drawing the resultant, then state the resultant components $\langle r_1, r_2 \rangle$ for each graph.</p>
+            </div>
+            <div class="mini-card">
+                <h4>Problem 3</h4>
+                <p>Convert vectors from magnitude-and-direction form to components, add them, then find $\mathbf{r}=\mathbf{u}+\mathbf{v}$, $\|\mathbf{r}\|$, and $\theta_r$.</p>
+            </div>
+        </div>
+
+        <div class="card review-card" style="margin-top:1rem;">
+            <div class="eyebrow"><i data-lucide="compass"></i> Core vector moves</div>
+            <h2>Quiz 13 essentials</h2>
+            <div class="formula-grid">
+                <div class="formula-card core">
+                    <h4>Component form</h4>
+                    <div class="formula-math">$$\mathbf{v}=\langle a,b\rangle$$</div>
+                    <div class="formula-note">Read the horizontal and vertical change carefully from tail to head.</div>
+                </div>
+                <div class="formula-card core">
+                    <h4>Magnitude</h4>
+                    <div class="formula-math">$$\|\mathbf{v}\|=\sqrt{a^2+b^2}$$</div>
+                    <div class="formula-note">Use exact work first, then round only when requested.</div>
+                </div>
+                <div class="formula-card core">
+                    <h4>Direction from components</h4>
+                    <div class="formula-math">$$\theta=\tan^{-1}\!\left(\frac{b}{a}\right)$$</div>
+                    <div class="formula-note">Adjust for quadrant. A calculator angle alone is not always the final direction.</div>
+                </div>
+                <div class="formula-card core">
+                    <h4>From magnitude and direction</h4>
+                    <div class="formula-math">$$\langle r\cos\theta,\;r\sin\theta\rangle$$</div>
+                    <div class="formula-note">This is the standard bridge from polar-style information to components.</div>
+                </div>
+                <div class="formula-card core">
+                    <h4>Add vectors</h4>
+                    <div class="formula-math">$$\langle a,b\rangle+\langle c,d\rangle=\langle a+c,\;b+d\rangle$$</div>
+                    <div class="formula-note">Graphically and algebraically, the same vector rules should agree.</div>
+                </div>
+                <div class="formula-card core">
+                    <h4>Resultant workflow</h4>
+                    <div class="formula-math">$$\mathbf{r}=\mathbf{u}+\mathbf{v}$$</div>
+                    <div class="formula-note">Convert, add, simplify, then find magnitude and direction last.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tab-content" id="tab-schedule">
+        <div class="card review-card">
+            <div class="eyebrow"><i data-lucide="calendar-days"></i> Final week schedule</div>
+            <h2>Final Week at a Glance</h2>
+            <p class="muted">The typical final week includes a last quiz, a reading/review day, and the comprehensive final exam. Check your syllabus for exact dates and times.</p>
+
+            <div style="margin-top:1rem;">
+                <table class="schedule-table" aria-label="Final week schedule">
+                    <tbody>
+                        <tr>
+                            <td class="day">Mon, 5/4</td>
+                            <td class="event">Quiz 13 &amp; Review</td>
+                            <td class="tags">
+                                <span class="tag review">Review</span>
+                                <span class="tag quiz">Quiz</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day">Wed, 5/6</td>
+                            <td class="event">Reading Day</td>
+                            <td class="tags">
+                                <span class="tag noclass">No Class</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day">Thu, 5/7</td>
+                            <td class="event"><strong>Final Exam</strong> (1:00–3:00 for Section 1, 3:30–5:30 for Section 2)</td>
+                            <td class="tags">
+                                <span class="tag final">Final</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="plan-grid">
+            <div class="plan-card">
+                <h4>Before the last class</h4>
+                <p>Finish vector review first, then use class review time to identify any final-exam weak spots that still need attention.</p>
+            </div>
+            <div class="plan-card">
+                <h4>Reading day</h4>
+                <p>Do cumulative practice across algebra, geometry, trigonometry, logs, and applications. Aim for breadth, not just one topic.</p>
+            </div>
+            <div class="plan-card">
+                <h4>Exam day</h4>
+                <p>Before the exam, revisit provided formulas, angle conversions, line formulas, and vector basics so setup work is quick and accurate.</p>
+            </div>
+        </div>
+    </section>
+
 </div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Nav handled by theme.js setupGlobalNav
 
-<script>
-
-function initTopNav(){
-  const nav=document.querySelector('.top-nav');
-  if(!nav)return;
-  const menuToggle=nav.querySelector('.menu-toggle.global-nav-toggle');
-  const navLinks=nav.querySelector('.top-nav-links');
-  const navUtilities=nav.querySelector('.top-nav-utilities');
-  const dropdowns=[...nav.querySelectorAll('.dropdown')];
-  const closeDropdowns=(keep)=>dropdowns.forEach(drop=>{if(drop!==keep){drop.removeAttribute('data-desktop-open');drop.removeAttribute('data-mobile-open');const trigger=drop.querySelector('.dropdown-trigger');if(trigger)trigger.setAttribute('aria-expanded','false');}});
-  const syncMenuState=()=>{const expanded=menuToggle && menuToggle.getAttribute('aria-expanded')==='true';nav.toggleAttribute('data-menu-open',expanded);if(navLinks)navLinks.dataset.open=expanded?'true':'false';if(navUtilities)navUtilities.dataset.open=expanded?'true':'false';if(!expanded)closeDropdowns();};
-  if(menuToggle){menuToggle.addEventListener('click',()=>{const expanded=menuToggle.getAttribute('aria-expanded')==='true';menuToggle.setAttribute('aria-expanded',String(!expanded));syncMenuState();});syncMenuState();}
-  dropdowns.forEach(drop=>{const trigger=drop.querySelector('.dropdown-trigger');if(!trigger)return;trigger.setAttribute('aria-expanded','false');trigger.addEventListener('click',(e)=>{e.stopPropagation();const mobile=window.matchMedia('(max-width: 768px)').matches;const attr=mobile?'data-mobile-open':'data-desktop-open';const isOpen=drop.getAttribute(attr)==='true';closeDropdowns(drop);if(isOpen){drop.removeAttribute(attr);trigger.setAttribute('aria-expanded','false');}else{drop.setAttribute(attr,'true');trigger.setAttribute('aria-expanded','true');}});});
-  document.addEventListener('click',(e)=>{if(!nav.contains(e.target))closeDropdowns();});
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if(menuToggle){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}closeDropdowns();}});
-  window.addEventListener('resize',()=>{closeDropdowns();if(menuToggle&&window.matchMedia('(min-width: 769px)').matches){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}});
-}
 document.addEventListener('DOMContentLoaded', function () {
-    initTopNav();
     if (window.lucide) lucide.createIcons();
 
-    const body = document.body;
-    const savedTheme = localStorage.getItem('math130-final-theme');
-    if (savedTheme === 'light') body.classList.add('light');
-
-    const themeToggle = document.getElementById('theme-toggle-btn');
-    themeToggle?.addEventListener('click', function () {
-        body.classList.toggle('light');
-        localStorage.setItem('math130-final-theme', body.classList.contains('light') ? 'light' : 'dark');
+    // Bridge theme.js to review-page light class
+    document.addEventListener('theme-changed', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        if (current === 'light') document.body.classList.add('light');
+        else document.body.classList.remove('light');
+        if (window.lucide) lucide.createIcons();
     });
 
-    const buttons = document.querySelectorAll('.tab-btn');
-    const panels = document.querySelectorAll('.tab-content');
-
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const tab = btn.dataset.tab;
-            buttons.forEach(b => b.classList.remove('active'));
-            panels.forEach(p => p.classList.remove('active'));
-
-            btn.classList.add('active');
-            document.getElementById('tab-' + tab)?.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Section nav: highlight active link on scroll
+    (function(){
+        const navLinks = document.querySelectorAll('.review-section-nav__inner a');
+        const secs = [];
+        navLinks.forEach(link => {
+            const id = link.getAttribute('href').replace('#','');
+            const el = document.getElementById(id);
+            if(el) secs.push({id, el, link});
         });
-    });
-
-    if (window.renderMathInElement) {
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: "\\(", right: "\\)", display: false},
-                {left: "\\[", right: "\\]", display: true}
-            ],
-            throwOnError: false
+        const offset = 140;
+        function updateActive(){
+            let current = secs[0];
+            for(const s of secs){
+                if(s.el.getBoundingClientRect().top <= offset) current = s;
+            }
+            navLinks.forEach(l => l.classList.remove('is-active'));
+            if(current) current.link.classList.add('is-active');
+        }
+        window.addEventListener('scroll', updateActive, {passive:true});
+        updateActive();
+        navLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const el = document.getElementById(link.getAttribute('href').replace('#',''));
+                if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+            });
         });
+    })();
+
+    let _mathRetryTimer = null;
+    function renderMath(retries) {
+        if (retries === undefined) retries = 12;
+        if (window.renderMathInElement) {
+            renderMathInElement(document.body, {
+                delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ],
+                throwOnError: false
+            });
+            return;
+        }
+        if (retries > 0) {
+            clearTimeout(_mathRetryTimer);
+            _mathRetryTimer = setTimeout(function(){ renderMath(retries - 1); }, 150);
+        }
     }
+    renderMath();
 });
 </script>
 </div>

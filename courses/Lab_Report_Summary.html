@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab Report Assignment Summary</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF9F6;
+    --surface: #FFFFFF;
+    --border: #E2DFD8;
+    --text: #2C2825;
+    --text-muted: #7A7570;
+    --accent: #3D5A80;
+    --accent-light: #EAF0F6;
+    --kit: #2A6041;
+    --kit-bg: #EDF5F0;
+    --user: #9B5B2D;
+    --user-bg: #FDF5ED;
+    --heading-font: 'Fraunces', Georgia, serif;
+    --body-font: 'DM Sans', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--body-font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  .page-header {
+    background: var(--accent);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.03) 40px,
+      rgba(255,255,255,0.03) 80px
+    );
+  }
+  .page-header h1 {
+    font-family: var(--heading-font);
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  .page-header p {
+    margin-top: 0.5rem;
+    opacity: 0.8;
+    font-size: 0.95rem;
+    position: relative;
+  }
+
+  nav.toc {
+    max-width: 860px;
+    margin: -1.5rem auto 2rem;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    padding: 1.25rem 1.75rem;
+    position: relative;
+    z-index: 1;
+  }
+  nav.toc h2 {
+    font-family: var(--heading-font);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+  nav.toc ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    counter-reset: toc;
+  }
+  nav.toc li { counter-increment: toc; }
+  nav.toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  nav.toc a::before {
+    content: counter(toc) ". ";
+    font-weight: 700;
+    opacity: 0.5;
+  }
+  nav.toc a:hover { color: var(--text); }
+
+  main { max-width: 860px; margin: 0 auto 4rem; padding: 0 1.5rem; }
+
+  .lab-section {
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 1px 12px rgba(0,0,0,0.04);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .lab-header {
+    padding: 1.5rem 1.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .lab-header::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent);
+  }
+  .lab-header h2 {
+    font-family: var(--heading-font);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+  .lab-header .activities-tag {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 0.2rem 0.65rem;
+    border-radius: 100px;
+  }
+
+  .lab-body { padding: 1.5rem 1.75rem; }
+
+  .activity {
+    margin-bottom: 1.75rem;
+  }
+  .activity:last-of-type { margin-bottom: 1.25rem; }
+
+  .activity h3 {
+    font-family: var(--heading-font);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--accent-light);
+    display: inline-block;
+  }
+
+  .activity ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .activity li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.9rem;
+  }
+  .activity li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .submit-note {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 0.6rem 1rem;
+    margin-top: 0.75rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .tip-box {
+    background: #FFF8E1;
+    border-left: 3px solid #F9A825;
+    padding: 0.6rem 1rem;
+    margin-top: 0.75rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #7B6518;
+  }
+
+  .supply-table-wrapper {
+    margin-top: 1.25rem;
+  }
+  .supply-table-wrapper h3 {
+    font-family: var(--heading-font);
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+    border-bottom: none;
+    display: block;
+  }
+
+  table.supplies {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  table.supplies th {
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.6rem 0.75rem;
+    background: var(--accent);
+    color: white;
+  }
+  table.supplies th:first-child { border-radius: 6px 0 0 0; }
+  table.supplies th:last-child { border-radius: 0 6px 0 0; }
+
+  table.supplies td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  table.supplies tr.section-kit td {
+    background: var(--kit-bg);
+    font-weight: 700;
+    color: var(--kit);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 0.75rem;
+  }
+  table.supplies tr.section-user td {
+    background: var(--user-bg);
+    font-weight: 700;
+    color: var(--user);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 0.75rem;
+  }
+
+  table.supplies .badge-kit {
+    display: inline-block;
+    background: var(--kit-bg);
+    color: var(--kit);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+    border: 1px solid rgba(42,96,65,0.2);
+  }
+  table.supplies .badge-user {
+    display: inline-block;
+    background: var(--user-bg);
+    color: var(--user);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+    border: 1px solid rgba(155,91,45,0.2);
+  }
+
+  table.supplies tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .page-header h1 { font-size: 1.6rem; }
+    nav.toc ol { flex-direction: column; gap: 0.35rem; }
+    .lab-body { padding: 1.25rem; }
+  }
+
+  @media print {
+    .lab-section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    .page-header { background: var(--accent) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Lab Report Assignment Summary</h1>
+  <p>Carolina Distance Learning — Directions, Submissions &amp; Supply Lists</p>
+</header>
+
+<nav class="toc">
+  <h2>Quick Navigation</h2>
+  <ol>
+    <li><a href="#kinematics">Kinematics</a></li>
+    <li><a href="#projectile">Projectile Motion</a></li>
+    <li><a href="#magnetism">Magnetism</a></li>
+    <li><a href="#circuits">Series &amp; Parallel Circuits</a></li>
+    <li><a href="#sound">Sound &amp; Resonance</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ===================== KINEMATICS ===================== -->
+<section class="lab-section" id="kinematics">
+  <div class="lab-header">
+    <h2>Kinematics</h2>
+    <span class="activities-tag">Activities 1, 2 &amp; 3</span>
+  </div>
+  <div class="lab-body">
+
+    <div class="activity">
+      <h3>Activity 1 — Graph &amp; Interpret Motion Data</h3>
+      <ul>
+        <li>Plot position vs. time data from Table 1 (provided in manual): displacement on the y-axis, time on the x-axis.</li>
+        <li>Connect all coordinates with straight lines.</li>
+      </ul>
+      <div class="submit-note">Submit: Photo of final graph labeled with your name and date.</div>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 2 — Calculate Velocity of a Moving Object</h3>
+      <ul>
+        <li>Set up a straight, level track ~2 m long with masking tape at 25-cm intervals.</li>
+        <li>Start the constant velocity vehicle ~5 cm behind the start so it reaches top speed before timing.</li>
+        <li>For each 25-cm interval (0.25 m to 2.00 m), time the car from the start line to each mark. Record in Data Table 1.</li>
+        <li>Graph displacement vs. time, draw a best-fit line, calculate slope = speed of the car.</li>
+      </ul>
+      <div class="submit-note">Submit: Completed Data Table 1, photo of setup with vehicle, photo of graph with labeled axes, speed calculation (slope = rise/run).</div>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 3 — Motion Under Constant Acceleration</h3>
+      <ul>
+        <li>Mark the inside of the angle bar at 1-cm increments with a permanent marker.</li>
+        <li>Use clay and a protractor to set the angle bar at 5°–10° incline. Stabilize the lower end against a book or wall.</li>
+        <li>Place the steel sphere at 10 cm through 80 cm (10-cm increments) from the lower end; release and time it to the end. Three trials per distance.</li>
+        <li>Record all times, compute averages, and calculate the square of each average time.</li>
+      </ul>
+      <div class="submit-note">Submit: Completed Data Table 3, photo of setup showing angle bar with protractor, graph of displacement vs. time².</div>
+    </div>
+
+    <div class="supply-table-wrapper">
+      <h3>Materials</h3>
+      <table class="supplies">
+        <thead><tr><th>Item</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
+          <tr><td>Constant Velocity Vehicle</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Steel Sphere</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Acrylic Sphere</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Angle Bar</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Foam Board</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Block of Clay</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Tape Measure</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Rubber Bands</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Protractor</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
+          <tr><td>Scientific or Graphing Calculator</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Permanent Marker</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Masking Tape</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Stopwatch (or smartphone with video)</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Graph Paper</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Batteries (for Constant Velocity Vehicle)</td><td><span class="badge-user">Student</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== PROJECTILE MOTION ===================== -->
+<section class="lab-section" id="projectile">
+  <div class="lab-header">
+    <h2>Projectile Motion</h2>
+    <span class="activities-tag">Activity 1 — 6 Trials</span>
+  </div>
+  <div class="lab-body">
+
+    <div class="activity">
+      <h3>Activity 1 — Projectile Launched Horizontally</h3>
+      <ul>
+        <li>Set up on a smooth, level table ≥70 cm from the floor. Use a book with clay to seat the angle bar; position the grooved ruler so the sphere transitions from incline to horizontal before leaving the table edge.</li>
+        <li>Tape a plumb line (string + washer) at the table edge to mark the launch point on the floor.</li>
+        <li>Measure the incline angle with the protractor. Mark a start point ~3 cm from the top of the angle bar.</li>
+        <li>For each trial: calculate acceleration (a = 0.71 × 9.8 × sin θ), horizontal velocity (v<sub>x</sub> = √(2as)), time of flight (t = √(2h/g)), and predicted landing distance (x = v<sub>x</sub> × t).</li>
+        <li>Mark predicted spot on the floor, release sphere, measure actual landing distance, compute percent difference.</li>
+        <li>Repeat at three angles (starting angle, +5°, +10°) for both steel and acrylic spheres — 6 total trials.</li>
+      </ul>
+      <div class="submit-note">Submit: Completed data table, photo of setup, all calculations shown.</div>
+      <div class="tip-box">
+        <strong>Tips:</strong> Use meters (not cm). Time "t" depends only on table height and should be &lt;0.5 s. Don't use 0° as starting angle. Set calculator to degree mode. Acceleration "a" must be positive and ≤6.958 m/s².
+      </div>
+    </div>
+
+    <div class="supply-table-wrapper">
+      <h3>Materials</h3>
+      <table class="supplies">
+        <thead><tr><th>Item</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
+          <tr><td>Metal Sphere</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Acrylic Sphere</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Angle Bar</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Clay</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Ruler (grooved)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>String</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Washer</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Tape Measure</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Protractor</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
+          <tr><td>Book (to prop angle bar)</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Masking Tape</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Calculator</td><td><span class="badge-user">Student</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== MAGNETISM ===================== -->
+<section class="lab-section" id="magnetism">
+  <div class="lab-header">
+    <h2>Magnetism</h2>
+    <span class="activities-tag">Activities 1, 2 &amp; 3</span>
+  </div>
+  <div class="lab-body">
+
+    <div class="activity">
+      <h3>Activity 1 — Properties of Electric Currents</h3>
+      <ul>
+        <li>Place the magnetic compass on a level surface away from metallic objects. Align N with the red needle.</li>
+        <li>Place a D-cell battery in its holder, connect one alligator clip lead, lay the wire over the compass, then connect the other end to close the circuit.</li>
+        <li>Observe the compass needle deflect; disconnect and observe it return.</li>
+      </ul>
+      <div class="submit-note">Submit: Photo at Step 4 (compass with wire, not connected) with name/date on paper; photo at Step 9 (circuit closed); description of what happens to the needle.</div>
+      <div class="tip-box"><strong>Important:</strong> After Activity 1, do NOT connect terminals with a single conductor — it will short-circuit the electromagnet and solenoid.</div>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 2 — Coiled Wire Electromagnet</h3>
+      <ul>
+        <li>Wrap magnet wire around the nail 100 times; strip enamel from both ends with sandpaper. Connect to battery via alligator clips.</li>
+        <li>Test with compass to identify north/south poles. Pick up paper clips and count them.</li>
+        <li>Vary conditions: disconnect while holding clips (observe them fall), add a second battery in series, remove the nail, reduce coils to 50 — count paper clips each time.</li>
+      </ul>
+      <div class="submit-note">Submit: Photos at Steps 7, 9, 13, and with 50 coils; discussion of how batteries, iron core, and coil count affect magnet strength.</div>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 3 — Solenoid</h3>
+      <ul>
+        <li>Wind magnet wire tightly around the straw 100 times; strip enamel from ends.</li>
+        <li>Straighten a paper clip and insert it inside the straw. Point openings away from yourself/others.</li>
+        <li>Connect to battery and observe the paper clip's motion. Try with more/less of the clip inside the tube.</li>
+      </ul>
+      <div class="submit-note">Submit: Photo of setup at Step 7 with name/date; photo at Step 9; discussion of what happens to the paper clip.</div>
+    </div>
+
+    <div class="supply-table-wrapper">
+      <h3>Materials</h3>
+      <table class="supplies">
+        <thead><tr><th>Item</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
+          <tr><td>Magnet Wire (#28 enameled)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Magnetic Compass</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Set of Ring Magnets</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>D-Cell Battery Holders (4)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>D-Cell Batteries (4)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Paper Clips (3)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Foam Cup</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Audio Jack</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Pie Plate (aluminum)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Alligator Clip Leads (2)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Sand Paper</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Straw</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Nail</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
+          <tr><td>Masking Tape</td><td><span class="badge-user">Student</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== CIRCUITS ===================== -->
+<section class="lab-section" id="circuits">
+  <div class="lab-header">
+    <h2>Series &amp; Parallel Circuits</h2>
+    <span class="activities-tag">Activities 1, 2 &amp; 3</span>
+  </div>
+  <div class="lab-body">
+
+    <div class="activity">
+      <h3>Activity 1 — Resistors in Series</h3>
+      <ul>
+        <li><strong>Single lamp:</strong> Connect one lamp to four D-cell batteries in series. Observe brightness, photograph, disconnect.</li>
+        <li><strong>Two lamps in series:</strong> Photograph with all connected; unscrew one lamp and photograph (all go dark).</li>
+        <li><strong>Three lamps in series:</strong> Photograph connected; unscrew one and photograph (all go dark).</li>
+      </ul>
+      <div class="submit-note">Submit: Photos at each step; discussion of series circuit observations.</div>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 2 — Resistors in Parallel</h3>
+      <ul>
+        <li><strong>Two lamps in parallel:</strong> Observe brightness (same as single lamp). Photograph connected; unscrew one and photograph (other stays lit).</li>
+        <li><strong>Three lamps in parallel:</strong> Same procedure — all equally bright; removing one doesn't affect others.</li>
+      </ul>
+      <div class="submit-note">Submit: Photos at each step; discussion of parallel circuit observations.</div>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 3 — Series &amp; Parallel Combination</h3>
+      <ul>
+        <li>Wire R₁ in series with R₂ and R₃ in parallel. Observe brightness differences (R₁ brighter).</li>
+        <li>Disconnect R₁ — all go dark. Reconnect R₁, disconnect R₂ — R₁ dims, R₃ brightens to match R₁.</li>
+      </ul>
+      <div class="submit-note">Submit: Photos of each configuration; discussion of combination circuit observations.</div>
+    </div>
+
+    <div class="tip-box" style="margin-bottom: 1.25rem;">
+      <strong>Prep:</strong> Cut magnet wire into ten 10-cm strips. Strip enamel from last 3 cm of each end on all sides. Connect all 4 batteries in series. Test each lamp before building circuits. Only leave circuits connected long enough to observe — prolonged connection may burn out lamps.
+    </div>
+
+    <div class="supply-table-wrapper">
+      <h3>Materials</h3>
+      <table class="supplies">
+        <thead><tr><th>Item</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
+          <tr><td>Battery Holders (4)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>D-Cell Batteries (4)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Magnet Wire</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Sand Paper</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Miniature Lamps (pack of 10)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Lamp Sockets (5)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Alligator Clips (2)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
+          <tr><td>Scissors</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Ruler</td><td><span class="badge-user">Student</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== SOUND ===================== -->
+<section class="lab-section" id="sound">
+  <div class="lab-header">
+    <h2>Sound &amp; Resonance</h2>
+    <span class="activities-tag">Single Activity</span>
+  </div>
+  <div class="lab-body">
+
+    <div class="activity">
+      <h3>Standing Wave in a Tube Open at One End</h3>
+      <ul>
+        <li>Calculate theoretical speed of sound: v<sub>s</sub> = 331.4 + 0.6T<sub>C</sub> (T<sub>C</sub> = room temperature in °C).</li>
+        <li>Assemble the graduated cylinder and fill with water. Insert the plastic tube.</li>
+        <li>Strike the tuning fork (2048 Hz) on your palm; hold it ~2 cm above the tube opening.</li>
+        <li>Slowly raise the tube. Listen for the first resonance point (sound amplifies) — this is L₁ = λ/4.</li>
+        <li>Continue raising to find L₂ = 3λ/4 and L₃ = 5λ/4.</li>
+        <li>Calculate wavelength from each measurement (λ = 4L₁, λ = 4L₂/3, λ = 4L₃/5).</li>
+        <li>Calculate experimental speed of sound (v = f × λ) and percent difference from theoretical for each row.</li>
+      </ul>
+      <div class="submit-note">Submit: Photo of setup with name/date, completed data table with all computations, percent difference for each of the three rows.</div>
+      <div class="tip-box">
+        <strong>Tips:</strong> Do NOT back-calculate L from the known wavelength — determine λ from your measured L values (some error is expected). Convert cm to meters. Percent difference is always positive (absolute value). Mark the tube at 1-cm increments before starting. Work in a quiet location.
+      </div>
+    </div>
+
+    <div class="supply-table-wrapper">
+      <h3>Materials</h3>
+      <table class="supplies">
+        <thead><tr><th>Item</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
+          <tr><td>Tuning Fork (2048 Hz)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Plastic Tube (open at both ends)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Graduated Cylinder (2 parts, unassembled)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Ruler (metric)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
+          <tr><td>Calculator</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Permanent Marker</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Thermometer</td><td><span class="badge-user">Student</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Carolina Distance Learning — Physics Lab Report Reference
+</footer>
+
+</body>
+</html>

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
 <title>Math 130 – Test 1 Study Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
@@ -12,15 +13,6 @@
   /* Page-specific styles only; shared Math 130 review tokens/components live in styles.css. */
 
 
-  .journey-panel { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border)); border-radius: 20px; padding: 1.35rem 1.4rem; margin: 1.25rem 0 1.5rem; box-shadow: var(--shadow); }
-  .journey-kicker { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem; }
-  .journey-panel h2 { font-size: 1.2rem; margin-bottom: 0.35rem; }
-  .journey-panel p { color: var(--text-muted); margin-bottom: 1rem; }
-  .journey-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.75rem; }
-  .journey-step { background: color-mix(in srgb, var(--surface2) 78%, var(--surface)); border: 1px solid var(--border); border-radius: 14px; padding: 0.9rem 1rem; }
-  .journey-step-num { display: block; font-family: var(--type-meta-family); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
-  .journey-step-title { display: block; font-weight: 700; margin-bottom: 0.2rem; }
-  .journey-step-copy { font-size: 0.88rem; color: var(--text-muted); }
   /* Topic Cards */
   .topic-card { background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--surface) 72%, var(--surface2))); border: 1px solid var(--border); border-radius: 18px; margin-bottom: 1.15rem; overflow: hidden; transition: border-color 0.3s, transform 0.25s; box-shadow: var(--shadow); }
   .topic-card:hover { border-color: var(--accent-hover); transform: translateY(-2px); }
@@ -187,11 +179,6 @@
 
   @media (max-width: 1024px) {
     .container { width: min(100vw - 1.5rem, 100%); padding-bottom: 3.5rem; }
-    header { flex-direction: column; }
-    .header-actions { width: 100%; justify-content: flex-start; }
-    .info-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .tab-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .tab-btn { min-height: 84px; padding: 0.88rem 0.95rem; }
     .practice-dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .formula-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .topic-header,
@@ -203,12 +190,9 @@
 
   @media (max-width: 760px) {
     .container { width: min(100vw - 1rem, 100%); padding-top: 1.25rem; }
-    .tab-nav,
-    .info-bar,
     .practice-dashboard,
     .formula-grid,
     .stats-overview { grid-template-columns: 1fr; }
-    .tab-btn { min-height: 76px; }
     .topic-header { min-height: 76px; padding: 1rem 1.1rem; }
     .topic-content,
     .problem-card,
@@ -222,10 +206,6 @@
     .history-table { display: block; overflow-x: auto; white-space: nowrap; }
   }
 
-  @media (max-width: 560px) {
-    .tab-nav { grid-template-columns: 1fr; }
-  }
-
   /* PRINT STYLES */
   @media print {
     /* Targeted resets - NO blanket border-color or background on * */
@@ -236,11 +216,12 @@
 
     /* White backgrounds for UI chrome only */
     .formula-section, .formula-item, .formula-box,
-    .info-card, .topic-card, .problem-card, .quiz-question-card,
-    .checklist-item, .tab-nav, .tab-btn { background: #fff !important; border-color: #ccc !important; }
+    .topic-card, .problem-card, .quiz-question-card,
+    .checklist-item { background: #fff !important; border-color: #ccc !important; }
 
     /* Hide everything except formula sheet */
-    header, .info-bar, .tab-nav-wrapper, .print-btn, .theme-toggle, .video-link, .video-embed-label,
+    .review-section-nav, .review-page-header, .page-context-bar,
+    .print-btn, .theme-toggle, .video-link, .video-embed-label,
     #tab-topics, #tab-practice, #tab-quiz, #tab-checklist, #tab-progress { display: none !important; }
     #tab-formulas { display: block !important; }
 
@@ -279,7 +260,7 @@
 
 
 </head>
-<body class="review-page">
+<body class="review-page review-page--sections">
 <div class="math-review-page">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
@@ -311,18 +292,17 @@
           <ul class="dropdown-menu dropdown-menu--right">
             <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
             <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#a3c2cbd5cccfc8e3cfcac1c6d1d7da8dc6c7d6">Contact</a></li>
           </ul>
         </li>
       </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
     </div>
   </div>
 </nav>
-
-<div class="container review-shell">
-  <header class="review-header">
-    <div class="header-copy review-title-group">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="index.html">Home</a>
       <span class="breadcrumb-sep" aria-hidden="true">›</span>
       <a href="learn.html">Courses</a>
@@ -331,50 +311,34 @@
       <span class="breadcrumb-sep" aria-hidden="true">›</span>
       <span class="breadcrumb-current" aria-current="page">Test 1 Review</span>
     </nav>
-    <div class="course-label">Spring 2026</div>
+  </div>
+</div>
+
+<header class="page-shell-header review-page-header">
+  <div class="container">
+    <p class="page-shell-header__eyebrow">Spring 2026</p>
     <h1>Math 130 — Test 1</h1>
-    <p class="subtitle review-subtitle">Interactive study guide covering all tested topics. Review concepts, practice problems, and quiz yourself.</p>
+    <p class="subtitle">Interactive study guide covering all tested topics. Review concepts, practice problems, and quiz yourself.</p>
+    <div class="review-page-header__chips">
+      <span class="review-page-header__chip">📝 Paper Test</span>
+      <span class="review-page-header__chip">💻 ALEKS: Up to 10 Attempts</span>
+      <span class="review-page-header__chip--accent review-page-header__chip">📐 10 Core Topics</span>
     </div>
-    <div class="header-actions">
-      <button id="theme-toggle-btn" class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle dark and light theme">
-        <span class="toggle-icon">🌙</span>
-        <div class="toggle-track"><div class="toggle-thumb"></div></div>
-        <span class="toggle-icon">☀️</span>
-      </button>
-    </div>
-  </header>
-
-  <div class="info-bar review-meta-chips">
-    <div class="info-card review-chip"><div class="info-icon">📝</div><div><div class="info-label">Format</div><div class="info-value">Paper Test</div></div></div>
-    <div class="info-card review-chip"><div class="info-icon">💻</div><div><div class="info-label">ALEKS Practice</div><div class="info-value">Up to 10 Attempts</div></div></div>
-    <div class="info-card review-chip"><div class="info-icon">📐</div><div><div class="info-label">Topics</div><div class="info-value">10 Core Areas</div></div></div>
   </div>
+</header>
 
-
-  <section class="journey-panel review-card" aria-label="Recommended study order">
-    <div class="journey-kicker">🧭 Recommended order</div>
-    <h2>Follow the same study path each time</h2>
-    <p>Start with the overview tab, move to the formula sheet, then complete practice before using the extra recall tools and progress tracker.</p>
-    <div class="journey-steps">
-      <div class="journey-step"><span class="journey-step-num">Step 1</span><span class="journey-step-title">Start Here / Overview</span><span class="journey-step-copy">Open the overview tab to review the tested topics and linked walkthroughs.</span></div>
-      <div class="journey-step"><span class="journey-step-num">Step 2</span><span class="journey-step-title">Formulas / Key Concepts</span><span class="journey-step-copy">Scan the core formulas before you begin solving problems.</span></div>
-      <div class="journey-step"><span class="journey-step-num">Step 3</span><span class="journey-step-title">Practice</span><span class="journey-step-copy">Work the generators first, then use the self-quiz and checklist as extra practice support.</span></div>
-      <div class="journey-step"><span class="journey-step-num">Step 4</span><span class="journey-step-title">Progress</span><span class="journey-step-copy">Finish by checking your saved completion and retry history.</span></div>
-    </div>
-  </section>
-
-  <div class="tab-nav-wrapper">
-    <div class="tab-fade-left" id="fade-left"></div>
-    <nav class="tab-nav review-tabs review-tabs-3" id="tabNav">
-      <button class="tab-btn review-tab-btn active" data-tab="topics"><span class="tab-icon review-tab-icon">📚</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Start Here</span><span class="tab-meta review-tab-meta">Overview of topics and walkthroughs</span></span></button>
-      <button class="tab-btn review-tab-btn" data-tab="formulas"><span class="tab-icon review-tab-icon">🧾</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Formulas</span><span class="tab-meta review-tab-meta">Key rules and test-day formulas</span></span></button>
-      <button class="tab-btn review-tab-btn" data-tab="practice"><span class="tab-icon review-tab-icon">✍️</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Practice</span><span class="tab-meta review-tab-meta">Track wins and retry misses</span></span></button>
-      <button class="tab-btn review-tab-btn" data-tab="quiz"><span class="tab-icon review-tab-icon">🎯</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Practice Quiz</span><span class="tab-meta review-tab-meta">Extra recall after generators</span></span></button>
-      <button class="tab-btn review-tab-btn" data-tab="checklist"><span class="tab-icon review-tab-icon">✅</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Practice Checklist</span><span class="tab-meta review-tab-meta">Wrap up each study objective</span></span></button>
-      <button class="tab-btn review-tab-btn" data-tab="progress"><span class="tab-icon review-tab-icon">📈</span><span class="tab-copy review-tab-copy"><span class="tab-label review-tab-label">Progress</span><span class="tab-meta review-tab-meta">Review history and best attempts</span></span></button>
-    </nav>
-    <div class="tab-fade-right" id="fade-right"></div>
+<nav class="review-section-nav" aria-label="Page sections">
+  <div class="review-section-nav__inner">
+    <a href="#tab-topics">Topics</a>
+    <a href="#tab-formulas">Formulas</a>
+    <a href="#tab-practice">Practice</a>
+    <a href="#tab-quiz">Quiz</a>
+    <a href="#tab-checklist">Checklist</a>
+    <a href="#tab-progress">Progress</a>
   </div>
+</nav>
+
+<div class="container review-shell review-shell--below-banner">
 
   <!-- TOPICS -->
   <div id="tab-topics" class="tab-content active">
@@ -455,42 +419,50 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // KaTeX
 function renderMath(){document.querySelectorAll('.k').forEach(el=>{if(el.dataset.rendered)return;try{katex.render(el.textContent,el,{throwOnError:false});el.dataset.rendered='true';}catch(e){}})}
 function renderLatexString(s){return s.replace(/\\?\\\((.+?)\\?\\\)/g,(_,t)=>{const sp=document.createElement('span');try{katex.render(t,sp,{throwOnError:false})}catch(e){sp.textContent=t}return sp.outerHTML})}
-function initTopNav(){
-  const nav=document.querySelector('.top-nav');
-  if(!nav)return;
-  const menuToggle=nav.querySelector('.menu-toggle.global-nav-toggle');
-  const navLinks=nav.querySelector('.top-nav-links');
-  const navUtilities=nav.querySelector('.top-nav-utilities');
-  const dropdowns=[...nav.querySelectorAll('.dropdown')];
-  const closeDropdowns=(keep)=>dropdowns.forEach(drop=>{if(drop!==keep){drop.removeAttribute('data-desktop-open');drop.removeAttribute('data-mobile-open');const trigger=drop.querySelector('.dropdown-trigger');if(trigger)trigger.setAttribute('aria-expanded','false');}});
-  const syncMenuState=()=>{const expanded=menuToggle && menuToggle.getAttribute('aria-expanded')==='true';nav.toggleAttribute('data-menu-open',expanded);if(navLinks)navLinks.dataset.open=expanded?'true':'false';if(navUtilities)navUtilities.dataset.open=expanded?'true':'false';if(!expanded)closeDropdowns();};
-  if(menuToggle){menuToggle.addEventListener('click',()=>{const expanded=menuToggle.getAttribute('aria-expanded')==='true';menuToggle.setAttribute('aria-expanded',String(!expanded));syncMenuState();});syncMenuState();}
-  dropdowns.forEach(drop=>{const trigger=drop.querySelector('.dropdown-trigger');if(!trigger)return;trigger.setAttribute('aria-expanded','false');trigger.addEventListener('click',(e)=>{e.stopPropagation();const mobile=window.matchMedia('(max-width: 768px)').matches;const attr=mobile?'data-mobile-open':'data-desktop-open';const isOpen=drop.getAttribute(attr)==='true';closeDropdowns(drop);if(isOpen){drop.removeAttribute(attr);trigger.setAttribute('aria-expanded','false');}else{drop.setAttribute(attr,'true');trigger.setAttribute('aria-expanded','true');}});});
-  document.addEventListener('click',(e)=>{if(!nav.contains(e.target))closeDropdowns();});
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){if(menuToggle){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}closeDropdowns();}});
-  window.addEventListener('resize',()=>{closeDropdowns();if(menuToggle&&window.matchMedia('(min-width: 769px)').matches){menuToggle.setAttribute('aria-expanded','false');syncMenuState();}});
-}
-initTopNav();
+// Top nav handled by theme.js setupGlobalNav
 
-// Tab nav + fades
-const tabNav=document.getElementById('tabNav'),fadeL=document.getElementById('fade-left'),fadeR=document.getElementById('fade-right');
-function updateFades(){const sl=tabNav.scrollLeft,mx=tabNav.scrollWidth-tabNav.clientWidth;fadeL.classList.toggle('visible',sl>5);fadeR.classList.toggle('visible',sl<mx-5)}
-tabNav.addEventListener('scroll',updateFades);window.addEventListener('resize',updateFades);setTimeout(updateFades,100);
+// Section nav: highlight active link on scroll
+(function(){
+  const navLinks = document.querySelectorAll('.review-section-nav__inner a');
+  const sections = [];
+  navLinks.forEach(link => {
+    const id = link.getAttribute('href').replace('#','');
+    const el = document.getElementById(id);
+    if(el) sections.push({id, el, link});
+  });
+  const offset = 140;
+  function updateActive(){
+    let current = sections[0];
+    for(const s of sections){
+      if(s.el.getBoundingClientRect().top <= offset) current = s;
+    }
+    navLinks.forEach(l => l.classList.remove('is-active'));
+    if(current) current.link.classList.add('is-active');
+  }
+  window.addEventListener('scroll', updateActive, {passive:true});
+  updateActive();
+  // Smooth scroll for nav links
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const el = document.getElementById(link.getAttribute('href').replace('#',''));
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+})();
 
-document.querySelectorAll('.tab-btn').forEach(btn=>{btn.addEventListener('click',()=>{const n=btn.dataset.tab;document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');btn.classList.add('active');btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});if(n==='quiz'&&!quizStarted)initQuizView();if(n==='practice'&&!practiceInit)initPracticeView();if(n==='progress')renderProgress();setTimeout(renderMath,50)})});initTopicToggles();
+// Init interactive sections immediately since all are visible
+setTimeout(()=>{ if(!quizStarted) initQuizView(); if(!practiceInit) initPracticeView(); renderProgress(); },200);
+
+initTopicToggles();
 function toggleTopic(c,btn){c.classList.toggle('open');const trigger=btn||c.querySelector('.topic-toggle');if(trigger)trigger.setAttribute('aria-expanded',String(c.classList.contains('open')));setTimeout(renderMath,100)}
 function initTopicToggles(){document.querySelectorAll('.topic-card').forEach((card,idx)=>{const btn=card.querySelector('.topic-toggle');const body=card.querySelector('.topic-body');if(!btn||!body)return;if(!body.id)body.id=`topic-body-${idx+1}`;btn.setAttribute('aria-controls',body.id);btn.setAttribute('aria-expanded',String(card.classList.contains('open')));btn.addEventListener('click',()=>toggleTopic(card,btn));});}
 function goToTopic(idx){
-  // Switch to topics tab
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-topics').classList.add('active');
-  document.querySelectorAll('.tab-btn')[0].classList.add('active');
-  // Open the card and scroll to it
+  // Open the card and scroll to it (all sections visible)
   const cards=document.querySelectorAll('.topic-card');
   const card=cards[idx];
   if(!card.classList.contains('open'))card.classList.add('open');
@@ -739,21 +711,7 @@ function doReset(){
   renderProgress();
 }
 
-// Theme toggle
-function toggleTheme(){
-  document.body.classList.toggle('light');
-  const isLight = document.body.classList.contains('light');
-  if(storeOk()) localStorage.setItem('m130theme', isLight ? 'light' : 'dark');
-}
-// Restore saved theme
-(function(){
-  if(storeOk()){
-    const saved = localStorage.getItem('m130theme');
-    if(saved === 'light') document.body.classList.add('light');
-  }
-})();
-
-initCL();initQuizView();initPracticeView();renderMath();
+initCL();renderMath();
 </script>
 </div>
 </body>
