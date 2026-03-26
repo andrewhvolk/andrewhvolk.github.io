@@ -8,4 +8,4 @@ Objective for this turn: **Phase 0 docs only** (no Phase 1 token implementation)
 4. Keep scope single-objective (either Phase 0 docs only or Phase 1 token foundation only).
 5. Run only the minimal validation commands you actually execute; report them truthfully.
 6. Commit once with a clear message tied to the chosen objective.
-7. Create/update `nextagent.md` in your turn and include this step explicitly in your own instructions.
+7. Create/update `nextagent.md` in your turn and include this step explicitly in your own instructions for the following agent.

@@ -174,11 +174,11 @@ These color literals are expected to remain page-local unless later explicitly a
 
 ---
 
-
 ## 7) Review Intake Log (Phase 0)
 
-- Latest commit reviewed before edits: `cc21e9c` (merge of PR #175).
-- PR discussion and inline comment review is required each turn; when discussion tooling is unavailable, document that limitation in the turn summary and avoid expanding scope.
+- Latest commit reviewed before edits: `d6dffbb` (merge of PR #176) via `git log -1 --oneline` on 2026-03-26.
+- PR discussion and inline comment review attempted via `gh pr status`; GitHub CLI is not available in this environment (`gh: command not found`).
+- Because PR discussion tooling is unavailable here, scope remains locked to documentation updates only and no implementation changes were added.
 - Current scope lock for this turn: **Phase 0 docs only**.
 
 ---
