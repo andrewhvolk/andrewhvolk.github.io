@@ -26,6 +26,25 @@ This repository contains the source for a static academic website with course ma
 - When renaming files or moving legacy assets, update all `href`/`src` references in related pages and metadata files.
 - Keep shared JavaScript utilities at the repository root (for example, `theme.js`) and reference them from subdirectories with relative paths like `../theme.js` instead of duplicating script files.
 
+## CSS Loading and CDN Policy
+
+- Global stylesheet: use `/styles.css` as the canonical local stylesheet include.
+- Third-party CSS: load only on pages that require the dependency (for example, KaTeX rendering or icon fonts).
+- Approved CDN domains: `fonts.googleapis.com`, `cdn.jsdelivr.net`, and `cdnjs.cloudflare.com`.
+- Version pinning: pin third-party library versions in CDN URLs (for example, `katex@0.16.9`, `font-awesome/6.4.0`) and avoid unversioned CDN package URLs.
+
+### CSS Include Lint Check
+
+Run this lightweight lint to catch stylesheet include issues:
+
+```bash
+python scripts/check_css_links.py
+```
+
+This check reports:
+- non-canonical local stylesheet `href` values
+- duplicate CDN variants for the same library
+
 ## Recommended Validation
 
 Run this local check before pushing to catch broken local `href` links:
