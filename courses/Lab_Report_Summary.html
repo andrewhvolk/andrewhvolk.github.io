@@ -108,6 +108,45 @@
 
   main { max-width: 860px; margin: 0 auto 4rem; padding: 0 1.5rem; }
 
+  .assignment-order {
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 1px 12px rgba(0,0,0,0.04);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .assignment-order header {
+    padding: 1.4rem 1.75rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--accent-light);
+  }
+  .assignment-order h2 {
+    font-family: var(--heading-font);
+    font-size: 1.35rem;
+    color: var(--accent);
+  }
+  .assignment-order p {
+    margin-top: 0.3rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+  .assignment-order ol {
+    padding: 1.1rem 1.75rem 1.4rem 2.8rem;
+  }
+  .assignment-order li {
+    margin-bottom: 0.65rem;
+    font-size: 0.95rem;
+  }
+  .assignment-order li strong {
+    color: var(--text);
+  }
+  .assignment-order li span {
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    margin-left: 0.35rem;
+  }
+
   .lab-section {
     background: var(--surface);
     border-radius: 12px;
@@ -326,6 +365,7 @@
 <nav class="toc">
   <h2>Quick Navigation</h2>
   <ol>
+    <li><a href="#assignment-order">Assignment Order by Module</a></li>
     <li><a href="#kinematics">Kinematics</a></li>
     <li><a href="#projectile">Projectile Motion</a></li>
     <li><a href="#magnetism">Magnetism</a></li>
@@ -335,6 +375,26 @@
 </nav>
 
 <main>
+
+<section class="assignment-order" id="assignment-order">
+  <header>
+    <h2>Assignments and Quizzes in Course Order</h2>
+    <p>Ordered by module with no due dates included.</p>
+  </header>
+  <ol>
+    <li><strong>Course Requirements Checklist</strong><span>Course Overview Module</span></li>
+    <li><strong>Quiz: Introduction to Graphing and Lab Safety</strong><span>Module 1: Week 1 - Introduction to Graphing and Lab Safety</span></li>
+    <li><strong>Lab Report: Kinematics</strong><span>Module 2: Week 2 - Kinematics</span></li>
+    <li><strong>Short Answer Response: Kinematics</strong><span>Module 2: Week 2 - Kinematics</span></li>
+    <li><strong>Lab Report: Projectile Motion</strong><span>Module 3: Week 3 - Projectile Motion</span></li>
+    <li><strong>Short Answer Response: Newton's Laws</strong><span>Module 4: Week 4 - Newton's Second Law</span></li>
+    <li><strong>Quiz: Newton's Second Law</strong><span>Module 4: Week 4 - Newton's Second Law</span></li>
+    <li><strong>Lab Report: Sound and Resonance</strong><span>Module 5: Week 5 - Sound and Resonance</span></li>
+    <li><strong>Lab Report: Series and Parallel Circuits</strong><span>Module 6: Week 6 - Series and Parallel Circuits</span></li>
+    <li><strong>Lab Report: Magnetism</strong><span>Module 7: Week 7 - Magnetism</span></li>
+    <li><strong>Quiz: Refraction of Light</strong><span>Module 8: Week 8 - Refraction of Light</span></li>
+  </ol>
+</section>
 
 <!-- ===================== KINEMATICS ===================== -->
 <section class="lab-section" id="kinematics">
