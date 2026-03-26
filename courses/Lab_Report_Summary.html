@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lab Report Assignment Summary</title>
+<title>Physics 103 Liberty University Online Assignment Guide by Prof. Andrew H. Volk</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -331,9 +331,17 @@
     font-size: 0.8rem;
     border-top: 1px solid var(--border);
   }
+  footer a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
 
 
-  .lab-section.is-hidden {
+  .page-step.is-hidden {
     display: none;
   }
 
@@ -341,6 +349,46 @@
     color: var(--text);
     text-decoration: underline;
     text-underline-offset: 0.16em;
+  }
+
+  .step-nav {
+    max-width: 860px;
+    margin: 0 auto 1.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .step-nav-inner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 1px 12px rgba(0,0,0,0.04);
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .step-nav button {
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    padding: 0.45rem 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .step-nav button[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .step-indicator {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    flex: 1;
   }
 
   @media (max-width: 600px) {
@@ -358,28 +406,24 @@
 <body>
 
 <header class="page-header">
-  <h1>Lab Report Assignment Summary</h1>
-  <p>Carolina Distance Learning — Directions, Submissions &amp; Supply Lists</p>
+  <h1>Physics 103 Liberty University Online Assignment Guide by Prof. Andrew H. Volk</h1>
+  <p>Assignment overview, pacing navigation, submissions, and supply checklists</p>
 </header>
 
-<nav class="toc">
-  <h2>Quick Navigation</h2>
-  <ol>
-    <li><a href="#assignment-order">Assignment Order by Module</a></li>
-    <li><a href="#kinematics">Kinematics</a></li>
-    <li><a href="#projectile">Projectile Motion</a></li>
-    <li><a href="#magnetism">Magnetism</a></li>
-    <li><a href="#circuits">Series &amp; Parallel Circuits</a></li>
-    <li><a href="#sound">Sound &amp; Resonance</a></li>
-  </ol>
+<nav class="step-nav" aria-label="Assignment navigation">
+  <div class="step-nav-inner">
+    <button type="button" id="prevBtn">← Back</button>
+    <div class="step-indicator" id="stepIndicator">Step 1 of 12</div>
+    <button type="button" id="nextBtn">Forward →</button>
+  </div>
 </nav>
 
 <main>
 
-<section class="assignment-order" id="assignment-order">
+<section class="assignment-order page-step" id="overview">
   <header>
-    <h2>Assignments and Quizzes in Course Order</h2>
-    <p>Ordered by module with no due dates included.</p>
+    <h2>Assignment Overview</h2>
+    <p>Landing page: start here, then use Forward and Back to move one assignment at a time.</p>
   </header>
   <ol>
     <li><strong>Course Requirements Checklist</strong><span>Course Overview Module</span></li>
@@ -396,10 +440,46 @@
   </ol>
 </section>
 
-<!-- ===================== KINEMATICS ===================== -->
-<section class="lab-section" id="kinematics">
+<section class="lab-section page-step" id="course-requirements">
   <div class="lab-header">
-    <h2>Kinematics</h2>
+    <h2>Course Overview Module — Course Requirements Checklist</h2>
+    <span class="activities-tag">Checklist Submission</span>
+  </div>
+  <div class="lab-body">
+    <div class="activity">
+      <h3>What to Complete</h3>
+      <ul>
+        <li>Review the syllabus, grading policy, and lab kit safety expectations.</li>
+        <li>Confirm access to required tools (calculator, camera, and upload access for submissions).</li>
+        <li>Verify your full name appears on every photo, graph, and data table submission.</li>
+      </ul>
+      <div class="submit-note">Submit: Completed checklist confirmation in the course module.</div>
+    </div>
+  </div>
+</section>
+
+<section class="lab-section page-step" id="intro-quiz">
+  <div class="lab-header">
+    <h2>Module 1 — Quiz: Introduction to Graphing and Lab Safety</h2>
+    <span class="activities-tag">Quiz Prep</span>
+  </div>
+  <div class="lab-body">
+    <div class="activity">
+      <h3>Study Focus</h3>
+      <ul>
+        <li>Graph basics: independent vs. dependent variables, axis labels, units, and trend interpretation.</li>
+        <li>Lab safety: battery handling, electrical safety, and safe setup procedures.</li>
+        <li>Documentation standards: name/date on work, readable photos, and complete calculations.</li>
+      </ul>
+      <div class="submit-note">Submit: Complete the Module 1 quiz in the LMS.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== KINEMATICS ===================== -->
+<section class="lab-section page-step" id="kinematics">
+  <div class="lab-header">
+    <h2>Module 2 — Lab Report: Kinematics</h2>
     <span class="activities-tag">Activities 1, 2 &amp; 3</span>
   </div>
   <div class="lab-body">
@@ -464,10 +544,28 @@
   </div>
 </section>
 
-<!-- ===================== PROJECTILE MOTION ===================== -->
-<section class="lab-section" id="projectile">
+<section class="lab-section page-step" id="kinematics-short-answer">
   <div class="lab-header">
-    <h2>Projectile Motion</h2>
+    <h2>Module 2 — Short Answer Response: Kinematics</h2>
+    <span class="activities-tag">Written Response</span>
+  </div>
+  <div class="lab-body">
+    <div class="activity">
+      <h3>Response Prompts</h3>
+      <ul>
+        <li>Explain how slope relates to velocity on your displacement-time graph.</li>
+        <li>Compare constant velocity data with constant acceleration data and identify one key difference.</li>
+        <li>Describe one likely source of experimental error and how to reduce it in a repeat trial.</li>
+      </ul>
+      <div class="submit-note">Submit: Short-answer responses with complete sentences and references to your lab data.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTILE MOTION ===================== -->
+<section class="lab-section page-step" id="projectile">
+  <div class="lab-header">
+    <h2>Module 3 — Lab Report: Projectile Motion</h2>
     <span class="activities-tag">Activity 1 — 6 Trials</span>
   </div>
   <div class="lab-body">
@@ -514,10 +612,46 @@
   </div>
 </section>
 
-<!-- ===================== MAGNETISM ===================== -->
-<section class="lab-section" id="magnetism">
+<section class="lab-section page-step" id="newton-short-answer">
   <div class="lab-header">
-    <h2>Magnetism</h2>
+    <h2>Module 4 — Short Answer Response: Newton's Laws</h2>
+    <span class="activities-tag">Written Response</span>
+  </div>
+  <div class="lab-body">
+    <div class="activity">
+      <h3>Response Prompts</h3>
+      <ul>
+        <li>State Newton's Second Law and explain each variable in F = ma.</li>
+        <li>Provide one real-world example where force changes acceleration but mass remains constant.</li>
+        <li>Explain how balanced and unbalanced forces affect motion.</li>
+      </ul>
+      <div class="submit-note">Submit: Typed short-answer responses in the Module 4 assignment.</div>
+    </div>
+  </div>
+</section>
+
+<section class="lab-section page-step" id="newton-quiz">
+  <div class="lab-header">
+    <h2>Module 4 — Quiz: Newton's Second Law</h2>
+    <span class="activities-tag">Quiz Prep</span>
+  </div>
+  <div class="lab-body">
+    <div class="activity">
+      <h3>Study Focus</h3>
+      <ul>
+        <li>Rearrange F = ma to solve for force, mass, or acceleration with units.</li>
+        <li>Interpret proportional relationships between force and acceleration.</li>
+        <li>Use correct SI units: newtons (N), kilograms (kg), and meters per second squared (m/s²).</li>
+      </ul>
+      <div class="submit-note">Submit: Complete the quiz in Module 4.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MAGNETISM ===================== -->
+<section class="lab-section page-step" id="magnetism">
+  <div class="lab-header">
+    <h2>Module 7 — Lab Report: Magnetism</h2>
     <span class="activities-tag">Activities 1, 2 &amp; 3</span>
   </div>
   <div class="lab-body">
@@ -582,9 +716,9 @@
 </section>
 
 <!-- ===================== CIRCUITS ===================== -->
-<section class="lab-section" id="circuits">
+<section class="lab-section page-step" id="circuits">
   <div class="lab-header">
-    <h2>Series &amp; Parallel Circuits</h2>
+    <h2>Module 6 — Lab Report: Series and Parallel Circuits</h2>
     <span class="activities-tag">Activities 1, 2 &amp; 3</span>
   </div>
   <div class="lab-body">
@@ -645,9 +779,9 @@
 </section>
 
 <!-- ===================== SOUND ===================== -->
-<section class="lab-section" id="sound">
+<section class="lab-section page-step" id="sound">
   <div class="lab-header">
-    <h2>Sound &amp; Resonance</h2>
+    <h2>Module 5 — Lab Report: Sound and Resonance</h2>
     <span class="activities-tag">Single Activity</span>
   </div>
   <div class="lab-body">
@@ -690,52 +824,91 @@
   </div>
 </section>
 
+<section class="lab-section page-step" id="refraction-quiz">
+  <div class="lab-header">
+    <h2>Module 8 — Quiz: Refraction of Light</h2>
+    <span class="activities-tag">Quiz Prep</span>
+  </div>
+  <div class="lab-body">
+    <div class="activity">
+      <h3>Study Focus</h3>
+      <ul>
+        <li>Define refraction and explain why light changes direction between media.</li>
+        <li>Identify how refractive index relates to the speed of light in a material.</li>
+        <li>Practice interpreting incident angle and refracted angle from diagrams.</li>
+      </ul>
+      <div class="submit-note">Submit: Complete the quiz in Module 8.</div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
-  Carolina Distance Learning — Physics Lab Report Reference
+  <p>Last edited: March 26, 2026</p>
+  <p><a href="https://andrewhvolk.github.io/" target="_blank" rel="noopener noreferrer">Andrew H. Volk Website</a></p>
 </footer>
 
 
 <script>
   (function () {
-    const sections = Array.from(document.querySelectorAll('.lab-section'));
-    const links = Array.from(document.querySelectorAll('nav.toc a[href^="#"]'));
+    const sectionIds = [
+      'overview',
+      'course-requirements',
+      'intro-quiz',
+      'kinematics',
+      'kinematics-short-answer',
+      'projectile',
+      'newton-short-answer',
+      'newton-quiz',
+      'sound',
+      'circuits',
+      'magnetism',
+      'refraction-quiz'
+    ];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    const stepIndicator = document.getElementById('stepIndicator');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
     if (!sections.length) return;
 
     const validIds = new Set(sections.map((section) => section.id));
 
-    function getTargetId() {
+    function getTargetIndex() {
       const hash = window.location.hash.replace('#', '');
-      if (hash && validIds.has(hash)) return hash;
-      return sections[0].id;
+      if (hash && validIds.has(hash)) return sectionIds.indexOf(hash);
+      return 0;
     }
 
     function render() {
-      const targetId = getTargetId();
+      const targetIndex = getTargetIndex();
+      const targetId = sectionIds[targetIndex];
 
       sections.forEach((section) => {
         const isActive = section.id === targetId;
         section.classList.toggle('is-hidden', !isActive);
         section.setAttribute('aria-hidden', String(!isActive));
       });
-
-      links.forEach((link) => {
-        const isActive = link.getAttribute('href') === `#${targetId}`;
-        link.classList.toggle('is-active', isActive);
-        if (isActive) {
-          link.setAttribute('aria-current', 'page');
-        } else {
-          link.removeAttribute('aria-current');
-        }
-      });
+      stepIndicator.textContent = `Step ${targetIndex + 1} of ${sections.length}`;
+      prevBtn.disabled = targetIndex === 0;
+      nextBtn.disabled = targetIndex === sections.length - 1;
 
       if (window.location.hash.replace('#', '') !== targetId) {
         window.location.replace(`#${targetId}`);
       }
     }
 
+    function goTo(offset) {
+      const current = getTargetIndex();
+      const next = Math.min(sections.length - 1, Math.max(0, current + offset));
+      window.location.hash = `#${sectionIds[next]}`;
+    }
+
+    prevBtn.addEventListener('click', () => goTo(-1));
+    nextBtn.addEventListener('click', () => goTo(1));
     window.addEventListener('hashchange', render);
     render();
   })();
