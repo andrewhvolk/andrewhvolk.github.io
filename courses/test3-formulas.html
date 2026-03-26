@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MATH114 Test 3 - Formula Reference Sheet (Full Two-Column with Z Table)</title>
+<link rel="stylesheet" href="/styles.css">
 <style>
 body { font-family: Arial, sans-serif; font-size: 9pt; margin: 0.5in; color: #000; background-color: #ffffff; }
 table { width: 100%; border-collapse: collapse; background-color: #ffffff; }
-th, td { border: 1px solid #333; padding: 2px 4px; text-align: center; background-color: #ffffff; }
+th, td { border: 1px solid #333; text-align: center; background-color: #ffffff; }
 th { background-color: #f2f2f2; }
 h1 { text-align:center; border-bottom: 1px solid #000; padding-bottom: 0.2rem; margin-bottom: 0.3in; background-color: #ffffff; }
 h2 { color:#003366; margin-top:0.2in; background-color: #ffffff; }
@@ -16,14 +17,14 @@ ul { margin-top: 0.1in; margin-bottom: 0.15in; line-height: 1.4; }
 li { margin-bottom: 0.05in; }
 code { background:#f3f3f3; padding:2px 4px; border-radius:2px; }
 .grid { display:grid; grid-template-columns:1fr 1fr; gap:0.4in; background-color: #ffffff; }
-.section { margin-bottom:0.3in; background-color: #ffffff; }
+.formula-section { margin-bottom:0.3in; background-color: #ffffff; }
 </style>
 </head>
 <body>
 <h1>MATH114: Quantitative Reasoning - Test 3 Formula Sheet</h1>
 
 <div class="grid">
-  <div class="section">
+  <div class="section-card formula-section">
     <h2>Growth Models</h2>
     <h3>Linear Growth</h3>
     <ul><li><code>New Value = Initial Value + (Growth Rate × Time)</code></li></ul>
@@ -46,7 +47,7 @@ code { background:#f3f3f3; padding:2px 4px; border-radius:2px; }
     </ul>
   </div>
 
-  <div class="section">
+  <div class="section-card formula-section">
     <h2>Descriptive Statistics</h2>
     <h3>Mean (μ or x̄)</h3>
     <ul><li><code>Sum of values / Count of values</code></li></ul>
@@ -70,7 +71,7 @@ code { background:#f3f3f3; padding:2px 4px; border-radius:2px; }
   </div>
 </div>
 
-<div class="section">
+<div class="section-card formula-section">
   <h2>Relevant Excel Formulas</h2>
   <div class="grid">
     <div>
@@ -111,8 +112,8 @@ code { background:#f3f3f3; padding:2px 4px; border-radius:2px; }
   </div>
 </div>
 
-<h2 style="text-align:center">Standard Normal (Z) Table - Percentiles</h2>
-<table>
+<h2 class="u-text-center">Standard Normal (Z) Table - Percentiles</h2>
+<table class="table-compact">
 <thead>
 <tr><th>Z</th><th>Percentile</th><th>Z</th><th>Percentile</th><th>Z</th><th>Percentile</th><th>Z</th><th>Percentile</th></tr>
 </thead>
