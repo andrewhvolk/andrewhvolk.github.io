@@ -108,22 +108,36 @@ These names are heavily reused in local scopes and can collide. Replace only wit
 1. Re-run inventory script and snapshot counts (`colors.md` update).
 2. Build file classification table (A/B/C buckets).
 3. Define acceptance criteria (contrast checks, dark-mode pass, no print regressions).
+4. Add a **token contract table** (old token/literal → new semantic token + scope + owner).
+5. Freeze migration conventions before coding:
+   - selector standard (`:root[data-theme="dark"]` vs `[data-theme="dark"]`)
+   - status token names and required channels
+   - what counts as “intentional literal” (charts/brand/teaching highlights)
+6. Set PR sizing limits and QA sign-off roles up front (global vs standalone owners).
 
 ### Phase 1 — Foundation in `styles.css`
 1. Introduce new Tier 1 + Tier 2 + Tier 2b tokens.
 2. Keep existing legacy tokens temporarily as compatibility aliases.
 3. Add dark theme semantic swaps for all required channels.
 4. Preserve `@media (forced-colors: active)` support.
+5. Add **dual-alias bridge tokens** for existing local ecosystems (review/math shells) so old aliases resolve through new semantics.
+6. Keep selector compatibility during rollout (support existing selector style until explicit cutover phase).
 
 ### Phase 2 — Global shell migration
 1. Migrate shared global selectors in `styles.css` (body, headings, buttons, cards, nav, form controls).
 2. Replace obvious literals in shared components only.
 3. Validate dark mode + focus states + hover states.
+4. Treat overlay/gradient/shadow values as a separate migration lane; do not batch with base color swaps.
 
 ### Phase 3 — Legacy token redirection
 1. Redirect legacy aliases in `styles.css` to new semantics.
 2. Keep local page aliases where they serve component boundaries.
 3. Remove dead/unreferenced tokens only after usage verification.
+4. Add temporary lint/check rule: fail CI if direct replacements target generic aliases (`--text`, `--bg`, `--surface`, `--border`, `--accent`) outside an approved mapping file.
+5. Introduce deprecation windows:
+   - Window A: aliases exist + warnings
+   - Window B: aliases exist only for standalone buckets not yet migrated
+   - Window C: aliases removed when reference count is zero
 
 ### Phase 4 — Standalone page migrations (bucket C)
 Per file:
@@ -131,6 +145,8 @@ Per file:
 2. Map local semantics to global Tier 2/Tier 2b where possible.
 3. Keep intentional, domain-specific colors (charts, pedagogical highlights, branded graphics) when necessary.
 4. Run file-level visual QA in light/dark/print.
+5. Require side-by-side screenshot diffs for each migrated standalone file before merge.
+6. Migrate highest-risk pages one-at-a-time (not in multi-page bundles).
 
 ### Phase 5 — Final cleanup
 1. Remove deprecated token definitions once references are zero.
@@ -148,6 +164,17 @@ Per file:
 - Charts/SVG/Canvas visuals remain interpretable.
 - `forced-colors` mode still works.
 - Print styles remain legible and intentional.
+- Dark selector behavior verified on both theme load paths:
+  - initial load from saved theme
+  - initial load from system preference
+- Compatibility alias map still resolves correctly for review/page-local scopes.
+- Screenshot diff reviewed for every changed standalone page.
+
+### Required automated checks per PR
+- Token inventory delta script run and attached (`colors.md` before/after excerpt).
+- Search check confirms no net increase in generic alias collisions.
+- Search check confirms no unapproved new literal status colors.
+- Search check confirms forced-colors and print blocks are still present in migrated files.
 
 ---
 
@@ -192,13 +219,50 @@ Per file:
 11. Who signs off visual QA for bucket C pages?
 12. Do we require screenshot diffs for each migrated file/section before merge?
 
+### Must-decide policy answers (recommended defaults)
+13. **Selector standard:** keep `:root[data-theme="dark"]` as canonical during migration; only consider `[data-theme="dark"]` in a dedicated post-migration normalization pass.
+14. **Compatibility aliases:** keep for at least one release cycle after bucket C completion, then remove via explicit deprecation PR.
+15. **Contrast requirement:** WCAG AA minimum for all UI surfaces; AAA target for body text-heavy educational content where practical.
+16. **PR size cap:** max 8 files for global-shell PRs and max 3 files for standalone PRs.
+17. **Sign-off model:** one implementation reviewer + one visual QA reviewer for every bucket C PR.
+
 ---
 
 ## 9) Suggested PR Sequence
 
 1. PR 1: Add new token architecture + compatibility aliases + no visual changes intended.
 2. PR 2: Migrate shared global shell in `styles.css`.
-3. PR 3+: Migrate standalone pages in small thematic batches.
-4. Final PR: remove dead aliases/tokens and update implementation docs.
+3. PR 3: Migrate review-shell bridge tokens and verify local alias compatibility (`--text`, `--bg`, etc.) without visual regressions.
+4. PR 4+: Migrate standalone pages one-by-one (highest-risk first) with screenshot diffs.
+5. Final PR: remove dead aliases/tokens, close deprecation window, and update implementation docs.
 
 This sequencing reduces blast radius and makes regressions easier to identify and revert.
+
+---
+
+## 10) Execution Controls to Prevent Regressions (New)
+
+1. **Change budget per PR**
+   - Do not combine global token architecture changes with standalone page migrations in the same PR.
+   - Keep each PR to a single migration concern (foundation, shell, aliasing, or one standalone page).
+
+2. **Mapping registry**
+   - Maintain a living mapping table in the PR description or companion doc:
+     - source token/literal
+     - target semantic token
+     - affected selectors/files
+     - rationale (surface/text/status/overlay)
+
+3. **Exception registry**
+   - Maintain a tracked list of intentional literals (charts, brand marks, instructional highlights).
+   - Every intentional literal must include a brief reason and owning page/component.
+
+4. **Rollback strategy**
+   - Every PR must include explicit rollback notes (which token redirects or selectors can be reverted independently).
+   - Avoid “all-or-nothing” edits across unrelated files.
+
+5. **Completion gates**
+   - No cleanup/deletion PR is allowed until:
+     - alias reference count is zero
+     - bucket C pages have visual sign-off
+     - forced-colors + print checks are explicitly passed
