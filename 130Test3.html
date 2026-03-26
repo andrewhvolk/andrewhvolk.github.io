@@ -1155,7 +1155,7 @@
 <div class="section-eyebrow"><i data-lucide="pen-tool"></i> Interactive review</div>
 <h2 class="u-mb-0">Practice Generators</h2>
 </div>
-<p id="coverage-audit" style="display:none;"></p>
+<p id="coverage-audit" class="u-hidden"></p>
 <!-- Mock Exam CTA -->
 <div id="exam-cta" class="review-callout review-callout--exam review-callout--highlight">
 <h3 class="review-callout__title review-callout__title--exam">🎯 Mock Exam Mode</h3>
@@ -1163,7 +1163,7 @@
 <button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Mock Exam</button>
 </div>
 <!-- Mock Quiz CTA -->
-<div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg" style="padding: 1.35rem 1.5rem;">
+<div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg review-callout--padded">
 <h3 class="review-callout__title u-text-center">📝 Mock Quiz Mode</h3>
 <p class="review-callout__body review-callout__body--sm u-text-center">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
 <div class="review-option-grid">
@@ -1186,36 +1186,36 @@
 </div>
 </div>
 <!-- Exam Progress Bar (hidden until active) -->
-<div id="exam-progress-bar" style="display: none; margin-bottom: 1.5rem;">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-<span id="exam-mode-label" style="font-weight: 600; color: var(--accent);">Mock Exam</span>
-<span id="exam-progress-label" style="font-family: var(--type-meta-family); color: var(--text-muted); font-size: 0.9rem;">1 / 15</span>
+<div id="exam-progress-bar" class="u-hidden u-mb-lg">
+<div class="u-flex-between-center u-mb-xs">
+<span id="exam-mode-label" class="u-text-accent-strong">Mock Exam</span>
+<span id="exam-progress-label" class="u-meta-muted-sm">1 / 15</span>
 </div>
-<div class="progress-bar-track review-progress-track" style="height: 10px;">
-<div class="progress-bar-fill review-progress-fill" id="exam-progress-fill" style="width: 0%; transition: width 0.4s ease;"></div>
+<div class="progress-bar-track review-progress-track review-progress-track--sm">
+<div class="progress-bar-fill review-progress-fill review-progress-fill--animated" id="exam-progress-fill"></div>
 </div>
 </div>
 <!-- Exam Results (hidden until complete) -->
-<div class="card review-card section-lead--results" id="exam-results" style="display: none;">
+<div class="card review-card section-lead--results u-hidden" id="exam-results">
 <h2>📊 Exam Results</h2>
 <div id="exam-score-display" class="review-results-score"></div>
-<div id="exam-breakdown" style="margin-top: 1rem;"></div>
+<div id="exam-breakdown" class="u-mt-md"></div>
 <div class="review-results-actions">
 <button class="btn-primary" onclick="endMockExam()">Back to Practice</button>
 </div>
 </div>
 <div class="quiz-selector" id="quiz-categories"></div>
-<div class="quiz-box" id="quiz-active-area" style="display: none; border-top: 1px solid var(--border); padding-top: 2rem;">
+<div class="quiz-box quiz-box--active-shell u-hidden" id="quiz-active-area">
 <div id="svg-display"></div>
 <div class="question-text" id="question-display"></div>
-<div class="question-note" id="question-note" style="display:none;"></div>
+<div class="question-note" id="question-note" class="u-hidden"></div>
 <div class="input-group" id="dynamic-inputs">
 <!-- Inputs injected here based on type -->
 </div>
-<div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+<div class="u-flex-align-center-wrap u-gap-sm">
 <button class="btn-primary" id="btn-submit">Check Answer</button>
-<button class="btn-secondary" id="btn-next" style="display: none;">Next Question</button>
-<button id="btn-exit-exam" onclick="confirmExitExam()" style="display: none; background: none; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; margin-left: auto;">✕ Exit</button>
+<button class="btn-secondary u-hidden" id="btn-next">Next Question</button>
+<button id="btn-exit-exam" onclick="confirmExitExam()" class="btn-ghost-muted u-hidden u-ml-auto">✕ Exit</button>
 </div>
 <div class="feedback" id="feedback-display"></div>
 </div>
@@ -1224,27 +1224,27 @@
 <!-- CHECKLIST & PROGRESS TAB -->
 <div class="tab-content" id="tab-videos">
 <div class="card review-card">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+<div class="u-flex-between-center-wrap u-mb-lg u-gap-xs">
 <h2>Study Videos</h2>
-<div id="video-progress" style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;"></div>
+<div id="video-progress" class="u-text-muted-meta"></div>
 </div>
 <div class="checklist-section review-checklist-section">
 <h3>Section 5.2: Right-Triangle Trigonometry</h3>
 <div class="checklist-grid">
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="trig_ratio" data-video-id="v42_1" href="https://www.youtube.com/watch?v=kikGvjKFN8Q" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Trig Ratios from Right Triangles</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="trig_ratio" data-video-id="v42_2" href="https://www.youtube.com/watch?v=aix8TLHdKgc" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Calculator Trig Values (Degree/Radian Mode)</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_unit_conversion" data-video-id="v42_3" href="https://www.youtube.com/watch?v=NCYNXkbTTUo" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Degree/Radian Unit Conversion</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_unit_conversion" data-video-id="v42_4" href="https://www.youtube.com/watch?v=2S4vK30dII0" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Side Lengths from Trig Ratios</span>
 </a>
 </div>
@@ -1253,19 +1253,19 @@
 <h3>Section 5.3: Reference angles, signs, and solving trig equations on 0°–360°</h3>
 <div class="checklist-grid">
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="reference_angle_deg" data-video-id="v43_1" href="https://www.youtube.com/watch?v=-ZQvz4bc2Eg" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Reference Angles (Degrees and Radians)</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_2" href="https://www.youtube.com/watch?v=eL2FhO11mf0" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Quadrant Signs (ASTC)</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_3" href="https://www.youtube.com/watch?v=3Rf8KEhY0ts" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Reference Angles: Extra Practice</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="quadrant_signs" data-video-id="v43_4" href="https://www.youtube.com/watch?v=fnhFneOz6n8" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Trig Values from Quadrant + Reference Angle</span>
 </a>
 </div>
@@ -1274,19 +1274,19 @@
 <h3>Geometry &amp; Section 8.4</h3>
 <div class="checklist-grid">
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="solve_right_triangle" data-video-id="vgeo_1" href="https://www.youtube.com/watch?v=8ysZhPknfYY" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Solve a Right Triangle</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="angle_of_elevation" data-video-id="vgeo_2" href="https://www.youtube.com/watch?v=FcDyaiHO4GQ" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Angle of Elevation/Depression</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="distance_rate_time" data-video-id="vgeo_3" href="https://www.youtube.com/watch?v=JmLN3QxshlE" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Distance-Rate-Time with Trig</span>
 </a>
 <a class="check-item video-link review-video-link review-link-reset" data-practice-id="vector_magnitude" data-video-id="vgeo_4" href="https://www.youtube.com/watch?v=XUus6-9E9sQ" target="_blank" rel="noopener noreferrer">
-<i data-lucide="play" style="color: var(--accent);"></i>
+<i data-lucide="play" class="icon-accent"></i>
 <span>Vector Magnitude and Direction</span>
 </a>
 </div>
@@ -1297,11 +1297,11 @@
 <!-- LECTURE SLIDES TAB -->
 <div class="tab-content" id="tab-schedule">
 <div class="card review-card">
-<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-<h2 style="margin-bottom: 0;">Course Schedule</h2>
-<div id="exam-countdown" style="background: var(--red-bg); border: 1px solid var(--red); color: var(--red); padding: 0.5rem 1rem; border-radius: 12px; font-weight: 600; font-family: var(--type-meta-family); font-size: 0.95rem;"></div>
+<div class="u-flex-between-center-wrap u-gap-md u-mb-lg">
+<h2 class="u-mb-0">Course Schedule</h2>
+<div id="exam-countdown" class="exam-countdown-pill"></div>
 </div>
-<div style="overflow-x: auto;">
+<div class="table-scroll">
 <table class="history-table">
 <thead>
 <tr>
@@ -1417,7 +1417,7 @@
 </div>
 <div class="card review-card">
 <h2>ALEKS Modules</h2>
-<div style="overflow-x: auto;">
+<div class="table-scroll">
 <table class="history-table">
 <thead>
 <tr>
@@ -1485,7 +1485,7 @@
 </div>
 </div>
 <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Practice History</h3>
-<div style="overflow-x: auto;">
+<div class="table-scroll">
 <table class="history-table">
 <thead>
 <tr>
@@ -1500,7 +1500,7 @@
 </tbody>
 </table>
 </div>
-<div style="text-align: center; margin-top: 3rem;">
+<div class="u-text-center u-mt-xl">
 <button class="btn-secondary" onclick="resetProgress()" style="color: var(--red); border-color: var(--red-bg);">
 <i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
                     Reset All Progress
