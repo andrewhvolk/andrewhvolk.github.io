@@ -206,11 +206,11 @@ body {
   line-height: var(--line-height-body);
   margin: 0;
   padding: 0;
-  color: var(--text-color);
+  color: var(--text-body);
   background:
     radial-gradient(circle at top, rgba(58, 102, 92, 0.08), transparent 28%),
     linear-gradient(180deg, rgba(220, 230, 224, 0.24), transparent 24%),
-    var(--background-color);
+    var(--bg-body);
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -233,29 +233,29 @@ h4,
 h5,
 h6 {
   margin-top: 0;
-  color: var(--secondary-color);
+  color: var(--text-heading);
   line-height: 1.3;
   font-family: var(--type-display-family);
 }
 
 a {
-  color: var(--secondary);
+  color: var(--primary-base);
   text-decoration-line: underline;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.16em;
-  text-decoration-color: color-mix(in srgb, var(--secondary) 72%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--primary-base) 72%, transparent);
   transition: color 0.2s ease, text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease, background-size 0.2s ease;
 }
 
 a:hover,
 a:focus-visible {
-  color: var(--tertiary);
+  color: var(--primary-hover);
   text-decoration-color: currentColor;
   text-decoration-thickness: 0.12em;
 }
 
 :where(.page-shell-main, .course-page, .review-shell, .summary-sheet, .question-guide, .answer-content, .publications-item, .experience-item, .education-item, #research, #publications, #philosophy, #overview) :where(p, li, dd, figcaption, blockquote) a {
-  text-decoration-color: color-mix(in srgb, var(--secondary) 82%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--primary-base) 82%, transparent);
   text-decoration-thickness: 0.09em;
   text-underline-offset: 0.18em;
 }
@@ -2708,14 +2708,14 @@ main.error-main {
   --review-h1-to: var(--secondary, #7ea8ff);
   --review-body-muted: var(--on-surface-variant, #bac4bf);
   --review-semantic-body: var(--on-surface, #f2f5f2);
-  --review-success: #34d399;
-  --review-success-bg: rgba(52, 211, 153, 0.1);
-  --review-warning: #f59e0b;
-  --review-warning-bg: rgba(245, 158, 11, 0.1);
-  --review-error: #f87171;
-  --review-error-bg: rgba(248, 113, 113, 0.1);
-  --review-info: var(--secondary, #7ea8ff);
-  --review-info-bg: rgba(126, 168, 255, 0.1);
+  --review-success: var(--status-success);
+  --review-success-bg: var(--status-success-bg);
+  --review-warning: var(--status-warning);
+  --review-warning-bg: var(--status-warning-bg);
+  --review-error: var(--status-error);
+  --review-error-bg: var(--status-error-bg);
+  --review-info: var(--status-info);
+  --review-info-bg: var(--status-info-bg);
   --review-radius: 16px;
   --review-shell-width: min(1100px, calc(100vw - 2rem));
 }
@@ -2788,14 +2788,14 @@ body.light .math-review-page,
   --review-h1-to: var(--primary-container, #00342b);
   --review-body-muted: color-mix(in srgb, var(--on-surface-variant) 86%, var(--primary) 14%);
   --review-semantic-body: var(--on-surface, #001d17);
-  --review-success: #059669;
-  --review-success-bg: rgba(5, 150, 105, 0.08);
-  --review-warning: #d97706;
-  --review-warning-bg: rgba(217, 119, 6, 0.08);
-  --review-error: #dc2626;
-  --review-error-bg: rgba(220, 38, 38, 0.08);
-  --review-info: var(--secondary, #1A56DB);
-  --review-info-bg: rgba(26, 86, 219, 0.08);
+  --review-success: var(--status-success);
+  --review-success-bg: var(--status-success-bg);
+  --review-warning: var(--status-warning);
+  --review-warning-bg: var(--status-warning-bg);
+  --review-error: var(--status-error);
+  --review-error-bg: var(--status-error-bg);
+  --review-info: var(--status-info);
+  --review-info-bg: var(--status-info-bg);
 }
 
 /* Review-page banner header — mirrors .page-shell-header from the CV page */
@@ -3227,14 +3227,14 @@ body.light .math-review-page,
 .review-callout--warning, .warning-box,
 .review-callout--info,
 .review-callout--success { color: var(--semantic-body); }
-.review-callout--tip, .tip-box { background: color-mix(in srgb, var(--amber) 10%, var(--surface)); border-left: 4px solid color-mix(in srgb, var(--amber) 72%, transparent); }
-.review-callout--warning, .warning-box { background: color-mix(in srgb, var(--red) 9%, var(--surface)); border-left: 4px solid color-mix(in srgb, var(--red) 72%, transparent); }
-.review-callout--info { background: color-mix(in srgb, var(--blue) 9%, var(--surface)); border-left: 4px solid color-mix(in srgb, var(--blue) 72%, transparent); }
-.review-callout--success { background: color-mix(in srgb, var(--green) 10%, var(--surface)); border-left: 4px solid color-mix(in srgb, var(--green) 72%, transparent); }
-.review-callout--tip i, .tip-box i, .review-callout--tip strong, .tip-box strong { color: var(--amber); }
-.review-callout--warning i, .warning-box i, .review-callout--warning strong, .warning-box strong { color: var(--red); }
-.review-callout--info i, .review-callout--info strong { color: var(--blue); }
-.review-callout--success i, .review-callout--success strong { color: var(--green); }
+.review-callout--tip, .tip-box { background: var(--status-warning-bg); border-left: 4px solid var(--status-warning-border); }
+.review-callout--warning, .warning-box { background: var(--status-error-bg); border-left: 4px solid var(--status-error-border); }
+.review-callout--info { background: var(--status-info-bg); border-left: 4px solid var(--status-info-border); }
+.review-callout--success { background: var(--status-success-bg); border-left: 4px solid var(--status-success-border); }
+.review-callout--tip i, .tip-box i, .review-callout--tip strong, .tip-box strong { color: var(--status-warning); }
+.review-callout--warning i, .warning-box i, .review-callout--warning strong, .warning-box strong { color: var(--status-error); }
+.review-callout--info i, .review-callout--info strong { color: var(--status-info); }
+.review-callout--success i, .review-callout--success strong { color: var(--status-success); }
 .review-summary-card, .section-summary-card { padding: 1rem 1.1rem; }
 .review-stack-gap { margin-top: 2rem; }
 .review-link-reset, .video-link.review-link-reset { text-decoration: none; }
