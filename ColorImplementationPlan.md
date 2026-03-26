@@ -1,222 +1,204 @@
-Color Architecture Implementation Plan
-
-This document outlines the step-by-step technical strategy for migrating the Prof. Volk's Office codebase from its current state (332 raw literal colors and 160 scattered tokens across 65 files) to the unified Parchment, Emerald, and Ink 3-tier token architecture.
+# Color Architecture Implementation Plan
 
-Phase 1: Establish the New Foundation
+This document defines a **safe, incremental strategy** for migrating Prof. Volk's Office from scattered literal colors/tokens to a unified semantic color system that supports light mode, dark mode, accessibility, and page-level exceptions.
 
-Before modifying any existing files, the new design system must be established in the global stylesheet.
+> Baseline inventory (from `colors.md`): 65 files, 332 unique literal colors, 160 referenced color tokens.
 
-Action: Replace the existing :root and [data-theme="dark"] blocks in styles.css with the consolidated 3-tier architecture.
+---
 
-/* ==========================================================================
-   UNIFIED COLOR SYSTEM
-   ========================================================================== */
-:root {
-  /* TIER 1: GLOBAL TOKENS (The Palette) */
-  --color-parchment-elevated: #ffffff;
-  --color-parchment-base:     #fcfaf7;
-  --color-parchment-warm:     #f4f0e6;
-  --color-parchment-muted:    #e8e2d2;
-  --color-parchment-deep:     #d3cbb8;
+## 1) Migration Goals and Guardrails
 
-  --color-emerald-mist:       #ecfdf5;
-  --color-emerald-light:      #6ee7b7;
-  --color-emerald-base:       #10b981;
-  --color-emerald-surface:    #047857;
-  --color-emerald-deep:       #064e3b;
+### Primary goals
+- Establish a stable semantic token foundation for shared UI surfaces.
+- Reduce hardcoded literals and duplicate tokens where safe.
+- Preserve readability and interaction contrast in both light and dark modes.
+- Avoid regressions in standalone pages, print styles, charts/graphics, and forced-colors mode.
 
-  --color-ink-inverse:        #ffffff;
-  --color-ink-muted:          #a8a29e;
-  --color-ink-soft:           #78716c;
-  --color-ink-base:           #44403c;
-  --color-ink-earth:          #292524;
-  --color-ink-strong:         #1c1917;
+### Guardrails (must-follow)
+1. **No repo-wide blind find/replace.**
+2. **Semantic-first mapping** for shared components; preserve local semantics where needed.
+3. **Status colors are first-class** (success/warning/error/info), not forced into primary/neutral.
+4. **Alpha flattening is selective**, not global.
+5. **Every phase is reversible** (small commits, visual QA per phase).
 
-  --overlay-light:            rgba(28, 25, 23, 0.05);
-  --overlay-medium:           rgba(28, 25, 23, 0.25);
-  --overlay-dark:             rgba(28, 25, 23, 0.60);
+---
 
-  /* TIER 2: SEMANTIC TOKENS (Light Mode Defaults) */
-  --bg-body:                  var(--color-parchment-base);
-  --bg-surface:               var(--color-parchment-elevated);
-  --bg-subtle:                var(--color-parchment-warm);
-  --bg-inverse:               var(--color-ink-strong);
-  
-  --text-heading:             var(--color-ink-strong);
-  --text-body:                var(--color-ink-base);
-  --text-muted:               var(--color-ink-soft);
-  --text-on-primary:          var(--color-ink-inverse);
-  
-  --primary-base:             var(--color-emerald-base);
-  --primary-hover:            var(--color-emerald-light);
-  --primary-surface:          var(--color-emerald-surface);
-  --primary-text:             var(--color-emerald-mist);
+## 2) Scope Model: Classify Files Before Editing
 
-  --border-subtle:            var(--color-parchment-muted);
-  --border-base:              var(--color-parchment-deep);
-}
+Before implementation, classify each file into one of these buckets:
 
-/* DARK MODE OVERRIDES (Swapping Semantics) */
-[data-theme="dark"] {
-  --bg-body:                  var(--color-ink-earth);
-  --bg-surface:               var(--color-ink-strong);
-  --bg-subtle:                var(--color-ink-base);
-  --bg-inverse:               var(--color-parchment-elevated);
-  
-  --text-heading:             var(--color-parchment-elevated);
-  --text-body:                var(--color-parchment-warm);
-  --text-muted:               var(--color-ink-muted);
-  --text-on-primary:          var(--color-ink-inverse);
-  
-  --border-subtle:            var(--color-ink-base);
-  --border-base:              var(--color-ink-soft);
-  
-  --overlay-light:            rgba(255, 255, 255, 0.05);
-}
+### A) Global system files
+- `styles.css`
+- `theme.js` (only if theme hooks/selectors need updates)
 
+### B) Shared page shells (inherit global design strongly)
+- Landing/site pages and course shells that mostly depend on `styles.css` tokens.
 
-Pro-Tip: Never use Tier 1 tokens (e.g., --color-emerald-base) directly in your component CSS. Always use Tier 2 tokens (e.g., --primary-base) so that dark mode toggling works automatically.
+### C) Standalone themed experiences (high local styling)
+Examples from current inventory:
+- `courses/103LUOAssignmentGuide.html`
+- `projects/QuestionSpinner/questionspinner.html`
+- `projects/PHYS103LUO/KinematicsShortAnswer.html`
+- Math review pages with local aliases (`130Test1.html`, `130Test2.html`, `130Test3.html`, `130Test4.html`)
+- Utility/game pages such as `chessboard.html`
 
-Phase 2: The Literal Color Purge
+**Policy:** Finish A + selected B first. Handle C with file-specific mappings and explicit visual approval.
 
-This phase involves running global "Find and Replace" operations across all 65 files to eliminate hardcoded hex codes, RGBs, and browser color names.
+---
 
-Hex Code Consolidation Mapping
+## 3) Target Token Architecture
 
-Use this mapping table to snap your "Gray Smear" and rogue brand colors to the new Semantic Tokens.
+### Tier 1: Palette tokens (base values)
+Use your proposed Parchment / Emerald / Ink primitives.
 
-Old Literal Colors
+### Tier 2: Semantic UI tokens (required)
+Keep your planned semantic tokens and add missing channels:
 
-Target Context
+- Surfaces: `--bg-body`, `--bg-surface`, `--bg-subtle`, `--bg-inverse`
+- Text: `--text-heading`, `--text-body`, `--text-muted`, `--text-on-primary`
+- Brand/action: `--primary-base`, `--primary-hover`, `--primary-surface`, `--primary-text`
+- Borders/overlays: `--border-subtle`, `--border-base`, `--overlay-light|medium|dark`
 
-Replace With Semantic Token
+### Tier 2b: Status semantic tokens (new, required)
+Add explicit status tokens before migration of review/alert components:
 
-#ccc, #d1d5db, #ddd, #e0e0e0, #e5e7eb
+- Success: `--status-success`, `--status-success-bg`, `--status-success-border`
+- Warning: `--status-warning`, `--status-warning-bg`, `--status-warning-border`
+- Error: `--status-error`, `--status-error-bg`, `--status-error-border`
+- Info: `--status-info`, `--status-info-bg`, `--status-info-border`
 
-Borders / Dividers
+### Tier 3: Component aliases (optional but recommended)
+For complex domains (e.g., Math review pages), keep local aliases that point to Tier 2/Tier 2b values.
 
-var(--border-subtle)
+---
 
-#333, #44403c, #555, #4b5563
+## 4) Replacement Rules (Revised)
 
-Body Text
+## 4.1 Literal mapping (safe defaults)
+Use your mapping table as a baseline, but apply by **context**, not raw string replacement.
 
-var(--text-body)
+- Borders/dividers → `var(--border-subtle)`
+- Body text → `var(--text-body)`
+- Heading/strong text → `var(--text-heading)`
+- Secondary backgrounds → `var(--bg-subtle)`
+- Main/card surfaces → `var(--bg-surface)`
+- Text on primary buttons → `var(--text-on-primary)`
+- Brand actions/links → `var(--primary-base)`
 
-#000, #111827, #1f2937, #1c1917
+## 4.2 Opacity/rgba migration (selective)
+Do **not** remove all `rgba()` usage. Categorize first:
 
-Headings / Bold Text
+1. **Backdrop and dim layers**: normalize to overlay tokens.
+2. **Shadows/elevation**: normalize repeated values to a small elevation token set.
+3. **Decorative gradients / atmospheric layers**: preserve or refactor carefully; do not flatten by default.
+4. **State badges and subtle status backgrounds**: migrate to status semantic bg/border tokens.
 
-var(--text-heading)
+## 4.3 Token consolidation (context-aware)
+Legacy tokens can be redirected, but avoid blind replacement for generic names:
 
-#f0f0f0, #f3f4f6, #f4f4f4, #f5f5f5
+- `--text`, `--bg`, `--surface`, `--border`, `--accent`
 
-Secondary Backgrounds
+These names are heavily reused in local scopes and can collide. Replace only with selector-aware edits.
 
-var(--bg-subtle)
+---
 
-#fff, #ffffff, white
+## 5) Step-by-Step Execution Plan
 
-Cards / Main Backgrounds
+### Phase 0 — Preflight (required)
+1. Re-run inventory script and snapshot counts (`colors.md` update).
+2. Build file classification table (A/B/C buckets).
+3. Define acceptance criteria (contrast checks, dark-mode pass, no print regressions).
 
-var(--bg-surface)
+### Phase 1 — Foundation in `styles.css`
+1. Introduce new Tier 1 + Tier 2 + Tier 2b tokens.
+2. Keep existing legacy tokens temporarily as compatibility aliases.
+3. Add dark theme semantic swaps for all required channels.
+4. Preserve `@media (forced-colors: active)` support.
 
-#fff, #ffffff, white
+### Phase 2 — Global shell migration
+1. Migrate shared global selectors in `styles.css` (body, headings, buttons, cards, nav, form controls).
+2. Replace obvious literals in shared components only.
+3. Validate dark mode + focus states + hover states.
 
-Text inside Primary Buttons
+### Phase 3 — Legacy token redirection
+1. Redirect legacy aliases in `styles.css` to new semantics.
+2. Keep local page aliases where they serve component boundaries.
+3. Remove dead/unreferenced tokens only after usage verification.
 
-var(--text-on-primary)
+### Phase 4 — Standalone page migrations (bucket C)
+Per file:
+1. Identify local semantic model (if any).
+2. Map local semantics to global Tier 2/Tier 2b where possible.
+3. Keep intentional, domain-specific colors (charts, pedagogical highlights, branded graphics) when necessary.
+4. Run file-level visual QA in light/dark/print.
 
-#10b981, #059669, #2ecc71, green
+### Phase 5 — Final cleanup
+1. Remove deprecated token definitions once references are zero.
+2. Re-run inventory and compare before/after counts.
+3. Document remaining intentional literals (exceptions list).
 
-Primary Buttons / Links
+---
 
-var(--primary-base)
+## 6) QA Checklist (Run After Each Phase)
 
-#ecfdf5, #d1fae5, #d5f5e3
+- Light mode readability and hierarchy are preserved.
+- Dark mode token swaps produce adequate contrast.
+- Focus rings remain visible.
+- Status UI (success/warning/error/info) remains semantically distinct.
+- Charts/SVG/Canvas visuals remain interpretable.
+- `forced-colors` mode still works.
+- Print styles remain legible and intentional.
 
-Success/Accent Backgrounds
+---
 
-var(--primary-surface)
+## 7) Risks and Mitigations
 
-Opacity Flattening
+1. **Risk:** Semantic drift from blind replacement.  
+   **Mitigation:** selector-aware and file-class-aware migrations only.
 
-You currently have 80+ unique rgba() strings with granular opacities (e.g., 0.02, 0.86, 0.98).
+2. **Risk:** Flat UI due to alpha removal.  
+   **Mitigation:** preserve decorative/elevation alpha where purposeful.
 
-Action: Strip all rgba() definitions and replace them with standard Overlays or standard Surface tokens.
+3. **Risk:** Status colors collapse into primary/neutral.  
+   **Mitigation:** introduce Tier 2b status tokens before component migration.
 
-Shadows and Light Borders: Replace rgba(0,0,0,0.05) through rgba(0,0,0,0.15) with var(--overlay-light).
+4. **Risk:** Standalone page regressions.  
+   **Mitigation:** bucket C handled independently with visual checkpoints.
 
-Modal Backdrops / Dimming: Replace rgba(0,0,0,0.3) through rgba(0,0,0,0.8) with var(--overlay-dark).
+5. **Risk:** Accessibility/print regressions.  
+   **Mitigation:** explicit forced-colors and print QA gates in every phase.
 
-Glassmorphism Backgrounds: Replace rgba(255,255,255,0.85) with var(--bg-surface). Rely on solid colors to improve performance and dark-mode compatibility.
+---
 
-Phase 3: Token Consolidation
+## 8) Questions That Must Be Answered Before Implementation
 
-You currently have 160 unique tokens. Many are duplicates doing the exact same job. You must redirect these legacy tokens to the new Semantic Tier.
+### Design and product questions
+1. Which pages are considered part of the shared site system vs intentionally standalone experiences?
+2. Are there any brand-locked colors that must remain literal (logos, partner pages, course-specific themes)?
+3. Is the goal strict visual parity, or is minor visual evolution acceptable if accessibility improves?
 
-Action: Execute a global search and replace for these legacy variables.
+### Technical questions
+4. Do we want to preserve current local alias layers (`--accent`, `--text`, etc.) for standalone pages, or fully standardize them?
+5. Should we maintain compatibility aliases indefinitely or remove in a follow-up deprecation release?
+6. Are we standardizing on `:root[data-theme="dark"]` (current style) or `[data-theme="dark"]` consistently across all files?
 
-Legacy Token Name
+### Accessibility and compliance questions
+7. What contrast threshold is required (minimum WCAG AA everywhere, or AAA for specific surfaces)?
+8. Which print pages are mission-critical and must preserve exact output?
+9. Are forced-colors users part of supported audience requirements (must-pass vs best-effort)?
 
-Semantic Role
+### Process and rollout questions
+10. What is the maximum acceptable PR size (files changed per PR)?
+11. Who signs off visual QA for bucket C pages?
+12. Do we require screenshot diffs for each migrated file/section before merge?
 
-Replace With New Token
+---
 
---text, --text-color, --semantic-body
+## 9) Suggested PR Sequence
 
-Standard Paragraph Text
+1. PR 1: Add new token architecture + compatibility aliases + no visual changes intended.
+2. PR 2: Migrate shared global shell in `styles.css`.
+3. PR 3+: Migrate standalone pages in small thematic batches.
+4. Final PR: remove dead aliases/tokens and update implementation docs.
 
-var(--text-body)
-
---text-muted, --muted-text-color, --review-muted
-
-Helper Text / Subtitles
-
-var(--text-muted)
-
---light-text, --on-primary, --on-secondary
-
-Text on Dark Backgrounds
-
-var(--text-on-primary)
-
---bg, --background-color, --review-bg
-
-Page Background
-
-var(--bg-body)
-
---surface, --card-background, --review-surface
-
-Elevated Cards
-
-var(--bg-surface)
-
---border, --review-border, --ghost-outline
-
-Standard Lines
-
-var(--border-subtle)
-
---primary, --accent, --primary-color
-
-Main Brand Actions
-
-var(--primary-base)
-
-Phase 4: Workflow & Execution Strategy
-
-To avoid breaking the UI, do not attempt to replace all 332 colors in a single commit. Follow this incremental workflow:
-
-Inject the New System: Add the new :root variables to styles.css. Leave the old variables at the bottom of the file temporarily.
-
-Tackle the HTML/Inline Styles First: Search your .html files for style="color: # or style="background: #. Replace these with standard utility classes or map them to the new CSS variables.
-
-Purge Legacy Tokens: Search through styles.css for references to --text-color and replace them with --text-body.
-
-Prune the Literals in CSS: Go through styles.css rule by rule. When you see border: 1px solid #ccc;, change it to border: 1px solid var(--border-subtle);.
-
-The Final Deletion: Once all components are mapped to the new Semantic Tokens, delete the legacy :root definitions at the bottom of styles.css.
-
-Pro-Tip (Dark Mode QA): The biggest point of failure during color refactoring is hardcoding a light color where a dark color should go. After mapping a component, immediately toggle Dark Mode to ensure the Semantic Token swaps correctly. If text becomes invisible, you likely hardcoded var(--color-ink-strong) instead of using the semantic var(--text-heading).
+This sequencing reduces blast radius and makes regressions easier to identify and revert.
