@@ -29,7 +29,7 @@
     background: var(--bg);
     color: var(--text);
     line-height: 1.65;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .page-header {
@@ -65,46 +65,6 @@
     font-size: 0.95rem;
     position: relative;
   }
-
-  nav.toc {
-    max-width: 860px;
-    margin: -1.5rem auto 2rem;
-    background: var(--surface);
-    border-radius: 12px;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-    padding: 1.25rem 1.75rem;
-    position: relative;
-    z-index: 1;
-  }
-  nav.toc h2 {
-    font-family: var(--heading-font);
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
-  }
-  nav.toc ol {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
-    counter-reset: toc;
-  }
-  nav.toc li { counter-increment: toc; }
-  nav.toc a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: color 0.2s;
-  }
-  nav.toc a::before {
-    content: counter(toc) ". ";
-    font-weight: 700;
-    opacity: 0.5;
-  }
-  nav.toc a:hover { color: var(--text); }
 
   main { max-width: 860px; margin: 0 auto 4rem; padding: 0 1.5rem; }
 
@@ -189,9 +149,12 @@
   .lab-body { padding: 1.5rem 1.75rem; }
 
   .activity {
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
   }
   .activity:last-of-type { margin-bottom: 1.25rem; }
+  .activity + .activity {
+    padding-top: 0.35rem;
+  }
 
   .activity h3 {
     font-family: var(--heading-font);
@@ -224,13 +187,18 @@
     line-height: 1.5;
   }
 
-  .submit-note {
-    background: var(--accent-light);
-    border-left: 3px solid var(--accent);
+  .submit-note,
+  .tip-box,
+  .quiz-note {
     padding: 0.6rem 1rem;
     margin-top: 0.75rem;
     border-radius: 0 6px 6px 0;
     font-size: 0.85rem;
+  }
+
+  .submit-note {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
     color: var(--accent);
     font-weight: 500;
   }
@@ -238,10 +206,6 @@
   .tip-box {
     background: #FFF8E1;
     border-left: 3px solid #F9A825;
-    padding: 0.6rem 1rem;
-    margin-top: 0.75rem;
-    border-radius: 0 6px 6px 0;
-    font-size: 0.85rem;
     color: #7B6518;
   }
 
@@ -345,12 +309,6 @@
     display: none;
   }
 
-  nav.toc a.is-active {
-    color: var(--text);
-    text-decoration: underline;
-    text-underline-offset: 0.16em;
-  }
-
   .step-nav {
     max-width: 860px;
     margin: 0 auto 1.5rem;
@@ -363,9 +321,9 @@
     border-radius: 12px;
     box-shadow: 0 1px 12px rgba(0,0,0,0.04);
     padding: 0.8rem 1rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: 0.75rem;
   }
 
@@ -384,26 +342,31 @@
     cursor: not-allowed;
   }
 
-  .nav-buttons {
-    display: flex;
-    gap: 0.6rem;
-    align-items: center;
+  .step-nav button.arrow-btn {
+    min-width: 2.5rem;
+    padding: 0.45rem 0.75rem;
   }
+
+  #prevBtn { justify-self: start; }
+  #nextBtn { justify-self: end; }
 
   .step-nav button.home-btn {
     background: var(--surface);
     color: var(--accent);
+    justify-self: center;
+    min-width: 14rem;
   }
 
   .step-nav button.home-btn:hover {
     background: var(--accent-light);
   }
 
-  .step-indicator {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    text-align: center;
-    flex: 1;
+  .step-nav button:focus-visible,
+  .assignment-order ol li a:focus-visible,
+  .lab-body a:focus-visible {
+    outline: 3px solid rgba(61, 90, 128, 0.35);
+    outline-offset: 2px;
+    border-radius: 6px;
   }
 
   .quiz-note {
@@ -414,10 +377,14 @@
 
   @media (max-width: 700px) {
     .page-header h1 { font-size: 1.6rem; }
-    nav.toc ol { flex-direction: column; gap: 0.35rem; }
     .lab-body { padding: 1.25rem; }
-    .step-nav-inner { flex-wrap: wrap; }
-    .nav-buttons { width: 100%; justify-content: space-between; }
+    .step-nav-inner {
+      grid-template-columns: auto 1fr auto;
+    }
+    .step-nav button.home-btn {
+      min-width: 0;
+      width: 100%;
+    }
   }
 
   .assignment-order ol li a {
@@ -431,9 +398,12 @@
     text-underline-offset: 0.16em;
   }
 
+  .tip-box--spaced {
+    margin-bottom: 1.25rem;
+  }
+
   @media print {
-    .step-nav,
-    nav.toc {
+    .step-nav {
       display: none !important;
     }
     .page-step {
@@ -453,16 +423,33 @@
 
 <nav class="step-nav" aria-label="Assignment navigation">
   <div class="step-nav-inner">
-    <div class="nav-buttons">
-      <button type="button" id="prevBtn">← Back</button>
-      <button type="button" id="homeBtn" class="home-btn">Overview ⌂</button>
-      <button type="button" id="nextBtn">Forward →</button>
-    </div>
-    <div class="step-indicator" id="stepIndicator">Step 1 of 11</div>
+    <button type="button" id="prevBtn" class="arrow-btn" aria-label="Previous assignment">←</button>
+    <button type="button" id="homeBtn" class="home-btn">Assignment Overview ⌂</button>
+    <button type="button" id="nextBtn" class="arrow-btn" aria-label="Next assignment">→</button>
   </div>
 </nav>
 
 <main>
+
+<section class="assignment-order page-step" id="overview">
+  <header>
+    <h2>Assignment Overview</h2>
+    <p>Landing page: start here, then use Forward and Back to move one assignment at a time.</p>
+  </header>
+  <ol>
+    <li><a href="#course-requirements"><strong>Course Requirements Checklist</strong></a><span>Course Overview Module</span></li>
+    <li><a href="#intro-quiz"><strong>Quiz: Introduction to Graphing and Lab Safety</strong></a><span>Module 1: Week 1 - Introduction to Graphing and Lab Safety</span></li>
+    <li><a href="#kinematics"><strong>Lab Report: Kinematics</strong></a><span>Module 2: Week 2 - Kinematics</span></li>
+    <li><a href="#kinematics-short-answer"><strong>Short Answer Response: Kinematics</strong></a><span>Module 2: Week 2 - Kinematics</span></li>
+    <li><a href="#projectile"><strong>Lab Report: Projectile Motion</strong></a><span>Module 3: Week 3 - Projectile Motion</span></li>
+    <li><a href="#newton-short-answer"><strong>Short Answer Response: Newton's Laws</strong></a><span>Module 4: Week 4 - Newton's Second Law</span></li>
+    <li><a href="#newton-quiz"><strong>Quiz: Newton's Second Law</strong></a><span>Module 4: Week 4 - Newton's Second Law</span></li>
+    <li><a href="#sound"><strong>Lab Report: Sound and Resonance</strong></a><span>Module 5: Week 5 - Sound and Resonance</span></li>
+    <li><a href="#circuits"><strong>Lab Report: Series and Parallel Circuits</strong></a><span>Module 6: Week 6 - Series and Parallel Circuits</span></li>
+    <li><a href="#magnetism"><strong>Lab Report: Magnetism</strong></a><span>Module 7: Week 7 - Magnetism</span></li>
+    <li><a href="#refraction-quiz"><strong>Quiz: Refraction of Light</strong></a><span>Module 8: Week 8 - Refraction of Light</span></li>
+  </ol>
+</section>
 
 <section class="lab-section page-step" id="course-requirements">
   <div class="lab-header">
@@ -502,7 +489,6 @@
   </div>
 </section>
 
-<!-- ===================== KINEMATICS ===================== -->
 <section class="lab-section page-step" id="kinematics">
   <div class="lab-header">
     <h2>Module 2 — Lab Report: Kinematics</h2>
@@ -597,10 +583,12 @@
     <div class="activity">
       <h3>Assignment Information</h3>
       <ul>
-        <li>To review the assignment information, click on the document name to view or download the document.</li>
+        <li>This short-answer assignment includes 5 questions.</li>
+        <li>Use the Canvas assignment page for the exact 5 prompts and submission details.</li>
       </ul>
+      <div class="tip-box"><strong>Work format option:</strong> You may answer all 5 questions on paper and submit clear photos of your work. This is often easier when showing math steps.</div>
       <div class="tip-box quiz-note"><strong>LUO Submission Policy:</strong> The first submission of this assignment will be used for grading. If you need an exception to this policy, please contact your faculty member.</div>
-      <div class="submit-note">Submit by 11:59 p.m. (ET) on Monday of Module 2: Week 2.</div>
+      <div class="submit-note">Submit: Your completed 5-question short-answer response in the Module 2 assignment (typed responses or clear photos of handwritten work are both acceptable), due by 11:59 p.m. (ET) on Monday of Module 2: Week 2.</div>
     </div>
 
     <div class="activity">
@@ -618,7 +606,6 @@
   </div>
 </section>
 
-<!-- ===================== PROJECTILE MOTION ===================== -->
 <section class="lab-section page-step" id="projectile">
   <div class="lab-header">
     <h2>Module 3 — Lab Report: Projectile Motion</h2>
@@ -692,13 +679,13 @@
   <div class="lab-body">
     <div class="tip-box"><strong>Submission format:</strong> Submit your report and photos as a single file (for example, insert photos into a Word document so your work is ordered and easy to follow). Include your name and date on the assignment and all associated work.</div>
     <div class="activity">
-      <h3>Response Prompts</h3>
+      <h3>Assignment Information</h3>
       <ul>
-        <li>State Newton's Second Law and explain each variable in F = ma.</li>
-        <li>Provide one real-world example where force changes acceleration but mass remains constant.</li>
-        <li>Explain how balanced and unbalanced forces affect motion.</li>
+        <li>This short-answer assignment includes 5 questions.</li>
+        <li>Use the Canvas assignment page for the exact 5 prompts and submission details.</li>
       </ul>
-      <div class="submit-note">Submit: Typed short-answer responses in the Module 4 assignment.</div>
+      <div class="tip-box"><strong>Work format option:</strong> You may answer all 5 questions on paper and submit clear photos of your work. This is often easier when showing math steps.</div>
+      <div class="submit-note">Submit: Your completed 5-question short-answer response in the Module 4 assignment (typed responses or clear photos of handwritten work are both acceptable).</div>
     </div>
 
     <div class="activity">
@@ -736,7 +723,145 @@
   </div>
 </section>
 
-<!-- ===================== MAGNETISM ===================== -->
+<section class="lab-section page-step" id="sound">
+  <div class="lab-header">
+    <h2>Module 5 — Lab Report: Sound and Resonance</h2>
+    <span class="activities-tag">Single Activity</span>
+  </div>
+  <div class="lab-body">
+    <div class="tip-box"><strong>Important:</strong> Follow the directions in the PDF found in this week's module and refer to the specific assignment instructions document found within the assignment in Canvas. This summary is meant to clarify, not replace those two documents in Canvas.</div>
+    <div class="tip-box"><strong>Submission format:</strong> Submit your report and photos as a single file (for example, insert photos into a Word document so your work is ordered and easy to follow). Include your name and date on the assignment and all associated work.</div>
+
+
+    <div class="activity">
+      <h3>Standing Wave in a Tube Open at One End</h3>
+      <ul>
+        <li>Calculate theoretical speed of sound: v<sub>s</sub> = 331.4 + 0.6T<sub>C</sub> (T<sub>C</sub> = room temperature in °C).</li>
+        <li>Assemble the graduated cylinder and fill with water. Insert the plastic tube.</li>
+        <li>Strike the tuning fork (2048 Hz) on your palm; hold it ~2 cm above the tube opening.</li>
+        <li>Slowly raise the tube. Listen for the first resonance point (sound amplifies) — this is L₁ = λ/4.</li>
+        <li>Continue raising to find L₂ = 3λ/4 and L₃ = 5λ/4.</li>
+        <li>Calculate wavelength from each measurement (λ = 4L₁, λ = 4L₂/3, λ = 4L₃/5).</li>
+        <li>Calculate experimental speed of sound (v = f × λ) and percent difference from theoretical for each row.</li>
+      </ul>
+      <div class="submit-note">Submit: Photo of setup with name/date, completed data table with all computations, percent difference for each of the three rows.</div>
+      <div class="tip-box">
+        <strong>Tips:</strong> Do NOT back-calculate L from the known wavelength — determine λ from your measured L values (some error is expected). Convert cm to meters. Percent difference is always positive (absolute value). Mark the tube at 1-cm increments before starting. Work in a quiet location.
+      </div>
+    </div>
+
+    <div class="supply-table-wrapper">
+      <h3>Materials</h3>
+      <table class="supplies">
+        <thead><tr><th>Item</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
+          <tr><td>Tuning Fork (2048 Hz)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Plastic Tube (open at both ends)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Graduated Cylinder (2 parts, unassembled)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Ruler (metric)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
+          <tr><td>Calculator</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Permanent Marker</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Thermometer</td><td><span class="badge-user">Student</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="activity">
+      <h3>Lab Report: Sound and Resonance Grading Rubric</h3>
+      <div class="submit-note">Complete assignment rubric can be found in Canvas.</div>
+      <ul>
+        <li><strong>Trial Data Complete (18 pts)</strong> — Advanced: Trial data is accurate.</li>
+        <li><strong>Calculations Accurate (18 pts)</strong> — Advanced: Calculations are accurate and all work is shown.</li>
+        <li><strong>Theoretical Velocity Calculated (17 pts)</strong> — Advanced: Calculation is accurate.</li>
+        <li><strong>Velocity Derived from Measured Lengths (17 pts)</strong> — Advanced: Calculations are accurate and all work is shown.</li>
+        <li><strong>Mechanics (30 pts)</strong> — Advanced: Grammar, spelling, and punctuation are correct, work is clearly visible, and name is included on all work.</li>
+      </ul>
+      <div class="tip-box"><strong>Total Points:</strong> 100</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="lab-section page-step" id="circuits">
+  <div class="lab-header">
+    <h2>Module 6 — Lab Report: Series and Parallel Circuits</h2>
+    <span class="activities-tag">Activities 1, 2 &amp; 3</span>
+  </div>
+  <div class="lab-body">
+    <div class="tip-box"><strong>Important:</strong> Follow the directions in the PDF found in this week's module and refer to the specific assignment instructions document found within the assignment in Canvas. This summary is meant to clarify, not replace those two documents in Canvas.</div>
+    <div class="tip-box"><strong>Submission format:</strong> Submit your report and photos as a single file (for example, insert photos into a Word document so your work is ordered and easy to follow). Include your name and date on the assignment and all associated work.</div>
+
+
+    <div class="activity">
+      <h3>Activity 1 — Resistors in Series</h3>
+      <ul>
+        <li><strong>Single lamp:</strong> Connect one lamp to four D-cell batteries in series. Observe brightness, photograph, disconnect.</li>
+        <li><strong>Two lamps in series:</strong> Photograph with all connected; unscrew one lamp and photograph (all go dark).</li>
+        <li><strong>Three lamps in series:</strong> Photograph connected; unscrew one and photograph (all go dark).</li>
+      </ul>
+      <div class="submit-note">Submit: Photos at each step; discussion of series circuit observations.</div>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 2 — Resistors in Parallel</h3>
+      <ul>
+        <li><strong>Two lamps in parallel:</strong> Observe brightness (same as single lamp). Photograph connected; unscrew one and photograph (other stays lit).</li>
+        <li><strong>Three lamps in parallel:</strong> Same procedure — all equally bright; removing one doesn't affect others.</li>
+      </ul>
+      <div class="submit-note">Submit: Photos at each step; discussion of parallel circuit observations.</div>
+    </div>
+
+    <div class="activity">
+      <h3>Activity 3 — Series &amp; Parallel Combination</h3>
+      <ul>
+        <li>Wire R₁ in series with R₂ and R₃ in parallel. Observe brightness differences (R₁ brighter).</li>
+        <li>Disconnect R₁ — all go dark. Reconnect R₁, disconnect R₂ — R₁ dims, R₃ brightens to match R₁.</li>
+      </ul>
+      <div class="submit-note">Submit: Photos of each configuration; discussion of combination circuit observations.</div>
+    </div>
+
+    <div class="tip-box tip-box--spaced">
+      <strong>Prep:</strong> Cut magnet wire into ten 10-cm strips. Strip enamel from last 3 cm of each end on all sides. Connect all 4 batteries in series. Test each lamp before building circuits. Only leave circuits connected long enough to observe — prolonged connection may burn out lamps.
+    </div>
+
+    <div class="supply-table-wrapper">
+      <h3>Materials</h3>
+      <table class="supplies">
+        <thead><tr><th>Item</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
+          <tr><td>Battery Holders (4)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>D-Cell Batteries (4)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Magnet Wire</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Sand Paper</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Miniature Lamps (pack of 10)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Lamp Sockets (5)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr><td>Alligator Clips (2)</td><td><span class="badge-kit">Kit</span></td></tr>
+          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
+          <tr><td>Scissors</td><td><span class="badge-user">Student</span></td></tr>
+          <tr><td>Ruler</td><td><span class="badge-user">Student</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="activity">
+      <h3>Lab Report: Series and Parallel Circuits Grading Rubric</h3>
+      <div class="submit-note">Complete assignment rubric can be found in Canvas.</div>
+      <ul>
+        <li><strong>Identification Photo showing Name and Date (10 pts)</strong> — Advanced: Photo clearly documents name and date.</li>
+        <li><strong>Activity 1: Photos and Discussion of Observations (20 pts)</strong> — Advanced: Photos document progress clearly and discussion of observation is clear.</li>
+        <li><strong>Activity 2: Photos and Discussion of Observations (20 pts)</strong> — Advanced: Photos document progress clearly and discussion of observation is clear.</li>
+        <li><strong>Activity 3: Photos and Discussion of Observations (20 pts)</strong> — Advanced: Photos document progress clearly and discussion of observation is clear.</li>
+        <li><strong>Mechanics (30 pts)</strong> — Advanced: Grammar, spelling, and punctuation are correct, work is clearly visible, and name is included on all work.</li>
+      </ul>
+      <div class="tip-box"><strong>Total Points:</strong> 100</div>
+    </div>
+
+  </div>
+</section>
+
 <section class="lab-section page-step" id="magnetism">
   <div class="lab-header">
     <h2>Module 7 — Lab Report: Magnetism</h2>
@@ -820,147 +945,6 @@
   </div>
 </section>
 
-<!-- ===================== CIRCUITS ===================== -->
-<section class="lab-section page-step" id="circuits">
-  <div class="lab-header">
-    <h2>Module 6 — Lab Report: Series and Parallel Circuits</h2>
-    <span class="activities-tag">Activities 1, 2 &amp; 3</span>
-  </div>
-  <div class="lab-body">
-    <div class="tip-box"><strong>Important:</strong> Follow the directions in the PDF found in this week's module and refer to the specific assignment instructions document found within the assignment in Canvas. This summary is meant to clarify, not replace those two documents in Canvas.</div>
-    <div class="tip-box"><strong>Submission format:</strong> Submit your report and photos as a single file (for example, insert photos into a Word document so your work is ordered and easy to follow). Include your name and date on the assignment and all associated work.</div>
-
-
-    <div class="activity">
-      <h3>Activity 1 — Resistors in Series</h3>
-      <ul>
-        <li><strong>Single lamp:</strong> Connect one lamp to four D-cell batteries in series. Observe brightness, photograph, disconnect.</li>
-        <li><strong>Two lamps in series:</strong> Photograph with all connected; unscrew one lamp and photograph (all go dark).</li>
-        <li><strong>Three lamps in series:</strong> Photograph connected; unscrew one and photograph (all go dark).</li>
-      </ul>
-      <div class="submit-note">Submit: Photos at each step; discussion of series circuit observations.</div>
-    </div>
-
-    <div class="activity">
-      <h3>Activity 2 — Resistors in Parallel</h3>
-      <ul>
-        <li><strong>Two lamps in parallel:</strong> Observe brightness (same as single lamp). Photograph connected; unscrew one and photograph (other stays lit).</li>
-        <li><strong>Three lamps in parallel:</strong> Same procedure — all equally bright; removing one doesn't affect others.</li>
-      </ul>
-      <div class="submit-note">Submit: Photos at each step; discussion of parallel circuit observations.</div>
-    </div>
-
-    <div class="activity">
-      <h3>Activity 3 — Series &amp; Parallel Combination</h3>
-      <ul>
-        <li>Wire R₁ in series with R₂ and R₃ in parallel. Observe brightness differences (R₁ brighter).</li>
-        <li>Disconnect R₁ — all go dark. Reconnect R₁, disconnect R₂ — R₁ dims, R₃ brightens to match R₁.</li>
-      </ul>
-      <div class="submit-note">Submit: Photos of each configuration; discussion of combination circuit observations.</div>
-    </div>
-
-    <div class="tip-box" style="margin-bottom: 1.25rem;">
-      <strong>Prep:</strong> Cut magnet wire into ten 10-cm strips. Strip enamel from last 3 cm of each end on all sides. Connect all 4 batteries in series. Test each lamp before building circuits. Only leave circuits connected long enough to observe — prolonged connection may burn out lamps.
-    </div>
-
-    <div class="supply-table-wrapper">
-      <h3>Materials</h3>
-      <table class="supplies">
-        <thead><tr><th>Item</th><th>Source</th></tr></thead>
-        <tbody>
-          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
-          <tr><td>Battery Holders (4)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>D-Cell Batteries (4)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>Magnet Wire</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>Sand Paper</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>Miniature Lamps (pack of 10)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>Lamp Sockets (5)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>Alligator Clips (2)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
-          <tr><td>Scissors</td><td><span class="badge-user">Student</span></td></tr>
-          <tr><td>Ruler</td><td><span class="badge-user">Student</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="activity">
-      <h3>Lab Report: Series and Parallel Circuits Grading Rubric</h3>
-      <div class="submit-note">Complete assignment rubric can be found in Canvas.</div>
-      <ul>
-        <li><strong>Identification Photo showing Name and Date (10 pts)</strong> — Advanced: Photo clearly documents name and date.</li>
-        <li><strong>Activity 1: Photos and Discussion of Observations (20 pts)</strong> — Advanced: Photos document progress clearly and discussion of observation is clear.</li>
-        <li><strong>Activity 2: Photos and Discussion of Observations (20 pts)</strong> — Advanced: Photos document progress clearly and discussion of observation is clear.</li>
-        <li><strong>Activity 3: Photos and Discussion of Observations (20 pts)</strong> — Advanced: Photos document progress clearly and discussion of observation is clear.</li>
-        <li><strong>Mechanics (30 pts)</strong> — Advanced: Grammar, spelling, and punctuation are correct, work is clearly visible, and name is included on all work.</li>
-      </ul>
-      <div class="tip-box"><strong>Total Points:</strong> 100</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===================== SOUND ===================== -->
-<section class="lab-section page-step" id="sound">
-  <div class="lab-header">
-    <h2>Module 5 — Lab Report: Sound and Resonance</h2>
-    <span class="activities-tag">Single Activity</span>
-  </div>
-  <div class="lab-body">
-    <div class="tip-box"><strong>Important:</strong> Follow the directions in the PDF found in this week's module and refer to the specific assignment instructions document found within the assignment in Canvas. This summary is meant to clarify, not replace those two documents in Canvas.</div>
-    <div class="tip-box"><strong>Submission format:</strong> Submit your report and photos as a single file (for example, insert photos into a Word document so your work is ordered and easy to follow). Include your name and date on the assignment and all associated work.</div>
-
-
-    <div class="activity">
-      <h3>Standing Wave in a Tube Open at One End</h3>
-      <ul>
-        <li>Calculate theoretical speed of sound: v<sub>s</sub> = 331.4 + 0.6T<sub>C</sub> (T<sub>C</sub> = room temperature in °C).</li>
-        <li>Assemble the graduated cylinder and fill with water. Insert the plastic tube.</li>
-        <li>Strike the tuning fork (2048 Hz) on your palm; hold it ~2 cm above the tube opening.</li>
-        <li>Slowly raise the tube. Listen for the first resonance point (sound amplifies) — this is L₁ = λ/4.</li>
-        <li>Continue raising to find L₂ = 3λ/4 and L₃ = 5λ/4.</li>
-        <li>Calculate wavelength from each measurement (λ = 4L₁, λ = 4L₂/3, λ = 4L₃/5).</li>
-        <li>Calculate experimental speed of sound (v = f × λ) and percent difference from theoretical for each row.</li>
-      </ul>
-      <div class="submit-note">Submit: Photo of setup with name/date, completed data table with all computations, percent difference for each of the three rows.</div>
-      <div class="tip-box">
-        <strong>Tips:</strong> Do NOT back-calculate L from the known wavelength — determine λ from your measured L values (some error is expected). Convert cm to meters. Percent difference is always positive (absolute value). Mark the tube at 1-cm increments before starting. Work in a quiet location.
-      </div>
-    </div>
-
-    <div class="supply-table-wrapper">
-      <h3>Materials</h3>
-      <table class="supplies">
-        <thead><tr><th>Item</th><th>Source</th></tr></thead>
-        <tbody>
-          <tr class="section-kit"><td colspan="2">Included in Kit</td></tr>
-          <tr><td>Tuning Fork (2048 Hz)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>Plastic Tube (open at both ends)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>Graduated Cylinder (2 parts, unassembled)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr><td>Ruler (metric)</td><td><span class="badge-kit">Kit</span></td></tr>
-          <tr class="section-user"><td colspan="2">You Must Supply</td></tr>
-          <tr><td>Calculator</td><td><span class="badge-user">Student</span></td></tr>
-          <tr><td>Permanent Marker</td><td><span class="badge-user">Student</span></td></tr>
-          <tr><td>Thermometer</td><td><span class="badge-user">Student</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="activity">
-      <h3>Lab Report: Sound and Resonance Grading Rubric</h3>
-      <div class="submit-note">Complete assignment rubric can be found in Canvas.</div>
-      <ul>
-        <li><strong>Trial Data Complete (18 pts)</strong> — Advanced: Trial data is accurate.</li>
-        <li><strong>Calculations Accurate (18 pts)</strong> — Advanced: Calculations are accurate and all work is shown.</li>
-        <li><strong>Theoretical Velocity Calculated (17 pts)</strong> — Advanced: Calculation is accurate.</li>
-        <li><strong>Velocity Derived from Measured Lengths (17 pts)</strong> — Advanced: Calculations are accurate and all work is shown.</li>
-        <li><strong>Mechanics (30 pts)</strong> — Advanced: Grammar, spelling, and punctuation are correct, work is clearly visible, and name is included on all work.</li>
-      </ul>
-      <div class="tip-box"><strong>Total Points:</strong> 100</div>
-    </div>
-
-  </div>
-</section>
-
 <section class="lab-section page-step" id="refraction-quiz">
   <div class="lab-header">
     <h2>Module 8 — Quiz: Refraction of Light</h2>
@@ -990,7 +974,9 @@
 
 <script>
   (function () {
+    // Keep this list in course sequence order (it controls Forward/Back navigation).
     const sectionIds = [
+      'overview',
       'course-requirements',
       'intro-quiz',
       'kinematics',
@@ -1004,7 +990,6 @@
       'refraction-quiz'
     ];
     const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
-    const stepIndicator = document.getElementById('stepIndicator');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const homeBtn = document.getElementById('homeBtn');
@@ -1029,7 +1014,6 @@
         section.setAttribute('aria-hidden', String(!isActive));
       });
 
-      stepIndicator.textContent = `Step ${targetIndex + 1} of ${sections.length}`;
       prevBtn.disabled = targetIndex === 0;
       nextBtn.disabled = targetIndex === sections.length - 1;
 
