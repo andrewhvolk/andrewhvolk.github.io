@@ -293,6 +293,17 @@
     border-top: 1px solid var(--border);
   }
 
+
+  .lab-section.is-hidden {
+    display: none;
+  }
+
+  nav.toc a.is-active {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 0.16em;
+  }
+
   @media (max-width: 600px) {
     .page-header h1 { font-size: 1.6rem; }
     nav.toc ol { flex-direction: column; gap: 0.35rem; }
@@ -624,6 +635,51 @@
 <footer>
   Carolina Distance Learning — Physics Lab Report Reference
 </footer>
+
+
+<script>
+  (function () {
+    const sections = Array.from(document.querySelectorAll('.lab-section'));
+    const links = Array.from(document.querySelectorAll('nav.toc a[href^="#"]'));
+
+    if (!sections.length) return;
+
+    const validIds = new Set(sections.map((section) => section.id));
+
+    function getTargetId() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && validIds.has(hash)) return hash;
+      return sections[0].id;
+    }
+
+    function render() {
+      const targetId = getTargetId();
+
+      sections.forEach((section) => {
+        const isActive = section.id === targetId;
+        section.classList.toggle('is-hidden', !isActive);
+        section.setAttribute('aria-hidden', String(!isActive));
+      });
+
+      links.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${targetId}`;
+        link.classList.toggle('is-active', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+
+      if (window.location.hash.replace('#', '') !== targetId) {
+        window.location.replace(`#${targetId}`);
+      }
+    }
+
+    window.addEventListener('hashchange', render);
+    render();
+  })();
+</script>
 
 </body>
 </html>
