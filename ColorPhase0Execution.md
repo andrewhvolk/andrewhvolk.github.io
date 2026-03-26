@@ -174,7 +174,16 @@ These color literals are expected to remain page-local unless later explicitly a
 
 ---
 
-## 7) Ready-to-Start Criteria for Phase 1
+
+## 7) Review Intake Log (Phase 0)
+
+- Latest commit reviewed before edits: `cc21e9c` (merge of PR #175).
+- PR discussion and inline comment review is required each turn; when discussion tooling is unavailable, document that limitation in the turn summary and avoid expanding scope.
+- Current scope lock for this turn: **Phase 0 docs only**.
+
+---
+
+## 8) Ready-to-Start Criteria for Phase 1
 
 Phase 1 can start when all conditions below are true:
 1. Policy lock table in Section 1 is approved.
