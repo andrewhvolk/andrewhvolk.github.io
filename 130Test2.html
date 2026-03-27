@@ -22,7 +22,7 @@
 
         .math-review-page {
             background:
-                radial-gradient(circle at top left, rgba(58, 102, 92, 0.12), transparent 28%),
+                radial-gradient(circle at top left, color-mix(in srgb, var(--emerald-main) 12%, transparent), transparent 28%),
                 linear-gradient(180deg, rgba(225, 227, 224, 0.46), transparent 24%),
                 var(--bg-surface);
         }
@@ -658,7 +658,7 @@
             border-radius: 12px;
             overflow: hidden;
             border: 0;
-            background: linear-gradient(180deg, rgba(26, 86, 219, 0.08) 0%, rgba(26, 86, 219, 0.02) 100%), var(--bg-surface);
+            background: linear-gradient(180deg, color-mix(in srgb, var(--primary-main) 8%, transparent) 0%, color-mix(in srgb, var(--primary-main) 2%, transparent) 100%), var(--bg-surface);
             aspect-ratio: 16 / 9;
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 74%, transparent);
             text-decoration: none;
@@ -696,13 +696,13 @@
             text-align: center;
             color: var(--text-muted);
             background:
-                linear-gradient(135deg, rgba(26, 86, 219, 0.08) 0%, transparent 100%),
+                linear-gradient(135deg, color-mix(in srgb, var(--primary-main) 8%, transparent) 0%, transparent 100%),
                 repeating-linear-gradient(
                     45deg,
                     transparent 0,
                     transparent 12px,
-                    rgba(255,255,255,0.025) 12px,
-                    rgba(255,255,255,0.025) 24px
+                    color-mix(in srgb, var(--bg-surface) 2%, transparent) 12px,
+                    color-mix(in srgb, var(--bg-surface) 2%, transparent) 24px
                 ),
                 var(--bg-surface);
         }
