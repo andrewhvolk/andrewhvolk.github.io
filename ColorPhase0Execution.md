@@ -129,6 +129,12 @@ This registry is intentionally small for PR 1 and will expand as files are migra
 | status info colors | `--status-info`, `--status-info-bg`, `--status-info-border` | Review/alert UIs | Keep status semantics explicit |
 | overlay/backdrop alpha layers | `--overlay-light`, `--overlay-medium`, `--overlay-dark` | Global + standalone modals/overlays | Preserve intentional translucency via semantic channels |
 
+### Alias lifecycle guardrails (compatibility window)
+
+- Compatibility aliases are **temporary** and remain available for **one full release cycle after Bucket C migration sign-off**.
+- During that window, aliases must map to Tier 2 semantic channels (for example `--text-body`, `--bg-surface`, `--primary-base`) rather than directly to literals.
+- No blind generic alias replacements are allowed. New or changed generic aliases (`--text`, `--bg`, `--surface`, `--border`, `--accent`) are only allowed in approved scoped bridge patterns (for example the Math 130 review layer bridge block).
+
 ---
 
 ## 4) Exception Registry Seed (Intentional Literals)
