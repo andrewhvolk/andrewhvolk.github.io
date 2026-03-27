@@ -45,8 +45,8 @@
 
   /* Tier 2 semantic tokens (migration foundation) */
   --bg-body: var(--bg-surface);
-  --bg-surface: var(--surface-container-lowest);
-  --bg-subtle: var(--surface-container-low);
+  --bg-surface: var(--bg-base);
+  --bg-subtle: var(--bg-base);
   --bg-inverse: var(--primary);
   --text-heading: var(--primary);
   --text-body: var(--on-surface);
@@ -78,6 +78,7 @@
   --danger-soft: color-mix(in srgb, var(--danger-main) 10%, transparent);
   --primary-soft: color-mix(in srgb, var(--primary-main) 10%, transparent);
   --border-transparent: color-mix(in srgb, var(--border-subtle) 70%, transparent);
+  --surface-transparent: color-mix(in srgb, var(--bg-surface) 85%, transparent);
   /*
    * Legacy compatibility aliases (temporary):
    * - Keep during migration window only (one full release cycle after Bucket C sign-off).
@@ -93,7 +94,7 @@
   --light-text: var(--text-on-primary);
   --background-color: var(--bg-base);
   --card-background: var(--bg-surface);
-  --featured-card-surface: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 8%, transparent), color-mix(in srgb, var(--bg-surface) 0%, transparent)), linear-gradient(135deg, rgba(0, 29, 23, 0.96), rgba(0, 52, 43, 0.92));
+  --featured-card-surface: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), linear-gradient(135deg, rgba(0, 29, 23, 0.96), rgba(0, 52, 43, 0.92));
   --featured-card-base: #002720;
   --featured-card-text: var(--primary-text);
   --featured-card-accent: color-mix(in srgb, var(--primary-main) 78%, var(--bg-surface) 22%);
@@ -148,37 +149,37 @@
     linear-gradient(135deg, rgba(0, 29, 23, 0.97), rgba(0, 52, 43, 0.92));
   --gradient-surface-soft: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--bg-surface) 78%, transparent),
+    var(--surface-transparent),
     rgba(242, 244, 241, 0.8)
   );
   --gradient-editorial-panel: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--bg-surface) 82%, transparent),
+    var(--surface-transparent),
     rgba(242, 244, 241, 0.9)
   );
   --gradient-editorial-tier: linear-gradient(
     180deg,
     rgba(220, 230, 224, 0.15),
-    color-mix(in srgb, var(--bg-surface) 0%, transparent)
+    var(--surface-transparent)
   );
   --gradient-editorial-hover-tier: linear-gradient(
     180deg,
     rgba(220, 230, 224, 0.24),
-    color-mix(in srgb, var(--bg-surface) 0%, transparent)
+    var(--surface-transparent)
   );
   --gradient-editorial-hover-panel: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--bg-surface) 90%, transparent),
+    var(--surface-transparent),
     rgba(242, 244, 241, 0.94)
   );
   --gradient-card-surface: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--bg-surface) 94%, transparent),
+    var(--surface-transparent),
     rgba(242, 244, 241, 0.88)
   );
   --gradient-card-surface-hover: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--bg-surface) 98%, transparent),
+    var(--surface-transparent),
     rgba(242, 244, 241, 0.9)
   );
   --gradient-publication-surface: linear-gradient(
@@ -187,29 +188,29 @@
     color-mix(in srgb, var(--emerald-main) 3%, transparent) 24%,
     transparent 70%
   ),
-  linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 82%, transparent), rgba(242, 244, 241, 0.72));
+  linear-gradient(180deg, var(--surface-transparent), rgba(242, 244, 241, 0.72));
   --gradient-publication-surface-hover: linear-gradient(
     90deg,
     var(--primary-soft),
     var(--emerald-soft) 28%,
     transparent 74%
   ),
-  linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 90%, transparent), rgba(242, 244, 241, 0.82));
-  --glass-surface: color-mix(in srgb, var(--bg-surface) 85%, transparent);
+  linear-gradient(180deg, var(--surface-transparent), rgba(242, 244, 241, 0.82));
+  --glass-surface: var(--surface-transparent);
   --ghost-outline: rgba(192, 200, 196, 0.15);
   --ambient-outline: rgba(192, 200, 196, 0.32);
-  --elevation-veil: color-mix(in srgb, var(--bg-surface) 66%, transparent);
-  --elevation-veil-strong: color-mix(in srgb, var(--bg-surface) 82%, transparent);
-  --gradient-footer-surface: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 0%, transparent), rgba(220, 230, 224, 0.18) 14%, rgba(232, 235, 231, 0.98)),
+  --elevation-veil: var(--surface-transparent);
+  --elevation-veil-strong: var(--surface-transparent);
+  --gradient-footer-surface: linear-gradient(180deg, var(--surface-transparent), rgba(220, 230, 224, 0.18) 14%, rgba(232, 235, 231, 0.98)),
     linear-gradient(180deg, rgba(242, 244, 241, 0.96), rgba(232, 235, 231, 0.98));
-  --nav-surface-start: color-mix(in srgb, var(--bg-surface) 88%, transparent);
+  --nav-surface-start: var(--surface-transparent);
   --nav-surface-end: rgba(242, 244, 241, 0.78);
-  --context-surface-start: color-mix(in srgb, var(--bg-surface) 68%, transparent);
+  --context-surface-start: var(--surface-transparent);
   --context-surface-end: rgba(242, 244, 241, 0.88);
-  --nav-pill-surface: color-mix(in srgb, var(--bg-surface) 72%, transparent);
-  --nav-mobile-panel-start: color-mix(in srgb, var(--bg-surface) 94%, transparent);
+  --nav-pill-surface: var(--surface-transparent);
+  --nav-mobile-panel-start: var(--surface-transparent);
   --nav-mobile-panel-end: rgba(242, 244, 241, 0.9);
-  --nav-mobile-menu-surface: color-mix(in srgb, var(--bg-surface) 96%, transparent);
+  --nav-mobile-menu-surface: var(--surface-transparent);
 }
 /* Base styles */
 body {
@@ -420,7 +421,7 @@ header h1 {
 }
 
 .reading-flow {
-  background: var(--surface-container-low);
+  background: var(--bg-base);
   border-radius: var(--radius-lg);
   padding: clamp(1.5rem, 3vw, 2.5rem);
   box-shadow: none;
@@ -434,7 +435,7 @@ header h1 {
 .reading-flow h2,
 .reading-flow h3,
 .reading-flow h4 {
-  color: var(--secondary-color);
+  color: var(--secondary);
 }
 
 .reading-flow h1,
@@ -473,7 +474,7 @@ header h1 {
 .reading-page .practice-sheet {
   max-width: var(--reading-measure);
   margin-inline: auto;
-  background: var(--surface-container-low);
+  background: var(--bg-base);
   border-radius: var(--radius-lg);
   padding: clamp(1.35rem, 2.6vw, 2rem);
   box-shadow: none;
@@ -491,7 +492,7 @@ header h1 {
 .reading-page .unit-resource-card,
 .reading-page .course-meta-card,
 .reading-page .quick-link-card {
-  background: var(--surface-container-lowest);
+  background: var(--bg-base);
   box-shadow: none;
 }
 
@@ -515,7 +516,7 @@ header h1 {
 }
 
 .reading-page :where(p, li, dd, figcaption, blockquote) a {
-  text-decoration-color: color-mix(in srgb, var(--bg-surface) 82%, transparent);
+  text-decoration-color: var(--surface-transparent);
 }
 
 .subtitle {
@@ -562,7 +563,7 @@ header h1 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--secondary-color);
+  color: var(--secondary);
 }
 
 /* Legacy nav.navbar styling removed: use the .top-nav system site-wide. */
@@ -610,7 +611,7 @@ section h2 {
 .marketing-card:hover,
 .feature-section:hover,
 .promo-band:hover {
-  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
+  box-shadow: 0 18px 36px var(--border-transparent);
   outline-color: color-mix(in srgb, var(--bg-surface) 18%, var(--border-subtle));
 }
 
@@ -673,7 +674,7 @@ section h2 {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 16%, transparent), color-mix(in srgb, var(--bg-surface) 0%, transparent)), var(--primary-main);
+  background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), var(--primary-main);
   color: var(--primary-text);
   padding: 0.9rem 1.6rem;
   border-radius: var(--radius-md);
@@ -688,7 +689,7 @@ section h2 {
 
 .button:hover,
 .download-btn:hover {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 12%, transparent), color-mix(in srgb, var(--bg-surface) 0%, transparent)), var(--primary-hover);
+  background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), var(--primary-hover);
   color: var(--primary-text);
   transform: translateY(-1px);
 }
@@ -700,14 +701,14 @@ section h2 {
 
 
 .button-secondary {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 14%, transparent), color-mix(in srgb, var(--bg-surface) 0%, transparent)), var(--primary-surface);
+  background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), var(--primary-surface);
   color: var(--primary-main);
   border-color: var(--border-subtle);
 }
 
 .button-secondary:hover,
 .button-secondary:focus-visible {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 18%, transparent), color-mix(in srgb, var(--bg-surface) 0%, transparent)), color-mix(in srgb, var(--primary-main) 18%, var(--bg-surface));
+  background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), color-mix(in srgb, var(--primary-main) 18%, var(--bg-surface));
   color: var(--primary-hover);
   border-color: color-mix(in srgb, var(--primary-main) 44%, var(--border-subtle));
 }
@@ -762,7 +763,7 @@ section h2 {
 .hero-lead {
   max-width: 34rem;
   font-size: 1.12rem;
-  color: color-mix(in srgb, var(--on-primary) 88%, color-mix(in srgb, var(--bg-surface) 20%, transparent));
+  color: color-mix(in srgb, var(--on-primary) 88%, var(--surface-transparent));
 }
 
 .hero-cta-cluster {
@@ -779,7 +780,7 @@ section h2 {
 
 .hero-tertiary-link {
   font-weight: 600;
-  color: color-mix(in srgb, var(--on-primary) 86%, color-mix(in srgb, var(--bg-surface) 20%, transparent));
+  color: color-mix(in srgb, var(--on-primary) 86%, var(--surface-transparent));
   text-decoration-color: color-mix(in srgb, var(--on-primary) 38%, transparent);
 }
 
@@ -787,8 +788,8 @@ section h2 {
   position: relative;
   padding: clamp(1.75rem, 3vw, 2.5rem);
   border-radius: var(--radius-lg);
-  background-color: color-mix(in srgb, var(--surface-container-lowest) 18%, color-mix(in srgb, var(--bg-surface) 12%, transparent));
-  background-image: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 16%, transparent), color-mix(in srgb, var(--bg-surface) 3%, transparent));
+  background-color: color-mix(in srgb, var(--bg-base) 18%, var(--surface-transparent));
+  background-image: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent));
   color: var(--featured-card-text);
   backdrop-filter: blur(6px);
   transform: translateY(var(--spacing-8));
@@ -808,7 +809,7 @@ section h2 {
 
 .highlighted-destination-card .button:hover,
 .highlighted-destination-card .button:focus-visible {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 22%, transparent), color-mix(in srgb, var(--bg-surface) 0%, transparent)), var(--featured-card-accent);
+  background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), var(--featured-card-accent);
 }
 
 .supporting-link-list {
@@ -1021,7 +1022,7 @@ section h2 {
 }
 
 .marketing-card:hover {
-  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
+  box-shadow: 0 18px 36px var(--border-transparent);
   outline-color: color-mix(in srgb, var(--bg-surface) 18%, var(--border-subtle));
 }
 
@@ -1137,7 +1138,7 @@ section h2 {
   gap: 1rem;
   align-items: stretch;
   background: var(--gradient-card-surface);
-  box-shadow: 0 16px 34px rgba(0, 29, 23, 0.05);
+  box-shadow: 0 16px 34px var(--border-transparent);
   border-radius: var(--border-radius);
   padding: 1rem 1.25rem;
 }
@@ -1159,7 +1160,7 @@ section h2 {
 
 .course-identity__value {
   margin: 0;
-  color: var(--secondary-color);
+  color: var(--secondary);
   font-weight: 600;
   overflow-wrap: anywhere;
 }
@@ -1174,7 +1175,7 @@ section h2 {
   padding: 0.32rem 0.78rem;
   border-radius: 999px;
   background: color-mix(in srgb, var(--bg-surface) 8%, var(--bg-surface));
-  color: var(--secondary-color);
+  color: var(--secondary);
   font-family: var(--type-meta-family);
   font-size: var(--meta-sm);
   font-weight: var(--meta-weight);
@@ -1204,7 +1205,7 @@ section h2 {
   background: var(--gradient-card-surface);
   border-radius: var(--border-radius);
   padding: 1.25rem;
-  box-shadow: 0 16px 34px rgba(0, 29, 23, 0.05);
+  box-shadow: 0 16px 34px var(--border-transparent);
 }
 
 .course-meta-card p:last-child,
@@ -1247,7 +1248,7 @@ section h2 {
   background: var(--gradient-card-surface);
   border-radius: var(--border-radius);
   padding: var(--spacing-6);
-  box-shadow: 0 16px 34px rgba(0, 29, 23, 0.05);
+  box-shadow: 0 16px 34px var(--border-transparent);
 }
 
 .unit-module-card + .unit-module-card {
@@ -1275,7 +1276,7 @@ section h2 {
 .unit-resource-card {
   background:
     linear-gradient(180deg, var(--primary-soft), var(--primary-soft)),
-    linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 86%, transparent), rgba(242, 244, 241, 0.8));
+    linear-gradient(180deg, var(--surface-transparent), rgba(242, 244, 241, 0.8));
   border-radius: var(--border-radius);
   padding: 1rem;
   box-shadow: 0 12px 28px rgba(0, 29, 23, 0.04);
@@ -1298,7 +1299,7 @@ section h2 {
 }
 
 .unit-task-meta strong {
-  color: var(--secondary-color);
+  color: var(--secondary);
 }
 
 .unit-resource-card ul {
@@ -1316,7 +1317,7 @@ section h2 {
 .unit-detail-toggle summary {
   cursor: pointer;
   font-weight: 700;
-  color: var(--secondary-color);
+  color: var(--secondary);
 }
 
 .unit-detail-toggle summary + * {
@@ -1341,7 +1342,7 @@ section h2 {
   background: var(--gradient-card-surface);
   overflow: hidden;
   border-radius: var(--border-radius);
-  box-shadow: 0 14px 32px rgba(0, 29, 23, 0.05);
+  box-shadow: 0 14px 32px var(--border-transparent);
 }
 
 .assignment-resource-table th,
@@ -1353,7 +1354,7 @@ section h2 {
 
 .assignment-resource-table th {
   background: linear-gradient(180deg, var(--primary-soft), var(--primary-soft));
-  color: var(--secondary-color);
+  color: var(--secondary);
 }
 
 .assignment-resource-table tbody tr:nth-child(even) td {
@@ -1361,7 +1362,7 @@ section h2 {
 }
 
 .assignment-resource-table tbody tr + tr td {
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--bg-surface) 70%, transparent);
+  box-shadow: inset 0 1px 0 var(--surface-transparent);
 }
 
 .course-sequence-nav {
@@ -1405,7 +1406,7 @@ section h2 {
 /* Footer styling */
 footer {
   background: var(--gradient-footer-surface);
-  color: var(--secondary-color);
+  color: var(--secondary);
   text-align: center;
   padding: 2.75rem 0 2.25rem;
   margin-top: 4rem;
@@ -1430,7 +1431,7 @@ footer p {
 }
 
 .social-links a {
-  color: var(--secondary-color);
+  color: var(--secondary);
   font-size: 1.5rem;
   text-decoration: none;
   transition: var(--transition);
@@ -1445,7 +1446,7 @@ footer p {
 .error-container {
   background: var(--gradient-card-surface);
   border-radius: var(--border-radius);
-  box-shadow: 0 18px 40px rgba(0, 29, 23, 0.06);
+  box-shadow: 0 18px 40px var(--border-transparent);
   padding: 2.5rem;
   width: 100%;
   max-width: 500px;
@@ -1461,7 +1462,7 @@ footer p {
 .error-code {
   font-size: 3rem;
   font-weight: bold;
-  color: var(--secondary-color);
+  color: var(--secondary);
   margin: 0;
 }
 
@@ -1512,7 +1513,7 @@ main.error-main {
   align-items: center;
   gap: 0.3rem;
   background: var(--primary-soft);
-  color: var(--secondary-color);
+  color: var(--secondary);
   padding: 0.3rem 0.8rem;
   border-radius: 50px;
   font-size: 0.9rem;
@@ -1529,8 +1530,8 @@ main.error-main {
 
 .tool-page-body {
   background:
-    radial-gradient(circle at top, color-mix(in srgb, var(--bg-surface) 8%, transparent), transparent 28%),
-    linear-gradient(180deg, color-mix(in srgb, var(--surface-container-low) 86%, transparent), transparent 22%),
+    radial-gradient(circle at top, var(--surface-transparent), transparent 28%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-base) 86%, transparent), transparent 22%),
     var(--bg-surface);
 }
 
@@ -1543,7 +1544,7 @@ main.error-main {
 .tool-page-shell,
 .practice-sheet,
 .tool-surface-card {
-  background: var(--surface-container-lowest);
+  background: var(--bg-base);
   border-radius: var(--radius-lg);
   padding: clamp(1.25rem, 2vw, 2rem);
   box-shadow: 0 20px 42px color-mix(in srgb, var(--surface-tint) 8%, transparent);
@@ -1563,7 +1564,7 @@ main.error-main {
 .review-callout,
 .recommended-order-panel,
 .journey-panel {
-  background: var(--surface-container-low);
+  background: var(--bg-base);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   box-shadow: none;
@@ -1588,7 +1589,7 @@ main.error-main {
 .stat-card,
 .person-box,
 .chart-container {
-  background: var(--surface-container-lowest);
+  background: var(--bg-base);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: none;
@@ -1605,13 +1606,13 @@ main.error-main {
 .recommended-order-panel,
 .journey-panel {
   border-color: color-mix(in srgb, var(--bg-surface) 24%, var(--border-subtle));
-  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 7%, var(--surface-container-low)), var(--surface-container-low));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 7%, var(--bg-base)), var(--bg-base));
 }
 
 .tool-chart-box,
 .chart-container,
 #linear-chart-container {
-  background: var(--surface-container-lowest);
+  background: var(--bg-base);
 }
 
 .tool-eyebrow,
@@ -1675,7 +1676,7 @@ main.error-main {
 .review-topic-btn,
 .print-btn,
 .reset-btn {
-  background: var(--surface-container-lowest);
+  background: var(--bg-base);
   color: var(--on-surface);
   border: 1px solid var(--border-subtle);
 }
@@ -1695,7 +1696,7 @@ main.error-main {
 .reset-btn:hover,
 .reset-btn:focus-visible {
   border-color: color-mix(in srgb, var(--bg-surface) 48%, var(--border-subtle));
-  background: color-mix(in srgb, var(--bg-surface) 8%, var(--surface-container-lowest));
+  background: color-mix(in srgb, var(--bg-surface) 8%, var(--bg-base));
   color: var(--bg-surface);
 }
 
@@ -1703,7 +1704,7 @@ main.error-main {
 .tool-button--secondary:focus-visible,
 .tool-panel :is(button, a, input, select, textarea):focus-visible,
 .tool-page-shell :is(button, a, input, select, textarea):focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--bg-surface) 36%, transparent);
+  outline: 3px solid var(--surface-transparent);
   outline-offset: 2px;
 }
 
@@ -1798,8 +1799,8 @@ main.error-main {
   --on-surface: #f2f5f2;
   --on-surface-variant: #bac4bf;
   --bg-body: var(--bg-surface);
-  --bg-surface: var(--surface-container-lowest);
-  --bg-subtle: var(--surface-container-low);
+  --bg-surface: var(--bg-base);
+  --bg-subtle: var(--bg-base);
   --bg-inverse: #f8faf7;
   --text-heading: var(--bg-surface);
   --text-body: var(--on-surface);
@@ -1811,9 +1812,9 @@ main.error-main {
   --primary-text: var(--text-on-primary);
   --border-subtle: color-mix(in srgb, var(--outline-variant) 52%, transparent);
   --border-base: var(--border-subtle);
-  --overlay-light: color-mix(in srgb, var(--bg-surface) 14%, transparent);
-  --overlay-medium: color-mix(in srgb, var(--bg-surface) 24%, transparent);
-  --overlay-dark: color-mix(in srgb, var(--bg-surface) 36%, transparent);
+  --overlay-light: var(--surface-transparent);
+  --overlay-medium: var(--surface-transparent);
+  --overlay-dark: var(--surface-transparent);
   --status-success: #34d399;
   --status-success-bg: rgba(52, 211, 153, 0.2);
   --status-success-border: rgba(52, 211, 153, 0.4);
@@ -1834,7 +1835,7 @@ main.error-main {
   --light-text: var(--text-on-primary);
   --background-color: var(--bg-base);
   --card-background: var(--bg-surface);
-  --featured-card-surface: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 4%, transparent), color-mix(in srgb, var(--bg-surface) 0%, transparent)), linear-gradient(135deg, rgba(22, 29, 27, 0.95), rgba(33, 72, 62, 0.88));
+  --featured-card-surface: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), linear-gradient(135deg, rgba(22, 29, 27, 0.95), rgba(33, 72, 62, 0.88));
   --featured-card-base: #16211d;
   --featured-card-text: var(--primary-text);
   --featured-card-accent: color-mix(in srgb, var(--primary-main) 82%, var(--primary-surface));
@@ -1911,7 +1912,7 @@ main.error-main {
 }
 
 :root[data-theme="dark"] .profile-image {
-  border-color: var(--secondary-color);
+  border-color: var(--secondary);
 }
 
 :root[data-theme="dark"] .item-date {
@@ -1931,7 +1932,7 @@ main.error-main {
   margin: 0;
   flex: 0 0 auto;
   align-self: center;
-  color: var(--secondary-color);
+  color: var(--secondary);
   border-radius: 50%;
   background-color: var(--primary-soft);
   width: 40px;
@@ -2286,8 +2287,8 @@ main.error-main {
 .top-nav-utilities a[aria-current="page"],
 .top-nav-utilities button[aria-current="page"] {
   color: var(--text-main);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 88%, transparent), color-mix(in srgb, var(--bg-surface) 92%, transparent));
-  box-shadow: inset 0 0 0 999px color-mix(in srgb, var(--bg-surface) 8%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 88%, transparent), var(--surface-transparent));
+  box-shadow: inset 0 0 0 999px var(--surface-transparent);
 }
 
 .top-nav-links a[aria-current="page"]:hover,
@@ -2299,7 +2300,7 @@ main.error-main {
 .top-nav-utilities button[aria-current="page"]:hover,
 .top-nav-utilities button[aria-current="page"]:focus-visible {
   color: var(--text-main);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 96%, transparent), color-mix(in srgb, var(--bg-surface) 96%, transparent));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 96%, transparent), var(--surface-transparent));
 }
 
 .page-context-bar {
@@ -2327,7 +2328,7 @@ main.error-main {
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius-pill);
   background: var(--gradient-editorial-panel);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--bg-surface) 45%, transparent);
+  box-shadow: inset 0 1px 0 var(--surface-transparent);
 }
 
 .breadcrumb a {
@@ -2420,7 +2421,7 @@ main.error-main {
   border: none;
   border-radius: 0.85rem;
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--surface-container-lowest) 96%, transparent), color-mix(in srgb, var(--surface-container-low) 92%, transparent));
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-base) 96%, transparent), color-mix(in srgb, var(--bg-base) 92%, transparent));
   color: var(--text-main);
   font: inherit;
   font-weight: 600;
@@ -2456,7 +2457,7 @@ main.error-main {
   position: sticky;
   top: 4.6rem;
   z-index: 900;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--glass-surface) 92%, transparent), color-mix(in srgb, var(--surface-container-low) 94%, transparent));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--glass-surface) 92%, transparent), color-mix(in srgb, var(--bg-base) 94%, transparent));
   border-top: none;
   border-bottom: none;
   box-shadow: inset 0 -1px 0 var(--border-transparent);
@@ -2512,7 +2513,7 @@ main.error-main {
   min-width: 220px;
   margin: 0;
   padding: 0.35rem;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--surface-container-lowest) 96%, transparent), color-mix(in srgb, var(--surface-container-low) 90%, transparent));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-base) 96%, transparent), color-mix(in srgb, var(--bg-base) 90%, transparent));
   border-radius: 0.75rem;
   box-shadow: inset 0 0 0 1px var(--border-transparent);
   opacity: 0;
@@ -2610,7 +2611,7 @@ main.error-main {
     margin-top: 0.35rem;
     padding: 0.45rem;
     background: var(--nav-mobile-menu-surface);
-    box-shadow: inset 0 0 0 999px color-mix(in srgb, var(--bg-surface) 8%, transparent);
+    box-shadow: inset 0 0 0 999px var(--surface-transparent);
     border-radius: 0.75rem;
   }
 
@@ -2686,7 +2687,7 @@ main.error-main {
 
 .shortcut-bar a {
   margin: 0 1rem;
-  color: var(--secondary-color);
+  color: var(--secondary);
   font-size: 1.5rem;
   text-decoration: none;
   transition: var(--transition);
@@ -2793,7 +2794,7 @@ body.light .math-review-page,
   --review-accent-glow: var(--primary-soft);
   --review-muted: var(--on-surface-variant, #3d4a44);
   --review-text: var(--on-surface, #001d17);
-  --review-shadow: 0 8px 32px rgba(0, 29, 23, 0.06);
+  --review-shadow: 0 8px 32px var(--border-transparent);
   --review-grid: var(--emerald-soft);
   --review-accent-hover: var(--primary-soft);
   --review-green-border: var(--emerald-soft);
@@ -2852,7 +2853,7 @@ body.light .math-review-page,
 .review-page-header .header-subtitle,
 .review-page-header .page-shell-header__eyebrow,
 .review-page-header p {
-  color: color-mix(in srgb, var(--bg-surface) 92%, transparent);
+  color: var(--surface-transparent);
 }
 
 .review-page-header h1 {
@@ -2869,7 +2870,7 @@ body.light .math-review-page,
   font-weight: var(--meta-weight);
   letter-spacing: var(--meta-tracking);
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--bg-surface) 82%, transparent);
+  color: var(--surface-transparent);
   opacity: 1;
 }
 
@@ -2920,7 +2921,7 @@ body.light .math-review-page,
   position: sticky;
   top: 4.6rem;
   z-index: 900;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--glass-surface) 92%, transparent), color-mix(in srgb, var(--surface-container-low) 94%, transparent));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--glass-surface) 92%, transparent), color-mix(in srgb, var(--bg-base) 94%, transparent));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: inset 0 -1px 0 var(--border-transparent);
@@ -2944,7 +2945,7 @@ body.light .math-review-page,
 .review-section-nav__inner a {
   display: block;
   padding: 0.7rem 0.9rem;
-  color: var(--secondary-color);
+  color: var(--secondary);
   font-family: var(--type-meta-family);
   font-size: var(--meta-sm);
   font-weight: 600;
@@ -2964,7 +2965,7 @@ body.light .math-review-page,
 }
 
 .review-section-nav__inner a.is-active {
-  background: color-mix(in srgb, var(--bg-surface) 12%, transparent);
+  background: var(--surface-transparent);
   color: var(--bg-surface);
 }
 
@@ -3144,7 +3145,7 @@ body.light .math-review-page,
 .card {
   position: relative;
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--surface-container-lowest) 96%, transparent), color-mix(in srgb, var(--surface-container-low) 94%, transparent));
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-base) 96%, transparent), color-mix(in srgb, var(--bg-base) 94%, transparent));
   border-radius: var(--radius-lg);
   box-shadow: inset 0 0 0 1px var(--border-transparent);
 }
@@ -3160,7 +3161,7 @@ body.light .math-review-page,
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: color-mix(in srgb, var(--bg-surface) 92%, transparent);
+  background: var(--surface-transparent);
   pointer-events: none;
 }
 .review-panel > *, .review-card > *, .card > *, .formula-section > *, .section-summary-card > * { position: relative; z-index: 1; }
@@ -3239,7 +3240,7 @@ body.light .math-review-page,
   margin: 1rem 0;
   border-radius: 14px;
   box-shadow: inset 0 0 0 1px var(--border-transparent);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-surface) 84%, transparent), var(--bg-surface));
+  background: linear-gradient(135deg, var(--surface-transparent), var(--bg-surface));
 }
 .review-callout--exam { text-align:center; box-shadow: inset 0 0 0 1px var(--primary-soft); background: linear-gradient(135deg, color-mix(in srgb, var(--primary-main) 16%, var(--bg-surface)), color-mix(in srgb, var(--bg-surface) 88%, var(--bg-surface))); }
 .review-callout--tip, .tip-box,
@@ -3300,7 +3301,7 @@ body.light .math-review-page,
 }
 
 .section-card {
-  background: var(--surface-container-lowest);
+  background: var(--bg-base);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: var(--spacing-4);
@@ -3453,8 +3454,8 @@ body.math130-course-page {
   align-items: center;
   padding: 0.38rem 0.72rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bg-surface) 10%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bg-surface) 14%, transparent);
+  background: var(--surface-transparent);
+  box-shadow: inset 0 0 0 1px var(--surface-transparent);
   color: var(--on-primary);
   font-family: var(--type-meta-family);
   font-size: var(--meta-sm);
@@ -3465,17 +3466,17 @@ body.math130-course-page {
 }
 
 .math130-header__chip--accent {
-  background: color-mix(in srgb, var(--bg-surface) 18%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bg-surface) 22%, transparent);
+  background: var(--surface-transparent);
+  box-shadow: inset 0 0 0 1px var(--surface-transparent);
 }
 
 .math130-header__usage {
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
   border-radius: var(--radius-lg);
-  background-color: color-mix(in srgb, var(--bg-surface) 8%, transparent);
-  background-image: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 12%, transparent), color-mix(in srgb, var(--bg-surface) 3%, transparent));
+  background-color: var(--surface-transparent);
+  background-image: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent));
   backdrop-filter: blur(6px);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bg-surface) 12%, transparent);
+  box-shadow: inset 0 0 0 1px var(--surface-transparent);
   color: var(--on-primary);
   align-self: stretch;
   display: flex;
@@ -3509,7 +3510,7 @@ body.math130-course-page {
   content: "•";
   position: absolute;
   left: 0;
-  color: color-mix(in srgb, var(--bg-surface) 60%, transparent);
+  color: var(--surface-transparent);
   font-weight: 700;
 }
 
@@ -3570,7 +3571,7 @@ body.math130-course-page {
 }
 
 .math130-unit-card:hover {
-  box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
+  box-shadow: 0 18px 36px var(--border-transparent);
   outline-color: color-mix(in srgb, var(--bg-surface) 18%, var(--border-subtle));
   transform: translateY(-2px);
 }
@@ -3598,7 +3599,7 @@ body.math130-course-page {
 
 .math130-unit-card__label {
   font-weight: 700;
-  color: var(--secondary-color);
+  color: var(--secondary);
   font-size: 1.02rem;
   line-height: 1.2;
 }
@@ -3621,7 +3622,7 @@ body.math130-course-page {
 }
 
 .math130-meta-stack strong {
-  color: var(--secondary-color);
+  color: var(--secondary);
 }
 
 .math130-unit-card__button {
@@ -3707,8 +3708,8 @@ body.math130-course-page {
   min-height: 3rem;
   padding: 0.8rem 1rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bg-surface) 10%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bg-surface) 14%, transparent);
+  background: var(--surface-transparent);
+  box-shadow: inset 0 0 0 1px var(--surface-transparent);
 }
 
 .page-shell-header--profile .contact-item--wide {
@@ -3727,13 +3728,13 @@ body.math130-course-page {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--bg-surface) 72%, transparent);
+  color: var(--surface-transparent);
 }
 
 .page-shell-header--profile .contact-item a,
 .page-shell-header--profile .contact-item span:last-child {
   color: var(--light-text);
-  text-decoration-color: color-mix(in srgb, var(--bg-surface) 35%, transparent);
+  text-decoration-color: var(--surface-transparent);
 }
 
 .cv-intro {
@@ -3887,7 +3888,7 @@ body.math130-course-page {
 
 .item-title {
   font-weight: 700;
-  color: var(--secondary-color);
+  color: var(--secondary);
   font-size: 1.02rem;
 }
 
@@ -3919,7 +3920,7 @@ body.math130-course-page {
 .cv-section-nav #nav-menu > li > .cv-nav-link {
   display: block;
   padding: 0.8rem 1rem;
-  color: var(--secondary-color);
+  color: var(--secondary);
   font-weight: 600;
   border-radius: 999px;
   background: transparent;
@@ -3945,7 +3946,7 @@ body.math130-course-page {
 
 .download-btn {
   background: transparent;
-  color: var(--secondary-color);
+  color: var(--secondary);
   border: 1px solid var(--border-transparent);
   box-shadow: none;
   font-weight: 600;
@@ -3955,7 +3956,7 @@ body.math130-course-page {
 .download-btn:hover,
 .download-btn:focus-visible {
   background: var(--primary-soft);
-  color: var(--secondary-color);
+  color: var(--secondary);
   transform: none;
 }
 
