@@ -235,7 +235,7 @@
         .formula-title { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700; }
         .formula-math { font-size: clamp(0.98rem, 1.45vw, 1.18rem); color: var(--text-main); max-width: 100%; overflow: visible; }
         .formula-math .katex-display { margin: 0.35rem auto; max-width: 100%; overflow: visible; padding: 0; }
-        .formula-math .katex-display > .katex { var(--bg-surface)-space: normal; max-width: 100%; }
+        .formula-math .katex-display > .katex { white-space: normal; max-width: 100%; }
         .formula-math .katex { max-width: 100%; }
         .formula-math.dual-line .katex-display { margin: 0.2rem auto; }
         .formula-math.compact-math { font-size: clamp(0.92rem, 1.25vw, 1.05rem); }
@@ -444,7 +444,7 @@
             #tab-formulas .formula-card.wide { padding: 1.15rem 1rem; }
             .formula-card.wide,
             .slide-card-featured { grid-column: auto; }
-            .history-table { display: block; overflow-x: auto; var(--bg-surface)-space: nowrap; }
+            .history-table { display: block; overflow-x: auto; white-space: nowrap; }
         }
     
 
@@ -1589,10 +1589,16 @@
     };
 
     function showTab(tabName, options = {}) {
-        // Long-page mode: scroll to section instead of toggling
+        const { scroll = true, behavior = 'smooth' } = options;
         const targetPanel = document.getElementById('tab-' + tabName);
         if (!targetPanel) return;
-        targetPanel.scrollIntoView({behavior:'smooth', block:'start'});
+
+        document.querySelectorAll('.tab-content').forEach(panel => panel.classList.remove('active'));
+        targetPanel.classList.add('active');
+
+        if (scroll) {
+            targetPanel.scrollIntoView({ behavior, block: 'start' });
+        }
     }
 
     function loadState() {
@@ -2559,11 +2565,29 @@
             if (tab) showTab(tab);
         });
 
-        // Scroll to hash section on load
+        showTab('slides', { scroll: false });
+
+        // Resolve hash-based deep links to the correct tab panel on load
         const initialHash = window.location.hash ? window.location.hash.replace('#', '') : null;
         if (initialHash) {
-            const target = document.getElementById('tab-' + initialHash) || document.getElementById(initialHash);
-            if (target) setTimeout(() => target.scrollIntoView({behavior:'smooth', block:'start'}), 300);
+            const directTab = document.getElementById('tab-' + initialHash)
+                ? initialHash
+                : (initialHash.startsWith('tab-') && document.getElementById(initialHash)
+                    ? initialHash.replace('tab-', '')
+                    : null);
+
+            if (directTab) {
+                showTab(directTab, { scroll: true });
+            } else {
+                const target = document.getElementById(initialHash);
+                if (target) {
+                    const parentTab = target.closest('.tab-content');
+                    if (parentTab && parentTab.id.startsWith('tab-')) {
+                        showTab(parentTab.id.replace('tab-', ''), { scroll: false });
+                    }
+                    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+                }
+            }
         }
 
         document.getElementById('btn-submit').addEventListener('click', checkAnswer);
