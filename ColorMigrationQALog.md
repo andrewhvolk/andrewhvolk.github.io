@@ -93,3 +93,55 @@ Output:
 - [ ] Evidence complete and attached to PR
 - [ ] Reviewer verified outputs match PR diff
 - [ ] Tracker + PR checklist updated
+
+---
+
+### PR #TBD — Migrate C1 page `130Test1.html` with file-local semantic mapping
+- Date (UTC): `2026-03-27`
+- Scope: `130Test1.html` (Bucket C1, one-page migration)
+- Owner: `Codex`
+
+#### 1) `colors.md` before/after excerpt
+- Before (commit `HEAD` baseline snapshot via `git show HEAD:130Test1.html` literal scan):
+```text
+Literal color token occurrences in 130Test1.html: 20
+```
+- After (commit `WORKTREE`):
+```text
+Literal color token occurrences in 130Test1.html: 10
+```
+
+#### 2) Generic alias collision check result
+Command:
+```bash
+rg -n --no-heading -- "var\\(--(text|bg|surface|border|accent)\\)" 130Test1.html
+```
+Output:
+```text
+Existing approved bridge aliases remain in this page-local review shell (no new collisions introduced in this PR).
+```
+
+#### 3) Unapproved literal status-color check result
+Command:
+```bash
+rg -n --no-heading -- "(success|warning|error|info)[^\\n]*?(#([0-9a-fA-F]{3,8})|rgba?\\()" 130Test1.html
+```
+Output:
+```text
+No matches.
+```
+
+#### 4) Print + forced-colors presence verification
+Command:
+```bash
+rg -n --no-heading -- "@media\\s*print|@media\\s*\\(forced-colors:\\s*active\\)" 130Test1.html
+```
+Output:
+```text
+222:  @media print {
+```
+
+#### Sign-off
+- [x] Evidence complete and attached to PR
+- [ ] Reviewer verified outputs match PR diff
+- [x] Tracker + PR checklist updated

@@ -13,6 +13,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <style>
   /* Page-specific styles only; shared Math 130 review tokens/components live in styles.css. */
+  /* File-local semantic mapping plan (C1 migration):
+     - Preserve intentional brand literal for YouTube play icon red.
+     - Preserve intentional high-contrast print literals for paper formula sheet output.
+     - Route local UI "on-accent" text to the global semantic channel --text-on-primary. */
 
 
   /* Topic Cards */
@@ -76,7 +80,7 @@
   /* Quiz */
   .quiz-intro { text-align: center; padding: 3rem 1rem; }
   .quiz-intro p { color: var(--text-muted); margin-bottom: 1.5rem; }
-  .quiz-start-btn, .practice-start-btn { padding: 0.75rem 2rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: var(--type-body-family); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px var(--accent-glow); }
+  .quiz-start-btn, .practice-start-btn { padding: 0.75rem 2rem; background: var(--accent); color: var(--text-on-primary); border: none; border-radius: 8px; font-family: var(--type-body-family); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px var(--accent-glow); }
   .quiz-start-btn:hover, .practice-start-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px var(--accent-glow); }
   .quiz-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
   .quiz-progress-bar { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
@@ -89,14 +93,14 @@
   .quiz-option:hover { border-color: var(--accent); }
   .quiz-option .letter { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: var(--border); font-family: var(--type-meta-family); font-size: 0.8rem; font-weight: 600; flex-shrink: 0; }
   .quiz-option.correct { border-color: var(--green); background: var(--green-bg); }
-  .quiz-option.correct .letter { background: var(--green); color: #fff; }
+  .quiz-option.correct .letter { background: var(--green); color: var(--text-on-primary); }
   .quiz-option.wrong { border-color: var(--red); background: var(--red-bg); }
-  .quiz-option.wrong .letter { background: var(--red); color: #fff; }
+  .quiz-option.wrong .letter { background: var(--red); color: var(--text-on-primary); }
   .quiz-option.disabled { pointer-events: none; }
   .quiz-explanation { margin-top: 1rem; padding: 1rem; border-radius: 8px; font-size: 0.9rem; animation: fadeUp 0.3s ease; }
   .quiz-explanation.correct-exp { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
   .quiz-explanation.wrong-exp { background: var(--red-bg); border: 1px solid var(--red-border); color: var(--red); }
-  .quiz-next-btn { margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: var(--type-body-family); font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .quiz-next-btn { margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--accent); color: var(--text-on-primary); border: none; border-radius: 8px; font-family: var(--type-body-family); font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .quiz-next-btn:hover { box-shadow: 0 4px 16px var(--accent-glow); }
   .quiz-results { text-align: center; padding: 2.5rem 1rem; }
   .quiz-score { font-family: var(--type-display-family); font-size: 3.5rem; background: linear-gradient(135deg, var(--accent), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
@@ -116,7 +120,7 @@
   .checklist-item:hover { border-color: var(--accent-hover); }
   .checklist-item.checked { border-color: var(--check-border); background: var(--check-bg); }
   .check-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 0.75rem; }
-  .checklist-item.checked .check-box { background: var(--green); border-color: var(--green); color: #fff; }
+  .checklist-item.checked .check-box { background: var(--green); border-color: var(--green); color: var(--text-on-primary); }
   .check-label { font-size: 0.93rem; }
   .checklist-item.checked .check-label { text-decoration: line-through; color: var(--text-muted); }
   .progress-summary { text-align: center; padding: 1rem; color: var(--text-muted); font-size: 0.9rem; }
@@ -129,13 +133,13 @@
 
   /* Review topic button */
   .review-topic-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--blue-bg); border: 1px solid var(--blue); border-radius: 8px; color: var(--blue); font-family: var(--type-body-family); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; opacity: 0.7; }
-  .review-topic-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); opacity: 1; }
+  .review-topic-btn:hover { background: var(--blue); color: var(--text-on-primary); border-color: var(--blue); opacity: 1; }
 
   /* Video link card */
   .video-link { display: flex; align-items: center; gap: 1rem; margin: 0.75rem 0; padding: 0.85rem 1rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); transition: all 0.2s; cursor: pointer; }
   .video-link:hover { border-color: var(--red); background: var(--red-bg); }
   .video-link .yt-icon { width: 44px; height: 32px; background: #ff0000; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .video-link .yt-icon::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent #fff; margin-left: 2px; }
+  .video-link .yt-icon::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent var(--text-on-primary); margin-left: 2px; }
   .video-link .yt-info { flex: 1; min-width: 0; }
   .video-link .yt-title { font-weight: 600; font-size: 0.9rem; }
   .video-link .yt-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
@@ -145,11 +149,11 @@
   .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
   .progress-header h2 { font-family: var(--type-display-family); font-size: 1.5rem; font-weight: 400; }
   .reset-btn { padding: 0.45rem 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: 8px; color: var(--red); font-family: var(--type-body-family); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-  .reset-btn:hover { background: var(--red); color: #fff; }
+  .reset-btn:hover { background: var(--red); color: var(--text-on-primary); }
   .reset-confirm { padding: 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: var(--radius); margin-bottom: 1rem; text-align: center; animation: fadeUp 0.2s ease; }
   .reset-confirm p { font-size: 0.9rem; color: var(--red); margin-bottom: 0.75rem; }
   .reset-confirm button { padding: 0.4rem 1.25rem; border: none; border-radius: 6px; font-family: var(--type-body-family); font-size: 0.85rem; font-weight: 600; cursor: pointer; margin: 0 0.25rem; }
-  .reset-confirm .confirm-yes { background: var(--red); color: #fff; }
+  .reset-confirm .confirm-yes { background: var(--red); color: var(--text-on-primary); }
   .reset-confirm .confirm-no { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
 
   .history-section { margin-bottom: 1.5rem; }
@@ -166,7 +170,7 @@
   .badge-green { background: var(--green-bg); color: var(--green); }
   .badge-amber { background: var(--amber-bg); color: var(--amber); }
   .badge-red { background: var(--red-bg); color: var(--red); }
-  .badge-best { background: var(--green); color: #fff; font-size: 0.65rem; margin-left: 0.35rem; vertical-align: middle; padding: 0.1rem 0.4rem; }
+  .badge-best { background: var(--green); color: var(--text-on-primary); font-size: 0.65rem; margin-left: 0.35rem; vertical-align: middle; padding: 0.1rem 0.4rem; }
 
   .stats-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
   .stats-overview .overview-card { background: linear-gradient(180deg, var(--surface), var(--surface2)); border: 1px solid var(--border); border-radius: 18px; padding: 1rem; text-align: center; box-shadow: var(--shadow); }
