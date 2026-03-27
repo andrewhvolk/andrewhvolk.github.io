@@ -74,7 +74,13 @@
   --status-info: #1A56DB;
   --status-info-bg: rgba(26, 86, 219, 0.08);
   --status-info-border: rgba(26, 86, 219, 0.32);
-  /* Legacy aliases routed through semantic tokens */
+  /*
+   * Legacy compatibility aliases (temporary):
+   * - Keep during migration window only (one full release cycle after Bucket C sign-off).
+   * - Every alias must resolve through Tier 2 semantic tokens (no direct Tier 1/literal wiring).
+   * - Do not introduce blind generic aliases (for example --text/--bg/--surface/--border/--accent)
+   *   outside approved scoped mapping patterns.
+   */
   --primary-color: var(--primary-base);
   --secondary-color: var(--text-heading);
   --accent-color: var(--primary-base);
@@ -85,8 +91,8 @@
   --card-background: var(--bg-surface);
   --featured-card-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)), linear-gradient(135deg, rgba(0, 29, 23, 0.96), rgba(0, 52, 43, 0.92));
   --featured-card-base: #002720;
-  --featured-card-text: var(--on-primary);
-  --featured-card-accent: color-mix(in srgb, var(--secondary) 78%, white 22%);
+  --featured-card-text: var(--primary-text);
+  --featured-card-accent: color-mix(in srgb, var(--primary-base) 78%, white 22%);
 
   --font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   --font-body: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
@@ -1826,8 +1832,8 @@ main.error-main {
   --card-background: var(--bg-surface);
   --featured-card-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)), linear-gradient(135deg, rgba(22, 29, 27, 0.95), rgba(33, 72, 62, 0.88));
   --featured-card-base: #16211d;
-  --featured-card-text: var(--on-surface);
-  --featured-card-accent: color-mix(in srgb, var(--secondary) 82%, var(--primary-container));
+  --featured-card-text: var(--primary-text);
+  --featured-card-accent: color-mix(in srgb, var(--primary-base) 82%, var(--primary-surface));
   --glass-surface: rgba(31, 39, 36, 0.85);
   --ghost-outline: rgba(94, 107, 102, 0.18);
   --ambient-outline: rgba(94, 107, 102, 0.36);
@@ -2730,6 +2736,7 @@ main.error-main {
 
 body.review-page,
 .math-review-page {
+  /* Approved scoped bridge aliases for legacy Math 130 review markup only. */
   --bg: var(--review-bg);
   --surface: var(--review-surface);
   --surface2: var(--review-surface-2);
