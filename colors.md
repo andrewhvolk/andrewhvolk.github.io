@@ -1,11 +1,11 @@
 # Color Usage Inventory (HTML + CSS)
-_Generated: 2026-03-27 16:49 UTC_
+_Generated: 2026-03-27 16:56 UTC_
 
 ## Scope
 - Files scanned (`*.html`, `*.css`): **62**
 - Scan sources: stylesheet files, HTML `<style>` blocks, inline `style="..."` declarations, and SVG color attributes (`fill`, `stroke`, `stop-color`, etc.).
 - Filter: only color-bearing properties/attributes are analyzed.
-- Unique color entries: **347**
+- Unique color entries: **332**
 
 ## Classification legend
 - **literal**: direct color values (`#hex`, `rgb()/rgba()`, `hsl()/hsla()`, `color-mix()`, etc.).
@@ -16,37 +16,35 @@ _Generated: 2026-03-27 16:49 UTC_
 
 | Color | Type | Uses |
 |---|---|---:|
-| `var(--bg-surface)` | tokenized | 277 |
-| `var(--primary-main)` | tokenized | 230 |
-| `transparent` | basic | 219 |
-| `var(--text-main)` | tokenized | 184 |
-| `var(--border-subtle)` | tokenized | 162 |
-| `var(--text-muted)` | tokenized | 141 |
-| `var(--emerald-main)` | tokenized | 72 |
-| `var(--danger-main)` | tokenized | 70 |
-| `var(--ghost-outline)` | tokenized | 46 |
-| `var(--secondary)` | tokenized | 39 |
-| `var(--bg-base)` | tokenized | 27 |
+| `var(--bg-surface)` | tokenized | 316 |
+| `transparent` | basic | 257 |
+| `var(--primary-main)` | tokenized | 234 |
+| `var(--border-subtle)` | tokenized | 208 |
+| `var(--text-main)` | tokenized | 195 |
+| `var(--text-muted)` | tokenized | 146 |
+| `var(--emerald-main)` | tokenized | 92 |
+| `var(--danger-main)` | tokenized | 88 |
+| `var(--bg-base)` | tokenized | 30 |
 | `var(--warning-main)` | tokenized | 25 |
 | `var(--secondary-color)` | tokenized | 24 |
-| `var(--green-bg)` | tokenized | 20 |
-| `var(--red-bg)` | tokenized | 18 |
+| `color-mix(insrgb,var(--emerald-main)10%,transparent)` | literal | 20 |
+| `color-mix(insrgb,var(--danger-main)10%,transparent)` | literal | 18 |
 | `var(--surface-container-lowest)` | tokenized | 14 |
 | `currentcolor` | basic | 13 |
 | `var(--surface-container-low)` | tokenized | 12 |
+| `var(--primary-hover)` | tokenized | 11 |
 | `var(--accent-glow)` | tokenized | 10 |
 | `var(--gradient-card-surface)` | tokenized | 10 |
 | `var(--on-primary)` | tokenized | 10 |
-| `#2c3e50` | literal | 8 |
 | `var(--shadow)` | tokenized | 8 |
-| `color-mix(insrgb,var(--ghost-outline)66%,transparent)` | literal | 7 |
-| `var(--primary-hover)` | tokenized | 7 |
+| `color-mix(insrgb,var(--border-subtle)66%,transparent)` | literal | 7 |
 | `color-mix(insrgb,var(--bg-surface)3%,transparent)` | literal | 6 |
-| `color-mix(insrgb,var(--ghost-outline)68%,transparent)` | literal | 6 |
-| `#94a3b8` | literal | 5 |
+| `color-mix(insrgb,var(--border-subtle)68%,transparent)` | literal | 6 |
 | `color-mix(insrgb,var(--bg-surface)0%,transparent)` | literal | 5 |
+| `color-mix(insrgb,var(--bg-surface)12%,transparent)` | literal | 5 |
 | `color-mix(insrgb,var(--bg-surface)2%,transparent)` | literal | 5 |
 | `color-mix(insrgb,var(--bg-surface)92%,transparent)` | literal | 5 |
+| `color-mix(insrgb,var(--border-subtle)72%,transparent)` | literal | 5 |
 | `color-mix(insrgb,var(--primary-main)10%,transparent)` | literal | 5 |
 | `color-mix(insrgb,var(--primary-main)14%,transparent)` | literal | 5 |
 | `color-mix(insrgb,var(--primary-main)16%,var(--bg-surface))` | literal | 5 |
@@ -55,9 +53,8 @@ _Generated: 2026-03-27 16:49 UTC_
 | `var(--on-surface-variant)` | tokenized | 5 |
 | `var(--tertiary)` | tokenized | 5 |
 | `var(--text-body-muted)` | tokenized | 5 |
-| `#38bdf8` | literal | 4 |
-| `#9b59b6` | literal | 4 |
-| `color-mix(insrgb,var(--bg-surface)12%,transparent)` | literal | 4 |
+| `color-mix(insrgb,var(--bg-surface)8%,transparent)` | literal | 4 |
+| `color-mix(insrgb,var(--border-subtle)78%,transparent)` | literal | 4 |
 | `color-mix(insrgb,var(--danger-main)12%,var(--bg-surface))` | literal | 4 |
 | `color-mix(insrgb,var(--danger-main)45%,var(--border-subtle))` | literal | 4 |
 | `color-mix(insrgb,var(--emerald-main)16%,transparent)` | literal | 4 |
@@ -71,15 +68,12 @@ _Generated: 2026-03-27 16:49 UTC_
 | `var(--gradient-library-glow)` | tokenized | 4 |
 | `var(--primary-surface)` | tokenized | 4 |
 | `var(--surface-tint)` | tokenized | 4 |
-| `#334155` | literal | 3 |
-| `#f9f9f9` | literal | 3 |
 | `color-mix(insrgb,var(--bg-surface)14%,transparent)` | literal | 3 |
-| `color-mix(insrgb,var(--bg-surface)8%,transparent)` | literal | 3 |
-| `color-mix(insrgb,var(--ghost-outline)72%,transparent)` | literal | 3 |
-| `color-mix(insrgb,var(--ghost-outline)76%,transparent)` | literal | 3 |
-| `color-mix(insrgb,var(--ghost-outline)82%,transparent)` | literal | 3 |
+| `color-mix(insrgb,var(--bg-surface)18%,var(--border-subtle))` | literal | 3 |
+| `color-mix(insrgb,var(--border-subtle)70%,transparent)` | literal | 3 |
+| `color-mix(insrgb,var(--border-subtle)76%,transparent)` | literal | 3 |
+| `color-mix(insrgb,var(--border-subtle)82%,transparent)` | literal | 3 |
 | `color-mix(insrgb,var(--primary-main)22%,transparent)` | literal | 3 |
-| `color-mix(insrgb,var(--secondary)18%,var(--border-subtle))` | literal | 3 |
 | `color-mix(insrgb,var(--surface-container-low)94%,transparent)` | literal | 3 |
 | `color-mix(insrgb,var(--surface-container-lowest)96%,transparent)` | literal | 3 |
 | `color-mix(insrgb,var(--text-main)4%,transparent)` | literal | 3 |
@@ -103,9 +97,9 @@ _Generated: 2026-03-27 16:49 UTC_
 | `color-mix(insrgb,var(--bg-surface)20%,transparent)` | literal | 2 |
 | `color-mix(insrgb,var(--bg-surface)22%,transparent)` | literal | 2 |
 | `color-mix(insrgb,var(--bg-surface)72%,var(--bg-surface))` | literal | 2 |
+| `color-mix(insrgb,var(--bg-surface)78%,var(--bg-surface))` | literal | 2 |
+| `color-mix(insrgb,var(--bg-surface)82%,transparent)` | literal | 2 |
 | `color-mix(insrgb,var(--bg-surface)92%,var(--bg-surface))` | literal | 2 |
-| `color-mix(insrgb,var(--border-subtle)72%,transparent)` | literal | 2 |
-| `color-mix(insrgb,var(--border-subtle)78%,transparent)` | literal | 2 |
 | `color-mix(insrgb,var(--danger-main)14%,var(--bg-surface))` | literal | 2 |
 | `color-mix(insrgb,var(--danger-main)48%,var(--border-subtle))` | literal | 2 |
 | `color-mix(insrgb,var(--emerald-main)14%,var(--bg-surface))` | literal | 2 |
@@ -114,8 +108,6 @@ _Generated: 2026-03-27 16:49 UTC_
 | `color-mix(insrgb,var(--emerald-main)45%,var(--border-subtle))` | literal | 2 |
 | `color-mix(insrgb,var(--emerald-main)48%,var(--border-subtle))` | literal | 2 |
 | `color-mix(insrgb,var(--emerald-main)8%,transparent)` | literal | 2 |
-| `color-mix(insrgb,var(--ghost-outline)70%,transparent)` | literal | 2 |
-| `color-mix(insrgb,var(--ghost-outline)78%,transparent)` | literal | 2 |
 | `color-mix(insrgb,var(--glass-surface)92%,transparent)` | literal | 2 |
 | `color-mix(insrgb,var(--primary-main)12%,var(--bg-surface))` | literal | 2 |
 | `color-mix(insrgb,var(--primary-main)16%,transparent)` | literal | 2 |
@@ -209,18 +201,30 @@ _Generated: 2026-03-27 16:49 UTC_
 | `#fffacd` | literal | 1 |
 | `#ffffffdd` | literal | 1 |
 | `canvastext` | basic | 1 |
+| `color-mix(insrgb,color-mix(insrgb,var(--emerald-main)10%,transparent)72%,var(--bg-surface))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-subtle)88%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--bg-subtle)96%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)12%,var(--bg-surface)88%)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)20%,var(--border-subtle))` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)24%,var(--border-subtle))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)25%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)28%,var(--border-subtle))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)35%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)36%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)40%,var(--border-subtle))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)45%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)48%,var(--border-subtle))` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)48%,var(--surface-tint))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)60%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)7%,var(--surface-container-low))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)70%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)70%,var(--bg-surface))` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)70%,var(--surface-tint))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)72%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)72%,var(--text-muted))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)76%,var(--bg-surface))` | literal | 1 |
-| `color-mix(insrgb,var(--bg-surface)78%,var(--bg-surface))` | literal | 1 |
-| `color-mix(insrgb,var(--bg-surface)82%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)8%,var(--bg-surface))` | literal | 1 |
+| `color-mix(insrgb,var(--bg-surface)8%,var(--surface-container-lowest))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)84%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)86%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)88%,transparent)` | literal | 1 |
@@ -228,7 +232,10 @@ _Generated: 2026-03-27 16:49 UTC_
 | `color-mix(insrgb,var(--bg-surface)90%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)92%,var(--accent-soft))` | literal | 1 |
 | `color-mix(insrgb,var(--bg-surface)96%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--border-subtle)70%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--border-subtle)60%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--border-subtle)62%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--border-subtle)74%,transparent)` | literal | 1 |
+| `color-mix(insrgb,var(--border-subtle)80%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--border-subtle)85%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--danger-main)16%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--danger-main)18%,transparent)` | literal | 1 |
@@ -236,17 +243,12 @@ _Generated: 2026-03-27 16:49 UTC_
 | `color-mix(insrgb,var(--emerald-main)12%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--emerald-main)22%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--emerald-main)4%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--ghost-outline)60%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--ghost-outline)62%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--ghost-outline)74%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--ghost-outline)80%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--green,var(--primary-main))32%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--green,var(--primary-main))38%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--green-bg)72%,var(--bg-surface))` | literal | 1 |
 | `color-mix(insrgb,var(--on-primary)38%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--on-primary)86%,color-mix(insrgb,var(--bg-surface)20%,transparent))` | literal | 1 |
 | `color-mix(insrgb,var(--on-primary)88%,color-mix(insrgb,var(--bg-surface)20%,transparent))` | literal | 1 |
-| `color-mix(insrgb,var(--primary-container)88%,var(--secondary))` | literal | 1 |
+| `color-mix(insrgb,var(--primary-container)88%,var(--bg-surface))` | literal | 1 |
 | `color-mix(insrgb,var(--primary-main)12%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--primary-main)14%,var(--bg-surface))` | literal | 1 |
 | `color-mix(insrgb,var(--primary-main)18%,transparent)` | literal | 1 |
@@ -271,23 +273,6 @@ _Generated: 2026-03-27 16:49 UTC_
 | `color-mix(insrgb,var(--primary-main)72%,var(--text-body-muted))` | literal | 1 |
 | `color-mix(insrgb,var(--primary-main)8%,var(--bg-surface))` | literal | 1 |
 | `color-mix(insrgb,var(--primary-main)82%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)12%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)12%,var(--bg-surface)88%)` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)20%,var(--ghost-outline))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)24%,var(--ghost-outline))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)28%,var(--ghost-outline))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)36%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)40%,var(--ghost-outline))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)48%,var(--ghost-outline))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)48%,var(--surface-tint))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)7%,var(--surface-container-low))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)70%,var(--surface-tint))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)72%,var(--text-muted))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)78%,var(--bg-surface))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)8%,transparent)` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)8%,var(--bg-surface))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)8%,var(--surface-container-lowest))` | literal | 1 |
-| `color-mix(insrgb,var(--secondary)82%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--surface-container)72%,var(--bg-surface))` | literal | 1 |
 | `color-mix(insrgb,var(--surface-container-high)56%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--surface-container-low)84%,var(--bg-surface))` | literal | 1 |

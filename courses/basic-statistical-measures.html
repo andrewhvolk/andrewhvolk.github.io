@@ -36,7 +36,7 @@
 
     /* Header */
     .header {
-      background-color: #2c3e50;
+      background-color: var(--text-main);
       color: var(--bg-surface);
       padding: 20px;
       text-align: center;
@@ -59,7 +59,7 @@
       border-bottom: none;
     }
     .section h2 {
-      color: #2c3e50;
+      color: var(--text-main);
       margin-bottom: 20px;
       font-size: 22px;
       border-left: 4px solid var(--primary-main);
@@ -94,12 +94,12 @@
     .median    { border-top-color: var(--primary-main); }
     .mode      { border-top-color: var(--emerald-main); }
     .range     { border-top-color: var(--warning-main); }
-    .variance  { border-top-color: #9b59b6; }
+    .variance  { border-top-color: var(--primary-main); }
     .std-dev   { border-top-color: #1abc9c; }
     .iqr       { border-top-color: var(--warning-main); }
     .quartiles { border-top-color: var(--warning-main); }
     .five-num  { border-top-color: var(--primary-main); }
-    .boxplot   { border-top-color: #9b59b6; }
+    .boxplot   { border-top-color: var(--primary-main); }
     .outliers  { border-top-color: var(--danger-main); }
 
     .measure-card h3 {
@@ -178,7 +178,7 @@
       padding-left: 10px;
       margin: 10px 0;
       font-size: 15px;
-      color: #2c3e50;
+      color: var(--text-main);
     }
 
     /* Distribution Shapes */
@@ -367,7 +367,7 @@
     .step-card h4 {
       font-size: 14px;
       margin-bottom: 5px;
-      color: #2c3e50;
+      color: var(--text-main);
     }
 
     /* Tables */
@@ -389,7 +389,7 @@
       font-weight: bold;
     }
     tr:nth-child(even) {
-      background-color: #f9f9f9;
+      background-color: var(--bg-base);
     }
 
     .interpretation {
@@ -702,7 +702,7 @@
             <path d="M10,90 C30,20 60,70 110,90" fill="none" stroke="var(--primary-main)" stroke-width="2"></path>
             <line x1="30" y1="90" x2="30" y2="20" stroke="var(--emerald-main)" stroke-width="2" stroke-dasharray="5,5"></line>
             <line x1="42" y1="90" x2="42" y2="50" stroke="var(--danger-main)" stroke-width="2" stroke-dasharray="5,5"></line>
-            <line x1="60" y1="90" x2="60" y2="70" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5"></line>
+            <line x1="60" y1="90" x2="60" y2="70" stroke="var(--primary-main)" stroke-width="2" stroke-dasharray="5,5"></line>
             <text x="20" y="98" font-size="8" fill="var(--text-main)">Mode < Median < Mean</text>
           </svg>
           <p>Choose Median & IQR for summary.</p>
@@ -712,7 +712,7 @@
           <h4>Left-Skewed</h4>
           <svg width="120" height="100" viewBox="0 0 120 100">
             <path d="M10,90 C60,70 90,20 110,90" fill="none" stroke="var(--primary-main)" stroke-width="2"></path>
-            <line x1="60" y1="90" x2="60" y2="70" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5"></line>
+            <line x1="60" y1="90" x2="60" y2="70" stroke="var(--primary-main)" stroke-width="2" stroke-dasharray="5,5"></line>
             <line x1="78" y1="90" x2="78" y2="50" stroke="var(--danger-main)" stroke-width="2" stroke-dasharray="5,5"></line>
             <line x1="90" y1="90" x2="90" y2="20" stroke="var(--emerald-main)" stroke-width="2" stroke-dasharray="5,5"></line>
             <text x="20" y="98" font-size="8" fill="var(--text-main)">Mean < Median < Mode</text>

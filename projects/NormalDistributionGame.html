@@ -13,7 +13,7 @@
             line-height: 1.6;
         }
         h1, h2 {
-            color: #2c3e50;
+            color: var(--text-main);
         }
         .container {
             display: flex;
@@ -28,7 +28,7 @@
         canvas {
             border: 1px solid var(--border-subtle);
             margin: 20px 0;
-            background-color: #f9f9f9;
+            background-color: var(--bg-base);
         }
         .controls {
             display: flex;
@@ -290,11 +290,11 @@
         
         // Colors
         const curveColor = 'var(--primary-main)';
-        const fillColors = ['var(--danger-main)', 'var(--emerald-main)', '#9b59b6'];
+        const fillColors = ['var(--danger-main)', 'var(--emerald-main)', 'var(--primary-main)'];
         const customFillColor = 'var(--warning-main)';
         const segmentColors = [
             'var(--danger-main)', 'var(--warning-main)', '#f1c40f', 'var(--emerald-main)', 
-            'var(--primary-main)', '#9b59b6', 'var(--danger-main)'
+            'var(--primary-main)', 'var(--primary-main)', 'var(--danger-main)'
         ];
         
         // Standard normal distribution table (approximate)

@@ -47,20 +47,20 @@
   .problem-card { background: linear-gradient(180deg, var(--bg-surface), color-mix(in srgb, var(--bg-surface) 72%, var(--bg-surface))); border: 1px solid var(--border-subtle); border-radius: 18px; padding: 1.4rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
   .problem-label { font-family: var(--type-meta-family); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
   .problem-pts { background: var(--bg-surface); padding: 0.15rem 0.5rem; border-radius: 5px; font-size: 0.72rem; color: var(--primary-main); }
-  .problem-tag-retry { background: var(--red-bg); color: var(--danger-main); padding: 0.15rem 0.55rem; border-radius: 5px; font-size: 0.72rem; font-weight: 600; margin-left: 0.5rem; }
+  .problem-tag-retry { background: color-mix(in srgb, var(--danger-main) 10%, transparent); color: var(--danger-main); padding: 0.15rem 0.55rem; border-radius: 5px; font-size: 0.72rem; font-weight: 600; margin-left: 0.5rem; }
   .problem-text { font-size: 0.95rem; margin-bottom: 1rem; }
 
   .practice-btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .solution-toggle, .practice-action-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; color: var(--text-muted); font-family: var(--type-body-family); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
   .solution-toggle:hover, .practice-action-btn:hover { border-color: var(--primary-main); color: var(--primary-main); }
   .practice-action-btn.got-it { border-color: var(--got-border); color: var(--emerald-main); }
-  .practice-action-btn.got-it:hover { background: var(--green-bg); border-color: var(--emerald-main); }
+  .practice-action-btn.got-it:hover { background: color-mix(in srgb, var(--emerald-main) 10%, transparent); border-color: var(--emerald-main); }
   .practice-action-btn.missed { border-color: var(--miss-border); color: var(--danger-main); }
-  .practice-action-btn.missed:hover { background: var(--red-bg); border-color: var(--danger-main); }
+  .practice-action-btn.missed:hover { background: color-mix(in srgb, var(--danger-main) 10%, transparent); border-color: var(--danger-main); }
 
   .solution { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
   .solution.show { max-height: 2000px; }
-  .solution-inner { margin-top: 1rem; padding: 1rem; background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 8px; font-size: 0.92rem; color: var(--emerald-main); }
+  .solution-inner { margin-top: 1rem; padding: 1rem; background: color-mix(in srgb, var(--emerald-main) 10%, transparent); border: 1px solid var(--green-border); border-radius: 8px; font-size: 0.92rem; color: var(--emerald-main); }
   .solution-inner .step { margin-bottom: 0.5rem; padding-left: 0.75rem; border-left: 2px solid var(--green-step); }
   .solution-inner .step:last-child { margin-bottom: 0; }
 
@@ -88,14 +88,14 @@
   .quiz-option { display: flex; align-items: center; gap: 0.85rem; padding: 0.85rem 1rem; background: var(--bg-surface); border: 1.5px solid var(--border-subtle); border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.93rem; }
   .quiz-option:hover { border-color: var(--primary-main); }
   .quiz-option .letter { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: var(--border-subtle); font-family: var(--type-meta-family); font-size: 0.8rem; font-weight: 600; flex-shrink: 0; }
-  .quiz-option.correct { border-color: var(--emerald-main); background: var(--green-bg); }
+  .quiz-option.correct { border-color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
   .quiz-option.correct .letter { background: var(--emerald-main); color: var(--bg-surface); }
-  .quiz-option.wrong { border-color: var(--danger-main); background: var(--red-bg); }
+  .quiz-option.wrong { border-color: var(--danger-main); background: color-mix(in srgb, var(--danger-main) 10%, transparent); }
   .quiz-option.wrong .letter { background: var(--danger-main); color: var(--bg-surface); }
   .quiz-option.disabled { pointer-events: none; }
   .quiz-explanation { margin-top: 1rem; padding: 1rem; border-radius: 8px; font-size: 0.9rem; animation: fadeUp 0.3s ease; }
-  .quiz-explanation.correct-exp { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--emerald-main); }
-  .quiz-explanation.wrong-exp { background: var(--red-bg); border: 1px solid var(--red-border); color: var(--danger-main); }
+  .quiz-explanation.correct-exp { background: color-mix(in srgb, var(--emerald-main) 10%, transparent); border: 1px solid var(--green-border); color: var(--emerald-main); }
+  .quiz-explanation.wrong-exp { background: color-mix(in srgb, var(--danger-main) 10%, transparent); border: 1px solid var(--red-border); color: var(--danger-main); }
   .quiz-next-btn { margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--primary-main); color: var(--bg-surface); border: none; border-radius: 8px; font-family: var(--type-body-family); font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .quiz-next-btn:hover { box-shadow: 0 4px 16px var(--accent-glow); }
   .quiz-results { text-align: center; padding: 2.5rem 1rem; }
@@ -133,7 +133,7 @@
 
   /* Video link card */
   .video-link { display: flex; align-items: center; gap: 1rem; margin: 0.75rem 0; padding: 0.85rem 1rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 8px; text-decoration: none; color: var(--text-main); transition: all 0.2s; cursor: pointer; }
-  .video-link:hover { border-color: var(--danger-main); background: var(--red-bg); }
+  .video-link:hover { border-color: var(--danger-main); background: color-mix(in srgb, var(--danger-main) 10%, transparent); }
   .video-link .yt-icon { width: 44px; height: 32px; background: var(--danger-main); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .video-link .yt-icon::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent var(--bg-surface); margin-left: 2px; }
   .video-link .yt-info { flex: 1; min-width: 0; }
@@ -144,9 +144,9 @@
   /* Progress History */
   .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
   .progress-header h2 { font-family: var(--type-display-family); font-size: 1.5rem; font-weight: 400; }
-  .reset-btn { padding: 0.45rem 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: 8px; color: var(--danger-main); font-family: var(--type-body-family); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .reset-btn { padding: 0.45rem 1rem; background: color-mix(in srgb, var(--danger-main) 10%, transparent); border: 1px solid var(--miss-border); border-radius: 8px; color: var(--danger-main); font-family: var(--type-body-family); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .reset-btn:hover { background: var(--danger-main); color: var(--bg-surface); }
-  .reset-confirm { padding: 1rem; background: var(--red-bg); border: 1px solid var(--miss-border); border-radius: var(--radius); margin-bottom: 1rem; text-align: center; animation: fadeUp 0.2s ease; }
+  .reset-confirm { padding: 1rem; background: color-mix(in srgb, var(--danger-main) 10%, transparent); border: 1px solid var(--miss-border); border-radius: var(--radius); margin-bottom: 1rem; text-align: center; animation: fadeUp 0.2s ease; }
   .reset-confirm p { font-size: 0.9rem; color: var(--danger-main); margin-bottom: 0.75rem; }
   .reset-confirm button { padding: 0.4rem 1.25rem; border: none; border-radius: 6px; font-family: var(--type-body-family); font-size: 0.85rem; font-weight: 600; cursor: pointer; margin: 0 0.25rem; }
   .reset-confirm .confirm-yes { background: var(--danger-main); color: var(--bg-surface); }
@@ -160,12 +160,12 @@
   .history-table th { font-family: var(--type-meta-family); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-align: left; padding: 0.7rem 1rem; background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle); }
   .history-table td { font-size: 0.88rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--border-subtle); }
   .history-table tr:last-child td { border-bottom: none; }
-  .history-table .best-row td { background: var(--green-bg); }
+  .history-table .best-row td { background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
 
   .history-badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 700; font-family: var(--type-meta-family); }
-  .badge-green { background: var(--green-bg); color: var(--emerald-main); }
+  .badge-green { background: color-mix(in srgb, var(--emerald-main) 10%, transparent); color: var(--emerald-main); }
   .badge-amber { background: var(--amber-bg); color: var(--warning-main); }
-  .badge-red { background: var(--red-bg); color: var(--danger-main); }
+  .badge-red { background: color-mix(in srgb, var(--danger-main) 10%, transparent); color: var(--danger-main); }
   .badge-best { background: var(--emerald-main); color: var(--bg-surface); font-size: 0.65rem; margin-left: 0.35rem; vertical-align: middle; padding: 0.1rem 0.4rem; }
 
   .stats-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }

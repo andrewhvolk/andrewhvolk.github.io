@@ -180,9 +180,9 @@
             background: var(--border-subtle);
             flex-shrink: 0;
         }
-        .legend-chip.legend-memorize { border-color: var(--danger-main); color: var(--danger-main); background: var(--red-bg); }
+        .legend-chip.legend-memorize { border-color: var(--danger-main); color: var(--danger-main); background: color-mix(in srgb, var(--danger-main) 10%, transparent); }
         .legend-chip.legend-memorize::before { background: var(--danger-main); }
-        .legend-chip.legend-provided { border-color: var(--emerald-main); color: var(--emerald-main); background: var(--green-bg); }
+        .legend-chip.legend-provided { border-color: var(--emerald-main); color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
         .legend-chip.legend-provided::before { background: var(--emerald-main); }
         .legend-chip.legend-useful::before { background: var(--text-muted); }
         .formula-grid {
@@ -217,13 +217,13 @@
         }
         .formula-card.memorize-card {
             border-color: var(--danger-main);
-            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--red-bg) 100%);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, color-mix(in srgb, var(--danger-main) 10%, transparent) 100%);
         }
         .formula-card.memorize-card::before { background: var(--danger-main); }
         .formula-card.memorize-card .formula-title { color: var(--text-main); }
         .formula-card.provided-card {
             border-color: var(--emerald-main);
-            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--green-bg) 100%);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, color-mix(in srgb, var(--emerald-main) 10%, transparent) 100%);
         }
         .formula-card.provided-card::before { background: var(--emerald-main); }
         .formula-card.useful-card {
@@ -295,8 +295,8 @@
             transition: border-color 0.2s; outline: none;
         }
         .multi-input-grid input:focus { border-color: var(--primary-main); }
-        .multi-input-grid input.inp-correct { border-color: var(--emerald-main); background: var(--green-bg); }
-        .multi-input-grid input.inp-wrong { border-color: var(--danger-main); background: var(--red-bg); }
+        .multi-input-grid input.inp-correct { border-color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
+        .multi-input-grid input.inp-wrong { border-color: var(--danger-main); background: color-mix(in srgb, var(--danger-main) 10%, transparent); }
 
         /* Buttons */
         .btn-primary { background: var(--primary-main); color: var(--bg-surface); border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--type-body-family); }
@@ -333,7 +333,7 @@
         /* Feedback */
         .feedback { margin-top: 1.5rem; padding: 1.25rem; border-radius: 12px; font-weight: 500; display: none; animation: fadeIn 0.3s ease; text-align: left; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .feedback.correct { display: block; background: var(--green-bg); color: var(--emerald-main); border: 1px solid var(--emerald-main); text-align: center; }
+        .feedback.correct { display: block; background: color-mix(in srgb, var(--emerald-main) 10%, transparent); color: var(--emerald-main); border: 1px solid var(--emerald-main); text-align: center; }
         .feedback.incorrect { display: block; background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--danger-main); border-left: 6px solid var(--danger-main); }
         .solution-step { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-subtle); color: var(--text-muted); font-size: 1.05rem; }
 
@@ -347,7 +347,7 @@
         .history-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; padding: 1rem; border-bottom: 2px solid var(--border-subtle); text-align: left;}
         .history-table td { padding: 1rem; border-bottom: 1px solid var(--border-subtle); }
         .history-table tr:hover { background: var(--bg-surface); }
-        .best-row { background: var(--green-bg); }
+        .best-row { background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
         
         .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .badge-perfect { background: color-mix(in srgb, var(--emerald-main) 18%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--emerald-main) 48%, var(--border-subtle)); }
@@ -680,7 +680,7 @@
             background: var(--bg-surface);
             color: var(--text-muted);
         }
-        .slide-tag.pdf { border-color: var(--emerald-main); color: var(--emerald-main); background: var(--green-bg); }
+        .slide-tag.pdf { border-color: var(--emerald-main); color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
         .slide-tag.pptx { border-color: var(--border-subtle); color: var(--text-muted); }
         .slide-card h3 {
             font-family: var(--type-display-family);
@@ -1501,7 +1501,7 @@
 </table>
 </div>
 <div class="u-text-center u-mt-xl">
-<button class="btn-secondary" onclick="resetProgress()" style="color: var(--danger-main); border-color: var(--red-bg);">
+<button class="btn-secondary" onclick="resetProgress()" style="color: var(--danger-main); border-color: color-mix(in srgb, var(--danger-main) 10%, transparent);">
 <i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
                     Reset All Progress
                 </button>
@@ -1722,14 +1722,14 @@
         const turnMarkup = hasExtraTurns ? `
             <path d="M ${center + wrapR} ${center} A ${wrapR} ${wrapR} 0 1 ${wrapSweepFlag} ${wrapMidX} ${wrapMidY}
                 A ${wrapR} ${wrapR} 0 1 ${wrapSweepFlag} ${center + wrapR} ${center}"
-                fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="3 4" opacity="0.75"></path>
-            <text x="36" y="42" fill="#94a3b8" font-size="12" font-weight="600">${turnLabel}</text>
+                fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="3 4" opacity="0.75"></path>
+            <text x="36" y="42" fill="var(--text-muted)" font-size="12" font-weight="600">${turnLabel}</text>
         ` : '';
 
         return `
             <svg viewBox="0 0 ${size} ${size}" width="300" height="300" role="img" aria-label="${fallbackText.replace(/"/g, '&quot;')}">
                 <rect x="0" y="0" width="${size}" height="${size}" fill="var(--text-main)"></rect>
-                <g stroke="#334155" stroke-width="1">
+                <g stroke="var(--text-main)" stroke-width="1">
                     ${Array.from({ length: 13 }, (_, i) => {
                         const p = 30 + i * 20;
                         return `<line x1="${p}" y1="30" x2="${p}" y2="270"></line><line x1="30" y1="${p}" x2="270" y2="${p}"></line>`;
@@ -1739,12 +1739,12 @@
                 <line x1="${center}" y1="30" x2="${center}" y2="270" stroke="var(--border-subtle)" stroke-width="2"></line>
                 <text x="273" y="${center - 5}" fill="var(--border-subtle)" font-size="12">x</text>
                 <text x="${center + 6}" y="26" fill="var(--border-subtle)" font-size="12">y</text>
-                <line x1="${center}" y1="${center}" x2="${terminalX.toFixed(2)}" y2="${terminalY.toFixed(2)}" stroke="#38bdf8" stroke-width="3"></line>
+                <line x1="${center}" y1="${center}" x2="${terminalX.toFixed(2)}" y2="${terminalY.toFixed(2)}" stroke="var(--primary-hover)" stroke-width="3"></line>
                 <circle cx="${center}" cy="${center}" r="4" fill="var(--border-subtle)"></circle>
                 <path d="M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 ${largeArcFlag} ${sweepFlag} ${arcEndX.toFixed(2)} ${arcEndY.toFixed(2)}"
                     fill="none" stroke="var(--emerald-main)" stroke-width="3"></path>
                 <text x="${thetaLabelX.toFixed(2)}" y="${thetaLabelY.toFixed(2)}" fill="var(--emerald-main)" font-size="13" font-weight="600">${labelText}</text>
-                <text x="36" y="286" fill="#94a3b8" font-size="12">grid: 1 square = 1 unit</text>
+                <text x="36" y="286" fill="var(--text-muted)" font-size="12">grid: 1 square = 1 unit</text>
                 ${turnMarkup}
                 ${refMarkup}
             </svg>
@@ -1765,7 +1765,7 @@
                     </marker>
                 </defs>
                 <rect x="0" y="0" width="${size}" height="${size}" fill="var(--text-main)"></rect>
-                <g stroke="#334155" stroke-width="1">
+                <g stroke="var(--text-main)" stroke-width="1">
                     ${Array.from({ length: 15 }, (_, i) => `<line x1="${i * 20 + 10}" y1="10" x2="${i * 20 + 10}" y2="290"></line>`).join('')}
                     ${Array.from({ length: 15 }, (_, i) => `<line x1="10" y1="${i * 20 + 10}" x2="290" y2="${i * 20 + 10}"></line>`).join('')}
                 </g>
@@ -1777,8 +1777,8 @@
                 <circle cx="${center}" cy="${center}" r="4" fill="var(--border-subtle)"></circle>
                 <circle cx="${endX.toFixed(2)}" cy="${endY.toFixed(2)}" r="4" fill="var(--emerald-main)"></circle>
                 <text x="${Math.min(258, endX + 8).toFixed(2)}" y="${Math.max(18, endY - 8).toFixed(2)}" fill="var(--emerald-main)" font-size="13">(${x}, ${y})</text>
-                <text x="36" y="286" fill="#94a3b8" font-size="12">scale: 1 unit per grid line</text>
-                <text x="18" y="28" fill="#38bdf8" font-size="13" font-weight="600">${labelText}</text>
+                <text x="36" y="286" fill="var(--text-muted)" font-size="12">scale: 1 unit per grid line</text>
+                <text x="18" y="28" fill="var(--primary-hover)" font-size="13" font-weight="600">${labelText}</text>
             </svg>
         `;
     }
@@ -2168,7 +2168,7 @@
                             </marker>
                         </defs>
                         <rect x="0" y="0" width="300" height="300" fill="var(--text-main)"></rect>
-                        <g stroke="#334155" stroke-width="1">
+                        <g stroke="var(--text-main)" stroke-width="1">
                             ${Array.from({ length: 15 }, (_, i) => `<line x1="${i * 20 + 10}" y1="10" x2="${i * 20 + 10}" y2="290"></line>`).join('')}
                             ${Array.from({ length: 15 }, (_, i) => `<line x1="10" y1="${i * 20 + 10}" x2="290" y2="${i * 20 + 10}"></line>`).join('')}
                         </g>
@@ -2177,11 +2177,11 @@
                         <text x="293" y="145" fill="var(--border-subtle)" font-size="12">x</text>
                         <text x="156" y="16" fill="var(--border-subtle)" font-size="12">y</text>
                         <line x1="${150 + x1 * 20}" y1="${150 - y1 * 20}" x2="${150 + x2 * 20}" y2="${150 - y2 * 20}" stroke="var(--danger-main)" stroke-width="3" marker-end="url(#arrowhead-pq)"></line>
-                        <circle cx="${150 + x1 * 20}" cy="${150 - y1 * 20}" r="4" fill="#38bdf8"></circle>
+                        <circle cx="${150 + x1 * 20}" cy="${150 - y1 * 20}" r="4" fill="var(--primary-hover)"></circle>
                         <circle cx="${150 + x2 * 20}" cy="${150 - y2 * 20}" r="4" fill="var(--emerald-main)"></circle>
-                        <text x="${158 + x1 * 20}" y="${142 - y1 * 20}" fill="#38bdf8" font-size="13">P(${x1},${y1})</text>
+                        <text x="${158 + x1 * 20}" y="${142 - y1 * 20}" fill="var(--primary-hover)" font-size="13">P(${x1},${y1})</text>
                         <text x="${158 + x2 * 20}" y="${142 - y2 * 20}" fill="var(--emerald-main)" font-size="13">Q(${x2},${y2})</text>
-                        <text x="36" y="286" fill="#94a3b8" font-size="12">scale: 1 unit per grid line</text>
+                        <text x="36" y="286" fill="var(--text-muted)" font-size="12">scale: 1 unit per grid line</text>
                     </svg>
                 `;
 

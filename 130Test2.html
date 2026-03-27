@@ -43,7 +43,7 @@
             border-radius: 1rem;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 78%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 78%, transparent);
             transition: transform 0.2s;
         }
 
@@ -87,7 +87,7 @@
         .formula-priority-note,
         .formula-legend {
             background: var(--bg-surface);
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 68%, transparent);
             border-radius: 14px;
             padding: 1rem 1.1rem;
         }
@@ -112,7 +112,7 @@
             border-radius: 999px;
             font-size: 0.88rem;
             font-weight: 600;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 68%, transparent);
             background: var(--bg-surface);
             color: var(--text-muted);
         }
@@ -124,9 +124,9 @@
             background: var(--border-subtle);
             flex-shrink: 0;
         }
-        .legend-chip.legend-memorize { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger-main) 18%, transparent); color: var(--danger-main); background: var(--red-bg); }
+        .legend-chip.legend-memorize { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger-main) 18%, transparent); color: var(--danger-main); background: color-mix(in srgb, var(--danger-main) 10%, transparent); }
         .legend-chip.legend-memorize::before { background: var(--danger-main); }
-        .legend-chip.legend-provided { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 18%, transparent); color: var(--emerald-main); background: var(--green-bg); }
+        .legend-chip.legend-provided { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 18%, transparent); color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
         .legend-chip.legend-provided::before { background: var(--emerald-main); }
         .legend-chip.legend-useful::before { background: var(--text-muted); }
         .formula-section-note {
@@ -146,7 +146,7 @@
             background: var(--bg-surface);
             padding: 1.5rem 1.25rem;
             border-radius: 14px;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 68%, transparent);
             text-align: center;
             overflow: hidden;
             transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
@@ -166,13 +166,13 @@
         }
         .formula-card.memorize-card {
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger-main) 16%, transparent);
-            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--red-bg) 100%);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, color-mix(in srgb, var(--danger-main) 10%, transparent) 100%);
         }
         .formula-card.memorize-card::before { background: var(--danger-main); }
         .formula-card.memorize-card .formula-title { color: var(--text-main); }
         .formula-card.provided-card {
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 16%, transparent);
-            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--green-bg) 100%);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, color-mix(in srgb, var(--emerald-main) 10%, transparent) 100%);
         }
         .formula-card.provided-card::before { background: var(--emerald-main); }
         .formula-card.useful-card {
@@ -197,14 +197,14 @@
 
         /* Quiz Section */
         .quiz-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
-        .quiz-btn { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); color: var(--text-main); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
+        .quiz-btn { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 66%, transparent); color: var(--text-main); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
         .quiz-btn:hover { border-color: var(--primary-main); }
         .quiz-btn.active { background: var(--primary-main); color: var(--bg-surface); border-color: var(--primary-main); }
 
         .quiz-box { text-align: center; padding: 1rem 0; }
         .question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.8; }
         
-        .svg-canvas { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px; padding: 1rem; margin: 0 auto 1.5rem auto; display: block; max-width: 100%; height: auto; }
+        .svg-canvas { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 66%, transparent); border-radius: 12px; padding: 1rem; margin: 0 auto 1.5rem auto; display: block; max-width: 100%; height: auto; }
         .svg-fallback { margin: -0.9rem auto 1.2rem auto; max-width: 640px; color: var(--text-muted); font-size: 0.92rem; text-align: left; }
 
         /* Multi-Inputs */
@@ -223,12 +223,12 @@
         .math-text { font-size: 1.5rem; font-family: var(--type-display-family); }
         .question-note { 
             max-width: 720px; margin: -0.5rem auto 1.25rem auto; padding: 0.9rem 1rem;
-            background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px;
+            background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 66%, transparent); border-radius: 12px;
             color: var(--text-muted); font-size: 0.98rem; line-height: 1.55; text-align: left;
         }
         .log-arg-template { 
             display: inline-flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
-            padding: 0.5rem 0.75rem; border-radius: 14px; background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent);
+            padding: 0.5rem 0.75rem; border-radius: 14px; background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 66%, transparent);
         }
         .log-base-stack {
             display: inline-flex; flex-direction: column; align-items: center; justify-content: flex-end;
@@ -251,14 +251,14 @@
             transition: border-color 0.2s; outline: none;
         }
         .multi-input-grid input:focus { border-color: var(--primary-main); }
-        .multi-input-grid input.inp-correct { border-color: var(--emerald-main); background: var(--green-bg); }
-        .multi-input-grid input.inp-wrong { border-color: var(--danger-main); background: var(--red-bg); }
+        .multi-input-grid input.inp-correct { border-color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
+        .multi-input-grid input.inp-wrong { border-color: var(--danger-main); background: color-mix(in srgb, var(--danger-main) 10%, transparent); }
 
         /* Buttons */
         .btn-primary { background: var(--primary-main); color: var(--bg-surface); border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--type-body-family); }
         .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
         .btn-primary:active { transform: translateY(0); }
-        .btn-secondary { background: transparent; color: var(--text-main); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-left: 0.5rem;}
+        .btn-secondary { background: transparent; color: var(--text-main); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 66%, transparent); padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-left: 0.5rem;}
         .btn-secondary:hover { background: var(--bg-surface); }
 
         /* Mock quiz cards need their own hover treatment because they sit on the same surface tone as the container */
@@ -267,7 +267,7 @@
             width: 100%;
             background: var(--bg-surface);
             min-height: 100%;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 62%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 62%, transparent);
         }
         #quiz-cta .btn-secondary:hover,
         #quiz-cta .btn-secondary:focus-visible {
@@ -287,13 +287,13 @@
         /* Feedback */
         .feedback { margin-top: 1.5rem; padding: 1.25rem; border-radius: 12px; font-weight: 500; display: none; animation: fadeIn 0.3s ease; text-align: left; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .feedback.correct { display: block; background: var(--green-bg); color: var(--emerald-main); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 22%, transparent); text-align: center; }
+        .feedback.correct { display: block; background: color-mix(in srgb, var(--emerald-main) 10%, transparent); color: var(--emerald-main); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 22%, transparent); text-align: center; }
         .feedback.incorrect { display: block; background: var(--bg-surface); color: var(--text-main); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger-main) 22%, transparent); border-left: 6px solid var(--danger-main); }
         .solution-step { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-subtle); color: var(--text-muted); font-size: 1.05rem; }
 
         /* Progress Stats & History Table */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .stat-card { background: var(--bg-surface); padding: 1.5rem; border-radius: 12px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); text-align: center; }
+        .stat-card { background: var(--bg-surface); padding: 1.5rem; border-radius: 12px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 66%, transparent); text-align: center; }
         .stat-val { font-size: 2.5rem; font-family: var(--type-meta-family); color: var(--primary-main); font-weight: 700; margin-bottom: 0.5rem; }
         .stat-label { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -303,7 +303,7 @@
         .history-table tbody td:first-child { border-radius: 12px 0 0 12px; }
         .history-table tbody td:last-child { border-radius: 0 12px 12px 0; }
         .history-table tr:hover td { background: color-mix(in srgb, var(--bg-surface) 92%, var(--accent-soft)); }
-        .best-row td { background: color-mix(in srgb, var(--green-bg) 72%, var(--bg-surface)); }
+        .best-row td { background: color-mix(in srgb, color-mix(in srgb, var(--emerald-main) 10%, transparent) 72%, var(--bg-surface)); }
         
         .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .badge-perfect { background: color-mix(in srgb, var(--emerald-main) 18%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--emerald-main) 48%, var(--border-subtle)); }
@@ -325,7 +325,7 @@
 
         /* Section progress bars */
         .progress-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .progress-item { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px; padding: 1rem; }
+        .progress-item { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 66%, transparent); border-radius: 12px; padding: 1rem; }
         .progress-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
         .progress-item-label { font-weight: 600; font-size: 0.9rem; }
         .progress-item-count { font-family: var(--type-meta-family); font-size: 0.85rem; color: var(--text-muted); }
@@ -474,7 +474,7 @@
         .slides-overview,
         .slides-tip-box {
             background: var(--bg-surface);
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 70%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 70%, transparent);
             border-radius: 14px;
             padding: 1.15rem 1.2rem;
         }
@@ -551,7 +551,7 @@
             border: 0;
             border-radius: 14px;
             padding: 1.15rem;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 76%, transparent), 0 14px 28px rgba(0, 29, 23, 0.07);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 76%, transparent), 0 14px 28px rgba(0, 29, 23, 0.07);
             transition: transform 0.18s ease, box-shadow 0.18s ease;
             overflow: hidden;
         }
@@ -608,11 +608,11 @@
             font-weight: 700;
             letter-spacing: 0.04em;
             text-transform: uppercase;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 60%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 60%, transparent);
             background: var(--bg-surface);
             color: var(--text-muted);
         }
-        .slide-tag.pdf { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 18%, transparent); color: var(--emerald-main); background: var(--green-bg); }
+        .slide-tag.pdf { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 18%, transparent); color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
         .slide-tag.pptx { border-color: var(--border-subtle); color: var(--text-muted); }
         .slide-card h3 {
             font-family: var(--type-display-family);
@@ -660,7 +660,7 @@
             border: 0;
             background: linear-gradient(180deg, color-mix(in srgb, var(--primary-main) 8%, transparent) 0%, color-mix(in srgb, var(--primary-main) 2%, transparent) 100%), var(--bg-surface);
             aspect-ratio: 16 / 9;
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 74%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 74%, transparent);
             text-decoration: none;
             transition: transform 0.18s ease, box-shadow 0.18s ease;
             cursor: pointer;
@@ -1456,7 +1456,7 @@
 </table>
 </div>
 <div class="u-text-center u-mt-xl">
-<button class="btn-secondary" onclick="resetProgress()" style="color: var(--danger-main); border-color: var(--red-bg);">
+<button class="btn-secondary" onclick="resetProgress()" style="color: var(--danger-main); border-color: color-mix(in srgb, var(--danger-main) 10%, transparent);">
 <i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
                     Reset All Progress
                 </button>

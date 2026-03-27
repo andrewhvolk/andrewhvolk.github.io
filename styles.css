@@ -52,9 +52,9 @@
   --text-body: var(--on-surface);
   --text-muted: var(--on-surface-variant);
   --text-on-primary: var(--on-primary);
-  --primary-base: var(--secondary);
-  --primary-hover: color-mix(in srgb, var(--secondary) 82%, var(--primary-main) 18%);
-  --primary-surface: color-mix(in srgb, var(--secondary) 10%, var(--bg-surface));
+  --primary-base: var(--bg-surface);
+  --primary-hover: color-mix(in srgb, var(--bg-surface) 82%, var(--primary-main) 18%);
+  --primary-surface: color-mix(in srgb, var(--bg-surface) 10%, var(--bg-surface));
   --primary-text: var(--text-on-primary);
   --border-subtle: color-mix(in srgb, var(--outline-variant) 58%, transparent);
   --border-base: var(--border-subtle);
@@ -312,7 +312,7 @@ a:focus-visible {
 }
 
 :where(.course-page, .review-shell, .summary-sheet, .question-guide, .answer-content) :where(ul, ol):not(.list-reset):not(.top-nav-links):not(.top-nav-utilities):not(.dropdown-menu):not(.highlights-list):not(.unit-task-meta):not(.math130-summary-list) ::marker {
-  color: var(--secondary);
+  color: var(--bg-surface);
   font-weight: 700;
 }
 
@@ -511,7 +511,7 @@ header h1 {
 }
 
 .reading-page :where(p, li, dd, figcaption, blockquote) a {
-  text-decoration-color: color-mix(in srgb, var(--secondary) 82%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--bg-surface) 82%, transparent);
 }
 
 .subtitle {
@@ -607,7 +607,7 @@ section h2 {
 .feature-section:hover,
 .promo-band:hover {
   box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
-  outline-color: color-mix(in srgb, var(--secondary) 18%, var(--border-subtle));
+  outline-color: color-mix(in srgb, var(--bg-surface) 18%, var(--border-subtle));
 }
 
 /* Two-column layout */
@@ -724,7 +724,7 @@ section h2 {
   font-weight: var(--meta-weight);
   letter-spacing: var(--meta-tracking);
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--bg-surface);
 }
 
 .home-hero {
@@ -828,7 +828,7 @@ section h2 {
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--secondary) 78%, var(--bg-surface));
+  background: color-mix(in srgb, var(--bg-surface) 78%, var(--bg-surface));
 }
 
 .band-intro {
@@ -1018,7 +1018,7 @@ section h2 {
 
 .marketing-card:hover {
   box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
-  outline-color: color-mix(in srgb, var(--secondary) 18%, var(--border-subtle));
+  outline-color: color-mix(in srgb, var(--bg-surface) 18%, var(--border-subtle));
 }
 
 .marketing-card h2 {
@@ -1150,7 +1150,7 @@ section h2 {
   font-weight: var(--meta-weight);
   letter-spacing: var(--meta-tracking);
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--secondary) 72%, var(--text-muted));
+  color: color-mix(in srgb, var(--bg-surface) 72%, var(--text-muted));
 }
 
 .course-identity__value {
@@ -1169,7 +1169,7 @@ section h2 {
   align-items: center;
   padding: 0.32rem 0.78rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--secondary) 8%, var(--bg-surface));
+  background: color-mix(in srgb, var(--bg-surface) 8%, var(--bg-surface));
   color: var(--secondary-color);
   font-family: var(--type-meta-family);
   font-size: var(--meta-sm);
@@ -1179,7 +1179,7 @@ section h2 {
 }
 
 :root[data-theme="dark"] .course-identity {
-  outline-color: var(--ghost-outline);
+  outline-color: var(--border-subtle);
 }
 
 :root[data-theme="dark"] .course-identity__pill {
@@ -1322,11 +1322,11 @@ section h2 {
 :root[data-theme="dark"] .unit-task-card,
 :root[data-theme="dark"] .unit-resource-card {
   background: rgba(126, 168, 255, 0.16);
-  outline-color: var(--ghost-outline);
+  outline-color: var(--border-subtle);
 }
 
 :root[data-theme="dark"] .unit-detail-toggle {
-  outline-color: var(--ghost-outline);
+  outline-color: var(--border-subtle);
 }
 
 .assignment-resource-table {
@@ -1395,7 +1395,7 @@ section h2 {
 
 :root[data-theme="dark"] .assignment-resource-table th,
 :root[data-theme="dark"] .assignment-resource-table td {
-  outline-color: var(--ghost-outline);
+  outline-color: var(--border-subtle);
 }
 
 /* Footer styling */
@@ -1450,7 +1450,7 @@ footer p {
 
 .error-icon {
   font-size: 4rem;
-  color: var(--secondary);
+  color: var(--bg-surface);
   margin-bottom: 1rem;
 }
 
@@ -1490,7 +1490,7 @@ main.error-main {
 
 .highlights-list li:before {
   content: "▹";
-  color: var(--secondary);
+  color: var(--bg-surface);
   position: absolute;
   left: 0;
   font-size: 1.2rem;
@@ -1525,7 +1525,7 @@ main.error-main {
 
 .tool-page-body {
   background:
-    radial-gradient(circle at top, color-mix(in srgb, var(--secondary) 8%, transparent), transparent 28%),
+    radial-gradient(circle at top, color-mix(in srgb, var(--bg-surface) 8%, transparent), transparent 28%),
     linear-gradient(180deg, color-mix(in srgb, var(--surface-container-low) 86%, transparent), transparent 22%),
     var(--bg-surface);
 }
@@ -1560,7 +1560,7 @@ main.error-main {
 .recommended-order-panel,
 .journey-panel {
   background: var(--surface-container-low);
-  border: 1px solid var(--ghost-outline);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   box-shadow: none;
 }
@@ -1585,7 +1585,7 @@ main.error-main {
 .person-box,
 .chart-container {
   background: var(--surface-container-lowest);
-  border: 1px solid var(--ghost-outline);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   box-shadow: none;
 }
@@ -1600,8 +1600,8 @@ main.error-main {
 .review-callout,
 .recommended-order-panel,
 .journey-panel {
-  border-color: color-mix(in srgb, var(--secondary) 24%, var(--ghost-outline));
-  background: linear-gradient(180deg, color-mix(in srgb, var(--secondary) 7%, var(--surface-container-low)), var(--surface-container-low));
+  border-color: color-mix(in srgb, var(--bg-surface) 24%, var(--border-subtle));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-surface) 7%, var(--surface-container-low)), var(--surface-container-low));
 }
 
 .tool-chart-box,
@@ -1620,7 +1620,7 @@ main.error-main {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--bg-surface);
   margin-bottom: 0.7rem;
 }
 
@@ -1661,7 +1661,7 @@ main.error-main {
 .practice-start-btn:focus-visible,
 .quiz-next-btn:hover,
 .quiz-next-btn:focus-visible {
-  background: color-mix(in srgb, var(--primary-container) 88%, var(--secondary));
+  background: color-mix(in srgb, var(--primary-container) 88%, var(--bg-surface));
 }
 
 .tool-button--secondary,
@@ -1673,7 +1673,7 @@ main.error-main {
 .reset-btn {
   background: var(--surface-container-lowest);
   color: var(--on-surface);
-  border: 1px solid var(--ghost-outline);
+  border: 1px solid var(--border-subtle);
 }
 
 .tool-button--secondary:hover,
@@ -1690,16 +1690,16 @@ main.error-main {
 .print-btn:focus-visible,
 .reset-btn:hover,
 .reset-btn:focus-visible {
-  border-color: color-mix(in srgb, var(--secondary) 48%, var(--ghost-outline));
-  background: color-mix(in srgb, var(--secondary) 8%, var(--surface-container-lowest));
-  color: var(--secondary);
+  border-color: color-mix(in srgb, var(--bg-surface) 48%, var(--border-subtle));
+  background: color-mix(in srgb, var(--bg-surface) 8%, var(--surface-container-lowest));
+  color: var(--bg-surface);
 }
 
 .tool-button:focus-visible,
 .tool-button--secondary:focus-visible,
 .tool-panel :is(button, a, input, select, textarea):focus-visible,
 .tool-page-shell :is(button, a, input, select, textarea):focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--secondary) 36%, transparent);
+  outline: 3px solid color-mix(in srgb, var(--bg-surface) 36%, transparent);
   outline-offset: 2px;
 }
 
@@ -1797,13 +1797,13 @@ main.error-main {
   --bg-surface: var(--surface-container-lowest);
   --bg-subtle: var(--surface-container-low);
   --bg-inverse: #f8faf7;
-  --text-heading: var(--secondary);
+  --text-heading: var(--bg-surface);
   --text-body: var(--on-surface);
   --text-muted: var(--on-surface-variant);
   --text-on-primary: #f8faf7;
-  --primary-base: var(--secondary);
-  --primary-hover: color-mix(in srgb, var(--secondary) 84%, var(--bg-surface) 16%);
-  --primary-surface: color-mix(in srgb, var(--secondary) 22%, var(--bg-surface));
+  --primary-base: var(--bg-surface);
+  --primary-hover: color-mix(in srgb, var(--bg-surface) 84%, var(--bg-surface) 16%);
+  --primary-surface: color-mix(in srgb, var(--bg-surface) 22%, var(--bg-surface));
   --primary-text: var(--text-on-primary);
   --border-subtle: color-mix(in srgb, var(--outline-variant) 52%, transparent);
   --border-base: var(--border-subtle);
@@ -1949,7 +1949,7 @@ main.error-main {
 }
 
 :root[data-theme="dark"] :focus {
-  outline-color: var(--secondary);
+  outline-color: var(--bg-surface);
 }
 
 /* Dark mode: button-secondary uses a light blue background, so needs dark text */
@@ -1969,15 +1969,15 @@ main.error-main {
 
 /* Dark mode: math130 unit card refinements */
 :root[data-theme="dark"] .math130-unit-card {
-  outline: 1px solid color-mix(in srgb, var(--ghost-outline) 82%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--border-subtle) 82%, transparent);
 }
 
 :root[data-theme="dark"] .math130-unit-card--priority::before {
-  background: linear-gradient(90deg, var(--secondary), transparent 70%);
+  background: linear-gradient(90deg, var(--bg-surface), transparent 70%);
 }
 
 :root[data-theme="dark"] .math130-unit-card:hover {
-  outline-color: color-mix(in srgb, var(--secondary) 28%, var(--ghost-outline));
+  outline-color: color-mix(in srgb, var(--bg-surface) 28%, var(--border-subtle));
 }
 
 /* Animations */
@@ -2156,7 +2156,7 @@ main.error-main {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: none;
-  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--ghost-outline) 70%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--border-subtle) 70%, transparent);
 }
 
 .top-nav-inner {
@@ -2372,7 +2372,7 @@ main.error-main {
   list-style: none;
   background: var(--glass-surface);
   border-radius: 0.75rem;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 82%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 82%, transparent);
 }
 
 .top-nav-links .dropdown:hover .dropdown-menu,
@@ -2421,7 +2421,7 @@ main.error-main {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 76%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 76%, transparent);
 }
 
 .menu-toggle.global-nav-toggle .menu-toggle__icon::before {
@@ -2455,7 +2455,7 @@ main.error-main {
   background: linear-gradient(180deg, color-mix(in srgb, var(--glass-surface) 92%, transparent), color-mix(in srgb, var(--surface-container-low) 94%, transparent));
   border-top: none;
   border-bottom: none;
-  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--ghost-outline) 72%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--border-subtle) 72%, transparent);
 }
 
 .cv-section-nav .cv-section-nav__inner {
@@ -2510,7 +2510,7 @@ main.error-main {
   padding: 0.35rem;
   background: linear-gradient(180deg, color-mix(in srgb, var(--surface-container-lowest) 96%, transparent), color-mix(in srgb, var(--surface-container-low) 90%, transparent));
   border-radius: 0.75rem;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 76%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 76%, transparent);
   opacity: 0;
   visibility: hidden;
 }
@@ -2564,7 +2564,7 @@ main.error-main {
     padding: 0.6rem;
     border-radius: 1rem;
     background: linear-gradient(180deg, var(--nav-mobile-panel-start), var(--nav-mobile-panel-end));
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 78%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 78%, transparent);
   }
 
   .top-nav-links[data-open="true"],
@@ -2919,7 +2919,7 @@ body.light .math-review-page,
   background: linear-gradient(180deg, color-mix(in srgb, var(--glass-surface) 92%, transparent), color-mix(in srgb, var(--surface-container-low) 94%, transparent));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--ghost-outline) 72%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--border-subtle) 72%, transparent);
 }
 
 .review-section-nav__inner {
@@ -2955,13 +2955,13 @@ body.light .math-review-page,
 .review-section-nav__inner a:hover,
 .review-section-nav__inner a:focus-visible {
   background: color-mix(in srgb, var(--primary-main) 10%, transparent);
-  color: var(--secondary);
+  color: var(--bg-surface);
   outline: none;
 }
 
 .review-section-nav__inner a.is-active {
-  background: color-mix(in srgb, var(--secondary) 12%, transparent);
-  color: var(--secondary);
+  background: color-mix(in srgb, var(--bg-surface) 12%, transparent);
+  color: var(--bg-surface);
 }
 
 @media (max-width: 640px) {
@@ -3142,14 +3142,14 @@ body.light .math-review-page,
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--surface-container-lowest) 96%, transparent), color-mix(in srgb, var(--surface-container-low) 94%, transparent));
   border-radius: var(--radius-lg);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 82%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 82%, transparent);
 }
 
 .review-panel, .review-card, .formula-section, .info-card, .practice-stat, .problem-card, .topic-card, .section-summary-card {
   position: relative;
   background: linear-gradient(180deg, var(--bg-surface), color-mix(in srgb, var(--bg-surface) 78%, var(--bg-surface)));
   border-radius: var(--radius);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 80%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 80%, transparent);
 }
 .review-panel::before, .review-card::before, .card::before, .formula-section::before, .section-summary-card::before {
   content: '';
@@ -3172,7 +3172,7 @@ body.light .math-review-page,
   box-sizing: border-box;
   padding: 1rem;
   background: var(--bg-surface);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 72%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 72%, transparent);
   border-radius: 12px;
   transition: all 0.2s;
 }
@@ -3184,7 +3184,7 @@ body.light .math-review-page,
 
 .review-formula-box, .formula-box {
   background: var(--bg-surface);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 68%, transparent);
   border-radius: 8px;
   padding: 0.85rem 1rem;
   margin: 0.6rem 0;
@@ -3213,7 +3213,7 @@ body.light .math-review-page,
   margin: 0.75rem 0;
   padding: 0.85rem 1rem;
   background: var(--bg-surface);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 68%, transparent);
   border-radius: 10px;
   color: var(--text-main);
   text-decoration: none;
@@ -3225,7 +3225,7 @@ body.light .math-review-page,
 .review-video-link i[data-lucide], .video-link i[data-lucide] { color: var(--green, var(--primary-main)) !important; flex-shrink: 0; opacity: 0.85; }
 .review-video-link:hover, .video-link:hover { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green, var(--primary-main)) 38%, transparent); }
 .review-video-link:hover i[data-lucide], .video-link:hover i[data-lucide] { opacity: 1; }
-.review-video-link.watched, .video-link.watched { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green, var(--primary-main)) 32%, transparent); background: var(--green-bg); }
+.review-video-link.watched, .video-link.watched { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green, var(--primary-main)) 32%, transparent); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
 .review-video-link.watched i[data-lucide], .video-link.watched i[data-lucide] { color: var(--green, var(--primary-main)) !important; opacity: 0.5; }
 .review-video-link.watched span, .video-link.watched span { opacity: 0.5; text-decoration: line-through; }
 .review-video-link::after, .video-link::after { content: '↗'; font-size: 0.8rem; color: var(--text-main); opacity: 0.35; margin-left: auto; padding-left: 0.5rem; flex-shrink: 0; }
@@ -3234,7 +3234,7 @@ body.light .math-review-page,
   padding: 1rem 1.1rem;
   margin: 1rem 0;
   border-radius: 14px;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 68%, transparent);
   background: linear-gradient(135deg, color-mix(in srgb, var(--bg-surface) 84%, transparent), var(--bg-surface));
 }
 .review-callout--exam { text-align:center; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary-main) 28%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--primary-main) 16%, var(--bg-surface)), color-mix(in srgb, var(--bg-surface) 88%, var(--bg-surface))); }
@@ -3285,7 +3285,7 @@ body.light .math-review-page,
 }
 
 .exam-countdown-pill {
-  background: var(--red-bg);
+  background: color-mix(in srgb, var(--danger-main) 10%, transparent);
   border: 1px solid var(--danger-main);
   color: var(--danger-main);
   padding: 0.5rem 1rem;
@@ -3297,7 +3297,7 @@ body.light .math-review-page,
 
 .section-card {
   background: var(--surface-container-lowest);
-  border: 1px solid var(--ghost-outline);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: var(--spacing-4);
 }
@@ -3567,7 +3567,7 @@ body.math130-course-page {
 
 .math130-unit-card:hover {
   box-shadow: 0 18px 36px rgba(0, 29, 23, 0.06);
-  outline-color: color-mix(in srgb, var(--secondary) 18%, var(--border-subtle));
+  outline-color: color-mix(in srgb, var(--bg-surface) 18%, var(--border-subtle));
   transform: translateY(-2px);
 }
 
@@ -3582,7 +3582,7 @@ body.math130-course-page {
   width: 100%;
   height: 3px;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  background: linear-gradient(90deg, var(--secondary), transparent 70%);
+  background: linear-gradient(90deg, var(--bg-surface), transparent 70%);
 }
 
 .math130-unit-card__copy {
@@ -3771,7 +3771,7 @@ body.math130-course-page {
 }
 
 .cv-fact-group--featured {
-  border-left-color: color-mix(in srgb, var(--secondary) 48%, var(--surface-tint));
+  border-left-color: color-mix(in srgb, var(--bg-surface) 48%, var(--surface-tint));
 }
 
 .cv-section {
@@ -3789,7 +3789,7 @@ body.math130-course-page {
   font-weight: var(--meta-weight);
   letter-spacing: var(--meta-tracking);
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--bg-surface);
 }
 
 .cv-entries {
@@ -3819,8 +3819,8 @@ body.math130-course-page {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--secondary);
-  background: color-mix(in srgb, var(--secondary) 12%, var(--bg-surface) 88%);
+  color: var(--bg-surface);
+  background: color-mix(in srgb, var(--bg-surface) 12%, var(--bg-surface) 88%);
   vertical-align: middle;
 }
 
@@ -3863,7 +3863,7 @@ body.math130-course-page {
   width: 0.38rem;
   height: 0.38rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--secondary) 70%, var(--surface-tint));
+  background: color-mix(in srgb, var(--bg-surface) 70%, var(--surface-tint));
 }
 
 .cv-split-list {
@@ -3928,7 +3928,7 @@ body.math130-course-page {
 .cv-section-nav #nav-menu > li > .cv-nav-link:hover,
 .cv-section-nav #nav-menu > li > .cv-nav-link:focus-visible {
   background: color-mix(in srgb, var(--primary-main) 10%, transparent);
-  color: var(--secondary);
+  color: var(--bg-surface);
   outline: none;
 }
 
