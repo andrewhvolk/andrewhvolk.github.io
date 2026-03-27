@@ -5,6 +5,24 @@
 /* Global design tokens: high-end editorial system */
 :root {
   color-scheme: light;
+  /* Core Palette */
+  --bg-base: #f8fafc;
+  --bg-surface: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-subtle: #e2e8f0;
+  --primary-main: #2563eb;
+  --emerald-main: #10b981;
+  --danger-main: #ef4444;
+  --warning-main: #f59e0b;
+  --secondary: #64748b;
+  /* Soft & Transparent Extension Tokens */
+  --surface-transparent: color-mix(in srgb, var(--bg-surface) 80%, transparent);
+  --border-transparent: color-mix(in srgb, var(--border-subtle) 65%, transparent);
+  --primary-soft: color-mix(in srgb, var(--primary-main) 12%, transparent);
+  --emerald-soft: color-mix(in srgb, var(--emerald-main) 12%, transparent);
+  --danger-soft: color-mix(in srgb, var(--danger-main) 12%, transparent);
+
   --ink-strong: #001d17;
   --ink-soft: #3d4a44;
   --ink-inverse: var(--bg-surface);
@@ -36,7 +54,7 @@
   --surface-dim: color-mix(in srgb, var(--parchment-warm) 76%, var(--parchment-deep));
   --primary: var(--emerald-main);
   --primary-container: var(--emerald-surface);
-  --secondary: var(--accent-action);
+  --secondary-tonal: var(--accent-action);
   --tertiary: var(--ink-earth);
   --on-surface: var(--text-main);
   --on-surface-variant: var(--ink-soft);
@@ -44,19 +62,18 @@
   --on-secondary: var(--ink-inverse);
 
   /* Tier 2 semantic tokens (migration foundation) */
-  --bg-body: var(--bg-surface);
-  --bg-surface: var(--bg-base);
+  --bg-body: var(--bg-base);
   --bg-subtle: var(--bg-base);
   --bg-inverse: var(--primary);
   --text-heading: var(--primary);
   --text-body: var(--on-surface);
-  --text-muted: var(--on-surface-variant);
+  --text-muted: #64748b;
   --text-on-primary: var(--on-primary);
   --primary-base: var(--bg-surface);
   --primary-hover: color-mix(in srgb, var(--bg-surface) 82%, var(--primary-main) 18%);
   --primary-surface: color-mix(in srgb, var(--bg-surface) 10%, var(--bg-surface));
   --primary-text: var(--text-on-primary);
-  --border-subtle: color-mix(in srgb, var(--outline-variant) 58%, transparent);
+  --border-subtle: #e2e8f0;
   --border-base: var(--border-subtle);
   --overlay-light: rgba(17, 22, 20, 0.66);
   --overlay-medium: rgba(17, 22, 20, 0.82);
@@ -74,11 +91,11 @@
   --status-info: var(--primary-main);
   --status-info-bg: var(--primary-soft);
   --status-info-border: color-mix(in srgb, var(--primary-main) 32%, transparent);
-  --emerald-soft: color-mix(in srgb, var(--emerald-main) 10%, transparent);
-  --danger-soft: color-mix(in srgb, var(--danger-main) 10%, transparent);
-  --primary-soft: color-mix(in srgb, var(--primary-main) 10%, transparent);
-  --border-transparent: color-mix(in srgb, var(--border-subtle) 70%, transparent);
-  --surface-transparent: color-mix(in srgb, var(--bg-surface) 85%, transparent);
+  --emerald-soft: color-mix(in srgb, var(--emerald-main) 12%, transparent);
+  --danger-soft: color-mix(in srgb, var(--danger-main) 12%, transparent);
+  --primary-soft: color-mix(in srgb, var(--primary-main) 12%, transparent);
+  --border-transparent: color-mix(in srgb, var(--border-subtle) 65%, transparent);
+  --surface-transparent: color-mix(in srgb, var(--bg-surface) 80%, transparent);
   /*
    * Legacy compatibility aliases (temporary):
    * - Keep during migration window only (one full release cycle after Bucket C sign-off).
