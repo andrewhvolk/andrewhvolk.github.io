@@ -43,23 +43,15 @@
   --on-primary: var(--ink-inverse);
   --on-secondary: var(--ink-inverse);
 
-  --primary-color: var(--primary-container);
-  --secondary-color: var(--primary);
-  --accent-color: var(--secondary);
-  --text-color: var(--on-surface);
-  --muted-text-color: var(--on-surface-variant);
-  --light-text: var(--on-primary);
-  --background-color: var(--surface);
-  --card-background: var(--surface-container-lowest);
   /* Tier 2 semantic tokens (migration foundation) */
-  --bg-body: var(--background-color);
-  --bg-surface: var(--card-background);
+  --bg-body: var(--surface);
+  --bg-surface: var(--surface-container-lowest);
   --bg-subtle: var(--surface-container-low);
   --bg-inverse: var(--primary);
-  --text-heading: var(--secondary-color);
-  --text-body: var(--text-color);
-  --text-muted: var(--muted-text-color);
-  --text-on-primary: var(--light-text);
+  --text-heading: var(--primary);
+  --text-body: var(--on-surface);
+  --text-muted: var(--on-surface-variant);
+  --text-on-primary: var(--on-primary);
   --primary-base: var(--secondary);
   --primary-hover: color-mix(in srgb, var(--secondary) 82%, #0d50d5 18%);
   --primary-surface: color-mix(in srgb, var(--secondary) 10%, var(--bg-surface));
@@ -82,6 +74,15 @@
   --status-info: #1A56DB;
   --status-info-bg: rgba(26, 86, 219, 0.08);
   --status-info-border: rgba(26, 86, 219, 0.32);
+  /* Legacy aliases routed through semantic tokens */
+  --primary-color: var(--primary-base);
+  --secondary-color: var(--text-heading);
+  --accent-color: var(--primary-base);
+  --text-color: var(--text-body);
+  --muted-text-color: var(--text-muted);
+  --light-text: var(--text-on-primary);
+  --background-color: var(--bg-body);
+  --card-background: var(--bg-surface);
   --featured-card-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0)), linear-gradient(135deg, rgba(0, 29, 23, 0.96), rgba(0, 52, 43, 0.92));
   --featured-card-base: #002720;
   --featured-card-text: var(--on-primary);
@@ -1783,18 +1784,13 @@ main.error-main {
   --surface-tint: #8bb1a8;
   --on-surface: #f2f5f2;
   --on-surface-variant: #bac4bf;
-  --text-color: var(--on-surface);
-  --muted-text-color: var(--on-surface-variant);
-  --light-text: var(--on-surface);
-  --background-color: var(--surface);
-  --card-background: var(--surface-container-lowest);
-  --bg-body: var(--background-color);
-  --bg-surface: var(--card-background);
+  --bg-body: var(--surface);
+  --bg-surface: var(--surface-container-lowest);
   --bg-subtle: var(--surface-container-low);
   --bg-inverse: #f8faf7;
   --text-heading: var(--secondary);
-  --text-body: var(--text-color);
-  --text-muted: var(--muted-text-color);
+  --text-body: var(--on-surface);
+  --text-muted: var(--on-surface-variant);
   --text-on-primary: #f8faf7;
   --primary-base: var(--secondary);
   --primary-hover: color-mix(in srgb, var(--secondary) 84%, white 16%);
@@ -1817,6 +1813,14 @@ main.error-main {
   --status-info: #7ea8ff;
   --status-info-bg: rgba(126, 168, 255, 0.2);
   --status-info-border: rgba(126, 168, 255, 0.4);
+  --primary-color: var(--primary-base);
+  --secondary-color: var(--text-heading);
+  --accent-color: var(--primary-base);
+  --text-color: var(--text-body);
+  --muted-text-color: var(--text-muted);
+  --light-text: var(--text-on-primary);
+  --background-color: var(--bg-body);
+  --card-background: var(--bg-surface);
   --featured-card-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)), linear-gradient(135deg, rgba(22, 29, 27, 0.95), rgba(33, 72, 62, 0.88));
   --featured-card-base: #16211d;
   --featured-card-text: var(--on-surface);
@@ -2088,13 +2092,6 @@ main.error-main {
 /* High contrast mode support */
 @media (forced-colors: active) {
   :root {
-    --primary-color: CanvasText;
-    --secondary-color: Canvas;
-    --accent-color: Highlight;
-    --text-color: CanvasText;
-    --light-text: Canvas;
-    --background-color: Canvas;
-    --card-background: Canvas;
     --bg-body: Canvas;
     --bg-surface: Canvas;
     --bg-subtle: Canvas;
@@ -2124,6 +2121,14 @@ main.error-main {
     --status-info: Highlight;
     --status-info-bg: Canvas;
     --status-info-border: CanvasText;
+    --primary-color: var(--primary-base);
+    --secondary-color: var(--text-heading);
+    --accent-color: var(--primary-base);
+    --text-color: var(--text-body);
+    --muted-text-color: var(--text-muted);
+    --light-text: var(--text-on-primary);
+    --background-color: var(--bg-body);
+    --card-background: var(--bg-surface);
   }
 
   .skill-badge,
