@@ -12,7 +12,7 @@
       padding-bottom: 3rem;
     }
     .summary-sheet {
-      background: #fff;
+      background: var(--bg-surface);
       border: 1px solid var(--border-color, #d9e2ec);
       border-radius: 18px;
       box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
@@ -30,9 +30,9 @@
     .summary-sheet ul, .summary-sheet ol { margin-left: 1.25em; margin-bottom: 0.75em; }
     .summary-sheet ul ul, .summary-sheet ul ol, .summary-sheet ol ul, .summary-sheet ol ol { margin-bottom: 0.3em; }
     .name-field { margin-top: 0; margin-bottom: 1em; }
-    .copyright { text-align: center; margin-top: 1em; font-size: 10pt; color: #666; }
+    .copyright { text-align: center; margin-top: 1em; font-size: 10pt; color: var(--text-muted); }
     @media print {
-      body { background: #fff; }
+      body { background: var(--bg-surface); }
       .top-nav, .page-context-bar, .course-header { display: none !important; }
       .summary-page { max-width: none; padding: 0; }
       .summary-sheet { border: none; box-shadow: none; border-radius: 0; padding: 0; }

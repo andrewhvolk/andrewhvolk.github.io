@@ -24,15 +24,15 @@
         position: relative;
         cursor: pointer;
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s;
-        border: 1px solid #ccc; /* Add subtle border */
+        border: 1px solid var(--border-subtle); /* Add subtle border */
       }
       .square:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 10px color-mix(in srgb, var(--text-main) 30%, transparent);
         z-index: 10;
       }
       .square.selected {
-         border: 3px solid #3b82f6; /* Blue border for selected */
+         border: 3px solid var(--primary-main); /* Blue border for selected */
          box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
       }
       .square .content {
@@ -46,7 +46,7 @@
         justify-content: center;
         font-size: 0.75rem; /* Smaller font for square number */
         font-weight: bold;
-        color: #4b5563; /* Gray text */
+        color: var(--text-muted); /* Gray text */
       }
       /* Alternating square colors */
       .board-row:nth-child(odd) .square:nth-child(even),
@@ -55,7 +55,7 @@
       }
       .board-row:nth-child(odd) .square:nth-child(odd),
       .board-row:nth-child(even) .square:nth-child(even) {
-        background-color: #f3f4f6; /* Lighter gray/white */
+        background-color: var(--bg-base); /* Lighter gray/var(--bg-surface) */
       }
       /* Style for the chart tooltips */
       .tooltip {
@@ -65,7 +65,7 @@
         font-family: var(--type-meta-family);
         font-size: 0.75rem;
         background: rgba(50, 50, 50, 0.8); /* Darker tooltip */
-        color: white;
+        color: var(--bg-surface);
         border: 0px;
         border-radius: 8px;
         pointer-events: none; /* Make tooltip non-interactive */
@@ -77,12 +77,12 @@
       .axis path,
       .axis line {
         fill: none;
-        stroke: #333;
+        stroke: var(--text-main);
         shape-rendering: crispEdges;
       }
       .axis text {
         font-size: 0.8rem;
-        fill: #333;
+        fill: var(--text-main);
       }
 
       /* Style for linear chart bars */

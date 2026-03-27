@@ -39,7 +39,7 @@
         /* Basic print styles */
         @media print {
             body {
-                color: #000;
+                color: var(--text-main);
                 margin: 0.35in; /* Print margin */
                 font-size: 7.5pt; /* Base print font size */
             }
@@ -52,16 +52,16 @@
                 padding: 0.05em 0.2em;
                 border-radius: 2px;
                 font-size: 0.95em;
-                color: #000;
-                border: 1px solid #ccc;
+                color: var(--text-main);
+                border: 1px solid var(--border-subtle);
              }
              h1 { font-size: 14pt; margin-bottom: 0.5rem; }
              h2 { font-size: 11pt; margin-bottom: 0.3rem; }
              h3 { font-size: 9pt; margin-bottom: 0.2rem; }
              p { font-size: 7.5pt; margin-bottom: 0.3rem;}
-             .section-block + .section-block { border-top: 1px solid #ccc; padding-top: 0.5rem; margin-top: 0.5rem;}
+             .section-block + .section-block { border-top: 1px solid var(--border-subtle); padding-top: 0.5rem; margin-top: 0.5rem;}
              table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-             th, td { border: 1px solid #ccc; text-align: center; }
+             th, td { border: 1px solid var(--border-subtle); text-align: center; }
              th { background-color: #e0e0e0 !important; font-size: 6.5pt; padding: 1px; }
              td { font-size: 6.5pt; padding: 1px; }
              .z-table th, .z-table td { padding: 1px; }
@@ -86,7 +86,7 @@
         /* Style for code blocks */
         code {
             font-family: monospace;
-            background-color: #f3f4f6; /* Tailwind gray-100 */
+            background-color: var(--bg-base); /* Tailwind gray-100 */
             padding: 0.1em 0.3em;
             border-radius: 3px;
             font-size: 0.85em; /* Slightly smaller code font */
@@ -107,7 +107,7 @@
             font-size: 0.7rem; /* Smaller font size */
         }
         .z-table th {
-            background-color: #f3f4f6; /* gray-100 */
+            background-color: var(--bg-base); /* gray-100 */
             font-weight: 600; /* semibold */
             font-size: 0.65rem; /* Smaller header font */
         }

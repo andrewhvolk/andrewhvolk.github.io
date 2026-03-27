@@ -8,21 +8,21 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
-            color: #333;
+            color: var(--text-main);
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: var(--bg-base);
         }
         .container {
-            background-color: white;
+            background-color: var(--bg-surface);
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px var(--border-subtle);
         }
         h1 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
+            color: var(--text-main);
+            border-bottom: 3px solid var(--primary-main);
             padding-bottom: 15px;
             font-size: 2.5em;
         }
@@ -32,13 +32,13 @@
             font-size: 1.8em;
         }
         h3 {
-            color: #7f8c8d;
+            color: var(--text-muted);
             font-size: 1.4em;
         }
         .equation-box {
             background-color: #ecf0f1;
             padding: 25px;
-            border-left: 5px solid #3498db;
+            border-left: 5px solid var(--primary-main);
             margin: 25px 0;
             font-size: 1.3em;
             text-align: center;
@@ -54,7 +54,7 @@
         .warning-box {
             background-color: #fff3cd;
             padding: 20px;
-            border-left: 5px solid #f39c12;
+            border-left: 5px solid var(--warning-main);
             margin: 25px 0;
             border-radius: 5px;
         }
@@ -88,7 +88,7 @@
             content: "→";
             position: absolute;
             left: 0;
-            color: #3498db;
+            color: var(--primary-main);
             font-weight: bold;
         }
         code {
@@ -104,10 +104,10 @@
             border-radius: 10px;
             margin: 30px 0;
             text-align: center;
-            color: white;
+            color: var(--bg-surface);
         }
         .interactive-demo h3 {
-            color: white;
+            color: var(--bg-surface);
         }
         input {
             padding: 10px;
@@ -119,8 +119,8 @@
         }
         button {
             padding: 12px 25px;
-            background-color: #27ae60;
-            color: white;
+            background-color: var(--emerald-main);
+            color: var(--bg-surface);
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -131,13 +131,13 @@
         button:hover {
             background-color: #229954;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px color-mix(in srgb, var(--text-main) 30%, transparent);
         }
         .result {
             margin-top: 20px;
             font-weight: bold;
-            background-color: rgba(255,255,255,0.9);
-            color: #333;
+            background-color: var(--surface-transparent);
+            color: var(--text-main);
             padding: 20px;
             border-radius: 8px;
             display: none;
@@ -146,20 +146,20 @@
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px var(--border-subtle);
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-subtle);
             padding: 15px;
             text-align: left;
         }
         th {
-            background-color: #3498db;
-            color: white;
+            background-color: var(--primary-main);
+            color: var(--bg-surface);
             font-weight: bold;
         }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: var(--bg-base);
         }
         tr:hover {
             background-color: #e8f5e9;
@@ -171,7 +171,7 @@
             margin-bottom: 30px;
         }
         .nav-menu a {
-            color: white;
+            color: var(--bg-surface);
             text-decoration: none;
             margin: 0 15px;
             padding: 8px 15px;
@@ -179,7 +179,7 @@
             transition: background-color 0.3s;
         }
         .nav-menu a:hover {
-            background-color: #2c3e50;
+            background-color: var(--text-main);
         }
         .quiz-box {
             background-color: #e1f5fe;
@@ -190,22 +190,22 @@
         }
         .video-placeholder {
             background-color: #263238;
-            color: white;
+            color: var(--bg-surface);
             padding: 60px;
             text-align: center;
             border-radius: 8px;
             margin: 20px 0;
         }
         .formula-derivation {
-            background-color: #f5f5f5;
+            background-color: var(--bg-base);
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
-            border: 1px solid #ccc;
+            border: 1px solid var(--border-subtle);
         }
         .animation-placeholder {
             background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            color: white;
+            color: var(--bg-surface);
             padding: 80px;
             text-align: center;
             border-radius: 10px;
@@ -604,7 +604,7 @@
                 <div class="step"><strong>Answer:</strong> Box or underline your final answer with units</div>
                 
                 <h4>Example format:</h4>
-                <div style="background-color: #f9f9f9; padding: 15px; margin: 10px 0; border: 1px solid #ddd;">
+                <div style="background-color: var(--bg-base); padding: 15px; margin: 10px 0; border: 1px solid var(--border-subtle);">
                     <p><strong>Given:</strong> h = 90 m, g = 9.8 m/s², v₀ = 0 m/s (dropped)</p>
                     <p><strong>Find:</strong> time to fall (t)</p>
                     <p><strong>Solution:</strong></p>
@@ -613,7 +613,7 @@
                     <p style="margin-left: 20px;">90 = 4.9t²</p>
                     <p style="margin-left: 20px;">t² = 90/4.9 = 18.37</p>
                     <p style="margin-left: 20px;">t = √18.37 = 4.29 s</p>
-                    <p><strong>Answer:</strong> <span style="border: 2px solid #333; padding: 2px 5px;">t = 4.29 seconds</span></p>
+                    <p><strong>Answer:</strong> <span style="border: 2px solid var(--text-main); padding: 2px 5px;">t = 4.29 seconds</span></p>
                 </div>
             </div>
 
@@ -624,27 +624,27 @@
                 <h4>Problem 1: Dropped Penny</h4>
                 <p>A penny is dropped from the Empire State Building (380 m). How long does it take to hit the ground?</p>
                 <details style="margin-top: 10px;">
-                    <summary style="cursor: pointer; color: #3498db;">Show Solution</summary>
+                    <summary style="cursor: pointer; color: var(--primary-main);">Show Solution</summary>
                     <p style="margin-top: 10px;">t = √(2h/g) = √(2×380/9.8) = √77.55 = 8.81 seconds</p>
                 </details>
                 
                 <h4>Problem 2: Thrown Baseball</h4>
                 <p>A baseball is thrown upward at 20 m/s. What is its position after 1.5 seconds?</p>
                 <details style="margin-top: 10px;">
-                    <summary style="cursor: pointer; color: #3498db;">Show Solution</summary>
+                    <summary style="cursor: pointer; color: var(--primary-main);">Show Solution</summary>
                     <p style="margin-top: 10px;">Y(1.5) = 20(1.5) - ½(9.8)(1.5)² = 30 - 11.025 = 18.975 m</p>
                 </details>
                 
                 <h4>Problem 3: Car Braking</h4>
                 <p>A car traveling at 25 m/s applies brakes with acceleration a = -5 m/s². How far does it travel in 3 seconds?</p>
                 <details style="margin-top: 10px;">
-                    <summary style="cursor: pointer; color: #3498db;">Show Solution</summary>
+                    <summary style="cursor: pointer; color: var(--primary-main);">Show Solution</summary>
                     <p style="margin-top: 10px;">d = v₀t + ½at² = 25(3) + ½(-5)(3)² = 75 - 22.5 = 52.5 m</p>
                 </details>
                 
                 <h4>Problem 4: Your Assignment Problem Template</h4>
                 <p>An object falls from height h = 6 × [your day]. Find the time and final velocity.</p>
-                <p style="color: #e74c3c;"><strong>Remember:</strong> Use YOUR actual due date, not someone else's!</p>
+                <p style="color: var(--danger-main);"><strong>Remember:</strong> Use YOUR actual due date, not someone else's!</p>
             </div>
 
             <div class="quiz-box">

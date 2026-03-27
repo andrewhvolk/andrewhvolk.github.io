@@ -22,8 +22,8 @@
 
         /* Cards */
         .card {
-            background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, transparent), var(--surface));
-            border: 1px solid var(--border);
+            background: linear-gradient(180deg, var(--surface-transparent), var(--bg-surface));
+            border: 1px solid var(--border-subtle);
             border-radius: var(--radius);
             padding: 2rem;
             margin-bottom: 1.5rem;
@@ -36,9 +36,9 @@
         }
         .card-tier-primary {
             padding: 2.25rem;
-            border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
-            box-shadow: 0 18px 42px rgba(0,0,0,0.18);
-            background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 10%, var(--surface)) 0%, var(--surface) 100%);
+            border-color: color-mix(in srgb, var(--primary-main) 38%, var(--border-subtle));
+            box-shadow: 0 18px 42px color-mix(in srgb, var(--text-main) 18%, transparent);
+            background: linear-gradient(180deg, color-mix(in srgb, var(--primary-main) 10%, var(--bg-surface)) 0%, var(--bg-surface) 100%);
             overflow: hidden;
         }
         .card-tier-primary::before {
@@ -46,25 +46,25 @@
             position: absolute;
             inset: 0 auto 0 0;
             width: 5px;
-            background: linear-gradient(180deg, var(--accent), transparent 88%);
+            background: linear-gradient(180deg, var(--primary-main), transparent 88%);
         }
         .card-tier-reference {
-            background: linear-gradient(180deg, color-mix(in srgb, var(--surface2) 88%, transparent) 0%, var(--surface) 100%);
+            background: linear-gradient(180deg, var(--surface-transparent) 0%, var(--bg-surface) 100%);
             border-style: dashed;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px var(--border-subtle);
         }
         .section-lead {
             display: grid;
             gap: 0.45rem;
             margin-bottom: 1.5rem;
             padding-bottom: 1.1rem;
-            border-bottom: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+            border-bottom: 1px solid color-mix(in srgb, var(--primary-main) 20%, var(--border-subtle));
         }
         .section-eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 0.45rem;
-            color: var(--accent);
+            color: var(--primary-main);
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -83,9 +83,9 @@
         .section-summary-card {
             padding: 1rem 1.05rem;
             border-radius: 14px;
-            border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
-            background: color-mix(in srgb, var(--surface2) 70%, var(--surface));
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+            border: 1px solid color-mix(in srgb, var(--primary-main) 18%, var(--border-subtle));
+            background: color-mix(in srgb, var(--bg-surface) 70%, var(--bg-surface));
+            box-shadow: inset 0 1px 0 var(--surface-transparent);
         }
         .section-summary-label {
             display: block;
@@ -98,18 +98,18 @@
         }
         .section-summary-value {
             display: block;
-            color: var(--text);
+            color: var(--text-main);
             font-weight: 700;
             line-height: 1.45;
         }
 
         /* Checklist */
         .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
-        .check-item { display: flex; box-sizing: border-box; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; user-select: none; }
-        .check-item:hover { border-color: var(--accent); }
-        .check-item:focus-visible, .practice-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-        .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
-        .check-item.done .check-box { background: var(--accent); border-color: var(--accent); }
+        .check-item { display: flex; box-sizing: border-box; align-items: center; gap: 1rem; padding: 1rem; background: var(--bg-surface); border-radius: 12px; border: 1px solid var(--border-subtle); cursor: pointer; transition: all 0.2s; user-select: none; }
+        .check-item:hover { border-color: var(--primary-main); }
+        .check-item:focus-visible, .practice-link:focus-visible { outline: 3px solid var(--primary-main); outline-offset: 2px; }
+        .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+        .check-item.done .check-box { background: var(--primary-main); border-color: var(--primary-main); }
         .check-item.done { opacity: 0.7; }
         .check-item.done span { text-decoration: line-through; }
         
@@ -119,7 +119,7 @@
             background: transparent;
             cursor: pointer;
             font: inherit;
-            color: var(--accent);
+            color: var(--primary-main);
             opacity: 0.75;
             transition: all 0.2s;
             display: flex;
@@ -142,18 +142,18 @@
         }
         .formula-priority-note,
         .formula-legend {
-            background: var(--surface2);
-            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
             border-radius: 14px;
             padding: 1rem 1.1rem;
         }
         .formula-priority-note {
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--primary-main);
             color: var(--text-body-muted, var(--text-muted));
             font-size: 0.95rem;
             line-height: 1.6;
         }
-        .formula-priority-note strong { color: var(--text); }
+        .formula-priority-note strong { color: var(--text-main); }
         .formula-legend {
             display: flex;
             flex-wrap: wrap;
@@ -168,8 +168,8 @@
             border-radius: 999px;
             font-size: 0.82rem;
             font-weight: 600;
-            border: 1px solid var(--border);
-            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-surface);
             color: var(--text-muted);
         }
         .legend-chip::before {
@@ -177,13 +177,13 @@
             width: 0.6rem;
             height: 0.6rem;
             border-radius: 50%;
-            background: var(--border);
+            background: var(--border-subtle);
             flex-shrink: 0;
         }
-        .legend-chip.legend-memorize { border-color: var(--red); color: var(--red); background: var(--red-bg); }
-        .legend-chip.legend-memorize::before { background: var(--red); }
-        .legend-chip.legend-provided { border-color: var(--green); color: var(--green); background: var(--green-bg); }
-        .legend-chip.legend-provided::before { background: var(--green); }
+        .legend-chip.legend-memorize { border-color: var(--danger-main); color: var(--danger-main); background: var(--danger-soft); }
+        .legend-chip.legend-memorize::before { background: var(--danger-main); }
+        .legend-chip.legend-provided { border-color: var(--emerald-main); color: var(--emerald-main); background: var(--emerald-soft); }
+        .legend-chip.legend-provided::before { background: var(--emerald-main); }
         .legend-chip.legend-useful::before { background: var(--text-muted); }
         .formula-grid {
             display: grid;
@@ -193,18 +193,18 @@
         }
         .formula-card {
             position: relative;
-            background: var(--surface2);
+            background: var(--bg-surface);
             padding: 1.5rem 1.25rem;
             border-radius: 14px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-subtle);
             text-align: center;
             overflow: hidden;
-            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 24px color-mix(in srgb, var(--text-main) 8%, transparent);
             transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
         }
         .formula-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+            box-shadow: 0 14px 28px color-mix(in srgb, var(--text-main) 12%, transparent);
         }
         .formula-card::before {
             content: "";
@@ -213,29 +213,29 @@
             top: 0;
             width: 100%;
             height: 4px;
-            background: var(--border);
+            background: var(--border-subtle);
         }
         .formula-card.memorize-card {
-            border-color: var(--red);
-            background: linear-gradient(180deg, var(--surface2) 0%, var(--red-bg) 100%);
+            border-color: var(--danger-main);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--danger-soft) 100%);
         }
-        .formula-card.memorize-card::before { background: var(--red); }
-        .formula-card.memorize-card .formula-title { color: var(--text); }
+        .formula-card.memorize-card::before { background: var(--danger-main); }
+        .formula-card.memorize-card .formula-title { color: var(--text-main); }
         .formula-card.provided-card {
-            border-color: var(--green);
-            background: linear-gradient(180deg, var(--surface2) 0%, var(--green-bg) 100%);
+            border-color: var(--emerald-main);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--emerald-soft) 100%);
         }
-        .formula-card.provided-card::before { background: var(--green); }
+        .formula-card.provided-card::before { background: var(--emerald-main); }
         .formula-card.useful-card {
-            background: var(--surface);
+            background: var(--bg-surface);
             border-style: dashed;
             opacity: 0.94;
         }
         .formula-card.useful-card::before { background: var(--text-muted); }
         .formula-title { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700; }
-        .formula-math { font-size: clamp(0.98rem, 1.45vw, 1.18rem); color: var(--text); max-width: 100%; overflow: visible; }
+        .formula-math { font-size: clamp(0.98rem, 1.45vw, 1.18rem); color: var(--text-main); max-width: 100%; overflow: visible; }
         .formula-math .katex-display { margin: 0.35rem auto; max-width: 100%; overflow: visible; padding: 0; }
-        .formula-math .katex-display > .katex { white-space: normal; max-width: 100%; }
+        .formula-math .katex-display > .katex { var(--bg-surface)-space: normal; max-width: 100%; }
         .formula-math .katex { max-width: 100%; }
         .formula-math.dual-line .katex-display { margin: 0.2rem auto; }
         .formula-math.compact-math { font-size: clamp(0.92rem, 1.25vw, 1.05rem); }
@@ -247,9 +247,9 @@
 
         /* Quiz Section */
         .quiz-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
-        .quiz-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
-        .quiz-btn:hover { border-color: var(--accent); }
-        .quiz-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .quiz-btn { background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-main); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
+        .quiz-btn:hover { border-color: var(--primary-main); }
+        .quiz-btn.active { background: var(--primary-main); color: var(--bg-surface); border-color: var(--primary-main); }
 
         .quiz-box { text-align: center; padding: 1rem 0; }
         .question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.8; }
@@ -258,8 +258,8 @@
 
         /* Multi-Inputs */
         .input-group { display: flex; justify-content: center; align-items: center; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
-        .input-group input { background: var(--bg); border: 2px solid var(--border); color: var(--text); padding: 1rem; border-radius: 12px; font-size: 1.2rem; font-family: var(--type-meta-family); text-align: center; transition: border-color 0.2s; outline: none; }
-        .input-group input:focus { border-color: var(--accent); }
+        .input-group input { background: var(--bg-base); border: 2px solid var(--border-subtle); color: var(--text-main); padding: 1rem; border-radius: 12px; font-size: 1.2rem; font-family: var(--type-meta-family); text-align: center; transition: border-color 0.2s; outline: none; }
+        .input-group input:focus { border-color: var(--primary-main); }
         
         .inp-standard { width: 200px; }
         .inp-small { width: 80px; padding: 0.75rem !important; }
@@ -267,17 +267,17 @@
         .math-text { font-size: 1.5rem; font-family: var(--type-display-family); }
         .question-note { 
             max-width: 720px; margin: -0.5rem auto 1.25rem auto; padding: 0.9rem 1rem;
-            background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+            background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px;
             color: var(--text-muted); font-size: 0.98rem; line-height: 1.55; text-align: left;
         }
         .log-arg-template { 
             display: inline-flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
-            padding: 0.5rem 0.75rem; border-radius: 14px; background: var(--surface2); border: 1px solid var(--border);
+            padding: 0.5rem 0.75rem; border-radius: 14px; background: var(--bg-surface); border: 1px solid var(--border-subtle);
         }
         .log-base-stack {
             display: inline-flex; flex-direction: column; align-items: center; justify-content: flex-end;
             min-width: 18px; transform: translateY(8px); font-size: 0.95rem; font-family: var(--type-meta-family);
-            color: var(--text);
+            color: var(--text-main);
         }
         .log-arg-input { width: 140px; }
 
@@ -287,37 +287,37 @@
             align-items: center; max-width: 420px; margin: 0 auto 1.5rem auto;
             text-align: left;
         }
-        .multi-input-grid .mig-label { font-size: 1rem; font-weight: 500; color: var(--text); }
+        .multi-input-grid .mig-label { font-size: 1rem; font-weight: 500; color: var(--text-main); }
         .multi-input-grid input { 
-            background: var(--bg); border: 2px solid var(--border); color: var(--text); 
+            background: var(--bg-base); border: 2px solid var(--border-subtle); color: var(--text-main); 
             padding: 0.75rem 1rem; border-radius: 12px; font-size: 1.1rem; 
             font-family: var(--type-meta-family); text-align: center; width: 160px;
             transition: border-color 0.2s; outline: none;
         }
-        .multi-input-grid input:focus { border-color: var(--accent); }
-        .multi-input-grid input.inp-correct { border-color: var(--green); background: var(--green-bg); }
-        .multi-input-grid input.inp-wrong { border-color: var(--red); background: var(--red-bg); }
+        .multi-input-grid input:focus { border-color: var(--primary-main); }
+        .multi-input-grid input.inp-correct { border-color: var(--emerald-main); background: var(--emerald-soft); }
+        .multi-input-grid input.inp-wrong { border-color: var(--danger-main); background: var(--danger-soft); }
 
         /* Buttons */
-        .btn-primary { background: var(--accent); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--type-body-family); }
+        .btn-primary { background: var(--primary-main); color: var(--bg-surface); border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--type-body-family); }
         .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
         .btn-primary:active { transform: translateY(0); }
-        .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-left: 0.5rem;}
-        .btn-secondary:hover { background: var(--surface2); }
+        .btn-secondary { background: transparent; color: var(--text-main); border: 1px solid var(--border-subtle); padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-left: 0.5rem;}
+        .btn-secondary:hover { background: var(--bg-surface); }
 
         /* Mock quiz cards need their own hover treatment because they sit on the same surface tone as the container */
         #quiz-cta .btn-secondary {
             margin-left: 0;
             width: 100%;
-            background: var(--surface);
-            border-color: var(--border);
+            background: var(--bg-surface);
+            border-color: var(--border-subtle);
             min-height: 100%;
             box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
         }
         #quiz-cta .btn-secondary:hover,
         #quiz-cta .btn-secondary:focus-visible {
-            background: color-mix(in srgb, var(--accent) 10%, var(--surface));
-            border-color: color-mix(in srgb, var(--accent) 48%, var(--border));
+            background: color-mix(in srgb, var(--primary-main) 10%, var(--bg-surface));
+            border-color: color-mix(in srgb, var(--primary-main) 48%, var(--border-subtle));
             transform: translateY(-2px);
             box-shadow: 0 10px 24px rgba(91, 82, 224, 0.10);
             outline: none;
@@ -327,36 +327,36 @@
         }
         #quiz-cta .btn-secondary:hover div:last-child,
         #quiz-cta .btn-secondary:focus-visible div:last-child {
-            color: var(--text);
+            color: var(--text-main);
         }
 
         /* Feedback */
         .feedback { margin-top: 1.5rem; padding: 1.25rem; border-radius: 12px; font-weight: 500; display: none; animation: fadeIn 0.3s ease; text-align: left; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .feedback.correct { display: block; background: var(--green-bg); color: var(--green); border: 1px solid var(--green); text-align: center; }
-        .feedback.incorrect { display: block; background: var(--surface2); color: var(--text); border: 1px solid var(--red); border-left: 6px solid var(--red); }
-        .solution-step { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border); color: var(--text-muted); font-size: 1.05rem; }
+        .feedback.correct { display: block; background: var(--emerald-soft); color: var(--emerald-main); border: 1px solid var(--emerald-main); text-align: center; }
+        .feedback.incorrect { display: block; background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--danger-main); border-left: 6px solid var(--danger-main); }
+        .solution-step { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-subtle); color: var(--text-muted); font-size: 1.05rem; }
 
         /* Progress Stats & History Table */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .stat-card { background: var(--surface2); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
-        .stat-val { font-size: 2.5rem; font-family: var(--type-meta-family); color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; }
+        .stat-card { background: var(--bg-surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-subtle); text-align: center; }
+        .stat-val { font-size: 2.5rem; font-family: var(--type-meta-family); color: var(--primary-main); font-weight: 700; margin-bottom: 0.5rem; }
         .stat-label { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
         .history-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95rem; }
-        .history-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; padding: 1rem; border-bottom: 2px solid var(--border); text-align: left;}
-        .history-table td { padding: 1rem; border-bottom: 1px solid var(--border); }
-        .history-table tr:hover { background: var(--surface2); }
-        .best-row { background: var(--green-bg); }
+        .history-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; padding: 1rem; border-bottom: 2px solid var(--border-subtle); text-align: left;}
+        .history-table td { padding: 1rem; border-bottom: 1px solid var(--border-subtle); }
+        .history-table tr:hover { background: var(--bg-surface); }
+        .best-row { background: var(--emerald-soft); }
         
         .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
-        .badge-perfect { background: color-mix(in srgb, var(--green) 18%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--green) 48%, var(--border)); }
-        .badge-retry { background: color-mix(in srgb, var(--amber) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--amber) 45%, var(--border)); }
-        .badge-class { background: var(--surface2); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border); }
-        .badge-quiz { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border)); margin-left: 4px; }
-        .badge-due { background: color-mix(in srgb, var(--red) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 45%, var(--border)); margin-left: 4px; }
-        .badge-exam { background: color-mix(in srgb, var(--red) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 48%, var(--border)); }
-        .badge-noclass { background: color-mix(in srgb, var(--amber) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--amber) 42%, var(--border)); }
+        .badge-perfect { background: color-mix(in srgb, var(--emerald-main) 18%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--emerald-main) 48%, var(--border-subtle)); }
+        .badge-retry { background: color-mix(in srgb, var(--warning-main) 14%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--warning-main) 45%, var(--border-subtle)); }
+        .badge-class { background: var(--bg-surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border-subtle); }
+        .badge-quiz { background: color-mix(in srgb, var(--primary-main) 16%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--primary-main) 45%, var(--border-subtle)); margin-left: 4px; }
+        .badge-due { background: color-mix(in srgb, var(--danger-main) 12%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--danger-main) 45%, var(--border-subtle)); margin-left: 4px; }
+        .badge-exam { background: color-mix(in srgb, var(--danger-main) 14%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--danger-main) 48%, var(--border-subtle)); }
+        .badge-noclass { background: color-mix(in srgb, var(--warning-main) 12%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--warning-main) 42%, var(--border-subtle)); }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
@@ -364,18 +364,18 @@
         /* Schedule date states */
         .schedule-past td { opacity: 0.4; }
         .schedule-past td .badge { opacity: 0.6; }
-        .schedule-today { background: var(--accent-glow) !important; border-left: 4px solid var(--accent); }
-        .schedule-next { background: var(--surface2); }
+        .schedule-today { background: var(--accent-glow) !important; border-left: 4px solid var(--primary-main); }
+        .schedule-next { background: var(--bg-surface); }
 
         /* Section progress bars */
         .progress-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .progress-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+        .progress-item { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1rem; }
         .progress-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
         .progress-item-label { font-weight: 600; font-size: 0.9rem; }
         .progress-item-count { font-family: var(--type-meta-family); font-size: 0.85rem; color: var(--text-muted); }
-        .progress-bar-track { background: var(--border); border-radius: 6px; height: 8px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; border-radius: 6px; background: var(--accent); transition: width 0.4s ease; }
-        .progress-bar-fill.complete { background: var(--green); }
+        .progress-bar-track { background: var(--border-subtle); border-radius: 6px; height: 8px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; border-radius: 6px; background: var(--primary-main); transition: width 0.4s ease; }
+        .progress-bar-fill.complete { background: var(--emerald-main); }
 
 
 /* Status Badge Styling */
@@ -389,9 +389,9 @@
     margin-bottom: 0.7rem;
     text-transform: uppercase;
 }
-.status-provided { background: color-mix(in srgb, var(--green) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--green) 45%, var(--border)); }
-.status-memorize { background: color-mix(in srgb, var(--red) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 45%, var(--border)); }
-.status-supplemental { background: var(--surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border); }
+.status-provided { background: color-mix(in srgb, var(--emerald-main) 14%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--emerald-main) 45%, var(--border-subtle)); }
+.status-memorize { background: color-mix(in srgb, var(--danger-main) 12%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--danger-main) 45%, var(--border-subtle)); }
+.status-supplemental { background: var(--bg-surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border-subtle); }
 
 
 /* Print Configuration */
@@ -400,7 +400,7 @@
     .theme-toggle, .quiz-selector, .btn-primary, .btn-secondary {
         display: none !important;
     }
-    body { background: white; color: black; }
+    body { background: var(--bg-surface); color: var(--text-main); }
     .card { border: none; box-shadow: none; }
 }
 
@@ -444,7 +444,7 @@
             #tab-formulas .formula-card.wide { padding: 1.15rem 1rem; }
             .formula-card.wide,
             .slide-card-featured { grid-column: auto; }
-            .history-table { display: block; overflow-x: auto; white-space: nowrap; }
+            .history-table { display: block; overflow-x: auto; var(--bg-surface)-space: nowrap; }
         }
     
 
@@ -529,8 +529,8 @@
         }
         .slides-overview,
         .slides-tip-box {
-            background: var(--surface2);
-            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
             border-radius: 14px;
             padding: 1.15rem 1.2rem;
         }
@@ -543,13 +543,13 @@
             position: absolute;
             inset: 0 auto 0 0;
             width: 4px;
-            background: var(--accent);
+            background: var(--primary-main);
         }
         .slides-kicker {
             display: inline-flex;
             align-items: center;
             gap: 0.45rem;
-            color: var(--accent);
+            color: var(--primary-main);
             font-size: 0.82rem;
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -587,7 +587,7 @@
             line-height: 1.5;
         }
         .slides-tip i {
-            color: var(--accent);
+            color: var(--primary-main);
             width: 1rem;
             height: 1rem;
             margin-top: 0.18rem;
@@ -603,11 +603,11 @@
             position: relative;
             display: grid;
             gap: 0.95rem;
-            background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
-            border: 1px solid var(--border);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-surface) 100%);
+            border: 1px solid var(--border-subtle);
             border-radius: 14px;
             padding: 1.15rem;
-            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 24px color-mix(in srgb, var(--text-main) 8%, transparent);
             transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
             overflow: hidden;
         }
@@ -618,23 +618,23 @@
             top: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            background: linear-gradient(90deg, var(--primary-main) 0%, transparent 100%);
         }
         .slide-card:hover {
             transform: translateY(-2px);
-            border-color: var(--accent);
-            box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+            border-color: var(--primary-main);
+            box-shadow: 0 14px 28px color-mix(in srgb, var(--text-main) 12%, transparent);
         }
         .slide-card-featured {
             order: -1;
             grid-column: span 2;
-            border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
-            background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 12%, var(--surface2)) 0%, var(--surface) 100%);
+            border-color: color-mix(in srgb, var(--primary-main) 55%, var(--border-subtle));
+            background: linear-gradient(180deg, color-mix(in srgb, var(--primary-main) 12%, var(--bg-surface)) 0%, var(--bg-surface) 100%);
             box-shadow: 0 18px 38px rgba(108, 99, 255, 0.14);
         }
         .slide-card-featured::before {
             height: 5px;
-            background: linear-gradient(90deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 55%, transparent) 100%);
+            background: linear-gradient(90deg, var(--primary-main) 0%, color-mix(in srgb, var(--primary-main) 55%, transparent) 100%);
         }
         .slide-card-top {
             display: flex;
@@ -648,9 +648,9 @@
             gap: 0.45rem;
             padding: 0.38rem 0.72rem;
             border-radius: 999px;
-            background: color-mix(in srgb, var(--accent) 16%, var(--surface));
-            color: var(--text);
-            border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+            background: color-mix(in srgb, var(--primary-main) 16%, var(--bg-surface));
+            color: var(--text-main);
+            border: 1px solid color-mix(in srgb, var(--primary-main) 40%, var(--border-subtle));
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 0.04em;
@@ -676,17 +676,17 @@
             font-weight: 700;
             letter-spacing: 0.04em;
             text-transform: uppercase;
-            border: 1px solid var(--border);
-            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-surface);
             color: var(--text-muted);
         }
-        .slide-tag.pdf { border-color: var(--green); color: var(--green); background: var(--green-bg); }
-        .slide-tag.pptx { border-color: var(--border); color: var(--text-muted); }
+        .slide-tag.pdf { border-color: var(--emerald-main); color: var(--emerald-main); background: var(--emerald-soft); }
+        .slide-tag.pptx { border-color: var(--border-subtle); color: var(--text-muted); }
         .slide-card h3 {
             font-family: var(--type-display-family);
             font-size: 1.35rem;
             line-height: 1.2;
-            color: var(--text);
+            color: var(--text-main);
             margin: 0;
         }
         .slide-subtitle {
@@ -714,7 +714,7 @@
             flex: 1 1 150px;
         }
         .slide-actions .btn-secondary {
-            background: var(--surface);
+            background: var(--bg-surface);
         }
         .slide-actions i {
             width: 1rem;
@@ -725,10 +725,10 @@
             display: block;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid var(--border);
-            background: linear-gradient(180deg, rgba(108, 99, 255, 0.08) 0%, rgba(108, 99, 255, 0.02) 100%), var(--surface);
+            border: 1px solid var(--border-subtle);
+            background: linear-gradient(180deg, rgba(108, 99, 255, 0.08) 0%, rgba(108, 99, 255, 0.02) 100%), var(--bg-surface);
             aspect-ratio: 16 / 9;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+            box-shadow: inset 0 1px 0 var(--surface-transparent);
             text-decoration: none;
             transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
             cursor: pointer;
@@ -736,10 +736,10 @@
         .slide-thumb-wrap:hover {
             transform: translateY(-2px);
             border-color: rgba(108, 99, 255, 0.45);
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.03);
+            box-shadow: 0 10px 24px color-mix(in srgb, var(--text-main) 18%, transparent), inset 0 1px 0 var(--surface-transparent);
         }
         .slide-thumb-wrap:focus-visible {
-            outline: 2px solid var(--accent);
+            outline: 2px solid var(--primary-main);
             outline-offset: 3px;
         }
         .slide-thumb {
@@ -748,7 +748,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center top;
-            background: var(--surface);
+            background: var(--bg-surface);
         }
         .slide-thumb-wrap.is-missing .slide-thumb {
             display: none;
@@ -770,10 +770,10 @@
                     45deg,
                     transparent 0,
                     transparent 12px,
-                    rgba(255,255,255,0.025) 12px,
-                    rgba(255,255,255,0.025) 24px
+                    var(--surface-transparent) 12px,
+                    var(--surface-transparent) 24px
                 ),
-                var(--surface);
+                var(--bg-surface);
         }
         .slide-thumb-wrap.is-missing .slide-thumb-placeholder {
             display: flex;
@@ -781,14 +781,14 @@
         .slide-thumb-placeholder i {
             width: 1.2rem;
             height: 1.2rem;
-            color: var(--accent);
+            color: var(--primary-main);
         }
         .slide-thumb-label {
             font-size: 0.76rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--primary-main);
         }
         .slide-thumb-note {
             font-size: 0.84rem;
@@ -921,8 +921,8 @@
 <div class="slides-tip-box">
 <div class="slides-tip-title">Best use</div>
 <div class="slides-tips">
-<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
-<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text);">Download PPTX</strong> when you need the original slide deck.</span></div>
+<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text-main);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
+<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text-main);">Download PPTX</strong> when you need the original slide deck.</span></div>
 </div>
 </div>
 </div>
@@ -1501,7 +1501,7 @@
 </table>
 </div>
 <div class="u-text-center u-mt-xl">
-<button class="btn-secondary" onclick="resetProgress()" style="color: var(--red); border-color: var(--red-bg);">
+<button class="btn-secondary" onclick="resetProgress()" style="color: var(--danger-main); border-color: var(--danger-soft);">
 <i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
                     Reset All Progress
                 </button>
@@ -1714,37 +1714,37 @@
             const refLabelY = center - (refR + 16) * Math.sin(refLabelAngle);
             return `
                 <path d="M ${refStartX.toFixed(2)} ${refStartY.toFixed(2)} A ${refR} ${refR} 0 ${refLargeArc} ${refSweepFlag} ${refEndX.toFixed(2)} ${refEndY.toFixed(2)}"
-                    fill="none" stroke="#fbbf24" stroke-width="3" stroke-dasharray="4 4"></path>
-                ${showReferenceLabel ? `<text x="${refLabelX.toFixed(2)}" y="${refLabelY.toFixed(2)}" fill="#fbbf24" font-size="13" font-weight="600">ref = ${referenceDeg}°</text>` : ''}
+                    fill="none" stroke="var(--warning-main)" stroke-width="3" stroke-dasharray="4 4"></path>
+                ${showReferenceLabel ? `<text x="${refLabelX.toFixed(2)}" y="${refLabelY.toFixed(2)}" fill="var(--warning-main)" font-size="13" font-weight="600">ref = ${referenceDeg}°</text>` : ''}
             `;
         })();
 
         const turnMarkup = hasExtraTurns ? `
             <path d="M ${center + wrapR} ${center} A ${wrapR} ${wrapR} 0 1 ${wrapSweepFlag} ${wrapMidX} ${wrapMidY}
                 A ${wrapR} ${wrapR} 0 1 ${wrapSweepFlag} ${center + wrapR} ${center}"
-                fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="3 4" opacity="0.75"></path>
-            <text x="36" y="42" fill="#94a3b8" font-size="12" font-weight="600">${turnLabel}</text>
+                fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="3 4" opacity="0.75"></path>
+            <text x="36" y="42" fill="var(--text-muted)" font-size="12" font-weight="600">${turnLabel}</text>
         ` : '';
 
         return `
             <svg viewBox="0 0 ${size} ${size}" width="300" height="300" role="img" aria-label="${fallbackText.replace(/"/g, '&quot;')}">
-                <rect x="0" y="0" width="${size}" height="${size}" fill="#0f172a"></rect>
-                <g stroke="#334155" stroke-width="1">
+                <rect x="0" y="0" width="${size}" height="${size}" fill="var(--text-main)"></rect>
+                <g stroke="var(--text-main)" stroke-width="1">
                     ${Array.from({ length: 13 }, (_, i) => {
                         const p = 30 + i * 20;
                         return `<line x1="${p}" y1="30" x2="${p}" y2="270"></line><line x1="30" y1="${p}" x2="270" y2="${p}"></line>`;
                     }).join('')}
                 </g>
-                <line x1="30" y1="${center}" x2="270" y2="${center}" stroke="#e2e8f0" stroke-width="2"></line>
-                <line x1="${center}" y1="30" x2="${center}" y2="270" stroke="#e2e8f0" stroke-width="2"></line>
-                <text x="273" y="${center - 5}" fill="#e2e8f0" font-size="12">x</text>
-                <text x="${center + 6}" y="26" fill="#e2e8f0" font-size="12">y</text>
-                <line x1="${center}" y1="${center}" x2="${terminalX.toFixed(2)}" y2="${terminalY.toFixed(2)}" stroke="#38bdf8" stroke-width="3"></line>
-                <circle cx="${center}" cy="${center}" r="4" fill="#e2e8f0"></circle>
+                <line x1="30" y1="${center}" x2="270" y2="${center}" stroke="var(--border-subtle)" stroke-width="2"></line>
+                <line x1="${center}" y1="30" x2="${center}" y2="270" stroke="var(--border-subtle)" stroke-width="2"></line>
+                <text x="273" y="${center - 5}" fill="var(--border-subtle)" font-size="12">x</text>
+                <text x="${center + 6}" y="26" fill="var(--border-subtle)" font-size="12">y</text>
+                <line x1="${center}" y1="${center}" x2="${terminalX.toFixed(2)}" y2="${terminalY.toFixed(2)}" stroke="var(--primary-hover)" stroke-width="3"></line>
+                <circle cx="${center}" cy="${center}" r="4" fill="var(--border-subtle)"></circle>
                 <path d="M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 ${largeArcFlag} ${sweepFlag} ${arcEndX.toFixed(2)} ${arcEndY.toFixed(2)}"
-                    fill="none" stroke="#22c55e" stroke-width="3"></path>
-                <text x="${thetaLabelX.toFixed(2)}" y="${thetaLabelY.toFixed(2)}" fill="#22c55e" font-size="13" font-weight="600">${labelText}</text>
-                <text x="36" y="286" fill="#94a3b8" font-size="12">grid: 1 square = 1 unit</text>
+                    fill="none" stroke="var(--emerald-main)" stroke-width="3"></path>
+                <text x="${thetaLabelX.toFixed(2)}" y="${thetaLabelY.toFixed(2)}" fill="var(--emerald-main)" font-size="13" font-weight="600">${labelText}</text>
+                <text x="36" y="286" fill="var(--text-muted)" font-size="12">grid: 1 square = 1 unit</text>
                 ${turnMarkup}
                 ${refMarkup}
             </svg>
@@ -1761,24 +1761,24 @@
             <svg viewBox="0 0 ${size} ${size}" width="300" height="300" role="img" aria-label="${fallbackText.replace(/"/g, '&quot;')}">
                 <defs>
                     <marker id="vec-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
-                        <polygon points="0 0, 9 4.5, 0 9" fill="#ff4d4d"></polygon>
+                        <polygon points="0 0, 9 4.5, 0 9" fill="var(--danger-main)"></polygon>
                     </marker>
                 </defs>
-                <rect x="0" y="0" width="${size}" height="${size}" fill="#0f172a"></rect>
-                <g stroke="#334155" stroke-width="1">
+                <rect x="0" y="0" width="${size}" height="${size}" fill="var(--text-main)"></rect>
+                <g stroke="var(--text-main)" stroke-width="1">
                     ${Array.from({ length: 15 }, (_, i) => `<line x1="${i * 20 + 10}" y1="10" x2="${i * 20 + 10}" y2="290"></line>`).join('')}
                     ${Array.from({ length: 15 }, (_, i) => `<line x1="10" y1="${i * 20 + 10}" x2="290" y2="${i * 20 + 10}"></line>`).join('')}
                 </g>
-                <line x1="10" y1="${center}" x2="290" y2="${center}" stroke="#e2e8f0" stroke-width="2"></line>
-                <line x1="${center}" y1="10" x2="${center}" y2="290" stroke="#e2e8f0" stroke-width="2"></line>
-                <text x="293" y="${center - 5}" fill="#e2e8f0" font-size="12">x</text>
-                <text x="${center + 6}" y="16" fill="#e2e8f0" font-size="12">y</text>
-                <line x1="${center}" y1="${center}" x2="${endX.toFixed(2)}" y2="${endY.toFixed(2)}" stroke="#ff4d4d" stroke-width="3" marker-end="url(#vec-arrow)"></line>
-                <circle cx="${center}" cy="${center}" r="4" fill="#e2e8f0"></circle>
-                <circle cx="${endX.toFixed(2)}" cy="${endY.toFixed(2)}" r="4" fill="#22c55e"></circle>
-                <text x="${Math.min(258, endX + 8).toFixed(2)}" y="${Math.max(18, endY - 8).toFixed(2)}" fill="#22c55e" font-size="13">(${x}, ${y})</text>
-                <text x="36" y="286" fill="#94a3b8" font-size="12">scale: 1 unit per grid line</text>
-                <text x="18" y="28" fill="#38bdf8" font-size="13" font-weight="600">${labelText}</text>
+                <line x1="10" y1="${center}" x2="290" y2="${center}" stroke="var(--border-subtle)" stroke-width="2"></line>
+                <line x1="${center}" y1="10" x2="${center}" y2="290" stroke="var(--border-subtle)" stroke-width="2"></line>
+                <text x="293" y="${center - 5}" fill="var(--border-subtle)" font-size="12">x</text>
+                <text x="${center + 6}" y="16" fill="var(--border-subtle)" font-size="12">y</text>
+                <line x1="${center}" y1="${center}" x2="${endX.toFixed(2)}" y2="${endY.toFixed(2)}" stroke="var(--danger-main)" stroke-width="3" marker-end="url(#vec-arrow)"></line>
+                <circle cx="${center}" cy="${center}" r="4" fill="var(--border-subtle)"></circle>
+                <circle cx="${endX.toFixed(2)}" cy="${endY.toFixed(2)}" r="4" fill="var(--emerald-main)"></circle>
+                <text x="${Math.min(258, endX + 8).toFixed(2)}" y="${Math.max(18, endY - 8).toFixed(2)}" fill="var(--emerald-main)" font-size="13">(${x}, ${y})</text>
+                <text x="36" y="286" fill="var(--text-muted)" font-size="12">scale: 1 unit per grid line</text>
+                <text x="18" y="28" fill="var(--primary-hover)" font-size="13" font-weight="600">${labelText}</text>
             </svg>
         `;
     }
@@ -2164,24 +2164,24 @@
                     <svg viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="${fallbackText}">
                         <defs>
                             <marker id="arrowhead-pq" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
-                                <polygon points="0 0, 9 4.5, 0 9" fill="#ff4d4d"></polygon>
+                                <polygon points="0 0, 9 4.5, 0 9" fill="var(--danger-main)"></polygon>
                             </marker>
                         </defs>
-                        <rect x="0" y="0" width="300" height="300" fill="#0f172a"></rect>
-                        <g stroke="#334155" stroke-width="1">
+                        <rect x="0" y="0" width="300" height="300" fill="var(--text-main)"></rect>
+                        <g stroke="var(--text-main)" stroke-width="1">
                             ${Array.from({ length: 15 }, (_, i) => `<line x1="${i * 20 + 10}" y1="10" x2="${i * 20 + 10}" y2="290"></line>`).join('')}
                             ${Array.from({ length: 15 }, (_, i) => `<line x1="10" y1="${i * 20 + 10}" x2="290" y2="${i * 20 + 10}"></line>`).join('')}
                         </g>
-                        <line x1="10" y1="150" x2="290" y2="150" stroke="#e2e8f0" stroke-width="2"></line>
-                        <line x1="150" y1="10" x2="150" y2="290" stroke="#e2e8f0" stroke-width="2"></line>
-                        <text x="293" y="145" fill="#e2e8f0" font-size="12">x</text>
-                        <text x="156" y="16" fill="#e2e8f0" font-size="12">y</text>
-                        <line x1="${150 + x1 * 20}" y1="${150 - y1 * 20}" x2="${150 + x2 * 20}" y2="${150 - y2 * 20}" stroke="#ff4d4d" stroke-width="3" marker-end="url(#arrowhead-pq)"></line>
-                        <circle cx="${150 + x1 * 20}" cy="${150 - y1 * 20}" r="4" fill="#38bdf8"></circle>
-                        <circle cx="${150 + x2 * 20}" cy="${150 - y2 * 20}" r="4" fill="#22c55e"></circle>
-                        <text x="${158 + x1 * 20}" y="${142 - y1 * 20}" fill="#38bdf8" font-size="13">P(${x1},${y1})</text>
-                        <text x="${158 + x2 * 20}" y="${142 - y2 * 20}" fill="#22c55e" font-size="13">Q(${x2},${y2})</text>
-                        <text x="36" y="286" fill="#94a3b8" font-size="12">scale: 1 unit per grid line</text>
+                        <line x1="10" y1="150" x2="290" y2="150" stroke="var(--border-subtle)" stroke-width="2"></line>
+                        <line x1="150" y1="10" x2="150" y2="290" stroke="var(--border-subtle)" stroke-width="2"></line>
+                        <text x="293" y="145" fill="var(--border-subtle)" font-size="12">x</text>
+                        <text x="156" y="16" fill="var(--border-subtle)" font-size="12">y</text>
+                        <line x1="${150 + x1 * 20}" y1="${150 - y1 * 20}" x2="${150 + x2 * 20}" y2="${150 - y2 * 20}" stroke="var(--danger-main)" stroke-width="3" marker-end="url(#arrowhead-pq)"></line>
+                        <circle cx="${150 + x1 * 20}" cy="${150 - y1 * 20}" r="4" fill="var(--primary-hover)"></circle>
+                        <circle cx="${150 + x2 * 20}" cy="${150 - y2 * 20}" r="4" fill="var(--emerald-main)"></circle>
+                        <text x="${158 + x1 * 20}" y="${142 - y1 * 20}" fill="var(--primary-hover)" font-size="13">P(${x1},${y1})</text>
+                        <text x="${158 + x2 * 20}" y="${142 - y2 * 20}" fill="var(--emerald-main)" font-size="13">Q(${x2},${y2})</text>
+                        <text x="36" y="286" fill="var(--text-muted)" font-size="12">scale: 1 unit per grid line</text>
                     </svg>
                 `;
 
@@ -2635,7 +2635,7 @@
                 div.setAttribute('tabindex', '0');
                 div.setAttribute('aria-pressed', String(item.done));
                 div.innerHTML = `
-                    <div class="check-box">${item.done ? '<i data-lucide="check" style="width:16px; color:white;"></i>' : ''}</div>
+                    <div class="check-box">${item.done ? '<i data-lucide="check" style="width:16px; color:var(--bg-surface);"></i>' : ''}</div>
                     <span style="flex: 1;">${item.label}</span>
                     ${item.videoUrl ? `<a href="${item.videoUrl}" target="_blank" rel="noopener noreferrer" class="practice-link" onclick="event.stopPropagation()" title="Watch Video" aria-label="Watch related video"><i data-lucide="play" style="width:18px; height:18px;"></i></a>` : ''}
                     ${item.practiceId ? `<button type="button" class="practice-link" onclick="goToPractice('${item.practiceId}', event)" title="Jump to Interactive Practice" aria-label="Jump to interactive practice"><i data-lucide="pen-tool" style="width:18px; height:18px;"></i></button>` : ''}
@@ -3147,7 +3147,7 @@
             } else {
                 feedback.className = 'feedback incorrect';
                 feedback.innerHTML = `
-                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--red);"></i> Incorrect.</div>
+                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--danger-main);"></i> Incorrect.</div>
                     <div class="solution-step"><strong>Solution:</strong> ${currentQuestion.solution}</div>
                 `;
             }
@@ -3171,7 +3171,7 @@
                 currentRetries++;
                 feedback.className = 'feedback incorrect';
                 feedback.innerHTML = `
-                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--red);"></i> Not quite right. Try again!</div>
+                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--danger-main);"></i> Not quite right. Try again!</div>
                     <div class="solution-step"><strong>Hint:</strong> ${currentQuestion.solution}</div>
                 `;
             }
@@ -3249,7 +3249,7 @@
         // Update results heading
         document.querySelector('#exam-results h2').textContent = `📊 ${label} Results`;
 
-        const color = pct >= 85 ? 'var(--green)' : pct >= 70 ? 'var(--amber)' : 'var(--red)';
+        const color = pct >= 85 ? 'var(--emerald-main)' : pct >= 70 ? 'var(--warning-main)' : 'var(--danger-main)';
         document.getElementById('exam-score-display').innerHTML = `<span style="color: ${color}">${pct}%</span>`;
 
         // Breakdown by section
@@ -3257,7 +3257,7 @@
         breakdown.innerHTML = '';
         Object.entries(examState.results).forEach(([section, data]) => {
             const secPct = Math.round((data.correct / data.total) * 100);
-            const secColor = secPct >= 85 ? 'var(--green)' : secPct >= 70 ? 'var(--amber)' : 'var(--red)';
+            const secColor = secPct >= 85 ? 'var(--emerald-main)' : secPct >= 70 ? 'var(--warning-main)' : 'var(--danger-main)';
             const bar = document.createElement('div');
             bar.className = 'progress-item';
             bar.innerHTML = `

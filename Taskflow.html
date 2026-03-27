@@ -19,8 +19,8 @@
 
     /* Each “box” or node in the flowchart */
     .node {
-      background: var(--surface-container-lowest);
-      border: 1px solid var(--ghost-outline);
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       text-align: center;
       width: 250px;
@@ -39,7 +39,7 @@
       height: 0;
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
-      border-top: 20px solid color-mix(in srgb, var(--secondary) 20%, var(--ghost-outline));
+      border-top: 20px solid color-mix(in srgb, var(--bg-surface) 20%, var(--border-subtle));
       transform: translateX(-50%);
     }
 
@@ -50,7 +50,7 @@
 
     /* Simple emphasis for “Yes” / “No” connectors */
     .decision {
-      color: var(--secondary);
+      color: var(--bg-surface);
       font-weight: bold;
     }
 

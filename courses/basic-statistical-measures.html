@@ -16,7 +16,7 @@
     }
     body {
       background-color: #f5f7fa;
-      color: #333;
+      color: var(--text-main);
       margin: 0;
     }
 
@@ -28,16 +28,16 @@
     .infographic {
       max-width: 900px;
       margin: 0 auto;
-      background-color: #fff;
+      background-color: var(--bg-surface);
       border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px var(--border-subtle);
       overflow: hidden;
     }
 
     /* Header */
     .header {
-      background-color: #2c3e50;
-      color: #fff;
+      background-color: var(--text-main);
+      color: var(--bg-surface);
       padding: 20px;
       text-align: center;
     }
@@ -59,16 +59,16 @@
       border-bottom: none;
     }
     .section h2 {
-      color: #2c3e50;
+      color: var(--text-main);
       margin-bottom: 20px;
       font-size: 22px;
-      border-left: 4px solid #3498db;
+      border-left: 4px solid var(--primary-main);
       padding-left: 10px;
     }
 
     /* Dataset Info Boxes */
     .dataset {
-      background-color: #f5f5f5;
+      background-color: var(--bg-base);
       padding: 10px;
       border-radius: 5px;
       text-align: center;
@@ -78,29 +78,29 @@
       font-family: var(--type-meta-family);
       font-size: 16px;
       margin-top: 5px;
-      color: #333;
+      color: var(--text-main);
     }
 
     /* Measure Cards */
     .measure-card {
-      background-color: #f8f9fa;
+      background-color: var(--bg-base);
       border-radius: 8px;
       padding: 15px;
       border-top: 4px solid;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 5px color-mix(in srgb, var(--text-main) 5%, transparent);
       margin-bottom: 15px;
     }
-    .mean      { border-top-color: #e74c3c; }
-    .median    { border-top-color: #3498db; }
-    .mode      { border-top-color: #2ecc71; }
-    .range     { border-top-color: #f39c12; }
-    .variance  { border-top-color: #9b59b6; }
+    .mean      { border-top-color: var(--danger-main); }
+    .median    { border-top-color: var(--primary-main); }
+    .mode      { border-top-color: var(--emerald-main); }
+    .range     { border-top-color: var(--warning-main); }
+    .variance  { border-top-color: var(--primary-main); }
     .std-dev   { border-top-color: #1abc9c; }
-    .iqr       { border-top-color: #e67e22; }
-    .quartiles { border-top-color: #e67e22; }
-    .five-num  { border-top-color: #3498db; }
-    .boxplot   { border-top-color: #9b59b6; }
-    .outliers  { border-top-color: #e74c3c; }
+    .iqr       { border-top-color: var(--warning-main); }
+    .quartiles { border-top-color: var(--warning-main); }
+    .five-num  { border-top-color: var(--primary-main); }
+    .boxplot   { border-top-color: var(--primary-main); }
+    .outliers  { border-top-color: var(--danger-main); }
 
     .measure-card h3 {
       font-size: 18px;
@@ -112,7 +112,7 @@
 
     /* Key Formulas and Excel Examples */
     .formula {
-      background-color: rgba(0,0,0,0.05);
+      background-color: color-mix(in srgb, var(--text-main) 5%, transparent);
       padding: 8px 12px;
       border-radius: 6px;
       font-family: var(--type-meta-family);
@@ -126,11 +126,11 @@
       border-radius: 6px;
       font-family: var(--type-meta-family);
       margin: 10px 0;
-      border-left: 3px solid #3498db;
+      border-left: 3px solid var(--primary-main);
       font-size: 15px;
     }
     .excel-formula strong {
-      color: #2980b9;
+      color: var(--primary-main);
     }
 
     /* Pros and Cons Panels */
@@ -147,11 +147,11 @@
     }
     .pros {
       background-color: rgba(46, 204, 113, 0.1);
-      border-left: 3px solid #2ecc71;
+      border-left: 3px solid var(--emerald-main);
     }
     .cons {
       background-color: rgba(231, 76, 60, 0.1);
-      border-left: 3px solid #e74c3c;
+      border-left: 3px solid var(--danger-main);
     }
     .pros h4, .cons h4 {
       font-size: 14px;
@@ -169,16 +169,16 @@
     .example h4 {
       font-size: 15px;
       margin-bottom: 8px;
-      color: #2980b9;
+      color: var(--primary-main);
     }
 
     /* Key Points and Tips */
     .key-point {
-      border-left: 3px solid #3498db;
+      border-left: 3px solid var(--primary-main);
       padding-left: 10px;
       margin: 10px 0;
       font-size: 15px;
-      color: #2c3e50;
+      color: var(--text-main);
     }
 
     /* Distribution Shapes */
@@ -220,7 +220,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #fff;
+      color: var(--bg-surface);
       font-size: 12px;
       font-weight: bold;
     }
@@ -235,7 +235,7 @@
     .boxplot-container {
       margin: 20px 0;
       padding: 10px;
-      background-color: #f8f9fa;
+      background-color: var(--bg-base);
       border-radius: 8px;
     }
     .boxplot-diagram {
@@ -249,7 +249,7 @@
       left: 50px;
       width: 400px;
       height: 2px;
-      background-color: #333;
+      background-color: var(--text-main);
     }
     .boxplot-box {
       position: absolute;
@@ -257,7 +257,7 @@
       left: 150px;
       width: 200px;
       height: 60px;
-      border: 2px solid #3498db;
+      border: 2px solid var(--primary-main);
       background-color: rgba(52, 152, 219, 0.2);
     }
     .boxplot-median {
@@ -266,7 +266,7 @@
       left: 250px;
       width: 2px;
       height: 60px;
-      background-color: #e74c3c;
+      background-color: var(--danger-main);
     }
     .boxplot-whisker-left {
       position: absolute;
@@ -274,7 +274,7 @@
       left: 80px;
       width: 70px;
       height: 2px;
-      background-color: #333;
+      background-color: var(--text-main);
     }
     .boxplot-whisker-right {
       position: absolute;
@@ -282,7 +282,7 @@
       left: 350px;
       width: 70px;
       height: 2px;
-      background-color: #333;
+      background-color: var(--text-main);
     }
     .boxplot-cap-left {
       position: absolute;
@@ -290,7 +290,7 @@
       left: 80px;
       width: 2px;
       height: 20px;
-      background-color: #333;
+      background-color: var(--text-main);
     }
     .boxplot-cap-right {
       position: absolute;
@@ -298,7 +298,7 @@
       left: 420px;
       width: 2px;
       height: 20px;
-      background-color: #333;
+      background-color: var(--text-main);
     }
     .boxplot-outlier {
       position: absolute;
@@ -307,13 +307,13 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background-color: #e74c3c;
+      background-color: var(--danger-main);
       transform: translate(-50%, -50%);
     }
     .boxplot-label {
       position: absolute;
       font-size: 12px;
-      color: #333;
+      color: var(--text-main);
     }
     .label-min {
       top: 75px;
@@ -344,7 +344,7 @@
       top: 75px;
       left: 460px;
       transform: translateX(-50%);
-      color: #e74c3c;
+      color: var(--danger-main);
     }
     .label-value {
       top: 10px;
@@ -359,15 +359,15 @@
     .step-card {
       flex: 1;
       min-width: 200px;
-      background-color: #f5f5f5;
+      background-color: var(--bg-base);
       padding: 12px;
       border-radius: 6px;
-      border-left: 3px solid #3498db;
+      border-left: 3px solid var(--primary-main);
     }
     .step-card h4 {
       font-size: 14px;
       margin-bottom: 5px;
-      color: #2c3e50;
+      color: var(--text-main);
     }
 
     /* Tables */
@@ -382,14 +382,14 @@
     th, td {
       padding: 8px 10px;
       text-align: left;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-subtle);
     }
     th {
-      background-color: #f2f2f2;
+      background-color: var(--bg-base);
       font-weight: bold;
     }
     tr:nth-child(even) {
-      background-color: #f9f9f9;
+      background-color: var(--bg-base);
     }
 
     .interpretation {
@@ -397,12 +397,12 @@
       background-color: #eaf7fd;
       padding: 12px;
       border-radius: 6px;
-      border-left: 3px solid #3498db;
+      border-left: 3px solid var(--primary-main);
     }
     .interpretation h4 {
       font-size: 15px;
       margin-bottom: 8px;
-      color: #2980b9;
+      color: var(--primary-main);
     }
 
     /* Footer */
@@ -411,7 +411,7 @@
       padding: 15px;
       text-align: center;
       font-size: 14px;
-      color: #7f8c8d;
+      color: var(--text-muted);
     }
 
     /* Responsive Tweaks */
@@ -688,9 +688,9 @@
         <div class="distribution">
           <h4>Normal (Symmetric)</h4>
           <svg width="120" height="100" viewBox="0 0 120 100">
-            <path d="M10,90 C30,90 40,10 60,10 C80,10 90,90 110,90" fill="none" stroke="#3498db" stroke-width="2"></path>
-            <line x1="60" y1="10" x2="60" y2="95" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5"></line>
-            <text x="50" y="98" font-size="10" fill="#333">Mean=Median</text>
+            <path d="M10,90 C30,90 40,10 60,10 C80,10 90,90 110,90" fill="none" stroke="var(--primary-main)" stroke-width="2"></path>
+            <line x1="60" y1="10" x2="60" y2="95" stroke="var(--danger-main)" stroke-width="2" stroke-dasharray="5,5"></line>
+            <text x="50" y="98" font-size="10" fill="var(--text-main)">Mean=Median</text>
           </svg>
           <p>Mean ≈ Median ≈ Mode</p>
           <p>Use Mean & Standard Deviation</p>
@@ -699,11 +699,11 @@
         <div class="distribution">
           <h4>Right-Skewed</h4>
           <svg width="120" height="100" viewBox="0 0 120 100">
-            <path d="M10,90 C30,20 60,70 110,90" fill="none" stroke="#3498db" stroke-width="2"></path>
-            <line x1="30" y1="90" x2="30" y2="20" stroke="#2ecc71" stroke-width="2" stroke-dasharray="5,5"></line>
-            <line x1="42" y1="90" x2="42" y2="50" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5"></line>
-            <line x1="60" y1="90" x2="60" y2="70" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5"></line>
-            <text x="20" y="98" font-size="8" fill="#333">Mode < Median < Mean</text>
+            <path d="M10,90 C30,20 60,70 110,90" fill="none" stroke="var(--primary-main)" stroke-width="2"></path>
+            <line x1="30" y1="90" x2="30" y2="20" stroke="var(--emerald-main)" stroke-width="2" stroke-dasharray="5,5"></line>
+            <line x1="42" y1="90" x2="42" y2="50" stroke="var(--danger-main)" stroke-width="2" stroke-dasharray="5,5"></line>
+            <line x1="60" y1="90" x2="60" y2="70" stroke="var(--primary-main)" stroke-width="2" stroke-dasharray="5,5"></line>
+            <text x="20" y="98" font-size="8" fill="var(--text-main)">Mode < Median < Mean</text>
           </svg>
           <p>Choose Median & IQR for summary.</p>
         </div>
@@ -711,11 +711,11 @@
         <div class="distribution">
           <h4>Left-Skewed</h4>
           <svg width="120" height="100" viewBox="0 0 120 100">
-            <path d="M10,90 C60,70 90,20 110,90" fill="none" stroke="#3498db" stroke-width="2"></path>
-            <line x1="60" y1="90" x2="60" y2="70" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5"></line>
-            <line x1="78" y1="90" x2="78" y2="50" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5"></line>
-            <line x1="90" y1="90" x2="90" y2="20" stroke="#2ecc71" stroke-width="2" stroke-dasharray="5,5"></line>
-            <text x="20" y="98" font-size="8" fill="#333">Mean < Median < Mode</text>
+            <path d="M10,90 C60,70 90,20 110,90" fill="none" stroke="var(--primary-main)" stroke-width="2"></path>
+            <line x1="60" y1="90" x2="60" y2="70" stroke="var(--primary-main)" stroke-width="2" stroke-dasharray="5,5"></line>
+            <line x1="78" y1="90" x2="78" y2="50" stroke="var(--danger-main)" stroke-width="2" stroke-dasharray="5,5"></line>
+            <line x1="90" y1="90" x2="90" y2="20" stroke="var(--emerald-main)" stroke-width="2" stroke-dasharray="5,5"></line>
+            <text x="20" y="98" font-size="8" fill="var(--text-main)">Mean < Median < Mode</text>
           </svg>
           <p>Also use Median & IQR.</p>
         </div>
@@ -845,7 +845,7 @@
             <div class="boxplot-label label-max">Max</div>
             <div class="boxplot-label label-outlier">Outlier?</div>
           </div>
-          <p style="text-align: center; font-size: 14px; color: #555;">(Scale here is just an illustration.)</p>
+          <p style="text-align: center; font-size: 14px; color: var(--text-muted);">(Scale here is just an illustration.)</p>
         </div>
 
         <div class="boxplot-steps">
