@@ -805,18 +805,24 @@ section h2 {
   position: relative;
   padding: clamp(1.75rem, 3vw, 2.5rem);
   border-radius: var(--radius-lg);
-  background-color: color-mix(in srgb, var(--bg-base) 18%, var(--surface-transparent));
+  background-color: var(--bg-surface);
   background-image: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent));
-  color: var(--featured-card-text);
+  color: var(--text-main);
   backdrop-filter: blur(6px);
   transform: translateY(var(--spacing-8));
 }
 
-.highlighted-destination-card h3,
+.highlighted-destination-card h3 {
+  color: var(--text-main);
+}
+
 .highlighted-destination-card p,
-.highlighted-destination-card li,
-.highlighted-destination-card a {
-  color: var(--featured-card-text);
+.highlighted-destination-card li {
+  color: var(--text-muted);
+}
+
+.highlighted-destination-card a:not(.button) {
+  color: var(--text-main);
 }
 
 .highlighted-destination-card h3 {
@@ -824,9 +830,18 @@ section h2 {
   font-size: clamp(1.9rem, 3vw, 2.4rem);
 }
 
+.hero-cta-cluster > .button:not(.button-secondary),
+.highlighted-destination-card .button {
+  background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), var(--primary-main);
+  color: var(--bg-surface);
+}
+
+.hero-cta-cluster > .button:not(.button-secondary):hover,
+.hero-cta-cluster > .button:not(.button-secondary):focus-visible,
 .highlighted-destination-card .button:hover,
 .highlighted-destination-card .button:focus-visible {
-  background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), var(--featured-card-accent);
+  background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), color-mix(in srgb, var(--primary-main) 85%, black);
+  color: var(--bg-surface);
 }
 
 .supporting-link-list {
