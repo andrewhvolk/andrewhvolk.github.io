@@ -180,9 +180,9 @@
             background: var(--border-subtle);
             flex-shrink: 0;
         }
-        .legend-chip.legend-memorize { border-color: var(--danger-main); color: var(--danger-main); background: color-mix(in srgb, var(--danger-main) 10%, transparent); }
+        .legend-chip.legend-memorize { border-color: var(--danger-main); color: var(--danger-main); background: var(--danger-soft); }
         .legend-chip.legend-memorize::before { background: var(--danger-main); }
-        .legend-chip.legend-provided { border-color: var(--emerald-main); color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
+        .legend-chip.legend-provided { border-color: var(--emerald-main); color: var(--emerald-main); background: var(--emerald-soft); }
         .legend-chip.legend-provided::before { background: var(--emerald-main); }
         .legend-chip.legend-useful::before { background: var(--text-muted); }
         .formula-grid {
@@ -217,13 +217,13 @@
         }
         .formula-card.memorize-card {
             border-color: var(--danger-main);
-            background: linear-gradient(180deg, var(--bg-surface) 0%, color-mix(in srgb, var(--danger-main) 10%, transparent) 100%);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--danger-soft) 100%);
         }
         .formula-card.memorize-card::before { background: var(--danger-main); }
         .formula-card.memorize-card .formula-title { color: var(--text-main); }
         .formula-card.provided-card {
             border-color: var(--emerald-main);
-            background: linear-gradient(180deg, var(--bg-surface) 0%, color-mix(in srgb, var(--emerald-main) 10%, transparent) 100%);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--emerald-soft) 100%);
         }
         .formula-card.provided-card::before { background: var(--emerald-main); }
         .formula-card.useful-card {
@@ -295,8 +295,8 @@
             transition: border-color 0.2s; outline: none;
         }
         .multi-input-grid input:focus { border-color: var(--primary-main); }
-        .multi-input-grid input.inp-correct { border-color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
-        .multi-input-grid input.inp-wrong { border-color: var(--danger-main); background: color-mix(in srgb, var(--danger-main) 10%, transparent); }
+        .multi-input-grid input.inp-correct { border-color: var(--emerald-main); background: var(--emerald-soft); }
+        .multi-input-grid input.inp-wrong { border-color: var(--danger-main); background: var(--danger-soft); }
 
         /* Buttons */
         .btn-primary { background: var(--primary-main); color: var(--bg-surface); border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--type-body-family); }
@@ -333,7 +333,7 @@
         /* Feedback */
         .feedback { margin-top: 1.5rem; padding: 1.25rem; border-radius: 12px; font-weight: 500; display: none; animation: fadeIn 0.3s ease; text-align: left; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .feedback.correct { display: block; background: color-mix(in srgb, var(--emerald-main) 10%, transparent); color: var(--emerald-main); border: 1px solid var(--emerald-main); text-align: center; }
+        .feedback.correct { display: block; background: var(--emerald-soft); color: var(--emerald-main); border: 1px solid var(--emerald-main); text-align: center; }
         .feedback.incorrect { display: block; background: var(--bg-surface); color: var(--text-main); border: 1px solid var(--danger-main); border-left: 6px solid var(--danger-main); }
         .solution-step { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-subtle); color: var(--text-muted); font-size: 1.05rem; }
 
@@ -347,7 +347,7 @@
         .history-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; padding: 1rem; border-bottom: 2px solid var(--border-subtle); text-align: left;}
         .history-table td { padding: 1rem; border-bottom: 1px solid var(--border-subtle); }
         .history-table tr:hover { background: var(--bg-surface); }
-        .best-row { background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
+        .best-row { background: var(--emerald-soft); }
         
         .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .badge-perfect { background: color-mix(in srgb, var(--emerald-main) 18%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--emerald-main) 48%, var(--border-subtle)); }
@@ -680,7 +680,7 @@
             background: var(--bg-surface);
             color: var(--text-muted);
         }
-        .slide-tag.pdf { border-color: var(--emerald-main); color: var(--emerald-main); background: color-mix(in srgb, var(--emerald-main) 10%, transparent); }
+        .slide-tag.pdf { border-color: var(--emerald-main); color: var(--emerald-main); background: var(--emerald-soft); }
         .slide-tag.pptx { border-color: var(--border-subtle); color: var(--text-muted); }
         .slide-card h3 {
             font-family: var(--type-display-family);
@@ -1501,7 +1501,7 @@
 </table>
 </div>
 <div class="u-text-center u-mt-xl">
-<button class="btn-secondary" onclick="resetProgress()" style="color: var(--danger-main); border-color: color-mix(in srgb, var(--danger-main) 10%, transparent);">
+<button class="btn-secondary" onclick="resetProgress()" style="color: var(--danger-main); border-color: var(--danger-soft);">
 <i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
                     Reset All Progress
                 </button>
