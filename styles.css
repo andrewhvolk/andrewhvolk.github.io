@@ -330,7 +330,7 @@ header h1 {
   position: relative;
   overflow: hidden;
   background: var(--gradient-library-glow);
-  color: var(--light-text);
+  color: var(--text-on-primary);
   text-align: center;
   padding: clamp(3.25rem, 6vw, 5rem) 0;
 }
@@ -371,7 +371,7 @@ header h1 {
 .page-shell-header--profile .contact-info,
 .page-shell-header--profile .contact-item,
 .page-shell-header--profile .contact-item i {
-  color: var(--light-text);
+  color: var(--text-on-primary);
 }
 
 /* Headings inside dark-gradient headers inherit light text rather than the
@@ -626,7 +626,7 @@ section h2 {
 
 .item-title {
   font-weight: bold;
-  color: var(--secondary-color);
+  color: var(--text-heading);
 }
 
 .item-date {
@@ -634,7 +634,7 @@ section h2 {
   font-size: var(--meta-sm);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--muted-text-color);
+  color: var(--text-muted);
 }
 
 .item-subtitle {
@@ -663,8 +663,8 @@ section h2 {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0)), var(--primary-container);
-  color: var(--light-text);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0)), var(--primary-base);
+  color: var(--primary-text);
   padding: 0.9rem 1.6rem;
   border-radius: var(--radius-md);
   text-decoration: none;
@@ -678,8 +678,8 @@ section h2 {
 
 .button:hover,
 .download-btn:hover {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0)), var(--accent-action);
-  color: var(--light-text);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0)), var(--primary-hover);
+  color: var(--primary-text);
   transform: translateY(-1px);
 }
 
@@ -690,13 +690,16 @@ section h2 {
 
 
 .button-secondary {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0)), var(--secondary);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0)), var(--primary-surface);
+  color: var(--primary-base);
+  border-color: var(--border-subtle);
 }
 
 .button-secondary:hover,
 .button-secondary:focus-visible {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0)), color-mix(in srgb, var(--secondary) 78%, var(--primary-container));
-  color: var(--light-text);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0)), color-mix(in srgb, var(--primary-base) 18%, var(--bg-surface));
+  color: var(--primary-hover);
+  border-color: color-mix(in srgb, var(--primary-base) 44%, var(--border-base));
 }
 
 .home-main {
@@ -1013,7 +1016,7 @@ section h2 {
 }
 
 .marketing-card h2 {
-  color: var(--secondary-color);
+  color: var(--text-heading);
   margin-top: 0;
 }
 
@@ -1031,7 +1034,7 @@ section h2 {
 .card-icon {
   font-size: var(--display-md);
   margin-bottom: 1rem;
-  color: var(--secondary);
+  color: var(--primary-base);
 }
 
 /* Reusable course page styles */
@@ -2169,7 +2172,7 @@ main.error-main {
 }
 
 .top-nav-title {
-  color: var(--secondary-color);
+  color: var(--text-heading);
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.2;
@@ -2180,7 +2183,7 @@ main.error-main {
 
 .top-nav-title:hover,
 .top-nav-title:focus-visible {
-  color: var(--secondary);
+  color: var(--primary-base);
 }
 
 .top-nav-links,
@@ -2219,7 +2222,7 @@ main.error-main {
 .top-nav-utilities .dropdown-menu a,
 .top-nav-links .dropdown-menu a {
   display: block;
-  color: var(--secondary-color);
+  color: var(--text-heading);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
@@ -2243,8 +2246,8 @@ main.error-main {
 .top-nav-links .dropdown-menu a:focus-visible,
 .top-nav-utilities .dropdown-menu a:hover,
 .top-nav-utilities .dropdown-menu a:focus-visible {
-  color: var(--secondary);
-  background: color-mix(in srgb, var(--accent-action) 10%, transparent);
+  color: var(--primary-hover);
+  background: var(--primary-surface);
   text-decoration-line: underline;
   text-decoration-thickness: 0.1em;
   text-underline-offset: 0.22em;
@@ -2254,9 +2257,9 @@ main.error-main {
 
 .top-nav a:focus-visible,
 .top-nav button:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--accent-action) 62%, white 12%);
+  outline: 2px solid color-mix(in srgb, var(--primary-base) 62%, white 12%);
   outline-offset: 3px;
-  box-shadow: 0 0 0 0.35rem color-mix(in srgb, var(--accent-action) 14%, transparent);
+  box-shadow: 0 0 0 0.35rem color-mix(in srgb, var(--primary-base) 14%, transparent);
 }
 
 .top-nav-links .dropdown-trigger,
@@ -2272,8 +2275,8 @@ main.error-main {
 .top-nav-links button[aria-current="page"],
 .top-nav-utilities a[aria-current="page"],
 .top-nav-utilities button[aria-current="page"] {
-  color: var(--secondary-color);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--surface-container-high) 78%, transparent), color-mix(in srgb, var(--surface-container-lowest) 86%, transparent));
+  color: var(--text-heading);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 88%, transparent), color-mix(in srgb, var(--bg-surface) 92%, transparent));
   box-shadow: inset 0 0 0 999px rgba(255, 255, 255, 0.08);
 }
 
@@ -2285,8 +2288,8 @@ main.error-main {
 .top-nav-utilities a[aria-current="page"]:focus-visible,
 .top-nav-utilities button[aria-current="page"]:hover,
 .top-nav-utilities button[aria-current="page"]:focus-visible {
-  color: var(--secondary-color);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--surface-container-high) 88%, transparent), color-mix(in srgb, var(--surface-container-lowest) 92%, transparent));
+  color: var(--text-heading);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 96%, transparent), color-mix(in srgb, var(--bg-surface) 96%, transparent));
 }
 
 .page-context-bar {
@@ -2310,7 +2313,7 @@ main.error-main {
   font-weight: var(--meta-weight);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted-text-color);
+  color: var(--text-muted);
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius-pill);
   background: var(--gradient-editorial-panel);
@@ -2318,21 +2321,21 @@ main.error-main {
 }
 
 .breadcrumb a {
-  color: var(--secondary-color);
+  color: var(--text-heading);
   font-weight: 600;
   text-decoration: none;
 }
 
 .breadcrumb a:hover,
 .breadcrumb a:focus-visible {
-  color: var(--secondary);
+  color: var(--primary-hover);
   text-decoration: underline;
   text-underline-offset: 0.16em;
 }
 
 .breadcrumb-sep,
 .breadcrumb-current {
-  color: color-mix(in srgb, var(--muted-text-color) 65%, transparent);
+  color: color-mix(in srgb, var(--text-muted) 65%, transparent);
 }
 
 .breadcrumb-current {
@@ -2388,7 +2391,7 @@ main.error-main {
 
 .top-nav-utilities > li > a,
 .top-nav-utilities > li > button {
-  color: var(--muted-text-color);
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 
@@ -2408,7 +2411,7 @@ main.error-main {
   border-radius: 0.85rem;
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--surface-container-lowest) 96%, transparent), color-mix(in srgb, var(--surface-container-low) 92%, transparent));
-  color: var(--secondary-color);
+  color: var(--text-heading);
   font: inherit;
   font-weight: 600;
   cursor: pointer;
@@ -2458,7 +2461,7 @@ main.error-main {
 
 .cv-section-nav .menu-toggle {
   background: transparent;
-  color: var(--secondary-color);
+  color: var(--text-heading);
 }
 
 .cv-section-nav #nav-menu {
@@ -2478,7 +2481,7 @@ main.error-main {
 .cv-section-nav #nav-menu > li > a {
   display: block;
   padding: 0.8rem 1rem;
-  color: var(--secondary-color);
+  color: var(--text-heading);
   font-weight: 600;
   border-radius: 999px;
 }
@@ -2487,8 +2490,8 @@ main.error-main {
 .cv-section-nav #nav-menu > li > a:focus-visible,
 .cv-section-nav #nav-menu .dropdown-menu a:hover,
 .cv-section-nav #nav-menu .dropdown-menu a:focus-visible {
-  background: rgba(13, 80, 213, 0.1);
-  color: var(--secondary);
+  background: var(--primary-surface);
+  color: var(--primary-hover);
   outline: none;
 }
 
@@ -2516,7 +2519,7 @@ main.error-main {
   display: block;
   padding: 0.65rem 0.85rem;
   border-radius: 0.6rem;
-  color: var(--text-color);
+  color: var(--text-body);
 }
 
 @media (max-width: 768px) {
