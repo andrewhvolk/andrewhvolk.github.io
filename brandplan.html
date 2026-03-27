@@ -62,7 +62,7 @@
             border: 1px solid var(--border-subtle);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px color-mix(in srgb, var(--text-main) 5%, transparent);
         }
 
         .color-swatch {
@@ -96,7 +96,7 @@
             background: var(--bg-surface);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px color-mix(in srgb, var(--text-main) 5%, transparent);
             font-size: 0.9rem;
             min-width: 600px;
         }
@@ -237,7 +237,7 @@
                 <tr>
                     <td><strong>Borders & Dividers</strong><br>Line separators, outlines</td>
                     <td>
-                        <code class="literal">#ddd</code>, <code class="literal">#ccc</code>, <code class="literal">#e2e8f0</code>, <code class="literal">rgba(0,0,0,0.1)</code><br>
+                        <code class="literal">#ddd</code>, <code class="literal">#ccc</code>, <code class="literal">#e2e8f0</code>, <code class="literal">color-mix(in srgb, var(--text-main) 10%, transparent)</code><br>
                         <code class="token">var(--border)</code>, <code class="token">var(--outline-variant)</code>, <code class="token">var(--border-base)</code>
                     </td>
                     <td><code>var(--border-subtle)</code></td>

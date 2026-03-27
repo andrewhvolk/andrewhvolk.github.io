@@ -43,15 +43,15 @@
     }
 
     .math-review-page .callout {
-        background: var(--surface2);
-        border: 1px solid var(--border);
-        border-left: 4px solid var(--accent);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-left: 4px solid var(--primary-main);
         border-radius: 14px;
         padding: 1rem 1.1rem;
         color: var(--text-muted);
     }
 
-    .math-review-page .callout strong { color: var(--text); }
+    .math-review-page .callout strong { color: var(--text-main); }
 
     .math-review-page .mini-grid,
     .math-review-page .scope-grid,
@@ -70,8 +70,8 @@
     .math-review-page .scope-card,
     .math-review-page .formula-card,
     .math-review-page .plan-card {
-        background: var(--surface2);
-        border: 1px solid var(--border);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
         border-radius: 14px;
         padding: 1rem 1.05rem;
     }
@@ -84,7 +84,7 @@
         font-weight: 700;
         font-size: 0.98rem;
         margin-bottom: 0.45rem;
-        color: var(--text);
+        color: var(--text-main);
     }
 
     .math-review-page .mini-card p,
@@ -100,12 +100,12 @@
         border-collapse: collapse;
         overflow: hidden;
         border-radius: 14px;
-        border: 1px solid var(--border);
-        background: var(--surface2);
+        border: 1px solid var(--border-subtle);
+        background: var(--bg-surface);
     }
 
     .math-review-page .schedule-table tr + tr td {
-        border-top: 1px solid var(--border);
+        border-top: 1px solid var(--border-subtle);
     }
 
     .math-review-page .schedule-table td {
@@ -117,7 +117,7 @@
         width: 150px;
         font-weight: 700;
         font-size: 1.02rem;
-        white-space: nowrap;
+        var(--bg-surface)-space: nowrap;
     }
 
     .math-review-page .schedule-table .event {
@@ -144,15 +144,15 @@
         font-weight: 800;
         letter-spacing: 0.02em;
         text-transform: uppercase;
-        border: 1px solid var(--border);
+        border: 1px solid var(--border-subtle);
         margin-left: 0.4rem;
-        white-space: nowrap;
+        var(--bg-surface)-space: nowrap;
     }
 
     .math-review-page .tag.review {
-        color: var(--amber);
+        color: var(--warning-main);
         background: var(--amber-bg);
-        border-color: var(--amber);
+        border-color: var(--warning-main);
     }
 
     .math-review-page .tag.quiz {
@@ -162,15 +162,15 @@
     }
 
     .math-review-page .tag.final {
-        color: var(--red);
-        background: var(--red-bg);
-        border-color: var(--red);
+        color: var(--danger-main);
+        background: var(--danger-soft);
+        border-color: var(--danger-main);
     }
 
     .math-review-page .tag.noclass {
-        color: var(--amber);
+        color: var(--warning-main);
         background: var(--amber-bg);
-        border-color: var(--amber);
+        border-color: var(--warning-main);
     }
 
     .math-review-page .eyebrow {
@@ -178,7 +178,7 @@
         align-items: center;
         gap: 0.45rem;
         margin-bottom: 0.55rem;
-        color: var(--accent);
+        color: var(--primary-main);
         font-size: 0.78rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
@@ -198,26 +198,26 @@
         gap: 0.35rem;
         padding: 0.42rem 0.72rem;
         border-radius: 999px;
-        background: var(--surface2);
-        border: 1px solid var(--border);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
         color: var(--text-muted);
         font-size: 0.82rem;
         font-weight: 700;
     }
 
     .math-review-page .formula-card.provided {
-        border-color: var(--green);
-        background: linear-gradient(180deg, var(--surface2), var(--green-bg));
+        border-color: var(--emerald-main);
+        background: linear-gradient(180deg, var(--bg-surface), var(--emerald-soft));
     }
 
     .math-review-page .formula-card.core {
-        border-color: var(--accent);
-        background: linear-gradient(180deg, var(--surface2), var(--accent-soft));
+        border-color: var(--primary-main);
+        background: linear-gradient(180deg, var(--bg-surface), var(--accent-soft));
     }
 
     .math-review-page .formula-math {
         font-size: clamp(0.95rem, 1.4vw, 1.08rem);
-        color: var(--text);
+        color: var(--text-main);
         margin: 0.25rem 0 0.45rem;
         min-height: 2.4rem;
         max-width: 100%;
@@ -233,7 +233,7 @@
     }
 
     .math-review-page .formula-math .katex-display > .katex {
-        white-space: normal;
+        var(--bg-surface)-space: normal;
         max-width: 100%;
     }
 
@@ -251,8 +251,8 @@
     }
 
     .math-review-page details.accordion {
-        background: var(--surface2);
-        border: 1px solid var(--border);
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
         border-radius: 14px;
         padding: 0;
         overflow: hidden;
@@ -260,7 +260,7 @@
     }
 
     .math-review-page details.accordion[open] {
-        border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+        border-color: color-mix(in srgb, var(--primary-main) 42%, var(--border-subtle));
     }
 
     .math-review-page details.accordion summary {
@@ -272,7 +272,7 @@
         justify-content: space-between;
         gap: 1rem;
         font-weight: 700;
-        color: var(--text);
+        color: var(--text-main);
     }
 
     .math-review-page details.accordion summary::-webkit-details-marker { display: none; }
@@ -289,7 +289,7 @@
         height: 34px;
         border-radius: 10px;
         background: var(--accent-soft);
-        color: var(--accent);
+        color: var(--primary-main);
         display: inline-flex;
         align-items: center;
         justify-content: center;
