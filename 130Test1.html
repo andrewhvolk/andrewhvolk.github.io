@@ -520,7 +520,7 @@ function initPracticeView(){
   practiceInit=true;
   const hist=loadHist().practice;
   const bestLine=hist.length?`<div style="margin-bottom:1rem"><span class="history-badge badge-green">Best: ${Math.min(...hist.map(h=>h.retries))} retries</span> <span style="color:var(--text-muted);font-size:0.82rem">across ${hist.length} session${hist.length>1?'s':''}</span></div>`:'';
-  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:var(--type-display-family);font-size:1.8rem;margin-bottom:0.5rem">Practice Mode</h2><p>${allProblems.length} problems in random order. Work each on paper, reveal the solution, then mark it. Missed problems recycle until you get them all right.</p>${bestLine}<button class="practice-start-btn" onclick="startPractice()">Start Practice</button></div>`;
+  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:var(--type-display-family);font-size:1.8rem;margin-bottom:0.5rem">Practice Mode</h2><p>${allProblems.length} problems in random order. Work each on paper, reveal the solution, then mark it. Missed problems recycle until you get them all right.</p>${bestLine}<button class="practice-start-btn" onclick="startPractice()" type="button">Start Practice</button></div>`;
 }
 
 function startPractice(){
@@ -529,9 +529,13 @@ function startPractice(){
 }
 
 function showPP(){
-  const c=document.getElementById('practice-container'),pi=practiceQueue[practiceIdx],p=allProblems[pi],rem=practiceQueue.length-practiceIdx;
+  const c=document.getElementById('practice-container');
+  if(!c)return;
+  const pi=practiceQueue[practiceIdx],p=allProblems[pi];
+  if(!p){initPracticeView();return;}
+  const rem=practiceQueue.length-practiceIdx;
   practiceSolShown=false;
-  c.innerHTML=`<div class="practice-dashboard"><div class="practice-stat"><div class="stat-num stat-green">${practiceCorrect}</div><div class="stat-label">Correct</div></div><div class="practice-stat"><div class="stat-num stat-red">${practiceMissed}</div><div class="stat-label">To Retry</div></div><div class="practice-stat"><div class="stat-num stat-blue">${rem}</div><div class="stat-label">Remaining</div></div></div><div class="problem-card"><div class="problem-label"><span>${p.label}${p._missed?'<span class="problem-tag-retry">RETRY</span>':''}</span><span class="problem-pts">${p.pts}</span></div><div class="problem-text">${p.text}</div><div class="practice-btn-row" id="pbtns"><button class="solution-toggle" onclick="revealPS()">Show Solution ▾</button></div><div class="solution" id="psol"><div class="solution-inner">${p.solution}</div></div></div>`;
+  c.innerHTML=`<div class="practice-dashboard"><div class="practice-stat"><div class="stat-num stat-green">${practiceCorrect}</div><div class="stat-label">Correct</div></div><div class="practice-stat"><div class="stat-num stat-red">${practiceMissed}</div><div class="stat-label">To Retry</div></div><div class="practice-stat"><div class="stat-num stat-blue">${rem}</div><div class="stat-label">Remaining</div></div></div><div class="problem-card"><div class="problem-label"><span>${p.label}${p._missed?'<span class="problem-tag-retry">RETRY</span>':''}</span><span class="problem-pts">${p.pts}</span></div><div class="problem-text">${p.text}</div><div class="practice-btn-row" id="pbtns"><button class="solution-toggle" onclick="revealPS()" type="button">Show Solution ▾</button></div><div class="solution" id="psol"><div class="solution-inner">${p.solution}</div></div></div>`;
   setTimeout(renderMath,50);
 }
 
@@ -558,7 +562,7 @@ function pMiss(){
 function showPC(){
   // Save session
   saveSession('practice',{correct:practiceCorrect,retries:practiceMissed,total:allProblems.length});
-  document.getElementById('practice-container').innerHTML=`<div class="practice-complete"><div class="big-check">🎉</div><h2>All Problems Cleared!</h2><div class="practice-stats-final"><div class="final-stat"><span class="num stat-green">${practiceCorrect}</span><span class="lbl">Correct</span></div><div class="final-stat"><span class="num stat-red">${practiceMissed}</span><span class="lbl">Retries</span></div><div class="final-stat"><span class="num stat-blue">${allProblems.length}</span><span class="lbl">Problems</span></div></div><p>${practiceMissed===0?'Perfect run — every problem on the first try!':'You cleared them all. Review the retried topics before test day.'}</p><button class="practice-start-btn" onclick="startPractice()">Practice Again</button></div>`;
+  document.getElementById('practice-container').innerHTML=`<div class="practice-complete"><div class="big-check">🎉</div><h2>All Problems Cleared!</h2><div class="practice-stats-final"><div class="final-stat"><span class="num stat-green">${practiceCorrect}</span><span class="lbl">Correct</span></div><div class="final-stat"><span class="num stat-red">${practiceMissed}</span><span class="lbl">Retries</span></div><div class="final-stat"><span class="num stat-blue">${allProblems.length}</span><span class="lbl">Problems</span></div></div><p>${practiceMissed===0?'Perfect run — every problem on the first try!':'You cleared them all. Review the retried topics before test day.'}</p><button class="practice-start-btn" onclick="startPractice()" type="button">Practice Again</button></div>`;
 }
 
 // ═══ QUIZ ═══
