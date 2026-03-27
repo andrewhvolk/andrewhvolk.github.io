@@ -1,11 +1,11 @@
 # Color Usage Inventory (HTML + CSS)
-_Generated: 2026-03-27 16:26 UTC_
+_Generated: 2026-03-27 16:41 UTC_
 
 ## Scope
 - Files scanned (`*.html`, `*.css`): **62**
 - Scan sources: stylesheet files, HTML `<style>` blocks, inline `style="..."` declarations, and SVG color attributes (`fill`, `stroke`, `stop-color`, etc.).
 - Filter: only color-bearing properties/attributes are analyzed.
-- Unique color entries: **361**
+- Unique color entries: **355**
 
 ## Classification legend
 - **literal**: direct color values (`#hex`, `rgb()/rgba()`, `hsl()/hsla()`, `color-mix()`, etc.).
@@ -18,20 +18,18 @@ _Generated: 2026-03-27 16:26 UTC_
 |---|---|---:|
 | `var(--bg-surface)` | tokenized | 230 |
 | `var(--primary-main)` | tokenized | 212 |
+| `var(--text-main)` | tokenized | 166 |
 | `var(--border-subtle)` | tokenized | 162 |
-| `var(--text-main)` | tokenized | 162 |
-| `var(--text-muted)` | tokenized | 140 |
+| `var(--text-muted)` | tokenized | 141 |
 | `transparent` | basic | 129 |
 | `var(--danger-main)` | tokenized | 70 |
 | `var(--emerald-main)` | tokenized | 65 |
 | `var(--ghost-outline)` | tokenized | 46 |
 | `var(--secondary)` | tokenized | 39 |
-| `green` | basic | 27 |
 | `var(--bg-base)` | tokenized | 27 |
 | `var(--warning-main)` | tokenized | 25 |
 | `var(--secondary-color)` | tokenized | 24 |
 | `var(--green-bg)` | tokenized | 20 |
-| `red` | basic | 19 |
 | `var(--red-bg)` | tokenized | 18 |
 | `var(--surface-container-lowest)` | tokenized | 14 |
 | `currentcolor` | basic | 13 |
@@ -55,7 +53,6 @@ _Generated: 2026-03-27 16:26 UTC_
 | `var(--text-body-muted)` | tokenized | 5 |
 | `#38bdf8` | literal | 4 |
 | `#9b59b6` | literal | 4 |
-| `black` | basic | 4 |
 | `color-mix(insrgb,var(--danger-main)12%,var(--bg-surface))` | literal | 4 |
 | `color-mix(insrgb,var(--danger-main)45%,var(--border-subtle))` | literal | 4 |
 | `color-mix(insrgb,var(--primary-main)10%,var(--bg-surface))` | literal | 4 |
@@ -81,7 +78,6 @@ _Generated: 2026-03-27 16:26 UTC_
 | `color-mix(insrgb,var(--secondary)18%,var(--border-subtle))` | literal | 3 |
 | `color-mix(insrgb,var(--surface-container-low)94%,transparent)` | literal | 3 |
 | `color-mix(insrgb,var(--surface-container-lowest)96%,transparent)` | literal | 3 |
-| `purple` | basic | 3 |
 | `rgba(0,0,0,0.04)` | literal | 3 |
 | `rgba(255,255,255,0.08)` | literal | 3 |
 | `rgba(255,255,255,0.14)` | literal | 3 |
@@ -212,7 +208,6 @@ _Generated: 2026-03-27 16:26 UTC_
 | `#fff8e1` | literal | 1 |
 | `#fffacd` | literal | 1 |
 | `#ffffffdd` | literal | 1 |
-| `blue` | basic | 1 |
 | `canvastext` | basic | 1 |
 | `color-mix(insrgb,var(--bg-subtle)88%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--bg-subtle)96%,transparent)` | literal | 1 |
@@ -293,7 +288,6 @@ _Generated: 2026-03-27 16:26 UTC_
 | `color-mix(insrgb,var(--surface-tint)10%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--surface-tint)8%,transparent)` | literal | 1 |
 | `color-mix(insrgb,var(--text-muted)65%,transparent)` | literal | 1 |
-| `gray` | basic | 1 |
 | `rgba(0,0,0,0.06)` | literal | 1 |
 | `rgba(0,0,0,0.10)` | literal | 1 |
 | `rgba(0,0,0,0.8)` | literal | 1 |

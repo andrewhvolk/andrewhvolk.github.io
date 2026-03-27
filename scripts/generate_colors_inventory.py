@@ -103,6 +103,7 @@ CSS_COLOR_KEYWORDS = {
 }
 
 PAT_VAR = re.compile(r"var\(--([a-zA-Z0-9_-]+)\)", re.IGNORECASE)
+PAT_ANY_VAR_CALL = re.compile(r"var\([^)]*\)", re.IGNORECASE)
 PAT_HEX = re.compile(r"#[0-9a-fA-F]{3,8}\b")
 PAT_WORD = re.compile(r"\b[a-zA-Z]+\b")
 PAT_DECL = re.compile(r"([a-zA-Z-]+)\s*:\s*([^;}{]+)")
@@ -187,20 +188,28 @@ def is_ignored_var(var_name: str) -> bool:
 
 def extract_colors_from_value(value: str) -> list[ColorEntry]:
     results: list[ColorEntry] = []
+    keyword_scan_value = value
 
     for match in PAT_VAR.finditer(value):
         var_name = match.group(1)
         if not is_ignored_var(var_name):
             results.append(ColorEntry(f"var(--{var_name.lower()})", "tokenized"))
+        # Remove var(...) payload from keyword scanning to avoid false basic-color hits
+        keyword_scan_value = keyword_scan_value.replace(match.group(0), " ")
 
     for match in PAT_HEX.finditer(value):
         results.append(ColorEntry(match.group(0).lower(), "literal"))
+        keyword_scan_value = keyword_scan_value.replace(match.group(0), " ")
 
     for function_call in extract_color_functions(value):
         normalized = re.sub(r"\s+", "", function_call.lower())
         results.append(ColorEntry(normalized, "literal"))
+        keyword_scan_value = keyword_scan_value.replace(function_call, " ")
 
-    for match in PAT_WORD.finditer(value):
+    # Remove any remaining var(...) calls (including fallback syntax) before keyword scan.
+    keyword_scan_value = PAT_ANY_VAR_CALL.sub(" ", keyword_scan_value)
+
+    for match in PAT_WORD.finditer(keyword_scan_value):
         keyword = match.group(0).lower()
         if keyword in CSS_COLOR_KEYWORDS:
             results.append(ColorEntry(keyword, "basic"))
