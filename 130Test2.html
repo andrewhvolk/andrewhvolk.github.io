@@ -24,12 +24,12 @@
             background:
                 radial-gradient(circle at top left, rgba(58, 102, 92, 0.12), transparent 28%),
                 linear-gradient(180deg, rgba(225, 227, 224, 0.46), transparent 24%),
-                var(--surface);
+                var(--bg-surface);
         }
         body.review-page:not(.light) .math-review-page {
             background:
                 radial-gradient(circle at top left, rgba(126, 168, 255, 0.08), transparent 28%),
-                var(--surface);
+                var(--bg-surface);
         }
         .review-section--open {
             padding: 0.5rem 0 1rem;
@@ -49,11 +49,11 @@
 
         /* Checklist */
         .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
-        .check-item { display: flex; box-sizing: border-box; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: 12px; border: 0; cursor: pointer; transition: all 0.2s; user-select: none; }
-        .check-item:hover { border-color: var(--accent); }
-        .check-item:focus-visible, .practice-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-        .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
-        .check-item.done .check-box { background: var(--accent); border-color: var(--accent); }
+        .check-item { display: flex; box-sizing: border-box; align-items: center; gap: 1rem; padding: 1rem; background: var(--bg-surface); border-radius: 12px; border: 0; cursor: pointer; transition: all 0.2s; user-select: none; }
+        .check-item:hover { border-color: var(--primary-main); }
+        .check-item:focus-visible, .practice-link:focus-visible { outline: 3px solid var(--primary-main); outline-offset: 2px; }
+        .check-box { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+        .check-item.done .check-box { background: var(--primary-main); border-color: var(--primary-main); }
         .check-item.done { opacity: 0.7; }
         .check-item.done span { text-decoration: line-through; }
         
@@ -63,7 +63,7 @@
             background: transparent;
             cursor: pointer;
             font: inherit;
-            color: var(--accent);
+            color: var(--primary-main);
             opacity: 0.75;
             transition: all 0.2s;
             display: flex;
@@ -86,18 +86,18 @@
         }
         .formula-priority-note,
         .formula-legend {
-            background: var(--surface2);
+            background: var(--bg-surface);
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
             border-radius: 14px;
             padding: 1rem 1.1rem;
         }
         .formula-priority-note {
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--primary-main);
             color: var(--text-body-muted, var(--text-muted));
             font-size: 0.95rem;
             line-height: 1.6;
         }
-        .formula-priority-note strong { color: var(--text); }
+        .formula-priority-note strong { color: var(--text-main); }
         .formula-legend {
             display: flex;
             flex-wrap: wrap;
@@ -113,7 +113,7 @@
             font-size: 0.88rem;
             font-weight: 600;
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
-            background: var(--surface);
+            background: var(--bg-surface);
             color: var(--text-muted);
         }
         .legend-chip::before {
@@ -121,13 +121,13 @@
             width: 0.6rem;
             height: 0.6rem;
             border-radius: 50%;
-            background: var(--border);
+            background: var(--border-subtle);
             flex-shrink: 0;
         }
-        .legend-chip.legend-memorize { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 18%, transparent); color: var(--red); background: var(--red-bg); }
-        .legend-chip.legend-memorize::before { background: var(--red); }
-        .legend-chip.legend-provided { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green) 18%, transparent); color: var(--green); background: var(--green-bg); }
-        .legend-chip.legend-provided::before { background: var(--green); }
+        .legend-chip.legend-memorize { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger-main) 18%, transparent); color: var(--danger-main); background: var(--red-bg); }
+        .legend-chip.legend-memorize::before { background: var(--danger-main); }
+        .legend-chip.legend-provided { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 18%, transparent); color: var(--emerald-main); background: var(--green-bg); }
+        .legend-chip.legend-provided::before { background: var(--emerald-main); }
         .legend-chip.legend-useful::before { background: var(--text-muted); }
         .formula-section-note {
             color: var(--text-body-muted, var(--text-muted));
@@ -143,7 +143,7 @@
         }
         .formula-card {
             position: relative;
-            background: var(--surface2);
+            background: var(--bg-surface);
             padding: 1.5rem 1.25rem;
             border-radius: 14px;
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 68%, transparent);
@@ -153,7 +153,7 @@
         }
         .formula-card:hover {
             transform: translateY(-2px);
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary-main) 18%, transparent);
         }
         .formula-card::before {
             content: "";
@@ -162,29 +162,29 @@
             top: 0;
             width: 100%;
             height: 4px;
-            background: var(--border);
+            background: var(--border-subtle);
         }
         .formula-card.memorize-card {
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 16%, transparent);
-            background: linear-gradient(180deg, var(--surface2) 0%, var(--red-bg) 100%);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger-main) 16%, transparent);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--red-bg) 100%);
         }
-        .formula-card.memorize-card::before { background: var(--red); }
-        .formula-card.memorize-card .formula-title { color: var(--text); }
+        .formula-card.memorize-card::before { background: var(--danger-main); }
+        .formula-card.memorize-card .formula-title { color: var(--text-main); }
         .formula-card.provided-card {
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green) 16%, transparent);
-            background: linear-gradient(180deg, var(--surface2) 0%, var(--green-bg) 100%);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 16%, transparent);
+            background: linear-gradient(180deg, var(--bg-surface) 0%, var(--green-bg) 100%);
         }
-        .formula-card.provided-card::before { background: var(--green); }
+        .formula-card.provided-card::before { background: var(--emerald-main); }
         .formula-card.useful-card {
-            background: var(--surface);
+            background: var(--bg-surface);
             border-style: dashed;
             opacity: 0.94;
         }
         .formula-card.useful-card::before { background: var(--text-muted); }
         .formula-title { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700; }
-        .formula-math { font-size: clamp(0.98rem, 1.45vw, 1.18rem); color: var(--text); max-width: 100%; overflow: visible; }
+        .formula-math { font-size: clamp(0.98rem, 1.45vw, 1.18rem); color: var(--text-main); max-width: 100%; overflow: visible; }
         .formula-math .katex-display { margin: 0.35rem auto; max-width: 100%; overflow: visible; padding: 0; }
-        .formula-math .katex-display > .katex { white-space: normal; max-width: 100%; }
+        .formula-math .katex-display > .katex { var(--bg-surface)-space: normal; max-width: 100%; }
         .formula-math .katex { max-width: 100%; }
         body.review-page .katex { color: inherit; }
         .formula-math.dual-line .katex-display { margin: 0.2rem auto; }
@@ -197,24 +197,24 @@
 
         /* Quiz Section */
         .quiz-selector { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
-        .quiz-btn { background: var(--surface2); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); color: var(--text); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
-        .quiz-btn:hover { border-color: var(--accent); }
-        .quiz-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .quiz-btn { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); color: var(--text-main); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
+        .quiz-btn:hover { border-color: var(--primary-main); }
+        .quiz-btn.active { background: var(--primary-main); color: var(--bg-surface); border-color: var(--primary-main); }
 
         .quiz-box { text-align: center; padding: 1rem 0; }
         .question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.8; }
         
-        .svg-canvas { background: var(--surface2); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px; padding: 1rem; margin: 0 auto 1.5rem auto; display: block; max-width: 100%; height: auto; }
+        .svg-canvas { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px; padding: 1rem; margin: 0 auto 1.5rem auto; display: block; max-width: 100%; height: auto; }
         .svg-fallback { margin: -0.9rem auto 1.2rem auto; max-width: 640px; color: var(--text-muted); font-size: 0.92rem; text-align: left; }
 
         /* Multi-Inputs */
         .input-group { display: flex; justify-content: center; align-items: center; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
-        .input-group input { background: var(--bg); border: 2px solid var(--border); color: var(--text); padding: 1rem; border-radius: 12px; font-size: 1.2rem; font-family: var(--type-meta-family); text-align: center; transition: border-color 0.2s; outline: none; }
-        .input-group input:focus { border-color: var(--accent); }
+        .input-group input { background: var(--bg-base); border: 2px solid var(--border-subtle); color: var(--text-main); padding: 1rem; border-radius: 12px; font-size: 1.2rem; font-family: var(--type-meta-family); text-align: center; transition: border-color 0.2s; outline: none; }
+        .input-group input:focus { border-color: var(--primary-main); }
         body.review-page:not(.light) .input-group input,
         body.review-page:not(.light) .multi-input-grid input {
-            background: var(--surface2);
-            border-color: color-mix(in srgb, var(--accent) 24%, var(--border));
+            background: var(--bg-surface);
+            border-color: color-mix(in srgb, var(--primary-main) 24%, var(--border-subtle));
         }
         
         .inp-standard { width: 200px; }
@@ -223,17 +223,17 @@
         .math-text { font-size: 1.5rem; font-family: var(--type-display-family); }
         .question-note { 
             max-width: 720px; margin: -0.5rem auto 1.25rem auto; padding: 0.9rem 1rem;
-            background: var(--surface2); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px;
+            background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px;
             color: var(--text-muted); font-size: 0.98rem; line-height: 1.55; text-align: left;
         }
         .log-arg-template { 
             display: inline-flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
-            padding: 0.5rem 0.75rem; border-radius: 14px; background: var(--surface2); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent);
+            padding: 0.5rem 0.75rem; border-radius: 14px; background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent);
         }
         .log-base-stack {
             display: inline-flex; flex-direction: column; align-items: center; justify-content: flex-end;
             min-width: 18px; transform: translateY(8px); font-size: 0.95rem; font-family: var(--type-meta-family);
-            color: var(--text);
+            color: var(--text-main);
         }
         .log-arg-input { width: 140px; }
 
@@ -243,37 +243,37 @@
             align-items: center; max-width: 420px; margin: 0 auto 1.5rem auto;
             text-align: left;
         }
-        .multi-input-grid .mig-label { font-size: 1rem; font-weight: 500; color: var(--text); }
+        .multi-input-grid .mig-label { font-size: 1rem; font-weight: 500; color: var(--text-main); }
         .multi-input-grid input { 
-            background: var(--bg); border: 2px solid var(--border); color: var(--text); 
+            background: var(--bg-base); border: 2px solid var(--border-subtle); color: var(--text-main); 
             padding: 0.75rem 1rem; border-radius: 12px; font-size: 1.1rem; 
             font-family: var(--type-meta-family); text-align: center; width: 160px;
             transition: border-color 0.2s; outline: none;
         }
-        .multi-input-grid input:focus { border-color: var(--accent); }
-        .multi-input-grid input.inp-correct { border-color: var(--green); background: var(--green-bg); }
-        .multi-input-grid input.inp-wrong { border-color: var(--red); background: var(--red-bg); }
+        .multi-input-grid input:focus { border-color: var(--primary-main); }
+        .multi-input-grid input.inp-correct { border-color: var(--emerald-main); background: var(--green-bg); }
+        .multi-input-grid input.inp-wrong { border-color: var(--danger-main); background: var(--red-bg); }
 
         /* Buttons */
-        .btn-primary { background: var(--accent); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--type-body-family); }
+        .btn-primary { background: var(--primary-main); color: var(--bg-surface); border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--type-body-family); }
         .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
         .btn-primary:active { transform: translateY(0); }
-        .btn-secondary { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-left: 0.5rem;}
-        .btn-secondary:hover { background: var(--surface2); }
+        .btn-secondary { background: transparent; color: var(--text-main); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); padding: 0.75rem 1.5rem; border-radius: 12px; font-size: 1rem; cursor: pointer; transition: all 0.2s; margin-left: 0.5rem;}
+        .btn-secondary:hover { background: var(--bg-surface); }
 
         /* Mock quiz cards need their own hover treatment because they sit on the same surface tone as the container */
         #quiz-cta .btn-secondary {
             margin-left: 0;
             width: 100%;
-            background: var(--surface);
+            background: var(--bg-surface);
             min-height: 100%;
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 62%, transparent);
         }
         #quiz-cta .btn-secondary:hover,
         #quiz-cta .btn-secondary:focus-visible {
-            background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+            background: color-mix(in srgb, var(--primary-main) 10%, var(--bg-surface));
             transform: translateY(-2px);
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary-main) 22%, transparent);
             outline: none;
         }
         #quiz-cta .btn-secondary div:last-child {
@@ -281,38 +281,38 @@
         }
         #quiz-cta .btn-secondary:hover div:last-child,
         #quiz-cta .btn-secondary:focus-visible div:last-child {
-            color: var(--text);
+            color: var(--text-main);
         }
 
         /* Feedback */
         .feedback { margin-top: 1.5rem; padding: 1.25rem; border-radius: 12px; font-weight: 500; display: none; animation: fadeIn 0.3s ease; text-align: left; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .feedback.correct { display: block; background: var(--green-bg); color: var(--green); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green) 22%, transparent); text-align: center; }
-        .feedback.incorrect { display: block; background: var(--surface2); color: var(--text); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 22%, transparent); border-left: 6px solid var(--red); }
-        .solution-step { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border); color: var(--text-muted); font-size: 1.05rem; }
+        .feedback.correct { display: block; background: var(--green-bg); color: var(--emerald-main); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 22%, transparent); text-align: center; }
+        .feedback.incorrect { display: block; background: var(--bg-surface); color: var(--text-main); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--danger-main) 22%, transparent); border-left: 6px solid var(--danger-main); }
+        .solution-step { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-subtle); color: var(--text-muted); font-size: 1.05rem; }
 
         /* Progress Stats & History Table */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .stat-card { background: var(--surface2); padding: 1.5rem; border-radius: 12px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); text-align: center; }
-        .stat-val { font-size: 2.5rem; font-family: var(--type-meta-family); color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; }
+        .stat-card { background: var(--bg-surface); padding: 1.5rem; border-radius: 12px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); text-align: center; }
+        .stat-val { font-size: 2.5rem; font-family: var(--type-meta-family); color: var(--primary-main); font-weight: 700; margin-bottom: 0.5rem; }
         .stat-label { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
         .history-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; margin-top: 1rem; font-size: 0.95rem; }
         .history-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; padding: 0 1rem 0.4rem; text-align: left;}
-        .history-table td { padding: 1rem; background: color-mix(in srgb, var(--surface2) 76%, var(--surface)); }
+        .history-table td { padding: 1rem; background: color-mix(in srgb, var(--bg-surface) 76%, var(--bg-surface)); }
         .history-table tbody td:first-child { border-radius: 12px 0 0 12px; }
         .history-table tbody td:last-child { border-radius: 0 12px 12px 0; }
-        .history-table tr:hover td { background: color-mix(in srgb, var(--surface2) 92%, var(--accent-soft)); }
-        .best-row td { background: color-mix(in srgb, var(--green-bg) 72%, var(--surface)); }
+        .history-table tr:hover td { background: color-mix(in srgb, var(--bg-surface) 92%, var(--accent-soft)); }
+        .best-row td { background: color-mix(in srgb, var(--green-bg) 72%, var(--bg-surface)); }
         
         .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
-        .badge-perfect { background: color-mix(in srgb, var(--green) 18%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--green) 48%, var(--border)); }
-        .badge-retry { background: color-mix(in srgb, var(--amber) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--amber) 45%, var(--border)); }
-        .badge-class { background: var(--surface2); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border); }
-        .badge-quiz { background: color-mix(in srgb, var(--accent) 16%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border)); margin-left: 4px; }
-        .badge-due { background: color-mix(in srgb, var(--red) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 45%, var(--border)); margin-left: 4px; }
-        .badge-exam { background: color-mix(in srgb, var(--red) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 48%, var(--border)); }
-        .badge-noclass { background: color-mix(in srgb, var(--amber) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--amber) 42%, var(--border)); }
+        .badge-perfect { background: color-mix(in srgb, var(--emerald-main) 18%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--emerald-main) 48%, var(--border-subtle)); }
+        .badge-retry { background: color-mix(in srgb, var(--warning-main) 14%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--warning-main) 45%, var(--border-subtle)); }
+        .badge-class { background: var(--bg-surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border-subtle); }
+        .badge-quiz { background: color-mix(in srgb, var(--primary-main) 16%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--primary-main) 45%, var(--border-subtle)); margin-left: 4px; }
+        .badge-due { background: color-mix(in srgb, var(--danger-main) 12%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--danger-main) 45%, var(--border-subtle)); margin-left: 4px; }
+        .badge-exam { background: color-mix(in srgb, var(--danger-main) 14%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--danger-main) 48%, var(--border-subtle)); }
+        .badge-noclass { background: color-mix(in srgb, var(--warning-main) 12%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--warning-main) 42%, var(--border-subtle)); }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
@@ -320,18 +320,18 @@
         /* Schedule date states */
         .schedule-past td { opacity: 0.55; }
         .schedule-past td .badge { opacity: 0.6; }
-        .schedule-today { background: var(--accent-glow) !important; border-left: 4px solid var(--accent); }
-        .schedule-next { background: var(--surface2); }
+        .schedule-today { background: var(--accent-glow) !important; border-left: 4px solid var(--primary-main); }
+        .schedule-next { background: var(--bg-surface); }
 
         /* Section progress bars */
         .progress-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .progress-item { background: var(--surface2); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px; padding: 1rem; }
+        .progress-item { background: var(--bg-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 66%, transparent); border-radius: 12px; padding: 1rem; }
         .progress-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
         .progress-item-label { font-weight: 600; font-size: 0.9rem; }
         .progress-item-count { font-family: var(--type-meta-family); font-size: 0.85rem; color: var(--text-muted); }
-        .progress-bar-track { background: var(--border); border-radius: 6px; height: 8px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; border-radius: 6px; background: var(--accent); transition: width 0.4s ease; }
-        .progress-bar-fill.complete { background: var(--green); }
+        .progress-bar-track { background: var(--border-subtle); border-radius: 6px; height: 8px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; border-radius: 6px; background: var(--primary-main); transition: width 0.4s ease; }
+        .progress-bar-fill.complete { background: var(--emerald-main); }
 
 
 /* Status Badge Styling */
@@ -345,9 +345,9 @@
     margin-bottom: 0.7rem;
     text-transform: uppercase;
 }
-.status-provided { background: color-mix(in srgb, var(--green) 14%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--green) 45%, var(--border)); }
-.status-memorize { background: color-mix(in srgb, var(--red) 12%, var(--surface)); color: var(--text); border: 1px solid color-mix(in srgb, var(--red) 45%, var(--border)); }
-.status-supplemental { background: var(--surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border); }
+.status-provided { background: color-mix(in srgb, var(--emerald-main) 14%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--emerald-main) 45%, var(--border-subtle)); }
+.status-memorize { background: color-mix(in srgb, var(--danger-main) 12%, var(--bg-surface)); color: var(--text-main); border: 1px solid color-mix(in srgb, var(--danger-main) 45%, var(--border-subtle)); }
+.status-supplemental { background: var(--bg-surface); color: var(--text-body-muted, var(--text-muted)); border: 1px solid var(--border-subtle); }
 
 
 
@@ -384,7 +384,7 @@
             #tab-formulas .formula-card.wide { padding: 1.15rem 1rem; }
             .formula-card.wide { grid-column: auto; }
             .svg-canvas { width: 100% !important; height: auto !important; }
-            .history-table { display: block; overflow-x: auto; white-space: nowrap; }
+            .history-table { display: block; overflow-x: auto; var(--bg-surface)-space: nowrap; }
         }
     
 
@@ -473,7 +473,7 @@
         }
         .slides-overview,
         .slides-tip-box {
-            background: var(--surface2);
+            background: var(--bg-surface);
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 70%, transparent);
             border-radius: 14px;
             padding: 1.15rem 1.2rem;
@@ -487,13 +487,13 @@
             position: absolute;
             inset: 0 auto 0 0;
             width: 4px;
-            background: var(--accent);
+            background: var(--primary-main);
         }
         .slides-kicker {
             display: inline-flex;
             align-items: center;
             gap: 0.45rem;
-            color: var(--accent);
+            color: var(--primary-main);
             font-size: 0.82rem;
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -531,7 +531,7 @@
             line-height: 1.5;
         }
         .slides-tip i {
-            color: var(--accent);
+            color: var(--primary-main);
             width: 1rem;
             height: 1rem;
             margin-top: 0.18rem;
@@ -562,11 +562,11 @@
             top: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            background: linear-gradient(90deg, var(--primary-main) 0%, transparent 100%);
         }
         .slide-card:hover {
             transform: translateY(-2px);
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent), 0 18px 34px rgba(0, 29, 23, 0.09);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary-main) 22%, transparent), 0 18px 34px rgba(0, 29, 23, 0.09);
         }
         .slide-card-top {
             display: flex;
@@ -580,9 +580,9 @@
             gap: 0.45rem;
             padding: 0.38rem 0.72rem;
             border-radius: 999px;
-            background: color-mix(in srgb, var(--accent) 16%, var(--surface));
-            color: var(--text);
-            border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+            background: color-mix(in srgb, var(--primary-main) 16%, var(--bg-surface));
+            color: var(--text-main);
+            border: 1px solid color-mix(in srgb, var(--primary-main) 40%, var(--border-subtle));
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 0.04em;
@@ -609,16 +609,16 @@
             letter-spacing: 0.04em;
             text-transform: uppercase;
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 60%, transparent);
-            background: var(--surface);
+            background: var(--bg-surface);
             color: var(--text-muted);
         }
-        .slide-tag.pdf { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--green) 18%, transparent); color: var(--green); background: var(--green-bg); }
-        .slide-tag.pptx { border-color: var(--border); color: var(--text-muted); }
+        .slide-tag.pdf { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--emerald-main) 18%, transparent); color: var(--emerald-main); background: var(--green-bg); }
+        .slide-tag.pptx { border-color: var(--border-subtle); color: var(--text-muted); }
         .slide-card h3 {
             font-family: var(--type-display-family);
             font-size: 1.35rem;
             line-height: 1.2;
-            color: var(--text);
+            color: var(--text-main);
             margin: 0;
         }
         .slide-subtitle {
@@ -646,7 +646,7 @@
             flex: 1 1 150px;
         }
         .slide-actions .btn-secondary {
-            background: var(--surface);
+            background: var(--bg-surface);
         }
         .slide-actions i {
             width: 1rem;
@@ -658,7 +658,7 @@
             border-radius: 12px;
             overflow: hidden;
             border: 0;
-            background: linear-gradient(180deg, rgba(26, 86, 219, 0.08) 0%, rgba(26, 86, 219, 0.02) 100%), var(--surface);
+            background: linear-gradient(180deg, rgba(26, 86, 219, 0.08) 0%, rgba(26, 86, 219, 0.02) 100%), var(--bg-surface);
             aspect-ratio: 16 / 9;
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ghost-outline) 74%, transparent);
             text-decoration: none;
@@ -667,10 +667,10 @@
         }
         .slide-thumb-wrap:hover {
             transform: translateY(-2px);
-            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent), 0 12px 24px rgba(0, 29, 23, 0.1);
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary-main) 22%, transparent), 0 12px 24px rgba(0, 29, 23, 0.1);
         }
         .slide-thumb-wrap:focus-visible {
-            outline: 2px solid var(--accent);
+            outline: 2px solid var(--primary-main);
             outline-offset: 3px;
         }
         .slide-thumb {
@@ -679,7 +679,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center top;
-            background: var(--surface);
+            background: var(--bg-surface);
         }
         .slide-thumb-wrap.is-missing .slide-thumb {
             display: none;
@@ -704,7 +704,7 @@
                     rgba(255,255,255,0.025) 12px,
                     rgba(255,255,255,0.025) 24px
                 ),
-                var(--surface);
+                var(--bg-surface);
         }
         .slide-thumb-wrap.is-missing .slide-thumb-placeholder {
             display: flex;
@@ -712,14 +712,14 @@
         .slide-thumb-placeholder i {
             width: 1.2rem;
             height: 1.2rem;
-            color: var(--accent);
+            color: var(--primary-main);
         }
         .slide-thumb-label {
             font-size: 0.76rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--primary-main);
         }
         .slide-thumb-note {
             font-size: 0.84rem;
@@ -835,8 +835,8 @@
 <div class="slides-tip-box">
 <div class="slides-tip-title">Best use</div>
 <div class="slides-tips">
-<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
-<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text);">Download PPTX</strong> when you need the original slide deck.</span></div>
+<div class="slides-tip"><i data-lucide="file-text"></i><span><strong style="color: var(--text-main);">View PDF</strong> when you want quick access and consistent formatting.</span></div>
+<div class="slides-tip"><i data-lucide="download"></i><span><strong style="color: var(--text-main);">Download PPTX</strong> when you need the original slide deck.</span></div>
 </div>
 </div>
 </div>
@@ -1456,7 +1456,7 @@
 </table>
 </div>
 <div class="u-text-center u-mt-xl">
-<button class="btn-secondary" onclick="resetProgress()" style="color: var(--red); border-color: var(--red-bg);">
+<button class="btn-secondary" onclick="resetProgress()" style="color: var(--danger-main); border-color: var(--red-bg);">
 <i data-lucide="trash-2" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i> 
                     Reset All Progress
                 </button>
@@ -1710,8 +1710,8 @@
         return { x, y };
     }
 
-    function svgOutlinedText({ x, y, text, fill = 'var(--text)', fontSize = 14, fontWeight = 'normal', textAnchor = 'middle' }) {
-        return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" fill="${fill}" font-size="${fontSize}" font-weight="${fontWeight}" text-anchor="${textAnchor}" stroke="var(--surface2)" stroke-width="4.5" stroke-linejoin="round" paint-order="stroke">${text}</text>`;
+    function svgOutlinedText({ x, y, text, fill = 'var(--text-main)', fontSize = 14, fontWeight = 'normal', textAnchor = 'middle' }) {
+        return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" fill="${fill}" font-size="${fontSize}" font-weight="${fontWeight}" text-anchor="${textAnchor}" stroke="var(--bg-surface)" stroke-width="4.5" stroke-linejoin="round" paint-order="stroke">${text}</text>`;
     }
 
     function runStdPosAngleUnitTests() {
@@ -1864,13 +1864,13 @@
                 }
 
                 const svg = `<svg viewBox="0 0 220 160" class="svg-canvas" width="300" height="220">
-                    <line x1="20" y1="80" x2="200" y2="80" stroke="var(--text)" stroke-width="1.5"/>
-                    <line x1="110" y1="15" x2="110" y2="145" stroke="var(--text)" stroke-width="1.5"/>
-                    <line x1="20" y1="${80 - shift * 12}" x2="200" y2="${80 - shift * 12}" stroke="var(--accent)" stroke-dasharray="5,5" stroke-width="2"/>
+                    <line x1="20" y1="80" x2="200" y2="80" stroke="var(--text-main)" stroke-width="1.5"/>
+                    <line x1="110" y1="15" x2="110" y2="145" stroke="var(--text-main)" stroke-width="1.5"/>
+                    <line x1="20" y1="${80 - shift * 12}" x2="200" y2="${80 - shift * 12}" stroke="var(--primary-main)" stroke-dasharray="5,5" stroke-width="2"/>
                     <path d="M35 ${80 - (coeff * Math.pow(base, -2) + shift) * 12} C 75 ${80 - (coeff * Math.pow(base, -1) + shift) * 12}, 105 ${80 - (coeff + shift) * 12}, 180 ${80 - (coeff * Math.pow(base, 1.3) + shift) * 12}" fill="none" stroke="var(--success)" stroke-width="2.5"/>
-                    <text x="196" y="75" fill="var(--text)" font-size="11">x</text>
-                    <text x="114" y="20" fill="var(--text)" font-size="11">y</text>
-                    <text x="28" y="${76 - shift * 12}" fill="var(--accent)" font-size="11">y = ?</text>
+                    <text x="196" y="75" fill="var(--text-main)" font-size="11">x</text>
+                    <text x="114" y="20" fill="var(--text-main)" font-size="11">y</text>
+                    <text x="28" y="${76 - shift * 12}" fill="var(--primary-main)" font-size="11">y = ?</text>
                 </svg>`;
 
                 return {
@@ -1935,12 +1935,12 @@
                 const y2 = 80 - 55 * Math.sin(theta);
 
                 const svg = `<svg viewBox="0 0 220 160" class="svg-canvas" width="300" height="220">
-                    <circle cx="110" cy="80" r="55" fill="none" stroke="var(--text)" stroke-width="1.5"/>
-                    <line x1="25" y1="80" x2="195" y2="80" stroke="var(--text)" stroke-width="1.5"/>
-                    <line x1="110" y1="20" x2="110" y2="140" stroke="var(--text)" stroke-width="1.5"/>
+                    <circle cx="110" cy="80" r="55" fill="none" stroke="var(--text-main)" stroke-width="1.5"/>
+                    <line x1="25" y1="80" x2="195" y2="80" stroke="var(--text-main)" stroke-width="1.5"/>
+                    <line x1="110" y1="20" x2="110" y2="140" stroke="var(--text-main)" stroke-width="1.5"/>
                     <line x1="110" y1="80" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--success)" stroke-width="2.5"/>
-                    <path d="M150,80 A40,40 0 0,0 ${110 + 40 * Math.cos(theta)},${80 - 40 * Math.sin(theta)}" fill="none" stroke="var(--accent)" stroke-width="2"/>
-                    <text x="154" y="75" fill="var(--accent)" font-size="11">θ</text>
+                    <path d="M150,80 A40,40 0 0,0 ${110 + 40 * Math.cos(theta)},${80 - 40 * Math.sin(theta)}" fill="none" stroke="var(--primary-main)" stroke-width="2"/>
+                    <text x="154" y="75" fill="var(--primary-main)" font-size="11">θ</text>
                 </svg>`;
 
                 return {
@@ -2007,10 +2007,10 @@
             const angleVal = arcVal / 2;
             const isFindingAngle = Math.random() > 0.5;
             const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
-                <circle cx="60" cy="60" r="50" fill="none" stroke="var(--text)" stroke-width="2"/>
-                <path d="M60,10 L107,75 L13,75 Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
-                <text x="60" y="90" fill="var(--text)" font-size="10" text-anchor="middle">${isFindingAngle ? '?' : arcVal + '°'}</text>
-                <text x="60" y="25" fill="var(--accent)" font-weight="bold" font-size="10" text-anchor="middle">${isFindingAngle ? 'x' : '?'}</text>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="var(--text-main)" stroke-width="2"/>
+                <path d="M60,10 L107,75 L13,75 Z" fill="var(--accent-glow)" stroke="var(--primary-main)" stroke-width="2"/>
+                <text x="60" y="90" fill="var(--text-main)" font-size="10" text-anchor="middle">${isFindingAngle ? '?' : arcVal + '°'}</text>
+                <text x="60" y="25" fill="var(--primary-main)" font-weight="bold" font-size="10" text-anchor="middle">${isFindingAngle ? 'x' : '?'}</text>
             </svg>`;
             return {
                 q: isFindingAngle 
@@ -2030,18 +2030,18 @@
             const arcAB = (Math.floor(Math.random() * 12) + 3) * 8; // 24 to 120
             const arcBC = 180 - arcAB;
             const svg = `<svg viewBox="0 0 200 200" class="svg-canvas" width="280" height="280">
-                <circle cx="100" cy="100" r="80" fill="none" stroke="var(--text)" stroke-width="2"/>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="var(--text-main)" stroke-width="2"/>
                 <!-- diameter -->
-                <line x1="20" y1="100" x2="180" y2="100" stroke="var(--text)" stroke-width="2"/>
+                <line x1="20" y1="100" x2="180" y2="100" stroke="var(--text-main)" stroke-width="2"/>
                 <!-- point B on bottom -->
-                <circle cx="60" cy="169" r="3" fill="var(--accent)"/>
-                <line x1="20" y1="100" x2="60" y2="169" stroke="var(--accent)" stroke-width="1.5"/>
-                <line x1="180" y1="100" x2="60" y2="169" stroke="var(--accent)" stroke-width="1.5"/>
-                <text x="15" y="95" fill="var(--text)" font-size="13" font-weight="bold">A</text>
-                <text x="182" y="95" fill="var(--text)" font-size="13" font-weight="bold">C</text>
-                <text x="50" y="185" fill="var(--text)" font-size="13" font-weight="bold">B</text>
-                <text x="30" y="145" fill="var(--accent)" font-size="11">${arcAB}°</text>
-                <text x="125" y="145" fill="var(--text)" font-size="11">?</text>
+                <circle cx="60" cy="169" r="3" fill="var(--primary-main)"/>
+                <line x1="20" y1="100" x2="60" y2="169" stroke="var(--primary-main)" stroke-width="1.5"/>
+                <line x1="180" y1="100" x2="60" y2="169" stroke="var(--primary-main)" stroke-width="1.5"/>
+                <text x="15" y="95" fill="var(--text-main)" font-size="13" font-weight="bold">A</text>
+                <text x="182" y="95" fill="var(--text-main)" font-size="13" font-weight="bold">C</text>
+                <text x="50" y="185" fill="var(--text-main)" font-size="13" font-weight="bold">B</text>
+                <text x="30" y="145" fill="var(--primary-main)" font-size="11">${arcAB}°</text>
+                <text x="125" y="145" fill="var(--text-main)" font-size="11">?</text>
             </svg>`;
             return {
                 q: `$\\overline{AC}$ is a diameter. Arc $\\widehat{AB} = ${arcAB}^\\circ$. Find arc $\\widehat{BC}$.`,
@@ -2084,19 +2084,19 @@
                 solution = `First, find $\\angle AEB$: $\\widehat{CD} = 2(${angleDBC}) = ${arcDC}^\\circ$, so $\\angle AEB = \\frac{${arcAB} + ${arcDC}}{2} = ${angleAEB}^\\circ$. <br> $\\angle AED$ and $\\angle AEB$ are supplementary: $\\angle AED = 180 - ${angleAEB} = ${angleAED}^\\circ$.`;
             }
             const svg = `<svg viewBox="0 0 220 220" class="svg-canvas" width="280" height="280">
-                <circle cx="110" cy="110" r="85" fill="none" stroke="var(--text)" stroke-width="2"/>
-                <line x1="25" y1="110" x2="195" y2="110" stroke="var(--text)" stroke-width="2"/>
-                <circle cx="65" cy="183" r="3" fill="var(--accent)"/>
-                <circle cx="155" cy="37" r="3" fill="var(--accent)"/>
-                <line x1="65" y1="183" x2="155" y2="37" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4"/>
-                <line x1="25" y1="110" x2="65" y2="183" stroke="var(--accent)" stroke-width="1.5"/>
-                <line x1="195" y1="110" x2="65" y2="183" stroke="var(--accent)" stroke-width="1.5"/>
-                <text x="15" y="107" fill="var(--text)" font-size="13" font-weight="bold">A</text>
-                <text x="197" y="107" fill="var(--text)" font-size="13" font-weight="bold">C</text>
-                <text x="53" y="198" fill="var(--text)" font-size="13" font-weight="bold">B</text>
-                <text x="158" y="33" fill="var(--text)" font-size="13" font-weight="bold">D</text>
+                <circle cx="110" cy="110" r="85" fill="none" stroke="var(--text-main)" stroke-width="2"/>
+                <line x1="25" y1="110" x2="195" y2="110" stroke="var(--text-main)" stroke-width="2"/>
+                <circle cx="65" cy="183" r="3" fill="var(--primary-main)"/>
+                <circle cx="155" cy="37" r="3" fill="var(--primary-main)"/>
+                <line x1="65" y1="183" x2="155" y2="37" stroke="var(--primary-main)" stroke-width="1.5" stroke-dasharray="4"/>
+                <line x1="25" y1="110" x2="65" y2="183" stroke="var(--primary-main)" stroke-width="1.5"/>
+                <line x1="195" y1="110" x2="65" y2="183" stroke="var(--primary-main)" stroke-width="1.5"/>
+                <text x="15" y="107" fill="var(--text-main)" font-size="13" font-weight="bold">A</text>
+                <text x="197" y="107" fill="var(--text-main)" font-size="13" font-weight="bold">C</text>
+                <text x="53" y="198" fill="var(--text-main)" font-size="13" font-weight="bold">B</text>
+                <text x="158" y="33" fill="var(--text-main)" font-size="13" font-weight="bold">D</text>
                 <text x="108" y="105" fill="var(--text-muted)" font-size="11">E</text>
-                <text x="33" y="152" fill="var(--accent)" font-size="11">${arcAB}°</text>
+                <text x="33" y="152" fill="var(--primary-main)" font-size="11">${arcAB}°</text>
                 <text x="140" y="170" fill="var(--text-muted)" font-size="11">${angleDBC}°</text>
             </svg>`;
             return {
@@ -2169,27 +2169,27 @@
         };
 
         const svg = `<svg viewBox="0 0 260 260" class="svg-canvas" width="300" height="300">
-            <circle cx="130" cy="130" r="100" fill="none" stroke="var(--text)" stroke-width="2"/>
+            <circle cx="130" cy="130" r="100" fill="none" stroke="var(--text-main)" stroke-width="2"/>
             <!-- Diameter AC -->
-            <line x1="30" y1="130" x2="230" y2="130" stroke="var(--text)" stroke-width="2"/>
+            <line x1="30" y1="130" x2="230" y2="130" stroke="var(--text-main)" stroke-width="2"/>
             <!-- Point B (bottom-left) -->
-            <circle cx="72" cy="217" r="3" fill="var(--accent)"/>
+            <circle cx="72" cy="217" r="3" fill="var(--primary-main)"/>
             <!-- Point D (top-right) -->
-            <circle cx="205" cy="55" r="3" fill="var(--accent)"/>
+            <circle cx="205" cy="55" r="3" fill="var(--primary-main)"/>
             <!-- Chord BD through E -->
-            <line x1="72" y1="217" x2="205" y2="55" stroke="var(--accent)" stroke-width="1.5" opacity="0.6"/>
+            <line x1="72" y1="217" x2="205" y2="55" stroke="var(--primary-main)" stroke-width="1.5" opacity="0.6"/>
             <!-- Triangle lines -->
-            <line x1="30" y1="130" x2="72" y2="217" stroke="var(--accent)" stroke-width="1.5"/>
-            <line x1="230" y1="130" x2="72" y2="217" stroke="var(--accent)" stroke-width="1.5"/>
-            <line x1="230" y1="130" x2="205" y2="55" stroke="var(--accent)" stroke-width="1.5"/>
+            <line x1="30" y1="130" x2="72" y2="217" stroke="var(--primary-main)" stroke-width="1.5"/>
+            <line x1="230" y1="130" x2="72" y2="217" stroke="var(--primary-main)" stroke-width="1.5"/>
+            <line x1="230" y1="130" x2="205" y2="55" stroke="var(--primary-main)" stroke-width="1.5"/>
             <!-- Labels -->
-            ${svgOutlinedText({ x: 14, y: 127, text: 'A', fill: 'var(--text)', fontSize: 15, fontWeight: 'bold', textAnchor: 'start' })}
-            ${svgOutlinedText({ x: 234, y: 127, text: 'C', fill: 'var(--text)', fontSize: 15, fontWeight: 'bold', textAnchor: 'start' })}
-            ${svgOutlinedText({ x: 56, y: 235, text: 'B', fill: 'var(--text)', fontSize: 15, fontWeight: 'bold', textAnchor: 'start' })}
-            ${svgOutlinedText({ x: 210, y: 48, text: 'D', fill: 'var(--text)', fontSize: 15, fontWeight: 'bold', textAnchor: 'start' })}
+            ${svgOutlinedText({ x: 14, y: 127, text: 'A', fill: 'var(--text-main)', fontSize: 15, fontWeight: 'bold', textAnchor: 'start' })}
+            ${svgOutlinedText({ x: 234, y: 127, text: 'C', fill: 'var(--text-main)', fontSize: 15, fontWeight: 'bold', textAnchor: 'start' })}
+            ${svgOutlinedText({ x: 56, y: 235, text: 'B', fill: 'var(--text-main)', fontSize: 15, fontWeight: 'bold', textAnchor: 'start' })}
+            ${svgOutlinedText({ x: 210, y: 48, text: 'D', fill: 'var(--text-main)', fontSize: 15, fontWeight: 'bold', textAnchor: 'start' })}
             ${svgOutlinedText({ x: circleLabels.E.x, y: circleLabels.E.y, text: 'E', fill: 'var(--text-muted)', fontSize: 15 })}
             <!-- Given values -->
-            ${svgOutlinedText({ x: circleLabels.arcAB.x, y: circleLabels.arcAB.y, text: `${arcAB}°`, fill: 'var(--accent)', fontSize: 14, fontWeight: '600' })}
+            ${svgOutlinedText({ x: circleLabels.arcAB.x, y: circleLabels.arcAB.y, text: `${arcAB}°`, fill: 'var(--primary-main)', fontSize: 14, fontWeight: '600' })}
             ${svgOutlinedText({ x: circleLabels.angleDBC.x, y: circleLabels.angleDBC.y, text: `${angleDBC}°`, fill: 'var(--text-muted)', fontSize: 14, fontWeight: '600' })}
         </svg>`;
 
@@ -2331,20 +2331,20 @@
         const df = parseFloat((ac * scale).toFixed(1));
 
         const svg = `<svg viewBox="0 0 520 230" class="svg-canvas" style="max-width: 520px; width: 100%; height: auto;">
-            <polygon points="70,185 180,55 235,185" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
-            <text x="58" y="200" fill="var(--text)" font-size="14">A</text>
-            <text x="178" y="45" fill="var(--text)" font-size="14">B</text>
-            <text x="238" y="200" fill="var(--text)" font-size="14">C</text>
+            <polygon points="70,185 180,55 235,185" fill="none" stroke="var(--primary-main)" stroke-width="2.5"/>
+            <text x="58" y="200" fill="var(--text-main)" font-size="14">A</text>
+            <text x="178" y="45" fill="var(--text-main)" font-size="14">B</text>
+            <text x="238" y="200" fill="var(--text-main)" font-size="14">C</text>
             <text x="121" y="116" fill="var(--text-muted)" font-size="12">AB = ${ab}</text>
             <text x="200" y="126" fill="var(--text-muted)" font-size="12">BC = ${bc}</text>
             <text x="136" y="198" fill="var(--text-muted)" font-size="12">AC = ${ac}</text>
             <text x="85" y="174" fill="var(--text-muted)" font-size="12">${angleA}°</text>
             <text x="212" y="174" fill="var(--text-muted)" font-size="12">${angleC}°</text>
 
-            <polygon points="305,185 390,90 450,185" fill="none" stroke="var(--green)" stroke-width="2.5"/>
-            <text x="293" y="200" fill="var(--text)" font-size="14">D</text>
-            <text x="388" y="80" fill="var(--text)" font-size="14">E</text>
-            <text x="453" y="200" fill="var(--text)" font-size="14">F</text>
+            <polygon points="305,185 390,90 450,185" fill="none" stroke="var(--emerald-main)" stroke-width="2.5"/>
+            <text x="293" y="200" fill="var(--text-main)" font-size="14">D</text>
+            <text x="388" y="80" fill="var(--text-main)" font-size="14">E</text>
+            <text x="453" y="200" fill="var(--text-main)" font-size="14">F</text>
             <text x="335" y="132" fill="var(--text-muted)" font-size="12">DE = ${de}</text>
             <text x="410" y="136" fill="var(--text-muted)" font-size="12">EF = ?</text>
             <text x="367" y="198" fill="var(--text-muted)" font-size="12">DF = ?</text>
@@ -2374,13 +2374,13 @@
         const obtuse = 180 - acute;
 
         const svg = `<svg viewBox="0 0 500 250" class="svg-canvas" style="max-width: 500px; width: 100%; height: auto;">
-            <line x1="40" y1="70" x2="460" y2="70" stroke="var(--accent)" stroke-width="3"/>
-            <line x1="40" y1="180" x2="460" y2="180" stroke="var(--accent)" stroke-width="3"/>
-            <line x1="130" y1="20" x2="350" y2="230" stroke="var(--green)" stroke-width="3"/>
+            <line x1="40" y1="70" x2="460" y2="70" stroke="var(--primary-main)" stroke-width="3"/>
+            <line x1="40" y1="180" x2="460" y2="180" stroke="var(--primary-main)" stroke-width="3"/>
+            <line x1="130" y1="20" x2="350" y2="230" stroke="var(--emerald-main)" stroke-width="3"/>
             <text x="28" y="72" fill="var(--text-muted)" font-size="12">j</text>
             <text x="28" y="182" fill="var(--text-muted)" font-size="12">k</text>
-            <text x="205" y="58" fill="var(--text)" font-size="12">∠1 = ${acute}°</text>
-            <text x="348" y="205" fill="var(--text)" font-size="12">∠8 = ${obtuse}°</text>
+            <text x="205" y="58" fill="var(--text-main)" font-size="12">∠1 = ${acute}°</text>
+            <text x="348" y="205" fill="var(--text-main)" font-size="12">∠8 = ${obtuse}°</text>
             <text x="92" y="58" fill="var(--text-muted)" font-size="12">∠2 = ?</text>
             <text x="141" y="96" fill="var(--text-muted)" font-size="12">∠3 = ?</text>
             <text x="314" y="165" fill="var(--text-muted)" font-size="12">∠6 = ?</text>
@@ -2429,11 +2429,11 @@
                 const ans = w1 * h1 - w2 * h2;
                 const s = 10; // scale factor for SVG
                 const svg = `<svg viewBox="0 0 ${(w1+4)*s} ${(h1+4)*s}" class="svg-canvas" style="max-width: 400px; width: 100%; height: auto;">
-                    <polygon points="${2*s},${2*s} ${(w1+2)*s},${2*s} ${(w1+2)*s},${(h1-h2+2)*s} ${(w1-w2+2)*s},${(h1-h2+2)*s} ${(w1-w2+2)*s},${(h1+2)*s} ${2*s},${(h1+2)*s}" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
-                    <text x="${(w1/2+2)*s}" y="${1.4*s}" fill="var(--text)" font-size="13" text-anchor="middle">${w1}</text>
-                    <text x="${0.8*s}" y="${(h1/2+2)*s}" fill="var(--text)" font-size="13" text-anchor="middle">${h1}</text>
-                    <text x="${(w1-w2/2+2)*s}" y="${(h1-h2+2)*s + 14}" fill="var(--text)" font-size="13" text-anchor="middle">${w2}</text>
-                    <text x="${(w1-w2+2)*s - 6}" y="${(h1-h2/2+2)*s + 4}" fill="var(--text)" font-size="13" text-anchor="start">${h2}</text>
+                    <polygon points="${2*s},${2*s} ${(w1+2)*s},${2*s} ${(w1+2)*s},${(h1-h2+2)*s} ${(w1-w2+2)*s},${(h1-h2+2)*s} ${(w1-w2+2)*s},${(h1+2)*s} ${2*s},${(h1+2)*s}" fill="var(--bg-surface)" stroke="var(--primary-main)" stroke-width="2"/>
+                    <text x="${(w1/2+2)*s}" y="${1.4*s}" fill="var(--text-main)" font-size="13" text-anchor="middle">${w1}</text>
+                    <text x="${0.8*s}" y="${(h1/2+2)*s}" fill="var(--text-main)" font-size="13" text-anchor="middle">${h1}</text>
+                    <text x="${(w1-w2/2+2)*s}" y="${(h1-h2+2)*s + 14}" fill="var(--text-main)" font-size="13" text-anchor="middle">${w2}</text>
+                    <text x="${(w1-w2+2)*s - 6}" y="${(h1-h2/2+2)*s + 4}" fill="var(--text-main)" font-size="13" text-anchor="start">${h2}</text>
                 </svg>`;
                 return {
                     q: `Find the total area of the L-shaped figure.`,
@@ -2513,12 +2513,12 @@
                     const h = Math.floor(Math.random() * 6) + 3;
                     const ans = 0.5 * h * (b1 + b2);
                     const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
-                        <polygon points="60,30 ${60+b1*10},30 ${40+b2*10},90 40,90" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                        <polygon points="60,30 ${60+b1*10},30 ${40+b2*10},90 40,90" fill="var(--bg-surface)" stroke="var(--primary-main)" stroke-width="2"/>
                         <line x1="60" y1="30" x2="60" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
                         <rect x="60" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
-                        <text x="${60+(b1*10)/2}" y="20" fill="var(--text)" font-size="14" text-anchor="middle">${b1} m</text>
-                        <text x="${40+(b2*10)/2}" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b2} m</text>
-                        <text x="35" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
+                        <text x="${60+(b1*10)/2}" y="20" fill="var(--text-main)" font-size="14" text-anchor="middle">${b1} m</text>
+                        <text x="${40+(b2*10)/2}" y="110" fill="var(--text-main)" font-size="14" text-anchor="middle">${b2} m</text>
+                        <text x="35" y="65" fill="var(--text-main)" font-size="14" text-anchor="end">${h} m</text>
                     </svg>`;
                     return {
                         q: `Find the area of the trapezoid.`,
@@ -2532,11 +2532,11 @@
                     const h = Math.floor(Math.random() * 8) + 4;
                     const ans = b * h;
                     const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
-                        <polygon points="50,90 170,90 130,30 10,30" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                        <polygon points="50,90 170,90 130,30 10,30" fill="var(--bg-surface)" stroke="var(--primary-main)" stroke-width="2"/>
                         <line x1="50" y1="30" x2="50" y2="90" stroke="var(--text-muted)" stroke-dasharray="4"/>
                         <rect x="50" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
-                        <text x="110" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b} m</text>
-                        <text x="40" y="65" fill="var(--text)" font-size="14" text-anchor="end">${h} m</text>
+                        <text x="110" y="110" fill="var(--text-main)" font-size="14" text-anchor="middle">${b} m</text>
+                        <text x="40" y="65" fill="var(--text-main)" font-size="14" text-anchor="end">${h} m</text>
                     </svg>`;
                     return {
                         q: `Find the area of the parallelogram.`,
@@ -2554,12 +2554,12 @@
                     const altitudeBottom = 90;
                     const altitudeMidY = (altitudeTop + altitudeBottom) / 2;
                     const svg = `<svg viewBox="0 0 200 120" class="svg-canvas" width="400" height="240">
-                        <polygon points="50,90 150,90 90,30" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+                        <polygon points="50,90 150,90 90,30" fill="var(--bg-surface)" stroke="var(--primary-main)" stroke-width="2"/>
                         <line x1="${altitudeX}" y1="${altitudeTop}" x2="${altitudeX}" y2="${altitudeBottom}" stroke="var(--text-muted)" stroke-dasharray="4"/>
                         <rect x="${altitudeX}" y="85" width="5" height="5" fill="none" stroke="var(--text-muted)"/>
-                        <text x="100" y="110" fill="var(--text)" font-size="14" text-anchor="middle">${b} m</text>
+                        <text x="100" y="110" fill="var(--text-main)" font-size="14" text-anchor="middle">${b} m</text>
                         <line x1="${altitudeX + 2}" y1="${altitudeMidY}" x2="${altitudeX + 10}" y2="${altitudeMidY}" stroke="var(--text-muted)" stroke-width="1.5"/>
-                        ${svgOutlinedText({ x: altitudeX + 13, y: altitudeMidY + 4.5, text: `${h} m`, fill: 'var(--text)', fontSize: 14, fontWeight: '600', textAnchor: 'start' })}
+                        ${svgOutlinedText({ x: altitudeX + 13, y: altitudeMidY + 4.5, text: `${h} m`, fill: 'var(--text-main)', fontSize: 14, fontWeight: '600', textAnchor: 'start' })}
                     </svg>`;
                     return {
                         q: `Find the area of the triangle.`,
@@ -2631,17 +2631,17 @@
 
                 const svg = `<svg viewBox="0 0 300 150" class="svg-canvas" width="500" height="250">
                     <!-- Parallel lines -->
-                    <line x1="10" y1="30" x2="290" y2="30" stroke="var(--text)" stroke-width="2"/>
-                    <line x1="10" y1="80" x2="290" y2="80" stroke="var(--text)" stroke-width="2"/>
-                    <line x1="10" y1="130" x2="290" y2="130" stroke="var(--text)" stroke-width="2"/>
+                    <line x1="10" y1="30" x2="290" y2="30" stroke="var(--text-main)" stroke-width="2"/>
+                    <line x1="10" y1="80" x2="290" y2="80" stroke="var(--text-main)" stroke-width="2"/>
+                    <line x1="10" y1="130" x2="290" y2="130" stroke="var(--text-main)" stroke-width="2"/>
                     <!-- Transversals -->
-                    <line x1="80" y1="10" x2="140" y2="140" stroke="var(--accent)" stroke-width="2"/>
-                    <line x1="220" y1="10" x2="160" y2="140" stroke="var(--accent)" stroke-width="2"/>
+                    <line x1="80" y1="10" x2="140" y2="140" stroke="var(--primary-main)" stroke-width="2"/>
+                    <line x1="220" y1="10" x2="160" y2="140" stroke="var(--primary-main)" stroke-width="2"/>
                     <!-- Labels -->
-                    ${svgOutlinedText({ x: transLabels.a.x, y: transLabels.a.y, text: `${a}`, fill: 'var(--text)', fontSize: 15, fontWeight: '600' })}
-                    ${svgOutlinedText({ x: transLabels.b.x, y: transLabels.b.y, text: `${b}`, fill: 'var(--text)', fontSize: 15, fontWeight: '600' })}
-                    ${svgOutlinedText({ x: transLabels.c.x, y: transLabels.c.y, text: `${c}`, fill: 'var(--text)', fontSize: 15, fontWeight: '600' })}
-                    ${svgOutlinedText({ x: transLabels.x.x, y: transLabels.x.y, text: 'x', fill: 'var(--accent)', fontSize: 17, fontWeight: 'bold' })}
+                    ${svgOutlinedText({ x: transLabels.a.x, y: transLabels.a.y, text: `${a}`, fill: 'var(--text-main)', fontSize: 15, fontWeight: '600' })}
+                    ${svgOutlinedText({ x: transLabels.b.x, y: transLabels.b.y, text: `${b}`, fill: 'var(--text-main)', fontSize: 15, fontWeight: '600' })}
+                    ${svgOutlinedText({ x: transLabels.c.x, y: transLabels.c.y, text: `${c}`, fill: 'var(--text-main)', fontSize: 15, fontWeight: '600' })}
+                    ${svgOutlinedText({ x: transLabels.x.x, y: transLabels.x.y, text: 'x', fill: 'var(--primary-main)', fontSize: 17, fontWeight: 'bold' })}
                 </svg>`;
 
                 return {
@@ -2692,9 +2692,9 @@
                 const largeArcFlag = thetaRad > Math.PI ? 1 : 0;
 
                 const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
-                    <path d="M${centerX},${centerY} L${startX},${startY} A${radius},${radius} 0 ${largeArcFlag},0 ${endX.toFixed(2)},${endY.toFixed(2)} Z" fill="var(--accent-glow)" stroke="var(--accent)" stroke-width="2"/>
-                    <text x="85" y="75" fill="var(--text)" font-size="12">r = ${rNum}</text>
-                    <text x="45" y="45" fill="var(--text)" font-size="12">${thetaSvgLabel}</text>
+                    <path d="M${centerX},${centerY} L${startX},${startY} A${radius},${radius} 0 ${largeArcFlag},0 ${endX.toFixed(2)},${endY.toFixed(2)} Z" fill="var(--accent-glow)" stroke="var(--primary-main)" stroke-width="2"/>
+                    <text x="85" y="75" fill="var(--text-main)" font-size="12">r = ${rNum}</text>
+                    <text x="45" y="45" fill="var(--text-main)" font-size="12">${thetaSvgLabel}</text>
                 </svg>`;
 
                 if (Math.random() > 0.5) {
@@ -3090,7 +3090,7 @@
                 div.setAttribute('tabindex', '0');
                 div.setAttribute('aria-pressed', String(item.done));
                 div.innerHTML = `
-                    <div class="check-box">${item.done ? '<i data-lucide="check" style="width:16px; color:white;"></i>' : ''}</div>
+                    <div class="check-box">${item.done ? '<i data-lucide="check" style="width:16px; color:var(--bg-surface);"></i>' : ''}</div>
                     <span style="flex: 1;">${item.label}</span>
                     ${item.videoUrl ? `<a href="${item.videoUrl}" target="_blank" rel="noopener noreferrer" class="practice-link" onclick="event.stopPropagation()" title="Watch Video" aria-label="Watch related video"><i data-lucide="play" style="width:18px; height:18px;"></i></a>` : ''}
                     ${item.practiceId ? `<button type="button" class="practice-link" onclick="goToPractice('${item.practiceId}', event)" title="Jump to Interactive Practice" aria-label="Jump to interactive practice"><i data-lucide="pen-tool" style="width:18px; height:18px;"></i></button>` : ''}
@@ -3578,7 +3578,7 @@
             } else {
                 feedback.className = 'feedback incorrect';
                 feedback.innerHTML = `
-                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--red);"></i> Incorrect.</div>
+                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--danger-main);"></i> Incorrect.</div>
                     <div class="solution-step"><strong>Solution:</strong> ${currentQuestion.solution}</div>
                 `;
             }
@@ -3602,7 +3602,7 @@
                 currentRetries++;
                 feedback.className = 'feedback incorrect';
                 feedback.innerHTML = `
-                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--red);"></i> Not quite right. Try again!</div>
+                    <div><i data-lucide="x-circle" style="display:inline-block; vertical-align:middle; margin-right:8px; color: var(--danger-main);"></i> Not quite right. Try again!</div>
                     <div class="solution-step"><strong>Hint:</strong> ${currentQuestion.solution}</div>
                 `;
             }
@@ -3718,7 +3718,7 @@
         // Update results heading
         document.querySelector('#exam-results h2').textContent = `📊 ${label} Results`;
 
-        const color = pct >= 85 ? 'var(--green)' : pct >= 70 ? 'var(--amber)' : 'var(--red)';
+        const color = pct >= 85 ? 'var(--emerald-main)' : pct >= 70 ? 'var(--warning-main)' : 'var(--danger-main)';
         document.getElementById('exam-score-display').innerHTML = `<span style="color: ${color}">${pct}%</span>`;
 
         // Breakdown by section
@@ -3726,7 +3726,7 @@
         breakdown.innerHTML = '';
         Object.entries(examState.results).forEach(([section, data]) => {
             const secPct = Math.round((data.correct / data.total) * 100);
-            const secColor = secPct >= 85 ? 'var(--green)' : secPct >= 70 ? 'var(--amber)' : 'var(--red)';
+            const secColor = secPct >= 85 ? 'var(--emerald-main)' : secPct >= 70 ? 'var(--warning-main)' : 'var(--danger-main)';
             const bar = document.createElement('div');
             bar.className = 'progress-item';
             bar.innerHTML = `
@@ -3821,7 +3821,7 @@
                 examResults.style.display = 'block';
                 quizActiveArea.style.display = 'none';
                 document.getElementById('exam-progress-bar').style.display = 'none';
-                document.getElementById('exam-score-display').innerHTML = '<div style="font-size:1.1rem; color: var(--red);">Unable to start this quiz.</div>';
+                document.getElementById('exam-score-display').innerHTML = '<div style="font-size:1.1rem; color: var(--danger-main);">Unable to start this quiz.</div>';
                 document.getElementById('exam-breakdown').innerHTML = `<div style="color: var(--text-muted); text-align: center;">Missing generator IDs: <code>${missingBlueprintIds.join(', ')}</code></div>`;
                 return;
             }

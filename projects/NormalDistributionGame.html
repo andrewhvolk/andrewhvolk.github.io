@@ -26,7 +26,7 @@
             align-items: center;
         }
         canvas {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-subtle);
             margin: 20px 0;
             background-color: #f9f9f9;
         }
@@ -38,14 +38,14 @@
         }
         button {
             padding: 8px 16px;
-            background-color: #3498db;
-            color: white;
+            background-color: var(--primary-main);
+            color: var(--bg-surface);
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #2980b9;
+            background-color: var(--primary-main);
         }
         .question {
             background-color: #f0f8ff;
@@ -63,7 +63,7 @@
         .explanation {
             margin-top: 20px;
             padding: 15px;
-            background-color: #f5f5f5;
+            background-color: var(--bg-base);
             border-radius: 5px;
         }
         .highlight {
@@ -91,7 +91,7 @@
         input {
             padding: 8px;
             width: 100px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-subtle);
             border-radius: 4px;
         }
         .result {
@@ -107,12 +107,12 @@
             border-collapse: collapse;
         }
         .z-table th, .z-table td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-subtle);
             padding: 8px;
             text-align: center;
         }
         .z-table th {
-            background-color: #f2f2f2;
+            background-color: var(--bg-base);
         }
         .segmented-graph {
             margin-top: 30px;
@@ -121,12 +121,12 @@
             position: absolute;
             font-size: 12px;
             pointer-events: none;
-            color: #333;
+            color: var(--text-main);
         }
         .segment-tooltip {
             position: absolute;
             background-color: rgba(0, 0, 0, 0.8);
-            color: white;
+            color: var(--bg-surface);
             padding: 5px 10px;
             border-radius: 4px;
             font-size: 14px;
@@ -289,12 +289,12 @@
         const height = 150;
         
         // Colors
-        const curveColor = '#3498db';
-        const fillColors = ['#e74c3c', '#2ecc71', '#9b59b6'];
-        const customFillColor = '#f39c12';
+        const curveColor = 'var(--primary-main)';
+        const fillColors = ['var(--danger-main)', 'var(--emerald-main)', '#9b59b6'];
+        const customFillColor = 'var(--warning-main)';
         const segmentColors = [
-            '#e74c3c', '#e67e22', '#f1c40f', '#2ecc71', 
-            '#3498db', '#9b59b6', '#e74c3c'
+            'var(--danger-main)', 'var(--warning-main)', '#f1c40f', 'var(--emerald-main)', 
+            'var(--primary-main)', '#9b59b6', 'var(--danger-main)'
         ];
         
         // Standard normal distribution table (approximate)
@@ -319,12 +319,12 @@
             ctx.lineTo(canvas.width, canvas.height - 30);
             ctx.moveTo(mean, canvas.height - 30);
             ctx.lineTo(mean, 30);
-            ctx.strokeStyle = '#7f8c8d';
+            ctx.strokeStyle = 'var(--text-muted)';
             ctx.stroke();
             
             // Draw labels
             ctx.font = '14px Arial';
-            ctx.fillStyle = '#7f8c8d';
+            ctx.fillStyle = 'var(--text-muted)';
             ctx.textAlign = 'center';
             ctx.fillText('μ', mean, canvas.height - 10);
             ctx.fillText('μ-3σ', mean - 3*stdDev, canvas.height - 10);
@@ -397,7 +397,7 @@
             ctx.globalAlpha = 1.0;
             
             // Add labels
-            ctx.fillStyle = '#000';
+            ctx.fillStyle = 'var(--text-main)';
             ctx.font = 'bold 16px Arial';
             ctx.fillText(`Z-Scores: ${z1.toFixed(1)} to ${z2.toFixed(1)}`, mean, canvas.height - 50);
         }
@@ -433,21 +433,21 @@
                 segCtx.fillRect(x1, 0, width, segmentedCanvas.height);
                 
                 // Add label
-                segCtx.fillStyle = '#000';
+                segCtx.fillStyle = 'var(--text-main)';
                 segCtx.font = '12px Arial';
                 segCtx.textAlign = 'center';
                 segCtx.fillText(segment.label, x1 + width/2, segmentedCanvas.height - 10);
             });
             
             // Add tail labels
-            segCtx.fillStyle = '#000';
+            segCtx.fillStyle = 'var(--text-main)';
             segCtx.font = '12px Arial';
             segCtx.textAlign = 'center';
             segCtx.fillText(tailSegment.label, (mean - 3*stdDev)/2, segmentedCanvas.height - 10);
             segCtx.fillText(tailSegment.label, mean + 3*stdDev + (segmentedCanvas.width - (mean + 3*stdDev))/2, segmentedCanvas.height - 10);
             
             // Add axis labels
-            segCtx.fillStyle = '#7f8c8d';
+            segCtx.fillStyle = 'var(--text-muted)';
             segCtx.font = '14px Arial';
             segCtx.fillText('μ-3σ', mean - 3*stdDev, segmentedCanvas.height - 30);
             segCtx.fillText('μ-2σ', mean - 2*stdDev, segmentedCanvas.height - 30);
@@ -542,7 +542,7 @@
                 ctx.globalAlpha = 1.0;
                 
                 // Show the percentage
-                ctx.fillStyle = '#000';
+                ctx.fillStyle = 'var(--text-main)';
                 ctx.font = 'bold 16px Arial';
                 ctx.fillText(clickedSegment.label, mean, canvas.height - 50);
             }
@@ -552,7 +552,7 @@
         document.getElementById('show1SD').addEventListener('click', function() {
             drawNormalCurve();
             fillArea(mean - stdDev, mean + stdDev, 0);
-            ctx.fillStyle = '#000';
+            ctx.fillStyle = 'var(--text-main)';
             ctx.font = 'bold 16px Arial';
             ctx.fillText('68% of data', mean, canvas.height - 50);
         });
@@ -560,7 +560,7 @@
         document.getElementById('show2SD').addEventListener('click', function() {
             drawNormalCurve();
             fillArea(mean - 2*stdDev, mean + 2*stdDev, 1);
-            ctx.fillStyle = '#000';
+            ctx.fillStyle = 'var(--text-main)';
             ctx.font = 'bold 16px Arial';
             ctx.fillText('95% of data', mean, canvas.height - 50);
         });
@@ -568,7 +568,7 @@
         document.getElementById('show3SD').addEventListener('click', function() {
             drawNormalCurve();
             fillArea(mean - 3*stdDev, mean + 3*stdDev, 2);
-            ctx.fillStyle = '#000';
+            ctx.fillStyle = 'var(--text-main)';
             ctx.font = 'bold 16px Arial';
             ctx.fillText('99.7% of data', mean, canvas.height - 50);
         });

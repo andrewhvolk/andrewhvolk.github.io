@@ -9,7 +9,7 @@
 <style>
   :root {
     --bg: #FAF9F6;
-    --surface: #FFFFFF;
+    --surface: var(--bg-surface);
     --border: #E2DFD8;
     --text: #2C2825;
     --text-muted: #7A7570;
@@ -27,15 +27,15 @@
 
   body {
     font-family: var(--body-font);
-    background: var(--bg);
-    color: var(--text);
+    background: var(--bg-base);
+    color: var(--text-main);
     line-height: 1.65;
     font-size: 16px;
   }
 
   .page-header {
-    background: var(--accent);
-    color: white;
+    background: var(--primary-main);
+    color: var(--bg-surface);
     padding: 3rem 2rem 2.5rem;
     text-align: center;
     position: relative;
@@ -70,22 +70,22 @@
   main { max-width: 860px; margin: 0 auto 4rem; padding: 0 1.5rem; }
 
   .assignment-order {
-    background: var(--surface);
+    background: var(--bg-surface);
     border-radius: 12px;
     box-shadow: 0 1px 12px rgba(0,0,0,0.04);
     margin-bottom: 2rem;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-subtle);
     overflow: hidden;
   }
   .assignment-order header {
     padding: 1.4rem 1.75rem 0.9rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-subtle);
     background: var(--accent-light);
   }
   .assignment-order h2 {
     font-family: var(--heading-font);
     font-size: 1.35rem;
-    color: var(--accent);
+    color: var(--primary-main);
   }
   .assignment-order p {
     margin-top: 0.3rem;
@@ -100,7 +100,7 @@
     font-size: 0.95rem;
   }
   .assignment-order li strong {
-    color: var(--text);
+    color: var(--text-main);
   }
   .assignment-order li span {
     color: var(--text-muted);
@@ -109,17 +109,17 @@
   }
 
   .lab-section {
-    background: var(--surface);
+    background: var(--bg-surface);
     border-radius: 12px;
     box-shadow: 0 1px 12px rgba(0,0,0,0.04);
     margin-bottom: 2rem;
     overflow: hidden;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-subtle);
   }
 
   .lab-header {
     padding: 1.5rem 1.75rem 1rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-subtle);
     position: relative;
   }
   .lab-header::after {
@@ -127,13 +127,13 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 4px;
-    background: var(--accent);
+    background: var(--primary-main);
   }
   .lab-header h2 {
     font-family: var(--heading-font);
     font-size: 1.45rem;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--primary-main);
     letter-spacing: -0.01em;
   }
   .lab-header .activities-tag {
@@ -142,7 +142,7 @@
     font-size: 0.8rem;
     font-weight: 500;
     background: var(--accent-light);
-    color: var(--accent);
+    color: var(--primary-main);
     padding: 0.2rem 0.65rem;
     border-radius: 100px;
   }
@@ -162,7 +162,7 @@
     font-size: 1.05rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: var(--text);
+    color: var(--text-main);
     padding-bottom: 0.3rem;
     border-bottom: 2px solid var(--accent-light);
     display: inline-block;
@@ -182,7 +182,7 @@
     content: '›';
     position: absolute;
     left: 0;
-    color: var(--accent);
+    color: var(--primary-main);
     font-weight: 700;
     font-size: 1.1rem;
     line-height: 1.5;
@@ -199,8 +199,8 @@
 
   .submit-note {
     background: var(--accent-light);
-    border-left: 3px solid var(--accent);
-    color: var(--accent);
+    border-left: 3px solid var(--primary-main);
+    color: var(--primary-main);
     font-weight: 500;
   }
 
@@ -233,15 +233,15 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
     padding: 0.6rem 0.75rem;
-    background: var(--accent);
-    color: white;
+    background: var(--primary-main);
+    color: var(--bg-surface);
   }
   table.supplies th:first-child { border-radius: 6px 0 0 0; }
   table.supplies th:last-child { border-radius: 0 6px 0 0; }
 
   table.supplies td {
     padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-subtle);
     vertical-align: top;
   }
 
@@ -294,10 +294,10 @@
     padding: 2rem;
     color: var(--text-muted);
     font-size: 0.8rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-subtle);
   }
   footer a {
-    color: var(--accent);
+    color: var(--primary-main);
     font-weight: 600;
     text-decoration: none;
   }
@@ -317,8 +317,8 @@
   }
 
   .step-nav-inner {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     box-shadow: 0 1px 12px rgba(0,0,0,0.04);
     padding: 0.8rem 1rem;
@@ -329,9 +329,9 @@
   }
 
   .step-nav button {
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: #fff;
+    border: 1px solid var(--primary-main);
+    background: var(--primary-main);
+    color: var(--bg-surface);
     border-radius: 8px;
     padding: 0.45rem 0.9rem;
     font-weight: 600;
@@ -352,8 +352,8 @@
   #nextBtn { justify-self: end; }
 
   .step-nav button.home-btn {
-    background: var(--surface);
-    color: var(--accent);
+    background: var(--bg-surface);
+    color: var(--primary-main);
     justify-self: center;
     min-width: 14rem;
   }
@@ -389,7 +389,7 @@
   }
 
   .assignment-order ol li a {
-    color: var(--accent);
+    color: var(--primary-main);
     font-weight: 600;
     text-decoration: none;
   }
@@ -410,8 +410,8 @@
     .page-step {
       display: block !important;
     }
-    .lab-section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-    .page-header { background: var(--accent) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .lab-section { break-inside: avoid; box-shadow: none; border: 1px solid var(--border-subtle); }
+    .page-header { background: var(--primary-main) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
