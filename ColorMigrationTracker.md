@@ -6,6 +6,7 @@ Tracking document for Phase 1 execution based on Section 2 of `ColorPhase0Execut
 - Initial seeding rule: all entries start as `Not started`.
 - First target for migration execution: **Bucket A**.
 - **Reminder:** Bucket C high-risk files (C1) are **one-per-PR only**.
+- **Last reconciled:** `bb28136` on 2026-03-27 (UTC) to align tracker status with merged history through PR #181.
 
 ## Status key
 - **Migration status:** `Not started` → `In progress` → `Complete`
@@ -17,8 +18,8 @@ Tracking document for Phase 1 execution based on Section 2 of `ColorPhase0Execut
 
 | File | Bucket / sub-bucket | Migration status | PR number | Visual QA status (light/dark/print/forced-colors) | Notes on intentional literals |
 |---|---|---|---|---|---|
-| `styles.css` | A / Global system files | Not started | TBD | Not started / Not started / Not started / Not started | None recorded |
-| `theme.js` | A / Global system files | Not started | TBD | Not started / Not started / Not started / Not started | None recorded |
+| `styles.css` | A / Global system files | In progress | #173, #181 | Not started / Not started / Not started / Not started | Foundation token setup complete in #173; legacy alias routing and channel updates continued in #181. |
+| `theme.js` | A / Global system files | Not started | TBD | Not started / Not started / Not started / Not started | Untouched as of reconciliation at `bb28136` (2026-03-27 UTC). |
 
 ## Bucket B1 — Low-literal pages
 
