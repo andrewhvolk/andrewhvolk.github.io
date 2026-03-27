@@ -191,3 +191,8 @@ Phase 1 can start when all conditions below are true:
 2. Bucket table in Section 2 is approved.
 3. Token contract starter in Section 3 is approved.
 4. Exception seed list in Section 4 is approved.
+
+### Checkpoint (2026-03-27, UTC)
+> **Owner:** Andrew Volk  
+> **Ready-to-Start Criteria for Phase 1:** **Satisfied** (Sections 1–4 approved).  
+> **Execution active:** **PR 2/3 lane** (global shell migration + legacy alias redirection sequence).
