@@ -184,7 +184,7 @@
         .formula-title { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700; }
         .formula-math { font-size: clamp(0.98rem, 1.45vw, 1.18rem); color: var(--text-main); max-width: 100%; overflow: visible; }
         .formula-math .katex-display { margin: 0.35rem auto; max-width: 100%; overflow: visible; padding: 0; }
-        .formula-math .katex-display > .katex { var(--bg-surface)-space: normal; max-width: 100%; }
+        .formula-math .katex-display > .katex { white-space: normal; max-width: 100%; }
         .formula-math .katex { max-width: 100%; }
         body.review-page .katex { color: inherit; }
         .formula-math.dual-line .katex-display { margin: 0.2rem auto; }
@@ -384,7 +384,7 @@
             #tab-formulas .formula-card.wide { padding: 1.15rem 1rem; }
             .formula-card.wide { grid-column: auto; }
             .svg-canvas { width: 100% !important; height: auto !important; }
-            .history-table { display: block; overflow-x: auto; var(--bg-surface)-space: nowrap; }
+            .history-table { display: block; overflow-x: auto; white-space: nowrap; }
         }
     
 
@@ -1549,10 +1549,16 @@
     };
 
     function showTab(tabName, options = {}) {
-        // Long-page mode: scroll to section instead of toggling
+        const { scroll = true, behavior = 'smooth' } = options;
         const targetPanel = document.getElementById('tab-' + tabName);
         if (!targetPanel) return;
-        targetPanel.scrollIntoView({behavior:'smooth', block:'start'});
+
+        document.querySelectorAll('.tab-content').forEach(panel => panel.classList.remove('active'));
+        targetPanel.classList.add('active');
+
+        if (scroll) {
+            targetPanel.scrollIntoView({ behavior, block: 'start' });
+        }
     }
 
     function loadState() {
@@ -1867,7 +1873,7 @@
                     <line x1="20" y1="80" x2="200" y2="80" stroke="var(--text-main)" stroke-width="1.5"/>
                     <line x1="110" y1="15" x2="110" y2="145" stroke="var(--text-main)" stroke-width="1.5"/>
                     <line x1="20" y1="${80 - shift * 12}" x2="200" y2="${80 - shift * 12}" stroke="var(--primary-main)" stroke-dasharray="5,5" stroke-width="2"/>
-                    <path d="M35 ${80 - (coeff * Math.pow(base, -2) + shift) * 12} C 75 ${80 - (coeff * Math.pow(base, -1) + shift) * 12}, 105 ${80 - (coeff + shift) * 12}, 180 ${80 - (coeff * Math.pow(base, 1.3) + shift) * 12}" fill="none" stroke="var(--success)" stroke-width="2.5"/>
+                    <path d="M35 ${80 - (coeff * Math.pow(base, -2) + shift) * 12} C 75 ${80 - (coeff * Math.pow(base, -1) + shift) * 12}, 105 ${80 - (coeff + shift) * 12}, 180 ${80 - (coeff * Math.pow(base, 1.3) + shift) * 12}" fill="none" stroke="var(--emerald-main)" stroke-width="2.5"/>
                     <text x="196" y="75" fill="var(--text-main)" font-size="11">x</text>
                     <text x="114" y="20" fill="var(--text-main)" font-size="11">y</text>
                     <text x="28" y="${76 - shift * 12}" fill="var(--primary-main)" font-size="11">y = ?</text>
@@ -1938,7 +1944,7 @@
                     <circle cx="110" cy="80" r="55" fill="none" stroke="var(--text-main)" stroke-width="1.5"/>
                     <line x1="25" y1="80" x2="195" y2="80" stroke="var(--text-main)" stroke-width="1.5"/>
                     <line x1="110" y1="20" x2="110" y2="140" stroke="var(--text-main)" stroke-width="1.5"/>
-                    <line x1="110" y1="80" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--success)" stroke-width="2.5"/>
+                    <line x1="110" y1="80" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--emerald-main)" stroke-width="2.5"/>
                     <path d="M150,80 A40,40 0 0,0 ${110 + 40 * Math.cos(theta)},${80 - 40 * Math.sin(theta)}" fill="none" stroke="var(--primary-main)" stroke-width="2"/>
                     <text x="154" y="75" fill="var(--primary-main)" font-size="11">θ</text>
                 </svg>`;
@@ -3020,11 +3026,29 @@
             if (tab) showTab(tab);
         });
 
-        // Scroll to hash section on load
+        showTab('slides', { scroll: false });
+
+        // Resolve hash-based deep links to the correct tab panel on load
         const initialHash = window.location.hash ? window.location.hash.replace('#', '') : null;
         if (initialHash) {
-            const target = document.getElementById('tab-' + initialHash) || document.getElementById(initialHash);
-            if (target) setTimeout(() => target.scrollIntoView({behavior:'smooth', block:'start'}), 300);
+            const directTab = document.getElementById('tab-' + initialHash)
+                ? initialHash
+                : (initialHash.startsWith('tab-') && document.getElementById(initialHash)
+                    ? initialHash.replace('tab-', '')
+                    : null);
+
+            if (directTab) {
+                showTab(directTab, { scroll: true });
+            } else {
+                const target = document.getElementById(initialHash);
+                if (target) {
+                    const parentTab = target.closest('.tab-content');
+                    if (parentTab && parentTab.id.startsWith('tab-')) {
+                        showTab(parentTab.id.replace('tab-', ''), { scroll: false });
+                    }
+                    setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+                }
+            }
         }
 
         document.getElementById('btn-submit').addEventListener('click', checkAnswer);
