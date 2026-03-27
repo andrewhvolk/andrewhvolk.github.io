@@ -4,6 +4,7 @@
 This document operationalizes Phase 0 from `ColorImplementationPlan.md` for this repository so implementation can start with clear scope boundaries, migration policy, and PR controls.
 
 ## Baseline Snapshot (2026-03-26)
+- **Policy approval stamp:** **Approved on 2026-03-27 (UTC)** for Section 1 Phase-0 policy locks.
 - Files scanned in color inventory: **65**
 - Unique literal colors: **332**
 - Unique referenced color tokens (`var(--*)`): **160**
@@ -17,14 +18,14 @@ Source of truth: `colors.md` (generated 2026-03-26 17:20 UTC).
 
 These are the required decision gates from the implementation plan, pre-filled with recommended defaults.
 
-| Decision | Proposed default | Status | Owner |
+| Decision | Final policy value | Status | Owner |
 |---|---|---|---|
-| Dark selector standard | `:root[data-theme="dark"]` during migration; normalize later if needed | Proposed | Site maintainer |
-| Compatibility alias lifecycle | Keep for one full release cycle after Bucket C migration completes | Proposed | Site maintainer |
-| Accessibility bar | WCAG AA minimum globally; AAA target for text-heavy educational content where practical | Proposed | Site maintainer |
-| PR size cap | Max 8 files for global-shell PRs; max 3 files for standalone PRs | Proposed | Site maintainer |
-| Visual QA sign-off | 1 implementation reviewer + 1 visual QA reviewer for each Bucket C PR | Proposed | Site maintainer |
-| Screenshot diff policy | Required for every Bucket C page migration | Proposed | Site maintainer |
+| Dark selector standard | `:root[data-theme="dark"]` is the migration standard; normalize later only by explicit follow-up decision | Approved | Andrew Volk |
+| Compatibility alias lifecycle | Compatibility aliases remain for one full release cycle after Bucket C migration completes | Approved | Andrew Volk |
+| Accessibility bar | WCAG AA is the minimum target globally; AAA is required where practical for text-heavy educational content | Approved | Andrew Volk |
+| PR size cap | Max 8 files for global-shell PRs; max 3 files for standalone page PRs | Approved | Andrew Volk |
+| Mandatory reviewer model | Every Bucket C PR requires 1 implementation reviewer + 1 visual QA reviewer before merge | Approved | Andrew Volk |
+| Screenshot policy | Screenshot diffs are mandatory for every Bucket C page migration (light/dark and relevant states) | Approved | Andrew Volk |
 
 ---
 
@@ -190,4 +191,3 @@ Phase 1 can start when all conditions below are true:
 2. Bucket table in Section 2 is approved.
 3. Token contract starter in Section 3 is approved.
 4. Exception seed list in Section 4 is approved.
-
