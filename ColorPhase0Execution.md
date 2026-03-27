@@ -178,6 +178,7 @@ These color literals are expected to remain page-local unless later explicitly a
 - Confirm no unapproved new literal status colors.
 - Confirm print and forced-colors support still present where applicable.
 - For Bucket C PRs: include side-by-side screenshot diffs.
+- Archive all required check outputs in `ColorMigrationQALog.md` (or linked PR checklist entry) for repeatable auditability.
 
 ---
 

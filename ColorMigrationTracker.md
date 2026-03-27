@@ -6,6 +6,7 @@ Tracking document for Phase 1 execution based on Section 2 of `ColorPhase0Execut
 - Initial seeding rule: all entries start as `Not started`.
 - First target for migration execution: **Bucket A**.
 - **Reminder:** Bucket C high-risk files (C1) are **one-per-PR only**.
+- **Per-PR evidence archive:** Record required migration QA artifacts in `ColorMigrationQALog.md` for every color migration PR.
 - **Last reconciled:** `44b4ed0` on 2026-03-27 (UTC) to align tracker status with merged history through PR #182.
 
 ## Status key
