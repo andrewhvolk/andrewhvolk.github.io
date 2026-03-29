@@ -13,9 +13,51 @@
 <!-- Page-specific external CSS: Google Fonts requested by this page's typography design. -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!-- Page-specific external CSS: KaTeX styles are required for math formula rendering. -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link id="katex-css-cdn" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer id="katex-js-cdn" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer id="katex-autorender-cdn" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+(function () {
+    const localKatexAssets = {
+        css: 'assets/vendor/katex/dist/katex.min.css',
+        js: 'assets/vendor/katex/dist/katex.min.js',
+        autoRender: 'assets/vendor/katex/dist/contrib/auto-render.min.js'
+    };
+
+    function loadLocalCss() {
+        if (document.getElementById('katex-css-local')) return;
+        const localCss = document.createElement('link');
+        localCss.id = 'katex-css-local';
+        localCss.rel = 'stylesheet';
+        localCss.href = localKatexAssets.css;
+        document.head.appendChild(localCss);
+    }
+
+    function loadLocalScript(id, src) {
+        if (document.getElementById(id)) return;
+        const script = document.createElement('script');
+        script.id = id;
+        script.defer = true;
+        script.src = src;
+        document.head.appendChild(script);
+    }
+
+    window.loadLocalKatexAssets = function () {
+        loadLocalCss();
+        loadLocalScript('katex-js-local', localKatexAssets.js);
+        loadLocalScript('katex-autorender-local', localKatexAssets.autoRender);
+    };
+
+    window.addEventListener('DOMContentLoaded', function () {
+        const cssCdn = document.getElementById('katex-css-cdn');
+        const jsCdn = document.getElementById('katex-js-cdn');
+        const autoCdn = document.getElementById('katex-autorender-cdn');
+        if (cssCdn) cssCdn.addEventListener('error', window.loadLocalKatexAssets);
+        if (jsCdn) jsCdn.addEventListener('error', window.loadLocalKatexAssets);
+        if (autoCdn) autoCdn.addEventListener('error', window.loadLocalKatexAssets);
+    });
+})();
+</script>
 <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
 
 <style>
@@ -315,6 +357,18 @@
     }
 
     .math-review-page .katex-display { margin: 0.15rem 0; }
+    .math-noscript,
+    .math-runtime-warning {
+        margin: 0.9rem 0 1rem;
+        padding: 0.75rem 0.9rem;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+    }
+    .math-noscript { color: var(--text-muted); border-left: 4px solid var(--text-muted); }
+    .math-runtime-warning { color: var(--danger-main); border-left: 4px solid var(--danger-main); }
 
     @media (max-width: 920px) {
         .math-review-page .intro-note,
@@ -589,6 +643,8 @@
         <div class="card review-card">
             <div class="eyebrow"><i data-lucide="sigma"></i> Formula focus</div>
             <h2>Provided on the Final Exam</h2>
+            <noscript><div class="math-noscript">JavaScript is required to render the math formulas on this page.</div></noscript>
+            <div aria-live="polite" class="math-runtime-warning" hidden="" id="math-runtime-warning"></div>
             <p class="muted" style="margin-bottom:1rem;">These formulas are printed on the exam. They still require recognition and correct setup.</p>
 
             <div class="formula-grid">
@@ -830,6 +886,13 @@ document.addEventListener('DOMContentLoaded', function () {
     })();
 
     let _mathRetryTimer = null;
+    function showMathRuntimeWarning(message) {
+        const warning = document.getElementById('math-runtime-warning');
+        if (!warning) return;
+        warning.hidden = false;
+        warning.textContent = message;
+    }
+
     function renderMath(retries) {
         if (retries === undefined) retries = 12;
         if (window.renderMathInElement) {
@@ -837,14 +900,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ],
                 throwOnError: false
             });
-            return;
+            return true;
         }
         if (retries > 0) {
             clearTimeout(_mathRetryTimer);
             _mathRetryTimer = setTimeout(function(){ renderMath(retries - 1); }, 150);
+            return false;
         }
+        showMathRuntimeWarning('Math rendering is unavailable right now. Please refresh or check network/content-blocking settings.');
+        return false;
     }
-    renderMath();
+
+    if (!window.katex || !window.renderMathInElement) {
+        if (window.loadLocalKatexAssets) window.loadLocalKatexAssets();
+        setTimeout(function () {
+            if (!window.katex || !window.renderMathInElement) {
+                showMathRuntimeWarning('Math rendering is unavailable right now. CDN and local KaTeX fallback both failed to initialize.');
+            }
+            renderMath();
+        }, 250);
+    } else {
+        renderMath();
+    }
 });
 </script>
 </div>
