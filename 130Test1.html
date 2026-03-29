@@ -8,9 +8,47 @@
 <title>Math 130 – Test 1 Study Guide</title>
 <!-- Page-specific external CSS: Google Fonts requested by this page's typography design. -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script id="katex-js-cdn" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <!-- Page-specific external CSS: KaTeX styles are required for math formula rendering. -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link id="katex-css-cdn" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script>
+(function () {
+  const localKatexAssets = {
+    css: 'assets/vendor/katex/dist/katex.min.css',
+    js: 'assets/vendor/katex/dist/katex.min.js'
+  };
+
+  function loadLocalCss() {
+    if (document.getElementById('katex-css-local')) return;
+    const localCss = document.createElement('link');
+    localCss.id = 'katex-css-local';
+    localCss.rel = 'stylesheet';
+    localCss.href = localKatexAssets.css;
+    document.head.appendChild(localCss);
+  }
+
+  function loadLocalScript() {
+    if (document.getElementById('katex-js-local')) return;
+    const script = document.createElement('script');
+    script.id = 'katex-js-local';
+    script.defer = true;
+    script.src = localKatexAssets.js;
+    document.head.appendChild(script);
+  }
+
+  window.loadLocalKatexAssets = function () {
+    loadLocalCss();
+    loadLocalScript();
+  };
+
+  window.addEventListener('DOMContentLoaded', function () {
+    const cssCdn = document.getElementById('katex-css-cdn');
+    const jsCdn = document.getElementById('katex-js-cdn');
+    if (cssCdn) cssCdn.addEventListener('error', window.loadLocalKatexAssets);
+    if (jsCdn) jsCdn.addEventListener('error', window.loadLocalKatexAssets);
+  });
+})();
+</script>
 <style>
   /* Page-specific styles only; shared Math 130 review tokens/components live in styles.css. */
 
@@ -175,6 +213,17 @@
 
   .katex { font-size: 1.05em; }
   .formula-box .katex { font-size: 1.1em; }
+  .math-noscript, .math-runtime-warning {
+    margin: 0.8rem 0 1rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+  }
+  .math-noscript { color: var(--text-muted); border-left: 4px solid var(--text-muted); }
+  .math-runtime-warning { color: var(--danger-main); border-left: 4px solid var(--danger-main); }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg-base); }
   ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
@@ -367,6 +416,8 @@
 
   <!-- FORMULAS -->
   <div id="tab-formulas" class="tab-content">
+    <noscript><div class="math-noscript">JavaScript is required to render the math formulas on this page.</div></noscript>
+    <div id="math-runtime-warning" class="math-runtime-warning" aria-live="polite" hidden=""></div>
     <button class="print-btn" onclick="window.print()">🖨️ Print Formula Sheet</button>
 
     <div class="formula-section review-formula-section"><h3>📐 Core Algebra</h3><div class="formula-grid">
@@ -717,7 +768,11 @@ function doReset(){
   renderProgress();
 }
 
-initCL();renderMath();
+initCL();
+if(!window.katex){
+  if(window.loadLocalKatexAssets)window.loadLocalKatexAssets();
+  setTimeout(()=>{if(!window.katex)showMathRuntimeWarning('Math rendering is unavailable right now. CDN and local KaTeX fallback both failed to initialize.');renderMath();},250);
+}else{renderMath();}
 </script>
 </div>
 </body>
