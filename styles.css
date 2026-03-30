@@ -65,10 +65,18 @@
   --bg-body: var(--bg-base);
   --bg-subtle: var(--bg-base);
   --bg-inverse: var(--primary);
+  --card-surface: var(--bg-surface);
+  --card-surface-alt: var(--bg-base);
+  --panel-surface: var(--bg-base);
+  --table-header-surface: var(--bg-base);
+  --table-row-alt-surface: var(--bg-base);
+  --footer-surface: var(--bg-base);
   --text-heading: var(--primary);
   --text-body: var(--on-surface);
   --text-muted: #64748b;
   --text-on-primary: var(--on-primary);
+  --text-link: var(--primary-main);
+  --text-link-hover: var(--primary-hover);
   --primary-base: var(--bg-surface);
   --primary-hover: color-mix(in srgb, var(--bg-surface) 82%, var(--primary-main) 18%);
   --primary-surface: color-mix(in srgb, var(--bg-surface) 10%, var(--bg-surface));
@@ -91,6 +99,23 @@
   --status-info: var(--primary-main);
   --status-info-bg: var(--primary-soft);
   --status-info-border: color-mix(in srgb, var(--primary-main) 32%, transparent);
+  --callout-info-surface: var(--status-info-bg);
+  --callout-info-border: var(--status-info-border);
+  --callout-success-surface: var(--status-success-bg);
+  --callout-success-border: var(--status-success-border);
+  --callout-danger-surface: var(--status-error-bg);
+  --callout-danger-border: var(--status-error-border);
+  --diagram-line: var(--text-main);
+  --diagram-label: var(--text-main);
+  --diagram-accent: var(--primary-main);
+  --excel-accent: var(--emerald-main);
+  --nav-surface: linear-gradient(180deg, var(--nav-surface-start), var(--nav-surface-end));
+  --nav-text: var(--text-main);
+  --nav-text-hover: var(--primary-hover);
+  --nav-text-current: var(--text-main);
+  --nav-border: var(--border-transparent);
+  --nav-dropdown-surface: var(--glass-surface);
+  --nav-dropdown-text: var(--text-main);
   --emerald-soft: color-mix(in srgb, var(--emerald-main) 12%, transparent);
   --danger-soft: color-mix(in srgb, var(--danger-main) 12%, transparent);
   --primary-soft: color-mix(in srgb, var(--primary-main) 12%, transparent);
@@ -1814,6 +1839,12 @@ main.error-main {
 /* Dark Theme Variables applied via JS */
 :root[data-theme="dark"] {
   color-scheme: dark;
+  --bg-base: #111614;
+  --bg-surface: #1f2724;
+  --bg-subtle: #18201d;
+  --text-main: #f2f5f2;
+  --text-body: #f2f5f2;
+  --text-muted: #bac4bf;
   --surface: #111614;
   --surface-container-low: #18201d;
   --surface-container-lowest: #1f2724;
@@ -1830,17 +1861,13 @@ main.error-main {
   --surface-tint: #8bb1a8;
   --on-surface: #f2f5f2;
   --on-surface-variant: #bac4bf;
-  --bg-body: var(--bg-surface);
-  --bg-surface: var(--bg-base);
-  --bg-subtle: var(--bg-base);
+  --bg-body: var(--bg-base);
   --bg-inverse: #f8faf7;
-  --text-heading: var(--bg-surface);
-  --text-body: var(--on-surface);
-  --text-muted: var(--on-surface-variant);
+  --text-heading: var(--text-main);
   --text-on-primary: #f8faf7;
   --primary-base: var(--bg-surface);
-  --primary-hover: color-mix(in srgb, var(--bg-surface) 84%, var(--bg-surface) 16%);
-  --primary-surface: color-mix(in srgb, var(--bg-surface) 22%, var(--bg-surface));
+  --primary-hover: color-mix(in srgb, var(--primary-main) 65%, var(--bg-surface) 35%);
+  --primary-surface: color-mix(in srgb, var(--primary-main) 18%, var(--bg-surface));
   --primary-text: var(--text-on-primary);
   --border-subtle: color-mix(in srgb, var(--outline-variant) 52%, transparent);
   --border-base: var(--border-subtle);
@@ -1859,6 +1886,22 @@ main.error-main {
   --status-info: #7ea8ff;
   --status-info-bg: rgba(126, 168, 255, 0.2);
   --status-info-border: rgba(126, 168, 255, 0.4);
+  --card-surface: #1f2724;
+  --card-surface-alt: #18201d;
+  --panel-surface: #18201d;
+  --table-header-surface: #202825;
+  --table-row-alt-surface: #18201d;
+  --footer-surface: #18201d;
+  --callout-info-surface: rgba(126, 168, 255, 0.16);
+  --callout-info-border: rgba(126, 168, 255, 0.38);
+  --callout-success-surface: rgba(52, 211, 153, 0.18);
+  --callout-success-border: rgba(52, 211, 153, 0.38);
+  --callout-danger-surface: rgba(248, 113, 113, 0.18);
+  --callout-danger-border: rgba(248, 113, 113, 0.42);
+  --diagram-line: var(--text-main);
+  --diagram-label: var(--text-body);
+  --diagram-accent: #7ea8ff;
+  --excel-accent: #34d399;
   --primary-color: var(--primary-main);
   --secondary-color: var(--text-main);
   --accent-color: var(--primary-main);
@@ -1882,6 +1925,13 @@ main.error-main {
   --nav-mobile-panel-start: rgba(31, 39, 36, 0.96);
   --nav-mobile-panel-end: rgba(24, 32, 29, 0.92);
   --nav-mobile-menu-surface: rgba(24, 32, 29, 0.98);
+  --nav-surface: linear-gradient(180deg, var(--nav-surface-start), var(--nav-surface-end));
+  --nav-text: #f2f5f2;
+  --nav-text-hover: #c8d9ff;
+  --nav-text-current: #f8faf7;
+  --nav-border: color-mix(in srgb, var(--outline-variant) 42%, transparent);
+  --nav-dropdown-surface: rgba(24, 32, 29, 0.98);
+  --nav-dropdown-text: #f2f5f2;
   --gradient-library-glow: radial-gradient(
       circle at top left,
       rgba(126, 168, 255, 0.12),
@@ -2188,12 +2238,11 @@ main.error-main {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background:
-    linear-gradient(180deg, var(--nav-surface-start), var(--nav-surface-end));
+  background: var(--nav-surface);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: none;
-  box-shadow: inset 0 -1px 0 var(--border-transparent);
+  box-shadow: inset 0 -1px 0 var(--nav-border);
 }
 
 .top-nav-inner {
@@ -2215,18 +2264,18 @@ main.error-main {
 }
 
 .top-nav-title {
-  color: var(--text-main);
+  color: var(--nav-text);
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.2;
   letter-spacing: 0.01em;
   text-decoration: none;
-  var(--bg-surface)-space: nowrap;
+  white-space: nowrap;
 }
 
 .top-nav-title:hover,
 .top-nav-title:focus-visible {
-  color: var(--primary-main);
+  color: var(--nav-text-hover);
 }
 
 .top-nav-links,
@@ -2265,7 +2314,7 @@ main.error-main {
 .top-nav-utilities .dropdown-menu a,
 .top-nav-links .dropdown-menu a {
   display: block;
-  color: var(--text-main);
+  color: var(--nav-text);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
@@ -2289,7 +2338,7 @@ main.error-main {
 .top-nav-links .dropdown-menu a:focus-visible,
 .top-nav-utilities .dropdown-menu a:hover,
 .top-nav-utilities .dropdown-menu a:focus-visible {
-  color: var(--primary-hover);
+  color: var(--nav-text-hover);
   background: var(--primary-surface);
   text-decoration-line: underline;
   text-decoration-thickness: 0.1em;
@@ -2318,7 +2367,7 @@ main.error-main {
 .top-nav-links button[aria-current="page"],
 .top-nav-utilities a[aria-current="page"],
 .top-nav-utilities button[aria-current="page"] {
-  color: var(--text-main);
+  color: var(--nav-text-current);
   background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 88%, transparent), var(--surface-transparent));
   box-shadow: inset 0 0 0 999px var(--surface-transparent);
 }
@@ -2331,7 +2380,7 @@ main.error-main {
 .top-nav-utilities a[aria-current="page"]:focus-visible,
 .top-nav-utilities button[aria-current="page"]:hover,
 .top-nav-utilities button[aria-current="page"]:focus-visible {
-  color: var(--text-main);
+  color: var(--nav-text-current);
   background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 96%, transparent), var(--surface-transparent));
 }
 
@@ -2407,9 +2456,9 @@ main.error-main {
   margin: 0;
   padding: 0.4rem;
   list-style: none;
-  background: var(--glass-surface);
+  background: var(--nav-dropdown-surface);
   border-radius: 0.75rem;
-  box-shadow: inset 0 0 0 1px var(--border-transparent);
+  box-shadow: inset 0 0 0 1px var(--nav-border);
 }
 
 .top-nav-links .dropdown:hover .dropdown-menu,
@@ -2434,7 +2483,7 @@ main.error-main {
 
 .top-nav-utilities > li > a,
 .top-nav-utilities > li > button {
-  color: var(--text-muted);
+  color: var(--nav-text);
   font-size: 0.9rem;
 }
 
