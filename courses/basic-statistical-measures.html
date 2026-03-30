@@ -8,6 +8,29 @@
 
   <!-- Unified & Simplified Styles -->
   <style>
+    :root {
+      --stats-page-bg: var(--bg-base);
+      --stats-shell-surface: var(--bg-surface);
+      --stats-header-surface: var(--text-main);
+      --stats-header-text: var(--bg-surface);
+      --stats-section-border: var(--border-subtle);
+      --stats-card-surface: var(--card-surface);
+      --stats-card-shadow: 0 2px 5px color-mix(in srgb, var(--text-main) 5%, transparent);
+      --stats-dataset-surface: var(--panel-surface);
+      --stats-formula-surface: var(--callout-info-surface);
+      --stats-example-surface: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface));
+      --stats-interpretation-surface: var(--callout-info-surface);
+      --stats-footer-surface: var(--footer-surface);
+      --stats-excel-accent: var(--excel-accent);
+      --stats-diagram-line: var(--diagram-line);
+      --stats-diagram-label: var(--diagram-label);
+      --stats-table-header-surface: var(--table-header-surface);
+      --stats-table-row-alt-surface: var(--table-row-alt-surface);
+      --stats-pros-surface: var(--callout-success-surface);
+      --stats-cons-surface: var(--callout-danger-surface);
+      --stats-stddev-accent: var(--emerald-main);
+    }
+
     /* Overall reset and font */
     * {
       box-sizing: border-box;
@@ -15,8 +38,8 @@
       padding: 0;
     }
     body {
-      background-color: #f5f7fa;
-      color: var(--text-main);
+      background-color: var(--stats-page-bg);
+      color: var(--text-body);
       margin: 0;
     }
 
@@ -28,7 +51,7 @@
     .infographic {
       max-width: 900px;
       margin: 0 auto;
-      background-color: var(--bg-surface);
+      background-color: var(--stats-shell-surface);
       border-radius: 10px;
       box-shadow: 0 5px 15px var(--border-subtle);
       overflow: hidden;
@@ -36,8 +59,8 @@
 
     /* Header */
     .header {
-      background-color: var(--text-main);
-      color: var(--bg-surface);
+      background-color: var(--stats-header-surface);
+      color: var(--stats-header-text);
       padding: 20px;
       text-align: center;
     }
@@ -53,7 +76,7 @@
     /* Section Layout */
     .section {
       padding: 25px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid var(--stats-section-border);
     }
     .section:last-child {
       border-bottom: none;
@@ -68,7 +91,7 @@
 
     /* Dataset Info Boxes */
     .dataset {
-      background-color: var(--bg-base);
+      background-color: var(--stats-dataset-surface);
       padding: 10px;
       border-radius: 5px;
       text-align: center;
@@ -83,11 +106,11 @@
 
     /* Measure Cards */
     .measure-card {
-      background-color: var(--bg-base);
+      background-color: var(--stats-card-surface);
       border-radius: 8px;
       padding: 15px;
       border-top: 4px solid;
-      box-shadow: 0 2px 5px color-mix(in srgb, var(--text-main) 5%, transparent);
+      box-shadow: var(--stats-card-shadow);
       margin-bottom: 15px;
     }
     .mean      { border-top-color: var(--danger-main); }
@@ -95,7 +118,7 @@
     .mode      { border-top-color: var(--emerald-main); }
     .range     { border-top-color: var(--warning-main); }
     .variance  { border-top-color: var(--primary-main); }
-    .std-dev   { border-top-color: #1abc9c; }
+    .std-dev   { border-top-color: var(--stats-stddev-accent); }
     .iqr       { border-top-color: var(--warning-main); }
     .quartiles { border-top-color: var(--warning-main); }
     .five-num  { border-top-color: var(--primary-main); }
@@ -121,7 +144,7 @@
       font-size: 16px;
     }
     .excel-formula {
-      background-color: #eaf2f8;
+      background-color: var(--stats-formula-surface);
       padding: 8px 12px;
       border-radius: 6px;
       font-family: var(--type-meta-family);
@@ -146,11 +169,11 @@
       border-radius: 4px;
     }
     .pros {
-      background-color: rgba(46, 204, 113, 0.1);
+      background-color: var(--stats-pros-surface);
       border-left: 3px solid var(--emerald-main);
     }
     .cons {
-      background-color: rgba(231, 76, 60, 0.1);
+      background-color: var(--stats-cons-surface);
       border-left: 3px solid var(--danger-main);
     }
     .pros h4, .cons h4 {
@@ -160,7 +183,7 @@
 
     /* Example Boxes */
     .example {
-      background-color: #f0f7ff;
+      background-color: var(--stats-example-surface);
       padding: 12px;
       border-radius: 6px;
       margin-top: 15px;
@@ -208,7 +231,7 @@
       display: inline-block;
       width: 16px;
       height: 16px;
-      background-color: #2b7338;
+      background-color: var(--stats-excel-accent);
       border-radius: 3px;
       position: relative;
       top: 3px;
@@ -225,7 +248,7 @@
       font-weight: bold;
     }
     .excel-heading {
-      color: #2b7338;
+      color: var(--stats-excel-accent);
       font-weight: bold;
       margin-top: 15px;
       font-size: 15px;
@@ -249,7 +272,7 @@
       left: 50px;
       width: 400px;
       height: 2px;
-      background-color: var(--text-main);
+      background-color: var(--stats-diagram-line);
     }
     .boxplot-box {
       position: absolute;
@@ -258,7 +281,7 @@
       width: 200px;
       height: 60px;
       border: 2px solid var(--primary-main);
-      background-color: rgba(52, 152, 219, 0.2);
+      background-color: color-mix(in srgb, var(--primary-main) 20%, transparent);
     }
     .boxplot-median {
       position: absolute;
@@ -274,7 +297,7 @@
       left: 80px;
       width: 70px;
       height: 2px;
-      background-color: var(--text-main);
+      background-color: var(--stats-diagram-line);
     }
     .boxplot-whisker-right {
       position: absolute;
@@ -282,7 +305,7 @@
       left: 350px;
       width: 70px;
       height: 2px;
-      background-color: var(--text-main);
+      background-color: var(--stats-diagram-line);
     }
     .boxplot-cap-left {
       position: absolute;
@@ -290,7 +313,7 @@
       left: 80px;
       width: 2px;
       height: 20px;
-      background-color: var(--text-main);
+      background-color: var(--stats-diagram-line);
     }
     .boxplot-cap-right {
       position: absolute;
@@ -298,7 +321,7 @@
       left: 420px;
       width: 2px;
       height: 20px;
-      background-color: var(--text-main);
+      background-color: var(--stats-diagram-line);
     }
     .boxplot-outlier {
       position: absolute;
@@ -313,7 +336,7 @@
     .boxplot-label {
       position: absolute;
       font-size: 12px;
-      color: var(--text-main);
+      color: var(--stats-diagram-label);
     }
     .label-min {
       top: 75px;
@@ -385,16 +408,16 @@
       border: 1px solid var(--border-subtle);
     }
     th {
-      background-color: var(--bg-base);
+      background-color: var(--stats-table-header-surface);
       font-weight: bold;
     }
     tr:nth-child(even) {
-      background-color: var(--bg-base);
+      background-color: var(--stats-table-row-alt-surface);
     }
 
     .interpretation {
       margin: 15px 0;
-      background-color: #eaf7fd;
+      background-color: var(--stats-interpretation-surface);
       padding: 12px;
       border-radius: 6px;
       border-left: 3px solid var(--primary-main);
@@ -407,7 +430,7 @@
 
     /* Footer */
     .footer {
-      background-color: #ecf0f1;
+      background-color: var(--stats-footer-surface);
       padding: 15px;
       text-align: center;
       font-size: 14px;
