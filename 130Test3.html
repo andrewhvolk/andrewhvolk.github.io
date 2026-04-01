@@ -1242,7 +1242,7 @@
 </div>
 </div>
 <!-- Exam Progress Bar (hidden until active) -->
-<div id="exam-progress-bar" class="u-hidden u-mb-lg">
+<div id="exam-progress-bar" class="u-mb-lg" style="display:none;">
 <div class="u-flex-between-center u-mb-xs">
 <span id="exam-mode-label" class="u-text-accent-strong">Mock Exam</span>
 <span id="exam-progress-label" class="u-meta-muted-sm">1 / 15</span>
@@ -1252,7 +1252,7 @@
 </div>
 </div>
 <!-- Exam Results (hidden until complete) -->
-<div class="card review-card section-lead--results u-hidden" id="exam-results">
+<div class="card review-card section-lead--results" id="exam-results" style="display:none;">
 <h2>📊 Exam Results</h2>
 <div id="exam-score-display" class="review-results-score"></div>
 <div id="exam-breakdown" class="u-mt-md"></div>
@@ -1261,17 +1261,17 @@
 </div>
 </div>
 <div class="quiz-selector" id="quiz-categories"></div>
-<div class="quiz-box quiz-box--active-shell u-hidden" id="quiz-active-area">
+<div class="quiz-box quiz-box--active-shell" id="quiz-active-area" style="display:none;">
 <div id="svg-display"></div>
 <div class="question-text" id="question-display"></div>
-<div class="question-note" id="question-note" class="u-hidden"></div>
+<div class="question-note" id="question-note" style="display:none;"></div>
 <div class="input-group" id="dynamic-inputs">
 <!-- Inputs injected here based on type -->
 </div>
 <div class="u-flex-align-center-wrap u-gap-sm">
 <button class="btn-primary" id="btn-submit">Check Answer</button>
-<button class="btn-secondary u-hidden" id="btn-next">Next Question</button>
-<button id="btn-exit-exam" onclick="confirmExitExam()" class="btn-ghost-muted u-hidden u-ml-auto">✕ Exit</button>
+<button class="btn-secondary" id="btn-next" style="display:none;">Next Question</button>
+<button id="btn-exit-exam" onclick="confirmExitExam()" class="btn-ghost-muted u-ml-auto" style="display:none;">✕ Exit</button>
 </div>
 <div class="feedback" id="feedback-display"></div>
 </div>
