@@ -2578,6 +2578,7 @@
         renderHistory();
         highlightScheduleDates();
         initVideoTracking();
+        runStartupLaunchValidator();
         // Wait briefly for elements to be injected, then render math
         setTimeout(renderMath, 100);
 
@@ -2802,6 +2803,72 @@
         const missing = checklistPracticeIds.filter(id => !generatorIds.has(id));
 
         coverageEl.textContent = `Checklist coverage audit: ${covered.length}/${checklistPracticeIds.length} checklist-linked topics have matching practice generators${missing.length ? `. Missing: ${missing.join(', ')}` : ' (full coverage).'}`;
+    }
+
+    function disableBrokenLaunchControl(el) {
+        if (!el) return;
+        if (el.matches('button, a')) el.disabled = true;
+        el.setAttribute('aria-disabled', 'true');
+        el.style.pointerEvents = 'none';
+        el.style.opacity = '0.45';
+        el.title = `${el.title ? `${el.title} — ` : ''}Practice unavailable: missing generator`;
+    }
+
+    function collectHardcodedLaunchIds() {
+        const controls = document.querySelectorAll('[onclick*="goToPractice("]');
+        const ids = [];
+        const pattern = /goToPractice\(\s*['"`]([^'"`]+)['"`]/;
+
+        controls.forEach(control => {
+            const onclickValue = control.getAttribute('onclick') || '';
+            const match = onclickValue.match(pattern);
+            if (match && match[1]) ids.push(match[1]);
+        });
+
+        return ids;
+    }
+
+    function runStartupLaunchValidator() {
+        const coverageEl = document.getElementById('coverage-audit');
+        const generatorIds = new Set(generators.map(g => g.id));
+        const checklistIds = [...new Set(state.checklist.map(item => item.practiceId).filter(Boolean))];
+        const videoIds = [...new Set(
+            [...document.querySelectorAll('.video-link[data-practice-id]')]
+                .map(link => link.dataset.practiceId)
+                .filter(Boolean)
+        )];
+        const hardcodedLaunchIds = [...new Set(collectHardcodedLaunchIds())];
+        const launchSourceIds = [...new Set([...checklistIds, ...videoIds, ...hardcodedLaunchIds])];
+        const missingIds = launchSourceIds.filter(id => !generatorIds.has(id));
+
+        if (missingIds.length > 0) {
+            if (coverageEl) {
+                coverageEl.classList.remove('u-hidden');
+                coverageEl.textContent = `⚠️ Launch coverage warning: ${missingIds.length} missing generator id(s): ${missingIds.join(', ')}.`;
+            }
+
+            console.warn('Launch coverage validator found missing generator IDs.', {
+                missingIds,
+                checklistIds,
+                videoIds,
+                hardcodedLaunchIds,
+                generatorIds: [...generatorIds]
+            });
+
+            // Optional guardrail: disable launch controls with broken practice IDs.
+            document.querySelectorAll(`[onclick*="goToPractice("]`).forEach(control => {
+                const match = (control.getAttribute('onclick') || '').match(/goToPractice\(\s*['"`]([^'"`]+)['"`]/);
+                if (match && missingIds.includes(match[1])) disableBrokenLaunchControl(control);
+            });
+
+            document.querySelectorAll('.video-link[data-practice-id]').forEach(link => {
+                const pid = link.dataset.practiceId;
+                if (!pid || !missingIds.includes(pid)) return;
+                link.querySelectorAll('.practice-link').forEach(disableBrokenLaunchControl);
+            });
+        } else {
+            console.info('Launch coverage validator: all launch sources map to a valid generator ID.');
+        }
     }
 
     function updateStatsUI() {
