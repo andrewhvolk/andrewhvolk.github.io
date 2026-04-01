@@ -2859,6 +2859,12 @@
     function startQuiz(id) {
         currentQuiz = generators.find(g => g.id === id);
         document.getElementById('quiz-active-area').style.display = 'block';
+        if (!currentQuiz) {
+            const feedback = document.getElementById('feedback-display');
+            feedback.className = 'feedback incorrect';
+            feedback.textContent = 'Could not load this practice generator. Please refresh.';
+            return;
+        }
         loadQuestion();
     }
 
@@ -2878,11 +2884,27 @@
             const gen = examState.questions[examState.currentIndex];
             currentQuiz = gen;
             currentRetries = 0;
-            currentQuestion = gen.generate();
+            try {
+                currentQuestion = gen.generate();
+            } catch (err) {
+                const feedback = document.getElementById('feedback-display');
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = 'This practice generator ran into an error. Please refresh and try again.';
+                console.error('Generator failed', { id: gen?.id, err });
+                return;
+            }
         } else {
             if (!currentQuiz) return;
             currentRetries = 0;
-            currentQuestion = currentQuiz.generate();
+            try {
+                currentQuestion = currentQuiz.generate();
+            } catch (err) {
+                const feedback = document.getElementById('feedback-display');
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = 'This practice generator ran into an error. Please refresh and try again.';
+                console.error('Generator failed', { id: currentQuiz?.id, err });
+                return;
+            }
         }
         
         document.getElementById('question-display').innerHTML = currentQuestion.q;
