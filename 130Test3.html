@@ -1720,14 +1720,31 @@
         }
     }
 
-    function createAngleSvg({
+    function buildAngleArcPath({
+        center,
+        radius,
+        startAngleDeg,
+        sweepDeg
+    }) {
+        const startRad = startAngleDeg * Math.PI / 180;
+        const endRad = (startAngleDeg + sweepDeg) * Math.PI / 180;
+        const startX = center + radius * Math.cos(startRad);
+        const startY = center - radius * Math.sin(startRad);
+        const endX = center + radius * Math.cos(endRad);
+        const endY = center - radius * Math.sin(endRad);
+        const largeArcFlag = Math.abs(sweepDeg) > 180 ? 1 : 0;
+        const sweepFlag = sweepDeg >= 0 ? 0 : 1;
+        return `M ${startX.toFixed(2)} ${startY.toFixed(2)} A ${radius} ${radius} 0 ${largeArcFlag} ${sweepFlag} ${endX.toFixed(2)} ${endY.toFixed(2)}`;
+    }
+
+    function createBasicAngleSvg({
         thetaDeg,
         labelText,
         fallbackText,
         referenceDeg = null,
         showReferenceLabel = false,
-        originalThetaDeg = thetaDeg,
-        turnCount = null
+        turnCount = null,
+        showGrid = true
     }) {
         const size = 300;
         const center = size / 2;
@@ -1736,17 +1753,18 @@
         const terminalX = center + radius * Math.cos(thetaRad);
         const terminalY = center - radius * Math.sin(thetaRad);
         const arcR = 42;
-        const norm = ((thetaDeg % 360) + 360) % 360;
-        const largeArcFlag = norm > 180 ? 1 : 0;
-        const sweepFlag = 0;
-        const arcStartX = center + arcR;
-        const arcStartY = center;
-        const arcEndX = center + arcR * Math.cos(thetaRad);
-        const arcEndY = center - arcR * Math.sin(thetaRad);
+        const norm = normalizeDegrees(thetaDeg);
+        const normalizedSweep = thetaDeg >= 0 ? norm : -(360 - norm);
+        const arcPath = buildAngleArcPath({
+            center,
+            radius: arcR,
+            startAngleDeg: 0,
+            sweepDeg: normalizedSweep
+        });
         const thetaLabelX = center + (arcR + 20) * Math.cos(thetaRad / 2);
         const thetaLabelY = center - (arcR + 20) * Math.sin(thetaRad / 2);
         const rawTurnCount = turnCount === null
-            ? (Number.isFinite(originalThetaDeg) ? (originalThetaDeg - norm) / 360 : 0)
+            ? 0
             : turnCount;
         const resolvedTurnCount = Number.isFinite(rawTurnCount)
             ? Math.round(rawTurnCount)
@@ -1762,52 +1780,112 @@
             const refR = 66;
             const refStartAngle = thetaDeg >= 0 ? 0 : 360;
             const refSweepDeg = thetaDeg >= 0 ? referenceDeg : -referenceDeg;
-            const startRad = refStartAngle * Math.PI / 180;
-            const endRad = (refStartAngle + refSweepDeg) * Math.PI / 180;
-            const refStartX = center + refR * Math.cos(startRad);
-            const refStartY = center - refR * Math.sin(startRad);
-            const refEndX = center + refR * Math.cos(endRad);
-            const refEndY = center - refR * Math.sin(endRad);
-            const refLargeArc = Math.abs(refSweepDeg) > 180 ? 1 : 0;
-            const refSweepFlag = refSweepDeg >= 0 ? 0 : 1;
+            const refArcPath = buildAngleArcPath({
+                center,
+                radius: refR,
+                startAngleDeg: refStartAngle,
+                sweepDeg: refSweepDeg
+            });
             const refLabelAngle = (refStartAngle + refSweepDeg / 2) * Math.PI / 180;
             const refLabelX = center + (refR + 16) * Math.cos(refLabelAngle);
             const refLabelY = center - (refR + 16) * Math.sin(refLabelAngle);
             return `
-                <path d="M ${refStartX.toFixed(2)} ${refStartY.toFixed(2)} A ${refR} ${refR} 0 ${refLargeArc} ${refSweepFlag} ${refEndX.toFixed(2)} ${refEndY.toFixed(2)}"
-                    fill="none" stroke="var(--warning-main)" stroke-width="3" stroke-dasharray="4 4"></path>
-                ${showReferenceLabel ? `<text x="${refLabelX.toFixed(2)}" y="${refLabelY.toFixed(2)}" fill="var(--warning-main)" font-size="13" font-weight="600">ref = ${referenceDeg}°</text>` : ''}
+                <path d="${refArcPath}"
+                    fill="none" stroke="var(--diagram-reference)" stroke-width="3" stroke-dasharray="4 4"></path>
+                ${showReferenceLabel ? `<text x="${refLabelX.toFixed(2)}" y="${refLabelY.toFixed(2)}" fill="var(--diagram-reference)" font-size="13" font-weight="600">ref = ${referenceDeg}°</text>` : ''}
             `;
         })();
 
         const turnMarkup = hasExtraTurns ? `
             <path d="M ${center + wrapR} ${center} A ${wrapR} ${wrapR} 0 1 ${wrapSweepFlag} ${wrapMidX} ${wrapMidY}
                 A ${wrapR} ${wrapR} 0 1 ${wrapSweepFlag} ${center + wrapR} ${center}"
-                fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="3 4" opacity="0.75"></path>
-            <text x="36" y="42" fill="var(--text-muted)" font-size="12" font-weight="600">${turnLabel}</text>
+                fill="none" stroke="var(--diagram-turn)" stroke-width="2" stroke-dasharray="3 4" opacity="0.75"></path>
+            <text x="36" y="42" fill="var(--diagram-turn)" font-size="12" font-weight="600">${turnLabel}</text>
         ` : '';
 
         return `
             <svg viewBox="0 0 ${size} ${size}" width="300" height="300" role="img" aria-label="${fallbackText.replace(/"/g, '&quot;')}">
-                <rect x="0" y="0" width="${size}" height="${size}" fill="var(--text-main)"></rect>
-                <g stroke="var(--text-main)" stroke-width="1">
+                <rect x="0" y="0" width="${size}" height="${size}" fill="var(--diagram-bg)"></rect>
+                ${showGrid ? `<g stroke="var(--diagram-grid)" stroke-width="0.75">
                     ${Array.from({ length: 13 }, (_, i) => {
                         const p = 30 + i * 20;
                         return `<line x1="${p}" y1="30" x2="${p}" y2="270"></line><line x1="30" y1="${p}" x2="270" y2="${p}"></line>`;
                     }).join('')}
-                </g>
-                <line x1="30" y1="${center}" x2="270" y2="${center}" stroke="var(--border-subtle)" stroke-width="2"></line>
-                <line x1="${center}" y1="30" x2="${center}" y2="270" stroke="var(--border-subtle)" stroke-width="2"></line>
-                <text x="273" y="${center - 5}" fill="var(--border-subtle)" font-size="12">x</text>
-                <text x="${center + 6}" y="26" fill="var(--border-subtle)" font-size="12">y</text>
-                <line x1="${center}" y1="${center}" x2="${terminalX.toFixed(2)}" y2="${terminalY.toFixed(2)}" stroke="var(--primary-hover)" stroke-width="3"></line>
-                <circle cx="${center}" cy="${center}" r="4" fill="var(--border-subtle)"></circle>
-                <path d="M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 ${largeArcFlag} ${sweepFlag} ${arcEndX.toFixed(2)} ${arcEndY.toFixed(2)}"
-                    fill="none" stroke="var(--emerald-main)" stroke-width="3"></path>
-                <text x="${thetaLabelX.toFixed(2)}" y="${thetaLabelY.toFixed(2)}" fill="var(--emerald-main)" font-size="13" font-weight="600">${labelText}</text>
-                <text x="36" y="286" fill="var(--text-muted)" font-size="12">grid: 1 square = 1 unit</text>
+                </g>` : ''}
+                <line x1="30" y1="${center}" x2="270" y2="${center}" stroke="var(--diagram-axis)" stroke-width="2"></line>
+                <line x1="${center}" y1="30" x2="${center}" y2="270" stroke="var(--diagram-axis)" stroke-width="2"></line>
+                <text x="273" y="${center - 5}" fill="var(--diagram-axis-label)" font-size="12">x</text>
+                <text x="${center + 6}" y="26" fill="var(--diagram-axis-label)" font-size="12">y</text>
+                <line x1="${center}" y1="${center}" x2="${terminalX.toFixed(2)}" y2="${terminalY.toFixed(2)}" stroke="var(--diagram-ray)" stroke-width="3"></line>
+                <circle cx="${center}" cy="${center}" r="4" fill="var(--diagram-origin)"></circle>
+                <path d="${arcPath}" fill="none" stroke="var(--diagram-arc)" stroke-width="3"></path>
+                <text x="${thetaLabelX.toFixed(2)}" y="${thetaLabelY.toFixed(2)}" fill="var(--diagram-arc)" font-size="13" font-weight="600">${labelText}</text>
+                ${showGrid ? `<text x="36" y="286" fill="var(--diagram-turn)" font-size="12">grid: 1 square = 1 unit</text>` : ''}
                 ${turnMarkup}
                 ${refMarkup}
+            </svg>
+        `;
+    }
+
+    function createCoterminalAngleSvg({
+        originalThetaDeg,
+        normalizedThetaDeg,
+        turnCount,
+        fallbackText
+    }) {
+        const size = 300;
+        const center = size / 2;
+        const radius = 105;
+        const terminalRad = normalizedThetaDeg * Math.PI / 180;
+        const terminalX = center + radius * Math.cos(terminalRad);
+        const terminalY = center - radius * Math.sin(terminalRad);
+        const direction = originalThetaDeg >= 0 ? 'counterclockwise' : 'clockwise';
+        const remainderSweep = originalThetaDeg - (turnCount * 360);
+        const mainArc = buildAngleArcPath({
+            center,
+            radius: 48,
+            startAngleDeg: 0,
+            sweepDeg: remainderSweep
+        });
+        const remainderLabelAngle = (remainderSweep / 2) * Math.PI / 180;
+        const remainderLabelX = center + 70 * Math.cos(remainderLabelAngle);
+        const remainderLabelY = center - 70 * Math.sin(remainderLabelAngle);
+        const turnDirectionWord = turnCount >= 0 ? 'CCW' : 'CW';
+
+        const turnMarkup = turnCount === 0 ? '' : `
+            <path d="${buildAngleArcPath({
+                center,
+                radius: 82,
+                startAngleDeg: 20,
+                sweepDeg: turnCount > 0 ? 300 : -300
+            })}"
+                fill="none" stroke="var(--diagram-turn)" stroke-width="2.5"
+                stroke-dasharray="5 6" marker-end="url(#arcArrowTurn)" opacity="0.9"></path>
+            <text x="28" y="42" fill="var(--diagram-turn)" font-size="12" font-weight="600">${turnCount > 0 ? '+' : ''}${turnCount} turn${Math.abs(turnCount) === 1 ? '' : 's'} (${turnDirectionWord})</text>
+        `;
+
+        return `
+            <svg viewBox="0 0 ${size} ${size}" width="300" height="300" role="img" aria-label="${fallbackText.replace(/"/g, '&quot;')}">
+                <defs>
+                    <marker id="arcArrowMain" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--diagram-arc)"></path>
+                    </marker>
+                    <marker id="arcArrowTurn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--diagram-turn)"></path>
+                    </marker>
+                </defs>
+                <rect x="0" y="0" width="${size}" height="${size}" fill="var(--diagram-bg)"></rect>
+                <line x1="30" y1="${center}" x2="270" y2="${center}" stroke="var(--diagram-axis)" stroke-width="2"></line>
+                <line x1="${center}" y1="30" x2="${center}" y2="270" stroke="var(--diagram-axis)" stroke-width="2"></line>
+                <text x="273" y="${center - 5}" fill="var(--diagram-axis-label)" font-size="12">x</text>
+                <text x="${center + 6}" y="26" fill="var(--diagram-axis-label)" font-size="12">y</text>
+                <line x1="${center}" y1="${center}" x2="${terminalX.toFixed(2)}" y2="${terminalY.toFixed(2)}" stroke="var(--diagram-ray)" stroke-width="3"></line>
+                <circle cx="${center}" cy="${center}" r="4" fill="var(--diagram-origin)"></circle>
+                <path d="${mainArc}" fill="none" stroke="var(--diagram-arc)" stroke-width="3.5" marker-end="url(#arcArrowMain)"></path>
+                ${turnMarkup}
+                <text x="24" y="248" fill="var(--diagram-axis-label)" font-size="12" font-weight="600">Original: ${originalThetaDeg}° (${direction})</text>
+                <text x="24" y="266" fill="var(--diagram-ray)" font-size="12" font-weight="600">Terminal side = ${normalizedThetaDeg}°</text>
+                <text x="${remainderLabelX.toFixed(2)}" y="${remainderLabelY.toFixed(2)}" fill="var(--diagram-arc)" font-size="12" font-weight="600">${remainderSweep}°</text>
             </svg>
         `;
     }
@@ -1854,14 +1932,16 @@
                 const ans = theta + 360 * (Math.random() > 0.5 ? k : -k);
                 const normalizedTheta = normalizeDegrees(theta);
                 const turnCount = Math.round((theta - normalizedTheta) / 360);
-                const fallbackText = `Standard-position angle theta = ${theta} degrees. Terminal side matches ${normalizedTheta} degrees, with ${turnCount > 0 ? `${turnCount} counterclockwise` : `${Math.abs(turnCount)} clockwise`} full turn${Math.abs(turnCount) === 1 ? '' : 's'}.`;
+                const directionWord = theta >= 0 ? 'counterclockwise' : 'clockwise';
+                const turnDirection = turnCount >= 0 ? 'counterclockwise' : 'clockwise';
+                const absRemainder = Math.abs(theta - turnCount * 360);
+                const fallbackText = `Standard-position angle ${theta} degrees. The terminal side matches ${normalizedTheta} degrees. Rotation is ${directionWord} with ${Math.abs(turnCount)} full ${turnDirection} turn${Math.abs(turnCount) === 1 ? '' : 's'} plus ${absRemainder} additional degrees to the shared terminal side.`;
                 return {
                     q: `Find one coterminal angle (in degrees) for $\\theta = ${theta}^\\circ$.`,
-                    svg: createAngleSvg({
-                        thetaDeg: normalizedTheta,
-                        labelText: `\u03b8=${theta}\u00b0`,
-                        fallbackText,
+                    svg: createCoterminalAngleSvg({
                         originalThetaDeg: theta,
+                        normalizedThetaDeg,
+                        fallbackText,
                         turnCount
                     }),
                     svgAltText: fallbackText,
@@ -2065,11 +2145,10 @@
                 const entryNote = 'Use the diagram to locate the terminal side, then measure the acute angle to the x-axis. The visual intentionally does not label the reference angle value.';
                 return {
                     q: `Find the reference angle for $${raw}^\\circ$.`,
-                    svg: createAngleSvg({
+                    svg: createBasicAngleSvg({
                         thetaDeg: t,
                         labelText: `${raw}\u00b0`,
                         fallbackText,
-                        originalThetaDeg: raw,
                         turnCount
                     }),
                     svgAltText: fallbackText,
