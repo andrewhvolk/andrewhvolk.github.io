@@ -4,23 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PHYS 103 Assignment Guide</title>
+<link rel="stylesheet" href="/styles.css">
 <!-- Page-specific external CSS: Google Fonts requested by this page's typography design. -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FAF9F6;
-    --surface: var(--bg-surface);
-    --border: #E2DFD8;
-    --text: #2C2825;
-    --text-muted: #7A7570;
-    --accent: #3D5A80;
-    --accent-light: #EAF0F6;
+    --accent-light: color-mix(in srgb, var(--primary-main) 12%, var(--bg-surface));
     --kit: #2A6041;
     --kit-bg: #EDF5F0;
     --user: #9B5B2D;
     --user-bg: #FDF5ED;
-    --heading-font: 'Fraunces', Georgia, serif;
-    --body-font: 'DM Sans', system-ui, sans-serif;
+    --heading-font: 'Fraunces', var(--type-display-family);
+    --body-font: 'DM Sans', var(--type-body-family);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
