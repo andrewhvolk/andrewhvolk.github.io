@@ -23,6 +23,19 @@
   --emerald-soft: color-mix(in srgb, var(--emerald-main) 12%, transparent);
   --danger-soft: color-mix(in srgb, var(--danger-main) 12%, transparent);
 
+  --hero-on-dark: #f8faf7;
+  --hero-on-dark-muted: rgba(248, 250, 247, 0.92);
+
+  --hero-panel-bg: rgba(0, 29, 23, 0.44);
+  --hero-panel-bg-strong: rgba(0, 29, 23, 0.58);
+  --hero-panel-border: rgba(248, 250, 247, 0.16);
+
+  --hero-chip-bg: rgba(0, 29, 23, 0.40);
+  --hero-chip-bg-accent: rgba(37, 99, 235, 0.28);
+  --hero-chip-border: rgba(248, 250, 247, 0.14);
+
+  --hero-bullet: #dbeafe;
+
   --ink-strong: #001d17;
   --ink-soft: #3d4a44;
   --ink-inverse: var(--bg-surface);
@@ -1902,6 +1915,19 @@ main.error-main {
   --diagram-label: var(--text-body);
   --diagram-accent: #7ea8ff;
   --excel-accent: #34d399;
+
+  --hero-on-dark: #f8faf7;
+  --hero-on-dark-muted: rgba(248, 250, 247, 0.94);
+
+  --hero-panel-bg: rgba(17, 22, 20, 0.62);
+  --hero-panel-bg-strong: rgba(17, 22, 20, 0.76);
+  --hero-panel-border: rgba(242, 245, 242, 0.14);
+
+  --hero-chip-bg: rgba(17, 22, 20, 0.56);
+  --hero-chip-bg-accent: rgba(126, 168, 255, 0.22);
+  --hero-chip-border: rgba(242, 245, 242, 0.12);
+
+  --hero-bullet: #c8d9ff;
   --primary-color: var(--primary-main);
   --secondary-color: var(--text-main);
   --accent-color: var(--primary-main);
@@ -2362,14 +2388,19 @@ main.error-main {
   cursor: pointer;
 }
 
-.top-nav-title[aria-current="page"],
+.top-nav-title[aria-current="page"] {
+  color: var(--nav-text-current);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 88%, transparent), var(--surface-transparent));
+  box-shadow: inset 0 0 0 999px var(--surface-transparent);
+}
+
 .top-nav-links a[aria-current="page"],
 .top-nav-links button[aria-current="page"],
 .top-nav-utilities a[aria-current="page"],
 .top-nav-utilities button[aria-current="page"] {
   color: var(--nav-text-current);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 88%, transparent), var(--surface-transparent));
-  box-shadow: inset 0 0 0 999px var(--surface-transparent);
+  background: color-mix(in srgb, var(--primary-main) 12%, var(--bg-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary-main) 24%, var(--border-subtle));
 }
 
 .top-nav-links a[aria-current="page"]:hover,
@@ -2381,7 +2412,8 @@ main.error-main {
 .top-nav-utilities button[aria-current="page"]:hover,
 .top-nav-utilities button[aria-current="page"]:focus-visible {
   color: var(--nav-text-current);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--bg-subtle) 96%, transparent), var(--surface-transparent));
+  background: color-mix(in srgb, var(--primary-main) 16%, var(--bg-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary-main) 30%, var(--border-subtle));
 }
 
 .page-context-bar {
@@ -3520,7 +3552,14 @@ body.math130-course-page {
   margin: 0;
   font-size: clamp(1rem, 2vw, 1.15rem);
   max-width: 42rem;
-  opacity: 0.9;
+}
+
+.math130-header .page-shell-header__eyebrow,
+.math130-header .subtitle,
+.math130-header__subtitle,
+.math130-header__identity .subtitle {
+  color: var(--hero-on-dark-muted);
+  opacity: 1;
 }
 
 .math130-header__chips {
@@ -3535,9 +3574,9 @@ body.math130-course-page {
   align-items: center;
   padding: 0.38rem 0.72rem;
   border-radius: 999px;
-  background: var(--surface-transparent);
-  box-shadow: inset 0 0 0 1px var(--surface-transparent);
-  color: var(--on-primary);
+  background: var(--hero-chip-bg);
+  box-shadow: inset 0 0 0 1px var(--hero-chip-border);
+  color: var(--hero-on-dark);
   font-family: var(--type-meta-family);
   font-size: var(--meta-sm);
   font-weight: var(--meta-weight);
@@ -3547,18 +3586,18 @@ body.math130-course-page {
 }
 
 .math130-header__chip--accent {
-  background: var(--surface-transparent);
-  box-shadow: inset 0 0 0 1px var(--surface-transparent);
+  background: var(--hero-chip-bg-accent);
+  box-shadow: inset 0 0 0 1px var(--hero-chip-border);
 }
 
 .math130-header__usage {
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
   border-radius: var(--radius-lg);
-  background-color: var(--surface-transparent);
-  background-image: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent));
+  background: linear-gradient(180deg, var(--hero-panel-bg), var(--hero-panel-bg-strong));
+  box-shadow: inset 0 0 0 1px var(--hero-panel-border);
+  color: var(--hero-on-dark);
   backdrop-filter: blur(6px);
-  box-shadow: inset 0 0 0 1px var(--surface-transparent);
-  color: var(--on-primary);
+  -webkit-backdrop-filter: blur(6px);
   align-self: stretch;
   display: flex;
   flex-direction: column;
@@ -3568,7 +3607,8 @@ body.math130-course-page {
 .math130-header__usage h2 {
   font-size: 1.3rem;
   margin-bottom: 0.85rem;
-  color: var(--on-primary);
+  color: var(--hero-on-dark);
+  opacity: 1;
 }
 
 .math130-summary-list {
@@ -3584,15 +3624,23 @@ body.math130-course-page {
   padding-left: 1.1rem;
   font-size: 0.95rem;
   line-height: 1.55;
-  opacity: 0.92;
+  color: var(--hero-on-dark);
+  opacity: 1;
 }
 
 .math130-summary-list li::before {
   content: "•";
   position: absolute;
   left: 0;
-  color: var(--surface-transparent);
+  color: var(--hero-bullet);
   font-weight: 700;
+}
+
+.math130-header h1,
+.math130-header .subtitle,
+.math130-header__usage h2,
+.math130-summary-list li {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
 }
 
 /* Dashboard content area — mirrors .cv-page */
