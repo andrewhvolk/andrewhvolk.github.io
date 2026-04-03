@@ -38,7 +38,6 @@ These are the required decision gates from the implementation plan, pre-filled w
 ### Bucket B — Shared shells and low-risk inheritors
 
 #### B1: Low-literal pages (likely global-token inheritors)
-- `Taskflow.html`
 - `Unit3Practice.html`
 - `courses/electrical-circuits-lab-data-sheet.html`
 - `courses/electrical-circuits-lab-manual.html`

@@ -26,7 +26,6 @@ Tracking document for Phase 1 execution based on Section 2 of `ColorPhase0Execut
 
 | File | Bucket / sub-bucket | Migration status | PR number | Visual QA status (light/dark/print/forced-colors) | Notes on intentional literals |
 |---|---|---|---|---|---|
-| `Taskflow.html` | B / B1 Low-literal pages | Not started | TBD | Not started / Not started / Not started / Not started | None recorded |
 | `Unit3Practice.html` | B / B1 Low-literal pages | Not started | TBD | Not started / Not started / Not started / Not started | None recorded |
 | `courses/electrical-circuits-lab-data-sheet.html` | B / B1 Low-literal pages | Not started | TBD | Not started / Not started / Not started / Not started | None recorded |
 | `courses/electrical-circuits-lab-manual.html` | B / B1 Low-literal pages | Not started | TBD | Not started / Not started / Not started / Not started | None recorded |
