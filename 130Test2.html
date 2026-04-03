@@ -307,6 +307,15 @@
             color: var(--text-main);
         }
         .log-arg-input { width: 140px; }
+        .answer-label {
+            width: 100%;
+            text-align: left;
+            max-width: 420px;
+            margin: 0 auto 0.35rem auto;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.98rem;
+        }
 
         /* Multi-input grid (interest table, circle multi-part) */
         .multi-input-grid { 
@@ -3424,6 +3433,7 @@
             `;
         } else if (currentQuestion.inputType === 'log_argument') {
             inputArea.innerHTML = `
+                <label class="answer-label" for="answer-input">Answer (decimal only)</label>
                 <div class="log-arg-template" aria-label="Enter the argument of the logarithm">
                     <span class="math-text">log</span>
                     <span class="log-base-stack">${currentQuestion.displayBase}</span>
@@ -3485,7 +3495,10 @@
                 </div>
             `;
         } else {
-            inputArea.innerHTML = `<input type="number" step="any" id="answer-input" class="inp-standard" placeholder="Your Answer" autocomplete="off">`;
+            inputArea.innerHTML = `
+                <label class="answer-label" for="answer-input">Answer (decimal only)</label>
+                <input type="number" step="any" id="answer-input" class="inp-standard" placeholder="Your Answer" autocomplete="off">
+            `;
         }
         
         // Focus first input
