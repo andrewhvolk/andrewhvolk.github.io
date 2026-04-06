@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Printed Program — PME Virginia Omicron Induction (Revised)</title>
+  <style>
+    @page { size: letter; margin: 0.55in; }
+    :root {
+      --violet: #4c2f91;
+      --gold: #c89d2a;
+      --ink: #111;
+      --muted: #555;
+      --line: #cfc6e3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Times New Roman", Times, serif;
+      color: var(--ink);
+      line-height: 1.26;
+      max-width: 7.35in;
+      margin: 0 auto;
+      font-size: 12pt;
+      position: relative;
+    }
+    .watermark {
+      position: fixed;
+      right: 0.15in;
+      bottom: 0.4in;
+      width: 2.1in;
+      opacity: .07;
+      z-index: 0;
+    }
+    .page { position: relative; z-index: 1; }
+    .cover {
+      text-align: center;
+      border: 1.5px solid var(--violet);
+      padding: 0.3in 0.3in 0.24in;
+      margin-bottom: 0.18in;
+      background: linear-gradient(180deg, #fbf9ff, #fff);
+    }
+    .cover img.logo {
+      width: 2.45in;
+      height: auto;
+      display: block;
+      margin: 0 auto 0.12in;
+    }
+    .seal-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.18in;
+      margin-top: 0.08in;
+    }
+    .seal-row img {
+      width: 0.85in;
+      height: auto;
+    }
+    h1, h2, h3 { margin: 0.12em 0; }
+    h1 { font-size: 22pt; text-align: center; letter-spacing: 0.01em; }
+    h2 { font-size: 15pt; text-align: center; color: var(--violet); }
+    .subline, .motto, .center { text-align: center; }
+    .subline { margin: 0.1em 0; }
+    .motto { font-style: italic; margin: 0.45em 0 0; }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 0.18in;
+      margin: 0.18in 0 0.12in;
+    }
+    .box {
+      border: 1px solid var(--line);
+      padding: 0.13in 0.15in;
+      background: #fff;
+    }
+    .box h3 {
+      font-size: 12.5pt;
+      color: var(--violet);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.08in;
+      margin-bottom: 0.08in;
+    }
+    .schedule {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.08in;
+    }
+    .schedule td {
+      border-bottom: 1px solid #ddd;
+      padding: 0.06in 0.05in;
+      vertical-align: top;
+    }
+    .schedule td:first-child {
+      width: 1.05in;
+      font-weight: bold;
+      color: var(--violet);
+    }
+    .section-title {
+      font-size: 13pt;
+      color: var(--violet);
+      border-bottom: 1px solid var(--violet);
+      padding-bottom: 0.08in;
+      margin-top: 0.16in;
+      margin-bottom: 0.08in;
+    }
+    .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 0.18in; }
+    ul { margin: 0.04in 0 0.06in 0.18in; }
+    li { margin: 0.03in 0; }
+    .pledge {
+      border-left: 4px solid var(--gold);
+      padding-left: 0.12in;
+      background: #faf7ef;
+      padding-top: 0.08in;
+      padding-bottom: 0.08in;
+    }
+    .footer-note {
+      margin-top: 0.16in;
+      font-size: 10.5pt;
+      color: var(--muted);
+      border-top: 1px solid #ccc;
+      padding-top: 0.08in;
+    }
+    @media print {
+      a { color: inherit; text-decoration: none; }
+      .watermark { position: fixed; }
+    }
+  </style>
+</head>
+<body>
+  <img class="watermark" src="shieldcolor.gif" alt="">
+  <div class="page">
+    <div class="cover">
+      <img class="logo" src="PMElogo_hires.jpg" alt="Pi Mu Epsilon logo">
+      <h1>Induction Ceremony</h1>
+      <h2>Virginia Omicron Chapter · Liberty University</h2>
+      <p class="subline"><strong>Tuesday, April 7, 2026</strong></p>
+      <p class="subline">5:30 PM · DeMoss Hall Room 4272</p>
+      <p class="motto">“To Promote Scholarship and Mathematics”</p>
+      <div class="seal-row">
+        <img src="Seal100dpi.gif" alt="Pi Mu Epsilon seal">
+        <img src="shieldcolor.gif" alt="Pi Mu Epsilon shield">
+      </div>
+    </div>
+
+    <div class="intro-grid">
+      <div class="box">
+        <h3>About Pi Mu Epsilon</h3>
+        <p>Pi Mu Epsilon is the national mathematics honor society. Founded at Syracuse University and incorporated in 1914, it promotes mathematics and recognizes scholarly achievement among students and faculty.</p>
+      </div>
+      <div class="box">
+        <h3>This Ceremony</h3>
+        <p>The first induction ceremony of the Virginia Omicron Chapter celebrates the formal beginning of a new community of mathematical scholarship at Liberty University.</p>
+      </div>
+    </div>
+
+    <div class="section-title">Program Order</div>
+    <table class="schedule">
+      <tr><td>5:30</td><td><strong>Welcome and Opening Prayer</strong> — Prof. Andrew H. Volk</td></tr>
+      <tr><td>5:35</td><td><strong>Pi Mu Epsilon: Purpose and History</strong> — Emma Kay</td></tr>
+      <tr><td>5:41</td><td><strong>Virginia Omicron at Liberty University</strong> — Avery Morrison</td></tr>
+      <tr><td>5:46</td><td><strong>Brief Discussion: PME and Mathematical Rigor</strong> — Dr. Thomas Wakefield, Chair and Professor of Mathematics, Youngstown State University; Past President, Pi Mu Epsilon</td></tr>
+      <tr><td>5:56</td><td><strong>Scholarship Pledge</strong> — Led by Heidi Jackson</td></tr>
+      <tr><td>6:00</td><td><strong>Induction of New Members</strong> — Names read by Isaiah Nathaniel Mellace and Annaliese DeFelice</td></tr>
+      <tr><td>6:10</td><td><strong>Membership Book Signing and Mathematical Prompts</strong> — Led by Dr. Daniel Scott Joseph and Prof. Andrew H. Volk</td></tr>
+      <tr><td>6:22</td><td><strong>Symbols and Motto of Pi Mu Epsilon</strong> — Prof. Andrew H. Volk</td></tr>
+      <tr><td>6:25</td><td><strong>Charge to New Members</strong> — Prof. Andrew H. Volk</td></tr>
+      <tr><td>6:28</td><td><strong>Group Photo on the DeMoss Steps</strong> — Led by Avery Morrison</td></tr>
+      <tr><td>6:30</td><td><strong>Closing Remarks and Closing Prayer</strong> — Prof. Andrew H. Volk</td></tr>
+    </table>
+
+    <div class="section-title">Pi Mu Epsilon Pledge</div>
+    <div class="pledge">
+      “I solemnly promise that I will exert my best efforts to promote true scholarship, particularly in mathematics; and that I will support the objectives of the Pi Mu Epsilon Honor Society.”
+    </div>
+
+    <div class="section-title">New Members — Virginia Omicron</div>
+    <div class="columns">
+      <div class="box">
+        <h3>Faculty</h3>
+        <ul>
+          <li>Dr. Daniel Scott Joseph</li>
+          <li>Dr. Timothy E. Sprano</li>
+          <li>Prof. Andrew H. Volk</li>
+          <li>Mr. Robert Young</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Students</h3>
+        <ul>
+          <li>Claire Madison Botts</li>
+          <li>Sage Rayne Bushman</li>
+          <li>Rebecca Clapp</li>
+          <li>Violet Cramer</li>
+          <li>Annaliese Isabel Quigley DeFelice</li>
+          <li>Annabeth Hughes</li>
+          <li>Jared Michael Hughes</li>
+          <li>Heidi Jackson</li>
+          <li>Emma Kay</li>
+          <li>Samantha Keiser</li>
+          <li>Michael Kendrick</li>
+          <li>Gabriella Kayleen Lawson</li>
+          <li>Isaiah Nathaniel Mellace</li>
+          <li>Avery Morrison</li>
+          <li>Luka Nigro</li>
+          <li>Anastasia Leigh O'Donnell</li>
+          <li>Julia Parlett</li>
+          <li>Conner Pratt</li>
+          <li>Ethan Wallace</li>
+          <li>Lauren Grace Zissos</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer-note"><strong>Acknowledgments:</strong> Special thanks to Liberty University administration, the Department of Mathematics, chapter leadership, and the families and friends of our initiates whose support has made this evening possible.</p>
+    <p class="footer-note" style="text-align:center; font-style:italic; border-top:none; padding-top:0.04in;">Virginia Omicron Chapter · Chartered 2026 · Liberty University</p>
+  </div>
+</body>
+</html>

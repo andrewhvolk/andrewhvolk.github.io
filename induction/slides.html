@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pi Mu Epsilon Induction Ceremony — Virginia Omicron (Final Visual Deck)</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111932;
+      --panel-2: #182347;
+      --ink: #eef2ff;
+      --muted: #c7cfdf;
+      --gold: #f3c24f;
+      --violet: #8f73ff;
+      --lavender: #d9d0ff;
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: radial-gradient(circle at top, #182347 0%, var(--bg) 58%); color: var(--ink); }
+    body { font-family: Georgia, "Times New Roman", serif; }
+
+    .deck { max-width: 1220px; margin: 0 auto; padding: 18px; }
+    .slide {
+      display: none;
+      min-height: 82vh;
+      background:
+        radial-gradient(circle at top right, rgba(243,194,79,.10), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(143,115,255,.13), transparent 30%),
+        linear-gradient(145deg, rgba(18,27,55,.98), rgba(10,16,32,.98));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 44px 48px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.active { display: block; }
+
+    .watermark {
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 280px;
+      opacity: .08;
+      pointer-events: none;
+      filter: grayscale(10%);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(243,194,79,.35);
+      color: var(--gold);
+      border-radius: 999px;
+      background: rgba(243,194,79,.08);
+      font-size: .92rem;
+      letter-spacing: .02em;
+    }
+
+    .speaker {
+      color: var(--gold);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+      margin: 0 0 16px;
+    }
+
+    h1, h2, h3 { margin: 0 0 12px; line-height: 1.08; }
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.15rem; }
+    h3 { font-size: 1.2rem; color: var(--lavender); }
+    p, li { font-size: 1.18rem; line-height: 1.48; }
+    .small, .small li, li.small { font-size: 1rem; }
+    .muted { color: var(--muted); }
+    .accent { color: var(--gold); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.35fr .95fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .grid-even {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.35fr .85fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-logo-card, .image-card, .info-card, .quote-card, .name-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-logo-card {
+      text-align: center;
+      padding: 28px 18px;
+    }
+
+    .hero-logo-card img.logo {
+      max-width: 100%;
+      width: 330px;
+      height: auto;
+      display: block;
+      margin: 0 auto 12px;
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px;
+    }
+
+    .image-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      background: #fff;
+      padding: 10px;
+      object-fit: contain;
+      max-height: 290px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .fact {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.04);
+    }
+    .fact .label {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--muted);
+      font-size: .84rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .fact .value {
+      font-size: 1.1rem;
+      margin-top: 6px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 16px 18px;
+      border-left: 4px solid var(--gold);
+      background: rgba(243,194,79,.08);
+      border-radius: 14px;
+      color: #fff;
+      font-size: 1.12rem;
+      line-height: 1.45;
+    }
+
+    ul { margin: 8px 0 0 1.15em; }
+    li { margin: .35em 0; }
+
+    .names {
+      columns: 2;
+      column-gap: 34px;
+      margin-top: 6px;
+    }
+    .names li { break-inside: avoid; }
+
+    .logo-row {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .logo-row img {
+      height: 118px;
+      width: auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .callout {
+      padding: 18px 20px;
+      border: 1px solid rgba(243,194,79,.35);
+      border-radius: 18px;
+      background: rgba(243,194,79,.08);
+      font-size: 1.28rem;
+      line-height: 1.45;
+    }
+
+    .footer-note {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .92rem;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 14px 4px 0;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button {
+      background: #1b2547;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 10px;
+      padding: 10px 15px;
+      font-size: .95rem;
+      cursor: pointer;
+    }
+    button:hover { border-color: rgba(243,194,79,.55); }
+
+    .progress-wrap {
+      flex: 1;
+      margin: 0 18px;
+      display: grid;
+      gap: 8px;
+      align-items: center;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--violet), var(--gold));
+      border-radius: 999px;
+    }
+    .counter { text-align: center; font-size: .92rem; }
+
+    .print-note {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-top: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    @media (max-width: 980px) {
+      .slide { padding: 30px 24px 76px; }
+      .hero, .grid-2, .grid-even { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr; }
+      .names { columns: 1; }
+      .footer-note { left: 24px; right: 24px; bottom: 18px; }
+      h1 { font-size: 2.25rem; }
+      h2 { font-size: 1.75rem; }
+      p, li { font-size: 1.05rem; }
+      .watermark { width: 180px; }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      .controls { display: none; }
+      .deck { max-width: none; padding: 0; }
+      .slide {
+        display: block !important;
+        min-height: auto;
+        color: #111;
+        background: #fff;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .footer-note, .topbar, .watermark { color: #555; }
+      .hero-logo-card img.logo, .image-card img, .logo-row img { border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+
+    <section class="slide active">
+      <div class="topbar">
+        <span class="badge">Pi Mu Epsilon • National Mathematics Honor Society</span>
+      </div>
+      <div class="hero">
+        <div>
+          <h1>Induction Ceremony</h1>
+          <h2>Virginia Omicron Chapter</h2>
+          <p class="speaker"><strong>Speaker:</strong> Prof. Andrew H. Volk (Emcee) · <strong>Slide 1 of 12</strong></p>
+          <p><strong>Liberty University</strong><br>
+          Tuesday, April 7, 2026<br>
+          5:30 PM · DeMoss Hall Room 4272</p>
+          <p class="callout">“To Promote Scholarship and Mathematics”</p>
+        </div>
+        <div class="hero-logo-card">
+          <img class="logo" src="PMElogo_hires.jpg" alt="Official Pi Mu Epsilon logo">
+          <p class="muted small">Official PME artwork integrated from the national organization’s image downloads page.</p>
+        </div>
+      </div>
+      <img class="watermark" src="Seal100dpi.gif" alt="">
+      <div class="footer-note">
+        <span>Use ←/→ or the buttons to advance.</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Welcome & Purpose</span>
+        <span>Slide 2 of 12</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <h2>Welcome & Purpose</h2>
+          <p class="speaker"><strong>Speaker:</strong> Prof. Andrew H. Volk</p>
+          <ul>
+            <li>Welcome families, friends, faculty, and students.</li>
+            <li>Opening prayer led by <strong>Prof. Andrew H. Volk</strong>, Chapter Advisor and Permanent Correspondent.</li>
+            <li>Recognize the significance of the chapter’s first induction ceremony.</li>
+            <li>Frame the evening as both celebration and commissioning into a community of mathematical scholarship.</li>
+          </ul>
+          <blockquote>Pi Mu Epsilon exists for the promotion and recognition of scholarly activity in the mathematical sciences.</blockquote>
+        </div>
+        <div class="image-card">
+          <img src="Seal100dpi.gif" alt="Pi Mu Epsilon seal">
+          <div class="info-card small">
+            <strong class="accent">Visual cue:</strong> keep the seal on screen during the welcome to give the ceremony a formal, official tone.
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">
+        <span>Transition to Emma Kay for “About Pi Mu Epsilon.”</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">About Pi Mu Epsilon</span>
+        <span>Slide 3 of 12</span>
+      </div>
+      <div class="grid-even">
+        <div>
+          <h2>About Pi Mu Epsilon</h2>
+          <p class="speaker"><strong>Speaker:</strong> Emma Kay</p>
+          <ul>
+            <li>Founded at <strong>Syracuse University</strong> and incorporated in <strong>1914</strong>.</li>
+            <li>A national honor society devoted to promoting mathematics and recognizing student achievement.</li>
+            <li>Chapters encourage scholarship through talks, writing, conferences, mentoring, and mathematical community.</li>
+          </ul>
+          <blockquote>PME encourages undergraduate presentations and posters, supports chapter activity, and sponsors a journal accessible to undergraduate students.</blockquote>
+        </div>
+        <div>
+          <div class="logo-row">
+            <img src="PMElogo_hires.jpg" alt="PME logo">
+            <img src="Seal100dpi.gif" alt="PME seal">
+          </div>
+          <div class="quote-card small" style="margin-top:18px;">
+            This slide replaces a text-only explanation with official PME branding and a more memorable visual composition.
+          </div>
+        </div>
+      </div>
+      <img class="watermark" src="Seal100dpi.gif" alt="">
+      <div class="footer-note">
+        <span>Transition to Avery Morrison for “Virginia Omicron at Liberty University.”</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Virginia Omicron</span>
+        <span>Slide 4 of 12</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <h2>Virginia Omicron at Liberty University</h2>
+          <p class="speaker"><strong>Speaker:</strong> Avery Morrison</p>
+          <ul>
+            <li>Tonight marks the <strong>first induction ceremony</strong> of the Virginia Omicron Chapter.</li>
+            <li>This chapter represents an enduring commitment to scholarship, service, and mathematical growth at Liberty University.</li>
+            <li>It also connects Liberty students and faculty to a national community of chapters across the United States.</li>
+          </ul>
+          <div class="fact" style="margin-top:16px; max-width:520px;">
+            <div class="label">Suggested spoken emphasis</div>
+            <div class="value">A chapter is both an honor and a stewardship.</div>
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="shieldcolor.gif" alt="Pi Mu Epsilon shield">
+          <div class="info-card small">
+            <strong class="accent">Design move:</strong> the shield gives this chapter-recognition slide a ceremonial emblem distinct from the title slide.
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">
+        <span>Transition to Dr. Thomas Wakefield for the featured discussion.</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Featured Discussion</span>
+        <span>Slide 5 of 12</span>
+      </div>
+      <div class="grid-even">
+        <div>
+          <h2>Featured Discussion</h2>
+          <p class="speaker"><strong>Speaker:</strong> Dr. Thomas Wakefield · Chair and Professor of Mathematics, Youngstown State University · Past President, Pi Mu Epsilon</p>
+          <ul>
+            <li>A brief discussion of Pi Mu Epsilon and the growth of mathematical rigor.</li>
+            <li>How students move from procedural competence to proof, abstraction, and mature mathematical thinking.</li>
+            <li>Why communities such as PME matter for intellectual formation, mentoring, and aspiration.</li>
+          </ul>
+        </div>
+        <div class="quote-card">
+          <h3>Optional talking thread</h3>
+          <p class="small">Invite listeners to think of mathematics not only as a set of courses completed, but as a mode of disciplined inquiry and a shared scholarly vocation.</p>
+        </div>
+      </div>
+      <img class="watermark" src="PMElogo_hires.jpg" alt="">
+      <div class="footer-note">
+        <span>Transition to Heidi Jackson for the scholarship pledge.</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Scholarship Pledge</span>
+        <span>Slide 6 of 12</span>
+      </div>
+      <h2>Pi Mu Epsilon Scholarship Pledge</h2>
+      <p class="speaker"><strong>Speaker:</strong> Heidi Jackson</p>
+      <p class="accent"><strong>All candidates please stand and repeat in unison:</strong></p>
+      <blockquote style="font-size:1.28rem; margin-top:14px;">“I solemnly promise that I will exert my best efforts to promote true scholarship, particularly in mathematics; and that I will support the objectives of the Pi Mu Epsilon Honor Society.”</blockquote>
+      <div class="logo-row" style="margin-top:22px;">
+        <img src="Seal100dpi.gif" alt="PME seal">
+        <img src="shieldcolor.gif" alt="PME shield">
+      </div>
+      <div class="footer-note">
+        <span>After the pledge: “Thank you. Please be seated.”</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Induction of New Members</span>
+        <span>Slide 7 of 12</span>
+      </div>
+      <div class="grid-even">
+        <div>
+          <h2>Induction of New Members</h2>
+          <p class="speaker"><strong>Speakers:</strong> Isaiah Nathaniel Mellace and Annaliese DeFelice</p>
+          <h3>Faculty Members</h3>
+          <ul class="small">
+            <li>Dr. Daniel Scott Joseph</li>
+            <li>Dr. Timothy E. Sprano</li>
+            <li>Prof. Andrew H. Volk</li>
+            <li>Mr. Robert Young</li>
+          </ul>
+          <div class="info-card small" style="margin-top:14px;">
+            Student names continue on the next slide so the readers can keep a measured pace and the audience can clearly follow the processional.
+          </div>
+        </div>
+        <div class="image-card">
+          <img src="PMElogo_hires.jpg" alt="PME logo">
+          <div class="info-card small">
+            Use this slide while faculty are called forward and certificates begin to be distributed.
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">
+        <span>Advance after faculty and introductory student cue.</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Student Initiates</span>
+        <span>Slide 8 of 12</span>
+      </div>
+      <h2>Student Initiates</h2>
+      <p class="speaker"><strong>Speakers:</strong> Isaiah Nathaniel Mellace and Annaliese DeFelice</p>
+      <ul class="names small">
+        <li>Claire Madison Botts</li>
+        <li>Sage Rayne Bushman</li>
+        <li>Rebecca Clapp</li>
+        <li>Violet Cramer</li>
+        <li>Annaliese Isabel Quigley DeFelice</li>
+        <li>Annabeth Hughes</li>
+        <li>Jared Michael Hughes</li>
+        <li>Heidi Jackson</li>
+        <li>Emma Kay</li>
+        <li>Samantha Keiser</li>
+        <li>Michael Kendrick</li>
+        <li>Gabriella Kayleen Lawson</li>
+        <li>Isaiah Nathaniel Mellace</li>
+        <li>Avery Morrison</li>
+        <li>Luka Nigro</li>
+        <li>Anastasia Leigh O'Donnell</li>
+        <li>Julia Parlett</li>
+        <li>Conner Pratt</li>
+        <li>Ethan Wallace</li>
+        <li>Lauren Grace Zissos</li>
+      </ul>
+      <img class="watermark" src="Seal100dpi.gif" alt="">
+      <div class="footer-note">
+        <span>Advance when all names and recognitions are complete.</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Book Signing &amp; Math Prompts</span>
+        <span>Slide 9 of 12</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <h2>Membership Book Signing &amp; Mathematical Prompts</h2>
+          <p class="speaker"><strong>Speakers:</strong> Dr. Daniel Scott Joseph and Prof. Andrew H. Volk</p>
+          <ul>
+            <li>As each student signs the membership book, they answer one prompt chosen from a list of five.</li>
+            <li>Prompt options: favorite mathematical memory; extreme joy/pain in math; favorite topic; skill wished learned earlier; highest level hoped for.</li>
+            <li>This segment combines the signing moment with live faculty discussion.</li>
+          </ul>
+          <blockquote>Keep this slide visually quiet so attention remains on each member signing and responding.</blockquote>
+        </div>
+        <div>
+          <div class="image-card">
+            <img src="PMElogo_hires.jpg" alt="PME logo">
+            <div class="info-card small">
+              Guide one prompt response per signer to keep the line moving at a steady pace.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">
+        <span>Transition to Prof. Andrew H. Volk for symbols and motto.</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Symbols & Motto</span>
+        <span>Slide 10 of 12</span>
+      </div>
+      <div class="grid-even">
+        <div>
+          <h2>Symbols & Motto</h2>
+          <p class="speaker"><strong>Speaker:</strong> Prof. Andrew H. Volk</p>
+          <ul>
+            <li>Colors: <strong>violet, gold, and lavender</strong>.</li>
+            <li>The seal, shield, and logo visually connect members to the wider Society.</li>
+            <li>Motto: <strong>To Promote Scholarship and Mathematics</strong>.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="logo-row">
+            <img src="Seal100dpi.gif" alt="PME seal">
+            <img src="shieldcolor.gif" alt="PME shield">
+            <img src="PMElogo_hires.jpg" alt="PME logo">
+          </div>
+        </div>
+      </div>
+      <img class="watermark" src="shieldcolor.gif" alt="">
+      <div class="footer-note">
+        <span>Transition directly into the charge to new members.</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Charge to New Members</span>
+        <span>Slide 11 of 12</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <h2>Charge to New Members</h2>
+          <p class="speaker"><strong>Speaker:</strong> Prof. Andrew H. Volk</p>
+          <ul>
+            <li>Pursue mathematical excellence with humility, integrity, and intellectual honesty.</li>
+            <li>Use your gifts in service to others and in encouragement of younger students.</li>
+            <li>Help Virginia Omicron become a chapter known for scholarship, initiative, and community.</li>
+          </ul>
+        </div>
+        <div class="quote-card">
+                    <p class="small">Your achievement tonight is both recognition and responsibility. May you continue to love what is true, seek what is difficult, and share what is beautiful in mathematics.</p>
+        </div>
+      </div>
+      <div class="footer-note">
+        <span>Transition to group photo and closing flow.</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="topbar">
+        <span class="badge">Group Photo • Closing</span>
+        <span>Slide 12 of 12</span>
+      </div>
+      <div class="grid-even">
+        <div>
+          <h2>Group Photo &amp; Closing</h2>
+          <p class="speaker"><strong>Speakers:</strong> Prof. Andrew H. Volk and Avery Morrison</p>
+          <ul>
+            <li>Direct the group photo on the <strong>DeMoss Steps</strong>.</li>
+            <li>Close with congratulations, gratitude, and the closing prayer.</li>
+          </ul>
+                  </div>
+        <div>
+          <div class="logo-row">
+            <img src="Seal100dpi.gif" alt="PME seal">
+            <img src="shieldcolor.gif" alt="PME shield">
+          </div>
+          <div class="quote-card small" style="margin-top:18px;">
+            Congratulations, Virginia Omicron initiates. Welcome to Pi Mu Epsilon.
+            <div style="margin-top:10px; font-style:italic; color:var(--lavender);">Virginia Omicron Chapter · Chartered 2026 · Liberty University</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-note">
+        <span>No further advance.</span>
+      </div>
+    </section>
+
+    <div class="controls">
+      <button onclick="prevSlide()">◀ Previous</button>
+      <div class="progress-wrap">
+        <div class="counter" id="counter">Slide 1 / 12</div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <button onclick="nextSlide()">Next ▶</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let idx = 0;
+    const counter = document.getElementById('counter');
+    const progressFill = document.getElementById('progressFill');
+
+    function render() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === idx));
+      counter.textContent = `Slide ${idx + 1} / ${slides.length}`;
+      progressFill.style.width = `${((idx + 1) / slides.length) * 100}%`;
+    }
+
+    function nextSlide() { idx = Math.min(idx + 1, slides.length - 1); render(); }
+    function prevSlide() { idx = Math.max(idx - 1, 0); render(); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    render();
+  </script>
+</body>
+</html>
