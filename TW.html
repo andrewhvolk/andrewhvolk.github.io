@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Itinerary: Thomas Wakefield</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid #002d62; /* Liberty University Blue */
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: #002d62;
+            margin: 0 0 10px 0;
+            font-variant: small-caps;
+        }
+        header p {
+            color: #777;
+            font-size: 1.1em;
+            margin: 0;
+        }
+        h2 {
+            color: #990000; /* Liberty University Red */
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .flight-block, .event-block {
+            display: flex;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #fdfdfd;
+            border-left: 4px solid #002d62;
+            border-radius: 4px;
+        }
+        .event-block {
+            border-left-color: #990000;
+        }
+        .time {
+            flex: 0 0 140px;
+            font-weight: bold;
+            color: #555;
+        }
+        .details {
+            flex: 1;
+        }
+        .details strong {
+            display: block;
+            font-size: 1.1em;
+            color: #222;
+        }
+        .flight-info {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .highlight {
+            background-color: #fff8e1;
+            border-left-color: #ffb300;
+            border-left-width: 6px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Liberty University Visit Itinerary</h1>
+        <p>Guest: Dr. Thomas Philip Wakefield</p>
+        <p>Date: Tuesday, April 7, 2026</p>
+    </header>
+
+    <h2>Morning Travel to Lynchburg</h2>
+    
+    <div class="flight-block">
+        <div class="time">06:10 AM</div>
+        <div class="details">
+            <strong>Depart Pittsburgh, PA (PIT)</strong>
+            <div class="flight-info">Flight: UA3679 | Economy (N) | Gate A4 | Arrives: IAD at 07:19 AM (Gate A1B)</div>
+        </div>
+    </div>
+
+    <div class="flight-block">
+        <div class="time">08:15 AM</div>
+        <div class="details">
+            <strong>Depart Washington, DC (IAD)</strong>
+            <div class="flight-info">Flight: UA5038 | Economy (N) | Gate A3C | Arrives: LYH at 09:23 AM</div>
+        </div>
+    </div>
+
+    <h2>Liberty University Schedule</h2>
+
+    <div class="event-block">
+        <div class="time">09:23 AM</div>
+        <div class="details">
+            <strong>Arrival & Airport Pick-up</strong>
+            <div>Lynchburg Regional Airport (LYH) Baggage Claim. Transport to Liberty University campus by Prof. Andrew Volk (Cell: 434-841-5810).</div>
+        </div>
+    </div>
+
+    <div class="event-block">
+        <div class="time">10:30 AM</div>
+        <div class="details">
+            <strong>Department Visit</strong>
+            <div>Meetings and collaborative discussions with the Mathematics Department faculty and students.</div>
+        </div>
+    </div>
+
+    <div class="event-block">
+        <div class="time">11:45 AM</div>
+        <div class="details">
+            <strong>On-Campus Lunch</strong>
+            <div>Lunch with faculty at the Reber-Thomas Dining Center.</div>
+        </div>
+    </div>
+
+    <div class="event-block">
+        <div class="time">02:00 PM &ndash; 05:00 PM</div>
+        <div class="details">
+            <strong>Campus Tour</strong>
+            <div>Comprehensive guided tour of the Liberty University campus, highlighting the Freedom Tower and academic facilities.</div>
+        </div>
+    </div>
+
+    <div class="event-block">
+        <div class="time">05:00 PM</div>
+        <div class="details">
+            <strong>Light Dinner / Refreshments</strong>
+            <div>Quick pre-ceremony meal or refreshments on campus.</div>
+        </div>
+    </div>
+
+    <div class="event-block highlight">
+        <div class="time">05:30 PM &ndash; 06:30 PM</div>
+        <div class="details">
+            <strong>Pi Mu Epsilon VA Omicron Chapter Installation</strong>
+            <div><strong>Location: DeMoss Hall, Room 4272</strong></div>
+            <div>Inaugural induction ceremony and chapter installation.</div>
+        </div>
+    </div>
+
+    <div class="event-block">
+        <div class="time">06:45 PM</div>
+        <div class="details">
+            <strong>Travel to LYH Airport</strong>
+            <div>Departure from DeMoss Hall for Lynchburg Regional Airport. Drop-off by Prof. Andrew Volk (Cell: 434-841-5810).</div>
+        </div>
+    </div>
+
+    <h2>Evening Return Travel</h2>
+
+    <div class="flight-block">
+        <div class="time">08:18 PM</div>
+        <div class="details">
+            <strong>Depart Lynchburg, VA (LYH)</strong>
+            <div class="flight-info">Flight: UA5041 | Economy (N) | Gate 5 | Arrives: IAD at 09:25 PM (Gate A3C)</div>
+        </div>
+    </div>
+
+    <div class="flight-block">
+        <div class="time">10:12 PM</div>
+        <div class="details">
+            <strong>Depart Washington, DC (IAD)</strong>
+            <div class="flight-info">Flight: UA3540 | Economy (N) | Gate D27 | Arrives: PIT at 11:20 PM (Gate A4)</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Ticket Reference: 0162368255072 | On-Site Contact: Prof. Andrew Volk (434-841-5810)</p>
+    </div>
+</div>
+
+</body>
+</html>
