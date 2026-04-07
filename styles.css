@@ -30,6 +30,12 @@
   --hero-panel-bg-strong: rgba(0, 29, 23, 0.58);
   --hero-panel-border: rgba(248, 250, 247, 0.16);
 
+  --hero-contact-bg: rgba(248, 250, 247, 0.14);
+  --hero-contact-border: rgba(248, 250, 247, 0.24);
+  --hero-contact-label: rgba(248, 250, 247, 0.84);
+  --hero-contact-icon: rgba(248, 250, 247, 0.92);
+  --hero-contact-value: #ffffff;
+
   --hero-chip-bg: rgba(0, 29, 23, 0.40);
   --hero-chip-bg-accent: rgba(37, 99, 235, 0.28);
   --hero-chip-border: rgba(248, 250, 247, 0.14);
@@ -1941,6 +1947,12 @@ main.error-main {
   --hero-panel-bg-strong: rgba(17, 22, 20, 0.76);
   --hero-panel-border: rgba(242, 245, 242, 0.14);
 
+  --hero-contact-bg: rgba(17, 22, 20, 0.52);
+  --hero-contact-border: rgba(248, 250, 247, 0.16);
+  --hero-contact-label: rgba(248, 250, 247, 0.80);
+  --hero-contact-icon: rgba(248, 250, 247, 0.90);
+  --hero-contact-value: #f8faf7;
+
   --hero-chip-bg: rgba(17, 22, 20, 0.56);
   --hero-chip-bg-accent: rgba(126, 168, 255, 0.22);
   --hero-chip-border: rgba(242, 245, 242, 0.12);
@@ -3839,6 +3851,12 @@ body.math130-course-page {
   max-width: 38rem;
 }
 
+.cv-hero .page-shell-header__eyebrow,
+.cv-hero__identity .subtitle {
+  color: var(--hero-on-dark-muted);
+  opacity: 1;
+}
+
 .page-shell-header--profile .contact-info {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3855,8 +3873,10 @@ body.math130-course-page {
   min-height: 3rem;
   padding: 0.8rem 1rem;
   border-radius: 999px;
-  background: var(--surface-transparent);
-  box-shadow: inset 0 0 0 1px var(--surface-transparent);
+  background: var(--hero-contact-bg);
+  box-shadow: inset 0 0 0 1px var(--hero-contact-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .page-shell-header--profile .contact-item--wide {
@@ -3866,22 +3886,25 @@ body.math130-course-page {
 
 .page-shell-header--profile .contact-item i {
   font-size: 0.95rem;
-  opacity: 0.9;
+  color: var(--hero-contact-icon);
+  opacity: 1;
 }
 
-.contact-label {
+.page-shell-header--profile .contact-label {
   font-family: var(--type-meta-family);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--surface-transparent);
+  color: var(--hero-contact-label);
 }
 
 .page-shell-header--profile .contact-item a,
 .page-shell-header--profile .contact-item span:last-child {
-  color: var(--light-text);
-  text-decoration-color: var(--surface-transparent);
+  color: var(--hero-contact-value);
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 0.08em;
+  font-weight: 500;
 }
 
 .cv-intro {
