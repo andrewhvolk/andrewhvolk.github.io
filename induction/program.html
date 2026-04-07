@@ -123,6 +123,10 @@
     @media print {
       a { color: inherit; text-decoration: none; }
       .watermark { position: fixed; }
+      .print-page-break {
+        break-before: page;
+        page-break-before: always;
+      }
     }
   </style>
 </head>
@@ -153,7 +157,7 @@
       </div>
     </div>
 
-    <div class="section-title">Program Order</div>
+    <div class="section-title print-page-break">Program Order</div>
     <table class="schedule">
       <tr><td>5:30</td><td><strong>Welcome and Opening Prayer</strong> — Prof. Andrew H. Volk</td></tr>
       <tr><td>5:35</td><td><strong>Pi Mu Epsilon: Purpose and History</strong> — Emma Kay</td></tr>
@@ -168,7 +172,7 @@
       <tr><td>6:30</td><td><strong>Closing Remarks and Closing Prayer</strong> — Prof. Andrew H. Volk</td></tr>
     </table>
 
-    <div class="section-title">Pi Mu Epsilon Pledge</div>
+    <div class="section-title print-page-break">Pi Mu Epsilon Pledge</div>
     <div class="pledge">
       “I solemnly promise that I will exert my best efforts to promote true scholarship, particularly in mathematics; and that I will support the objectives of the Pi Mu Epsilon Honor Society.”
     </div>
