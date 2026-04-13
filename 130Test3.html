@@ -1263,22 +1263,22 @@
 <!-- Mock Quiz CTA -->
 <div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg review-callout--padded">
 <h3 class="review-callout__title u-text-center">📝 Mock Quiz Mode</h3>
-<p class="review-callout__body review-callout__body--sm u-text-center">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 10 mixes Sections 5.1 & 5.2; Quizzes 11–13 prioritize exact trig, bearings, and vector workflows).</p>
+<p class="review-callout__body review-callout__body--sm u-text-center">Each mock quiz has 5 one-attempt questions sampled from an alignment-focused pool (Quiz 9 mixes Sections 5.1 &amp; 5.2; Quizzes 10–12 prioritize exact trig, bearings, and vector workflows).</p>
 <div class="review-option-grid">
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(5)">
-<div class="review-option-title">Quiz 10 — Sections 5.1–5.2 (Core Skills)</div>
+<div class="review-option-title">Quiz 9 — Sections 5.1–5.2 (Core Skills)</div>
 <div class="review-option-copy">Coterminal angles + exact trig triangle skills</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(6)">
-<div class="review-option-title">Quiz 11 — Section 5.3 (Core Skills)</div>
+<div class="review-option-title">Quiz 10 — Section 5.3 (Core Skills)</div>
 <div class="review-option-copy">Reference angles, signs, and solving trig equations on 0°–360°</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
-<div class="review-option-title">Quiz 12 — Section 7.1 (Core Skills)</div>
+<div class="review-option-title">Quiz 11 — Section 7.1 (Core Skills)</div>
 <div class="review-option-copy">Airplane applications, angle of elevation, and bearings</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(8)">
-<div class="review-option-title">Quiz 13 — Section 8.4 (Core Skills)</div>
+<div class="review-option-title">Quiz 12 — Section 8.4 (Core Skills)</div>
 <div class="review-option-copy">Graph/resultant vectors and magnitude-direction conversions</div>
 </button>
 </div>
@@ -3622,26 +3622,26 @@
     // --- MOCK QUIZ MODE ---
     const QUIZ_CONFIG = {
         5: {
-            label: 'Quiz 10 — Sections 5.1–5.2 (Core Skills)',
+            label: 'Quiz 9 — Sections 5.1–5.2 (Core Skills)',
             sections: ['Section 5.1', 'Section 5.2'],
             requiredIds: ['angle_coterminal', 'angle_coterminal_rad', 'trig_ratio', 'solve_right_triangle_side_52', 'trig_from_given_ratio'],
             excludedIds: ['trig_calculator_values', 'angle_unit_conversion'],
             count: 5
         },
         6: {
-            label: 'Quiz 11 — Section 5.3 (Core Skills)',
+            label: 'Quiz 10 — Section 5.3 (Core Skills)',
             sections: ['Section 5.3'],
             requiredIds: ['reference_angle_deg', 'quadrant_signs', 'trig_values_from_info', 'solve_trig_equation_special'],
             count: 5
         },
         7: {
-            label: 'Quiz 12 — Section 7.1 (Core Skills)',
+            label: 'Quiz 11 — Section 7.1 (Core Skills)',
             sections: ['Section 7.1'],
             requiredIds: ['angle_of_elevation', 'distance_rate_time', 'two_right_triangles', 'bearing_navigation', 'oblique_triangle_area'],
             count: 5
         },
         8: {
-            label: 'Quiz 13 — Section 8.4 (Core Skills)',
+            label: 'Quiz 12 — Section 8.4 (Core Skills)',
             sections: ['Section 8.4'],
             requiredIds: ['vector_components', 'graph_vector_addition', 'vector_from_mag_dir', 'resultant_from_direction_vectors', 'vector_mag_direction'],
             count: 5
