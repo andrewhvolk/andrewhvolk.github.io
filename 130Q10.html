@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math 130 – Quiz 10 Notes | Section 5.3</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1310;
+    --paper: #fff;
+    --cream: #f5f1ea;
+    --rust: #b84c2b;
+    --gold: #c9922a;
+    --blue: #4a6fa5;
+    --muted: #6b5f55;
+    --rule: #d8d0c5;
+    --green: #2e7d32;
+    --red: #c62828;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 10pt;
+    color: var(--ink);
+    background: white;
+    line-height: 1.45;
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    padding: 0.35in 0.4in 0.3in;
+    display: flex;
+    flex-direction: column;
+    gap: 7pt;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: white;
+    padding: 8pt 12pt 7pt;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 3pt solid var(--gold);
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 1;
+  }
+  header h1 em { color: var(--gold); font-style: italic; }
+  .hdr-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  /* ── GRID LAYOUT ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7pt;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 7pt;
+  }
+  .span2 { grid-column: span 2; }
+
+  /* ── CARD ── */
+  .card {
+    border: 1px solid var(--rule);
+    border-radius: 2pt;
+    overflow: hidden;
+  }
+  .card-head {
+    background: var(--ink);
+    color: white;
+    padding: 4pt 8pt;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .card-head.rust  { background: var(--rust); }
+  .card-head.blue  { background: var(--blue); }
+  .card-head.gold  { background: var(--gold); color: var(--ink); }
+  .card-head.green { background: var(--green); }
+
+  .card-body {
+    padding: 6pt 8pt;
+    background: white;
+  }
+
+  /* ── REF ANGLE TABLE ── */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4pt 10pt;
+  }
+  .ref-row {
+    display: flex;
+    align-items: center;
+    gap: 5pt;
+    font-size: 9pt;
+  }
+  .q-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 600;
+    color: var(--blue);
+    min-width: 22pt;
+  }
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    background: var(--cream);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+  }
+  .note {
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 3pt;
+  }
+
+  /* ── STEPS ── */
+  .steps-row {
+    display: flex;
+    gap: 6pt;
+    align-items: flex-start;
+  }
+  .step-box {
+    flex: 1;
+    display: flex;
+    gap: 5pt;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: var(--blue);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 11pt;
+    font-weight: 700;
+    width: 18pt;
+    height: 18pt;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .step-content {}
+  .step-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    font-weight: 600;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1.5pt;
+  }
+  .step-desc {
+    font-size: 8.5pt;
+    line-height: 1.45;
+  }
+  .step-arrow {
+    color: var(--rule);
+    font-size: 16pt;
+    line-height: 1;
+    margin-top: 4pt;
+    flex-shrink: 0;
+  }
+
+  /* ── ASTC CHART ── */
+  .astc-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3pt;
+    max-width: 160pt;
+    margin: 0 auto;
+  }
+  .astc-cell {
+    padding: 5pt 4pt;
+    text-align: center;
+    border-radius: 2pt;
+    font-size: 8pt;
+  }
+  .astc-cell .big {
+    font-family: 'Playfair Display', serif;
+    font-size: 12pt;
+    font-weight: 700;
+    display: block;
+    line-height: 1.1;
+  }
+  .astc-cell .small {
+    font-size: 6.5pt;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .q2 { background: #fff3e0; }
+  .q2 .big { color: #e65100; }
+  .q1 { background: #e8f5e9; }
+  .q1 .big { color: #2e7d32; }
+  .q3 { background: #fce4ec; }
+  .q3 .big { color: #c62828; }
+  .q4 { background: #e3f2fd; }
+  .q4 .big { color: #1565c0; }
+  .astc-mnemonic {
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 4pt;
+  }
+  .astc-mnemonic strong { color: var(--ink); font-style: normal; }
+
+  /* ── SPECIAL TRIANGLES ── */
+  .tri-row {
+    display: flex;
+    gap: 10pt;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  .tri-item { text-align: center; }
+  .tri-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    color: var(--muted);
+    margin-bottom: 3pt;
+  }
+  .tri-vals {
+    font-size: 8.5pt;
+    line-height: 1.65;
+    text-align: left;
+  }
+  .tri-vals strong { color: var(--rust); }
+
+  /* ── TRIG FROM POINT ── */
+  .def-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3pt 10pt;
+    font-size: 8.5pt;
+  }
+  .def-row {
+    display: flex;
+    gap: 5pt;
+    align-items: center;
+  }
+  .fn-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    color: var(--rust);
+    min-width: 28pt;
+    font-weight: 600;
+  }
+  .fn-def {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    background: var(--cream);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+  }
+
+  /* ── FINDING TWO ANGLES ── */
+  .angle-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3pt 8pt;
+    align-items: center;
+    font-size: 8.5pt;
+  }
+  .step-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 6.5pt;
+    background: var(--rust);
+    color: white;
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── RIGHT TRIANGLE ── */
+  .rt-list {
+    font-size: 8.5pt;
+    line-height: 1.7;
+    list-style: none;
+  }
+  .rt-list li::before {
+    content: "▸ ";
+    color: var(--gold);
+    font-size: 7pt;
+  }
+  .m { font-family: 'JetBrains Mono', monospace; font-size: 8pt; background: var(--cream); padding: 0 3pt; border-radius: 2pt; }
+
+  /* ── COMMON ERRORS ── */
+  .err-list {
+    font-size: 8pt;
+    line-height: 1.65;
+    list-style: none;
+  }
+  .err-list li { padding-left: 10pt; position: relative; }
+  .err-list li::before {
+    content: "✕";
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-size: 7pt;
+    top: 1pt;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 0;
+  }
+
+  @media print {
+    body { background: white; }
+    .page {
+      margin: 0;
+      padding: 0.3in 0.38in 0.25in;
+    }
+  }
+
+  @page {
+    size: letter;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <h1>Math 130 &mdash; Quiz 10 <em>Notes</em></h1>
+    <div class="hdr-right">
+      Section 5.3<br>
+      Reference Angles &amp; Trig Functions<br>
+      Spring 2026
+    </div>
+  </header>
+
+  <!-- ROW 1: Reference Angle Formulas + 3-Step Process -->
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="card-head blue">Reference Angle Formulas &nbsp;(θ′)</div>
+      <div class="card-body">
+        <div class="ref-grid">
+          <div class="ref-row">
+            <span class="q-badge">Q I</span>
+            <span class="formula">θ′ = θ</span>
+          </div>
+          <div class="ref-row">
+            <span class="q-badge">Q II</span>
+            <span class="formula">θ′ = 180° − θ</span>
+          </div>
+          <div class="ref-row">
+            <span class="q-badge">Q III</span>
+            <span class="formula">θ′ = θ − 180°</span>
+          </div>
+          <div class="ref-row">
+            <span class="q-badge">Q IV</span>
+            <span class="formula">θ′ = 360° − θ</span>
+          </div>
+        </div>
+        <p class="note">For radians, replace 180° with π and 360° with 2π.</p>
+        <p class="note">Negative angle? Add 360° (or 2π) first to get a co-terminal angle, <em>then</em> identify quadrant.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head blue">The 3-Step Process — use on every trig value problem</div>
+      <div class="card-body">
+        <div class="steps-row">
+          <div class="step-box">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-title">Find θ′</div>
+              <div class="step-desc">Identify the quadrant, then apply the reference-angle formula.</div>
+            </div>
+          </div>
+          <div class="step-arrow">›</div>
+          <div class="step-box">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-title">Evaluate at θ′</div>
+              <div class="step-desc">Use a special triangle to get the magnitude — always positive.</div>
+            </div>
+          </div>
+          <div class="step-arrow">›</div>
+          <div class="step-box">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-title">Apply the Sign</div>
+              <div class="step-desc">Use the ASTC chart to assign +/− based on the original quadrant.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: ASTC + Special Triangles + Six Trig Defs -->
+  <div class="grid-3">
+
+    <div class="card">
+      <div class="card-head rust">ASTC Sign Chart</div>
+      <div class="card-body">
+        <div class="astc-wrap">
+          <div class="astc-cell q2">
+            <span class="big">S</span>
+            <span class="small">Q II<br>sin, csc ✓<br>cos &amp; tan −</span>
+          </div>
+          <div class="astc-cell q1">
+            <span class="big">A</span>
+            <span class="small">Q I<br>ALL positive</span>
+          </div>
+          <div class="astc-cell q3">
+            <span class="big">T</span>
+            <span class="small">Q III<br>tan, cot ✓<br>sin &amp; cos −</span>
+          </div>
+          <div class="astc-cell q4">
+            <span class="big">C</span>
+            <span class="small">Q IV<br>cos, sec ✓<br>sin &amp; tan −</span>
+          </div>
+        </div>
+        <p class="astc-mnemonic"><strong>"All Students Take Calculus"</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head gold">Special Triangle Values</div>
+      <div class="card-body">
+        <div class="tri-row">
+          <div class="tri-item">
+            <div class="tri-label">30 – 60 – 90</div>
+            <svg width="68" height="60" viewBox="0 0 68 60">
+              <polygon points="4,55 64,55 64,8" fill="#fff8ec" stroke="#c9922a" stroke-width="1.5"/>
+              <text x="34" y="54" font-size="8" fill="#888" text-anchor="middle">√3</text>
+              <text x="66" y="34" font-size="8" fill="#888">1</text>
+              <text x="28" y="26" font-size="8.5" fill="#c9922a" font-weight="bold" text-anchor="middle">2</text>
+              <text x="10" y="50" font-size="7" fill="#888">30°</text>
+              <text x="47" y="22" font-size="7" fill="#888">60°</text>
+            </svg>
+            <div class="tri-vals">
+              sin 30° = <strong>½</strong><br>
+              cos 30° = <strong>√3/2</strong><br>
+              sin 60° = <strong>√3/2</strong><br>
+              cos 60° = <strong>½</strong><br>
+              tan 30° = <strong>√3/3</strong><br>
+              tan 60° = <strong>√3</strong>
+            </div>
+          </div>
+          <div class="tri-item">
+            <div class="tri-label">45 – 45 – 90</div>
+            <svg width="62" height="60" viewBox="0 0 62 60">
+              <polygon points="4,55 58,55 4,8" fill="#e3f2fd" stroke="#4a6fa5" stroke-width="1.5"/>
+              <text x="31" y="54" font-size="8" fill="#888" text-anchor="middle">1</text>
+              <text x="0" y="34" font-size="8" fill="#888">1</text>
+              <text x="32" y="30" font-size="8.5" fill="#4a6fa5" font-weight="bold">√2</text>
+              <text x="7" y="50" font-size="7" fill="#888">45°</text>
+              <text x="7" y="20" font-size="7" fill="#888">45°</text>
+            </svg>
+            <div class="tri-vals">
+              sin 45° = <strong>√2/2</strong><br>
+              cos 45° = <strong>√2/2</strong><br>
+              tan 45° = <strong>1</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head green">Six Trig Functions from a Point (x, y)</div>
+      <div class="card-body">
+        <p style="font-size:8pt; margin-bottom:5pt; color:var(--muted);">First compute: <span class="m">r = √(x² + y²)</span> &nbsp;(always &gt; 0)</p>
+        <div class="def-grid">
+          <div class="def-row"><span class="fn-name">sin θ</span><span class="fn-def">= y/r</span></div>
+          <div class="def-row"><span class="fn-name">csc θ</span><span class="fn-def">= r/y</span></div>
+          <div class="def-row"><span class="fn-name">cos θ</span><span class="fn-def">= x/r</span></div>
+          <div class="def-row"><span class="fn-name">sec θ</span><span class="fn-def">= r/x</span></div>
+          <div class="def-row"><span class="fn-name">tan θ</span><span class="fn-def">= y/x</span></div>
+          <div class="def-row"><span class="fn-name">cot θ</span><span class="fn-def">= x/y</span></div>
+        </div>
+        <p class="note" style="margin-top:5pt;">Signs come from x and y directly — no need for ASTC. Verify with ASTC as a sanity-check.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 3: Finding Two Angles + Right Triangle + Common Errors -->
+  <div class="grid-3">
+
+    <div class="card">
+      <div class="card-head rust">Finding Two Angles in [0°, 360°]</div>
+      <div class="card-body">
+        <p style="font-size:8pt; margin-bottom:5pt;">Example: <span class="m">sin θ = −√3/2</span></p>
+        <div class="angle-grid">
+          <span class="step-tag">Step 1</span>
+          <span>Ignore sign → reference angle θ′ = 60°</span>
+          <span class="step-tag">Step 2</span>
+          <span>Negative sine → Q III &amp; Q IV only</span>
+          <span class="step-tag">Step 3</span>
+          <span>Build angles:<br>
+            Q III: <span class="m">180° + 60° = 240°</span><br>
+            Q IV: <span class="m">360° − 60° = 300°</span>
+          </span>
+        </div>
+        <hr class="divider" style="margin:5pt 0;">
+        <p style="font-size:8pt; font-weight:600; margin-bottom:2pt;">Negative-value quadrant summary:</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2pt 8pt; font-size:8pt;">
+          <span>sin &lt; 0 → Q III, IV</span>
+          <span>sin &gt; 0 → Q I, II</span>
+          <span>cos &lt; 0 → Q II, III</span>
+          <span>cos &gt; 0 → Q I, IV</span>
+          <span>tan &lt; 0 → Q II, IV</span>
+          <span>tan &gt; 0 → Q I, III</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head blue">Solving a Right Triangle</div>
+      <div class="card-body">
+        <ul class="rt-list">
+          <li><strong>Missing side:</strong> Pythagorean Theorem — <span class="m">a² + b² = c²</span></li>
+          <li><strong>Find angle from two sides:</strong> use inverse trig
+            <br>&nbsp;&nbsp;<span class="m">sin⁻¹(opp/hyp)</span>, &nbsp;<span class="m">cos⁻¹(adj/hyp)</span>, &nbsp;<span class="m">tan⁻¹(opp/adj)</span></li>
+          <li><strong>Third angle:</strong> angles sum to 180° → <span class="m">α = 90° − β</span></li>
+          <li><strong>Check:</strong> α + β + 90° = 180° ✓</li>
+        </ul>
+        <p class="note" style="margin-top:4pt;">Example (Quiz Q10): legs 21 &amp; b, hyp 29<br>
+          <span class="m">b = √(29²−21²) = √400 = 20</span><br>
+          <span class="m">β = sin⁻¹(20/29) ≈ 43.6°</span> &nbsp;·&nbsp; <span class="m">α ≈ 46.4°</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head" style="background:#6b5f55;">Common Errors to Avoid</div>
+      <div class="card-body">
+        <ul class="err-list">
+          <li>Forgetting to negate after finding the reference-angle value (sign step).</li>
+          <li>Using the reference angle itself as the final answer — it must be acute.</li>
+          <li>Working with a negative angle directly instead of converting to a co-terminal first.</li>
+          <li>Writing cos = 4/5 when x = −4 (ignoring the negative x).</li>
+          <li>Mixing up sin/cos in Step 2 (e.g., using sin 60° when you need cos 60°).</li>
+          <li>For reciprocal functions: csc/sec share the sign of sin/cos — a positive csc means positive sin.</li>
+          <li>Confusing θ′ formula: Q III uses θ − 180°, not 180° − θ.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 4: Worked Example Strip -->
+  <div class="card">
+    <div class="card-head rust">Worked Example &mdash; Evaluating cos(240°) via the 3-Step Process</div>
+    <div class="card-body" style="display:flex; gap:12pt; align-items:flex-start; flex-wrap:wrap;">
+      <div style="flex:1; min-width:140pt;">
+        <div style="display:flex; gap:4pt; align-items:center; margin-bottom:3pt;">
+          <div style="background:var(--blue); color:white; font-family:'JetBrains Mono',monospace; font-size:7pt; padding:1pt 5pt; border-radius:2pt;">STEP 1</div>
+          <strong style="font-size:8.5pt;">Find θ′</strong>
+        </div>
+        <p style="font-size:8.5pt;">240° is between 180°–270° → <strong>Q III</strong><br>
+        θ′ = 240° − 180° = <strong>60°</strong></p>
+      </div>
+      <div style="color:var(--rule); font-size:18pt; line-height:1; margin-top:6pt;">›</div>
+      <div style="flex:1; min-width:140pt;">
+        <div style="display:flex; gap:4pt; align-items:center; margin-bottom:3pt;">
+          <div style="background:var(--blue); color:white; font-family:'JetBrains Mono',monospace; font-size:7pt; padding:1pt 5pt; border-radius:2pt;">STEP 2</div>
+          <strong style="font-size:8.5pt;">Evaluate at θ′</strong>
+        </div>
+        <p style="font-size:8.5pt;">From the 30-60-90 triangle:<br>cos(60°) = <strong>1/2</strong> &nbsp;← magnitude only</p>
+      </div>
+      <div style="color:var(--rule); font-size:18pt; line-height:1; margin-top:6pt;">›</div>
+      <div style="flex:1; min-width:140pt;">
+        <div style="display:flex; gap:4pt; align-items:center; margin-bottom:3pt;">
+          <div style="background:var(--blue); color:white; font-family:'JetBrains Mono',monospace; font-size:7pt; padding:1pt 5pt; border-radius:2pt;">STEP 3</div>
+          <strong style="font-size:8.5pt;">Apply the Sign</strong>
+        </div>
+        <p style="font-size:8.5pt;">ASTC: Q III → only tangent is positive.<br>Cosine is negative → cos(240°) = <strong>−1/2</strong> ✓</p>
+      </div>
+      <div style="color:var(--rule); font-size:18pt; line-height:1; margin-top:6pt;">›</div>
+      <div style="flex:1; min-width:140pt;">
+        <div style="display:flex; gap:4pt; align-items:center; margin-bottom:3pt;">
+          <div style="background:var(--green); color:white; font-family:'JetBrains Mono',monospace; font-size:7pt; padding:1pt 5pt; border-radius:2pt;">POINT EXAMPLE</div>
+          <strong style="font-size:8.5pt;">From (−4, 3)</strong>
+        </div>
+        <p style="font-size:8.5pt;">r = √(16+9) = <strong>5</strong><br>
+        sin θ = 3/5 &nbsp;·&nbsp; cos θ = −4/5<br>
+        tan θ = −3/4 &nbsp;(Q II ✓ via ASTC)</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
