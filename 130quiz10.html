@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math 130 – Quiz 10 Practice | Section 5.3</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1310;
+    --paper: #f7f3ed;
+    --cream: #ede8df;
+    --rust: #b84c2b;
+    --gold: #c9922a;
+    --muted: #7a6f65;
+    --rule: #cfc8be;
+    --correct-bg: #e8f5e9;
+    --correct: #2e7d32;
+    --wrong-bg: #fdecea;
+    --wrong: #c62828;
+    --hint-bg: #fff8ec;
+    --step-bg: #f0f4ff;
+    --step-border: #4a6fa5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; line-height: 1.7; min-height: 100vh; }
+
+  /* HEADER */
+  header { background: var(--ink); color: var(--paper); padding: 3rem 2rem 2.4rem; position: relative; overflow: hidden; }
+  header::before { content: "θ"; position: absolute; right: -0.05em; top: -0.15em; font-family: 'Playfair Display', serif; font-size: 18rem; color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; user-select: none; }
+  .header-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .course-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 0.35rem; }
+  header h1 em { color: var(--gold); font-style: italic; }
+  .subtitle { font-size: 0.95rem; color: rgba(247,243,237,0.55); font-style: italic; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
+
+  /* OVERVIEW */
+  .overview { background: var(--ink); color: var(--paper); border-radius: 2px; padding: 2rem 2.2rem; margin-bottom: 2.5rem; }
+  .overview h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 1rem; border-bottom: 1px solid rgba(201,146,42,0.3); padding-bottom: 0.5rem; }
+  .overview p { font-size: 0.95rem; color: rgba(247,243,237,0.82); margin-bottom: 0.5rem; }
+  .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; margin-top: 1.2rem; }
+  .topic-item { display: flex; align-items: flex-start; gap: 0.55rem; font-size: 0.88rem; color: rgba(247,243,237,0.75); }
+  .topic-item .bullet { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 0.1rem; flex-shrink: 0; }
+
+  /* 3-STEP WORKFLOW */
+  .workflow { background: var(--step-bg); border: 1px solid #c5d3e8; border-radius: 2px; padding: 1.6rem 2rem; margin-bottom: 2.5rem; }
+  .workflow h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--step-border); margin-bottom: 1.4rem; }
+  .steps { display: flex; gap: 0; position: relative; }
+  .steps::before { content: ''; position: absolute; top: 1.5rem; left: 1.5rem; right: 1.5rem; height: 2px; background: #c5d3e8; z-index: 0; }
+  .step { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; padding: 0 0.5rem; }
+  .step-num { width: 3rem; height: 3rem; background: var(--step-border); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.7rem; flex-shrink: 0; }
+  .step-title { font-size: 0.78rem; font-weight: 600; color: var(--step-border); margin-bottom: 0.3rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; text-transform: uppercase; }
+  .step-desc { font-size: 0.82rem; color: #3a4f6e; line-height: 1.5; }
+  .step-desc .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; background: #dce6f5; padding: 0.05em 0.25em; border-radius: 2px; }
+
+  /* WORKED EXAMPLE */
+  .worked { border: 1px solid var(--rule); border-radius: 2px; margin-bottom: 2.5rem; overflow: hidden; }
+  .worked-header { background: var(--rust); color: white; padding: 0.75rem 1.4rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+  .worked-header h3 { font-family: 'Playfair Display', serif; font-size: 1rem; }
+  .worked-toggle { font-size: 1rem; transition: transform 0.25s; display: inline-block; }
+  .worked-body { background: white; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .worked-body.open { max-height: 2800px; }
+
+  /* TRIANGLE DIAGRAM */
+  .triangle-wrap { display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap; margin-top: 0.8rem; }
+  .triangle-svg-wrap { flex-shrink: 0; }
+  .triangle-blanks { flex: 1; min-width: 200px; }
+  .triangle-blanks h5 { font-family: 'Playfair Display', serif; font-size: 0.88rem; color: var(--muted); margin-bottom: 0.75rem; font-weight: 400; font-style: italic; }
+  .trig-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 0.5rem; }
+  .trig-table th { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0.3rem 0.5rem; text-align: left; border-bottom: 1px solid var(--rule); }
+  .trig-table td { padding: 0.35rem 0.5rem; vertical-align: middle; }
+  .trig-table input[type="text"] { border: 1px solid var(--rule); border-radius: 2px; padding: 0.3rem 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; width: 110px; background: var(--paper); transition: border-color 0.2s; }
+  .trig-table input:focus { outline: none; border-color: var(--gold); background: white; }
+  .trig-table input.correct { border-color: var(--correct); background: var(--correct-bg); }
+  .trig-table input.wrong { border-color: var(--wrong); background: var(--wrong-bg); }
+  .trig-table .given { font-family: 'JetBrains Mono', monospace; color: var(--step-border); font-weight: 600; }
+  .worked-inner { padding: 1.6rem 1.8rem; }
+  .example-problem { background: var(--cream); border-left: 3px solid var(--rust); padding: 0.8rem 1.1rem; margin-bottom: 1.3rem; font-size: 0.95rem; }
+  .ex-step { display: flex; gap: 1rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--rule); }
+  .ex-step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .ex-badge { background: var(--rust); color: white; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; padding: 0.2em 0.6em; border-radius: 2px; height: fit-content; margin-top: 0.2rem; flex-shrink: 0; text-transform: uppercase; }
+  .ex-content { font-size: 0.9rem; line-height: 1.65; color: #2a2320; }
+  .ex-content .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: var(--cream); padding: 0.05em 0.3em; border-radius: 2px; }
+  .ex-content strong { color: var(--rust); }
+
+  /* REFERENCE PANEL */
+  .reference-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2.5rem; }
+  .ref-card { background: white; border: 1px solid var(--rule); border-radius: 2px; padding: 1.2rem 1.4rem; }
+  .ref-card h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--rust); margin-bottom: 0.9rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule); }
+  .astc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; max-width: 210px; margin: 0 auto; }
+  .astc-cell { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.7rem 0.4rem; font-size: 0.78rem; text-align: center; border-radius: 2px; }
+  .astc-cell.q1 { background: #e8f5e9; }
+  .astc-cell.q2 { background: #fff3e0; }
+  .astc-cell.q3 { background: #fce4ec; }
+  .astc-cell.q4 { background: #e3f2fd; }
+  .astc-cell .qnum { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); margin-bottom: 0.15rem; }
+  .astc-cell .pos { font-weight: 700; font-size: 0.88rem; }
+  .astc-cell.q1 .pos { color: #2e7d32; }
+  .astc-cell.q2 .pos { color: #e65100; }
+  .astc-cell.q3 .pos { color: #c62828; }
+  .astc-cell.q4 .pos { color: #1565c0; }
+  .astc-cell .functions { font-size: 0.68rem; color: var(--muted); line-height: 1.35; margin-top: 0.15rem; }
+  .astc-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 0.65rem; font-style: italic; }
+  .tri-row { display: flex; gap: 0.8rem; justify-content: space-around; margin-top: 0.3rem; }
+  .tri-item { text-align: center; }
+  .tri-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-bottom: 0.3rem; }
+  .tri-values { font-size: 0.79rem; color: var(--ink); line-height: 1.6; }
+
+  /* SECTION LABEL */
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--rule); padding-bottom: 0.4rem; margin-bottom: 1.8rem; margin-top: 2.8rem; }
+
+  /* QUESTION CARD */
+  .question-card { background: white; border: 1px solid var(--rule); border-radius: 2px; padding: 1.6rem 1.8rem; margin-bottom: 1.4rem; transition: border-color 0.2s; }
+  .question-card:focus-within { border-color: var(--gold); }
+  .q-header { display: flex; align-items: baseline; gap: 0.9rem; margin-bottom: 0.6rem; }
+  .q-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--rust); line-height: 1; flex-shrink: 0; }
+  .q-text { font-size: 1rem; color: var(--ink); line-height: 1.55; }
+  .q-text .math { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--cream); padding: 0.05em 0.3em; border-radius: 2px; }
+
+  /* HINT TOGGLE */
+  .hint-toggle { background: none; border: 1px dashed var(--gold); color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.28em 0.75em; border-radius: 2px; cursor: pointer; margin-top: 0.5rem; display: inline-block; transition: background 0.15s; }
+  .hint-toggle:hover { background: var(--hint-bg); }
+  .inline-hint { background: var(--hint-bg); border-left: 3px solid var(--gold); padding: 0.65rem 1rem; margin-top: 0.55rem; font-size: 0.86rem; color: #4a3a20; line-height: 1.6; display: none; border-radius: 0 2px 2px 0; }
+  .inline-hint.open { display: block; }
+  .inline-hint .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; background: #fde9b8; padding: 0.05em 0.3em; border-radius: 2px; }
+
+  /* CHOICES */
+  .choices { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .choice-label { display: flex; align-items: center; gap: 0.7rem; cursor: pointer; padding: 0.6rem 0.9rem; border: 1px solid var(--rule); border-radius: 2px; font-size: 0.93rem; transition: background 0.15s, border-color 0.15s; user-select: none; }
+  .choice-label:hover { background: var(--cream); border-color: var(--gold); }
+  .choice-label input[type="radio"] { accent-color: var(--rust); width: 15px; height: 15px; flex-shrink: 0; }
+  .choice-label.correct { background: var(--correct-bg) !important; border-color: var(--correct) !important; color: var(--correct); }
+  .choice-label.wrong   { background: var(--wrong-bg)   !important; border-color: var(--wrong)   !important; color: var(--wrong); }
+
+  /* MULTI-BLANK */
+  .multi-blank { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.9rem; }
+  .blank-group { display: flex; flex-direction: column; gap: 0.25rem; }
+  .blank-group label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+  .blank-group input[type="text"] { border: 1px solid var(--rule); border-radius: 2px; padding: 0.5rem 0.7rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; width: 130px; background: var(--paper); transition: border-color 0.2s; }
+  .blank-group input:focus { outline: none; border-color: var(--gold); background: white; }
+  .blank-group input.correct { border-color: var(--correct); background: var(--correct-bg); }
+  .blank-group input.wrong   { border-color: var(--wrong);   background: var(--wrong-bg); }
+
+  /* FEEDBACK */
+  .feedback { margin-top: 0.9rem; padding: 0.85rem 1.1rem; border-radius: 2px; font-size: 0.88rem; line-height: 1.6; display: none; }
+  .feedback.show { display: block; }
+  .feedback.correct { background: var(--correct-bg); color: #1b5e20; border-left: 3px solid var(--correct); }
+  .feedback.wrong   { background: var(--wrong-bg);   color: #7f0000; border-left: 3px solid var(--wrong); }
+  .feedback .why { display: block; margin-top: 0.45rem; font-style: italic; opacity: 0.9; }
+  .feedback .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; }
+
+  /* BUTTONS */
+  .btn-row { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.9rem; }
+  .check-btn { background: var(--ink); color: var(--paper); border: none; padding: 0.5rem 1.2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background 0.15s; }
+  .check-btn:hover { background: var(--rust); }
+  .check-btn:disabled { background: var(--muted); cursor: default; }
+
+  /* SCORE BAR */
+  .score-bar { position: sticky; bottom: 0; background: var(--ink); color: var(--paper); padding: 0.9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; border-top: 2px solid var(--gold); z-index: 100; }
+  .score-label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .score-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); }
+  .progress-wrap { flex: 1; margin: 0 1.5rem; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.4s ease; border-radius: 2px; }
+
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.88em; }
+
+  @media (max-width: 620px) {
+    .topic-grid, .reference-panel { grid-template-columns: 1fr; }
+    .steps { flex-direction: column; }
+    .steps::before { display: none; }
+    .score-bar { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .progress-wrap { width: 100%; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="course-tag">Math 130 &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; Section 5.3</div>
+    <h1>Quiz 10 <em>Practice</em></h1>
+    <div class="subtitle">Reference Angles &amp; Trigonometric Functions</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <div class="overview">
+    <h2>What's on Quiz 10?</h2>
+    <p>This quiz covers <strong>Section 5.3</strong> — using reference angles to evaluate trig functions for any angle, identifying quadrants from sign conditions, and finding all angles that produce a given trig value.</p>
+    <div class="topic-grid">
+      <div class="topic-item"><span class="bullet">▸</span><span>Finding and using <strong>reference angles</strong> (θ′)</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>Evaluating <strong>sin, cos, tan</strong> for non-acute angles</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>Determining the <strong>quadrant</strong> from sign conditions</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>Finding <strong>two angles</strong> (0°–360°) satisfying a trig equation</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>All <strong>six trig functions</strong> from a point (x, y)</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>Sketching angles in <strong>standard position</strong></span></div>
+    </div>
+  </div>
+
+  <!-- 3-STEP WORKFLOW -->
+  <div class="workflow">
+    <h3>The 3-Step Process — use this on every trig value problem</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Find θ′</div>
+        <div class="step-desc">
+          Locate the quadrant, then use its formula:<br>
+          Q I: <span class="mono">θ′ = θ</span><br>
+          Q II: <span class="mono">θ′ = 180° − θ</span><br>
+          Q III: <span class="mono">θ′ = θ − 180°</span><br>
+          Q IV: <span class="mono">θ′ = 360° − θ</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Evaluate at θ′</div>
+        <div class="step-desc">
+          Look up the trig value for the reference angle using a special triangle. This step always gives a <em>positive</em> number — the magnitude of the answer.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Apply the Sign</div>
+        <div class="step-desc">
+          Use the ASTC chart to decide whether the answer is positive or negative based on which quadrant the original angle θ is in.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKED EXAMPLE -->
+  <div class="worked">
+    <div class="worked-header" id="worked-hdr" onclick="toggleWorked()">
+      <h3>📖 Worked Example — click to expand and see the 3 steps in action</h3>
+      <span class="worked-toggle" id="worked-icon">▼</span>
+    </div>
+    <div class="worked-body" id="worked-body">
+      <div class="worked-inner">
+        <div class="example-problem">
+          <strong>Problem:</strong> For θ = 210°, find the reference angle θ′ and then find <strong>sin(210°)</strong> exactly.
+        </div>
+
+        <div class="ex-step">
+          <div class="ex-badge">Step 1</div>
+          <div class="ex-content">
+            <strong>Which quadrant?</strong> 210° is between 180° and 270° → <strong>Quadrant III</strong>.<br>
+            Reference angle formula for Q III: <span class="mono">θ′ = θ − 180°</span><br>
+            <span class="mono">θ′ = 210° − 180° = <strong>30°</strong></span>
+          </div>
+        </div>
+
+        <div class="ex-step">
+          <div class="ex-badge">Step 2</div>
+          <div class="ex-content">
+            <strong>Look up sin at the reference angle:</strong><br>
+            From the 30-60-90 triangle: <span class="mono">sin(30°) = 1/2</span><br>
+            The <em>magnitude</em> of the answer is <strong>1/2</strong>.
+          </div>
+        </div>
+
+        <div class="ex-step">
+          <div class="ex-badge">Step 3</div>
+          <div class="ex-content">
+            <strong>Apply the sign using ASTC:</strong><br>
+            In Quadrant III, only <strong>Tangent</strong> is positive. Sine is <strong>negative</strong>.<br>
+            Final answer: <span class="mono">sin(210°) = <strong>−1/2</strong></span>
+          </div>
+        </div>
+
+        <div class="ex-step">
+          <div class="ex-badge">Bonus</div>
+          <div class="ex-content">
+            <strong>What if the angle is negative, like θ = −5π/6?</strong><br>
+            Negative angles rotate clockwise. First add 2π to get a positive co-terminal angle:<br>
+            <span class="mono">−5π/6 + 2π = 7π/6</span>&nbsp; (which is 210° — same situation as above!)<br>
+            Then follow the same 3 steps. <span class="mono">sin(−5π/6) = −1/2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASTC + SPECIAL TRIANGLES -->
+  <div class="reference-panel">
+
+    <div class="ref-card">
+      <h4>ASTC Sign Chart — which functions are positive?</h4>
+      <div class="astc-grid">
+        <div class="astc-cell q2">
+          <div class="qnum">Q II</div>
+          <div class="pos">S positive</div>
+          <div class="functions">sin, csc ✓<br>cos &amp; tan negative</div>
+        </div>
+        <div class="astc-cell q1">
+          <div class="qnum">Q I</div>
+          <div class="pos">All positive</div>
+          <div class="functions">sin, cos,<br>tan all ✓</div>
+        </div>
+        <div class="astc-cell q3">
+          <div class="qnum">Q III</div>
+          <div class="pos">T positive</div>
+          <div class="functions">tan, cot ✓<br>sin &amp; cos negative</div>
+        </div>
+        <div class="astc-cell q4">
+          <div class="qnum">Q IV</div>
+          <div class="pos">C positive</div>
+          <div class="functions">cos, sec ✓<br>sin &amp; tan negative</div>
+        </div>
+      </div>
+      <p class="astc-note">Memory: <strong>"All Students Take Calculus"</strong></p>
+    </div>
+
+    <div class="ref-card">
+      <h4>Special Triangle Values</h4>
+      <div class="tri-row">
+        <div class="tri-item">
+          <svg width="82" height="75" viewBox="0 0 82 75">
+            <polygon points="6,69 76,69 76,12" fill="#fff3e0" stroke="#e65100" stroke-width="1.5"/>
+            <text x="40" y="67" font-size="9.5" fill="#666" text-anchor="middle">√3</text>
+            <text x="79" y="44" font-size="9.5" fill="#666">1</text>
+            <text x="32" y="34" font-size="9.5" fill="#e65100" text-anchor="middle">2</text>
+            <text x="13" y="62" font-size="8.5" fill="#888">30°</text>
+            <text x="60" y="28" font-size="8.5" fill="#888">60°</text>
+          </svg>
+          <div class="tri-label">30–60–90</div>
+          <div class="tri-values">
+            sin 30° = <strong>1/2</strong><br>
+            cos 30° = <strong>√3/2</strong><br>
+            sin 60° = <strong>√3/2</strong><br>
+            cos 60° = <strong>1/2</strong>
+          </div>
+        </div>
+        <div class="tri-item">
+          <svg width="78" height="75" viewBox="0 0 78 75">
+            <polygon points="6,69 72,69 6,12" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+            <text x="38" y="67" font-size="9.5" fill="#666" text-anchor="middle">1</text>
+            <text x="1" y="43" font-size="9.5" fill="#666">1</text>
+            <text x="42" y="36" font-size="9.5" fill="#1565c0" text-anchor="middle">√2</text>
+            <text x="10" y="62" font-size="8.5" fill="#888">45°</text>
+            <text x="10" y="22" font-size="8.5" fill="#888">45°</text>
+          </svg>
+          <div class="tri-label">45–45–90</div>
+          <div class="tri-values">
+            sin 45° = <strong>√2/2</strong><br>
+            cos 45° = <strong>√2/2</strong><br>
+            tan 45° = <strong>1</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WORKED EXAMPLE 2: SIX TRIG FUNCTIONS FROM A POINT -->
+  <div class="worked">
+    <div class="worked-header" id="worked-hdr2" onclick="toggleWorked2()">
+      <h3>📍 Worked Example — Six Trig Functions from a Point</h3>
+      <span class="worked-toggle" id="worked-icon2">▼</span>
+    </div>
+    <div class="worked-body" id="worked-body2">
+      <div class="worked-inner">
+        <div class="example-problem">
+          <strong>Problem:</strong> The point (−3, −4) lies on the terminal side of angle θ. Find r and all six trig functions of θ.
+        </div>
+
+        <div class="ex-step">
+          <div class="ex-badge">Step 1</div>
+          <div class="ex-content">
+            <strong>Identify x and y, then compute r:</strong><br>
+            <span class="mono">x = −3</span>, &nbsp;<span class="mono">y = −4</span><br>
+            <span class="mono">r = √(x² + y²) = √(9 + 16) = √25 = <strong>5</strong></span><br>
+            Note: r is <em>always positive</em> — it is a distance.
+          </div>
+        </div>
+
+        <div class="ex-step">
+          <div class="ex-badge">Step 2</div>
+          <div class="ex-content">
+            <strong>Apply the definitions directly — signs come from x and y, not from a quadrant rule:</strong><br>
+            <span class="mono">sin θ = y/r = −4/5</span><br>
+            <span class="mono">cos θ = x/r = −3/5</span><br>
+            <span class="mono">tan θ = y/x = (−4)/(−3) = <strong>4/3</strong></span> &nbsp;← both negative, so tan is positive (Q III ✓)
+          </div>
+        </div>
+
+        <div class="ex-step">
+          <div class="ex-badge">Step 3</div>
+          <div class="ex-content">
+            <strong>Find the three reciprocal functions by flipping:</strong><br>
+            <span class="mono">csc θ = 1/sin θ = r/y = 5/(−4) = <strong>−5/4</strong></span><br>
+            <span class="mono">sec θ = 1/cos θ = r/x = 5/(−3) = <strong>−5/3</strong></span><br>
+            <span class="mono">cot θ = 1/tan θ = x/y = (−3)/(−4) = <strong>3/4</strong></span>
+          </div>
+        </div>
+
+        <div class="ex-step">
+          <div class="ex-badge">Check</div>
+          <div class="ex-content">
+            <strong>Sanity-check with ASTC:</strong> (−3, −4) is in Quadrant III — only tangent and cotangent should be positive. ✓<br>
+            sin and cos are negative ✓ &nbsp;·&nbsp; tan and cot are positive ✓ &nbsp;·&nbsp; csc and sec are negative ✓
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ QUESTIONS ══════════════════ -->
+
+  <div class="section-label">Section A — Reference Angles</div>
+
+  <div class="question-card" id="q1">
+    <div class="q-header"><div class="q-num">1</div><div class="q-text">What is the reference angle for <span class="math">θ = 150°</span>?</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h1')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h1">150° falls between 90° and 180° — that's <strong>Quadrant II</strong>. For Q II, the formula is <span class="mono">θ′ = 180° − θ</span>.</div>
+    <div class="choices">
+      <label class="choice-label"><input type="radio" name="q1" value="A"> <span>30°</span></label>
+      <label class="choice-label"><input type="radio" name="q1" value="B"> <span>60°</span></label>
+      <label class="choice-label"><input type="radio" name="q1" value="C"> <span>150°</span></label>
+      <label class="choice-label"><input type="radio" name="q1" value="D"> <span>45°</span></label>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMC('q1','A',
+      'θ′ = 180° − 150° = 30°. The reference angle is always the acute angle to the nearest x-axis.',
+      'If you chose 60°: 150° is 30° away from the 180° axis, not 60°. If you chose 150° itself: the reference angle must always be acute (under 90°).')">Check</button></div>
+    <div class="feedback" id="q1-fb"></div>
+  </div>
+
+  <div class="question-card" id="q2">
+    <div class="q-header"><div class="q-num">2</div><div class="q-text">Find the reference angle for <span class="math">θ = −5π/6</span>.</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h2')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h2">Negative angles rotate <em>clockwise</em>. Add 2π to get a positive co-terminal angle first: <span class="mono">−5π/6 + 2π = 7π/6</span>. Now, 7π/6 is between π and 3π/2 — which quadrant is that? Then apply the right formula.</div>
+    <div class="choices">
+      <label class="choice-label"><input type="radio" name="q2" value="A"> <span>5π/6</span></label>
+      <label class="choice-label"><input type="radio" name="q2" value="B"> <span>π/3</span></label>
+      <label class="choice-label"><input type="radio" name="q2" value="C"> <span>π/6</span></label>
+      <label class="choice-label"><input type="radio" name="q2" value="D"> <span>π/4</span></label>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMC('q2','C',
+      'Co-terminal angle = 7π/6 (Q III). θ′ = 7π/6 − π = π/6.',
+      'A common mistake is working with −5π/6 directly instead of converting first. If you chose 5π/6: that is just the magnitude of the original angle — not the reference angle, which must be acute. The terminal side of 7π/6 is π/6 away from the negative x-axis.')">Check</button></div>
+    <div class="feedback" id="q2-fb"></div>
+  </div>
+
+  <div class="question-card" id="q3">
+    <div class="q-header"><div class="q-num">3</div><div class="q-text">What is the reference angle for <span class="math">θ = 300°</span>?</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h3')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h3">300° is between 270° and 360°, placing it in <strong>Quadrant IV</strong>. For Q IV: <span class="mono">θ′ = 360° − θ</span>.</div>
+    <div class="choices">
+      <label class="choice-label"><input type="radio" name="q3" value="A"> <span>60°</span></label>
+      <label class="choice-label"><input type="radio" name="q3" value="B"> <span>30°</span></label>
+      <label class="choice-label"><input type="radio" name="q3" value="C"> <span>300°</span></label>
+      <label class="choice-label"><input type="radio" name="q3" value="D"> <span>120°</span></label>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMC('q3','A',
+      'θ′ = 360° − 300° = 60°.',
+      'If you chose 30°: 300° belongs to the 60° family (it is 60° away from the x-axis), not the 30° family. Think of it as 360° − 300° = 60°.')">Check</button></div>
+    <div class="feedback" id="q3-fb"></div>
+  </div>
+
+  <div class="section-label">Section B — Exact Trig Values</div>
+
+  <div class="question-card" id="q4">
+    <div class="q-header"><div class="q-num">4</div><div class="q-text">Find the <strong>exact</strong> value of <span class="math">cos(240°)</span>.</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h4')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h4"><strong>Step 1:</strong> 240° is in Q III → <span class="mono">θ′ = 240° − 180° = 60°</span>.<br><strong>Step 2:</strong> From your special triangle: <span class="mono">cos(60°) = 1/2</span>.<br><strong>Step 3:</strong> Check your ASTC chart — is cosine positive or negative in Q III?</div>
+    <div class="choices">
+      <label class="choice-label"><input type="radio" name="q4" value="A"> <span>1/2</span></label>
+      <label class="choice-label"><input type="radio" name="q4" value="B"> <span>−√3/2</span></label>
+      <label class="choice-label"><input type="radio" name="q4" value="C"> <span>−1/2</span></label>
+      <label class="choice-label"><input type="radio" name="q4" value="D"> <span>√3/2</span></label>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMC('q4','C',
+      'θ′ = 60°, cos(60°) = 1/2. Cosine is negative in Q III → cos(240°) = −1/2.',
+      'If you chose +1/2: you got the magnitude right but forgot to flip the sign — cosine is negative in Q III (only tangent is positive there). If you chose −√3/2: that would be cos(150°), using sin(60°) instead of cos(60°) — be careful which function you look up in Step 2.')">Check</button></div>
+    <div class="feedback" id="q4-fb"></div>
+  </div>
+
+  <div class="question-card" id="q5">
+    <div class="q-header"><div class="q-num">5</div><div class="q-text">Find the <strong>exact</strong> value of <span class="math">tan(135°)</span>.</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h5')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h5">135° is in Q II. Reference angle: <span class="mono">180° − 135° = 45°</span>. From the 45-45-90 triangle: <span class="mono">tan(45°) = 1</span>. Now check: is tangent positive or negative in Q II?</div>
+    <div class="choices">
+      <label class="choice-label"><input type="radio" name="q5" value="A"> <span>1</span></label>
+      <label class="choice-label"><input type="radio" name="q5" value="B"> <span>√2</span></label>
+      <label class="choice-label"><input type="radio" name="q5" value="C"> <span>−1</span></label>
+      <label class="choice-label"><input type="radio" name="q5" value="D"> <span>−√2</span></label>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMC('q5','C',
+      'θ′ = 45°, tan(45°) = 1. In Q II only sine is positive → tan(135°) = −1.',
+      'If you chose +1: correct magnitude, wrong sign. In Q II only sine (and csc) are positive — tangent is negative. If you chose −√2: tan(45°) = sin/cos = (√2/2)/(√2/2) = 1, not √2. √2 is the hypotenuse of the 45-45-90 triangle, not a trig value.')">Check</button></div>
+    <div class="feedback" id="q5-fb"></div>
+  </div>
+
+  <div class="section-label">Section C — Quadrant Identification</div>
+
+  <div class="question-card" id="q6">
+    <div class="q-header"><div class="q-num">6</div><div class="q-text">The terminal side of θ satisfies <span class="math">cos θ &gt; 0</span> and <span class="math">sin θ &lt; 0</span>. In which quadrant does θ lie?</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h6')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h6">Translate into coordinates: since <span class="mono">r > 0</span> always, <span class="mono">cos θ = x/r > 0</span> means <strong>x > 0</strong> (right side) and <span class="mono">sin θ = y/r &lt; 0</span> means <strong>y &lt; 0</strong> (below x-axis). Which quadrant is right and below?</div>
+    <div class="choices">
+      <label class="choice-label"><input type="radio" name="q6" value="A"> <span>Quadrant I</span></label>
+      <label class="choice-label"><input type="radio" name="q6" value="B"> <span>Quadrant II</span></label>
+      <label class="choice-label"><input type="radio" name="q6" value="C"> <span>Quadrant III</span></label>
+      <label class="choice-label"><input type="radio" name="q6" value="D"> <span>Quadrant IV</span></label>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMC('q6','D',
+      'cos > 0 → x > 0 (right). sin < 0 → y < 0 (below x-axis). That intersection is Quadrant IV.',
+      'If you chose Q III: sin is indeed negative there, but cos is also negative in Q III — both conditions must be satisfied simultaneously. Q IV is the only quadrant with cos positive AND sin negative.')">Check</button></div>
+    <div class="feedback" id="q6-fb"></div>
+  </div>
+
+  <div class="question-card" id="q7">
+    <div class="q-header"><div class="q-num">7</div><div class="q-text">Identify the quadrant where <span class="math">csc θ &gt; 0</span> and <span class="math">cos θ &lt; 0</span>.</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h7')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h7">First, translate the reciprocal: <span class="mono">csc θ = 1/sin θ</span>, so csc > 0 means <strong>sin > 0</strong> as well (same sign). Now you have: sin > 0 and cos &lt; 0. Which two quadrants have sin > 0? Of those, which also has cos &lt; 0?</div>
+    <div class="choices">
+      <label class="choice-label"><input type="radio" name="q7" value="A"> <span>Quadrant I</span></label>
+      <label class="choice-label"><input type="radio" name="q7" value="B"> <span>Quadrant II</span></label>
+      <label class="choice-label"><input type="radio" name="q7" value="C"> <span>Quadrant III</span></label>
+      <label class="choice-label"><input type="radio" name="q7" value="D"> <span>Quadrant IV</span></label>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkMC('q7','B',
+      'csc > 0 → sin > 0 (upper half: Q I or Q II). cos < 0 → left half (Q II or Q III). The overlap is Quadrant II.',
+      'The key first move is converting csc > 0 into sin > 0 — they always share the same sign since csc = 1/sin. Once you do that, treat it like Q6: narrow down by each condition separately, then find where they overlap.')">Check</button></div>
+    <div class="feedback" id="q7-fb"></div>
+  </div>
+
+  <div class="section-label">Section D — Finding Angles from a Trig Value</div>
+
+  <div class="question-card" id="q8">
+    <div class="q-header"><div class="q-num">8</div><div class="q-text">Find <strong>two</strong> angles between 0° and 360° satisfying <span class="math">sin θ = −√3/2</span>.</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h8')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h8">
+      <strong>1)</strong> Ignore the sign first — what reference angle gives <span class="mono">sin θ′ = √3/2</span>? (Look at your 30-60-90 triangle.)<br>
+      <strong>2)</strong> The value is negative, so θ must be in a quadrant where sine is negative. That's <strong>Q III and Q IV</strong>.<br>
+      <strong>3)</strong> Build the two angles: Q III → <span class="mono">180° + θ′</span>, and Q IV → <span class="mono">360° − θ′</span>.
+    </div>
+    <div class="multi-blank">
+      <div class="blank-group"><label>First angle</label><input type="text" id="q8a" placeholder="___°"></div>
+      <div class="blank-group"><label>Second angle</label><input type="text" id="q8b" placeholder="___°"></div>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkDoubleAngle('q8','240','300',
+      'θ′ = 60°. Sine is negative in Q III and Q IV. Q III: 180°+60° = 240°. Q IV: 360°−60° = 300°.',
+      'A common error is placing the answers in Q I or Q II, where sine is positive. Since the given value is negative, both answers must come from Q III and Q IV only.')">Check</button></div>
+    <div class="feedback" id="q8-fb"></div>
+  </div>
+
+  <div class="section-label">Section E — Six Trig Functions from a Point</div>
+
+  <div class="question-card" id="q9">
+    <div class="q-header"><div class="q-num">9</div><div class="q-text">The point <span class="math">(−4, 3)</span> lies on the terminal side of θ. Find <span class="math">r</span>, then compute <span class="math">sin θ</span>, <span class="math">cos θ</span>, and <span class="math">tan θ</span>.</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h9')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h9">
+      With <span class="mono">x = −4</span> and <span class="mono">y = 3</span>:<br>
+      &nbsp;&nbsp;r = √(x² + y²) &nbsp;— always positive.<br>
+      &nbsp;&nbsp;sin θ = y/r &nbsp;·&nbsp; cos θ = x/r &nbsp;·&nbsp; tan θ = y/x<br>
+      Pay close attention to signs — x is negative, so cos θ will be negative too.
+    </div>
+    <div class="multi-blank">
+      <div class="blank-group"><label>r =</label><input type="text" id="q9r" placeholder="exact"></div>
+      <div class="blank-group"><label>sin θ =</label><input type="text" id="q9s" placeholder="y/r"></div>
+      <div class="blank-group"><label>cos θ =</label><input type="text" id="q9c" placeholder="x/r"></div>
+      <div class="blank-group"><label>tan θ =</label><input type="text" id="q9t" placeholder="y/x"></div>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkSixTrig()">Check</button></div>
+    <div class="feedback" id="q9-fb"></div>
+  </div>
+
+  <div class="question-card" id="q10">
+    <div class="q-header"><div class="q-num">10</div><div class="q-text"><strong>Solve the right triangle.</strong> Given the labeled triangle below, find the missing side and both unknown angles. Round angles to the nearest tenth of a degree.</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h10')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h10">
+      <strong>Missing side:</strong> Use the Pythagorean theorem — <span class="mono">a² + b² = c²</span>. You know two sides.<br>
+      <strong>Angle β:</strong> You know the side opposite β and the hypotenuse, so use <span class="mono">sin β = opp/hyp</span> → <span class="mono">β = sin⁻¹(opp/hyp)</span>.<br>
+      <strong>Angle α:</strong> Either use inverse trig on another ratio, <em>or</em> use the fact that the three angles of a triangle sum to 180°.
+    </div>
+
+    <div class="triangle-wrap">
+      <!-- SVG Triangle Diagram -->
+      <div class="triangle-svg-wrap">
+        <svg width="240" height="185" viewBox="0 0 240 185" style="display:block;">
+          <!-- Triangle -->
+          <polygon points="20,160 205,160 205,28" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="2"/>
+          <!-- Right angle box at C -->
+          <rect x="188" y="143" width="17" height="17" fill="white" stroke="#4a6fa5" stroke-width="1.5"/>
+          <!-- Vertex labels -->
+          <text x="5" y="166" font-size="14" fill="#1a1310" font-family="Georgia,serif" font-style="italic" font-weight="bold">B</text>
+          <text x="210" y="166" font-size="14" fill="#1a1310" font-family="Georgia,serif" font-style="italic" font-weight="bold">C</text>
+          <text x="210" y="26" font-size="14" fill="#1a1310" font-family="Georgia,serif" font-style="italic" font-weight="bold">A</text>
+          <!-- BC = 21 (bottom, given) -->
+          <text x="112" y="178" font-size="12" fill="#2e7d32" font-family="monospace" text-anchor="middle" font-weight="bold">21</text>
+          <!-- AC = b (right side, unknown) -->
+          <text x="217" y="100" font-size="12" fill="#b84c2b" font-family="monospace" font-style="italic">b = ?</text>
+          <!-- AB = 29 (hypotenuse) -->
+          <text x="88" y="83" font-size="12" fill="#1565c0" font-family="monospace" text-anchor="middle" font-weight="bold">29</text>
+          <!-- Angle arc at B -->
+          <path d="M 43,160 A 23,23 0 0,0 30.5,139" fill="none" stroke="#c9922a" stroke-width="1.5"/>
+          <text x="40" y="152" font-size="12" fill="#c9922a" font-family="Georgia,serif" font-style="italic">β</text>
+          <!-- Angle arc at A -->
+          <path d="M 205,51 A 23,23 0 0,0 183,40" fill="none" stroke="#c9922a" stroke-width="1.5"/>
+          <text x="181" y="58" font-size="12" fill="#c9922a" font-family="Georgia,serif" font-style="italic">α</text>
+          <!-- Right angle label -->
+          <text x="191" y="158" font-size="9" fill="#4a6fa5">90°</text>
+        </svg>
+      </div>
+
+      <!-- Answer blanks as a clean table -->
+      <div class="triangle-blanks">
+        <h5>Fill in all missing measurements:</h5>
+        <table class="trig-table">
+          <thead><tr><th>Element</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Side BC</td><td><span class="given">21</span></td></tr>
+            <tr><td>Side AC &nbsp;(<em>b</em>)</td><td><input type="text" id="q10b" placeholder="find b"></td></tr>
+            <tr><td>Hypotenuse AB</td><td><span class="given">29</span></td></tr>
+            <tr><td>Angle β (at B)</td><td><input type="text" id="q10beta" placeholder="___°"></td></tr>
+            <tr><td>Angle α (at A)</td><td><input type="text" id="q10alpha" placeholder="___°"></td></tr>
+            <tr><td>Angle C</td><td><span class="given">90°</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="btn-row"><button class="check-btn" onclick="checkSolveTriangle()">Check</button></div>
+    <div class="feedback" id="q10-fb"></div>
+  </div>
+
+</main>
+
+<div class="score-bar">
+  <div><div class="score-label">Score</div><div class="score-value" id="score-display">0 / 0</div></div>
+  <div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+  <div><div class="score-label">Answered</div><div class="score-value" id="answered-display">0 / 10</div></div>
+</div>
+
+<script>
+  let answered = new Set();
+  let correct  = new Set();
+
+  function updateScore() {
+    document.getElementById('score-display').textContent    = `${correct.size} / ${answered.size}`;
+    document.getElementById('answered-display').textContent = `${answered.size} / 10`;
+    document.getElementById('progress-fill').style.width    = `${(answered.size / 10) * 100}%`;
+  }
+
+  function showFeedback(id, isCorrect, correctMsg, wrongMsg) {
+    const fb = document.getElementById(id + '-fb');
+    fb.className = `feedback show ${isCorrect ? 'correct' : 'wrong'}`;
+    if (isCorrect) {
+      fb.innerHTML = `<strong>✓ Correct!</strong> ${correctMsg}`;
+    } else {
+      fb.innerHTML = `<strong>✗ Not quite.</strong> ${correctMsg}<span class="why">⚠ Why this happens: ${wrongMsg}</span>`;
+    }
+  }
+
+  function toggleHint(id) {
+    const el  = document.getElementById(id);
+    const btn = el.previousElementSibling;
+    el.classList.toggle('open');
+    btn.textContent = el.classList.contains('open') ? '🙈 Hide hint' : '💡 Need a hint?';
+  }
+
+  function toggleWorked() {
+    const body = document.getElementById('worked-body');
+    const icon = document.getElementById('worked-icon');
+    body.classList.toggle('open');
+    icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+  }
+
+  function checkMC(qid, correctVal, correctMsg, wrongMsg) {
+    const selected = document.querySelector(`input[name="${qid}"]:checked`);
+    if (!selected) { alert('Please select an answer first.'); return; }
+    if (answered.has(qid)) return;
+    answered.add(qid);
+    const isCorrect = selected.value === correctVal;
+    if (isCorrect) correct.add(qid);
+    document.querySelectorAll(`#${qid} .choice-label`).forEach(lbl => {
+      const inp = lbl.querySelector('input');
+      inp.disabled = true;
+      if (inp.value === correctVal) lbl.classList.add('correct');
+      else if (inp.checked) lbl.classList.add('wrong');
+    });
+    document.querySelector(`#${qid} .check-btn`).disabled = true;
+    showFeedback(qid, isCorrect, correctMsg, wrongMsg);
+    updateScore();
+  }
+
+  function normalize(val) {
+    return val.trim().replace(/\s+/g,'').toLowerCase().replace(/°/g,'').replace(/deg/g,'');
+  }
+
+  function checkDoubleAngle(qid, ans1, ans2, correctMsg, wrongMsg) {
+    if (answered.has(qid)) return;
+    const a = normalize(document.getElementById(qid+'a').value);
+    const b = normalize(document.getElementById(qid+'b').value);
+    if (!a || !b) { alert('Please fill in both angles.'); return; }
+    const pair = new Set([a, b]);
+    const isCorrect = pair.has(ans1) && pair.has(ans2);
+    answered.add(qid);
+    if (isCorrect) correct.add(qid);
+    ['a','b'].forEach(s => {
+      const inp = document.getElementById(qid+s);
+      inp.disabled = true;
+      inp.classList.add(isCorrect ? 'correct' : 'wrong');
+    });
+    document.querySelector(`#${qid} .check-btn`).disabled = true;
+    showFeedback(qid, isCorrect, correctMsg, wrongMsg);
+    updateScore();
+  }
+
+  function toggleWorked2() {
+    const body = document.getElementById('worked-body2');
+    const icon = document.getElementById('worked-icon2');
+    body.classList.toggle('open');
+    icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+  }
+
+  function checkSolveTriangle() {
+    if (answered.has('q10')) return;
+    const bRaw    = normalize(document.getElementById('q10b').value);
+    const betaRaw = normalize(document.getElementById('q10beta').value);
+    const alphaRaw= normalize(document.getElementById('q10alpha').value);
+    if (!bRaw || !betaRaw || !alphaRaw) { alert('Please fill in all three blanks.'); return; }
+
+    // b = 20 exactly
+    const bOk = bRaw === '20';
+    // β = arcsin(20/29) ≈ 43.6°  (accept within 1°)
+    const betaVal  = parseFloat(betaRaw);
+    const alphaVal = parseFloat(alphaRaw);
+    const betaOk   = !isNaN(betaVal)  && Math.abs(betaVal  - 43.6) <= 1.0;
+    const alphaOk  = !isNaN(alphaVal) && Math.abs(alphaVal - 46.4) <= 1.0;
+
+    const isCorrect = bOk && betaOk && alphaOk;
+    answered.add('q10');
+    if (isCorrect) correct.add('q10');
+
+    ['q10b','q10beta','q10alpha'].forEach(id => {
+      const el = document.getElementById(id);
+      el.disabled = true;
+    });
+    document.getElementById('q10b').classList.add(bOk ? 'correct' : 'wrong');
+    document.getElementById('q10beta').classList.add(betaOk ? 'correct' : 'wrong');
+    document.getElementById('q10alpha').classList.add(alphaOk ? 'correct' : 'wrong');
+    document.querySelector('#q10 .check-btn').disabled = true;
+
+    showFeedback('q10', isCorrect,
+      'b = √(29² − 21²) = √(841 − 441) = √400 = 20. ' +
+      'β = sin⁻¹(20/29) ≈ 43.6°. α = sin⁻¹(21/29) ≈ 46.4°. Check: 43.6° + 46.4° + 90° = 180° ✓',
+      (!bOk
+        ? 'For side b: use the Pythagorean theorem — 21² + b² = 29². So b² = 841 − 441 = 400, b = 20. '
+        : '') +
+      (!betaOk
+        ? 'For β: the side opposite β is AC = b = 20, and the hypotenuse is 29, so sin β = 20/29 → β ≈ 43.6°. '
+        : '') +
+      (!alphaOk
+        ? 'For α: either use sin α = 21/29 ≈ 46.4°, or subtract from 90° since α + β = 90°. '
+        : '')
+    );
+    updateScore();
+  }
+
+  function checkSixTrig() {
+    if (answered.has('q9')) return;
+    const r = normalize(document.getElementById('q9r').value);
+    const s = normalize(document.getElementById('q9s').value);
+    const c = normalize(document.getElementById('q9c').value);
+    const t = normalize(document.getElementById('q9t').value);
+    if (!r || !s || !c || !t) { alert('Please fill in all four blanks.'); return; }
+    const rOk = r === '5';
+    const sOk = ['3/5','0.6'].includes(s);
+    const cOk = ['-4/5','−4/5'].includes(c);
+    const tOk = ['-3/4','−3/4'].includes(t);
+    const isCorrect = rOk && sOk && cOk && tOk;
+    answered.add('q9');
+    if (isCorrect) correct.add('q9');
+    ['q9r','q9s','q9c','q9t'].forEach(id => {
+      const el = document.getElementById(id);
+      el.disabled = true;
+      el.classList.add(isCorrect ? 'correct' : 'wrong');
+    });
+    document.querySelector('#q9 .check-btn').disabled = true;
+    showFeedback('q9', isCorrect,
+      'r = √(16+9) = 5. sin θ = 3/5, cos θ = −4/5, tan θ = −3/4. Reciprocals: csc = 5/3, sec = −5/4, cot = −4/3.',
+      'Check your signs carefully. x = −4 makes cos θ negative. y = 3 makes sin θ positive. tan θ = y/x = 3/(−4) = −3/4. A common error is writing cos = 4/5 (positive) by ignoring the negative x.'
+    );
+    updateScore();
+  }
+</script>
+</body>
+</html>
