@@ -1703,10 +1703,6 @@
         try {
             // Also try migrating from old storage keys
             let saved = localStorage.getItem(STORAGE_KEY);
-            if (!saved) {
-                const oldKey = null;
-                if (oldKey) saved = oldKey;
-            }
             if (saved) {
                 const parsed = JSON.parse(saved);
                 state.theme = parsed.theme || state.theme;
@@ -1983,7 +1979,7 @@
                     q: `Find one coterminal angle (in degrees) for $\\theta = ${theta}^\\circ$.`,
                     svg: createCoterminalAngleSvg({
                         originalThetaDeg: theta,
-                        normalizedThetaDeg,
+                        normalizedThetaDeg: normalizedTheta,
                         fallbackText,
                         turnCount
                     }),
@@ -2037,7 +2033,7 @@
                 return {
                     q: `In a right triangle, opposite side $=${opp}$ and adjacent side $=${adj}$. Find $${pick}(\\theta)$. (Round to 4 decimals)`,
                     inputType: 'number', a: ans, tol: 0.0006,
-                    solution: pick === 'sin' ? `Hypotenuse $=\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\sin\\theta=\\frac{${opp}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : pick === 'cos' ? `Hypotenuse $=\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\cos\\theta=\\frac{${adj}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : `$\\tan\\theta=\\frac{\\text{opp}}{\\text{adj}}=\\frac{${opp}}{${adj}}=${ans.toFixed(4)}$.`
+                    solution: pick === 'sin' ? `Hypotenuse $=\\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\sin\\theta=\\frac{${opp}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : pick === 'cos' ? `Hypotenuse $=\\sqrt{${opp}^2+${adj}^2}=${hyp.toFixed(4)}$, so $\\cos\\theta=\\frac{${adj}}{${hyp.toFixed(4)}}=${ans.toFixed(4)}$.` : `$\\tan\\theta=\\frac{\\text{opp}}{\\text{adj}}=\\frac{${opp}}{${adj}}=${ans.toFixed(4)}$.`
                 };
             }
         },
