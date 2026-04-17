@@ -1,23 +1,7 @@
-// 1. Check local storage safely
-let savedTheme = null;
-try {
-    savedTheme = localStorage.getItem('theme');
-} catch (error) {
-    console.warn("localStorage is unavailable, defaulting to system preference.");
-}
-
-const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const mobileNavMediaQuery = window.matchMedia('(max-width: 768px)');
 
-// Set the theme before the DOM fully loads
-if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-} else {
-    document.documentElement.setAttribute('data-theme', 'light');
-}
-
 const menuToggleLabel = (expanded) => expanded ? 'Close navigation menu' : 'Open navigation menu';
-const submenuToggleLabel = (expanded) => expanded ? 'Close Courses submenu' : 'Open Courses submenu';
+const submenuToggleLabel = (expanded) => expanded ? 'Close submenu' : 'Open submenu';
 
 function getFocusableElements(container) {
     if (!container) return [];
