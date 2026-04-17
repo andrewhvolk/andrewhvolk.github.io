@@ -3056,6 +3056,23 @@
         loadQuestion();
     }
 
+    function showGeneratorError(genId, err) {
+        const feedback = document.getElementById('feedback-display');
+        feedback.className = 'feedback incorrect';
+        feedback.textContent = 'This practice generator ran into an error. Skipping to the next question.';
+        console.error('Generator failed', { id: genId, err });
+        document.getElementById('dynamic-inputs').innerHTML = '';
+        document.getElementById('btn-submit').style.display = 'none';
+        const btnNext = document.getElementById('btn-next');
+        btnNext.style.display = 'inline-block';
+        if (examState.isActive) {
+            btnNext.textContent = examState.currentIndex < examState.total - 1 ? 'Next Question' : 'See Results';
+        } else {
+            btnNext.textContent = 'Next Question';
+        }
+        btnNext.focus();
+    }
+
     function loadQuestion() {
         if (examState.isActive) {
             // Exam mode: advance to next question or show results
@@ -3066,8 +3083,8 @@
             }
             // Update progress bar
             document.getElementById('exam-progress-label').textContent = `${examState.currentIndex + 1} / ${examState.total}`;
-            document.getElementById('exam-progress-fill').style.width = `${((examState.currentIndex) / examState.total) * 100}%`;
-            
+            document.getElementById('exam-progress-fill').style.width = `${((examState.currentIndex + 1) / examState.total) * 100}%`;
+
             // Generate from the shuffled generator
             const gen = examState.questions[examState.currentIndex];
             currentQuiz = gen;
@@ -3075,10 +3092,7 @@
             try {
                 currentQuestion = gen.generate();
             } catch (err) {
-                const feedback = document.getElementById('feedback-display');
-                feedback.className = 'feedback incorrect';
-                feedback.textContent = 'This practice generator ran into an error. Please refresh and try again.';
-                console.error('Generator failed', { id: gen?.id, err });
+                showGeneratorError(gen?.id, err);
                 return;
             }
         } else {
@@ -3087,10 +3101,7 @@
             try {
                 currentQuestion = currentQuiz.generate();
             } catch (err) {
-                const feedback = document.getElementById('feedback-display');
-                feedback.className = 'feedback incorrect';
-                feedback.textContent = 'This practice generator ran into an error. Please refresh and try again.';
-                console.error('Generator failed', { id: currentQuiz?.id, err });
+                showGeneratorError(currentQuiz?.id, err);
                 return;
             }
         }
