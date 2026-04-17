@@ -4,10 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prof. Volk's Office</title>
+  <meta name="description" content="Course materials, study tools, and academic resources for mathematics, physics, and engineering — by Prof. Andrew H. Volk at Liberty University.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/">
   <link rel="stylesheet" href="/styles.css">
-  <script src="theme.js"></script>
+  <script>(function(){var s;try{s=localStorage.getItem('theme')}catch(e){}document.documentElement.setAttribute('data-theme',(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches))?'dark':'light')})();</script>
+  <script src="/theme.js" defer></script>
 </head>
 <body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
@@ -18,7 +22,7 @@
         <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="CV.html">About</a></li>
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">Courses ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">Courses ▾</button>
           <ul class="dropdown-menu">
             <li><a href="learn.html">All Courses</a></li>
             <li><a href="courses/math114.html">MATH 114</a></li>
@@ -30,7 +34,7 @@
       </ul>
       <ul class="top-nav-utilities" aria-label="More">
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More ▾</button>
           <ul class="dropdown-menu dropdown-menu--right">
             <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
             <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
@@ -57,7 +61,7 @@
   </div>
 </header>
 
-  <main class="container page-shell-main home-main">
+  <main id="main-content" class="container page-shell-main home-main">
     <section class="home-stage home-hero feature-section" aria-labelledby="home-hero-title">
       <div class="hero-copy-column">
         <p class="home-kicker">Start here</p>
@@ -137,7 +141,7 @@
 
   <footer>
     <div class="container">
-      <p>&copy; <span id="current-year">2025</span> Andrew H. Volk. All rights reserved.</p>
+      <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. All rights reserved.</p>
       <div class="social-links">
         <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
       </div>

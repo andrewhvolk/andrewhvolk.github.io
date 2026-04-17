@@ -2,6 +2,24 @@
 /* Global stylesheet for Prof. Volk's Office website */
 /* Updated: March 18, 2025 */
 
+/* Skip-to-main link for keyboard/screen-reader users */
+.skip-to-main {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--primary-main, #2563eb);
+  color: #fff;
+  border-radius: 0 0 4px 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.15s;
+}
+.skip-to-main:focus {
+  top: 0;
+}
+
 /* Global design tokens: high-end editorial system */
 :root {
   color-scheme: light;
