@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professor OS</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0f1117;
+    --surface:  #171c28;
+    --surface2: #1e2535;
+    --border:   #2a3248;
+    --sq:       #e8a838;
+    --sq-dim:   #7a5418;
+    --sq-glow:  rgba(232,168,56,0.18);
+    --ci:       #38c9b0;
+    --ci-dim:   #1a6157;
+    --ci-glow:  rgba(56,201,176,0.18);
+    --text:     #d4daf0;
+    --text-dim: #6b7599;
+    --sub:      #9ba5c8;
+    --done-bg:  #1e2e1e;
+    --done-fg:  #4a6b4a;
+    --na-bg:    #1a1a28;
+    --na-fg:    #46466a;
+    --eod-fg:   #9b59b6;
+    --danger:   #e74c3c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'DM Mono', monospace; min-height: 100vh;
+    padding: 0 0 80px; overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(232,168,56,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(56,201,176,0.05) 0%, transparent 60%);
+  }
+
+  /* ── HEADER & NAVIGATION W/ TIMER ── */
+  .top-wrapper { position: sticky; top: 0; z-index: 50; margin-bottom: 40px; }
+  nav {
+    display: flex; justify-content: center; gap: 8px;
+    padding: 20px 24px; border-bottom: 1px solid var(--border);
+    background: rgba(15, 17, 23, 0.85); backdrop-filter: blur(10px);
+  }
+  .tab-btn {
+    background: transparent; border: 1px solid transparent;
+    color: var(--text-dim); padding: 8px 20px; font-family: 'DM Mono', monospace;
+    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+    cursor: pointer; border-radius: 4px; transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--text); background: var(--surface2); }
+  .tab-btn.active { color: var(--text); border-color: var(--border); background: var(--surface); }
+
+  /* ── GLOBAL COUNTDOWN BANNER ── */
+  .timer-banner {
+    display: none; align-items: center; justify-content: center; gap: 12px;
+    background: var(--sq-glow); border-bottom: 1px solid var(--sq-dim);
+    padding: 10px 24px; text-align: center; font-size: 0.85rem; color: var(--sq);
+    backdrop-filter: blur(10px); animation: fadeDown 0.4s ease;
+  }
+  .timer-banner.active { display: flex; }
+  .timer-banner.urgent { background: rgba(231, 76, 60, 0.15); border-color: var(--danger); color: var(--danger); }
+  .timer-clear { background: transparent; border: none; color: inherit; opacity: 0.6; cursor: pointer; font-size: 0.75rem; text-decoration: underline; margin-left: 16px; font-family: 'DM Mono', monospace; }
+  .timer-clear:hover { opacity: 1; }
+
+  /* ── VIEW CONTAINERS ── */
+  .view-section { display: none; padding: 0 24px; max-width: 1100px; margin: 0 auto; animation: fadeIn 0.4s ease both; }
+  .view-section.active { display: block; }
+  header { text-align: center; margin-bottom: 32px; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 8px; }
+  header p { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* ── ROUTER STYLES ── */
+  .tree-container { background: var(--surface); border: 1px solid var(--border); padding: 40px; max-width: 650px; margin: 0 auto; text-align: center; border-radius: 8px; overflow: hidden; position: relative; }
+  .node-wrapper { position: relative; min-height: 200px; display: flex; align-items: center; justify-content: center; }
+  .node { display: none; width: 100%; position: absolute; opacity: 0; transition: all 0.4s; }
+  .node.active { display: block; position: relative; opacity: 1; z-index: 2; }
+  .node.slide-left-enter { transform: translateX(40px); }
+  .node.slide-right-enter { transform: translateX(-40px); }
+  .node.slide-left-exit { transform: translateX(-40px); opacity: 0; position: absolute; }
+  .node.slide-right-exit { transform: translateX(40px); opacity: 0; position: absolute; }
+  
+  .router-q { font-family: 'DM Serif Display', serif; font-size: 1.5rem; line-height: 1.3; margin-bottom: 32px; }
+  .options { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .choice-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 14px 28px; cursor: pointer; text-transform: uppercase; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 0.05em; transition: 0.2s;}
+  .choice-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--text-dim); }
+  .btn-primary { border-color: var(--sq) !important; color: var(--sq) !important; }
+  .btn-primary:hover { background: var(--sq-glow) !important; }
+  .result-icon { display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; font-size: 1.8rem; margin-bottom: 20px; border-radius: 50%; }
+  .icon-sq { border: 2px solid var(--sq); background: var(--sq-glow); color: var(--sq); border-radius: 8px; }
+  .icon-ev { border: 2px solid var(--eod-fg); background: rgba(155,89,182,0.15); color: var(--eod-fg); }
+  .action-links { display: flex; gap: 16px; justify-content: center; margin-top: 32px; }
+  .action-btn { padding: 10px 20px; text-transform: uppercase; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text); font-family: 'DM Mono', monospace; font-size: 0.75rem; text-decoration: none; }
+  .action-btn:hover { background: var(--surface2); }
+
+  /* Event Input Forms */
+  .input-group { display: flex; flex-direction: column; gap: 16px; max-width: 320px; margin: 0 auto 32px; text-align: left; }
+  .input-group label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); }
+  .custom-input { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 12px; font-family: 'DM Mono', monospace; font-size: 0.9rem; border-radius: 4px; outline: none; transition: 0.2s; }
+  .custom-input:focus { border-color: var(--sq); background: var(--surface2); }
+  
+  /* ── DASHBOARD STYLES ── */
+  .progress-wrap { max-width: 700px; margin: 0 auto 40px; }
+  .progress-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; font-size: 0.75rem; }
+  .progress-track { height: 6px; background: var(--surface2); border: 1px solid var(--border); position: relative; }
+  .progress-fill-sq { position: absolute; left: 0; top: 0; bottom: 0; background: var(--sq); width: 0%; transition: width 0.4s; }
+  .progress-fill-ci { position: absolute; left: 50%; top: 0; bottom: 0; background: var(--ci); width: 0%; opacity: 0.8; transition: width 0.4s; }
+  .progress-gate { margin-top: 10px; font-size: 0.67rem; text-transform: uppercase; text-align: center; }
+  .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 720px) { .columns { grid-template-columns: 1fr; } }
+  
+  .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .section-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; }
+  .sq-col .section-icon { border: 2px solid var(--sq); color: var(--sq); }
+  .ci-col .section-icon { border: 2px solid var(--ci); color: var(--ci); border-radius: 50%; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; }
+  
+  .task-list { display: flex; flex-direction: column; gap: 6px; }
+  .task-trigger { display: flex; align-items: center; gap: 9px; padding: 9px 12px; background: var(--surface); border: 1px solid var(--border); cursor: pointer; user-select: none; }
+  .task-trigger:hover { background: var(--surface2); }
+  .task-trigger.done { background: var(--done-bg); border-color: #3a5e3a; opacity: 0.72; }
+  .task-trigger.done .task-label { color: var(--done-fg); text-decoration: line-through; }
+  .task-trigger.na { background: var(--na-bg); border-color: #252538; }
+  .task-trigger.na .task-label { color: var(--na-fg); font-style: italic; }
+  
+  .check-box { flex-shrink: 0; width: 15px; height: 15px; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; transition: 0.2s; cursor: pointer; }
+  .sq-col .check-box { border-color: var(--sq-dim); }
+  .ci-col .check-box { border-color: var(--ci-dim); border-radius: 50%; }
+  .task-trigger.done .check-box { background: #3a5e3a; }
+  
+  .task-label { flex: 1; font-size: 0.78rem; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
+  .streak-badge { font-size: 0.65rem; color: #e67e22; background: rgba(230,126,34,0.1); padding: 2px 6px; border-radius: 4px; display: none; }
+  .has-streak .streak-badge { display: inline-block; }
+
+  .task-controls { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+  .na-btn { font-size: 0.56rem; padding: 2px 5px; cursor: pointer; background: transparent; border: 1px solid transparent; color: var(--text-dim); }
+  .na-btn:hover { border-color: var(--border); }
+  
+  .ci-col.locked { opacity: 0.4; pointer-events: none; }
+
+  /* ── INSIGHTS STYLES ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; border-radius: 8px; }
+  .stat-card h3 { font-family: 'DM Serif Display', serif; color: var(--text); margin-bottom: 16px; font-size: 1.2rem; }
+  .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed var(--border); font-size: 0.8rem; }
+  .stat-row:last-child { border: none; padding-bottom: 0; }
+  .stat-val { color: var(--sq); font-weight: 500; }
+  
+  /* ── MODALS ── */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(10,12,18,0.9); z-index: 100; align-items: center; justify-content: center; }
+  .overlay.show { display: flex; }
+  .modal { background: var(--surface2); border: 1px solid var(--border); padding: 32px; text-align: center; max-width: 400px; width: 90%; }
+  .modal h2 { font-family: 'DM Serif Display', serif; color: var(--text); margin-bottom: 12px; }
+  .modal p { font-size: 0.8rem; color: var(--sub); margin-bottom: 24px; line-height: 1.5; }
+  .modal-actions { display: flex; gap: 12px; justify-content: center; }
+
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-10px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+</style>
+</head>
+<body>
+
+<div class="top-wrapper">
+  <nav>
+    <button class="tab-btn active" onclick="switchTab('router')">Focus Router</button>
+    <button class="tab-btn" onclick="switchTab('dashboard')">Dashboard</button>
+    <button class="tab-btn" onclick="switchTab('insights')">Insights</button>
+  </nav>
+  
+  <div class="timer-banner" id="timerBanner">
+    <span id="timerText">⏳ Loading timer...</span>
+    <button class="timer-clear" onclick="clearTimer()">Dismiss</button>
+  </div>
+</div>
+
+<div class="overlay" id="resetModal">
+  <div class="modal">
+    <h2>New Day Detected</h2>
+    <p>It looks like it's <strong id="modalDayName">Today</strong>. Do you want to log yesterday's data and start fresh, or review yesterday's checklist first?</p>
+    <div class="modal-actions">
+      <button class="action-btn" onclick="closeModal()">Review Yesterday</button>
+      <button class="action-btn btn-primary" onclick="logAndReset()">Log & Start Today</button>
+    </div>
+  </div>
+</div>
+
+<main class="view-section active" id="view-router">
+  <header>
+    <h1>Workday Router</h1>
+    <p>Find your optimal focus right now</p>
+  </header>
+
+  <div class="tree-container">
+    <div class="node-wrapper" id="node-wrapper">
+      
+      <div class="node active" id="node-start">
+        <div class="router-q">Do you have any hard-scheduled events today?</div>
+        <div class="options">
+          <button class="choice-btn btn-primary" onclick="navTree('node-event-setup', true)">Yes</button>
+          <button class="choice-btn" onclick="navTree('node-luo', true)">No</button>
+        </div>
+      </div>
+
+      <div class="node" id="node-event-setup">
+        <div class="router-q">When is your next event?</div>
+        <div class="input-group">
+          <div>
+            <label>Event Title</label>
+            <input type="text" id="eventTitle" class="custom-input" placeholder="e.g., Dept Meeting, Office Hours" autocomplete="off" />
+          </div>
+          <div>
+            <label>Start Time</label>
+            <input type="time" id="eventTime" class="custom-input" />
+          </div>
+        </div>
+        <div class="options">
+          <button class="choice-btn btn-primary" onclick="handleTimerSetup()">Set Timer & Continue</button>
+          <button class="choice-btn" onclick="navTree('node-luo', true)">Skip</button>
+        </div>
+      </div>
+
+      <div class="node" id="node-luo">
+        <div class="router-q">Are your urgent communications and LUO duties handled?</div>
+        <div class="options">
+          <button class="choice-btn" onclick="navTree('node-grading', true)">Yes</button>
+          <button class="choice-btn btn-primary" onclick="navTree('node-do-comms', true)">No</button>
+        </div>
+      </div>
+
+      <div class="node" id="node-do-comms">
+        <div class="result-icon icon-sq">■</div>
+        <div class="router-q" style="color: var(--sq);">Communications Hub</div>
+        <p style="color:var(--text-dim); font-size:0.85rem; margin-bottom: 24px;">Clear out urgent student issues to unblock others.</p>
+        <div class="action-links">
+          <button class="action-btn btn-primary" onclick="switchTab('dashboard')">Open Dashboard ›</button>
+          <button class="action-btn" style="border:none;" onclick="navTree('node-start', false)">↺ Reset Router</button>
+        </div>
+      </div>
+
+      <div class="node" id="node-grading">
+        <div class="router-q">Is your grading queue clear and synced?</div>
+        <div class="options">
+          <button class="choice-btn" onclick="navTree('node-prep', true)">Yes</button>
+          <button class="choice-btn btn-primary" onclick="navTree('node-do-grading', true)">No</button>
+        </div>
+      </div>
+
+      <div class="node" id="node-do-grading">
+        <div class="result-icon icon-sq">■</div>
+        <div class="router-q" style="color: var(--sq);">The Grading Block</div>
+        <div class="action-links">
+          <button class="action-btn btn-primary" onclick="switchTab('dashboard')">Open Dashboard ›</button>
+        </div>
+      </div>
+
+      <div class="node" id="node-prep">
+        <div class="router-q">Are your upcoming lectures fully prepared?</div>
+        <div class="options">
+          <button class="choice-btn" onclick="navTree('node-deep', true)">Yes</button>
+          <button class="choice-btn btn-primary" onclick="navTree('node-do-prep', true)">No</button>
+        </div>
+      </div>
+
+      <div class="node" id="node-do-prep">
+        <div class="result-icon icon-sq" style="border-color:#e67e22; color:#e67e22;">📝</div>
+        <div class="router-q" style="color: #e67e22;">Lecture Assembly</div>
+        <div class="action-links">
+          <button class="action-btn" style="border-color:#e67e22; color:#e67e22;" onclick="switchTab('dashboard')">Open Dashboard ›</button>
+        </div>
+      </div>
+
+      <div class="node" id="node-deep">
+        <div class="router-q">All core duties done! Priority for deep work?</div>
+        <div class="options">
+          <button class="choice-btn" style="border-color:var(--ci); color:var(--ci);" onclick="navTree('node-do-deep', true)">Dissertation</button>
+          <button class="choice-btn" style="border-color:var(--ci); color:var(--ci);" onclick="navTree('node-do-deep', true)">Creative / Labs</button>
+        </div>
+      </div>
+      
+      <div class="node" id="node-do-deep">
+        <div class="result-icon icon-sq" style="border-color:var(--ci); color:var(--ci); border-radius:50%;">●</div>
+        <div class="router-q" style="color: var(--ci);">Deep Work Focus</div>
+        <div class="action-links">
+          <button class="action-btn" style="border-color:var(--ci); color:var(--ci);" onclick="switchTab('dashboard')">Open Dashboard ›</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+
+<main class="view-section" id="view-dashboard">
+  <header>
+    <h1>Daily Checklist</h1>
+    <p id="currentDateDisplay">Date</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-header">
+      <span style="color:var(--text-dim); text-transform:uppercase; letter-spacing:0.1em;">Daily Progress</span>
+      <span>
+        <span style="color:var(--sq)" id="sqDone">0</span><span style="color:var(--text-dim)">/<span id="sqTotal">10</span> ■</span>
+        <span style="color:var(--text-dim); margin:0 5px;">·</span>
+        <span style="color:var(--ci)" id="ciDone">0</span><span style="color:var(--text-dim)">/<span id="ciTotal">4</span> ●</span>
+      </span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill-sq" id="fillSq"></div>
+      <div class="progress-fill-ci" id="fillCi"></div>
+    </div>
+    <div class="progress-gate" style="color:var(--sq-dim);" id="gateMsg">Complete all squares to unlock</div>
+    
+    <div style="text-align:center; margin-top: 16px;">
+        <button class="action-btn" onclick="forceModal()">↺ End Day & Log</button>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="sq-col">
+      <div class="section-header">
+        <div class="section-icon">■</div>
+        <div>
+          <div class="section-title" style="color:var(--sq);">Priority Tasks</div>
+        </div>
+      </div>
+      <div class="task-list" id="sqList">
+        </div>
+    </div>
+
+    <div class="ci-col locked" id="ciCol">
+      <div class="section-header">
+        <div class="section-icon">●</div>
+        <div>
+          <div class="section-title" style="color:var(--ci);">Secondary Tasks</div>
+        </div>
+      </div>
+      <div class="task-list" id="ciList">
+        </div>
+    </div>
+  </div>
+</main>
+
+
+<main class="view-section" id="view-insights">
+  <header>
+    <h1>Workflow Insights</h1>
+    <p>Historical completion data</p>
+  </header>
+  
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>Last <span id="lastDayName">Day</span></h3>
+      <div class="stat-row">
+        <span>Priority (Squares) Completed</span>
+        <span class="stat-val" id="lastSq">--/--</span>
+      </div>
+      <div class="stat-row">
+        <span>Secondary (Circles) Completed</span>
+        <span class="stat-val" id="lastCi" style="color:var(--ci);">--/--</span>
+      </div>
+      <div class="stat-row" style="margin-top:8px; border:none;">
+        <span style="color:var(--text-dim); font-size:0.7rem;">(Compared to average)</span>
+        <span class="stat-val" id="lastCompared">--</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <h3>Yearly Averages: <span id="avgDayName">Day</span>s</h3>
+      <div class="stat-row">
+        <span>Total Logged <span id="avgDayName2">Day</span>s</span>
+        <span class="stat-val" style="color:var(--text);" id="totalDays">--</span>
+      </div>
+      <div class="stat-row">
+        <span>Average Square Completion</span>
+        <span class="stat-val" id="avgSqPercent">--%</span>
+      </div>
+      <div class="stat-row">
+        <span>Highest Consistency Task</span>
+        <span class="stat-val" style="color:var(--text);" id="bestTask">--</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<script>
+  let openPanels = new Set(); // Remembers which subtask panels are open
+  let activeTimerId = null;   // Interval reference
+
+  // ==========================================
+  // DATA CONFIG & SEEDING
+  // ==========================================
+  const MASTER_TASKS = {
+    sq: [
+      { id: 'sq-1', label: 'LUO myStudents & Comms', subtasks: [
+        { id: 'sq-1-1', label: 'Inactivity Messages' },
+        { id: 'sq-1-2', label: 'FN/Attendance posted' },
+        { id: 'sq-1-3', label: 'Final Grades posted' }
+      ]},
+      { id: 'sq-2', label: 'Grade Paper Submissions', subtasks: [
+        { id: 'sq-2-1', label: 'By grading' },
+        { id: 'sq-2-2', label: 'By handoff' }
+      ]},
+      { id: 'sq-3', label: 'Grade Online Submissions', subtasks: [
+        { id: 'sq-3-1', label: 'By automation' },
+        { id: 'sq-3-2', label: 'By grading' }
+      ]},
+      { id: 'sq-4', label: 'Sync Lab Grades', subtasks: [
+        { id: 'sq-4-1', label: 'Canvas copied to Teams' },
+        { id: 'sq-4-2', label: 'Teams copied to Canvas' }
+      ]},
+      { id: 'sq-5', label: 'Office Hours / Advising', subtasks: [
+        { id: 'sq-5-1', label: 'Scheduled appointments' },
+        { id: 'sq-5-2', label: 'Walk-in students' },
+        { id: 'sq-5-3', label: 'Email reply' }
+      ]},
+      { id: 'sq-6', label: 'Teach Lectures', subtasks: [
+        { id: 'sq-6-1', label: 'With PowerPoint' },
+        { id: 'sq-6-2', label: 'With practice/videos' },
+        { id: 'sq-6-3', label: 'Prep Handouts/PDFs' }
+      ]},
+      { id: 'sq-7', label: 'Process Emails', subtasks: [
+        { id: 'sq-7-1', label: 'Inboxes' },
+        { id: 'sq-7-2', label: 'Teams' }
+      ]}
+    ],
+    ci: [
+      { id: 'ci-1', label: 'Dissertation Focus' },
+      { id: 'ci-2', label: 'Club / Dept Admin', subtasks: [
+        { id: 'ci-2-1', label: 'PME + KME Admin' },
+        { id: 'ci-2-2', label: 'Math Club' },
+        { id: 'ci-2-3', label: 'CSER Admin' }
+      ]},
+      { id: 'ci-3', label: '3D Prints (OpenSCAD)' },
+      { id: 'ci-4', label: 'Textbook / Video Auth' }
+    ]
+  };
+
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const STORE_STATE = 'profOS_state';
+  const STORE_HIST  = 'profOS_history';
+
+  let appState = { 
+    lastActiveDate: '', 
+    tasks: {},
+    activeEvent: null // { title: "Meeting", timestamp: 1713500000000 }
+  };
+  let appHistory = []; 
+
+  // ==========================================
+  // INITIALIZATION
+  // ==========================================
+  function initApp() {
+    loadData();
+    renderChecklist();
+    checkNewDay();
+    updateProgress();
+    updateInsights();
+    resumeTimerIfActive();
+    
+    document.getElementById('currentDateDisplay').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  }
+
+  function loadData() {
+    try {
+      const s = localStorage.getItem(STORE_STATE);
+      if (s) appState = JSON.parse(s);
+      
+      const h = localStorage.getItem(STORE_HIST);
+      if (h) appHistory = JSON.parse(h);
+    } catch(e) { console.error("Storage read error", e); }
+  }
+
+  function saveData() {
+    localStorage.setItem(STORE_STATE, JSON.stringify(appState));
+    localStorage.setItem(STORE_HIST, JSON.stringify(appHistory));
+  }
+
+  // ==========================================
+  // TIMER LOGIC
+  // ==========================================
+  function handleTimerSetup() {
+    const titleInput = document.getElementById('eventTitle').value.trim() || 'Next Event';
+    const timeInput = document.getElementById('eventTime').value;
+
+    if (!timeInput) {
+      alert("Please enter a valid time.");
+      return;
+    }
+
+    const now = new Date();
+    const [hours, minutes] = timeInput.split(':');
+    let targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, 0);
+
+    // Save to state and boot timer
+    appState.activeEvent = {
+      title: titleInput,
+      timestamp: targetDate.getTime()
+    };
+    saveData();
+    
+    bootTimer();
+    navTree('node-luo', true); // Continue routing to figure out what to do until the timer goes off
+  }
+
+  function resumeTimerIfActive() {
+    if (appState.activeEvent && appState.activeEvent.timestamp) {
+      bootTimer();
+    }
+  }
+
+  function bootTimer() {
+    if (!appState.activeEvent) return;
+    
+    const banner = document.getElementById('timerBanner');
+    const textEl = document.getElementById('timerText');
+    banner.classList.add('active');
+    banner.classList.remove('urgent');
+
+    if (activeTimerId) clearInterval(activeTimerId);
+
+    activeTimerId = setInterval(() => {
+      const now = new Date().getTime();
+      const diffMs = appState.activeEvent.timestamp - now;
+
+      if (diffMs <= 0) {
+        clearInterval(activeTimerId);
+        banner.classList.add('urgent');
+        textEl.innerHTML = `<strong>${appState.activeEvent.title}</strong> is starting now!`;
+        return;
+      }
+
+      const h = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+      const format = num => num.toString().padStart(2, '0');
+      let timeString = h > 0 ? `${h}:${format(m)}:${format(s)}` : `${format(m)}:${format(s)}`;
+
+      textEl.innerHTML = `⏳ <strong>${appState.activeEvent.title}</strong> starts in <span style="font-family:'DM Mono', monospace; font-size:0.95rem; margin-left:4px;">${timeString}</span>`;
+    }, 1000);
+  }
+
+  function clearTimer() {
+    if (activeTimerId) clearInterval(activeTimerId);
+    document.getElementById('timerBanner').classList.remove('active');
+    
+    // Wipe from memory so it doesn't resurrect on refresh
+    appState.activeEvent = null; 
+    saveData();
+  }
+
+  // ==========================================
+  // VIEW SWITCHING & ROUTING
+  // ==========================================
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+    
+    event.currentTarget?.classList.add('active');
+    document.getElementById(`view-${tabId}`).classList.add('active');
+    
+    if (tabId === 'insights') updateInsights();
+  }
+
+  let activeNode = 'node-start';
+  function navTree(targetId, isForward) {
+    document.getElementById(activeNode).classList.remove('active', 'slide-left-enter', 'slide-right-enter');
+    document.getElementById(activeNode).classList.add(isForward ? 'slide-left-exit' : 'slide-right-exit');
+    
+    const target = document.getElementById(targetId);
+    target.classList.remove('slide-left-exit', 'slide-right-exit');
+    target.classList.add(isForward ? 'slide-left-enter' : 'slide-right-enter', 'active');
+    
+    setTimeout(() => {
+      document.getElementById(activeNode).classList.remove('slide-left-exit', 'slide-right-exit');
+      activeNode = targetId;
+    }, 400);
+  }
+
+  // ==========================================
+  // SMART RESET & LOGGING
+  // ==========================================
+  function checkNewDay() {
+    const today = new Date().toDateString();
+    
+    if (appState.lastActiveDate && appState.lastActiveDate !== today) {
+      const d = new Date();
+      document.getElementById('modalDayName').textContent = DAYS[d.getDay()];
+      document.getElementById('resetModal').classList.add('show');
+    } else {
+      appState.lastActiveDate = today;
+      saveData();
+    }
+  }
+
+  function forceModal() {
+      const d = new Date();
+      document.getElementById('modalDayName').textContent = DAYS[d.getDay()] + " Logging";
+      document.getElementById('resetModal').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('resetModal').classList.remove('show');
+  }
+
+  function logAndReset() {
+    let sqDone=0, sqTotal=0, ciDone=0, ciTotal=0;
+    const taskLog = {};
+    
+    MASTER_TASKS.sq.forEach(t => {
+      const state = appState.tasks[t.id] || {};
+      if (!state.na) { sqTotal++; if(state.done) sqDone++; }
+      taskLog[t.id] = state.done ? 1 : (state.na ? 2 : 0); 
+    });
+    
+    MASTER_TASKS.ci.forEach(t => {
+      const state = appState.tasks[t.id] || {};
+      if (!state.na) { ciTotal++; if(state.done) ciDone++; }
+      taskLog[t.id] = state.done ? 1 : (state.na ? 2 : 0);
+    });
+
+    if (appState.lastActiveDate) {
+        const d = new Date(appState.lastActiveDate);
+        appHistory.push({
+            date: appState.lastActiveDate,
+            dayOfWeek: d.getDay(),
+            sqDone, sqTotal, ciDone, ciTotal,
+            tasks: taskLog
+        });
+    }
+
+    // Preserve activeEvent across day logs if it hasn't expired
+    const currentTimer = appState.activeEvent;
+    
+    appState.tasks = {}; 
+    appState.lastActiveDate = new Date().toDateString();
+    if (currentTimer) appState.activeEvent = currentTimer;
+    
+    saveData();
+    closeModal();
+    renderChecklist();
+    updateProgress();
+    updateInsights();
+  }
+
+  // ==========================================
+  // DASHBOARD RENDERING & LOGIC
+  // ==========================================
+  function renderChecklist() {
+    const buildHtml = (type) => {
+      let html = '';
+      MASTER_TASKS[type].forEach(t => {
+        const s = appState.tasks[t.id] || {};
+        const isDone = s.done ? 'done' : '';
+        const isNa   = s.na ? 'na' : '';
+        const streak = calculateStreak(t.id);
+        const streakHtml = streak >= 2 ? `<span class="streak-badge">🔥 ${streak}</span>` : '';
+        const hasStreakClass = streak >= 2 ? 'has-streak' : '';
+        
+        let subHtml = '';
+        let chevron = '';
+        
+        if (t.subtasks && t.subtasks.length > 0) {
+          const isPanelOpen = openPanels.has(t.id);
+          const rotation = isPanelOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+          const displayStyle = isPanelOpen ? 'block' : 'none';
+          
+          chevron = `<span class="task-chevron" style="margin-left:auto; font-size:0.7rem; color:var(--text-dim); transition:transform 0.2s; transform:${rotation};">›</span>`;
+          subHtml = `<div class="subtask-panel" id="panel-${t.id}" style="display:${displayStyle}; border-left:2px solid var(--border); margin-left:20px; padding:4px 0;">`;
+          
+          t.subtasks.forEach(sub => {
+            const subState = appState.tasks[sub.id] || {};
+            const subDoneColor = subState.done ? 'var(--done-fg)' : 'var(--text-dim)';
+            const subBoxStyle = subState.done ? 'background:#3a5e3a; border-color:#3a5e3a;' : 'border-color:var(--border);';
+            const subCheckOp = subState.done ? 1 : 0;
+            const subStrike = subState.done ? 'text-decoration:line-through;' : '';
+
+            subHtml += `
+              <div class="subtask" style="display:flex; align-items:center; gap:10px; padding:7px 12px; font-size:0.7rem; color:${subDoneColor}; ${subStrike} cursor:pointer; transition:0.2s;" onclick="toggleSubtask('${sub.id}', '${t.id}', event)">
+                <div class="check-box" style="width:12px; height:12px; border-radius:2px; ${subBoxStyle}"><span style="color:#6ecf6e;opacity:${subCheckOp};font-size:0.5rem;line-height:1;">✓</span></div>
+                <span>${sub.label}</span>
+              </div>
+            `;
+          });
+          subHtml += `</div>`;
+        }
+
+        html += `
+          <div>
+            <div class="task-trigger ${isDone} ${isNa} ${hasStreakClass}" id="node-${t.id}" onclick="togglePanel('${t.id}', event)">
+              <div class="check-box" onclick="toggleTask('${t.id}', event)"><span style="color:#6ecf6e;opacity:${s.done?1:0};">✓</span></div>
+              <div class="task-label" style="display:flex; align-items:center; gap:8px;">
+                <span>${t.label}</span>
+                ${streakHtml}
+              </div>
+              <div class="task-controls" style="margin-left:auto; display:flex; align-items:center; gap:8px;">
+                <button class="na-btn" onclick="toggleNa('${t.id}', event)">⊘</button>
+                ${chevron}
+              </div>
+            </div>
+            ${subHtml}
+          </div>
+        `;
+      });
+      return html;
+    };
+
+    document.getElementById('sqList').innerHTML = buildHtml('sq');
+    document.getElementById('ciList').innerHTML = buildHtml('ci');
+  }
+
+  function togglePanel(id, event) {
+    if (openPanels.has(id)) {
+      openPanels.delete(id);
+    } else {
+      openPanels.add(id);
+    }
+    renderChecklist();
+  }
+
+  function toggleTask(id, event) {
+    if (event) event.stopPropagation(); 
+    if (!appState.tasks[id]) appState.tasks[id] = { done: false, na: false };
+    if (appState.tasks[id].na) return; 
+    
+    const isNowDone = !appState.tasks[id].done;
+    appState.tasks[id].done = isNowDone;
+
+    // CASCADE DOWN
+    const task = [...MASTER_TASKS.sq, ...MASTER_TASKS.ci].find(t => t.id === id);
+    if (task && task.subtasks) {
+      task.subtasks.forEach(sub => {
+        if (!appState.tasks[sub.id]) appState.tasks[sub.id] = { done: false, na: false };
+        appState.tasks[sub.id].done = isNowDone;
+      });
+    }
+
+    saveData();
+    renderChecklist(); 
+    updateProgress();
+  }
+
+  function toggleSubtask(subId, parentId, event) {
+    if (event) event.stopPropagation();
+    if (!appState.tasks[subId]) appState.tasks[subId] = { done: false, na: false };
+    
+    appState.tasks[subId].done = !appState.tasks[subId].done;
+
+    // ROLL-UP
+    const task = [...MASTER_TASKS.sq, ...MASTER_TASKS.ci].find(t => t.id === parentId);
+    if (task && task.subtasks) {
+      const allDone = task.subtasks.every(sub => {
+        return appState.tasks[sub.id] && appState.tasks[sub.id].done;
+      });
+
+      if (!appState.tasks[parentId]) appState.tasks[parentId] = { done: false, na: false };
+      
+      if (!appState.tasks[parentId].na) {
+         appState.tasks[parentId].done = allDone;
+      }
+    }
+
+    saveData();
+    renderChecklist();
+    updateProgress();
+  }
+
+  function toggleNa(id, event) {
+    if (event) event.stopPropagation(); 
+    if (!appState.tasks[id]) appState.tasks[id] = { done: false, na: false };
+    
+    appState.tasks[id].na = !appState.tasks[id].na;
+    if (appState.tasks[id].na) appState.tasks[id].done = false;
+    
+    // CASCADE N/A
+    const task = [...MASTER_TASKS.sq, ...MASTER_TASKS.ci].find(t => t.id === id);
+    if (task && task.subtasks && appState.tasks[id].na) {
+      task.subtasks.forEach(sub => {
+         if (!appState.tasks[sub.id]) appState.tasks[sub.id] = { done: false, na: false };
+         appState.tasks[sub.id].done = false; 
+      });
+    }
+
+    saveData();
+    renderChecklist();
+    updateProgress();
+  }
+
+  function updateProgress() {
+    let sqD=0, sqT=0, ciD=0, ciT=0;
+    
+    MASTER_TASKS.sq.forEach(t => {
+      const s = appState.tasks[t.id] || {};
+      if (!s.na) { sqT++; if(s.done) sqD++; }
+    });
+    MASTER_TASKS.ci.forEach(t => {
+      const s = appState.tasks[t.id] || {};
+      if (!s.na) { ciT++; if(s.done) ciD++; }
+    });
+
+    document.getElementById('sqDone').textContent = sqD;
+    document.getElementById('sqTotal').textContent = sqT;
+    document.getElementById('ciDone').textContent = ciD;
+    document.getElementById('ciTotal').textContent = ciT;
+
+    document.getElementById('fillSq').style.width = sqT ? (sqD/sqT*50)+'%' : '0%';
+    
+    const sqComplete = (sqT > 0 && sqD >= sqT);
+    const ciCol = document.getElementById('ciCol');
+    const gate = document.getElementById('gateMsg');
+    
+    if (sqComplete) {
+      document.getElementById('fillCi').style.width = ciT ? (ciD/ciT*50)+'%' : '0%';
+      ciCol.classList.remove('locked');
+      gate.textContent = '✅ Squares complete. Circles unlocked.';
+      gate.style.color = 'var(--ci)';
+    } else {
+      document.getElementById('fillCi').style.width = '0%';
+      ciCol.classList.add('locked');
+      gate.textContent = `⬜ ${sqT - sqD} squares remaining to unlock`;
+      gate.style.color = 'var(--sq-dim)';
+    }
+  }
+
+  // ==========================================
+  // ANALYTICS & STREAKS
+  // ==========================================
+  function calculateStreak(taskId) {
+    if (appHistory.length === 0) return 0;
+    let streak = 0;
+    for (let i = appHistory.length - 1; i >= 0; i--) {
+      const status = appHistory[i].tasks[taskId];
+      if (status === 1) streak++;       
+      else if (status === 2) continue;  
+      else break;                       
+    }
+    const todayState = appState.tasks[taskId];
+    if (todayState && todayState.done) streak++;
+    
+    return streak;
+  }
+
+  function updateInsights() {
+    if (appHistory.length === 0) return; 
+    
+    const currentDayOfWeek = new Date().getDay();
+    const historyForDay = appHistory.filter(h => h.dayOfWeek === currentDayOfWeek);
+    
+    document.getElementById('lastDayName').textContent = DAYS[currentDayOfWeek];
+    document.getElementById('avgDayName').textContent = DAYS[currentDayOfWeek];
+    document.getElementById('avgDayName2').textContent = DAYS[currentDayOfWeek];
+    
+    if (historyForDay.length > 0) {
+      const last = historyForDay[historyForDay.length - 1];
+      document.getElementById('lastSq').textContent = `${last.sqDone}/${last.sqTotal}`;
+      document.getElementById('lastCi').textContent = `${last.ciDone}/${last.ciTotal}`;
+      
+      let totalSqD = 0, totalSqT = 0;
+      historyForDay.forEach(h => { totalSqD += h.sqDone; totalSqT += h.sqTotal; });
+      const avgPct = totalSqT > 0 ? Math.round((totalSqD/totalSqT)*100) : 0;
+      
+      document.getElementById('totalDays').textContent = historyForDay.length;
+      document.getElementById('avgSqPercent').textContent = avgPct + '%';
+      
+      const lastPct = last.sqTotal > 0 ? Math.round((last.sqDone/last.sqTotal)*100) : 0;
+      const diff = lastPct - avgPct;
+      const diffEl = document.getElementById('lastCompared');
+      if (diff > 0) { diffEl.textContent = `▲ +${diff}%`; diffEl.style.color = '#6ecf6e'; }
+      else if (diff < 0) { diffEl.textContent = `▼ ${diff}%`; diffEl.style.color = '#e74c3c'; }
+      else { diffEl.textContent = `Matched avg`; diffEl.style.color = 'var(--text-dim)'; }
+      
+    } else {
+       document.getElementById('totalDays').textContent = "0";
+    }
+
+    let bestT = "--", highestHits = -1;
+    MASTER_TASKS.sq.concat(MASTER_TASKS.ci).forEach(t => {
+       let hits = 0;
+       appHistory.forEach(h => { if(h.tasks[t.id] === 1) hits++; });
+       if (hits > highestHits && hits > 0) { highestHits = hits; bestT = t.label; }
+    });
+    document.getElementById('bestTask').textContent = bestT;
+  }
+
+  // Boot
+  initApp();
+</script>
+</body>
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH114 – Module 12 Practice Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-mid: #1a3260;
+    --gold: #c8973a;
+    --gold-light: #e8b95a;
+    --cream: #faf6ef;
+    --cream-dark: #f0e9dc;
+    --text: #1a1208;
+    --muted: #6b5c42;
+    --correct: #2d6a4f;
+    --correct-bg: #d8f3dc;
+    --wrong: #9b2226;
+    --wrong-bg: #fde0dc;
+    --radius: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(200,151,58,0.05) 40px,
+      rgba(200,151,58,0.05) 41px
+    );
+  }
+  .header-inner {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 32px 40px;
+  }
+  .course-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(200,151,58,0.4);
+    border-radius: 3px;
+    padding: 4px 10px;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  header h1 span { color: var(--gold-light); }
+  header p.subtitle {
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  /* ── MAIN ── */
+  main { max-width: 820px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ── OVERVIEW CARD ── */
+  .overview {
+    background: var(--navy-mid);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 32px 0 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .overview::after {
+    content: '📋';
+    position: absolute; right: 28px; top: 24px;
+    font-size: 40px; opacity: 0.15;
+  }
+  .overview h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+  .overview p { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.82); margin-bottom: 10px; }
+  .overview p:last-child { margin-bottom: 0; }
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .topic-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(200,151,58,0.3);
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(255,255,255,0.75);
+  }
+  .topic-pill::before { content: '→ '; color: var(--gold); }
+
+  /* ── HINTS BOX ── */
+  .hints {
+    background: #fffbf0;
+    border: 1px solid var(--gold);
+    border-left: 5px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 22px 28px;
+    margin-bottom: 32px;
+  }
+  .hints h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .hints ol { padding-left: 20px; }
+  .hints li {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .hints li strong { color: var(--navy); }
+
+  /* ── SCORE BAR ── */
+  #score-bar {
+    background: var(--cream-dark);
+    border: 1px solid #ddd0bb;
+    border-radius: var(--radius);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+  #score-display { font-weight: 600; color: var(--navy); }
+  #progress-wrap { flex: 1; margin: 0 20px; }
+  #progress-track {
+    background: #ddd0bb;
+    border-radius: 99px;
+    height: 6px;
+    overflow: hidden;
+  }
+  #progress-fill {
+    background: var(--gold);
+    height: 100%;
+    width: 0%;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+  #q-count { color: var(--muted); font-size: 12px; }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: #fff;
+    border: 1px solid #ddd0bb;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .q-card:hover { box-shadow: 0 4px 20px rgba(15,31,61,0.08); }
+
+  .q-header {
+    background: var(--navy);
+    padding: 14px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .q-topic {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em;
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+
+  .q-body { padding: 22px 24px 18px; }
+  .q-text {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    color: var(--text);
+  }
+  .q-text .math {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    background: #f4eede;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--navy-mid);
+  }
+  .data-table {
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    margin: 10px 0 16px;
+    width: 100%;
+  }
+  .data-table th {
+    background: var(--navy);
+    color: var(--gold-light);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .data-table td {
+    border-bottom: 1px solid #eee;
+    padding: 7px 12px;
+    color: var(--navy-mid);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* OPTIONS */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--cream);
+    border: 1.5px solid #ddd0bb;
+    border-radius: 6px;
+    padding: 11px 16px;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Source Serif 4', serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--gold);
+    background: #fffbf0;
+  }
+  .option-btn .opt-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--navy);
+    background: var(--cream-dark);
+    border-radius: 3px;
+    padding: 2px 7px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .option-btn.correct {
+    border-color: var(--correct);
+    background: var(--correct-bg);
+  }
+  .option-btn.correct .opt-label { background: var(--correct); color: #fff; }
+  .option-btn.wrong {
+    border-color: var(--wrong);
+    background: var(--wrong-bg);
+  }
+  .option-btn.wrong .opt-label { background: var(--wrong); color: #fff; }
+  .option-btn:disabled { cursor: default; opacity: 0.75; }
+  .option-btn.correct:disabled,
+  .option-btn.wrong:disabled { opacity: 1; }
+
+  /* FEEDBACK */
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct-fb { background: var(--correct-bg); border-left: 4px solid var(--correct); color: #1b4332; }
+  .feedback.wrong-fb  { background: var(--wrong-bg);  border-left: 4px solid var(--wrong);  color: #621010; }
+  .feedback strong { font-weight: 600; }
+
+  /* ── FINAL RESULTS ── */
+  #results {
+    display: none;
+    background: var(--navy);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 36px 36px;
+    margin-top: 12px;
+    text-align: center;
+  }
+  #results h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+  #results .big-score {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 58px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1;
+    margin: 16px 0 8px;
+  }
+  #results .grade-msg {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  #restart-btn {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 12px 32px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #restart-btn:hover { background: var(--gold-light); }
+
+  @media (max-width: 540px) {
+    .header-inner { padding: 32px 20px 28px; }
+    .overview { padding: 22px 20px; }
+    main { padding: 0 16px 60px; }
+    .q-body { padding: 18px 16px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="course-tag">MATH114 · Quantitative Reasoning</div>
+    <h1>Module 12 <span>Practice Test</span></h1>
+    <p class="subtitle">Instructor: Andrew Volk &nbsp;·&nbsp; Test 3 Preparation</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <div class="overview">
+    <h2>What's on the Test?</h2>
+    <p>Test 3 covers two major topic areas: <strong>Statistics & Distributions</strong> and <strong>Exponential & Linear Growth</strong>. You'll need to interpret data, calculate descriptive statistics, reason about normal distributions, and apply growth models.</p>
+    <p>The test has 25 questions — a mix of multiple-choice and fill-in-the-blank — and includes questions that ask you to <em>reason without calculating</em>, so be sure to understand the concepts, not just the formulas.</p>
+    <div class="topic-grid">
+      <div class="topic-pill">Percentiles &amp; Median</div>
+      <div class="topic-pill">Mean, Median, Mode</div>
+      <div class="topic-pill">Range &amp; Std. Deviation</div>
+      <div class="topic-pill">Five-Number Summary</div>
+      <div class="topic-pill">Normal Distribution</div>
+      <div class="topic-pill">68–95–99.7 Rule</div>
+      <div class="topic-pill">Z-Scores</div>
+      <div class="topic-pill">Skewed Distributions</div>
+      <div class="topic-pill">Doubling &amp; Half-Life</div>
+      <div class="topic-pill">Exponential vs. Linear</div>
+      <div class="topic-pill">Logarithms / Powers of 10</div>
+      <div class="topic-pill">Estimation &amp; Fermi Problems</div>
+    </div>
+  </div>
+
+  <!-- HINTS -->
+  <div class="hints">
+    <h2>💡 Study Hints</h2>
+    <ol>
+      <li><strong>50th percentile = median.</strong> The median splits the data exactly in half — the same thing the 50th percentile does.</li>
+      <li><strong>Range rule of thumb:</strong> Estimated std. deviation ≈ Range ÷ 4. It works best when data is spread evenly.</li>
+      <li><strong>68–95–99.7 rule:</strong> In a normal distribution, ~68% of data falls within 1 std. dev., ~95% within 2, ~99.7% within 3.</li>
+      <li><strong>Doubling time formula (approximate):</strong> T<sub>double</sub> ≈ 70 ÷ growth rate %. Exact: T = log(2) ÷ log(1 + r).</li>
+      <li><strong>Skewness clue:</strong> If mean &gt; median, the distribution is right-skewed (pulled by high outliers). If mean &lt; median, it's left-skewed.</li>
+      <li><strong>Linear vs. exponential growth:</strong> Linear grows by a fixed <em>amount</em> each period; exponential grows by a fixed <em>percentage</em>.</li>
+      <li><strong>Median is best for income data</strong> because a few very high earners can distort the mean significantly.</li>
+      <li><strong>Z-score sign:</strong> Negative z-scores are below the mean, positive are above. z = (value − mean) ÷ std. dev.</li>
+    </ol>
+  </div>
+
+  <!-- SCORE BAR -->
+  <div id="score-bar">
+    <span id="score-display">Score: 0 / 10</span>
+    <div id="progress-wrap">
+      <div id="progress-track"><div id="progress-fill"></div></div>
+    </div>
+    <span id="q-count">0 answered</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       QUESTIONS
+  ══════════════════════════════════════════ -->
+
+  <!-- Q1 -->
+  <div class="q-card" id="qcard-1">
+    <div class="q-header">
+      <span class="q-num">QUESTION 01</span>
+      <span class="q-topic">Percentiles</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">Maria scored in the <span class="math">25th percentile</span> on a standardized exam. Which of the following best describes her score?</p>
+      <div class="options" data-q="1" data-answer="B">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>Maria scored higher than 75% of test-takers.</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>Maria scored higher than or equal to 25% of test-takers.</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>Maria scored exactly average.</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>Maria's score is the 25th value in the data set.</button>
+      </div>
+      <div class="feedback" id="fb-1"></div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="qcard-2">
+    <div class="q-header">
+      <span class="q-num">QUESTION 02</span>
+      <span class="q-topic">Powers of 10 / Logarithms</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">Without calculating, determine whether the following statement is true or false.<br><br>
+      <span class="math">10<sup>3.45</sup></span> is between 1,000 and 10,000.</p>
+      <div class="options" data-q="2" data-answer="A">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>True; since 3.45 is between 3 and 4, 10<sup>3.45</sup> is between 10<sup>3</sup> and 10<sup>4</sup>, or between 1,000 and 10,000.</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>False; since 3.45 is between 3 and 4, 10<sup>3.45</sup> is between 100 and 1,000.</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>False; 10<sup>3.45</sup> equals exactly 3,450.</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>True; since 3.45 rounds to 3, the answer is 10<sup>3</sup> = 1,000 exactly.</button>
+      </div>
+      <div class="feedback" id="fb-2"></div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="qcard-3">
+    <div class="q-header">
+      <span class="q-num">QUESTION 03</span>
+      <span class="q-topic">Mean, Median, Mode</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">Find the mean, median, and mode for the following set of numbers:<br><br>
+      <span class="math">12 &nbsp; 18 &nbsp; 7 &nbsp; 25 &nbsp; 18 &nbsp; 9 &nbsp; 31 &nbsp; 14</span></p>
+      <div class="options" data-q="3" data-answer="C">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>Mean = 16.0 &nbsp;·&nbsp; Median = 16.0 &nbsp;·&nbsp; Mode = no mode</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>Mean = 16.75 &nbsp;·&nbsp; Median = 18.0 &nbsp;·&nbsp; Mode = 18</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>Mean = 16.75 &nbsp;·&nbsp; Median = 16.0 &nbsp;·&nbsp; Mode = 18</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>Mean = 18.0 &nbsp;·&nbsp; Median = 16.75 &nbsp;·&nbsp; Mode = no mode</button>
+      </div>
+      <div class="feedback" id="fb-3"></div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="qcard-4">
+    <div class="q-header">
+      <span class="q-num">QUESTION 04</span>
+      <span class="q-topic">Skewness &amp; Distribution Shape</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">A study of household net worth in a U.S. city found:<br><br>
+      Mean net worth = <span class="math">$480,000</span> &nbsp;·&nbsp; Median net worth = <span class="math">$120,000</span><br><br>
+      Which best describes this distribution, and why?</p>
+      <div class="options" data-q="4" data-answer="B">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>Left-skewed, because the mean is much higher than the median.</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>Right-skewed, because the mean is pulled up by a small number of very wealthy households.</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>Symmetric, because both the mean and median are single values.</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>Right-skewed, because the median is lower than the mode.</button>
+      </div>
+      <div class="feedback" id="fb-4"></div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="qcard-5">
+    <div class="q-header">
+      <span class="q-num">QUESTION 05</span>
+      <span class="q-topic">68–95–99.7 Rule</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">The weights of apples from an orchard are normally distributed with a <span class="math">mean = 150 g</span> and <span class="math">std. dev. = 10 g</span>.<br><br>
+      What percentage of apples weigh <strong>less than 130 g</strong>?</p>
+      <div class="options" data-q="5" data-answer="C">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>16.0%</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>5.0%</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>2.5%</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>0.3%</button>
+      </div>
+      <div class="feedback" id="fb-5"></div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="qcard-6">
+    <div class="q-header">
+      <span class="q-num">QUESTION 06</span>
+      <span class="q-topic">Z-Scores</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">Which z-score correctly describes: <em>"a data value 2.3 standard deviations below the mean"?</em></p>
+      <div class="options" data-q="6" data-answer="D">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>z = 2.3</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>z = 0.23</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>z = 23</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>z = −2.3</button>
+      </div>
+      <div class="feedback" id="fb-6"></div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="qcard-7">
+    <div class="q-header">
+      <span class="q-num">QUESTION 07</span>
+      <span class="q-topic">Doubling Time</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">A city's population of <span class="math">50,000</span> is growing at <span class="math">7%</span> per year. Using the <em>approximate</em> doubling time formula (Rule of 70), about how many years will it take for the population to double?</p>
+      <div class="options" data-q="7" data-answer="B">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>About 7 years</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>About 10 years</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>About 14 years</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>About 70 years</button>
+      </div>
+      <div class="feedback" id="fb-7"></div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="qcard-8">
+    <div class="q-header">
+      <span class="q-num">QUESTION 08</span>
+      <span class="q-topic">Linear vs. Exponential Growth</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">A tree farm plants <span class="math">200</span> new trees every month, regardless of how many trees exist. A second farm doubles its tree count every 6 months starting from 200 trees.<br><br>
+      Which statement is true?</p>
+      <div class="options" data-q="8" data-answer="A">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>The first farm shows linear growth; the second shows exponential growth.</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>Both farms show exponential growth because both are growing each month.</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>The first farm shows exponential growth; the second shows linear growth.</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>Both farms show linear growth because the starting number is the same.</button>
+      </div>
+      <div class="feedback" id="fb-8"></div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card" id="qcard-9">
+    <div class="q-header">
+      <span class="q-num">QUESTION 09</span>
+      <span class="q-topic">Best Measure of Center</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">A researcher wants to report a "typical" salary for employees at a company where most workers earn between $40,000–$60,000, but the CEO earns $5,000,000. Which measure of center is <strong>most appropriate</strong> and why?</p>
+      <div class="options" data-q="9" data-answer="C">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>The mean, because it uses every data value in its calculation.</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>The mode, because it identifies the most common salary.</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>The median, because it is not distorted by the CEO's extreme salary.</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>The mean, because it is the most commonly understood statistic.</button>
+      </div>
+      <div class="feedback" id="fb-9"></div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card" id="qcard-10">
+    <div class="q-header">
+      <span class="q-num">QUESTION 10</span>
+      <span class="q-topic">Half-Life / Exponential Decay</span>
+    </div>
+    <div class="q-body">
+      <p class="q-text">A radioactive substance has a current mass of <span class="math">800 g</span> and a half-life of <span class="math">10 years</span>. How much will remain after <span class="math">30 years</span>?</p>
+      <div class="options" data-q="10" data-answer="D">
+        <button class="option-btn" data-val="A"><span class="opt-label">A</span>400 g</button>
+        <button class="option-btn" data-val="B"><span class="opt-label">B</span>266.7 g</button>
+        <button class="option-btn" data-val="C"><span class="opt-label">C</span>200 g</button>
+        <button class="option-btn" data-val="D"><span class="opt-label">D</span>100 g</button>
+      </div>
+      <div class="feedback" id="fb-10"></div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <h2>Practice Complete!</h2>
+    <div class="big-score" id="final-score-text">0/10</div>
+    <div class="grade-msg" id="grade-msg"></div>
+    <button id="restart-btn" onclick="restartQuiz()">↺ &nbsp;Try Again</button>
+  </div>
+
+</main>
+
+<script>
+  const explanations = {
+    1: {
+      correct: "<strong>Correct!</strong> The p-th percentile means a value is greater than or equal to p% of the data. The 25th percentile means Maria scored higher than (or equal to) 25% of test-takers — and 75% scored higher than her.",
+      wrong: "<strong>Incorrect.</strong> Remember: the p-th percentile means the value is greater than or equal to p% of all values. The 25th percentile ≠ average (that's the 50th), and it doesn't mean she beat 75% — that would be the 75th percentile."
+    },
+    2: {
+      correct: "<strong>Correct!</strong> Since the exponent 3.45 falls between 3 and 4, the value 10<sup>3.45</sup> must fall between 10<sup>3</sup> = 1,000 and 10<sup>4</sup> = 10,000. No calculator needed — just reason about the exponent's position.",
+      wrong: "<strong>Incorrect.</strong> The key insight: if the exponent is between two integers, the result is between the corresponding powers of 10. Since 3 &lt; 3.45 &lt; 4, we get 10<sup>3</sup> &lt; 10<sup>3.45</sup> &lt; 10<sup>4</sup>, i.e., between 1,000 and 10,000."
+    },
+    3: {
+      correct: "<strong>Correct!</strong> Sorted: 7, 9, 12, 14, 18, 18, 25, 31. Sum = 134, mean = 134/8 = 16.75. Median = average of 4th &amp; 5th values = (14+18)/2 = 16.0. Mode = 18 (appears twice).",
+      wrong: "<strong>Incorrect.</strong> First sort the data: 7, 9, 12, 14, 18, 18, 25, 31. Mean = sum ÷ count = 134 ÷ 8 = <strong>16.75</strong>. Median = avg of middle two = (14 + 18) ÷ 2 = <strong>16.0</strong>. Mode = <strong>18</strong> (only value that repeats)."
+    },
+    4: {
+      correct: "<strong>Correct!</strong> When mean &gt; median, the distribution is right-skewed (positively skewed). A small number of very high values (very wealthy households) pull the mean upward without affecting the median much.",
+      wrong: "<strong>Incorrect.</strong> The key rule: mean &gt; median → right-skewed; mean &lt; median → left-skewed. Here, mean ($480k) &gt; median ($120k), so the data is <strong>right-skewed</strong>. The median is the better measure of a 'typical' household here."
+    },
+    5: {
+      correct: "<strong>Correct!</strong> 130 g is 2 standard deviations below the mean (150 − 2×10 = 130). By the 95% rule, 95% of data falls within 2 std. devs., leaving 5% in the two tails combined. The lower tail alone = 5% ÷ 2 = <strong>2.5%</strong>.",
+      wrong: "<strong>Incorrect.</strong> Locate 130 g on the normal curve: (130 − 150) ÷ 10 = −2 std. devs. from mean. The 95% rule says 95% of values are within ±2 std. devs., so 5% are outside. The area below the lower end = 5% ÷ 2 = <strong>2.5%</strong>."
+    },
+    6: {
+      correct: "<strong>Correct!</strong> Z-scores are negative when a value is below the mean. 'Below the mean' → negative sign. The magnitude is simply the number of standard deviations: z = −2.3.",
+      wrong: "<strong>Incorrect.</strong> Z-scores: positive = above mean, negative = below mean. 'Below the mean' always gives a negative z-score. So 2.3 standard deviations below the mean = z = <strong>−2.3</strong>."
+    },
+    7: {
+      correct: "<strong>Correct!</strong> Rule of 70 (approximate doubling time): T ≈ 70 ÷ r = 70 ÷ 7 = <strong>10 years</strong>. This formula works well for growth rates under ~15%.",
+      wrong: "<strong>Incorrect.</strong> Use the Rule of 70: approximate doubling time ≈ 70 ÷ (growth rate %). At 7% per year: 70 ÷ 7 = <strong>10 years</strong>. Don't confuse the rate with the result."
+    },
+    8: {
+      correct: "<strong>Correct!</strong> Linear growth adds a constant <em>amount</em> each period (200 trees/month = constant addition). Exponential growth multiplies by a constant <em>factor</em> each period (doubling = ×2 every 6 months). The key distinction is additive vs. multiplicative.",
+      wrong: "<strong>Incorrect.</strong> Linear growth: fixed amount added each period. Exponential growth: fixed percentage (or factor) multiplied each period. Farm 1 adds 200 trees regardless of total → <strong>linear</strong>. Farm 2 doubles its total → <strong>exponential</strong>."
+    },
+    9: {
+      correct: "<strong>Correct!</strong> The CEO's extreme salary is an outlier that pulls the mean far above what most employees earn. The median is resistant to outliers and better represents a 'typical' salary. This is the same reason median income is preferred over mean income in economic reporting.",
+      wrong: "<strong>Incorrect.</strong> When data has extreme outliers (like a very high CEO salary), the mean gets inflated far above what most people experience. The <strong>median</strong> is not affected by extreme values and gives a more accurate picture of the typical employee's salary."
+    },
+    10: {
+      correct: "<strong>Correct!</strong> 30 years = 3 half-lives (30 ÷ 10 = 3). Each half-life reduces the mass by half: 800 → 400 → 200 → <strong>100 g</strong>. Or use the formula: 800 × (½)<sup>3</sup> = 800 × 0.125 = 100 g.",
+      wrong: "<strong>Incorrect.</strong> Count the number of half-lives: 30 years ÷ 10 years per half-life = <strong>3 half-lives</strong>. Apply each: 800 ÷ 2 = 400 → 400 ÷ 2 = 200 → 200 ÷ 2 = <strong>100 g</strong>. The answer is 100 g."
+    }
+  };
+
+  let score = 0;
+  let answered = 0;
+  const total = 10;
+
+  document.querySelectorAll('.options').forEach(optGroup => {
+    optGroup.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleAnswer(optGroup, btn));
+    });
+  });
+
+  function handleAnswer(optGroup, clickedBtn) {
+    const q = optGroup.dataset.q;
+    const answer = optGroup.dataset.answer;
+    const chosen = clickedBtn.dataset.val;
+    const fb = document.getElementById('fb-' + q);
+
+    // Disable all buttons
+    optGroup.querySelectorAll('.option-btn').forEach(b => {
+      b.disabled = true;
+      if (b.dataset.val === answer) b.classList.add('correct');
+    });
+
+    if (chosen === answer) {
+      clickedBtn.classList.add('correct');
+      fb.className = 'feedback correct-fb show';
+      fb.innerHTML = '✅ ' + explanations[q].correct;
+      score++;
+    } else {
+      clickedBtn.classList.add('wrong');
+      fb.className = 'feedback wrong-fb show';
+      fb.innerHTML = '❌ ' + explanations[q].wrong;
+    }
+
+    answered++;
+    updateScore();
+
+    if (answered === total) showResults();
+  }
+
+  function updateScore() {
+    document.getElementById('score-display').textContent = `Score: ${score} / ${total}`;
+    document.getElementById('q-count').textContent = `${answered} answered`;
+    document.getElementById('progress-fill').style.width = (answered / total * 100) + '%';
+  }
+
+  function showResults() {
+    const results = document.getElementById('results');
+    results.style.display = 'block';
+    document.getElementById('final-score-text').textContent = score + '/' + total;
+
+    let msg = '';
+    if (score === 10) msg = 'Perfect score! You\'re ready for the real test. 🏆';
+    else if (score >= 8) msg = 'Great work! Review any missed questions before test day.';
+    else if (score >= 6) msg = 'Good effort — revisit the hint section and try again.';
+    else if (score >= 4) msg = 'Keep studying! Focus on the topics you missed.';
+    else msg = 'Don\'t give up — re-read the hints and try again. You\'ve got this!';
+
+    document.getElementById('grade-msg').textContent = msg;
+    results.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function restartQuiz() {
+    score = 0; answered = 0;
+    document.querySelectorAll('.option-btn').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong');
+    });
+    document.querySelectorAll('.feedback').forEach(fb => {
+      fb.className = 'feedback';
+      fb.innerHTML = '';
+    });
+    updateScore();
+    document.getElementById('results').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
