@@ -102,6 +102,16 @@ def delete_shape(shape):
     sp.getparent().remove(sp)
 
 
+def recolor_run(shape, needle: str, new_color: RGBColor):
+    """Recolor every run in `shape` whose text contains `needle`."""
+    if not shape.has_text_frame:
+        return
+    for p in shape.text_frame.paragraphs:
+        for r in p.runs:
+            if needle in r.text:
+                r.font.color.rgb = new_color
+
+
 # ---------------------------------------------------------------------------
 # Load from original snapshot so re-runs are deterministic.
 # ---------------------------------------------------------------------------
@@ -133,6 +143,63 @@ replace_picture(prs.slides[S_ADD7],  13, f"{IMG}/s_vector_addition.png")
 replace_picture(prs.slides[S_MAG8],   3, f"{IMG}/s_magnitude_direction.png")
 replace_picture(prs.slides[S_QUAD9],  1, f"{IMG}/s_quadrant_arrows.png")
 replace_picture(prs.slides[S_SCAL11], 1, f"{IMG}/s_scalar_multiplication.png")
+
+
+# ---------------------------------------------------------------------------
+# 1b. Slide 9 (Quadrant Adjustment) - replace the 4-example breakdown
+#     with the single compact rule from HANDOFF §3.8.
+#
+#     After the picture swap above, shape indices are:
+#       0 title | 1 right-panel bg | 2 "Examples" label
+#       3..14   (four rows: <a,b>, Q label, θ value)
+#       15      NEW PICTURE
+# ---------------------------------------------------------------------------
+s = prs.slides[S_QUAD9]
+# Re-label the header (was "Examples")
+set_text(s.shapes[2], "One Rule for θ", size=20, color=NAVY,
+         bold=True, font_name="Georgia")
+# Drop rows 3..14 (12 shapes) in reverse order — keep the picture at [15].
+for idx in range(14, 2, -1):
+    delete_shape(s.shapes[idx])
+# Add one new text block with the rule.
+rule_box = s.shapes.add_textbox(Emu(5212080), Emu(1463040),
+                                Emu(3657600), Emu(2925000))
+tf = rule_box.text_frame
+tf.word_wrap = True
+lines = [
+    ("Compute α = tan⁻¹(b/a), then:", NAVY, 16, False),
+    (" ", NAVY, 10, False),
+    ("if a < 0  →  θ = α + 180°", PURPLE, 16, True),
+    ("     (Q II or Q III)", MUTED, 13, False),
+    (" ", NAVY, 10, False),
+    ("else if b < 0  →  θ = α + 360°", PURPLE, 16, True),
+    ("     (Q IV)", MUTED, 13, False),
+    (" ", NAVY, 10, False),
+    ("otherwise  →  θ = α", PURPLE, 16, True),
+    ("     (Q I)", MUTED, 13, False),
+]
+for i, (text, color, size, bold) in enumerate(lines):
+    p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+    r = p.add_run()
+    r.text = text
+    r.font.size = Pt(size)
+    r.font.color.rgb = color
+    r.font.bold = bold
+    r.font.name = "Calibri"
+
+
+# ---------------------------------------------------------------------------
+# 1c. Palette audit (HANDOFF §3.9):
+#     TEAL = definitions/formulas, ORANGE = examples/worked problems.
+#     The original deck has these swapped on slides 5 & 8 — fix them.
+# ---------------------------------------------------------------------------
+# Slide 5 (Writing a Vector in Component Form): "Formula:" -> TEAL, "Example:" -> ORANGE
+recolor_run(prs.slides[S_COMP5].shapes[2], "Formula:", TEAL)
+recolor_run(prs.slides[S_COMP5].shapes[5], "Example:", ORANGE)
+# Slide 8 (Magnitude and Direction): "Magnitude:" already TEAL; recolor "Direction:"
+#  from orange to teal (both are formulas), and promote "Example:" to ORANGE.
+recolor_run(prs.slides[S_MAG8].shapes[2], "Direction:", TEAL)
+recolor_run(prs.slides[S_MAG8].shapes[5], "Example:", ORANGE)
 
 
 # ---------------------------------------------------------------------------
