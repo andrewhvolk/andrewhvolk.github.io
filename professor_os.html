@@ -45,16 +45,27 @@
   nav {
     display:flex; justify-content:center; gap:8px;
     padding:20px 24px; border-bottom:1px solid var(--border);
-    background:rgba(15,17,23,0.85); backdrop-filter:blur(10px);
+    background:rgba(15,17,23,0.90); backdrop-filter:blur(12px);
   }
   .tab-btn {
-    background:transparent; border:1px solid transparent;
+    background:transparent; border:none; border-bottom:2px solid transparent;
     color:var(--text-dim); padding:8px 20px; font-family:'DM Mono',monospace;
     font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em;
-    cursor:pointer; border-radius:4px; transition:all 0.2s;
+    cursor:pointer; border-radius:0; transition:all 0.2s;
+    position:relative;
   }
-  .tab-btn:hover { color:var(--text); background:var(--surface2); }
-  .tab-btn.active { color:var(--text); border-color:var(--border); background:var(--surface); }
+  .tab-btn:hover { color:var(--text); }
+  /* V6: active tab = gold underline, no background fill */
+  .tab-btn.active { color:var(--text); border-bottom-color:var(--sq); }
+
+  /* Pulse urgency dot on tab */
+  .tab-pulse-dot {
+    display:none; position:absolute; top:5px; right:6px;
+    width:6px; height:6px; border-radius:50%; background:var(--sq);
+    animation:pomoPulse 2s infinite;
+  }
+  .tab-pulse-dot.warn { display:block; background:var(--sq); }
+  .tab-pulse-dot.critical { display:block; background:var(--danger); }
 
   /* ── BANNERS ── */
   .timer-banner {
@@ -118,6 +129,52 @@
   .custom-input { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:11px; font-family:'DM Mono',monospace; font-size:0.9rem; border-radius:4px; outline:none; transition:0.2s; }
   .custom-input:focus { border-color:var(--sq); background:var(--surface2); }
 
+  /* ── QUIZ NODE ── */
+  .quiz-progress-bar { height:3px; background:var(--surface2); border-radius:2px; margin-bottom:28px; overflow:hidden; }
+  .quiz-progress-fill { height:100%; background:var(--sq); border-radius:2px; transition:width 0.35s ease; }
+  .quiz-meta { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+  .quiz-step  { font-size:0.63rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-dim); }
+  .quiz-count { font-size:0.63rem; color:var(--text-dim); }
+  .quiz-parent { font-size:0.68rem; color:var(--sq); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; opacity:0.8; }
+  .quiz-q { font-family:'DM Serif Display',serif; font-size:1.4rem; line-height:1.3; margin-bottom:28px; }
+  .quiz-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
+  .quiz-btn-done { background:var(--sq-glow); border:1px solid var(--sq); color:var(--sq); padding:13px 28px; cursor:pointer; border-radius:4px; font-family:'DM Mono',monospace; font-size:0.85rem; letter-spacing:0.05em; transition:0.2s; }
+  .quiz-btn-done:hover { background:rgba(232,168,56,0.3); }
+  .quiz-btn-skip { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:13px 24px; cursor:pointer; border-radius:4px; font-family:'DM Mono',monospace; font-size:0.85rem; letter-spacing:0.05em; transition:0.2s; }
+  .quiz-btn-skip:hover { background:rgba(255,255,255,0.03); border-color:var(--text-dim); }
+  .quiz-btn-na { background:transparent; border:1px solid transparent; color:var(--text-dim); padding:13px 14px; cursor:pointer; border-radius:4px; font-family:'DM Mono',monospace; font-size:0.75rem; transition:0.2s; }
+  .quiz-btn-na:hover { border-color:var(--border); color:var(--text); }
+  .quiz-back { display:inline-flex; align-items:center; gap:6px; background:transparent; border:none; color:var(--text-dim); font-size:0.7rem; font-family:'DM Mono',monospace; cursor:pointer; padding:0; margin-top:4px; transition:color 0.2s; }
+  .quiz-back:hover { color:var(--text); }
+  /* Add-tasks phase */
+  .quiz-addtasks-cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; text-align:left; }
+  @media(max-width:480px){ .quiz-addtasks-cols { grid-template-columns:1fr; } }
+  .quiz-addtasks-col { display:flex; flex-direction:column; gap:8px; }
+  .quiz-addtasks-label { font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; display:flex; align-items:center; gap:6px; margin-bottom:2px; }
+  .quiz-addtasks-input-row { display:flex; gap:5px; }
+  .quiz-addtasks-field { flex:1; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:8px 10px; font-family:'DM Mono',monospace; font-size:0.76rem; border-radius:3px; outline:none; min-width:0; }
+  .quiz-addtasks-field:focus { border-color:var(--sq); background:var(--surface2); }
+  .quiz-addtasks-field.ci-field:focus { border-color:var(--ci); }
+  .quiz-addtasks-add { padding:8px 11px; border-radius:3px; cursor:pointer; font-size:0.7rem; font-family:'DM Mono',monospace; border:1px solid; transition:0.15s; white-space:nowrap; }
+  .quiz-addtasks-add.sq { border-color:var(--sq-dim); color:var(--sq); background:var(--sq-glow); }
+  .quiz-addtasks-add.sq:hover { background:rgba(232,168,56,0.28); }
+  .quiz-addtasks-add.ci { border-color:var(--ci-dim); color:var(--ci); background:var(--ci-glow); }
+  .quiz-addtasks-add.ci:hover { background:rgba(56,201,176,0.22); }
+  .quiz-added-list { display:flex; flex-direction:column; gap:4px; min-height:0; }
+  .quiz-added-pill { display:flex; align-items:center; gap:7px; font-size:0.7rem; padding:5px 8px; border-radius:3px; animation:fadeIn 0.2s ease; }
+  .quiz-added-pill.sq { background:var(--sq-glow); border:1px solid var(--sq-dim); color:var(--sq); }
+  .quiz-added-pill.ci { background:var(--ci-glow); border:1px solid var(--ci-dim); color:var(--ci); }
+  .quiz-added-pill span { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .quiz-added-del { background:transparent; border:none; color:inherit; opacity:0.5; cursor:pointer; font-size:0.75rem; flex-shrink:0; transition:opacity 0.15s; padding:0 2px; }
+  .quiz-added-del:hover { opacity:1; }
+  /* Result screen */
+  .quiz-result-rows { text-align:left; margin:20px 0 24px; display:flex; flex-direction:column; gap:5px; max-height:180px; overflow-y:auto; }
+  .quiz-result-row { display:flex; align-items:center; gap:9px; font-size:0.74rem; padding:5px 0; border-bottom:1px solid var(--border); }
+  .quiz-result-row:last-child { border:none; }
+  .quiz-result-row.marked { color:var(--done-fg); }
+  .quiz-result-row.skipped { color:var(--text-dim); opacity:0.6; }
+  .quiz-result-row.na-d { color:var(--na-fg); font-style:italic; }
+
   /* Event queue */
   .event-queue { max-width:320px; margin:0 auto 16px; text-align:left; }
   .event-pill { display:flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--sq-dim); background:var(--sq-glow); border-radius:3px; margin-bottom:5px; font-size:0.72rem; color:var(--sq); }
@@ -141,6 +198,28 @@
   .pulse-rec { font-family:'DM Serif Display',serif; font-size:1.1rem; margin-bottom:5px; }
   .pulse-detail { font-size:0.73rem; color:var(--text-dim); margin-bottom:14px; line-height:1.5; }
 
+  /* ── V6: MISSION CHIP on Dashboard ── */
+  .mission-chip {
+    max-width:700px; margin:0 auto 20px;
+    display:flex; align-items:center; gap:12px;
+    padding:10px 14px 10px 16px;
+    border-radius:4px; border:1px solid var(--border);
+    font-size:0.76rem; cursor:pointer; transition:opacity 0.2s;
+    background:var(--surface);
+    animation:fadeIn 0.4s ease;
+  }
+  .mission-chip:hover { opacity:0.85; }
+  .mission-chip-arrow { font-size:1rem; flex-shrink:0; }
+  .mission-chip-body { flex:1; min-width:0; }
+  .mission-chip-label { font-size:0.6rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-dim); margin-bottom:3px; }
+  .mission-chip-rec { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mission-chip-dismiss { background:transparent; border:none; color:var(--text-dim); opacity:0.45; cursor:pointer; font-size:0.8rem; font-family:'DM Mono',monospace; flex-shrink:0; padding:2px 4px; transition:opacity 0.2s; }
+  .mission-chip-dismiss:hover { opacity:1; }
+
+  /* ── V6: DOW average line ── */
+  .dow-avg { font-size:0.62rem; color:var(--text-dim); margin-top:6px; letter-spacing:0.06em; }
+  .dow-avg-val { color:var(--sq); }
+
   /* ── DASHBOARD ── */
   .progress-wrap { max-width:700px; margin:0 auto 40px; }
   .progress-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; font-size:0.75rem; }
@@ -149,7 +228,18 @@
   .progress-track { height:6px; background:var(--surface2); border:1px solid var(--border); position:relative; }
   .progress-fill-sq { position:absolute; left:0; top:0; bottom:0; background:var(--sq); width:0%; transition:width 0.4s; }
   .progress-fill-ci { position:absolute; left:50%; top:0; bottom:0; background:var(--ci); width:0%; opacity:0.8; transition:width 0.4s; }
+  /* V6: midpoint gate marker */
+  .progress-midpoint {
+    position:absolute; left:50%; top:-5px; bottom:-5px; width:1px;
+    background:var(--text-dim); opacity:0.25; z-index:3;
+  }
+  .progress-midpoint::after {
+    content:''; position:absolute; left:-3px; top:50%; transform:translateY(-50%);
+    width:7px; height:7px; border-radius:50%;
+    background:var(--surface2); border:1px solid var(--text-dim); opacity:0.6;
+  }
   .progress-gate { margin-top:10px; font-size:0.67rem; text-transform:uppercase; text-align:center; }
+  .progress-actions { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:16px; }
   .columns { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
   @media (max-width:720px) { .columns { grid-template-columns:1fr; } }
   .section-header { display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--border); }
@@ -167,9 +257,13 @@
   .task-trigger.na { background:var(--na-bg); border-color:#252538; }
   .task-trigger.na .task-label { color:var(--na-fg); font-style:italic; }
   .task-trigger.focused { border-color:var(--focus) !important; box-shadow:inset 0 0 0 1px rgba(124,106,247,0.12); }
-  /* Urgency */
-  .task-trigger.urg-warn:not(.done):not(.na) { border-left:2px solid var(--warn); }
-  .task-trigger.urg-critical:not(.done):not(.na) { border-left:2px solid var(--danger); }
+  /* V6: Urgency — border AND background for better scanability */
+  .task-trigger.urg-warn:not(.done):not(.na) { border-left:3px solid var(--warn); }
+  @keyframes critRowBg { 0%,100%{background:var(--surface);} 50%{background:rgba(231,76,60,0.055);} }
+  .task-trigger.urg-critical:not(.done):not(.na) {
+    border-left:3px solid var(--danger);
+    animation:critRowBg 2.5s infinite;
+  }
 
   .check-box { flex-shrink:0; width:15px; height:15px; border:1.5px solid var(--border); display:flex; align-items:center; justify-content:center; transition:0.2s; cursor:pointer; }
   .sq-col .check-box { border-color:var(--sq-dim); }
@@ -177,12 +271,15 @@
   .task-trigger.done .check-box { background:#3a5e3a; }
   .task-label { flex:1; font-size:0.78rem; color:var(--text); display:flex; align-items:center; gap:6px; min-width:0; }
   .task-label-text { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .streak-badge { font-size:0.62rem; color:#e67e22; background:rgba(230,126,34,0.1); padding:2px 6px; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+  /* V6: Streak and recurring badges hidden at rest, revealed on hover */
+  .streak-badge { font-size:0.62rem; color:#e67e22; background:rgba(230,126,34,0.1); padding:2px 6px; border-radius:4px; white-space:nowrap; flex-shrink:0; opacity:0; transition:opacity 0.2s; }
+  .task-trigger:hover .streak-badge { opacity:1; }
   .urgency-badge { font-size:0.58rem; padding:1px 5px; border-radius:3px; white-space:nowrap; flex-shrink:0; }
   .urgency-badge.warn { color:var(--warn); background:rgba(230,126,34,0.1); border:1px solid rgba(230,126,34,0.25); }
   .urgency-badge.critical { color:var(--danger); background:rgba(231,76,60,0.1); border:1px solid rgba(231,76,60,0.25); animation:urgPulse 2.5s infinite; }
   @keyframes urgPulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
-  .recurring-badge { font-size:0.58rem; color:var(--ci-dim); opacity:0.7; flex-shrink:0; }
+  .recurring-badge { font-size:0.58rem; color:var(--ci-dim); opacity:0; transition:opacity 0.2s; flex-shrink:0; }
+  .task-trigger:hover .recurring-badge { opacity:0.7; }
 
   .task-controls { display:flex; align-items:center; gap:3px; flex-shrink:0; margin-left:auto; }
   .icon-btn { font-size:0.6rem; padding:3px 5px; cursor:pointer; background:transparent; border:1px solid transparent; color:var(--text-dim); font-family:'DM Mono',monospace; border-radius:2px; transition:0.15s; line-height:1; }
@@ -190,6 +287,15 @@
   .icon-btn.focus-active { color:var(--focus); border-color:rgba(124,106,247,0.4); }
   .icon-btn.del:hover { color:var(--danger); border-color:rgba(231,76,60,0.3); }
   .ci-col.locked { opacity:0.4; pointer-events:none; }
+
+  /* V6: Gate override button */
+  .gate-override-btn {
+    font-size:0.6rem; color:var(--ci-dim); background:transparent;
+    border:1px solid var(--ci-dim); cursor:pointer; padding:3px 8px;
+    border-radius:3px; font-family:'DM Mono',monospace; margin-left:auto;
+    transition:0.2s; opacity:0.6;
+  }
+  .gate-override-btn:hover { color:var(--ci); border-color:var(--ci); opacity:1; }
 
   /* Add-task UI */
   .add-task-input-row { display:none; flex-direction:column; gap:6px; margin-top:6px; }
@@ -215,11 +321,15 @@
   .stat-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px dashed var(--border); font-size:0.8rem; }
   .stat-row:last-child { border:none; padding-bottom:0; }
   .stat-val { color:var(--sq); font-weight:500; }
-  .week-bars { display:flex; gap:6px; align-items:flex-end; height:72px; }
+  /* V6: week bars taller */
+  .week-bars { display:flex; gap:6px; align-items:flex-end; height:128px; }
   .week-bar-wrap { flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; height:100%; }
   .week-bar-bg { width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:2px; flex:1; position:relative; overflow:hidden; cursor:default; }
   .week-bar-fill { position:absolute; bottom:0; left:0; right:0; transition:height 0.6s ease; border-radius:1px 1px 0 0; }
   .week-bar-label { font-size:0.56rem; color:var(--text-dim); text-align:center; }
+  /* V6: avg stat below chart */
+  .week-avg-stat { margin-top:10px; font-size:0.68rem; color:var(--text-dim); display:flex; align-items:center; gap:8px; }
+  .week-avg-indicator { display:inline-block; width:16px; border-top:1px dashed var(--text-dim); opacity:0.5; vertical-align:middle; }
   /* Energy trail in insights */
   .energy-trail { display:flex; gap:3px; flex-wrap:wrap; margin-top:12px; }
   .energy-dot { width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; border:1px solid var(--border); cursor:default; }
@@ -240,6 +350,21 @@
   .reflection-note { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:10px; font-family:'DM Mono',monospace; font-size:0.82rem; border-radius:4px; outline:none; resize:none; height:64px; margin-top:8px; }
   .reflection-note:focus { border-color:var(--sq); background:var(--surface2); }
   .modal-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-dim); text-align:left; display:block; margin-bottom:0; }
+  /* V6: reflection accomplishment summary */
+  .refl-summary {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:4px; padding:12px 14px; margin-bottom:18px; text-align:left;
+  }
+  .refl-summary-headline {
+    font-family:'DM Serif Display',serif; font-size:1rem; margin-bottom:6px;
+    color:var(--text);
+  }
+  .refl-summary-stats {
+    display:flex; gap:16px; font-size:0.7rem; color:var(--text-dim); flex-wrap:wrap;
+  }
+  .refl-summary-stat { display:flex; align-items:center; gap:5px; }
+  .refl-stat-val { color:var(--sq); }
+  .refl-stat-val.ci { color:var(--ci); }
 
   @keyframes fadeDown { from{opacity:0;transform:translateY(-10px);} to{opacity:1;transform:translateY(0);} }
   @keyframes fadeIn   { from{opacity:0;} to{opacity:1;} }
@@ -250,7 +375,10 @@
 <!-- ── STICKY TOP ── -->
 <div class="top-wrapper">
   <nav>
-    <button class="tab-btn active" onclick="switchTab('router',event)">Focus Router</button>
+    <button class="tab-btn active" onclick="switchTab('router',event)">
+      Focus Router
+      <span class="tab-pulse-dot" id="pulseNavDot"></span>
+    </button>
     <button class="tab-btn" onclick="switchTab('dashboard',event)">Dashboard</button>
     <button class="tab-btn" onclick="switchTab('insights',event)">Insights</button>
   </nav>
@@ -288,6 +416,8 @@
 <div class="overlay" id="reflectionModal">
   <div class="modal">
     <h2>End of Day</h2>
+    <!-- V6: Accomplishment summary injected here by JS -->
+    <div id="reflSummary" class="refl-summary" style="display:none;"></div>
     <p id="reflectionSubtitle" style="margin-bottom:16px;">How was today's energy?</p>
     <div class="energy-row">
       <button class="energy-btn" onclick="selectEnergy(1)">😴<span>Low</span></button>
@@ -323,7 +453,7 @@
         <div class="router-q">Do you have any hard-scheduled events today?</div>
         <div class="options">
           <button class="choice-btn btn-primary" onclick="navTree('node-event-setup',true)">Yes</button>
-          <button class="choice-btn" onclick="navTree('node-luo',true)">No</button>
+          <button class="choice-btn" onclick="startQuiz()">No</button>
         </div>
       </div>
 
@@ -341,74 +471,18 @@
           <button class="choice-btn" onclick="commitEventsAndContinue()">Done →</button>
         </div>
         <div style="margin-top:14px;">
-          <button class="action-btn" style="border:none;color:var(--text-dim);font-size:0.7rem;" onclick="navTree('node-luo',true)">Skip events</button>
+          <button class="action-btn" style="border:none;color:var(--text-dim);font-size:0.7rem;" onclick="startQuiz()">Skip events</button>
         </div>
       </div>
 
-      <div class="node" id="node-luo">
-        <div class="router-q">Are your urgent communications and LUO duties handled?</div>
-        <div class="options">
-          <button class="choice-btn" onclick="navTree('node-grading',true)">Yes</button>
-          <button class="choice-btn btn-primary" onclick="navTree('node-do-comms',true)">No</button>
-        </div>
+      <!-- Dynamic subtask quiz — content written by JS -->
+      <div class="node" id="node-quiz">
+        <div id="quizInner"></div>
       </div>
 
-      <div class="node" id="node-do-comms">
-        <div class="result-icon icon-sq">■</div>
-        <div class="router-q" style="color:var(--sq);">Communications Hub</div>
-        <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:24px;">Clear urgent student issues to unblock others.</p>
-        <div class="action-links">
-          <button class="action-btn btn-primary" onclick="switchTab('dashboard',event)">Open Dashboard ›</button>
-          <button class="action-btn" style="border:none;" onclick="navTree('node-start',false)">↺ Reset Router</button>
-        </div>
-      </div>
-
-      <div class="node" id="node-grading">
-        <div class="router-q">Is your grading queue clear and synced?</div>
-        <div class="options">
-          <button class="choice-btn" onclick="navTree('node-prep',true)">Yes</button>
-          <button class="choice-btn btn-primary" onclick="navTree('node-do-grading',true)">No</button>
-        </div>
-      </div>
-
-      <div class="node" id="node-do-grading">
-        <div class="result-icon icon-sq">■</div>
-        <div class="router-q" style="color:var(--sq);">The Grading Block</div>
-        <div class="action-links">
-          <button class="action-btn btn-primary" onclick="switchTab('dashboard',event)">Open Dashboard ›</button>
-        </div>
-      </div>
-
-      <div class="node" id="node-prep">
-        <div class="router-q">Are your upcoming lectures fully prepared?</div>
-        <div class="options">
-          <button class="choice-btn" onclick="navTree('node-deep',true)">Yes</button>
-          <button class="choice-btn btn-primary" onclick="navTree('node-do-prep',true)">No</button>
-        </div>
-      </div>
-
-      <div class="node" id="node-do-prep">
-        <div class="result-icon icon-sq" style="border-color:#e67e22;color:#e67e22;border-radius:8px;">📝</div>
-        <div class="router-q" style="color:#e67e22;">Lecture Assembly</div>
-        <div class="action-links">
-          <button class="action-btn" style="border-color:#e67e22;color:#e67e22;" onclick="switchTab('dashboard',event)">Open Dashboard ›</button>
-        </div>
-      </div>
-
-      <div class="node" id="node-deep">
-        <div class="router-q">All core duties done! Priority for deep work?</div>
-        <div class="options">
-          <button class="choice-btn" style="border-color:var(--ci);color:var(--ci);" onclick="navTree('node-do-deep',true)">Dissertation</button>
-          <button class="choice-btn" style="border-color:var(--ci);color:var(--ci);" onclick="navTree('node-do-deep',true)">Creative / Labs</button>
-        </div>
-      </div>
-
-      <div class="node" id="node-do-deep">
-        <div class="result-icon" style="border:2px solid var(--ci);background:var(--ci-glow);color:var(--ci);border-radius:50%;width:60px;height:60px;display:inline-flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:20px;">●</div>
-        <div class="router-q" style="color:var(--ci);">Deep Work Focus</div>
-        <div class="action-links">
-          <button class="action-btn" style="border-color:var(--ci);color:var(--ci);" onclick="switchTab('dashboard',event)">Open Dashboard ›</button>
-        </div>
+      <!-- Quiz result screen — content written by JS -->
+      <div class="node" id="node-quiz-result">
+        <div id="quizResultInner"></div>
       </div>
 
     </div>
@@ -426,7 +500,12 @@
   <header>
     <h1>Daily Checklist</h1>
     <p id="currentDateDisplay">Date</p>
+    <!-- V6: Day-of-week historical average -->
+    <div class="dow-avg" id="dowAvg" style="display:none;"></div>
   </header>
+
+  <!-- V6: Mission chip — stores router recommendation -->
+  <div id="missionChip"></div>
 
   <div class="progress-wrap">
     <div class="progress-header">
@@ -443,10 +522,14 @@
     <div class="progress-track">
       <div class="progress-fill-sq" id="fillSq"></div>
       <div class="progress-fill-ci" id="fillCi"></div>
+      <!-- V6: gate midpoint marker -->
+      <div class="progress-midpoint" title="Gate: complete all squares to unlock circles"></div>
     </div>
     <div class="progress-gate" style="color:var(--sq-dim);" id="gateMsg">Complete all squares to unlock</div>
-    <div style="text-align:center;margin-top:16px;">
+    <!-- V6: progress actions row with re-route shortcut -->
+    <div class="progress-actions">
       <button class="action-btn" onclick="openReflection('manual')">↺ End Day & Log</button>
+      <button class="action-btn" style="border-color:transparent;color:var(--text-dim);font-size:0.68rem;" onclick="rerouteFromDashboard()">⇄ Re-route</button>
     </div>
   </div>
 
@@ -475,6 +558,8 @@
       <div class="section-header">
         <div class="section-icon">●</div>
         <div><div class="section-title" style="color:var(--ci);">Secondary Tasks</div></div>
+        <!-- V6: Dissertation gate override -->
+        <button class="gate-override-btn" id="overrideBtn" onclick="overrideGate(event)" title="Unlock for dissertation block">Unlock</button>
       </div>
       <div class="task-list" id="ciList"></div>
       <div class="add-task-input-row" id="ciAddRow">
@@ -545,7 +630,14 @@
 
     <div class="stat-card" style="grid-column:1/-1;">
       <h3>Last 7 Days</h3>
-      <div class="week-bars" id="weekBars" style="margin-top:16px;"></div>
+      <div style="position:relative;margin-top:16px;">
+        <div class="week-bars" id="weekBars"></div>
+      </div>
+      <!-- V6: avg pct text below chart -->
+      <div class="week-avg-stat" id="weekAvgStat" style="display:none;">
+        <span class="week-avg-indicator"></span>
+        <span id="weekAvgText"></span>
+      </div>
     </div>
 
     <div class="stat-card" style="grid-column:1/-1;">
@@ -610,31 +702,35 @@ const MASTER_TASKS = {
 
 // Time-of-day urgency rules: { warn: hour, critical: hour }
 const URGENCY_RULES = {
-  'sq-1': { warn:10, critical:13 },  // LUO/Comms: warn @10am, critical @1pm
-  'sq-7': { warn:11, critical:14 },  // Email: warn @11am, critical @2pm
-  'sq-2': { warn:12, critical:15 },  // Grading: warn @noon, critical @3pm
+  'sq-1': { warn:10, critical:13 },
+  'sq-7': { warn:11, critical:14 },
+  'sq-2': { warn:12, critical:15 },
   'sq-3': { warn:12, critical:15 },
   'sq-4': { warn:13, critical:16 },
-  'sq-6': { warn:11, critical:14 },  // Lecture prep: warn @11am, critical @2pm
+  'sq-6': { warn:11, critical:14 },
 };
 
 const DAYS    = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const DAY_ABR = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const ENERGY_EMOJI = ['','😴','😑','😊','💪','🔥'];
+const ENERGY_EMOJI  = ['','😴','😑','😊','💪','🔥'];
 const ENERGY_COLORS = ['','#6b7599','#9ba5c8','#38c9b0','#e8a838','#e74c3c'];
 
-const STORE_ST  = 'profOS_state_v3';
+const STORE_ST  = 'profOS_state_v4'; // bumped to avoid migration conflicts
 const STORE_HI  = 'profOS_history_v2';
 const POMO_MS   = 25 * 60 * 1000;
 
 let appState = {
   lastActiveDate: '',
   tasks:          {},
-  customTasks:    { sq:[], ci:[] },  // [{ id, label, recurring }]
-  events:         [],                // [{ id, title, timestamp }]
+  customTasks:    { sq:[], ci:[] },
+  events:         [],
   currentFocusId: null,
-  pomoSession:    null,              // { endMs, isPaused, pausedAt }
-  completedPomos: 0                  // count of finished 25-min sessions today
+  pomoSession:    null,
+  completedPomos: 0,
+  // V6 additions:
+  todayMission:     null,   // { rec, detail, urgency, timestamp } — set after quiz
+  gateOverride:     false,  // true when user unlocks circles manually
+  missionChipSeen:  false,  // true when user has dismissed the chip
 };
 let appHistory  = [];
 
@@ -644,23 +740,28 @@ let pomoTimerId = null;
 let urgTimerId  = null;
 let activeNode  = 'node-start';
 let selectedEnergy = 0;
-let reflectionTrigger = 'manual'; // 'manual' | 'newday'
+let reflectionTrigger = 'manual';
 
 // ══════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════
 function initApp() {
   loadData();
-  // Migrate old format
+
+  // Migrate old state keys
   if (appState.activeEvent) {
     if (!appState.events) appState.events = [];
     if (appState.activeEvent.timestamp > Date.now())
       appState.events.push({ id:'migrated', title:appState.activeEvent.title, timestamp:appState.activeEvent.timestamp });
     delete appState.activeEvent;
   }
-  if (!appState.customTasks) appState.customTasks = { sq:[], ci:[] };
-  if (!appState.events)      appState.events = [];
+  if (!appState.customTasks)   appState.customTasks = { sq:[], ci:[] };
+  if (!appState.events)        appState.events = [];
   if (!appState.completedPomos) appState.completedPomos = 0;
+  // V6 init
+  if (!appState.todayMission)    appState.todayMission = null;
+  if (appState.gateOverride === undefined) appState.gateOverride = false;
+  if (appState.missionChipSeen === undefined) appState.missionChipSeen = false;
 
   document.getElementById('currentDateDisplay').textContent =
     new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
@@ -673,15 +774,18 @@ function initApp() {
   resumeEventTimer();
   resumeFocus();
   renderPulseCard();
+  renderMissionChip();
+  updateDowAvg();
 
-  // Refresh urgency badges every 60 seconds
-  urgTimerId = setInterval(() => { renderChecklist(); renderPulseCard(); }, 60000);
+  urgTimerId = setInterval(() => { renderChecklist(); renderPulseCard(); renderMissionChip(); }, 60000);
 }
 
 function loadData() {
   try {
-    const s = localStorage.getItem(STORE_ST);
-    if (s) appState = JSON.parse(s);
+    // Try V4 store first, fall back to V3 (migration)
+    let s = localStorage.getItem(STORE_ST);
+    if (!s) s = localStorage.getItem('profOS_state_v3');
+    if (s) appState = { ...appState, ...JSON.parse(s) };
     const h = localStorage.getItem(STORE_HI);
     if (h) appHistory = JSON.parse(h);
   } catch(e) { console.error('Storage error', e); }
@@ -701,7 +805,6 @@ function getUrgency(taskId) {
   const h = new Date().getHours();
   const rule = URGENCY_RULES[taskId];
   if (!rule) {
-    // Generic sq: late-day pressure
     if (MASTER_TASKS.sq.find(t => t.id === taskId)) {
       if (h >= 17) return 2;
       if (h >= 15) return 1;
@@ -729,7 +832,6 @@ function computePulse() {
 
   const h = new Date().getHours();
 
-  // Determine recommendation + urgency level
   let rec, detail, urgency;
 
   if (!commsOk && h >= 13) {
@@ -799,6 +901,100 @@ function renderPulseCard() {
         <button class="action-btn" style="border-color:${s.accent};color:${s.accent};" onclick="switchTab('dashboard',event)">Open Dashboard ›</button>
       </div>
     </div>`;
+
+  // V6: update pulse dot on nav tab
+  updatePulseNavDot(p.urgency);
+}
+
+// V6: pulse dot on the Router nav tab
+function updatePulseNavDot(urgency) {
+  const dot = document.getElementById('pulseNavDot');
+  if (!dot) return;
+  dot.className = 'tab-pulse-dot';
+  if (urgency === 'critical') dot.classList.add('critical');
+  else if (urgency === 'warn') dot.classList.add('warn');
+}
+
+// ══════════════════════════════════════════
+// V6: MISSION CHIP (dashboard breadcrumb from router)
+// ══════════════════════════════════════════
+function renderMissionChip() {
+  const el = document.getElementById('missionChip');
+  if (!el) return;
+
+  // If chip was dismissed or no mission stored, fall back to live pulse
+  const mission = appState.todayMission;
+  const p = computePulse();
+
+  // Always show live pulse as the chip (re-renders every 60s)
+  const CHIP_SCHEME = {
+    normal:   { border:'var(--border)',              accent:'var(--ci)',     arrow:'→' },
+    warn:     { border:'rgba(232,168,56,0.5)',        accent:'var(--sq)',     arrow:'⚠' },
+    critical: { border:'rgba(231,76,60,0.5)',         accent:'var(--danger)', arrow:'!!' },
+    good:     { border:'rgba(56,201,176,0.4)',        accent:'var(--ci)',     arrow:'✓' },
+  };
+  const sc = CHIP_SCHEME[p.urgency];
+
+  if (appState.missionChipSeen) { el.innerHTML=''; return; }
+
+  el.innerHTML = `
+    <div class="mission-chip"
+         style="border-color:${sc.border};"
+         onclick="switchTab('router',event)"
+         title="View full Pulse Card in Router">
+      <span class="mission-chip-arrow" style="color:${sc.accent};">${sc.arrow}</span>
+      <div class="mission-chip-body">
+        <div class="mission-chip-label">Current Focus</div>
+        <div class="mission-chip-rec" style="color:${sc.accent};">${p.rec}</div>
+      </div>
+      <button class="mission-chip-dismiss" onclick="dismissMissionChip(event)" title="Dismiss">✕</button>
+    </div>`;
+}
+
+function dismissMissionChip(evt) {
+  if (evt) evt.stopPropagation();
+  appState.missionChipSeen = true;
+  saveData();
+  renderMissionChip();
+}
+
+// V6: re-route shortcut from dashboard
+function rerouteFromDashboard() {
+  // Reset chip so it refreshes after re-routing
+  appState.missionChipSeen = false;
+  saveData();
+  switchTab('router', null);
+  // Navigate to start node
+  const cur = document.getElementById(activeNode);
+  if (cur && activeNode !== 'node-start') {
+    cur.classList.remove('active');
+    const start = document.getElementById('node-start');
+    start.classList.add('active');
+    activeNode = 'node-start';
+  }
+}
+
+// V6: gate override for dissertation block
+function overrideGate(evt) {
+  if (evt) evt.stopPropagation();
+  appState.gateOverride = !appState.gateOverride;
+  saveData();
+  updateProgress();
+}
+
+// V6: day-of-week historical average on dashboard
+function updateDowAvg() {
+  const el = document.getElementById('dowAvg');
+  if (!el) return;
+  const dow = new Date().getDay();
+  const histDay = appHistory.filter(h => h.dayOfWeek === dow);
+  if (histDay.length < 2) { el.style.display='none'; return; }
+  let totSqD=0, totSqT=0;
+  histDay.forEach(h => { totSqD += h.sqDone; totSqT += h.sqTotal; });
+  const avg = totSqT > 0 ? Math.round((totSqD/totSqT)*100) : 0;
+  const dayName = DAYS[dow];
+  el.style.display = 'block';
+  el.innerHTML = `On ${dayName}s you typically finish <span class="dow-avg-val">${avg}%</span> of squares`;
 }
 
 // ══════════════════════════════════════════
@@ -843,6 +1039,258 @@ function deleteCustomTask(id, type, evt) {
 }
 
 // ══════════════════════════════════════════
+// SUBTASK QUIZ ENGINE
+// ══════════════════════════════════════════
+let quizQueue      = [];
+let quizIndex      = 0;
+let quizHistory    = [];
+let quizMarked     = [];
+let quizAddedTasks = [];
+
+function buildQuizQueue() {
+  const queue = [];
+  MASTER_TASKS.sq.forEach(task => {
+    const s = appState.tasks[task.id] || {};
+    if (task.subtasks && task.subtasks.length) {
+      task.subtasks.forEach(sub => {
+        const ss = appState.tasks[sub.id] || {};
+        if (!ss.done && !ss.na)
+          queue.push({ id:sub.id, label:sub.label, parentId:task.id, parentLabel:task.label, isParent:false });
+      });
+    } else {
+      if (!s.done && !s.na)
+        queue.push({ id:task.id, label:task.label, parentId:null, parentLabel:null, isParent:true });
+    }
+  });
+  return queue;
+}
+
+function startQuiz() {
+  quizQueue      = buildQuizQueue();
+  quizIndex      = 0;
+  quizHistory    = [];
+  quizMarked     = [];
+  quizAddedTasks = [];
+
+  if (quizQueue.length === 0) {
+    renderQuizAddTasks();
+    navTree('node-quiz', true);
+    return;
+  }
+  renderQuizStep();
+  navTree('node-quiz', true);
+}
+
+function renderQuizStep() {
+  if (quizIndex >= quizQueue.length) {
+    renderQuizAddTasks();
+    return;
+  }
+
+  const item  = quizQueue[quizIndex];
+  const total = quizQueue.length;
+  const pct   = Math.round((quizIndex / total) * 100);
+  const canBack = quizHistory.length > 0;
+
+  const parentLine = item.parentLabel
+    ? `<div class="quiz-parent">■ ${item.parentLabel}</div>` : '';
+
+  document.getElementById('quizInner').innerHTML = `
+    <div class="quiz-meta">
+      <span class="quiz-step">Check-in</span>
+      <span class="quiz-count">${quizIndex + 1} / ${total}</span>
+    </div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+    ${parentLine}
+    <div class="quiz-q">Did you complete<br><em>${item.label}</em>?</div>
+    <div class="quiz-btns">
+      <button class="quiz-btn-done" onclick="quizAnswer('done')">✓ Done</button>
+      <button class="quiz-btn-skip" onclick="quizAnswer('skip')">Not Yet</button>
+      <button class="quiz-btn-na"   onclick="quizAnswer('na')">N/A</button>
+    </div>
+    ${canBack ? `<button class="quiz-back" onclick="quizBack()">← Back</button>` : ''}`;
+}
+
+function quizAnswer(answer) {
+  const item      = quizQueue[quizIndex];
+  const prevState = appState.tasks[item.id] ? { ...appState.tasks[item.id] } : null;
+  quizHistory.push({ index:quizIndex, id:item.id, parentId:item.parentId, prevState });
+
+  if (!appState.tasks[item.id]) appState.tasks[item.id] = { done:false, na:false };
+  if (answer === 'done') {
+    appState.tasks[item.id].done = true;
+    appState.tasks[item.id].na   = false;
+    quizMarked.push({ ...item, answer:'done' });
+    if (item.parentId) rollUpParent(item.parentId);
+  } else if (answer === 'na') {
+    appState.tasks[item.id].na   = true;
+    appState.tasks[item.id].done = false;
+    quizMarked.push({ ...item, answer:'na' });
+    if (item.parentId) rollUpParent(item.parentId);
+  }
+
+  saveData(); updateProgress(); renderPulseCard();
+  quizIndex++;
+  renderQuizStep();
+}
+
+function quizBack() {
+  if (quizHistory.length === 0) return;
+  const last = quizHistory.pop();
+  if (last.prevState) appState.tasks[last.id] = { ...last.prevState };
+  else delete appState.tasks[last.id];
+  if (last.parentId) rollUpParent(last.parentId);
+  quizMarked = quizMarked.filter(m => m.id !== last.id);
+  saveData(); updateProgress();
+  quizIndex = last.index;
+  renderQuizStep();
+}
+
+function rollUpParent(parentId) {
+  const parent = MASTER_TASKS.sq.find(t => t.id === parentId);
+  if (!parent || !parent.subtasks) return;
+  if (!appState.tasks[parentId]) appState.tasks[parentId] = { done:false, na:false };
+  if (appState.tasks[parentId].na) return;
+  const allDone = parent.subtasks.every(s => appState.tasks[s.id]?.done);
+  const allNa   = parent.subtasks.every(s => appState.tasks[s.id]?.na);
+  appState.tasks[parentId].done = allDone;
+  if (allNa) { appState.tasks[parentId].na = true; appState.tasks[parentId].done = false; }
+}
+
+// ── ADD-TASKS PHASE ─────────────────────────
+function renderQuizAddTasks() {
+  const sqCount = quizQueue.length;
+  const preamble = sqCount > 0
+    ? `<div class="quiz-meta"><span class="quiz-step">Add Tasks</span><span class="quiz-count">Almost done</span></div>
+       <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:100%"></div></div>`
+    : `<div class="quiz-meta"><span class="quiz-step">Add Tasks</span></div>`;
+
+  document.getElementById('quizInner').innerHTML = `
+    ${preamble}
+    <div class="quiz-q" style="font-size:1.2rem;margin-bottom:6px;">Any tasks to add today?</div>
+    <p style="font-size:0.74rem;color:var(--text-dim);margin-bottom:4px;">
+      One-off items, ad-hoc requests, or anything that came up this morning.
+    </p>
+    <div class="quiz-addtasks-cols">
+      <div class="quiz-addtasks-col">
+        <div class="quiz-addtasks-label" style="color:var(--sq);">■ <span>Priority</span></div>
+        <div class="quiz-addtasks-input-row">
+          <input class="quiz-addtasks-field" id="qaFieldSq" placeholder="e.g., Call registrar…"
+            onkeydown="if(event.key==='Enter')quizAddTask('sq')" autocomplete="off" />
+          <button class="quiz-addtasks-add sq" onclick="quizAddTask('sq')">Add</button>
+        </div>
+        <div class="quiz-added-list" id="qaListSq"></div>
+      </div>
+      <div class="quiz-addtasks-col">
+        <div class="quiz-addtasks-label" style="color:var(--ci);">● <span>Secondary</span></div>
+        <div class="quiz-addtasks-input-row">
+          <input class="quiz-addtasks-field ci-field" id="qaFieldCi" placeholder="e.g., Update syllabus…"
+            onkeydown="if(event.key==='Enter')quizAddTask('ci')" autocomplete="off" />
+          <button class="quiz-addtasks-add ci" onclick="quizAddTask('ci')">Add</button>
+        </div>
+        <div class="quiz-added-list" id="qaListCi"></div>
+      </div>
+    </div>
+    <div class="action-links" style="margin-top:14px;">
+      <button class="action-btn btn-primary" onclick="quizFinish()">Continue →</button>
+      ${quizQueue.length > 0 ? `<button class="quiz-back" style="margin-top:0;" onclick="quizBackFromAddTasks()">← Back</button>` : ''}
+    </div>`;
+
+  quizAddedTasks.forEach(t => renderQuizAddedPill(t));
+  setTimeout(() => { const f=document.getElementById('qaFieldSq'); if(f) f.focus(); }, 60);
+}
+
+function quizAddTask(type) {
+  const field = document.getElementById(`qaField${type==='sq'?'Sq':'Ci'}`);
+  const label = field.value.trim();
+  if (!label) return;
+  const id = `custom-${type}-${Date.now()}`;
+  appState.customTasks[type].push({ id, label, recurring:false });
+  saveData(); renderChecklist(); updateProgress();
+  const task = { id, label, type };
+  quizAddedTasks.push(task);
+  renderQuizAddedPill(task);
+  field.value = '';
+  field.focus();
+}
+
+function renderQuizAddedPill(task) {
+  const listId = task.type === 'sq' ? 'qaListSq' : 'qaListCi';
+  const list   = document.getElementById(listId);
+  if (!list) return;
+  const pill = document.createElement('div');
+  pill.className = `quiz-added-pill ${task.type}`;
+  pill.id = `pill-${task.id}`;
+  pill.innerHTML = `<span>${task.label}</span><button class="quiz-added-del" onclick="quizRemoveAdded('${task.id}','${task.type}')">✕</button>`;
+  list.appendChild(pill);
+}
+
+function quizRemoveAdded(id, type) {
+  appState.customTasks[type] = appState.customTasks[type].filter(t => t.id !== id);
+  delete appState.tasks[id];
+  saveData(); renderChecklist(); updateProgress();
+  quizAddedTasks = quizAddedTasks.filter(t => t.id !== id);
+  const pill = document.getElementById(`pill-${id}`);
+  if (pill) pill.remove();
+}
+
+function quizBackFromAddTasks() {
+  quizIndex = quizQueue.length - 1;
+  renderQuizStep();
+}
+
+function quizFinish() {
+  renderQuizResult();
+  navTree('node-quiz-result', true);
+}
+
+function renderQuizResult() {
+  const p  = computePulse();
+  const sc = { normal:{accent:'var(--ci)',title:'var(--text)'}, warn:{accent:'var(--sq)',title:'var(--sq)'},
+                critical:{accent:'var(--danger)',title:'var(--danger)'}, good:{accent:'var(--ci)',title:'var(--ci)'} }[p.urgency];
+
+  // V6: Store the mission in state so the dashboard chip can use it
+  appState.todayMission    = { rec:p.rec, detail:p.detail, urgency:p.urgency, timestamp:Date.now() };
+  appState.missionChipSeen = false; // always re-show chip after a fresh route
+  saveData();
+  renderMissionChip();
+
+  const checkedRows = quizQueue.map(item => {
+    const s   = appState.tasks[item.id] || {};
+    const cls = s.done ? 'marked' : s.na ? 'na-d' : 'skipped';
+    const icon = s.done ? '✓' : s.na ? '⊘' : '·';
+    const lbl  = item.parentLabel ? `${item.parentLabel} → ${item.label}` : item.label;
+    return `<div class="quiz-result-row ${cls}"><span>${icon}</span><span>${lbl}</span></div>`;
+  }).join('');
+
+  const addedRows = quizAddedTasks.map(t => {
+    const icon = t.type === 'sq' ? '■' : '●';
+    const color = t.type === 'sq' ? 'var(--sq)' : 'var(--ci)';
+    return `<div class="quiz-result-row marked" style="color:${color};"><span>${icon}</span><span>${t.label}</span></div>`;
+  }).join('');
+
+  const markedCount = quizMarked.filter(m => m.answer==='done').length;
+  const addedCount  = quizAddedTasks.length;
+
+  const summaryParts = [];
+  if (markedCount > 0) summaryParts.push(`${markedCount} item${markedCount>1?'s':''} marked complete`);
+  if (addedCount  > 0) summaryParts.push(`${addedCount} task${addedCount>1?'s':''} added to today`);
+  const summaryLine = summaryParts.length ? summaryParts.join(' · ') + '.' : 'Nothing changed — continuing from current state.';
+
+  const hasRows = quizQueue.length > 0 || quizAddedTasks.length > 0;
+
+  document.getElementById('quizResultInner').innerHTML = `
+    <div class="router-q" style="color:${sc.title};margin-bottom:10px;">→ ${p.rec}</div>
+    <p style="color:var(--text-dim);font-size:0.8rem;margin-bottom:16px;">${p.detail}</p>
+    ${hasRows ? `<div class="quiz-result-rows">${checkedRows}${addedRows}</div>` : ''}
+    <p style="font-size:0.68rem;color:var(--text-dim);margin-bottom:20px;">${summaryLine}</p>
+    <div class="action-links">
+      <button class="action-btn" style="border-color:${sc.accent};color:${sc.accent};" onclick="switchTab('dashboard',event)">Open Dashboard ›</button>
+      <button class="action-btn" style="border:none;color:var(--text-dim);" onclick="navTree('node-start',false)">↺ Run Again</button>
+    </div>`;
+}
+
+// ══════════════════════════════════════════
 // EVENT QUEUE
 // ══════════════════════════════════════════
 function addRouterEvent() {
@@ -865,7 +1313,7 @@ function removeEvent(id, evt) {
 }
 function commitEventsAndContinue() {
   if (appState.events.length > 0) resumeEventTimer();
-  navTree('node-luo', true);
+  startQuiz();
 }
 function renderEventQueue() {
   const el = document.getElementById('eventQueue');
@@ -924,7 +1372,6 @@ function clearTimer() {
 function setFocus(taskId, label, evt) {
   if (evt) evt.stopPropagation();
   if (appState.currentFocusId === taskId) { clearFocus(); return; }
-  // Settle any in-progress pomo before switching
   bankFocusTime();
   if (pomoTimerId) clearInterval(pomoTimerId);
   appState.currentFocusId = taskId;
@@ -939,12 +1386,8 @@ function setFocus(taskId, label, evt) {
 }
 
 function bankFocusTime() {
-  // Credit elapsed time when clearing an active (non-paused) session
   if (appState.pomoSession && !appState.pomoSession.isPaused) {
-    const elapsed = POMO_MS - Math.max(0, appState.pomoSession.endMs - Date.now());
-    if (elapsed > 60000) { // only credit if >1 min
-      // Partial: we don't count it as a full pomo, but we keep track via completedPomos only for full ones
-    }
+    // partial sessions not counted as full pomos
   }
 }
 
@@ -987,7 +1430,6 @@ function resumeFocus() {
 
 function togglePomodoro() {
   if (!appState.pomoSession) {
-    // Fresh start
     const now=Date.now();
     appState.pomoSession = { endMs:now+POMO_MS, isPaused:false, pausedAt:null };
     saveData();
@@ -995,14 +1437,12 @@ function togglePomodoro() {
     document.getElementById('focusBanner').classList.add('pomo-running');
     startPomoTick();
   } else if (!appState.pomoSession.isPaused) {
-    // Pause
     appState.pomoSession.isPaused=true; appState.pomoSession.pausedAt=Date.now();
     if (pomoTimerId) clearInterval(pomoTimerId);
     saveData();
     document.getElementById('pomoBtnEl').textContent='▶ Resume';
     document.getElementById('focusBanner').classList.remove('pomo-running');
   } else {
-    // Resume — extend end by paused duration
     const paused=Date.now()-appState.pomoSession.pausedAt;
     appState.pomoSession.endMs+=paused; appState.pomoSession.isPaused=false; appState.pomoSession.pausedAt=null;
     saveData();
@@ -1019,14 +1459,12 @@ function startPomoTick() {
     if (rem <= 0) {
       clearInterval(pomoTimerId); pomoTimerId=null;
       setPomoDisplay(0, POMO_MS);
-      // Count the completed session
       appState.completedPomos = (appState.completedPomos||0) + 1;
       appState.pomoSession = null;
       saveData();
       document.getElementById('pomoBtnEl').textContent='↺ Restart';
       document.getElementById('focusBanner').classList.remove('pomo-running');
       updateFocusCounter();
-      // Flash teal to signal completion
       const fb=document.getElementById('focusBanner');
       fb.style.background='rgba(56,201,176,0.22)';
       setTimeout(()=>fb.style.background='',1800);
@@ -1061,8 +1499,9 @@ function switchTab(tabId, evt) {
   document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', tabs[i]===tabId));
   document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
   document.getElementById(`view-${tabId}`).classList.add('active');
-  if (tabId==='insights')  updateInsights();
+  if (tabId==='insights') updateInsights();
   if (tabId==='router')   { renderEventQueue(); renderPulseCard(); }
+  if (tabId==='dashboard') { renderMissionChip(); updateDowAvg(); }
 }
 
 function navTree(targetId, forward) {
@@ -1083,10 +1522,51 @@ function openReflection(trigger) {
   selectedEnergy = 0;
   document.querySelectorAll('.energy-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('reflectionNote').value = '';
-  document.getElementById('reflCancelBtn').style.display = trigger==='newday' ? 'inline-block' : 'inline-block';
+  document.getElementById('reflCancelBtn').style.display = 'inline-block';
+
+  // V6: Compute accomplishment summary for celebration
+  const summaryEl = document.getElementById('reflSummary');
+  let sqD=0, sqT=0, ciD=0, ciT=0;
+  allTasks('sq').forEach(t => { const s=appState.tasks[t.id]||{}; if(!s.na){sqT++;if(s.done)sqD++;} });
+  allTasks('ci').forEach(t => { const s=appState.tasks[t.id]||{}; if(!s.na){ciT++;if(s.done)ciD++;} });
+  const pomos = appState.completedPomos || 0;
+
+  if (trigger !== 'newday' && sqT > 0) {
+    const pct = Math.round((sqD/sqT)*100);
+    let headline = '';
+    if (pct === 100)      headline = 'Perfect day — all squares done! 🎉';
+    else if (pct >= 75)   headline = 'Strong day — nearly there.';
+    else if (pct >= 50)   headline = 'Solid progress today.';
+    else if (sqD > 0)     headline = 'Something done is better than nothing.';
+    else                  headline = 'Tomorrow is a fresh start.';
+
+    summaryEl.style.display = 'block';
+    summaryEl.innerHTML = `
+      <div class="refl-summary-headline">${headline}</div>
+      <div class="refl-summary-stats">
+        <div class="refl-summary-stat">
+          <span>■</span>
+          <span class="refl-stat-val">${sqD}/${sqT}</span>
+          <span>squares</span>
+        </div>
+        ${ciT > 0 ? `<div class="refl-summary-stat">
+          <span>●</span>
+          <span class="refl-stat-val ci">${ciD}/${ciT}</span>
+          <span>secondary</span>
+        </div>` : ''}
+        ${pomos > 0 ? `<div class="refl-summary-stat">
+          <span>◎</span>
+          <span class="refl-stat-val" style="color:var(--focus);">${pomos}×25m</span>
+          <span>focused</span>
+        </div>` : ''}
+      </div>`;
+  } else {
+    summaryEl.style.display = 'none';
+  }
+
   document.getElementById('reflectionSubtitle').textContent = trigger==='newday'
     ? "New day detected. Before you reset, how was yesterday's energy?"
-    : "Before you log, how was today's energy?";
+    : "How was today's energy?";
   document.getElementById('resetModal').classList.remove('show');
   document.getElementById('reflectionModal').classList.add('show');
 }
@@ -1145,25 +1625,29 @@ function logAndReset(energy, note) {
     });
   }
 
-  // Preserve recurring custom tasks; drop one-time
   const savedCustom = {
     sq: appState.customTasks.sq.filter(t=>t.recurring),
     ci: appState.customTasks.ci.filter(t=>t.recurring)
   };
   const futureEvts = appState.events.filter(e=>e.timestamp>Date.now());
 
-  appState.tasks          = {};
-  appState.lastActiveDate = new Date().toDateString();
-  appState.customTasks    = savedCustom;
-  appState.events         = futureEvts;
-  appState.currentFocusId = null;
-  appState.pomoSession    = null;
-  appState.completedPomos = 0;
+  appState.tasks            = {};
+  appState.lastActiveDate   = new Date().toDateString();
+  appState.customTasks      = savedCustom;
+  appState.events           = futureEvts;
+  appState.currentFocusId   = null;
+  appState.pomoSession      = null;
+  appState.completedPomos   = 0;
+  // V6: reset daily state
+  appState.gateOverride     = false;
+  appState.todayMission     = null;
+  appState.missionChipSeen  = false;
+
   if (pomoTimerId) clearInterval(pomoTimerId); pomoTimerId=null;
   document.getElementById('focusBanner').classList.remove('active','pomo-running');
   updateFocusCounter();
 
-  saveData(); renderChecklist(); updateProgress(); updateInsights(); renderPulseCard();
+  saveData(); renderChecklist(); updateProgress(); updateInsights(); renderPulseCard(); renderMissionChip(); updateDowAvg();
 }
 
 // ══════════════════════════════════════════
@@ -1179,6 +1663,7 @@ function buildTaskHtml(type) {
     const streak  = calculateStreak(t.id);
     const urg     = na||done ? 0 : getUrgency(t.id);
 
+    // V6: streak and recurring revealed on hover via CSS; urgency always visible
     const streakHtml  = streak>=2 ? `<span class="streak-badge">🔥${streak}</span>` : '';
     const urgHtml     = urg===2 ? `<span class="urgency-badge critical">!!</span>`
                       : urg===1 ? `<span class="urgency-badge warn">⚠</span>` : '';
@@ -1283,17 +1768,35 @@ function updateProgress() {
   document.getElementById('ciDone').textContent=ciD;
   document.getElementById('ciTotal').textContent=ciT;
   document.getElementById('fillSq').style.width=sqT?(sqD/sqT*50)+'%':'0%';
+
   const sqDone=sqT>0&&sqD>=sqT;
-  const ciCol=document.getElementById('ciCol'), gate=document.getElementById('gateMsg');
-  if (sqDone) {
+  const ciCol=document.getElementById('ciCol');
+  const gate=document.getElementById('gateMsg');
+  const overrideBtn = document.getElementById('overrideBtn');
+
+  // V6: gate override — let user temporarily unlock circles
+  const unlocked = sqDone || appState.gateOverride;
+
+  if (unlocked) {
     document.getElementById('fillCi').style.width=ciT?(ciD/ciT*50)+'%':'0%';
     ciCol.classList.remove('locked');
-    gate.textContent='✅ Squares complete. Circles unlocked.'; gate.style.color='var(--ci)';
+    if (sqDone) {
+      gate.textContent='✅ Squares complete. Circles unlocked.'; gate.style.color='var(--ci)';
+      if (overrideBtn) overrideBtn.style.display='none';
+    } else {
+      gate.textContent='🔓 Circles unlocked manually.'; gate.style.color='var(--ci-dim)';
+      if (overrideBtn) { overrideBtn.textContent='Lock'; overrideBtn.style.display=''; }
+    }
   } else {
     document.getElementById('fillCi').style.width='0%';
     ciCol.classList.add('locked');
-    gate.textContent=`⬜ ${sqT-sqD} squares remaining to unlock`; gate.style.color='var(--sq-dim)';
+    gate.textContent=`⬜ ${sqT-sqD} squares remaining to unlock`;
+    gate.style.color='var(--sq-dim)';
+    if (overrideBtn) { overrideBtn.textContent='Unlock'; overrideBtn.style.display=''; }
   }
+
+  // V6: update mission chip on progress changes
+  renderMissionChip();
 }
 
 // ══════════════════════════════════════════
@@ -1350,9 +1853,11 @@ function updateInsights() {
   });
   document.getElementById('bestTask').textContent=bestHits>0?bestT:'--';
 
-  // Weekly bar chart
+  // V6: Weekly bar chart — taller, with 7-day avg stat below
   const container=document.getElementById('weekBars');
   let barHtml='';
+  let totalPct=0, daysWithData=0;
+
   for (let i=6;i>=0;i--) {
     const d=new Date(); d.setDate(d.getDate()-i);
     const dateStr=d.toDateString(); const isToday=i===0;
@@ -1365,6 +1870,7 @@ function updateInsights() {
       const rec=appHistory.find(h=>h.date===dateStr);
       if(rec){pct=rec.sqTotal>0?Math.round((rec.sqDone/rec.sqTotal)*100):0;pomos=rec.completedPomos||0;}
     }
+    if (pct > 0 || isToday) { totalPct += pct; daysWithData++; }
     const color=pct===100?'var(--ci)':pct>=50?'var(--sq)':pct>0?'var(--sq-dim)':'transparent';
     const pomoStr=pomos>0?`${pomos}×25m`:'';
     barHtml+=`
@@ -1377,7 +1883,18 @@ function updateInsights() {
   }
   container.innerHTML=barHtml;
 
-  // Energy trail (last 30 logged days with energy data)
+  // V6: Show 7-day average below chart
+  const avgStatEl = document.getElementById('weekAvgStat');
+  const avgTextEl = document.getElementById('weekAvgText');
+  if (daysWithData > 1 && avgStatEl && avgTextEl) {
+    const sevenDayAvg = Math.round(totalPct / daysWithData);
+    avgStatEl.style.display = 'flex';
+    avgTextEl.textContent = `7-day square avg: ${sevenDayAvg}%`;
+  } else if (avgStatEl) {
+    avgStatEl.style.display = 'none';
+  }
+
+  // Energy trail
   const withEnergy=appHistory.filter(h=>h.energy!=null).slice(-30);
   const trail=document.getElementById('energyTrail');
   const empty=document.getElementById('energyEmpty');
