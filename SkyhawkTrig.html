@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyhawk Review of Math 130 7.1 Skills</title>
+    <style>
+        /* Constrain to window, prevent scrolling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
+        }
+
+        /* Top Progress Bar */
+        #progress-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 10px 0;
+            z-index: 20;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #progress-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #progress-bar-bg {
+            width: 80%;
+            background: rgba(255,255,255,0.3);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #progress-bar-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Background Visuals */
+        #game-area {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 15vh;
+            background: #2E7D32;
+            border-top: 5px solid #1B5E20;
+        }
+
+        #runway {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            width: 20%;
+            height: 15vh;
+            background: #424242;
+            transform: perspective(500px) rotateX(60deg);
+            border-left: 2px dashed #fff;
+            border-right: 2px dashed #fff;
+        }
+
+        /* Plane Visual */
+        #plane {
+            position: absolute;
+            font-size: 4rem;
+            bottom: 12vh;
+            left: 10%;
+            transition: all 2s ease-in-out;
+            z-index: 5;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            transform: rotate(0deg);
+        }
+
+        /* Modal / Popup styling */
+        #modal-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        #modal {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #1565C0;
+            font-size: 1.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ul.checklist {
+            text-align: left;
+            background: #f5f5f5;
+            padding: 15px 20px 15px 40px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        ul.checklist li {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            font-size: 1rem;
+            width: 80px;
+            border: 2px solid #90CAF9;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        #btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #1565C0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0D47A1;
+        }
+        
+        button.secondary {
+            background: #4CAF50;
+        }
+
+        button.secondary:hover {
+            background: #388E3C;
+        }
+
+        #error-msg {
+            color: #D32F2F;
+            font-weight: bold;
+            min-height: 20px;
+            margin-top: 10px;
+        }
+        
+        .math-hint {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .solution-box {
+            background: #f1f8e9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            text-align: left;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="progress-container">
+    <div id="progress-text">Preflight</div>
+    <div id="progress-bar-bg">
+        <div id="progress-bar-fill"></div>
+    </div>
+</div>
+
+<div id="game-area">
+    <div id="ground"></div>
+    <div id="runway"></div>
+    <div id="plane">&#128745;</div> <div id="modal-overlay">
+        <div id="modal">
+            <h2 id="modal-title">Skyhawk Review of Math 130 7.1 Skills</h2>
+            <div id="modal-text">
+                Welcome to your checkride out of Lynchburg (LYH). You will review and practice the 4 key right-triangle trigonometry skills required for your flight path:
+                <ul class="checklist">
+                    <li>☑ Stage 1: Elevation (Ascent distance & time)</li>
+                    <li>☑ Stage 2: Bearing (North/South & East/West components)</li>
+                    <li>☑ Stage 3: Depression (Descent altitude loss)</li>
+                    <li>☑ Stage 4: Return (Distance & Bearing to origin)</li>
+                </ul>
+                <b>Important:</b> Always round to the designated precision. If you miss a calculation, ATC will show you the math and give you a new heading to try.
+            </div>
+            
+            <div id="solution-container" class="solution-box"></div>
+            <div id="inputs-container"></div>
+            <div id="error-msg"></div>
+            
+            <div id="btn-container">
+                <button onclick="initGame()">Start Engine</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Math Helpers ---
+    const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const randomFloat = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
+    const toRadians = (degrees) => degrees * (Math.PI / 180);
+    const toDegrees = (radians) => radians * (180 / Math.PI);
+
+    // --- Game State ---
+    let currentStageIndex = 0;
+    let currentData = {}; 
+
+    // Define the sequence of question types and their visual animations
+    const stageDefinitions = [
+        { type: "elevation", title: "Stage 1: Elevation (Takeoff from LYH)", anim: { b: '40vh', l: '30%', t: 'rotate(-15deg)' } },
+        { type: "bearing", title: "Stage 2: Bearing (Cruising)", dir: "SW", anim: { b: '40vh', l: '60%', t: 'rotate(0deg)' } },
+        { type: "depression", title: "Stage 3: Depression (Descent)", anim: { b: '25vh', l: '80%', t: 'rotate(10deg)' } },
+        { type: "return", title: "Stage 4: Return (Diverted)", anim: { b: '25vh', l: '20%', t: 'scaleX(-1) rotate(0deg)' } }
+    ];
+
+    function updateProgress() {
+        const progContainer = document.getElementById("progress-container");
+        const progText = document.getElementById("progress-text");
+        const progFill = document.getElementById("progress-bar-fill");
+
+        progContainer.style.display = "flex";
+
+        if (currentStageIndex >= stageDefinitions.length) {
+            progText.innerText = "Flight Complete!";
+            progFill.style.width = "100%";
+        } else {
+            progText.innerText = `Flight Progress: ${stageDefinitions[currentStageIndex].title} (${currentStageIndex + 1} of ${stageDefinitions.length})`;
+            let pct = (currentStageIndex / stageDefinitions.length) * 100;
+            progFill.style.width = `${pct}%`;
+        }
+    }
+
+    function initGame() {
+        currentStageIndex = 0;
+        loadStage();
+    }
+
+    function loadStage() {
+        if (currentStageIndex >= stageDefinitions.length) {
+            endGame();
+            return;
+        }
+        
+        updateProgress();
+        generateDataForStage(stageDefinitions[currentStageIndex]);
+        renderStage(false);
+    }
+
+    function generateDataForStage(def) {
+        currentData = { type: def.type, dir: def.dir };
+
+        if (def.type === "elevation") {
+            currentData.angle = randomInt(4, 9); // degrees
+            currentData.speed = randomInt(75, 90); // mph
+            currentData.alt = parseFloat(randomFloat(0.5, 1.5)); // miles
+            
+            let dist = currentData.alt / Math.sin(toRadians(currentData.angle));
+            let t_hours = dist / currentData.speed;
+            currentData.ans = Math.round(t_hours * 60); // nearest minute
+            
+            currentData.solutionText = `
+                <b>1. Find diagonal distance flown (d):</b><br>
+                sin(${currentData.angle}&deg;) = Opposite / Hypotenuse<br>
+                d = ${currentData.alt} / sin(${currentData.angle}&deg;) = ${dist.toFixed(3)} miles.<br>
+                <b>2. Find time in hours:</b><br>
+                Time = Distance / Speed = ${dist.toFixed(3)} / ${currentData.speed} = ${t_hours.toFixed(4)} hours.<br>
+                <b>3. Convert to minutes:</b><br>
+                ${t_hours.toFixed(4)} * 60 = ${t_hours * 60} &rarr; <b>${currentData.ans} minutes</b>.
+            `;
+        } 
+        else if (def.type === "bearing") {
+            currentData.speed = randomInt(105, 125);
+            currentData.time = parseFloat(randomFloat(1.0, 2.5));
+            currentData.angle = randomInt(25, 65); // e.g. S 40 W
+            
+            let dist = currentData.speed * currentData.time;
+            currentData.ans1 = Math.round(dist * Math.cos(toRadians(currentData.angle))); // Adjacent to N/S axis
+            currentData.ans2 = Math.round(dist * Math.sin(toRadians(currentData.angle))); // Opposite to N/S axis
+            
+            let dir1 = def.dir === "SW" ? "South" : "North";
+            let dir2 = def.dir === "SW" ? "West" : "East";
+
+            currentData.solutionText = `
+                <b>1. Find total distance:</b><br>
+                Distance = ${currentData.speed} mph * ${currentData.time} hrs = ${dist.toFixed(2)} miles.<br>
+                <b>2. Find ${dir1} component (Adjacent):</b><br>
+                ${dir1} = Distance * cos(${currentData.angle}&deg;)<br>
+                ${dir1} = ${dist.toFixed(2)} * cos(${currentData.angle}&deg;) = ${dist * Math.cos(toRadians(currentData.angle))} &rarr; <b>${currentData.ans1} miles</b>.<br>
+                <b>3. Find ${dir2} component (Opposite):</b><br>
+                ${dir2} = Distance * sin(${currentData.angle}&deg;)<br>
+                ${dir2} = ${dist.toFixed(2)} * sin(${currentData.angle}&deg;) = ${dist * Math.sin(toRadians(currentData.angle))} &rarr; <b>${currentData.ans2} miles</b>.
+            `;
+        }
+        else if (def.type === "depression") {
+            currentData.speed = randomInt(85, 105);
+            currentData.angle = randomInt(3, 6);
+            currentData.timeMins = randomInt(3, 7);
+            
+            let t_hours = currentData.timeMins / 60;
+            let dist = currentData.speed * t_hours;
+            let altLost = dist * Math.sin(toRadians(currentData.angle));
+            currentData.ans = Math.round(altLost * 10) / 10; // nearest tenth
+            
+            currentData.solutionText = `
+                <b>1. Convert time to hours:</b><br>
+                ${currentData.timeMins} mins / 60 = ${t_hours.toFixed(4)} hours.<br>
+                <b>2. Find distance flown:</b><br>
+                Distance = ${currentData.speed} mph * ${t_hours.toFixed(4)} hrs = ${dist.toFixed(3)} miles.<br>
+                <b>3. Find altitude lost (Opposite):</b><br>
+                sin(${currentData.angle}&deg;) = Altitude / Distance<br>
+                Altitude = ${dist.toFixed(3)} * sin(${currentData.angle}&deg;) = ${altLost} &rarr; <b>${currentData.ans} miles</b>.
+            `;
+        }
+        else if (def.type === "return") {
+            currentData.speed = randomInt(105, 120);
+            currentData.timeN = parseFloat(randomFloat(0.5, 1.5));
+            currentData.timeW = parseFloat(randomFloat(0.5, 1.5));
+            
+            let distN = currentData.speed * currentData.timeN;
+            let distW = currentData.speed * currentData.timeW;
+            let totalDist = Math.sqrt((distN * distN) + (distW * distW));
+            
+            currentData.ans1 = Math.round(totalDist); // distance
+            
+            // Plane is NW of origin. To fly direct to origin, it must fly SE.
+            let angle = toDegrees(Math.atan(distW / distN));
+            currentData.ans2 = Math.round(angle); // degrees
+
+            currentData.solutionText = `
+                <b>1. Find individual distances:</b><br>
+                North = ${currentData.speed} * ${currentData.timeN} = ${distN.toFixed(1)} mi.<br>
+                West = ${currentData.speed} * ${currentData.timeW} = ${distW.toFixed(1)} mi.<br>
+                <b>2. Find direct distance (Hypotenuse):</b><br>
+                c&sup2; = a&sup2; + b&sup2; &rarr; &radic;(${distN.toFixed(1)}&sup2; + ${distW.toFixed(1)}&sup2;) = ${totalDist.toFixed(2)} &rarr; <b>${currentData.ans1} miles</b>.<br>
+                <b>3. Find Return Bearing:</b><br>
+                You are currently North and West of origin. You must fly South and East.<br>
+                tan(&theta;) = Opposite(West) / Adjacent(North)<br>
+                &theta; = arctan(${distW.toFixed(1)} / ${distN.toFixed(1)}) = ${angle.toFixed(2)}&deg; &rarr; <b>S ${currentData.ans2}&deg; E</b>.
+            `;
+        }
+    }
+
+    function renderStage(showingSolution) {
+        const def = stageDefinitions[currentStageIndex];
+        
+        document.getElementById("modal-title").innerHTML = def.title;
+        document.getElementById("solution-container").style.display = showingSolution ? "block" : "none";
+        document.getElementById("error-msg").innerText = "";
+
+        const plane = document.getElementById("plane");
+        plane.style.bottom = def.anim.b;
+        plane.style.left = def.anim.l;
+        plane.style.transform = def.anim.t;
+
+        const inputsContainer = document.getElementById("inputs-container");
+        const btnContainer = document.getElementById("btn-container");
+        const textElem = document.getElementById("modal-text");
+
+        if (showingSolution) {
+            document.getElementById("modal-title").innerHTML = `<span style="color:#D32F2F;">Math Review</span>`;
+            textElem.innerHTML = "Review the breakdown below to see where you made a mistake.";
+            document.getElementById("solution-container").innerHTML = currentData.solutionText;
+            inputsContainer.innerHTML = "";
+            btnContainer.innerHTML = `<button onclick="loadStage()">Try Another Example</button>`;
+            return;
+        }
+
+        // Build question text dynamically
+        let qText, hint, htmlInputs;
+
+        if (currentData.type === "elevation") {
+            qText = `You establish a climb at an angle of ${currentData.angle}&deg; at an average climb speed of ${currentData.speed} mph. How long will it take for the Skyhawk to reach an altitude of ${currentData.alt} miles?`;
+            hint = "Hint: Find distance on the hypotenuse first. Round to the nearest minute.";
+            htmlInputs = `
+                <div class="input-group">
+                    <label>Time (minutes):</label>
+                    <input type="number" id="inp1" />
+                </div>`;
+        } 
+        else if (currentData.type === "bearing") {
+            let bText = currentData.dir === "SW" ? `S ${currentData.angle}&deg; W` : `N ${currentData.angle}&deg; E`;
+            let dir1 = currentData.dir === "SW" ? "South" : "North";
+            let dir2 = currentData.dir === "SW" ? "West" : "East";
+            
+            qText = `You fly at ${currentData.speed} mph on a bearing of ${bText} for ${currentData.time} hours. How many miles ${dir1} and ${dir2} have you traveled?`;
+            hint = "Hint: Distance = speed &times; time. Use sine and cosine. Round to the nearest mile.";
+            htmlInputs = `
+                <div class="input-group">
+                    <label>${dir1} (miles):</label>
+                    <input type="number" id="inp1" />
+                </div>
+                <div class="input-group">
+                    <label>${dir2} (miles):</label>
+                    <input type="number" id="inp2" />
+                </div>`;
+        }
+        else if (currentData.type === "depression") {
+            qText = `You begin a descent at ${currentData.speed} mph with an angle of depression of ${currentData.angle}&deg;. How much altitude will you lose in ${currentData.timeMins} minutes?`;
+            hint = "Hint: Convert minutes to hours first. Round to the nearest tenth of a mile.";
+            htmlInputs = `
+                <div class="input-group">
+                    <label>Altitude lost (miles):</label>
+                    <input type="number" id="inp1" step="0.1" />
+                </div>`;
+        }
+        else if (currentData.type === "return") {
+            qText = `You divert, flying North for ${currentData.timeN} hours and West for ${currentData.timeW} hours at ${currentData.speed} mph. Find the direct distance back to your starting point and the bearing you should take.`;
+            hint = "Hint: Use Pythagorean theorem for distance. Return bearing requires switching directions (South and East). Round distance to nearest mile, angle to nearest degree.";
+            htmlInputs = `
+                <div class="input-group">
+                    <label>Distance (miles):</label>
+                    <input type="number" id="inp1" />
+                </div>
+                <div class="input-group">
+                    <label>Bearing Angle (S __&deg; E):</label>
+                    <input type="number" id="inp2" />
+                </div>`;
+        }
+
+        textElem.innerHTML = qText + `<br><br><span class='math-hint'>${hint}</span>`;
+        inputsContainer.innerHTML = htmlInputs;
+        
+        btnContainer.innerHTML = `<button onclick="verifyAnswer()">Submit Calculation</button>`;
+    }
+
+    function verifyAnswer() {
+        let isCorrect = false;
+        let v1 = parseFloat(document.getElementById("inp1").value);
+        
+        if (currentData.type === "elevation" || currentData.type === "depression") {
+            if (v1 === currentData.ans) isCorrect = true;
+        } else {
+            let v2 = parseFloat(document.getElementById("inp2").value);
+            if (v1 === currentData.ans1 && v2 === currentData.ans2) isCorrect = true;
+        }
+
+        if (isCorrect) {
+            showSuccessScreen();
+        } else {
+            renderStage(true); // Show math review
+        }
+    }
+
+    function showSuccessScreen() {
+        document.getElementById("modal-title").innerHTML = `<span style="color:#388E3C;">Calculation Correct!</span>`;
+        document.getElementById("modal-text").innerHTML = "Great job! Your calculations are spot on.";
+        document.getElementById("inputs-container").innerHTML = "";
+        document.getElementById("error-msg").innerText = "";
+        
+        document.getElementById("btn-container").innerHTML = `
+            <button class="secondary" onclick="practiceAgain()">Practice This Type Again</button>
+            <button onclick="continueFlight()">Continue Flight</button>
+        `;
+    }
+
+    function practiceAgain() {
+        // Reloads stage without incrementing index
+        loadStage();
+    }
+
+    function continueFlight() {
+        // Increment index and load next stage
+        currentStageIndex++;
+        loadStage();
+    }
+
+    function endGame() {
+        updateProgress(); // Sets progress bar to 100%
+        
+        const plane = document.getElementById("plane");
+        plane.style.transform = 'rotate(0deg)';
+        plane.style.bottom = '12vh'; 
+        plane.style.left = '80%';
+        
+        document.getElementById("modal-title").innerText = "Landing Successful!";
+        document.getElementById("modal-text").innerText = "Great job navigating! You've successfully mastered the 4 key right-triangle trigonometry skills.";
+        document.getElementById("inputs-container").innerHTML = "";
+        document.getElementById("solution-container").style.display = "none";
+        document.getElementById("error-msg").innerText = "";
+        
+        document.getElementById("btn-container").innerHTML = `<button onclick="initGame()">Start A New Flight</button>`;
+    }
+</script>
+
+</body>
+</html>
