@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Abundantly: Vector Missions</title>
+    <style>
+        :root {
+            --primary: #003366; 
+            --secondary: #cc0000; 
+            --bg-color: #f4f7f6;
+            --box-bg: #ffffff;
+            --text: #333333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: var(--box-bg);
+            max-width: 750px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: var(--primary);
+            text-align: center;
+        }
+        .tagline {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 30px;
+            min-height: 1.5em;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .inline-input {
+            width: auto !important;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
+            margin: 0 5px;
+        }
+        .vector-bracket-input {
+            width: 70px !important;
+            text-align: center;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #002244;
+        }
+        button.secondary {
+            background-color: #4CAF50;
+        }
+        button.secondary:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .hint-box {
+            background-color: #e9f2fb;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+        }
+        .problem-area {
+            font-size: 1.2em;
+            margin: 20px 0;
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+            line-height: 1.8;
+            text-align: center;
+        }
+        #feedback {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 15px 0;
+            min-height: 30px;
+        }
+        .correct { color: #2e7d32; }
+        .incorrect { color: var(--secondary); }
+        .success-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .certificate {
+            text-align: center;
+            border: 8px double var(--primary);
+            padding: 40px;
+            border-radius: 10px;
+            background: #fffcf2;
+        }
+        .certificate h1 { font-size: 2.5em; color: var(--primary); margin-bottom: 10px; }
+        .certificate p { font-size: 1.2em; margin: 10px 0; }
+        .signature { margin-top: 40px; font-family: 'Brush Script MT', cursive; font-size: 1.5em; color: var(--primary);}
+        .video-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    
+    <div id="welcome-screen">
+        <h1>Math 130: Vector Missions</h1>
+        <div class="tagline">Learn <span id="dynamic-word">Mathematics</span></div>
+        <p>Welcome to your interactive practice for Section 8.4. Work through each component to earn your exit ticket.</p>
+        
+        <div class="input-group">
+            <label for="studentName">Your Name:</label>
+            <input type="text" id="studentName" placeholder="Enter your first and last name">
+        </div>
+        <div class="input-group">
+            <label for="partnerName">Partner's Name (Optional):</label>
+            <input type="text" id="partnerName" placeholder="Leave blank if working alone">
+        </div>
+        
+        <button onclick="startApp()">Begin Missions</button>
+    </div>
+
+    <div id="mission-screen" class="hidden">
+        <h2 id="mission-title">Mission Title</h2>
+        
+        <div class="hint-box" id="mission-hint"></div>
+
+        <div class="problem-area" id="dynamic-problem"></div>
+
+        <div id="feedback"></div>
+
+        <button id="submitBtn" onclick="checkAnswer()">Submit Answer</button>
+
+        <div id="success-actions" class="success-actions hidden">
+            <button class="secondary" onclick="generateProblem()">Try Another Version</button>
+            <button onclick="nextMission()">Move to Next Mission &rarr;</button>
+        </div>
+    </div>
+
+    <div id="certificate-screen" class="hidden">
+        <div class="certificate">
+            <h1>Certificate of Completion</h1>
+            <p>This certifies that</p>
+            <h2 id="cert-names">[Names]</h2>
+            <p>have successfully completed all training missions for</p>
+            <h3>Math 130: Unit 3 - Vectors (Section 8.4)</h3>
+            <p>Show this Exit Ticket to your instructor.</p>
+            <div class="signature">Prof. Andrew H. Volk</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- Branding Animation ---
+    const words = ["Mathematics", "Physics", "Engineering", "Anything", "Abundantly"];
+    let wordIndex = 0;
+    
+    function animateBranding() {
+        if (wordIndex < words.length - 1) {
+            wordIndex++;
+            document.getElementById("dynamic-word").innerText = words[wordIndex];
+            setTimeout(animateBranding, 1200);
+        }
+    }
+    setTimeout(animateBranding, 1200);
+
+    // --- Core Logic ---
+    let sName = "";
+    let pName = "";
+    let currentMissionIndex = 0;
+    let currentValidationFunction = null; 
+
+    // Helper: Random Integer
+    function randInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Helper: Robust Text Matching Algorithm
+    function checkText(input, validAnswersArray) {
+        if (!input) return false;
+        
+        let cleanInput = input.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").trim().replace(/\s{2,}/g, " ");
+        
+        return validAnswersArray.some(ans => {
+            let cleanAns = ans.toLowerCase().trim();
+            if (cleanInput === cleanAns) return true;
+            
+            let inputWords = cleanInput.split(" ").sort().join(" ");
+            let ansWords = cleanAns.split(" ").sort().join(" ");
+            if (inputWords === ansWords) return true;
+
+            return false;
+        });
+    }
+
+    // --- Mission Definitions & Question Pools ---
+    const missions = [
+        {
+            title: "Mission 1: Concepts & Vocabulary",
+            hint: "Review the differences between scalars and vectors, and the fundamental vector operations.",
+            mediaHtml: `
+                <div class="video-container">
+                    <video controls muted>
+                        <source src="scalar_vs_vector.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            `,
+            generate: () => {
+                const pool = [
+                    {
+                        html: `Quantities that have magnitude but require <b>no direction</b> (like speed, mass, or temperature) are called: <br><br> <input type="text" class="inline-input" id="q_text" placeholder="Type your answer...">`,
+                        validate: () => checkText(document.getElementById('q_text').value, ["scalar", "scalars", "a scalar"])
+                    },
+                    {
+                        html: `Quantities that require <b>both</b> magnitude and direction (like velocity, force, or displacement) are called: <br><br> <input type="text" class="inline-input" id="q_text" placeholder="Type your answer...">`,
+                        validate: () => checkText(document.getElementById('q_text').value, ["vector", "vectors", "a vector"])
+                    },
+                    {
+                        html: `The two basic vector operations are vector addition and __________. <br><br> <input type="text" class="inline-input" id="q_text" placeholder="Type your answer...">`,
+                        validate: () => checkText(document.getElementById('q_text').value, ["scalar multiplication", "scalar multiple", "multiplication by a scalar"])
+                    }
+                ];
+                let q = pool[randInt(0, pool.length - 1)];
+                document.getElementById("dynamic-problem").innerHTML = q.html;
+                return q.validate;
+            }
+        },
+        {
+            title: "Mission 2: Component Form",
+            hint: "Formula: <b>v = &lang; x₂ - x₁ , y₂ - y₁ &rang;</b> (Terminal minus Initial). Component form is position-independent.",
+            mediaHtml: `
+                <div class="video-container">
+                    <video controls muted>
+                        <source src="component_form.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            `,
+            generate: () => {
+                let x1 = randInt(-8, 8); let y1 = randInt(-8, 8);
+                let x2 = randInt(-8, 8); let y2 = randInt(-8, 8);
+                
+                const pool = [
+                    `Find the component form of the vector <b>v</b> that goes from initial point P(${x1}, ${y1}) to terminal point Q(${x2}, ${y2}).`,
+                    `A vector <b>v</b> starts at (${x1}, ${y1}) and ends at (${x2}, ${y2}). Write <b>v</b> in component form.`,
+                    `Calculate the displacement vector <b>v</b> from location A(${x1}, ${y1}) to location B(${x2}, ${y2}).`
+                ];
+                
+                let text = pool[randInt(0, pool.length - 1)];
+                let html = `${text}<br><br> <b>v</b> = &lang; <input type="number" id="ansX" class="vector-bracket-input"> , <input type="number" id="ansY" class="vector-bracket-input"> &rang;`;
+                
+                document.getElementById("dynamic-problem").innerHTML = html;
+                
+                let correctX = x2 - x1;
+                let correctY = y2 - y1;
+                
+                return () => {
+                    return parseInt(document.getElementById("ansX").value) === correctX && 
+                           parseInt(document.getElementById("ansY").value) === correctY;
+                };
+            }
+        },
+        {
+            title: "Mission 3: Vector Operations",
+            hint: "Perform operations component-wise. Add/subtract corresponding components, and distribute scalars to both components.",
+            mediaHtml: `
+                <div class="video-container">
+                    <video controls muted>
+                        <source src="vector_addition.mp4" type="video/mp4">
+                    </video>
+                    <video controls muted>
+                        <source src="scalar_multiplication.mp4" type="video/mp4">
+                    </video>
+                </div>
+            `,
+            generate: () => {
+                let a = randInt(-6, 6); let b = randInt(-6, 6);
+                let c = randInt(-6, 6); let d = randInt(-6, 6);
+                let k = randInt(2, 5);
+                
+                const pool = [
+                    {
+                        text: `Given <b>u</b> = &lang;${a}, ${b}&rang; and <b>v</b> = &lang;${c}, ${d}&rang;, find <b>u + v</b>.`,
+                        ansX: a + c, ansY: b + d
+                    },
+                    {
+                        text: `Given <b>u</b> = &lang;${a}, ${b}&rang; and <b>v</b> = &lang;${c}, ${d}&rang;, find <b>u - v</b>.`,
+                        ansX: a - c, ansY: b - d
+                    },
+                    {
+                        text: `Given <b>w</b> = &lang;${a}, ${b}&rang;, find the scaled vector <b>${k}w</b>.`,
+                        ansX: k * a, ansY: k * b
+                    }
+                ];
+                
+                let q = pool[randInt(0, pool.length - 1)];
+                let html = `${q.text}<br><br> Result = &lang; <input type="number" id="ansX" class="vector-bracket-input"> , <input type="number" id="ansY" class="vector-bracket-input"> &rang;`;
+                
+                document.getElementById("dynamic-problem").innerHTML = html;
+                
+                return () => {
+                    return parseInt(document.getElementById("ansX").value) === q.ansX && 
+                           parseInt(document.getElementById("ansY").value) === q.ansY;
+                };
+            }
+        },
+        {
+            title: "Mission 4: Magnitude",
+            hint: "The magnitude (length) of a vector v = &lang;a, b&rang; is found using the formula: <b>||v|| = &radic;(a&sup2; + b&sup2;)</b>.",
+            mediaHtml: `
+                <div class="video-container">
+                    <video controls muted>
+                        <source src="vector_magnitude.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            `,
+            generate: () => {
+                const triples = [
+                    {a: 3, b: 4, mag: 5}, {a: 6, b: 8, mag: 10}, 
+                    {a: 5, b: 12, mag: 13}, {a: 8, b: 15, mag: 17},
+                    {a: 9, b: 12, mag: 15}, {a: 7, b: 24, mag: 25}
+                ];
+                let triple = triples[randInt(0, triples.length - 1)];
+                
+                let signA = randInt(0, 1) === 0 ? 1 : -1;
+                let signB = randInt(0, 1) === 0 ? 1 : -1;
+                let compA = triple.a * signA;
+                let compB = triple.b * signB;
+
+                const pool = [
+                    `Find the magnitude ||v|| of the vector <b>v</b> = &lang;${compA}, ${compB}&rang;.`,
+                    `Calculate the length of the vector <b>w</b> = &lang;${compA}, ${compB}&rang;.`,
+                    `If a force vector is given by <b>F</b> = &lang;${compA}, ${compB}&rang; Newtons, what is the total magnitude of the force?`
+                ];
+
+                let text = pool[randInt(0, pool.length - 1)];
+                let html = `${text}<br><br> Magnitude = <input type="number" id="ansMag" class="inline-input">`;
+                
+                document.getElementById("dynamic-problem").innerHTML = html;
+                
+                return () => {
+                    return parseInt(document.getElementById("ansMag").value) === triple.mag;
+                };
+            }
+        }
+    ];
+
+    // --- App Flow Control ---
+    function startApp() {
+        sName = document.getElementById("studentName").value.trim();
+        pName = document.getElementById("partnerName").value.trim();
+        
+        if (!sName) {
+            alert("Please enter at least your name to begin.");
+            return;
+        }
+
+        document.getElementById("welcome-screen").classList.add("hidden");
+        document.getElementById("mission-screen").classList.remove("hidden");
+        loadMission(currentMissionIndex);
+    }
+
+    function loadMission(index) {
+        let mission = missions[index];
+        document.getElementById("mission-title").innerText = mission.title;
+        
+        // Build the hint content, appending media if it exists
+        let hintContent = mission.hint;
+        if (mission.mediaHtml) {
+            hintContent += mission.mediaHtml;
+        }
+        document.getElementById("mission-hint").innerHTML = hintContent;
+        
+        generateProblem();
+    }
+
+    function generateProblem() {
+        // Reset UI feedback
+        document.getElementById("feedback").innerText = "";
+        document.getElementById("feedback").className = "";
+        document.getElementById("submitBtn").classList.remove("hidden");
+        document.getElementById("success-actions").classList.add("hidden");
+
+        // Generate problem and store its specific validation function
+        currentValidationFunction = missions[currentMissionIndex].generate();
+    }
+
+    function checkAnswer() {
+        // Execute the validation function specific to the generated problem
+        let isCorrect = currentValidationFunction();
+
+        let feedbackEl = document.getElementById("feedback");
+        if (isCorrect) {
+            feedbackEl.innerText = "Excellent! That is correct.";
+            feedbackEl.className = "correct";
+            document.getElementById("submitBtn").classList.add("hidden");
+            document.getElementById("success-actions").classList.remove("hidden");
+        } else {
+            feedbackEl.innerText = "Not quite. Check your work or spelling and try again!";
+            feedbackEl.className = "incorrect";
+        }
+    }
+
+    function nextMission() {
+        // Pause any playing videos before moving to the next mission
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => video.pause());
+
+        currentMissionIndex++;
+        if (currentMissionIndex < missions.length) {
+            loadMission(currentMissionIndex);
+        } else {
+            showCertificate();
+        }
+    }
+
+    function showCertificate() {
+        document.getElementById("mission-screen").classList.add("hidden");
+        document.getElementById("certificate-screen").classList.remove("hidden");
+        
+        let namesText = sName;
+        if (pName) {
+            namesText += " & " + pName;
+        }
+        document.getElementById("cert-names").innerText = namesText;
+    }
+</script>
+
+</body>
+</html>
