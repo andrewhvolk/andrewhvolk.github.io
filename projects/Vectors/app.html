@@ -143,6 +143,18 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             margin-bottom: 10px;
         }
+        .video-label {
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0 6px;
+        }
+        .video-note {
+            font-size: 0.95em;
+            color: #555;
+            margin: 0 auto 14px;
+            max-width: 600px;
+            line-height: 1.45;
+        }
     </style>
 </head>
 <body>
@@ -244,13 +256,14 @@
     const missions = [
         {
             title: "Mission 1: Concepts & Vocabulary",
-            hint: "Review the differences between scalars and vectors, and the fundamental vector operations.",
+            hint: "This silent coach-caption lesson teaches how to decide whether direction matters. Watch for the scalar examples, the vector examples, the speed-versus-velocity comparison, and the recap of vector addition and scalar multiplication.",
             mediaHtml: `
                 <div class="video-container">
                     <video controls muted>
                         <source src="scalar_vs_vector.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+                    <div class="video-note">This video covers all Mission 1 question types: identifying a scalar, identifying a vector, and naming scalar multiplication as a basic vector operation.</div>
                 </div>
             `,
             generate: () => {
@@ -275,13 +288,14 @@
         },
         {
             title: "Mission 2: Component Form",
-            hint: "Formula: <b>v = &lang; x₂ - x₁ , y₂ - y₁ &rang;</b> (Terminal minus Initial). Component form is position-independent.",
+            hint: "This silent coach-caption lesson teaches the full recipe: terminal minus initial, subtract x-values, subtract y-values, and keep parentheses around negatives. It also shows that 'from P to Q,' 'starts at ... ends at ...,' and 'displacement from A to B' all ask the same thing.",
             mediaHtml: `
                 <div class="video-container">
                     <video controls muted>
                         <source src="component_form.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+                    <div class="video-note">This video explains every Mission 2 wording variation and shows why component form is position-independent.</div>
                 </div>
             `,
             generate: () => {
@@ -310,15 +324,19 @@
         },
         {
             title: "Mission 3: Vector Operations",
-            hint: "Perform operations component-wise. Add/subtract corresponding components, and distribute scalars to both components.",
+            hint: "These silent coach-caption lessons cover every Mission 3 variation. The first video explains both addition and subtraction of vectors. The second video explains scalar multiplication and the common mistake of multiplying only one component.",
             mediaHtml: `
                 <div class="video-container">
+                    <div class="video-label">Vector Addition and Subtraction</div>
                     <video controls muted>
                         <source src="vector_addition.mp4" type="video/mp4">
                     </video>
+                    <div class="video-note">This video teaches <b>u + v</b> and <b>u - v</b>, including the tip-to-tail idea and the rule to check the sign before computing.</div>
+                    <div class="video-label">Scalar Multiplication</div>
                     <video controls muted>
                         <source src="scalar_multiplication.mp4" type="video/mp4">
                     </video>
+                    <div class="video-note">This video teaches <b>kw</b> problems by multiplying both components by the scalar and also shows what a negative scalar does to direction.</div>
                 </div>
             `,
             generate: () => {
@@ -354,13 +372,14 @@
         },
         {
             title: "Mission 4: Magnitude",
-            hint: "The magnitude (length) of a vector v = &lang;a, b&rang; is found using the formula: <b>||v|| = &radic;(a&sup2; + b&sup2;)</b>.",
+            hint: "This silent coach-caption lesson explains that magnitude, length, and total force all ask for the same positive size. Watch for the right-triangle setup, the step-by-step use of <b>||v|| = &radic;(a&sup2; + b&sup2;)</b>, and the reminder that squaring removes negative signs.",
             mediaHtml: `
                 <div class="video-container">
                     <video controls muted>
                         <source src="vector_magnitude.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+                    <div class="video-note">This video covers all Mission 4 wording variations and finishes with common Pythagorean triples used by the random practice problems.</div>
                 </div>
             `,
             generate: () => {
