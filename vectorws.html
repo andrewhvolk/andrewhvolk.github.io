@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math 130: Vector Masterclass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax Configuration to enable $...$ for inline math -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .math-block { overflow-x: auto; padding: 1rem 0; }
+        .step-card { transition: all 0.3s ease; }
+        .step-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 leading-relaxed">
+
+    <nav class="bg-indigo-700 text-white p-6 shadow-lg sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight">Math 130: Vectors</h1>
+            <div class="text-indigo-100 text-sm italic">Interactive Lesson & Worksheet Guide</div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-4 md:p-8 space-y-12">
+        
+        <!-- Introduction -->
+        <section id="intro" class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+            <h2 class="text-3xl font-bold text-indigo-900 mb-4">1. Understanding Vector Components</h2>
+            <p class="mb-6 text-lg">A vector $\vec{v}$ represents a quantity with both <strong>magnitude</strong> (size) and <strong>direction</strong>. We describe it using "components" $\langle x, y \rangle$ which tell us how far to move horizontally and vertically.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <div class="p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-500">
+                        <p class="font-semibold text-indigo-800">The Component Rule:</p>
+                        <p>If a vector starts at $(x_1, y_1)$ and ends at $(x_2, y_2)$:</p>
+                        <p class="text-xl font-mono mt-2">$\vec{v} = \langle x_2 - x_1, y_2 - y_1 \rangle$</p>
+                    </div>
+                </div>
+                <div class="bg-slate-100 rounded-xl p-4 flex justify-center">
+                    <!-- SVG Diagram for Vector 1 -->
+                    <svg viewBox="0 0 100 100" class="w-48 h-48">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#4f46e5" />
+                            </marker>
+                        </defs>
+                        <line x1="10" y1="90" x2="95" y2="90" stroke="#94a3b8" stroke-width="1" />
+                        <line x1="10" y1="5" x2="10" y2="90" stroke="#94a3b8" stroke-width="1" />
+                        <line x1="10" y1="90" x2="30" y2="30" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrowhead)" />
+                        <circle cx="30" cy="30" r="2" fill="#1e293b" />
+                        <text x="35" y="30" font-size="6" font-family="sans-serif">(1, 3)</text>
+                        <text x="15" y="60" font-size="8" font-style="italic" fill="#4f46e5">v</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Set 1 Breakdown -->
+        <section id="basics" class="space-y-6">
+            <h2 class="text-2xl font-bold text-slate-900 border-b-2 border-indigo-200 pb-2">Part 1: Magnitude & Direction</h2>
+            
+            <!-- Problem 1 -->
+            <div class="step-card bg-white p-6 rounded-xl border border-slate-200">
+                <h3 class="text-lg font-bold text-indigo-700 mb-3">Problem 1: Vector from (0,0) to (1,3)</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-slate-50 rounded">
+                        <p class="text-sm uppercase text-slate-500 font-bold mb-1">Component Form</p>
+                        <p class="text-lg">$\vec{v} = \langle 1, 3 \rangle$</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded">
+                        <p class="text-sm uppercase text-slate-500 font-bold mb-1">Magnitude</p>
+                        <p class="text-lg">$||\vec{v}|| = \sqrt{1^2 + 3^2} = \sqrt{10}$</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded">
+                        <p class="text-sm uppercase text-slate-500 font-bold mb-1">Direction ($\theta$)</p>
+                        <p class="text-lg">$\theta_v = \tan^{-1}(\frac{3}{1}) \approx 71.57^\circ$</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem 2 -->
+            <div class="step-card bg-white p-6 rounded-xl border border-slate-200">
+                <h3 class="text-lg font-bold text-indigo-700 mb-3">Problem 2: Vector from (-1,-1) to (3,5)</h3>
+                <p class="text-sm text-slate-600 mb-4 italic">Note: This vector does not start at the origin!</p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">1</div>
+                        <p><strong>Subtract:</strong> $\vec{v} = \langle 3 - (-1), 5 - (-1) \rangle = \langle 4, 6 \rangle$</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">2</div>
+                        <p><strong>Magnitude:</strong> $||\vec{v}|| = \sqrt{4^2 + 6^2} = \sqrt{16+36} = \sqrt{52} = 2\sqrt{13}$</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">3</div>
+                        <p><strong>Direction:</strong> $\theta_v = \tan^{-1}(\frac{6}{4}) \approx 56.31^\circ$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vector Addition -->
+        <section id="addition" class="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+            <h2 class="text-3xl font-bold text-indigo-900 mb-4">2. Visual Vector Addition</h2>
+            <p class="mb-6">To add vectors visually, use the <strong>Tip-to-Tail Method</strong>. Move the second vector so its start ("tail") touches the end ("tip") of the first vector.</p>
+
+            <div class="bg-indigo-50 p-6 rounded-xl mb-8">
+                <h4 class="font-bold text-indigo-800 mb-2 underline">The Workflow for $3A + 2B$:</h4>
+                <ol class="list-decimal list-inside space-y-2 text-slate-700">
+                    <li>Sketch Vector $A$ starting from a point. Repeat it 3 times in a row.</li>
+                    <li>At the very end of the 3rd $A$, start Vector $B$. Repeat it 2 times.</li>
+                    <li>Draw a final arrow from the <strong>very beginning</strong> to the <strong>very end</strong>. That is your Resultant Vector!</li>
+                </ol>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="border rounded-lg p-4 bg-white text-center">
+                    <p class="font-bold mb-2">Algebraic Addition</p>
+                    <div class="math-block">
+                        $\vec{u} = \langle 3, 4 \rangle, \vec{v} = \langle -2, 0 \rangle$ <br><br>
+                        $\vec{u} + \vec{v} = \langle 3 + (-2), 4 + 0 \rangle = \langle 1, 4 \rangle$
+                    </div>
+                </div>
+                <div class="border rounded-lg p-4 bg-white text-center">
+                    <p class="font-bold mb-2">Scalar Multiplication</p>
+                    <div class="math-block">
+                        $2\vec{u} - 3\vec{v} = 2\langle 3, 4 \rangle - 3\langle -2, 0 \rangle$ <br><br>
+                        $= \langle 6, 8 \rangle - \langle -6, 0 \rangle = \langle 12, 8 \rangle$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Worksheet walkthrough -->
+        <section id="worksheet" class="space-y-6">
+            <h2 class="text-2xl font-bold text-slate-900 border-b-2 border-indigo-200 pb-2">Final Practice (Page 2 Guide)</h2>
+            <p>Given: $\vec{u} = \langle 3, 4 \rangle$ and $\vec{v} = \langle -2, 0 \rangle$</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Calc A -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-indigo-600">Exercise A: $\vec{u} + \vec{v}$</h4>
+                    <ul class="mt-2 space-y-1">
+                        <li>Resultant: $\langle 1, 4 \rangle$</li>
+                        <li>Magnitude: $||\vec{r}|| = \sqrt{1^2 + 4^2} = \sqrt{17}$</li>
+                        <li>Direction: $\theta \approx \tan^{-1}(4/1) \approx 75.96^\circ$</li>
+                    </ul>
+                </div>
+                <!-- Calc B -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-indigo-600">Exercise B: $2\vec{u} - 3\vec{v}$</h4>
+                    <ul class="mt-2 space-y-1">
+                        <li>Resultant: $\langle 12, 8 \rangle$</li>
+                        <li>Magnitude: $||\vec{r}|| = \sqrt{12^2 + 8^2} = \sqrt{208} = 4\sqrt{13}$</li>
+                        <li>Direction: $\theta \approx \tan^{-1}(8/12) \approx 33.69^\circ$</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulas Summary -->
+        <footer class="bg-slate-800 text-white p-8 rounded-3xl">
+            <h3 class="text-xl font-bold mb-4 text-indigo-300">Quick Formula Reference</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div class="border-l-2 border-slate-600 pl-4">
+                    <p class="font-bold text-slate-400">Magnitude (Length)</p>
+                    <p class="text-lg font-mono">$||\vec{v}|| = \sqrt{x^2 + y^2}$</p>
+                </div>
+                <div class="border-l-2 border-slate-600 pl-4">
+                    <p class="font-bold text-slate-400">Direction Angle</p>
+                    <p class="text-lg font-mono">$\theta = \tan^{-1}(y/x)$</p>
+                    <p class="text-xs italic text-slate-400">*Adjust for Quadrant! (Add 180° if in Q2 or Q3)*</p>
+                </div>
+                <div class="border-l-2 border-slate-600 pl-4">
+                    <p class="font-bold text-slate-400">Standard Basis Form</p>
+                    <p class="text-lg font-mono">$\vec{v} = x\vec{i} + y\vec{j}$</p>
+                </div>
+                <div class="border-l-2 border-slate-600 pl-4">
+                    <p class="font-bold text-slate-400">Scalar Mult</p>
+                    <p class="text-lg font-mono">$k\langle x, y \rangle = \langle kx, ky \rangle$</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <div class="text-center p-8 text-slate-400 text-sm">
+        Math 130 Worksheet Resource • Created for Interactive Learning
+    </div>
+
+</body>
+</html>
