@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH 114: Quantitative Reasoning Review</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ==========================================================================
+           1. THEME & STYLING
+           ========================================================================== */
+        :root {
+            --primary: #0A254E;    /* Liberty Navy */
+            --secondary: #990000;  /* Liberty Red */
+            --success: #27ae60;    
+            --light: #f4f6f8;      
+            --dark: #2c3e50;       
+            --warning: #f39c12;    
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        #app-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1, h2 { color: var(--primary); }
+        
+        input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 10px 5px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #7a0000; }
+        button:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+        
+        .hidden { display: none !important; }
+        
+        /* ==========================================================================
+           PROGRESS BAR STYLES
+           ========================================================================== */
+        #progress-dashboard {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .progress-label {
+            font-size: 0.9em;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            height: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar:last-child { margin-bottom: 0; }
+        
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .fill-overall { background-color: var(--primary); }
+        .fill-mission { background-color: var(--secondary); }
+
+        /* ==========================================================================
+           PROBLEM UI STYLES
+           ========================================================================== */
+        .option-btn {
+            display: block;
+            width: 100%;
+            background-color: #f8f9fa;
+            color: var(--dark);
+            border: 2px solid #bdc3c7;
+            text-align: left;
+            margin-bottom: 8px;
+        }
+        .option-btn:hover:not(:disabled) { background-color: #e2e6ea; }
+        
+        .feedback {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            min-height: 24px;
+        }
+        .correct { color: var(--success); }
+        .incorrect { color: #c0392b; }
+        
+        .hint-box {
+            background-color: #fff9e6;
+            border-left: 5px solid var(--warning);
+            padding: 15px;
+            margin: 0 0 20px 0;
+            text-align: left;
+            font-size: 0.95em;
+            border-radius: 0 4px 4px 0;
+        }
+        .hint-box strong { color: var(--warning); }
+
+        #chart-container {
+            max-width: 100%;
+            max-height: 350px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .certificate {
+            border: 10px solid var(--primary);
+            padding: 40px;
+            background: #fffafa;
+        }
+        .cert-title { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .cert-names { font-size: 24px; color: var(--secondary); margin: 20px 0; font-style: italic; }
+        
+        #text-input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+    
+    <div id="progress-dashboard" class="hidden">
+        <div class="progress-label">
+            <span>Overall Course Progress</span>
+            <span id="overall-progress-text">Mission 1</span>
+        </div>
+        <div class="progress-bar">
+            <div id="overall-progress-fill" class="progress-fill fill-overall"></div>
+        </div>
+        
+        <div id="mission-progress-wrapper">
+            <div class="progress-label">
+                <span>Mission Progress</span>
+                <span id="mission-progress-text">Question 1</span>
+            </div>
+            <div class="progress-bar" style="margin-bottom: 0;">
+                <div id="mission-progress-fill" class="progress-fill fill-mission"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen-welcome">
+        <h1>MATH 114: Quantitative Reasoning</h1>
+        <p>Final Exam Review Interactive Lab</p>
+        <input type="text" id="studentName" placeholder="Enter your first and last name" required>
+        <input type="text" id="partnerName" placeholder="Partner's name (optional)">
+        <br>
+        <button onclick="startApp()">Start the Lab</button>
+    </div>
+
+    <div id="screen-mission-intro" class="hidden">
+        <h2 id="mission-title"></h2>
+        <p style="font-size: 1.1em; margin-bottom: 25px;">Review the concept, then jump into the practice!</p>
+        <div class="hint-box">
+            <strong>Concept Review:</strong> <span id="mission-intro-hint"></span>
+        </div>
+        <button onclick="startMission()">Let's Go!</button>
+    </div>
+
+    <div id="screen-problem" class="hidden">
+        <h2 id="problem-mission-title"></h2>
+        
+        <div class="hint-box">
+            <strong>Hint:</strong> <span id="problem-hint"></span>
+        </div>
+
+        <div id="chart-container" class="hidden">
+            <canvas id="problem-chart"></canvas>
+        </div>
+
+        <p id="problem-text" style="font-size: 1.2em; margin-bottom: 20px; font-weight: 500;"></p>
+        
+        <div id="options-container" class="hidden"></div>
+        
+        <div id="text-input-container" class="hidden">
+            <input type="text" id="fitb-input" placeholder="Type your answer here..." autocomplete="off">
+            <button id="fitb-submit" onclick="checkFitbAnswer()">Submit Answer</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+        
+        <div id="action-buttons" class="hidden">
+            </div>
+    </div>
+
+    <div id="screen-mission-complete" class="hidden">
+        <h1 id="mc-title" style="margin-bottom: 5px;">Mission Complete!</h1>
+        <p style="font-size: 1.1em; margin-bottom: 25px; color: var(--dark);">Here is your performance report.</p>
+        
+        <div class="hint-box" style="text-align: center; font-size: 1.2em; padding: 25px;">
+            <p id="mc-stats" style="margin: 0;"></p>
+            <div id="mc-overall-stats" class="hidden" style="margin-top: 15px; font-weight: bold; color: var(--primary);"></div>
+        </div>
+        
+        <br>
+        <div id="mc-buttons">
+            </div>
+    </div>
+
+    <div id="screen-certificate" class="hidden certificate">
+        <div class="cert-title">Certificate of Completion</div>
+        <p>This certifies that</p>
+        <div id="cert-names" class="cert-names"></div>
+        <p>has successfully completed the MATH 114 Review Module.</p>
+        <br>
+        <p id="cert-final-score" style="font-weight: bold; color: var(--primary); font-size: 1.2em;"></p>
+        <p style="font-size: 0.9em; margin-top: 30px;">Show this screen to Professor Volk as your exit ticket.</p>
+    </div>
+
+</div>
+
+<script>
+    // ==========================================================================
+    // GLOBAL APP STATE
+    // ==========================================================================
+    let names = "";
+    
+    // Progress Tracking
+    const QUESTIONS_PER_MISSION = 2; 
+    let currentMissionIndex = 0;
+    let currentQuestionIndex = 0; 
+    let currentProblemObj = null;
+
+    // Failsafe, Chart, & Score Tracking
+    let currentAttempts = 0;
+    let questionFailed = false; 
+    let firstTryCorrect = 0; 
+    let totalFirstTryCorrect = 0; 
+    
+    const MAX_ATTEMPTS = 3;
+    let myChart = null; 
+
+    // ==========================================================================
+    // ANSWER NORMALIZER LOGIC (MATH 114 EDITION)
+    // ==========================================================================
+    function normalizeString(text) {
+        return text.toLowerCase()
+            .replace(/\*/g, 'x')
+            .replace(/(\d),(\d)/g, '$1$2')
+            .replace(/\s*([%\^\-\/x])\s*/g, '$1')
+            .replace(/[^a-z0-9\s.\-%^/x]/g, ' ')
+            .replace(/\b(the|a|an|of|for|is|are|amount|number|total|dollar|dollars|cents)\b/g, ' ')
+            .split(/\s+/)
+            .filter(word => word.length > 0)
+            .map(word => word.endsWith('s') && word.length > 2 ? word.slice(0, -1) : word) 
+            .sort() 
+            .join(' ');
+    }
+
+    // ==========================================================================
+    // CONTENT DATA STRUCTURE
+    // ==========================================================================
+    const missions = [
+        {
+            title: "Mission 1: Financial Mathematics",
+            generateProblem: () => {
+                if (currentQuestionIndex === 0) {
+                    let hours = Math.floor(Math.random() * 10) + 15;
+                    let wage = 18.50;
+                    let pay = hours * wage;
+                    
+                    let optionsArray = [
+                        { text: `$${(wage - 2.50).toFixed(2)}`, isCorrect: false, feedback: "Check your division. Are you dividing the total pay by the number of hours?" },
+                        { text: `$${wage.toFixed(2)}`, isCorrect: true, feedback: "" },
+                        { text: `$${(wage + 3.00).toFixed(2)}`, isCorrect: false, feedback: "That's a bit too high. Make sure you divide the total pay by the hours worked." }
+                    ].sort(() => Math.random() - 0.5);
+
+                    return { 
+                        type: "mc", 
+                        text: `If a person is paid $${pay} for ${hours} hours of work, what is the person's hourly wage?`, 
+                        options: optionsArray, 
+                        hint: "To find an hourly wage, divide the total pay by the number of hours worked.",
+                        explanation: `Dividing the total pay ($${pay}) by the hours worked (${hours}) gives $${wage.toFixed(2)} per hour.`
+                    };
+                } else {
+                    let hours = Math.floor(Math.random() * 10) + 30;
+                    let wage = 22.00;
+                    let pay = hours * wage;
+                    
+                    let optionsArray = [
+                        { text: `$${(pay - 40).toFixed(2)}`, isCorrect: false, feedback: "Not quite. Remember to multiply the total hours by the wage." },
+                        { text: `$${(pay + 60).toFixed(2)}`, isCorrect: false, feedback: "That's a bit too high. Did you multiply hours by the wage correctly?" },
+                        { text: `$${pay.toFixed(2)}`, isCorrect: true, feedback: "" }
+                    ].sort(() => Math.random() - 0.5);
+
+                    return { 
+                        type: "mc", 
+                        text: `If a person works ${hours} hours at an hourly wage of $${wage.toFixed(2)}, what is their total pay?`, 
+                        options: optionsArray, 
+                        hint: "To find total pay, multiply the number of hours worked by the hourly wage.",
+                        explanation: `Multiplying the hours worked (${hours}) by the hourly wage ($${wage.toFixed(2)}) gives a total pay of $${pay.toFixed(2)}.`
+                    };
+                }
+            }
+        },
+        {
+            title: "Mission 2: Statistical Samples",
+            generateProblem: () => {
+                const pool = [
+                    { 
+                        q: "A poll of 995 randomly selected women revealed that 5 in 10 believe there has been progress finding a cure for cancer. Identify the SAMPLE.", 
+                        options: [
+                            { text: "All women in the country", isCorrect: false, feedback: "That is the population! The sample is the smaller group actually surveyed." },
+                            { text: "5 out of 10 women in the country", isCorrect: false, feedback: "This is a statistic derived from the sample, not the sample itself." },
+                            { text: "The 995 women selected", isCorrect: true, feedback: "" }
+                        ],
+                        hint: "The sample is the SPECIFIC group you actually collect data from.",
+                        explanation: "The sample is the exact subgroup surveyed, which is the 995 women selected."
+                    },
+                    { 
+                        q: "A poll of 995 randomly selected women revealed that 5 in 10 believe there has been progress finding a cure for cancer. Identify the POPULATION.", 
+                        options: [
+                            { text: "The 995 women selected", isCorrect: false, feedback: "That is the sample! The population is the broader group they represent." },
+                            { text: "5 out of 10 of the 995 women selected", isCorrect: false, feedback: "This describes a sample statistic, not the population." },
+                            { text: "All women in the country", isCorrect: true, feedback: "" }
+                        ],
+                        hint: "The population is the ENTIRE group you want to draw conclusions about.",
+                        explanation: "The population is the broader group the researchers want to understand: all women in the country."
+                    },
+                    {
+                        q: "A quality control inspector tests 50 lightbulbs from a batch of 10,000 to check for defects. Identify the SAMPLE.",
+                        options: [
+                            { text: "The 10,000 lightbulbs", isCorrect: false, feedback: "That is the entire population of the batch, not the specific ones tested." },
+                            { text: "The inspector", isCorrect: false, feedback: "The inspector is the researcher, not the data being collected." },
+                            { text: "The 50 lightbulbs", isCorrect: true, feedback: "" }
+                        ],
+                        hint: "The sample is the subset of items actually tested or surveyed.",
+                        explanation: "Because only 50 lightbulbs were actually tested, they make up the sample."
+                    },
+                    {
+                        q: "A survey asks 500 Liberty University freshmen about their dining hall preferences. Identify the POPULATION.",
+                        options: [
+                            { text: "The 500 surveyed freshmen", isCorrect: false, feedback: "That is the sample! The population is the entire group they represent." },
+                            { text: "All Liberty University students", isCorrect: false, feedback: "Careful! The survey is specifically targeting freshmen, so upperclassmen are not part of this population." },
+                            { text: "All Liberty University freshmen", isCorrect: true, feedback: "" }
+                        ],
+                        hint: "The population is the specific, overall group the researchers want to draw a conclusion about.",
+                        explanation: "The survey is trying to gauge the opinion of the entire freshman class based on the 500 surveyed."
+                    }
+                ];
+                let selectedData = pool[Math.floor(Math.random() * pool.length)];
+                selectedData.options = selectedData.options.sort(() => Math.random() - 0.5);
+                return { type: "mc", text: selectedData.q, options: selectedData.options, hint: selectedData.hint, explanation: selectedData.explanation };
+            }
+        },
+        {
+            title: "Mission 3: Data Classification",
+            generateProblem: () => {
+                const pool = [
+                    { 
+                        q: "Determine whether the following variable is qualitative or quantitative: The eye color of students in a class.", 
+                        options: [
+                            { text: "Quantitative, because it's genetic.", isCorrect: false, feedback: "Genetics don't make something quantitative. Is eye color a measurable number?" },
+                            { text: "Quantitative, because you can count the students.", isCorrect: false, feedback: "While you can count frequencies, the actual data point (the color itself) is not a number." },
+                            { text: "Qualitative, because colors are nonnumerical categories.", isCorrect: true, feedback: "" }
+                        ],
+                        hint: "Qualitative variables deal with characteristics/categories, not measurements.",
+                        explanation: "Eye color describes a trait or category (like blue, brown, green) rather than a measurable numerical amount."
+                    },
+                    { 
+                        q: "Determine whether the following variable is qualitative or quantitative: Home prices in a small town.", 
+                        options: [
+                            { text: "Qualitative, because the worth of a house is subjective.", isCorrect: false, feedback: "While 'worth' might be subjective, a listing price is a concrete, measurable amount." },
+                            { text: "Qualitative, because it's only looking at one small town.", isCorrect: false, feedback: "The size of the sample does not change the type of data." },
+                            { text: "Quantitative, because price is a numerical category.", isCorrect: true, feedback: "" }
+                        ],
+                        hint: "Quantitative variables deal with numbers/measurements.",
+                        explanation: "Prices represent numerical amounts that can be measured, averaged, and calculated."
+                    },
+                    { 
+                        q: "Determine whether the following variable is qualitative or quantitative: The ZIP codes of online students living across the United States.", 
+                        options: [
+                            { text: "Quantitative, because ZIP codes are numbers.", isCorrect: false, feedback: "Watch out! ZIP codes are numbers, but do they measure an amount? Does a higher ZIP code mean 'more' of something?" },
+                            { text: "Quantitative, because you can average them.", isCorrect: false, feedback: "Averaging ZIP codes results in a meaningless number. They are labels, not amounts." },
+                            { text: "Qualitative, because they represent geographic categories.", isCorrect: true, feedback: "" }
+                        ],
+                        hint: "Just because a variable uses numbers doesn't automatically make it quantitative. Ask yourself: does this number measure an amount?",
+                        explanation: "Even though ZIP codes are made of numbers, they function as geographic labels or categories. You wouldn't mathematically average ZIP codes together."
+                    },
+                    { 
+                        q: "Determine whether the following variable is qualitative or quantitative: The daily high temperatures in Lynchburg, Virginia over the month of April.", 
+                        options: [
+                            { text: "Qualitative, because weather is descriptive.", isCorrect: false, feedback: "Saying it is 'hot' is qualitative, but a specific temperature measurement is different." },
+                            { text: "Qualitative, because it changes every day.", isCorrect: false, feedback: "The fact that it varies doesn't make it qualitative. Look at the data type itself." },
+                            { text: "Quantitative, because temperature is a measurable numerical value.", isCorrect: true, feedback: "" }
+                        ],
+                        hint: "Quantitative variables deal with measurable amounts or scales.",
+                        explanation: "Temperature provides a concrete numerical measurement that can be averaged and mathematically compared."
+                    }
+                ];
+                let selectedData = pool[Math.floor(Math.random() * pool.length)];
+                selectedData.options = selectedData.options.sort(() => Math.random() - 0.5);
+                return { type: "mc", text: selectedData.q, options: selectedData.options, hint: selectedData.hint, explanation: selectedData.explanation };
+            }
+        },
+        {
+            title: "Mission 4: Growth Models",
+            generateProblem: () => {
+                if (currentQuestionIndex === 0) {
+                    let annualIncrease = (Math.floor(Math.random() * 15) + 5) * 100; 
+                    let startValue = (Math.floor(Math.random() * 150) + 100) * 1000; 
+                    let yrs = Math.floor(Math.random() * 4) + 3; 
+                    
+                    let correctAns = startValue + (annualIncrease * yrs);
+                    let fakeAns1 = startValue + annualIncrease; 
+                    let fakeAns2 = Math.floor(startValue * Math.pow(1.02, yrs)); 
+                    
+                    let optionsArray = [
+                        { text: `$${correctAns.toLocaleString()}`, isCorrect: true, feedback: "" },
+                        { text: `$${fakeAns1.toLocaleString()}`, isCorrect: false, feedback: `It looks like you only added one year of growth. Remember, it grows for ${yrs} years.` },
+                        { text: `$${fakeAns2.toLocaleString()}`, isCorrect: false, feedback: "You calculated compound exponential growth. Read carefully: it increases by a fixed dollar amount (linear)." }
+                    ].sort(() => Math.random() - 0.5);
+
+                    return { 
+                        type: "mc", 
+                        text: `A house's value is increasing linearly by $${annualIncrease.toLocaleString()} per year. If it is worth $${startValue.toLocaleString()} today, what will it be worth in ${yrs} years?`, 
+                        options: optionsArray, 
+                        hint: "For linear growth, multiply the annual increase by the number of years, then add it to the starting value.",
+                        explanation: `Linear growth means adding a fixed amount each year. $${annualIncrease.toLocaleString()} × ${yrs} years = $${(annualIncrease * yrs).toLocaleString()}. Added to the starting value gives $${correctAns.toLocaleString()}.`
+                    };
+                } else {
+                    let rate = Math.floor(Math.random() * 10) + 8; 
+                    let startCost = Math.floor(Math.random() * 40) + 40; 
+                    let yrs = Math.floor(Math.random() * 3) + 2; 
+                    
+                    let correctAns = startCost * Math.pow(1 - (rate / 100), yrs);
+                    let fakeAns1 = startCost - (startCost * (rate / 100) * yrs); 
+                    let fakeAns2 = startCost * Math.pow(1 + (rate / 100), yrs); 
+                    
+                    let optionsArray = [
+                        { text: `$${correctAns.toFixed(2)}`, isCorrect: true, feedback: "" },
+                        { text: `$${fakeAns1.toFixed(2)}`, isCorrect: false, feedback: "It looks like you calculated a flat linear discount instead of compound exponential decay." },
+                        { text: `$${fakeAns2.toFixed(2)}`, isCorrect: false, feedback: "You calculated exponential GROWTH! Read the question carefully: the price is decreasing." }
+                    ].sort(() => Math.random() - 0.5);
+
+                    return { 
+                        type: "mc", 
+                        text: `The price of a computer component is decreasing exponentially at a rate of ${rate}% per year. If it costs $${startCost} today, what will it cost in ${yrs} years?`, 
+                        options: optionsArray, 
+                        hint: "For exponential decay, use the formula: Future Value = Current Value × (1 - rate)^years.",
+                        explanation: `The decay is exponential, so we multiply the starting value by (1 - ${rate/100}) for each year. $${startCost} × (1 - ${rate/100})^${yrs} = $${correctAns.toFixed(2)}.`
+                    };
+                }
+            }
+        },
+        {
+            title: "Mission 5: Scientific Notation",
+            generateProblem: () => {
+                if (currentQuestionIndex === 0) {
+                    let digits = Math.floor(Math.random() * 899) + 101; 
+                    let baseString = (digits / 100).toFixed(2); 
+                    let exp = Math.floor(Math.random() * 3) + 4; 
+                    
+                    let strDigitsOnly = digits.toString();
+                    let correctAns = "0." + "0".repeat(exp - 1) + strDigitsOnly.replace('.', '');
+                    let fakeAns1 = "0." + "0".repeat(exp - 2) + strDigitsOnly.replace('.', '');
+                    let fakeAns2 = "0." + "0".repeat(exp) + strDigitsOnly.replace('.', '');
+                    
+                    let optionsArray = [
+                        { text: correctAns, isCorrect: true, feedback: "" },
+                        { text: fakeAns1, isCorrect: false, feedback: "Close! Count your decimal shifts carefully. You moved it one space too few." },
+                        { text: fakeAns2, isCorrect: false, feedback: "Close! Count your decimal shifts carefully. You moved it one space too many." }
+                    ].sort(() => Math.random() - 0.5);
+
+                    return { 
+                        type: "mc", 
+                        text: `Write the following number in ordinary notation: ${baseString} x 10^-${exp}`, 
+                        options: optionsArray, 
+                        hint: "A negative exponent means you move the decimal point to the left to make a smaller number.",
+                        explanation: `The exponent is -${exp}, so you must move the decimal point ${exp} places to the left, resulting in ${correctAns}.`
+                    };
+                } else {
+                    let digits = Math.floor(Math.random() * 899) + 101; 
+                    let baseString = (digits / 100).toFixed(2); 
+                    let exp = Math.floor(Math.random() * 3) + 5; 
+                    
+                    let ordinaryNum = digits * Math.pow(10, exp - 2);
+                    let ordinaryStr = ordinaryNum.toLocaleString();
+                    
+                    let correctAns = `${baseString} x 10^${exp}`;
+                    let fakeAns1 = `${(digits/10).toFixed(1)} x 10^${exp - 1}`;
+                    let fakeAns2 = `${baseString} x 10^-${exp}`;
+                    
+                    let optionsArray = [
+                        { text: correctAns, isCorrect: true, feedback: "" },
+                        { text: fakeAns1, isCorrect: false, feedback: "Scientific notation requires the base number to be between 1 and 10." },
+                        { text: fakeAns2, isCorrect: false, feedback: "Watch your signs! Large numbers have positive exponents, not negative ones." }
+                    ].sort(() => Math.random() - 0.5);
+
+                    return { 
+                        type: "mc", 
+                        text: `Write the following number in scientific notation: ${ordinaryStr}`, 
+                        options: optionsArray, 
+                        hint: "Scientific notation takes the format of a number between 1 and 10, multiplied by a power of 10.",
+                        explanation: `To get a number between 1 and 10, place the decimal after the first digit to get ${baseString}. You moved the decimal ${exp} places to the left to get there, so the exponent is positive ${exp}.`
+                    };
+                }
+            }
+        },
+        {
+            title: "Mission 6: Descriptive Statistics",
+            generateProblem: () => {
+                if (currentQuestionIndex === 0) {
+                    let data = Array.from({length: 5}, () => Math.floor(Math.random() * 20) + 1).sort((a, b) => a - b);
+                    let median = data[2];
+                    return { 
+                        type: "fitb", 
+                        text: `Find the MEDIAN for these sorted numbers: ${data.join(', ')}`, 
+                        validAnswers: [median.toString()],
+                        hint: "The median is the physical middle value when data is sorted sequentially.",
+                        explanation: `Since there are 5 numbers (an odd amount), the 3rd number is exactly in the middle. The median is ${median}.`
+                    };
+                } else {
+                    let data = Array.from({length: 5}, () => (Math.floor(Math.random() * 10) + 1) * 5);
+                    let sum = data.reduce((a, b) => a + b, 0);
+                    let mean = sum / data.length;
+                    return { 
+                        type: "fitb", 
+                        text: `Find the MEAN for these 5 numbers: ${data.join(', ')}`, 
+                        validAnswers: [mean.toString()],
+                        hint: "To find the mean, calculate the sum of all values, then divide by the total number of values.",
+                        explanation: `The sum of the numbers is ${sum}. Divided by the total count of 5 numbers, the mean is ${mean}.`
+                    };
+                }
+            }
+        },
+        {
+            title: "Mission 7: Data Visualization",
+            generateProblem: () => {
+                if (currentQuestionIndex === 0) {
+                    let isPositive = Math.random() > 0.5;
+                    let dataPoints = [];
+                    for(let i=0; i<15; i++) {
+                        let x = Math.floor(Math.random() * 50) + 10;
+                        let y = isPositive ? x + (Math.random() * 20 - 10) : 80 - x + (Math.random() * 20 - 10);
+                        dataPoints.push({x: x, y: y});
+                    }
+                    
+                    let chartConfig = {
+                        type: 'scatter',
+                        data: {
+                            datasets: [{
+                                label: 'Data Points',
+                                data: dataPoints,
+                                backgroundColor: '#990000', 
+                                pointRadius: 5
+                            }]
+                        },
+                        options: {
+                            scales: { 
+                                x: { type: 'linear', position: 'bottom', title: { display: true, text: 'Variable X' } },
+                                y: { title: { display: true, text: 'Variable Y' } }
+                            },
+                            plugins: { legend: { display: false } },
+                            maintainAspectRatio: false
+                        }
+                    };
+
+                    let correctText = isPositive ? "Positive Correlation" : "Negative Correlation";
+                    let fakeText1 = isPositive ? "Negative Correlation" : "Positive Correlation";
+                    
+                    let optionsArray = [
+                        { text: correctText, isCorrect: true, feedback: "" },
+                        { text: fakeText1, isCorrect: false, feedback: "Look at the trend of the dots. As X increases (moves right), what happens to Y?" },
+                        { text: "No Correlation", isCorrect: false, feedback: "There is actually a clear linear trend here! Try to imagine drawing a line of best fit through the center of the dots." }
+                    ].sort(() => Math.random() - 0.5);
+
+                    return {
+                        type: "mc",
+                        text: "Examine the scatterplot above. Which type of correlation does the data exhibit?",
+                        chartConfig: chartConfig,
+                        options: optionsArray,
+                        hint: "Positive correlation means as X goes up, Y goes up. Negative means as X goes up, Y goes down.",
+                        explanation: `The data points trend generally ${isPositive ? 'upward' : 'downward'} from left to right, indicating a ${correctText.toLowerCase()}.`
+                    };
+                } else {
+                    let labels = ['Country A', 'Country B', 'Country C', 'Country D'];
+                    let group1 = Array.from({length: 4}, () => Math.floor(Math.random() * 80) + 400); 
+                    let group2 = Array.from({length: 4}, () => Math.floor(Math.random() * 80) + 400);
+                    
+                    let chartConfig = {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                { label: 'Boys', data: group1, backgroundColor: '#0A254E' }, 
+                                { label: 'Girls', data: group2, backgroundColor: '#990000' }  
+                            ]
+                        },
+                        options: { 
+                            scales: { y: { min: 350, title: { display: true, text: 'Mean Score' } } },
+                            maintainAspectRatio: false
+                        }
+                    };
+
+                    let targetIdx = Math.floor(Math.random() * labels.length);
+                    let targetCategory = labels[targetIdx];
+                    let val1 = group1[targetIdx];
+                    let val2 = group2[targetIdx];
+                    
+                    let correctGroup = val1 > val2 ? "Boys" : "Girls";
+                    let incorrectGroup = val1 > val2 ? "Girls" : "Boys";
+
+                    let optionsArray = [
+                        { text: correctGroup, isCorrect: true, feedback: "" },
+                        { text: incorrectGroup, isCorrect: false, feedback: `Check ${targetCategory} again. Look closely at which color bar reaches higher on the y-axis.` },
+                        { text: "They are equal", isCorrect: false, feedback: `Look closely at ${targetCategory}. The bars are not the exact same height.` }
+                    ].sort(() => Math.random() - 0.5);
+
+                    return {
+                        type: "mc",
+                        text: `Based on the bar graph above, which group had a higher mean score in ${targetCategory}?`,
+                        chartConfig: chartConfig,
+                        options: optionsArray,
+                        hint: `Find ${targetCategory} on the x-axis and see which bar goes higher on the y-axis scale. Check the legend for colors.`,
+                        explanation: `In ${targetCategory}, the ${correctGroup} had a taller bar (score of ${Math.max(val1, val2)}) compared to the other group (score of ${Math.min(val1, val2)}).`
+                    };
+                }
+            }
+        }
+    ];
+
+    // ==========================================================================
+    // UI NAVIGATION & CONTROL FLOW
+    // ==========================================================================
+    
+    function hideAll() {
+        document.getElementById("screen-welcome").classList.add("hidden");
+        document.getElementById("screen-mission-intro").classList.add("hidden");
+        document.getElementById("screen-problem").classList.add("hidden");
+        document.getElementById("screen-mission-complete").classList.add("hidden");
+        document.getElementById("screen-certificate").classList.add("hidden");
+    }
+
+    function updateProgressUI(questionsCompleted = 0) {
+        const dashboard = document.getElementById("progress-dashboard");
+        dashboard.classList.remove("hidden");
+
+        const overallPct = (currentMissionIndex / missions.length) * 100;
+        document.getElementById("overall-progress-fill").style.width = overallPct + "%";
+        
+        const missionTextIndex = Math.min(currentMissionIndex + 1, missions.length);
+        document.getElementById("overall-progress-text").innerText = `Mission ${missionTextIndex} of ${missions.length}`;
+
+        const missionPct = (questionsCompleted / QUESTIONS_PER_MISSION) * 100;
+        document.getElementById("mission-progress-fill").style.width = missionPct + "%";
+        document.getElementById("mission-progress-text").innerText = `Question ${currentQuestionIndex + 1} of ${QUESTIONS_PER_MISSION}`;
+        
+        if (document.getElementById("screen-mission-intro").classList.contains("hidden") === false || 
+            document.getElementById("screen-mission-complete").classList.contains("hidden") === false) {
+            document.getElementById("mission-progress-wrapper").classList.add("hidden");
+        } else {
+            document.getElementById("mission-progress-wrapper").classList.remove("hidden");
+        }
+    }
+
+    function startApp() {
+        const sName = document.getElementById("studentName").value.trim();
+        const pName = document.getElementById("partnerName").value.trim();
+        if (!sName) { alert("Please enter your name."); return; }
+        
+        names = pName ? `${sName} & ${pName}` : sName;
+        currentMissionIndex = 0;
+        totalFirstTryCorrect = 0; 
+        showMissionIntro();
+    }
+
+    function showMissionIntro() {
+        hideAll();
+        currentQuestionIndex = 0; 
+        
+        const mission = missions[currentMissionIndex];
+        document.getElementById("mission-title").innerText = mission.title;
+        document.getElementById("mission-intro-hint").innerText = "Read the question carefully and check the hint box if you get stuck!";
+        
+        document.getElementById("screen-mission-intro").classList.remove("hidden");
+        updateProgressUI(0);
+    }
+
+    function startMission() {
+        hideAll();
+        firstTryCorrect = 0; 
+        currentQuestionIndex = 0; 
+        document.getElementById("screen-problem").classList.remove("hidden");
+        loadQuestion(); 
+    }
+
+    function loadQuestion() {
+        const mission = missions[currentMissionIndex];
+        document.getElementById("problem-mission-title").innerText = mission.title;
+        
+        currentProblemObj = mission.generateProblem(); 
+        
+        document.getElementById("problem-hint").innerText = currentProblemObj.hint;
+        document.getElementById("problem-text").innerText = currentProblemObj.text;
+        document.getElementById("feedback").innerText = "";
+        document.getElementById("action-buttons").classList.add("hidden");
+        
+        currentAttempts = 0; 
+        questionFailed = false; 
+
+        const chartContainer = document.getElementById("chart-container");
+        if (currentProblemObj.chartConfig) {
+            chartContainer.classList.remove("hidden");
+            const ctx = document.getElementById('problem-chart').getContext('2d');
+            if (myChart) { myChart.destroy(); }
+            myChart = new Chart(ctx, currentProblemObj.chartConfig);
+        } else {
+            chartContainer.classList.add("hidden");
+        }
+
+        const mcContainer = document.getElementById("options-container");
+        const fitbContainer = document.getElementById("text-input-container");
+        
+        if (currentProblemObj.type === "mc") {
+            fitbContainer.classList.add("hidden");
+            mcContainer.classList.remove("hidden");
+            mcContainer.innerHTML = "";
+            
+            currentProblemObj.options.forEach((optObj, index) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerText = optObj.text;
+                btn.onclick = () => checkMcAnswer(index, btn);
+                mcContainer.appendChild(btn);
+            });
+        } 
+        else if (currentProblemObj.type === "fitb") {
+            mcContainer.classList.add("hidden");
+            fitbContainer.classList.remove("hidden");
+            
+            const inputField = document.getElementById("fitb-input");
+            inputField.value = "";
+            inputField.disabled = false;
+            
+            const submitBtn = document.getElementById("fitb-submit");
+            submitBtn.disabled = false;
+            submitBtn.style.backgroundColor = ""; 
+            
+            inputField.style.borderColor = "#bdc3c7";
+            inputField.style.backgroundColor = "";
+            
+            inputField.focus();
+            inputField.onkeypress = function(e) {
+                if (e.key === 'Enter') { checkFitbAnswer(); }
+            };
+        }
+        
+        updateProgressUI(currentQuestionIndex); 
+    }
+
+    // ==========================================================================
+    // ANSWER CHECKING LOGIC
+    // ==========================================================================
+
+    function handleCorrectAnswer() {
+        const actionContainer = document.getElementById("action-buttons");
+        actionContainer.innerHTML = "";
+        actionContainer.classList.remove("hidden");
+        
+        updateProgressUI(currentQuestionIndex + 1); 
+        
+        if (currentQuestionIndex + 1 < QUESTIONS_PER_MISSION) {
+            const btn = document.createElement("button");
+            btn.innerText = "Next Question";
+            btn.onclick = () => {
+                currentQuestionIndex++;
+                loadQuestion();
+            };
+            actionContainer.appendChild(btn);
+        } else {
+            const btn = document.createElement("button");
+            btn.innerText = "View Mission Report";
+            btn.style.backgroundColor = "var(--primary)";
+            btn.onclick = () => {
+                showMissionComplete();
+            };
+            actionContainer.appendChild(btn);
+        }
+    }
+
+    function checkMcAnswer(selectedIndex, btnElement) {
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach(b => b.disabled = true); 
+        const feedback = document.getElementById("feedback");
+
+        let selectedOption = currentProblemObj.options[selectedIndex];
+
+        if (selectedOption.isCorrect) {
+            if (!questionFailed) {
+                firstTryCorrect++;
+                totalFirstTryCorrect++;
+            }
+            btnElement.style.backgroundColor = "#d4edda";
+            btnElement.style.borderColor = "#c3e6cb";
+            feedback.innerHTML = `<span class="correct">Spot on! Great job.</span><br><br><span style="font-size: 0.9em;"><strong>Why?</strong> ${currentProblemObj.explanation}</span>`;
+            handleCorrectAnswer();
+        } else {
+            questionFailed = true; 
+            btnElement.style.backgroundColor = "#f8d7da";
+            btnElement.style.borderColor = "#f5c6cb";
+            feedback.innerHTML = `<span class="incorrect">${selectedOption.feedback}</span>`;
+            
+            setTimeout(() => {
+                buttons.forEach(b => {
+                    b.disabled = false;
+                    b.style.backgroundColor = "";
+                    b.style.borderColor = "";
+                });
+                feedback.innerText = "";
+            }, 3500); 
+        }
+    }
+
+    function checkFitbAnswer() {
+        const inputField = document.getElementById("fitb-input");
+        const submitBtn = document.getElementById("fitb-submit");
+        const feedback = document.getElementById("feedback");
+        
+        if (inputField.value.trim() === "") return; 
+
+        inputField.disabled = true;
+        submitBtn.disabled = true;
+
+        const normalizedUserInput = normalizeString(inputField.value);
+
+        const isCorrect = currentProblemObj.validAnswers.some(validAns => {
+            const normalizedValidAns = normalizeString(validAns);
+            return normalizedValidAns === normalizedUserInput;
+        });
+
+        if (isCorrect) {
+            if (currentAttempts === 0) {
+                firstTryCorrect++;
+                totalFirstTryCorrect++;
+            }
+            inputField.style.borderColor = "var(--success)";
+            inputField.style.backgroundColor = "#d4edda";
+            submitBtn.style.backgroundColor = "var(--success)";
+            feedback.innerHTML = `<span class="correct">Excellent! You nailed it.</span><br><br><span style="font-size: 0.9em;"><strong>Why?</strong> ${currentProblemObj.explanation}</span>`;
+            handleCorrectAnswer();
+        } else {
+            currentAttempts++; 
+            questionFailed = true;
+            
+            if (currentAttempts >= MAX_ATTEMPTS) {
+                inputField.style.borderColor = "var(--warning)";
+                inputField.value = currentProblemObj.validAnswers[0]; 
+                submitBtn.style.backgroundColor = "var(--warning)";
+                
+                feedback.innerHTML = `<span class="incorrect">Let's look at the solution.</span><br><br><span style="font-size: 0.9em;"><strong>The correct answer is:</strong> ${currentProblemObj.validAnswers[0]}<br><strong>Why?</strong> ${currentProblemObj.explanation}</span>`;
+                handleCorrectAnswer(); 
+                
+            } else {
+                let attemptsLeft = MAX_ATTEMPTS - currentAttempts;
+                inputField.style.borderColor = "#c0392b";
+                inputField.style.backgroundColor = "#f8d7da";
+                feedback.innerHTML = `<span class="incorrect">Not quite. You have ${attemptsLeft} attempt(s) left. Check the hint box!</span>`;
+                
+                setTimeout(() => {
+                    inputField.disabled = false;
+                    submitBtn.disabled = false;
+                    inputField.style.borderColor = "#bdc3c7";
+                    inputField.style.backgroundColor = "";
+                    inputField.value = "";
+                    feedback.innerText = "";
+                    inputField.focus();
+                }, 3000);
+            }
+        }
+    }
+
+    // ==========================================================================
+    // COMPLETION & CERTIFICATE SCREENS
+    // ==========================================================================
+
+    function showMissionComplete() {
+        hideAll();
+        document.getElementById("screen-mission-complete").classList.remove("hidden");
+        updateProgressUI(QUESTIONS_PER_MISSION); 
+        
+        const isLastMission = (currentMissionIndex === missions.length - 1);
+        const btnContainer = document.getElementById("mc-buttons");
+        btnContainer.innerHTML = "";
+        
+        const nextBtn = document.createElement("button");
+        nextBtn.innerText = "Continue to Next Mission";
+        nextBtn.style.backgroundColor = "var(--success)";
+        nextBtn.onclick = () => {
+            currentMissionIndex++;
+            showMissionIntro();
+        };
+        
+        if (isLastMission) {
+            document.getElementById("mc-title").innerText = "Lab Complete!";
+            document.getElementById("mc-stats").innerText = `Mission ${currentMissionIndex + 1} Score: ${firstTryCorrect} / ${QUESTIONS_PER_MISSION} on the first try.`;
+            
+            const overallDiv = document.getElementById("mc-overall-stats");
+            overallDiv.classList.remove("hidden");
+            const totalQuestions = missions.length * QUESTIONS_PER_MISSION;
+            overallDiv.innerText = `Overall Score: ${totalFirstTryCorrect} / ${totalQuestions} on the first try.`;
+            
+            const replayBtn = document.createElement("button");
+            replayBtn.innerText = "Replay Entire Lab";
+            replayBtn.onclick = () => {
+                totalFirstTryCorrect = 0;
+                currentMissionIndex = 0;
+                showMissionIntro();
+            };
+            
+            const certBtn = document.createElement("button");
+            certBtn.innerText = "Show Certificate";
+            certBtn.style.backgroundColor = "var(--success)";
+            certBtn.onclick = () => {
+                showCertificate();
+            };
+            
+            btnContainer.appendChild(replayBtn);
+            btnContainer.appendChild(certBtn);
+            
+        } else {
+            document.getElementById("mc-title").innerText = `Mission ${currentMissionIndex + 1} Complete!`;
+            
+            if(firstTryCorrect === QUESTIONS_PER_MISSION) {
+                // Perfect Score: Only show the continue button
+                document.getElementById("mc-stats").innerHTML = `Perfect! You got <strong style="color: var(--success);">${firstTryCorrect} out of ${QUESTIONS_PER_MISSION}</strong> correct on the first try.`;
+                btnContainer.appendChild(nextBtn);
+            } else if (firstTryCorrect === 0) {
+                // Zero Score: Only show retry button
+                document.getElementById("mc-stats").innerHTML = `You got <strong style="color: var(--secondary);">${firstTryCorrect} out of ${QUESTIONS_PER_MISSION}</strong> correct on the first try. You must review the material and try again.`;
+                
+                const retryBtn = document.createElement("button");
+                retryBtn.innerText = "Retry Mission";
+                retryBtn.onclick = () => {
+                    startMission(); 
+                };
+                
+                btnContainer.appendChild(retryBtn);
+            } else {
+                // Partial score (1/2): Show both Retry and Continue
+                document.getElementById("mc-stats").innerHTML = `You got <strong>${firstTryCorrect} out of ${QUESTIONS_PER_MISSION}</strong> correct on the first try.`;
+                
+                const retryBtn = document.createElement("button");
+                retryBtn.innerText = "Retry Mission";
+                retryBtn.onclick = () => {
+                    totalFirstTryCorrect -= firstTryCorrect; 
+                    startMission(); 
+                };
+                
+                btnContainer.appendChild(retryBtn);
+                btnContainer.appendChild(nextBtn);
+            }
+        }
+    }
+
+    function showCertificate() {
+        hideAll();
+        document.getElementById("progress-dashboard").classList.add("hidden");
+        document.getElementById("cert-names").innerText = names;
+        
+        const totalQuestions = missions.length * QUESTIONS_PER_MISSION;
+        document.getElementById("cert-final-score").innerText = `Final Score: ${totalFirstTryCorrect} / ${totalQuestions} First-Try Correct`;
+        
+        document.getElementById("screen-certificate").classList.remove("hidden");
+    }
+</script>
+
+</body>
+</html>
