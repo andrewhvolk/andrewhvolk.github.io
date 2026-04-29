@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Math 130 Vector Gap Review — Guided Notes</title>
+<style>
+  :root{
+    --navy:#0A2540;
+    --blue:#1B5E8C;
+    --red:#A72B2A;
+    --gold:#F2C94C;
+    --ink:#111827;
+    --muted:#4B5563;
+    --line:#9CA3AF;
+    --light:#F8FAFC;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:#e5e7eb;
+    font-family:"Segoe UI", Arial, sans-serif;
+    color:var(--ink);
+  }
+  .page{
+    width:8.5in;
+    min-height:11in;
+    margin:24px auto;
+    padding:.42in .45in;
+    background:white;
+    box-shadow:0 8px 28px rgba(0,0,0,.18);
+  }
+  h1{
+    margin:0;
+    font-size:25px;
+    color:var(--navy);
+    letter-spacing:-.3px;
+  }
+  .top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom:4px solid var(--navy);
+    padding-bottom:8px;
+    margin-bottom:10px;
+  }
+  .name{
+    font-size:13px;
+    color:var(--muted);
+    min-width:260px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+  }
+  .subtitle{
+    margin:3px 0 0;
+    color:var(--muted);
+    font-size:12px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 10px;
+  }
+  .box{
+    border:1.4px solid var(--line);
+    border-radius:10px;
+    padding:8px 9px;
+    break-inside:avoid;
+  }
+  .box h2{
+    margin:0 0 5px;
+    font-size:15px;
+    color:var(--navy);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .num{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    width:20px;height:20px;
+    border-radius:50%;
+    background:var(--blue);
+    color:white;
+    font-weight:800;
+    font-size:12px;
+    flex:0 0 auto;
+  }
+  p{
+    margin:4px 0;
+    font-size:11.3px;
+    line-height:1.25;
+  }
+  .formula{
+    background:#F1F5F9;
+    border-left:5px solid var(--blue);
+    padding:4px 6px;
+    border-radius:6px;
+    font-family:"Cambria Math","Times New Roman",serif;
+    font-size:13.2px;
+    margin:5px 0;
+  }
+  .work{
+    font-family:"Cambria Math","Times New Roman",serif;
+    font-size:12.8px;
+    line-height:1.35;
+  }
+  .blank{
+    display:inline-block;
+    min-width:54px;
+    border-bottom:1.6px solid var(--ink);
+    height:14px;
+    vertical-align:baseline;
+  }
+  .blank.sm{min-width:35px}
+  .blank.lg{min-width:95px}
+  .hint{
+    color:var(--muted);
+    font-size:10.4px;
+    font-style:italic;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:10.8px;
+    margin-top:4px;
+  }
+  th,td{
+    border:1px solid var(--line);
+    padding:3px 4px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:var(--navy);
+    color:white;
+    font-weight:700;
+  }
+  .full{grid-column:1 / -1}
+  .mini-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+  }
+  .checklist{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:5px;
+    margin-top:4px;
+  }
+  .check{
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:4px;
+    font-size:10.5px;
+    background:#FAFAFA;
+  }
+  .answer-line{
+    border-bottom:1.4px solid var(--ink);
+    min-height:16px;
+    margin-top:3px;
+  }
+  .tiny{font-size:10px}
+  .visual{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:7px;
+    align-items:start;
+  }
+  svg{
+    width:100%;
+    max-height:145px;
+    border:1px solid #CBD5E1;
+    border-radius:8px;
+    background:white;
+  }
+  @media print{
+    body{background:white}
+    .page{
+      margin:0;
+      box-shadow:none;
+      width:8.5in;
+      min-height:11in;
+      padding:.35in .4in;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <div>
+      <h1>Math 130 Vector Gap Review — Guided Notes</h1>
+      <p class="subtitle">Fill in the blanks as we work through the examples.</p>
+    </div>
+    <div class="name">Name:</div>
+  </div>
+
+  <section class="grid">
+    <div class="box">
+      <h2><span class="num">1</span> Component form from points</h2>
+      <p><strong>Rule:</strong> vector = terminal point − initial point</p>
+      <div class="formula">v = ⟨x₂ − x₁, y₂ − y₁⟩</div>
+      <p><strong>Example:</strong> from A(−4, 3) to B(1, −2)</p>
+      <div class="work">
+        v = ⟨1 − (−4), −2 − 3⟩<br>
+        v = ⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩
+      </div>
+      <p class="hint">Check: this means <span class="blank sm"></span> right and <span class="blank sm"></span> down.</p>
+    </div>
+
+    <div class="box">
+      <h2><span class="num">2</span> Unit vectors</h2>
+      <p><strong>Goal:</strong> same direction, length 1.</p>
+      <div class="formula">unit vector = ⟨a/‖v‖, b/‖v‖⟩</div>
+      <p><strong>Example:</strong> w = ⟨8, −6⟩</p>
+      <div class="work">
+        ‖w‖ = √(8² + (−6)²) = <span class="blank sm"></span><br>
+        unit = ⟨8/<span class="blank sm"></span>, −6/<span class="blank sm"></span>⟩<br>
+        unit = ⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩
+      </div>
+    </div>
+
+    <div class="box">
+      <h2><span class="num">3</span> Targeted unit-vector model</h2>
+      <p><strong>Example:</strong> w = ⟨6, −3⟩</p>
+      <div class="work">
+        ‖w‖ = √(6² + (−3)²) = √<span class="blank sm"></span> = <span class="blank sm"></span>√5<br>
+        unit = ⟨6/(3√5), −3/(3√5)⟩<br>
+        unit = ⟨<span class="blank sm"></span>/√5, <span class="blank sm"></span>/√5⟩<br>
+        decimal ≈ ⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩
+      </div>
+    </div>
+
+    <div class="box">
+      <h2><span class="num">4</span> Magnitude + angle → components</h2>
+      <p>Use cosine for horizontal and sine for vertical.</p>
+      <div class="formula">v = ⟨r cos θ, r sin θ⟩</div>
+      <p><strong>Example:</strong> ‖v‖ = 9, θ = 40°</p>
+      <div class="work">
+        v = ⟨9cos40°, 9sin40°⟩<br>
+        v ≈ ⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩
+      </div>
+      <p class="hint">Check the signs using the quadrant.</p>
+    </div>
+
+    <div class="box">
+      <h2><span class="num">5</span> Targeted magnitude-angle model</h2>
+      <p><strong>Example:</strong> ‖v‖ = 8, θ = 75°. Round to one decimal place.</p>
+      <div class="work">
+        v = ⟨8cos75°, 8sin75°⟩<br>
+        v ≈ ⟨8(<span class="blank sm"></span>), 8(<span class="blank sm"></span>)⟩<br>
+        v ≈ ⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩
+      </div>
+    </div>
+
+    <div class="box">
+      <h2><span class="num">6</span> Direction angle by quadrant</h2>
+      <p>Find the reference angle first, then adjust.</p>
+      <div class="formula">reference = tan⁻¹(|b|/|a|)</div>
+      <table>
+        <tr><th>Vector signs</th><th>Quadrant</th><th>Angle</th></tr>
+        <tr><td>⟨+, +⟩</td><td>I</td><td>ref</td></tr>
+        <tr><td>⟨−, +⟩</td><td>II</td><td>180° − ref</td></tr>
+        <tr><td>⟨−, −⟩</td><td>III</td><td>180° + ref</td></tr>
+        <tr><td>⟨+, −⟩</td><td>IV</td><td>360° − ref</td></tr>
+      </table>
+    </div>
+
+    <div class="box">
+      <h2><span class="num">7</span> Targeted Quadrant IV model</h2>
+      <p><strong>Example:</strong> v = ⟨12, −9⟩</p>
+      <div class="work">
+        ‖v‖ = √(12² + (−9)²) = <span class="blank sm"></span><br>
+        reference = tan⁻¹(9/12) ≈ <span class="blank sm"></span>°<br>
+        Quadrant: <span class="blank sm"></span><br>
+        θ = 360° − <span class="blank sm"></span>° = <span class="blank sm"></span>°
+      </div>
+    </div>
+
+    <div class="box">
+      <h2><span class="num">8</span> Fractional scalar multiplication</h2>
+      <p>Multiply every component first.</p>
+      <div class="formula">½⟨a,b⟩ = ⟨a/2,b/2⟩</div>
+      <p><strong>Example:</strong> w = ⟨10,14⟩, u = ⟨−3,4⟩</p>
+      <div class="work">
+        ½w + u = ½⟨10,14⟩ + ⟨−3,4⟩<br>
+        = ⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩ + ⟨−3,4⟩<br>
+        = ⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩
+      </div>
+    </div>
+
+    <div class="box full">
+      <h2><span class="num">9</span> Graphical vector addition: count, add, then draw the resultant</h2>
+      <div class="visual">
+        <div>
+          <p><strong>Common-tail example:</strong> First find each component from the graph. Then add and draw the resultant yourself.</p>
+          <table>
+            <tr><th>Arrow</th><th>Component</th></tr>
+            <tr><td>A</td><td>⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</td></tr>
+            <tr><td>B</td><td>⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</td></tr>
+            <tr><td>C</td><td>⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</td></tr>
+            <tr><td><strong>r</strong></td><td>⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</td></tr>
+          </table>
+          <p class="hint">Then sketch r from the origin.</p>
+        </div>
+        <svg viewBox="0 0 500 170" aria-label="Common-tail vector addition diagram">
+          <defs>
+            <pattern id="g1v2" width="18" height="18" patternUnits="userSpaceOnUse">
+              <path d="M18 0 L0 0 0 18" fill="none" stroke="#CBD5E1" stroke-width="1"/>
+            </pattern>
+            <marker id="ar1red" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#A72B2A"/></marker>
+            <marker id="ar1blue" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#1B5E8C"/></marker>
+            <marker id="ar1green" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#1E7D45"/></marker>
+          </defs>
+          <rect width="500" height="170" fill="url(#g1v2)"/>
+          <line x1="250" y1="145" x2="250" y2="15" stroke="#94A3B8" stroke-width="1.5"/>
+          <line x1="40" y1="145" x2="460" y2="145" stroke="#94A3B8" stroke-width="1.5"/>
+          <circle cx="250" cy="145" r="4" fill="#111827"/>
+          <!-- A = <-4,1> -->
+          <line x1="250" y1="145" x2="178" y2="127" stroke="#A72B2A" stroke-width="4" marker-end="url(#ar1red)"/>
+          <!-- B = <3,2> -->
+          <line x1="250" y1="145" x2="304" y2="109" stroke="#1B5E8C" stroke-width="4" marker-end="url(#ar1blue)"/>
+          <!-- C = <2,4> -->
+          <line x1="250" y1="145" x2="286" y2="73" stroke="#1E7D45" stroke-width="4" marker-end="url(#ar1green)"/>
+          <text x="166" y="123" font-size="15" font-weight="800" fill="#A72B2A">A</text>
+          <text x="310" y="110" font-size="15" font-weight="800" fill="#1B5E8C">B</text>
+          <text x="292" y="74" font-size="15" font-weight="800" fill="#1E7D45">C</text>
+          <text x="257" y="158" font-size="13" fill="#374151">origin</text>
+          <text x="352" y="23" font-size="13" fill="#6B7280">Draw r after adding.</text>
+        </svg>
+      </div>
+      <div class="visual" style="margin-top:5px">
+        <div>
+          <p><strong>Scattered-vector example:</strong> Even when vectors are separated, count each tail-to-head movement from the graph.</p>
+          <table>
+            <tr><th>Arrow</th><th>Component</th></tr>
+            <tr><td>A</td><td>⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</td></tr>
+            <tr><td>B</td><td>⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</td></tr>
+            <tr><td>C</td><td>⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</td></tr>
+            <tr><td><strong>r</strong></td><td>⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</td></tr>
+          </table>
+          <p class="hint">Then sketch r from the origin.</p>
+        </div>
+        <svg viewBox="0 0 500 170" aria-label="Scattered vector addition diagram">
+          <defs>
+            <pattern id="g2v2" width="18" height="18" patternUnits="userSpaceOnUse">
+              <path d="M18 0 L0 0 0 18" fill="none" stroke="#CBD5E1" stroke-width="1"/>
+            </pattern>
+            <marker id="ar2red" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#A72B2A"/></marker>
+            <marker id="ar2blue" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#1B5E8C"/></marker>
+            <marker id="ar2green" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#1E7D45"/></marker>
+          </defs>
+          <rect width="500" height="170" fill="url(#g2v2)"/>
+          <line x1="250" y1="145" x2="250" y2="15" stroke="#94A3B8" stroke-width="1.5"/>
+          <line x1="40" y1="145" x2="460" y2="145" stroke="#94A3B8" stroke-width="1.5"/>
+          <!-- A = <2,-3> -->
+          <line x1="88" y1="55" x2="124" y2="109" stroke="#A72B2A" stroke-width="4" marker-end="url(#ar2red)"/>
+          <!-- B = <-4,-1> -->
+          <line x1="358" y1="55" x2="286" y2="73" stroke="#1B5E8C" stroke-width="4" marker-end="url(#ar2blue)"/>
+          <!-- C = <5,3> -->
+          <line x1="160" y1="127" x2="250" y2="73" stroke="#1E7D45" stroke-width="4" marker-end="url(#ar2green)"/>
+          <text x="128" y="112" font-size="15" font-weight="800" fill="#A72B2A">A</text>
+          <text x="268" y="69" font-size="15" font-weight="800" fill="#1B5E8C">B</text>
+          <text x="254" y="73" font-size="15" font-weight="800" fill="#1E7D45">C</text>
+          <text x="352" y="23" font-size="13" fill="#6B7280">No resultant shown.</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="box full">
+      <h2><span class="num">10</span> Final practice and checks</h2>
+      <div class="mini-grid">
+        <div>
+          <p><strong>Practice:</strong> A = ⟨−4,2⟩, B = ⟨7,−1⟩, C = ⟨−2,5⟩</p>
+          <div class="work">r = ⟨<span class="blank sm"></span>, <span class="blank sm"></span>⟩</div>
+          <p class="hint">Sketch direction: <span class="blank lg"></span></p>
+        </div>
+        <div>
+          <p><strong>Before submitting, check:</strong></p>
+          <div class="checklist">
+            <div class="check">Terminal − initial</div>
+            <div class="check">Both components divided</div>
+            <div class="check">cos = x, sin = y</div>
+            <div class="check">Quadrant adjusted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
