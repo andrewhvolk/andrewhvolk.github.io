@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Exponential Growth: Oil Production Step-by-Step</title>
+<style>
+  :root {
+    --navy: #0b1f3a;
+    --blue: #1d4ed8;
+    --light-blue: #dbeafe;
+    --gold: #f59e0b;
+    --green: #15803d;
+    --red: #b91c1c;
+    --ink: #102033;
+    --muted: #64748b;
+    --paper: #f8fafc;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: radial-gradient(circle at top left, #e0f2fe 0, #f8fafc 34%, #e2e8f0 100%);
+    color: var(--ink);
+    overflow: hidden;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+
+  .slide {
+    display: none;
+    width: min(1180px, 96vw);
+    height: min(680px, 90vh);
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.22);
+    padding: 54px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .slide::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--blue), var(--gold));
+  }
+
+  .kicker {
+    color: var(--blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 54px;
+    line-height: 1.04;
+    margin: 0 0 22px;
+    color: var(--navy);
+  }
+
+  h2 {
+    font-size: 42px;
+    line-height: 1.08;
+    margin: 0 0 24px;
+    color: var(--navy);
+  }
+
+  h3 {
+    font-size: 28px;
+    margin: 22px 0 10px;
+    color: var(--navy);
+  }
+
+  p, li {
+    font-size: 25px;
+    line-height: 1.38;
+  }
+
+  ul, ol { margin-top: 8px; }
+  li { margin-bottom: 10px; }
+
+  .big {
+    font-size: 32px;
+    line-height: 1.32;
+  }
+
+  .formula {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--navy);
+    background: #eef6ff;
+    border: 3px solid #bfdbfe;
+    border-radius: 18px;
+    padding: 22px 26px;
+    margin: 18px 0;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .card {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 22px 26px;
+  }
+
+  .answer {
+    background: #ecfdf5;
+    border: 3px solid #86efac;
+    border-radius: 18px;
+    padding: 22px 26px;
+    font-size: 31px;
+    font-weight: 700;
+    color: #14532d;
+    margin-top: 20px;
+  }
+
+  .warning {
+    background: #fff7ed;
+    border: 3px solid #fed7aa;
+    border-radius: 18px;
+    padding: 20px 24px;
+    font-size: 25px;
+  }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .number-box {
+    background: var(--navy);
+    color: white;
+    border-radius: 18px;
+    padding: 22px 24px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .number-box small {
+    display: block;
+    font-size: 17px;
+    color: #cbd5e1;
+    margin-top: 8px;
+  }
+
+  .less-than {
+    font-size: 34px;
+    color: var(--red);
+    font-weight: 800;
+  }
+
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 58px;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    font-weight: 700;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 22px;
+    right: 36px;
+    color: var(--muted);
+    font-size: 18px;
+  }
+
+  .controls {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.82);
+    color: white;
+    border-radius: 999px;
+    padding: 10px 14px;
+    z-index: 10;
+  }
+
+  button {
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    background: white;
+    color: var(--navy);
+  }
+
+  .progress {
+    min-width: 92px;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .small-note {
+    font-size: 20px;
+    color: var(--muted);
+  }
+
+  .highlight {
+    color: var(--blue);
+    font-weight: 800;
+  }
+
+  .math-line {
+    font-size: 31px;
+    margin: 12px 0;
+  }
+
+  .mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 23px;
+    margin-top: 16px;
+  }
+
+  .mini-table th, .mini-table td {
+    border: 2px solid #e2e8f0;
+    padding: 14px 16px;
+    text-align: left;
+  }
+
+  .mini-table th {
+    background: #eff6ff;
+    color: var(--navy);
+  }
+
+  @media print {
+    body { overflow: visible; background: white; }
+    .deck { display: block; width: auto; height: auto; padding: 0; }
+    .slide { display: flex !important; page-break-after: always; width: 100vw; height: 100vh; box-shadow: none; border-radius: 0; }
+    .controls { display: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide active">
+      <div class="kicker">Exponential Growth</div>
+      <h1>Oil Production Problem<br />Step by Step</h1>
+      <p class="big">Goal: use the exponential growth model to estimate production at different growth rates, then compare those estimates to the actual 2020 value.</p>
+      <div class="footer">Slide 1</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Problem Information</div>
+      <h2>What are we given?</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Starting point</h3>
+          <p>In 1950, production was about <span class="highlight">500 million tons</span>.</p>
+          <p class="math-line">500 million = <strong>0.5 billion</strong></p>
+        </div>
+        <div class="card">
+          <h3>Growth information</h3>
+          <p>From 1950 to 1971, the growth rate was <span class="highlight">7.6% per year</span>.</p>
+          <p>In 2020, actual production was about <span class="highlight">4.6 billion tons</span>.</p>
+        </div>
+      </div>
+      <div class="footer">Slide 2</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Main Tool</div>
+      <h2>Use the exponential growth model</h2>
+      <div class="formula">A = P(1 + r)<sup>t</sup></div>
+      <div class="two-col">
+        <div class="card">
+          <p><strong>P</strong> = starting amount</p>
+          <p><strong>r</strong> = annual growth rate as a decimal</p>
+        </div>
+        <div class="card">
+          <p><strong>t</strong> = number of years</p>
+          <p><strong>A</strong> = ending amount</p>
+        </div>
+      </div>
+      <div class="warning">Important: 7.6% becomes <strong>0.076</strong>, and 3.1% becomes <strong>0.031</strong>.</div>
+      <div class="footer">Slide 3</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part A</div>
+      <h2>Estimate production in 1971</h2>
+      <ol class="steps">
+        <li>Start with 1950 production: <strong>P = 0.5</strong> billion tons.</li>
+        <li>Use the 7.6% growth rate: <strong>r = 0.076</strong>.</li>
+        <li>Count the years: <strong>1971 − 1950 = 21</strong>, so <strong>t = 21</strong>.</li>
+      </ol>
+      <div class="formula">A = 0.5(1.076)<sup>21</sup></div>
+      <div class="footer">Slide 4</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part A Calculation</div>
+      <h2>Calculate and round</h2>
+      <p class="math-line">A = 0.5(1.076)<sup>21</sup></p>
+      <p class="math-line">A ≈ 2.328</p>
+      <p class="math-line">Rounded to one decimal place: <strong>2.3</strong></p>
+      <div class="answer">Part A answer: approximately 2.3 billion tons in 1971.</div>
+      <div class="footer">Slide 5</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part B</div>
+      <h2>What if 7.6% continued until 2020?</h2>
+      <ol class="steps">
+        <li>Start from the rounded Part A result: <strong>P = 2.3</strong> billion tons.</li>
+        <li>Use the same growth rate: <strong>r = 0.076</strong>.</li>
+        <li>Count the years: <strong>2020 − 1971 = 49</strong>, so <strong>t = 49</strong>.</li>
+      </ol>
+      <div class="formula">A = 2.3(1.076)<sup>49</sup></div>
+      <div class="footer">Slide 6</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part B Calculation</div>
+      <h2>Calculate and compare</h2>
+      <p class="math-line">A = 2.3(1.076)<sup>49</sup> ≈ 83.3</p>
+      <div class="compare">
+        <div class="number-box">4.6 billion<small>actual 2020 production</small></div>
+        <div class="less-than">is far less than</div>
+        <div class="number-box">83.3 billion<small>projected using 7.6%</small></div>
+      </div>
+      <div class="answer">Part B answer: 83.3 billion tons; the actual figure is far less than this estimate.</div>
+      <div class="footer">Slide 7</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part C</div>
+      <h2>What if the rate after 1971 was 3.1%?</h2>
+      <ol class="steps">
+        <li>Start from the rounded Part A result: <strong>P = 2.3</strong> billion tons.</li>
+        <li>Use the new growth rate: <strong>r = 0.031</strong>.</li>
+        <li>Use the same time span: <strong>t = 49</strong> years.</li>
+      </ol>
+      <div class="formula">A = 2.3(1.031)<sup>49</sup></div>
+      <div class="footer">Slide 8</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part C Calculation</div>
+      <h2>Calculate and compare</h2>
+      <p class="math-line">A = 2.3(1.031)<sup>49</sup> ≈ 10.3</p>
+      <div class="compare">
+        <div class="number-box">4.6 billion<small>actual 2020 production</small></div>
+        <div class="less-than">is far less than</div>
+        <div class="number-box">10.3 billion<small>projected using 3.1%</small></div>
+      </div>
+      <div class="answer">Part C answer: 10.3 billion tons; the actual figure is far less than this estimate.</div>
+      <div class="footer">Slide 9</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D</div>
+      <h2>What are we solving for?</h2>
+      <p>Part D asks for the annual growth rate from 1971 to 2020 that produces the actual 2020 value.</p>
+      <div class="two-col">
+        <div class="card">
+          <h3>Known values</h3>
+          <p><strong>1971:</strong> about 2.328 billion tons</p>
+          <p><strong>2020:</strong> 4.6 billion tons</p>
+        </div>
+        <div class="card">
+          <h3>Unknown value</h3>
+          <p><strong>r</strong> = annual growth rate</p>
+          <p><strong>t</strong> = 2020 − 1971 = 49 years</p>
+        </div>
+      </div>
+      <div class="footer">Slide 10</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Setup</div>
+      <h2>Use the unrounded 1971 value</h2>
+      <p>The 1971 estimate came from Part A:</p>
+      <div class="formula">0.5(1.076)<sup>21</sup> ≈ 2.328239764</div>
+      <p class="small-note">The answer box in Part A rounds this to 2.3, but Part D needs more precision to get the expected rate.</p>
+      <div class="warning">Using 2.3 instead of 2.328239764 gives a slightly different rate.</div>
+      <div class="footer">Slide 11</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Equation</div>
+      <h2>Build the exponential equation</h2>
+      <p>Start at the 1971 amount and grow for 49 years until reaching the actual 2020 amount.</p>
+      <div class="formula">4.6 = 2.328239764(1 + r)<sup>49</sup></div>
+      <ol class="steps">
+        <li><strong>4.6</strong> is the ending amount.</li>
+        <li><strong>2.328239764</strong> is the starting amount.</li>
+        <li><strong>49</strong> is the number of years.</li>
+      </ol>
+      <div class="footer">Slide 12</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Algebra</div>
+      <h2>Isolate the growth factor</h2>
+      <p>Divide both sides by the starting amount.</p>
+      <p class="math-line">4.6 ÷ 2.328239764 ≈ 1.975741533</p>
+      <div class="formula">(1 + r)<sup>49</sup> ≈ 1.975741533</div>
+      <p>This means production became about <strong>1.976 times</strong> as large from 1971 to 2020.</p>
+      <div class="footer">Slide 13</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Algebra</div>
+      <h2>Undo the 49th power</h2>
+      <p>To undo a 49th power, raise both sides to the <strong>1/49</strong> power.</p>
+      <div class="formula">1 + r = (1.975741533)<sup>1/49</sup></div>
+      <p class="math-line">1 + r ≈ 1.013993822</p>
+      <p class="math-line">r ≈ 1.013993822 − 1 = 0.013993822</p>
+      <div class="footer">Slide 14</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Calculator Help</div>
+      <h2>Calculator sequence</h2>
+      <p>One reliable way to enter the calculation is:</p>
+      <div class="formula">(4.6 ÷ 2.328239764)^(1 ÷ 49) − 1</div>
+      <p class="math-line">≈ 0.013993822</p>
+      <p>Then convert the decimal rate to a percent:</p>
+      <p class="math-line">0.013993822 × 100 ≈ <strong>1.3993822%</strong></p>
+      <div class="footer">Slide 15</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Trial and Error</div>
+      <h2>How trial and error narrows the rate</h2>
+      <p>Try rates in the model until the 2020 estimate gets close to 4.6.</p>
+      <table class="mini-table">
+        <thead>
+          <tr><th>Rate tried</th><th>Model</th><th>2020 estimate</th><th>Meaning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1.0%</td><td>2.328239764(1.010)<sup>49</sup></td><td>3.791</td><td>too low</td></tr>
+          <tr><td>1.5%</td><td>2.328239764(1.015)<sup>49</sup></td><td>4.829</td><td>too high</td></tr>
+          <tr><td>1.4%</td><td>2.328239764(1.014)<sup>49</sup></td><td>4.601</td><td>very close</td></tr>
+        </tbody>
+      </table>
+      <div class="footer">Slide 16</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Precision</div>
+      <h2>Getting to three decimal places</h2>
+      <p>Since 1.4% is slightly high, test rates just below it.</p>
+      <table class="mini-table">
+        <thead>
+          <tr><th>Rate tried</th><th>2020 estimate</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1.397%</td><td>4.5947</td><td>too low</td></tr>
+          <tr><td>1.398%</td><td>4.5969</td><td>too low</td></tr>
+          <tr><td>1.399%</td><td>4.5992</td><td>very close</td></tr>
+          <tr><td>1.400%</td><td>4.6014</td><td>slightly high</td></tr>
+        </tbody>
+      </table>
+      <div class="footer">Slide 17</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Rounding</div>
+      <h2>Round the percent, not the decimal rate</h2>
+      <p class="math-line">Exact rate: r ≈ 0.0139938215</p>
+      <p class="math-line">As a percent: 0.0139938215 × 100 ≈ 1.39938215%</p>
+      <div class="answer">Rounded to three decimal places: 1.399%</div>
+      <div class="warning">Do not round 0.0139938215 to 0.014 first. That would become 1.4%, which is less precise than the requested answer.</div>
+      <div class="footer">Slide 18</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Part D Check</div>
+      <h2>Check the final rate</h2>
+      <p>Substitute the rounded rate back into the model.</p>
+      <div class="formula">2.328239764(1.01399)<sup>49</sup> ≈ 4.599</div>
+      <p class="math-line">4.599 billion rounds to <strong>4.6 billion</strong>.</p>
+      <div class="answer">Part D answer: approximately 1.399% per year.</div>
+      <div class="footer">Slide 19</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Common Mistakes</div>
+      <h2>Watch for these errors</h2>
+      <ul>
+        <li>Using <strong>7.6</strong> instead of <strong>0.076</strong>.</li>
+        <li>Forgetting to convert 500 million to <strong>0.5 billion</strong>.</li>
+        <li>Using the wrong number of years: 1950 to 1971 is <strong>21</strong>; 1971 to 2020 is <strong>49</strong>.</li>
+        <li>Rounding too early in Part D. Use the unrounded Part A value when possible.</li>
+      </ul>
+      <div class="footer">Slide 20</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Final Answers</div>
+      <h2>Summary</h2>
+      <table class="mini-table">
+        <thead>
+          <tr><th>Part</th><th>Answer</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A</td><td>2.3 billion tons in 1971</td></tr>
+          <tr><td>B</td><td>83.3 billion tons; actual is far less</td></tr>
+          <tr><td>C</td><td>10.3 billion tons; actual is far less</td></tr>
+          <tr><td>D</td><td>1.399% annual growth rate</td></tr>
+        </tbody>
+      </table>
+      <p class="small-note">Use the arrow keys or the buttons below to move through the deck.</p>
+      <div class="footer">Slide 21</div>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Slide controls">
+    <button id="prevBtn" type="button">Previous</button>
+    <span class="progress" id="progress">1 / 21</span>
+    <button id="nextBtn" type="button">Next</button>
+  </nav>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const progress = document.getElementById('progress');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let current = 0;
+
+  function showSlide(index) {
+    current = Math.max(0, Math.min(index, slides.length - 1));
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+    progress.textContent = `${current + 1} / ${slides.length}`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === slides.length - 1;
+  }
+
+  prevBtn.addEventListener('click', () => showSlide(current - 1));
+  nextBtn.addEventListener('click', () => showSlide(current + 1));
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight' || event.key === ' ') showSlide(current + 1);
+    if (event.key === 'ArrowLeft') showSlide(current - 1);
+    if (event.key === 'Home') showSlide(0);
+    if (event.key === 'End') showSlide(slides.length - 1);
+  });
+
+  showSlide(0);
+</script>
+</body>
+</html>
