@@ -507,7 +507,7 @@
                             { text: "Quantitative, because you can average them.", isCorrect: false, feedback: "Averaging ZIP codes results in a meaningless number. They are labels, not amounts." },
                             { text: "Qualitative, because they represent geographic categories.", isCorrect: true, feedback: "" }
                         ],
-                        hint: "Just because a variable uses numbers doesn't automatically make it quantitative. Ask yourself: does this number measure an amount?",
+                        hint: "Just because a variable uses numbers doesnt automatically make it quantitative. Ask yourself: does this number measure an amount?",
                         explanation: "Even though ZIP codes are made of numbers, they function as geographic labels or categories. You wouldn't mathematically average ZIP codes together."
                     },
                     { 
@@ -1142,9 +1142,12 @@
             const replayBtn = document.createElement("button");
             replayBtn.innerText = "Replay Entire Lab";
             replayBtn.onclick = () => {
-                totalFirstTryCorrect = 0;
-                currentMissionIndex = 0;
-                showInstructions();
+                // ADDED: Warning confirmation before resetting
+                if (confirm("Are you sure you want to replay the entire lab? This will wipe your current score and start you back at the beginning.")) {
+                    totalFirstTryCorrect = 0;
+                    currentMissionIndex = 0;
+                    showInstructions();
+                }
             };
             
             const certBtn = document.createElement("button");
