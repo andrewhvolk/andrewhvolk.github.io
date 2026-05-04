@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math 130 Final Prep | Test 4 + Quiz 13</title>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root {
+      --navy: #14213d;
+      --blue: #1f4ea8;
+      --teal: #087f6f;
+      --green: #0d8f61;
+      --red: #b42318;
+      --amber: #b7791f;
+      --paper: #ffffff;
+      --cream: #f8fafc;
+      --muted: #64748b;
+      --ink: #1e293b;
+      --line: #dbe3ef;
+      --soft-blue: #eef5ff;
+      --soft-green: #ecfdf5;
+      --soft-red: #fff1f2;
+      --soft-amber: #fffbeb;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #e7edf6;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+
+    body { min-height: 100vh; overflow: hidden; }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .slide {
+      display: none;
+      width: min(1280px, calc(100vw - 48px));
+      height: min(720px, calc(100vh - 48px));
+      background: linear-gradient(180deg, #fff 0%, #fbfdff 100%);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 44px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide.active { display: block; }
+
+    .slide::after {
+      content: attr(data-footer);
+      position: absolute;
+      right: 42px;
+      bottom: 22px;
+      color: #94a3b8;
+      font-size: 14px;
+      letter-spacing: .02em;
+    }
+
+    .title-band {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 16px;
+      background: linear-gradient(180deg, var(--blue), var(--teal));
+    }
+
+    .kicker {
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      color: var(--navy);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    h1 { font-size: 70px; max-width: 980px; }
+    h2 { font-size: 46px; margin-bottom: 24px; }
+    h3 { font-size: 27px; margin-bottom: 12px; }
+
+    p { font-size: 23px; margin: 0 0 15px; }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 26px;
+      font-size: 22px;
+    }
+
+    li { margin: 9px 0; }
+
+    .subtitle {
+      font-size: 30px;
+      color: var(--muted);
+      margin-top: 24px;
+      max-width: 980px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    .card.white { background: #fff; }
+    .card.blue { background: var(--soft-blue); border-color: #bed3ff; }
+    .card.green { background: var(--soft-green); border-color: #b7ead1; }
+    .card.red { background: var(--soft-red); border-color: #fecdd3; }
+    .card.amber { background: var(--soft-amber); border-color: #fde68a; }
+
+    .large-center {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .center { text-align: center; }
+    .muted { color: var(--muted); }
+    .red-text { color: var(--red); font-weight: 900; }
+    .blue-text { color: var(--blue); font-weight: 900; }
+    .green-text { color: var(--green); font-weight: 900; }
+
+    .big-number {
+      font-size: 46px;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #e0ecff;
+      color: #1e3a8a;
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 10px;
+    }
+
+    .formula {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 72px;
+      min-width: 150px;
+      padding: 12px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 31px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 8px 0 13px;
+    }
+
+    .formula.block { width: 100%; display: flex; }
+    .small-formula { font-size: 24px; }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 19px;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+
+    .table th, .table td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table th {
+      background: #eaf1ff;
+      color: #1e3a8a;
+      font-weight: 900;
+    }
+
+    .table td { background: #fff; }
+
+    .practice {
+      border: 4px dashed #10b981;
+      background: #ecfdf5;
+      padding: 30px;
+      border-radius: 26px;
+    }
+
+    .practice h2 {
+      color: #047857;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .answer-box {
+      margin-top: 20px;
+      min-height: 120px;
+      border: 2px dashed #cbd5e1;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: #94a3b8;
+      font-size: 22px;
+      background: rgba(255, 255, 255, .65);
+    }
+
+    .solution {
+      border: 3px solid var(--blue);
+      background: var(--soft-blue);
+      border-radius: 26px;
+      padding: 28px;
+      min-height: 610px;
+    }
+
+    .solution h2 { color: var(--blue); margin-bottom: 18px; }
+
+    .warn-title {
+      color: var(--red);
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .step-list li {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      align-items: start;
+      margin: 12px 0;
+      font-size: 22px;
+    }
+
+    .step-list li::before {
+      counter-increment: step;
+      content: counter(step);
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: white;
+      font-weight: 900;
+    }
+
+    .micro {
+      font-size: 18px;
+      color: var(--muted);
+      margin: 6px 0 0;
+    }
+
+    .splitline { height: 1px; background: var(--line); margin: 16px 0; }
+
+    .mode-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .mode-chip {
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 19px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .wrong-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    .wrong-right .wrong { background: var(--soft-red); border: 1px solid #fecdd3; }
+    .wrong-right .right { background: var(--soft-green); border: 1px solid #b7ead1; }
+
+    .diagram-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      display: grid;
+      place-items: center;
+      min-height: 270px;
+    }
+
+    .svg-diagram { width: 100%; max-height: 300px; }
+    .svg-label { font-size: 18px; font-weight: 800; fill: #14213d; }
+    .svg-small { font-size: 15px; fill: #475569; font-weight: 700; }
+
+    .mini-axis {
+      width: 280px;
+      height: 220px;
+      border: 1px solid #cbd5e1;
+      background:
+        linear-gradient(to right, transparent 49.5%, #64748b 49.5%, #64748b 50.5%, transparent 50.5%),
+        linear-gradient(to bottom, transparent 49.5%, #64748b 49.5%, #64748b 50.5%, transparent 50.5%),
+        repeating-linear-gradient(to right, #f8fafc 0, #f8fafc 23px, #e2e8f0 24px),
+        repeating-linear-gradient(to bottom, transparent 0, transparent 23px, #e2e8f0 24px);
+      border-radius: 16px;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .arrow {
+      position: absolute;
+      height: 4px;
+      background: var(--blue);
+      transform-origin: left center;
+      border-radius: 999px;
+    }
+
+    .arrow::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left: 11px solid var(--blue);
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+    }
+
+    .printable-checklist li { margin: 8px 0; font-size: 21px; }
+
+    .controls {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      z-index: 50;
+      background: rgba(15, 23, 42, .78);
+      color: white;
+      padding: 9px 12px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: white;
+      color: #0f172a;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:hover { background: #e0ecff; }
+
+    .progress-wrap {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 6px;
+      background: rgba(148, 163, 184, .35);
+      z-index: 60;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      transition: width .2s ease;
+    }
+
+    @media print {
+      body { overflow: visible; background: white; }
+      .deck { display: block; padding: 0; }
+      .slide {
+        display: block !important;
+        page-break-after: always;
+        width: 11in;
+        height: 6.1875in;
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        margin: 0;
+      }
+      .controls, .progress-wrap { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+  <main class="deck" id="deck">
+
+    <section class="slide active">
+      <div class="title-band"></div>
+      <div class="large-center">
+        <div class="kicker">Math 130 Final Lecture</div>
+        <h1>Test 4 + Quiz 13 Final Prep</h1>
+        <p class="subtitle">A 45-minute guided review focused on the skills most likely to decide student success: setup, radians, algebra, diagrams, and rounding.</p>
+        <div class="grid-3" style="margin-top:34px; max-width:930px;">
+          <div class="card blue"><div class="big-number">1</div><p>Build the formula map.</p></div>
+          <div class="card green"><div class="big-number">2</div><p>Practice the problem types.</p></div>
+          <div class="card amber"><div class="big-number">3</div><p>Leave with an attack plan.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Priority Map: Test 4 vs. Quiz 13</h2>
+      <table class="table">
+        <thead>
+          <tr><th>Skill</th><th>Test 4</th><th>Quiz 13</th><th>Student priority</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Arc length / sector area</td><td>Yes</td><td>Yes</td><td>High: angle conversion required</td></tr>
+          <tr><td>Linear velocity</td><td>Yes</td><td>Yes</td><td>High: radius and radians</td></tr>
+          <tr><td>Coordinate geometry</td><td>Yes</td><td>Yes</td><td>High: multi-part work</td></tr>
+          <tr><td>Logs / exponents</td><td>Yes</td><td>Yes</td><td>High: quick algebra points</td></tr>
+          <tr><td>Rational equations</td><td>Yes</td><td>Yes</td><td>High: restrictions matter</td></tr>
+          <tr><td>Vectors, intervals, bearings</td><td>Yes</td><td>No</td><td>Test-only focus</td></tr>
+          <tr><td>Compound interest / projectile maximum</td><td>Yes</td><td>No</td><td>Formula-pattern focus</td></tr>
+        </tbody>
+      </table>
+      <div class="card amber" style="margin-top:18px;"><p><strong>Teaching decision:</strong> spend live time on overlap skills first, then close with Test 4-only topics.</p></div>
+    </section>
+
+    <section class="slide">
+      <h2>What Students Must Be Ready To Do</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Test 4 emphasis</h3>
+          <ul>
+            <li>Trigonometry and right triangles</li>
+            <li>Radians, degrees, arc length, and sector area</li>
+            <li>Polygon area and angle relationships</li>
+            <li>Coordinate geometry: distance, midpoint, slope, equations</li>
+            <li>Logs, exponents, rational equations, compound interest</li>
+            <li>Projectile maximum height, bearing, and vectors</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>Quiz 13 emphasis</h3>
+          <ul>
+            <li>Arc length and sector area with missing values</li>
+            <li>Linear velocity from rotations per minute</li>
+            <li>Quadratic minimum/maximum</li>
+            <li>Exponent simplification</li>
+            <li>Distance, line equations, perpendicular lines</li>
+            <li>Rational equations with restrictions</li>
+          </ul>
+        </div>
+      </div>
+      <p class="micro">Instructor move: frame the session as pattern recognition, not as a list of formulas.</p>
+    </section>
+
+    <section class="slide">
+      <h2>Test-Day Formula Sheet: Use It Correctly</h2>
+      <div class="grid-2">
+        <div class="card white">
+          <span class="tag">Provided</span>
+          <div class="formula block">$s = r\theta$</div>
+          <div class="formula block">$A_{sector}=\dfrac{1}{2}r^2\theta$</div>
+          <div class="formula block">$A=\dfrac{1}{2}bc\sin(A)$</div>
+          <div class="formula block">$C=2\pi r$</div>
+        </div>
+        <div class="card red">
+          <div class="warn-title">Common trap</div>
+          <p>For $s=r\theta$ and $A=\frac12r^2\theta$, the angle must be in <strong>radians</strong>.</p>
+          <p class="red-text">Degrees go in only after conversion.</p>
+          <div class="formula block">$\theta_{rad}=\theta^\circ\cdot\dfrac{\pi}{180}$</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>What Is Provided vs. What Must Be Known</h2>
+      <div class="grid-2">
+        <div class="card green">
+          <h3>Provided or directly referenced</h3>
+          <ul>
+            <li>$s=r\theta$</li>
+            <li>$A=\frac12r^2\theta$</li>
+            <li>$A=\frac12bc\sin(A)$</li>
+            <li>$C=2\pi r$</li>
+          </ul>
+        </div>
+        <div class="card blue">
+          <h3>Must know how to use</h3>
+          <ul>
+            <li>Degree/radian conversion</li>
+            <li>$v=r\omega$ and unit conversion</li>
+            <li>Distance, midpoint, slope, and line equations</li>
+            <li>Exponent rules and log/exponential conversion</li>
+            <li>Rational equation restrictions</li>
+            <li>Quadrant correction for inverse tangent</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Calculator Mode Rules</h2>
+      <div class="mode-strip">
+        <div class="mode-chip">Degree mode<br><span class="muted">ordinary trig with degree angles</span></div>
+        <div class="mode-chip">Radian mode<br><span class="muted">arc length and sector area formulas</span></div>
+        <div class="mode-chip">Inverse tangent<br><span class="muted">check the quadrant manually</span></div>
+      </div>
+      <div class="wrong-right">
+        <div class="card wrong">
+          <h3 class="red-text">Common wrong move</h3>
+          <p>$s=7.6(140)=1064$</p>
+          <p>Wrong because 140 is degrees, not radians.</p>
+        </div>
+        <div class="card right">
+          <h3 class="green-text">Correct setup</h3>
+          <p>$s=7.6\left(140\cdot\frac{\pi}{180}\right)$</p>
+          <p>Convert the angle first, then calculate.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Three Angle Conversions Students Need Fast</h2>
+      <div class="grid-3">
+        <div class="card blue">
+          <h3>Degrees to radians</h3>
+          <div class="formula block">$\theta^\circ\cdot\dfrac{\pi}{180}$</div>
+          <p>Example: $63.4^\circ\approx1.106$ rad</p>
+        </div>
+        <div class="card green">
+          <h3>Radians to degrees</h3>
+          <div class="formula block">$\theta\cdot\dfrac{180}{\pi}$</div>
+          <p>Example: $2.8\approx160.428^\circ$</p>
+        </div>
+        <div class="card amber">
+          <h3>Decimal to DMS</h3>
+          <ol>
+            <li>Keep whole degrees.</li>
+            <li>Multiply decimal by 60 for minutes.</li>
+            <li>Multiply remaining decimal by 60 for seconds.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="card white" style="margin-top:20px;">
+        <p><strong>Quick check:</strong> 85° is not 85 radians. It is $85\cdot\pi/180\approx1.484$ radians.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="practice">
+        <h2>Your Turn: Arc Length</h2>
+        <p class="center">Find the arc length of a circle with radius <strong>7.6 units</strong> and central angle <strong>140°</strong>.</p>
+        <div class="grid-3" style="margin-top:24px;">
+          <div class="card white"><h3>Step 1</h3><p>Identify the formula.</p><div class="formula block">$s=r\theta$</div></div>
+          <div class="card white"><h3>Step 2</h3><p>Convert $140^\circ$ to radians.</p></div>
+          <div class="card white"><h3>Step 3</h3><p>Multiply $r\theta$ and round.</p></div>
+        </div>
+      </div>
+      <div class="answer-box">Instructor workspace</div>
+    </section>
+
+    <section class="slide">
+      <div class="solution">
+        <h2>Solution Reveal: Arc Length</h2>
+        <div class="grid-2">
+          <div class="card white">
+            <h3>Work</h3>
+            <p>$140^\circ=140\cdot\frac{\pi}{180}=\frac{7\pi}{9}\approx2.443$ radians</p>
+            <p>$s=r\theta=7.6\left(\frac{7\pi}{9}\right)\approx18.581$ units</p>
+          </div>
+          <div class="card red">
+            <div class="warn-title">What to say aloud</div>
+            <p>The formula is short, but the setup is the problem. The angle must become radians before it enters the formula.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Arc Length and Sector Area: Missing Quantity Map</h2>
+      <table class="table">
+        <thead>
+          <tr><th>Question form</th><th>Equation</th><th>Most common mistake</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Find $s$</td><td>$s=r\theta$</td><td>Using degrees without converting.</td></tr>
+          <tr><td>Find $r$</td><td>$r=s/\theta$</td><td>Dividing by a degree measure.</td></tr>
+          <tr><td>Find $\theta$</td><td>$\theta=s/r$</td><td>Giving radians when degrees are requested.</td></tr>
+          <tr><td>Find sector area</td><td>$A=\frac12r^2\theta$</td><td>Forgetting to square the radius.</td></tr>
+          <tr><td>Find $r$ from sector area</td><td>$r=\sqrt{\frac{2A}{\theta}}$</td><td>Forgetting the square root.</td></tr>
+        </tbody>
+      </table>
+      <div class="card amber" style="margin-top:20px;">
+        <p><strong>Instructor line:</strong> “The formula sheet gives the formula, but it does not convert your angle for you.”</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Linear vs. Angular Velocity</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>The relationship</h3>
+          <div class="formula block">$v=r\omega$</div>
+          <ul>
+            <li>$r$ = radius from center to moving object</li>
+            <li>$\omega$ = angular velocity in radians per unit time</li>
+            <li>$v$ = linear velocity in distance per unit time</li>
+          </ul>
+        </div>
+        <div class="card red">
+          <div class="warn-title">Two setup traps</div>
+          <ul>
+            <li><strong>Wingspan is diameter.</strong> Radius is half the wingspan.</li>
+            <li><strong>Rotations and degrees are not radians.</strong> Convert before multiplying.</li>
+          </ul>
+          <div class="formula block small-formula">$1\text{ rotation}=2\pi\text{ radians}$</div>
+        </div>
+      </div>
+      <div class="splitline"></div>
+      <p><strong>Unit conversion:</strong> $1\text{ ft/sec}=\dfrac{3600}{5280}\text{ mi/hr}\approx0.6818\text{ mi/hr}$.</p>
+    </section>
+
+    <section class="slide">
+      <h2>Roll Rate Diagram: Radius Is Half the Wingspan</h2>
+      <div class="grid-2">
+        <div class="diagram-card">
+          <svg class="svg-diagram" viewBox="0 0 420 260" role="img" aria-label="Wingspan diagram showing radius is half the wingspan">
+            <line x1="70" y1="130" x2="350" y2="130" stroke="#1f4ea8" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="210" cy="130" r="10" fill="#b42318"/>
+            <line x1="210" y1="130" x2="350" y2="130" stroke="#0d8f61" stroke-width="5" stroke-dasharray="10 8"/>
+            <path d="M70 160 L350 160" stroke="#64748b" stroke-width="3"/>
+            <path d="M210 96 A42 42 0 0 1 252 130" stroke="#b7791f" stroke-width="5" fill="none"/>
+            <text x="148" y="190" class="svg-label">wingspan = diameter</text>
+            <text x="252" y="116" class="svg-label">radius</text>
+            <text x="84" y="72" class="svg-small">Wingtip moves in a circle around the center.</text>
+          </svg>
+        </div>
+        <div class="card red">
+          <div class="warn-title">Visual setup</div>
+          <ul>
+            <li>The center of the airplane is the center of rotation.</li>
+            <li>The wingtip travels around a circle.</li>
+            <li>The radius is the distance from center to wingtip.</li>
+            <li>Therefore, radius is half the wingspan.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="practice">
+        <h2>Your Turn: Roll Rate</h2>
+        <p class="center">A plane has a wingspan of <strong>30 feet</strong>. It rolls at <strong>500° per second</strong>.</p>
+        <p class="center">Find the wingtip linear velocity in <strong>ft/sec</strong> and <strong>mph</strong>.</p>
+      </div>
+      <div class="grid-3" style="margin-top:22px;">
+        <div class="card white"><h3>Radius</h3><p>$r=15$ ft</p></div>
+        <div class="card white"><h3>Angular velocity</h3><p>$500^\circ/sec=\frac{500\pi}{180}$ rad/sec</p></div>
+        <div class="card white"><h3>Linear velocity</h3><p>$v=r\omega$</p></div>
+      </div>
+      <div class="answer-box">Instructor workspace</div>
+    </section>
+
+    <section class="slide">
+      <div class="solution">
+        <h2>Solution Reveal: Roll Rate</h2>
+        <div class="grid-2">
+          <div class="card white">
+            <h3>Work</h3>
+            <p>$r=30/2=15$ ft</p>
+            <p>$\omega=500\cdot\frac{\pi}{180}\approx8.727$ rad/sec</p>
+            <p>$v=r\omega=15(8.727)\approx130.900$ ft/sec</p>
+            <p>$130.900\cdot\frac{3600}{5280}\approx89.250$ mph</p>
+          </div>
+          <div class="card amber">
+            <h3>Scoring emphasis</h3>
+            <ul>
+              <li>Half the wingspan.</li>
+              <li>Convert degrees to radians.</li>
+              <li>Report both requested units.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Right Triangle and Exact Trig Review</h2>
+      <div class="grid-2">
+        <div class="card green">
+          <h3>Right triangle setup</h3>
+          <ul>
+            <li>Label hypotenuse first.</li>
+            <li>Relative to angle $A$: identify opposite and adjacent.</li>
+            <li>Use sine, cosine, or tangent based on what is given.</li>
+          </ul>
+          <div class="formula block small-formula">$\sin A=\frac{opp}{hyp},\quad \cos A=\frac{adj}{hyp},\quad \tan A=\frac{opp}{adj}$</div>
+        </div>
+        <div class="card amber">
+          <h3>Six trig functions</h3>
+          <table class="table">
+            <tbody>
+              <tr><td>$\sin\theta$</td><td>$y/r$</td></tr>
+              <tr><td>$\cos\theta$</td><td>$x/r$</td></tr>
+              <tr><td>$\tan\theta$</td><td>$y/x$</td></tr>
+              <tr><td>$\csc,\sec,\cot$</td><td>reciprocals</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="micro">For coordinate trig, calculate $r=\sqrt{x^2+y^2}$, then apply signs by quadrant.</p>
+    </section>
+
+    <section class="slide">
+      <h2>Coordinate Trig: Point to Functions</h2>
+      <div class="grid-2">
+        <div class="card white center">
+          <div class="mini-axis">
+            <div class="dot" style="left:32%; top:28%;"></div>
+            <div class="arrow" style="left:50%; top:50%; width:82px; transform: rotate(140deg);"></div>
+          </div>
+          <p style="margin-top:16px;">Example point: $P(-4,8)$</p>
+        </div>
+        <div class="card blue">
+          <h3>Process</h3>
+          <ol class="step-list">
+            <li>Find $r=\sqrt{x^2+y^2}$.</li>
+            <li>Use $\sin\theta=y/r$ and $\cos\theta=x/r$.</li>
+            <li>Use $\tan\theta=y/x$.</li>
+            <li>Take reciprocals for $\csc$, $\sec$, and $\cot$.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="card red" style="margin-top:20px;"><p><strong>Sign rule:</strong> Quadrant II has negative cosine and tangent, positive sine.</p></div>
+    </section>
+
+    <section class="slide">
+      <h2>Area: Polygons and Triangle Formula</h2>
+      <div class="grid-3">
+        <div class="card blue">
+          <h3>Trapezoid</h3>
+          <div class="formula block">$A=\dfrac{b_1+b_2}{2}h$</div>
+          <p class="red-text">Use vertical height, not slant side.</p>
+        </div>
+        <div class="card green">
+          <h3>Regular polygon</h3>
+          <div class="formula block">$A=\dfrac12aP$</div>
+          <p>$a$ = apothem; $P$ = perimeter.</p>
+        </div>
+        <div class="card amber">
+          <h3>Triangle with included angle</h3>
+          <div class="formula block">$A=\dfrac12bc\sin(A)$</div>
+          <p>Angle $A$ must be between sides $b$ and $c$.</p>
+        </div>
+      </div>
+      <div class="card white" style="margin-top:22px;"><p><strong>Rounding convention:</strong> polygon and triangle dimensions are commonly rounded to one decimal place when requested.</p></div>
+    </section>
+
+    <section class="slide">
+      <div class="practice">
+        <h2>Your Turn: Polygon Area</h2>
+        <p class="center">A regular hexagon has side length <strong>10</strong> and apothem <strong>8.7</strong>.</p>
+        <p class="center">Find its area to one decimal place.</p>
+      </div>
+      <div class="grid-3" style="margin-top:24px;">
+        <div class="card white"><h3>Step 1</h3><p>Find perimeter: $P=6s$.</p></div>
+        <div class="card white"><h3>Step 2</h3><p>Use $A=\frac12aP$.</p></div>
+        <div class="card white"><h3>Step 3</h3><p>Round to one decimal place.</p></div>
+      </div>
+      <div class="answer-box">Instructor workspace</div>
+    </section>
+
+    <section class="slide">
+      <div class="solution">
+        <h2>Solution Reveal: Polygon Area</h2>
+        <div class="grid-2">
+          <div class="diagram-card">
+            <svg class="svg-diagram" viewBox="0 0 360 260" role="img" aria-label="Regular hexagon with apothem and side length">
+              <polygon points="180,30 285,90 285,170 180,230 75,170 75,90" fill="#eef5ff" stroke="#1f4ea8" stroke-width="5"/>
+              <line x1="180" y1="130" x2="232" y2="100" stroke="#b7791f" stroke-width="4"/>
+              <text x="214" y="123" class="svg-label">a=8.7</text>
+              <text x="212" y="82" class="svg-label">s=10</text>
+            </svg>
+          </div>
+          <div class="card white">
+            <h3>Work</h3>
+            <p>$P=6(10)=60$</p>
+            <p>$A=\frac12aP=\frac12(8.7)(60)$</p>
+            <p class="green-text">$A=261.0$ square units</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Coordinate Geometry: Four-Part Problem</h2>
+      <p>These problems are point-heavy on Test 4. They reward an organized setup.</p>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Given two points $P(x_1,y_1)$ and $Q(x_2,y_2)$</h3>
+          <ul>
+            <li>Distance: $d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$</li>
+            <li>Midpoint: $M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)$</li>
+            <li>Slope: $m=\frac{y_2-y_1}{x_2-x_1}$</li>
+            <li>Line: use $y-y_1=m(x-x_1)$</li>
+          </ul>
+        </div>
+        <div class="card red">
+          <div class="warn-title">Perpendicular line</div>
+          <p>Use the <strong>opposite reciprocal slope</strong>.</p>
+          <div class="formula block">$m_{\perp}=-\dfrac{1}{m}$</div>
+          <p>If it goes through the origin, the equation is often simple: $y=m_{\perp}x$.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="practice">
+        <h2>Your Turn: Coordinate Geometry</h2>
+        <p class="center">For $P=(-4,8)$ and $Q=(6,-2)$, find:</p>
+        <div class="grid-4" style="margin-top:18px;">
+          <div class="card white"><p>Distance</p></div>
+          <div class="card white"><p>Midpoint</p></div>
+          <div class="card white"><p>Equation of $PQ$</p></div>
+          <div class="card white"><p>Perpendicular line through $(0,0)$</p></div>
+        </div>
+      </div>
+      <div class="answer-box">Instructor workspace</div>
+    </section>
+
+    <section class="slide">
+      <div class="solution">
+        <h2>Solution Reveal: Coordinate Geometry</h2>
+        <table class="table">
+          <tbody>
+            <tr><th>Distance</th><td>$d=\sqrt{(6-(-4))^2+(-2-8)^2}=\sqrt{200}=10\sqrt2\approx14.142$</td></tr>
+            <tr><th>Midpoint</th><td>$M=\left(\frac{-4+6}{2},\frac{8+(-2)}{2}\right)=(1,3)$</td></tr>
+            <tr><th>Slope</th><td>$m=\frac{-2-8}{6-(-4)}=-1$</td></tr>
+            <tr><th>Line through $P,Q$</th><td>$y-8=-1(x+4)$, so $y=-x+4$</td></tr>
+            <tr><th>Perpendicular through origin</th><td>$m_\perp=1$, so $y=x$</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Logs and Exponents: Convert Forms Immediately</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Logarithmic form</h3>
+          <div class="formula block">$\log_b(y)=x$</div>
+          <p>Read as: “The exponent on $b$ that gives $y$ is $x$.”</p>
+        </div>
+        <div class="card green">
+          <h3>Exponential form</h3>
+          <div class="formula block">$b^x=y$</div>
+          <p>Same relationship, different format.</p>
+        </div>
+      </div>
+      <div class="card amber" style="margin-top:22px;">
+        <p><strong>Mini-drill:</strong> $\log_3(81)=x \Rightarrow 3^x=81 \Rightarrow x=4$.</p>
+        <p><strong>Reverse drill:</strong> $2^x=30 \Rightarrow x=\log_2(30)=\frac{\log(30)}{\log(2)}$.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Exponent Simplification Checklist</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Rules</h3>
+          <ul>
+            <li>Multiply same base: add exponents.</li>
+            <li>Divide same base: subtract exponents.</li>
+            <li>Power of a power: multiply exponents.</li>
+            <li>Negative exponent: move across the fraction bar.</li>
+            <li>Fraction exponent: root/power meaning.</li>
+          </ul>
+        </div>
+        <div class="card green">
+          <h3>Examples</h3>
+          <div class="formula block small-formula">$x^{1/2}=\sqrt{x}$</div>
+          <div class="formula block small-formula">$x^{-3}=\dfrac{1}{x^3}$</div>
+          <div class="formula block small-formula">$x^{1/2}x^{5/2}=x^3$</div>
+        </div>
+      </div>
+      <div class="card red" style="margin-top:22px;"><p><strong>Required finish:</strong> positive exponents only when the problem asks for it.</p></div>
+    </section>
+
+    <section class="slide">
+      <h2>Quadratics: Solve vs. Find the Vertex</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Solve the equation</h3>
+          <p>Example: $x^2-7x+10=0$</p>
+          <ol>
+            <li>Factor if possible.</li>
+            <li>Set each factor equal to zero.</li>
+            <li>List all solutions.</li>
+          </ol>
+        </div>
+        <div class="card green">
+          <h3>Find minimum or maximum</h3>
+          <p>Example: $h(x)=4x^2-4x+21$</p>
+          <ol>
+            <li>Use $x=-b/(2a)$.</li>
+            <li>Plug the $x$-value back in.</li>
+            <li>If $a>0$, it is a minimum. If $a<0$, it is a maximum.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="solution">
+        <h2>Quick Reveal: Quadratic Minimum</h2>
+        <div class="grid-2">
+          <div class="card white">
+            <p>For $h(x)=4x^2-4x+21$, use $x=-\frac{b}{2a}$.</p>
+            <p>$x=-\frac{-4}{2(4)}=\frac12$</p>
+            <p>$h\left(\frac12\right)=4\left(\frac14\right)-4\left(\frac12\right)+21=20$</p>
+          </div>
+          <div class="card green">
+            <h3>Conclusion</h3>
+            <p>Because $a=4>0$, the parabola opens upward.</p>
+            <p class="green-text">Minimum value: $20$</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Projectile Motion: Maximum Height</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Pattern</h3>
+          <p>Height is given by a quadratic:</p>
+          <div class="formula block">$h(t)=-16t^2+bt+c$</div>
+          <p>The maximum height occurs at the vertex.</p>
+        </div>
+        <div class="card green">
+          <h3>Example</h3>
+          <p>$h(t)=-16t^2+88t$</p>
+          <ol class="step-list">
+            <li>Find $t=-b/(2a)$.</li>
+            <li>Plug $t$ into $h(t)$.</li>
+            <li>State the maximum height with units.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="card amber" style="margin-top:20px;"><p><strong>Do not stop at time.</strong> The problem asks for the maximum height.</p></div>
+    </section>
+
+    <section class="slide">
+      <h2>Compound Interest Word Problems</h2>
+      <div class="grid-2">
+        <div class="card white">
+          <div class="formula block">$A=P\left(1+\dfrac{r}{n}\right)^{nt}$</div>
+          <table class="table">
+            <tbody>
+              <tr><td>$P$</td><td>principal / starting amount</td></tr>
+              <tr><td>$r$</td><td>annual rate as a decimal</td></tr>
+              <tr><td>$n$</td><td>number of compounds per year</td></tr>
+              <tr><td>$t$</td><td>time in years</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card red">
+          <div class="warn-title">Common mistakes</div>
+          <ul>
+            <li>Using 4.8 instead of 0.048.</li>
+            <li>Forgetting $nt$ in the exponent.</li>
+            <li>Using $n=12$ for quarterly compounding.</li>
+          </ul>
+          <div class="formula block small-formula">quarterly: $n=4$</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Rational Equations: Clear Fractions Safely</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Process</h3>
+          <ol class="step-list">
+            <li>State restrictions from denominators.</li>
+            <li>Find the LCD.</li>
+            <li>Multiply every term by the LCD.</li>
+            <li>Solve the resulting equation.</li>
+            <li>Reject any restricted solution.</li>
+          </ol>
+        </div>
+        <div class="card amber">
+          <h3>Quiz 13 pattern</h3>
+          <div class="formula block small-formula">$\dfrac{x+2}{6x}+1=\dfrac{x-7}{x}$</div>
+          <p>Restriction: $x\ne0$.</p>
+          <div class="formula block small-formula">$\dfrac{2}{x-5}-\dfrac{1}{x+5}=\dfrac{11}{x^2-25}$</div>
+          <p>Restrictions: $x\ne5,-5$.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Intervals: Union and Intersection</h2>
+      <div class="grid-2">
+        <div class="card green">
+          <h3>Union</h3>
+          <p>Everything in either set.</p>
+          <div class="formula block">$A\cup B$</div>
+          <p>Think: “combine coverage.”</p>
+        </div>
+        <div class="card blue">
+          <h3>Intersection</h3>
+          <p>Only what the sets share.</p>
+          <div class="formula block">$A\cap B$</div>
+          <p>Think: “overlap only.”</p>
+        </div>
+      </div>
+      <div class="practice" style="margin-top:22px; padding:22px;">
+        <p class="center">If $A=[2,9)$ and $B=(-1,6]$, find $A\cup B$ and $A\cap B$.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Bearings and Descent Angle</h2>
+      <div class="grid-2">
+        <div class="diagram-card">
+          <svg class="svg-diagram" viewBox="0 0 380 280" role="img" aria-label="Bearing diagram to airport">
+            <line x1="70" y1="220" x2="320" y2="220" stroke="#64748b" stroke-width="3"/>
+            <line x1="70" y1="220" x2="70" y2="40" stroke="#64748b" stroke-width="3"/>
+            <path d="M70 220 L300 70" stroke="#1f4ea8" stroke-width="5"/>
+            <line x1="70" y1="220" x2="300" y2="220" stroke="#0d8f61" stroke-width="4" stroke-dasharray="8 6"/>
+            <line x1="300" y1="220" x2="300" y2="70" stroke="#b42318" stroke-width="4" stroke-dasharray="8 6"/>
+            <path d="M105 220 A35 35 0 0 0 99 201" stroke="#b7791f" stroke-width="4" fill="none"/>
+            <text x="58" y="238" class="svg-small">you</text>
+            <text x="282" y="60" class="svg-small">airport</text>
+            <text x="155" y="243" class="svg-label">east</text>
+            <text x="308" y="150" class="svg-label">north</text>
+            <text x="117" y="205" class="svg-label">θ</text>
+          </svg>
+        </div>
+        <div class="card blue">
+          <h3>Direct bearing to an airport</h3>
+          <ul>
+            <li>Draw an east-north coordinate sketch.</li>
+            <li>Use right-triangle trig to find the angle.</li>
+            <li>State direction carefully.</li>
+            <li>Distance uses the Pythagorean theorem.</li>
+          </ul>
+          <div class="splitline"></div>
+          <h3>Descent angle</h3>
+          <p>Convert units first: $1\text{ NM}=6076\text{ ft}$.</p>
+          <p>$\tan\theta=\dfrac{\text{altitude loss}}{\text{forward travel}}$</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Vectors: Component Method</h2>
+      <div class="grid-2">
+        <div class="card white center">
+          <div class="mini-axis">
+            <div class="arrow" style="left:50%; top:50%; width:76px; transform: rotate(53deg);"></div>
+            <div class="arrow" style="left:50%; top:50%; width:88px; transform: rotate(165deg);"></div>
+          </div>
+          <p style="margin-top:16px;">Add horizontal with horizontal; vertical with vertical.</p>
+        </div>
+        <div class="card blue">
+          <h3>Given $u=\langle a,b\rangle$ and $v=\langle c,d\rangle$</h3>
+          <ol class="step-list">
+            <li>$r=u+v=\langle a+c,b+d\rangle$</li>
+            <li>$|r|=\sqrt{x^2+y^2}$</li>
+            <li>$\theta=\tan^{-1}(y/x)$, then adjust for quadrant.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="card red" style="margin-top:20px;"><p><strong>Calculator warning:</strong> inverse tangent alone may give a reference angle in the wrong quadrant.</p></div>
+    </section>
+
+    <section class="slide">
+      <div class="practice">
+        <h2>Your Turn: Vectors</h2>
+        <p class="center">Find $r=u+v$, $|r|$, and $\theta_r$ to one decimal place.</p>
+        <p class="center">$u=\langle 9,12\rangle$, $v=\langle -15,4\rangle$</p>
+      </div>
+      <div class="grid-3" style="margin-top:24px;">
+        <div class="card white"><h3>Resultant</h3><p>$r=\langle 9-15,12+4\rangle$</p></div>
+        <div class="card white"><h3>Magnitude</h3><p>$|r|=\sqrt{x^2+y^2}$</p></div>
+        <div class="card white"><h3>Direction</h3><p>Use quadrant for $(-,+)$.</p></div>
+      </div>
+      <div class="answer-box">Instructor workspace</div>
+    </section>
+
+    <section class="slide">
+      <div class="solution">
+        <h2>Solution Reveal: Vectors</h2>
+        <div class="grid-2">
+          <div class="card white">
+            <p>$r=\langle9+(-15),12+4\rangle=\langle-6,16\rangle$</p>
+            <p>$|r|=\sqrt{(-6)^2+16^2}=\sqrt{292}\approx17.1$</p>
+            <p>Reference angle: $\tan^{-1}\left|\frac{16}{-6}\right|\approx69.4^\circ$</p>
+            <p>Quadrant II direction: $180^\circ-69.4^\circ=110.6^\circ$</p>
+          </div>
+          <div class="diagram-card">
+            <svg class="svg-diagram" viewBox="0 0 340 260" role="img" aria-label="Vector resultant in Quadrant II">
+              <line x1="170" y1="230" x2="170" y2="30" stroke="#64748b" stroke-width="3"/>
+              <line x1="40" y1="170" x2="310" y2="170" stroke="#64748b" stroke-width="3"/>
+              <path d="M170 170 L120 62" stroke="#1f4ea8" stroke-width="6"/>
+              <path d="M170 170 L120 170" stroke="#b42318" stroke-width="3" stroke-dasharray="6 6"/>
+              <path d="M120 170 L120 62" stroke="#0d8f61" stroke-width="3" stroke-dasharray="6 6"/>
+              <text x="86" y="56" class="svg-label">r = ⟨-6,16⟩</text>
+              <text x="72" y="188" class="svg-small">x negative</text>
+              <text x="126" y="110" class="svg-small">y positive</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>High-Value Error Check Before Submitting</h2>
+      <div class="grid-2">
+        <div class="card red">
+          <div class="warn-title">Check these every time</div>
+          <ul>
+            <li>Did I convert degrees to radians for arc/sector formulas?</li>
+            <li>Did I use radius rather than diameter/wingspan?</li>
+            <li>Did I square the radius for sector area?</li>
+            <li>Did I round to the requested place?</li>
+            <li>Did I include units for word problems?</li>
+          </ul>
+        </div>
+        <div class="card amber">
+          <div class="warn-title" style="color:var(--amber);">Algebra checks</div>
+          <ul>
+            <li>Are exponents positive if required?</li>
+            <li>Did I reject restricted values in rational equations?</li>
+            <li>Did I answer the actual question: time, height, amount, angle, or distance?</li>
+            <li>Did I adjust inverse tangent for the correct quadrant?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Quiz 13 Attack Strategy</h2>
+      <ol class="step-list">
+        <li><strong>Start with algebra.</strong> Simplify exponents and solve rational equations while fresh.</li>
+        <li><strong>Do arc and sector problems as a table.</strong> Write $r$, $\theta$, and units before calculating.</li>
+        <li><strong>Draw every word problem.</strong> Linear velocity, bearings, descent angle, and coordinate geometry all improve with a sketch.</li>
+        <li><strong>Use formula sheet intentionally.</strong> Verify whether the angle must be radians.</li>
+        <li><strong>Check rounding last.</strong> Do not round too early inside multistep problems.</li>
+      </ol>
+      <div class="card green" style="margin-top:22px;"><p><strong>Take-home expectation:</strong> show enough work that another person can follow the setup.</p></div>
+    </section>
+
+    <section class="slide">
+      <h2>Final 8-Minute Mixed Drill</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Set A</h3>
+          <ol>
+            <li>Convert $125^\circ$ to radians.</li>
+            <li>Find $s$ if $r=9.2$ and $\theta=125^\circ$.</li>
+            <li>Simplify $x^{1/2}y^{3/5}\cdot x^{5/2}y^{4/3}$.</li>
+            <li>Find the vertex value of $h(x)=4x^2-4x+21$.</li>
+          </ol>
+        </div>
+        <div class="card green">
+          <h3>Set B</h3>
+          <ol>
+            <li>Find the midpoint of $(-6,5)$ and $(8,-3)$.</li>
+            <li>Find $r$ if $s=36$ and $\theta=1.2$.</li>
+            <li>For $u=\langle10,7\rangle$ and $v=\langle-22,-2\rangle$, find $u+v$.</li>
+            <li>Write $\log_5(125)=x$ in exponential form and solve.</li>
+          </ol>
+        </div>
+      </div>
+      <p class="micro">Use as a quick individual check, then ask students to explain one setup to a neighbor.</p>
+    </section>
+
+    <section class="slide">
+      <div class="solution">
+        <h2>Solution Reveal: Mixed Drill</h2>
+        <div class="grid-2">
+          <div class="card white">
+            <h3>Set A</h3>
+            <ol>
+              <li>$125^\circ=\frac{25\pi}{36}\approx2.182$ rad</li>
+              <li>$s=9.2(2.182)\approx20.076$</li>
+              <li>$x^{1/2+5/2}y^{3/5+4/3}=x^3y^{29/15}$</li>
+              <li>Minimum value: $20$</li>
+            </ol>
+          </div>
+          <div class="card white">
+            <h3>Set B</h3>
+            <ol>
+              <li>Midpoint: $(1,1)$</li>
+              <li>$r=36/1.2=30$</li>
+              <li>$u+v=\langle-12,5\rangle$</li>
+              <li>$5^x=125$, so $x=3$</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h2>Printable Final Checklist</h2>
+      <div class="grid-2">
+        <div class="card blue">
+          <h3>Setup checks</h3>
+          <ol class="printable-checklist">
+            <li>I identified what the problem is asking for.</li>
+            <li>I wrote the correct formula before substituting.</li>
+            <li>I converted degrees to radians when required.</li>
+            <li>I used radius, not diameter or wingspan.</li>
+            <li>I drew a diagram for word, vector, and bearing problems.</li>
+          </ol>
+        </div>
+        <div class="card green">
+          <h3>Finish checks</h3>
+          <ol class="printable-checklist">
+            <li>I did not round too early.</li>
+            <li>I used the requested rounding rule.</li>
+            <li>I included units when appropriate.</li>
+            <li>I rejected restricted values in rational equations.</li>
+            <li>I checked the quadrant for inverse tangent.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="large-center center">
+        <div class="kicker">Closing</div>
+        <h1 style="margin:0 auto;">Prepared means organized.</h1>
+        <p class="subtitle" style="margin-left:auto; margin-right:auto;">The strongest test strategy is not memorizing every problem. It is recognizing the type, writing the setup, checking the units, and finishing the requested answer.</p>
+        <div class="grid-3" style="margin-top:36px;">
+          <div class="card blue"><h3>Formula</h3><p>Choose and convert.</p></div>
+          <div class="card green"><h3>Setup</h3><p>Draw and label.</p></div>
+          <div class="card amber"><h3>Check</h3><p>Round and answer.</p></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="controls" aria-label="Slide controls">
+    <button id="prev" type="button">← Prev</button>
+    <span id="counter">1 / 36</span>
+    <button id="next" type="button">Next →</button>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    const progress = document.getElementById('progress');
+    let index = 0;
+
+    function updateFooters() {
+      slides.forEach((slide, n) => {
+        slide.setAttribute('data-footer', `${n + 1} / ${slides.length}`);
+      });
+    }
+
+    function showSlide(i) {
+      index = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach((slide, n) => slide.classList.toggle('active', n === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([slides[index]]).catch(() => {});
+      }
+    }
+
+    document.getElementById('prev').addEventListener('click', () => showSlide(index - 1));
+    document.getElementById('next').addEventListener('click', () => showSlide(index + 1));
+
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index + 1);
+      }
+      if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index - 1);
+      }
+      if (event.key === 'Home') showSlide(0);
+      if (event.key === 'End') showSlide(slides.length - 1);
+    });
+
+    updateFooters();
+    showSlide(0);
+  </script>
+</body>
+</html>
