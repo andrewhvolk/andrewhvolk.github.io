@@ -252,7 +252,11 @@
                             $$ PMT = \frac{PV \times \left(\frac{APR}{n}\right)}{\left[1 - \left(1 + \frac{APR}{n}\right)^{(-nY)}\right]} $$
                              <span class="latex-source">PMT = (PV * (APR/n)) / (1 - (1 + APR/n)^(-nY))</span>
                          </li>
-                         <li>PMT: Regular Payment, PV: Principal/Loan Amount, FV: Future Value</li>
+                         <li class="latex-formula">Future Value (FV) from regular payment (PMT):
+                            $$ FV = PMT \cdot \frac{\left(1+\frac{APR}{n}\right)^{nY}-1}{\frac{APR}{n}} $$
+                            <span class="latex-source">FV = PMT * (((1 + APR/n)^(nY)) - 1) / (APR/n)</span>
+                         </li>
+                         <li>PMT: Regular Payment, PV: Principal/Loan Amount, FV: Future Value, APR: Annual Percentage Rate (decimal), n: Payments/compounding periods per year, Y: Years</li>
                     </ul>
                 </div>
                  <div class="ml-2">
