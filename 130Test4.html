@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math 130 Test 4 Practice Lab</title>
+    <title>Math 130 Unit 4 Final Exam Review</title>
     <style>
         :root {
             --primary: #23395d;
@@ -250,9 +250,9 @@
 
 <div id="app-container">
     <div id="screen-welcome">
-        <div class="eyebrow">Math 130 · Test 4</div>
-        <h1>Test 4 Practice Lab</h1>
-        <p class="subtle">A mission-style generator modeled after the 114 module labs. Work one skill cluster at a time, try unlimited fresh versions, and move forward when you are confident.</p>
+        <div class="eyebrow">Math 130 · Unit 4 · Final Exam</div>
+        <h1>Final Exam Review Lab</h1>
+        <p class="subtle">A cumulative Math 130 final exam review generator for Unit 4. Work one skill cluster at a time, try unlimited fresh versions, and use the final-week review to prioritize the concepts you most need to refresh.</p>
         <input type="text" id="studentName" placeholder="Enter your first and last name" required>
         <input type="text" id="partnerName" placeholder="Partner's name (optional)">
         <div class="topic-list" aria-label="Practice lab topics">
@@ -264,7 +264,7 @@
             <div class="topic-pill">Logs, interest & applications</div>
             <div class="topic-pill">Projectiles, rational equations & vectors</div>
         </div>
-        <button onclick="startApp()">Start the Practice Lab</button>
+        <button onclick="startApp()">Start the Final Exam Review</button>
     </div>
 
     <div id="screen-mission-intro" class="hidden">
@@ -284,7 +284,7 @@
         <div class="stats-row">
             <div class="stat-card"><span class="stat-number" id="stat-correct">0</span><span class="stat-label">Correct</span></div>
             <div class="stat-card"><span class="stat-number" id="stat-attempted">0</span><span class="stat-label">Attempted</span></div>
-            <div class="stat-card"><span class="stat-number" id="stat-mission">1 / 8</span><span class="stat-label">Mission</span></div>
+            <div class="stat-card"><span class="stat-number" id="stat-mission">— / —</span><span class="stat-label">Mission</span></div>
         </div>
 
         <div class="hint-box">
@@ -308,10 +308,10 @@
     </div>
 
     <div id="screen-certificate" class="hidden certificate">
-        <div class="cert-title">Certificate of Practice Completion</div>
+        <div class="cert-title">Certificate of Final Exam Review Completion</div>
         <p>This certifies that</p>
         <div id="cert-names" class="cert-names"></div>
-        <p>completed the Math 130 Test 4 Practice Lab.</p>
+        <p>completed the Math 130 Unit 4 Final Exam Review Lab.</p>
         <p id="cert-score" style="font-weight: bold; color: var(--primary); font-size: 1.15em;"></p>
         <div class="hint-box">
             <strong>Formula reminders:</strong>
@@ -325,7 +325,7 @@
             </ul>
         </div>
         <p style="font-size: 0.9em; margin-top: 24px;">Show this screen to your instructor if requested, then keep practicing any mission you found challenging.</p>
-        <button onclick="restartLab()">Practice Again</button>
+        <button onclick="restartLab()">Review Again</button>
     </div>
 </div>
 
