@@ -1,964 +1,1048 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Math 130 – Test 4 Review</title>
-
-<link rel="stylesheet" href="/styles.css">
-<script src="theme.js"></script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Page-specific external CSS: Google Fonts requested by this page's typography design. -->
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<!-- Page-specific external CSS: KaTeX styles are required for math formula rendering. -->
-<link id="katex-css-cdn" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer id="katex-js-cdn" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer id="katex-autorender-cdn" src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-<script>
-(function () {
-    const localKatexAssets = {
-        css: 'assets/vendor/katex/dist/katex.min.css',
-        js: 'assets/vendor/katex/dist/katex.min.js',
-        autoRender: 'assets/vendor/katex/dist/contrib/auto-render.min.js'
-    };
-
-    function loadLocalCss() {
-        if (document.getElementById('katex-css-local')) return;
-        const localCss = document.createElement('link');
-        localCss.id = 'katex-css-local';
-        localCss.rel = 'stylesheet';
-        localCss.href = localKatexAssets.css;
-        document.head.appendChild(localCss);
-    }
-
-    function loadLocalScript(id, src) {
-        if (document.getElementById(id)) return;
-        const script = document.createElement('script');
-        script.id = id;
-        script.defer = true;
-        script.src = src;
-        document.head.appendChild(script);
-    }
-
-    window.loadLocalKatexAssets = function () {
-        loadLocalCss();
-        loadLocalScript('katex-js-local', localKatexAssets.js);
-        loadLocalScript('katex-autorender-local', localKatexAssets.autoRender);
-    };
-
-    window.addEventListener('DOMContentLoaded', function () {
-        const cssCdn = document.getElementById('katex-css-cdn');
-        const jsCdn = document.getElementById('katex-js-cdn');
-        const autoCdn = document.getElementById('katex-autorender-cdn');
-        if (cssCdn) cssCdn.addEventListener('error', window.loadLocalKatexAssets);
-        if (jsCdn) jsCdn.addEventListener('error', window.loadLocalKatexAssets);
-        if (autoCdn) autoCdn.addEventListener('error', window.loadLocalKatexAssets);
-    });
-})();
-</script>
-<script defer src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
-
-<style>
-    /* Page-specific styles only; shared Math 130 review tokens/components live in styles.css. */
-
-    .math-review-page .card h2 {
-        font-size: 1.7rem;
-        margin-bottom: 0.45rem;
-    }
-
-    .math-review-page .card h3 {
-        font-size: 1.25rem;
-        margin-bottom: 0.55rem;
-    }
-
-    .math-review-page .muted {
-        color: var(--text-muted);
-    }
-
-    .math-review-page .intro-note {
-        display: grid;
-        grid-template-columns: 1.25fr 1fr;
-        gap: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    .math-review-page .callout {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-left: 4px solid var(--primary-main);
-        border-radius: 14px;
-        padding: 1rem 1.1rem;
-        color: var(--text-muted);
-    }
-
-    .math-review-page .callout strong { color: var(--text-main); }
-
-    .math-review-page .instruction-block {
-        margin-bottom: 1.2rem;
-        padding: 1.1rem 1.2rem;
-        border: 2px solid var(--primary-main);
-        border-left-width: 8px;
-        border-radius: 18px;
-        background: linear-gradient(135deg, var(--accent-soft), var(--bg-surface));
-        box-shadow: var(--shadow);
-    }
-
-    .math-review-page .instruction-block h2 {
-        margin-bottom: 0.65rem;
-        font-size: 1.35rem;
-    }
-
-    .math-review-page .instruction-list {
-        display: grid;
-        gap: 0.45rem;
-        margin: 0;
-        padding-left: 1.15rem;
-        color: var(--text-main);
-        font-weight: 700;
-    }
-
-    .math-review-page .mini-grid,
-    .math-review-page .scope-grid,
-    .math-review-page .formula-grid,
-    .math-review-page .plan-grid {
-        display: grid;
-        gap: 1rem;
-    }
-
-    .math-review-page .mini-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .math-review-page .scope-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .math-review-page .formula-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .math-review-page .plan-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-    .math-review-page .mini-card,
-    .math-review-page .scope-card,
-    .math-review-page .formula-card,
-    .math-review-page .plan-card {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: 14px;
-        padding: 1rem 1.05rem;
-    }
-
-    .math-review-page .mini-card h4,
-    .math-review-page .scope-card h4,
-    .math-review-page .formula-card h4,
-    .math-review-page .plan-card h4 {
-        font-family: var(--type-body-family);
-        font-weight: 700;
-        font-size: 0.98rem;
-        margin-bottom: 0.45rem;
-        color: var(--text-main);
-    }
-
-    .math-review-page .mini-card p,
-    .math-review-page .scope-card p,
-    .math-review-page .formula-card p,
-    .math-review-page .plan-card p {
-        color: var(--text-muted);
-        font-size: 0.94rem;
-    }
-
-    .math-review-page .schedule-table {
-        width: 100%;
-        border-collapse: collapse;
-        overflow: hidden;
-        border-radius: 14px;
-        border: 1px solid var(--border-subtle);
-        background: var(--bg-surface);
-    }
-
-    .math-review-page .schedule-table tr + tr td {
-        border-top: 1px solid var(--border-subtle);
-    }
-
-    .math-review-page .schedule-table td {
-        padding: 1rem 1rem;
-        vertical-align: middle;
-    }
-
-    .math-review-page .schedule-table .day {
-        width: 150px;
-        font-weight: 700;
-        font-size: 1.02rem;
-        var(--bg-surface)-space: nowrap;
-    }
-
-    .math-review-page .schedule-table .event {
-        font-size: 1.02rem;
-        font-weight: 600;
-    }
-
-    .math-review-page .schedule-table .event strong {
-        font-weight: 700;
-    }
-
-    .math-review-page .schedule-table .tags {
-        width: 220px;
-        text-align: right;
-    }
-
-    .math-review-page .tag {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.45rem 0.9rem;
-        border-radius: 999px;
-        font-size: 0.82rem;
-        font-weight: 800;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        border: 1px solid var(--border-subtle);
-        margin-left: 0.4rem;
-        var(--bg-surface)-space: nowrap;
-    }
-
-    .math-review-page .tag.review {
-        color: var(--warning-main);
-        background: var(--amber-bg);
-        border-color: var(--warning-main);
-    }
-
-    .math-review-page .tag.quiz {
-        color: var(--purple);
-        background: var(--purple-bg);
-        border-color: var(--purple);
-    }
-
-    .math-review-page .tag.final {
-        color: var(--danger-main);
-        background: var(--danger-soft);
-        border-color: var(--danger-main);
-    }
-
-    .math-review-page .tag.noclass {
-        color: var(--warning-main);
-        background: var(--amber-bg);
-        border-color: var(--warning-main);
-    }
-
-    .math-review-page .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        margin-bottom: 0.55rem;
-        color: var(--primary-main);
-        font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-weight: 800;
-    }
-
-    .math-review-page .pill-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin: 0.9rem 0 0.2rem;
-    }
-
-    .math-review-page .soft-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.42rem 0.72rem;
-        border-radius: 999px;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        color: var(--text-muted);
-        font-size: 0.82rem;
-        font-weight: 700;
-    }
-
-    .math-review-page .formula-card.provided {
-        border-color: var(--emerald-main);
-        background: linear-gradient(180deg, var(--bg-surface), var(--emerald-soft));
-    }
-
-    .math-review-page .formula-card.core {
-        border-color: var(--primary-main);
-        background: linear-gradient(180deg, var(--bg-surface), var(--accent-soft));
-    }
-
-    .math-review-page .formula-math {
-        font-size: clamp(0.95rem, 1.4vw, 1.08rem);
-        color: var(--text-main);
-        margin: 0.25rem 0 0.45rem;
-        min-height: 2.4rem;
-        max-width: 100%;
-        overflow: visible;
-    }
-
-    .math-review-page .formula-math .katex-display {
-        margin: 0.15rem auto;
-        max-width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 0;
-    }
-
-    .math-review-page .formula-math .katex-display > .katex {
-        var(--bg-surface)-space: normal;
-        max-width: 100%;
-    }
-
-    .math-review-page .formula-math .katex {
-        max-width: 100%;
-    }
-
-    .math-review-page .formula-card {
-        overflow: visible;
-    }
-
-    .math-review-page .formula-note {
-        color: var(--text-muted);
-        font-size: 0.86rem;
-    }
-
-    .math-review-page details.accordion {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: 14px;
-        padding: 0;
-        overflow: hidden;
-        margin-bottom: 0.8rem;
-    }
-
-    .math-review-page details.accordion[open] {
-        border-color: color-mix(in srgb, var(--primary-main) 42%, var(--border-subtle));
-    }
-
-    .math-review-page details.accordion summary {
-        list-style: none;
-        cursor: pointer;
-        padding: 1rem 1.05rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        font-weight: 700;
-        color: var(--text-main);
-    }
-
-    .math-review-page details.accordion summary::-webkit-details-marker { display: none; }
-
-    .math-review-page .summary-copy {
-        display: flex;
-        align-items: center;
-        gap: 0.7rem;
-        min-width: 0;
-    }
-
-    .math-review-page .summary-icon {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        background: var(--accent-soft);
-        color: var(--primary-main);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .math-review-page .accordion-body {
-        padding: 0 1.05rem 1rem;
-        color: var(--text-muted);
-    }
-
-    .math-review-page .accordion-body ul {
-        padding-left: 1.1rem;
-        display: grid;
-        gap: 0.35rem;
-    }
-
-    .math-review-page .foot {
-        margin-top: 1.25rem;
-        color: var(--text-muted);
-        font-size: 0.86rem;
-        text-align: center;
-    }
-
-    .math-review-page .katex-display { margin: 0.15rem 0; }
-    .math-noscript,
-    .math-runtime-warning {
-        margin: 0.9rem 0 1rem;
-        padding: 0.75rem 0.9rem;
-        border-radius: 10px;
-        font-size: 0.9rem;
-        line-height: 1.5;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-    }
-    .math-noscript { color: var(--text-muted); border-left: 4px solid var(--text-muted); }
-    .math-runtime-warning { color: var(--danger-main); border-left: 4px solid var(--danger-main); }
-
-    @media (max-width: 920px) {
-        .math-review-page .intro-note,
-        .math-review-page .scope-grid,
-        .math-review-page .plan-grid {
-            grid-template-columns: 1fr;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math 130 Test 4 Practice Lab</title>
+    <style>
+        :root {
+            --primary: #23395d;
+            --secondary: #2563eb;
+            --success: #15803d;
+            --warning: #d97706;
+            --danger: #b91c1c;
+            --light: #eef4ff;
+            --dark: #172033;
+            --muted: #64748b;
+            --card: #ffffff;
+            --border: #cbd5e1;
+            --soft-blue: #dbeafe;
+            --soft-green: #dcfce7;
+            --soft-red: #fee2e2;
+            --soft-amber: #fef3c7;
         }
 
-        .math-review-page .mini-grid {
-            grid-template-columns: 1fr;
-        }
-    }
+        * { box-sizing: border-box; }
 
-    @media (max-width: 720px) {
-        .math-review-page .schedule-table,
-        .math-review-page .schedule-table tbody,
-        .math-review-page .schedule-table tr,
-        .math-review-page .schedule-table td {
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 32rem),
+                linear-gradient(135deg, #eef4ff 0%, #f8fafc 55%, #e0f2fe 100%);
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px;
+        }
+
+        #app-container {
+            background: var(--card);
+            padding: 34px;
+            border-radius: 18px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.16);
+            max-width: 820px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+        }
+
+        h1, h2, h3 { color: var(--primary); margin-top: 0; }
+        h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.35rem; }
+        h2 { font-size: clamp(1.45rem, 3vw, 2rem); }
+        p { line-height: 1.6; }
+
+        .eyebrow {
+            color: var(--secondary);
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtle { color: var(--muted); }
+
+        input[type="text"], input[type="number"] {
+            width: min(100%, 360px);
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            margin: 8px 5px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+        button:hover:not(:disabled) { background-color: #1d4ed8; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); }
+        button:disabled { background-color: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .hidden { display: none !important; }
+
+        .mission-progress {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 18px 0 4px;
+        }
+
+        .mission-dot {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--border);
+            color: var(--muted);
+            font-weight: 800;
+            background: white;
+        }
+
+        .mission-dot.active { border-color: var(--secondary); color: var(--secondary); background: var(--soft-blue); }
+        .mission-dot.done { border-color: var(--success); color: var(--success); background: var(--soft-green); }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 22px 0;
+        }
+
+        .stat-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .stat-number { display: block; font-size: 1.7rem; font-weight: 900; color: var(--primary); }
+        .stat-label { color: var(--muted); font-size: 0.86rem; font-weight: 700; }
+
+        .hint-box {
+            background-color: var(--soft-amber);
+            border-left: 6px solid var(--warning);
+            padding: 16px;
+            margin: 0 0 20px 0;
+            text-align: left;
+            font-size: 0.98em;
+            border-radius: 0 10px 10px 0;
+        }
+        .hint-box strong { color: var(--warning); }
+
+        .problem-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px;
+            background: #f8fafc;
+            margin-top: 18px;
+        }
+
+        #problem-text {
+            font-size: 1.18em;
+            margin-bottom: 20px;
+            font-weight: 650;
+            white-space: pre-line;
+        }
+
+        .option-btn {
             display: block;
             width: 100%;
-        }
-
-        .math-review-page .schedule-table td {
-            padding: 0.85rem 1rem;
-        }
-
-        .math-review-page .schedule-table .day {
-            padding-bottom: 0.2rem;
-        }
-
-        .math-review-page .schedule-table .tags {
+            background-color: white;
+            color: var(--dark);
+            border: 2px solid var(--border);
             text-align: left;
-            padding-top: 0.15rem;
+            font-weight: 650;
+        }
+        .option-btn:hover:not(:disabled) { background-color: var(--soft-blue); }
+
+        .feedback {
+            margin-top: 18px;
+            font-weight: 800;
+            font-size: 1.05em;
+            min-height: 30px;
+        }
+        .correct { color: var(--success); }
+        .incorrect { color: var(--danger); }
+
+        .solution-box {
+            margin-top: 14px;
+            padding: 14px;
+            background: white;
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            text-align: left;
+            color: var(--dark);
         }
 
-        .math-review-page .tag {
-            margin-left: 0;
-            margin-right: 0.4rem;
-            margin-top: 0.35rem;
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 10px;
+            text-align: left;
+            margin-top: 10px;
         }
-    }
-</style>
+
+        .input-grid label {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .input-grid input { width: 100%; margin: 0; }
+
+        .topic-list {
+            text-align: left;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 10px;
+            margin: 22px 0;
+        }
+
+        .topic-pill {
+            padding: 12px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .formula-list {
+            text-align: left;
+            columns: 2;
+            column-gap: 2rem;
+            margin: 0;
+        }
+
+        .certificate {
+            border: 10px solid var(--primary);
+            padding: 36px;
+            background: #fffafa;
+        }
+        .cert-title { font-size: 28px; font-weight: 900; margin-bottom: 10px; color: var(--primary); }
+        .cert-names { font-size: 24px; color: var(--secondary); margin: 20px 0; font-style: italic; font-weight: 800; }
+
+        @media (max-width: 650px) {
+            body { padding: 12px; align-items: flex-start; }
+            #app-container { padding: 22px; }
+            .stats-row { grid-template-columns: 1fr; }
+            .formula-list { columns: 1; }
+        }
+    </style>
 </head>
-<body class="review-page review-page--sections">
-<div class="math-review-page">
-<nav class="top-nav" aria-label="Primary">
-  <div class="top-nav-inner">
-    <div class="top-nav-branding">
-      <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
+<body>
+
+<div id="app-container">
+    <div id="screen-welcome">
+        <div class="eyebrow">Math 130 · Test 4</div>
+        <h1>Test 4 Practice Lab</h1>
+        <p class="subtle">A mission-style generator modeled after the 114 module labs. Work one skill cluster at a time, try unlimited fresh versions, and move forward when you are confident.</p>
+        <input type="text" id="studentName" placeholder="Enter your first and last name" required>
+        <input type="text" id="partnerName" placeholder="Partner's name (optional)">
+        <div class="topic-list" aria-label="Practice lab topics">
+            <div class="topic-pill">Trig values & triangles</div>
+            <div class="topic-pill">Arc length, sectors & speed</div>
+            <div class="topic-pill">Angle conversions</div>
+            <div class="topic-pill">Functions, intervals & algebra</div>
+            <div class="topic-pill">Coordinate geometry</div>
+            <div class="topic-pill">Logs, interest & applications</div>
+            <div class="topic-pill">Projectiles, rational equations & vectors</div>
+        </div>
+        <button onclick="startApp()">Start the Practice Lab</button>
     </div>
-    <div class="top-nav-actions">
-      <button class="menu-toggle global-nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav-links primary-nav-utilities" aria-label="Toggle navigation">
-        <span>Menu</span>
-        <span class="menu-toggle__icon" aria-hidden="true"></span>
-      </button>
-      <ul class="top-nav-links" id="primary-nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="CV.html">About</a></li>
-        <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-current="page">Courses ▾</button>
-          <ul class="dropdown-menu">
-            <li><a href="learn.html">All Courses</a></li>
-            <li><a href="courses/math114.html">MATH 114</a></li>
-            <li><a href="courses/math130.html">MATH 130</a></li>
-            <li><a href="courses/physics-labs.html">Physics Labs</a></li>
-          </ul>
-        </li>
-        <li><a href="projects.html">Tools</a></li>
-      </ul>
-      <ul class="top-nav-utilities" id="primary-nav-utilities" aria-label="More">
-        <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
-          <ul class="dropdown-menu dropdown-menu--right">
-            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
-            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="/cdn-cgi/l/email-protection#14757c627b787f54787d767166606d3a717061">Contact</a></li>
-          </ul>
-        </li>
-      </ul>
-      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+
+    <div id="screen-mission-intro" class="hidden">
+        <div class="mission-progress" id="mission-progress-intro"></div>
+        <h2 id="mission-title"></h2>
+        <p class="subtle">Review the concept, then generate as many similar problems as you need.</p>
+        <div class="hint-box">
+            <strong>Concept Review:</strong> <span id="mission-intro-hint"></span>
+        </div>
+        <button onclick="startProblem()">Let's Go!</button>
     </div>
-  </div>
-</nav>
-<div class="page-context-bar">
-  <div class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Home</a>
-      <span class="breadcrumb-sep" aria-hidden="true">›</span>
-      <a href="learn.html">Courses</a>
-      <span class="breadcrumb-sep" aria-hidden="true">›</span>
-      <a href="courses/math130.html">MATH 130</a>
-      <span class="breadcrumb-sep" aria-hidden="true">›</span>
-      <span class="breadcrumb-current" aria-current="page">Math 130 Test 4</span>
-    </nav>
-  </div>
+
+    <div id="screen-problem" class="hidden">
+        <div class="mission-progress" id="mission-progress-problem"></div>
+        <h2 id="problem-mission-title"></h2>
+
+        <div class="stats-row">
+            <div class="stat-card"><span class="stat-number" id="stat-correct">0</span><span class="stat-label">Correct</span></div>
+            <div class="stat-card"><span class="stat-number" id="stat-attempted">0</span><span class="stat-label">Attempted</span></div>
+            <div class="stat-card"><span class="stat-number" id="stat-mission">1 / 8</span><span class="stat-label">Mission</span></div>
+        </div>
+
+        <div class="hint-box">
+            <strong>Hint:</strong> <span id="problem-hint"></span>
+        </div>
+
+        <div class="problem-card">
+            <p id="problem-text"></p>
+            <div id="options-container" class="hidden"></div>
+            <div id="input-container" class="hidden">
+                <div id="input-fields" class="input-grid"></div>
+                <button id="input-submit" onclick="checkInputAnswer()">Submit Answer</button>
+            </div>
+            <div id="feedback" class="feedback"></div>
+            <div id="solution" class="solution-box hidden"></div>
+            <div id="action-buttons" class="hidden">
+                <button onclick="loadAnother()">Try Another Like This</button>
+                <button onclick="nextMission()" style="background-color: var(--success);">Move to Next Mission</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen-certificate" class="hidden certificate">
+        <div class="cert-title">Certificate of Practice Completion</div>
+        <p>This certifies that</p>
+        <div id="cert-names" class="cert-names"></div>
+        <p>completed the Math 130 Test 4 Practice Lab.</p>
+        <p id="cert-score" style="font-weight: bold; color: var(--primary); font-size: 1.15em;"></p>
+        <div class="hint-box">
+            <strong>Formula reminders:</strong>
+            <ul class="formula-list">
+                <li>Heron: A = √(s(s-a)(s-b)(s-c))</li>
+                <li>Semiperimeter: s = (a+b+c)/2</li>
+                <li>Triangle area: A = 1/2 bc sin(A)</li>
+                <li>Arc length: s = rθ</li>
+                <li>Sector area: A = 1/2 r²θ</li>
+                <li>Circumference: C = 2πr</li>
+            </ul>
+        </div>
+        <p style="font-size: 0.9em; margin-top: 24px;">Show this screen to your instructor if requested, then keep practicing any mission you found challenging.</p>
+        <button onclick="restartLab()">Practice Again</button>
+    </div>
 </div>
 
-<header class="page-shell-header review-page-header">
-  <div class="container">
-    <p class="page-shell-header__eyebrow">MATH 130 · Test 4</p>
-    <h1>Math 130 Test 4 Review</h1>
-    <p class="subtitle">Focused review and recreation practice for Math 130 Test 4 topics, formulas, and problem types.</p>
-  </div>
-</header>
-
-<nav class="review-section-nav" aria-label="Page sections">
-  <div class="review-section-nav__inner">
-    <a href="#tab-overview">Test 4 Overview</a>
-    <a href="#tab-formulas">Test 4 Formulas</a>
-    <a href="#tab-practice">Test 4 Practice</a>
-    <a href="#tab-plan">Test 4 Plan</a>
-  </div>
-</nav>
-
-<div class="container review-shell review-shell--below-banner">
-
-    <section class="instruction-block" aria-labelledby="test-4-instructions">
-        <div class="eyebrow"><i data-lucide="info"></i> Test 4 instructions</div>
-        <h2 id="test-4-instructions">Read before using the recreated versions</h2>
-        <ul class="instruction-list">
-            <li>Show work for full credit.</li>
-            <li>Unless otherwise stated, round answers to one decimal place.</li>
-            <li>Equivalent versions use the same question sequence and skill targets with changed parameters.</li>
-            <li>Use the helpful formula list at the end.</li>
-        </ul>
-    </section>
-
-    <section class="tab-content" id="tab-overview">
-        <div class="intro-note">
-            <div class="callout">
-                <strong>Math 130 Test 4.</strong> Use this page to review and recreate the major Test 4 problem types — algebra, geometry, trigonometry, logarithms, applications, and vectors — in roughly 25–30 questions.
-            </div>
-            <div class="callout">
-                <strong>Practical takeaway.</strong> Review broadly. Test 4 mixes short skill checks with multi-step application problems, so accuracy in setup matters as much as calculation.
-            </div>
-        </div>
-
-        <div class="scope-grid">
-            <div class="scope-card">
-                <h4>Trig, angles, and circles</h4>
-                <p>Exact trig values from a figure, solving right triangles, arc length, sector area, central angle, degree–radian conversion, DMS conversion, and linear speed are all fair game.</p>
-            </div>
-            <div class="scope-card">
-                <h4>Algebra and equations</h4>
-                <p>Exponent simplification, function evaluation, quadratic equations, rational equations, set notation, and interval union/intersection are covered.</p>
-            </div>
-            <div class="scope-card">
-                <h4>Coordinate geometry</h4>
-                <p>Distance, midpoint, the equation of a line through two points, and the equation of a perpendicular line through the origin can all appear.</p>
-            </div>
-            <div class="scope-card">
-                <h4>Geometry with diagrams</h4>
-                <p>Polygon area, angle-chasing with parallel lines, and angle relationships from diagrams are included — visual reading matters.</p>
-            </div>
-            <div class="scope-card">
-                <h4>Logs, exponentials, and models</h4>
-                <p>Writing logarithmic and exponential forms, solving those equations, compound interest, and applied motion/descent situations are all tested.</p>
-            </div>
-            <div class="scope-card">
-                <h4>Vectors</h4>
-                <p>Vector-resultant problems are part of Math 130 Test 4, so component form, magnitude, direction, and vector addition should stay in your review rotation.</p>
-            </div>
-        </div>
-
-        <div class="card review-card" style="margin-top:1rem;">
-            <div class="eyebrow"><i data-lucide="clipboard-list"></i> Official review categories</div>
-            <h2>Review sheet structure</h2>
-
-            <details class="accordion" open>
-                <summary>
-                    <span class="summary-copy">
-                        <span class="summary-icon"><i data-lucide="braces"></i></span>
-                        <span>Algebra foundations</span>
-                    </span>
-                    <i data-lucide="chevron-down"></i>
-                </summary>
-                <div class="accordion-body">
-                    <ul>
-                        <li>Real numbers and set notation</li>
-                        <li>Adding, subtracting, and multiplying expressions</li>
-                        <li>Exponent and radical rules</li>
-                        <li>Factoring: GCF, difference of squares, sum/difference of cubes, grouping, and trial-and-error polynomial factoring</li>
-                        <li>Rational expressions and complex fractions</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>
-                    <span class="summary-copy">
-                        <span class="summary-icon"><i data-lucide="line-chart"></i></span>
-                        <span>Cartesian plane and lines</span>
-                    </span>
-                    <i data-lucide="chevron-down"></i>
-                </summary>
-                <div class="accordion-body">
-                    <ul>
-                        <li>Distance formula and midpoint formula</li>
-                        <li>Equation of a circle</li>
-                        <li>Linear equations in point-slope, slope-intercept, and general form</li>
-                        <li>Parallel and perpendicular lines</li>
-                        <li>Vertical and horizontal lines</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>
-                    <span class="summary-copy">
-                        <span class="summary-icon"><i data-lucide="triangle"></i></span>
-                        <span>Geometry and measurement</span>
-                    </span>
-                    <i data-lucide="chevron-down"></i>
-                </summary>
-                <div class="accordion-body">
-                    <ul>
-                        <li>Angles, transversals, corresponding segments, DMS, and radians vs. degrees</li>
-                        <li>Quadrilateral types and area</li>
-                        <li>Triangle types, interior angles, area formulas, Pythagorean Theorem, and similar-triangle applications</li>
-                        <li>Circles: arc measure, perimeter, arc length, inscribed and central angles, area, and sector area</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>
-                    <span class="summary-copy">
-                        <span class="summary-icon"><i data-lucide="equal"></i></span>
-                        <span>Equations and functions</span>
-                    </span>
-                    <i data-lucide="chevron-down"></i>
-                </summary>
-                <div class="accordion-body">
-                    <ul>
-                        <li>Linear equations, including fractional forms</li>
-                        <li>Applications with linear equations</li>
-                        <li>Quadratic equations by any method</li>
-                        <li>Quadratic applications and the maximum/minimum idea $f\!\left(\frac{-b}{2a}\right)$</li>
-                        <li>Polynomial, radical, and rational-style equations</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>
-                    <span class="summary-copy">
-                        <span class="summary-icon"><i data-lucide="orbit"></i></span>
-                        <span>Logs, trig, and applications</span>
-                    </span>
-                    <i data-lucide="chevron-down"></i>
-                </summary>
-                <div class="accordion-body">
-                    <ul>
-                        <li>Evaluating exponential functions and compound interest</li>
-                        <li>Converting logarithmic and exponential forms</li>
-                        <li>Change-of-base formula</li>
-                        <li>Angles in standard position, right-triangle trigonometry, reference angles, and trig functions at any angle</li>
-                        <li>Linear speed and angular speed applications</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="accordion">
-                <summary>
-                    <span class="summary-copy">
-                        <span class="summary-icon"><i data-lucide="move-3d"></i></span>
-                        <span>Vectors</span>
-                    </span>
-                    <i data-lucide="chevron-down"></i>
-                </summary>
-                <div class="accordion-body">
-                    <ul>
-                        <li>Find components from magnitude and direction</li>
-                        <li>Find magnitude and direction from components</li>
-                        <li>Add vectors</li>
-                    </ul>
-                </div>
-            </details>
-        </div>
-    </section>
-
-    <section class="tab-content" id="tab-formulas">
-        <div class="card review-card">
-            <div class="eyebrow"><i data-lucide="sigma"></i> Formula focus</div>
-            <h2>Provided on Math 130 Test 4</h2>
-            <noscript><div class="math-noscript">JavaScript is required to render the math formulas on this page.</div></noscript>
-            <div aria-live="polite" class="math-runtime-warning" hidden="" id="math-runtime-warning"></div>
-            <p class="muted" style="margin-bottom:1rem;">These formulas are printed on Math 130 Test 4. They still require recognition and correct setup.</p>
-
-            <div class="formula-grid">
-                <div class="formula-card provided">
-                    <h4>Heron’s Formula</h4>
-                    <div class="formula-math">$$\mathcal{A}=\sqrt{s(s-a)(s-b)(s-c)}$$</div>
-                    <div class="formula-note">Use with $s=\frac{a+b+c}{2}$.</div>
-                </div>
-                <div class="formula-card provided">
-                    <h4>Semiperimeter</h4>
-                    <div class="formula-math">$$s=\frac{a+b+c}{2}$$</div>
-                    <div class="formula-note">Pairs naturally with Heron’s Formula.</div>
-                </div>
-                <div class="formula-card provided">
-                    <h4>Arc length</h4>
-                    <div class="formula-math">$$s=r\theta$$</div>
-                    <div class="formula-note">Angle $\theta$ must be in radians.</div>
-                </div>
-                <div class="formula-card provided">
-                    <h4>Sector area</h4>
-                    <div class="formula-math">$$\mathcal{A}=\frac12 r^2\theta$$</div>
-                    <div class="formula-note">Again, $\theta$ is in radians.</div>
-                </div>
-                <div class="formula-card provided">
-                    <h4>Triangle area</h4>
-                    <div class="formula-math">$$\mathcal{A}=\frac12 bc\sin A$$</div>
-                    <div class="formula-note">Useful when two sides and the included angle are known.</div>
-                </div>
-                <div class="formula-card provided">
-                    <h4>Circumference</h4>
-                    <div class="formula-math">$$C=2\pi r$$</div>
-                    <div class="formula-note">Helpful with circle relationships and interpretation.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card review-card">
-            <h3>Know these cold</h3>
-            <div class="formula-grid">
-                <div class="formula-card core">
-                    <h4>Distance</h4>
-                    <div class="formula-math">$$d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$$</div>
-                    <div class="formula-note">Needed for coordinate geometry and applications.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Midpoint</h4>
-                    <div class="formula-math">$$M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)$$</div>
-                    <div class="formula-note">Shows up directly and supports geometry reasoning.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Compound interest</h4>
-                    <div class="formula-math">$$A=P\left(1+\frac{r}{n}\right)^{nt} \qquad A=Pe^{rt}$$</div>
-                    <div class="formula-note">Be sure you can identify each variable from context.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Change of base</h4>
-                    <div class="formula-math">$$\log_b x=\frac{\ln x}{\ln b}=\frac{\log x}{\log b}$$</div>
-                    <div class="formula-note">Part of the official review topics.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Vector components</h4>
-                    <div class="formula-math">$$\langle r\cos\theta,\;r\sin\theta\rangle$$</div>
-                    <div class="formula-note">Essential for Math 130 Test 4 vector and resultant problems.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Trig ratios</h4>
-                    <div class="formula-math">$$\sin\theta=\frac{\text{opp}}{\text{hyp}},\quad \cos\theta=\frac{\text{adj}}{\text{hyp}},\quad \tan\theta=\frac{\text{opp}}{\text{adj}}$$</div>
-                    <div class="formula-note">Useful for exact values, solving triangles, and angle applications.</div>
-                </div>
-            </div>
-        </div>
-
-        <p class="foot">Streamlined for Math 130 Test 4 review and recreation practice.</p>
-    </section>
-
-    <section class="tab-content" id="tab-practice">
-        <div class="intro-note">
-            <div class="callout">
-                <strong>Math 130 Test 4 vector practice.</strong> This review covers component form, magnitude, direction, graphical vector addition, and resultant vectors.
-                <div class="pill-row">
-                    <span class="soft-pill">components</span>
-                    <span class="soft-pill">magnitude</span>
-                    <span class="soft-pill">direction</span>
-                    <span class="soft-pill">vector addition</span>
-                </div>
-            </div>
-            <div class="callout">
-                <strong>Fast strategy.</strong> Translate everything into components as early as possible. Once the vector is in component form, magnitude and direction become routine.
-            </div>
-        </div>
-
-        <div class="mini-grid">
-            <div class="mini-card">
-                <h4>Problem 1</h4>
-                <p>Given a vector drawn on the coordinate plane, find its component form $\langle v_1, v_2 \rangle$, then compute direction $\theta$ and magnitude $\|v\|$.</p>
-            </div>
-            <div class="mini-card">
-                <h4>Problem 2</h4>
-                <p>Add vectors graphically by drawing the resultant, then state the resultant components $\langle r_1, r_2 \rangle$ for each graph.</p>
-            </div>
-            <div class="mini-card">
-                <h4>Problem 3</h4>
-                <p>Convert vectors from magnitude-and-direction form to components, add them, then find $\mathbf{r}=\mathbf{u}+\mathbf{v}$, $\|\mathbf{r}\|$, and $\theta_r$.</p>
-            </div>
-        </div>
-
-        <div class="card review-card" style="margin-top:1rem;">
-            <div class="eyebrow"><i data-lucide="compass"></i> Core vector moves</div>
-            <h2>Math 130 Test 4 vector essentials</h2>
-            <div class="formula-grid">
-                <div class="formula-card core">
-                    <h4>Component form</h4>
-                    <div class="formula-math">$$\mathbf{v}=\langle a,b\rangle$$</div>
-                    <div class="formula-note">Read the horizontal and vertical change carefully from tail to head.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Magnitude</h4>
-                    <div class="formula-math">$$\|\mathbf{v}\|=\sqrt{a^2+b^2}$$</div>
-                    <div class="formula-note">Use exact work first, then round only when requested.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Direction from components</h4>
-                    <div class="formula-math">$$\theta=\tan^{-1}\!\left(\frac{b}{a}\right)$$</div>
-                    <div class="formula-note">Adjust for quadrant. A calculator angle alone is not always the final direction.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>From magnitude and direction</h4>
-                    <div class="formula-math">$$\langle r\cos\theta,\;r\sin\theta\rangle$$</div>
-                    <div class="formula-note">This is the standard bridge from polar-style information to components.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Add vectors</h4>
-                    <div class="formula-math">$$\langle a,b\rangle+\langle c,d\rangle=\langle a+c,\;b+d\rangle$$</div>
-                    <div class="formula-note">Graphically and algebraically, the same vector rules should agree.</div>
-                </div>
-                <div class="formula-card core">
-                    <h4>Resultant workflow</h4>
-                    <div class="formula-math">$$\mathbf{r}=\mathbf{u}+\mathbf{v}$$</div>
-                    <div class="formula-note">Convert, add, simplify, then find magnitude and direction last.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="tab-content" id="tab-plan">
-        <div class="card review-card">
-            <div class="eyebrow"><i data-lucide="calendar-days"></i> Test 4 review plan</div>
-            <h2>Math 130 Test 4 at a Glance</h2>
-            <p class="muted">Use this sequence to turn the review list into a Test 4 recreation plan: identify the target skills, practice the supplied formulas, then rehearse mixed problems under test-like conditions.</p>
-
-            <div style="margin-top:1rem;">
-                <table class="schedule-table" aria-label="Math 130 Test 4 review plan">
-                    <tbody>
-                        <tr>
-                            <td class="day">Step 1</td>
-                            <td class="event">Map the Test 4 topics</td>
-                            <td class="tags">
-                                <span class="tag review">Review</span>
-                                <span class="tag quiz">Topics</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="day">Step 2</td>
-                            <td class="event">Rehearse formulas and setup work</td>
-                            <td class="tags">
-                                <span class="tag noclass">Formulas</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="day">Step 3</td>
-                            <td class="event"><strong>Recreate Math 130 Test 4</strong> with mixed timed practice</td>
-                            <td class="tags">
-                                <span class="tag final">Test 4</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="plan-grid">
-            <div class="plan-card">
-                <h4>Start with the topic map</h4>
-                <p>Finish vector review first, then mark any Test 4 weak spots that still need focused practice.</p>
-            </div>
-            <div class="plan-card">
-                <h4>Build a formula pass</h4>
-                <p>Practice across algebra, geometry, trigonometry, logs, and applications. Aim for breadth, not just one topic.</p>
-            </div>
-            <div class="plan-card">
-                <h4>Finish with test-like practice</h4>
-                <p>Before your Test 4 attempt, revisit provided formulas, angle conversions, line formulas, and vector basics so setup work is quick and accurate.</p>
-            </div>
-        </div>
-    </section>
-
-</div>
 <script>
-// Nav handled by theme.js setupGlobalNav
+    let names = "";
+    let currentMissionIndex = 0;
+    let currentProblemObj = null;
+    let correctCount = 0;
+    let attemptedCount = 0;
 
-document.addEventListener('DOMContentLoaded', function () {
-    if (window.lucide) lucide.createIcons();
+    function randInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-    // Bridge theme.js to review-page light class
-    document.addEventListener('theme-changed', () => {
-        const current = document.documentElement.getAttribute('data-theme') || 'dark';
-        if (current === 'light') document.body.classList.add('light');
-        else document.body.classList.remove('light');
-        if (window.lucide) lucide.createIcons();
-    });
+    function choice(items) {
+        return items[Math.floor(Math.random() * items.length)];
+    }
 
-    // Section nav: highlight active link on scroll
-    (function(){
-        const navLinks = document.querySelectorAll('.review-section-nav__inner a');
-        const secs = [];
-        navLinks.forEach(link => {
-            const id = link.getAttribute('href').replace('#','');
-            const el = document.getElementById(id);
-            if(el) secs.push({id, el, link});
-        });
-        const offset = 140;
-        function updateActive(){
-            let current = secs[0];
-            for(const s of secs){
-                if(s.el.getBoundingClientRect().top <= offset) current = s;
+    function shuffle(items) {
+        const arr = items.slice();
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function round(value, places = 1) {
+        return Number(value.toFixed(places));
+    }
+
+    function gcd(a, b) {
+        a = Math.abs(a); b = Math.abs(b);
+        while (b) [a, b] = [b, a % b];
+        return a || 1;
+    }
+
+    function frac(n, d) {
+        if (n === 0) return "0";
+        const sign = n * d < 0 ? "-" : "";
+        n = Math.abs(n); d = Math.abs(d);
+        const g = gcd(n, d);
+        n /= g; d /= g;
+        return d === 1 ? `${sign}${n}` : `${sign}${n}/${d}`;
+    }
+
+    function lineEquationFromPointSlope(x, y, mNum, mDen = 1) {
+        const m = mNum / mDen;
+        const b = y - m * x;
+        return `y = ${round(m, 2)}x ${b >= 0 ? "+" : "-"} ${Math.abs(round(b, 2))}`;
+    }
+
+    function normalizeText(text) {
+        return String(text).toLowerCase().replace(/\s+/g, "").replace(/[{}]/g, "");
+    }
+
+    function parseNumber(value) {
+        if (String(value).trim() === "") return null;
+        const cleaned = String(value).replace(/,/g, "").trim();
+        if (/^-?\d+(\.\d+)?\s*\/\s*-?\d+(\.\d+)?$/.test(cleaned)) {
+            const [n, d] = cleaned.split("/").map(Number);
+            return d === 0 ? null : n / d;
+        }
+        const num = Number(cleaned);
+        return Number.isFinite(num) ? num : null;
+    }
+
+    const missions = [
+        {
+            title: "Mission 1: Trig Triangles",
+            hints: "Use x/r, y/r, and y/x for cosine, sine, and tangent. The quadrant controls the signs.",
+            generateProblem: () => {
+                const points = [[-3, 4], [-5, 12], [8, -15], [-7, -24], [6, -8], [-9, 12]];
+                const [x, y] = choice(points);
+                const r = Math.sqrt(x * x + y * y);
+                const correct = `sin θ = ${frac(y, r)}, cos θ = ${frac(x, r)}, tan θ = ${frac(y, x)}`;
+                const distractors = [
+                    `sin θ = ${frac(Math.abs(y), r)}, cos θ = ${frac(Math.abs(x), r)}, tan θ = ${frac(Math.abs(y), Math.abs(x))}`,
+                    `sin θ = ${frac(x, r)}, cos θ = ${frac(y, r)}, tan θ = ${frac(x, y)}`,
+                    `sin θ = ${frac(-y, r)}, cos θ = ${frac(-x, r)}, tan θ = ${frac(y, x)}`
+                ];
+                const options = shuffle([correct, ...distractors]);
+                return {
+                    type: "mc",
+                    text: `An angle θ in standard position has terminal side through P(${x}, ${y}). Which option gives the correct exact sine, cosine, and tangent?`,
+                    options,
+                    correct: options.indexOf(correct),
+                    solution: `r = √(${x}² + ${y}²) = ${r}. Therefore sin θ = y/r = ${frac(y, r)}, cos θ = x/r = ${frac(x, r)}, and tan θ = y/x = ${frac(y, x)}.`
+                };
             }
-            navLinks.forEach(l => l.classList.remove('is-active'));
-            if(current) current.link.classList.add('is-active');
-        }
-        window.addEventListener('scroll', updateActive, {passive:true});
-        updateActive();
-        navLinks.forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const el = document.getElementById(link.getAttribute('href').replace('#',''));
-                if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-            });
-        });
-    })();
-
-    let _mathRetryTimer = null;
-    function showMathRuntimeWarning(message) {
-        const warning = document.getElementById('math-runtime-warning');
-        if (!warning) return;
-        warning.hidden = false;
-        warning.textContent = message;
-    }
-
-    function renderMath(retries) {
-        if (retries === undefined) retries = 12;
-        if (window.renderMathInElement) {
-            renderMathInElement(document.body, {
-                delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ],
-                throwOnError: false
-            });
-            return true;
-        }
-        if (retries > 0) {
-            clearTimeout(_mathRetryTimer);
-            _mathRetryTimer = setTimeout(function(){ renderMath(retries - 1); }, 150);
-            return false;
-        }
-        showMathRuntimeWarning('Math rendering is unavailable right now. Please refresh or check network/content-blocking settings.');
-        return false;
-    }
-
-    if (!window.katex || !window.renderMathInElement) {
-        if (window.loadLocalKatexAssets) window.loadLocalKatexAssets();
-        setTimeout(function () {
-            if (!window.katex || !window.renderMathInElement) {
-                showMathRuntimeWarning('Math rendering is unavailable right now. CDN and local KaTeX fallback both failed to initialize.');
+        },
+        {
+            title: "Mission 2: Right Triangle Solving",
+            hints: "Draw the triangle first. Use sine/cosine/tangent for missing sides, and inverse tangent for an unknown acute angle.",
+            generateProblem: () => {
+                const angle = choice([28, 34, 41, 52, 63]);
+                const hyp = choice([12, 15, 18, 22, 26]);
+                const opp = hyp * Math.sin(angle * Math.PI / 180);
+                const adj = hyp * Math.cos(angle * Math.PI / 180);
+                return {
+                    type: "multi",
+                    text: `A right triangle has hypotenuse ${hyp} and an acute angle of ${angle}°. Find the side opposite the angle and the side adjacent to the angle. Round to one decimal place.`,
+                    fields: [
+                        { id: "opp", label: "Opposite side", answer: round(opp), tolerance: 0.05 },
+                        { id: "adj", label: "Adjacent side", answer: round(adj), tolerance: 0.05 }
+                    ],
+                    solution: `Opposite = ${hyp}sin(${angle}°) = ${round(opp)}. Adjacent = ${hyp}cos(${angle}°) = ${round(adj)}.`
+                };
             }
-            renderMath();
-        }, 250);
-    } else {
-        renderMath();
+        },
+        {
+            title: "Mission 3: Circles, Arcs, and Sectors",
+            hints: "Arc length and sector area both require radians. Convert degrees using θ radians = degrees·π/180, then use s = rθ or A = 1/2r²θ.",
+            generateProblem: () => {
+                const mode = randInt(1, 5);
+                if (mode === 1) {
+                    const r = choice([6, 8, 10, 12, 15]);
+                    const deg = choice([45, 60, 75, 120, 135]);
+                    const theta = deg * Math.PI / 180;
+                    const arc = r * theta;
+                    return {
+                        type: "numeric",
+                        text: `A circle has radius ${r}. Find the arc length for a central angle of ${deg}°. Round to one decimal place.`,
+                        answer: round(arc),
+                        tolerance: 0.05,
+                        solution: `Convert first: ${deg}° = ${round(theta, 3)} radians. Then s = rθ = ${r}(${round(theta, 3)}) = ${round(arc)}.`
+                    };
+                }
+                if (mode === 2) {
+                    const theta = choice([1.2, 1.5, 2.1, 2.4, 2.8]);
+                    const r = choice([6, 8, 10, 12]);
+                    const arc = r * theta;
+                    return {
+                        type: "numeric",
+                        text: `An arc length is ${round(arc, 1)} and the central angle is ${theta} radians. Find the radius. Round to one decimal place.`,
+                        answer: round(r),
+                        tolerance: 0.05,
+                        solution: `Use s = rθ, so r = s/θ = ${round(arc, 1)}/${theta} = ${round(r)}.`
+                    };
+                }
+                if (mode === 3) {
+                    const radius = choice([18, 24, 30, 36]);
+                    const angle = choice([35, 50, 65, 80]);
+                    const arc = radius * angle * Math.PI / 180;
+                    return {
+                        type: "numeric",
+                        text: `An aircraft travels ${round(arc, 1)} miles along an arc with radius ${radius} miles. Find the central angle, rounded to the nearest degree.`,
+                        answer: angle,
+                        tolerance: 0.5,
+                        solution: `θ = s/r = ${round(arc, 1)}/${radius} = ${round(arc / radius, 3)} radians. Convert to degrees: ${round((arc / radius) * 180 / Math.PI, 1)}°, so the nearest degree is ${angle}°.`
+                    };
+                }
+                if (mode === 4) {
+                    const r = choice([5, 7, 9, 11]);
+                    const deg = choice([80, 100, 140, 160]);
+                    const theta = deg * Math.PI / 180;
+                    const area = 0.5 * r * r * theta;
+                    return {
+                        type: "numeric",
+                        text: `A sector has radius ${r} and central angle ${deg}°. Find the sector area. Round to one decimal place.`,
+                        answer: round(area),
+                        tolerance: 0.05,
+                        solution: `Convert first: ${deg}° = ${round(theta, 3)} radians. Then A = 1/2 r²θ = 1/2(${r}²)(${round(theta, 3)}) = ${round(area)}.`
+                    };
+                }
+                const r = choice([6, 8, 10, 12]);
+                const theta = choice([0.8, 1.1, 1.4, 1.7]);
+                const area = 0.5 * r * r * theta;
+                return {
+                    type: "numeric",
+                    text: `A sector has area ${round(area, 1)} and radius ${r}. Find the central angle in radians. Round to one decimal place.`,
+                    answer: round(theta),
+                    tolerance: 0.05,
+                    solution: `A = 1/2r²θ, so θ = 2A/r² = 2(${round(area, 1)})/${r}² = ${round(theta)} radians.`
+                };
+            }
+        },
+        {
+            title: "Mission 4: Angle Conversions",
+            hints: "Degrees ↔ radians uses 180° = π radians. Decimal degrees ↔ DMS uses 60 minutes per degree and 60 seconds per minute.",
+            generateProblem: () => {
+                const mode = randInt(1, 5);
+                if (mode === 1) {
+                    const num = choice([2, 3, 5, 7, 11]);
+                    const den = choice([4, 6, 9, 12]);
+                    const deg = num * 180 / den;
+                    return {
+                        type: "numeric",
+                        text: `Convert ${num}π/${den} radians to degrees.`,
+                        answer: round(deg, 2),
+                        tolerance: 0.05,
+                        solution: `${num}π/${den} · 180°/π = ${round(deg, 2)}°.`
+                    };
+                }
+                if (mode === 2) {
+                    const rad = choice([0.7, 1.2, 2.4, 3.6, 4.1]);
+                    const deg = rad * 180 / Math.PI;
+                    return {
+                        type: "numeric",
+                        text: `Convert ${rad} radians to degrees. Round to one decimal place.`,
+                        answer: round(deg),
+                        tolerance: 0.05,
+                        solution: `${rad} · 180/π = ${round(deg)}°.`
+                    };
+                }
+                if (mode === 3) {
+                    const degrees = randInt(25, 145);
+                    const minutes = randInt(10, 55);
+                    const seconds = randInt(10, 55);
+                    const decimal = degrees + minutes / 60 + seconds / 3600;
+                    return {
+                        type: "numeric",
+                        text: `Convert ${degrees}° ${minutes}' ${seconds}" to decimal degrees. Round to one decimal place.`,
+                        answer: round(decimal),
+                        tolerance: 0.05,
+                        solution: `${degrees} + ${minutes}/60 + ${seconds}/3600 = ${round(decimal)}°.`
+                    };
+                }
+                if (mode === 4) {
+                    const degWhole = randInt(20, 145);
+                    const minutes = randInt(10, 58);
+                    const seconds = randInt(10, 58);
+                    const decimal = degWhole + minutes / 60 + seconds / 3600;
+                    return {
+                        type: "multi",
+                        text: `Convert ${round(decimal, 4)}° to degrees, minutes, and seconds.`,
+                        fields: [
+                            { id: "deg", label: "Degrees", answer: degWhole, tolerance: 0.001 },
+                            { id: "min", label: "Minutes", answer: minutes, tolerance: 0.001 },
+                            { id: "sec", label: "Seconds", answer: seconds, tolerance: 0.5 }
+                        ],
+                        solution: `The whole degrees are ${degWhole}. The decimal part times 60 gives ${minutes} minutes plus a remaining decimal. That remainder times 60 gives about ${seconds} seconds.`
+                    };
+                }
+                const deg = choice([30, 45, 72, 105, 150]);
+                const rad = deg * Math.PI / 180;
+                return {
+                    type: "numeric",
+                    text: `Convert ${deg}° to radians as a decimal. Round to two decimal places.`,
+                    answer: round(rad, 2),
+                    tolerance: 0.005,
+                    solution: `${deg} · π/180 = ${round(rad, 2)} radians.`
+                };
+            }
+        },
+        {
+            title: "Mission 5: Functions, Domains, and Intervals",
+            hints: "A rational function is undefined where its denominator is zero. For intervals, union means combine and intersection means overlap.",
+            generateProblem: () => {
+                if (Math.random() < 0.5) {
+                    const k = choice([2, 3, 4, 5, 6]);
+                    const d = choice([2, 3, 5, -4, -6]);
+                    const a = choice([4, 6, 8, 10]);
+                    const x = a - d;
+                    const value = k * x / (x + d);
+                    return {
+                        type: "multi",
+                        text: `Let f(x) = ${k}x/(x ${d >= 0 ? "+" : "-"} ${Math.abs(d)}). Find the excluded x-value and f(${a} ${d >= 0 ? "-" : "+"} ${Math.abs(d)}).`,
+                        fields: [
+                            { id: "excluded", label: "Excluded x-value", answer: -d, tolerance: 0.001 },
+                            { id: "value", label: "Function value", answer: round(value, 2), tolerance: 0.01 }
+                        ],
+                        solution: `Set the denominator equal to zero: x + (${d}) = 0, so x = ${-d}. The input ${a} - (${d}) = ${x}. f(${x}) = ${k}(${x})/(${x}+${d}) = ${round(value, 2)}.`
+                    };
+                }
+                const a = randInt(-8, -3);
+                const b = randInt(-1, 3);
+                const c = randInt(1, 5);
+                const d = randInt(6, 10);
+                const union = `[${a}, ${d})`;
+                const inter = `(${b}, ${c}]`;
+                return {
+                    type: "fitb",
+                    text: `Let A = [${a}, ${c}] and B = (${b}, ${d}). What is A ∩ B in interval notation?`,
+                    validAnswers: [inter, inter.replace(" ", "")],
+                    solution: `The overlap starts just after ${b} because B is open there, and ends at ${c} because A includes ${c} and B continues past it. So A ∩ B = ${inter}. The union would be ${union}.`
+                };
+            }
+        },
+        {
+            title: "Mission 6: Algebra, Equations, and Area",
+            hints: "Factor quadratics from their roots, clear denominators in rational equations, use exponent rules carefully, and use Heron's formula when all three triangle sides are known.",
+            generateProblem: () => {
+                const mode = randInt(1, 5);
+                if (mode === 1) {
+                    const r1 = choice([-6, -4, -3, 2, 5]);
+                    let r2 = choice([-5, -2, 3, 4, 7]);
+                    if (r2 === r1) r2 += 1;
+                    const b = -(r1 + r2);
+                    const c = r1 * r2;
+                    const correct = `{${Math.min(r1, r2)}, ${Math.max(r1, r2)}}`;
+                    return {
+                        type: "fitb",
+                        text: `Solve x² ${b >= 0 ? "+" : "-"} ${Math.abs(b)}x ${c >= 0 ? "+" : "-"} ${Math.abs(c)} = 0. Enter the solution set.`,
+                        validAnswers: [correct, `${r1},${r2}`, `${r2},${r1}`],
+                        solution: `This factors as (x - (${r1}))(x - (${r2})) = 0, so x = ${r1} or x = ${r2}.`
+                    };
+                }
+                if (mode === 2) {
+                    const base1 = randInt(8, 16);
+                    const base2 = randInt(18, 30);
+                    const h = randInt(5, 12);
+                    const area = 0.5 * (base1 + base2) * h;
+                    return {
+                        type: "numeric",
+                        text: `A trapezoid has bases ${base1} and ${base2}, and height ${h}. Find its area.`,
+                        answer: area,
+                        tolerance: 0.05,
+                        solution: `A = 1/2(b1+b2)h = 1/2(${base1}+${base2})(${h}) = ${area}.`
+                    };
+                }
+                if (mode === 3) {
+                    const triples = [[5, 6, 7], [7, 8, 9], [9, 10, 11], [6, 8, 10]];
+                    const [a, b, c] = choice(triples);
+                    const s = (a + b + c) / 2;
+                    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+                    return {
+                        type: "numeric",
+                        text: `A triangle has side lengths ${a}, ${b}, and ${c}. Use Heron's formula to find the area. Round to one decimal place.`,
+                        answer: round(area),
+                        tolerance: 0.05,
+                        solution: `s = (${a}+${b}+${c})/2 = ${s}. Area = √(${s}(${s-a})(${s-b})(${s-c})) = ${round(area)}.`
+                    };
+                }
+                if (mode === 4) {
+                    const a = randInt(1, 3);
+                    const b = randInt(2, 4);
+                    const c = randInt(1, 3);
+                    const n = choice([2, 3]);
+                    const correct = `x^${n * b}z^${n * c}/y^${n * a}`;
+                    const options = shuffle([
+                        correct,
+                        `y^${n * a}/x^${n * b}z^${n * c}`,
+                        `x^${b}z^${c}/y^${a}`,
+                        `x^${n * b}y^${n * a}/z^${n * c}`
+                    ]);
+                    return {
+                        type: "mc",
+                        text: `Simplify ((x^-${b} y^${a}) / z^${c})^-${n} with positive exponents only.`,
+                        options,
+                        correct: options.indexOf(correct),
+                        solution: `A negative outside exponent flips the fraction and applies the power: (z^${c}/(x^-${b}y^${a}))^${n} = (x^${b}z^${c}/y^${a})^${n} = ${correct}.`
+                    };
+                }
+                const a = choice([2, 3, 4, 5]);
+                const b = choice([1, 2, 3]);
+                const x = choice([4, 5, 6, 8]);
+                const constant = round(a / (x - b) + 1 / x, 3);
+                return {
+                    type: "numeric",
+                    text: `Solve the rational equation ${a}/(x - ${b}) + 1/x = ${constant}. Enter x, and remember to reject excluded values.`,
+                    answer: x,
+                    tolerance: 0.01,
+                    solution: `The excluded values are x = ${b} and x = 0. Clearing denominators and solving gives x = ${x}, which is allowed.`
+                };
+            }
+        },
+        {
+            title: "Mission 7: Coordinate Geometry",
+            hints: "Distance, midpoint, slope, line equations, and perpendicular slopes all come from two points.",
+            generateProblem: () => {
+                const x1 = randInt(-6, 2);
+                const y1 = randInt(-5, 4);
+                const x2 = x1 + choice([3, 4, 5, 6]);
+                const y2 = y1 + choice([-6, -4, 3, 5]);
+                const dx = x2 - x1;
+                const dy = y2 - y1;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const mx = (x1 + x2) / 2;
+                const my = (y1 + y2) / 2;
+                const slope = dy / dx;
+                return {
+                    type: "multi",
+                    text: `Given P(${x1}, ${y1}) and Q(${x2}, ${y2}), find the distance PQ and the midpoint of segment PQ. Round distance to one decimal place.`,
+                    fields: [
+                        { id: "distance", label: "Distance", answer: round(dist), tolerance: 0.05 },
+                        { id: "midx", label: "Midpoint x-coordinate", answer: round(mx, 2), tolerance: 0.001 },
+                        { id: "midy", label: "Midpoint y-coordinate", answer: round(my, 2), tolerance: 0.001 }
+                    ],
+                    solution: `Distance = √((${dx})² + (${dy})²) = ${round(dist)}. Midpoint = ((${x1}+${x2})/2, (${y1}+${y2})/2) = (${round(mx, 2)}, ${round(my, 2)}). The slope of PQ is ${round(slope, 2)}.`
+                };
+            }
+        },
+        {
+            title: "Mission 8: Logs, Interest, Aviation, Projectiles, and Vectors",
+            hints: "Rewrite logs and exponentials in the opposite form, keep units straight in applications, use the vertex for projectile height, and use atan2 for vector direction.",
+            generateProblem: () => {
+                const mode = randInt(1, 8);
+                if (mode === 1) {
+                    const b = choice([2, 3, 4, 5]);
+                    const m = choice([2, 3, 4]);
+                    const k = choice([2, 3, 5]);
+                    const x = Math.pow(b, m) / k;
+                    return {
+                        type: "numeric",
+                        text: `Solve log_${b}(${k}x) = ${m}. Round x to one decimal place.`,
+                        answer: round(x),
+                        tolerance: 0.05,
+                        solution: `Rewrite as ${k}x = ${b}^${m} = ${Math.pow(b, m)}. Therefore x = ${Math.pow(b, m)}/${k} = ${round(x)}.`
+                    };
+                }
+                if (mode === 2) {
+                    const base = choice([2, 3, 5, 7]);
+                    const value = choice([10, 18, 25, 40, 75, 100]);
+                    const x = Math.log(value) / Math.log(base);
+                    return {
+                        type: "numeric",
+                        text: `Solve ${base}^x = ${value}. Round x to one decimal place.`,
+                        answer: round(x),
+                        tolerance: 0.05,
+                        solution: `Rewrite in logarithmic form: x = log_${base}(${value}). By change of base, x = ln(${value})/ln(${base}) = ${round(x)}.`
+                    };
+                }
+                if (mode === 3) {
+                    const P = choice([1500, 2500, 4000, 6000]);
+                    const rate = choice([3.2, 4.5, 5.1, 6.0]);
+                    const n = choice([4, 12, 365]);
+                    const t = choice([3, 5, 8]);
+                    const A = P * Math.pow(1 + (rate / 100) / n, n * t);
+                    return {
+                        type: "numeric",
+                        text: `Use A = P(1 + r/n)^(nt). Find the balance for $${P} at ${rate}% interest, compounded ${n} times per year for ${t} years. Round to the nearest cent.`,
+                        answer: round(A, 2),
+                        tolerance: 0.01,
+                        solution: `A = ${P}(1 + ${rate/100}/${n})^(${n}·${t}) = $${round(A, 2)}.`
+                    };
+                }
+                if (mode === 4) {
+                    const loss = choice([1200, 1800, 2400, 3000]);
+                    const nm = choice([4, 5, 6, 8]);
+                    const feet = nm * 6076;
+                    const angle = Math.atan(loss / feet) * 180 / Math.PI;
+                    return {
+                        type: "numeric",
+                        text: `An aircraft loses ${loss} ft of altitude over ${nm} nautical miles of forward travel. Find the descent angle in degrees. Round to one decimal place.`,
+                        answer: round(angle),
+                        tolerance: 0.05,
+                        solution: `${nm} nautical miles = ${feet} ft. tan(θ) = ${loss}/${feet}, so θ = ${round(angle)}°.`
+                    };
+                }
+                if (mode === 5) {
+                    const west = choice([12, 18, 24, 30]);
+                    const south = choice([5, 9, 14, 20]);
+                    const distance = Math.sqrt(west * west + south * south);
+                    const angleEastOfNorth = Math.atan(west / south) * 180 / Math.PI;
+                    return {
+                        type: "multi",
+                        text: `You are ${west} miles west and ${south} miles south of an airport. Find the straight-line distance to the airport and the bearing angle east of north.`,
+                        fields: [
+                            { id: "distance", label: "Distance", answer: round(distance), tolerance: 0.05 },
+                            { id: "bearing", label: "Bearing angle east of north", answer: round(angleEastOfNorth), tolerance: 0.05 }
+                        ],
+                        solution: `Distance = √(${west}²+${south}²) = ${round(distance)} miles. From north, tan(θ) = west/south = ${west}/${south}, so θ = ${round(angleEastOfNorth)}°. Bearing format: N ${round(angleEastOfNorth)}° E.`
+                    };
+                }
+                if (mode === 6) {
+                    const speed = choice([60, 90, 120, 150]);
+                    const span = choice([28, 32, 36, 40]);
+                    const radius = span / 2;
+                    const fps = radius * speed * Math.PI / 180;
+                    const mph = fps * 3600 / 5280;
+                    return {
+                        type: "multi",
+                        text: `A trainer aircraft has maximum roll rate ${speed}° per second and wingspan ${span} ft. Find one wingtip's linear speed in ft/s and mph.`,
+                        fields: [
+                            { id: "fps", label: "ft/s", answer: round(fps), tolerance: 0.05 },
+                            { id: "mph", label: "mph", answer: round(mph), tolerance: 0.05 }
+                        ],
+                        solution: `Radius = half the wingspan = ${radius} ft. Angular speed = ${speed}π/180 = ${round(speed * Math.PI / 180, 3)} rad/s. v = rω = ${round(fps)} ft/s = ${round(mph)} mph.`
+                    };
+                }
+                if (mode === 7) {
+                    const v = choice([48, 56, 64, 72, 80]);
+                    const t = v / 32;
+                    const h = -16 * t * t + v * t;
+                    return {
+                        type: "numeric",
+                        text: `A ball is thrown upward with height h(t) = -16t² + ${v}t. Find the maximum height.`,
+                        answer: h,
+                        tolerance: 0.05,
+                        solution: `The vertex time is t = -b/(2a) = -${v}/(2·-16) = ${round(t, 2)} seconds. h(${round(t, 2)}) = ${h} feet.`
+                    };
+                }
+                const u = [randInt(-6, 6), randInt(-5, 7)];
+                const v = [randInt(-6, 6), randInt(-5, 7)];
+                const rx = u[0] + v[0];
+                const ry = u[1] + v[1];
+                const mag = Math.sqrt(rx * rx + ry * ry);
+                let theta = Math.atan2(ry, rx) * 180 / Math.PI;
+                if (theta < 0) theta += 360;
+                return {
+                    type: "multi",
+                    text: `Let u = <${u[0]}, ${u[1]}> and v = <${v[0]}, ${v[1]}>. Find r = u + v, |r|, and the direction angle θ from the positive x-axis.`,
+                    fields: [
+                        { id: "rx", label: "r x-component", answer: rx, tolerance: 0.001 },
+                        { id: "ry", label: "r y-component", answer: ry, tolerance: 0.001 },
+                        { id: "mag", label: "|r|", answer: round(mag), tolerance: 0.05 },
+                        { id: "theta", label: "θ in degrees", answer: round(theta), tolerance: 0.05 }
+                    ],
+                    solution: `r = <${rx}, ${ry}>. |r| = √(${rx}²+${ry}²) = ${round(mag)}. θ = atan2(${ry}, ${rx}) = ${round(theta)}°.`
+                };
+            }
+        }
+    ];
+
+    function hideAll() {
+        document.getElementById("screen-welcome").classList.add("hidden");
+        document.getElementById("screen-mission-intro").classList.add("hidden");
+        document.getElementById("screen-problem").classList.add("hidden");
+        document.getElementById("screen-certificate").classList.add("hidden");
     }
-});
+
+    function renderMissionProgress(targetId) {
+        const target = document.getElementById(targetId);
+        target.innerHTML = missions.map((mission, index) => {
+            const state = index < currentMissionIndex ? "done" : index === currentMissionIndex ? "active" : "";
+            return `<span class="mission-dot ${state}" title="${mission.title}">${index + 1}</span>`;
+        }).join("");
+    }
+
+    function updateStats() {
+        document.getElementById("stat-correct").innerText = correctCount;
+        document.getElementById("stat-attempted").innerText = attemptedCount;
+        document.getElementById("stat-mission").innerText = `${Math.min(currentMissionIndex + 1, missions.length)} / ${missions.length}`;
+    }
+
+    function startApp() {
+        const sName = document.getElementById("studentName").value.trim();
+        const pName = document.getElementById("partnerName").value.trim();
+        if (!sName) { alert("Please enter your name."); return; }
+        names = pName ? `${sName} & ${pName}` : sName;
+        correctCount = 0;
+        attemptedCount = 0;
+        currentMissionIndex = 0;
+        showMissionIntro();
+    }
+
+    function showMissionIntro() {
+        hideAll();
+        if (currentMissionIndex >= missions.length) {
+            showCertificate();
+            return;
+        }
+        const mission = missions[currentMissionIndex];
+        renderMissionProgress("mission-progress-intro");
+        document.getElementById("mission-title").innerText = mission.title;
+        document.getElementById("mission-intro-hint").innerText = mission.hints;
+        document.getElementById("screen-mission-intro").classList.remove("hidden");
+    }
+
+    function startProblem() {
+        hideAll();
+        const mission = missions[currentMissionIndex];
+        renderMissionProgress("mission-progress-problem");
+        updateStats();
+        document.getElementById("screen-problem").classList.remove("hidden");
+        document.getElementById("problem-mission-title").innerText = mission.title;
+        document.getElementById("problem-hint").innerText = mission.hints;
+        loadAnother();
+    }
+
+    function resetProblemUI() {
+        document.getElementById("feedback").innerText = "";
+        document.getElementById("solution").classList.add("hidden");
+        document.getElementById("solution").innerHTML = "";
+        document.getElementById("action-buttons").classList.add("hidden");
+    }
+
+    function loadAnother() {
+        const mission = missions[currentMissionIndex];
+        currentProblemObj = mission.generateProblem();
+        resetProblemUI();
+
+        document.getElementById("problem-text").innerText = currentProblemObj.text;
+        const mcContainer = document.getElementById("options-container");
+        const inputContainer = document.getElementById("input-container");
+        const inputFields = document.getElementById("input-fields");
+        document.getElementById("input-submit").disabled = false;
+
+        if (currentProblemObj.type === "mc") {
+            inputContainer.classList.add("hidden");
+            mcContainer.classList.remove("hidden");
+            mcContainer.innerHTML = "";
+            currentProblemObj.options.forEach((opt, index) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerText = opt;
+                btn.onclick = () => checkMcAnswer(index, btn);
+                mcContainer.appendChild(btn);
+            });
+        } else {
+            mcContainer.classList.add("hidden");
+            inputContainer.classList.remove("hidden");
+            inputFields.innerHTML = "";
+            const fields = currentProblemObj.type === "multi" ? currentProblemObj.fields : [{ id: "answer", label: "Answer", answer: currentProblemObj.answer, tolerance: currentProblemObj.tolerance }];
+            fields.forEach(field => {
+                const label = document.createElement("label");
+                label.innerText = field.label;
+                const input = document.createElement("input");
+                input.type = currentProblemObj.type === "fitb" ? "text" : "text";
+                input.id = `input-${field.id}`;
+                input.autocomplete = "off";
+                input.addEventListener("keypress", event => {
+                    if (event.key === "Enter") checkInputAnswer();
+                });
+                label.appendChild(input);
+                inputFields.appendChild(label);
+            });
+            const firstInput = inputFields.querySelector("input");
+            if (firstInput) firstInput.focus();
+        }
+    }
+
+    function showSuccess() {
+        correctCount++;
+        attemptedCount++;
+        updateStats();
+        document.getElementById("feedback").innerHTML = `<span class="correct">Correct — great work!</span>`;
+        document.getElementById("solution").innerHTML = `<strong>Solution:</strong> ${currentProblemObj.solution}`;
+        document.getElementById("solution").classList.remove("hidden");
+        document.getElementById("action-buttons").classList.remove("hidden");
+    }
+
+    function showRetry(message) {
+        attemptedCount++;
+        updateStats();
+        const feedback = document.getElementById("feedback");
+        feedback.innerHTML = `<span class="incorrect">${message}</span>`;
+        setTimeout(() => { feedback.innerText = ""; }, 2600);
+    }
+
+    function checkMcAnswer(selectedIndex, btnElement) {
+        const buttons = document.querySelectorAll(".option-btn");
+        buttons.forEach(b => b.disabled = true);
+
+        if (selectedIndex === currentProblemObj.correct) {
+            btnElement.style.backgroundColor = "var(--soft-green)";
+            btnElement.style.borderColor = "#86efac";
+            showSuccess();
+        } else {
+            btnElement.style.backgroundColor = "var(--soft-red)";
+            btnElement.style.borderColor = "#fecaca";
+            showRetry("Not quite. Use the hint, check the setup, and try again.");
+            setTimeout(() => {
+                buttons.forEach(b => {
+                    b.disabled = false;
+                    b.style.backgroundColor = "";
+                    b.style.borderColor = "";
+                });
+            }, 2600);
+        }
+    }
+
+    function checkInputAnswer() {
+        if (!currentProblemObj) return;
+
+        if (currentProblemObj.type === "fitb") {
+            const input = document.getElementById("input-answer");
+            const normalized = normalizeText(input.value);
+            const isCorrect = currentProblemObj.validAnswers.some(ans => normalizeText(ans) === normalized);
+            if (isCorrect) {
+                input.disabled = true;
+                showSuccess();
+            } else {
+                showRetry("Not quite. Check interval notation, braces, signs, and order.");
+                input.value = "";
+                input.focus();
+            }
+            return;
+        }
+
+        const fields = currentProblemObj.type === "multi" ? currentProblemObj.fields : [{ id: "answer", label: "Answer", answer: currentProblemObj.answer, tolerance: currentProblemObj.tolerance }];
+        let allCorrect = true;
+        fields.forEach(field => {
+            const input = document.getElementById(`input-${field.id}`);
+            const value = parseNumber(input.value);
+            const ok = value !== null && Math.abs(value - field.answer) <= (field.tolerance ?? 0.05);
+            input.style.borderColor = ok ? "var(--success)" : "var(--danger)";
+            input.style.backgroundColor = ok ? "var(--soft-green)" : "var(--soft-red)";
+            if (!ok) allCorrect = false;
+        });
+
+        if (allCorrect) {
+            fields.forEach(field => { document.getElementById(`input-${field.id}`).disabled = true; });
+            document.getElementById("input-submit").disabled = true;
+            showSuccess();
+        } else {
+            showRetry("Not quite. Recheck rounding, units, and signs, then try again.");
+            setTimeout(() => {
+                fields.forEach(field => {
+                    const input = document.getElementById(`input-${field.id}`);
+                    input.style.borderColor = "var(--border)";
+                    input.style.backgroundColor = "";
+                });
+            }, 2600);
+        }
+    }
+
+    function nextMission() {
+        document.getElementById("input-submit").disabled = false;
+        currentMissionIndex++;
+        showMissionIntro();
+    }
+
+    function showCertificate() {
+        hideAll();
+        document.getElementById("cert-names").innerText = names;
+        const pct = attemptedCount ? Math.round((correctCount / attemptedCount) * 100) : 0;
+        document.getElementById("cert-score").innerText = `Session score: ${correctCount} correct out of ${attemptedCount} attempts (${pct}%).`;
+        document.getElementById("screen-certificate").classList.remove("hidden");
+    }
+
+    function restartLab() {
+        hideAll();
+        document.getElementById("screen-welcome").classList.remove("hidden");
+    }
 </script>
-</div>
+
 </body>
 </html>
