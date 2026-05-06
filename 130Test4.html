@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math 130 Unit 4 Final Exam Review</title>
+    <title>Math 130 Test 4 Blueprint Practice Lab</title>
     <style>
         :root {
             --primary: #23395d;
@@ -88,8 +88,22 @@
         }
         button:hover:not(:disabled) { background-color: #1d4ed8; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); }
         button:disabled { background-color: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
+        .button-success { background-color: var(--success); }
+        .button-success:hover:not(:disabled) { background-color: #166534; box-shadow: 0 8px 20px rgba(21, 128, 61, 0.25); }
 
         .hidden { display: none !important; }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
 
         .mission-progress {
             display: flex;
@@ -100,8 +114,8 @@
         }
 
         .mission-dot {
-            width: 34px;
-            height: 34px;
+            width: 30px;
+            height: 30px;
             border-radius: 999px;
             display: inline-flex;
             align-items: center;
@@ -109,6 +123,7 @@
             border: 2px solid var(--border);
             color: var(--muted);
             font-weight: 800;
+            font-size: 0.86rem;
             background: white;
         }
 
@@ -250,21 +265,23 @@
 
 <div id="app-container">
     <div id="screen-welcome">
-        <div class="eyebrow">Math 130 · Unit 4 · Final Exam</div>
-        <h1>Final Exam Review Lab</h1>
-        <p class="subtle">A cumulative Math 130 final exam review generator for Unit 4. Work one skill cluster at a time, try unlimited fresh versions, and use the final-week review to prioritize the concepts you most need to refresh.</p>
+        <div class="eyebrow">Math 130 · Test 4</div>
+        <h1>Test 4 Blueprint Practice Lab</h1>
+        <p class="subtle">A question-by-question Math 130 Test 4 practice generator. Each mission follows the test blueprint sequence, uses changed parameters, and gives immediate feedback while you build the work you would show for full credit.</p>
+        <label class="sr-only" for="studentName">Student first and last name</label>
         <input type="text" id="studentName" placeholder="Enter your first and last name" required>
+        <label class="sr-only" for="partnerName">Partner name, optional</label>
         <input type="text" id="partnerName" placeholder="Partner's name (optional)">
         <div class="topic-list" aria-label="Practice lab topics">
-            <div class="topic-pill">Trig values & triangles</div>
-            <div class="topic-pill">Arc length, sectors & speed</div>
-            <div class="topic-pill">Angle conversions</div>
-            <div class="topic-pill">Functions, intervals & algebra</div>
-            <div class="topic-pill">Coordinate geometry</div>
-            <div class="topic-pill">Logs, interest & applications</div>
+            <div class="topic-pill">Exact trig values & right triangles</div>
+            <div class="topic-pill">Arc length, sectors & angular speed</div>
+            <div class="topic-pill">Angle conversions: radians, degrees & DMS</div>
+            <div class="topic-pill">Functions, intervals, exponents & quadratics</div>
+            <div class="topic-pill">Area formulas & coordinate geometry</div>
+            <div class="topic-pill">Logs, compound interest & applications</div>
             <div class="topic-pill">Projectiles, rational equations & vectors</div>
         </div>
-        <button onclick="startApp()">Start the Final Exam Review</button>
+        <button type="button" onclick="startApp()">Start the Test 4 Practice</button>
     </div>
 
     <div id="screen-mission-intro" class="hidden">
@@ -274,7 +291,7 @@
         <div class="hint-box">
             <strong>Concept Review:</strong> <span id="mission-intro-hint"></span>
         </div>
-        <button onclick="startProblem()">Let's Go!</button>
+        <button type="button" onclick="startProblem()">Let's Go!</button>
     </div>
 
     <div id="screen-problem" class="hidden">
@@ -296,25 +313,26 @@
             <div id="options-container" class="hidden"></div>
             <div id="input-container" class="hidden">
                 <div id="input-fields" class="input-grid"></div>
-                <button id="input-submit" onclick="checkInputAnswer()">Submit Answer</button>
+                <button type="button" id="input-submit" onclick="checkInputAnswer()">Submit Answer</button>
             </div>
-            <div id="feedback" class="feedback"></div>
+            <div id="feedback" class="feedback" aria-live="polite"></div>
             <div id="solution" class="solution-box hidden"></div>
             <div id="action-buttons" class="hidden">
-                <button onclick="loadAnother()">Try Another Like This</button>
-                <button onclick="nextMission()" style="background-color: var(--success);">Move to Next Mission</button>
+                <button type="button" onclick="loadAnother()">Try Another Like This</button>
+                <button type="button" class="button-success" onclick="nextMission()">Move to Next Mission</button>
             </div>
         </div>
     </div>
 
     <div id="screen-certificate" class="hidden certificate">
-        <div class="cert-title">Certificate of Final Exam Review Completion</div>
+        <div class="cert-title">Certificate of Test 4 Practice Completion</div>
         <p>This certifies that</p>
         <div id="cert-names" class="cert-names"></div>
-        <p>completed the Math 130 Unit 4 Final Exam Review Lab.</p>
+        <p>completed the Math 130 Test 4 Blueprint Practice Lab.</p>
         <p id="cert-score" style="font-weight: bold; color: var(--primary); font-size: 1.15em;"></p>
         <div class="hint-box">
-            <strong>Formula reminders:</strong>
+            <strong>On-test formula reminders:</strong>
+            <p class="subtle" style="margin: 6px 0 10px;">The actual Test 4 formula list is intentionally limited to these items; all other setup comes from the question context and student work.</p>
             <ul class="formula-list">
                 <li>Heron: A = √(s(s-a)(s-b)(s-c))</li>
                 <li>Semiperimeter: s = (a+b+c)/2</li>
@@ -325,7 +343,7 @@
             </ul>
         </div>
         <p style="font-size: 0.9em; margin-top: 24px;">Show this screen to your instructor if requested, then keep practicing any mission you found challenging.</p>
-        <button onclick="restartLab()">Review Again</button>
+        <button type="button" onclick="restartLab()">Practice Again</button>
     </div>
 </div>
 
@@ -372,14 +390,13 @@
         return d === 1 ? `${sign}${n}` : `${sign}${n}/${d}`;
     }
 
-    function lineEquationFromPointSlope(x, y, mNum, mDen = 1) {
-        const m = mNum / mDen;
-        const b = y - m * x;
-        return `y = ${round(m, 2)}x ${b >= 0 ? "+" : "-"} ${Math.abs(round(b, 2))}`;
-    }
 
     function normalizeText(text) {
-        return String(text).toLowerCase().replace(/\s+/g, "").replace(/[{}]/g, "");
+        return String(text)
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .replace(/[{}]/g, "")
+            .replace(/\*/g, "");
     }
 
     function parseNumber(value) {
@@ -395,438 +412,331 @@
 
     const missions = [
         {
-            title: "Mission 1: Trig Triangles",
-            hints: "Use x/r, y/r, and y/x for cosine, sine, and tangent. The quadrant controls the signs.",
+            title: "Question 1: Exact Trig Values from a Point",
+            hints: "Find r = √(x²+y²), then use sin = y/r, cos = x/r, tan = y/x, and the reciprocal ratios. Keep the signs from the quadrant.",
             generateProblem: () => {
-                const points = [[-3, 4], [-5, 12], [8, -15], [-7, -24], [6, -8], [-9, 12]];
+                const points = [[-3, 4], [-5, 12], [8, -15], [-7, -24], [6, -8], [-9, 12], [-8, -15], [5, -12]];
                 const [x, y] = choice(points);
                 const r = Math.sqrt(x * x + y * y);
-                const correct = `sin θ = ${frac(y, r)}, cos θ = ${frac(x, r)}, tan θ = ${frac(y, x)}`;
-                const distractors = [
-                    `sin θ = ${frac(Math.abs(y), r)}, cos θ = ${frac(Math.abs(x), r)}, tan θ = ${frac(Math.abs(y), Math.abs(x))}`,
-                    `sin θ = ${frac(x, r)}, cos θ = ${frac(y, r)}, tan θ = ${frac(x, y)}`,
-                    `sin θ = ${frac(-y, r)}, cos θ = ${frac(-x, r)}, tan θ = ${frac(y, x)}`
-                ];
-                const options = shuffle([correct, ...distractors]);
                 return {
-                    type: "mc",
-                    text: `An angle θ in standard position has terminal side through P(${x}, ${y}). Which option gives the correct exact sine, cosine, and tangent?`,
-                    options,
-                    correct: options.indexOf(correct),
-                    solution: `r = √(${x}² + ${y}²) = ${r}. Therefore sin θ = y/r = ${frac(y, r)}, cos θ = x/r = ${frac(x, r)}, and tan θ = y/x = ${frac(y, x)}.`
+                    type: "multi",
+                    text: `An angle θ is in standard position and its terminal side passes through P(${x}, ${y}). A right triangle is dropped to the x-axis with horizontal leg |${x}| and vertical leg |${y}|. Find the exact values of all six trig functions.`,
+                    fields: [
+                        { id: "sin", label: "sin θ", validAnswers: [frac(y, r)] },
+                        { id: "cos", label: "cos θ", validAnswers: [frac(x, r)] },
+                        { id: "tan", label: "tan θ", validAnswers: [frac(y, x)] },
+                        { id: "csc", label: "csc θ", validAnswers: [frac(r, y)] },
+                        { id: "sec", label: "sec θ", validAnswers: [frac(r, x)] },
+                        { id: "cot", label: "cot θ", validAnswers: [frac(x, y)] }
+                    ],
+                    solution: `r = √(${x}² + ${y}²) = ${r}. Therefore sin θ = ${frac(y, r)}, cos θ = ${frac(x, r)}, tan θ = ${frac(y, x)}, csc θ = ${frac(r, y)}, sec θ = ${frac(r, x)}, and cot θ = ${frac(x, y)}.`
                 };
             }
         },
         {
-            title: "Mission 2: Right Triangle Solving",
-            hints: "Draw the triangle first. Use sine/cosine/tangent for missing sides, and inverse tangent for an unknown acute angle.",
+            title: "Question 2: Solve Right Triangles",
+            hints: "For angle-and-hypotenuse information, use opposite = hypotenuse·sin(angle) and adjacent = hypotenuse·cos(angle). For two legs, use the Pythagorean theorem and inverse tangent.",
             generateProblem: () => {
                 const angle = choice([28, 34, 41, 52, 63]);
                 const hyp = choice([12, 15, 18, 22, 26]);
                 const opp = hyp * Math.sin(angle * Math.PI / 180);
                 const adj = hyp * Math.cos(angle * Math.PI / 180);
+                const legA = choice([7, 9, 11, 14, 18]);
+                const legB = choice([5, 8, 12, 16, 20]);
+                const hypB = Math.sqrt(legA * legA + legB * legB);
+                const acute = Math.atan(legB / legA) * 180 / Math.PI;
                 return {
                     type: "multi",
-                    text: `A right triangle has hypotenuse ${hyp} and an acute angle of ${angle}°. Find the side opposite the angle and the side adjacent to the angle. Round to one decimal place.`,
+                    text: `Part a: A right triangle has hypotenuse ${hyp} and an acute angle of ${angle}°. Find the opposite and adjacent legs.\nPart b: A second right triangle has legs ${legA} and ${legB}. Find the hypotenuse and the acute angle opposite the ${legB}-unit leg. Round to one decimal place.`,
                     fields: [
-                        { id: "opp", label: "Opposite side", answer: round(opp), tolerance: 0.05 },
-                        { id: "adj", label: "Adjacent side", answer: round(adj), tolerance: 0.05 }
+                        { id: "opp", label: "Part a opposite leg", answer: round(opp), tolerance: 0.05 },
+                        { id: "adj", label: "Part a adjacent leg", answer: round(adj), tolerance: 0.05 },
+                        { id: "hyp", label: "Part b hypotenuse", answer: round(hypB), tolerance: 0.05 },
+                        { id: "angle", label: "Part b acute angle", answer: round(acute), tolerance: 0.05 }
                     ],
-                    solution: `Opposite = ${hyp}sin(${angle}°) = ${round(opp)}. Adjacent = ${hyp}cos(${angle}°) = ${round(adj)}.`
+                    solution: `Part a: opposite = ${hyp}sin(${angle}°) = ${round(opp)} and adjacent = ${hyp}cos(${angle}°) = ${round(adj)}. Part b: hypotenuse = √(${legA}²+${legB}²) = ${round(hypB)} and θ = tan⁻¹(${legB}/${legA}) = ${round(acute)}°.`
                 };
             }
         },
         {
-            title: "Mission 3: Circles, Arcs, and Sectors",
-            hints: "Arc length and sector area both require radians. Convert degrees using θ radians = degrees·π/180, then use s = rθ or A = 1/2r²θ.",
+            title: "Question 3: Arc Length from Degrees",
+            hints: "Convert degrees to radians first: θ = degrees·π/180. Then use s = rθ.",
             generateProblem: () => {
-                const mode = randInt(1, 5);
-                if (mode === 1) {
-                    const r = choice([6, 8, 10, 12, 15]);
-                    const deg = choice([45, 60, 75, 120, 135]);
-                    const theta = deg * Math.PI / 180;
-                    const arc = r * theta;
-                    return {
-                        type: "numeric",
-                        text: `A circle has radius ${r}. Find the arc length for a central angle of ${deg}°. Round to one decimal place.`,
-                        answer: round(arc),
-                        tolerance: 0.05,
-                        solution: `Convert first: ${deg}° = ${round(theta, 3)} radians. Then s = rθ = ${r}(${round(theta, 3)}) = ${round(arc)}.`
-                    };
-                }
-                if (mode === 2) {
-                    const theta = choice([1.2, 1.5, 2.1, 2.4, 2.8]);
-                    const r = choice([6, 8, 10, 12]);
-                    const arc = r * theta;
-                    return {
-                        type: "numeric",
-                        text: `An arc length is ${round(arc, 1)} and the central angle is ${theta} radians. Find the radius. Round to one decimal place.`,
-                        answer: round(r),
-                        tolerance: 0.05,
-                        solution: `Use s = rθ, so r = s/θ = ${round(arc, 1)}/${theta} = ${round(r)}.`
-                    };
-                }
-                if (mode === 3) {
-                    const radius = choice([18, 24, 30, 36]);
-                    const angle = choice([35, 50, 65, 80]);
-                    const arc = radius * angle * Math.PI / 180;
-                    return {
-                        type: "numeric",
-                        text: `An aircraft travels ${round(arc, 1)} miles along an arc with radius ${radius} miles. Find the central angle, rounded to the nearest degree.`,
-                        answer: angle,
-                        tolerance: 0.5,
-                        solution: `θ = s/r = ${round(arc, 1)}/${radius} = ${round(arc / radius, 3)} radians. Convert to degrees: ${round((arc / radius) * 180 / Math.PI, 1)}°, so the nearest degree is ${angle}°.`
-                    };
-                }
-                if (mode === 4) {
-                    const r = choice([5, 7, 9, 11]);
-                    const deg = choice([80, 100, 140, 160]);
-                    const theta = deg * Math.PI / 180;
-                    const area = 0.5 * r * r * theta;
-                    return {
-                        type: "numeric",
-                        text: `A sector has radius ${r} and central angle ${deg}°. Find the sector area. Round to one decimal place.`,
-                        answer: round(area),
-                        tolerance: 0.05,
-                        solution: `Convert first: ${deg}° = ${round(theta, 3)} radians. Then A = 1/2 r²θ = 1/2(${r}²)(${round(theta, 3)}) = ${round(area)}.`
-                    };
-                }
-                const r = choice([6, 8, 10, 12]);
-                const theta = choice([0.8, 1.1, 1.4, 1.7]);
-                const area = 0.5 * r * r * theta;
-                return {
-                    type: "numeric",
-                    text: `A sector has area ${round(area, 1)} and radius ${r}. Find the central angle in radians. Round to one decimal place.`,
-                    answer: round(theta),
-                    tolerance: 0.05,
-                    solution: `A = 1/2r²θ, so θ = 2A/r² = 2(${round(area, 1)})/${r}² = ${round(theta)} radians.`
-                };
+                const r = choice([6, 8, 10, 12, 15, 18]);
+                const deg = choice([45, 60, 75, 100, 120, 135]);
+                const theta = deg * Math.PI / 180;
+                const arc = r * theta;
+                return { type: "numeric", text: `A circle has radius ${r}. Find the arc length for a central angle of ${deg}°. Round to one decimal place.`, answer: round(arc), tolerance: 0.05, solution: `${deg}° = ${round(theta, 3)} radians, so s = rθ = ${r}(${round(theta, 3)}) = ${round(arc)}.` };
             }
         },
         {
-            title: "Mission 4: Angle Conversions",
-            hints: "Degrees ↔ radians uses 180° = π radians. Decimal degrees ↔ DMS uses 60 minutes per degree and 60 seconds per minute.",
+            title: "Question 4: Radius from Arc Length",
+            hints: "Use s = rθ and solve for r: r = s/θ. The angle is already in radians.",
             generateProblem: () => {
-                const mode = randInt(1, 5);
-                if (mode === 1) {
-                    const num = choice([2, 3, 5, 7, 11]);
-                    const den = choice([4, 6, 9, 12]);
-                    const deg = num * 180 / den;
-                    return {
-                        type: "numeric",
-                        text: `Convert ${num}π/${den} radians to degrees.`,
-                        answer: round(deg, 2),
-                        tolerance: 0.05,
-                        solution: `${num}π/${den} · 180°/π = ${round(deg, 2)}°.`
-                    };
-                }
-                if (mode === 2) {
-                    const rad = choice([0.7, 1.2, 2.4, 3.6, 4.1]);
-                    const deg = rad * 180 / Math.PI;
-                    return {
-                        type: "numeric",
-                        text: `Convert ${rad} radians to degrees. Round to one decimal place.`,
-                        answer: round(deg),
-                        tolerance: 0.05,
-                        solution: `${rad} · 180/π = ${round(deg)}°.`
-                    };
-                }
-                if (mode === 3) {
-                    const degrees = randInt(25, 145);
-                    const minutes = randInt(10, 55);
-                    const seconds = randInt(10, 55);
-                    const decimal = degrees + minutes / 60 + seconds / 3600;
-                    return {
-                        type: "numeric",
-                        text: `Convert ${degrees}° ${minutes}' ${seconds}" to decimal degrees. Round to one decimal place.`,
-                        answer: round(decimal),
-                        tolerance: 0.05,
-                        solution: `${degrees} + ${minutes}/60 + ${seconds}/3600 = ${round(decimal)}°.`
-                    };
-                }
-                if (mode === 4) {
-                    const degWhole = randInt(20, 145);
-                    const minutes = randInt(10, 58);
-                    const seconds = randInt(10, 58);
-                    const decimal = degWhole + minutes / 60 + seconds / 3600;
-                    return {
-                        type: "multi",
-                        text: `Convert ${round(decimal, 4)}° to degrees, minutes, and seconds.`,
-                        fields: [
-                            { id: "deg", label: "Degrees", answer: degWhole, tolerance: 0.001 },
-                            { id: "min", label: "Minutes", answer: minutes, tolerance: 0.001 },
-                            { id: "sec", label: "Seconds", answer: seconds, tolerance: 0.5 }
-                        ],
-                        solution: `The whole degrees are ${degWhole}. The decimal part times 60 gives ${minutes} minutes plus a remaining decimal. That remainder times 60 gives about ${seconds} seconds.`
-                    };
-                }
-                const deg = choice([30, 45, 72, 105, 150]);
+                const theta = choice([1.2, 1.5, 2.1, 2.4, 2.8]);
+                const r = choice([6, 8, 10, 12, 14]);
+                const arc = r * theta;
+                return { type: "numeric", text: `An arc length is ${round(arc, 1)} and the central angle is ${theta} radians. Find the radius. Round to one decimal place.`, answer: round(r), tolerance: 0.05, solution: `r = s/θ = ${round(arc, 1)}/${theta} = ${round(r)}.` };
+            }
+        },
+        {
+            title: "Question 5: Aircraft Arc Central Angle",
+            hints: "Use θ = s/r to get radians, then convert to degrees with degrees = radians·180/π.",
+            generateProblem: () => {
+                const radius = choice([18, 24, 30, 36, 42]);
+                const angle = choice([35, 50, 65, 80, 95]);
+                const arc = radius * angle * Math.PI / 180;
+                return { type: "numeric", text: `An aircraft travels ${round(arc, 1)} miles along an arc with radius ${radius} miles. Find the central angle, rounded to the nearest degree.`, answer: angle, tolerance: 0.5, solution: `θ = s/r = ${round(arc, 1)}/${radius} = ${round(arc / radius, 3)} radians. In degrees, θ ≈ ${round((arc / radius) * 180 / Math.PI, 1)}°, so the nearest degree is ${angle}°.` };
+            }
+        },
+        {
+            title: "Question 6: Angular and Linear Wingtip Speed",
+            hints: "One wingtip travels in a circle with radius equal to half the wingspan. Convert degrees per second to radians per second before using v = rω.",
+            generateProblem: () => {
+                const speed = choice([60, 90, 120, 150, 180]);
+                const span = choice([28, 32, 36, 40, 44]);
+                const radius = span / 2;
+                const omega = speed * Math.PI / 180;
+                const fps = radius * omega;
+                const mph = fps * 3600 / 5280;
+                return { type: "multi", text: `A trainer aircraft has maximum roll rate ${speed}° per second and wingspan ${span} ft. Find one wingtip's linear speed in ft/s and mph.`, fields: [{ id: "fps", label: "ft/s", answer: round(fps), tolerance: 0.05 }, { id: "mph", label: "mph", answer: round(mph), tolerance: 0.05 }], solution: `Radius = ${radius} ft and ω = ${speed}π/180 = ${round(omega, 3)} rad/s. v = rω = ${round(fps)} ft/s. Convert: ${round(fps)}·3600/5280 = ${round(mph)} mph.` };
+            }
+        },
+        {
+            title: "Question 7: Radians to Degrees",
+            hints: "Multiply radians by 180/π. The π cancels in exact multiples of π.",
+            generateProblem: () => {
+                const num = choice([2, 3, 5, 7, 11]);
+                const den = choice([4, 6, 9, 12]);
+                const exactDeg = num * 180 / den;
+                const rad = choice([0.7, 1.2, 2.4, 3.6, 4.1]);
+                const decDeg = rad * 180 / Math.PI;
+                return { type: "multi", text: `Convert both angles to degrees: ${num}π/${den} radians and ${rad} radians. Round the decimal-radian result to one decimal place.`, fields: [{ id: "exact", label: `${num}π/${den} radians in degrees`, answer: round(exactDeg, 2), tolerance: 0.05 }, { id: "decimal", label: `${rad} radians in degrees`, answer: round(decDeg), tolerance: 0.05 }], solution: `${num}π/${den}·180/π = ${round(exactDeg, 2)}°. Also ${rad}·180/π = ${round(decDeg)}°.` };
+            }
+        },
+        {
+            title: "Question 8: Decimal Degrees to DMS",
+            hints: "The whole-number part is degrees. Multiply the decimal part by 60 for minutes, then multiply the remaining decimal by 60 for seconds.",
+            generateProblem: () => {
+                const deg = randInt(20, 145);
+                const min = randInt(10, 58);
+                const sec = randInt(10, 58);
+                const decimal = deg + min / 60 + sec / 3600;
+                return { type: "multi", text: `Convert ${round(decimal, 4)}° to degrees, minutes, and seconds.`, fields: [{ id: "deg", label: "Degrees", answer: deg, tolerance: 0.001 }, { id: "min", label: "Minutes", answer: min, tolerance: 0.001 }, { id: "sec", label: "Seconds", answer: sec, tolerance: 0.5 }], solution: `The whole degrees are ${deg}. The decimal part times 60 gives ${min} minutes plus a remainder, and that remainder times 60 gives about ${sec} seconds.` };
+            }
+        },
+        {
+            title: "Question 9: DMS to Decimal Degrees",
+            hints: "Use decimal degrees = degrees + minutes/60 + seconds/3600.",
+            generateProblem: () => {
+                const deg = randInt(25, 145);
+                const min = randInt(10, 55);
+                const sec = randInt(10, 55);
+                const decimal = deg + min / 60 + sec / 3600;
+                return { type: "numeric", text: `Convert ${deg}° ${min}' ${sec}" to decimal degrees. Round to one decimal place.`, answer: round(decimal), tolerance: 0.05, solution: `${deg} + ${min}/60 + ${sec}/3600 = ${round(decimal)}°.` };
+            }
+        },
+        {
+            title: "Question 10: Degrees to Radians",
+            hints: "Multiply degrees by π/180. If a decimal is requested, evaluate the result and round.",
+            generateProblem: () => {
+                const deg = choice([30, 45, 72, 105, 150, 215]);
                 const rad = deg * Math.PI / 180;
-                return {
-                    type: "numeric",
-                    text: `Convert ${deg}° to radians as a decimal. Round to two decimal places.`,
-                    answer: round(rad, 2),
-                    tolerance: 0.005,
-                    solution: `${deg} · π/180 = ${round(rad, 2)} radians.`
-                };
+                return { type: "numeric", text: `Convert ${deg}° to radians as a decimal. Round to two decimal places.`, answer: round(rad, 2), tolerance: 0.005, solution: `${deg}°·π/180 = ${round(rad, 2)} radians.` };
             }
         },
         {
-            title: "Mission 5: Functions, Domains, and Intervals",
-            hints: "A rational function is undefined where its denominator is zero. For intervals, union means combine and intersection means overlap.",
+            title: "Question 11: Rational Function Domain and Evaluation",
+            hints: "A rational function is undefined where the denominator is zero. Substitute carefully for the shifted input.",
             generateProblem: () => {
-                if (Math.random() < 0.5) {
-                    const k = choice([2, 3, 4, 5, 6]);
-                    const d = choice([2, 3, 5, -4, -6]);
-                    const a = choice([4, 6, 8, 10]);
-                    const x = a - d;
-                    const value = k * x / (x + d);
-                    return {
-                        type: "multi",
-                        text: `Let f(x) = ${k}x/(x ${d >= 0 ? "+" : "-"} ${Math.abs(d)}). Find the excluded x-value and f(${a} ${d >= 0 ? "-" : "+"} ${Math.abs(d)}).`,
-                        fields: [
-                            { id: "excluded", label: "Excluded x-value", answer: -d, tolerance: 0.001 },
-                            { id: "value", label: "Function value", answer: round(value, 2), tolerance: 0.01 }
-                        ],
-                        solution: `Set the denominator equal to zero: x + (${d}) = 0, so x = ${-d}. The input ${a} - (${d}) = ${x}. f(${x}) = ${k}(${x})/(${x}+${d}) = ${round(value, 2)}.`
-                    };
-                }
-                const a = randInt(-8, -3);
-                const b = randInt(-1, 3);
-                const c = randInt(1, 5);
-                const d = randInt(6, 10);
+                const k = choice([2, 3, 4, 5, 6]);
+                const d = choice([2, 3, 5, -4, -6]);
+                const a = choice([4, 6, 8, 10]);
+                const x = a - d;
+                const value = k * x / (x + d);
+                return { type: "multi", text: `Let f(x) = ${k}x/(x ${d >= 0 ? "+" : "-"} ${Math.abs(d)}). Part a: find the x-value where f is not defined. Part b: evaluate and simplify f(${a} ${d >= 0 ? "-" : "+"} ${Math.abs(d)}).`, fields: [{ id: "excluded", label: "Undefined input", answer: -d, tolerance: 0.001 }, { id: "value", label: "Function value", answer: round(value, 2), tolerance: 0.01 }], solution: `Denominator zero: x + (${d}) = 0, so x = ${-d}. The requested input is ${a} - (${d}) = ${x}. f(${x}) = ${k}(${x})/(${x}+${d}) = ${round(value, 2)}.` };
+            }
+        },
+        {
+            title: "Question 12: Areas of a Trapezoid and Triangle",
+            hints: "Use A = 1/2(b₁+b₂)h for the trapezoid and Heron's formula for a triangle when all three side lengths are known.",
+            generateProblem: () => {
+                const b1 = randInt(8, 16), b2 = randInt(18, 30), h = randInt(5, 12);
+                const trap = 0.5 * (b1 + b2) * h;
+                const triples = [[5, 6, 7], [7, 8, 9], [9, 10, 11], [6, 8, 10], [8, 13, 15]];
+                const [a, b, c] = choice(triples);
+                const s = (a + b + c) / 2;
+                const tri = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+                return { type: "multi", text: `Part a: A trapezoid has bases ${b1} and ${b2}, and height ${h}. Find its area.\nPart b: A scalene triangle has side lengths ${a}, ${b}, and ${c}. Use Heron's formula to find its area. Round to one decimal place.`, fields: [{ id: "trap", label: "Trapezoid area", answer: round(trap), tolerance: 0.05 }, { id: "tri", label: "Triangle area", answer: round(tri), tolerance: 0.05 }], solution: `Trapezoid: A = 1/2(${b1}+${b2})(${h}) = ${round(trap)}. Triangle: s = (${a}+${b}+${c})/2 = ${s}; A = √(${s}(${s-a})(${s-b})(${s-c})) = ${round(tri)}.` };
+            }
+        },
+        {
+            title: "Question 13: Union and Intersection of Intervals",
+            hints: "The union includes everything in either interval. The intersection includes only the overlap, with endpoint brackets determined by whether the endpoint is included by both intervals.",
+            generateProblem: () => {
+                const a = randInt(-8, -3), b = randInt(-1, 2), c = randInt(3, 6), d = randInt(7, 10);
                 const union = `[${a}, ${d})`;
                 const inter = `(${b}, ${c}]`;
-                return {
-                    type: "fitb",
-                    text: `Let A = [${a}, ${c}] and B = (${b}, ${d}). What is A ∩ B in interval notation?`,
-                    validAnswers: [inter, inter.replace(" ", "")],
-                    solution: `The overlap starts just after ${b} because B is open there, and ends at ${c} because A includes ${c} and B continues past it. So A ∩ B = ${inter}. The union would be ${union}.`
-                };
+                return { type: "multi", text: `Let A = [${a}, ${c}] and B = (${b}, ${d}). Find A ∪ B and A ∩ B in interval notation.`, fields: [{ id: "union", label: "A ∪ B", validAnswers: [union, union.replace(" ", "")] }, { id: "intersection", label: "A ∩ B", validAnswers: [inter, inter.replace(" ", "")] }], solution: `The intervals overlap and connect from ${a} through just before ${d}, so A ∪ B = ${union}. Their common overlap starts just after ${b} and ends at included endpoint ${c}, so A ∩ B = ${inter}.` };
             }
         },
         {
-            title: "Mission 6: Algebra, Equations, and Area",
-            hints: "Factor quadratics from their roots, clear denominators in rational equations, use exponent rules carefully, and use Heron's formula when all three triangle sides are known.",
+            title: "Question 14: Sector Area Forward and Inverse",
+            hints: "Convert degree measures to radians for sector area. For the inverse problem, solve A = 1/2r²θ as θ = 2A/r².",
             generateProblem: () => {
-                const mode = randInt(1, 5);
-                if (mode === 1) {
-                    const r1 = choice([-6, -4, -3, 2, 5]);
-                    let r2 = choice([-5, -2, 3, 4, 7]);
-                    if (r2 === r1) r2 += 1;
-                    const b = -(r1 + r2);
-                    const c = r1 * r2;
-                    const correct = `{${Math.min(r1, r2)}, ${Math.max(r1, r2)}}`;
-                    return {
-                        type: "fitb",
-                        text: `Solve x² ${b >= 0 ? "+" : "-"} ${Math.abs(b)}x ${c >= 0 ? "+" : "-"} ${Math.abs(c)} = 0. Enter the solution set.`,
-                        validAnswers: [correct, `${r1},${r2}`, `${r2},${r1}`],
-                        solution: `This factors as (x - (${r1}))(x - (${r2})) = 0, so x = ${r1} or x = ${r2}.`
-                    };
-                }
-                if (mode === 2) {
-                    const base1 = randInt(8, 16);
-                    const base2 = randInt(18, 30);
-                    const h = randInt(5, 12);
-                    const area = 0.5 * (base1 + base2) * h;
-                    return {
-                        type: "numeric",
-                        text: `A trapezoid has bases ${base1} and ${base2}, and height ${h}. Find its area.`,
-                        answer: area,
-                        tolerance: 0.05,
-                        solution: `A = 1/2(b1+b2)h = 1/2(${base1}+${base2})(${h}) = ${area}.`
-                    };
-                }
-                if (mode === 3) {
-                    const triples = [[5, 6, 7], [7, 8, 9], [9, 10, 11], [6, 8, 10]];
-                    const [a, b, c] = choice(triples);
-                    const s = (a + b + c) / 2;
-                    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
-                    return {
-                        type: "numeric",
-                        text: `A triangle has side lengths ${a}, ${b}, and ${c}. Use Heron's formula to find the area. Round to one decimal place.`,
-                        answer: round(area),
-                        tolerance: 0.05,
-                        solution: `s = (${a}+${b}+${c})/2 = ${s}. Area = √(${s}(${s-a})(${s-b})(${s-c})) = ${round(area)}.`
-                    };
-                }
-                if (mode === 4) {
-                    const a = randInt(1, 3);
-                    const b = randInt(2, 4);
-                    const c = randInt(1, 3);
-                    const n = choice([2, 3]);
-                    const correct = `x^${n * b}z^${n * c}/y^${n * a}`;
-                    const options = shuffle([
-                        correct,
-                        `y^${n * a}/x^${n * b}z^${n * c}`,
-                        `x^${b}z^${c}/y^${a}`,
-                        `x^${n * b}y^${n * a}/z^${n * c}`
-                    ]);
-                    return {
-                        type: "mc",
-                        text: `Simplify ((x^-${b} y^${a}) / z^${c})^-${n} with positive exponents only.`,
-                        options,
-                        correct: options.indexOf(correct),
-                        solution: `A negative outside exponent flips the fraction and applies the power: (z^${c}/(x^-${b}y^${a}))^${n} = (x^${b}z^${c}/y^${a})^${n} = ${correct}.`
-                    };
-                }
-                const a = choice([2, 3, 4, 5]);
-                const b = choice([1, 2, 3]);
-                const x = choice([4, 5, 6, 8]);
-                const constant = round(a / (x - b) + 1 / x, 3);
-                return {
-                    type: "numeric",
-                    text: `Solve the rational equation ${a}/(x - ${b}) + 1/x = ${constant}. Enter x, and remember to reject excluded values.`,
-                    answer: x,
-                    tolerance: 0.01,
-                    solution: `The excluded values are x = ${b} and x = 0. Clearing denominators and solving gives x = ${x}, which is allowed.`
-                };
+                const r1 = choice([5, 7, 9, 11]);
+                const deg = choice([80, 100, 140, 160]);
+                const theta1 = deg * Math.PI / 180;
+                const area1 = 0.5 * r1 * r1 * theta1;
+                const r2 = choice([6, 8, 10, 12]);
+                const theta2 = choice([0.8, 1.1, 1.4, 1.7]);
+                const area2 = 0.5 * r2 * r2 * theta2;
+                return { type: "multi", text: `Part a: A sector has radius ${r1} and central angle ${deg}°. Find its area.\nPart b: A sector has area ${round(area2, 1)} and radius ${r2}. Find the central angle in radians. Round to one decimal place.`, fields: [{ id: "area", label: "Part a sector area", answer: round(area1), tolerance: 0.05 }, { id: "theta", label: "Part b θ in radians", answer: round(theta2), tolerance: 0.05 }], solution: `Part a: ${deg}° = ${round(theta1, 3)} radians, so A = 1/2(${r1}²)(${round(theta1, 3)}) = ${round(area1)}. Part b: θ = 2A/r² = 2(${round(area2, 1)})/${r2}² = ${round(theta2)} radians.` };
             }
         },
         {
-            title: "Mission 7: Coordinate Geometry",
-            hints: "Distance, midpoint, slope, line equations, and perpendicular slopes all come from two points.",
+            title: "Question 15: Exponent Rules",
+            hints: "A negative outside exponent flips the fraction and applies the power to every factor. Final answers should have positive exponents only.",
             generateProblem: () => {
-                const x1 = randInt(-6, 2);
-                const y1 = randInt(-5, 4);
-                const x2 = x1 + choice([3, 4, 5, 6]);
-                const y2 = y1 + choice([-6, -4, 3, 5]);
-                const dx = x2 - x1;
-                const dy = y2 - y1;
+                const a = randInt(1, 3), b = randInt(2, 4), c = randInt(1, 3), n = choice([2, 3]);
+                const correct = `x^${n * b}z^${n * c}/y^${n * a}`;
+                const options = shuffle([correct, `y^${n * a}/x^${n * b}z^${n * c}`, `x^${b}z^${c}/y^${a}`, `x^${n * b}y^${n * a}/z^${n * c}`]);
+                return { type: "mc", text: `Simplify ((x^-${b} y^${a}) / z^${c})^-${n} with positive exponents only.`, options, correct: options.indexOf(correct), solution: `Flip because of the negative outside exponent: (z^${c}/(x^-${b}y^${a}))^${n} = (x^${b}z^${c}/y^${a})^${n} = ${correct}.` };
+            }
+        },
+        {
+            title: "Question 16: Factorable Quadratic Equation",
+            hints: "Factor the monic quadratic into two binomials, then set each factor equal to zero.",
+            generateProblem: () => {
+                const r1 = choice([-6, -4, -3, 2, 5]);
+                let r2 = choice([-5, -2, 3, 4, 7]);
+                if (r2 === r1) r2 += 1;
+                const b = -(r1 + r2), c = r1 * r2;
+                const low = Math.min(r1, r2), high = Math.max(r1, r2);
+                return { type: "fitb", text: `Solve x² ${b >= 0 ? "+" : "-"} ${Math.abs(b)}x ${c >= 0 ? "+" : "-"} ${Math.abs(c)} = 0. Enter the solution set.`, validAnswers: [`{${low}, ${high}}`, `{${low},${high}}`, `${low},${high}`, `${high},${low}`], solution: `x² ${b >= 0 ? "+" : "-"} ${Math.abs(b)}x ${c >= 0 ? "+" : "-"} ${Math.abs(c)} factors as (x - (${r1}))(x - (${r2})) = 0, so x = ${r1} or x = ${r2}.` };
+            }
+        },
+        {
+            title: "Question 17: Coordinate Geometry with Two Points",
+            hints: "Use distance, midpoint, slope, slope-intercept form, and the negative reciprocal for a perpendicular line.",
+            generateProblem: () => {
+                const x1 = randInt(-6, 2), y1 = randInt(-5, 4);
+                const dx = choice([3, 4, 5, 6]);
+                const dy = choice([-6, -4, 3, 5]);
+                const x2 = x1 + dx, y2 = y1 + dy;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                const mx = (x1 + x2) / 2;
-                const my = (y1 + y2) / 2;
-                const slope = dy / dx;
-                return {
-                    type: "multi",
-                    text: `Given P(${x1}, ${y1}) and Q(${x2}, ${y2}), find the distance PQ and the midpoint of segment PQ. Round distance to one decimal place.`,
-                    fields: [
-                        { id: "distance", label: "Distance", answer: round(dist), tolerance: 0.05 },
-                        { id: "midx", label: "Midpoint x-coordinate", answer: round(mx, 2), tolerance: 0.001 },
-                        { id: "midy", label: "Midpoint y-coordinate", answer: round(my, 2), tolerance: 0.001 }
-                    ],
-                    solution: `Distance = √((${dx})² + (${dy})²) = ${round(dist)}. Midpoint = ((${x1}+${x2})/2, (${y1}+${y2})/2) = (${round(mx, 2)}, ${round(my, 2)}). The slope of PQ is ${round(slope, 2)}.`
-                };
+                const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+                const mText = frac(dy, dx);
+                const bText = frac(y1 * dx - dy * x1, dx);
+                const perpText = frac(-dx, dy);
+                const line = `y=${mText}x${Number(parseNumber(bText)) >= 0 ? "+" : ""}${bText}`;
+                const perp = `y=${perpText}x`;
+                return { type: "multi", text: `Given P(${x1}, ${y1}) and Q(${x2}, ${y2}), find the distance PQ, midpoint, equation of line PQ, and equation of the line perpendicular to PQ that passes through the origin. Round distance to one decimal place.`, fields: [{ id: "distance", label: "Distance", answer: round(dist), tolerance: 0.05 }, { id: "midx", label: "Midpoint x-coordinate", answer: round(mx, 2), tolerance: 0.001 }, { id: "midy", label: "Midpoint y-coordinate", answer: round(my, 2), tolerance: 0.001 }, { id: "line", label: "Line PQ, y=mx+b", validAnswers: [line] }, { id: "perp", label: "Perpendicular line through origin", validAnswers: [perp] }], solution: `Distance = √(${dx}²+${dy}²) = ${round(dist)}. Midpoint = (${round(mx, 2)}, ${round(my, 2)}). Slope m = ${dy}/${dx} = ${mText}, so line PQ is ${line}. The perpendicular slope is ${perpText}, so the perpendicular line through the origin is ${perp}.` };
             }
         },
         {
-            title: "Mission 8: Logs, Interest, Aviation, Projectiles, and Vectors",
-            hints: "Rewrite logs and exponentials in the opposite form, keep units straight in applications, use the vertex for projectile height, and use atan2 for vector direction.",
+            title: "Question 18: Intersecting Lines Angle Relationships",
+            hints: "Vertical angles are congruent. A linear pair is supplementary, so the two angles add to 180°.",
             generateProblem: () => {
-                const mode = randInt(1, 8);
-                if (mode === 1) {
-                    const b = choice([2, 3, 4, 5]);
-                    const m = choice([2, 3, 4]);
-                    const k = choice([2, 3, 5]);
-                    const x = Math.pow(b, m) / k;
-                    return {
-                        type: "numeric",
-                        text: `Solve log_${b}(${k}x) = ${m}. Round x to one decimal place.`,
-                        answer: round(x),
-                        tolerance: 0.05,
-                        solution: `Rewrite as ${k}x = ${b}^${m} = ${Math.pow(b, m)}. Therefore x = ${Math.pow(b, m)}/${k} = ${round(x)}.`
-                    };
-                }
-                if (mode === 2) {
-                    const base = choice([2, 3, 5, 7]);
-                    const value = choice([10, 18, 25, 40, 75, 100]);
-                    const x = Math.log(value) / Math.log(base);
-                    return {
-                        type: "numeric",
-                        text: `Solve ${base}^x = ${value}. Round x to one decimal place.`,
-                        answer: round(x),
-                        tolerance: 0.05,
-                        solution: `Rewrite in logarithmic form: x = log_${base}(${value}). By change of base, x = ln(${value})/ln(${base}) = ${round(x)}.`
-                    };
-                }
-                if (mode === 3) {
-                    const P = choice([1500, 2500, 4000, 6000]);
-                    const rate = choice([3.2, 4.5, 5.1, 6.0]);
-                    const n = choice([4, 12, 365]);
-                    const t = choice([3, 5, 8]);
-                    const A = P * Math.pow(1 + (rate / 100) / n, n * t);
-                    return {
-                        type: "numeric",
-                        text: `Use A = P(1 + r/n)^(nt). Find the balance for $${P} at ${rate}% interest, compounded ${n} times per year for ${t} years. Round to the nearest cent.`,
-                        answer: round(A, 2),
-                        tolerance: 0.01,
-                        solution: `A = ${P}(1 + ${rate/100}/${n})^(${n}·${t}) = $${round(A, 2)}.`
-                    };
-                }
-                if (mode === 4) {
-                    const loss = choice([1200, 1800, 2400, 3000]);
-                    const nm = choice([4, 5, 6, 8]);
-                    const feet = nm * 6076;
-                    const angle = Math.atan(loss / feet) * 180 / Math.PI;
-                    return {
-                        type: "numeric",
-                        text: `An aircraft loses ${loss} ft of altitude over ${nm} nautical miles of forward travel. Find the descent angle in degrees. Round to one decimal place.`,
-                        answer: round(angle),
-                        tolerance: 0.05,
-                        solution: `${nm} nautical miles = ${feet} ft. tan(θ) = ${loss}/${feet}, so θ = ${round(angle)}°.`
-                    };
-                }
-                if (mode === 5) {
-                    const west = choice([12, 18, 24, 30]);
-                    const south = choice([5, 9, 14, 20]);
-                    const distance = Math.sqrt(west * west + south * south);
-                    const angleEastOfNorth = Math.atan(west / south) * 180 / Math.PI;
-                    return {
-                        type: "multi",
-                        text: `You are ${west} miles west and ${south} miles south of an airport. Find the straight-line distance to the airport and the bearing angle east of north.`,
-                        fields: [
-                            { id: "distance", label: "Distance", answer: round(distance), tolerance: 0.05 },
-                            { id: "bearing", label: "Bearing angle east of north", answer: round(angleEastOfNorth), tolerance: 0.05 }
-                        ],
-                        solution: `Distance = √(${west}²+${south}²) = ${round(distance)} miles. From north, tan(θ) = west/south = ${west}/${south}, so θ = ${round(angleEastOfNorth)}°. Bearing format: N ${round(angleEastOfNorth)}° E.`
-                    };
-                }
-                if (mode === 6) {
-                    const speed = choice([60, 90, 120, 150]);
-                    const span = choice([28, 32, 36, 40]);
-                    const radius = span / 2;
-                    const fps = radius * speed * Math.PI / 180;
-                    const mph = fps * 3600 / 5280;
-                    return {
-                        type: "multi",
-                        text: `A trainer aircraft has maximum roll rate ${speed}° per second and wingspan ${span} ft. Find one wingtip's linear speed in ft/s and mph.`,
-                        fields: [
-                            { id: "fps", label: "ft/s", answer: round(fps), tolerance: 0.05 },
-                            { id: "mph", label: "mph", answer: round(mph), tolerance: 0.05 }
-                        ],
-                        solution: `Radius = half the wingspan = ${radius} ft. Angular speed = ${speed}π/180 = ${round(speed * Math.PI / 180, 3)} rad/s. v = rω = ${round(fps)} ft/s = ${round(mph)} mph.`
-                    };
-                }
-                if (mode === 7) {
-                    const v = choice([48, 56, 64, 72, 80]);
-                    const t = v / 32;
-                    const h = -16 * t * t + v * t;
-                    return {
-                        type: "numeric",
-                        text: `A ball is thrown upward with height h(t) = -16t² + ${v}t. Find the maximum height.`,
-                        answer: h,
-                        tolerance: 0.05,
-                        solution: `The vertex time is t = -b/(2a) = -${v}/(2·-16) = ${round(t, 2)} seconds. h(${round(t, 2)}) = ${h} feet.`
-                    };
-                }
-                const u = [randInt(-6, 6), randInt(-5, 7)];
-                const v = [randInt(-6, 6), randInt(-5, 7)];
-                const rx = u[0] + v[0];
-                const ry = u[1] + v[1];
+                const given = choice([38, 52, 67, 74, 118, 132]);
+                const alpha = given;
+                const beta = 180 - given;
+                return { type: "multi", text: `Two straight lines intersect. One angle is labeled ${given}°. The vertical angle is α, and an adjacent linear-pair angle is β. Find α and β.`, fields: [{ id: "alpha", label: "α", answer: alpha, tolerance: 0.001 }, { id: "beta", label: "β", answer: beta, tolerance: 0.001 }], solution: `Vertical angles are equal, so α = ${given}°. Adjacent linear-pair angles are supplementary, so β = 180° - ${given}° = ${beta}°.` };
+            }
+        },
+        {
+            title: "Question 19: Logarithmic Equation",
+            hints: "Rewrite log_b(argument) = exponent as argument = b^exponent, then solve for x.",
+            generateProblem: () => {
+                const b = choice([2, 3, 4, 5]), m = choice([2, 3, 4]), k = choice([2, 3, 5]);
+                const x = Math.pow(b, m) / k;
+                return { type: "numeric", text: `Solve log_${b}(${k}x) = ${m}. Round x to one decimal place.`, answer: round(x), tolerance: 0.05, solution: `Rewrite as ${k}x = ${b}^${m} = ${Math.pow(b, m)}. Therefore x = ${Math.pow(b, m)}/${k} = ${round(x)}.` };
+            }
+        },
+        {
+            title: "Question 20: Exponential Equation",
+            hints: "Rewrite b^x = N as x = log_b(N), then use change of base if needed.",
+            generateProblem: () => {
+                const base = choice([2, 3, 5, 7]);
+                const value = choice([10, 18, 25, 40, 75, 100]);
+                const x = Math.log(value) / Math.log(base);
+                return { type: "numeric", text: `Solve ${base}^x = ${value}. Round x to one decimal place.`, answer: round(x), tolerance: 0.05, solution: `In logarithmic form, x = log_${base}(${value}) = ln(${value})/ln(${base}) = ${round(x)}.` };
+            }
+        },
+        {
+            title: "Question 21: Compound Interest",
+            hints: "Use A = P(1 + r/n)^(nt), with r written as a decimal.",
+            generateProblem: () => {
+                const P = choice([1500, 2500, 4000, 6000]);
+                const rate = choice([3.2, 4.5, 5.1, 6.0]);
+                const n = choice([4, 12, 365]);
+                const t = choice([3, 5, 8]);
+                const A = P * Math.pow(1 + (rate / 100) / n, n * t);
+                return { type: "numeric", text: `Use A = P(1 + r/n)^(nt). Find the balance for $${P} at ${rate}% interest, compounded ${n} times per year for ${t} years. Round to the nearest cent.`, answer: round(A, 2), tolerance: 0.01, solution: `A = ${P}(1 + ${rate / 100}/${n})^(${n}·${t}) = $${round(A, 2)}.` };
+            }
+        },
+        {
+            title: "Question 22: Aircraft Descent Angle",
+            hints: "Convert nautical miles to feet, then use tan(θ) = altitude loss / forward distance.",
+            generateProblem: () => {
+                const loss = choice([1200, 1800, 2400, 3000]);
+                const nm = choice([4, 5, 6, 8]);
+                const feet = nm * 6076;
+                const angle = Math.atan(loss / feet) * 180 / Math.PI;
+                return { type: "numeric", text: `An aircraft loses ${loss} ft of altitude over ${nm} nautical miles of forward travel. Find the descent angle in degrees. Round to one decimal place.`, answer: round(angle), tolerance: 0.05, solution: `${nm} nautical miles = ${feet} ft. tan(θ) = ${loss}/${feet}, so θ = tan⁻¹(${loss}/${feet}) = ${round(angle)}°.` };
+            }
+        },
+        {
+            title: "Question 23: Bearing and Distance to an Airport",
+            hints: "Draw a right triangle. Use the Pythagorean theorem for distance and tangent for the bearing angle east of north.",
+            generateProblem: () => {
+                const west = choice([12, 18, 24, 30]);
+                const south = choice([5, 9, 14, 20]);
+                const distance = Math.sqrt(west * west + south * south);
+                const angle = Math.atan(west / south) * 180 / Math.PI;
+                return { type: "multi", text: `You are ${west} miles west and ${south} miles south of an airport. Find the straight-line distance to the airport and the bearing angle east of north.`, fields: [{ id: "distance", label: "Distance", answer: round(distance), tolerance: 0.05 }, { id: "bearing", label: "Bearing angle east of north", answer: round(angle), tolerance: 0.05 }], solution: `Distance = √(${west}²+${south}²) = ${round(distance)} miles. From north, tan(θ) = ${west}/${south}, so θ = ${round(angle)}°. Bearing: N ${round(angle)}° E.` };
+            }
+        },
+        {
+            title: "Question 24: Maximum Height of a Projectile",
+            hints: "The maximum occurs at the vertex. For h(t) = at²+bt+c, use t = -b/(2a), then evaluate h(t).",
+            generateProblem: () => {
+                const v = choice([48, 56, 64, 72, 80]);
+                const t = v / 32;
+                const h = -16 * t * t + v * t;
+                return { type: "numeric", text: `A ball is thrown upward with height h(t) = -16t² + ${v}t. Find the maximum height.`, answer: h, tolerance: 0.05, solution: `The vertex time is t = -${v}/(2·-16) = ${round(t, 2)} seconds. h(${round(t, 2)}) = ${h} feet.` };
+            }
+        },
+        {
+            title: "Question 25: Rational Equation",
+            hints: "List excluded values first. Clear denominators, solve the resulting equation, then reject any excluded solution.",
+            generateProblem: () => {
+                const p = choice([1, 2, 3]);
+                const q = choice([-4, -2, 4, 5]);
+                const x = choice([6, 7, 8, 9]);
+                const a = choice([2, 3, 4, 5]);
+                const c = choice([1, 2, 3]);
+                const constantNum = a * (x - q) + c * (x - p);
+                const constantDen = (x - p) * (x - q);
+                const constant = frac(constantNum, constantDen);
+                return { type: "numeric", text: `Solve the rational equation ${a}/(x - ${p}) + ${c}/(x ${q < 0 ? "+" : "-"} ${Math.abs(q)}) = ${constant}. Enter x, and remember to reject excluded values.`, answer: x, tolerance: 0.01, solution: `Excluded values are x = ${p} and x = ${q}. Multiplying by (x-${p})(x-${q}) clears denominators: ${a}(x-${q}) + ${c}(x-${p}) = (${constant}) (x-${p})(x-${q}). Solving gives x = ${x}, which is not excluded.` };
+            }
+        },
+        {
+            title: "Question 26: Vector Addition, Magnitude, and Direction",
+            hints: "Add components first. Then use |r| = √(x²+y²) and θ = atan2(y, x), adjusted to the correct quadrant from the positive x-axis.",
+            generateProblem: () => {
+                let u, v, rx, ry;
+                do {
+                    u = [randInt(-6, 6), randInt(-5, 7)];
+                    v = [randInt(-6, 6), randInt(-5, 7)];
+                    rx = u[0] + v[0];
+                    ry = u[1] + v[1];
+                } while (rx === 0 && ry === 0);
                 const mag = Math.sqrt(rx * rx + ry * ry);
                 let theta = Math.atan2(ry, rx) * 180 / Math.PI;
                 if (theta < 0) theta += 360;
-                return {
-                    type: "multi",
-                    text: `Let u = <${u[0]}, ${u[1]}> and v = <${v[0]}, ${v[1]}>. Find r = u + v, |r|, and the direction angle θ from the positive x-axis.`,
-                    fields: [
-                        { id: "rx", label: "r x-component", answer: rx, tolerance: 0.001 },
-                        { id: "ry", label: "r y-component", answer: ry, tolerance: 0.001 },
-                        { id: "mag", label: "|r|", answer: round(mag), tolerance: 0.05 },
-                        { id: "theta", label: "θ in degrees", answer: round(theta), tolerance: 0.05 }
-                    ],
-                    solution: `r = <${rx}, ${ry}>. |r| = √(${rx}²+${ry}²) = ${round(mag)}. θ = atan2(${ry}, ${rx}) = ${round(theta)}°.`
-                };
+                return { type: "multi", text: `Let u = <${u[0]}, ${u[1]}> and v = <${v[0]}, ${v[1]}>. Find r = u + v, |r|, and the direction angle θr from the positive x-axis.`, fields: [{ id: "rx", label: "r x-component", answer: rx, tolerance: 0.001 }, { id: "ry", label: "r y-component", answer: ry, tolerance: 0.001 }, { id: "mag", label: "|r|", answer: round(mag), tolerance: 0.05 }, { id: "theta", label: "θr in degrees", answer: round(theta), tolerance: 0.05 }], solution: `r = <${rx}, ${ry}>. |r| = √(${rx}²+${ry}²) = ${round(mag)}. θr = atan2(${ry}, ${rx}) = ${round(theta)}° from the positive x-axis.` };
             }
         }
     ];
@@ -1001,8 +911,14 @@
         let allCorrect = true;
         fields.forEach(field => {
             const input = document.getElementById(`input-${field.id}`);
-            const value = parseNumber(input.value);
-            const ok = value !== null && Math.abs(value - field.answer) <= (field.tolerance ?? 0.05);
+            let ok = false;
+            if (field.validAnswers) {
+                const normalized = normalizeText(input.value);
+                ok = field.validAnswers.some(ans => normalizeText(ans) === normalized);
+            } else {
+                const value = parseNumber(input.value);
+                ok = value !== null && Math.abs(value - field.answer) <= (field.tolerance ?? 0.05);
+            }
             input.style.borderColor = ok ? "var(--success)" : "var(--danger)";
             input.style.backgroundColor = ok ? "var(--soft-green)" : "var(--soft-red)";
             if (!ok) allCorrect = false;
