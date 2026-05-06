@@ -221,6 +221,18 @@
 
         .input-grid input { width: 100%; margin: 0; }
 
+        .answer-directions {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            color: var(--primary);
+            font-size: 0.94rem;
+            font-weight: 650;
+            margin: 0 0 16px;
+            padding: 12px;
+            text-align: left;
+        }
+
         .topic-list {
             text-align: left;
             display: grid;
@@ -251,7 +263,6 @@
             background: #fffafa;
         }
         .cert-title { font-size: 28px; font-weight: 900; margin-bottom: 10px; color: var(--primary); }
-        .cert-names { font-size: 24px; color: var(--secondary); margin: 20px 0; font-style: italic; font-weight: 800; }
 
         @media (max-width: 650px) {
             body { padding: 12px; align-items: flex-start; }
@@ -268,10 +279,6 @@
         <div class="eyebrow">Math 130 · Test 4</div>
         <h1>Test 4 Blueprint Practice Lab</h1>
         <p class="subtle">A question-by-question Math 130 Test 4 practice generator. Each mission follows the test blueprint sequence, uses changed parameters, and gives immediate feedback while you build the work you would show for full credit.</p>
-        <label class="sr-only" for="studentName">Student first and last name</label>
-        <input type="text" id="studentName" placeholder="Enter your first and last name" required>
-        <label class="sr-only" for="partnerName">Partner name, optional</label>
-        <input type="text" id="partnerName" placeholder="Partner's name (optional)">
         <div class="topic-list" aria-label="Practice lab topics">
             <div class="topic-pill">Exact trig values & right triangles</div>
             <div class="topic-pill">Arc length, sectors & angular speed</div>
@@ -310,11 +317,13 @@
 
         <div class="problem-card">
             <p id="problem-text"></p>
+            <div id="answer-directions" class="answer-directions"></div>
             <div id="options-container" class="hidden"></div>
             <div id="input-container" class="hidden">
                 <div id="input-fields" class="input-grid"></div>
                 <button type="button" id="input-submit" onclick="checkInputAnswer()">Submit Answer</button>
             </div>
+            <button type="button" id="stuck-button" onclick="showSolutionAndContinue()">I'm Stuck — Show Solution</button>
             <div id="feedback" class="feedback" aria-live="polite"></div>
             <div id="solution" class="solution-box hidden"></div>
             <div id="action-buttons" class="hidden">
@@ -326,9 +335,7 @@
 
     <div id="screen-certificate" class="hidden certificate">
         <div class="cert-title">Certificate of Test 4 Practice Completion</div>
-        <p>This certifies that</p>
-        <div id="cert-names" class="cert-names"></div>
-        <p>completed the Math 130 Test 4 Blueprint Practice Lab.</p>
+        <p>You completed the Math 130 Test 4 Blueprint Practice Lab.</p>
         <p id="cert-score" style="font-weight: bold; color: var(--primary); font-size: 1.15em;"></p>
         <div class="hint-box">
             <strong>On-test formula reminders:</strong>
@@ -348,9 +355,10 @@
 </div>
 
 <script>
-    let names = "";
     let currentMissionIndex = 0;
     let currentProblemObj = null;
+    let currentProblemHadAttempt = false;
+    let currentProblemLocked = false;
     let correctCount = 0;
     let attemptedCount = 0;
 
@@ -408,6 +416,37 @@
         }
         const num = Number(cleaned);
         return Number.isFinite(num) ? num : null;
+    }
+
+    function textAnswerMatches(value, validAnswers, tolerance = 0.001) {
+        const normalized = normalizeText(value);
+        if (validAnswers.some(ans => normalizeText(ans) === normalized)) return true;
+
+        const numericValue = parseNumber(value);
+        if (numericValue === null) return false;
+
+        return validAnswers.some(ans => {
+            const numericAnswer = parseNumber(ans);
+            return numericAnswer !== null && Math.abs(numericValue - numericAnswer) <= tolerance;
+        });
+    }
+
+    function getAnswerDirections(problem) {
+        if (problem.type === "mc") {
+            return "Choose the best answer. After any problem, you can show the solution or generate another version.";
+        }
+
+        const fields = problem.type === "multi" ? problem.fields : [{ validAnswers: problem.validAnswers }];
+        const hasTextFields = fields.some(field => field.validAnswers);
+        const hasNumericFields = problem.type === "numeric" || fields.some(field => !field.validAnswers);
+
+        if (hasTextFields && hasNumericFields) {
+            return "Answer format: numeric fields accept equivalent decimals or fractions. Text fields should match the requested notation, such as interval notation or y=mx+b with fractions.";
+        }
+        if (hasTextFields) {
+            return "Answer format: use the requested notation. Equivalent fractions are accepted for simple numeric entries; intervals, solution sets, and equations should match the displayed style.";
+        }
+        return "Answer format: decimals or equivalent fractions are accepted. Follow any rounding directions in the question.";
     }
 
     const missions = [
@@ -763,10 +802,6 @@
     }
 
     function startApp() {
-        const sName = document.getElementById("studentName").value.trim();
-        const pName = document.getElementById("partnerName").value.trim();
-        if (!sName) { alert("Please enter your name."); return; }
-        names = pName ? `${sName} & ${pName}` : sName;
         correctCount = 0;
         attemptedCount = 0;
         currentMissionIndex = 0;
@@ -798,10 +833,14 @@
     }
 
     function resetProblemUI() {
+        currentProblemHadAttempt = false;
+        currentProblemLocked = false;
         document.getElementById("feedback").innerText = "";
         document.getElementById("solution").classList.add("hidden");
         document.getElementById("solution").innerHTML = "";
         document.getElementById("action-buttons").classList.add("hidden");
+        document.getElementById("stuck-button").classList.remove("hidden");
+        document.getElementById("stuck-button").disabled = false;
     }
 
     function loadAnother() {
@@ -810,6 +849,7 @@
         resetProblemUI();
 
         document.getElementById("problem-text").innerText = currentProblemObj.text;
+        document.getElementById("answer-directions").innerText = getAnswerDirections(currentProblemObj);
         const mcContainer = document.getElementById("options-container");
         const inputContainer = document.getElementById("input-container");
         const inputFields = document.getElementById("input-fields");
@@ -849,22 +889,51 @@
         }
     }
 
-    function showSuccess() {
-        correctCount++;
-        attemptedCount++;
-        updateStats();
-        document.getElementById("feedback").innerHTML = `<span class="correct">Correct — great work!</span>`;
+    function disableProblemControls() {
+        document.querySelectorAll(".option-btn").forEach(button => { button.disabled = true; });
+        document.querySelectorAll("#input-fields input").forEach(input => { input.disabled = true; });
+        document.getElementById("input-submit").disabled = true;
+        document.getElementById("stuck-button").disabled = true;
+        document.getElementById("stuck-button").classList.add("hidden");
+    }
+
+    function revealSolution() {
         document.getElementById("solution").innerHTML = `<strong>Solution:</strong> ${currentProblemObj.solution}`;
         document.getElementById("solution").classList.remove("hidden");
         document.getElementById("action-buttons").classList.remove("hidden");
     }
 
+    function showSuccess() {
+        currentProblemHadAttempt = true;
+        currentProblemLocked = true;
+        correctCount++;
+        attemptedCount++;
+        updateStats();
+        disableProblemControls();
+        document.getElementById("feedback").innerHTML = `<span class="correct">Correct — great work!</span>`;
+        revealSolution();
+    }
+
     function showRetry(message) {
+        currentProblemHadAttempt = true;
         attemptedCount++;
         updateStats();
         const feedback = document.getElementById("feedback");
         feedback.innerHTML = `<span class="incorrect">${message}</span>`;
-        setTimeout(() => { feedback.innerText = ""; }, 2600);
+        setTimeout(() => { if (!currentProblemLocked) feedback.innerText = ""; }, 2600);
+    }
+
+    function showSolutionAndContinue() {
+        if (!currentProblemObj || currentProblemLocked) return;
+        currentProblemLocked = true;
+        if (!currentProblemHadAttempt) {
+            currentProblemHadAttempt = true;
+            attemptedCount++;
+            updateStats();
+        }
+        disableProblemControls();
+        document.getElementById("feedback").innerHTML = `<span class="incorrect">No worries — study the solution, try another version, or move on.</span>`;
+        revealSolution();
     }
 
     function checkMcAnswer(selectedIndex, btnElement) {
@@ -880,6 +949,7 @@
             btnElement.style.borderColor = "#fecaca";
             showRetry("Not quite. Use the hint, check the setup, and try again.");
             setTimeout(() => {
+                if (currentProblemLocked) return;
                 buttons.forEach(b => {
                     b.disabled = false;
                     b.style.backgroundColor = "";
@@ -894,8 +964,7 @@
 
         if (currentProblemObj.type === "fitb") {
             const input = document.getElementById("input-answer");
-            const normalized = normalizeText(input.value);
-            const isCorrect = currentProblemObj.validAnswers.some(ans => normalizeText(ans) === normalized);
+            const isCorrect = textAnswerMatches(input.value, currentProblemObj.validAnswers);
             if (isCorrect) {
                 input.disabled = true;
                 showSuccess();
@@ -913,8 +982,7 @@
             const input = document.getElementById(`input-${field.id}`);
             let ok = false;
             if (field.validAnswers) {
-                const normalized = normalizeText(input.value);
-                ok = field.validAnswers.some(ans => normalizeText(ans) === normalized);
+                ok = textAnswerMatches(input.value, field.validAnswers);
             } else {
                 const value = parseNumber(input.value);
                 ok = value !== null && Math.abs(value - field.answer) <= (field.tolerance ?? 0.05);
@@ -925,12 +993,11 @@
         });
 
         if (allCorrect) {
-            fields.forEach(field => { document.getElementById(`input-${field.id}`).disabled = true; });
-            document.getElementById("input-submit").disabled = true;
             showSuccess();
         } else {
             showRetry("Not quite. Recheck rounding, units, and signs, then try again.");
             setTimeout(() => {
+                if (currentProblemLocked) return;
                 fields.forEach(field => {
                     const input = document.getElementById(`input-${field.id}`);
                     input.style.borderColor = "var(--border)";
@@ -948,7 +1015,6 @@
 
     function showCertificate() {
         hideAll();
-        document.getElementById("cert-names").innerText = names;
         const pct = attemptedCount ? Math.round((correctCount / attemptedCount) * 100) : 0;
         document.getElementById("cert-score").innerText = `Session score: ${correctCount} correct out of ${attemptedCount} attempts (${pct}%).`;
         document.getElementById("screen-certificate").classList.remove("hidden");
