@@ -238,6 +238,75 @@
             text-align: left;
         }
 
+        .practice-toolbar, .mode-grid, .report-grid, .review-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 18px 0;
+            text-align: left;
+        }
+
+        .mode-card, .report-card {
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            background: #f8fafc;
+            padding: 14px;
+        }
+
+        .mode-card { cursor: pointer; }
+        .mode-card input { margin-right: 8px; }
+        .mode-card:has(input:checked) { border-color: var(--secondary); background: var(--soft-blue); }
+
+        .formula-panel, .mastery-panel, .diagram-panel {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #f8fafc;
+            margin: 18px 0;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .formula-panel summary, .mastery-panel summary {
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        .hint-controls { margin: 10px 0 0; text-align: left; }
+        .hint-level {
+            background: white;
+            border-left: 6px solid var(--secondary);
+            border-radius: 0 10px 10px 0;
+            color: var(--dark);
+            margin-top: 10px;
+            padding: 12px;
+        }
+
+        .diagram-panel svg { width: 100%; max-height: 190px; }
+        .timer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--primary);
+            font-weight: 900;
+            padding: 8px 12px;
+            background: white;
+        }
+
+        .mastery-list { list-style: none; padding: 0; margin: 12px 0 0; }
+        .mastery-list li {
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px 0;
+        }
+        .mastery-list li:last-child { border-bottom: 0; }
+        .mastery-low { color: var(--danger); font-weight: 900; }
+        .mastery-good { color: var(--success); font-weight: 900; }
+
         .topic-list {
             text-align: left;
             display: grid;
@@ -357,7 +426,25 @@
             <div class="topic-pill">Logs, compound interest & applications</div>
             <div class="topic-pill">Projectiles, rational equations & vectors</div>
         </div>
-        <button type="button" onclick="startApp()">Start the Test 4 Practice</button>
+        <div class="mode-grid" aria-label="Practice mode selection">
+            <label class="mode-card"><input type="radio" name="practice-mode" value="study" checked> <strong>Study Mode</strong><br><span class="subtle">Progressive hints, full solutions, unlimited similar problems.</span></label>
+            <label class="mode-card"><input type="radio" name="practice-mode" value="test"> <strong>Test Mode</strong><br><span class="subtle">Timer, hidden hints first, one scored attempt before review.</span></label>
+        </div>
+        <details class="formula-panel" open>
+            <summary>Formula sheet available during practice</summary>
+            <ul class="formula-list">
+                <li>Heron: A = √(s(s - a)(s - b)(s - c))</li>
+                <li>Semiperimeter: s = (a + b + c)/2</li>
+                <li>Triangle area: A = ½bc sin(A)</li>
+                <li>Arc length: s = rθ</li>
+                <li>Sector area: A = ½r²θ</li>
+                <li>Circumference: C = 2πr</li>
+            </ul>
+        </details>
+        <div class="review-actions">
+            <button type="button" onclick="startApp()">Start the Test 4 Practice</button>
+            <button type="button" id="resume-button" class="hidden" onclick="resumeSavedSession()">Resume Saved Session</button>
+        </div>
     </div>
 
     <div id="screen-mission-intro" class="hidden">
@@ -379,12 +466,35 @@
             <div class="stat-card"><span class="stat-number" id="stat-attempted">0</span><span class="stat-label">Attempted</span></div>
             <div class="stat-card"><span class="stat-number" id="stat-mission">— / —</span><span class="stat-label">Mission</span></div>
         </div>
+        <p><span class="timer-badge" id="timer-badge">⏱ <span id="timer-display">Study mode</span></span></p>
+
+        <details class="formula-panel">
+            <summary>Open formula sheet</summary>
+            <ul class="formula-list">
+                <li>Heron: A = √(s(s - a)(s - b)(s - c))</li>
+                <li>Semiperimeter: s = (a + b + c)/2</li>
+                <li>Triangle area: A = ½bc sin(A)</li>
+                <li>Arc length: s = rθ</li>
+                <li>Sector area: A = ½r²θ</li>
+                <li>Circumference: C = 2πr</li>
+            </ul>
+        </details>
 
         <div class="hint-box">
-            <strong>Hint:</strong> <span id="problem-hint"></span>
+            <strong>Progressive Hint:</strong> <span id="problem-hint">Try the setup first, then reveal a hint if needed.</span>
+            <div class="hint-controls">
+                <button type="button" id="hint-button" onclick="revealNextHint()">Reveal Hint 1</button>
+                <div id="hint-level" class="hint-level hidden"></div>
+            </div>
         </div>
 
+        <details class="mastery-panel">
+            <summary>Current mastery dashboard</summary>
+            <ul id="mastery-list" class="mastery-list"></ul>
+        </details>
+
         <div class="problem-card">
+            <div id="problem-diagram" class="diagram-panel hidden" aria-label="Problem diagram"></div>
             <p id="problem-text"></p>
             <div id="answer-directions" class="answer-directions"></div>
             <div id="options-container" class="hidden"></div>
@@ -406,6 +516,12 @@
         <div class="cert-title">Certificate of Test 4 Practice Completion</div>
         <p>You completed the Math 130 Test 4 Blueprint Practice Lab.</p>
         <p id="cert-score" style="font-weight: bold; color: var(--primary); font-size: 1.15em;"></p>
+        <div id="cert-report" class="report-grid"></div>
+        <div id="cert-review" class="mastery-panel"></div>
+        <div class="review-actions">
+            <button type="button" onclick="startReviewQueue()">Review Weakest Topics</button>
+            <button type="button" onclick="clearSavedSession()">Clear Saved Progress</button>
+        </div>
         <div class="hint-box">
             <strong>On-test formula reminders:</strong>
             <p class="subtle" style="margin: 6px 0 10px;">The actual Test 4 formula list is intentionally limited to these items; all other setup comes from the question context and student work.</p>
@@ -432,6 +548,14 @@
     let currentProblemLocked = false;
     let correctCount = 0;
     let attemptedCount = 0;
+    let practiceMode = "study";
+    let missionStats = [];
+    let reviewQueue = [];
+    let hintLevel = 0;
+    let timerId = null;
+    let sessionStart = null;
+    let currentProblemAttemptCount = 0;
+    const storageKey = "math130Test4PracticeState";
 
     function randInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -518,9 +642,58 @@
         return Number.isFinite(num) ? num : null;
     }
 
+    function splitTopLevelEquation(text) {
+        const parts = String(text).replace(/\s+/g, "").toLowerCase().split("=");
+        return parts.length === 2 ? parts : null;
+    }
+
+    function evalLinearExpression(expr, x, y) {
+        let cleaned = String(expr)
+            .replace(/−/g, "-")
+            .replace(/(?<![a-z0-9)])-/g, "+-")
+            .replace(/^\+/, "");
+        if (!cleaned) return NaN;
+        return cleaned.split("+").filter(Boolean).reduce((sum, term) => {
+            const variable = term.includes("x") ? "x" : term.includes("y") ? "y" : null;
+            if (!variable) return sum + (parseNumber(term) ?? NaN);
+            const coeffText = term.replace(variable, "");
+            let coeff = 1;
+            if (coeffText === "-") coeff = -1;
+            else if (coeffText && coeffText !== "+") coeff = parseNumber(coeffText);
+            return sum + coeff * (variable === "x" ? x : y);
+        }, 0);
+    }
+
+    function equationCoefficients(parts) {
+        const f = (x, y) => evalLinearExpression(parts[0], x, y) - evalLinearExpression(parts[1], x, y);
+        const c = f(0, 0);
+        return [f(1, 0) - c, f(0, 1) - c, c];
+    }
+
+    function equationsEquivalent(input, expected) {
+        const leftRightA = splitTopLevelEquation(input);
+        const leftRightB = splitTopLevelEquation(expected);
+        if (!leftRightA || !leftRightB) return false;
+        const a = equationCoefficients(leftRightA);
+        const b = equationCoefficients(leftRightB);
+        if (!a.concat(b).every(Number.isFinite)) return false;
+        const pivot = b.findIndex(v => Math.abs(v) > 0.001);
+        if (pivot === -1) return false;
+        const ratio = a[pivot] / b[pivot];
+        return a.every((v, i) => Math.abs(v - ratio * b[i]) < 0.001);
+    }
+
+    function solutionSetEquivalent(input, expected) {
+        const read = text => normalizeText(text).replace(/[{}]/g, "").split(",").map(parseNumber).filter(v => v !== null).sort((a, b) => a - b);
+        const a = read(input), b = read(expected);
+        return a.length > 0 && a.length === b.length && a.every((v, i) => Math.abs(v - b[i]) < 0.001);
+    }
+
     function textAnswerMatches(value, validAnswers, tolerance = 0.001) {
         const normalized = normalizeText(value);
         if (validAnswers.some(ans => normalizeText(ans) === normalized)) return true;
+        if (validAnswers.some(ans => String(ans).includes("=") && equationsEquivalent(value, ans))) return true;
+        if (validAnswers.some(ans => String(ans).includes(",") && solutionSetEquivalent(value, ans))) return true;
 
         const numericValue = parseNumber(value);
         if (numericValue === null) return false;
@@ -885,6 +1058,176 @@
         }
     ];
 
+    function initialMissionStats() {
+        return missions.map(() => ({ attempts: 0, correct: 0, firstTryCorrect: 0, stuck: 0, misses: 0 }));
+    }
+
+    function getSelectedMode() {
+        return document.querySelector('input[name="practice-mode"]:checked')?.value || "study";
+    }
+
+    function saveSession() {
+        const state = { currentMissionIndex, correctCount, attemptedCount, practiceMode, missionStats, reviewQueue, sessionStart };
+        localStorage.setItem(storageKey, JSON.stringify(state));
+        updateResumeButton();
+    }
+
+    function restoreSessionState(state) {
+        currentMissionIndex = state.currentMissionIndex ?? 0;
+        correctCount = state.correctCount ?? 0;
+        attemptedCount = state.attemptedCount ?? 0;
+        practiceMode = state.practiceMode || "study";
+        missionStats = Array.isArray(state.missionStats) && state.missionStats.length === missions.length ? state.missionStats : initialMissionStats();
+        reviewQueue = Array.isArray(state.reviewQueue) ? state.reviewQueue : [];
+        sessionStart = state.sessionStart || Date.now();
+    }
+
+    function resumeSavedSession() {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return;
+        restoreSessionState(JSON.parse(raw));
+        showMissionIntro();
+        startTimer();
+    }
+
+    function clearSavedSession() {
+        localStorage.removeItem(storageKey);
+        updateResumeButton();
+        document.getElementById("cert-review").innerHTML = "<strong>Saved progress cleared.</strong>";
+    }
+
+    function updateResumeButton() {
+        const btn = document.getElementById("resume-button");
+        if (btn) btn.classList.toggle("hidden", !localStorage.getItem(storageKey));
+    }
+
+    function formatElapsed(ms) {
+        const total = Math.max(0, Math.floor(ms / 1000));
+        const min = Math.floor(total / 60);
+        const sec = String(total % 60).padStart(2, "0");
+        return `${min}:${sec}`;
+    }
+
+    function startTimer() {
+        clearInterval(timerId);
+        const display = document.getElementById("timer-display");
+        if (!display) return;
+        if (practiceMode !== "test") {
+            display.innerText = "Study mode";
+            return;
+        }
+        sessionStart = sessionStart || Date.now();
+        timerId = setInterval(() => {
+            display.innerText = `Test mode · ${formatElapsed(Date.now() - sessionStart)}`;
+        }, 1000);
+    }
+
+    function getMissionAccuracy(index) {
+        const stat = missionStats[index] || { attempts: 0, correct: 0 };
+        return stat.attempts ? Math.round((stat.correct / stat.attempts) * 100) : null;
+    }
+
+    function renderMasteryDashboard() {
+        const list = document.getElementById("mastery-list");
+        if (!list || !missionStats.length) return;
+        list.innerHTML = missions.map((mission, index) => {
+            const stat = missionStats[index];
+            const accuracy = getMissionAccuracy(index);
+            const label = accuracy === null ? "Not tried" : `${accuracy}% (${stat.correct}/${stat.attempts})`;
+            const cls = accuracy === null ? "" : accuracy >= 80 ? "mastery-good" : "mastery-low";
+            return `<li><span>${index + 1}. ${mission.title.replace(/^Question \d+: /, "")}</span><span class="${cls}">${label}</span></li>`;
+        }).join("");
+    }
+
+    function addReviewMission(index) {
+        if (!reviewQueue.includes(index)) reviewQueue.push(index);
+    }
+
+    function getHintLevels(mission) {
+        return [
+            "Start by identifying what is given, what is asked, and the correct formula or relationship.",
+            mission.hints,
+            "Write one clean setup line before calculating, keep units attached, and round only at the final step."
+        ];
+    }
+
+    function revealNextHint() {
+        const mission = missions[currentMissionIndex];
+        const levels = getHintLevels(mission);
+        const box = document.getElementById("hint-level");
+        const btn = document.getElementById("hint-button");
+        box.classList.remove("hidden");
+        box.innerText = levels[Math.min(hintLevel, levels.length - 1)];
+        hintLevel++;
+        btn.innerText = hintLevel >= levels.length ? "Hint Fully Revealed" : `Reveal Hint ${hintLevel + 1}`;
+        btn.disabled = hintLevel >= levels.length;
+        saveSession();
+    }
+
+    function classifyInputError(input, field) {
+        if (field.validAnswers) {
+            if (String(input.value).trim() === "") return "This field is blank. Enter the requested notation before submitting.";
+            if (field.validAnswers.some(ans => String(ans).includes("=") || String(ans).includes("[") || String(ans).includes("("))) return "The idea may be close, but the notation is not equivalent to the requested equation, interval, or set.";
+            return "Check the requested exact notation and the order/signs of your response.";
+        }
+        const value = parseNumber(input.value);
+        if (value === null) return "One or more entries is not a readable number. Fractions like 3/4 and decimals are accepted.";
+        const diff = Math.abs(value - field.answer);
+        if (diff <= (field.tolerance ?? 0.05) * 5) return "Very close — this looks like a rounding or precision issue.";
+        if (Math.abs(value + field.answer) <= (field.tolerance ?? 0.05) * 5) return "Your magnitude is close, but the sign appears reversed.";
+        if (field.label.toLowerCase().includes("angle") || field.label.includes("θ")) return "Check whether the answer should be in degrees or radians before rounding.";
+        return "The setup or arithmetic needs another pass. Recheck formula choice, units, and substitution.";
+    }
+
+    function renderProblemDiagram(problem) {
+        const target = document.getElementById("problem-diagram");
+        const title = missions[currentMissionIndex].title.toLowerCase();
+        let svg = "";
+        if (title.includes("trig") || title.includes("right triangle") || title.includes("descent") || title.includes("bearing")) {
+            svg = `<svg viewBox="0 0 320 150" role="img"><path d="M40 120 L260 120 L260 35 Z" fill="#dbeafe" stroke="#23395d" stroke-width="3"/><path d="M245 120 L245 105 L260 105" fill="none" stroke="#23395d" stroke-width="2"/><text x="132" y="140">adjacent</text><text x="268" y="82">opposite</text><text x="140" y="70">hypotenuse</text><path d="M72 120 A32 32 0 0 1 96 98" fill="none" stroke="#d97706" stroke-width="3"/></svg>`;
+        } else if (title.includes("arc") || title.includes("sector") || title.includes("radians") || title.includes("degrees")) {
+            svg = `<svg viewBox="0 0 320 150" role="img"><path d="M160 120 L160 25 A95 95 0 0 1 248 84 Z" fill="#dcfce7" stroke="#23395d" stroke-width="3"/><path d="M160 25 A95 95 0 0 1 248 84" fill="none" stroke="#2563eb" stroke-width="8"/><text x="176" y="103">θ</text><text x="183" y="57">arc s</text><text x="118" y="78">r</text></svg>`;
+        } else if (title.includes("coordinate") || title.includes("vector")) {
+            svg = `<svg viewBox="0 0 320 170" role="img"><path d="M30 140 H295 M160 155 V20" stroke="#94a3b8" stroke-width="2"/><path d="M160 100 L245 55" stroke="#2563eb" stroke-width="5" marker-end="url(#arrow)"/><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker></defs><circle cx="160" cy="100" r="4" fill="#23395d"/><circle cx="245" cy="55" r="4" fill="#23395d"/><text x="250" y="50">point/vector</text></svg>`;
+        } else if (title.includes("lines angle")) {
+            svg = `<svg viewBox="0 0 320 150" role="img"><path d="M45 120 L275 30 M45 30 L275 120" stroke="#23395d" stroke-width="4"/><text x="152" y="60">α</text><text x="178" y="92">β</text></svg>`;
+        }
+        target.innerHTML = svg;
+        target.classList.toggle("hidden", !svg);
+    }
+
+    function buildStudyReport() {
+        const tried = missionStats.filter(s => s.attempts > 0);
+        const strongest = missions.map((m, i) => ({ i, acc: getMissionAccuracy(i) })).filter(x => x.acc !== null).sort((a, b) => b.acc - a.acc).slice(0, 3);
+        const weakest = missions.map((m, i) => ({ i, acc: getMissionAccuracy(i), misses: missionStats[i].misses + missionStats[i].stuck })).filter(x => x.acc !== null || x.misses).sort((a, b) => (a.acc ?? -1) - (b.acc ?? -1) || b.misses - a.misses).slice(0, 3);
+        return { tried, strongest, weakest };
+    }
+
+    function renderCertificateReport() {
+        const report = buildStudyReport();
+        const elapsed = sessionStart ? formatElapsed(Date.now() - sessionStart) : "—";
+        document.getElementById("cert-report").innerHTML = `
+            <div class="report-card"><strong>Mode</strong><br>${practiceMode === "test" ? "Timed Test Mode" : "Guided Study Mode"}</div>
+            <div class="report-card"><strong>Elapsed</strong><br>${elapsed}</div>
+            <div class="report-card"><strong>First-try correct</strong><br>${missionStats.reduce((s, m) => s + m.firstTryCorrect, 0)} missions</div>`;
+        const rows = report.weakest.map(item => `<li>${item.i + 1}. ${missions[item.i].title.replace(/^Question \d+: /, "")} — ${getMissionAccuracy(item.i) ?? 0}%</li>`).join("") || "<li>No weak areas recorded yet. Try more problems for a stronger diagnostic.</li>";
+        document.getElementById("cert-review").innerHTML = `<strong>Recommended review queue</strong><ul>${rows}</ul>`;
+        report.weakest.forEach(item => addReviewMission(item.i));
+        saveSession();
+    }
+
+    function startReviewQueue() {
+        if (!reviewQueue.length) {
+            const report = buildStudyReport();
+            reviewQueue = report.weakest.map(item => item.i);
+        }
+        if (!reviewQueue.length) return;
+        currentMissionIndex = reviewQueue.shift();
+        showMissionIntro();
+        saveSession();
+    }
+
+
     function hideAll() {
         document.getElementById("screen-welcome").classList.add("hidden");
         document.getElementById("screen-mission-intro").classList.add("hidden");
@@ -904,17 +1247,27 @@
         document.getElementById("stat-correct").innerText = correctCount;
         document.getElementById("stat-attempted").innerText = attemptedCount;
         document.getElementById("stat-mission").innerText = `${Math.min(currentMissionIndex + 1, missions.length)} / ${missions.length}`;
+        renderMasteryDashboard();
+        saveSession();
     }
 
     function startApp() {
         correctCount = 0;
         attemptedCount = 0;
         currentMissionIndex = 0;
+        practiceMode = getSelectedMode();
+        missionStats = initialMissionStats();
+        reviewQueue = [];
+        sessionStart = Date.now();
+        localStorage.removeItem(storageKey);
+        startTimer();
         showMissionIntro();
+        saveSession();
     }
 
     function showMissionIntro() {
         hideAll();
+        if (!missionStats.length) missionStats = initialMissionStats();
         if (currentMissionIndex >= missions.length) {
             showCertificate();
             return;
@@ -924,6 +1277,7 @@
         document.getElementById("mission-title").innerText = mission.title;
         document.getElementById("mission-intro-hint").innerText = mission.hints;
         document.getElementById("screen-mission-intro").classList.remove("hidden");
+        saveSession();
     }
 
     function startProblem() {
@@ -931,15 +1285,22 @@
         const mission = missions[currentMissionIndex];
         renderMissionProgress("mission-progress-problem");
         updateStats();
+        startTimer();
         document.getElementById("screen-problem").classList.remove("hidden");
         document.getElementById("problem-mission-title").innerText = mission.title;
-        document.getElementById("problem-hint").innerText = mission.hints;
+        document.getElementById("problem-hint").innerText = practiceMode === "test" ? "Try this without help first; reveal hints only after a serious attempt." : "Try the setup first, then reveal a hint if needed.";
         loadAnother();
     }
 
     function resetProblemUI() {
         currentProblemHadAttempt = false;
         currentProblemLocked = false;
+        currentProblemAttemptCount = 0;
+        hintLevel = 0;
+        const hintBox = document.getElementById("hint-level");
+        const hintBtn = document.getElementById("hint-button");
+        if (hintBox) { hintBox.innerText = ""; hintBox.classList.add("hidden"); }
+        if (hintBtn) { hintBtn.innerText = "Reveal Hint 1"; hintBtn.disabled = false; }
         document.getElementById("feedback").innerText = "";
         document.getElementById("solution").classList.add("hidden");
         document.getElementById("solution").innerHTML = "";
@@ -955,6 +1316,8 @@
 
         document.getElementById("problem-text").innerText = currentProblemObj.text;
         document.getElementById("answer-directions").innerText = getAnswerDirections(currentProblemObj);
+        renderProblemDiagram(currentProblemObj);
+        saveSession();
         const mcContainer = document.getElementById("options-container");
         const inputContainer = document.getElementById("input-container");
         const inputFields = document.getElementById("input-fields");
@@ -1011,21 +1374,37 @@
     function showSuccess() {
         currentProblemHadAttempt = true;
         currentProblemLocked = true;
+        currentProblemAttemptCount++;
         correctCount++;
         attemptedCount++;
+        const stat = missionStats[currentMissionIndex];
+        stat.attempts++;
+        stat.correct++;
+        if (currentProblemAttemptCount === 1) stat.firstTryCorrect++;
         updateStats();
         disableProblemControls();
         document.getElementById("feedback").innerHTML = `<span class="correct">Correct — great work!</span>`;
         revealSolution();
     }
 
-    function showRetry(message) {
+    function showRetry(message, lockAfter = false) {
         currentProblemHadAttempt = true;
+        currentProblemAttemptCount++;
         attemptedCount++;
+        const stat = missionStats[currentMissionIndex];
+        stat.attempts++;
+        stat.misses++;
+        addReviewMission(currentMissionIndex);
         updateStats();
         const feedback = document.getElementById("feedback");
         feedback.innerHTML = `<span class="incorrect">${message}</span>`;
-        setTimeout(() => { if (!currentProblemLocked) feedback.innerText = ""; }, 2600);
+        if (lockAfter || practiceMode === "test") {
+            currentProblemLocked = true;
+            disableProblemControls();
+            revealSolution();
+            return;
+        }
+        setTimeout(() => { if (!currentProblemLocked) feedback.innerText = ""; }, 3600);
     }
 
     function showSolutionAndContinue() {
@@ -1034,6 +1413,10 @@
         if (!currentProblemHadAttempt) {
             currentProblemHadAttempt = true;
             attemptedCount++;
+            const stat = missionStats[currentMissionIndex];
+            stat.attempts++;
+            stat.stuck++;
+            addReviewMission(currentMissionIndex);
             updateStats();
         }
         disableProblemControls();
@@ -1074,15 +1457,18 @@
                 input.disabled = true;
                 showSuccess();
             } else {
-                showRetry("Not quite. Check interval notation, braces, signs, and order.");
-                input.value = "";
-                input.focus();
+                showRetry(classifyInputError(input, { validAnswers: currentProblemObj.validAnswers }));
+                if (!currentProblemLocked) {
+                    input.value = "";
+                    input.focus();
+                }
             }
             return;
         }
 
         const fields = currentProblemObj.type === "multi" ? currentProblemObj.fields : [{ id: "answer", label: "Answer", answer: currentProblemObj.answer, tolerance: currentProblemObj.tolerance }];
         let allCorrect = true;
+        const errorMessages = [];
         fields.forEach(field => {
             const input = document.getElementById(`input-${field.id}`);
             let ok = false;
@@ -1094,13 +1480,16 @@
             }
             input.style.borderColor = ok ? "var(--success)" : "var(--danger)";
             input.style.backgroundColor = ok ? "var(--soft-green)" : "var(--soft-red)";
-            if (!ok) allCorrect = false;
+            if (!ok) {
+                allCorrect = false;
+                errorMessages.push(`${field.label}: ${classifyInputError(input, field)}`);
+            }
         });
 
         if (allCorrect) {
             showSuccess();
         } else {
-            showRetry("Not quite. Recheck rounding, units, and signs, then try again.");
+            showRetry(errorMessages.slice(0, 2).join(" "));
             setTimeout(() => {
                 if (currentProblemLocked) return;
                 fields.forEach(field => {
@@ -1120,15 +1509,23 @@
 
     function showCertificate() {
         hideAll();
+        clearInterval(timerId);
         const pct = attemptedCount ? Math.round((correctCount / attemptedCount) * 100) : 0;
         document.getElementById("cert-score").innerText = `Session score: ${correctCount} correct out of ${attemptedCount} attempts (${pct}%).`;
         document.getElementById("screen-certificate").classList.remove("hidden");
+        renderCertificateReport();
+        saveSession();
     }
 
     function restartLab() {
         hideAll();
+        clearInterval(timerId);
+        localStorage.removeItem(storageKey);
+        updateResumeButton();
         document.getElementById("screen-welcome").classList.remove("hidden");
     }
+
+    document.addEventListener("DOMContentLoaded", updateResumeButton);
 </script>
 
 </body>
