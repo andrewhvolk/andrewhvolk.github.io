@@ -95,6 +95,30 @@
 
     .math-review-page .callout strong { color: var(--text-main); }
 
+    .math-review-page .instruction-block {
+        margin-bottom: 1.2rem;
+        padding: 1.1rem 1.2rem;
+        border: 2px solid var(--primary-main);
+        border-left-width: 8px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, var(--accent-soft), var(--bg-surface));
+        box-shadow: var(--shadow);
+    }
+
+    .math-review-page .instruction-block h2 {
+        margin-bottom: 0.65rem;
+        font-size: 1.35rem;
+    }
+
+    .math-review-page .instruction-list {
+        display: grid;
+        gap: 0.45rem;
+        margin: 0;
+        padding-left: 1.15rem;
+        color: var(--text-main);
+        font-weight: 700;
+    }
+
     .math-review-page .mini-grid,
     .math-review-page .scope-grid,
     .math-review-page .formula-grid,
@@ -484,6 +508,17 @@
 </nav>
 
 <div class="container review-shell review-shell--below-banner">
+
+    <section class="instruction-block" aria-labelledby="test-4-instructions">
+        <div class="eyebrow"><i data-lucide="info"></i> Test 4 instructions</div>
+        <h2 id="test-4-instructions">Read before using the recreated versions</h2>
+        <ul class="instruction-list">
+            <li>Show work for full credit.</li>
+            <li>Unless otherwise stated, round answers to one decimal place.</li>
+            <li>Equivalent versions use the same question sequence and skill targets with changed parameters.</li>
+            <li>Use the helpful formula list at the end.</li>
+        </ul>
+    </section>
 
     <section class="tab-content" id="tab-overview">
         <div class="intro-note">
