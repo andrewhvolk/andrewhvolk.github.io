@@ -158,16 +158,9 @@ function setupGlobalNav(navRoot, index) {
         };
 
         trigger.addEventListener('click', (event) => {
-            if (!mobileNavMediaQuery.matches) {
-                const expanded = trigger.getAttribute('aria-expanded') === 'true';
-                setDropdownExpanded(!expanded, { focusFirstItem: !expanded });
-                event.preventDefault();
-                return;
-            }
-
             event.preventDefault();
             const expanded = trigger.getAttribute('aria-expanded') === 'true';
-            setDropdownExpanded(!expanded, { focusFirstItem: !expanded });
+            setDropdownExpanded(!expanded);
         });
 
         trigger.addEventListener('keydown', (event) => {
@@ -195,6 +188,8 @@ function setupGlobalNav(navRoot, index) {
         });
 
         dropdown.addEventListener('focusout', (event) => {
+            if (mobileNavMediaQuery.matches) return;
+
             if (!dropdown.contains(event.relatedTarget)) {
                 setDropdownExpanded(false);
             }
