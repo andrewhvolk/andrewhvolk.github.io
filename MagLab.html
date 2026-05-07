@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics 103: Module 7 Lab Report - Magnetism</title>
+    <style>
+        :root {
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #0056b3;
+            --border: #d1d8e0;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --highlight: #fff3cd;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h2, h3 { margin-top: 0; color: var(--primary); }
+        .container {
+            width: 100%;
+            max-width: 950px;
+        }
+        
+        /* Instructions Header */
+        .header-instructions {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            border-top: 5px solid var(--accent);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+        .warning-box {
+            background: var(--highlight);
+            border-left: 4px solid #f39c12;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #8a6d3b;
+        }
+
+        /* Identification Paper */
+        .white-paper {
+            background: white;
+            border: 2px solid var(--border);
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            gap: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            align-items: center;
+            background-image: repeating-linear-gradient(transparent, transparent 29px, #e1e4e8 29px, #e1e4e8 30px);
+            background-position: 0 10px;
+        }
+        .white-paper input {
+            border: none;
+            border-bottom: 1px dashed #7f8c8d;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+            width: 250px;
+            background: transparent;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Activity Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+        .step-list {
+            margin: 15px 0;
+            padding-left: 20px;
+            color: var(--secondary);
+        }
+        .step-list li { margin-bottom: 8px; }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.1s;
+        }
+        button:hover { background: #004494; }
+        button:active { transform: scale(0.98); }
+        button.active { background: var(--danger); }
+        button.active:hover { background: #c0392b; }
+        button.snapshot-btn { background: var(--success); display: flex; align-items: center; gap: 6px; }
+        button.snapshot-btn:hover { background: #219a52; }
+        select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-size: 14px;
+            background: white;
+        }
+        
+        /* Canvas */
+        canvas {
+            background: #eef2f5;
+            border-radius: 6px;
+            border: 1px inset var(--border);
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+            box-shadow: inner 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .rubric-note {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Reporting Area */
+        .reporting-area {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-top: 15px;
+            border-top: 1px dashed var(--border);
+            padding-top: 20px;
+        }
+        .observation-box {
+            flex: 2;
+            box-sizing: border-box;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 200px;
+            background: #fafbfc;
+            margin: 0;
+            line-height: 1.5;
+        }
+        .snapshots-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+            min-width: 250px;
+        }
+        .snapshot-img {
+            width: 100%;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            background: white;
+        }
+        .empty-snapshots-msg {
+            color: #95a5a6;
+            font-style: italic;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Print Formatting */
+        @media print {
+            body { background: white; margin: 0; padding: 0; }
+            .container { max-width: 100%; width: 100%; }
+            .controls, .header-instructions, button, .submission-section { display: none !important; }
+            .card { box-shadow: none; border: 1px solid #ccc; margin-bottom: 30px; page-break-inside: avoid; }
+            canvas { display: none !important; } /* Hide live canvases on the report */
+            .snapshots-container { max-height: none; overflow: visible; display: block; }
+            .snapshot-img { box-shadow: none; margin-bottom: 15px; page-break-inside: avoid; }
+            .observation-box { border: 1px solid #ccc; background: transparent; resize: none; overflow: visible; }
+            .white-paper { background-image: none; border: 1px solid #ccc; box-shadow: none; }
+            .white-paper input { border: none; }
+            .rubric-note { display: none; }
+            .reporting-area { flex-direction: column; } /* Stack text and images for better printing */
+            .observation-box { width: 100%; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="header-instructions">
+            <h1>Module 7 — Lab Report: Magnetism</h1>
+            <p><strong>Overview:</strong> Laboratory reports are an essential component of a physics education. You will perform Activities 1–3 using this interactive simulation.</p>
+            <p><strong>Submission format:</strong> Type your observations and use the Snapshot buttons to capture your work. The images will appear next to your notes. You can then print this page to a PDF to submit your final report.</p>
+        </div>
+
+        <div class="white-paper">
+            <strong>Student ID Card:</strong>
+            <label>Name: <input type="text" id="student-name" placeholder="Type your full name"></label>
+            <label>Date: <input type="date" id="student-date"></label>
+        </div>
+
+        <div class="card">
+            <h2>Activity 1: Properties of Electric Currents</h2>
+            <ul class="step-list">
+                <li>Place the magnetic compass on a level surface away from metallic objects. Align N with the red needle.</li>
+                <li>Place a D-cell battery in its holder, connect one alligator clip lead, lay the wire over the compass, then connect the other end to close the circuit.</li>
+                <li>Observe the compass needle deflect; disconnect and observe it return.</li>
+            </ul>
+            
+            <div class="warning-box">
+                Important: After Activity 1, do NOT connect terminals with a single conductor — it will short-circuit the electromagnet and solenoid in the physical lab.
+            </div>
+
+            <div class="controls">
+                <button id="btn-a1-power" onclick="togglePowerA1()">Connect Circuit (Step 9)</button>
+                <div style="flex-grow: 1;"></div>
+                <button class="snapshot-btn" onclick="takeSnapshot('canvasA1', 'snapshotsA1')">
+                    📸 Take Snapshot
+                </button>
+            </div>
+
+            <canvas id="canvasA1" width="800" height="300"></canvas>
+            <span class="rubric-note">Submit: Photo at Step 4 (compass with wire, not connected); photo at Step 9 (circuit closed).</span>
+            
+            <div class="reporting-area">
+                <textarea class="observation-box" placeholder="Describe what happens to the compass needle..."></textarea>
+                <div class="snapshots-container" id="snapshotsA1">
+                    <div class="empty-snapshots-msg">Snapshots will appear here.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Activity 2: Coiled Wire Electromagnet</h2>
+            <ul class="step-list">
+                <li>Wrap magnet wire around the nail 100 times. Connect to battery via alligator clips.</li>
+                <li>Test with compass to identify north/south poles. Pick up paper clips and count them.</li>
+                <li>Vary conditions: disconnect while holding clips, add a second battery in series, remove the nail, reduce coils to 50 — count paper clips each time.</li>
+            </ul>
+            
+            <div class="controls">
+                <label>Batteries: 
+                    <select id="a2-batt">
+                        <option value="1">1 D-cell</option>
+                        <option value="2">2 D-cells (Series)</option>
+                    </select>
+                </label>
+                <label>Core: 
+                    <select id="a2-core">
+                        <option value="iron">Iron Nail</option>
+                        <option value="air">Air (No Core)</option>
+                    </select>
+                </label>
+                <label>Coil Turns: 
+                    <select id="a2-coils">
+                        <option value="100">100 Turns</option>
+                        <option value="50">50 Turns</option>
+                    </select>
+                </label>
+                <button id="btn-a2-power" onclick="togglePowerA2()">Connect Circuit (Step 9 / 13)</button>
+                <div style="flex-grow: 1;"></div>
+                <button class="snapshot-btn" onclick="takeSnapshot('canvasA2', 'snapshotsA2')">
+                    📸 Take Snapshot
+                </button>
+            </div>
+
+            <canvas id="canvasA2" width="800" height="400"></canvas>
+            <span class="rubric-note">Submit: Photos at Step 7 (compass with prepared coil, not connected), Step 9 (compass with electromagnet connected), Step 13 (holding clips), and with 50 coils.</span>
+            
+            <div class="reporting-area">
+                <textarea class="observation-box" placeholder="Discuss your findings. How did batteries, the iron core, and coil count affect magnet strength?"></textarea>
+                <div class="snapshots-container" id="snapshotsA2">
+                    <div class="empty-snapshots-msg">Snapshots will appear here.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Activity 3: Solenoid</h2>
+            <ul class="step-list">
+                <li>Wind magnet wire tightly around the straw 100 times.</li>
+                <li>Straighten a paper clip and insert it inside the straw.</li>
+                <li>Connect to battery and observe the paper clip's motion.</li>
+            </ul>
+            
+            <div class="controls">
+                <button onclick="resetA3()">Reset Setup (Step 7)</button>
+                <button id="btn-a3-power" onclick="togglePowerA3()">Connect Circuit (Step 9)</button>
+                <div style="flex-grow: 1;"></div>
+                <button class="snapshot-btn" onclick="takeSnapshot('canvasA3', 'snapshotsA3')">
+                    📸 Take Snapshot
+                </button>
+            </div>
+
+            <canvas id="canvasA3" width="800" height="250"></canvas>
+            <span class="rubric-note">Submit: Photo of setup at Step 7; photo at Step 9 (paper clip should be as straight as possible).</span>
+            
+            <div class="reporting-area">
+                <textarea class="observation-box" placeholder="Include a discussion of what happens to the paper clip in Steps 9–10..."></textarea>
+                <div class="snapshots-container" id="snapshotsA3">
+                    <div class="empty-snapshots-msg">Snapshots will appear here.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card submission-section" style="background: #e8f4f8; border-color: #b3d4fc;">
+            <h2>Submission Instructions</h2>
+            <p>Once you have completed all activities, captured the required snapshots, and entered your observations, you are ready to submit your lab report.</p>
+            <ol class="step-list">
+                <li>Review your notes to ensure all questions from the assignment instructions are answered.</li>
+                <li>Ensure your name and date are filled out at the top of the page.</li>
+                <li>Click the button below to generate your report. When your browser's print dialog appears, set the destination to <strong>"Save as PDF"</strong>.</li>
+                <li>Upload the resulting single PDF file to the assignment submission link in Canvas.</li>
+            </ol>
+            <button class="snapshot-btn" style="background: var(--primary); width: 100%; justify-content: center; font-size: 16px; padding: 15px; margin-top: 15px;" onclick="prepareAndPrint()">
+                📄 Generate PDF Report (Save as PDF)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // Print / PDF Utility
+        // ==========================================
+        function prepareAndPrint() {
+            // Expand textareas to fit their entire content before printing so text isn't cut off
+            const textareas = document.querySelectorAll('.observation-box');
+            textareas.forEach(ta => {
+                ta.style.height = 'auto'; // Reset height
+                ta.style.height = (ta.scrollHeight + 5) + 'px'; // Set to actual scroll content height
+            });
+            
+            // Trigger browser print dialog
+            window.print();
+        }
+
+        // ==========================================
+        // Snapshot Utility
+        // ==========================================
+        function takeSnapshot(canvasId, containerId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const name = document.getElementById('student-name').value || 'No Name Provided';
+            const dateStr = document.getElementById('student-date').value;
+            const date = dateStr ? new Date(dateStr).toLocaleDateString() : 'No Date Provided';
+
+            ctx.save();
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetX = 3;
+            ctx.shadowOffsetY = 3;
+            ctx.fillRect(15, 15, 300, 75);
+            
+            ctx.shadowColor = 'transparent';
+            ctx.strokeStyle = '#bdc3c7';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(15, 15, 300, 75);
+
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = 'bold 15px "Courier New", monospace';
+            ctx.fillText('Student: ' + name, 30, 42);
+            ctx.fillText('Date:    ' + date, 30, 68);
+            ctx.restore();
+
+            const dataURL = canvas.toDataURL('image/png');
+            const img = document.createElement('img');
+            img.src = dataURL;
+            img.className = 'snapshot-img';
+
+            const container = document.getElementById(containerId);
+            const emptyMsg = container.querySelector('.empty-snapshots-msg');
+            if (emptyMsg) emptyMsg.remove();
+            
+            container.prepend(img);
+        }
+
+        // ==========================================
+        // Activity 1: Compass Physics
+        // ==========================================
+        const canvas1 = document.getElementById('canvasA1');
+        const ctx1 = canvas1.getContext('2d');
+        let a1PowerOn = false;
+        let currentAngle = 0;
+        let targetAngle = 0;
+
+        function togglePowerA1() {
+            a1PowerOn = !a1PowerOn;
+            const btn = document.getElementById('btn-a1-power');
+            if(a1PowerOn) {
+                btn.innerText = "Disconnect Circuit";
+                btn.classList.add('active');
+                targetAngle = 75 * (Math.PI / 180);
+            } else {
+                btn.innerText = "Connect Circuit (Step 9)";
+                btn.classList.remove('active');
+                targetAngle = 0;
+            }
+        }
+
+        function renderA1() {
+            ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+            currentAngle += (targetAngle - currentAngle) * 0.1;
+            const cx = 400; const cy = 150;
+
+            ctx1.beginPath(); ctx1.arc(cx, cy, 60, 0, 2 * Math.PI);
+            ctx1.fillStyle = '#ffffff'; ctx1.fill();
+            ctx1.lineWidth = 4; ctx1.strokeStyle = '#3498db'; ctx1.stroke();
+
+            ctx1.fillStyle = '#7f8c8d'; ctx1.font = 'bold 16px Arial';
+            ctx1.textAlign = 'center';
+            ctx1.fillText('N', cx, cy - 40); ctx1.fillText('S', cx, cy + 52);
+
+            ctx1.save(); ctx1.translate(cx, cy); ctx1.rotate(currentAngle);
+            ctx1.beginPath(); ctx1.moveTo(0, -45); ctx1.lineTo(5, 0); ctx1.lineTo(-5, 0);
+            ctx1.fillStyle = '#e74c3c'; ctx1.fill();
+            ctx1.beginPath(); ctx1.moveTo(0, 45); ctx1.lineTo(5, 0); ctx1.lineTo(-5, 0);
+            ctx1.fillStyle = '#95a5a6'; ctx1.fill();
+            ctx1.beginPath(); ctx1.arc(0, 0, 4, 0, 2 * Math.PI);
+            ctx1.fillStyle = '#2c3e50'; ctx1.fill();
+            ctx1.restore();
+
+            ctx1.lineWidth = 8;
+            ctx1.strokeStyle = a1PowerOn ? 'rgba(211, 84, 0, 0.9)' : 'rgba(230, 126, 34, 0.4)';
+            ctx1.beginPath(); ctx1.moveTo(0, cy); ctx1.lineTo(canvas1.width, cy); ctx1.stroke();
+
+            requestAnimationFrame(renderA1);
+        }
+        renderA1();
+
+        // ==========================================
+        // Activity 2: Kinematic Smooth Chaining
+        // ==========================================
+        const canvas2 = document.getElementById('canvasA2');
+        const ctx2 = canvas2.getContext('2d');
+        
+        let a2PowerOn = false;
+        let clipsA2 = [];
+        let a2CompassAngle = 0;
+        let a2CompassTarget = 0;
+        const floorY = 380;
+        const magnetY = 80;
+        const magnetX = 400;
+
+        for(let i = 0; i < 65; i++) {
+            clipsA2.push({
+                x: 100 + Math.random() * 600,
+                y: floorY - Math.random() * 5,
+                vx: 0, vy: 0,
+                angle: Math.random() * Math.PI,
+                vAngle: (Math.random() - 0.5) * 0.2,
+                state: 0, 
+                chainCol: -1,
+                chainRow: -1,
+                targetAngle: 0
+            });
+        }
+
+        function togglePowerA2() {
+            a2PowerOn = !a2PowerOn;
+            const btn = document.getElementById('btn-a2-power');
+            if(a2PowerOn) {
+                btn.innerText = "Disconnect Circuit";
+                btn.classList.add('active');
+            } else {
+                btn.innerText = "Connect Circuit (Step 9 / 13)";
+                btn.classList.remove('active');
+            }
+        }
+
+        function renderA2() {
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+            const batt = parseInt(document.getElementById('a2-batt').value);
+            const core = document.getElementById('a2-core').value;
+            const coils = parseInt(document.getElementById('a2-coils').value);
+
+            const coreMult = core === 'iron' ? 4 : 0.5;
+            const coilMult = coils / 50; 
+            const strength = batt * coreMult * coilMult; 
+            const maxLiftCapacity = Math.floor(strength * 3.5); 
+
+            let activeClips = clipsA2.filter(c => c.state === 1 || c.state === 2);
+            activeClips.sort((a, b) => b.chainRow - a.chainRow);
+            
+            while (activeClips.length > maxLiftCapacity || !a2PowerOn) {
+                if (activeClips.length === 0) break;
+                let clipToDrop = activeClips.shift();
+                clipToDrop.state = 3; 
+                clipToDrop.chainCol = -1;
+                clipToDrop.chainRow = -1;
+            }
+
+            let chainLengths = [0, 0, 0, 0, 0];
+            activeClips.forEach(c => {
+                if (c.chainCol >= 0 && c.chainCol < 5) {
+                    if (c.chainRow >= chainLengths[c.chainCol]) {
+                        chainLengths[c.chainCol] = c.chainRow + 1;
+                    }
+                }
+            });
+
+            if (a2PowerOn) {
+                let floorClips = clipsA2.filter(c => c.state === 0 || c.state === 3);
+                while (activeClips.length < maxLiftCapacity && floorClips.length > 0) {
+                    let newClip = floorClips.shift();
+                    newClip.state = 1; 
+
+                    let minLen = 999;
+                    let bestCol = 0;
+                    for(let i = 0; i < 5; i++) {
+                        if(chainLengths[i] < minLen) { minLen = chainLengths[i]; bestCol = i; }
+                    }
+                    newClip.chainCol = bestCol;
+                    newClip.chainRow = minLen;
+                    newClip.targetAngle = (Math.PI / 2) + (Math.random() - 0.5) * 0.4; 
+                    chainLengths[bestCol]++;
+                    activeClips.push(newClip);
+                }
+            }
+
+            let anchors = [magnetX - 44, magnetX - 22, magnetX, magnetX + 22, magnetX + 44];
+
+            clipsA2.forEach(clip => {
+                if (clip.state === 0 || clip.state === 3) {
+                    clip.vy += 0.4; 
+                    clip.vx *= 0.95; 
+                    clip.vy *= 0.95;
+                    
+                    clip.x += clip.vx; 
+                    clip.y += clip.vy;
+                    clip.angle += clip.vAngle;
+
+                    if (clip.y > floorY) { 
+                        clip.y = floorY; 
+                        clip.vy = -clip.vy * 0.3; 
+                        clip.vx *= 0.6; 
+                        clip.vAngle *= 0.8;
+                        if (Math.abs(clip.vy) < 0.5) {
+                            clip.state = 0; 
+                        }
+                    }
+                } else if (clip.state === 1 || clip.state === 2) {
+                    let targetX = anchors[clip.chainCol];
+                    let targetY = magnetY + 25 + (clip.chainRow * 13);
+                    let dx = targetX - clip.x;
+                    let dy = targetY - clip.y;
+
+                    if (clip.state === 1) {
+                        clip.vx = dx * 0.08;
+                        clip.vy = dy * 0.08;
+                        clip.x += clip.vx;
+                        clip.y += clip.vy;
+                        
+                        clip.angle += (clip.targetAngle - clip.angle) * 0.1;
+                        
+                        if (Math.abs(dx) < 2 && Math.abs(dy) < 2) {
+                            clip.state = 2; 
+                        }
+                    } else {
+                        clip.x += dx * 0.4;
+                        clip.y += dy * 0.4;
+                        clip.vx = 0; 
+                        clip.vy = 0;
+                        clip.angle += (clip.targetAngle - clip.angle) * 0.2;
+                    }
+                }
+
+                ctx2.save();
+                ctx2.translate(clip.x, clip.y); ctx2.rotate(clip.angle);
+                ctx2.fillStyle = '#95a5a6'; ctx2.fillRect(-8, -2, 16, 4);
+                ctx2.strokeStyle = '#2c3e50'; ctx2.lineWidth = 1; ctx2.strokeRect(-8, -2, 16, 4);
+                ctx2.restore();
+            });
+
+            if(core === 'iron') {
+                let grad = ctx2.createLinearGradient(0, 30, 0, 90);
+                grad.addColorStop(0, '#95a5a6');
+                grad.addColorStop(0.3, '#ecf0f1');
+                grad.addColorStop(1, '#7f8c8d');
+
+                ctx2.fillStyle = grad;
+                ctx2.strokeStyle = '#2c3e50';
+                ctx2.lineWidth = 2;
+                
+                ctx2.beginPath();
+                ctx2.moveTo(magnetX - 65, 30);
+                ctx2.lineTo(magnetX - 55, 30);
+                ctx2.lineTo(magnetX - 55, 40);
+                ctx2.lineTo(magnetX + 45, 40);
+                ctx2.lineTo(magnetX + 65, 60); 
+                ctx2.lineTo(magnetX + 45, 80); 
+                ctx2.lineTo(magnetX - 55, 80);
+                ctx2.lineTo(magnetX - 55, 90);
+                ctx2.lineTo(magnetX - 65, 90);
+                ctx2.closePath();
+                ctx2.fill();
+                ctx2.stroke();
+            } else {
+                ctx2.strokeStyle = 'rgba(127, 140, 141, 0.5)';
+                ctx2.setLineDash([5, 5]);
+                ctx2.strokeRect(magnetX - 55, 40, 110, 40);
+                ctx2.setLineDash([]);
+            }
+
+            ctx2.strokeStyle = '#d35400'; 
+            ctx2.lineWidth = coils === 100 ? 3 : 1.5;
+            const coilSpacing = coils === 100 ? 6 : 12;
+            ctx2.beginPath();
+            for(let i = magnetX - 50; i < magnetX + 40; i += coilSpacing) {
+                ctx2.moveTo(i, 38); 
+                ctx2.lineTo(i + 5, 82);
+            }
+            ctx2.stroke();
+
+            const cx = 150; const cy = 150;
+            ctx2.beginPath(); ctx2.arc(cx, cy, 30, 0, 2 * Math.PI);
+            ctx2.fillStyle = '#ffffff'; ctx2.fill();
+            ctx2.lineWidth = 2; ctx2.strokeStyle = '#3498db'; ctx2.stroke();
+
+            if(a2PowerOn && core === 'iron') {
+                a2CompassTarget = Math.atan2(magnetY - cy, magnetX - cx) + Math.PI/2;
+            } else if (a2PowerOn && core === 'air') {
+                a2CompassTarget = Math.atan2(magnetY - cy, magnetX - cx) + Math.PI/2 - 0.5; 
+            } else {
+                a2CompassTarget = 0; 
+            }
+            
+            let diff = a2CompassTarget - a2CompassAngle;
+            while (diff < -Math.PI) diff += 2 * Math.PI;
+            while (diff > Math.PI) diff -= 2 * Math.PI;
+            a2CompassAngle += diff * 0.1;
+
+            ctx2.save();
+            ctx2.translate(cx, cy); ctx2.rotate(a2CompassAngle);
+            ctx2.beginPath(); ctx2.moveTo(0, -20); ctx2.lineTo(3, 0); ctx2.lineTo(-3, 0);
+            ctx2.fillStyle = '#e74c3c'; ctx2.fill();
+            ctx2.beginPath(); ctx2.moveTo(0, 20); ctx2.lineTo(3, 0); ctx2.lineTo(-3, 0);
+            ctx2.fillStyle = '#95a5a6'; ctx2.fill();
+            ctx2.restore();
+            
+            ctx2.fillStyle = '#2c3e50'; ctx2.font = '10px Arial'; ctx2.fillText('Compass', cx - 20, cy + 45);
+
+            requestAnimationFrame(renderA2);
+        }
+        renderA2();
+
+        // ==========================================
+        // Activity 3: Solenoid Physics
+        // ==========================================
+        const canvas3 = document.getElementById('canvasA3');
+        const ctx3 = canvas3.getContext('2d');
+        
+        let a3PowerOn = false;
+        let clipA3 = { x: 150, vx: 0 }; 
+        const strawCenter = 400;
+
+        function togglePowerA3() {
+            a3PowerOn = !a3PowerOn;
+            const btn = document.getElementById('btn-a3-power');
+            if(a3PowerOn) {
+                btn.innerText = "Disconnect Circuit";
+                btn.classList.add('active');
+            } else {
+                btn.innerText = "Connect Circuit (Step 9)";
+                btn.classList.remove('active');
+            }
+        }
+
+        function resetA3() {
+            a3PowerOn = false;
+            clipA3.x = 150;
+            clipA3.vx = 0;
+            const btn = document.getElementById('btn-a3-power');
+            btn.innerText = "Connect Circuit (Step 9)";
+            btn.classList.remove('active');
+        }
+
+        function renderA3() {
+            ctx3.clearRect(0, 0, canvas3.width, canvas3.height);
+
+            ctx3.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx3.strokeStyle = '#bdc3c7'; ctx3.lineWidth = 2;
+            ctx3.fillRect(strawCenter - 100, 100, 200, 40);
+            ctx3.strokeRect(strawCenter - 100, 100, 200, 40);
+
+            ctx3.strokeStyle = '#c0392b'; ctx3.lineWidth = 2;
+            ctx3.beginPath();
+            for(let i = strawCenter - 95; i < strawCenter + 95; i += 8) {
+                ctx3.moveTo(i, 95); ctx3.lineTo(i + 4, 145);
+            }
+            ctx3.stroke();
+
+            if(a3PowerOn) {
+                let force = (strawCenter - clipA3.x) * 0.02;
+                clipA3.vx += force;
+            }
+            
+            clipA3.vx *= 0.85; 
+            clipA3.x += clipA3.vx;
+
+            ctx3.fillStyle = '#7f8c8d';
+            ctx3.fillRect(clipA3.x - 60, 117, 120, 6);
+            ctx3.strokeStyle = '#2c3e50'; ctx3.lineWidth = 1;
+            ctx3.strokeRect(clipA3.x - 60, 117, 120, 6);
+
+            requestAnimationFrame(renderA3);
+        }
+        renderA3();
+    </script>
+</body>
+</html>
