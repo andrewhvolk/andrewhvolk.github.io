@@ -25,6 +25,8 @@
         .fade-in { animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .hidden-content { display: none; }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
@@ -34,7 +36,7 @@
         <div class="max-w-5xl mx-auto">
             <div class="flex items-center gap-4 mb-4">
                 <i class="fas fa-globe-americas text-4xl text-liberty-red"></i>
-                <h1 class="text-3xl md:text-5xl font-bold tracking-tight">Fulbright Pathway</h1>
+                <h1 class="text-3xl md:text-5xl font-bold tracking-tight">Fulbright Pathway: Math & Physics</h1>
             </div>
             <p class="text-xl text-blue-100 max-w-3xl">
                 A definitive guide for <strong>Math, Applied Math, and Physics</strong> undergraduates at Liberty University preparing for the Fulbright U.S. Student Program.
@@ -148,6 +150,29 @@
             </div>
         </div>
 
+        <!-- Grant Types: Research vs. ETA -->
+        <div class="mb-10">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-gray-200 pb-2">Which Grant is Right for You?</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-blue-600">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2"><i class="fas fa-microscope text-blue-600 mr-2"></i>Study / Research Grant</h3>
+                    <p class="text-gray-700 text-sm mb-4">The traditional path. You design your own independent research project or enroll in a graduate degree program abroad.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Best for:</strong> Students heading to grad school, future researchers, or those with a specific lab they want to work in.</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Requirements:</strong> Requires a solid Letter of Affiliation and a very specific project proposal.</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-teal-500">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2"><i class="fas fa-chalkboard-teacher text-teal-500 mr-2"></i>English Teaching Assistant (ETA)</h3>
+                    <p class="text-gray-700 text-sm mb-4">You are placed in a classroom abroad to assist local English teachers. <strong>STEM majors are highly sought after!</strong></p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Best for:</strong> Students who love teaching, outreach, or want a gap year before pursuing a Ph.D. or industry job.</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>STEM Edge:</strong> Many countries specifically request ETAs with STEM backgrounds to help with science clubs or teach STEM vocabulary in English.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <!-- What it Covers -->
         <div class="bg-gradient-to-r from-liberty-navy to-blue-800 rounded-xl shadow-md p-6 mb-10 text-white flex flex-col md:flex-row items-center justify-between">
             <div class="mb-4 md:mb-0 md:mr-6">
@@ -165,7 +190,7 @@
         <!-- Interactive Selector -->
         <div class="bg-white rounded-xl shadow-md p-6 mb-8 text-center">
             <h2 class="text-2xl font-bold text-gray-900 mb-4">Select Your Anticipated Graduation Date</h2>
-            <p class="text-gray-600 mb-6">Your priorities for Fall 2026 and Spring 2027 depend entirely on when you graduate.</p>
+            <p class="text-gray-600 mb-6">Your priorities for Summer 2026, Fall 2026, and Spring 2027 depend entirely on when you graduate.</p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
                 <button onclick="showTrack('senior')" id="btn-senior" class="flex-1 py-3 px-6 rounded-lg font-bold border-2 transition-all duration-200 bg-liberty-navy text-white border-liberty-navy shadow-md hover:bg-blue-900">
@@ -184,32 +209,53 @@
                 <p class="text-gray-600 mt-2">You are applying for the <strong>2027-2028 Grant Year</strong>. Your application is due THIS Fall (2026).</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Fall 2026 Column -->
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+                <!-- Summer 2026 Column (Current) -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="bg-liberty-navy text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-leaf mr-2"></i> Summer/Fall 2026: Liberty Deadlines</h4>
+                    <div class="bg-yellow-500 text-white py-3 px-6">
+                        <h4 class="text-xl font-bold"><i class="fas fa-sun mr-2"></i> Summer 2026 (Now!)</h4>
                     </div>
                     <div class="p-6">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
+                            <li class="pl-6 relative">
+                                <div class="absolute w-4 h-4 bg-yellow-600 rounded-full -left-[9px] top-1"></div>
+                                <h5 class="font-bold text-gray-900">Draft Your Essays</h5>
+                                <p class="text-sm text-gray-600 mt-1">Start writing your Personal Statement and Statement of Grant Purpose. Translating heavy STEM concepts for a general committee takes many revisions.</p>
+                            </li>
+                            <li class="pl-6 relative">
+                                <div class="absolute w-4 h-4 bg-yellow-600 rounded-full -left-[9px] top-1"></div>
+                                <h5 class="font-bold text-gray-900">Secure Affiliation</h5>
+                                <p class="text-sm text-gray-600 mt-1">Finalize your host country lab/university. Ensure the official Letter of Affiliation is signed and on official letterhead.</p>
+                            </li>
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-orange-500 rounded-full -left-[9px] top-1"></div>
                                 <h5 class="font-bold text-gray-900">August 5 - Canvas Training Due</h5>
                                 <p class="text-sm text-gray-600 mt-1">Deadline to complete Liberty's mandatory Canvas Fulbright Application Summer Training.</p>
                             </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Fall 2026 Column -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-liberty-navy text-white py-3 px-6">
+                        <h4 class="text-xl font-bold"><i class="fas fa-leaf mr-2"></i> Fall 2026: Deadlines</h4>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-red-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">August 15 - Liberty Campus Deadline</h5>
-                                <p class="text-sm text-gray-600 mt-1"><strong>Strict Campus Deadline:</strong> Complete online application must be submitted via the portal to be eligible for the campus interview.</p>
+                                <h5 class="font-bold text-gray-900">August 15 - Campus Deadline</h5>
+                                <p class="text-sm text-gray-600 mt-1"><strong>Strict Deadline:</strong> Complete online application must be submitted via the portal to be eligible for the campus interview.</p>
                             </li>
                             <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-yellow-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Early September - Campus Interview</h5>
-                                <p class="text-sm text-gray-600 mt-1">Attend the mandatory campus interview with Liberty University's Fulbright Committee. Feedback will be provided to polish your STEM essays.</p>
+                                <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1"></div>
+                                <h5 class="font-bold text-gray-900">Early Sept - Campus Interview</h5>
+                                <p class="text-sm text-gray-600 mt-1">Attend the mandatory campus interview with Liberty's committee. Feedback will be provided to polish your application.</p>
                             </li>
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-red-600 rounded-full -left-[9px] top-1 border-2 border-white shadow"></div>
-                                <h5 class="font-bold text-red-700">2nd Tuesday in October - National Deadline</h5>
+                                <h5 class="font-bold text-red-700">Mid-Oct - National Deadline</h5>
                                 <p class="text-sm text-gray-600 mt-1">Final submission to the national Fulbright portal. No changes can be made after this date.</p>
                             </li>
                         </ul>
@@ -219,31 +265,26 @@
                 <!-- Spring 2027 Column -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
                     <div class="bg-green-700 text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-seedling mr-2"></i> Spring 2027: The Waiting Period</h4>
+                        <h4 class="text-xl font-bold"><i class="fas fa-seedling mr-2"></i> Spring 2027: Waiting</h4>
                     </div>
                     <div class="p-6">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-gray-400 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Late January - Semi-Finalist Notification</h5>
-                                <p class="text-sm text-gray-600 mt-1">The U.S. National Screening Committee announces if your application has been forwarded to the host country for final review.</p>
+                                <h5 class="font-bold text-gray-900">Late Jan - Semi-Finalists</h5>
+                                <p class="text-sm text-gray-600 mt-1">The U.S. National Screening Committee announces if your application has been forwarded to the host country.</p>
                             </li>
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-gray-400 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">March to May - Finalist Notification</h5>
-                                <p class="text-sm text-gray-600 mt-1">Host countries notify applicants on a rolling basis. If selected, you begin pre-departure orientations and visa paperwork.</p>
+                                <h5 class="font-bold text-gray-900">March-May - Finalists</h5>
+                                <p class="text-sm text-gray-600 mt-1">Host countries notify applicants. If selected, begin pre-departure orientations and visas.</p>
                             </li>
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-liberty-red rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">May 2027 (For May Grads)</h5>
-                                <p class="text-sm text-gray-600 mt-1">Graduate from Liberty University! Your grant will typically start between August 2027 and March 2028 depending on the country.</p>
+                                <h5 class="font-bold text-gray-900">May 2027</h5>
+                                <p class="text-sm text-gray-600 mt-1">Graduate from Liberty University! Grant starts Aug '27 - Mar '28.</p>
                             </li>
                         </ul>
-                        
-                        <div class="mt-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                            <h5 class="font-bold text-sm text-gray-800"><i class="fas fa-info-circle text-blue-500 mr-1"></i> December 2026 Grads Note:</h5>
-                            <p class="text-xs text-gray-600 mt-1">If you graduate in Dec '26, you will have a "gap semester" (Spring 2027) before your grant begins. Use this time to work, do research, or study the language of your host country.</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -256,7 +297,28 @@
                 <p class="text-gray-600 mt-2">You will apply in Fall 2027 for the <strong>2028-2029 Grant Year</strong>. Now is the time to build your profile and secure funding.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+                <!-- Summer 2026 Column -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="bg-yellow-500 text-white py-3 px-6">
+                        <h4 class="text-xl font-bold"><i class="fas fa-sun mr-2"></i> Summer 2026 (Now!)</h4>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
+                            <li class="pl-6 relative">
+                                <div class="absolute w-4 h-4 bg-yellow-600 rounded-full -left-[9px] top-1"></div>
+                                <h5 class="font-bold text-gray-900">Gain Lab/Research Experience</h5>
+                                <p class="text-sm text-gray-600 mt-1">Participate in an REU (Research Experience for Undergraduates) or work in a Liberty lab. This is crucial for a STEM Fulbright.</p>
+                            </li>
+                            <li class="pl-6 relative">
+                                <div class="absolute w-4 h-4 bg-yellow-600 rounded-full -left-[9px] top-1"></div>
+                                <h5 class="font-bold text-gray-900">Brainstorm Projects</h5>
+                                <p class="text-sm text-gray-600 mt-1">Start thinking: What specific subset of physics or math do you want to research? Which countries are leaders in this field?</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <!-- Fall 2026 Column -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
                     <div class="bg-liberty-navy text-white py-3 px-6">
@@ -267,17 +329,17 @@
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-blue-400 rounded-full -left-[9px] top-1"></div>
                                 <h5 class="font-bold text-gray-900">Email Prof. Udobong</h5>
-                                <p class="text-sm text-gray-600 mt-1">Send an introductory email to <code class="bg-gray-100 px-1 rounded text-xs text-liberty-red">internationalscholarships@liberty.edu</code> to get on the radar for the 28-29 cycle.</p>
+                                <p class="text-sm text-gray-600 mt-1">Send an intro email to <code class="bg-gray-100 px-1 rounded text-xs text-liberty-red">internationalscholarships@liberty.edu</code> to get on the radar.</p>
                             </li>
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-purple-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-purple-700">Apply for the P.A.R.E. Grant</h5>
-                                <p class="text-sm text-gray-600 mt-1">Liberty offers the <em>Provost's Award for Research Excellence</em> (up to $2,500) specifically for students promising to apply for a Fulbright. Apply in late Fall/Winter for summer research funding.</p>
+                                <h5 class="font-bold text-purple-700">Apply for the P.A.R.E.</h5>
+                                <p class="text-sm text-gray-600 mt-1">Liberty offers the <em>Provost's Award for Research Excellence</em> ($2,500) for students applying for a Fulbright. Apply in late Fall/Winter.</p>
                             </li>
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-blue-400 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Identify STEM Interests</h5>
-                                <p class="text-sm text-gray-600 mt-1">Work with Liberty Math/Physics faculty to define a research niche (e.g., condensed matter, topology) that you want to pursue abroad.</p>
+                                <h5 class="font-bold text-gray-900">Cultivate Recommenders</h5>
+                                <p class="text-sm text-gray-600 mt-1">Build strong relationships with STEM faculty. You will need 3 highly academic letters of recommendation next year.</p>
                             </li>
                         </ul>
                     </div>
@@ -286,28 +348,62 @@
                 <!-- Spring 2027 Column -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
                     <div class="bg-green-700 text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-seedling mr-2"></i> Spring 2027: Boot Camp & Affiliation</h4>
+                        <h4 class="text-xl font-bold"><i class="fas fa-seedling mr-2"></i> Spring 2027: Affiliation</h4>
                     </div>
                     <div class="p-6">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">March/April - Liberty Boot Camp</h5>
-                                <p class="text-sm text-gray-600 mt-1">Attend Liberty's official Fulbright information sessions and the Spring Application Boot Camp. Register for the Summer Canvas Training.</p>
+                                <h5 class="font-bold text-gray-900">Country Selection</h5>
+                                <p class="text-sm text-gray-600 mt-1">Research host countries with favorable award ratios and labs matching your interests.</p>
                             </li>
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] top-1"></div>
                                 <h5 class="font-bold text-gray-900">The Affiliation Hunt</h5>
-                                <p class="text-sm text-gray-600 mt-1"><strong>CRITICAL STEP:</strong> Start cold-emailing professors and labs in your target country. You must secure a host willing to oversee your research project.</p>
+                                <p class="text-sm text-gray-600 mt-1"><strong>CRITICAL:</strong> Start cold-emailing foreign professors/labs in March. You must secure a host willing to oversee your project.</p>
                             </li>
                             <li class="pl-6 relative">
                                 <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">May - Execute P.A.R.E. Research</h5>
-                                <p class="text-sm text-gray-600 mt-1">If awarded the P.A.R.E., spend your summer conducting your funded research while simultaneously drafting your Fulbright essays for the August 15 deadline.</p>
+                                <h5 class="font-bold text-gray-900">May - Draft Essays</h5>
+                                <p class="text-sm text-gray-600 mt-1">Begin drafting essays so you are ready for Liberty's internal Canvas course in Summer 2027.</p>
                             </li>
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="mb-10 mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-gray-200 pb-2">Frequently Asked Questions</h2>
+            <div class="space-y-3">
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group transition-all duration-200">
+                    <summary class="font-semibold p-4 cursor-pointer list-none flex justify-between items-center text-gray-800 focus:outline-none">
+                        Is there a minimum GPA requirement?
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-liberty-red"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0 text-gray-600 text-sm border-t border-gray-100 mt-2">
+                        There is no official minimum GPA to apply for a Fulbright. However, it is highly competitive. Generally, a GPA of 3.5 or higher is recommended, especially for STEM research grants. The committee looks at your overall academic trajectory and preparedness for your specific project.
+                    </div>
+                </details>
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group transition-all duration-200">
+                    <summary class="font-semibold p-4 cursor-pointer list-none flex justify-between items-center text-gray-800 focus:outline-none">
+                        Do I need to speak the language of the host country?
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-liberty-red"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0 text-gray-600 text-sm border-t border-gray-100 mt-2">
+                        Not necessarily! This is a common misconception. While some countries require fluency, many STEM research labs across Europe and Asia operate entirely in English. You must check the specific language requirements of the individual country profile you are applying to.
+                    </div>
+                </details>
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group transition-all duration-200">
+                    <summary class="font-semibold p-4 cursor-pointer list-none flex justify-between items-center text-gray-800 focus:outline-none">
+                        Are international students eligible to apply through Liberty?
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-liberty-red"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-4 pt-0 text-gray-600 text-sm border-t border-gray-100 mt-2">
+                        To be eligible for the Fulbright U.S. Student Program, you must be a U.S. citizen at the time of application. Permanent residents and international students are not eligible to apply to this specific program, though other scholarships may be available depending on your home country.
+                    </div>
+                </details>
             </div>
         </div>
 
@@ -316,6 +412,7 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-8 text-center mt-12">
         <p class="mb-2">Created for Liberty University Math, Applied Math, and Physics Students.</p>
+        <p class="mb-4 text-blue-400 font-medium">Prepared by Prof. Andrew Volk (<a href="mailto:ahvolk@liberty.edu" class="hover:text-white transition-colors underline">ahvolk@liberty.edu</a>) | 5/22/2026</p>
         <p class="text-sm opacity-75">Note: Exact deadlines fluctuate slightly year to year. Always consult the official Fulbright U.S. Student Program website and the Liberty University FPA.</p>
     </footer>
 
