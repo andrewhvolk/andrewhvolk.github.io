@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fulbright Pathway: Math & Physics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -25,8 +24,10 @@
         .fade-in { animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .hidden-content { display: none; }
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
+        .accordion-content { transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; max-height: 0; overflow: hidden; padding: 0 1.5rem; }
+        .accordion-content.active { max-height: 500px; padding: 1.5rem; }
+        .chevron { transition: transform 0.3s ease-in-out; }
+        .chevron.active { transform: rotate(180deg); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
@@ -35,7 +36,7 @@
     <header class="bg-liberty-navy text-white py-12 px-4 shadow-lg border-b-4 border-liberty-red">
         <div class="max-w-5xl mx-auto">
             <div class="flex items-center gap-4 mb-4">
-                <i class="fas fa-globe-americas text-4xl text-liberty-red"></i>
+                <svg class="w-12 h-12 text-liberty-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <h1 class="text-3xl md:text-5xl font-bold tracking-tight">Fulbright Pathway: Math & Physics</h1>
             </div>
             <p class="text-xl text-blue-100 max-w-3xl">
@@ -47,27 +48,11 @@
     <!-- Main Content -->
     <main class="max-w-5xl mx-auto px-4 py-8">
 
-        <!-- Liberty Specific Callout -->
-        <div class="bg-blue-50 border border-blue-200 rounded-xl shadow-sm p-6 mb-8 flex flex-col md:flex-row gap-6 items-center">
-            <div class="bg-liberty-navy text-white rounded-full p-4 flex-shrink-0">
-                <i class="fas fa-university text-2xl"></i>
-            </div>
-            <div>
-                <h2 class="text-lg font-bold text-liberty-navy mb-1">Liberty University Fulbright Advisor</h2>
-                <p class="text-gray-700 mb-2">
-                    All prospective applicants must work with <strong>Professor Edna Udobong</strong>, Liberty's Fulbright Program Advisor. 
-                    You must contact her at <a href="mailto:internationalscholarships@liberty.edu" class="text-blue-600 font-semibold hover:underline">internationalscholarships@liberty.edu</a> to begin the process.
-                </p>
-                <div class="text-sm text-gray-600 bg-white inline-block px-3 py-1 rounded border border-gray-200 shadow-sm">
-                    <i class="fas fa-laptop-code mr-1 text-liberty-red"></i> <strong>Requirement:</strong> Liberty mandates completion of a "Canvas Fulbright Application Summer Training" course prior to applying.
-                </div>
-            </div>
-        </div>
-
         <!-- Critical Information Panel -->
         <div class="bg-white rounded-xl shadow-md p-6 mb-8 border-l-4 border-yellow-500">
-            <h2 class="text-xl font-bold text-gray-900 mb-2">
-                <i class="fas fa-exclamation-circle text-yellow-500 mr-2"></i> The Undergraduate Rule
+            <h2 class="text-xl font-bold text-gray-900 mb-2 flex items-center">
+                <svg class="w-6 h-6 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                The Undergraduate Rule
             </h2>
             <p class="text-gray-700 leading-relaxed">
                 <strong>Can I go on a Fulbright while I am still an undergrad?</strong> No. You must have your bachelor's degree before the start of the grant. However, you <strong>must apply during your senior year</strong> (or as an alumni). 
@@ -79,118 +64,86 @@
             </div>
         </div>
 
-        <!-- Real World Examples & Destinations Section -->
+        <!-- Inspiration Grid -->
         <div class="mb-10">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-gray-200 pb-2">Inspiration: Where Can STEM Majors Go?</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                
-                <!-- Destination 1: Math in Hungary -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-shadow">
-                    <div class="text-liberty-red mb-3"><i class="fas fa-square-root-variable text-3xl"></i></div>
-                    <h3 class="font-bold text-lg text-gray-900">Hungary: BSM Math Program</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Hungary offers a highly prestigious, discipline-specific award: the <strong>Fulbright / Budapest Semesters in Mathematics (BSM)</strong> at the Rényi Institute. It is tailor-made for high-level math students to take advanced coursework and join elite research groups in Central Europe.
-                    </p>
+            <h2 class="text-2xl font-bold text-liberty-navy mb-4">Inspiration & Top Destinations</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <!-- Example 1 -->
+                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="font-bold text-lg text-liberty-red mb-1">Budapest Semesters in Mathematics</h3>
+                    <p class="text-sm text-gray-600 mb-3">Hungary</p>
+                    <p class="text-sm text-gray-700">Hungary offers specific Fulbright grants tailored for mathematics students to study at the prestigious Renyi Institute.</p>
                 </div>
-
-                <!-- Destination 2: Physics in the Netherlands/France -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-shadow">
-                    <div class="text-blue-600 mb-3"><i class="fas fa-atom text-3xl"></i></div>
-                    <h3 class="font-bold text-lg text-gray-900">Applied Physics in Europe</h3>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Past Physics undergrads have won grants to pursue an MSc. in Applied Physics at <strong>Delft University of Technology (Netherlands)</strong> researching solar cell nanocrystals, or joined labs like <strong>Thales Research and Technology (France)</strong> for optical physics.
-                    </p>
+                <!-- Example 2 -->
+                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="font-bold text-lg text-liberty-red mb-1">Max Planck Institutes</h3>
+                    <p class="text-sm text-gray-600 mb-3">Germany</p>
+                    <p class="text-sm text-gray-700">A top destination for Physics researchers. Many labs operate entirely in English, waiving the German language requirement.</p>
                 </div>
-
-                <!-- Destination 3: Liberty Mentorship -->
-                <div class="bg-liberty-navy rounded-xl shadow-sm border border-gray-100 p-5 text-white hover:shadow-md transition-shadow">
-                    <div class="text-yellow-400 mb-3"><i class="fas fa-user-graduate text-3xl"></i></div>
-                    <h3 class="font-bold text-lg text-white">Find Your Liberty Mentor</h3>
-                    <p class="text-sm text-blue-100 mt-2">
-                        <strong>Liberty Tip:</strong> Seek out faculty like Dr. Esswein. As a former Fulbright scholar to Eastern Europe himself, he has successfully mentored multiple Liberty students to win their own Fulbright Awards and P.A.R.E. research grants!
-                    </p>
+                <!-- Example 3 -->
+                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                    <h3 class="font-bold text-lg text-liberty-red mb-1">Liberty Success Story</h3>
+                    <p class="text-sm text-gray-600 mb-3">Campus Mentorship</p>
+                    <p class="text-sm text-gray-700">Dr. Esswein (Math Dept) has successfully mentored multiple LU students to win Fulbrights and P.A.R.E. grants. Connect with him early!</p>
                 </div>
             </div>
         </div>
 
-        <!-- Anatomy of an Application -->
-        <div class="mb-10">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-gray-200 pb-2">The Anatomy of a STEM Application</h2>
-            <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-liberty-navy">
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="bg-blue-100 text-blue-700 w-12 h-12 rounded-full flex items-center justify-center text-xl mb-3">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm">Statement of Grant Purpose</h4>
-                        <p class="text-xs text-gray-600 mt-1">2 pages. The core of your application. What research will you do, and why must it be done in that specific country?</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <div class="bg-purple-100 text-purple-700 w-12 h-12 rounded-full flex items-center justify-center text-xl mb-3">
-                            <i class="fas fa-pen-nib"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm">Personal Statement</h4>
-                        <p class="text-xs text-gray-600 mt-1">1 page. Your narrative. How did your background in Math/Physics lead you to this exact moment and proposal?</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <div class="bg-green-100 text-green-700 w-12 h-12 rounded-full flex items-center justify-center text-xl mb-3">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm">Letter of Affiliation</h4>
-                        <p class="text-xs text-gray-600 mt-1">A signed letter from your host university/lab abroad explicitly inviting you to conduct your proposed research.</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <div class="bg-orange-100 text-orange-700 w-12 h-12 rounded-full flex items-center justify-center text-xl mb-3">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm">3 Recommendation Letters</h4>
-                        <p class="text-xs text-gray-600 mt-1">Usually from Liberty faculty. For STEM, these should speak heavily to your technical competence and research ability.</p>
-                    </div>
-                </div>
+        <!-- Anatomy of an Application & Benefits -->
+        <div class="grid md:grid-cols-2 gap-8 mb-10">
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-xl font-bold text-liberty-navy mb-4">Anatomy of a STEM Application</h2>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="text-sm text-gray-700"><strong>Statement of Grant Purpose (2 pages):</strong> The technical details of your proposed math/physics research.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="text-sm text-gray-700"><strong>Personal Statement (1 page):</strong> Your narrative. Why math? Why this country?</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="text-sm text-gray-700"><strong>Letter of Affiliation:</strong> A signed letter from a foreign professor agreeing to host you.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="text-sm text-gray-700"><strong>3 Letters of Recommendation:</strong> Usually from LU Math/Physics faculty.</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="bg-gray-800 rounded-xl shadow-md p-6 text-white">
+                <h2 class="text-xl font-bold mb-4 text-white">What Does the Grant Cover?</h2>
+                <p class="text-gray-300 text-sm mb-4">The Fulbright program is fully funded by the U.S. Department of State. If selected, you receive:</p>
+                <ul class="space-y-3">
+                    <li class="flex items-center text-sm"><svg class="w-5 h-5 text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Round-trip airfare to your host country</li>
+                    <li class="flex items-center text-sm"><svg class="w-5 h-5 text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Monthly living stipend (covers rent & food)</li>
+                    <li class="flex items-center text-sm"><svg class="w-5 h-5 text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Basic health benefits</li>
+                    <li class="flex items-center text-sm"><svg class="w-5 h-5 text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> In some countries: Full tuition coverage</li>
+                </ul>
             </div>
         </div>
 
-        <!-- Grant Types: Research vs. ETA -->
-        <div class="mb-10">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-gray-200 pb-2">Which Grant is Right for You?</h2>
+        <!-- Which Grant is Right For You? -->
+        <div class="bg-blue-50 rounded-xl shadow-inner border border-blue-100 p-6 mb-10">
+            <h2 class="text-xl font-bold text-liberty-navy mb-3">Which Grant is Right for You?</h2>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-blue-600">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2"><i class="fas fa-microscope text-blue-600 mr-2"></i>Study / Research Grant</h3>
-                    <p class="text-gray-700 text-sm mb-4">The traditional path. You design your own independent research project or enroll in a graduate degree program abroad.</p>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Best for:</strong> Students heading to grad school, future researchers, or those with a specific lab they want to work in.</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Requirements:</strong> Requires a solid Letter of Affiliation and a very specific project proposal.</li>
-                    </ul>
+                <div>
+                    <h3 class="font-bold text-gray-900">Study/Research Grant</h3>
+                    <p class="text-sm text-gray-700 mt-1">Design your own independent math or physics research project working alongside foreign scientists. Best for students aiming for a PhD.</p>
                 </div>
-                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-teal-500">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2"><i class="fas fa-chalkboard-teacher text-teal-500 mr-2"></i>English Teaching Assistant (ETA)</h3>
-                    <p class="text-gray-700 text-sm mb-4">You are placed in a classroom abroad to assist local English teachers. <strong>STEM majors are highly sought after!</strong></p>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>Best for:</strong> Students who love teaching, outreach, or want a gap year before pursuing a Ph.D. or industry job.</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i><strong>STEM Edge:</strong> Many countries specifically request ETAs with STEM backgrounds to help with science clubs or teach STEM vocabulary in English.</li>
-                    </ul>
+                <div>
+                    <h3 class="font-bold text-gray-900">English Teaching Assistant (ETA) Grant</h3>
+                    <p class="text-sm text-gray-700 mt-1">Help teach English in foreign schools. <strong>Secret Advantage:</strong> Many countries specifically request STEM majors to help teach math/science in English!</p>
                 </div>
-            </div>
-        </div>
-
-        <!-- What it Covers -->
-        <div class="bg-gradient-to-r from-liberty-navy to-blue-800 rounded-xl shadow-md p-6 mb-10 text-white flex flex-col md:flex-row items-center justify-between">
-            <div class="mb-4 md:mb-0 md:mr-6">
-                <h2 class="text-2xl font-bold mb-2">Why apply? What does it cover?</h2>
-                <p class="text-blue-100">The Fulbright is fully funded by the U.S. Department of State. If you win, your focus is entirely on your research and cultural exchange.</p>
-            </div>
-            <div class="flex flex-wrap gap-3 justify-center md:justify-end">
-                <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm"><i class="fas fa-plane-departure mr-1"></i> Round-Trip Airfare</span>
-                <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm"><i class="fas fa-wallet mr-1"></i> Monthly Stipend</span>
-                <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm"><i class="fas fa-heartbeat mr-1"></i> Health Benefits</span>
-                <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm"><i class="fas fa-university mr-1"></i> Tuition (varies)</span>
             </div>
         </div>
 
         <!-- Interactive Selector -->
-        <div class="bg-white rounded-xl shadow-md p-6 mb-8 text-center">
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8 text-center border-t-4 border-liberty-navy">
             <h2 class="text-2xl font-bold text-gray-900 mb-4">Select Your Anticipated Graduation Date</h2>
-            <p class="text-gray-600 mb-6">Your priorities for Summer 2026, Fall 2026, and Spring 2027 depend entirely on when you graduate.</p>
+            <p class="text-gray-600 mb-6">Your priorities entirely depend on when you graduate.</p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
                 <button onclick="showTrack('senior')" id="btn-senior" class="flex-1 py-3 px-6 rounded-lg font-bold border-2 transition-all duration-200 bg-liberty-navy text-white border-liberty-navy shadow-md hover:bg-blue-900">
@@ -206,85 +159,88 @@
         <div id="track-senior" class="fade-in">
             <div class="mb-6">
                 <h3 class="text-2xl font-bold text-liberty-navy border-b-2 border-liberty-red inline-block pb-1">The Active Applicant Track</h3>
-                <p class="text-gray-600 mt-2">You are applying for the <strong>2027-2028 Grant Year</strong>. Your application is due THIS Fall (2026).</p>
+                <p class="text-gray-600 mt-2">You are applying for the <strong>2027-2028 Grant Year</strong>. You must complete your application by the start of the Fall semester.</p>
             </div>
 
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-                <!-- Summer 2026 Column (Current) -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="bg-yellow-500 text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-sun mr-2"></i> Summer 2026 (Now!)</h4>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Summer 2026 Column -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-yellow-200">
+                    <div class="bg-yellow-500 text-gray-900 py-3 px-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <h4 class="text-lg font-bold">Summer 2026</h4>
                     </div>
-                    <div class="p-6">
+                    <div class="p-5">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-yellow-600 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Draft Your Essays</h5>
-                                <p class="text-sm text-gray-600 mt-1">Start writing your Personal Statement and Statement of Grant Purpose. Translating heavy STEM concepts for a general committee takes many revisions.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-red-500 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Enroll in Canvas Course</h5>
+                                <p class="text-xs text-gray-600 mt-1">Liberty requires you to complete the "Fulbright Application Summer Training" module.</p>
                             </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-yellow-600 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Secure Affiliation</h5>
-                                <p class="text-sm text-gray-600 mt-1">Finalize your host country lab/university. Ensure the official Letter of Affiliation is signed and on official letterhead.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-red-500 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Secure Affiliation</h5>
+                                <p class="text-xs text-gray-600 mt-1">You must finalize your Letter of Affiliation from your foreign host lab this summer.</p>
                             </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-orange-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">August 5 - Canvas Training Due</h5>
-                                <p class="text-sm text-gray-600 mt-1">Deadline to complete Liberty's mandatory Canvas Fulbright Application Summer Training.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-red-500 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Draft Essays</h5>
+                                <p class="text-xs text-gray-600 mt-1">Draft your math/physics grant proposal. Make it readable to non-experts.</p>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Fall 2026 Column -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="bg-liberty-navy text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-leaf mr-2"></i> Fall 2026: Deadlines</h4>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-liberty-navy">
+                    <div class="bg-liberty-navy text-white py-3 px-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        <h4 class="text-lg font-bold">Fall 2026</h4>
                     </div>
-                    <div class="p-6">
+                    <div class="p-5">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-red-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">August 15 - Campus Deadline</h5>
-                                <p class="text-sm text-gray-600 mt-1"><strong>Strict Deadline:</strong> Complete online application must be submitted via the portal to be eligible for the campus interview.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-yellow-500 rounded-full -left-[7px] top-1.5 shadow-[0_0_0_2px_white]"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Aug 15: Campus Deadline</h5>
+                                <p class="text-xs text-gray-600 mt-1">Submit your complete application to Prof. Udobong (LU FPA) for campus review.</p>
                             </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Early Sept - Campus Interview</h5>
-                                <p class="text-sm text-gray-600 mt-1">Attend the mandatory campus interview with Liberty's committee. Feedback will be provided to polish your application.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Early Sept: LU Interviews</h5>
+                                <p class="text-xs text-gray-600 mt-1">Participate in the mandatory Liberty campus committee interview.</p>
                             </li>
-                            <li class="pl-6 relative">
+                            <li class="pl-5 relative">
                                 <div class="absolute w-4 h-4 bg-red-600 rounded-full -left-[9px] top-1 border-2 border-white shadow"></div>
-                                <h5 class="font-bold text-red-700">Mid-Oct - National Deadline</h5>
-                                <p class="text-sm text-gray-600 mt-1">Final submission to the national Fulbright portal. No changes can be made after this date.</p>
+                                <h5 class="font-bold text-red-700 text-sm">Mid-Oct: National Deadline</h5>
+                                <p class="text-xs text-gray-600 mt-1">Hit submit on the official Fulbright portal.</p>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Spring 2027 Column -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="bg-green-700 text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-seedling mr-2"></i> Spring 2027: Waiting</h4>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-green-700">
+                    <div class="bg-green-700 text-white py-3 px-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                        <h4 class="text-lg font-bold">Spring 2027</h4>
                     </div>
-                    <div class="p-6">
+                    <div class="p-5">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-gray-400 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Late Jan - Semi-Finalists</h5>
-                                <p class="text-sm text-gray-600 mt-1">The U.S. National Screening Committee announces if your application has been forwarded to the host country.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-gray-400 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Late Jan: Semi-Finalists</h5>
+                                <p class="text-xs text-gray-600 mt-1">U.S. Committee announces if your app is forwarded to the host country.</p>
                             </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-gray-400 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">March-May - Finalists</h5>
-                                <p class="text-sm text-gray-600 mt-1">Host countries notify applicants. If selected, begin pre-departure orientations and visas.</p>
-                            </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-liberty-red rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">May 2027</h5>
-                                <p class="text-sm text-gray-600 mt-1">Graduate from Liberty University! Grant starts Aug '27 - Mar '28.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-gray-400 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Mar - May: Finalists</h5>
+                                <p class="text-xs text-gray-600 mt-1">Host countries notify applicants on a rolling basis.</p>
                             </li>
                         </ul>
+                        
+                        <div class="mt-5 bg-gray-50 p-3 rounded border border-gray-200">
+                            <h5 class="font-bold text-xs text-gray-800"><svg class="w-3 h-3 text-blue-500 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Dec '26 Grads:</h5>
+                            <p class="text-[10px] text-gray-600 mt-1">You will have a "gap semester" before the grant begins. Stay productive!</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -294,78 +250,71 @@
         <div id="track-junior" class="hidden-content fade-in">
             <div class="mb-6">
                 <h3 class="text-2xl font-bold text-liberty-navy border-b-2 border-liberty-red inline-block pb-1">The Preparation Track</h3>
-                <p class="text-gray-600 mt-2">You will apply in Fall 2027 for the <strong>2028-2029 Grant Year</strong>. Now is the time to build your profile and secure funding.</p>
+                <p class="text-gray-600 mt-2">You will apply in Fall 2027 for the <strong>2028-2029 Grant Year</strong>. Now is the time to build your profile.</p>
             </div>
 
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-3 gap-6">
                 <!-- Summer 2026 Column -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="bg-yellow-500 text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-sun mr-2"></i> Summer 2026 (Now!)</h4>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-yellow-200">
+                    <div class="bg-yellow-500 text-gray-900 py-3 px-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <h4 class="text-lg font-bold">Summer 2026</h4>
                     </div>
-                    <div class="p-6">
+                    <div class="p-5">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-yellow-600 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Gain Lab/Research Experience</h5>
-                                <p class="text-sm text-gray-600 mt-1">Participate in an REU (Research Experience for Undergraduates) or work in a Liberty lab. This is crucial for a STEM Fulbright.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-blue-400 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Research Experiences</h5>
+                                <p class="text-xs text-gray-600 mt-1">Participate in an REU or assist LU Math/Physics faculty with research.</p>
                             </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-yellow-600 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Brainstorm Projects</h5>
-                                <p class="text-sm text-gray-600 mt-1">Start thinking: What specific subset of physics or math do you want to research? Which countries are leaders in this field?</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-blue-400 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Explore Subfields</h5>
+                                <p class="text-xs text-gray-600 mt-1">Determine your niche (e.g., condensed matter, topology) to guide your future proposal.</p>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Fall 2026 Column -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="bg-liberty-navy text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-leaf mr-2"></i> Fall 2026: Profile & P.A.R.E.</h4>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-liberty-navy">
+                    <div class="bg-liberty-navy text-white py-3 px-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        <h4 class="text-lg font-bold">Fall 2026</h4>
                     </div>
-                    <div class="p-6">
+                    <div class="p-5">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-blue-400 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Email Prof. Udobong</h5>
-                                <p class="text-sm text-gray-600 mt-1">Send an intro email to <code class="bg-gray-100 px-1 rounded text-xs text-liberty-red">internationalscholarships@liberty.edu</code> to get on the radar.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-blue-400 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Apply for P.A.R.E.</h5>
+                                <p class="text-xs text-gray-600 mt-1">Apply for Liberty's Provost's Award for Research Excellence to fund your undergrad research.</p>
                             </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-purple-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-purple-700">Apply for the P.A.R.E.</h5>
-                                <p class="text-sm text-gray-600 mt-1">Liberty offers the <em>Provost's Award for Research Excellence</em> ($2,500) for students applying for a Fulbright. Apply in late Fall/Winter.</p>
-                            </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-blue-400 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Cultivate Recommenders</h5>
-                                <p class="text-sm text-gray-600 mt-1">Build strong relationships with STEM faculty. You will need 3 highly academic letters of recommendation next year.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-blue-400 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Initial FPA Contact</h5>
+                                <p class="text-xs text-gray-600 mt-1">Email Prof. Edna Udobong (LU's Fulbright Advisor) indicating your interest for next year.</p>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Spring 2027 Column -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="bg-green-700 text-white py-3 px-6">
-                        <h4 class="text-xl font-bold"><i class="fas fa-seedling mr-2"></i> Spring 2027: Affiliation</h4>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-green-700">
+                    <div class="bg-green-700 text-white py-3 px-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                        <h4 class="text-lg font-bold">Spring 2027</h4>
                     </div>
-                    <div class="p-6">
+                    <div class="p-5">
                         <ul class="space-y-4 relative border-l-2 border-gray-200 ml-3">
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">Country Selection</h5>
-                                <p class="text-sm text-gray-600 mt-1">Research host countries with favorable award ratios and labs matching your interests.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-green-500 rounded-full -left-[7px] top-1.5"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">Select Target Country</h5>
+                                <p class="text-xs text-gray-600 mt-1">Research which countries have strong programs in your field and favorable award statistics.</p>
                             </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">The Affiliation Hunt</h5>
-                                <p class="text-sm text-gray-600 mt-1"><strong>CRITICAL:</strong> Start cold-emailing foreign professors/labs in March. You must secure a host willing to oversee your project.</p>
-                            </li>
-                            <li class="pl-6 relative">
-                                <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] top-1"></div>
-                                <h5 class="font-bold text-gray-900">May - Draft Essays</h5>
-                                <p class="text-sm text-gray-600 mt-1">Begin drafting essays so you are ready for Liberty's internal Canvas course in Summer 2027.</p>
+                            <li class="pl-5 relative">
+                                <div class="absolute w-3 h-3 bg-green-500 rounded-full -left-[7px] top-1.5 shadow-[0_0_0_2px_white]"></div>
+                                <h5 class="font-bold text-gray-900 text-sm">The Affiliation Hunt</h5>
+                                <p class="text-xs text-gray-600 mt-1"><strong>CRITICAL:</strong> Start cold-emailing foreign labs and professors asking them to host you.</p>
                             </li>
                         </ul>
                     </div>
@@ -374,36 +323,37 @@
         </div>
 
         <!-- FAQ Section -->
-        <div class="mb-10 mt-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-gray-200 pb-2">Frequently Asked Questions</h2>
-            <div class="space-y-3">
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group transition-all duration-200">
-                    <summary class="font-semibold p-4 cursor-pointer list-none flex justify-between items-center text-gray-800 focus:outline-none">
-                        Is there a minimum GPA requirement?
-                        <span class="transition-transform duration-300 group-open:rotate-180 text-liberty-red"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="p-4 pt-0 text-gray-600 text-sm border-t border-gray-100 mt-2">
-                        There is no official minimum GPA to apply for a Fulbright. However, it is highly competitive. Generally, a GPA of 3.5 or higher is recommended, especially for STEM research grants. The committee looks at your overall academic trajectory and preparedness for your specific project.
-                    </div>
-                </details>
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group transition-all duration-200">
-                    <summary class="font-semibold p-4 cursor-pointer list-none flex justify-between items-center text-gray-800 focus:outline-none">
-                        Do I need to speak the language of the host country?
-                        <span class="transition-transform duration-300 group-open:rotate-180 text-liberty-red"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="p-4 pt-0 text-gray-600 text-sm border-t border-gray-100 mt-2">
-                        Not necessarily! This is a common misconception. While some countries require fluency, many STEM research labs across Europe and Asia operate entirely in English. You must check the specific language requirements of the individual country profile you are applying to.
-                    </div>
-                </details>
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group transition-all duration-200">
-                    <summary class="font-semibold p-4 cursor-pointer list-none flex justify-between items-center text-gray-800 focus:outline-none">
-                        Are international students eligible to apply through Liberty?
-                        <span class="transition-transform duration-300 group-open:rotate-180 text-liberty-red"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="p-4 pt-0 text-gray-600 text-sm border-t border-gray-100 mt-2">
-                        To be eligible for the Fulbright U.S. Student Program, you must be a U.S. citizen at the time of application. Permanent residents and international students are not eligible to apply to this specific program, though other scholarships may be available depending on your home country.
-                    </div>
-                </details>
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 border-b pb-2">Frequently Asked Questions</h2>
+            
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-3">
+                <button class="w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                    Is there a minimum GPA requirement?
+                    <svg class="w-5 h-5 inline transition-transform duration-200 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content text-gray-600 text-sm">
+                    <p class="pb-4">While the Fulbright program does not have an official minimum GPA, it is highly competitive. Generally, a GPA of 3.5 or higher is recommended, especially for research grants. However, the strength of your research proposal and your affiliation letter are often more important than a perfect 4.0.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-3">
+                <button class="w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                    Do I need to be fluent in a foreign language?
+                    <svg class="w-5 h-5 inline transition-transform duration-200 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content text-gray-600 text-sm">
+                    <p class="pb-4">Not necessarily! This is a major advantage for STEM majors. Because math and physics are universal languages, many research labs in Europe and Asia operate entirely in English. Always check the specific country summary page on the Fulbright website, as requirements vary by nation.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-3">
+                <button class="w-full px-6 py-4 text-left font-bold text-gray-800 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                    Who is the Liberty University contact for Fulbright?
+                    <svg class="w-5 h-5 inline transition-transform duration-200 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content text-gray-600 text-sm">
+                    <p class="pb-4">Professor Edna Udobong is the official Fulbright Program Advisor (FPA) for Liberty University. You must work through her office to submit your application and schedule your campus committee interview. You should also reach out to math/physics faculty like Dr. Esswein for specific subject-matter mentorship.</p>
+                </div>
             </div>
         </div>
 
@@ -412,8 +362,11 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-8 text-center mt-12">
         <p class="mb-2">Created for Liberty University Math, Applied Math, and Physics Students.</p>
-        <p class="mb-4 text-blue-400 font-medium">Prepared by Prof. Andrew Volk (<a href="mailto:ahvolk@liberty.edu" class="hover:text-white transition-colors underline">ahvolk@liberty.edu</a>) | 5/22/2026</p>
-        <p class="text-sm opacity-75">Note: Exact deadlines fluctuate slightly year to year. Always consult the official Fulbright U.S. Student Program website and the Liberty University FPA.</p>
+        <p class="text-sm opacity-75 mb-4">Note: Exact deadlines fluctuate slightly year to year. Always consult the official Fulbright website and the LU FPA.</p>
+        <div class="border-t border-gray-700 pt-4 mt-4 text-xs">
+            <p>Prepared by Prof. Andrew Volk - 5/22/2026</p>
+            <a href="mailto:ahvolk@liberty.edu" class="text-blue-400 hover:text-blue-300 transition-colors">ahvolk@liberty.edu</a>
+        </div>
     </footer>
 
     <script>
@@ -436,6 +389,14 @@
                 btnJunior.className = "flex-1 py-3 px-6 rounded-lg font-bold border-2 transition-all duration-200 bg-liberty-navy text-white border-liberty-navy shadow-md hover:bg-blue-900";
                 btnSenior.className = "flex-1 py-3 px-6 rounded-lg font-bold border-2 transition-all duration-200 bg-white text-liberty-navy border-gray-300 shadow-sm hover:border-liberty-navy";
             }
+        }
+
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const chevron = button.querySelector('.chevron');
+            
+            content.classList.toggle('active');
+            chevron.classList.toggle('active');
         }
     </script>
 </body>
