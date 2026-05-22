@@ -6,6 +6,10 @@ on:
     branches:
       - main
 
+# Forces GitHub Actions to use Node.js 24 to resolve the deprecation warning
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   css-link-lint:
     runs-on: ubuntu-latest
