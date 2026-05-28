@@ -1,0 +1,27 @@
+@layer print {
+  @media print {
+    .top-nav,
+    .page-context-bar,
+    .category-nav,
+    .page-actions,
+    .site-footer {
+      display: none !important;
+    }
+
+    .page-hero {
+      background: none;
+      color: #000;
+      padding: 0 0 1rem;
+    }
+
+    .page-hero::before {
+      display: none;
+    }
+
+    .page-hero h1,
+    .page-hero__lede,
+    .page-hero__eyebrow {
+      color: #000;
+    }
+  }
+}

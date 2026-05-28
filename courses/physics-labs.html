@@ -3,38 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Physics Labs Course Resources | Prof. Volk's Office</title>
+  <title>Physics Labs | Prof. Volk's Office</title>
+  <meta name="description" content="Physics lab course home pages and preparation resources for PHYS 103, PHYS 201L/231L, and PHYS 202L/232L.">
   <link rel="stylesheet" href="/styles.css">
-  <script src="../theme.js"></script>
+  <script src="/theme.js" defer></script>
 </head>
 <body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
-      <a class="top-nav-title" href="../index.html">Prof. Volk's Office</a>
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
     </div>
     <div class="top-nav-actions">
       <ul class="top-nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../CV.html">About</a></li>
+        <li><a href="/index.html">Home</a></li>
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-current="page">Courses ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
           <ul class="dropdown-menu">
-            <li><a href="../learn.html">All Courses</a></li>
-            <li><a href="math114.html">MATH 114</a></li>
-            <li><a href="math130.html">MATH 130</a></li>
-            <li><a href="physics-labs.html" aria-current="page">Physics Labs</a></li>
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html" aria-current="page">Physics Labs</a></li>
           </ul>
         </li>
-        <li><a href="../projects.html">Tools</a></li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/LibertyMathClub/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
       <ul class="top-nav-utilities" aria-label="More">
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
           <ul class="dropdown-menu dropdown-menu--right">
-            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
-            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
           </ul>
         </li>
       </ul>
@@ -42,52 +44,105 @@
     </div>
   </div>
 </nav>
+
 <div class="page-context-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="../index.html">Home</a>
+      <a href="/index.html">Home</a>
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
-      <a href="../learn.html">Courses</a>
+      <a href="/learn.html">Courses</a>
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
       <span class="breadcrumb-current" aria-current="page">Physics Labs</span>
     </nav>
   </div>
 </div>
-<header class="course-header course-header--unit">
-  <div class="container">
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">Physics Lab Resources</p>
     <h1>Physics Labs</h1>
-    <p class="subtitle">Choose the lab course home that matches your section to find manuals, experiment lists, and support materials.</p>
+    <p class="page-hero__lede">Choose the lab course home that matches your section.</p>
+    <div class="page-actions">
+      <a href="#lab-courses" class="button">Find My Lab Course</a>
+      <a href="#before-lab" class="button button-secondary">Before Lab Checklist</a>
+    </div>
   </div>
 </header>
-<main class="container course-page course-page--longform reading-page">
-  <article class="reading-flow course-page__prose">
-    <section>
-      <h2>How to use this page</h2>
-      <p class="course-page__lede">Start with the course home for your lab enrollment. Each home page collects the relevant manuals, experiment sequence, and course-specific notes in one place.</p>
-      <ol class="course-page__action-list">
+
+<main id="main-content" class="site-main">
+  <section class="site-section" aria-labelledby="how-title">
+    <div class="checklist-card">
+      <h2 id="how-title">How to use this page</h2>
+      <ol>
         <li>Identify the course number listed in Canvas or on your syllabus.</li>
         <li>Open the matching course home below.</li>
         <li>Use that course page as your starting point for manuals, experiment preparation, and lab-day reference material.</li>
       </ol>
-    </section>
-    <section>
-      <h2>Lab course homes</h2>
-      <p class="course-page__section-intro">Choose the page that corresponds to your section.</p>
-      <ul class="course-page__link-list">
-        <li><a href="phys103.html">PHYS 103: Elements of Physics Lab</a> — introductory measurement, motion, waves, and electricity labs.</li>
-        <li><a href="physlab1.html">PHYS 201L / 231L: Physics Lab 1</a> — mechanics-focused investigations and first-semester laboratory work.</li>
-        <li><a href="physlab2.html">PHYS 202L / 232L: Physics Lab 2</a> — electricity, magnetism, optics, and later-semester experiments.</li>
-      </ul>
-    </section>
-    <section>
-      <h2>Before you come to lab</h2>
+    </div>
+  </section>
+
+  <section id="lab-courses" class="site-section" aria-labelledby="lab-courses-title">
+    <div class="section-header">
+      <p class="section-kicker">Lab Course Homes</p>
+      <h2 id="lab-courses-title">Choose the page that corresponds to your section.</h2>
+    </div>
+    <div class="card-grid lab-course-grid">
+      <article class="course-card">
+        <span class="course-card__meta">PHYS 103</span>
+        <h3>Elements of Physics Lab</h3>
+        <p>Introductory measurement, motion, waves, and electricity labs.</p>
+        <a href="/courses/phys103.html" class="button">Open PHYS 103</a>
+      </article>
+      <article class="course-card">
+        <span class="course-card__meta">PHYS 201L / 231L</span>
+        <h3>Physics Lab 1</h3>
+        <p>Mechanics-focused investigations and first-semester laboratory work.</p>
+        <a href="/courses/physlab1.html" class="button">Open Physics Lab 1</a>
+      </article>
+      <article class="course-card">
+        <span class="course-card__meta">PHYS 202L / 232L</span>
+        <h3>Physics Lab 2</h3>
+        <p>Electricity, magnetism, optics, and later-semester experiments.</p>
+        <a href="/courses/physlab2.html" class="button">Open Physics Lab 2</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="shared-title">
+    <h2 id="shared-title">Shared lab-page clarification</h2>
+    <p>PHYS 201L and PHYS 231L share the Physics Lab 1 course home. PHYS 202L and PHYS 232L share the Physics Lab 2 course home. Use the course code from Canvas or your syllabus to choose the correct path.</p>
+  </section>
+
+  <section id="before-lab" class="site-section" aria-labelledby="before-title">
+    <div class="checklist-card">
+      <h2 id="before-title">Before you come to lab</h2>
       <ol>
         <li>Read the assigned manual and note the objective, materials, and major procedure steps.</li>
         <li>Bring a notebook or data sheet so you can record measurements clearly during the experiment.</li>
-        <li>Review any formulas or safety notes before class so that lab time can focus on observation and analysis.</li>
+        <li>Review any formulas or safety notes before class so lab time can focus on observation and analysis.</li>
       </ol>
-    </section>
-  </article>
+    </div>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="safety-title">
+    <h2 id="safety-title">Safety and preparation reminder</h2>
+    <p>Follow the instructions in the current lab manual and Canvas course. Ask before using unfamiliar equipment, changing a setup, or continuing an experiment when a measurement or procedure seems unsafe.</p>
+  </section>
 </main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/LibertyMathClub/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

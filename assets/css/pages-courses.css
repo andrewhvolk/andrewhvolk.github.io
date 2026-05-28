@@ -1,0 +1,53 @@
+@layer pages {
+  .course-home-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .course-dashboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+
+  .quick-start-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  }
+
+  .current-need-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lab-course-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .course-card__meta {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .course-card ul,
+  .resource-card ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 980px) {
+    .course-home-grid,
+    .lab-course-grid,
+    .current-need-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .course-home-grid,
+    .lab-course-grid,
+    .current-need-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

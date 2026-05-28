@@ -1,0 +1,168 @@
+@layer components {
+  .badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.38rem 0.72rem;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--primary-main) 12%, var(--bg-surface));
+    color: var(--text-main);
+    border: 1px solid color-mix(in srgb, var(--primary-main) 24%, var(--border-subtle));
+    font-family: var(--type-meta-family);
+    font-size: var(--meta-sm);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.15;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .page-hero .site-badge {
+    background: var(--hero-chip-bg);
+    color: var(--hero-on-dark);
+    border-color: var(--hero-chip-border);
+  }
+
+  .card-grid,
+  .card-container.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+    align-items: stretch;
+  }
+
+  .site-card,
+  .course-card,
+  .resource-card,
+  .checklist-card,
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 0;
+    padding: var(--site-card-padding);
+    border-radius: var(--site-card-radius);
+    background: var(--gradient-card-surface);
+    border: 1px solid var(--border-transparent);
+    box-shadow: none;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .site-card:hover,
+  .course-card:hover,
+  .resource-card:hover,
+  .profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--site-shadow-soft);
+  }
+
+  .site-card h2,
+  .site-card h3,
+  .course-card h2,
+  .course-card h3,
+  .resource-card h2,
+  .resource-card h3,
+  .checklist-card h2,
+  .checklist-card h3,
+  .profile-card h2,
+  .profile-card h3 {
+    margin: 0;
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+  }
+
+  .site-card p,
+  .course-card p,
+  .resource-card p,
+  .checklist-card p,
+  .profile-card p {
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  .site-card .button,
+  .course-card .button,
+  .resource-card .button,
+  .profile-card .button {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  .decision-card {
+    border-top: 3px solid color-mix(in srgb, var(--primary-main) 72%, var(--emerald-main));
+  }
+
+  .checklist-card {
+    background: linear-gradient(180deg, var(--surface-transparent), var(--surface-transparent)), var(--bg-surface);
+  }
+
+  .checklist-card ol,
+  .checklist-card ul {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .site-note {
+    padding: clamp(1rem, 2vw, 1.4rem);
+    border-radius: var(--site-card-radius);
+    background: var(--callout-info-surface);
+    border: 1px solid var(--callout-info-border);
+  }
+
+  .site-note > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.25rem 0 0;
+  }
+
+  .category-nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.48rem 0.75rem;
+    border-radius: var(--radius-pill);
+    background: var(--primary-surface);
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .category-nav a:hover,
+  .category-nav a:focus-visible {
+    background: color-mix(in srgb, var(--primary-main) 18%, var(--bg-surface));
+  }
+
+  .site-footer {
+    background: var(--gradient-footer-surface);
+    color: var(--text-muted);
+  }
+
+  .site-footer nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .site-footer a {
+    color: var(--text-muted);
+  }
+}

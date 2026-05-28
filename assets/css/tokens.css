@@ -1,0 +1,12 @@
+@layer tokens {
+  :root {
+    --site-max-width: 1180px;
+    --site-content-width: min(var(--site-max-width), calc(100vw - 2rem));
+    --site-section-gap: clamp(2rem, 5vw, 4rem);
+    --site-card-radius: var(--radius-md, 0.75rem);
+    --site-card-padding: clamp(1.15rem, 2.2vw, 1.6rem);
+    --site-border: var(--border-subtle, #e2e8f0);
+    --site-shadow-soft: 0 18px 40px color-mix(in srgb, var(--surface-tint, #3a665c) 10%, transparent);
+    --site-footer-copy: "Course materials, tools, and academic resources.";
+  }
+}

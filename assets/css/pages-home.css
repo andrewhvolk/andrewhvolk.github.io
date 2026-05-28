@@ -1,0 +1,32 @@
+@layer pages {
+  .home-decision-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .home-section-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .home-connect {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: stretch;
+  }
+
+  @media (max-width: 900px) {
+    .home-decision-grid,
+    .home-section-grid,
+    .home-connect {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .home-decision-grid,
+    .home-section-grid,
+    .home-connect {
+      grid-template-columns: 1fr;
+    }
+  }
+}

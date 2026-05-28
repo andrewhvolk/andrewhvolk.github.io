@@ -1,0 +1,21 @@
+@layer pages {
+  .resource-category {
+    scroll-margin-top: 7rem;
+  }
+
+  .resource-category + .resource-category {
+    margin-top: var(--site-section-gap);
+  }
+
+  .resource-card__type {
+    color: var(--secondary);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .featured-resource-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  }
+}

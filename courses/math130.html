@@ -3,42 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MATH 130: Advanced Technical Mathematics</title>
+  <title>MATH 130: Advanced Technical Mathematics | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 130 course dashboard with review units, videos, slides, and exam-by-exam study materials.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Page-specific external CSS: Google Fonts requested by this page's typography design. -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
-  <script src="../theme.js"></script>
+  <script src="/theme.js" defer></script>
 </head>
 <body class="math130-course-page">
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
-      <a class="top-nav-title" href="../index.html">Prof. Volk's Office</a>
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
     </div>
     <div class="top-nav-actions">
       <ul class="top-nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../CV.html">About</a></li>
+        <li><a href="/index.html">Home</a></li>
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true" aria-current="page">Courses ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
           <ul class="dropdown-menu">
-            <li><a href="../learn.html">All Courses</a></li>
-            <li><a href="../courses/math114.html">MATH 114</a></li>
-            <li><a href="../courses/math130.html" aria-current="page">MATH 130</a></li>
-            <li><a href="../courses/physics-labs.html">Physics Labs</a></li>
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html">MATH 114</a></li>
+            <li><a href="/courses/math130.html" aria-current="page">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
           </ul>
         </li>
-        <li><a href="../projects.html">Tools</a></li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/LibertyMathClub/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
       <ul class="top-nav-utilities" aria-label="More">
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
           <ul class="dropdown-menu dropdown-menu--right">
-            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
-            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="/cdn-cgi/l/email-protection#95f4fde3faf9fed5f9fcf7f0e7e1ecbbf0f1e0">Contact</a></li>
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
           </ul>
         </li>
       </ul>
@@ -46,110 +47,126 @@
     </div>
   </div>
 </nav>
+
 <div class="page-context-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="../index.html">Home</a>
+      <a href="/index.html">Home</a>
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
-      <a href="../learn.html">Courses</a>
+      <a href="/learn.html">Courses</a>
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
       <span class="breadcrumb-current" aria-current="page">MATH 130</span>
     </nav>
   </div>
 </div>
 
-<header class="page-shell-header math130-header" aria-labelledby="math130-course-title">
-  <div class="container math130-header__grid">
-    <div class="math130-header__identity">
-      <p class="page-shell-header__eyebrow">MATH 130 Course Dashboard</p>
-      <h1 id="math130-course-title">Advanced Technical Mathematics</h1>
-      <p class="subtitle math130-header__subtitle">Use this page as the home base for all four Math 130 review units. Each card links to the matching review page and highlights where to start.</p>
-      <div class="math130-header__chips" aria-label="Course highlights">
-        <span class="math130-header__chip math130-header__chip--accent">4 review units</span>
-        <span class="math130-header__chip">Slides, videos &amp; review tools</span>
-        <span class="math130-header__chip">Exam-by-exam study flow</span>
-      </div>
-    </div>
-    <aside class="math130-header__usage" aria-labelledby="math130-usage-title">
-      <h2 id="math130-usage-title">How to use this course site</h2>
-      <ul class="math130-summary-list">
-        <li>Open the unit that matches your current exam or review goal.</li>
-        <li>Start with the recommended entry point, then move into videos, practice, or formula review.</li>
-        <li>Return here whenever you need the full course roadmap.</li>
-      </ul>
-    </aside>
+<header class="page-hero math130-header">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 130 Course Dashboard</p>
+    <h1>Advanced Technical Mathematics</h1>
+    <p class="page-hero__lede">Home base for all four MATH 130 review units.</p>
+    <ul class="badge-list" aria-label="Course highlights">
+      <li><span class="site-badge">4 review units</span></li>
+      <li><span class="site-badge">Slides, videos, and review tools</span></li>
+      <li><span class="site-badge">Exam-by-exam study flow</span></li>
+    </ul>
   </div>
 </header>
 
-<main class="container math130-dashboard">
-  <section class="math130-progress" aria-labelledby="math130-progress-title">
-    <div class="math130-section-heading">
+<main id="main-content" class="site-main math130-dashboard">
+  <section class="site-section" aria-labelledby="current-need-title">
+    <div class="section-header">
+      <p class="section-kicker">Current Need</p>
+      <h2 id="current-need-title">Jump to the review unit you need now.</h2>
+    </div>
+    <div class="card-grid current-need-grid">
+      <article class="course-card"><span class="course-card__meta">Test 1</span><h3>Preparing for Test 1</h3><p>Foundations, algebra fluency, and setup skills.</p><a href="/130Test1.html" class="button">Open Unit 1</a></article>
+      <article class="course-card"><span class="course-card__meta">Test 2</span><h3>Preparing for Test 2</h3><p>Functions, equations, graphing, and technical modeling.</p><a href="/130Test2.html" class="button">Open Unit 2</a></article>
+      <article class="course-card"><span class="course-card__meta">Test 3</span><h3>Preparing for Test 3</h3><p>Trigonometry, vectors, and mid-course review.</p><a href="/130Test3.html" class="button">Open Unit 3</a></article>
+      <article class="course-card"><span class="course-card__meta">Final Exam</span><h3>Reviewing for the Final</h3><p>Cumulative review and final-week preparation.</p><a href="/130Test4.html" class="button">Open Unit 4</a></article>
+    </div>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="how-to-title">
+    <h2 id="how-to-title">How to use this course site</h2>
+    <ol>
+      <li>Open the unit that matches your current exam or review goal.</li>
+      <li>Start with the recommended entry point, then move into videos, practice, or formula review.</li>
+      <li>Return here whenever you need the full course roadmap.</li>
+    </ol>
+  </section>
+
+  <section class="site-section" aria-labelledby="units-title">
+    <div class="section-header section-header--split">
       <div>
         <p class="section-kicker">Course Units &amp; Study Materials</p>
-        <h2 id="math130-progress-title">Choose a unit and open its review hub.</h2>
+        <h2 id="units-title">Choose a unit and open its review hub.</h2>
       </div>
-      <p class="math130-section-heading__sub">The cards below organize resources for Test 1 through the Final Exam in one place.</p>
+      <p>The cards below organize resources for Test 1 through the Final Exam in one place.</p>
     </div>
-
-    <div class="math130-unit-grid">
-      <article class="math130-unit-card math130-unit-card--priority">
-        <div class="math130-unit-card__copy">
-          <span class="math130-unit-card__label">Unit 1 · Test 1</span>
-          <span class="math130-unit-card__meta">Foundations, algebra fluency, and setup skills for later units.</span>
-          <div class="math130-meta-stack">
-            <div><strong>Topic focus:</strong> Foundational concepts, algebraic operations, and introductory problem-solving.</div>
-            <div><strong>Recommended start:</strong> Begin with the main overview and foundational examples.</div>
-            <div><strong>Main resources:</strong> Lecture slides, videos, assignments, and review materials.</div>
-          </div>
-          <a href="../130Test1.html" class="button math130-unit-card__button">View Unit 1 Resources</a>
-        </div>
+    <div class="card-grid course-dashboard-grid">
+      <article class="course-card">
+        <span class="course-card__meta">Unit 1 / Test 1</span>
+        <h3>Foundations and algebra fluency</h3>
+        <p>Topic focus: foundational concepts, algebraic operations, and introductory problem-solving.</p>
+        <p>Recommended start: begin with the main overview and foundational examples.</p>
+        <p>Main resources: lecture slides, videos, assignments, and review materials.</p>
+        <a href="/130Test1.html" class="button">View Unit 1 Resources</a>
       </article>
-
-      <article class="math130-unit-card">
-        <div class="math130-unit-card__copy">
-          <span class="math130-unit-card__label">Unit 2 · Test 2</span>
-          <span class="math130-unit-card__meta">Functions, equations, graphing, and technical modeling tools.</span>
-          <div class="math130-meta-stack">
-            <div><strong>Topic focus:</strong> Advanced functions, equations, graphing, and specialized applications.</div>
-            <div><strong>Recommended start:</strong> Open the Test 2 review tabs and follow the guided checklist flow.</div>
-            <div><strong>Main resources:</strong> Review tabs, formula work, practice sets, and quiz-style checks.</div>
-          </div>
-          <a href="../130Test2.html" class="button math130-unit-card__button">View Unit 2 Resources</a>
-        </div>
+      <article class="course-card">
+        <span class="course-card__meta">Unit 2 / Test 2</span>
+        <h3>Functions, equations, and graphing</h3>
+        <p>Topic focus: advanced functions, equations, graphing, and specialized applications.</p>
+        <p>Recommended start: open the Test 2 review tabs and follow the guided checklist flow.</p>
+        <p>Main resources: review tabs, formula work, practice sets, and quiz-style checks.</p>
+        <a href="/130Test2.html" class="button">View Unit 2 Resources</a>
       </article>
-
-      <article class="math130-unit-card">
-        <div class="math130-unit-card__copy">
-          <span class="math130-unit-card__label">Unit 3 · Test 3</span>
-          <span class="math130-unit-card__meta">Trigonometry, vectors, and targeted mid-course review support.</span>
-          <div class="math130-meta-stack">
-            <div><strong>Topic focus:</strong> Sections 5.1, 5.2, 5.3, 7.1, and 8.4 with Test 3 review tools.</div>
-            <div><strong>Recommended start:</strong> Use the section overview first, then move into formulas and practice.</div>
-            <div><strong>Main resources:</strong> Guided summaries, checklist items, formulas, and mock quiz tools.</div>
-          </div>
-          <a href="../130Test3.html" class="button math130-unit-card__button">View Unit 3 Resources</a>
-        </div>
+      <article class="course-card">
+        <span class="course-card__meta">Unit 3 / Test 3</span>
+        <h3>Trigonometry and vectors</h3>
+        <p>Topic focus: Sections 5.1, 5.2, 5.3, 7.1, and 8.4 with Test 3 review tools.</p>
+        <p>Recommended start: use the section overview first, then move into formulas and practice.</p>
+        <p>Main resources: guided summaries, checklist items, formulas, and mock quiz tools.</p>
+        <a href="/130Test3.html" class="button">View Unit 3 Resources</a>
       </article>
-
-      <article class="math130-unit-card">
-        <div class="math130-unit-card__copy">
-          <span class="math130-unit-card__label">Unit 4 · Final Exam</span>
-          <span class="math130-unit-card__meta">Cumulative review and final-week preparation across the course.</span>
-          <div class="math130-meta-stack">
-            <div><strong>Topic focus:</strong> Culminating concepts and comprehensive final exam review.</div>
-            <div><strong>Recommended start:</strong> Begin with the final-week plan and identify the highest-priority refreshers.</div>
-            <div><strong>Main resources:</strong> Final review guides, summary cards, formula refreshers, and practice prompts.</div>
-          </div>
-          <a href="../130Test4.html" class="button math130-unit-card__button">View Unit 4 Resources</a>
-        </div>
+      <article class="course-card">
+        <span class="course-card__meta">Unit 4 / Final Exam</span>
+        <h3>Cumulative final review</h3>
+        <p>Topic focus: culminating concepts and comprehensive final exam review.</p>
+        <p>Recommended start: begin with the final-week plan and identify the highest-priority refreshers.</p>
+        <p>Main resources: final review guides, summary cards, formula refreshers, and practice prompts.</p>
+        <a href="/130Test4.html" class="button">View Unit 4 Resources</a>
       </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="support-title">
+    <div class="section-header">
+      <p class="section-kicker">More Support</p>
+      <h2 id="support-title">Use these links when you need help outside the unit cards.</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card"><span class="resource-card__type">Video</span><h3>YouTube</h3><p>Additional lesson support and review videos.</p><a class="button external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">Visit YouTube Channel</a></article>
+      <article class="resource-card"><span class="resource-card__type">Student Opportunity</span><h3>Math Club</h3><p>Explore problem-solving events, competitions, research teams, GRE preparation, and honor societies.</p><a href="/LibertyMathClub/" class="button">Open Math Club</a></article>
+      <article class="resource-card"><span class="resource-card__type">Contact</span><h3>Ask a question</h3><p>Use the contact page for course questions or meeting information.</p><a href="/contact.html" class="button">Contact Prof. Volk</a></article>
+      <article class="resource-card"><span class="resource-card__type">Courses</span><h3>Course Home</h3><p>Return to the list of course home pages.</p><a href="/learn.html" class="button">Open Course Home</a></article>
     </div>
   </section>
 </main>
 
-<footer>
+<footer class="site-footer">
   <div class="container">
-    <p>&copy; 2025 - All Rights Reserved</p>
-    <div class="social-links">
-      <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">YouTube</a>
-    </div>
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/LibertyMathClub/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

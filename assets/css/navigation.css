@@ -1,0 +1,52 @@
+@layer navigation {
+  .top-nav-inner {
+    max-width: var(--site-max-width);
+  }
+
+  .top-nav-links > li > a,
+  .top-nav-links > li > button,
+  .top-nav-utilities > li > a,
+  .top-nav-utilities > li > button {
+    white-space: nowrap;
+  }
+
+  .dropdown-trigger {
+    color: inherit;
+  }
+
+  .top-nav .external-destination::after,
+  .site-footer .external-destination::after {
+    content: " (External)";
+    font-size: 0.82em;
+    color: currentColor;
+  }
+
+  .skip-to-main {
+    z-index: 2000;
+  }
+
+  @media (max-width: 920px) and (min-width: 769px) {
+    .top-nav-inner {
+      align-items: flex-start;
+    }
+
+    .top-nav-actions {
+      width: 100%;
+      justify-content: flex-start;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .top-nav-inner {
+      max-width: calc(100vw - 2rem);
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .top-nav-actions,
+    .menu-toggle.global-nav-toggle {
+      max-width: 100%;
+    }
+  }
+}

@@ -3,38 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prof. Volk's Tools</title>
+  <title>Tools &amp; Resources | Prof. Volk's Office</title>
+  <meta name="description" content="Calculators, guides, practice pages, PDFs, and classroom resources for Prof. Volk's courses.">
   <link rel="stylesheet" href="/styles.css">
-  <script src="theme.js"></script>
+  <script src="/theme.js" defer></script>
 </head>
 <body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
-      <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
     </div>
     <div class="top-nav-actions">
       <ul class="top-nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="CV.html">About</a></li>
+        <li><a href="/index.html">Home</a></li>
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">Courses ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">Courses</button>
           <ul class="dropdown-menu">
-            <li><a href="learn.html">All Courses</a></li>
-            <li><a href="courses/math114.html">MATH 114</a></li>
-            <li><a href="courses/math130.html">MATH 130</a></li>
-            <li><a href="courses/physics-labs.html">Physics Labs</a></li>
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
           </ul>
         </li>
-        <li><a href="projects.html" aria-current="page">Tools</a></li>
+        <li><a href="/projects.html" aria-current="page">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/LibertyMathClub/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
       <ul class="top-nav-utilities" aria-label="More">
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
           <ul class="dropdown-menu dropdown-menu--right">
-            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
-            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
           </ul>
         </li>
       </ul>
@@ -42,220 +44,174 @@
     </div>
   </div>
 </nav>
+
 <div class="page-context-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Home</a>
+      <a href="/index.html">Home</a>
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
-      <span class="breadcrumb-current" aria-current="page">Tools</span>
+      <span class="breadcrumb-current" aria-current="page">Tools &amp; Resources</span>
     </nav>
   </div>
 </div>
-<header class="page-shell-header">
-  <div class="container">
-    <div class="page-shell-header__eyebrow">Tools</div>
-    <h1>Tools</h1>
-    <p class="subtitle">Research, tools, and initiatives collected across courses and classroom projects.</p>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">Tools &amp; Resources</p>
+    <h1>Tools &amp; Resources</h1>
+    <p class="page-hero__lede">Calculators, guides, practice pages, PDFs, and classroom resources.</p>
+    <nav class="category-nav" aria-label="Resource categories">
+      <a href="#course-tools">Course Tools</a>
+      <a href="#physics-labs">Physics Lab Resources</a>
+      <a href="#math130">MATH 130 Practice</a>
+      <a href="#math114">MATH 114 Resources</a>
+      <a href="#mathclub">Math Club Resources</a>
+      <a href="#professional">Professional / Advising</a>
+      <a href="#misc">Experimental / Miscellaneous</a>
+    </nav>
   </div>
 </header>
-  
-  <main class="container page-shell-main">
-    <section class="welcome-section editorial-panel">
-      <h2>Highlighted Works</h2>
-      <p>Below are some of my featured projects, each dedicated to advancing education, engineering, or mathematics.</p>
-    </section>
 
-    <div class="card-container">
-      <div class="card marketing-card">
-        <a href="projects/ResearchMentorship/MathJournals.html" aria-label="Undergraduate Math Journals" title="Undergraduate Math Journals">
-          <div class="card-icon">📖</div>
-        </a>
-        <h2>Undergraduate Math Journals</h2>
-        <p>An interactive guide to undergraduate-friendly math journals, submission tips, and publishing advice.</p>
-        <a href="projects/ResearchMentorship/MathJournals.html" class="button">Explore Resource</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="projects/PrayerAppV1/index.html" aria-label="PrayerAppV1" title="PrayerAppV1">
-          <div class="card-icon">🙏</div>
-        </a>
-        <h2>PrayerAppV1</h2>
-        <p>A simple app to track and organize prayer requests.</p>
-        <a href="projects/PrayerAppV1/index.html" class="button">Open App</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="projects/PHYS103LUO/KinematicsShortAnswer.html" aria-label="PHYS 103 Kinematics Short Answer" title="PHYS 103 Kinematics Short Answer">
-          <div class="card-icon">🚗</div>
-        </a>
-        <h2>Kinematics Short Answer</h2>
-        <p>A PHYS 103 resource for practicing short-answer kinematics questions.</p>
-        <a href="projects/PHYS103LUO/KinematicsShortAnswer.html" class="button">View Resource</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="pdfs/KRules.pdf" aria-label="K-Rules PDF" title="K-Rules PDF">
-          <div class="card-icon">🔋</div>
-        </a>
-        <h2>K-Rules PDF</h2>
-        <p>A quick-download PDF reference for Kirchhoff’s rules and circuit analysis setup.</p>
-        <a href="pdfs/KRules.pdf" class="button">Open PDF</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="pdfs/KinematicsLabHelp.pdf" aria-label="Kinematics Lab Help PDF" title="Kinematics Lab Help PDF">
-          <div class="card-icon">🧭</div>
-        </a>
-        <h2>Kinematics Lab Help PDF</h2>
-        <p>A downloadable helper guide for PHYS kinematics lab calculations and setup reminders.</p>
-        <a href="pdfs/KinematicsLabHelp.pdf" class="button">Open PDF</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="pdfs/130Quiz8Practice.pdf" aria-label="MATH 130 Quiz 8 Practice PDF" title="MATH 130 Quiz 8 Practice PDF">
-          <div class="card-icon">🧮</div>
-        </a>
-        <h2>MATH 130 Quiz 8 Practice PDF</h2>
-        <p>A printable practice worksheet to support preparation for Math 130 Quiz 8.</p>
-        <a href="pdfs/130Quiz8Practice.pdf" class="button">Open PDF</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="courses/Lab_Supply_Summary.pdf" aria-label="Lab Supply Summary PDF" title="Lab Supply Summary PDF">
-          <div class="card-icon">📦</div>
-        </a>
-        <h2>Lab Supply Summary PDF</h2>
-        <p>A course PDF summarizing required lab supplies and related preparation notes.</p>
-        <a href="courses/Lab_Supply_Summary.pdf" class="button">Open PDF</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="courses/103LUOAssignmentGuide.html" aria-label="PHYS 103 LUO Assignment Guide" title="PHYS 103 LUO Assignment Guide">
-          <div class="card-icon">🧭</div>
-        </a>
-        <h2>103LUO Assignment Guide</h2>
-        <p>A step-by-step PHYS 103 LUO assignment guide with an overview landing page and module navigation.</p>
-        <a href="courses/103LUOAssignmentGuide.html" class="button">Open Guide</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="projects/QuestionSpinner/questionspinner.html" aria-label="Question Spinner" title="Question Spinner">
-          <div class="card-icon">🎡</div>
-        </a>
-        <h2>Question Spinner</h2>
-        <p>A classroom-ready spinner tool for prompting discussion questions and quick activities.</p>
-        <a href="projects/QuestionSpinner/questionspinner.html" class="button">Open Spinner</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="bookings.html" aria-label="Book a Meeting with Professor Volk" title="Book a Meeting with Professor Volk">
-          <div class="card-icon">📅</div>
-        </a>
-        <h2>Book a Meeting</h2>
-        <p>A quick guide to using Microsoft Bookings to schedule a meeting with Professor Volk.</p>
-        <a href="bookings.html" class="button">Open Guide</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="Unit3Practice.html" aria-label="Unit 3 Practice" title="Unit 3 Practice">
-          <div class="card-icon">🧮</div>
-        </a>
-        <h2>Unit 3 Practice</h2>
-        <p>A standalone practice page supporting additional unit-based review work.</p>
-        <a href="Unit3Practice.html" class="button">Open Practice</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="chessboard.html" aria-label="Chessboard" title="Chessboard">
-          <div class="card-icon">♟️</div>
-        </a>
-        <h2>Chessboard</h2>
-        <p>A standalone interactive chessboard page for demonstrations and exploration.</p>
-        <a href="chessboard.html" class="button">Open Board</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="employeepay.html" aria-label="Employee Pay" title="Employee Pay">
-          <div class="card-icon">💵</div>
-        </a>
-        <h2>Employee Pay</h2>
-        <p>A practical worksheet-style page focused on employee pay calculations.</p>
-        <a href="employeepay.html" class="button">View Page</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="infographic.html" aria-label="Infographic" title="Infographic">
-          <div class="card-icon">🖼️</div>
-        </a>
-        <h2>Infographic</h2>
-        <p>A standalone infographic-style page for visual presentation of content.</p>
-        <a href="infographic.html" class="button">View Infographic</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="courses/data-sheet-for-electric-circuits.html" aria-label="Electric Circuits Data Sheet" title="Electric Circuits Data Sheet">
-          <div class="card-icon">🔌</div>
-        </a>
-        <h2>Electric Circuits Data Sheet</h2>
-        <p>A physics lab support page containing data-sheet material for electric circuits work.</p>
-        <a href="courses/data-sheet-for-electric-circuits.html" class="button">Open Resource</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="courses/final-exam-review-guide.html" aria-label="Final Exam Review Guide" title="Final Exam Review Guide">
-          <div class="card-icon">📝</div>
-        </a>
-        <h2>Final Exam Review Guide</h2>
+<main id="main-content" class="site-main">
+  <section class="site-section" aria-labelledby="featured-tools-title">
+    <div class="section-header">
+      <p class="section-kicker">Featured Tools</p>
+      <h2 id="featured-tools-title">High-use resources.</h2>
+      <p>Start with these resources when you need common course support quickly.</p>
+    </div>
+    <div class="card-grid featured-resource-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Guide</span>
+        <h3>Final Exam Review Guide</h3>
         <p>A review guide page for cumulative exam preparation.</p>
-        <a href="courses/final-exam-review-guide.html" class="button">Open Review</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="courses/knowledgegrowth.html" aria-label="Knowledge Growth" title="Knowledge Growth">
-          <div class="card-icon">🌱</div>
-        </a>
-        <h2>Knowledge Growth</h2>
-        <p>A course-related page focused on knowledge development and learning reflection.</p>
-        <a href="courses/knowledgegrowth.html" class="button">View Page</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="courses/lab6-krules.html" aria-label="Lab 6 K-Rules" title="Lab 6 K-Rules">
-          <div class="card-icon">🧪</div>
-        </a>
-        <h2>Lab 6 K-Rules</h2>
-        <p>A lab reference page covering Kirchhoff-rule material and related guidance.</p>
-        <a href="courses/lab6-krules.html" class="button">Open Lab Page</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="courses/test3-formulas.html" aria-label="Test 3 Formulas" title="Test 3 Formulas">
-          <div class="card-icon">📚</div>
-        </a>
-        <h2>Test 3 Formulas</h2>
-        <p>A quick-reference page collecting formulas for Test 3 review.</p>
-        <a href="courses/test3-formulas.html" class="button">View Formulas</a>
-      </div>
-
-      <div class="card marketing-card">
-        <a href="courses/test4-formulas.html" aria-label="Test 4 Formulas" title="Test 4 Formulas">
-          <div class="card-icon">📘</div>
-        </a>
-        <h2>Test 4 Formulas</h2>
-        <p>A quick-reference page collecting formulas for Test 4 review.</p>
-        <a href="courses/test4-formulas.html" class="button">View Formulas</a>
-      </div>
+        <a href="/courses/final-exam-review-guide.html" class="button">Open Guide</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Physics Lab</span>
+        <h3>PHYS 103 Assignment Guide</h3>
+        <p>A step-by-step PHYS 103 LUO assignment guide with module navigation.</p>
+        <a href="/courses/103LUOAssignmentGuide.html" class="button">Open Guide</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Practice</span>
+        <h3>Unit 3 Practice</h3>
+        <p>A standalone practice page supporting additional unit-based review work.</p>
+        <a href="/Unit3Practice.html" class="button">Open Practice</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">PDF</span>
+        <h3>K-Rules PDF</h3>
+        <p>A quick-download PDF reference for Kirchhoff's rules and circuit analysis.</p>
+        <a href="/pdfs/KRules.pdf" class="button">Open PDF</a>
+      </article>
     </div>
-  </main>
+  </section>
 
-  <footer>
-    <div class="container">
-      <p>&copy; <span id="current-year">2025</span> Andrew H. Volk. All rights reserved.</p>
-      <div class="social-links">
-        <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
-      </div>
+  <section id="course-tools" class="resource-category" aria-labelledby="course-tools-title">
+    <div class="section-header">
+      <p class="section-kicker">Course Tools</p>
+      <h2 id="course-tools-title">General course support.</h2>
     </div>
-  </footer>
-<script>document.getElementById("current-year").textContent = new Date().getFullYear();</script>
+    <div class="card-grid">
+      <article class="resource-card"><span class="resource-card__type">Tool</span><h3>Employee Pay</h3><p>A practical worksheet-style page focused on employee pay calculations.</p><a href="/employeepay.html" class="button">Open Tool</a></article>
+      <article class="resource-card"><span class="resource-card__type">Reflection</span><h3>Knowledge Growth</h3><p>A course-related page focused on knowledge development and learning reflection.</p><a href="/courses/knowledgegrowth.html" class="button">Open Guide</a></article>
+      <article class="resource-card"><span class="resource-card__type">Guide</span><h3>Final Exam Review Guide</h3><p>A review guide page for cumulative exam preparation.</p><a href="/courses/final-exam-review-guide.html" class="button">Open Guide</a></article>
+    </div>
+  </section>
+
+  <section id="physics-labs" class="resource-category" aria-labelledby="physics-labs-title">
+    <div class="section-header">
+      <p class="section-kicker">Physics Lab Resources</p>
+      <h2 id="physics-labs-title">Lab guides, PDFs, and support pages.</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card"><span class="resource-card__type">Practice</span><h3>Kinematics Short Answer</h3><p>A PHYS 103 resource for practicing short-answer kinematics questions.</p><a href="/projects/PHYS103LUO/KinematicsShortAnswer.html" class="button">Open Practice</a></article>
+      <article class="resource-card"><span class="resource-card__type">PDF</span><h3>K-Rules PDF</h3><p>A reference for Kirchhoff's rules and circuit analysis setup.</p><a href="/pdfs/KRules.pdf" class="button">Open PDF</a></article>
+      <article class="resource-card"><span class="resource-card__type">PDF</span><h3>Kinematics Lab Help PDF</h3><p>A helper guide for PHYS kinematics lab calculations and setup reminders.</p><a href="/pdfs/KinematicsLabHelp.pdf" class="button">Open PDF</a></article>
+      <article class="resource-card"><span class="resource-card__type">PDF</span><h3>Lab Supply Summary PDF</h3><p>A summary of required lab supplies and preparation notes.</p><a href="/courses/Lab_Supply_Summary.pdf" class="button">Open PDF</a></article>
+      <article class="resource-card"><span class="resource-card__type">Guide</span><h3>103LUO Assignment Guide</h3><p>PHYS 103 LUO assignment overview and module navigation.</p><a href="/courses/103LUOAssignmentGuide.html" class="button">Open Guide</a></article>
+      <article class="resource-card"><span class="resource-card__type">Data Sheet</span><h3>Electric Circuits Data Sheet</h3><p>Data-sheet material for electric circuits lab work.</p><a href="/courses/data-sheet-for-electric-circuits.html" class="button">Open Guide</a></article>
+      <article class="resource-card"><span class="resource-card__type">Lab Page</span><h3>Lab 6 K-Rules</h3><p>A lab reference page covering Kirchhoff-rule material and guidance.</p><a href="/courses/lab6-krules.html" class="button">Open Guide</a></article>
+    </div>
+  </section>
+
+  <section id="math130" class="resource-category" aria-labelledby="math130-title">
+    <div class="section-header">
+      <p class="section-kicker">MATH 130 Practice</p>
+      <h2 id="math130-title">Practice and formula support.</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card"><span class="resource-card__type">PDF</span><h3>MATH 130 Quiz 8 Practice PDF</h3><p>A printable practice worksheet for Math 130 Quiz 8.</p><a href="/pdfs/130Quiz8Practice.pdf" class="button">Open PDF</a></article>
+      <article class="resource-card"><span class="resource-card__type">Practice</span><h3>Unit 3 Practice</h3><p>A standalone practice page supporting unit-based review work.</p><a href="/Unit3Practice.html" class="button">Open Practice</a></article>
+      <article class="resource-card"><span class="resource-card__type">Formulas</span><h3>Test 3 Formulas</h3><p>A quick-reference page collecting formulas for Test 3 review.</p><a href="/courses/test3-formulas.html" class="button">Open Guide</a></article>
+      <article class="resource-card"><span class="resource-card__type">Formulas</span><h3>Test 4 Formulas</h3><p>A quick-reference page collecting formulas for Test 4 review.</p><a href="/courses/test4-formulas.html" class="button">Open Guide</a></article>
+    </div>
+  </section>
+
+  <section id="math114" class="resource-category" aria-labelledby="math114-title">
+    <div class="section-header">
+      <p class="section-kicker">MATH 114 / Quantitative Reasoning</p>
+      <h2 id="math114-title">Quantitative reasoning resources.</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card"><span class="resource-card__type">Guide</span><h3>Final Exam Review Guide</h3><p>Cumulative review support for final exam preparation.</p><a href="/courses/final-exam-review-guide.html" class="button">Open Guide</a></article>
+      <article class="resource-card"><span class="resource-card__type">Tool</span><h3>Employee Pay</h3><p>Practice with employee pay calculations.</p><a href="/employeepay.html" class="button">Open Tool</a></article>
+    </div>
+  </section>
+
+  <section id="mathclub" class="resource-category" aria-labelledby="mathclub-title">
+    <div class="section-header">
+      <p class="section-kicker">Math Club Resources</p>
+      <h2 id="mathclub-title">Workshops, career prep, and research pathways.</h2>
+      <p>These resources connect tools and professional preparation to the Liberty University Math Club schedule.</p>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card"><span class="resource-card__type">Workshop</span><h3>LaTeX &amp; Overleaf</h3><p>Workshop support for mathematical writing, homework, and research documents.</p><a href="/LibertyMathClub/events.html#latex-overleaf" class="button">Open Event</a></article>
+      <article class="resource-card"><span class="resource-card__type">Software</span><h3>Jupyter / SageMath</h3><p>Math Club workshop pathway for computation, notebooks, and symbolic exploration.</p><a href="/LibertyMathClub/events.html#jupyter-sagemath" class="button">Open Event</a></article>
+      <article class="resource-card"><span class="resource-card__type">Animation</span><h3>Manim Workshop</h3><p>Workshop pathway for creating mathematical animations and instructional videos.</p><a href="/LibertyMathClub/events.html#manim-animation" class="button">Open Event</a></article>
+      <article class="resource-card"><span class="resource-card__type">GRE</span><h3>GRE Study Groups</h3><p>Quantitative practice and graduate-school preparation through Math Club events.</p><a href="/LibertyMathClub/events.html#gre-study" class="button">Open GRE Events</a></article>
+      <article class="resource-card"><span class="resource-card__type">Research</span><h3>Research Styles</h3><p>Preview project types for undergraduate research, posters, papers, and computational notebooks.</p><a href="/LibertyMathClub/research.html#research-styles" class="button">Open Research Styles</a></article>
+    </div>
+  </section>
+
+  <section id="professional" class="resource-category" aria-labelledby="professional-title">
+    <div class="section-header">
+      <p class="section-kicker">Professional / Advising Tools</p>
+      <h2 id="professional-title">Research and meeting support.</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card"><span class="resource-card__type">Guide</span><h3>Undergraduate Math Journals</h3><p>An interactive guide to undergraduate-friendly math journals and publishing advice.</p><a href="/projects/ResearchMentorship/MathJournals.html" class="button">Open Guide</a></article>
+      <article class="resource-card"><span class="resource-card__type">Meeting</span><h3>Book a Meeting</h3><p>A quick guide to using Microsoft Bookings to schedule a meeting.</p><a href="/bookings.html" class="button">Open Guide</a></article>
+    </div>
+  </section>
+
+  <section id="misc" class="resource-category" aria-labelledby="misc-title">
+    <div class="section-header">
+      <p class="section-kicker">Experimental / Miscellaneous</p>
+      <h2 id="misc-title">Standalone projects and demos.</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card"><span class="resource-card__type">App</span><h3>PrayerAppV1</h3><p>A simple app to track and organize prayer requests.</p><a href="/projects/PrayerAppV1/index.html" class="button">Open Tool</a></article>
+      <article class="resource-card"><span class="resource-card__type">Tool</span><h3>Question Spinner</h3><p>A classroom-ready spinner tool for discussion questions and quick activities.</p><a href="/projects/QuestionSpinner/questionspinner.html" class="button">Open Tool</a></article>
+      <article class="resource-card"><span class="resource-card__type">Demo</span><h3>Chessboard</h3><p>A standalone interactive chessboard page for demonstrations and exploration.</p><a href="/chessboard.html" class="button">Open Tool</a></article>
+      <article class="resource-card"><span class="resource-card__type">Visual</span><h3>Infographic</h3><p>A standalone infographic-style page for visual presentation of content.</p><a href="/infographic.html" class="button">Open Guide</a></article>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/LibertyMathClub/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

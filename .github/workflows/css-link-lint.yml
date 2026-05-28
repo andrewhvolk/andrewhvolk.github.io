@@ -24,3 +24,9 @@ jobs:
 
       - name: Run CSS link lint
         run: python scripts/check_css_links.py
+
+      - name: Run local link check
+        run: python scripts/check_links.py
+
+      - name: Run HTML structure check
+        run: python scripts/check_html_structure.py

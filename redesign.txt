@@ -1,0 +1,1031 @@
+ANDREWHVOLK.GITHUB.IO SITE IMPROVEMENT DEV DOCUMENT
+Detailed implementation plan with completion criteria
+Prepared for: Andrew H. Volk
+Site: https://andrewhvolk.github.io/
+Date: 2026-05-28
+
+====================================================================
+1. PROJECT PURPOSE
+====================================================================
+
+This document translates the site design/layout review into an implementation-ready development plan. The goal is to make the site function as a unified academic portal rather than a set of related but visually uneven pages.
+
+Primary audience groups:
+1. Current students looking for course materials, review pages, tools, and lab resources.
+2. Prospective collaborators, committees, and colleagues looking for professional information.
+3. Math Club students looking for meeting information, events, engagement tracks, and honor society details.
+4. Casual visitors looking for teaching resources, YouTube support, or contact information.
+
+Primary user paths:
+1. I am in a course -> find my course home.
+2. I need a study tool, practice page, guide, PDF, or calculator -> open Tools & Resources.
+3. I need professional information about Prof. Volk -> view About / CV.
+4. I want Math Club information -> open the Liberty University Math Club site.
+5. I need to contact Prof. Volk -> open Contact.
+
+====================================================================
+2. SOURCE PAGES IN SCOPE
+====================================================================
+
+Main site pages:
+1. /index.html - Home
+2. /CV.html - About / Professional CV
+3. /learn.html - All Courses / Course Home Pages
+4. /courses/math114.html - MATH 114: Quantitative Reasoning
+5. /courses/math130.html - MATH 130: Advanced Technical Mathematics
+6. /courses/physics-labs.html - Physics Labs
+7. /projects.html - Tools
+8. /contact.html - proposed new page
+
+Connected subsite in scope for high-level alignment:
+9. /LibertyMathClub/ - Math Club Home
+
+External link in navigation:
+10. YouTube channel - retain as external link; do not redesign.
+
+====================================================================
+3. GLOBAL DEVELOPMENT OBJECTIVES
+====================================================================
+
+Objective A: Create a unified site identity.
+- The main site should use consistent navigation, page heroes, cards, buttons, footer text, and spacing.
+- Course pages should feel like members of the same course family.
+- The Math Club subsite may keep its own identity, but it should still include a clear path back to the main site and should follow comparable usability standards.
+
+Objective B: Reduce navigation ambiguity.
+- The site currently uses overlapping language such as Learn, All Courses, Browse Courses, Browse Learn, and Course Home Pages.
+- Standardize terminology so the user always knows where a link goes.
+
+Objective C: Make the homepage a decision tree.
+- The homepage should help visitors choose the correct path in one click.
+- Course, tools, CV, Math Club, and contact paths should be visible and distinct.
+
+Objective D: Improve page scanning.
+- Long text blocks and plain lists should be converted into card grids, feature blocks, badges, or short checklist sections.
+- Students should not need to read full paragraphs before finding the action they need.
+
+Objective E: Improve accessibility and maintainability.
+- All links should have visible text or accessible labels.
+- Icons/images used as links should have descriptive alt text or aria-labels.
+- Footer, header, nav, page hero, and card styles should be reusable.
+
+====================================================================
+4. RECOMMENDED NAVIGATION MODEL
+====================================================================
+
+Recommended top-level navigation:
+
+Home
+About / CV
+Courses
+  Course Home
+  MATH 114
+  MATH 130
+  Physics Labs
+Tools & Resources
+Math Club
+Contact
+YouTube [external]
+
+Alternative if nav width is limited:
+
+Home
+Courses
+Tools
+About
+More
+  Math Club
+  Contact
+  YouTube
+
+Completion criteria:
+[ ] Navigation labels are consistent across all main site pages.
+[ ] Every top-level nav item links to a working page or intentional external destination.
+[ ] Contact is no longer plain text in the nav; it links to /contact.html.
+[ ] The Courses dropdown uses the same order on every page.
+[ ] The active page is visually indicated when feasible.
+[ ] External links such as YouTube are marked clearly with either an external-link icon or text cue.
+[ ] Keyboard users can tab through all nav items in a logical order.
+[ ] Dropdowns are usable by keyboard and screen readers.
+[ ] Mobile navigation collapses cleanly and exposes all links.
+
+====================================================================
+5. GLOBAL COMPONENT REQUIREMENTS
+====================================================================
+
+5.1 Header / Navigation
+
+Development tasks:
+[ ] Create one consistent header pattern.
+[ ] Apply the header to Home, CV, Learn, MATH 114, MATH 130, Physics Labs, Tools, and Contact.
+[ ] Ensure the site title links to /index.html.
+[ ] Ensure mobile navigation is readable and not crowded.
+[ ] If using a dropdown, add proper focus behavior and aria-expanded behavior.
+
+Completion criteria:
+[ ] Header spacing, font sizes, nav labels, and dropdown behavior match across pages.
+[ ] All nav links are valid.
+[ ] Contact appears as a working link on all pages.
+[ ] Current page indicator is visible or the page breadcrumb makes location clear.
+[ ] No page has duplicate or obsolete nav labels.
+
+5.2 Page Hero
+
+Use a standard page hero on each major page.
+
+Recommended fields:
+- Eyebrow label, e.g., Course Hub, Professional Profile, Tools & Resources.
+- H1 title.
+- One-sentence purpose statement.
+- Optional badges, e.g., 4 review units, Evergreen course resources, Current-term Canvas lives separately.
+- One to three action buttons.
+
+Completion criteria:
+[ ] Every first-level page has a clear H1.
+[ ] Every first-level page includes a concise purpose statement under the H1.
+[ ] Primary CTA appears above the fold where appropriate.
+[ ] Hero spacing and typography are consistent across pages.
+[ ] Hero content does not duplicate breadcrumb text unnecessarily.
+
+5.3 Card System
+
+Recommended card types:
+1. Path card - used on homepage and Learn page.
+2. Course card - used on Learn page and course hubs.
+3. Tool card - used on Tools page.
+4. Profile card - used on CV page.
+5. Checklist card - used on Physics Labs and course pages.
+6. Track card - used on Math Club page.
+
+Completion criteria:
+[ ] Cards use consistent border radius, spacing, heading scale, body text scale, and button placement.
+[ ] Cards have clear clickable areas or clear action buttons.
+[ ] Cards avoid excessive paragraph text.
+[ ] Cards stack cleanly on mobile.
+[ ] Cards preserve heading hierarchy; do not skip from H2 to H4 merely for visual size.
+
+5.4 Buttons and Link Language
+
+Standard button labels:
+- Find My Course
+- Open Course Hub
+- Open MATH 114
+- Open MATH 130
+- Open Physics Labs
+- Open Tool
+- Open PDF
+- Open Guide
+- Open Practice
+- View CV
+- Download CV
+- Contact Prof. Volk
+- Visit YouTube Channel
+
+Completion criteria:
+[ ] Button labels are action-oriented and predictable.
+[ ] The same kind of destination uses the same label pattern.
+[ ] No button says “click here.”
+[ ] Buttons and text links have sufficient contrast.
+[ ] Buttons have visible focus states.
+
+5.5 Footer
+
+Recommended footer:
+© 2026 Andrew H. Volk. Course materials, tools, and academic resources.
+
+Optional footer links:
+Home | Courses | Tools & Resources | About / CV | Contact | Math Club
+
+Completion criteria:
+[ ] Footer year is consistent across all main site pages.
+[ ] Footer name and site purpose are consistent.
+[ ] Footer links are valid.
+[ ] Footer does not contain stray links outside its container.
+[ ] Footer appears visually separated from page content.
+
+====================================================================
+6. HOMEPAGE: /index.html
+====================================================================
+
+Current issues to address:
+- The page includes duplicate “Home” labels near the top.
+- The homepage uses several terms for the same path: Learn, Browse Courses, Go to Learn, Browse Learn.
+- The page has useful sections, but the main user paths should be clearer and more visual.
+- YouTube, Math Club, and email/contact items are useful but should not compete with the primary student path.
+
+Recommended homepage structure:
+
+1. Header / nav.
+2. Hero:
+   Eyebrow: Prof. Volk's Office
+   H1: Course materials, tools, and academic resources for mathematics, physics, and engineering.
+   Purpose: Find course pages, review materials, tools, and professional information in one place.
+   Primary buttons:
+   - Find My Course
+   - Use Study Tools
+   - View CV
+3. Start Here decision cards:
+   - I am in a course -> Course Home
+   - I need a tool or worksheet -> Tools & Resources
+   - I am looking for Prof. Volk's background -> About / CV
+4. Main Sections card grid:
+   - Courses
+   - Tools & Resources
+   - About / CV
+   - Math Club
+5. Beyond the Site / Connect section:
+   - YouTube
+   - Contact
+   - Math Club community link if not already emphasized
+6. Footer.
+
+Development tasks:
+[ ] Remove duplicate “Home” label above the hero.
+[ ] Use one naming convention: Courses or Course Home, not Learn/All Courses interchangeably.
+[ ] Replace the current repeated course CTAs with a single strong primary CTA.
+[ ] Create a three-card “Start Here” decision block.
+[ ] Add a visually subordinate “Beyond the Site” block below the main path cards.
+[ ] Ensure homepage card links go to the correct pages.
+[ ] Make the homepage responsive at desktop, tablet, and mobile widths.
+
+Completion criteria:
+[ ] A new visitor can identify the course path within 5 seconds.
+[ ] The primary course CTA appears above the fold on common laptop screens.
+[ ] The homepage has no duplicate page labels.
+[ ] The words Learn, All Courses, Browse Courses, and Browse Learn are not used inconsistently.
+[ ] The homepage includes clear paths to Courses, Tools, About/CV, Math Club, and Contact.
+[ ] Homepage card grid displays as 3 or 4 columns on desktop, 2 columns on tablet, and 1 column on mobile.
+[ ] All homepage links work.
+
+====================================================================
+7. ABOUT / CV PAGE: /CV.html
+====================================================================
+
+Current issues to address:
+- The page is useful but very long.
+- It functions as both an About page and a full CV.
+- Visitors with different purposes need a faster way to scan it.
+- Footer year differs from the homepage.
+
+Recommended structure:
+
+1. Header / nav.
+2. Hero:
+   Eyebrow: Professional Profile
+   H1: Andrew H. Volk
+   Subtitle: Assistant Professor of Mathematics and Physics
+   Buttons:
+   - Download CV
+   - Contact Prof. Volk
+   - View Teaching Resources
+3. Quick profile card:
+   - Role
+   - Institution
+   - Teaching areas
+   - Research interests
+   - Email
+   - Office
+4. Audience cards:
+   - For students
+   - For collaborators
+   - For committees/reviewers
+5. Professional Summary.
+6. Selected Highlights.
+7. Education.
+8. Academic and Professional Appointments.
+9. Publications.
+10. Presentations.
+11. Teaching Profile.
+12. Service and Mentoring.
+13. Honors and Awards.
+14. Download CV section.
+15. Footer.
+
+Development tasks:
+[ ] Add a short “About” layer above the full CV content.
+[ ] Create a quick profile card near the top.
+[ ] Add an audience-oriented card row.
+[ ] Keep existing CV sections but improve visual hierarchy.
+[ ] Consider collapsible sections for older presentations or earlier teaching positions.
+[ ] Standardize footer year and wording.
+[ ] Ensure the headshot has descriptive alt text.
+[ ] Make email and phone links accessible.
+[ ] Ensure PDF download link is visible above the fold and again near the bottom.
+
+Completion criteria:
+[ ] The page still contains the full CV content or links clearly to it.
+[ ] A student can quickly find the teaching/contact pathway.
+[ ] A committee reviewer can quickly find education, experience, publications, presentations, teaching, service, and honors.
+[ ] The profile summary appears before long historical details.
+[ ] The download CV button works.
+[ ] The headshot has useful alt text.
+[ ] Footer matches the main site footer standard.
+[ ] Page remains readable on mobile without horizontal scrolling.
+
+====================================================================
+8. COURSE HOME / LEARN PAGE: /learn.html
+====================================================================
+
+Current issues to address:
+- The page is sparse and mostly textual.
+- Page title and nav language are inconsistent with “All Courses” and “Learn.”
+- The course options should be visually grouped.
+
+Recommended structure:
+
+1. Header / nav.
+2. Hero:
+   Eyebrow: Course Home
+   H1: Course Home Pages
+   Purpose: Choose the course or lab page that matches your current class.
+   Button: Open Canvas reminder or “Start with your course below.”
+3. Note card:
+   Official deadlines, grades, announcements, and section-specific details remain in Canvas.
+4. Math course section:
+   - MATH 114 card
+   - MATH 130 card
+5. Physics lab section:
+   - Physics Labs card
+6. Help card:
+   Not sure where to go? Check Canvas course code or contact Prof. Volk.
+7. Footer.
+
+Development tasks:
+[ ] Decide final label: “Course Home” or “Courses.”
+[ ] Update nav and page title to match the chosen label.
+[ ] Replace plain sections with course cards.
+[ ] Add a Canvas/current-term reminder.
+[ ] Visually group math and physics resources.
+[ ] Add a help note for students unsure about their course.
+[ ] Standardize footer.
+
+Completion criteria:
+[ ] The page name in nav, H1, and internal links is consistent.
+[ ] Each course option appears as a card with course code, title, short description, and button.
+[ ] Cards link correctly to MATH 114, MATH 130, and Physics Labs.
+[ ] The Canvas reminder is visible before or near the course cards.
+[ ] Page is usable on mobile.
+[ ] Footer matches the main site standard.
+
+====================================================================
+9. MATH 114 PAGE: /courses/math114.html
+====================================================================
+
+Current strengths:
+- Strong course overview.
+- Clear explanation that the site is evergreen while Canvas holds current policies and deadlines.
+- Detailed unit/module navigation.
+- Useful quick links and common tools.
+
+Current issues to address:
+- Quick Start / Common Tools appears late in the page.
+- Final Review appears both as featured content and in the unit navigation.
+- The page is useful but could scan better as a course dashboard.
+- Unit/module sections could be card-based.
+
+Recommended structure:
+
+1. Header / nav.
+2. Breadcrumb.
+3. Hero:
+   Eyebrow: Course Hub
+   H1: MATH 114: Quantitative Reasoning
+   Purpose: Enhancing data interpretation, logical reasoning, and real-world problem solving.
+   Badges:
+   - Evergreen course resources
+   - Canvas holds current deadlines
+   - Unit-based review
+   Buttons:
+   - Open Spring Assignment Page
+   - Open Final Review
+   - Open Common Tools
+4. Quick Start section near the top:
+   - Current Canvas / assignment links
+   - Final Review
+   - Desmos Scientific Calculator
+   - Desmos Graphing Calculator
+   - Excel Online
+5. Instructor and course logistics card.
+6. Syllabus and policies note card.
+7. Featured Unit card.
+8. Unit/module card grid:
+   - Orientation & Foundations
+   - Test 1 Unit
+   - Financial Math Unit
+   - Test 2 Unit
+   - Statistics Unit
+   - Test 3 Unit
+   - Final Review & Exam
+9. Footer.
+
+Development tasks:
+[ ] Move Quick Start / Common Tools above the full unit navigation.
+[ ] Convert each unit/module block into a card.
+[ ] Add badges to distinguish evergreen resources from current-term Canvas links.
+[ ] Reduce duplicate Final Review CTAs by clarifying one featured card and one unit card.
+[ ] Maintain all existing destination links.
+[ ] Standardize footer.
+[ ] Make external tool links open appropriately and accessibly.
+
+Completion criteria:
+[ ] A student can find assignment links, final review, and common calculators without scrolling through the full unit list.
+[ ] Every unit has a visually consistent card.
+[ ] Each card includes title, module range or test connection, short description, and action button.
+[ ] Current-term and evergreen materials are visually distinguished.
+[ ] No destination links are lost during redesign.
+[ ] Final Review appears intentionally, not redundantly.
+[ ] Footer matches the main site standard.
+[ ] Mobile card layout is clean and readable.
+
+====================================================================
+10. MATH 130 PAGE: /courses/math130.html
+====================================================================
+
+Current strengths:
+- The page already works as a course dashboard.
+- It clearly organizes four review units.
+- It has a helpful exam-by-exam study flow.
+
+Current issues to address:
+- The metadata line “4 review units Slides, videos & review tools Exam-by-exam study flow” should be turned into badges.
+- Unit entries need clearer visual separation.
+- A current-need chooser would help students quickly jump to the correct review unit.
+- The YouTube link appears after the footer and should be moved into a standard section or footer.
+
+Recommended structure:
+
+1. Header / nav.
+2. Breadcrumb.
+3. Hero:
+   Eyebrow: MATH 130 Course Dashboard
+   H1: Advanced Technical Mathematics
+   Purpose: Home base for all four MATH 130 review units.
+   Badges:
+   - 4 review units
+   - Slides, videos, and review tools
+   - Exam-by-exam study flow
+4. Current Need chooser:
+   - Preparing for Test 1
+   - Preparing for Test 2
+   - Preparing for Test 3
+   - Reviewing for the Final Exam
+5. How to use this course site.
+6. Course units card grid:
+   - Unit 1 / Test 1
+   - Unit 2 / Test 2
+   - Unit 3 / Test 3
+   - Unit 4 / Final Exam
+7. More support:
+   - YouTube
+   - Contact
+   - Course Home
+8. Footer.
+
+Development tasks:
+[ ] Convert the metadata line into badge elements.
+[ ] Add a “current need” chooser above the unit cards.
+[ ] Convert unit entries into clear cards.
+[ ] Ensure each card has the same internal structure.
+[ ] Move YouTube link above the footer or into the footer.
+[ ] Standardize footer.
+[ ] Ensure Contact link in nav uses the same /contact.html as other pages.
+
+Completion criteria:
+[ ] The metadata no longer appears as a run-on text line.
+[ ] A student can choose a test/final review path immediately.
+[ ] Each unit card includes unit/test label, topic focus, recommended start, main resources, and button.
+[ ] The YouTube link is no longer stranded after the footer.
+[ ] Footer matches the main site standard.
+[ ] The page remains readable and balanced on mobile.
+
+====================================================================
+11. PHYSICS LABS PAGE: /courses/physics-labs.html
+====================================================================
+
+Current strengths:
+- The page clearly tells students to choose the lab course that matches Canvas/syllabus.
+- It includes a useful “Before you come to lab” checklist.
+- It distinguishes PHYS 103, PHYS 201L/231L, and PHYS 202L/232L.
+
+Current issues to address:
+- Lab course homes are currently a plain list.
+- The checklist should be more visually prominent.
+- Students may need clarification that some courses share lab pages.
+- A safety/preparation note should be visible.
+
+Recommended structure:
+
+1. Header / nav.
+2. Breadcrumb.
+3. Hero:
+   Eyebrow: Physics Lab Resources
+   H1: Physics Labs
+   Purpose: Choose the lab course home that matches your section.
+   Button: Find My Lab Course
+4. “How to use this page” numbered card.
+5. Lab course homes card grid:
+   - PHYS 103: Elements of Physics Lab
+   - PHYS 201L / 231L: Physics Lab 1
+   - PHYS 202L / 232L: Physics Lab 2
+6. Common confusion note:
+   - PHYS 201L and PHYS 231L share one lab home.
+   - PHYS 202L and PHYS 232L share one lab home.
+7. Before you come to lab checklist card.
+8. Safety and preparation note.
+9. Footer.
+
+Development tasks:
+[ ] Convert lab home list into three cards.
+[ ] Add a clear shared-lab-page clarification.
+[ ] Convert checklist into a visually distinct checklist card.
+[ ] Add safety/preparation reminder.
+[ ] Standardize footer.
+[ ] Ensure all lab links still work.
+
+Completion criteria:
+[ ] Each lab course path is visible as a card with course number, focus, short description, and button.
+[ ] Shared lab-page relationships are explicitly stated.
+[ ] Checklist is visually prominent and easy to scan.
+[ ] Safety/preparation reminder appears before the footer.
+[ ] All lab links work.
+[ ] Footer matches the main site standard.
+[ ] Page is usable on mobile.
+
+====================================================================
+12. TOOLS PAGE: /projects.html
+====================================================================
+
+Current strengths:
+- The page contains many useful resources.
+- It includes PDFs, apps, practice pages, guides, worksheets, and lab supports.
+- It has strong potential as a central resource library.
+
+Current issues to address:
+- The page is a long undifferentiated list.
+- Several links appear to have empty anchor text or icon-only links.
+- Button labels vary more than necessary.
+- Students need filtering or grouping to find relevant tools.
+
+Recommended structure:
+
+1. Header / nav.
+2. Breadcrumb.
+3. Hero:
+   Eyebrow: Tools & Resources
+   H1: Tools & Resources
+   Purpose: Calculators, guides, practice pages, PDFs, and classroom resources.
+   Buttons:
+   - Browse Course Tools
+   - Browse Physics Lab Resources
+   - Browse Practice Pages
+4. Featured tools section:
+   Choose 4-6 highest-use resources.
+5. Category anchors or filters:
+   - Course Tools
+   - Physics Lab Resources
+   - MATH 130 Practice
+   - MATH 114 / Quantitative Reasoning
+   - Professional / Advising Tools
+   - Experimental / Miscellaneous
+6. Categorized tool card grids.
+7. Footer.
+
+Suggested categorization:
+
+Course Tools:
+- Employee Pay
+- Knowledge Growth
+- Final Exam Review Guide
+
+Physics Lab Resources:
+- Kinematics Short Answer
+- K-Rules PDF
+- Kinematics Lab Help PDF
+- Lab Supply Summary PDF
+- 103LUO Assignment Guide
+- Electric Circuits Data Sheet
+- Lab 6 K-Rules
+
+MATH 130 Practice:
+- MATH 130 Quiz 8 Practice PDF
+- Unit 3 Practice
+- Test 3 Formulas
+- Test 4 Formulas
+
+Professional / Advising Tools:
+- Undergraduate Math Journals
+- Book a Meeting
+
+Experimental / Miscellaneous:
+- PrayerAppV1
+- Question Spinner
+- Chessboard
+- Infographic
+
+Development tasks:
+[ ] Rename page consistently as “Tools & Resources” if that label is adopted in nav.
+[ ] Add category anchors or filter controls.
+[ ] Select 4-6 highlighted tools for a top section.
+[ ] Convert every tool to a consistent card format.
+[ ] Add descriptive alt text or aria-labels to any image/icon-only links.
+[ ] Standardize button labels by destination type.
+[ ] Check all tool links for broken or empty anchors.
+[ ] Standardize footer.
+
+Completion criteria:
+[ ] Tools are grouped into meaningful categories.
+[ ] No tool is represented only by an empty or unlabeled link.
+[ ] All icon/image links have accessible names.
+[ ] Buttons use consistent labels such as Open Tool, Open PDF, Open Guide, Open Practice.
+[ ] Featured tools appear before the full list.
+[ ] Category navigation works on desktop and mobile.
+[ ] All existing tool links are preserved unless intentionally removed.
+[ ] Footer matches the main site standard.
+
+====================================================================
+13. CONTACT PAGE: /contact.html
+====================================================================
+
+Current issue:
+- Contact appears in the navigation, but it is not consistently implemented as a working page.
+
+Recommended structure:
+
+1. Header / nav.
+2. Breadcrumb.
+3. Hero:
+   Eyebrow: Contact
+   H1: Contact Prof. Volk
+   Purpose: Use the appropriate channel for course questions, meetings, and professional contact.
+4. Contact cards:
+   - Current students
+   - Office / meetings
+   - Professional inquiries
+   - Math Club inquiries
+5. Recommended communication order for current students:
+   1. Check Canvas announcement/syllabus.
+   2. Use Canvas message or official course communication method.
+   3. Email when needed.
+   4. Book a meeting when discussion would be better live.
+6. Contact details:
+   - Email: ahvolk@liberty.edu
+   - Office: DH 4284N or current confirmed office
+   - Phone: optional
+   - Bookings link if available
+7. Footer.
+
+Development tasks:
+[ ] Create /contact.html.
+[ ] Link Contact in nav on all main pages.
+[ ] Add contact cards for major audience types.
+[ ] Add email mailto link.
+[ ] Add booking link if desired.
+[ ] Add Canvas-first note for current students.
+[ ] Add Math Club inquiry note or link.
+[ ] Standardize footer.
+
+Completion criteria:
+[ ] Contact link works from every main site page.
+[ ] Page explains how current students should contact Prof. Volk.
+[ ] Email link works.
+[ ] Booking link works if included.
+[ ] Contact page does not expose unnecessary private details.
+[ ] Footer matches the main site standard.
+[ ] Page is usable on mobile.
+
+====================================================================
+14. MATH CLUB SUBSITE: /LibertyMathClub/
+====================================================================
+
+Current strengths:
+- The subsite has its own identity and nav.
+- It contains useful engagement tracks: Leadership, Research, Competition, Interdisciplinary Team.
+- It includes recurring event information and honor society information.
+
+Current issues to address:
+- The most important student actions should appear higher.
+- The “Updated: July 3, 2025” line may become stale unless maintained.
+- Recurring meeting time is valuable and should be more prominent.
+- Engagement tracks should use cards rather than long lists.
+
+Recommended structure:
+
+1. Math Club header/nav.
+2. Hero:
+   H1: Liberty University Math Club
+   Subtitle: 2025-2026 Academic Year
+   Key info badge: Mondays, 10:20-11:45 AM
+   Buttons:
+   - View Events
+   - Join / Contact Officers
+   - Explore Research Team
+   - Learn About PME / KME
+3. Meeting info card:
+   - Recurring meeting time
+   - Location if known
+   - Who can attend
+   - Next meeting or event schedule link
+4. Engagement track cards:
+   - Leadership Team
+   - Research Team
+   - Competition Team
+   - Interdisciplinary Consulting Team
+5. Special events section:
+   - Estimathon
+   - Integration Bee
+   - Conference trips
+   - Other events
+6. Honor societies section:
+   - PME
+   - KME
+7. Recurring event series section.
+8. Link back to Prof. Volk's Office main site.
+
+Development tasks:
+[ ] Move recurring meeting time near the top.
+[ ] Replace or maintain the “Updated” date; consider “2025-2026 Academic Year” instead.
+[ ] Add primary CTAs above the fold.
+[ ] Convert engagement tracks to cards.
+[ ] Add a back-link to main Prof. Volk site.
+[ ] Ensure Math Club nav is mobile friendly.
+[ ] Ensure logo has descriptive alt text.
+[ ] If a contact/join path exists, make it visible above the fold.
+
+Completion criteria:
+[ ] Students can find meeting time within 5 seconds.
+[ ] Students can find events, officers/contact, research, competition, consulting, and honors from the top area or nav.
+[ ] Engagement tracks are visually distinct and parallel in structure.
+[ ] The page does not display a stale update date unless it is intentionally maintained.
+[ ] The page links back to the main site.
+[ ] Mobile layout is readable and usable.
+
+====================================================================
+15. ACCESSIBILITY REQUIREMENTS
+====================================================================
+
+Development tasks:
+[ ] Use one H1 per page.
+[ ] Use headings in hierarchical order.
+[ ] Add alt text to meaningful images.
+[ ] Use empty alt text only for decorative images.
+[ ] Add aria-labels to icon-only links.
+[ ] Ensure all links have accessible names.
+[ ] Ensure dropdown nav is keyboard accessible.
+[ ] Ensure visible focus indicators exist for links and buttons.
+[ ] Check color contrast for text, buttons, cards, and badges.
+[ ] Avoid relying on color alone to communicate meaning.
+[ ] Confirm mobile tap targets are large enough.
+
+Completion criteria:
+[ ] Automated accessibility scan shows no critical errors.
+[ ] Keyboard-only navigation can reach every page and every actionable element.
+[ ] Screen reader announces nav links, cards, buttons, and icons meaningfully.
+[ ] No empty anchor text remains.
+[ ] Images used as links have descriptive accessible names.
+[ ] Body text and button text meet WCAG AA contrast expectations.
+
+====================================================================
+16. RESPONSIVE DESIGN REQUIREMENTS
+====================================================================
+
+Target breakpoints:
+- Mobile: 360px-480px
+- Large mobile / small tablet: 481px-767px
+- Tablet: 768px-1023px
+- Desktop: 1024px and wider
+
+Development tasks:
+[ ] Test every first-level page at mobile, tablet, and desktop widths.
+[ ] Ensure nav does not wrap awkwardly on tablet.
+[ ] Ensure card grids collapse gracefully.
+[ ] Ensure buttons do not overflow their containers.
+[ ] Ensure long course titles wrap cleanly.
+[ ] Ensure hero text remains readable and not overly tall on mobile.
+
+Completion criteria:
+[ ] No horizontal scrolling occurs at 360px width.
+[ ] Main nav is usable on mobile.
+[ ] Card grids display as one column on mobile.
+[ ] Page hero is readable without excessive vertical crowding.
+[ ] Footer remains readable and organized on mobile.
+
+====================================================================
+17. CONTENT AND COPY STANDARDS
+====================================================================
+
+Voice:
+- Clear, concise, student-centered, professional.
+- Avoid unnecessary jargon.
+- Prefer action verbs.
+- Keep descriptions short enough to scan.
+
+Recommended copy principles:
+[ ] Use “Course Home” consistently if that is the selected label.
+[ ] Use “Tools & Resources” consistently if that is the selected label.
+[ ] Reserve “Canvas” for official current-term materials.
+[ ] Explain evergreen resources as reusable support materials.
+[ ] Keep card descriptions to 1-2 sentences.
+[ ] Use parallel phrasing across cards.
+
+Completion criteria:
+[ ] Page labels are consistent across nav, hero, buttons, and internal references.
+[ ] No page uses multiple names for the same destination.
+[ ] Card descriptions are concise and parallel.
+[ ] Current-term Canvas expectations are clear on course pages.
+
+====================================================================
+18. QUALITY ASSURANCE CHECKLIST
+====================================================================
+
+Link testing:
+[ ] Home link works.
+[ ] About / CV link works.
+[ ] Course Home link works.
+[ ] MATH 114 link works.
+[ ] MATH 130 link works.
+[ ] Physics Labs link works.
+[ ] Tools & Resources link works.
+[ ] Math Club link works.
+[ ] YouTube external link works.
+[ ] Contact link works.
+[ ] All tool/resource links work.
+[ ] All course unit links work.
+[ ] All PDF links work.
+[ ] All external links are intentional.
+
+Visual testing:
+[ ] Header is consistent on all main pages.
+[ ] Footer is consistent on all main pages.
+[ ] Buttons have consistent styling.
+[ ] Cards have consistent styling.
+[ ] Hero spacing is consistent.
+[ ] Page content does not feel overcrowded.
+[ ] Important CTAs appear before secondary content.
+
+Accessibility testing:
+[ ] Keyboard tab order is logical.
+[ ] Focus states are visible.
+[ ] Images have correct alt behavior.
+[ ] Empty links are removed or labeled.
+[ ] Color contrast is sufficient.
+[ ] Heading levels are logical.
+
+Responsive testing:
+[ ] 360px width works.
+[ ] 768px width works.
+[ ] 1024px width works.
+[ ] Desktop layout works.
+[ ] Dropdown/mobile nav works.
+[ ] Cards collapse correctly.
+
+Content testing:
+[ ] No stale footer dates remain.
+[ ] No duplicate Home labels remain.
+[ ] Learn/All Courses/Course Home naming is consistent.
+[ ] Contact information is accurate.
+[ ] Office location is current.
+[ ] CV download is current.
+[ ] Math Club year/update language is current.
+
+====================================================================
+19. IMPLEMENTATION PHASES
+====================================================================
+
+Phase 1: Foundation cleanup
+Purpose: Fix the site-wide inconsistencies before redesigning individual pages.
+
+Tasks:
+[ ] Standardize nav labels.
+[ ] Create /contact.html.
+[ ] Link Contact everywhere.
+[ ] Standardize footer.
+[ ] Remove duplicate Home labels.
+[ ] Decide final labels: Course Home/Courses and Tools & Resources.
+
+Phase 1 completion criteria:
+[ ] All main pages share the same nav structure.
+[ ] Contact is functional everywhere.
+[ ] Footer is consistent everywhere.
+[ ] Page naming is consistent.
+
+Phase 2: Component system
+Purpose: Build reusable design patterns.
+
+Tasks:
+[ ] Create shared page hero style.
+[ ] Create card grid style.
+[ ] Create badge style.
+[ ] Create checklist card style.
+[ ] Create standard button styles.
+[ ] Create accessible icon/link pattern.
+
+Phase 2 completion criteria:
+[ ] Homepage, Learn, course pages, Tools, and Contact can use the same component language.
+[ ] Components work on mobile and desktop.
+[ ] Buttons, cards, and badges are visually consistent.
+
+Phase 3: Homepage and course path redesign
+Purpose: Make the main student path clear.
+
+Tasks:
+[ ] Redesign homepage as decision tree.
+[ ] Redesign Course Home / Learn page as course cards.
+[ ] Redesign MATH 114 quick start and unit cards.
+[ ] Redesign MATH 130 badges, current-need chooser, and unit cards.
+[ ] Redesign Physics Labs cards and checklist.
+
+Phase 3 completion criteria:
+[ ] Students can identify and open the correct course path quickly.
+[ ] Course pages show quick-start information before long resource lists.
+[ ] Unit/lab cards are visually scannable.
+
+Phase 4: Tools and CV improvements
+Purpose: Make large resource/professional pages easier to scan.
+
+Tasks:
+[ ] Categorize Tools page.
+[ ] Add featured tools.
+[ ] Fix empty/icon-only links.
+[ ] Add About/CV quick profile and audience cards.
+[ ] Improve CV section hierarchy.
+
+Phase 4 completion criteria:
+[ ] Tools are grouped and easy to filter/scan.
+[ ] CV supports students, collaborators, and reviewers.
+[ ] No empty links remain.
+
+Phase 5: Math Club alignment
+Purpose: Improve the student action path while preserving subsite identity.
+
+Tasks:
+[ ] Move meeting time near top.
+[ ] Add clear CTAs.
+[ ] Convert engagement tracks to cards.
+[ ] Review update-date language.
+[ ] Add main-site backlink.
+
+Phase 5 completion criteria:
+[ ] Math Club page clearly communicates when/how to participate.
+[ ] Engagement tracks are easy to understand.
+[ ] Stale date issue is resolved.
+
+Phase 6: Final QA and launch
+Purpose: Verify functionality, accessibility, and responsiveness.
+
+Tasks:
+[ ] Run link check.
+[ ] Run accessibility scan.
+[ ] Test keyboard navigation.
+[ ] Test mobile, tablet, and desktop.
+[ ] Proofread page labels and button text.
+[ ] Confirm files deploy correctly on GitHub Pages.
+
+Phase 6 completion criteria:
+[ ] No broken internal links.
+[ ] No critical accessibility errors.
+[ ] No mobile horizontal scrolling.
+[ ] All primary paths work from the homepage.
+[ ] GitHub Pages deployment displays the revised site correctly.
+
+====================================================================
+20. FINAL DEFINITION OF DONE
+====================================================================
+
+The redesign is complete when:
+
+[ ] The main site uses a consistent header, footer, page hero, card, badge, and button system.
+[ ] Navigation labels are consistent and meaningful.
+[ ] Contact is a real page and a working nav link.
+[ ] The homepage clearly routes visitors to Courses, Tools, About/CV, Math Club, and Contact.
+[ ] Course Home / Learn page uses course cards instead of sparse text blocks.
+[ ] MATH 114 places quick-start resources high on the page and uses unit cards.
+[ ] MATH 130 uses badges, current-need chooser, and consistent unit cards.
+[ ] Physics Labs uses lab cards, a prominent checklist, and shared-lab clarification.
+[ ] Tools page is categorized and accessible.
+[ ] About/CV page has quick profile and audience-oriented entry points.
+[ ] Math Club page highlights meeting time, participation actions, and engagement tracks.
+[ ] Footer year and wording are consistent.
+[ ] No empty links or unlabeled icon links remain.
+[ ] All pages pass basic link, accessibility, keyboard, and mobile checks.
+[ ] The GitHub Pages version reflects the updated files.
+
+====================================================================
+21. OPTIONAL FUTURE ENHANCEMENTS
+====================================================================
+
+These are not required for the current redesign but may be useful later.
+
+[ ] Add search across course pages and tools.
+[ ] Add a lightweight JSON data file for tools so the Tools page can be generated from structured data.
+[ ] Add a “recently updated” section for courses or tools.
+[ ] Add print styles for PDF/worksheet-heavy pages.
+[ ] Add a site map.
+[ ] Add analytics to see which course and tool pages students actually use.
+[ ] Add dark mode if not already present in the shared CSS.
+[ ] Add automated GitHub Actions link checking.
+[ ] Add automated HTML validation.
+[ ] Add a reusable template for new course pages.
+
+====================================================================
+END OF DOCUMENT
+====================================================================

@@ -10,36 +10,37 @@
     <link rel="stylesheet" href="/styles.css">
     <!-- Page-specific external CSS: Font Awesome provides icon glyphs used on this page. -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="theme.js"></script>
+    <script src="/theme.js" defer></script>
 </head>
 <body>
- <nav class="top-nav" aria-label="Primary">
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
     <div class="top-nav-branding">
-      <a class="top-nav-title" href="index.html">Prof. Volk's Office</a>
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
     </div>
     <div class="top-nav-actions">
       <ul class="top-nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="CV.html" aria-current="page">About</a></li>
+        <li><a href="/index.html">Home</a></li>
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">Courses ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">Courses</button>
           <ul class="dropdown-menu">
-            <li><a href="learn.html">All Courses</a></li>
-            <li><a href="courses/math114.html">MATH 114</a></li>
-            <li><a href="courses/math130.html">MATH 130</a></li>
-            <li><a href="courses/physics-labs.html">Physics Labs</a></li>
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
           </ul>
         </li>
-        <li><a href="projects.html">Tools</a></li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html" aria-current="page">About / CV</a></li>
+        <li><a href="/LibertyMathClub/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
       <ul class="top-nav-utilities" aria-label="More">
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
           <ul class="dropdown-menu dropdown-menu--right">
-            <li><a href="https://andrewhvolk.github.io/LibertyMathClub/" target="_blank" rel="noopener noreferrer">Math Club</a></li>
-            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="mailto:ahvolk@liberty.edu">Contact</a></li>
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
           </ul>
         </li>
       </ul>
@@ -50,9 +51,9 @@
 <div class="page-context-bar">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Home</a>
+      <a href="/index.html">Home</a>
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
-      <span class="breadcrumb-current" aria-current="page">About</span>
+      <span class="breadcrumb-current" aria-current="page">About / CV</span>
     </nav>
   </div>
 </div>
@@ -63,7 +64,7 @@
                 <img src="headshot150.jpg" alt="Headshot of Andrew H. Volk">
             </div>
             <div class="cv-hero__identity">
-                <p class="page-shell-header__eyebrow">Curriculum Vitae</p>
+                <p class="page-shell-header__eyebrow">Professional Profile</p>
                 <h1>Andrew H. Volk</h1>
                 <p class="subtitle">Assistant Professor of Mathematics and Physics</p>
                 <div class="contact-info" aria-label="Contact information">
@@ -82,6 +83,11 @@
                         <span class="contact-label">Office</span>
                         <span>1971 University Blvd, Lynchburg, VA 24515</span>
                     </div>
+                </div>
+                <div class="page-actions cv-hero-actions">
+                    <button class="button" type="button" onclick="window.print()">Download CV</button>
+                    <a href="/contact.html" class="button button-secondary">Contact Prof. Volk</a>
+                    <a href="/learn.html" class="button button-secondary">View Teaching Resources</a>
                 </div>
             </div>
         </div>
@@ -105,7 +111,48 @@
         </div>
     </nav>
 
-    <main class="container cv-page">
+    <main id="main-content" class="container cv-page">
+        <section class="quick-profile-grid" aria-label="Quick profile">
+            <article class="profile-card">
+                <h2>Quick Profile</h2>
+                <dl>
+                    <div><dt>Role</dt><dd>Assistant Professor of Mathematics and Physics</dd></div>
+                    <div><dt>Institution</dt><dd>Liberty University</dd></div>
+                    <div><dt>Teaching areas</dt><dd>Mathematics, physics, quantitative reasoning, and engineering education.</dd></div>
+                    <div><dt>Research interests</dt><dd>Mathematics education, reflective practice, learning tools, and interdisciplinary teaching.</dd></div>
+                </dl>
+            </article>
+            <article class="profile-card">
+                <h2>Contact Snapshot</h2>
+                <dl>
+                    <div><dt>Email</dt><dd><a href="mailto:ahvolk@liberty.edu">ahvolk@liberty.edu</a></dd></div>
+                    <div><dt>Office</dt><dd>DH 4284N</dd></div>
+                    <div><dt>Meetings</dt><dd><a href="/bookings.html">Open meeting booking guide</a></dd></div>
+                </dl>
+            </article>
+        </section>
+
+        <section class="audience-grid" aria-label="Audience paths">
+            <article class="site-card">
+                <span class="site-badge">For students</span>
+                <h2>Teaching and course support</h2>
+                <p>Use the course pages and contact path for course materials, review support, and meeting guidance.</p>
+                <a href="/learn.html" class="button">Open Course Home</a>
+            </article>
+            <article class="site-card">
+                <span class="site-badge">For collaborators</span>
+                <h2>Professional background</h2>
+                <p>Review scholarship, presentations, teaching interests, service, and contact information.</p>
+                <a href="/contact.html" class="button">Contact Prof. Volk</a>
+            </article>
+            <article class="site-card">
+                <span class="site-badge">For reviewers</span>
+                <h2>Full CV details</h2>
+                <p>Jump into education, appointments, publications, presentations, teaching, service, and honors.</p>
+                <a href="#education" class="button">View CV Sections</a>
+            </article>
+        </section>
+
         <section id="summary" class="cv-intro">
             <div class="cv-intro__main">
                 <p class="section-kicker">Professional Profile</p>
@@ -420,6 +467,14 @@
             <div class="cv-entries">
                 <article class="cv-entry">
                     <div class="item-header">
+                        <span class="item-title">Faculty Advisor, Liberty University Math Club</span>
+                        <span class="item-date">Current</span>
+                    </div>
+                    <p>Supports student events, undergraduate research, mathematics competitions, interdisciplinary project work, and mathematics honor society activities.</p>
+                    <p class="item-note"><a href="/LibertyMathClub/">Liberty University Math Club</a></p>
+                </article>
+                <article class="cv-entry">
+                    <div class="item-header">
                         <span class="item-title">Honor Thesis Committee Chair</span>
                         <span class="item-date">October 2023 – Present</span>
                     </div>
@@ -469,17 +524,23 @@
             </ul>
         </section>
 
-        <div class="download-container">
-            <button class="download-btn" type="button" onclick="window.print()">Download PDF</button>
+        <div class="download-container page-actions">
+            <button class="download-btn" type="button" onclick="window.print()">Download CV</button>
+            <a href="/contact.html" class="button button-secondary">Contact Prof. Volk</a>
         </div>
     </main>
 
-    <footer>
+    <footer class="site-footer">
         <div class="container">
-            <p>&copy; <span id="current-year">2025</span> Andrew H. Volk. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
-            </div>
+            <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+            <nav aria-label="Footer">
+                <a href="/index.html">Home</a>
+                <a href="/learn.html">Courses</a>
+                <a href="/projects.html">Tools &amp; Resources</a>
+                <a href="/CV.html">About / CV</a>
+                <a href="/LibertyMathClub/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+            </nav>
         </div>
         <script>
             document.getElementById('current-year').textContent = new Date().getFullYear();
