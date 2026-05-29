@@ -435,6 +435,46 @@ function replaceVisibleText(root, replacements) {
     });
 }
 
+function showMathRuntimeWarning(message) {
+    const existingWarning = document.querySelector('.math-runtime-warning');
+    if (existingWarning) {
+        existingWarning.textContent = message;
+        return;
+    }
+
+    const warning = document.createElement('div');
+    warning.className = 'math-runtime-warning';
+    warning.setAttribute('role', 'status');
+    warning.textContent = message;
+    warning.style.cssText = [
+        'margin: 1rem auto',
+        'padding: 0.85rem 1rem',
+        'max-width: min(100% - 2rem, 980px)',
+        'border: 1px solid #f59e0b',
+        'border-radius: 0.65rem',
+        'background: #fff7ed',
+        'color: #7c2d12',
+        'font-weight: 700',
+        'line-height: 1.4'
+    ].join(';');
+
+    const header = document.querySelector('.review-page-header, .page-shell-header, .course-header, .page-hero, .math-review-page > header, .page > header');
+    if (header) {
+        header.insertAdjacentElement('afterend', warning);
+        return;
+    }
+
+    const target = document.querySelector('main, .math-review-page, .page, .container, #app-container');
+    if (target) {
+        target.prepend(warning);
+        return;
+    }
+
+    document.body.prepend(warning);
+}
+
+window.showMathRuntimeWarning = window.showMathRuntimeWarning || showMathRuntimeWarning;
+
 function ensureMath130FallStyles() {
     if (document.getElementById('math130-fall-2026-styles')) return;
     const style = document.createElement('style');
