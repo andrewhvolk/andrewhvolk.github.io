@@ -697,15 +697,14 @@ function buildMath130PageFlow(config) {
     section.id = 'math130-fall-2026-flow';
     section.className = 'math130-fall-flow math130-fall-flow--compact';
     section.setAttribute('aria-labelledby', 'math130-fall-2026-flow-title');
-    const rowList = rows.slice(0, 8).map(([, date, day, topic]) => `<li><strong>${escapeHtml(date)} (${escapeHtml(day)}):</strong> ${escapeHtml(topic)}</li>`).join('');
-    const additionalRows = rows.length > 8 ? `<li><strong>More:</strong> ${rows.length - 8} additional class meetings in this assessment window.</li>` : '';
+    const rowList = rows.map(([, date, day, topic]) => `<li><strong>${escapeHtml(date)} (${escapeHtml(day)}):</strong> ${escapeHtml(topic)}</li>`).join('');
     section.innerHTML = `
         <div class="math130-fall-flow__header">
             <p class="math130-fall-flow__kicker">Fall 2026 MATH 130 Flow</p>
             <h2 id="math130-fall-2026-flow-title">${escapeHtml(config.title)} fits in ${escapeHtml(unit.label)}.</h2>
             <p class="math130-fall-flow__lede"><strong>${escapeHtml(unit.dates)}:</strong> ${escapeHtml(unit.topics)} <strong>${escapeHtml(unit.assessment)}.</strong></p>
         </div>
-        <ul class="math130-fall-flow__mini-schedule">${rowList}${additionalRows}</ul>
+        <ul class="math130-fall-flow__mini-schedule">${rowList}</ul>
         <div class="math130-fall-flow__actions">
             <a class="math130-fall-flow__link" href="/courses/math130.html">Back to MATH 130 Dashboard</a>
             ${config.prev ? `<a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="${escapeHtml(config.prev)}">Previous</a>` : ''}
