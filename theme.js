@@ -688,8 +688,24 @@ function insertMath130FallFlow(config) {
         return;
     }
 
-    const main = document.querySelector('main, .container, #app-container');
-    if (main) main.prepend(flow);
+    const pageHeader = document.querySelector('.page > header');
+    if (pageHeader) {
+        pageHeader.insertAdjacentElement('afterend', flow);
+        return;
+    }
+
+    const main = document.querySelector('main, .container, #app-container, .page');
+    if (main) {
+        main.prepend(flow);
+        return;
+    }
+
+    const firstBodyChild = Array.from(document.body.children).find((element) => !element.matches('script, style'));
+    if (firstBodyChild) {
+        firstBodyChild.insertAdjacentElement('beforebegin', flow);
+    } else {
+        document.body.prepend(flow);
+    }
 }
 
 function applyMath130FallTextUpdates(config) {
