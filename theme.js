@@ -299,48 +299,48 @@ const math130FallSchedule = [
     ['Week 1', 'Aug 26', 'Wed', 'Review - Chapter R'],
     ['Week 1', 'Aug 28', 'Fri', 'Review'],
     ['Week 2', 'Aug 31', 'Mon', 'Review'],
-    ['Week 2', 'Sep 2', 'Wed', '1.1-1.2'],
+    ['Week 2', 'Sep 2', 'Wed', '1.1-1.2, Quiz 1'],
     ['Week 2', 'Sep 4', 'Fri', '1.2'],
     ['Week 3', 'Sep 7', 'Mon', '1.4'],
-    ['Week 3', 'Sep 9', 'Wed', '2.1'],
+    ['Week 3', 'Sep 9', 'Wed', '2.1, Quiz 2'],
     ['Week 3', 'Sep 11', 'Fri', '2.2'],
     ['Week 4', 'Sep 14', 'Mon', '2.4'],
-    ['Week 4', 'Sep 16', 'Wed', '2.5'],
+    ['Week 4', 'Sep 16', 'Wed', '2.5, Quiz 3'],
     ['Week 4', 'Sep 18', 'Fri', '3.1'],
-    ['Week 5', 'Sep 21', 'Mon', 'Review'],
+    ['Week 5', 'Sep 21', 'Mon', 'Review, Quiz 4'],
     ['Week 5', 'Sep 23', 'Wed', 'Test 1'],
     ['Week 5', 'Sep 25', 'Fri', '4.2'],
     ['Week 6', 'Sep 28', 'Mon', '4.2'],
-    ['Week 6', 'Sep 30', 'Wed', '4.3'],
+    ['Week 6', 'Sep 30', 'Wed', '4.3, Quiz 5'],
     ['Week 6', 'Oct 2', 'Fri', '4.3'],
     ['Week 7', 'Oct 5', 'Mon', 'Geometry: Polygon'],
-    ['Week 7', 'Oct 7', 'Wed', 'Geometry: Polygon'],
+    ['Week 7', 'Oct 7', 'Wed', 'Geometry: Polygon, Quiz 6'],
     ['Week 7', 'Oct 9', 'Fri', 'Geometry: Polygon'],
     ['Week 8', 'Oct 12', 'Mon', 'Geometry: Polygon'],
-    ['Week 8', 'Oct 14', 'Wed', 'Geometry: Circles'],
+    ['Week 8', 'Oct 14', 'Wed', 'Geometry: Circles, Quiz 7'],
     ['Week 8', 'Oct 16', 'Fri', 'Fall Break'],
     ['Week 9', 'Oct 19', 'Mon', 'Geometry: Circles'],
-    ['Week 9', 'Oct 21', 'Wed', 'Geometry: Circles'],
+    ['Week 9', 'Oct 21', 'Wed', 'Geometry: Circles, Quiz 8'],
     ['Week 9', 'Oct 23', 'Fri', 'Geometry: Circles'],
     ['Week 10', 'Oct 26', 'Mon', 'Geometry: Circles'],
-    ['Week 10', 'Oct 28', 'Wed', 'Review'],
+    ['Week 10', 'Oct 28', 'Wed', 'Review, Quiz 9'],
     ['Week 10', 'Oct 30', 'Fri', 'Test 2'],
     ['Week 11', 'Nov 2', 'Mon', '5.1'],
     ['Week 11', 'Nov 4', 'Wed', '5.2'],
     ['Week 11', 'Nov 6', 'Fri', '5.2'],
     ['Week 12', 'Nov 9', 'Mon', '5.3'],
-    ['Week 12', 'Nov 11', 'Wed', '5.3'],
+    ['Week 12', 'Nov 11', 'Wed', '5.3, Quiz 10'],
     ['Week 12', 'Nov 13', 'Fri', '5.3'],
     ['Week 13', 'Nov 16', 'Mon', '5.7, 7.1'],
-    ['Week 13', 'Nov 18', 'Wed', '7.1'],
+    ['Week 13', 'Nov 18', 'Wed', '7.1, Quiz 11'],
     ['Week 13', 'Nov 20', 'Fri', '7.1'],
     ['Break', 'Nov 23', 'Mon', 'Thanksgiving Break'],
     ['Break', 'Nov 25', 'Wed', 'Thanksgiving Break'],
     ['Break', 'Nov 27', 'Fri', 'Thanksgiving Break'],
     ['Week 14', 'Nov 30', 'Mon', '8.4'],
-    ['Week 14', 'Dec 2', 'Wed', '8.4'],
+    ['Week 14', 'Dec 2', 'Wed', '8.4, Quiz 12'],
     ['Week 14', 'Dec 4', 'Fri', 'Applications'],
-    ['Week 15', 'Dec 7', 'Mon', 'Review'],
+    ['Week 15', 'Dec 7', 'Mon', 'Review, Quiz 13'],
     ['Week 15', 'Dec 9', 'Wed', 'Test 3'],
     ['Week 15', 'Dec 11', 'Fri', 'Review'],
     ['Finals', 'Dec 14', 'Mon', 'Final Exam']
@@ -354,7 +354,7 @@ const math130FallUnits = [
         assessment: 'Test 1: Sep 23',
         href: '/130Test1.html',
         title: 'Foundations, algebra, functions, and coordinate skills',
-        topics: 'Intro; Chapter R review; 1.1-1.2; 1.4; 2.1; 2.2; 2.4; 2.5; 3.1; review.',
+        topics: 'Intro; Chapter R review; 1.1-1.2; 1.4; 2.1; 2.2; 2.4; 2.5; 3.1; Quizzes 1-4; review.',
         range: [0, 13]
     },
     {
@@ -364,7 +364,7 @@ const math130FallUnits = [
         assessment: 'Test 2: Oct 30',
         href: '/130Test2.html',
         title: 'Interest, logarithms, polygons, and circles',
-        topics: '4.2; 4.3; polygon geometry; circle geometry; review.',
+        topics: '4.2; 4.3; polygon geometry; circle geometry; Quizzes 5-9; review.',
         range: [14, 29]
     },
     {
@@ -374,7 +374,7 @@ const math130FallUnits = [
         assessment: 'Test 3: Dec 9',
         href: '/130Test3.html',
         title: 'Trigonometry, applications, and vectors',
-        topics: '5.1; 5.2; 5.3; 5.7; 7.1; Thanksgiving break; 8.4; applications; review.',
+        topics: '5.1; 5.2; 5.3; 5.7; 7.1; Thanksgiving break; 8.4; applications; Quizzes 10-13; review.',
         range: [30, 46]
     },
     {
@@ -600,6 +600,12 @@ function ensureMath130FallStyles() {
             border-bottom: 0;
         }
         .math130-fall-flow__table tr[data-assessment="true"] td {
+            font-weight: 700;
+        }
+        .math130-fall-flow__table tr[data-quiz="true"] td {
+            color: var(--primary-main, #2563eb);
+        }
+        .math130-fall-flow__table tr[data-major-assessment="true"] td {
             font-weight: 800;
             color: var(--danger-main, #b91c1c);
         }
@@ -647,14 +653,16 @@ function buildMath130UnitCard(unit) {
 
 function buildMath130ScheduleTable(rows = math130FallSchedule) {
     const body = rows.map(([week, date, day, topic]) => {
-        const assessment = /Test|Final Exam/.test(topic);
+        const quiz = /Quiz/.test(topic);
+        const majorAssessment = /Test|Final Exam/.test(topic);
+        const assessment = quiz || majorAssessment;
         const breakRow = /Break/.test(topic);
-        return `<tr data-assessment="${assessment ? 'true' : 'false'}" data-break="${breakRow ? 'true' : 'false'}"><td>${escapeHtml(week)}</td><td>${escapeHtml(date)}</td><td>${escapeHtml(day)}</td><td>${escapeHtml(topic)}</td></tr>`;
+        return `<tr data-assessment="${assessment ? 'true' : 'false'}" data-quiz="${quiz ? 'true' : 'false'}" data-major-assessment="${majorAssessment ? 'true' : 'false'}" data-break="${breakRow ? 'true' : 'false'}"><td>${escapeHtml(week)}</td><td>${escapeHtml(date)}</td><td>${escapeHtml(day)}</td><td>${escapeHtml(topic)}</td></tr>`;
     }).join('');
     return `
         <div class="math130-fall-flow__table-wrap">
             <table class="math130-fall-flow__table">
-                <thead><tr><th>Week</th><th>Date</th><th>Day</th><th>Topic</th></tr></thead>
+                <thead><tr><th>Week</th><th>Date</th><th>Day</th><th>Topic / Assignment</th></tr></thead>
                 <tbody>${body}</tbody>
             </table>
         </div>`;
@@ -669,7 +677,7 @@ function buildMath130DashboardFlow() {
         <div class="math130-fall-flow__header">
             <p class="math130-fall-flow__kicker">Fall 2026 Semester Flow</p>
             <h2 id="math130-fall-2026-flow-title">Follow the course by assessment window.</h2>
-            <p class="math130-fall-flow__lede">The Fall 2026 calendar has three tests and a cumulative final. Each page below is positioned around the dates and topics students will see in class.</p>
+            <p class="math130-fall-flow__lede">The Fall 2026 calendar has thirteen quizzes, three tests, and a cumulative final. Each page below is positioned around the dates, assignments, and topics students will see in class.</p>
         </div>
         <div class="math130-fall-flow__grid">
             ${math130FallUnits.map(buildMath130UnitCard).join('')}
