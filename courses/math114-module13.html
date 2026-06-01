@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 13: Linear Modeling | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 13: functions and linear modeling — rate of change, slope-intercept form, and building linear models of real situations.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module13.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Module 13: Linear Modeling">
+  <meta property="og:description" content="Functions and linear modeling — rate of change, slope-intercept form, and building linear models.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-module13.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.6rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-formula { background: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface)); border-left: 3px solid var(--primary-main); border-radius: 0.4rem; padding: 0.6rem 0.9rem; margin: 0.6rem 0; font-family: var(--type-meta-family); }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 13</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 13 of 14</p>
+    <h1>Linear Modeling</h1>
+    <p class="page-hero__lede">A model is a math description of a real situation. This module starts with functions and the most common model of all — the straight line with a constant rate of change.</p>
+    <ul class="badge-list" aria-label="Module highlights">
+      <li><span class="site-badge">Chapter 9A–9B</span></li>
+      <li><span class="site-badge">Functions &amp; slope</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#concepts" class="button">Start learning</a>
+      <a href="/courses/math114.html" class="button button-secondary">Course overview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section id="concepts" class="site-section" aria-labelledby="c1-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c1-title">1 · Functions</h2>
+    </div>
+    <div class="cw-prose">
+      <p>A <strong>function</strong> takes each input to exactly one output — written y = f(x), where x is the input (independent variable) and y is the output (dependent variable). Functions can be shown four ways: in words, as a table, as a graph, or as an equation.</p>
+      <p>The <strong>domain</strong> is the set of allowed inputs; the <strong>range</strong> is the set of resulting outputs.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c2-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c2-title">2 · Linear models</h2>
+    </div>
+    <div class="cw-prose">
+      <p>A relationship is <strong>linear</strong> when the output changes by a constant <em>amount</em> for each unit of input — a constant <strong>rate of change</strong> (the slope). In slope-intercept form:</p>
+      <div class="cw-formula">y = m·x + b&nbsp;&nbsp;(m = rate of change, b = initial value when x = 0)</div>
+      <p>The slope between two points is the change in output over the change in input:</p>
+      <div class="cw-formula">m = (y₂ − y₁) ÷ (x₂ − x₁)</div>
+      <p>Graph linear models quickly with the Desmos graphing calculator linked below.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="ex-title">
+    <div class="section-header">
+      <p class="section-kicker">Worked Examples</p>
+      <h2 id="ex-title">See it done, step by step</h2>
+    </div>
+
+    <details class="cw-example">
+      <summary>Example 1 — A gym charges a $30 fee plus $5 per visit. Model the cost.</summary>
+      <div class="cw-example__body">
+        <p>The $30 is the initial value (b); the $5 per visit is the rate of change (m).</p>
+        <div class="cw-answer">
+          <p>C = 5x + 30. For 8 visits: C = 5(8) + 30 = <strong>$70</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 2 — Find the slope between (2, 50) and (5, 80)</summary>
+      <div class="cw-example__body">
+        <div class="cw-answer">
+          <p>m = (80 − 50) ÷ (5 − 2) = 30 ÷ 3 = <strong>10</strong> (the output rises 10 per unit of input).</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 3 — A car is 100 miles away and approaches at 60 mph. Model its distance.</summary>
+      <div class="cw-example__body">
+        <p>Distance starts at 100 and decreases 60 each hour, so the rate of change is negative.</p>
+        <div class="cw-answer">
+          <p>d = 100 − 60t. After 1 hour: d = 100 − 60 = <strong>40 miles</strong>.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="site-section" aria-labelledby="watch-title">
+    <div class="section-header">
+      <p class="section-kicker">Watch &amp; Review</p>
+      <h2 id="watch-title">Resources for this module</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Tool</span>
+        <h3>Desmos Graphing Calculator</h3>
+        <p>Type a linear equation like y = 5x + 30 to see and explore its graph.</p>
+        <a href="https://www.desmos.com/graphing" class="button external-destination" target="_blank" rel="noopener noreferrer">Open Desmos</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">In Canvas</span>
+        <h3>Lecture materials</h3>
+        <p>Module 13 lecture slides and any posted videos are available in your Canvas course.</p>
+        <a href="https://canvas.liberty.edu/" class="button external-destination" target="_blank" rel="noopener noreferrer">Open Canvas</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="check-title">
+    <div class="section-header">
+      <p class="section-kicker">Check Yourself</p>
+      <h2 id="check-title">Quick self-check</h2>
+    </div>
+    <details class="cw-example">
+      <summary>1. In y = 3x + 12, what are the rate of change and the initial value?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>Rate of change = <strong>3</strong>; initial value = <strong>12</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>2. A phone plan is $20 per month plus $0.10 per minute. Cost for 100 minutes?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>C = 20 + 0.10(100) = 20 + 10 = <strong>$30</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>3. What makes a model linear rather than nonlinear?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>A <strong>constant rate of change</strong> — the output changes by the same amount for each step in the input.</p></div></div>
+    </details>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="submit-title">
+    <h2 id="submit-title">Ready to turn it in?</h2>
+    <p>When linear models make sense, complete the <strong>Module 13 homework and quiz in Canvas</strong>.</p>
+    <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Submit in Canvas</a>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-test3.html" class="button button-secondary course-sequence-nav__link">&larr; Test 3</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">Course overview</a>
+    <a href="math114-module14.html" class="button course-sequence-nav__link">Module 14 &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 10: The Normal Distribution | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 10: the normal distribution, the 68-95-99.7 (empirical) rule, and z-scores — with an interactive explorer and worked examples.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module10.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Module 10: The Normal Distribution">
+  <meta property="og:description" content="The normal distribution, the 68-95-99.7 rule, and z-scores — with an interactive explorer.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-module10.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.6rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-formula { background: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface)); border-left: 3px solid var(--primary-main); border-radius: 0.4rem; padding: 0.6rem 0.9rem; margin: 0.6rem 0; font-family: var(--type-meta-family); }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 10</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 10 of 14</p>
+    <h1>The Normal Distribution</h1>
+    <p class="page-hero__lede">Many real measurements — heights, test scores, measurement errors — follow a bell-shaped normal distribution. This module shows how to read it with the 68‑95‑99.7 rule and z-scores.</p>
+    <ul class="badge-list" aria-label="Module highlights">
+      <li><span class="site-badge">Chapter 6 &amp; 8</span></li>
+      <li><span class="site-badge">68‑95‑99.7 rule</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#concepts" class="button">Start learning</a>
+      <a href="/courses/math114.html" class="button button-secondary">Course overview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section id="concepts" class="site-section" aria-labelledby="c1-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c1-title">1 · The 68‑95‑99.7 rule</h2>
+    </div>
+    <div class="cw-prose">
+      <p>A normal distribution is symmetric and bell-shaped, centered on its mean (μ) with spread set by the standard deviation (σ). The <strong>empirical rule</strong> says:</p>
+      <ul>
+        <li><strong>68%</strong> of values fall within <strong>1σ</strong> of the mean,</li>
+        <li><strong>95%</strong> within <strong>2σ</strong>,</li>
+        <li><strong>99.7%</strong> within <strong>3σ</strong>.</li>
+      </ul>
+      <p>The interactive explorer below lets you shade each band and see the percentages — it's the fastest way to build intuition for this module.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c2-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c2-title">2 · Z-scores</h2>
+    </div>
+    <div class="cw-prose">
+      <p>A <strong>z-score</strong> tells you how many standard deviations a value sits from the mean:</p>
+      <div class="cw-formula">z = (x − μ) ÷ σ</div>
+      <p>A z-score of 0 is exactly average; z = +2 is two standard deviations above the mean (high); z = −1 is one below. Z-scores let you compare values from different normal distributions on a common scale.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="ex-title">
+    <div class="section-header">
+      <p class="section-kicker">Worked Examples</p>
+      <h2 id="ex-title">See it done, step by step</h2>
+    </div>
+
+    <details class="cw-example">
+      <summary>Example 1 — Test scores are normal with μ = 80, σ = 5. What percent scored 75 to 85?</summary>
+      <div class="cw-example__body">
+        <p>75 = μ − σ and 85 = μ + σ, so this is the 1σ band.</p>
+        <div class="cw-answer">
+          <p>That's <strong>68%</strong> of students.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 2 — Men's heights are normal with μ = 70 in, σ = 3 in. What percent are 64 to 76 inches?</summary>
+      <div class="cw-example__body">
+        <p>64 = μ − 2σ and 76 = μ + 2σ, the 2σ band.</p>
+        <div class="cw-answer">
+          <p>That's <strong>95%</strong> of men.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 3 — IQ scores have μ = 100, σ = 15. Find a z-score of 130.</summary>
+      <div class="cw-example__body">
+        <p>Use z = (x − μ) ÷ σ.</p>
+        <div class="cw-answer">
+          <p>z = (130 − 100) ÷ 15 = 30 ÷ 15 = <strong>2</strong> — two standard deviations above average.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="site-section" aria-labelledby="watch-title">
+    <div class="section-header">
+      <p class="section-kicker">Watch &amp; Review</p>
+      <h2 id="watch-title">Resources for this module</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Interactive</span>
+        <h3>68‑95‑99.7 explorer</h3>
+        <p>Shade each band, click segments for exact percentages, and use the z-score calculator.</p>
+        <a href="NormalDistributionGame.html" class="button">Open explorer</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Video</span>
+        <h3>Using the 68‑95‑99.7 rule</h3>
+        <p>A short walkthrough of empirical-rule problems.</p>
+        <a href="https://youtu.be/rWprz1MvhOI" class="button external-destination" target="_blank" rel="noopener noreferrer">Watch video</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Slides</span>
+        <h3>Lecture slides</h3>
+        <p>The Module 10 slides on the normal distribution.</p>
+        <a href="../pdfs/114Module10Spring25.pdf" class="button">Open slides</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="check-title">
+    <div class="section-header">
+      <p class="section-kicker">Check Yourself</p>
+      <h2 id="check-title">Quick self-check</h2>
+    </div>
+    <details class="cw-example">
+      <summary>1. About what percent of a normal distribution lies within 1 standard deviation of the mean?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>About <strong>68%</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>2. A value has μ = 50, σ = 10, x = 35. Find its z-score.</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>z = (35 − 50) ÷ 10 = <strong>−1.5</strong> (one and a half standard deviations below the mean).</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>3. Scores are normal with μ = 500, σ = 100. Between what scores do about 95% fall?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>μ ± 2σ = 500 ± 200, so <strong>300 to 700</strong>.</p></div></div>
+    </details>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="submit-title">
+    <h2 id="submit-title">Ready to turn it in?</h2>
+    <p>When the empirical rule and z-scores click, complete the <strong>Module 10 homework and quiz in Canvas</strong>.</p>
+    <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Submit in Canvas</a>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-module9.html" class="button button-secondary course-sequence-nav__link">&larr; Module 9</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">Course overview</a>
+    <a href="math114-module11.html" class="button course-sequence-nav__link">Module 11 &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

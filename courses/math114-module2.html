@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 2: Problem Solving &amp; Units | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 2: working with units, unit (dimensional) analysis, and a reliable problem-solving strategy — with worked examples and practice.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module2.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Module 2: Problem Solving &amp; Units">
+  <meta property="og:description" content="Working with units, unit (dimensional) analysis, and a reliable problem-solving strategy.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-module2.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.6rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 2</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 2 of 14</p>
+    <h1>Problem Solving &amp; Units</h1>
+    <p class="page-hero__lede">Most real-world math comes with units attached. This module shows you how to track units, convert between them, and use them to guide your problem solving.</p>
+    <ul class="badge-list" aria-label="Module highlights">
+      <li><span class="site-badge">Chapter 2</span></li>
+      <li><span class="site-badge">Unit analysis</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#concepts" class="button">Start learning</a>
+      <a href="/courses/math114.html" class="button button-secondary">Course overview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section id="concepts" class="site-section" aria-labelledby="c1-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c1-title">1 · Working with units</h2>
+    </div>
+    <div class="cw-prose">
+      <p>A number alone rarely tells the whole story — <strong>5</strong> means something very different as 5 dollars, 5 miles, or 5 hours. The <strong>unit</strong> is part of the answer.</p>
+      <ul>
+        <li><strong>"Per"</strong> means division: miles <em>per</em> hour is miles ÷ hours.</li>
+        <li><strong>"Of"</strong> often means multiplication: 0.25 <em>of</em> 80 is 0.25 × 80.</li>
+        <li><strong>Square / cubic</strong> units come from multiplying lengths: ft × ft = ft² (area), ft × ft × ft = ft³ (volume).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c2-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c2-title">2 · Unit (dimensional) analysis</h2>
+    </div>
+    <div class="cw-prose">
+      <p>Treat units like numbers you can multiply and cancel. A <strong>conversion factor</strong> is a fraction equal to 1, such as <em>(5280 ft) / (1 mi)</em>. Multiplying by it doesn't change the amount — only the units it's written in. Line up the factors so the units you don't want cancel and the units you do want remain.</p>
+      <p>A dependable four-step strategy for any problem:</p>
+      <ol>
+        <li><strong>Understand</strong> — what is given, and what are you asked to find (in what units)?</li>
+        <li><strong>Plan</strong> — choose conversion factors or a formula that connects them.</li>
+        <li><strong>Solve</strong> — carry out the arithmetic, keeping units attached.</li>
+        <li><strong>Check</strong> — do the units and the size of the answer make sense?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="ex-title">
+    <div class="section-header">
+      <p class="section-kicker">Worked Examples</p>
+      <h2 id="ex-title">See it done, step by step</h2>
+      <p>Try each first, then reveal the solution.</p>
+    </div>
+
+    <details class="cw-example">
+      <summary>Example 1 — Convert 60 miles per hour to feet per second</summary>
+      <div class="cw-example__body">
+        <p>Chain conversion factors so "miles" and "hours" cancel, leaving feet over seconds.</p>
+        <div class="cw-answer">
+          <p>60 mi/hr × (5280 ft / 1 mi) × (1 hr / 3600 s)</p>
+          <p>= (60 × 5280 ÷ 3600) ft/s = <strong>88 ft/s</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 2 — A car travels 360 miles on 12 gallons. What is its gas mileage?</summary>
+      <div class="cw-example__body">
+        <p>Gas mileage is measured in miles per gallon, so divide miles by gallons.</p>
+        <div class="cw-answer">
+          <p>360 mi ÷ 12 gal = <strong>30 miles per gallon</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 3 — How many square feet of carpet for a 12 ft by 10 ft room?</summary>
+      <div class="cw-example__body">
+        <p>Area of a rectangle is length × width, and ft × ft = ft².</p>
+        <div class="cw-answer">
+          <p>12 ft × 10 ft = <strong>120 square feet</strong>.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="site-section" aria-labelledby="watch-title">
+    <div class="section-header">
+      <p class="section-kicker">Watch &amp; Review</p>
+      <h2 id="watch-title">Resources for this module</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Slides</span>
+        <h3>Lecture slides</h3>
+        <p>The Module 2 slides on units and problem solving.</p>
+        <a href="../pdfs/114Module2Spring25.pdf" class="button">Open slides</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Tools</span>
+        <h3>Calculators</h3>
+        <ul>
+          <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific</a></li>
+          <li><a href="https://www.desmos.com/graphing" target="_blank" rel="noopener noreferrer">Desmos Graphing</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="check-title">
+    <div class="section-header">
+      <p class="section-kicker">Check Yourself</p>
+      <h2 id="check-title">Quick self-check</h2>
+      <p>Answer, then reveal.</p>
+    </div>
+    <details class="cw-example">
+      <summary>1. Convert 3 feet to inches.</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>3 ft × (12 in / 1 ft) = <strong>36 inches</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>2. Apples cost $1.50 per pound. What do 4 pounds cost?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>4 lb × ($1.50 / 1 lb) = <strong>$6.00</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>3. A trip of 150 miles at 50 miles per hour takes how long?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>150 mi ÷ (50 mi/hr) = <strong>3 hours</strong>.</p></div></div>
+    </details>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="submit-title">
+    <h2 id="submit-title">Ready to turn it in?</h2>
+    <p>When the concepts feel solid, complete the <strong>Module 2 homework and quiz in Canvas</strong>, where the work is graded and due dates are posted.</p>
+    <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Submit in Canvas</a>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-module1.html" class="button button-secondary course-sequence-nav__link">&larr; Module 1</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">Course overview</a>
+    <a href="math114-module3.html" class="button course-sequence-nav__link">Module 3 &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

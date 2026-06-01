@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 14: Nonlinear Modeling | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 14: nonlinear and exponential modeling — exponential growth and decay models, and choosing between linear and exponential models.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module14.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Module 14: Nonlinear Modeling">
+  <meta property="og:description" content="Exponential growth and decay models, and choosing between linear and exponential models.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-module14.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.6rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-formula { background: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface)); border-left: 3px solid var(--primary-main); border-radius: 0.4rem; padding: 0.6rem 0.9rem; margin: 0.6rem 0; font-family: var(--type-meta-family); }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 14</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 14 of 14</p>
+    <h1>Nonlinear Modeling</h1>
+    <p class="page-hero__lede">The last content module: modeling situations that change by a constant percentage rather than a constant amount, and knowing when an exponential model fits better than a linear one.</p>
+    <ul class="badge-list" aria-label="Module highlights">
+      <li><span class="site-badge">Chapter 9B–9C</span></li>
+      <li><span class="site-badge">Exponential models</span></li>
+      <li><span class="site-badge">Last module before the final</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#concepts" class="button">Start learning</a>
+      <a href="/courses/math114.html" class="button button-secondary">Course overview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section id="concepts" class="site-section" aria-labelledby="c1-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c1-title">1 · Exponential models</h2>
+    </div>
+    <div class="cw-prose">
+      <p>An <strong>exponential model</strong> changes by a constant <em>percentage</em> each period, so it multiplies by a fixed factor:</p>
+      <div class="cw-formula">y = P · (1 + r)<sup>t</sup>&nbsp;&nbsp;growth&nbsp;&nbsp;|&nbsp;&nbsp;y = P · (1 − r)<sup>t</sup>&nbsp;&nbsp;decay</div>
+      <p>Here P is the starting value, r is the percent change (as a decimal), and t is time. The factor (1 + r) is the <strong>growth factor</strong>; (1 − r) is the <strong>decay factor</strong>. Its graph curves rather than following a straight line.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c2-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c2-title">2 · Linear or exponential?</h2>
+    </div>
+    <div class="cw-prose">
+      <p>Choosing the right model comes down to one question: <em>how</em> does the quantity change?</p>
+      <ul>
+        <li>Changes by a fixed <strong>amount</strong> each step → <strong>linear</strong> (y = mx + b).</li>
+        <li>Changes by a fixed <strong>percentage</strong> each step → <strong>exponential</strong> (y = P(1 + r)<sup>t</sup>).</li>
+      </ul>
+      <p>Over time, exponential growth always overtakes linear growth, even if it starts slower — the curve eventually outruns any straight line.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="ex-title">
+    <div class="section-header">
+      <p class="section-kicker">Worked Examples</p>
+      <h2 id="ex-title">See it done, step by step</h2>
+    </div>
+
+    <details class="cw-example">
+      <summary>Example 1 — A town of 10,000 grows 3% per year. Population after 5 years?</summary>
+      <div class="cw-example__body">
+        <p>Growth factor is 1.03.</p>
+        <div class="cw-answer">
+          <p>P(5) = 10000 (1.03)<sup>5</sup> ≈ 10000 × 1.15927 ≈ <strong>11,593 people</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 2 — A $20,000 car loses 15% of its value each year. Value after 3 years?</summary>
+      <div class="cw-example__body">
+        <p>Decay factor is 1 − 0.15 = 0.85.</p>
+        <div class="cw-answer">
+          <p>V(3) = 20000 (0.85)<sup>3</sup> = 20000 × 0.614125 ≈ <strong>$12,282.50</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 3 — Linear +$1,000/yr vs. exponential +10%/yr, both from $10,000. After 10 years?</summary>
+      <div class="cw-example__body">
+        <p>Compute each model at t = 10.</p>
+        <div class="cw-answer">
+          <p>Linear: 10000 + 1000(10) = $20,000.</p>
+          <p>Exponential: 10000 (1.10)<sup>10</sup> ≈ $25,937.</p>
+          <p>The <strong>exponential</strong> model is far ahead — and the gap only widens.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="site-section" aria-labelledby="watch-title">
+    <div class="section-header">
+      <p class="section-kicker">Watch &amp; Review</p>
+      <h2 id="watch-title">Resources for this module</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Tool</span>
+        <h3>Desmos Graphing Calculator</h3>
+        <p>Graph y = 10000(1.03)^x to watch an exponential model curve upward.</p>
+        <a href="https://www.desmos.com/graphing" class="button external-destination" target="_blank" rel="noopener noreferrer">Open Desmos</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Review</span>
+        <h3>Growth models quiz</h3>
+        <p>Revisit the linear-vs-exponential comparisons from the growth quiz.</p>
+        <a href="knowledgegrowth.html" class="button">Open quiz</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">In Canvas</span>
+        <h3>Lecture materials</h3>
+        <p>Module 14 slides and any posted videos are in your Canvas course.</p>
+        <a href="https://canvas.liberty.edu/" class="button external-destination" target="_blank" rel="noopener noreferrer">Open Canvas</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="check-title">
+    <div class="section-header">
+      <p class="section-kicker">Check Yourself</p>
+      <h2 id="check-title">Quick self-check</h2>
+    </div>
+    <details class="cw-example">
+      <summary>1. A quantity decreases 20% per year. What is its decay factor?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>1 − 0.20 = <strong>0.80</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>2. Is y = 500(1.04)<sup>t</sup> growth or decay, and at what rate?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p><strong>Growth at 4% per period</strong> (the factor 1.04 = 1 + 0.04).</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>3. Salary rising $2,000 every year — linear or exponential?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p><strong>Linear</strong> — a fixed amount is added each year, not a fixed percentage.</p></div></div>
+    </details>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="submit-title">
+    <h2 id="submit-title">Ready to turn it in?</h2>
+    <p>When you can model with exponentials and choose the right model, complete the <strong>Module 14 homework and quiz in Canvas</strong>. Next stop: the cumulative final review.</p>
+    <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Submit in Canvas</a>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-module13.html" class="button button-secondary course-sequence-nav__link">&larr; Module 13</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">Course overview</a>
+    <a href="math114-final-review.html" class="button course-sequence-nav__link">Next: Final Review &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

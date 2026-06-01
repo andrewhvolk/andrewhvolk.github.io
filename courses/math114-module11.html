@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 11: Exponential &amp; Logistic Growth | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 11: exponential growth, doubling time and the Rule of 70, and logistic growth with carrying capacity — with worked examples.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module11.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Module 11: Exponential &amp; Logistic Growth">
+  <meta property="og:description" content="Exponential growth, doubling time and the Rule of 70, and logistic growth with carrying capacity.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-module11.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.6rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-formula { background: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface)); border-left: 3px solid var(--primary-main); border-radius: 0.4rem; padding: 0.6rem 0.9rem; margin: 0.6rem 0; font-family: var(--type-meta-family); }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 11</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 11 of 14</p>
+    <h1>Exponential &amp; Logistic Growth</h1>
+    <p class="page-hero__lede">Some quantities grow by a constant amount; others by a constant percentage. This module explores exponential growth, how fast it doubles, and what eventually slows it down.</p>
+    <ul class="badge-list" aria-label="Module highlights">
+      <li><span class="site-badge">Chapter 8</span></li>
+      <li><span class="site-badge">Doubling &amp; the Rule of 70</span></li>
+      <li><span class="site-badge">Wraps up Test 3 material</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#concepts" class="button">Start learning</a>
+      <a href="/courses/math114.html" class="button button-secondary">Course overview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section id="concepts" class="site-section" aria-labelledby="c1-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c1-title">1 · Linear vs. exponential growth</h2>
+    </div>
+    <div class="cw-prose">
+      <ul>
+        <li><strong>Linear growth</strong> adds a fixed <em>amount</em> each period (saving $50 a month). A straight line.</li>
+        <li><strong>Exponential growth</strong> multiplies by a fixed <em>percentage</em> each period (a population growing 5% a year). It curves upward ever more steeply.</li>
+      </ul>
+      <p>The future value after <em>t</em> periods of exponential growth is:</p>
+      <div class="cw-formula">A = P · (1 + r)<sup>t</sup>&nbsp;&nbsp;(or repeated doubling: A = P · 2<sup>(number of doublings)</sup>)</div>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c2-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c2-title">2 · Doubling time and limits to growth</h2>
+    </div>
+    <div class="cw-prose">
+      <p>The <strong>Rule of 70</strong> gives a quick estimate of how long an exponentially growing quantity takes to double:</p>
+      <div class="cw-formula">doubling time ≈ 70 ÷ (percent growth rate)</div>
+      <p>Real growth can't continue forever. <strong>Logistic growth</strong> starts out roughly exponential, then slows and levels off at the environment's <strong>carrying capacity</strong> — the maximum the resources can sustain. Its graph is an S-shaped curve.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="ex-title">
+    <div class="section-header">
+      <p class="section-kicker">Worked Examples</p>
+      <h2 id="ex-title">See it done, step by step</h2>
+    </div>
+
+    <details class="cw-example">
+      <summary>Example 1 — 50 spores double every 6 hours. How many after 24 hours?</summary>
+      <div class="cw-example__body">
+        <p>First count the doublings: 24 ÷ 6 = 4.</p>
+        <div class="cw-answer">
+          <p>A = 50 × 2<sup>4</sup> = 50 × 16 = <strong>800 spores</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 2 — An investment grows 5% per year. Estimate its doubling time.</summary>
+      <div class="cw-example__body">
+        <p>Use the Rule of 70.</p>
+        <div class="cw-answer">
+          <p>70 ÷ 5 = <strong>about 14 years</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 3 — $500 grows 8% per year. How much after 3 years?</summary>
+      <div class="cw-example__body">
+        <p>Use A = P(1 + r)<sup>t</sup>.</p>
+        <div class="cw-answer">
+          <p>A = 500 × (1.08)<sup>3</sup> = 500 × 1.259712 ≈ <strong>$629.86</strong>.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="site-section" aria-labelledby="watch-title">
+    <div class="section-header">
+      <p class="section-kicker">Watch &amp; Review</p>
+      <h2 id="watch-title">Resources for this module</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Interactive</span>
+        <h3>Growth models quiz</h3>
+        <p>Reveal-answer practice comparing linear, exponential, and logistic growth, plus the Rule of 70.</p>
+        <a href="knowledgegrowth.html" class="button">Open quiz</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Demo</span>
+        <h3>Growth in action</h3>
+        <ul>
+          <li><a href="../employeepay.html">Employee Pay (penny-doubling)</a></li>
+          <li><a href="../chessboard.html">Chessboard rice growth</a></li>
+        </ul>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Slides &amp; tools</span>
+        <h3>Slides + calculators</h3>
+        <ul>
+          <li><a href="../pdfs/114Module11Slides.pdf">Lecture slides</a></li>
+          <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific</a></li>
+          <li><a href="https://www.microsoft365.com/launch/excel?" target="_blank" rel="noopener noreferrer">Excel Online</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="check-title">
+    <div class="section-header">
+      <p class="section-kicker">Check Yourself</p>
+      <h2 id="check-title">Quick self-check</h2>
+    </div>
+    <details class="cw-example">
+      <summary>1. A population grows 7% per year. Estimate its doubling time.</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>70 ÷ 7 = <strong>about 10 years</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>2. Saving exactly $100 every month — linear or exponential?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p><strong>Linear</strong> — a constant amount is added each period.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>3. What does carrying capacity describe?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>The <strong>maximum population</strong> the environment can sustain, where logistic growth levels off.</p></div></div>
+    </details>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="submit-title">
+    <h2 id="submit-title">Ready to turn it in?</h2>
+    <p>When growth models make sense, complete the <strong>Module 11 homework and quiz in Canvas</strong>. This wraps up the material for Test 3.</p>
+    <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Submit in Canvas</a>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-module10.html" class="button button-secondary course-sequence-nav__link">&larr; Module 10</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">Course overview</a>
+    <a href="math114-test3.html" class="button course-sequence-nav__link">Next: Test 3 &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 7: Graphics &amp; Correlation | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 7: reading statistical graphics critically, and understanding correlation versus causation — with worked examples.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module7.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Module 7: Graphics &amp; Correlation">
+  <meta property="og:description" content="Reading statistical graphics critically, and understanding correlation versus causation.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-module7.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.6rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 7</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 7 of 14</p>
+    <h1>Graphics &amp; Correlation</h1>
+    <p class="page-hero__lede">Statistics are usually delivered as a picture or a relationship. This module helps you read graphs without being fooled and tell correlation apart from causation.</p>
+    <ul class="badge-list" aria-label="Module highlights">
+      <li><span class="site-badge">Chapter 5</span></li>
+      <li><span class="site-badge">Reading data critically</span></li>
+      <li><span class="site-badge">Wraps up Test 2 material</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#concepts" class="button">Start learning</a>
+      <a href="/courses/math114.html" class="button button-secondary">Course overview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section id="concepts" class="site-section" aria-labelledby="c1-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c1-title">1 · Reading graphics critically</h2>
+    </div>
+    <div class="cw-prose">
+      <p>A graph can be technically accurate and still mislead. Watch for:</p>
+      <ul>
+        <li><strong>A vertical axis that doesn't start at zero</strong> — small differences look dramatic.</li>
+        <li><strong>Inconsistent or missing scales</strong> — unequal spacing distorts trends.</li>
+        <li><strong>Pictographs that scale area</strong> — doubling a value but drawing an image twice as tall <em>and</em> wide quadruples the apparent size.</li>
+        <li><strong>Missing labels or sources</strong> — you can't judge what you can't see.</li>
+      </ul>
+      <p>Always ask: what are the axes, where do they start, and what is being compared?</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c2-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c2-title">2 · Correlation vs. causation</h2>
+    </div>
+    <div class="cw-prose">
+      <p>Two variables are <strong>correlated</strong> when they tend to change together. On a scatterplot:</p>
+      <ul>
+        <li><strong>Positive correlation</strong> — both rise together (points trend up).</li>
+        <li><strong>Negative correlation</strong> — one rises as the other falls (points trend down).</li>
+        <li><strong>No correlation</strong> — no clear pattern.</li>
+      </ul>
+      <p><strong>Correlation does not prove causation.</strong> A strong relationship can come from coincidence or, more often, a <em>confounding variable</em> that influences both. Establishing real causation requires ruling out other explanations — ideally with a controlled study.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="ex-title">
+    <div class="section-header">
+      <p class="section-kicker">Worked Examples</p>
+      <h2 id="ex-title">See it done, step by step</h2>
+    </div>
+
+    <details class="cw-example">
+      <summary>Example 1 — A bar chart's y-axis starts at 90 instead of 0. What's the effect?</summary>
+      <div class="cw-example__body">
+        <p>Think about how the bar heights compare to the real values.</p>
+        <div class="cw-answer">
+          <p>Values of 92 and 96 look like one bar is roughly <em>twice</em> the other, when the real difference is only about 4%. Truncating the axis <strong>exaggerates small differences</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 2 — Hours studied vs. exam score. What correlation would you expect?</summary>
+      <div class="cw-example__body">
+        <div class="cw-answer">
+          <p><strong>Positive correlation</strong> — more study time generally goes with higher scores, so the scatterplot trends upward.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 3 — Ice cream sales and drownings both rise together. Does ice cream cause drowning?</summary>
+      <div class="cw-example__body">
+        <p>Look for a confounding variable.</p>
+        <div class="cw-answer">
+          <p>No. Both rise in <strong>hot summer weather</strong> — the confounding variable. The correlation is real, but neither causes the other.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="site-section" aria-labelledby="watch-title">
+    <div class="section-header">
+      <p class="section-kicker">Watch &amp; Review</p>
+      <h2 id="watch-title">Resources for this module</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Slides</span>
+        <h3>Lecture slides</h3>
+        <p>The Module 7 slides on graphics and correlation.</p>
+        <a href="../pdfs/114Module7Slides.pdf" class="button">Open slides</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Tools</span>
+        <h3>Calculators</h3>
+        <ul>
+          <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific</a></li>
+          <li><a href="https://www.microsoft365.com/launch/excel?" target="_blank" rel="noopener noreferrer">Excel Online</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="check-title">
+    <div class="section-header">
+      <p class="section-kicker">Check Yourself</p>
+      <h2 id="check-title">Quick self-check</h2>
+    </div>
+    <details class="cw-example">
+      <summary>1. Towns with more firefighters tend to have more fire damage. Do firefighters cause damage?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>No — the confounding variable is the <strong>size of the fire (or town)</strong>: bigger fires bring both more firefighters and more damage.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>2. Height vs. shoe size across many people: which type of correlation?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p><strong>Positive correlation</strong> — taller people tend to have larger feet.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>3. What's the quickest way a chart can exaggerate a difference?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>Starting the vertical axis somewhere other than <strong>zero</strong>.</p></div></div>
+    </details>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="submit-title">
+    <h2 id="submit-title">Ready to turn it in?</h2>
+    <p>When you're confident reading graphs and relationships, complete the <strong>Module 7 homework and quiz in Canvas</strong>. This wraps up the material for Test 2.</p>
+    <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Submit in Canvas</a>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-module6.html" class="button button-secondary course-sequence-nav__link">&larr; Module 6</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">Course overview</a>
+    <a href="math114-test2.html" class="button course-sequence-nav__link">Next: Test 2 &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

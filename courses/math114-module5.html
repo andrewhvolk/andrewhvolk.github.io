@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 5: Interest &amp; Compounding | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 5: simple interest, compound interest, and the difference between APR and APY — with worked examples.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module5.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Module 5: Interest &amp; Compounding">
+  <meta property="og:description" content="Simple interest, compound interest, and the difference between APR and APY.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-module5.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.6rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-formula { background: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface)); border-left: 3px solid var(--primary-main); border-radius: 0.4rem; padding: 0.6rem 0.9rem; margin: 0.6rem 0; font-family: var(--type-meta-family); }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 5</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 5 of 14</p>
+    <h1>Interest &amp; Compounding</h1>
+    <p class="page-hero__lede">This module starts the money unit: how interest is calculated, why compounding is so powerful, and what APR and APY really mean.</p>
+    <ul class="badge-list" aria-label="Module highlights">
+      <li><span class="site-badge">Chapter 4</span></li>
+      <li><span class="site-badge">Managing money</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#concepts" class="button">Start learning</a>
+      <a href="/courses/math114.html" class="button button-secondary">Course overview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section id="concepts" class="site-section" aria-labelledby="c1-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c1-title">1 · Simple vs. compound interest</h2>
+    </div>
+    <div class="cw-prose">
+      <p><strong>Simple interest</strong> is paid only on the original principal:</p>
+      <div class="cw-formula">I = P · r · t &nbsp;&nbsp;(principal × annual rate × years)</div>
+      <p><strong>Compound interest</strong> is paid on the principal <em>and</em> on interest already earned, so the balance grows faster:</p>
+      <div class="cw-formula">A = P (1 + r/n)<sup>n·t</sup></div>
+      <p>where <em>n</em> is the number of compounding periods per year (12 for monthly, 4 for quarterly, 1 for annual). The more often it compounds, the more you earn.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c2-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c2-title">2 · APR vs. APY</h2>
+    </div>
+    <div class="cw-prose">
+      <p><strong>APR (annual percentage rate)</strong> is the stated yearly rate. <strong>APY (annual percentage yield)</strong> is the rate you actually earn once compounding is included — so APY is a little higher than APR whenever interest compounds more than once a year. When comparing accounts, compare APYs.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="ex-title">
+    <div class="section-header">
+      <p class="section-kicker">Worked Examples</p>
+      <h2 id="ex-title">See it done, step by step</h2>
+    </div>
+
+    <details class="cw-example">
+      <summary>Example 1 — $2,000 at 4% simple interest for 3 years</summary>
+      <div class="cw-example__body">
+        <p>Use I = P · r · t, then add the interest to the principal.</p>
+        <div class="cw-answer">
+          <p>I = 2000 × 0.04 × 3 = $240.</p>
+          <p>Total balance = 2000 + 240 = <strong>$2,240</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 2 — $2,000 at 4% compounded annually for 3 years</summary>
+      <div class="cw-example__body">
+        <p>Use A = P(1 + r/n)<sup>n·t</sup> with n = 1.</p>
+        <div class="cw-answer">
+          <p>A = 2000 (1.04)<sup>3</sup> = 2000 × 1.124864 ≈ <strong>$2,249.73</strong>.</p>
+          <p>That's about $9.73 more than simple interest — the effect of compounding.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 3 — $5,000 at 3% compounded monthly for 2 years</summary>
+      <div class="cw-example__body">
+        <p>Here r/n = 0.03/12 = 0.0025 and n·t = 24.</p>
+        <div class="cw-answer">
+          <p>A = 5000 (1.0025)<sup>24</sup> ≈ 5000 × 1.06176 ≈ <strong>$5,308.81</strong>.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="site-section" aria-labelledby="watch-title">
+    <div class="section-header">
+      <p class="section-kicker">Watch &amp; Review</p>
+      <h2 id="watch-title">Resources for this module</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Video</span>
+        <h3>Lecture video</h3>
+        <p>Walkthrough of the Module 5 interest concepts.</p>
+        <a href="https://youtu.be/jIGUzHvs25g" class="button external-destination" target="_blank" rel="noopener noreferrer">Watch video</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Slides</span>
+        <h3>Lecture slides</h3>
+        <p>The Module 5 slides on interest and compounding.</p>
+        <a href="../pdfs/114Module5Spring25.pdf" class="button">Open slides</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Tools</span>
+        <h3>Calculators</h3>
+        <ul>
+          <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific</a></li>
+          <li><a href="https://www.microsoft365.com/launch/excel?" target="_blank" rel="noopener noreferrer">Excel Online</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="check-title">
+    <div class="section-header">
+      <p class="section-kicker">Check Yourself</p>
+      <h2 id="check-title">Quick self-check</h2>
+    </div>
+    <details class="cw-example">
+      <summary>1. Find the simple interest on $1,500 at 5% for 2 years.</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>I = 1500 × 0.05 × 2 = <strong>$150</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>2. Which earns more over time at the same rate — simple or compound interest?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p><strong>Compound</strong>, because it also earns interest on previously earned interest.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>3. When comparing two savings accounts, should you compare APR or APY?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p><strong>APY</strong> — it reflects what you actually earn after compounding.</p></div></div>
+    </details>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="submit-title">
+    <h2 id="submit-title">Ready to turn it in?</h2>
+    <p>When you're confident with interest calculations, complete the <strong>Module 5 homework and quiz in Canvas</strong>.</p>
+    <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Submit in Canvas</a>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-test1.html" class="button button-secondary course-sequence-nav__link">&larr; Test 1</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">Course overview</a>
+    <a href="math114-module6.html" class="button course-sequence-nav__link">Module 6 &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

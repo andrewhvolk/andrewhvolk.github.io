@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 6: Loans &amp; Savings Plans | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 6: the loan payment formula and the savings-plan (annuity) formula, with worked examples for monthly payments and long-term saving.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module6.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Module 6: Loans &amp; Savings Plans">
+  <meta property="og:description" content="The loan payment formula and the savings-plan (annuity) formula, with worked examples.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-module6.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.6rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-formula { background: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface)); border-left: 3px solid var(--primary-main); border-radius: 0.4rem; padding: 0.6rem 0.9rem; margin: 0.6rem 0; font-family: var(--type-meta-family); }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 6</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 6 of 14</p>
+    <h1>Loans &amp; Savings Plans</h1>
+    <p class="page-hero__lede">Two formulas drive most personal finance: the monthly payment on a loan, and the future value of regular savings. This module shows how to use both.</p>
+    <ul class="badge-list" aria-label="Module highlights">
+      <li><span class="site-badge">Chapter 4</span></li>
+      <li><span class="site-badge">Loans &amp; annuities</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#concepts" class="button">Start learning</a>
+      <a href="/courses/math114.html" class="button button-secondary">Course overview</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section id="concepts" class="site-section" aria-labelledby="c1-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c1-title">1 · The loan payment formula</h2>
+    </div>
+    <div class="cw-prose">
+      <p>For a loan of principal <em>P</em> at annual rate <em>r</em>, compounded <em>n</em> times per year for <em>t</em> years, the regular payment is:</p>
+      <div class="cw-formula">PMT = [ P · (r/n) ] ÷ [ 1 − (1 + r/n)<sup>−n·t</sup> ]</div>
+      <p>The same payment covers interest first and principal second, which is why early payments mostly pay interest. Total interest = (PMT × number of payments) − P.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c2-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c2-title">2 · The savings plan formula</h2>
+    </div>
+    <div class="cw-prose">
+      <p>If you deposit the same amount <em>PMT</em> every period into an account earning rate <em>r</em> compounded <em>n</em> times per year for <em>t</em> years, the future value is:</p>
+      <div class="cw-formula">A = PMT · [ (1 + r/n)<sup>n·t</sup> − 1 ] ÷ (r/n)</div>
+      <p>This is how retirement and college-savings accounts grow. Starting earlier matters far more than depositing more, because of the long compounding window.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="ex-title">
+    <div class="section-header">
+      <p class="section-kicker">Worked Examples</p>
+      <h2 id="ex-title">See it done, step by step</h2>
+    </div>
+
+    <details class="cw-example">
+      <summary>Example 1 — Monthly payment on a $12,000 car loan at 6% for 5 years</summary>
+      <div class="cw-example__body">
+        <p>Here r/n = 0.06/12 = 0.005 and n·t = 60.</p>
+        <div class="cw-answer">
+          <p>(1.005)<sup>60</sup> ≈ 1.34885, so (1.005)<sup>−60</sup> ≈ 0.74137.</p>
+          <p>PMT = (12000 × 0.005) ÷ (1 − 0.74137) = 60 ÷ 0.25863 ≈ <strong>$231.99 per month</strong>.</p>
+          <p>Total paid ≈ 231.99 × 60 ≈ $13,919, so about $1,919 in interest.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 2 — Save $100/month at 6% for 10 years</summary>
+      <div class="cw-example__body">
+        <p>Again r/n = 0.005 and n·t = 120.</p>
+        <div class="cw-answer">
+          <p>(1.005)<sup>120</sup> ≈ 1.81940.</p>
+          <p>A = 100 × (1.81940 − 1) ÷ 0.005 = 100 × 163.88 ≈ <strong>$16,388</strong>.</p>
+          <p>You deposited $12,000; the other ~$4,388 is earned interest.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="site-section" aria-labelledby="watch-title">
+    <div class="section-header">
+      <p class="section-kicker">Watch &amp; Review</p>
+      <h2 id="watch-title">Resources for this module</h2>
+    </div>
+    <div class="card-grid">
+      <article class="resource-card">
+        <span class="resource-card__type">Video</span>
+        <h3>Lecture video</h3>
+        <p>Walkthrough of the loan and savings calculations.</p>
+        <a href="https://youtu.be/AVUpJVBRsfI" class="button external-destination" target="_blank" rel="noopener noreferrer">Watch video</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Video</span>
+        <h3>Loan payment (short)</h3>
+        <p>A quick example of a loan payment calculation.</p>
+        <a href="https://youtu.be/HFo9cDZW2X0" class="button external-destination" target="_blank" rel="noopener noreferrer">Watch video</a>
+      </article>
+      <article class="resource-card">
+        <span class="resource-card__type">Slides &amp; tools</span>
+        <h3>Slides + calculators</h3>
+        <ul>
+          <li><a href="../pdfs/114Module6Slides.pdf">Lecture slides</a></li>
+          <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific</a></li>
+          <li><a href="https://www.microsoft365.com/launch/excel?" target="_blank" rel="noopener noreferrer">Excel Online</a></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="check-title">
+    <div class="section-header">
+      <p class="section-kicker">Check Yourself</p>
+      <h2 id="check-title">Quick self-check</h2>
+    </div>
+    <details class="cw-example">
+      <summary>1. In the loan formula, what does r/n represent?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>The interest rate <strong>per compounding period</strong> (annual rate divided by periods per year).</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>2. For a monthly 5-year loan, what is n·t?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>12 × 5 = <strong>60 payments</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>3. Why does starting to save earlier matter so much?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>A longer time horizon gives compounding more periods to grow the balance.</p></div></div>
+    </details>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="submit-title">
+    <h2 id="submit-title">Ready to turn it in?</h2>
+    <p>When the loan and savings formulas feel comfortable, complete the <strong>Module 6 homework and quiz in Canvas</strong>.</p>
+    <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Submit in Canvas</a>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-module5.html" class="button button-secondary course-sequence-nav__link">&larr; Module 5</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">Course overview</a>
+    <a href="math114-module7.html" class="button course-sequence-nav__link">Module 7 &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
