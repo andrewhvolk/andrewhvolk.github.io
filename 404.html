@@ -6,6 +6,7 @@
     <title>Page Not Found - Prof. Volk's Office</title>
     <link rel="stylesheet" href="/styles.css">
     <script src="/theme.js"></script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <nav class="top-nav" aria-label="Primary">
@@ -16,9 +17,8 @@
     <div class="top-nav-actions">
       <ul class="top-nav-links">
         <li><a href="/index.html">Home</a></li>
-        <li><a href="/CV.html">About</a></li>
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">Courses ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">Courses</button>
           <ul class="dropdown-menu">
             <li><a href="/learn.html">Course Home</a></li>
             <li><a href="/courses/math114.html">MATH 114</a></li>
@@ -27,14 +27,15 @@
           </ul>
         </li>
         <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
       <ul class="top-nav-utilities" aria-label="More">
         <li class="dropdown">
-          <button class="dropdown-trigger" type="button" aria-haspopup="true">More ▾</button>
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
           <ul class="dropdown-menu dropdown-menu--right">
-            <li><a href="/club/">Math Club</a></li>
-            <li><a href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="/contact.html">Contact</a></li>
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
           </ul>
         </li>
       </ul>
@@ -58,13 +59,19 @@
         </div>
     </main>
     
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 - All Rights Reserved</p>
-            <div class="social-links">
-                <a href="https://www.youtube.com/learnabundantly" aria-label="YouTube">📺</a>
-            </div>
-        </div>
-    </footer>
+    <footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
