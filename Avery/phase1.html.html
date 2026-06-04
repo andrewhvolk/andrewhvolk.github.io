@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phase 1 - Preflight - All of Us NAFLD/MASLD Project 1</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5e6976;
+      --line: #d9e1e7;
+      --paper: #fbfcfb;
+      --white: #ffffff;
+      --teal: #0f766e;
+      --teal-dark: #0a514c;
+      --amber: #b87514;
+      --red: #9f2d2d;
+      --blue: #244c7a;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); line-height: 1.56; }
+
+    .hero { color: var(--white); background: linear-gradient(120deg, #0a514c, #17212b 70%); padding: 46px 0 38px; }
+    .wrap { width: min(900px, calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #d9f0ed; margin-bottom: 0.7rem; }
+    h1 { margin: 0; font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 850; line-height: 1.12; }
+    .hero p { max-width: 740px; margin: 0.9rem 0 0; color: #edf6f3; font-size: 1.04rem; }
+
+    main { padding: 2rem 0 3.5rem; }
+    h2 { font-size: 1.4rem; margin: 1.6rem 0 0.4rem; }
+    p { margin: 0.55rem 0; }
+    .small { color: var(--muted); font-size: 0.92rem; }
+
+    .callout { border: 1px solid var(--line); border-left: 5px solid var(--teal); background: var(--white); border-radius: var(--radius); padding: 0.9rem 1rem; margin: 1.1rem 0; }
+    .callout.warning { border-left-color: var(--amber); background: #fff8ec; }
+    .callout.danger { border-left-color: var(--red); background: #fff0f0; }
+    .callout.blue { border-left-color: var(--blue); background: #f0f5fb; }
+
+    .step { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 0.9rem; padding: 1.1rem; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); margin: 0.9rem 0; }
+    .step-num { width: 44px; height: 44px; border-radius: 8px; background: var(--teal-dark); color: var(--white); display: grid; place-items: center; font-weight: 850; font-size: 1.15rem; }
+    .step h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+
+    .checklist { list-style: none; padding: 0; margin: 0; }
+    .checklist li { position: relative; padding: 0.5rem 0 0.5rem 1.8rem; border-bottom: 1px dashed #e6ebef; }
+    .checklist li:last-child { border-bottom: 0; }
+    .checklist input { position: absolute; left: 0; top: 0.62rem; width: 17px; height: 17px; }
+    .checklist label { font-weight: 700; }
+    .checklist input:checked ~ label { color: var(--muted); text-decoration: line-through; }
+    .note { display: block; color: var(--muted); font-size: 0.9rem; font-weight: 400; margin-top: 0.15rem; }
+
+    code { font-family: var(--mono); font-size: 0.92em; background: #eef2f6; border: 1px solid var(--line); border-radius: 4px; padding: 0.05rem 0.25rem; }
+
+    table { width: 100%; border-collapse: collapse; margin: 0.4rem 0 0; font-size: 0.9rem; }
+    th, td { padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { background: #eef4f1; color: var(--teal-dark); font-size: 0.78rem; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+
+    details.expand { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); margin: 0.7rem 0; overflow: hidden; }
+    details.expand > summary { cursor: pointer; display: flex; align-items: center; gap: 0.55rem; padding: 0.8rem 1rem; font-weight: 800; color: var(--teal-dark); list-style: none; background: #f6faf8; }
+    details.expand > summary::-webkit-details-marker { display: none; }
+    details.expand > summary::before { content: "+"; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 5px; color: var(--white); background: var(--teal); font-weight: 900; flex: 0 0 auto; }
+    details.expand[open] > summary::before { content: "-"; }
+    details.expand .inside { padding: 0.5rem 1rem 1rem; }
+
+    .code-panel { margin: 0.8rem 0 0; border-radius: var(--radius); overflow: hidden; border: 1px solid #15223c; background: #101b31; }
+    .code-panel header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.55rem 0.8rem; color: #e9efff; border-bottom: 1px solid rgba(255,255,255,0.14); font-size: 0.85rem; font-weight: 750; }
+    pre { margin: 0; padding: 0.9rem; overflow-x: auto; color: #e9efff; font-family: var(--mono); font-size: 0.82rem; line-height: 1.5; white-space: pre-wrap; }
+    .copy { border: 1px solid rgba(255,255,255,0.28); color: #e9efff; background: rgba(255,255,255,0.08); border-radius: 6px; min-height: 28px; padding: 0.25rem 0.5rem; cursor: pointer; font-weight: 750; }
+    .button { display: inline-flex; min-height: 39px; align-items: center; gap: 0.4rem; padding: 0.55rem 0.9rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: var(--white); font-weight: 800; cursor: pointer; margin-top: 1.1rem; }
+
+    @media (max-width: 560px) { .step { grid-template-columns: 1fr; } }
+    @media print {
+      .button, .copy { display: none; }
+      .hero { background: var(--white); color: var(--ink); padding: 0 0 1rem; }
+      .hero p, .eyebrow { color: var(--muted); }
+      details.expand[open] > summary::before { content: ""; }
+      .step, .callout, .code-panel, details.expand { break-inside: avoid; }
+      pre { color: #11203c; background: #f4f6f8; }
+      .code-panel { background: #f4f6f8; border-color: var(--line); }
+      .code-panel header { color: var(--ink); border-color: var(--line); }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Personalized action plan &middot; All of Us NAFLD/MASLD &middot; Project 1</div>
+      <h1>Phase 1 &mdash; Preflight</h1>
+      <p>
+        Avery, this is your personalized action plan for Phase 1 &mdash; and your first project of this kind.
+        We will take it step by step, and I am mentoring you the whole way. Phase 1 is access and setup only
+        (no analysis yet): clear every item before starting Phase 2. Everything you need is on this page.
+      </p>
+      <button class="button" type="button" onclick="window.print()">Print / save PDF</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="callout blue">
+      <strong>Stuck or unsure? Reach out &mdash; anytime.</strong> This is your first project like this, so
+      questions are expected and welcome &mdash; please ask early rather than spin your wheels. Contact your
+      mentor, Andrew Volk (PI): email <a href="mailto:ahvolk@liberty.edu">ahvolk@liberty.edu</a> &middot;
+      cell 434-841-5810 &middot; Discord: Volk. <em>(This is the contact address for questions; the
+      <code>ahvolk@researchallofus.org</code> address is only the Workbench account you share the workspace with.)</em>
+    </div>
+
+    <div class="callout">
+      <strong>Gate rule:</strong> Phase 2 starts only after Phase 1 fully passes. If Workbench access,
+      runtime, CDR version, or setup is blocked, Phase 1 is not done &mdash; log the blocker and tell the PI.
+    </div>
+
+    <h2>Project at a glance</h2>
+    <table>
+      <tbody>
+        <tr><td style="width:32%"><strong>Project title</strong></td><td>Code-based vs. biomarker-index definitions of NAFLD/MASLD in All of Us: phenotype burden and the diagnostic gap.</td></tr>
+        <tr><td><strong>Methodology</strong></td><td>Cross-sectional analysis of adult, EHR-linked All of Us participants comparing diagnosis-code, non-invasive index (FLI/HSI; FIB-4 for fibrosis), and combined phenotypes.</td></tr>
+        <tr><td><strong>Purpose</strong></td><td>Show how much observed NAFLD/MASLD burden shifts when diagnosis codes are supplemented with non-invasive indices, and who is missed.</td></tr>
+        <tr><td><strong>Research question</strong></td><td>How do code-, index-, and combined definitions differ, and which groups are index-positive without a recorded diagnosis?</td></tr>
+        <tr><td><strong>Literature gap</strong></td><td>Prior All of Us / EHR work used code-only diagnosed cases; a transparent code-plus-index comparison and diagnostic-gap estimate is missing.</td></tr>
+        <tr><td><strong>Targets</strong></td><td>Posters: The Liver Meeting (AASLD), ObesityWeek, Digestive Disease Week (DDW). Journals: Gastro Hep Advances, Hepatology Communications, BMC Gastroenterology.</td></tr>
+      </tbody>
+    </table>
+    <p class="small">New here? The terms above (cross-sectional, EHR-linked, phenotype, FLI/HSI/FIB-4, diagnostic gap) are all defined in <strong>Key terms</strong> below &mdash; skim that first.</p>
+
+    <h2>Project team</h2>
+    <table>
+      <tbody>
+        <tr><td style="width:32%"><strong>Principal Investigator &amp; mentor</strong></td><td>Andrew Volk &mdash; Workbench: <code>ahvolk@researchallofus.org</code>; questions: ahvolk@liberty.edu, 434-841-5810, Discord Volk</td></tr>
+        <tr><td><strong>Statistics lead (research assistant)</strong></td><td>Avery Morrison</td></tr>
+        <tr><td><strong>Background, literature, manuscript &amp; references</strong></td><td>Dr. Tharpe, Dr. Joseph, and Dr. Walker</td></tr>
+      </tbody>
+    </table>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Phase 1 preflight checklist</h3>
+        <ul class="checklist" id="phase1">
+          <li>
+            <input type="checkbox" id="p1g">
+            <label for="p1g">Skim the key terms (glossary).</label>
+            <span class="note">Done when: you have read the Key terms panel below and can explain phenotype, diagnostic gap, FLI/HSI/FIB-4, concept set, and small-cell suppression in your own words. New to this area? Do this step first.</span>
+          </li>
+          <li>
+            <input type="checkbox" id="p1a">
+            <label for="p1a">Confirm Workbench access with Controlled Tier.</label>
+            <span class="note">Done when: you can log in at the All of Us Researcher Workbench (workbench.researchallofus.org) and your account shows Controlled Tier access. <strong>Note:</strong> this project could be completed with Registered Tier alone (it uses only diagnosis codes, labs, measurements, and demographics), but we are using Controlled Tier here because the follow-up projects in this program will require it. If you don't have Controlled Tier access yet, start the Controlled Tier training / data-use steps.</span>
+          </li>
+          <li>
+            <input type="checkbox" id="p1b">
+            <label for="p1b">Open or create the project workspace with a public-facing description.</label>
+            <span class="note">Done when: the workspace exists and the About tab has a clear, non-stigmatizing research purpose (describe the science without language that blames patients for having fatty liver). Use the paste-ready description in Resource A.</span>
+          </li>
+          <li>
+            <input type="checkbox" id="p1f">
+            <label for="p1f">Share the workspace with the Principal Investigator, Andrew Volk.</label>
+            <span class="note">Done when: <code>ahvolk@researchallofus.org</code> (Andrew Volk, Principal Investigator) is added on the workspace Share / Collaborators panel with Writer (or Owner) access, so he can see your cohorts, notebooks, and outputs. (In the workspace, open the actions menu &rarr; Share &rarr; enter the email &rarr; pick the role &rarr; Save.)</span>
+          </li>
+          <li>
+            <input type="checkbox" id="p1c">
+            <label for="p1c">Start the R Analysis Environment and verify that R opens.</label>
+            <span class="note">Done when: RStudio launches and the session check in Resource B runs without error. Enable auto-pause (it shuts the cloud machine down when idle so it stops billing) to control cost.</span>
+          </li>
+          <li>
+            <input type="checkbox" id="p1d">
+            <label for="p1d">Write the one-paragraph novelty statement.</label>
+            <span class="note">Done when: 3-5 sentences are saved explaining why the code-vs-index comparison and diagnostic gap add to prior code-only work. Adapt Resource C.</span>
+          </li>
+          <li>
+            <input type="checkbox" id="p1e">
+            <label for="p1e">Set up the decision log, run log, and safe-output manifest in the Workbench.</label>
+            <span class="note">Done when: all three tracking files exist in the workspace, with CDR version and workspace name filled in. Use the templates in Resource D.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Key terms</h2>
+    <details class="expand" open>
+      <summary>Plain-language glossary (new to this area? skim this first)</summary>
+      <div class="inside">
+        <p class="small">Just enough to follow Project 1. Everything below is defined here so you need no other reference.</p>
+        <table>
+          <thead><tr><th>Term</th><th>Plain-language meaning</th></tr></thead>
+          <tbody>
+            <tr><td>NAFLD / MASLD</td><td>Nonalcoholic fatty liver disease, now also called metabolic dysfunction-associated steatotic liver disease - excess fat in the liver not caused by alcohol. Treat the two names as the same condition here.</td></tr>
+            <tr><td>Steatosis</td><td>Fat build-up in the liver (the "fatty" part).</td></tr>
+            <tr><td>NASH / MASH</td><td>Steatosis plus inflammation and liver-cell injury - a more advanced stage.</td></tr>
+            <tr><td>Fibrosis</td><td>Liver scarring from ongoing injury; advanced fibrosis can progress toward cirrhosis.</td></tr>
+            <tr><td>FLI / HSI</td><td>Fatty Liver Index and Hepatic Steatosis Index - scores from routine labs and body measures that flag likely steatosis (FLI &ge; 60; HSI &gt; 36).</td></tr>
+            <tr><td>FIB-4</td><td>A fibrosis-risk score from age, AST, ALT, and platelets; higher means more likely advanced fibrosis.</td></tr>
+            <tr><td>Phenotype</td><td>How you define, from data, that someone "has" the condition - by diagnosis codes, by an index, or both combined.</td></tr>
+            <tr><td>Diagnostic gap</td><td>This project's key idea: people who are index-positive but have no recorded diagnosis code.</td></tr>
+            <tr><td>EHR</td><td>Electronic health record - clinical data (diagnoses, labs) created during medical care.</td></tr>
+            <tr><td>Researcher Workbench</td><td>The secure cloud site where you analyze All of Us data (powered by Verily); participant data never leave it.</td></tr>
+            <tr><td>Registered vs. Controlled Tier</td><td>Two access levels. Registered Tier (codes, labs, measures, surveys, demographics) is enough for this project; Controlled Tier adds genomics, exact dates, and more granular geography/demographics, which later projects in this program need.</td></tr>
+            <tr><td>Bucket</td><td>Cloud storage attached to your workspace where you save code and approved (aggregate) outputs.</td></tr>
+            <tr><td>Auto-pause</td><td>A setting that shuts the cloud machine down when it sits idle, so it stops billing.</td></tr>
+            <tr><td>CDR</td><td>Curated Data Repository - the dated snapshot of All of Us data you analyze. Always record its version.</td></tr>
+            <tr><td>Concept set</td><td>A saved group of standardized codes (concept_ids) for a clinical idea, e.g., all NAFLD diagnosis codes.</td></tr>
+            <tr><td>Cohort / denominator</td><td>The participants you study; the denominator is the base group everyone is compared against.</td></tr>
+            <tr><td>Prevalence (observed burden)</td><td>The share of the cohort meeting a definition. Call it "observed burden," not population prevalence.</td></tr>
+            <tr><td>Cohen's kappa</td><td>A 0&ndash;1 measure of how much two definitions agree beyond chance.</td></tr>
+            <tr><td>Odds ratio (OR) / 95% CI</td><td>From a logistic model: OR &gt; 1 means higher odds; the 95% confidence interval is the plausible range.</td></tr>
+            <tr><td>Small-cell suppression</td><td>All of Us privacy rule: never report a count below the program minimum (commonly 20), or a percentage that reveals one.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <h2>Resources to finish Phase 1</h2>
+    <p class="small">Everything the steps reference is here. Open a panel, copy it into the Workbench, and fill the bracketed parts.</p>
+
+    <details class="expand" open>
+      <summary>Resource A &mdash; paste-ready public workspace description (for the workspace step)</summary>
+      <div class="inside">
+        <p class="small">Paste into the workspace About tab. Keep it accurate and non-stigmatizing.</p>
+        <div class="code-panel">
+          <header><span>Public workspace description</span><button class="copy" type="button" data-copy="wsDesc">Copy</button></header>
+          <pre id="wsDesc">This project evaluates computable definitions of nonalcoholic fatty liver disease /
+metabolic dysfunction-associated steatotic liver disease (NAFLD/MASLD) in the All of Us
+Research Program. We will compare diagnosis-code, non-invasive biomarker-index, and
+combined phenotype definitions among adult participants with EHR-linked data. We will
+estimate phenotype burden, code-index overlap, diagnostic gap, and subgroup variation
+using aggregate, privacy-preserving outputs. Results may inform future validation and
+care-cascade studies but will not identify individual participants or disclose small cells.</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="expand">
+      <summary>Resource B &mdash; R session check (for the R Analysis Environment step)</summary>
+      <div class="inside">
+        <p class="small">Run this first in the R Analysis Environment. If it prints your CDR and bucket and ends with session info, R is ready.</p>
+        <div class="code-panel">
+          <header><span>Session check (R)</span><button class="copy" type="button" data-copy="sessionCheck">Copy</button></header>
+          <pre id="sessionCheck"># Run inside the All of Us Researcher Workbench R Analysis Environment.
+workspace_cdr <- Sys.getenv("WORKSPACE_CDR")
+workspace_bucket <- Sys.getenv("WORKSPACE_BUCKET")
+
+stopifnot(nchar(workspace_cdr) > 0)      # CDR dataset is reachable
+stopifnot(nchar(workspace_bucket) > 0)   # output bucket is set
+
+cat("CDR:", workspace_cdr, "\n")
+cat("Bucket:", workspace_bucket, "\n")
+cat("Date:", as.character(Sys.Date()), "\n")
+sessionInfo()</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="expand">
+      <summary>Resource C &mdash; novelty paragraph to adapt (for the novelty-statement step)</summary>
+      <div class="inside">
+        <p class="small">Start from this and make it yours; this is the framing that keeps the project from being "another code-only risk-factor table."</p>
+        <div class="code-panel">
+          <header><span>Novelty paragraph</span><button class="copy" type="button" data-copy="novelty">Copy</button></header>
+          <pre id="novelty">Prior EHR-based NAFLD/MASLD studies, including analyses using All of Us, have shown that
+diagnosed-case approaches can characterize metabolic risk factors but may miss participants
+with biomarker evidence consistent with steatosis. This study addresses that ascertainment
+problem by comparing diagnosis-code, non-invasive index, and combined phenotype definitions
+in All of Us, then estimating the diagnostic gap among index-positive participants without a
+recorded NAFLD/MASLD diagnosis. The emphasis is transparent phenotype construction,
+missingness-aware interpretation, and disclosure-safe subgroup analysis.</pre>
+        </div>
+      </div>
+    </details>
+
+    <details class="expand">
+      <summary>Resource D &mdash; tracking templates: decision log, run log, safe-output manifest (for the setup step)</summary>
+      <div class="inside">
+        <p class="small">Create these three files in the workspace now (e.g., as a notebook markdown cell or a plain text file saved to the workspace) and keep them updated. They contain no participant-level data.</p>
+        <div class="code-panel">
+          <header><span>Decision log</span><button class="copy" type="button" data-copy="decisionLog">Copy</button></header>
+          <pre id="decisionLog"># Decision log - complete before final modeling
+primary_question: How do diagnosis-code, index-based, and combined NAFLD/MASLD phenotypes differ in All of Us?
+secondary_question_1: Which groups are index-positive without a recorded diagnosis?
+secondary_question_2: Which clinical factors are associated with diagnostic gap?
+
+locked_denominator:
+  adult_age_rule: age >= 18
+  ehr_rule: EHR-linked data available
+  outcome_filter_before_denominator: no
+
+locked_outcomes:
+  code_positive: reviewed NAFLD/MASLD condition concepts
+  index_positive: FLI >= 60 or HSI > 36 after exclusions
+  combined: code_positive or index_positive after exclusions
+  diagnostic_gap: index_positive and not code_positive after exclusions
+  fibrosis_proxy: FIB-4 high risk
+
+locked_exclusions:
+  viral_hepatitis: yes
+  alcohol_associated_liver_disease_or_AUD: yes
+  other_competing_liver_etiologies: yes
+
+locked_covariates: [age, sex_at_birth, race_ethnicity, BMI, diabetes,
+  dyslipidemia, hypertension, smoking, alcohol, food_insecurity_or_SDOH]
+
+post_hoc_changes:
+  - date: TODO
+    change: TODO
+    reason: TODO
+    primary_or_exploratory: TODO</pre>
+        </div>
+        <div class="code-panel">
+          <header><span>Run log</span><button class="copy" type="button" data-copy="runLog">Copy</button></header>
+          <pre id="runLog"># Workbench run log - complete at the top of every analysis notebook
+project: All of Us NAFLD/MASLD phenotype and diagnostic gap
+workspace_name: TODO
+workspace_owner: TODO
+data_tier: Controlled
+cdr_version: TODO
+analysis_environment: R Analysis Environment for AoU
+notebook_name: TODO
+run_date: TODO
+analyst: TODO
+
+cohorts_created:
+  - adult_ehr_denominator: TODO (count kept inside Workbench)
+concept_sets_created:
+  - nafld_masld_codes: TODO
+  - competing_liver_exclusions: TODO
+  - alcohol_exclusions: TODO
+  - labs: TODO
+  - measurements: TODO
+  - surveys: TODO
+blockers:
+  - issue: TODO
+    owner: TODO
+    next_action: TODO</pre>
+        </div>
+        <div class="code-panel">
+          <header><span>Safe-output manifest</span><button class="copy" type="button" data-copy="safeManifest">Copy</button></header>
+          <pre id="safeManifest"># Safe-output manifest - complete before moving any file out of Workbench
+project: All of Us NAFLD/MASLD phenotype and diagnostic gap
+cdr_version: TODO
+review_date: TODO
+reviewer: TODO
+
+files_approved_for_export:
+  - file: TODO
+    type: aggregate_table / figure / manuscript_text
+    row_level_data_present: no
+    direct_counts_below_minimum_present: no
+    inferable_small_cells_present: no
+    screenshots_present: no
+
+files_not_approved:
+  - person-level analytic tables
+  - raw cohort member lists
+  - raw survey or lab rows
+  - screenshots of Workbench row-level views
+  - exact small subgroup counts
+  - percentages that reveal suppressed counts</pre>
+        </div>
+      </div>
+    </details>
+
+    <div class="callout danger">
+      <strong>Phase 1 boundary:</strong> do not build cohorts, pull data, or run analyses yet &mdash;
+      and never move participant-level data out of the Workbench.
+    </div>
+
+    <div class="callout blue">
+      <strong>Phase 1 is cleared when all seven boxes are checked (including the three tracking files).</strong>
+      Then start Phase 2 (lock the methods).
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll("#phase1 input[type='checkbox']").forEach((box) => {
+      const key = "ra-phase1-" + box.id;
+      box.checked = localStorage.getItem(key) === "1";
+      box.addEventListener("change", () => localStorage.setItem(key, box.checked ? "1" : "0"));
+    });
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copy);
+        if (!target) return;
+        try {
+          await navigator.clipboard.writeText(target.textContent);
+          const old = button.textContent;
+          button.textContent = "Copied";
+          setTimeout(() => { button.textContent = old; }, 1200);
+        } catch (e) { button.textContent = "Select text"; }
+      });
+    });
+  </script>
+</body>
+</html>
