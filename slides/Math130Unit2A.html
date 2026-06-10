@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MATH 130 - Sec 4.2 Exponential Functions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" id="theme">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --text-main: #111111;
+            --accent-blue: #0056b3; 
+            --accent-green: #0a793a; 
+            --accent-red: #b31b1b;   
+            --box-bg: #f4f6f8;
+            --border-color: #d1d5db;
+        }
+
+        .reveal { font-family: 'Roboto', sans-serif; color: var(--text-main); }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: 'Montserrat', sans-serif; text-transform: none; color: #000; }
+        .reveal .MathJax_Display { font-size: 1.15em !important; margin: 0.5em 0; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; align-items: start; }
+        
+        /* Table Styling */
+        .reveal table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin: 20px 0; }
+        .reveal th { background-color: #eef2f6; color: var(--accent-blue); font-weight: bold; text-align: center; border-bottom: 2px solid var(--accent-blue); padding: 12px;}
+        .reveal td { padding: 12px; border: 1px solid var(--border-color); text-align: center; }
+
+        /* Instructional Design UI Elements */
+        .box { background: var(--box-bg); border-left: 8px solid; padding: 25px 30px; border-radius: 4px; margin: 25px 0; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .box-title { font-family: 'Montserrat', sans-serif; font-size: 1.1em; margin-bottom: 15px; font-weight: bold; }
+        
+        .concept { border-color: var(--accent-blue); }
+        .concept .box-title { color: var(--accent-blue); }
+        
+        .practice { border-color: var(--accent-green); }
+        .practice .box-title { color: var(--accent-green); }
+        
+        .pitfall { border-color: var(--accent-red); padding: 15px 20px; margin: 10px 0; }
+        .pitfall .box-title { color: var(--accent-red); font-size: 1em; margin-bottom: 8px;}
+
+        /* Custom Interactive Applet Styles */
+        .applet { background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 20px; }
+        .applet input { font-size: 1em; padding: 8px; margin: 5px; border: 1px solid #ccc; border-radius: 4px; width: 100px; }
+
+        /* Interactive Action Buttons */
+        .action-btn { background-color: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9em; font-family: 'Montserrat', sans-serif; transition: background 0.2s, transform 0.1s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .action-btn:hover { background-color: #003d82; transform: translateY(-1px); }
+        .action-btn:active { transform: translateY(1px); }
+        
+        .hidden-answer { display: none; margin-top: 10px; padding: 15px; background: #eef2f6; border-left: 4px solid var(--accent-blue); border-radius: 4px; font-weight: 500; }
+
+        /* Custom Graph and Slider */
+        .graph-container { background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+        .base-slider { width: 80%; margin: 15px 0; cursor: pointer; }
+        .graph-controls { margin-top: 10px; font-family: 'Montserrat', sans-serif; font-weight: bold; color: var(--accent-blue); }
+
+        /* Custom Navigation Menu */
+        .slide-nav-menu { position: fixed; top: 20px; left: 20px; z-index: 1000; font-family: 'Montserrat', sans-serif; }
+        .slide-nav-toggle { background: var(--accent-blue); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: background 0.2s; display: flex; align-items: center; gap: 8px; }
+        .slide-nav-toggle:hover { background: #003d82; }
+        .slide-nav-list { display: none; position: absolute; top: 45px; left: 0; background: white; border: 1px solid var(--border-color); border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); list-style: none; padding: 10px 0; margin: 0; min-width: 260px; max-height: 80vh; overflow-y: auto;}
+        .slide-nav-list.active { display: block; }
+        .slide-nav-list li { padding: 10px 20px; cursor: pointer; font-size: 14px; color: var(--text-main); transition: background 0.2s, color 0.2s; border-bottom: 1px solid #f0f0f0; }
+        .slide-nav-list li:last-child { border-bottom: none; }
+        .slide-nav-list li:hover { background: #f4f6f8; color: var(--accent-blue); font-weight: 600; }
+    </style>
+</head>
+<body>
+    <!-- Custom Navigation Dropdown -->
+    <div class="slide-nav-menu">
+        <button class="slide-nav-toggle" onclick="toggleNav()">
+            <span style="font-size: 1.2em;">☰</span> Jump To...
+        </button>
+        <ul class="slide-nav-list" id="navList">
+            <li onclick="goToSlide(0)">1. Title</li>
+            <li onclick="goToSlide(1)">2. The Hook</li>
+            <li onclick="goToSlide(2)">3. Objectives</li>
+            <li onclick="goToSlide(3)">4. Review: Exponent Rules</li>
+            <li onclick="goToSlide(4)">5. Retrieval Practice</li>
+            <li onclick="goToSlide(5)">6. Building the Pattern</li>
+            <li onclick="goToSlide(6)">7. Defining Exp. Functions</li>
+            <li onclick="goToSlide(7)">8. The Natural Base, e</li>
+            <li onclick="goToSlide(8)">9. Calculator Practice</li>
+            <li onclick="goToSlide(9)">10. Simple vs. Compound Interest</li>
+            <li onclick="goToSlide(10)">11. Deconstructing Formulas</li>
+            <li onclick="goToSlide(11)">12. Interest Applet</li>
+            <li onclick="goToSlide(12)">13. Radioactive Decay</li>
+            <li onclick="goToSlide(13)">14. Common Pitfalls</li>
+            <li onclick="goToSlide(14)">15. Synthesis & Exit Ticket</li>
+            <li onclick="goToSlide(16)">16. Practice Problems</li>
+        </ul>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+            
+            <section>
+                <h3 style="color: var(--accent-blue);">MATH 130</h3>
+                <h1>Exponential Functions</h1>
+                <p>Section 4.2</p>
+                <p style="color: #555; font-size: 0.8em;">Press Right Arrow to begin</p>
+            </section>
+
+            <!-- Slide 2: The Hook -->
+            <section>
+                <h2>The Power of Exponents</h2>
+                <div class="box concept">
+                    <div class="box-title">Would You Rather?</div>
+                    <p>Receive a one-time payment of <strong>$1,000,000</strong> today...</p>
+                    <p>OR</p>
+                    <p>Receive a single <strong>penny ($0.01)</strong> today, and have it double every day for 30 days?</p>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="action-btn" onclick="toggleAnswer('hook-ans', this)">Reveal the Math</button>
+                    </div>
+                    <div id="hook-ans" class="hidden-answer">
+                        <p><strong>The Penny!</strong></p>
+                        <p>Day 1: $0.01 &nbsp;→&nbsp; Day 10: $5.12 &nbsp;→&nbsp; Day 20: $5,242.88</p>
+                        <p>By Day 30, that penny has become <strong>$5,368,709.12</strong>.</p>
+                        <p style="color: #555; font-size: 0.9em; margin-top: 10px;">This is the staggering power of exponential growth, which we will mathematically model today.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Learning Objectives</h2>
+                <div class="box concept">
+                    <p>By the end of this module, you will be able to:</p>
+                    <ol>
+                        <li>Graph exponential functions and identify key features.</li>
+                        <li>Understand and work with the natural base $e$.</li>
+                        <li>Apply compound interest formulas (periodic & continuous).</li>
+                        <li>Model real-world growth and decay with exponential functions.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Slide 4: Exponent Rules Review (Restored from PDF) -->
+            <section>
+                <h2>Review: Exponent Rules</h2>
+                <p style="color: #555;">Before we begin, ensure you are comfortable with these properties:</p>
+                
+                <div class="grid-2 text-left" style="font-size: 0.9em; align-items: stretch;">
+                    <div class="box concept" style="margin-top: 10px; margin-bottom: 10px;">
+                        <ul>
+                            <li style="margin-bottom: 15px;"><strong>Product Rule:</strong> $\quad a^m \cdot a^n = a^{m+n}$</li>
+                            <li style="margin-bottom: 15px;"><strong>Power Rule:</strong> $\quad (a^m)^n = a^{mn}$</li>
+                            <li><strong>Quotient Rule:</strong> $\quad \frac{a^m}{a^n} = a^{m-n}$</li>
+                        </ul>
+                    </div>
+                    <div class="box concept" style="margin-top: 10px; margin-bottom: 10px;">
+                        <ul>
+                            <li style="margin-bottom: 15px;"><strong>Zero Exponent:</strong> $\quad a^0 = 1 \quad (a \neq 0)$</li>
+                            <li style="margin-bottom: 15px;"><strong>Negative Exponent:</strong> $\quad a^{-n} = \frac{1}{a^n}$</li>
+                            <li><strong>Fractional:</strong> $\quad a^{1/n} = \sqrt[n]{a}$</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Retrieval Practice</h2>
+                <p>Take 30 seconds to evaluate the following based on the rules we just reviewed.</p>
+                <div class="grid-2">
+                    <div class="box practice">
+                        <p>1. Evaluate: $5^{-3}$ </p>
+                        <p class="fragment" style="color: var(--accent-green); font-weight: bold;">Answer: $\frac{1}{125}$</p>
+                    </div>
+                    <div class="box practice">
+                        <p>2. Evaluate: $\left(\frac{2}{3}\right)^{-2}$ </p>
+                        <p class="fragment" style="color: var(--accent-green); font-weight: bold;">Answer: $\frac{9}{4}$</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Constructivism (Building the Table) -->
+            <section>
+                <h2>Building the Pattern</h2>
+                <p>Let's evaluate $f(x) = \left(\frac{1}{4}\right)^x$ for various inputs.</p>
+                
+                <table style="font-size: 1.2em; margin-top: 40px;">
+                    <tr>
+                        <th>$x$</th>
+                        <th>$-2$</th>
+                        <th>$-1$</th>
+                        <th>$0$</th>
+                        <th>$1$</th>
+                        <th>$2$</th>
+                    </tr>
+                    <tr>
+                        <th>$f(x)$</th>
+                        <td id="table-ans-1">?</td>
+                        <td id="table-ans-2">?</td>
+                        <td id="table-ans-3">?</td>
+                        <td id="table-ans-4">?</td>
+                        <td id="table-ans-5">?</td>
+                    </tr>
+                </table>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button id="table-btn" class="action-btn" onclick="revealTable()">Check Answers & Discover Pattern</button>
+                </div>
+                
+                <div class="fragment box concept text-left" style="margin-top: 30px;">
+                    <div class="box-title">What did you notice?</div>
+                    <p>As $x$ increases, $f(x)$ <strong>decreases</strong>. Because the base is between 0 and 1, this represents <strong>exponential decay</strong>.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Defining Exponential Functions</h2>
+                <div class="grid-2">
+                    <div class="box concept text-left">
+                        <div class="box-title">The Formal Definition</div>
+                        <p>Let $b$ be a constant with $b > 0$ and $b \neq 1$.</p>
+                        <p>Then for any real number $x$, the function $f(x) = b^x$ is an exponential function of base $b$.</p>
+                        <div style="font-size: 0.85em; margin-top: 20px; padding-top: 15px; border-top: 1px solid #ccc;">
+                            <p><strong>Universal Properties:</strong></p>
+                            <ul style="margin-left: 20px;">
+                                <li><strong>Domain:</strong> $(-\infty, \infty)$</li>
+                                <li><strong>Range:</strong> $(0, \infty)$</li>
+                                <li><strong>y-intercept:</strong> $(0, 1)$</li>
+                                <li><strong>Asymptote:</strong> $y = 0$</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="graph-container">
+                            <canvas id="liveGraph" width="500" height="350"></canvas>
+                            <div class="graph-controls">
+                                Base ($b$): <span id="baseValueDisplay">2.0</span><br>
+                                <input type="range" id="baseSlider" class="base-slider" min="0.1" max="4.0" step="0.1" value="2.0">
+                            </div>
+                        </div>
+                        <p style="font-size: 0.7em; color: #666; margin-top: 10px;">Drag the slider to physically see Growth vs. Decay!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>The Natural Base, $e$</h2>
+                <p>$e$ is an irrational constant (like $\pi$).</p>
+                <h1 style="color: var(--accent-blue); font-size: 3em;">$e \approx 2.71828...$ </h1>
+                
+                <div class="box concept">
+                    <p>Watch what happens to the expression as $n \to \infty$:</p>
+                    $$\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \to e \text{ }$$
+                </div>
+            </section>
+
+            <!-- Slide 9: Calculator Practice (Restored from PDF) -->
+            <section>
+                <h2>Calculator Practice</h2>
+                <p style="color: #555;">Let's verify you can input these correctly into your device.<br>Round to the nearest thousandth.</p>
+                
+                <div class="grid-2 text-left" style="margin-top: 30px;">
+                    <div class="box practice">
+                        <p style="font-size: 1.2em; font-weight: bold; text-align: center;">$3.5^{1.6}$</p>
+                        <div style="text-align: center;"><button class="action-btn" onclick="toggleAnswer('calc-1', this)">Reveal</button></div>
+                        <div id="calc-1" class="hidden-answer text-center">
+                            <strong>7.422</strong><br>
+                            <span style="font-size: 0.8em; color: #555;">(Type: 3.5 ^ 1.6)</span>
+                        </div>
+                    </div>
+                    <div class="box practice">
+                        <p style="font-size: 1.2em; font-weight: bold; text-align: center;">$\left(\frac{3}{4}\right)^{-0.95}$</p>
+                        <div style="text-align: center;"><button class="action-btn" onclick="toggleAnswer('calc-2', this)">Reveal</button></div>
+                        <div id="calc-2" class="hidden-answer text-center">
+                            <strong>1.314</strong><br>
+                            <span style="font-size: 0.8em; color: #555;">(Type: (3 ÷ 4) ^ -0.95)</span>
+                        </div>
+                    </div>
+                    <div class="box practice">
+                        <p style="font-size: 1.2em; font-weight: bold; text-align: center;">$e^{-0.15}$</p>
+                        <div style="text-align: center;"><button class="action-btn" onclick="toggleAnswer('calc-3', this)">Reveal</button></div>
+                        <div id="calc-3" class="hidden-answer text-center">
+                            <strong>0.861</strong><br>
+                            <span style="font-size: 0.8em; color: #555;">(Type: 2nd -> LN -> -0.15)</span>
+                        </div>
+                    </div>
+                    <div class="box practice">
+                        <p style="font-size: 1.2em; font-weight: bold; text-align: center;">$175 \cdot e^{0.5}$</p>
+                        <div style="text-align: center;"><button class="action-btn" onclick="toggleAnswer('calc-4', this)">Reveal</button></div>
+                        <div id="calc-4" class="hidden-answer text-center">
+                            <strong>288.526</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Simple vs Compound Interest (Restored from PDF) -->
+            <section>
+                <h2>Simple vs. Compound Interest</h2>
+                <div class="text-left" style="width: 90%; margin: 0 auto;">
+                    <p><strong>Simple Interest ($I = Prt$):</strong> Interest is only earned on the original principal.</p>
+                    <p><strong>Compound Interest:</strong> Interest is earned on the principal AND previously earned interest.</p>
+                    
+                    <div class="box concept" style="margin-top: 30px;">
+                        <p><strong>Scenario:</strong> Jenny invests $70,000 at 3% compounded annually. Frank invests $70,000 at 3% simple interest. Compare the first 3 years.</p>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>Year</th>
+                            <th>Frank (Simple)</th>
+                            <th>Jenny (Compound)</th>
+                        </tr>
+                        <tr>
+                            <td>1st</td>
+                            <td>$2,100.00</td>
+                            <td>$2,100.00</td>
+                        </tr>
+                        <tr>
+                            <td>2nd</td>
+                            <td>$2,100.00</td>
+                            <td class="fragment" style="color: var(--accent-blue); font-weight: bold;">$2,163.00</td>
+                        </tr>
+                        <tr>
+                            <td>3rd</td>
+                            <td>$2,100.00</td>
+                            <td class="fragment" style="color: var(--accent-blue); font-weight: bold;">$2,227.89</td>
+                        </tr>
+                    </table>
+                    
+                    <p class="fragment" style="color: #555; text-align: center;"><strong>The Takeaway:</strong> The gap grows every year because Jenny earns "interest on her interest".</p>
+                </div>
+            </section>
+
+            <!-- Slide 11: Procedural Fluency (Formula Breakdown) -->
+            <section>
+                <h2>Deconstructing the Formula</h2>
+                <p style="color: #555;">Before we calculate, we must identify our variables correctly.</p>
+                
+                <div class="box practice">
+                    <p><strong>Scenario:</strong> <span id="scenario-text">$44,000 is borrowed for 13 years at 3.25% compounded annually.</span></p>
+                    <button class="action-btn" style="margin-top: 10px; font-size: 0.8em;" onclick="generateNewProblem()">Generate New Scenario</button>
+                </div>
+                
+                <div class="grid-2 text-left">
+                    <div>
+                        <p><strong>Principal ($P$):</strong> <button class="action-btn" style="float: right;" onclick="toggleAnswer('var-p', this)">Reveal</button></p>
+                        <div id="var-p" class="hidden-answer"><span id="ans-p">$44,000</span> <span style="color: #555; font-size: 0.8em;"><br>(The starting amount)</span></div>
+                        
+                        <p style="margin-top: 20px;"><strong>Rate ($r$):</strong> <button class="action-btn" style="float: right;" onclick="toggleAnswer('var-r', this)">Reveal</button></p>
+                        <div id="var-r" class="hidden-answer"><span id="ans-r">0.0325</span> <span style="color: #555; font-size: 0.8em;"><br>(Always divide percentage by 100!)</span></div>
+                    </div>
+                    <div>
+                        <p><strong>Compounds/Yr ($n$):</strong> <button class="action-btn" style="float: right;" onclick="toggleAnswer('var-n', this)">Reveal</button></p>
+                        <div id="var-n" class="hidden-answer"><span id="ans-n">1</span> <span style="color: #555; font-size: 0.8em;" id="ans-n-reason"><br>(Because it is compounded "annually")</span></div>
+                        
+                        <p style="margin-top: 20px;"><strong>Time ($t$):</strong> <button class="action-btn" style="float: right;" onclick="toggleAnswer('var-t', this)">Reveal</button></p>
+                        <div id="var-t" class="hidden-answer"><span id="ans-t">13</span> <span style="color: #555; font-size: 0.8em;"><br>(Time in years)</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Compound Interest: Live Exploration</h2>
+                <p style="font-size: 0.9em; margin-bottom: 20px;">Periodic: $A = P\left(1 + \frac{r}{n}\right)^{nt}$  &nbsp;&nbsp;|&nbsp;&nbsp; Continuous: $A = Pe^{rt}$ </p>
+                
+                <div class="grid-2">
+                    <div class="applet text-left" style="margin: 0;">
+                        <h3 style="margin-bottom: 15px;">Interactive Calculator</h3>
+                        <div>
+                            <label style="display:inline-block; width:120px;">Principal ($P$):</label> $<input type="number" id="prin" value="1000"><br>
+                            <label style="display:inline-block; width:120px;">Rate ($r$%):</label> &nbsp;&nbsp;<input type="number" id="rate" value="4">%<br>
+                            <label style="display:inline-block; width:120px;">Years ($t$):</label> &nbsp;&nbsp;<input type="number" id="time" value="10">
+                        </div>
+                        <div class="grid-2" style="font-size: 0.9em; font-weight: bold; padding-top: 15px; margin-top: 15px; border-top: 1px solid #eee; text-align: center;">
+                            <div>
+                                Annual ($n=1$): <br><span id="out-ann" style="color: var(--accent-blue); font-size: 1.3em;">$0.00</span>
+                            </div>
+                            <div>
+                                Continuous ($n \to \infty$): <br><span id="out-cont" style="color: var(--accent-green); font-size: 1.3em;">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="box practice text-left" style="margin: 0; font-size: 0.8em;">
+                        <div class="box-title">Exploration Missions</div>
+                        <p><strong>Mission 1:</strong> Set $P=1000$, $r=4$, $t=10$. <br>How big is the difference between Annual and Continuous?</p>
+                        <button class="action-btn" onclick="toggleAnswer('mission-1', this)">Check</button>
+                        <div id="mission-1" class="hidden-answer">Only ~$11.58!</div>
+                        
+                        <p style="margin-top: 15px;"><strong>Mission 2:</strong> Change $t$ to 40 years. Now how big is the difference?</p>
+                        <button class="action-btn" onclick="toggleAnswer('mission-2', this)">Check</button>
+                        <div id="mission-2" class="hidden-answer">It jumps to ~$151.78. Time amplifies the power of continuous compounding!</div>
+                    </div>
+                </div>
+
+                <script>
+                    function calculateInterest() {
+                        let p = parseFloat(document.getElementById('prin').value) || 0;
+                        let r = (parseFloat(document.getElementById('rate').value) || 0) / 100;
+                        let t = parseFloat(document.getElementById('time').value) || 0;
+                        
+                        let annual = p * Math.pow((1 + r/1), (1 * t));
+                        let cont = p * Math.exp(r * t);
+                        
+                        document.getElementById('out-ann').innerText = '$' + annual.toFixed(2);
+                        document.getElementById('out-cont').innerText = '$' + cont.toFixed(2);
+                    }
+                    document.getElementById('prin').addEventListener('input', calculateInterest);
+                    document.getElementById('rate').addEventListener('input', calculateInterest);
+                    document.getElementById('time').addEventListener('input', calculateInterest);
+                    // Initial calculation
+                    setTimeout(calculateInterest, 500); 
+                </script>
+            </section>
+
+            <section>
+                <h2>Modeling: Radioactive Decay</h2>
+                <div class="text-left" style="width: 90%; margin: 0 auto;">
+                    <p>Uranium-240 has a half-life of 14 hours. The amount remaining (in grams) after $t$ hours is modeled by:</p>
+                    <h3 style="text-align: center; color: var(--accent-blue); margin: 30px 0;">$$A(t) = 3200 \left(\frac{1}{2}\right)^{t/14} \text{ }$$</h3>
+                    
+                    <div class="grid-2">
+                        <div class="box practice">
+                            <p><strong>Step 1:</strong> Find the initial amount.</p>
+                            <button class="action-btn" onclick="toggleAnswer('decay-1', this)">Reveal Step 1</button>
+                            <div id="decay-1" class="hidden-answer">
+                                <p style="color: #555; font-size: 0.9em; margin-bottom: 5px;">Plug in $t = 0$:</p>
+                                $A(0) = 3200(1/2)^0$<br>
+                                $A(0) = 3200(1) = \mathbf{3,200 \text{ g}}$
+                            </div>
+                        </div>
+                        <div class="box practice">
+                            <p><strong>Step 2:</strong> Find the amount after 40 hours.</p>
+                            <button class="action-btn" onclick="toggleAnswer('decay-2', this)">Reveal Step 2</button>
+                            <div id="decay-2" class="hidden-answer">
+                                <p style="color: #555; font-size: 0.9em; margin-bottom: 5px;">Plug in $t = 40$:</p>
+                                $A(40) = 3200(1/2)^{40/14}$<br>
+                                $A(40) \approx \mathbf{442 \text{ g}}$ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 14: Common Pitfalls (Fully Restored from PDF) -->
+            <section>
+                <h2>Common Mistakes to Avoid</h2>
+                <div class="grid-3 text-left" style="font-size: 0.85em;">
+                    <div class="box pitfall">
+                        <div class="box-title">1. Base vs. Exponent</div>
+                        <p>Confusing $x^2$ with $2^x$.</p>
+                        <p style="color: #555; margin-top: 5px;">$x^2$ is a power function (variable base). $2^x$ is exponential. They grow at completely different rates.</p>
+                    </div>
+                    <div class="box pitfall">
+                        <div class="box-title">2. Decimal Conversions</div>
+                        <p>Using $r = 5$ instead of $r = 0.05$.</p>
+                        <p style="color: #555; margin-top: 5px;">Always divide your percentage by 100! If your answer seems absurdly large, check this first.</p>
+                    </div>
+                    <div class="box pitfall">
+                        <div class="box-title">3. The Wrong 'n' Value</div>
+                        <p>Confusing $n$ and $t$.</p>
+                        <p style="color: #555; margin-top: 5px;">$n$ is compounds <em>per year</em> (Quarterly = 4). It is NOT the number of years.</p>
+                    </div>
+                    <div class="box pitfall">
+                        <div class="box-title">4. Wrong Formula</div>
+                        <p>Using $A = P(1+\frac{r}{n})^{nt}$ for continuous.</p>
+                        <p style="color: #555; margin-top: 5px;">If the problem says "compounded continuously," use $A = Pe^{rt}$. There is no $n$!</p>
+                    </div>
+                    <div class="box pitfall" style="grid-column: span 2;">
+                        <div class="box-title">5. Forgetting Calculator Parentheses</div>
+                        <p>Typing $(3/4)^{-2}$ as $3/4^{-2}$ in your calculator.</p>
+                        <p style="color: #555; margin-top: 5px;">Always parenthesize the base and the exponent. When in doubt, add more parentheses.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Synthesis & Key Takeaways</h2>
+                    <div class="box concept text-left" style="width: 80%; margin: 0 auto; line-height: 1.8;">
+                        <ul>
+                            <li><strong>Structure:</strong> $f(x) = b^x$ is exponential because the variable is the exponent.</li>
+                            <li><strong>Behavior:</strong> $b > 1$ represents growth, while $0 < b < 1$ represents decay.</li>
+                            <li><strong>The Natural Base:</strong> $e \approx 2.71828$ is used primarily for continuous compounding: $A = Pe^{rt}$.</li>
+                            <li><strong>Periodic Finance:</strong> Use $A = P\left(1 + \frac{r}{n}\right)^{nt}$, ensuring $r$ is a decimal and $n$ is compounds <em>per year</em>.</li>
+                        </ul>
+                    </div>
+                    <p style="color: #555; margin-top: 30px;">Press <strong>Down Arrow</strong> for Exit Ticket.</p>
+                </section>
+
+                <section>
+                    <h2>Exit Ticket</h2>
+                    <p>Test your understanding before leaving!</p>
+                    <div class="box practice text-left" style="width: 70%; margin: 0 auto;">
+                        <p><strong>Given the function:</strong> $\quad f(x) = 3(0.5)^x$</p>
+                        <ol style="margin-top: 20px; line-height: 2;">
+                            <li>Does this function model exponential growth or decay?</li>
+                            <li>What is the y-intercept of the graph?</li>
+                        </ol>
+                        <div style="text-align: center; margin-top: 30px;">
+                            <button class="action-btn" onclick="toggleAnswer('exit-ticket', this)">Reveal Final Answers</button>
+                        </div>
+                        <div id="exit-ticket" class="hidden-answer">
+                            <p>1. <strong>Decay</strong> (Because the base, 0.5, is between 0 and 1).</p>
+                            <p>2. <strong>(0, 3)</strong> (Because $f(0) = 3 \cdot 0.5^0 = 3 \cdot 1 = 3$).</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Slide 16: Practice Problems (Restored from PDF) -->
+            <section>
+                <h2>Homework & Practice Problems</h2>
+                <div class="text-left" style="width: 90%; margin: 0 auto; font-size: 0.85em;">
+                    <ol style="line-height: 2.2;">
+                        <li><strong>Evaluate:</strong> $5^{-3}$ and $(\frac{2}{3})^{-2}$. Apply exponent rules to simplify.</li>
+                        <li><strong>Graph:</strong> $f(x) = (\frac{1}{3})^x$. Identify the asymptote, domain, range, and whether it shows growth or decay. Build a table with $x = -2, -1, 0, 1, 2$.</li>
+                        <li><strong>Periodic Compounding:</strong> $8,500 is invested at 4.2% compounded quarterly for 6 years. Find the account balance.</li>
+                        <li><strong>Continuous Compounding:</strong> An investment of $12,000 earns 5.8% compounded continuously. Find the value after 10 years.</li>
+                        <li><strong>Modeling:</strong> A bacteria culture starts with 500 cells and doubles every 3 hours. Write the model $B(t)$ and find the population after 10 hours.<br><span style="color: var(--accent-blue); font-weight: bold;">Hint Model:</span> $B(t) = 500 \cdot 2^{t/3}$</li>
+                    </ol>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/math/math.min.js"></script>
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.08,
+            minScale: 0.2, maxScale: 2.0,
+            controls: true, progress: true, center: true, hash: false, history: false, transition: 'fade',
+            mathjax2: {
+                mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js',
+                config: 'TeX-AMS_HTML-full'
+            },
+            plugins: [ RevealMath.MathJax2 ]
+        });
+
+        // Navigation Menu Logic
+        function toggleNav() {
+            document.getElementById('navList').classList.toggle('active');
+        }
+
+        function goToSlide(index) {
+            Reveal.slide(index);
+            document.getElementById('navList').classList.remove('active');
+        }
+
+        // Close nav when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.slide-nav-menu');
+            if (!nav.contains(event.target)) {
+                document.getElementById('navList').classList.remove('active');
+            }
+        });
+
+        // Interactive Button Logic for Self-Paced Learning
+        function toggleAnswer(id, btn) {
+            const el = document.getElementById(id);
+            if (!btn.hasAttribute('data-orig')) {
+                btn.setAttribute('data-orig', btn.innerText);
+            }
+            
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+                btn.innerText = btn.getAttribute('data-orig');
+            } else {
+                el.style.display = 'block';
+                btn.innerText = 'Hide';
+            }
+        }
+
+        // Table Scaffolding Logic
+        function revealTable() {
+            document.getElementById('table-ans-1').innerHTML = '<strong>16</strong>';
+            document.getElementById('table-ans-2').innerHTML = '<strong>4</strong>';
+            document.getElementById('table-ans-3').innerHTML = '<strong>1</strong>';
+            document.getElementById('table-ans-4').innerHTML = '<strong>1/4</strong>';
+            document.getElementById('table-ans-5').innerHTML = '<strong>1/16</strong>';
+            document.getElementById('table-btn').style.display = 'none';
+        }
+
+        // --- Live Graphing Engine ---
+        const canvas = document.getElementById('liveGraph');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        const slider = document.getElementById('baseSlider');
+        const baseDisplay = document.getElementById('baseValueDisplay');
+
+        function drawGraph() {
+            if (!canvas) return;
+            const b = parseFloat(slider.value);
+            baseDisplay.innerText = b.toFixed(1);
+            
+            const w = canvas.width;
+            const h = canvas.height;
+            const originX = w / 2;
+            const originY = h - 50; 
+            const scaleX = 50; // pixels per math unit
+            const scaleY = 40;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Draw grid
+            ctx.strokeStyle = '#eef2f6';
+            ctx.lineWidth = 1;
+            for(let i=0; i<w; i+=scaleX) { ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,h); ctx.stroke(); }
+            for(let i=0; i<h; i+=scaleY) { ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(w,i); ctx.stroke(); }
+
+            // Draw Axes
+            ctx.strokeStyle = '#111';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(0, originY); ctx.lineTo(w, originY); ctx.stroke(); // X axis
+            ctx.beginPath(); ctx.moveTo(originX, 0); ctx.lineTo(originX, h); ctx.stroke(); // Y axis
+
+            // Plot f(x) = b^x
+            ctx.strokeStyle = '#0056b3'; 
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            
+            for (let px = 0; px <= w; px++) {
+                let mathX = (px - originX) / scaleX;
+                let mathY = Math.pow(b, mathX);
+                let py = originY - (mathY * scaleY);
+                
+                // Don't draw lines that shoot infinitely off the top of the canvas
+                if (py < -100) continue; 
+                
+                if (px === 0 || py < -100) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+
+            // Draw point at (0,1)
+            let interceptY = originY - (1 * scaleY);
+            ctx.fillStyle = '#b31b1b'; 
+            ctx.beginPath();
+            ctx.arc(originX, interceptY, 7, 0, Math.PI*2);
+            ctx.fill();
+            ctx.fillStyle = '#111';
+            ctx.font = '16px Montserrat';
+            ctx.fillText('(0, 1)', originX + 12, interceptY + 5);
+        }
+
+        if (slider) {
+            slider.addEventListener('input', drawGraph);
+            setTimeout(drawGraph, 500);
+        }
+
+
+        // --- Infinite Practice Generator ---
+        function generateNewProblem() {
+            // Hide all answers and reset buttons
+            ['var-p', 'var-r', 'var-n', 'var-t'].forEach(id => {
+                let el = document.getElementById(id);
+                if(el) el.style.display = 'none';
+                let btn = document.querySelector(`button[onclick="toggleAnswer('${id}', this)"]`);
+                if (btn && btn.getAttribute('data-orig')) btn.innerText = btn.getAttribute('data-orig');
+            });
+
+            // Randomize values
+            const p = Math.floor(Math.random() * 49 + 1) * 1000; // $1,000 to $50,000
+            const rPercent = (Math.random() * 7 + 1.5).toFixed(2); // 1.50% to 8.50%
+            const t = Math.floor(Math.random() * 25 + 5); // 5 to 30 years
+            
+            const compoundTypes = [
+                { word: 'annually', n: 1, reason: '<br>(Because it is compounded "annually")' },
+                { word: 'semiannually', n: 2, reason: '<br>(Because it is compounded twice a year)' },
+                { word: 'quarterly', n: 4, reason: '<br>(Because it is compounded 4 times a year)' },
+                { word: 'monthly', n: 12, reason: '<br>(Because it is compounded 12 times a year)' },
+                { word: 'daily', n: 365, reason: '<br>(Because it is compounded 365 times a year)' }
+            ];
+            const comp = compoundTypes[Math.floor(Math.random() * compoundTypes.length)];
+
+            // Update UI text and hidden answers
+            document.getElementById('scenario-text').innerHTML = `\$${p.toLocaleString()} is borrowed for ${t} years at ${rPercent}% compounded ${comp.word}.`;
+            document.getElementById('ans-p').innerText = `\$${p.toLocaleString()}`;
+            document.getElementById('ans-r').innerText = (rPercent / 100).toFixed(4);
+            document.getElementById('ans-n').innerText = comp.n;
+            document.getElementById('ans-n-reason').innerHTML = comp.reason;
+            document.getElementById('ans-t').innerText = t;
+        }
+    </script>
+</body>
+</html>
