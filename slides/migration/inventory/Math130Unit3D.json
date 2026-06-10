@@ -1,0 +1,247 @@
+{
+  "deck": "Math130Unit3D",
+  "source": "Math130Unit3D.pptx",
+  "slide_count": 14,
+  "slides": [
+    {
+      "number": 1,
+      "title": "Module 13",
+      "text": [
+        "Section 8.4",
+        "Vectors",
+        "Math 130: Advanced Technical Mathematics | Unit 3"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 2,
+      "title": "Why Vectors?",
+      "text": [
+        "Many real-world quantities need both size AND direction.",
+        "• Velocity — wind at 15 mph to the north-east",
+        "• Force — 50 N pulling down at 30°",
+        "• Displacement — walking 3 blocks east, then 2 north",
+        "Scalars (speed, mass, temperature) need only size."
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 3,
+      "title": "Module 13 — Skills Overview",
+      "text": [
+        "Writing a vector in component form from initial/terminal points",
+        "1",
+        "Vector addition and scalar multiplication: component form",
+        "2",
+        "Finding magnitude and direction of a vector from its graph",
+        "3",
+        "Finding the direction angle of a vector in ai + bj form",
+        "4",
+        "(Supplementary) Finding the components of a vector given magnitude and angle",
+        "5"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 4,
+      "title": "Vectors and Scalars",
+      "text": [
+        "Scalar",
+        "Vector",
+        "Magnitude only (a single number)",
+        "Examples: speed, temperature, mass",
+        "Magnitude AND direction",
+        "Examples: velocity, force, displacement",
+        "Notation",
+        "Component form: v = ⟨a, b⟩ = a i + b j",
+        "Unit vectors: i = ⟨1, 0⟩, j = ⟨0, 1⟩",
+        "Zero vector: 0 = ⟨0, 0⟩ (no magnitude, no direction)",
+        "Magnitude: |v| = √(a² + b²) Direction angle: θ (CCW from +x)"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 5,
+      "title": "Writing a Vector in Component Form",
+      "text": [
+        "Formula: v = ⟨x₂ − x₁, y₂ − y₁⟩ (terminal minus initial)",
+        "Example: A(−2, 5) to B(3, −1)",
+        "v = ⟨3 − (−2), −1 − 5⟩",
+        "v = ⟨5, −6⟩",
+        "Meaning: 5 units right, 6 units down",
+        "Component form is position-independent — only the displacement matters."
+      ],
+      "images": [
+        "assets/math130unit3d/corrected/s_component_form.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 6,
+      "title": "Components from |v| and θ",
+      "text": [
+        "Given |v| and θ",
+        "vₓ = |v| cos θ",
+        "vᵧ = |v| sin θ",
+        "v = ⟨|v| cos θ, |v| sin θ⟩",
+        "Example: |v| = 5, θ = 53.1°",
+        "vₓ = 5 cos 53.1° ≈ 3",
+        "vᵧ = 5 sin 53.1° ≈ 4",
+        "v = ⟨3, 4⟩"
+      ],
+      "images": [
+        "assets/math130unit3d/corrected/s_components_from_mag_theta.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 7,
+      "title": "Vector Addition & Scalar Multiplication",
+      "text": [
+        "Addition",
+        "⟨a, b⟩ + ⟨c, d⟩ = ⟨a+c, b+d⟩",
+        "Subtraction",
+        "⟨a, b⟩ − ⟨c, d⟩ = ⟨a−c, b−d⟩",
+        "Scalar ×",
+        "k⟨a, b⟩ = ⟨ka, kb⟩",
+        "u = ⟨3, −2⟩ and v = ⟨−1, 5⟩",
+        "u + v = ⟨3+(−1), −2+5⟩ = ⟨2, 3⟩",
+        "3u − 2v:",
+        "3⟨3,−2⟩ − 2⟨−1,5⟩ = ⟨9,−6⟩ − ⟨−2,10⟩",
+        "= ⟨9−(−2), −6−10⟩ = ⟨11, −16⟩"
+      ],
+      "images": [
+        "assets/math130unit3d/corrected/s_vector_addition.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 8,
+      "title": "Magnitude and Direction",
+      "text": [
+        "Magnitude: |v| = √(a² + b²)",
+        "Direction: θ = tan⁻¹(b / a) (adjust for quadrant)",
+        "Example: v = ⟨−3, 4⟩",
+        "|v| = √(9 + 16) = √25 = 5",
+        "tan⁻¹(4/−3) ≈ −53.1°",
+        "Q II (a < 0, b > 0): add 180°",
+        "θ ≈ −53.1° + 180° = 126.9°"
+      ],
+      "images": [
+        "assets/math130unit3d/corrected/s_magnitude_direction.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 9,
+      "title": "Direction Angle — Quadrant Adjustment",
+      "text": [
+        "One Rule for θ",
+        "Compute α = tan⁻¹(b/a), then:",
+        "if a < 0 → θ = α + 180°",
+        "(Q II or Q III)",
+        "else if b < 0 → θ = α + 360°",
+        "(Q IV)",
+        "otherwise → θ = α",
+        "(Q I)"
+      ],
+      "images": [
+        "assets/math130unit3d/corrected/s_quadrant_arrows.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 10,
+      "title": "Direction Angle of ai + bj",
+      "text": [
+        "Find the direction angle of v = −5i + 12j.",
+        "Convert to components:",
+        "v = −5i + 12j → ⟨−5, 12⟩ (a = −5, b = 12)",
+        "Find magnitude:",
+        "|v| = √(25 + 144) = √169 = 13",
+        "Find direction:",
+        "tan⁻¹(12/−5) ≈ −67.4°",
+        "a < 0, b > 0 → Q II: add 180°",
+        "θ ≈ −67.4° + 180° = 112.6°"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 11,
+      "title": "Scalar Multiplication — Visual",
+      "text": [
+        "Rules",
+        "|k| > 1 → stretches the vector",
+        "0 < |k| < 1 → shrinks the vector",
+        "k < 0 → reverses direction",
+        "k⟨a, b⟩ = ⟨ka, kb⟩",
+        "Magnitude: |kv| = |k| × |v|"
+      ],
+      "images": [
+        "assets/math130unit3d/corrected/s_scalar_multiplication.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 12,
+      "title": "Test Prep — Vector Operations",
+      "text": [
+        "Test 3, Problem 9: Vector addition, scalar multiplication, magnitude, and direction angle calculations.",
+        "Part A: Component form",
+        "Part B: Operations",
+        "Given: P(3, −1) to Q(−2, 4)",
+        "v = ⟨−2−3, 4−(−1)⟩",
+        "v = ⟨−5, 5⟩",
+        "|v| = √(25+25) = √50 = 5√2",
+        "θ = tan⁻¹(5/−5)+180° = −45°+180°",
+        "θ = 135°",
+        "Given: u = ⟨2, −3⟩, v = ⟨−1, 4⟩",
+        "u + v = ⟨1, 1⟩",
+        "2u − 3v =",
+        "⟨4,−6⟩ − ⟨−3,12⟩ = ⟨7, −18⟩",
+        "|2u − 3v| = √(49+324) = √373",
+        "≈ 19.3"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 13,
+      "title": "Module 13 Summary",
+      "text": [
+        "5 ALEKS Topics | Section 8.4",
+        "Components",
+        "v = ⟨x₂−x₁, y₂−y₁⟩ from points, or v = ⟨|v|cos θ, |v|sin θ⟩ from magnitude/direction",
+        "Operations",
+        "Add/subtract component-wise, scalar multiplication multiplies each component",
+        "Magnitude & Direction",
+        "|v| = √(a²+b²), θ = tan⁻¹(b/a) adjusted for quadrant (Q II/III: +180°, Q IV: +360°)",
+        "Key for Test 3",
+        "Problem 9: component form, vector operations (2u − 3v), magnitude, and direction angle with quadrant adjustment",
+        "Next: Unit 3 Review → Test 3"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 14,
+      "title": "You Try",
+      "text": [
+        "Vector v goes from P(−4, −2) to Q(2, 1). Find:",
+        "(a) component form (b) magnitude (c) direction angle",
+        "(a) v = ⟨2 − (−4), 1 − (−2)⟩ = ⟨6, 3⟩",
+        "(b) |v| = √(36 + 9) = √45 = 3√5 ≈ 6.71",
+        "(c) θ = tan⁻¹(3 / 6) ≈ 26.57° (Q I, no adjustment)"
+      ],
+      "images": [
+        "assets/math130unit3d/corrected/s_you_try.png"
+      ],
+      "speaker_notes": []
+    }
+  ]
+}

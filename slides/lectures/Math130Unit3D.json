@@ -1,0 +1,611 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit3D",
+    "title": "Vectors",
+    "section": "Module 13",
+    "source": "Math130Unit3D.pptx",
+    "canonical": true
+  },
+  "objectives": [
+    {
+      "id": "u3d-components",
+      "text": "represent vectors in component form"
+    },
+    {
+      "id": "u3d-operations",
+      "text": "perform vector operations and interpret scalar multiplication"
+    },
+    {
+      "id": "u3d-direction",
+      "text": "find vector magnitude and direction angle"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "math130unit3d",
+      "title": "Vectors",
+      "subtitle": "Concepts, worked examples, student practice, and synthesis",
+      "output": "Math130Unit3D.html",
+      "duration_minutes": 55,
+      "min_slides": 18,
+      "max_slides": 24,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 38.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 17.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit3d-u3d-components-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3d-u3d-operations-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3d-u3d-direction-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "math130unit3d-title",
+          "title": "Vectors",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Concepts, worked examples, student practice, and synthesis",
+            "Module 13"
+          ]
+        },
+        {
+          "id": "math130unit3d-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u3d-components",
+            "u3d-operations",
+            "u3d-direction"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "represent vectors in component form",
+            "perform vector operations and interpret scalar multiplication",
+            "find vector magnitude and direction angle"
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-components-activate",
+          "title": "Predict: represent vectors in component form",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3d-components"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What information does speed omit that velocity includes?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3d-u3d-components-explain",
+          "title": "represent vectors in component form",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3d-components"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            2
+          ],
+          "content": [
+            "A vector has magnitude and direction.",
+            "$\\vec v=\\langle x_2-x_1,y_2-y_1\\rangle$.",
+            "From magnitude and direction: $\\langle |v|\\cos\\theta,|v|\\sin\\theta\\rangle$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3d-u3d-components-model",
+          "title": "Model the Skill: represent vectors in component form",
+          "phase": "model",
+          "component": "diagram",
+          "objectives": [
+            "u3d-components"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            3
+          ],
+          "content": [
+            "Find the vector from $A=(-2,5)$ to $B=(3,-1)$.",
+            "Terminal minus initial gives $\\langle3-(-2),-1-5\\rangle$.",
+            "$\\vec v=\\langle5,-6\\rangle$.",
+            "The corrected diagram moves 5 right and 6 down."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all component diagrams and calculations."
+          ],
+          "steps": [
+            "Terminal minus initial gives $\\langle3-(-2),-1-5\\rangle$.",
+            "$\\vec v=\\langle5,-6\\rangle$.",
+            "The corrected diagram moves 5 right and 6 down."
+          ],
+          "audit_checks": [
+            "u3d-components"
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3d/corrected/s_component_form.png",
+              "alt": "Vector from A negative two comma five to B three comma negative one with components five and negative six"
+            }
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-components-practice",
+          "title": "You Try: represent vectors in component form",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3d-components"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            4
+          ],
+          "content": [
+            "Find the component form from $P=(-4,-2)$ to $Q=(2,1)$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$\\langle6,3\\rangle$."
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-components-feedback",
+          "title": "Check and Diagnose: represent vectors in component form",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3d-components"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            5
+          ],
+          "content": [
+            "Use terminal minus initial.",
+            "Component form describes displacement, not location."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all component diagrams and calculations."
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-components-synthesize",
+          "title": "Make It Stick: represent vectors in component form",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3d-components"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            6
+          ],
+          "content": [
+            "Explain both ways to obtain vector components."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3d-u3d-operations-activate",
+          "title": "Predict: perform vector operations and interpret scalar multiplication",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3d-operations"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What changes when a vector is multiplied by a negative scalar?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3d-u3d-operations-explain",
+          "title": "perform vector operations and interpret scalar multiplication",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3d-operations"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            7
+          ],
+          "content": [
+            "Add and subtract component-wise.",
+            "$k\\langle a,b\\rangle=\\langle ka,kb\\rangle$.",
+            "A negative scalar reverses direction."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3d-u3d-operations-model",
+          "title": "Model the Skill: perform vector operations and interpret scalar multiplication",
+          "phase": "model",
+          "component": "diagram",
+          "objectives": [
+            "u3d-operations"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "For $u=\\langle3,-2\\rangle$ and $v=\\langle-1,5\\rangle$, find $u+v$ and $3u-2v$.",
+            "$u+v=\\langle2,3\\rangle$.",
+            "$3u-2v=\\langle9,-6\\rangle-\\langle-2,10\\rangle=\\langle11,-16\\rangle$.",
+            "The diagram separately confirms stretching and reversal under scalar multiplication."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all vector operation results and arrow directions."
+          ],
+          "steps": [
+            "$u+v=\\langle2,3\\rangle$.",
+            "$3u-2v=\\langle9,-6\\rangle-\\langle-2,10\\rangle=\\langle11,-16\\rangle$.",
+            "The diagram separately confirms stretching and reversal under scalar multiplication."
+          ],
+          "audit_checks": [
+            "u3d-operations"
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3d/corrected/s_scalar_multiplication.png",
+              "alt": "Vectors v, two v, and negative v showing stretch and reversal"
+            }
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-operations-practice",
+          "title": "You Try: perform vector operations and interpret scalar multiplication",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3d-operations"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            11
+          ],
+          "content": [
+            "Let $u=\\langle2,-3\\rangle$ and $v=\\langle-1,4\\rangle$. Find $2u-3v$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$2u-3v=\\langle7,-18\\rangle$."
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-operations-feedback",
+          "title": "Check and Diagnose: perform vector operations and interpret scalar multiplication",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3d-operations"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Distribute the scalar to both components.",
+            "Check the direction of negative scalar multiples visually."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all vector operation results and arrow directions."
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-operations-synthesize",
+          "title": "Make It Stick: perform vector operations and interpret scalar multiplication",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3d-operations"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Describe how scalar sign and magnitude affect a vector."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3d-u3d-direction-activate",
+          "title": "Predict: find vector magnitude and direction angle",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3d-direction"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Why can a calculator’s inverse tangent answer require a quadrant adjustment?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3d-u3d-direction-explain",
+          "title": "find vector magnitude and direction angle",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3d-direction"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            8,
+            9
+          ],
+          "content": [
+            "Magnitude: $|v|=\\sqrt{a^2+b^2}$.",
+            "Use atan2 behavior conceptually: choose the angle in the vector’s actual quadrant."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3d-u3d-direction-model",
+          "title": "Model the Skill: find vector magnitude and direction angle",
+          "phase": "model",
+          "component": "diagram",
+          "objectives": [
+            "u3d-direction"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            10
+          ],
+          "content": [
+            "For $v=\\langle-3,4\\rangle$, find magnitude and direction.",
+            "$|v|=\\sqrt{(-3)^2+4^2}=5$.",
+            "The reference angle is $\\tan^{-1}(4/3)\\approx53.13^\\circ$.",
+            "Quadrant II gives $\\theta=180^\\circ-53.13^\\circ\\approx126.87^\\circ$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify magnitude, direction, and quadrant-adjustment calculations."
+          ],
+          "steps": [
+            "$|v|=\\sqrt{(-3)^2+4^2}=5$.",
+            "The reference angle is $\\tan^{-1}(4/3)\\approx53.13^\\circ$.",
+            "Quadrant II gives $\\theta=180^\\circ-53.13^\\circ\\approx126.87^\\circ$."
+          ],
+          "audit_checks": [
+            "u3d-direction"
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3d/corrected/s_magnitude_direction.png",
+              "alt": "Quadrant two vector with direction angle measured counterclockwise from the positive x-axis"
+            }
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-direction-practice",
+          "title": "You Try: find vector magnitude and direction angle",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3d-direction"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            12
+          ],
+          "content": [
+            "For $v=\\langle6,3\\rangle$, find magnitude and direction."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$|v|=3\\sqrt5\\approx6.71$ and $\\theta\\approx26.57^\\circ$."
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-direction-feedback",
+          "title": "Check and Diagnose: find vector magnitude and direction angle",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3d-direction"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            13
+          ],
+          "content": [
+            "Check component signs before adjusting the angle.",
+            "Direction is measured counterclockwise from the positive x-axis."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify magnitude, direction, and quadrant-adjustment calculations."
+          ]
+        },
+        {
+          "id": "math130unit3d-u3d-direction-synthesize",
+          "title": "Make It Stick: find vector magnitude and direction angle",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3d-direction"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            14
+          ],
+          "content": [
+            "Write a quadrant-safe direction-angle procedure."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3d-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3d-components",
+            "u3d-operations",
+            "u3d-direction"
+          ],
+          "minutes": 1.5,
+          "source_slides": [],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "math130unit3d-roadmap"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-components-explain"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-components-model"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-components-practice"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-components-feedback"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-components-synthesize"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-operations-explain"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-direction-explain"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-direction-explain"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-direction-model"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-operations-practice"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-direction-practice"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-direction-feedback"
+    },
+    {
+      "slide": 14,
+      "disposition": "mapped",
+      "block": "math130unit3d-u3d-direction-synthesize"
+    }
+  ]
+}

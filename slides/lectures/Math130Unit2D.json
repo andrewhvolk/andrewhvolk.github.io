@@ -1,0 +1,1187 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit2D",
+    "title": "Circles, Radians, Velocity, and Solids",
+    "section": "Unit 2",
+    "source": "Math130Unit2D.pptx",
+    "canonical": true,
+    "chooser_output": "Math130Unit2D.html"
+  },
+  "objectives": [
+    {
+      "id": "u2d-area",
+      "text": "decompose figures and compute area accurately"
+    },
+    {
+      "id": "u2d-circle",
+      "text": "use circle terminology and circumference-area formulas"
+    },
+    {
+      "id": "u2d-theorems",
+      "text": "apply inscribed-angle, chord, and arc theorems"
+    },
+    {
+      "id": "u2d-radians",
+      "text": "convert angle measures and compute arc length and sector area"
+    },
+    {
+      "id": "u2d-velocity",
+      "text": "relate angular velocity, linear velocity, and distance"
+    },
+    {
+      "id": "u2d-solids",
+      "text": "select volume and surface-area formulas for solids"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "unit2d-part1",
+      "title": "Area and Circle Geometry",
+      "subtitle": "Area decomposition, circle measures, arcs, sectors, and angle theorems",
+      "output": "Math130Unit2D-part1.html",
+      "duration_minutes": 55,
+      "min_slides": 20,
+      "max_slides": 26,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 38.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 17.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit2d-u2d-area-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2d-u2d-circle-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2d-u2d-theorems-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "unit2d-part1-title",
+          "title": "Area and Circle Geometry",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "Area decomposition, circle measures, arcs, sectors, and angle theorems",
+            "Unit 2"
+          ]
+        },
+        {
+          "id": "unit2d-part1-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u2d-area",
+            "u2d-circle",
+            "u2d-theorems"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            2
+          ],
+          "content": [
+            "decompose figures and compute area accurately",
+            "use circle terminology and circumference-area formulas",
+            "apply inscribed-angle, chord, and arc theorems"
+          ]
+        },
+        {
+          "id": "unit2d-part1-chapter",
+          "title": "Session 1 · Area and Circle Geometry",
+          "phase": "activate",
+          "component": "chapter",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Connect each diagram to the correct radius, arc, chord, or angle relationship."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-area-activate",
+          "title": "Predict: decompose figures and compute area accurately",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-area"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Why can the same compound figure be decomposed in more than one valid way?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-area-explain",
+          "title": "decompose figures and compute area accurately",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u2d-area"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            3
+          ],
+          "content": [
+            "Area is additive for nonoverlapping pieces.",
+            "Choose rectangles, triangles, and circles that minimize unknown dimensions."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-area-model",
+          "title": "Model the Skill: decompose figures and compute area accurately",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-area"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            4
+          ],
+          "content": [
+            "A 15-by-10 rectangle has a 5-by-4 corner removed. Find the remaining area two ways."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all compound-area arithmetic and units."
+          ],
+          "steps": [
+            "Subtraction: $15(10)-5(4)=150-20=130$ square units.",
+            "An additive decomposition of the same region also totals 130 square units.",
+            "The result is less than the 150-square-unit bounding rectangle."
+          ],
+          "audit_checks": [
+            "u2d-area"
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-area-practice",
+          "title": "You Try: decompose figures and compute area accurately",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-area"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Find the area of a 12-by-9 rectangle with a 4-by-3 corner removed."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$108-12=96$ square units."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-area-feedback",
+          "title": "Check and Diagnose: decompose figures and compute area accurately",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2d-area"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            5
+          ],
+          "content": [
+            "Label units as square units.",
+            "Check that the result is smaller than the bounding rectangle."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all compound-area arithmetic and units."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-area-synthesize",
+          "title": "Make It Stick: decompose figures and compute area accurately",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-area"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Describe two valid decomposition strategies for a compound region."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2d-u2d-circle-activate",
+          "title": "Predict: use circle terminology and circumference-area formulas",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-circle"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "If a radius doubles, by what factor do circumference and area change?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-circle-explain",
+          "title": "use circle terminology and circumference-area formulas",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2d-circle"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            6
+          ],
+          "content": [
+            "Circumference: $C=2\\pi r$.",
+            "Area: $A=\\pi r^2$.",
+            "A sector is bounded by two radii and an arc; a segment is bounded by a chord and arc."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-circle-model",
+          "title": "Model the Skill: use circle terminology and circumference-area formulas",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2d-circle"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            7
+          ],
+          "content": [
+            "Compare radii 3 and 6, then find the annulus area between them."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify circle and annulus formulas and results."
+          ],
+          "steps": [
+            "Circumference changes from $6\\pi$ to $12\\pi$, so it doubles.",
+            "Area changes from $9\\pi$ to $36\\pi$, so it quadruples.",
+            "The annulus area is $36\\pi-9\\pi=27\\pi$ square units."
+          ],
+          "audit_checks": [
+            "u2d-circle"
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-circle-practice",
+          "title": "You Try: use circle terminology and circumference-area formulas",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-circle"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            8
+          ],
+          "content": [
+            "A washer has outer radius 8 and inner radius 5. Find its exact area."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$A=\\pi(8^2-5^2)=39\\pi$ square units."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-circle-feedback",
+          "title": "Check and Diagnose: use circle terminology and circumference-area formulas",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2d-circle"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            9
+          ],
+          "content": [
+            "Use radius, not diameter, in formulas.",
+            "Subtract circle areas, not radii, for an annulus."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify circle and annulus formulas and results."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-circle-synthesize",
+          "title": "Make It Stick: use circle terminology and circumference-area formulas",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-circle"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Explain why circle area scales quadratically while circumference scales linearly."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2d-u2d-theorems-activate",
+          "title": "Predict: apply inscribed-angle, chord, and arc theorems",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-theorems"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "How does an inscribed angle compare with its intercepted arc?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-theorems-explain",
+          "title": "apply inscribed-angle, chord, and arc theorems",
+          "phase": "explain",
+          "component": "decision",
+          "objectives": [
+            "u2d-theorems"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            10
+          ],
+          "content": [
+            "An inscribed angle measures half its intercepted arc.",
+            "Equal chords intercept equal arcs.",
+            "Angles formed by intersecting chords use half the sum of intercepted arcs."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-theorems-model",
+          "title": "Model the Skill: apply inscribed-angle, chord, and arc theorems",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-theorems"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            11
+          ],
+          "content": [
+            "Find an inscribed angle intercepting a $110^\\circ$ arc and a chord angle intercepting arcs $80^\\circ$ and $40^\\circ$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify every circle theorem against its diagram."
+          ],
+          "steps": [
+            "The inscribed angle is $110^\\circ/2=55^\\circ$.",
+            "The intersecting-chord angle is $(80^\\circ+40^\\circ)/2=60^\\circ$.",
+            "The vertex location determines which half-arc rule applies."
+          ],
+          "audit_checks": [
+            "u2d-theorems"
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-theorems-practice",
+          "title": "You Try: apply inscribed-angle, chord, and arc theorems",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-theorems"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "An inscribed angle measures 37°. Find its intercepted arc."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "The intercepted arc measures 74°."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-theorems-feedback",
+          "title": "Check and Diagnose: apply inscribed-angle, chord, and arc theorems",
+          "phase": "feedback",
+          "component": "comparison",
+          "objectives": [
+            "u2d-theorems"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            12
+          ],
+          "content": [
+            "Identify the vertex location before choosing a theorem.",
+            "Do not confuse central and inscribed angles."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify every circle theorem against its diagram."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-theorems-synthesize",
+          "title": "Make It Stick: apply inscribed-angle, chord, and arc theorems",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-theorems"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "State the vertex-and-arc information needed before applying a circle-angle theorem."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "unit2d-part1-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-area",
+            "u2d-circle",
+            "u2d-theorems"
+          ],
+          "minutes": 1.5,
+          "source_slides": [],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit2d-part2",
+      "title": "Radians, Velocity, and Solid Geometry",
+      "subtitle": "Angle conversion, arc length, sectors, motion, volume, and surface area",
+      "output": "Math130Unit2D-part2.html",
+      "duration_minutes": 55,
+      "min_slides": 20,
+      "max_slides": 26,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 38.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 17.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit2d-u2d-radians-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2d-u2d-velocity-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2d-u2d-solids-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "unit2d-part2-title",
+          "title": "Radians, Velocity, and Solid Geometry",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [
+            13,
+            22,
+            26
+          ],
+          "content": [
+            "Angle conversion, arc length, sectors, motion, volume, and surface area",
+            "Unit 2"
+          ]
+        },
+        {
+          "id": "unit2d-part2-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u2d-radians",
+            "u2d-velocity",
+            "u2d-solids"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "convert angle measures and compute arc length and sector area",
+            "relate angular velocity, linear velocity, and distance",
+            "select volume and surface-area formulas for solids"
+          ]
+        },
+        {
+          "id": "unit2d-part2-chapter",
+          "title": "Session 2 · Radians, Motion, and Solids",
+          "phase": "activate",
+          "component": "chapter",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Track units carefully as angles produce distances, speeds, areas, and volumes."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-radians-activate",
+          "title": "Predict: convert angle measures and compute arc length and sector area",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-radians"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Why must the angle be in radians when using $s=r\\theta$?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-radians-explain",
+          "title": "convert angle measures and compute arc length and sector area",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2d-radians"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            14,
+            15
+          ],
+          "content": [
+            "Radians measure arc length per radius.",
+            "$s=r\\theta$ and $A=\\tfrac12r^2\\theta$ require radians.",
+            "Convert degrees using $\\theta_{rad}=\\theta_{deg}\\pi/180$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-radians-model",
+          "title": "Model the Skill: convert angle measures and compute arc length and sector area",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2d-radians"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            16,
+            17
+          ],
+          "content": [
+            "For $r=12$ and $\\theta=120^\\circ$, find arc length and sector area."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all degree-radian, arc-length, and sector-area calculations."
+          ],
+          "steps": [
+            "$120^\\circ=2\\pi/3$ radians.",
+            "$s=r\\theta=12(2\\pi/3)=8\\pi\\approx25.133$ units.",
+            "$A=\\tfrac12r^2\\theta=48\\pi\\approx150.796$ square units."
+          ],
+          "audit_checks": [
+            "u2d-radians"
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-radians-practice",
+          "title": "You Try: convert angle measures and compute arc length and sector area",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-radians"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            18
+          ],
+          "content": [
+            "Find the arc length for radius 9 and central angle 40°."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$40^\\circ=2\\pi/9$ radians, so $s=9(2\\pi/9)=2\\pi$."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-radians-feedback",
+          "title": "Check and Diagnose: convert angle measures and compute arc length and sector area",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2d-radians"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            19,
+            20
+          ],
+          "content": [
+            "Do not insert degrees directly into radian formulas.",
+            "Sector area should be the same fraction of $\\pi r^2$ as the angle is of a full rotation."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all degree-radian, arc-length, and sector-area calculations."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-radians-synthesize",
+          "title": "Make It Stick: convert angle measures and compute arc length and sector area",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-radians"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            21
+          ],
+          "content": [
+            "Explain the unit check that confirms an arc-length calculation."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2d-u2d-velocity-activate",
+          "title": "Predict: relate angular velocity, linear velocity, and distance",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-velocity"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Why do points farther from the center move faster even when angular speed is the same?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-velocity-explain",
+          "title": "relate angular velocity, linear velocity, and distance",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2d-velocity"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            23
+          ],
+          "content": [
+            "Angular speed: $\\omega=\\theta/t$.",
+            "Linear speed: $v=r\\omega$.",
+            "Distance: $d=vt=r\\theta$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-velocity-model",
+          "title": "Model the Skill: relate angular velocity, linear velocity, and distance",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2d-velocity"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            24
+          ],
+          "content": [
+            "A paddle tip at radius 4 ft rotates at 3 rad/s. Find speed and distance in 10 s."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify angular-linear velocity examples and units."
+          ],
+          "steps": [
+            "$v=r\\omega=4(3)=12$ ft/s.",
+            "$d=vt=12(10)=120$ ft.",
+            "Radians are dimensionless in the linear-speed conversion."
+          ],
+          "audit_checks": [
+            "u2d-velocity"
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-velocity-practice",
+          "title": "You Try: relate angular velocity, linear velocity, and distance",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-velocity"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "A wheel of radius 0.35 m turns at 8 rad/s. Find rim speed."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$v=r\\omega=0.35(8)=2.8$ m/s."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-velocity-feedback",
+          "title": "Check and Diagnose: relate angular velocity, linear velocity, and distance",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2d-velocity"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            25
+          ],
+          "content": [
+            "Angular units must be radians for $v=r\\omega$.",
+            "Distinguish revolutions per minute from radians per second."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify angular-linear velocity examples and units."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-velocity-synthesize",
+          "title": "Make It Stick: relate angular velocity, linear velocity, and distance",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-velocity"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Describe how radius affects linear speed at fixed angular speed."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2d-u2d-solids-activate",
+          "title": "Predict: select volume and surface-area formulas for solids",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Which dimensions contribute to volume, and which surfaces contribute to surface area?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-solids-explain",
+          "title": "select volume and surface-area formulas for solids",
+          "phase": "explain",
+          "component": "decision",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            27
+          ],
+          "content": [
+            "Volume measures three-dimensional capacity; surface area measures exposed two-dimensional faces.",
+            "Cylinder: $V=\\pi r^2h$ and $SA=2\\pi r^2+2\\pi rh$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2d-u2d-solids-model",
+          "title": "Model the Skill: select volume and surface-area formulas for solids",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "A 10-unit pipe has outer radius 4 and inner radius 3. Find material volume."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all solid-geometry formulas, dimensions, and units."
+          ],
+          "steps": [
+            "$V=\\pi(R^2-r^2)h$.",
+            "$V=\\pi(4^2-3^2)(10)=70\\pi$ cubic units.",
+            "Subtract the inner cylinder from the outer cylinder."
+          ],
+          "audit_checks": [
+            "u2d-solids"
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-solids-practice",
+          "title": "You Try: select volume and surface-area formulas for solids",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            28
+          ],
+          "content": [
+            "Find the volume of a cylinder with radius 3 and height 10, then its total surface area."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$V=90\\pi$ cubic units.",
+            "$SA=78\\pi$ square units."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-solids-feedback",
+          "title": "Check and Diagnose: select volume and surface-area formulas for solids",
+          "phase": "feedback",
+          "component": "comparison",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Use cubic units for volume and square units for area.",
+            "A pipe requires outer volume minus inner volume."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all solid-geometry formulas, dimensions, and units."
+          ]
+        },
+        {
+          "id": "math130unit2d-u2d-solids-synthesize",
+          "title": "Make It Stick: select volume and surface-area formulas for solids",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Explain how a diagram determines whether to add, subtract, or omit circular bases."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "unit2d-part2-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-radians",
+            "u2d-velocity",
+            "u2d-solids"
+          ],
+          "minutes": 1.5,
+          "source_slides": [
+            29,
+            30
+          ],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "unit2d-part1-title"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "unit2d-part1-roadmap"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-area-explain"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-area-model"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-area-feedback"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-circle-explain"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-circle-model"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-circle-practice"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-circle-feedback"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-theorems-explain"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-theorems-model"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-theorems-feedback"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "unit2d-part2-title"
+    },
+    {
+      "slide": 14,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-radians-explain"
+    },
+    {
+      "slide": 15,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-radians-explain"
+    },
+    {
+      "slide": 16,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-radians-model"
+    },
+    {
+      "slide": 17,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-radians-model"
+    },
+    {
+      "slide": 18,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-radians-practice"
+    },
+    {
+      "slide": 19,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-radians-feedback"
+    },
+    {
+      "slide": 20,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-radians-feedback"
+    },
+    {
+      "slide": 21,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-radians-synthesize"
+    },
+    {
+      "slide": 22,
+      "disposition": "mapped",
+      "block": "unit2d-part2-title"
+    },
+    {
+      "slide": 23,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-velocity-explain"
+    },
+    {
+      "slide": 24,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-velocity-model"
+    },
+    {
+      "slide": 25,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-velocity-feedback"
+    },
+    {
+      "slide": 26,
+      "disposition": "mapped",
+      "block": "unit2d-part2-title"
+    },
+    {
+      "slide": 27,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-solids-explain"
+    },
+    {
+      "slide": 28,
+      "disposition": "mapped",
+      "block": "math130unit2d-u2d-solids-practice"
+    },
+    {
+      "slide": 29,
+      "disposition": "mapped",
+      "block": "unit2d-part2-closing"
+    },
+    {
+      "slide": 30,
+      "disposition": "mapped",
+      "block": "unit2d-part2-closing"
+    }
+  ]
+}

@@ -1,0 +1,843 @@
+{
+  "deck": "Math130Unit2B",
+  "source": "Math130Unit2B.pptx",
+  "slide_count": 31,
+  "slides": [
+    {
+      "number": 1,
+      "title": "log",
+      "text": [
+        "Section 4.3",
+        "Logarithmic Functions",
+        "College Algebra & Trigonometry",
+        "Lecture Notes with Worked Examples"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "Welcome to Section 4.3 on Logarithmic Functions.",
+        "This section introduces logarithms as the INVERSE of exponential functions. The key idea: if b^x = y, then log_b(y) = x.",
+        "Prerequisites: Students should be comfortable with exponential functions from Section 4.2, including properties of f(x) = b^x and the natural base e.",
+        "Key theme: Logarithms answer the question 'What exponent do I need?' This is the fundamental shift students need to grasp."
+      ]
+    },
+    {
+      "number": 2,
+      "title": "LEARNING OBJECTIVES",
+      "text": [
+        "By the end of this section, you will be able to:",
+        "Convert between logarithmic and exponential forms",
+        "1",
+        "Evaluate logarithmic expressions (including common and natural logs)",
+        "2",
+        "Apply basic properties of logarithms",
+        "3",
+        "Graph logarithmic functions and identify key features",
+        "4",
+        "Use the change-of-base formula",
+        "5",
+        "Solve simple logarithmic equations",
+        "6"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "Read objectives aloud. Emphasize that logarithms are the INVERSE of exponential functions — they 'undo' exponentiation.",
+        "Objective 1 (converting forms) is the most foundational skill. Everything else builds on it.",
+        "Objective 6 (solving equations) connects directly to Sections 4.4-4.5 where we solve more complex log/exp equations."
+      ]
+    },
+    {
+      "number": 3,
+      "title": "REVIEW: INVERSE FUNCTIONS",
+      "text": [
+        "Before we define logarithms, recall the concept of an inverse function:",
+        "The Big Idea",
+        "The inverse of a function undoes what the function does. If f assigns y to x, then f ⁻¹ assigns x back to y.",
+        "Example",
+        "Verifying Inverses",
+        "g(f(x)) = x for all x in domain of f",
+        "If f(3) = 5, then f ⁻¹(5) = 3",
+        "f(g(x)) = x for all x in domain of g",
+        "Why This Matters for Logarithms",
+        "The exponential function f(x) = bx is one-to-one, so it has an inverse: f ⁻¹(x) = logb(x)."
+      ],
+      "images": [],
+      "speaker_notes": [
+        "QUICK REVIEW: Ask students 'If f(x) = 2x + 1, what does f⁻¹ do?'",
+        "Answer: f⁻¹ subtracts 1 then divides by 2 (undoes the operations in reverse).",
+        "The key connection: The exponential function f(x) = bˣ is one-to-one (passes the horizontal line test), so it HAS an inverse.",
+        "That inverse is what we call the logarithmic function.",
+        "Example with numbers: If f(x) = 2ˣ, then f(3) = 8. The inverse asks: '2 raised to WHAT power gives 8?' Answer: 3. So log₂(8) = 3."
+      ]
+    },
+    {
+      "number": 4,
+      "title": "DEFINITION",
+      "text": [
+        "Logarithmic Function",
+        "If x and b are positive real numbers such that b ≠ 1, then the logarithmic function with base b is:",
+        "𝒚 = 𝑙𝑜𝑔𝑏(𝑥) is equivalent to 𝒃𝒚 = 𝒙",
+        "Logarithmic vs. Exponential",
+        "Logarithmic Form",
+        "Exponential Form",
+        "𝒚 = 𝑙𝑜𝑔𝑏(𝑥)",
+        "⟺",
+        "𝒃𝒚 = 𝒙",
+        "\"What power of b gives x?\"",
+        "\"b raised to y equals x\""
+      ],
+      "images": [],
+      "speaker_notes": [
+        "KEY DEFINITION — This is the most important slide in the section.",
+        "Say it clearly: 'log base b of x equals y' means 'b raised to the y power equals x.'",
+        "The logarithm IS an exponent. log₂(8) = 3 because 2³ = 8.",
+        "Why b > 0 and b ≠ 1? Same reasons as exponential functions — negative bases cause problems, and base 1 gives a constant.",
+        "Why x > 0? Because bʸ is always positive for b > 0, so we can only take logarithms of positive numbers.",
+        "COMMON CONFUSION: Students mix up which number is the base, which is the exponent, and which is the result. Use color-coding on the board."
+      ]
+    },
+    {
+      "number": 5,
+      "title": "TRY IT: CONVERT TO EXPONENTIAL FORM",
+      "text": [
+        "Write each logarithmic equation in exponential form.",
+        "a) log4(64) = 3 → ?",
+        "b) log3(1/9) = −2 → ?",
+        "c) log10(1000) = 3 → ?",
+        "d) ln(e5) = 5 → ?",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-05-1.png"
+      ],
+      "speaker_notes": [
+        "Give students 2-3 minutes.",
+        "HINTS if students are stuck:",
+        "• 'The logarithm IS the exponent.'",
+        "• 'log base b of x = y means b^y = x'",
+        "• For (d): recall that ln means log base e.",
+        "COMMON MISTAKES:",
+        "• Writing 64³ = 4 (confusing base and result)",
+        "• Not knowing that ln = log base e"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "SOLUTION: CONVERT TO EXPONENTIAL FORM",
+      "text": [
+        "a)",
+        "log4(64) = 3",
+        "→",
+        "43 = 64",
+        "4 cubed is 64 ✓",
+        "b)",
+        "log3(1/9) = −2",
+        "3−2 = 1/9",
+        "3⁻² = 1/9 ✓",
+        "c)",
+        "log10(1000) = 3",
+        "103 = 1000",
+        "10 cubed is 1000 ✓",
+        "d)",
+        "ln(e5) = 5",
+        "e5 = e5",
+        "ln means log base e",
+        "Remember: logb(x) = y means by = x. The logarithm is always the exponent!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-06-1.png"
+      ],
+      "speaker_notes": [
+        "Walk through each conversion. Emphasize the pattern:",
+        "• The base of the log becomes the base of the exponential",
+        "• The answer (right side of log equation) becomes the exponent",
+        "• The argument of the log becomes the result",
+        "For (d), stress that ln = log_e. This trips students up constantly.",
+        "Verification strategy: Always check by computing the exponential side."
+      ]
+    },
+    {
+      "number": 7,
+      "title": "TRY IT: CONVERT TO LOGARITHMIC FORM",
+      "text": [
+        "Write each exponential equation in logarithmic form.",
+        "a) 53 = 125 → ?",
+        "b) 4−3 = 1/64 → ?",
+        "c) 100 = 1 → ?",
+        "d) e1 = e → ?",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-07-1.png"
+      ],
+      "speaker_notes": [
+        "This is the reverse of the previous exercise. Students should identify:",
+        "• The base stays the same",
+        "• The exponent becomes the answer of the log",
+        "• The result becomes the argument of the log",
+        "Watch for: Students writing log₁₂₅(5) = 3 instead of log₅(125) = 3 — they swap the base and argument."
+      ]
+    },
+    {
+      "number": 8,
+      "title": "SOLUTION: CONVERT TO LOGARITHMIC FORM",
+      "text": [
+        "a)",
+        "53 = 125",
+        "→",
+        "log5(125) = 3",
+        "b)",
+        "4−3 = 1/64",
+        "log4(1/64) = −3",
+        "c)",
+        "100 = 1",
+        "log(1) = 0",
+        "d)",
+        "e1 = e",
+        "ln(e) = 1",
+        "As a function: f(x) = log4(x) For example, f(1/64) = −3 because 4−3 = 1/64."
+      ],
+      "images": [
+        "assets/math130unit2b/slide-08-1.png"
+      ],
+      "speaker_notes": [
+        "Emphasize the conversion pattern:",
+        "b^y = x → log_b(x) = y",
+        "For (c): Point out that log₁₀ is the 'common log' and is written simply as 'log' (no base shown).",
+        "For (d): log_e is the 'natural log' and is written as 'ln'.",
+        "Ask: 'What does log₅(125) = 3 MEAN in words?' Answer: '5 raised to the 3rd power equals 125.'"
+      ]
+    },
+    {
+      "number": 9,
+      "title": "EVALUATING LOGARITHMIC EXPRESSIONS",
+      "text": [
+        "To evaluate logb(x), ask: \"b raised to what power gives x?\"",
+        "Example 1",
+        "Example 2",
+        "Evaluate log2(32)",
+        "Evaluate log3(1/27)",
+        "Ask: 2 raised to what power = 32?",
+        "Ask: 3 raised to what power = 1/27?",
+        "25 = 32, so log2(32) = 5",
+        "3−3 = 1/27, so log3(1/27) = −3",
+        "Example 3",
+        "Example 4",
+        "Evaluate log5(√5)",
+        "Evaluate log9(1)",
+        "√5 = 51/2, so log5(51/2) = 1/2",
+        "Ask: 9 raised to what power = 1?",
+        "90 = 1, so log9(1) = 0"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "Work through each example step by step. The key strategy is always the same:",
+        "1. Set up: log_b(x) = ?",
+        "2. Convert: b^? = x",
+        "3. Ask: what exponent works?",
+        "For Example 3: Students need to recognize √5 = 5^(1/2).",
+        "For Example 4: log_b(1) = 0 for ANY base b because b⁰ = 1 always."
+      ]
+    },
+    {
+      "number": 10,
+      "title": "COMMON AND NATURAL LOGARITHMS",
+      "text": [
+        "Common Logarithm",
+        "Natural Logarithm",
+        "log10(x) = log(x)",
+        "loge(x) = ln(x)",
+        "Base 10 is the default — when you see \"log\"",
+        "with no base written, it means base 10.",
+        "Your calculator's LOG button is base 10.",
+        "Base e ≈ 2.71828 — the natural base from",
+        "Section 4.2. Used extensively in calculus.",
+        "Your calculator's LN button is base e.",
+        "Calculator: log(140) ≈ 2.1461 → Check: 102.1461 ≈ 140 ✓ ln(60) ≈ 4.0943 → Check: e4.0943 ≈ 60 ✓"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-10-1.png"
+      ],
+      "speaker_notes": [
+        "Two special bases built into every calculator:",
+        "1. Common Log (base 10): Written as 'log' with no subscript. Your LOG key.",
+        "2. Natural Log (base e): Written as 'ln'. Your LN key.",
+        "IMPORTANT: All other bases require the change-of-base formula (coming later).",
+        "Demonstrate on calculator:",
+        "• LOG 140 ENTER → 2.14612803...",
+        "• Verify: 10^2.14612803 = 140"
+      ]
+    },
+    {
+      "number": 11,
+      "title": "TRY IT: EVALUATE WITH A CALCULATOR",
+      "text": [
+        "Use your calculator. Round to 4 decimal places. Check using exponential form.",
+        "a) log(250) = ?",
+        "b) ln(40) = ?",
+        "c) log(0.015) = ?",
+        "d) ln(1) = ?",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-11-1.png"
+      ],
+      "speaker_notes": [
+        "CALCULATOR KEYSTROKES:",
+        "• log(250): LOG 250 ENTER → 2.3979",
+        "• ln(40): LN 40 ENTER → 3.6889",
+        "• log(0.015): LOG 0.015 ENTER → −1.8239 (negative because 0.015 < 1)",
+        "• ln(1): LN 1 ENTER → 0 (property: ln(1) = 0 always)"
+      ]
+    },
+    {
+      "number": 12,
+      "title": "SOLUTION: EVALUATE WITH A CALCULATOR",
+      "text": [
+        "a)",
+        "log(250) ≈ 2.3979",
+        "Check: 102.3979 ≈ 250 ✓",
+        "b)",
+        "ln(40) ≈ 3.6889",
+        "Check: e3.6889 ≈ 40 ✓",
+        "c)",
+        "log(0.015) ≈ −1.8239",
+        "Check: 10−1.8239 ≈ 0.015 ✓ (Negative because 0.015 < 1)",
+        "d)",
+        "ln(1) = 0",
+        "Check: e0 = 1 ✓ (No calculator needed! logb(1) = 0 for any base)"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-12-1.png"
+      ],
+      "speaker_notes": [
+        "Key takeaways:",
+        "1. log(x) positive when x > 1, zero when x = 1, negative when 0 < x < 1.",
+        "2. ln(x) same pattern.",
+        "3. Always verify by converting back to exponential form.",
+        "4. ln(1) = 0 is a property — no calculator needed."
+      ]
+    },
+    {
+      "number": 13,
+      "title": "BASIC PROPERTIES OF LOGARITHMS",
+      "text": [
+        "logb(1) = 0",
+        "logb(b) = 1",
+        "logb(bx) = x",
+        "because b0 = 1",
+        "because b1 = b",
+        "log undoes exponent",
+        "log(1) = 0",
+        "log(10) = 1",
+        "log(10x) = x",
+        "ln(1) = 0",
+        "ln(e) = 1",
+        "ln(ex) = x",
+        "Inverse Property",
+        "One-to-One Property",
+        "If logb(x) = logb(y)",
+        "blog_b(x) = x",
+        "then x = y",
+        "10log x = x eln x = x",
+        "Equal logs (same base) → equal arguments",
+        "These properties come directly from the definition. They are used constantly in solving equations!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-13-1.png"
+      ],
+      "speaker_notes": [
+        "Five foundational properties:",
+        "1. log_b(1) = 0 — log of 1 is ALWAYS 0",
+        "2. log_b(b) = 1 — log of the base is ALWAYS 1",
+        "3. log_b(b^x) = x — log and exp are inverses",
+        "4. b^(log_b(x)) = x — other direction of inverse",
+        "5. One-to-One — equal logs (same base) → equal arguments",
+        "Quick drill: log₇(1)? → 0. log₅(5)? → 1. ln(e³)? → 3. 10^(log 50)? → 50."
+      ]
+    },
+    {
+      "number": 14,
+      "title": "TRY IT: SIMPLIFY USING PROPERTIES",
+      "text": [
+        "Simplify each expression without a calculator.",
+        "a) log7(1)",
+        "d) 5log₅(12)",
+        "b) ln(e−5/2)",
+        "e) log4(43)",
+        "c) log(108)",
+        "f) eln 7",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-14-1.png"
+      ],
+      "speaker_notes": [
+        "3-4 minutes. All done WITHOUT a calculator.",
+        "(a) log of 1 = 0. (b) ln(e^x) = x → −5/2. (c) log(10^x) = x → 8.",
+        "(d) b^(log_b x) = x → 12. (e) log_b(b^x) = x → 3. (f) e^(ln x) = x → 7."
+      ]
+    },
+    {
+      "number": 15,
+      "title": "SOLUTION: SIMPLIFY USING PROPERTIES",
+      "text": [
+        "a)",
+        "d)",
+        "log7(1) = 0",
+        "5log₅(12) = 12",
+        "because 70 = 1",
+        "because blog_b(x) = x",
+        "b)",
+        "e)",
+        "ln(e−5/2) = −5/2",
+        "log4(43) = 3",
+        "because ln(ex) = x",
+        "because logb(bx) = x",
+        "c)",
+        "f)",
+        "log(108) = 8",
+        "eln 7 = 7",
+        "because log(10x) = x",
+        "because eln x = x",
+        "All follow directly from the basic properties. No calculator needed!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-15-1.png"
+      ],
+      "speaker_notes": [
+        "Review each answer. The inverse properties (c-f) are the most important for solving equations later."
+      ]
+    },
+    {
+      "number": 16,
+      "title": "GRAPHS OF LOGARITHMIC FUNCTIONS",
+      "text": [
+        "Since f(x) = logb(x) is the inverse of g(x) = bx, their graphs are reflections across y = x.",
+        "Graphing y = log2(x)",
+        "f(x) = 2x (exponential)",
+        "Rewrite as 2y = x and choose y-values:",
+        "Horizontal asymptote: y = 0",
+        "y-intercept: (0, 1)",
+        "Domain: (−∞, ∞) Range: (0, ∞)",
+        "Points: (¼,−2), (½,−1), (1,0), (2,1), (4,2), (8,3)",
+        "f(x) = log2(x) (logarithmic)",
+        "Tip: Choose y-values first, then compute x = 2y. Avoids fractions!",
+        "Vertical asymptote: x = 0",
+        "x-intercept: (1, 0)",
+        "Domain: (0, ∞) Range: (−∞, ∞)",
+        "Inverse functions swap domain/range, x/y-intercepts, and horizontal/vertical asymptotes!"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "GRAPHING TIP: To graph y = log_b(x), rewrite as b^y = x. Pick nice y-values and compute x.",
+        "Emphasize the INVERSE RELATIONSHIP — everything swaps:",
+        "• domain ↔ range",
+        "• x-int ↔ y-int",
+        "• horizontal asymptote ↔ vertical asymptote"
+      ]
+    },
+    {
+      "number": 17,
+      "title": "PROPERTIES OF f(x) = logb(x)",
+      "text": [
+        "Both cases: Domain: (0, ∞) Range: (−∞, ∞) x-intercept: (1, 0) Asymptote: x = 0",
+        "b > 1 (e.g., log2 x)",
+        "0 < b < 1 (e.g., log1/2 x)",
+        "Increasing function",
+        "As",
+        "x → 0+, f(x) → −∞",
+        "x → ∞, f(x) → ∞",
+        "Graph rises slowly to the right",
+        "Passes through (1, 0) and (",
+        "b, 1)",
+        "Decreasing function",
+        "x → 0+, f(x) → ∞",
+        "x → ∞, f(x) → −∞",
+        "Graph falls slowly to the right",
+        "Key Question: How do you tell growth from decay? Look at the base b, same as with exponentials!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-17-1.png"
+      ],
+      "speaker_notes": [
+        "BIG PICTURE: b > 1 → increasing, 0 < b < 1 → decreasing. Both share domain (0,∞), range (−∞,∞), x-int (1,0), asymptote x = 0."
+      ]
+    },
+    {
+      "number": 18,
+      "title": "TRY IT: GRAPH A LOGARITHMIC FUNCTION",
+      "text": [
+        "Graph f(x) = log2(x + 1) + 2. Identify the domain, range, and vertical asymptote.",
+        "Hint: Start with the parent function y = log2(x). How does it shift?",
+        "Transformation Reference",
+        "f(x) = logb(x − h) + k",
+        "Shifts right h, up k",
+        "f(x) = logb(x + h)",
+        "Shifts LEFT h units",
+        "f(x) = logb(x) + k",
+        "Shifts UP k units",
+        "f(x) = −logb(x)",
+        "Reflects over x-axis",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-18-1.png"
+      ],
+      "speaker_notes": [
+        "Students should recognize: parent y = log₂(x), (x+1) shifts LEFT 1, +2 shifts UP 2.",
+        "Asymptote: x = −1. Domain: (−1, ∞). Range: (−∞, ∞)."
+      ]
+    },
+    {
+      "number": 19,
+      "title": "SOLUTION: GRAPH f(x) = log2(x + 1) + 2",
+      "text": [
+        "Transformations Applied",
+        "Key Features",
+        "Parent: y = log2(x)",
+        "Shift left 1: (",
+        "x + 1) moves asymptote to x = −1",
+        "Shift up 2: + 2 moves",
+        "x-intercept up",
+        "Vertical asymptote: x = −1",
+        "Domain: (−1, ∞)",
+        "Range: (−∞, ∞)",
+        "Step-by-Step",
+        "f(0) = log2(0 + 1) + 2 = log2(1) + 2 = 0 + 2 = 2 (y-intercept at (0, 2))",
+        "f(1) = log2(1 + 1) + 2 = log2(2) + 2 = 1 + 2 = 3",
+        "f(3) = log2(3 + 1) + 2 = log2(4) + 2 = 2 + 2 = 4",
+        "f(7) = log2(7 + 1) + 2 = log2(8) + 2 = 3 + 2 = 5"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-19-1.png"
+      ],
+      "speaker_notes": [
+        "Walk through each computation. y-intercept: f(0) = log₂(1) + 2 = 0 + 2 = 2. x-intercept: set f(x) = 0 → log₂(x+1) = −2 → x+1 = 1/4 → x = −3/4."
+      ]
+    },
+    {
+      "number": 20,
+      "title": "DOMAIN OF LOGARITHMIC FUNCTIONS",
+      "text": [
+        "Critical Rule",
+        "The argument of a logarithm must be strictly positive. For f(x) = logb(g(x)), the domain requires g(x) > 0.",
+        "f(x) = log(3x − 6)",
+        "f(x) = ln(x2 + 4)",
+        "Set argument > 0:",
+        "3x − 6 > 0 → 3x > 6 → x > 2",
+        "Domain: (2, ∞)",
+        "Vertical asymptote: x = 2",
+        "x2 + 4 > 0 → always true!",
+        "(",
+        "x2 ≥ 0, so x2 + 4 ≥ 4 > 0)",
+        "Domain: (−∞, ∞)",
+        "f(x) = log2(x2 − 4)",
+        "Set: x2 − 4 > 0 → (x − 2)(x + 2) > 0 → x < −2 or x > 2 Domain: (−∞, −2) ∪ (2, ∞)",
+        "Find boundary points, test intervals. Vertical asymptotes at x = −2 and x = 2."
+      ],
+      "images": [],
+      "speaker_notes": [
+        "DOMAIN: Set argument > 0 and solve. Example 2 shows the domain can be all reals. Example 3 requires factoring and sign analysis."
+      ]
+    },
+    {
+      "number": 21,
+      "title": "SOLVING LOGARITHMIC EQUATIONS",
+      "text": [
+        "Strategy: Convert to exponential form or use the one-to-one property.",
+        "Method 1: Convert to Exponential",
+        "Method 2: One-to-One Property",
+        "Solve: log2(x − 5) = 4",
+        "Solve: log5(x2 + 4) = log5(3x + 14)",
+        "Convert: x − 5 = 24 = 16",
+        "Solve:",
+        "x = 16 + 5 = 21",
+        "Check: log",
+        "2(21 − 5) = log2(16) = 4 ✓",
+        "Drop logs: x2 + 4 = 3x + 14",
+        "x2 − 3x − 10 = 0",
+        "(",
+        "x − 5)(x + 2) = 0",
+        "x = 5 or x = −2 Both check ✓",
+        "Method 3: Using Inverse Properties",
+        "Solve: eln 3x = 0.2",
+        "Solve: 102x−1 = 145",
+        "Simplify: 3x = 0.2 (since eln u = u)",
+        "x = 0.2/3 ≈ 0.067",
+        "Take log: 2x − 1 = log(145)",
+        "x = (log(145) + 1)/2 ≈ 1.581"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "Three strategies:",
+        "1. CONVERT TO EXPONENTIAL — single log = number.",
+        "2. ONE-TO-ONE — log_b(A) = log_b(B) → A = B.",
+        "3. INVERSE PROPERTIES — e^(ln x) = x, 10^(log x) = x.",
+        "Always check: log arguments must be positive!"
+      ]
+    },
+    {
+      "number": 22,
+      "title": "TRY IT: SOLVE LOGARITHMIC EQUATIONS",
+      "text": [
+        "Solve each equation.",
+        "a) ln(x2 − x) = ln 6",
+        "b) e1−4t = 12.405 (solve for t)",
+        "c) logx(232) = 21 (solve for x, round to 3 dec.)",
+        "d) 3x = 175 (round to 3 decimal places)",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-22-1.png"
+      ],
+      "speaker_notes": [
+        "5 minutes. (a) One-to-one, (b) Take ln of both sides, (c) Convert to exponential, (d) Take log of both sides."
+      ]
+    },
+    {
+      "number": 23,
+      "title": "SOLUTION: SOLVE LOGARITHMIC EQUATIONS",
+      "text": [
+        "a) ln(x2 − x) = ln 6",
+        "b) e1−4t = 12.405",
+        "One-to-one: x2 − x = 6",
+        "x2 − x − 6 = 0",
+        "(x − 3)(x + 2) = 0",
+        "x = 3 or x = −2 Both check ✓",
+        "Take ln: 1 − 4t = ln(12.405)",
+        "−4t = ln(12.405) − 1",
+        "t = (ln(12.405) − 1)/(−4)",
+        "t ≈ −0.380",
+        "c) logx(232) = 21",
+        "d) 3x = 175",
+        "Exponential form: x21 = 232",
+        "x = 2321/21",
+        "x ≈ 1.295",
+        "Take log: x · log(3) = log(175)",
+        "x = log(175)/log(3)",
+        "x ≈ 4.700",
+        "Always check your answers!",
+        "Verify all log arguments remain positive. Extraneous solutions can arise with logarithms."
+      ],
+      "images": [
+        "assets/math130unit2b/slide-23-1.png"
+      ],
+      "speaker_notes": [
+        "(a) One-to-one. (b) ln both sides. (c) Convert to exponential. (d) Take log both sides = change of base."
+      ]
+    },
+    {
+      "number": 24,
+      "title": "CHANGE-OF-BASE FORMULA",
+      "text": [
+        "Your calculator only has LOG (base 10) and LN (base e). To evaluate other bases, convert!",
+        "loga(x) = log(x) / log(a) = ln(x) / ln(a)",
+        "\"To convert from base a, divide by log(a).\"",
+        "Example: Evaluate log4(25)",
+        "Using LOG:",
+        "log4(25) = log(25) / log(4) = 1.39794 / 0.60206 ≈ 2.322",
+        "Using LN:",
+        "log4(25) = ln(25) / ln(4) = 3.21888 / 1.38629 ≈ 2.322 (same answer!)"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-24-1.png"
+      ],
+      "speaker_notes": [
+        "This formula solves: 'My calculator can't do log₃(x)!' Use log(x)/log(a) or ln(x)/ln(a).",
+        "Verification: 4^2.322 ≈ 25 ✓"
+      ]
+    },
+    {
+      "number": 25,
+      "title": "TRY IT: CHANGE-OF-BASE FORMULA",
+      "text": [
+        "Evaluate using change-of-base. Round to 3 decimal places.",
+        "a) log3(50)",
+        "b) log7(0.3)",
+        "c) log2(100)",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-25-1.png"
+      ],
+      "speaker_notes": [
+        "(a) log(50)/log(3) ≈ 3.561. (b) log(0.3)/log(7) ≈ −0.619. (c) log(100)/log(2) ≈ 6.644."
+      ]
+    },
+    {
+      "number": 26,
+      "title": "SOLUTION: CHANGE-OF-BASE FORMULA",
+      "text": [
+        "a)",
+        "log3(50) = log(50)/log(3)",
+        "= 1.69897 / 0.47712 ≈ 3.561",
+        "Check: 33.561 ≈ 50 ✓",
+        "b)",
+        "log7(0.3) = log(0.3)/log(7)",
+        "= −0.52288 / 0.84510 ≈ −0.619",
+        "Check: 7−0.619 ≈ 0.3 ✓ (Negative because 0.3 < 1)",
+        "c)",
+        "log2(100) = log(100)/log(2)",
+        "= 2 / 0.30103 ≈ 6.644",
+        "Check: 26.644 ≈ 100 ✓ (26 = 64, 27 = 128)"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-26-1.png"
+      ],
+      "speaker_notes": [
+        "Both log and ln give the same final answer. Use whichever is more convenient."
+      ]
+    },
+    {
+      "number": 27,
+      "title": "APPLICATION: STAR MAGNITUDE",
+      "text": [
+        "Astronomers use logarithmic scales to measure star brightness.",
+        "M = m − 5 · log(d/10)",
+        "M = absolute magnitude m = apparent magnitude d = distance in parsecs",
+        "Sirius (Dog Star)",
+        "Our Sun",
+        "m = −1.44, d = 2.637 parsecs",
+        "M = −1.44 − 5·log(2.637/10)",
+        "= −1.44 − 5·log(0.2637)",
+        "= −1.44 − 5(−0.5788)",
+        "= −1.44 + 2.894",
+        "≈ 1.45",
+        "m = −26.74, d = 4.848 × 10−6 pc",
+        "M = −26.74 − 5·log(4.848×10−6/10)",
+        "= −26.74 − 5·log(4.848×10−7)",
+        "= −26.74 − 5(−6.3143)",
+        "= −26.74 + 31.572",
+        "≈ 4.83"
+      ],
+      "images": [
+        "assets/math130unit2b/slide-27-1.png"
+      ],
+      "speaker_notes": [
+        "Logarithmic scales in action. The Sun appears very bright (m = −26.74) only because it's close. Its absolute magnitude (4.83) is actually average."
+      ]
+    },
+    {
+      "number": 28,
+      "title": "COMMON MISTAKES TO AVOID",
+      "text": [
+        "Thinking logb(x + y) = logb(x) + logb(y)",
+        "✗",
+        "The log of a SUM is NOT the sum of logs. #1 mistake. (logb(xy) = logb(x) + logb(y) IS true — Product Rule in 4.4.)",
+        "Forgetting the domain restriction",
+        "You can only take log of a POSITIVE number. log(0) and log(−5) are undefined. Always check solutions!",
+        "Confusing base and argument",
+        "In logb(x) = y: b is the base, x is the argument, y is the exponent. Convert: by = x (not xy = b).",
+        "Thinking log means multiply",
+        "log2(8) ≠ log · 2 · 8. The subscript 2 is the BASE. log2(8) = 3 because 23 = 8.",
+        "Not checking for extraneous solutions",
+        "When solving log equations, ALWAYS verify answers don't make any argument ≤ 0. Reject any that do."
+      ],
+      "images": [
+        "assets/math130unit2b/slide-28-1.png"
+      ],
+      "speaker_notes": [
+        "The #1 mistake: distributing log over addition. Emphasize: log(a+b) ≠ log(a)+log(b). But log(ab) = log(a)+log(b) IS correct (Product Rule, Section 4.4)."
+      ]
+    },
+    {
+      "number": 29,
+      "title": "KEY TAKEAWAYS",
+      "text": [
+        "logb(x) = y means by = x",
+        "1",
+        "The logarithm IS the exponent. Converting between forms is the fundamental skill.",
+        "Common log = log10, Natural log = ln = loge",
+        "2",
+        "These are the only two bases on your calculator. All others need change of base.",
+        "Properties: logb(1) = 0, logb(b) = 1, logb(bx) = x",
+        "3",
+        "Plus the inverse property blog_b(x) = x and the one-to-one property.",
+        "Domain of logb(x) is (0, ∞) — argument must be positive",
+        "4",
+        "Vertical asymptote at x = 0. Graph passes through (1, 0). Inverse of bx.",
+        "Change of base: loga(x) = log(x)/log(a) = ln(x)/ln(a)",
+        "5",
+        "Use this to evaluate any log with your calculator."
+      ],
+      "images": [
+        "assets/math130unit2b/slide-29-1.png"
+      ],
+      "speaker_notes": [
+        "WRAP-UP. Looking ahead: Section 4.4 covers Product/Quotient/Power Rules. Section 4.5 covers full exponential and logarithmic equations."
+      ]
+    },
+    {
+      "number": 30,
+      "title": "PRACTICE PROBLEMS",
+      "text": [
+        "Test your understanding — try these on your own!",
+        "Write in exponential form: log6(216) = 3 and ln(1) = 0",
+        "1",
+        "Apply the definition: logb(x) = y ↔ by = x.",
+        "Evaluate without a calculator: log4(1/16) and log27(3)",
+        "2",
+        "Set up by = x and find y. Remember fractional exponents!",
+        "Simplify: log(106), eln 15, log8(82.5)",
+        "3",
+        "Use the basic properties and inverse properties.",
+        "Find the domain of f(x) = log3(5 − 2x)",
+        "4",
+        "Set 5 − 2x > 0 and solve the inequality.",
+        "Solve: log3(2x + 1) = 4",
+        "5",
+        "Convert to exponential form: 34 = 2x + 1.",
+        "Use change of base to evaluate log5(83)",
+        "6",
+        "log5(83) = log(83)/log(5). Round to 3 decimal places."
+      ],
+      "images": [],
+      "speaker_notes": [
+        "ANSWERS:",
+        "1. 6³ = 216; e⁰ = 1",
+        "2. log₄(1/16) = −2; log₂₇(3) = 1/3",
+        "3. 6; 15; 2.5",
+        "4. Domain: (−∞, 5/2). VA: x = 5/2.",
+        "5. 3⁴ = 2x+1 → 81 = 2x+1 → x = 40",
+        "6. log(83)/log(5) ≈ 2.745"
+      ]
+    },
+    {
+      "number": 31,
+      "title": "PRACTICE PROBLEM ANSWERS",
+      "text": [
+        "✓",
+        "Exponential form",
+        "1",
+        "6³ = 216 e⁰ = 1",
+        "Evaluate",
+        "2",
+        "log4(1/16) = −2 log27(3) = 1/3",
+        "Simplify",
+        "3",
+        "6 ; 15 ; 2.5",
+        "Domain",
+        "4",
+        "Domain: (−∞, 5/2) VA: x = 5/2",
+        "Solve",
+        "5",
+        "34 = 2x + 1 → 81 = 2x + 1 → x = 40",
+        "Change of base",
+        "6",
+        "log(83)/log(5) ≈ 2.745",
+        "Check your work! Review any problems you missed before moving to Section 4.4."
+      ],
+      "images": [],
+      "speaker_notes": [
+        "ANSWERS:",
+        "1. 6³ = 216; e⁰ = 1",
+        "2. log₄(1/16) = −2; log₂₇(3) = 1/3",
+        "3. 6; 15; 2.5",
+        "4. Domain: (−∞, 5/2). VA: x = 5/2.",
+        "5. 3⁴ = 2x+1 → 81 = 2x+1 → x = 40",
+        "6. log(83)/log(5) ≈ 2.745",
+        "Encourage students to review any they missed. Point them to relevant slides."
+      ]
+    }
+  ]
+}

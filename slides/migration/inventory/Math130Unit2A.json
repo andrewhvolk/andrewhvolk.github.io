@@ -1,0 +1,595 @@
+{
+  "deck": "Math130Unit2A",
+  "source": "Math130Unit2A.pptx",
+  "slide_count": 31,
+  "slides": [
+    {
+      "number": 1,
+      "title": "Section 4.2",
+      "text": [
+        "Exponential Functions",
+        "College Algebra & Trigonometry",
+        "Lecture Notes with Worked Examples"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-01-1.png"
+      ],
+      "speaker_notes": [
+        "Welcome to Section 4.2 on Exponential Functions.\n\nThis section transitions from polynomial/rational functions (algebraic) to transcendental functions.\n\nKey theme: the variable is now in the EXPONENT, not the base. This is the fundamental shift students need to grasp.\n\nPrerequisites: Students should be comfortable with exponent rules (product, quotient, power, negative, fractional). If not, spend extra time on the review slide."
+      ]
+    },
+    {
+      "number": 2,
+      "title": "LEARNING OBJECTIVES",
+      "text": [
+        "By the end of this section, you will be able to:",
+        "Graph exponential functions and identify key features",
+        "1",
+        "Understand and work with the natural base e",
+        "2",
+        "Apply compound interest formulas (periodic & continuous)",
+        "3",
+        "Model real-world growth and decay with exponential functions",
+        "4"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "Read objectives aloud. Emphasize that exponential functions appear everywhere: finance, biology, physics, computer science.\n\nObjective 3 (compound interest) tends to be the most tested topic. Objective 4 (modeling) connects to later sections on logarithms."
+      ]
+    },
+    {
+      "number": 3,
+      "title": "REVIEW: EXPONENT RULES",
+      "text": [
+        "Before we begin — make sure you're comfortable with these:",
+        "Product Rule",
+        "Quotient Rule",
+        "aᵐ · aⁿ = aᵐ⁺ⁿ",
+        "aᵐ / aⁿ = aᵐ⁻ⁿ",
+        "Power Rule",
+        "Zero Exponent",
+        "(aᵐ)ⁿ = aᵐⁿ",
+        "a⁰ = 1 (a ≠ 0)",
+        "Negative Exponent",
+        "Fractional Exponent",
+        "a⁻ⁿ = 1/aⁿ",
+        "a^(1/n) = ⁿ√a"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "QUICK WARM-UP: Ask students to simplify 2³ · 2⁵, (3²)⁴, and 5⁻². Watch for these mistakes:\n• Multiplying bases instead of adding exponents (2³ · 2⁵ ≠ 4⁸)\n• Confusing negative exponents with negative numbers (2⁻³ ≠ −8, it equals 1/8)\n• Forgetting a⁰ = 1 for any nonzero a\n\nThese rules are essential for simplifying exponential expressions throughout this chapter."
+      ]
+    },
+    {
+      "number": 4,
+      "title": "DEFINITION",
+      "text": [
+        "Exponential Function",
+        "Let b be a constant with b > 0 and b ≠ 1. Then for any real number x, the function f(x) = bˣ is an exponential function of base b.",
+        "Previously vs. Now",
+        "Power Function (variable base)",
+        "Exponential Function (variable exponent)",
+        "f(x) = x²",
+        "f(x) = 2ˣ",
+        "Base varies, exponent is constant",
+        "Base is constant, exponent varies"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "KEY DISTINCTION — ask students: 'What's the difference between x² and 2ˣ?'\n\nAnswer: In x², the base changes and exponent is fixed. In 2ˣ, the base is fixed and the exponent changes.\n\nWhy b > 0? Because negative bases cause problems with fractional exponents (e.g., (−4)^(1/2) is not real).\n\nWhy b ≠ 1? Because 1ˣ = 1 for all x — it's just a constant function, not interesting.\n\nCOMMON MISTAKE: Students often confuse x² with 2ˣ. Point out that 2³ = 8 but 3² = 9 — the order matters!"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "EXAMPLE: GRAPHING f(x) = 2ˣ",
+      "text": [
+        "Key Observations",
+        "y-intercept: (0, 1)",
+        "Horizontal asymptote: y = 0",
+        "Always positive (never touches x-axis)",
+        "Increasing for all x (b > 1)",
+        "Domain: (−∞, ∞)",
+        "Range: (0, ∞)"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-05-1.png"
+      ],
+      "speaker_notes": [
+        "GRAPHING WALKTHROUGH:\n1. Build the table together — have students compute each value.\n2. Plot points on the coordinate grid.\n3. Connect with a smooth curve (NOT straight lines between points).\n4. Draw the dashed asymptote at y = 0.\n\nEmphasize: The graph gets CLOSE to the x-axis on the left but NEVER touches it. Ask: 'Can 2ˣ ever equal 0?' (No — because any positive number raised to any power is positive.)\n\nCALCULATOR TIP: For 2⁻³, press 2 ^ (-) 3 ENTER. Common mistake: students forget the negative sign or type 2 × 3."
+      ]
+    },
+    {
+      "number": 6,
+      "title": "TRY IT: TABLE FOR AN EXPONENTIAL FUNCTION",
+      "text": [
+        "The function f is defined by f(x) = (¼)ˣ. Find f(x) for each x-value in the table.",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-06-1.png"
+      ],
+      "speaker_notes": [
+        "Give students 2-3 minutes. Walk around the room.\n\nHINTS if students are stuck:\n• 'What does a negative exponent do?' (flips the fraction)\n• '(¼)⁻² means (4/1)² = 16'\n• 'What's anything to the 0 power?'\n\nCOMMON MISTAKES to watch for:\n• Students computing (¼)(−2) = −½ (multiplying instead of exponentiating)\n• Forgetting to flip the fraction for negative exponents\n• Writing (¼)² = ½ instead of 1/16"
+      ]
+    },
+    {
+      "number": 7,
+      "title": "TRY IT: TABLE FOR AN EXPONENTIAL FUNCTION",
+      "text": [
+        "The function f is defined by f(x) = (¼)ˣ. Find f(x) for each x-value in the table.",
+        "Step-by-Step",
+        "f(−2) = (¼)⁻² = 4² = 16 f(−1) = (¼)⁻¹ = 4¹ = 4 f(0) = (¼)⁰ = 1",
+        "f(1) = (¼)¹ = 0.25 f(2) = (¼)² = 1/16 = 0.0625",
+        "Pattern: As x increases, f(x) decreases — this is exponential decay (base 0 < b < 1)."
+      ],
+      "images": [
+        "assets/math130unit2a/slide-07-1.png",
+        "assets/math130unit2a/slide-07-2.png"
+      ],
+      "speaker_notes": [
+        "Walk through each computation. Emphasize the pattern:\n• Negative exponents flip the base: (¼)⁻² = (4/1)² = 16\n• The function DECREASES because the base is between 0 and 1.\n• Compare with 2ˣ (growth) — this is a DECAY function.\n\nNote the graph is a reflection of 4ˣ over the y-axis: (¼)ˣ = 4⁻ˣ."
+      ]
+    },
+    {
+      "number": 8,
+      "title": "TRY IT: GRAPH f(x) = 3ˣ AND ITS ASYMPTOTE",
+      "text": [
+        "Plot five points on the graph of f(x) = 3ˣ and draw the asymptote.",
+        "Build a table of values, plot the points, and identify the horizontal asymptote.",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-08-1.png"
+      ],
+      "speaker_notes": [
+        "Students should choose x-values like −2, −1, 0, 1, 2.\n\nRemind them to:\n1. Compute y-values first\n2. Set up proper scale on the y-axis (values jump fast — 3² = 9)\n3. Draw the dashed asymptote at y = 0\n4. Draw a smooth curve through the points (not straight line segments)"
+      ]
+    },
+    {
+      "number": 9,
+      "title": "SOLUTION: GRAPH f(x) = 3ˣ",
+      "text": [
+        "Key Features",
+        "Five points:",
+        "(−2, 1/9), (−1, 1/3), (0, 1), (1, 3), (2, 9)",
+        "Horizontal asymptote:",
+        "y = 0 (the x-axis)",
+        "Domain: (−∞, ∞)",
+        "Range: (0, ∞)",
+        "y-intercept: (0, 1)",
+        "Increasing (b = 3 > 1)",
+        "Steeper than 2ˣ because the base is larger."
+      ],
+      "images": [
+        "assets/math130unit2a/slide-09-1.png",
+        "assets/math130unit2a/slide-09-2.png"
+      ],
+      "speaker_notes": [
+        "Point out the labeled coordinates on the graph. Compare with 2ˣ: 3ˣ grows faster to the right and approaches 0 faster to the left.\n\nAsk: 'All exponential functions f(x) = bˣ pass through which point?' → (0, 1) because b⁰ = 1.\n\nCALCULATOR: For 3⁻², students should get 1/9 ≈ 0.111. Show them: 3 ^ (−2) ENTER."
+      ]
+    },
+    {
+      "number": 10,
+      "title": "PROPERTIES OF f(x) = bˣ",
+      "text": [
+        "Both cases: Domain: (−∞, ∞) Range: (0, ∞) y-intercept: (0, 1) Asymptote: y = 0"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-10-1.png"
+      ],
+      "speaker_notes": [
+        "This is the BIG PICTURE slide. Emphasize the visual contrast:\n\n• LEFT curve (green, 2ˣ): GROWTH — rises steeply to the right\n• RIGHT curve (orange, (½)ˣ): DECAY — falls steeply to the right\n• BOTH pass through (0, 1) — highlighted with white dot\n• BOTH approach but never reach y = 0 (dashed yellow line)\n\nKey question for students: 'If I gave you any exponential function, how would you tell if it's growth or decay just from the equation?'\nAnswer: Look at the base b. If b > 1 → growth. If 0 < b < 1 → decay."
+      ]
+    },
+    {
+      "number": 11,
+      "title": "COMPARING EXPONENTIAL FUNCTIONS",
+      "text": [
+        "How does the graph of f(x) = 2ˣ compare to g(x) = 4ˣ ?",
+        "What to Notice",
+        "Both pass through (0, 1)",
+        "Larger base → steeper growth to the right",
+        "Larger base → faster approach to 0 on the left",
+        "Note: 4ˣ = (2²)ˣ = 2²ˣ, so 4ˣ is 2ˣ growing twice as fast"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-11-1.png"
+      ],
+      "speaker_notes": [
+        "Good time to ask: 'If we added 10ˣ to this graph, where would it be?'\nAnswer: Even steeper — growing faster right, approaching 0 faster left.\n\nNote the algebraic connection: 4ˣ = (2²)ˣ = 2²ˣ. This means 4ˣ at x = 1 equals 2ˣ at x = 2. The larger base 'speeds up' the function."
+      ]
+    },
+    {
+      "number": 12,
+      "title": "THE NATURAL BASE e",
+      "text": [
+        "e ≈ 2.71828…",
+        "irrational constant (like π)",
+        "As n → ∞: (1 + 1/n)ⁿ → e",
+        "Watching (1 + 1/n)ⁿ converge:"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-12-1.png",
+        "assets/math130unit2a/slide-12-2.png"
+      ],
+      "speaker_notes": [
+        "e is arguably the most important constant in mathematics after π.\n\nWhere does e come from? It's the limit of (1 + 1/n)ⁿ as n → ∞. This connects directly to compound interest: if you compound more and more frequently, you approach continuous compounding — and e appears.\n\nThe graph shows eˣ sitting BETWEEN 2ˣ and 3ˣ, which makes sense since 2 < e < 3.\n\nCALCULATOR: The 'e' button is usually 2nd + LN. Have students verify: e¹ ≈ 2.71828.\n\nFun fact: e appears in probability, calculus, physics, biology, and finance."
+      ]
+    },
+    {
+      "number": 13,
+      "title": "TRY IT: EVALUATING EXPONENTIAL EXPRESSIONS",
+      "text": [
+        "Use a calculator to evaluate each expression. Round to the nearest thousandth.",
+        "3.5¹·⁶ = ?",
+        "(¾)⁻⁰·⁹⁵ = ?",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-13-1.png"
+      ],
+      "speaker_notes": [
+        "CALCULATOR KEYSTROKES:\n• 3.5¹·⁶: Press 3.5 ^ 1.6 ENTER → 7.422\n• (¾)⁻⁰·⁹⁵: Press ( 3 ÷ 4 ) ^ (−) 0.95 ENTER → 1.314\n OR: Press 0.75 ^ (−) 0.95 ENTER\n\nCOMMON MISTAKE: Students type 3/4^(−0.95) without parentheses, which computes 3/(4^(−0.95)) due to order of operations. Emphasize: ALWAYS use parentheses around the base fraction!"
+      ]
+    },
+    {
+      "number": 14,
+      "title": "SOLUTION: EVALUATING EXPONENTIAL EXPRESSIONS",
+      "text": [
+        "3.5¹·⁶",
+        "Enter: 3.5 ^ 1.6 → 7.422",
+        "(¾)⁻⁰·⁹⁵",
+        "Enter: ( 3 ÷ 4 ) ^ (−0.95) →",
+        "Negative exponent flips: (¾)⁻⁰·⁹⁵ = (⁴⁄₃)⁰·⁹⁵ (result > 1)",
+        "1.314"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-14-1.png"
+      ],
+      "speaker_notes": [
+        "Reinforce: the negative exponent flips the base, which is why the answer is GREATER than 1 even though (¾) < 1.\n\nSanity check: (¾)⁻¹ = 4/3 ≈ 1.333, so (¾)⁻⁰·⁹⁵ should be slightly less than 1.333. And 1.314 ✓"
+      ]
+    },
+    {
+      "number": 15,
+      "title": "TRY IT: EVALUATING WITH BASE e",
+      "text": [
+        "Use a calculator (2nd + LN = eˣ). Round to the nearest thousandth.",
+        "e⁻⁰·¹⁵ = ?",
+        "175 · e⁰·⁵ = ?",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-15-1.png"
+      ],
+      "speaker_notes": [
+        "CALCULATOR KEYSTROKES:\n• e⁻⁰·¹⁵: Press 2nd → LN → (−) 0.15 → ENTER → 0.861\n• 175·e⁰·⁵: Press 175 × 2nd → LN → 0.5 → ENTER → 288.526\n\nRemind students: The eˣ key is NOT the same as typing e × x. It's a single operation.\n\nSanity check: e⁻⁰·¹⁵ should be slightly less than 1 (negative exponent of a number > 1 gives a result between 0 and 1). ✓"
+      ]
+    },
+    {
+      "number": 16,
+      "title": "SOLUTION: EVALUATING WITH BASE e",
+      "text": [
+        "e⁻⁰·¹⁵",
+        "2nd → LN → (−0.15) → ENTER",
+        "e⁻⁰·¹⁵ ≈ 0.861",
+        "175 · e⁰·⁵",
+        "175 × 2nd → LN → 0.5 → ENTER",
+        "175 · e⁰·⁵ ≈ 288.526"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-16-1.png"
+      ],
+      "speaker_notes": [
+        "Check understanding: 'If the exponent is positive, is eˣ greater or less than 1?' (Greater — always.) 'If negative?' (Between 0 and 1 — always.)"
+      ]
+    },
+    {
+      "number": 17,
+      "title": "COMPOUND INTEREST FORMULAS",
+      "text": [
+        "Suppose P dollars is invested (or borrowed) at annual interest rate r for t years.",
+        "SIMPLE INTEREST",
+        "PERIODIC COMPOUND",
+        "CONTINUOUS",
+        "I = Prt",
+        "A = P(1 + r/n)ⁿᵗ",
+        "A = Peʳᵗ",
+        "P = principal",
+        "r = annual rate (decimal)",
+        "t = time in years",
+        "I = interest earned",
+        "A = future value",
+        "n = compounds per year",
+        "n=1 annually, n=4 quarterly",
+        "n=12 monthly, n=365 daily",
+        "As n → ∞, periodic",
+        "compounding → continuous",
+        "Uses base e"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-17-1.png"
+      ],
+      "speaker_notes": [
+        "TEACHING STRATEGY: Derive the compound interest formula from simple interest.\n\n1. Start: You invest $1000 at 6% for 1 year. A = 1000(1.06) = $1060.\n2. Year 2: A = 1060(1.06) = 1000(1.06)². See the pattern?\n3. After t years: A = P(1 + r)ᵗ — this is compound interest with n = 1.\n4. Now split the year into n periods: each period earns r/n, and there are nt periods total.\n5. A = P(1 + r/n)ⁿᵗ\n6. Let n → ∞ to get A = Peʳᵗ (this is where e naturally emerges!)\n\nCOMMON MISTAKES:\n• Using r = 6 instead of r = 0.06 (must convert % to decimal!)\n• Confusing n and t (n = times per year, t = years)\n• Using A = Peʳᵗ for periodic problems (only for continuous!)"
+      ]
+    },
+    {
+      "number": 18,
+      "title": "TRY IT: SIMPLE vs. COMPOUND INTEREST",
+      "text": [
+        "Jenny: $70,000 at 3% compounded annually. Frank: $70,000 at 3% simple interest.",
+        "Compare the interest earned each year for 3 years."
+      ],
+      "images": [
+        "assets/math130unit2a/slide-18-1.png"
+      ],
+      "speaker_notes": [
+        "KEY PROBLEM for understanding the difference between simple and compound interest.\n\nHints if students are stuck:\n• Frank (simple): interest = P × r × 1 = 70,000 × 0.03 = $2,100 EVERY year (never changes).\n• Jenny (compound, year 1): same calculation → $2,100.\n• Jenny (year 2): Now her principal is $72,100 → interest = 72,100 × 0.03 = $2,163.\n• Jenny (year 3): Principal is $74,263 → interest = 74,263 × 0.03 = $2,227.89.\n\nThe 'aha moment': Year 1 is the same! The power of compounding only shows in subsequent years."
+      ]
+    },
+    {
+      "number": 19,
+      "title": "SOLUTION: SIMPLE vs. COMPOUND INTEREST",
+      "text": [
+        "Jenny: $70,000 at 3% compounded annually Frank: $70,000 at 3% simple interest",
+        "Why?",
+        "Year 1 — both earn the same because compound interest hasn't had time to accumulate.",
+        "Year 2+ — Jenny earns interest on her interest (compounding effect). Frank's base never changes.",
+        "The gap grows every year — that's the power of compound interest!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-19-1.png"
+      ],
+      "speaker_notes": [
+        "Emphasize: The gap ACCELERATES over time. After 30 years the difference becomes dramatic.\n\nYear 2 calculation detail: Jenny's balance after Year 1 = $72,100. Year 2 interest = 72,100 × 0.03 = $2,163.\nThe extra $63 comes from earning interest on the $2,100 she earned in Year 1: 2,100 × 0.03 = $63.\n\nThis is 'interest on interest' — the core idea of compounding."
+      ]
+    },
+    {
+      "number": 20,
+      "title": "EFFECT OF COMPOUNDING FREQUENCY",
+      "text": [
+        "$1,000 invested at 4% for 10 years — how does compounding frequency affect the result?",
+        "Key Insight",
+        "More frequent compounding → higher return, but with diminishing gains.",
+        "Daily vs. continuous differs by only $0.03 — the jump from annual to quarterly matters most!"
+      ],
+      "images": [],
+      "speaker_notes": [
+        "This slide demonstrates DIMINISHING RETURNS of compounding frequency.\n\nKey numbers to highlight:\n• Annual → Quarterly: +$8.62 gain\n• Quarterly → Monthly: +$1.97 gain\n• Monthly → Daily: +$0.96 gain\n• Daily → Continuous: +$0.03 gain (!)\n\nThe 'curve of diminishing returns' is why banks don't bother advertising 'every-second compounding.' Continuous is the theoretical maximum, and daily practically reaches it.\n\nThis is also why the formula A = Peʳᵗ exists — it represents the LIMIT as n → ∞."
+      ]
+    },
+    {
+      "number": 21,
+      "title": "TRY IT: COMPOUND INTEREST — ANNUAL",
+      "text": [
+        "$44,000 is borrowed for 13 years at 3.25% compounded annually. No payments. Find the amount owed. Round to the nearest dollar.",
+        "A = P(1 + r/n)ⁿᵗ",
+        "P = ?",
+        "r = ?",
+        "n = ?",
+        "t = ?",
+        "Principal",
+        "Annual rate",
+        "Compounds/yr",
+        "Time in years",
+        "Identify P, r, n, and t, then substitute into the formula.",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-21-1.png"
+      ],
+      "speaker_notes": [
+        "This problem tests whether students can correctly identify all four variables.\n\nP = 44,000 (principal borrowed)\nr = 0.0325 (convert 3.25% → divide by 100!)\nn = 1 (compounded annually)\nt = 13 (years)\n\nCOMMON MISTAKE: Using r = 3.25 instead of 0.0325. This gives an absurdly large answer. If a student gets millions of dollars, they forgot to convert."
+      ]
+    },
+    {
+      "number": 22,
+      "title": "SOLUTION: $44,000 AT 3.25% FOR 13 YEARS",
+      "text": [
+        "Identify Variables",
+        "P = $44,000 r = 0.0325 n = 1 (annually) t = 13 years",
+        "Substitute & Solve",
+        "A = P(1 + r/n)ⁿᵗ",
+        "A = 44,000(1 + 0.0325/1)¹⁽¹³⁾ = 44,000(1.0325)¹³",
+        "A = 44,000 × 1.51554…",
+        "A ≈ $66,684"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-22-1.png"
+      ],
+      "speaker_notes": [
+        "CALCULATOR KEYSTROKES: 44000 × ( 1.0325 ) ^ 13 ENTER\n\nOR: 44000 × 1.0325 ^ 13 ENTER (parentheses optional here since there's only multiplication)\n\nSanity check: 3.25% for 13 years should roughly increase the value by about 50%. $44,000 × 1.5 = $66,000. Our answer of $66,684 ✓"
+      ]
+    },
+    {
+      "number": 23,
+      "title": "TRY IT: COMPOUND INTEREST — SEMIANNUAL",
+      "text": [
+        "$2,000 is invested at 3.1% compounded semiannually. Find the total after 3 years. Round to the nearest cent.",
+        "A = P(1 + r/n)ⁿᵗ",
+        "Compounding Frequency Reference",
+        "Annually: n = 1 Semiannually: n = 2 Quarterly: n = 4 Monthly: n = 12 Daily: n = 365",
+        "Hint: What is n for semiannual? What is the total number of compounding periods (nt)?",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-23-1.png"
+      ],
+      "speaker_notes": [
+        "Common confusion: students mix up 'semiannually' (n = 2) with 'bimonthly' or 'biannually.'\n\nFrequency cheat sheet:\n• Annually = 1 • Semiannually = 2 • Quarterly = 4\n• Monthly = 12 • Weekly = 52 • Daily = 365\n\nThe exponent is nt = 2 × 3 = 6 (6 compounding periods total)."
+      ]
+    },
+    {
+      "number": 24,
+      "title": "SOLUTION: $2,000 AT 3.1% SEMIANNUALLY",
+      "text": [
+        "Identify Variables",
+        "P = $2,000 r = 0.031 n = 2 (semiannually) t = 3 years",
+        "Substitute & Solve",
+        "A = 2,000(1 + 0.031/2)²⁽³⁾ = 2,000(1.0155)⁶",
+        "A = 2,000 × 1.09668…",
+        "A ≈ $2,193.36"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-24-1.png"
+      ],
+      "speaker_notes": [
+        "Step by step on calculator: 2000 × (1 + 0.031 ÷ 2) ^ (2 × 3) ENTER\n\nNote: r/n = 0.031/2 = 0.0155 (the rate per period). The total periods = nt = 6."
+      ]
+    },
+    {
+      "number": 25,
+      "title": "TRY IT: CONTINUOUS COMPOUND INTEREST",
+      "text": [
+        "$1,600 borrowed at 6.5% compounded continuously for 6 years. Find amount owed. Round to nearest cent.",
+        "A = Peʳᵗ",
+        "Which Formula Do I Use?",
+        "\"compounded annually / quarterly / monthly / daily\" → A = P(1 + r/n)ⁿᵗ",
+        "\"compounded continuously\" → A = Peʳᵗ (no n needed!)",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-25-1.png"
+      ],
+      "speaker_notes": [
+        "KEY: When the problem says 'continuously,' use A = Peʳᵗ — NOT the (1 + r/n) formula.\n\nThere is no n for continuous compounding! That's the whole point: n → ∞.\n\nCALCULATOR: 1600 × e^(0.065 × 6)\nKeystrokes: 1600 × 2nd → LN → ( 0.065 × 6 ) → ENTER"
+      ]
+    },
+    {
+      "number": 26,
+      "title": "SOLUTION: $1,600 CONTINUOUS AT 6.5%",
+      "text": [
+        "Identify Variables",
+        "P = $1,600 r = 0.065 t = 6 years (continuous → use A = Peʳᵗ)",
+        "Substitute & Solve",
+        "A = Peʳᵗ = 1,600 · e⁰·⁰⁶⁵⁽⁶⁾ = 1,600 · e⁰·³⁹",
+        "A = 1,600 × 1.47698…",
+        "A ≈ $2,363.17"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-26-1.png"
+      ],
+      "speaker_notes": [
+        "Quick mental check: 6.5% for 6 years ≈ 39% growth. So amount ≈ $1,600 × 1.39 ≈ $2,224.\nOur answer is $2,363 — slightly more because continuous compounding adds extra. ✓\n\nCompare: If this had been compounded annually, A = 1600(1.065)⁶ ≈ $2,339. Continuous gives ~$24 more."
+      ]
+    },
+    {
+      "number": 27,
+      "title": "TRY IT: RADIOACTIVE DECAY",
+      "text": [
+        "Uranium-240 has a half-life of 14 hours. The amount remaining (in grams) after t hours:",
+        "A(t) = 3200 · (½)^(t/14)",
+        "Find: (a) The initial amount (b) The amount remaining after 40 hours",
+        "Pause and try this before advancing!"
+      ],
+      "images": [
+        "assets/math130unit2a/slide-27-1.png",
+        "assets/math130unit2a/slide-27-2.png"
+      ],
+      "speaker_notes": [
+        "Part (a) is a conceptual check: 'initial amount' means t = 0. Students should recognize that plugging in t = 0 gives (½)⁰ = 1, so A(0) = 3200.\n\nPart (b) requires the calculator: 3200 × (0.5) ^ (40/14)\n\nHalf-life context: After 14 hours, half remains. After 28 hours (2 half-lives), one quarter remains. After 40 hours is about 2.86 half-lives, so the answer should be between ¼ and ⅛ of 3200 (between 400 and 800). Our answer of 442 ✓"
+      ]
+    },
+    {
+      "number": 28,
+      "title": "SOLUTION: RADIOACTIVE DECAY",
+      "text": [
+        "(a) Initial Amount (t = 0)",
+        "(b) After 40 hours",
+        "A(0) = 3200 · (½)⁰⁄¹⁴",
+        "= 3200 · (½)⁰ = 3200 · 1",
+        "= 3,200 grams",
+        "The initial sample is 3,200 g.",
+        "A(40) = 3200 · (½)⁴⁰⁄¹⁴",
+        "= 3200 · (½)²·⁸⁵⁷",
+        "= 3200 × 0.13811…",
+        "≈ 442 grams",
+        "After 40 hours, ≈ 442 g remain.",
+        "The coefficient in front (3200) is always the initial amount. Verify: plug in t = 0."
+      ],
+      "images": [
+        "assets/math130unit2a/slide-28-1.png"
+      ],
+      "speaker_notes": [
+        "Reinforce the half-life concept:\n• After 1 half-life (14 hrs): 3200 × ½ = 1600 g\n• After 2 half-lives (28 hrs): 1600 × ½ = 800 g\n• After 3 half-lives (42 hrs): 800 × ½ = 400 g\n• 40 hours is just under 3 half-lives, so answer should be just above 400. Our 442 ✓\n\nGeneral decay model: Q(t) = Q₀ · (½)^(t/h) where h = half-life."
+      ]
+    },
+    {
+      "number": 29,
+      "title": "COMMON MISTAKES TO AVOID",
+      "text": [
+        "Confusing x² with 2ˣ",
+        "✗",
+        "x² = power function (variable base). 2ˣ = exponential (variable exponent). They grow at completely different rates.",
+        "Using r = 5 instead of r = 0.05",
+        "Always convert the percentage to a decimal first! Divide by 100. If your answer seems absurdly large, check this.",
+        "Wrong n value in A = P(1+r/n)ⁿᵗ",
+        "n = 1 annually, 2 semiannually, 4 quarterly, 12 monthly, 365 daily. n is NOT the number of years (that's t).",
+        "Using A = P(1+r/n)ⁿᵗ for continuous",
+        "If the problem says \"compounded continuously,\" use A = Peʳᵗ. There is no n — that's the point.",
+        "Forgetting parentheses on calculator",
+        "(3/4)^(−2) ≠ 3/4^(−2). Always parenthesize the base and the exponent. When in doubt, add more parentheses."
+      ],
+      "images": [
+        "assets/math130unit2a/slide-29-1.png"
+      ],
+      "speaker_notes": [
+        "INSTRUCTOR: This is a great slide to revisit before exams.\n\nThe #1 mistake across all sections is the percentage-to-decimal conversion (Mistake #2). Consider giving a pop quiz where students must identify r from a word problem.\n\nMistake #3 (wrong n) is the second most common. Students frequently set n = t or n = nt.\n\nMistake #5 (calculator parentheses) causes the most frustration because students think they're doing the math right but get wrong answers. Demonstrate live on the projector.\n\nAdditional mistakes not listed:\n• Thinking 2ˣ can equal 0 or be negative (it can't)\n• Writing the asymptote as x = 0 instead of y = 0\n• Confusing growth rate with growth factor (3% rate means factor of 1.03, not 0.03)"
+      ]
+    },
+    {
+      "number": 30,
+      "title": "KEY TAKEAWAYS",
+      "text": [
+        "f(x) = bˣ is exponential when b > 0, b ≠ 1",
+        "1",
+        "The variable is in the exponent — that's what makes it exponential.",
+        "b > 1 → growth, 0 < b < 1 → decay",
+        "2",
+        "All pass through (0, 1) with horizontal asymptote y = 0.",
+        "e ≈ 2.71828 is the natural base",
+        "3",
+        "Appears in continuous compounding, physics, biology, and calculus.",
+        "A = P(1 + r/n)ⁿᵗ and A = Peʳᵗ",
+        "4",
+        "Periodic vs. continuous — more frequent → higher return (diminishing gains).",
+        "Exponential models describe real-world phenomena",
+        "5",
+        "Radioactive decay, population growth, viral spread, and financial growth."
+      ],
+      "images": [
+        "assets/math130unit2a/slide-30-1.png"
+      ],
+      "speaker_notes": [
+        "WRAP-UP: Review these 5 points. Ask students which concept they found most confusing.\n\nLOOKING AHEAD: Section 4.3 will introduce logarithms as the INVERSE of exponential functions. The key connection: if bˣ = y, then log_b(y) = x.\n\nHOMEWORK SUGGESTION: Assign a mix of graphing problems, calculator evaluations, and compound interest word problems. Include at least one continuous compounding problem and one decay problem.\n\nRESOURCES: ALEKS has additional practice problems that mirror these examples."
+      ]
+    },
+    {
+      "number": 31,
+      "title": "PRACTICE PROBLEMS",
+      "text": [
+        "Test your understanding — try these on your own!",
+        "Evaluate: 5⁻³ and (⅔)⁻²",
+        "1",
+        "Apply exponent rules to simplify.",
+        "Graph f(x) = (⅓)ˣ. Identify the asymptote, domain, range, and whether it shows growth or decay.",
+        "2",
+        "Build a table with x = −2, −1, 0, 1, 2.",
+        "$8,500 is invested at 4.2% compounded quarterly for 6 years. Find the account balance.",
+        "3",
+        "Use A = P(1 + r/n)ⁿᵗ with n = 4.",
+        "An investment of $12,000 earns 5.8% compounded continuously. Find the value after 10 years.",
+        "4",
+        "Use A = Peʳᵗ.",
+        "A bacteria culture starts with 500 cells and doubles every 3 hours. Write the model B(t) and find the population after 10 hours.",
+        "5",
+        "Model: B(t) = 500 · 2^(t/3)."
+      ],
+      "images": [],
+      "speaker_notes": [
+        "ANSWERS:\n1. 5⁻³ = 1/125 = 0.008; (⅔)⁻² = (3/2)² = 9/4 = 2.25\n2. Decay (base ⅓ < 1). Asymptote: y = 0. Domain: (−∞,∞). Range: (0,∞). Points: (−2,9), (−1,3), (0,1), (1,⅓), (2,1/9).\n3. A = 8500(1 + 0.042/4)^(4×6) = 8500(1.0105)²⁴ ≈ $10,870.19\n4. A = 12000·e^(0.058×10) = 12000·e^0.58 ≈ $21,415.08\n5. B(10) = 500·2^(10/3) = 500·2^3.333 ≈ 5,040 cells"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "math130-canonical-slides",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Offline Reveal.js lecture decks and migration QA for MATH 130.",
+  "scripts": {
+    "validate": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/run_python.ps1 tools/validate_lectures.py",
+    "audit:math": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/run_python.ps1 tools/math_audit.py",
+    "build": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/run_python.ps1 tools/migrate_slides.py",
+    "qa": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/run_python.ps1 tools/qa_slides.py",
+    "qa:browser": "node tools/browser_qa.cjs",
+    "verify": "npm run validate && npm run audit:math && npm run build && npm run qa && npm run qa:browser"
+  },
+  "devDependencies": {
+    "mathjax-full": "3.2.2",
+    "playwright": "1.60.0",
+    "reveal.js": "4.6.1"
+  }
+}

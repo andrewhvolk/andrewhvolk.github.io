@@ -1,0 +1,62 @@
+:root {
+  --ink: #10253f;
+  --navy: #163a5f;
+  --blue: #075ea8;
+  --line: #cbd5e1;
+  --bg: #eef4f8;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: linear-gradient(135deg, #eaf2f8, #f8fafc);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+.session-chooser {
+  margin: 0 auto;
+  max-width: 1120px;
+  padding: 64px 28px;
+}
+.eyebrow {
+  color: var(--blue);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+h1, h2 { color: var(--navy); font-family: Georgia, "Times New Roman", serif; }
+h1 { font-size: clamp(2.6rem, 7vw, 5rem); margin: 0.15em 0; }
+.lede { font-size: 1.25rem; line-height: 1.6; max-width: 760px; }
+.session-grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 40px;
+}
+.session-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 8px solid var(--blue);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgb(15 35 55 / 12%);
+  padding: 30px;
+}
+.session-number { color: var(--blue); font-weight: 800; text-transform: uppercase; }
+.session-card li { line-height: 1.45; margin: 0.5em 0; }
+.session-link {
+  background: var(--blue);
+  border-radius: 8px;
+  color: #fff;
+  display: inline-block;
+  font-weight: 800;
+  margin-top: 16px;
+  padding: 13px 18px;
+  text-decoration: none;
+}
+.session-link:focus-visible, .session-link:hover { background: #03477f; outline: 4px solid #8ac4ed; }
+.legacy-note { margin-top: 30px; }
+.legacy-note a { color: var(--blue); }
+@media (max-width: 760px) {
+  .session-grid { grid-template-columns: 1fr; }
+}

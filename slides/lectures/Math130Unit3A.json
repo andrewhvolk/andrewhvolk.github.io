@@ -1,0 +1,918 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit3A",
+    "title": "Angles and Right Triangle Trigonometry",
+    "section": "Module 10",
+    "source": "Math130Unit3A.pptx",
+    "canonical": true
+  },
+  "objectives": [
+    {
+      "id": "u3a-standard",
+      "text": "sketch angles in standard position"
+    },
+    {
+      "id": "u3a-coterminal",
+      "text": "find coterminal and reference angles in degrees and radians"
+    },
+    {
+      "id": "u3a-arc",
+      "text": "use radians to compute arc length"
+    },
+    {
+      "id": "u3a-ratios",
+      "text": "use right-triangle trigonometric ratios"
+    },
+    {
+      "id": "u3a-applications",
+      "text": "solve special-triangle and right-triangle applications"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "math130unit3a",
+      "title": "Angles and Right Triangle Trigonometry",
+      "subtitle": "Concepts, worked examples, student practice, and synthesis",
+      "output": "Math130Unit3A.html",
+      "duration_minutes": 75,
+      "min_slides": 28,
+      "max_slides": 35,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 62.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 13.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit3a-u3a-standard-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3a-u3a-coterminal-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3a-u3a-arc-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3a-u3a-ratios-synthesize",
+            "planned_elapsed": 48.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3a-u3a-applications-synthesize",
+            "planned_elapsed": 60.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": true,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "math130unit3a-title",
+          "title": "Angles and Right Triangle Trigonometry",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Concepts, worked examples, student practice, and synthesis",
+            "Module 10"
+          ]
+        },
+        {
+          "id": "math130unit3a-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u3a-standard",
+            "u3a-coterminal",
+            "u3a-arc",
+            "u3a-ratios",
+            "u3a-applications"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "sketch angles in standard position",
+            "find coterminal and reference angles in degrees and radians",
+            "use radians to compute arc length",
+            "use right-triangle trigonometric ratios",
+            "solve special-triangle and right-triangle applications"
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-standard-activate",
+          "title": "Predict: sketch angles in standard position",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3a-standard"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Where does a negative angle rotate, and what never changes about standard position?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-standard-explain",
+          "title": "sketch angles in standard position",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3a-standard"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            2
+          ],
+          "content": [
+            "The initial side lies on the positive x-axis.",
+            "Positive rotation is counterclockwise; negative rotation is clockwise."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-standard-model",
+          "title": "Model the Skill: sketch angles in standard position",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3a-standard"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            3
+          ],
+          "content": [
+            "Sketch $225^\\circ$ and $-120^\\circ$ and identify their quadrants."
+          ],
+          "instructor_notes": [],
+          "verification": [],
+          "steps": [
+            "$225^\\circ=180^\\circ+45^\\circ$, so it terminates in Quadrant III.",
+            "$-120^\\circ+360^\\circ=240^\\circ$, also in Quadrant III.",
+            "Both begin on the positive x-axis; rotation direction distinguishes the sketches."
+          ],
+          "audit_checks": [
+            "u3a-standard"
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-standard-practice",
+          "title": "You Try: sketch angles in standard position",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3a-standard"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            4
+          ],
+          "content": [
+            "Sketch 310° and label initial and terminal sides."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "The initial side is the positive x-axis; $310^\\circ$ terminates in Quadrant IV, $50^\\circ$ below the positive x-axis."
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-standard-feedback",
+          "title": "Check and Diagnose: sketch angles in standard position",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3a-standard"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            5
+          ],
+          "content": [
+            "Do not measure from the y-axis.",
+            "Quadrant boundaries are not inside a quadrant."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-standard-synthesize",
+          "title": "Make It Stick: sketch angles in standard position",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3a-standard"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Describe standard position without drawing it."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3a-u3a-coterminal-activate",
+          "title": "Predict: find coterminal and reference angles in degrees and radians",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3a-coterminal"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "How can infinitely many angles share one terminal side?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-coterminal-explain",
+          "title": "find coterminal and reference angles in degrees and radians",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3a-coterminal"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            6
+          ],
+          "content": [
+            "Coterminal angles differ by $360^\\circ k$ or $2\\pi k$.",
+            "Reduce large magnitudes before locating the terminal side."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-coterminal-model",
+          "title": "Model the Skill: find coterminal and reference angles in degrees and radians",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u3a-coterminal"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            7
+          ],
+          "content": [
+            "Find positive and negative coterminal angles for $-97^\\circ$ and $9\\pi/7$."
+          ],
+          "instructor_notes": [],
+          "verification": [],
+          "steps": [
+            "$-97^\\circ+360^\\circ=263^\\circ$ and $-97^\\circ-360^\\circ=-457^\\circ$.",
+            "$9\\pi/7+2\\pi=23\\pi/7$ and $9\\pi/7-2\\pi=-5\\pi/7$.",
+            "Coterminal angles differ by full rotations."
+          ],
+          "audit_checks": [
+            "u3a-coterminal"
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-coterminal-practice",
+          "title": "You Try: find coterminal and reference angles in degrees and radians",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3a-coterminal"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Find a coterminal angle between 0° and 360° for 765°."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$765-720=45^\\circ$."
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-coterminal-feedback",
+          "title": "Check and Diagnose: find coterminal and reference angles in degrees and radians",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3a-coterminal"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            8
+          ],
+          "content": [
+            "Add or subtract full rotations only.",
+            "Keep degree and radian units separate."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-coterminal-synthesize",
+          "title": "Make It Stick: find coterminal and reference angles in degrees and radians",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3a-coterminal"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Give the general coterminal-angle formulas."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3a-u3a-arc-activate",
+          "title": "Predict: use radians to compute arc length",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3a-arc"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What does one radian measure geometrically?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-arc-explain",
+          "title": "use radians to compute arc length",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3a-arc"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            9
+          ],
+          "content": [
+            "Arc length is $s=r\\theta$ when $\\theta$ is in radians.",
+            "Radians connect central angle directly to distance."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-arc-model",
+          "title": "Model the Skill: use radians to compute arc length",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u3a-arc"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "For $r=12$ and $\\theta=2\\pi/3$, compute arc length."
+          ],
+          "instructor_notes": [],
+          "verification": [],
+          "steps": [
+            "The angle is already in radians.",
+            "$s=r\\theta=12(2\\pi/3)=8\\pi$ units.",
+            "$8\\pi$ is about 25.133 units, less than the full circumference $24\\pi$."
+          ],
+          "audit_checks": [
+            "u3a-arc"
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-arc-practice",
+          "title": "You Try: use radians to compute arc length",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3a-arc"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            10
+          ],
+          "content": [
+            "Find s for $r=8$ and $\\theta=135^\\circ$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$135^\\circ=3\\pi/4$, so $s=6\\pi$."
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-arc-feedback",
+          "title": "Check and Diagnose: use radians to compute arc length",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3a-arc"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Convert degrees before using $s=r\\theta$.",
+            "Arc length has linear units."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-arc-synthesize",
+          "title": "Make It Stick: use radians to compute arc length",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3a-arc"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Explain why radians make $s=r\\theta$ dimensionally natural."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3a-u3a-ratios-activate",
+          "title": "Predict: use right-triangle trigonometric ratios",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3a-ratios"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Which two sides define sine, cosine, and tangent relative to an angle?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-ratios-explain",
+          "title": "use right-triangle trigonometric ratios",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3a-ratios"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            11,
+            12
+          ],
+          "content": [
+            "SOH-CAH-TOA selects the ratio.",
+            "Reciprocal functions invert sine, cosine, and tangent."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-ratios-model",
+          "title": "Model the Skill: use right-triangle trigonometric ratios",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3a-ratios"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            13,
+            14
+          ],
+          "content": [
+            "A right triangle has opposite leg 40, adjacent leg 9, and hypotenuse 41. Find all six ratios."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all right-triangle ratios and calculator values."
+          ],
+          "steps": [
+            "$\\sin\\theta=40/41$, $\\cos\\theta=9/41$, and $\\tan\\theta=40/9$.",
+            "$\\csc\\theta=41/40$, $\\sec\\theta=41/9$, and $\\cot\\theta=9/40$.",
+            "$9^2+40^2=41^2$ verifies the side lengths."
+          ],
+          "audit_checks": [
+            "u3a-ratios"
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-ratios-practice",
+          "title": "You Try: use right-triangle trigonometric ratios",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3a-ratios"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            15
+          ],
+          "content": [
+            "Given $\\cos\\theta=9/41$, find $\\sin\\theta$ and $\\tan\\theta$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "Opposite side is 40, so $\\sin\\theta=40/41$ and $\\tan\\theta=40/9$."
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-ratios-feedback",
+          "title": "Check and Diagnose: use right-triangle trigonometric ratios",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3a-ratios"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            16,
+            17
+          ],
+          "content": [
+            "Opposite and adjacent depend on the chosen reference angle.",
+            "Keep the calculator in the requested angle mode."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all right-triangle ratios and calculator values."
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-ratios-synthesize",
+          "title": "Make It Stick: use right-triangle trigonometric ratios",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3a-ratios"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            18
+          ],
+          "content": [
+            "Write the ratio-selection rule you will use under time pressure."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3a-u3a-applications-activate",
+          "title": "Predict: solve special-triangle and right-triangle applications",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3a-applications"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "When is an exact radical answer better than a decimal approximation?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-applications-explain",
+          "title": "solve special-triangle and right-triangle applications",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3a-applications"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            19,
+            20
+          ],
+          "content": [
+            "Special triangles produce exact values.",
+            "Word problems require a labeled diagram before choosing a ratio."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3a-u3a-applications-model",
+          "title": "Model the Skill: solve special-triangle and right-triangle applications",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3a-applications"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            21
+          ],
+          "content": [
+            "A 25 ft ladder makes a $70^\\circ$ angle with the ground. Find its vertical reach."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify special-triangle and word-problem calculations."
+          ],
+          "steps": [
+            "$\\sin70^\\circ=h/25$.",
+            "$h=25\\sin70^\\circ\\approx23.49$ ft.",
+            "The height is less than the 25 ft hypotenuse."
+          ],
+          "audit_checks": [
+            "u3a-applications"
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-applications-practice",
+          "title": "You Try: solve special-triangle and right-triangle applications",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3a-applications"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            22,
+            23
+          ],
+          "content": [
+            "A 25 ft ladder makes a 70° angle with the ground. Find the height."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$h=25\\sin70^\\circ\\approx23.5$ ft."
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-applications-feedback",
+          "title": "Check and Diagnose: solve special-triangle and right-triangle applications",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3a-applications"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            24
+          ],
+          "content": [
+            "Exact-value questions should retain radicals.",
+            "Check that a leg is shorter than the hypotenuse."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify special-triangle and word-problem calculations."
+          ]
+        },
+        {
+          "id": "math130unit3a-u3a-applications-synthesize",
+          "title": "Make It Stick: solve special-triangle and right-triangle applications",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3a-applications"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            25
+          ],
+          "content": [
+            "List the diagram, ratio, solve, and reasonableness-check steps."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3a-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3a-standard",
+            "u3a-coterminal",
+            "u3a-arc",
+            "u3a-ratios",
+            "u3a-applications"
+          ],
+          "minutes": 1.5,
+          "source_slides": [
+            26
+          ],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "math130unit3a-roadmap"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-standard-explain"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-standard-model"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-standard-practice"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-standard-feedback"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-coterminal-explain"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-coterminal-model"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-coterminal-feedback"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-arc-explain"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-arc-practice"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-ratios-explain"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-ratios-explain"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-ratios-model"
+    },
+    {
+      "slide": 14,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-ratios-model"
+    },
+    {
+      "slide": 15,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-ratios-practice"
+    },
+    {
+      "slide": 16,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-ratios-feedback"
+    },
+    {
+      "slide": 17,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-ratios-feedback"
+    },
+    {
+      "slide": 18,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-ratios-synthesize"
+    },
+    {
+      "slide": 19,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-applications-explain"
+    },
+    {
+      "slide": 20,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-applications-explain"
+    },
+    {
+      "slide": 21,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-applications-model"
+    },
+    {
+      "slide": 22,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-applications-practice"
+    },
+    {
+      "slide": 23,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-applications-practice"
+    },
+    {
+      "slide": 24,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-applications-feedback"
+    },
+    {
+      "slide": 25,
+      "disposition": "mapped",
+      "block": "math130unit3a-u3a-applications-synthesize"
+    },
+    {
+      "slide": 26,
+      "disposition": "mapped",
+      "block": "math130unit3a-closing"
+    }
+  ]
+}

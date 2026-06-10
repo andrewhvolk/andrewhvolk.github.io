@@ -1,0 +1,572 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit3E",
+    "title": "Test 3 Review",
+    "section": "Test 3",
+    "source": "Math130Unit3E.pptx",
+    "canonical": true
+  },
+  "objectives": [
+    {
+      "id": "u3e-angles",
+      "text": "solve angle, reference-angle, and exact-value problems"
+    },
+    {
+      "id": "u3e-triangles",
+      "text": "solve right-triangle, area, and two-triangle applications"
+    },
+    {
+      "id": "u3e-vectors",
+      "text": "perform vector operations and direction calculations"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "math130unit3e",
+      "title": "Test 3 Review",
+      "subtitle": "Concepts, worked examples, student practice, and synthesis",
+      "output": "Math130Unit3E.html",
+      "duration_minutes": 55,
+      "min_slides": 16,
+      "max_slides": 22,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 38.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 17.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit3e-u3e-angles-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3e-u3e-triangles-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3e-u3e-vectors-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "math130unit3e-title",
+          "title": "Test 3 Review",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Concepts, worked examples, student practice, and synthesis",
+            "Test 3"
+          ]
+        },
+        {
+          "id": "math130unit3e-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u3e-angles",
+            "u3e-triangles",
+            "u3e-vectors"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "solve angle, reference-angle, and exact-value problems",
+            "solve right-triangle, area, and two-triangle applications",
+            "perform vector operations and direction calculations"
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-angles-activate",
+          "title": "Predict: solve angle, reference-angle, and exact-value problems",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3e-angles"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Which problems need a sketch before any calculation?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3e-u3e-angles-explain",
+          "title": "solve angle, reference-angle, and exact-value problems",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3e-angles"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            2,
+            3
+          ],
+          "content": [
+            "Use coterminal reduction, reference angles, ASTC, and special triangles as one connected workflow."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3e-u3e-angles-model",
+          "title": "Model the Skill: solve angle, reference-angle, and exact-value problems",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3e-angles"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            4
+          ],
+          "content": [
+            "Find the remaining ratios when $\\cos\\theta=9/41$ in Quadrant I, then analyze $-97^\\circ$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all Test 3 angle and exact-value answers."
+          ],
+          "steps": [
+            "The missing leg is 40, so $\\sin\\theta=40/41$ and $\\tan\\theta=40/9$.",
+            "$-97^\\circ$ is coterminal with $263^\\circ$ in Quadrant III.",
+            "Its reference angle is $263^\\circ-180^\\circ=83^\\circ$."
+          ],
+          "audit_checks": [
+            "u3e-angles"
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-angles-practice",
+          "title": "You Try: solve angle, reference-angle, and exact-value problems",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3e-angles"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            5,
+            6
+          ],
+          "content": [
+            "Find $\\sin225^\\circ$. Then find a positive coterminal angle and reference angle for $-97^\\circ$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$\\sin225^\\circ=-\\sqrt2/2$.",
+            "Positive coterminal angle: $263^\\circ$; reference angle: $83^\\circ$."
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-angles-feedback",
+          "title": "Check and Diagnose: solve angle, reference-angle, and exact-value problems",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3e-angles"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            7
+          ],
+          "content": [
+            "Check calculator mode and retain exact radicals when requested."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all Test 3 angle and exact-value answers."
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-angles-synthesize",
+          "title": "Make It Stick: solve angle, reference-angle, and exact-value problems",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3e-angles"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            8
+          ],
+          "content": [
+            "Write the order: sketch, reference angle, sign, exact value."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3e-u3e-triangles-activate",
+          "title": "Predict: solve right-triangle, area, and two-triangle applications",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3e-triangles"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What distinguishes a one-triangle problem from a shared-height two-triangle problem?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3e-u3e-triangles-explain",
+          "title": "solve right-triangle, area, and two-triangle applications",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3e-triangles"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            9
+          ],
+          "content": [
+            "Use inverse trig to find angles, Pythagorean theorem for missing sides, and $A=\\tfrac12bc\\sin A$ for included-angle area."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3e-u3e-triangles-model",
+          "title": "Model the Skill: solve right-triangle, area, and two-triangle applications",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3e-triangles"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            10
+          ],
+          "content": [
+            "Solve a right triangle with leg $a=11$, hypotenuse $c=35$, then find area for $A=76^\\circ$, $b=34$, $c=21$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify Test 3 triangle and application results."
+          ],
+          "steps": [
+            "$b=\\sqrt{35^2-11^2}=4\\sqrt{69}\\approx33.23$.",
+            "$A\\approx18.32^\\circ$ and $B\\approx71.68^\\circ$.",
+            "Included-angle area is $\\tfrac12(34)(21)\\sin76^\\circ\\approx346.40$ square units."
+          ],
+          "audit_checks": [
+            "u3e-triangles"
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-triangles-practice",
+          "title": "You Try: solve right-triangle, area, and two-triangle applications",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3e-triangles"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Observation points 50 ft apart measure tower elevation angles $53^\\circ$ and $31^\\circ$. Find the tower height."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$d\\tan53^\\circ=(d+50)\\tan31^\\circ$, so $d\\approx41.37$ ft.",
+            "$h=d\\tan53^\\circ\\approx54.90$ ft."
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-triangles-feedback",
+          "title": "Check and Diagnose: solve right-triangle, area, and two-triangle applications",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3e-triangles"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            11
+          ],
+          "content": [
+            "Draw and label before substituting.",
+            "Use square units for area."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify Test 3 triangle and application results."
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-triangles-synthesize",
+          "title": "Make It Stick: solve right-triangle, area, and two-triangle applications",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3e-triangles"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "State the setup pattern for each triangle problem type."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3e-u3e-vectors-activate",
+          "title": "Predict: perform vector operations and direction calculations",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3e-vectors"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Which vector tasks are component-wise and which require geometry?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3e-u3e-vectors-explain",
+          "title": "perform vector operations and direction calculations",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3e-vectors"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            12
+          ],
+          "content": [
+            "Operations are component-wise; magnitude and direction use the Pythagorean theorem and inverse tangent."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3e-u3e-vectors-model",
+          "title": "Model the Skill: perform vector operations and direction calculations",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3e-vectors"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Find the vector from $P=(3,-1)$ to $Q=(-2,4)$, then its magnitude and direction."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify Test 3 vector answers."
+          ],
+          "steps": [
+            "$\\vec v=\\langle-2-3,4-(-1)\\rangle=\\langle-5,5\\rangle$.",
+            "$|v|=\\sqrt{50}=5\\sqrt2$.",
+            "The Quadrant II direction angle is $135^\\circ$."
+          ],
+          "audit_checks": [
+            "u3e-vectors"
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-vectors-practice",
+          "title": "You Try: perform vector operations and direction calculations",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3e-vectors"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Find magnitude and direction of $\\langle-5,5\\rangle$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "Magnitude $5\\sqrt2$; direction 135°."
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-vectors-feedback",
+          "title": "Check and Diagnose: perform vector operations and direction calculations",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3e-vectors"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Use terminal minus initial.",
+            "Check quadrant before accepting inverse tangent."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify Test 3 vector answers."
+          ]
+        },
+        {
+          "id": "math130unit3e-u3e-vectors-synthesize",
+          "title": "Make It Stick: perform vector operations and direction calculations",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3e-vectors"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Write a vector problem checklist from components through direction."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3e-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3e-angles",
+            "u3e-triangles",
+            "u3e-vectors"
+          ],
+          "minutes": 1.5,
+          "source_slides": [
+            13
+          ],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "math130unit3e-roadmap"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-angles-explain"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-angles-explain"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-angles-model"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-angles-practice"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-angles-practice"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-angles-feedback"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-angles-synthesize"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-triangles-explain"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-triangles-model"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-triangles-feedback"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit3e-u3e-vectors-explain"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "math130unit3e-closing"
+    }
+  ]
+}

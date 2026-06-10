@@ -1,0 +1,262 @@
+{
+  "deck": "Math130Unit2E",
+  "source": "Math130Unit2E.pptx",
+  "slide_count": 13,
+  "slides": [
+    {
+      "number": 1,
+      "title": "Test 2 Review",
+      "text": [
+        "Sections 4.2, 4.3 & Geometry",
+        "Exponentials, Logs, Angles, Areas, Circles & Speed",
+        "Math 130: Advanced Technical Mathematics | Unit 2"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 2,
+      "title": "Test 2 — Topics at a Glance",
+      "text": [
+        "Compound Interest (discrete & continuous)",
+        "1",
+        "Exponential ↔ Logarithmic form conversions",
+        "2",
+        "Solving exponential & log equations",
+        "3",
+        "Angle conversions: DMS ↔ decimal degrees, radians ↔ degrees",
+        "4",
+        "Arc length (s = rθ) and sector area (A = ½r²θ)",
+        "5",
+        "Triangle area: ½bh and Heron's formula",
+        "6",
+        "Trapezoid area: ½(b₁+b₂)h (with Pythagorean Thm for height)",
+        "7",
+        "Parallel lines & proportional segments",
+        "8",
+        "Circle theorems: inscribed angles, central angles, intersecting chords",
+        "9",
+        "Linear & angular speed: v = rω",
+        "10"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 3,
+      "title": "Compound Interest",
+      "text": [
+        "Discrete",
+        "Continuous",
+        "A = P(1 + r/n)^(nt)",
+        "A = Pe^(rt)",
+        "P = principal, r = rate (decimal), n = compounds/yr, t = years",
+        "Same P, r, t. e ≈ 2.71828. Use when \"compounded continuously.\"",
+        "Example: $2,500 at 3% for 20 years",
+        "Monthly (n=12): A = 2500(1 + 0.03/12)^(240) = 2500(1.0025)^240 ≈ $4,551.89",
+        "Continuous: A = 2500·e^(0.6) = 2500 × 1.82212 ≈ $4,555.30",
+        "Calculator tip: Use parentheses! Enter (1.0025)^240, not 1.0025^240."
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 4,
+      "title": "Exponential ↔ Logarithmic Form",
+      "text": [
+        "b^y = x ⟺ log_b(x) = y The base stays the base!",
+        "Exp → Log",
+        "Log → Exp",
+        "25^(5/2) = 3125 → log₂₅(3125) = 5/2",
+        "log₄(2048) = 5.5 → 4^5.5 = 2048",
+        "Solve: ln x = 4",
+        "Solve: 2^x = 13",
+        "x = e⁴ ≈ 54.598",
+        "x = ln(13)/ln(2) ≈ 3.700"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 5,
+      "title": "Angle Conversions",
+      "text": [
+        "DMS ↔ Decimal",
+        "Radians ↔ Degrees",
+        "DMS → Dec: D + M/60 + S/3600",
+        "37°41'11\" = 37 + 41/60 + 11/3600 = 37.6864°",
+        "Dec → DMS: take decimal × 60 each step",
+        "36.3492° → 36° + 0.3492×60 = 20.952'",
+        "→ 20' + 0.952×60 = 57\" → 36°20'57\"",
+        "Deg → Rad: × π/180",
+        "163.9° × π/180 ≈ 2.86 rad",
+        "Rad → Deg: × 180/π",
+        "2.7 rad × 180/π ≈ 154.7°",
+        "Common: 30°=π/6 45°=π/4 60°=π/3 90°=π/2 180°=π 360°=2π"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 6,
+      "title": "Arc Length & Sector Area",
+      "text": [
+        "Arc Length",
+        "s = rθ",
+        "r=5.7, θ=65° → θ=1.1345 rad → s=5.7×1.1345 ≈ 6.5",
+        "Sector Area",
+        "A = ½r²θ",
+        "r=10, θ=3π/5 → A=½×100×(3π/5) ≈ 94.2",
+        "⚠ θ MUST be in radians! Convert degrees first: θ_rad = θ_deg × π/180"
+      ],
+      "images": [
+        "assets/math130unit2e/slide-06-1.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 7,
+      "title": "Triangle Area: Heron's Formula",
+      "text": [
+        "s = (a+b+c)/2 A = √[s(s−a)(s−b)(s−c)]",
+        "Example: a = 1.5 cm, b = 1.3 cm, c = 2.1 cm",
+        "s = (1.5 + 1.3 + 2.1)/2 = 4.9/2 = 2.45",
+        "s−a = 0.95, s−b = 1.15, s−c = 0.35",
+        "A = √(2.45 × 0.95 × 1.15 × 0.35) = √(0.937) ≈ 1.0 cm²",
+        "Use Heron's when you know all 3 sides but NOT the height."
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 8,
+      "title": "Trapezoid Area (Multi-Step)",
+      "text": [
+        "A = ½(b₁ + b₂)h (may need Pythagorean Thm for h)",
+        "Ex: b₁=4.5, b₂=10.1, slant=7.0 m",
+        "Step 1: d = b₂ − b₁ = 5.6 m",
+        "Step 2: h² + 5.6² = 7.0²",
+        "h² = 49 − 31.36 = 17.64 → h = 4.2 m",
+        "Step 3: A = ½(4.5+10.1)(4.2)",
+        "A = ½(14.6)(4.2) = 30.66 m²"
+      ],
+      "images": [
+        "assets/math130unit2e/slide-08-1.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 9,
+      "title": "Parallel Lines & Proportional Segments",
+      "text": [
+        "If parallel lines cut transversals, corresponding segments are proportional: AB/BD = AC/CE",
+        "Example: AB = 40, BD = 45, AC = 37. Find CE and DC.",
+        "Set up proportion:",
+        "40/45 = 37/CE",
+        "CE = 37 × 45/40 = 41.6 m",
+        "DC = CE − AC = 41.6 − 37 = 4.6 m"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 10,
+      "title": "Circle Theorems: Arcs & Angles",
+      "text": [
+        "Central angle = intercepted arc",
+        "Inscribed angle = ½(intercepted arc)",
+        "Intersecting chords: ∠ = ½(arc₁ + arc₂)",
+        "Semicircle: diameter → arc = 180°"
+      ],
+      "images": [
+        "assets/math130unit2e/slide-10-1.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 11,
+      "title": "Linear & Angular Speed",
+      "text": [
+        "Angular speed",
+        "ω = θ/t (rad/time)",
+        "1 rev = 2π radians",
+        "Linear speed",
+        "v = rω",
+        "distance per unit time at edge",
+        "Example: 350 RPM, r = 3 ft",
+        "ω = 350 × 2π = 700π rad/min",
+        "v = 3 × 700π = 2100π ≈ 6,597 ft/min",
+        "→ 6,597 × 60 ÷ 5280 ≈ 75.0 mph"
+      ],
+      "images": [
+        "assets/math130unit2e/slide-11-1.png"
+      ],
+      "speaker_notes": []
+    },
+    {
+      "number": 12,
+      "title": "Practice Quiz — Try Before Checking!",
+      "text": [
+        "1.",
+        "$4,000 at 6% for 10 yrs, monthly. Find A.",
+        "$7,277.59",
+        "6.",
+        "Convert 5π/6 to degrees.",
+        "150°",
+        "2.",
+        "Write log₃(81)=4 in exponential form.",
+        "3⁴ = 81",
+        "7.",
+        "Arc length: r=12, θ=40°.",
+        "s ≈ 8.4",
+        "3.",
+        "Solve: e^x = 20 (3 dec places).",
+        "x = ln20 ≈ 2.996",
+        "8.",
+        "Sector area: r=7, θ=2π/3.",
+        "A ≈ 51.3",
+        "4.",
+        "Convert 45°22'18\" to decimal degrees.",
+        "45.3717°",
+        "9.",
+        "Heron's: a=5, b=7, c=9.",
+        "A ≈ 17.4",
+        "5.",
+        "Convert 128.75° to DMS.",
+        "128°45'00\"",
+        "10.",
+        "600 RPM, r=1.5 ft. Find mph.",
+        "≈ 64.3 mph"
+      ],
+      "images": [],
+      "speaker_notes": []
+    },
+    {
+      "number": 13,
+      "title": "Formula Cheat Sheet",
+      "text": [
+        "Interest",
+        "A = P(1+r/n)^(nt) | A = Pe^(rt)",
+        "Log ↔ Exp",
+        "b^y = x ⟺ log_b(x) = y | ln(aⁿ) = n·ln(a)",
+        "DMS",
+        "D + M/60 + S/3600 | Deg→Rad: ×π/180 | Rad→Deg: ×180/π",
+        "Arc/Sector",
+        "s = rθ (rad) | A = ½r²θ (rad) | Always convert θ to radians first!",
+        "Triangle",
+        "A = ½bh | Heron's: s=(a+b+c)/2, A=√[s(s-a)(s-b)(s-c)]",
+        "Trapezoid",
+        "A = ½(b₁+b₂)h | May need: h²+d²=slant², d=b₂−b₁",
+        "Parallel Lines",
+        "Proportional segments: AB/BD = AC/CE",
+        "Circles",
+        "Central ∠ = arc | Inscribed ∠ = ½(arc) | Chords: ∠ = ½(arc₁+arc₂)",
+        "Speed",
+        "ω = θ/t | v = rω | 1 rev = 2π rad | ft/min → mph: ×60÷5280",
+        "Good luck on Test 2! Remember: show all work for full credit."
+      ],
+      "images": [],
+      "speaker_notes": []
+    }
+  ]
+}

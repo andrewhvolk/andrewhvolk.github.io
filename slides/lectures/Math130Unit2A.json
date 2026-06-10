@@ -1,0 +1,842 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit2A",
+    "title": "Exponential Functions",
+    "section": "Section 4.2",
+    "source": "Math130Unit2A.pptx",
+    "canonical": true
+  },
+  "objectives": [
+    {
+      "id": "u2a-graph",
+      "text": "recognize and graph exponential functions"
+    },
+    {
+      "id": "u2a-e",
+      "text": "evaluate exponential expressions and use the natural base e"
+    },
+    {
+      "id": "u2a-interest",
+      "text": "select and apply simple, periodic, and continuous interest formulas"
+    },
+    {
+      "id": "u2a-model",
+      "text": "interpret exponential growth and decay models"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "unit2a",
+      "title": "Exponential Functions",
+      "subtitle": "Growth, decay, compound interest, and modeling",
+      "output": "Math130Unit2A.html",
+      "duration_minutes": 55,
+      "min_slides": 25,
+      "max_slides": 30,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 50.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 5.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit2a-u2a-graph-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2a-u2a-e-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2a-u2a-interest-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2a-u2a-model-synthesize",
+            "planned_elapsed": 48.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": true,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "unit2a-title",
+          "title": "Exponential Functions",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "Growth, decay, compound interest, and modeling",
+            "Section 4.2"
+          ]
+        },
+        {
+          "id": "unit2a-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u2a-graph",
+            "u2a-e",
+            "u2a-interest",
+            "u2a-model"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            2
+          ],
+          "content": [
+            "recognize and graph exponential functions",
+            "evaluate exponential expressions and use the natural base e",
+            "select and apply simple, periodic, and continuous interest formulas",
+            "interpret exponential growth and decay models"
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-graph-activate",
+          "title": "Predict: recognize and graph exponential functions",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2a-graph"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Which grows faster for large x: x² or 2ˣ? Explain before calculating."
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2a-u2a-graph-explain",
+          "title": "recognize and graph exponential functions",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u2a-graph"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            3,
+            4
+          ],
+          "content": [
+            "An exponential function has the variable in the exponent: $f(x)=b^x$, where $b>0$ and $b\\ne1$.",
+            "All parent exponential graphs pass through $(0,1)$, have domain $(-\\infty,\\infty)$, range $(0,\\infty)$, and asymptote $y=0$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2a-u2a-graph-model",
+          "title": "Model the Skill: recognize and graph exponential functions",
+          "phase": "model",
+          "component": "diagram",
+          "objectives": [
+            "u2a-graph"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            5,
+            6
+          ],
+          "content": [
+            "Build and graph a five-point table for $f(x)=2^x$.",
+            "For $x=-2,-1,0,1,2$, the values are $1/4,1/2,1,2,4$.",
+            "Plot the five points and draw a smooth increasing curve through $(0,1)$.",
+            "Domain: $(-\\infty,\\infty)$; range: $(0,\\infty)$; horizontal asymptote: $y=0$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all plotted exponential points and asymptotes."
+          ],
+          "steps": [
+            "For $x=-2,-1,0,1,2$, the values are $1/4,1/2,1,2,4$.",
+            "Plot the five points and draw a smooth increasing curve through $(0,1)$.",
+            "Domain: $(-\\infty,\\infty)$; range: $(0,\\infty)$; horizontal asymptote: $y=0$."
+          ],
+          "audit_checks": [
+            "u2a-graph"
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit2a/slide-05-1.png",
+              "alt": "Graph of the exponential function two to the x"
+            }
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-graph-practice",
+          "title": "You Try: recognize and graph exponential functions",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2a-graph"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            7,
+            8
+          ],
+          "content": [
+            "Graph $g(x)=3^x$ using five points. Label the intercept, domain, range, and asymptote."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "Points: $(-2,1/9),(-1,1/3),(0,1),(1,3),(2,9)$.",
+            "Intercept: $(0,1)$; domain: $(-\\infty,\\infty)$; range: $(0,\\infty)$; asymptote: $y=0$."
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-graph-feedback",
+          "title": "Check and Diagnose: recognize and graph exponential functions",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2a-graph"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            9,
+            10
+          ],
+          "content": [
+            "Do not confuse $x^2$ with $2^x$.",
+            "A larger growth base is steeper to the right; a base between 0 and 1 produces decay."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all plotted exponential points and asymptotes."
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-graph-synthesize",
+          "title": "Make It Stick: recognize and graph exponential functions",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2a-graph"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            11
+          ],
+          "content": [
+            "Explain how the base determines growth or decay and name the four invariant graph features."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2a-u2a-e-activate",
+          "title": "Predict: evaluate exponential expressions and use the natural base e",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2a-e"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What value should $e^0$ have, and why must that be true?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2a-u2a-e-explain",
+          "title": "evaluate exponential expressions and use the natural base e",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2a-e"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            12
+          ],
+          "content": [
+            "$e\\approx2.71828$ is the natural base.",
+            "Calculator entry requires parentheses around negative or fractional exponents."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2a-u2a-e-model",
+          "title": "Model the Skill: evaluate exponential expressions and use the natural base e",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2a-e"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            13
+          ],
+          "content": [
+            "Evaluate $3.5^{1.6}$ and $(3/4)^{-0.95}$ and check each magnitude."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Recalculate all rounded exponential values."
+          ],
+          "steps": [
+            "$3.5^{1.6}\\approx7.422$; a base above 1 with a positive exponent should exceed 3.5.",
+            "$(3/4)^{-0.95}\\approx1.314$; a negative exponent takes a reciprocal, so the result exceeds 1.",
+            "Both results are positive, as required for positive bases."
+          ],
+          "audit_checks": [
+            "u2a-e"
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-e-practice",
+          "title": "You Try: evaluate exponential expressions and use the natural base e",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2a-e"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            14
+          ],
+          "content": [
+            "Evaluate $e^{-0.15}$ and $175e^{0.5}$ to the nearest thousandth."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$e^{-0.15}\\approx0.861$.",
+            "$175e^{0.5}\\approx288.526$."
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-e-feedback",
+          "title": "Check and Diagnose: evaluate exponential expressions and use the natural base e",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2a-e"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            15
+          ],
+          "content": [
+            "A negative exponent does not make the result negative.",
+            "Estimate first: $e^{0.5}$ lies between 1 and e."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Recalculate all rounded exponential values."
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-e-synthesize",
+          "title": "Make It Stick: evaluate exponential expressions and use the natural base e",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2a-e"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            16
+          ],
+          "content": [
+            "Describe one calculator check that catches an exponent-entry error."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2a-u2a-interest-activate",
+          "title": "Predict: select and apply simple, periodic, and continuous interest formulas",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2a-interest"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Which wording tells you whether an interest problem needs n or e?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2a-u2a-interest-explain",
+          "title": "select and apply simple, periodic, and continuous interest formulas",
+          "phase": "explain",
+          "component": "decision",
+          "objectives": [
+            "u2a-interest"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            17,
+            18
+          ],
+          "content": [
+            "Simple: $I=Prt$.",
+            "Periodic compound: $A=P(1+r/n)^{nt}$.",
+            "Continuous compound: $A=Pe^{rt}$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2a-u2a-interest-model",
+          "title": "Model the Skill: select and apply simple, periodic, and continuous interest formulas",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2a-interest"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            19,
+            20
+          ],
+          "content": [
+            "Find the balance for $P=44000$, $r=0.0325$, annual compounding, and $t=13$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Recalculate annual, semiannual, and continuous interest examples."
+          ],
+          "steps": [
+            "Annual compounding gives $n=1$ in $A=P(1+r/n)^{nt}$.",
+            "$A=44000(1.0325)^{13}\\approx66684.28$.",
+            "The balance exceeds the principal and retains currency units."
+          ],
+          "audit_checks": [
+            "u2a-interest"
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-interest-practice",
+          "title": "You Try: select and apply simple, periodic, and continuous interest formulas",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2a-interest"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            21,
+            22
+          ],
+          "content": [
+            "$2000 is invested at 3.1% compounded semiannually for 3 years. Find A."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "Use $P=2000$, $r=0.031$, $n=2$, $t=3$.",
+            "$A\\approx2193.36$."
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-interest-feedback",
+          "title": "Check and Diagnose: select and apply simple, periodic, and continuous interest formulas",
+          "phase": "feedback",
+          "component": "comparison",
+          "objectives": [
+            "u2a-interest"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            23,
+            24
+          ],
+          "content": [
+            "Convert percentages to decimals.",
+            "n is compounds per year, not the number of years.",
+            "Continuous compounding has no n."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Recalculate annual, semiannual, and continuous interest examples."
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-interest-synthesize",
+          "title": "Make It Stick: select and apply simple, periodic, and continuous interest formulas",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2a-interest"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            25,
+            26
+          ],
+          "content": [
+            "Give a decision rule that selects the correct interest formula from the wording."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2a-u2a-model-activate",
+          "title": "Predict: interpret exponential growth and decay models",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2a-model"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "In $A(t)=3200(1/2)^{t/14}$, what does each number mean?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2a-u2a-model-explain",
+          "title": "interpret exponential growth and decay models",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u2a-model"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            27
+          ],
+          "content": [
+            "A coefficient gives the initial amount.",
+            "A factor above 1 models growth; a factor between 0 and 1 models decay.",
+            "The exponent $t/14$ counts the number of half-lives."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2a-u2a-model-model",
+          "title": "Model the Skill: interpret exponential growth and decay models",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2a-model"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            28
+          ],
+          "content": [
+            "For $A(t)=3200(1/2)^{t/14}$, evaluate the model at $t=0$ and $t=40$ hours."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify decay and bacteria model calculations and units."
+          ],
+          "steps": [
+            "$A(0)=3200(1/2)^0=3200$ units.",
+            "$A(40)=3200(1/2)^{40/14}\\approx441.64$ units.",
+            "The decrease is reasonable because 40 hours is almost three half-lives."
+          ],
+          "audit_checks": [
+            "u2a-model"
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-model-practice",
+          "title": "You Try: interpret exponential growth and decay models",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2a-model"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "A culture begins with 500 cells and doubles every 3 hours. Write a model and estimate the population after 10 hours."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$B(t)=500\\cdot2^{t/3}$.",
+            "$B(10)\\approx5039.7$ cells."
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-model-feedback",
+          "title": "Check and Diagnose: interpret exponential growth and decay models",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2a-model"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            29
+          ],
+          "content": [
+            "The initial amount is found by setting time equal to zero.",
+            "Keep units attached to time and rate quantities."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify decay and bacteria model calculations and units."
+          ]
+        },
+        {
+          "id": "math130unit2a-u2a-model-synthesize",
+          "title": "Make It Stick: interpret exponential growth and decay models",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2a-model"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Explain how to read initial value, growth or decay factor, and time scale from an exponential model."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "unit2a-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2a-graph",
+            "u2a-e",
+            "u2a-interest",
+            "u2a-model"
+          ],
+          "minutes": 1.5,
+          "source_slides": [
+            30,
+            31
+          ],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "unit2a-title"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "unit2a-roadmap"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-explain"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-explain"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-model"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-model"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-practice"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-practice"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-feedback"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-feedback"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-graph-synthesize"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-e-explain"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-e-model"
+    },
+    {
+      "slide": 14,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-e-practice"
+    },
+    {
+      "slide": 15,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-e-feedback"
+    },
+    {
+      "slide": 16,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-e-synthesize"
+    },
+    {
+      "slide": 17,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-explain"
+    },
+    {
+      "slide": 18,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-explain"
+    },
+    {
+      "slide": 19,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-model"
+    },
+    {
+      "slide": 20,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-model"
+    },
+    {
+      "slide": 21,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-practice"
+    },
+    {
+      "slide": 22,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-practice"
+    },
+    {
+      "slide": 23,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-feedback"
+    },
+    {
+      "slide": 24,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-feedback"
+    },
+    {
+      "slide": 25,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-synthesize"
+    },
+    {
+      "slide": 26,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-interest-synthesize"
+    },
+    {
+      "slide": 27,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-model-explain"
+    },
+    {
+      "slide": 28,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-model-model"
+    },
+    {
+      "slide": 29,
+      "disposition": "mapped",
+      "block": "math130unit2a-u2a-model-feedback"
+    },
+    {
+      "slide": 30,
+      "disposition": "mapped",
+      "block": "unit2a-closing"
+    },
+    {
+      "slide": 31,
+      "disposition": "mapped",
+      "block": "unit2a-closing"
+    }
+  ]
+}

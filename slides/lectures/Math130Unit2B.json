@@ -1,0 +1,834 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit2B",
+    "title": "Logarithmic Functions",
+    "section": "Section 4.3",
+    "source": "Math130Unit2B.pptx",
+    "canonical": true
+  },
+  "objectives": [
+    {
+      "id": "u2b-forms",
+      "text": "convert between logarithmic and exponential forms"
+    },
+    {
+      "id": "u2b-evaluate",
+      "text": "evaluate and simplify logarithmic expressions"
+    },
+    {
+      "id": "u2b-graphs",
+      "text": "graph logarithmic functions and determine their domains"
+    },
+    {
+      "id": "u2b-solve",
+      "text": "solve logarithmic and exponential equations using inverse properties"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "unit2b",
+      "title": "Logarithmic Functions",
+      "subtitle": "Inverse relationships, graphs, equations, and applications",
+      "output": "Math130Unit2B.html",
+      "duration_minutes": 55,
+      "min_slides": 25,
+      "max_slides": 30,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 50.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 5.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit2b-u2b-forms-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2b-u2b-evaluate-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2b-u2b-graphs-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2b-u2b-solve-synthesize",
+            "planned_elapsed": 48.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "unit2b-title",
+          "title": "Logarithmic Functions",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "Inverse relationships, graphs, equations, and applications",
+            "Section 4.3"
+          ]
+        },
+        {
+          "id": "unit2b-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u2b-forms",
+            "u2b-evaluate",
+            "u2b-graphs",
+            "u2b-solve"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            2
+          ],
+          "content": [
+            "convert between logarithmic and exponential forms",
+            "evaluate and simplify logarithmic expressions",
+            "graph logarithmic functions and determine their domains",
+            "solve logarithmic and exponential equations using inverse properties"
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-forms-activate",
+          "title": "Predict: convert between logarithmic and exponential forms",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2b-forms"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "If $2^5=32$, what question is $\\log_2(32)$ answering?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-forms-explain",
+          "title": "convert between logarithmic and exponential forms",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2b-forms"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            3,
+            4
+          ],
+          "content": [
+            "$\\log_b(x)=y$ means exactly $b^y=x$.",
+            "The logarithm is the exponent."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-forms-model",
+          "title": "Model the Skill: convert between logarithmic and exponential forms",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2b-forms"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            5
+          ],
+          "content": [
+            "Convert $\\log_4(64)=3$ and $4^{-3}=1/64$ between forms."
+          ],
+          "instructor_notes": [],
+          "verification": [],
+          "steps": [
+            "$\\log_4(64)=3$ means $4^3=64$.",
+            "$4^{-3}=1/64$ means $\\log_4(1/64)=-3$.",
+            "The base remains 4 and the logarithm records the exponent."
+          ],
+          "audit_checks": [
+            "u2b-forms"
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-forms-practice",
+          "title": "You Try: convert between logarithmic and exponential forms",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2b-forms"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            6
+          ],
+          "content": [
+            "Rewrite $5^3=125$, $3^{-2}=1/9$, and $\\ln(7)=x$ in the opposite form."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$\\log_5(125)=3$.",
+            "$\\log_3(1/9)=-2$.",
+            "$e^x=7$."
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-forms-feedback",
+          "title": "Check and Diagnose: convert between logarithmic and exponential forms",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2b-forms"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            7
+          ],
+          "content": [
+            "Keep the base unchanged.",
+            "The log argument becomes the exponential result."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-forms-synthesize",
+          "title": "Make It Stick: convert between logarithmic and exponential forms",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2b-forms"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            8
+          ],
+          "content": [
+            "Complete the sentence: a logarithm tells us ____."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2b-u2b-evaluate-activate",
+          "title": "Predict: evaluate and simplify logarithmic expressions",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2b-evaluate"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Without a calculator, evaluate $\\log_2(32)$ and $\\ln(1)$."
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-evaluate-explain",
+          "title": "evaluate and simplify logarithmic expressions",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2b-evaluate"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            9,
+            10
+          ],
+          "content": [
+            "Common log has base 10; natural log has base e.",
+            "$\\log_b(1)=0$, $\\log_b(b)=1$, and $\\log_b(b^x)=x$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-evaluate-model",
+          "title": "Model the Skill: evaluate and simplify logarithmic expressions",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2b-evaluate"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            11
+          ],
+          "content": [
+            "Evaluate $\\log(250)$ and $\\ln(40)$, then verify by exponentiating."
+          ],
+          "instructor_notes": [],
+          "verification": [],
+          "steps": [
+            "$\\log(250)\\approx2.398$, and $10^{2.398}\\approx250$.",
+            "$\\ln(40)\\approx3.689$, and $e^{3.689}\\approx40$.",
+            "The inverse checks confirm both calculator entries."
+          ],
+          "audit_checks": [
+            "u2b-evaluate"
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-evaluate-practice",
+          "title": "You Try: evaluate and simplify logarithmic expressions",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2b-evaluate"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            12,
+            13
+          ],
+          "content": [
+            "Simplify $\\log_7(1)$, $\\ln(e^{-5/2})$, and $e^{\\ln 7}$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$0$, $-5/2$, and $7$."
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-evaluate-feedback",
+          "title": "Check and Diagnose: evaluate and simplify logarithmic expressions",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2b-evaluate"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            14
+          ],
+          "content": [
+            "A logarithm of a number between 0 and 1 is negative when the base exceeds 1.",
+            "Logs undo exponents only when bases match."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-evaluate-synthesize",
+          "title": "Make It Stick: evaluate and simplify logarithmic expressions",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2b-evaluate"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            15
+          ],
+          "content": [
+            "Name two inverse identities involving logarithms and exponents."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2b-u2b-graphs-activate",
+          "title": "Predict: graph logarithmic functions and determine their domains",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2b-graphs"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What feature of an exponential graph becomes the vertical asymptote of its inverse?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-graphs-explain",
+          "title": "graph logarithmic functions and determine their domains",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u2b-graphs"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            16
+          ],
+          "content": [
+            "Logarithmic graphs reflect exponential graphs across $y=x$.",
+            "For $f(x)=\\log_b(g(x))$, require $g(x)>0$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-graphs-model",
+          "title": "Model the Skill: graph logarithmic functions and determine their domains",
+          "phase": "model",
+          "component": "diagram",
+          "objectives": [
+            "u2b-graphs"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            17
+          ],
+          "content": [
+            "Transform $y=\\log_2(x)$ into $f(x)=\\log_2(x+1)+2$.",
+            "Shift the parent graph left 1 and up 2.",
+            "Domain: $(-1,\\infty)$; vertical asymptote: $x=-1$.",
+            "Intercepts: $(0,2)$ and $(-3/4,0)$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify transformed graph features and domain inequalities."
+          ],
+          "steps": [
+            "Shift the parent graph left 1 and up 2.",
+            "Domain: $(-1,\\infty)$; vertical asymptote: $x=-1$.",
+            "Intercepts: $(0,2)$ and $(-3/4,0)$."
+          ],
+          "audit_checks": [
+            "u2b-graphs"
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit2b/corrected/log-transform.svg",
+              "alt": "Graph of f of x equals log base 2 of x plus 1, plus 2, with vertical asymptote x equals negative 1 and labeled intercepts"
+            }
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-graphs-practice",
+          "title": "You Try: graph logarithmic functions and determine their domains",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2b-graphs"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            18
+          ],
+          "content": [
+            "Find the domain and vertical asymptote of $\\log(3x-6)$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "Require $3x-6>0$, so $x>2$.",
+            "Domain: $(2,\\infty)$; asymptote: $x=2$."
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-graphs-feedback",
+          "title": "Check and Diagnose: graph logarithmic functions and determine their domains",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2b-graphs"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            19
+          ],
+          "content": [
+            "The logarithm argument must be strictly positive, not merely nonnegative.",
+            "Horizontal shifts move the vertical asymptote."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify transformed graph features and domain inequalities."
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-graphs-synthesize",
+          "title": "Make It Stick: graph logarithmic functions and determine their domains",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2b-graphs"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            20
+          ],
+          "content": [
+            "Explain how to find a logarithmic domain before graphing."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2b-u2b-solve-activate",
+          "title": "Predict: solve logarithmic and exponential equations using inverse properties",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2b-solve"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "When should you convert to exponential form, and when should you take a logarithm?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-solve-explain",
+          "title": "solve logarithmic and exponential equations using inverse properties",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2b-solve"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            21,
+            22
+          ],
+          "content": [
+            "Use exponential form for a single logarithm.",
+            "Use one-to-one properties when equal logs have the same base.",
+            "Use change of base: $\\log_a(x)=\\log(x)/\\log(a)$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2b-u2b-solve-model",
+          "title": "Model the Skill: solve logarithmic and exponential equations using inverse properties",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2b-solve"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            23,
+            24
+          ],
+          "content": [
+            "Solve $\\log_2(x-5)=4$ and evaluate $\\log_4(25)$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Recalculate equation solutions and change-of-base values."
+          ],
+          "steps": [
+            "$x-5=2^4=16$, so $x=21$; the argument $16$ is positive.",
+            "$\\log_4(25)=\\ln(25)/\\ln(4)\\approx2.322$.",
+            "Substitution and exponentiation verify both results."
+          ],
+          "audit_checks": [
+            "u2b-solve"
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-solve-practice",
+          "title": "You Try: solve logarithmic and exponential equations using inverse properties",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2b-solve"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            25
+          ],
+          "content": [
+            "Solve $3^x=175$ and evaluate $\\log_3(50)$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$x=\\log(175)/\\log(3)\\approx4.701$.",
+            "$\\log_3(50)\\approx3.561$."
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-solve-feedback",
+          "title": "Check and Diagnose: solve logarithmic and exponential equations using inverse properties",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2b-solve"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            26,
+            27
+          ],
+          "content": [
+            "Reject solutions that make a log argument nonpositive.",
+            "The log of a sum is not the sum of logs."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Recalculate equation solutions and change-of-base values."
+          ]
+        },
+        {
+          "id": "math130unit2b-u2b-solve-synthesize",
+          "title": "Make It Stick: solve logarithmic and exponential equations using inverse properties",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2b-solve"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            28
+          ],
+          "content": [
+            "Write a two-step checklist for solving and checking a logarithmic equation."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "unit2b-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2b-forms",
+            "u2b-evaluate",
+            "u2b-graphs",
+            "u2b-solve"
+          ],
+          "minutes": 1.5,
+          "source_slides": [
+            29,
+            30,
+            31
+          ],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "unit2b-title"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "unit2b-roadmap"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-forms-explain"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-forms-explain"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-forms-model"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-forms-practice"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-forms-feedback"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-forms-synthesize"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-evaluate-explain"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-evaluate-explain"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-evaluate-model"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-evaluate-practice"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-evaluate-practice"
+    },
+    {
+      "slide": 14,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-evaluate-feedback"
+    },
+    {
+      "slide": 15,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-evaluate-synthesize"
+    },
+    {
+      "slide": 16,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-graphs-explain"
+    },
+    {
+      "slide": 17,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-graphs-model"
+    },
+    {
+      "slide": 18,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-graphs-practice"
+    },
+    {
+      "slide": 19,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-graphs-feedback"
+    },
+    {
+      "slide": 20,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-graphs-synthesize"
+    },
+    {
+      "slide": 21,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-solve-explain"
+    },
+    {
+      "slide": 22,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-solve-explain"
+    },
+    {
+      "slide": 23,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-solve-model"
+    },
+    {
+      "slide": 24,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-solve-model"
+    },
+    {
+      "slide": 25,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-solve-practice"
+    },
+    {
+      "slide": 26,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-solve-feedback"
+    },
+    {
+      "slide": 27,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-solve-feedback"
+    },
+    {
+      "slide": 28,
+      "disposition": "mapped",
+      "block": "math130unit2b-u2b-solve-synthesize"
+    },
+    {
+      "slide": 29,
+      "disposition": "mapped",
+      "block": "unit2b-closing"
+    },
+    {
+      "slide": 30,
+      "disposition": "mapped",
+      "block": "unit2b-closing"
+    },
+    {
+      "slide": 31,
+      "disposition": "mapped",
+      "block": "unit2b-closing"
+    }
+  ]
+}

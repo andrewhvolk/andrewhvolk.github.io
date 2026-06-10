@@ -1,0 +1,624 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit3C",
+    "title": "Right Triangle Applications",
+    "section": "Module 12",
+    "source": "Math130Unit3C.pptx",
+    "canonical": true
+  },
+  "objectives": [
+    {
+      "id": "u3c-model",
+      "text": "model one-triangle applications with SOH-CAH-TOA"
+    },
+    {
+      "id": "u3c-motion",
+      "text": "apply elevation, depression, and motion components"
+    },
+    {
+      "id": "u3c-two",
+      "text": "solve complete and two-triangle application problems"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "math130unit3c",
+      "title": "Right Triangle Applications",
+      "subtitle": "Concepts, worked examples, student practice, and synthesis",
+      "output": "Math130Unit3C.html",
+      "duration_minutes": 55,
+      "min_slides": 20,
+      "max_slides": 26,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 38.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 17.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit3c-u3c-model-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3c-u3c-motion-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3c-u3c-two-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "math130unit3c-title",
+          "title": "Right Triangle Applications",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Concepts, worked examples, student practice, and synthesis",
+            "Module 12"
+          ]
+        },
+        {
+          "id": "math130unit3c-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u3c-model",
+            "u3c-motion",
+            "u3c-two"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "model one-triangle applications with SOH-CAH-TOA",
+            "apply elevation, depression, and motion components",
+            "solve complete and two-triangle application problems"
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-model-activate",
+          "title": "Predict: model one-triangle applications with SOH-CAH-TOA",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3c-model"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What must be labeled before selecting a trig ratio?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3c-u3c-model-explain",
+          "title": "model one-triangle applications with SOH-CAH-TOA",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3c-model"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            2,
+            3
+          ],
+          "content": [
+            "Read, draw, label, choose a ratio, solve, and check.",
+            "Inverse trig finds an angle from a ratio."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3c-u3c-model-model",
+          "title": "Model the Skill: model one-triangle applications with SOH-CAH-TOA",
+          "phase": "model",
+          "component": "diagram",
+          "objectives": [
+            "u3c-model"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            4
+          ],
+          "content": [
+            "A 20 ft ladder makes a $65^\\circ$ angle with the ground. Find the height.",
+            "$\\sin65^\\circ=h/20$.",
+            "$h=20\\sin65^\\circ\\approx18.13$ ft.",
+            "The result agrees with the corrected diagram and is less than 20 ft."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all one-triangle results and degree-mode instructions."
+          ],
+          "steps": [
+            "$\\sin65^\\circ=h/20$.",
+            "$h=20\\sin65^\\circ\\approx18.13$ ft.",
+            "The result agrees with the corrected diagram and is less than 20 ft."
+          ],
+          "audit_checks": [
+            "u3c-model"
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3c/corrected/s_skill2_ladder.png",
+              "alt": "Right triangle ladder diagram with a 20 foot ladder and 65 degree ground angle"
+            }
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-model-practice",
+          "title": "You Try: model one-triangle applications with SOH-CAH-TOA",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-model"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            5
+          ],
+          "content": [
+            "A surveyor stands 80 ft from a building at 42° elevation. Find the height."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$h=80\\tan42^\\circ\\approx72.0$ ft."
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-model-feedback",
+          "title": "Check and Diagnose: model one-triangle applications with SOH-CAH-TOA",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3c-model"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            6
+          ],
+          "content": [
+            "Calculator mode must be degrees.",
+            "A leg must be shorter than the hypotenuse."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all one-triangle results and degree-mode instructions."
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-model-synthesize",
+          "title": "Make It Stick: model one-triangle applications with SOH-CAH-TOA",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3c-model"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            7
+          ],
+          "content": [
+            "State the six-step word-problem strategy."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3c-u3c-motion-activate",
+          "title": "Predict: apply elevation, depression, and motion components",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3c-motion"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Why are an angle of depression and its matching angle of elevation equal?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3c-u3c-motion-explain",
+          "title": "apply elevation, depression, and motion components",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3c-motion"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            8
+          ],
+          "content": [
+            "Both are measured from parallel horizontal lines.",
+            "Resolve motion with $d_x=d\\cos\\theta$ and $d_y=d\\sin\\theta$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3c-u3c-motion-model",
+          "title": "Model the Skill: apply elevation, depression, and motion components",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u3c-motion"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            9
+          ],
+          "content": [
+            "A vehicle travels 300 miles at $25^\\circ$ north of east. Resolve its displacement."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify elevation/depression and motion-component calculations."
+          ],
+          "steps": [
+            "East component: $300\\cos25^\\circ\\approx271.89$ mi.",
+            "North component: $300\\sin25^\\circ\\approx126.79$ mi.",
+            "$\\sqrt{271.89^2+126.79^2}\\approx300$ verifies the components."
+          ],
+          "audit_checks": [
+            "u3c-motion"
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-motion-practice",
+          "title": "You Try: apply elevation, depression, and motion components",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-motion"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            10
+          ],
+          "content": [
+            "A vehicle travels 300 miles at 25° north of east. Find east and north components."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "East: $300\\cos25^\\circ\\approx271.9$ mi; north: $300\\sin25^\\circ\\approx126.8$ mi."
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-motion-feedback",
+          "title": "Check and Diagnose: apply elevation, depression, and motion components",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3c-motion"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            11
+          ],
+          "content": [
+            "Angles are measured from horizontal unless stated otherwise.",
+            "Use total distance before resolving components."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify elevation/depression and motion-component calculations."
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-motion-synthesize",
+          "title": "Make It Stick: apply elevation, depression, and motion components",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3c-motion"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Explain how a horizontal reference line organizes both elevation and component problems."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3c-u3c-two-activate",
+          "title": "Predict: solve complete and two-triangle application problems",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3c-two"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What information is shared by two right triangles aimed at the same height?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3c-u3c-two-explain",
+          "title": "solve complete and two-triangle application problems",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3c-two"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            12,
+            13
+          ],
+          "content": [
+            "To solve a right triangle, find all missing sides and angles.",
+            "Two-triangle problems share a height and use related horizontal distances."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3c-u3c-two-model",
+          "title": "Model the Skill: solve complete and two-triangle application problems",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3c-two"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            14
+          ],
+          "content": [
+            "Two tower observations are 50 ft apart with elevation angles $53^\\circ$ and $31^\\circ$. Find the closer distance d and height h."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify complete-triangle and two-triangle algebra and units."
+          ],
+          "steps": [
+            "$h=d\\tan53^\\circ=(d+50)\\tan31^\\circ$.",
+            "$d\\approx41.37$ ft and $h\\approx54.90$ ft.",
+            "Using the farther distance $91.37$ ft reproduces the same height."
+          ],
+          "audit_checks": [
+            "u3c-two"
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-two-practice",
+          "title": "You Try: solve complete and two-triangle application problems",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-two"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            15,
+            16
+          ],
+          "content": [
+            "Set up, but do not immediately solve, a two-observation tower problem with a 50 ft gap."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "Closer: $\\tan53^\\circ=h/d$; farther: $\\tan31^\\circ=h/(d+50)$."
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-two-feedback",
+          "title": "Check and Diagnose: solve complete and two-triangle application problems",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3c-two"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            17
+          ],
+          "content": [
+            "Keep d and d+50 attached to the correct observation points.",
+            "Show the algebraic distribution step before dividing."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify complete-triangle and two-triangle algebra and units."
+          ]
+        },
+        {
+          "id": "math130unit3c-u3c-two-synthesize",
+          "title": "Make It Stick: solve complete and two-triangle application problems",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3c-two"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            18
+          ],
+          "content": [
+            "Write the shared-height equation that connects the two triangles."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3c-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3c-model",
+            "u3c-motion",
+            "u3c-two"
+          ],
+          "minutes": 1.5,
+          "source_slides": [
+            19
+          ],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "math130unit3c-roadmap"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-model-explain"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-model-explain"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-model-model"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-model-practice"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-model-feedback"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-model-synthesize"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-motion-explain"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-motion-model"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-motion-practice"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-motion-feedback"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-two-explain"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-two-explain"
+    },
+    {
+      "slide": 14,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-two-model"
+    },
+    {
+      "slide": 15,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-two-practice"
+    },
+    {
+      "slide": 16,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-two-practice"
+    },
+    {
+      "slide": 17,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-two-feedback"
+    },
+    {
+      "slide": 18,
+      "disposition": "mapped",
+      "block": "math130unit3c-u3c-two-synthesize"
+    },
+    {
+      "slide": 19,
+      "disposition": "mapped",
+      "block": "math130unit3c-closing"
+    }
+  ]
+}

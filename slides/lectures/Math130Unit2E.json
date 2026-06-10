@@ -1,0 +1,575 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit2E",
+    "title": "Test 2 Review",
+    "section": "Test 2",
+    "source": "Math130Unit2E.pptx",
+    "canonical": true
+  },
+  "objectives": [
+    {
+      "id": "u2e-algebra",
+      "text": "apply exponential and logarithmic models"
+    },
+    {
+      "id": "u2e-angle",
+      "text": "solve angle, arc, and sector problems"
+    },
+    {
+      "id": "u2e-geometry",
+      "text": "choose area, similarity, and speed strategies"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "math130unit2e",
+      "title": "Test 2 Review",
+      "subtitle": "Concepts, worked examples, student practice, and synthesis",
+      "output": "Math130Unit2E.html",
+      "duration_minutes": 55,
+      "min_slides": 16,
+      "max_slides": 22,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 38.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 17.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit2e-u2e-algebra-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2e-u2e-angle-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit2e-u2e-geometry-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "math130unit2e-title",
+          "title": "Test 2 Review",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Concepts, worked examples, student practice, and synthesis",
+            "Test 2"
+          ]
+        },
+        {
+          "id": "math130unit2e-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u2e-algebra",
+            "u2e-angle",
+            "u2e-geometry"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "apply exponential and logarithmic models",
+            "solve angle, arc, and sector problems",
+            "choose area, similarity, and speed strategies"
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-algebra-activate",
+          "title": "Predict: apply exponential and logarithmic models",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2e-algebra"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Which formula or inverse relationship would you choose first?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2e-u2e-algebra-explain",
+          "title": "apply exponential and logarithmic models",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u2e-algebra"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            2
+          ],
+          "content": [
+            "Match wording to compound-interest formulas.",
+            "$\\log_b(x)=y\\iff b^y=x$."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2e-u2e-algebra-model",
+          "title": "Model the Skill: apply exponential and logarithmic models",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2e-algebra"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            3
+          ],
+          "content": [
+            "Find the balance for $2500$ at 5.2% compounded quarterly for 6 years, then convert $\\log_2(32)=5$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Recalculate all Test 2 algebra review answers."
+          ],
+          "steps": [
+            "$A=2500(1+0.052/4)^{24}\\approx3408.53$.",
+            "$\\log_2(32)=5$ is equivalent to $2^5=32$.",
+            "The interest result uses dollars; the logarithmic conversion is dimensionless."
+          ],
+          "audit_checks": [
+            "u2e-algebra"
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-algebra-practice",
+          "title": "You Try: apply exponential and logarithmic models",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2e-algebra"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Find the balance on $4000 at 6% monthly for 10 years and rewrite $\\log_3(81)=4$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$A\\approx7277.59$ and $3^4=81$."
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-algebra-feedback",
+          "title": "Check and Diagnose: apply exponential and logarithmic models",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2e-algebra"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            4
+          ],
+          "content": [
+            "Convert rates to decimals and preserve the logarithm base."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Recalculate all Test 2 algebra review answers."
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-algebra-synthesize",
+          "title": "Make It Stick: apply exponential and logarithmic models",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2e-algebra"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Write the first decision you make in each problem type."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2e-u2e-angle-activate",
+          "title": "Predict: solve angle, arc, and sector problems",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2e-angle"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Which formulas require radians and which accept degrees after conversion?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2e-u2e-angle-explain",
+          "title": "solve angle, arc, and sector problems",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u2e-angle"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            5
+          ],
+          "content": [
+            "Convert angles before applying $s=r\\theta$ or $A=\\tfrac12r^2\\theta$.",
+            "Use circle theorems only after identifying the intercepted arc."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2e-u2e-angle-model",
+          "title": "Model the Skill: solve angle, arc, and sector problems",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2e-angle"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            6
+          ],
+          "content": [
+            "Convert $5\\pi/6$ to degrees and find arc length for $r=9$, $\\theta=2\\pi/3$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify every angle and circle review result."
+          ],
+          "steps": [
+            "$(5\\pi/6)(180^\\circ/\\pi)=150^\\circ$.",
+            "$s=r\\theta=9(2\\pi/3)=6\\pi$ units.",
+            "Radians cancel in the arc-length calculation."
+          ],
+          "audit_checks": [
+            "u2e-angle"
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-angle-practice",
+          "title": "You Try: solve angle, arc, and sector problems",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2e-angle"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            10
+          ],
+          "content": [
+            "Find arc length for $r=12$, $\\theta=40^\\circ$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$\\theta=2\\pi/9$, so $s=8\\pi/3\\approx8.38$."
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-angle-feedback",
+          "title": "Check and Diagnose: solve angle, arc, and sector problems",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2e-angle"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            11
+          ],
+          "content": [
+            "Do not mix degrees and radians.",
+            "Central and inscribed angles obey different rules."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify every angle and circle review result."
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-angle-synthesize",
+          "title": "Make It Stick: solve angle, arc, and sector problems",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2e-angle"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "State the unit check for an arc or sector answer."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2e-u2e-geometry-activate",
+          "title": "Predict: choose area, similarity, and speed strategies",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2e-geometry"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What information tells you to use Heron, trapezoid area, similarity, or $v=r\\omega$?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit2e-u2e-geometry-explain",
+          "title": "choose area, similarity, and speed strategies",
+          "phase": "explain",
+          "component": "decision",
+          "objectives": [
+            "u2e-geometry"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            7
+          ],
+          "content": [
+            "Formula selection depends on the givens, not the picture’s appearance.",
+            "Write corresponding sides in consistent order."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit2e-u2e-geometry-model",
+          "title": "Model the Skill: choose area, similarity, and speed strategies",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2e-geometry"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            8
+          ],
+          "content": [
+            "Find a trapezoid area with bases 10 and 16 and height 7, then solve $6/9=x/15$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify Test 2 practice quiz answers."
+          ],
+          "steps": [
+            "$A=\\tfrac12(10+16)(7)=91$ square units.",
+            "$9x=90$, so $x=10$.",
+            "Formula choice follows the given measurements and correspondence."
+          ],
+          "audit_checks": [
+            "u2e-geometry"
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-geometry-practice",
+          "title": "You Try: choose area, similarity, and speed strategies",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2e-geometry"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            9
+          ],
+          "content": [
+            "Solve $6/9=x/15$. Then find the rim speed of a wheel with radius 0.4 m turning at 5 rad/s."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$9x=90$, so $x=10$.",
+            "$v=r\\omega=0.4(5)=2$ m/s."
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-geometry-feedback",
+          "title": "Check and Diagnose: choose area, similarity, and speed strategies",
+          "phase": "feedback",
+          "component": "comparison",
+          "objectives": [
+            "u2e-geometry"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            12
+          ],
+          "content": [
+            "Most lost points come from setup, units, or mismatched corresponding sides."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify Test 2 practice quiz answers."
+          ]
+        },
+        {
+          "id": "math130unit2e-u2e-geometry-synthesize",
+          "title": "Make It Stick: choose area, similarity, and speed strategies",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2e-geometry"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Name the evidence that selects each geometry strategy."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit2e-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2e-algebra",
+            "u2e-angle",
+            "u2e-geometry"
+          ],
+          "minutes": 1.5,
+          "source_slides": [
+            13
+          ],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "math130unit2e-roadmap"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-algebra-explain"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-algebra-model"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-algebra-feedback"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-angle-explain"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-angle-model"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-geometry-explain"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-geometry-model"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-geometry-practice"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-angle-practice"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-angle-feedback"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit2e-u2e-geometry-feedback"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "math130unit2e-closing"
+    }
+  ]
+}

@@ -1,0 +1,755 @@
+{
+  "$schema": "lecture-manifest.schema.json",
+  "version": 1,
+  "deck": {
+    "id": "Math130Unit3B",
+    "title": "Trigonometric Functions of Any Angle",
+    "section": "Module 11",
+    "source": "Math130Unit3B.pptx",
+    "canonical": true
+  },
+  "objectives": [
+    {
+      "id": "u3b-reference",
+      "text": "find reference angles in degrees and radians"
+    },
+    {
+      "id": "u3b-signs",
+      "text": "determine trigonometric signs and quadrants"
+    },
+    {
+      "id": "u3b-values",
+      "text": "find exact trigonometric values from points and reference angles"
+    },
+    {
+      "id": "u3b-area",
+      "text": "apply the trigonometric triangle-area formula"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "math130unit3b",
+      "title": "Trigonometric Functions of Any Angle",
+      "subtitle": "Concepts, worked examples, student practice, and synthesis",
+      "output": "Math130Unit3B.html",
+      "duration_minutes": 55,
+      "min_slides": 22,
+      "max_slides": 28,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 50.0,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 5.0,
+        "stopping_points": [
+          {
+            "after_block": "math130unit3b-u3b-reference-synthesize",
+            "planned_elapsed": 12.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3b-u3b-signs-synthesize",
+            "planned_elapsed": 24.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3b-u3b-values-synthesize",
+            "planned_elapsed": 36.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          },
+          {
+            "after_block": "math130unit3b-u3b-area-synthesize",
+            "planned_elapsed": 48.5,
+            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "math130unit3b-title",
+          "title": "Trigonometric Functions of Any Angle",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Concepts, worked examples, student practice, and synthesis",
+            "Module 11"
+          ]
+        },
+        {
+          "id": "math130unit3b-roadmap",
+          "title": "Today’s Learning Roadmap",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [
+            "u3b-reference",
+            "u3b-signs",
+            "u3b-values",
+            "u3b-area"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            1
+          ],
+          "content": [
+            "find reference angles in degrees and radians",
+            "determine trigonometric signs and quadrants",
+            "find exact trigonometric values from points and reference angles",
+            "apply the trigonometric triangle-area formula"
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-reference-activate",
+          "title": "Predict: find reference angles in degrees and radians",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3b-reference"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Why is a reference angle always acute?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-reference-explain",
+          "title": "find reference angles in degrees and radians",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3b-reference"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            2,
+            3
+          ],
+          "content": [
+            "Reference angles are measured to the nearest x-axis.",
+            "First find a coterminal angle when the original lies outside one rotation."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-reference-model",
+          "title": "Model the Skill: find reference angles in degrees and radians",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u3b-reference"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            5
+          ],
+          "content": [
+            "Find reference angles for $150^\\circ$, $310^\\circ$, $-120^\\circ$, and $7\\pi/4$."
+          ],
+          "instructor_notes": [],
+          "verification": [],
+          "steps": [
+            "$150^\\circ$ has reference angle $30^\\circ$; $310^\\circ$ has $50^\\circ$.",
+            "$-120^\\circ$ is coterminal with $240^\\circ$, so its reference angle is $60^\\circ$.",
+            "$7\\pi/4$ has reference angle $\\pi/4$."
+          ],
+          "audit_checks": [
+            "u3b-reference"
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-reference-practice",
+          "title": "You Try: find reference angles in degrees and radians",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-reference"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            6,
+            7
+          ],
+          "content": [
+            "Find the reference angle for 580°."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$580-360=220^\\circ$, so the QIII reference angle is 40°."
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-reference-feedback",
+          "title": "Check and Diagnose: find reference angles in degrees and radians",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3b-reference"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            8
+          ],
+          "content": [
+            "Do not measure to the y-axis.",
+            "Use π, not 180°, when working in radians."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-reference-synthesize",
+          "title": "Make It Stick: find reference angles in degrees and radians",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3b-reference"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            9
+          ],
+          "content": [
+            "State the quadrant formulas for reference angles."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3b-u3b-signs-activate",
+          "title": "Predict: determine trigonometric signs and quadrants",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3b-signs"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "If tangent is positive and cosine is negative, which quadrant is possible?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-signs-explain",
+          "title": "determine trigonometric signs and quadrants",
+          "phase": "explain",
+          "component": "decision",
+          "objectives": [
+            "u3b-signs"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            10
+          ],
+          "content": [
+            "ASTC summarizes positive functions by quadrant.",
+            "Signs follow from x, y, and positive r."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-signs-model",
+          "title": "Model the Skill: determine trigonometric signs and quadrants",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-signs"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Determine the quadrant if $\\tan\\theta>0$ and $\\cos\\theta<0$."
+          ],
+          "instructor_notes": [],
+          "verification": [],
+          "steps": [
+            "Tangent is positive in Quadrants I and III.",
+            "Cosine is negative in Quadrants II and III.",
+            "The intersection is Quadrant III."
+          ],
+          "audit_checks": [
+            "u3b-signs"
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-signs-practice",
+          "title": "You Try: determine trigonometric signs and quadrants",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-signs"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            11
+          ],
+          "content": [
+            "Determine the quadrant if $\\sin\\theta>0$ and $\\sec\\theta<0$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "Quadrant II."
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-signs-feedback",
+          "title": "Check and Diagnose: determine trigonometric signs and quadrants",
+          "phase": "feedback",
+          "component": "comparison",
+          "objectives": [
+            "u3b-signs"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Use the intersection of sign conditions.",
+            "Reciprocal functions share the sign of their partner."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-signs-synthesize",
+          "title": "Make It Stick: determine trigonometric signs and quadrants",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3b-signs"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Explain ASTC using the signs of x and y rather than memorization."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3b-u3b-values-activate",
+          "title": "Predict: find exact trigonometric values from points and reference angles",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "What does r represent for a point $(x,y)$ on a terminal side?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-values-explain",
+          "title": "find exact trigonometric values from points and reference angles",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            4,
+            12
+          ],
+          "content": [
+            "$r=\\sqrt{x^2+y^2}$.",
+            "Use the reference angle for magnitude and the quadrant for sign."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-values-model",
+          "title": "Model the Skill: find exact trigonometric values from points and reference angles",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            13
+          ],
+          "content": [
+            "For $P=(-3,4)$, calculate r and all six trigonometric values."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify exact values and quadrant signs."
+          ],
+          "steps": [
+            "$r=\\sqrt{(-3)^2+4^2}=5$.",
+            "$\\sin\\theta=4/5$, $\\cos\\theta=-3/5$, $\\tan\\theta=-4/3$.",
+            "$\\csc\\theta=5/4$, $\\sec\\theta=-5/3$, $\\cot\\theta=-3/4$."
+          ],
+          "audit_checks": [
+            "u3b-values"
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-values-practice",
+          "title": "You Try: find exact trigonometric values from points and reference angles",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            14,
+            15
+          ],
+          "content": [
+            "Find exact trig values for $P=(-2,-5)$ and evaluate $\\sin240^\\circ$."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "For $P=(-2,-5)$, $r=\\sqrt{29}$; $\\sin=-5/\\sqrt{29}$, $\\cos=-2/\\sqrt{29}$, $\\tan=5/2$.",
+            "$\\csc=-\\sqrt{29}/5$, $\\sec=-\\sqrt{29}/2$, $\\cot=2/5$; $\\sin240^\\circ=-\\sqrt3/2$."
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-values-feedback",
+          "title": "Check and Diagnose: find exact trigonometric values from points and reference angles",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            16
+          ],
+          "content": [
+            "r is always positive.",
+            "Rationalize denominators only when required by course convention."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify exact values and quadrant signs."
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-values-synthesize",
+          "title": "Make It Stick: find exact trigonometric values from points and reference angles",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 0.5,
+          "source_slides": [
+            17
+          ],
+          "content": [
+            "Describe the point-to-ratios workflow in three steps."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3b-u3b-area-activate",
+          "title": "Predict: apply the trigonometric triangle-area formula",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3b-area"
+          ],
+          "minutes": 1.0,
+          "source_slides": [],
+          "content": [
+            "Why must the known angle be included between the two known sides?"
+          ],
+          "instructor_notes": [
+            "Require an individual prediction before discussion."
+          ],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-area-explain",
+          "title": "apply the trigonometric triangle-area formula",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3b-area"
+          ],
+          "minutes": 2.5,
+          "source_slides": [
+            18
+          ],
+          "content": [
+            "$A=\\tfrac12bc\\sin A$ uses two sides and their included angle.",
+            "The formula applies to nonright triangles."
+          ],
+          "instructor_notes": [],
+          "verification": []
+        },
+        {
+          "id": "math130unit3b-u3b-area-model",
+          "title": "Model the Skill: apply the trigonometric triangle-area formula",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-area"
+          ],
+          "minutes": 3.0,
+          "source_slides": [
+            19
+          ],
+          "content": [
+            "Find the area when $A=76^\\circ$, $b=34$, and $c=21$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify all triangle-area calculations."
+          ],
+          "steps": [
+            "$A_{triangle}=\\tfrac12bc\\sin A$.",
+            "$A_{triangle}=\\tfrac12(34)(21)\\sin76^\\circ\\approx346.40$.",
+            "The result is in square units."
+          ],
+          "audit_checks": [
+            "u3b-area"
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-area-practice",
+          "title": "You Try: apply the trigonometric triangle-area formula",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-area"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Find the area when sides 12 and 15 include a 40° angle."
+          ],
+          "instructor_notes": [
+            "Pause before revealing the solution."
+          ],
+          "verification": [],
+          "answer": [
+            "$A=\\tfrac12(12)(15)\\sin40^\\circ\\approx57.85$."
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-area-feedback",
+          "title": "Check and Diagnose: apply the trigonometric triangle-area formula",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3b-area"
+          ],
+          "minutes": 2.0,
+          "source_slides": [
+            20
+          ],
+          "content": [
+            "Match each side pair with its included angle.",
+            "Square units are required."
+          ],
+          "instructor_notes": [
+            "Ask students to explain why the incorrect path fails."
+          ],
+          "verification": [
+            "Verify all triangle-area calculations."
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-area-synthesize",
+          "title": "Make It Stick: apply the trigonometric triangle-area formula",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3b-area"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Explain how the diagram identifies the correct sine angle."
+          ],
+          "instructor_notes": [
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+          ],
+          "verification": [],
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3b-closing",
+          "title": "Session Summary and Exit Ticket",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3b-reference",
+            "u3b-signs",
+            "u3b-values",
+            "u3b-area"
+          ],
+          "minutes": 1.5,
+          "source_slides": [
+            21
+          ],
+          "content": [
+            "State the most important idea from today without looking at your notes.",
+            "Complete one representative setup and identify the step most likely to cause an error.",
+            "Write one question that should be answered before the next assessment."
+          ],
+          "answer": [
+            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    }
+  ],
+  "source_disposition": [
+    {
+      "slide": 1,
+      "disposition": "mapped",
+      "block": "math130unit3b-roadmap"
+    },
+    {
+      "slide": 2,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-reference-explain"
+    },
+    {
+      "slide": 3,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-reference-explain"
+    },
+    {
+      "slide": 4,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-values-explain"
+    },
+    {
+      "slide": 5,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-reference-model"
+    },
+    {
+      "slide": 6,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-reference-practice"
+    },
+    {
+      "slide": 7,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-reference-practice"
+    },
+    {
+      "slide": 8,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-reference-feedback"
+    },
+    {
+      "slide": 9,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-reference-synthesize"
+    },
+    {
+      "slide": 10,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-signs-explain"
+    },
+    {
+      "slide": 11,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-signs-practice"
+    },
+    {
+      "slide": 12,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-values-explain"
+    },
+    {
+      "slide": 13,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-values-model"
+    },
+    {
+      "slide": 14,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-values-practice"
+    },
+    {
+      "slide": 15,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-values-practice"
+    },
+    {
+      "slide": 16,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-values-feedback"
+    },
+    {
+      "slide": 17,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-values-synthesize"
+    },
+    {
+      "slide": 18,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-area-explain"
+    },
+    {
+      "slide": 19,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-area-model"
+    },
+    {
+      "slide": 20,
+      "disposition": "mapped",
+      "block": "math130unit3b-u3b-area-feedback"
+    },
+    {
+      "slide": 21,
+      "disposition": "mapped",
+      "block": "math130unit3b-closing"
+    }
+  ]
+}
