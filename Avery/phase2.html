@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MASLD diagnostic-gap study · setup to results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EAEFEE; --surface:#FFFFFF; --ink:#15211E; --ink-soft:#54625E;
+    --line:#D4DDDA; --teal:#0E7C74; --teal-deep:#0A5751; --teal-wash:#E3F0EE;
+    --amber:#A86A18; --amber-wash:#FAF0DD; --amber-line:#E7CFA0;
+    --info-wash:#EDF1F4; --info-line:#CBD8DD; --info-ink:#3C5560;
+    --code-bg:#0E1A18; --code-ink:#DCE9E5; --code-dim:#6E847F; --code-line:#22302D;
+    --r:12px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+  code.inline{font-family:"IBM Plex Mono"; font-size:.86em; background:var(--teal-wash);
+    color:var(--teal-deep); padding:.08em .35em; border-radius:4px}
+
+  .topbar{position:sticky; top:0; z-index:30; background:rgba(234,239,238,.86);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+  .topbar-in{max-width:1180px; margin:0 auto; padding:.7rem 1.4rem; display:flex; align-items:center; gap:1rem}
+  .brand{font-family:"Space Grotesk"; font-weight:600; letter-spacing:-.01em; font-size:.95rem}
+  .brand span{color:var(--teal)}
+  .meter-wrap{flex:1; display:flex; align-items:center; gap:.7rem; min-width:0}
+  .meter{flex:1; height:7px; background:var(--line); border-radius:99px; overflow:hidden}
+  .meter-fill{height:100%; width:0; background:linear-gradient(90deg,var(--teal),var(--teal-deep));
+    border-radius:99px; transition:width .4s cubic-bezier(.2,.7,.2,1)}
+  .meter-count{font-family:"IBM Plex Mono"; font-size:.74rem; color:var(--ink-soft); white-space:nowrap}
+
+  .layout{max-width:1180px; margin:0 auto; padding:0 1.4rem 5rem; display:grid;
+    grid-template-columns:212px 1fr; gap:2.6rem}
+  .rail{position:sticky; top:74px; align-self:start; height:max-content; padding-top:2.2rem;
+    max-height:calc(100vh - 90px); overflow:auto}
+  .rail-title{font-family:"IBM Plex Mono"; font-size:.68rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-soft); margin:1.1rem 0 .5rem .15rem}
+  .rail-title:first-child{margin-top:0}
+  .rail ol{list-style:none; margin:0 0 .4rem; padding:0; border-left:1px solid var(--line)}
+  .rail a{display:flex; gap:.55rem; align-items:baseline; text-decoration:none; color:var(--ink-soft);
+    padding:.36rem .55rem; margin-left:-1px; border-left:2px solid transparent; font-size:.8rem}
+  .rail a:hover{color:var(--ink)}
+  .rail a.active{color:var(--ink); border-left-color:var(--teal); background:var(--teal-wash)}
+  .rail a .rn{font-family:"IBM Plex Mono"; font-size:.7rem; color:var(--teal); font-weight:600; min-width:1.4rem}
+  .rail a.gate .rn{color:var(--amber)}
+  .rail a.done .rn::after{content:"✓"; margin-left:.1rem}
+
+  .hero{padding:2.6rem 0 1rem}
+  .eyebrow{font-family:"IBM Plex Mono"; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--teal); margin:0 0 1rem}
+  h1{font-family:"Space Grotesk"; font-weight:600; letter-spacing:-.025em;
+    font-size:clamp(2.1rem,5.4vw,3.2rem); line-height:1.03; margin:0 0 1rem; max-width:17ch}
+  .lede{font-size:1.06rem; color:var(--ink-soft); max-width:62ch; margin:0 0 1.5rem}
+  .lede b{color:var(--ink); font-weight:600}
+  .journey{display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin:0 0 2rem}
+  .journey span{font-family:"IBM Plex Mono"; font-size:.72rem; color:var(--ink-soft);
+    background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:.32rem .6rem}
+  .journey span.cur{color:var(--teal-deep); border-color:var(--teal); background:var(--teal-wash)}
+  .journey i{color:var(--ink-soft); font-style:normal; opacity:.5}
+
+  .figure{background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+    padding:1.4rem 1.5rem 1.2rem; margin-bottom:2.2rem}
+  .figure h3{font-family:"IBM Plex Mono"; font-weight:500; font-size:.7rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-soft); margin:0 0 1rem}
+  .figure figcaption{font-size:.82rem; color:var(--ink-soft); margin-top:.7rem}
+  .figure svg{width:100%; height:auto; display:block}
+
+  .band{font-family:"Space Grotesk"; font-weight:600; font-size:1.4rem; letter-spacing:-.01em;
+    margin:2.4rem 0 1rem; display:flex; align-items:center; gap:.8rem; color:var(--ink)}
+  .band::after{content:""; flex:1; height:1px; background:var(--line)}
+  .band .bn{font-family:"IBM Plex Mono"; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--teal); background:var(--teal-wash); padding:.28rem .55rem; border-radius:6px; font-weight:600}
+
+  .item{background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+    padding:1.55rem 1.65rem; margin-bottom:1.25rem; scroll-margin-top:84px}
+  .item.is-gate{border-color:var(--amber-line)}
+  .item.done{border-color:var(--teal)}
+  .item-head{display:flex; gap:1rem; align-items:flex-start; margin-bottom:.3rem}
+  .item-num{font-family:"IBM Plex Mono"; font-weight:600; font-size:1.42rem; color:var(--teal);
+    line-height:1; min-width:2.3rem; padding-top:.12rem}
+  .item.is-gate .item-num{color:var(--amber)}
+  .item-head h2{font-family:"Space Grotesk"; font-weight:600; font-size:1.22rem; margin:0 0 .2rem; letter-spacing:-.01em}
+  .item-head .sub{margin:0; font-size:.9rem; color:var(--ink-soft)}
+  .done-toggle{margin-left:auto; display:inline-flex; gap:.4rem; align-items:center; font-family:"IBM Plex Mono";
+    font-size:.72rem; color:var(--ink-soft); cursor:pointer; border:1px solid var(--line); padding:.32rem .55rem;
+    border-radius:99px; white-space:nowrap; user-select:none}
+  .done-toggle:hover{border-color:var(--teal); color:var(--teal-deep)}
+  .done-toggle input{accent-color:var(--teal); margin:0}
+  .item.done .done-toggle{background:var(--teal-wash); border-color:var(--teal); color:var(--teal-deep)}
+
+  ol.steps{margin:.9rem 0 0; padding-left:1.2rem}
+  ol.steps li{margin:.5rem 0; font-size:.95rem}
+  ol.steps li::marker{color:var(--teal); font-family:"IBM Plex Mono"; font-size:.85em}
+
+  .call{border-radius:10px; padding:.85rem 1rem; margin:1.1rem 0 0; font-size:.88rem; display:flex; gap:.7rem; align-items:flex-start}
+  .call .tag{font-family:"IBM Plex Mono"; font-weight:600; font-size:.64rem; letter-spacing:.1em;
+    text-transform:uppercase; padding:.22rem .5rem; border-radius:5px; white-space:nowrap; margin-top:.05rem; color:#fff}
+  .call.warn{background:var(--amber-wash); border:1px solid var(--amber-line); color:#5e451c}
+  .call.warn .tag{background:var(--amber)}
+  .call.tip{background:var(--teal-wash); border:1px solid #BEDDD8; color:#1d4742}
+  .call.tip .tag{background:var(--teal)}
+  .call.info{background:var(--info-wash); border:1px solid var(--info-line); color:var(--info-ink)}
+  .call.info .tag{background:var(--info-ink)}
+  .call b{font-weight:600}
+
+  .gate{background:var(--amber-wash); border:1px solid var(--amber-line); border-radius:10px;
+    padding:.9rem 1rem; margin:1.1rem 0 0; display:flex; gap:.8rem; align-items:flex-start}
+  .gate-tag{font-family:"IBM Plex Mono"; font-weight:600; font-size:.66rem; letter-spacing:.1em;
+    text-transform:uppercase; color:#fff; background:var(--amber); padding:.22rem .5rem; border-radius:5px;
+    white-space:nowrap; margin-top:.1rem}
+  .gate-body{flex:1; font-size:.88rem; color:#5e451c}
+  .gate-body p{margin:0 0 .55rem}
+  .gate-check{display:inline-flex; gap:.45rem; align-items:center; font-family:"IBM Plex Mono";
+    font-size:.74rem; cursor:pointer; color:var(--amber); user-select:none}
+  .gate-check input{accent-color:var(--amber); margin:0}
+
+  .code{margin-top:1.1rem; border-radius:10px; overflow:hidden; border:1px solid var(--code-line)}
+  .code-bar{display:flex; align-items:center; background:#0A1413; padding:.45rem .7rem; gap:.6rem}
+  .code-tag{font-family:"IBM Plex Mono"; font-size:.66rem; letter-spacing:.12em; color:var(--code-dim); text-transform:uppercase}
+  .code-note{font-family:"IBM Plex Mono"; font-size:.66rem; color:var(--code-dim)}
+  .copy{margin-left:auto; font-family:"IBM Plex Mono"; font-size:.7rem; color:var(--code-ink);
+    background:transparent; border:1px solid var(--code-line); border-radius:6px; padding:.3rem .65rem; cursor:pointer; transition:all .15s}
+  .copy:hover{border-color:var(--teal); color:#fff; background:rgba(14,124,116,.25)}
+  .copy.copied{color:#9be6c4; border-color:#1f6b58}
+  pre{margin:0; background:var(--code-bg); color:var(--code-ink); overflow:auto; max-height:460px;
+    padding:1rem 1.1rem; font-family:"IBM Plex Mono"; font-size:.78rem; line-height:1.6; tab-size:2}
+  pre::-webkit-scrollbar{height:9px; width:9px}
+  pre::-webkit-scrollbar-thumb{background:#2c3c39; border-radius:9px}
+
+  footer{max-width:1180px; margin:0 auto; padding:0 1.4rem}
+  .closing{background:var(--ink); color:#cdd9d5; border-radius:var(--r); padding:1.6rem 1.7rem; margin-top:1.5rem}
+  .closing h3{font-family:"Space Grotesk"; color:#fff; margin:0 0 .6rem; font-size:1.05rem}
+  .closing p{margin:.45rem 0; font-size:.88rem; color:#aebbb7}
+  .closing .mono{color:var(--teal)}
+  .fineprint{font-size:.74rem; color:var(--ink-soft); margin:1.2rem 0 0; max-width:74ch}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:2px; border-radius:3px}
+
+  @media (max-width:880px){ .layout{grid-template-columns:1fr; gap:0} .rail{display:none} }
+  @media (prefers-reduced-motion:no-preference){
+    .item,.figure,.hero>*{animation:rise .5s both}
+    @keyframes rise{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">MASLD study<span>·</span>setup → results</div>
+    <div class="meter-wrap">
+      <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+      <div class="meter-count" id="meterCount">0 / 13 done</div>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="rail" aria-label="Contents"><div id="railList"></div></nav>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">All of Us Researcher Workbench 2.0 · Controlled Tier</p>
+      <h1>One run: from access to the diagnostic-gap result.</h1>
+      <p class="lede">Setup phases <b>A–D</b> take you from sign-in through a duplicated, pre-wired workspace to a connected RStudio. Analysis steps <b>00–08</b> then paste straight into that session. Heavy work stays in BigQuery; only small per-person tables return, so you stay inside <b>13&nbsp;GB</b>. Three analysis steps carry a <b>verify gate</b> — clear it before moving on.</p>
+      <div class="journey">
+        <span class="cur">Access</span><i>→</i><span>Duplicate</span><i>→</i><span>RStudio</span><i>→</i>
+        <span>Connect</span><i>→</i><span>RQ1</span><i>·</i><span>RQ2</span><i>·</i><span>RQ3</span>
+      </div>
+
+      <figure class="figure">
+        <h3>What the analysis is after — RQ1, in one picture</h3>
+        <svg viewBox="0 0 620 168" role="img" aria-label="ICD-coded prevalence is a small slice of index-detected steatosis; the difference is the diagnostic gap.">
+          <defs><pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="7" stroke="#A86A18" stroke-width="2" opacity=".55"/></pattern></defs>
+          <line x1="150" y1="20" x2="150" y2="150" stroke="#D4DDDA" stroke-width="1"/>
+          <text x="138" y="52" text-anchor="end" font-family="IBM Plex Mono" font-size="12" fill="#54625E">ICD-coded</text>
+          <rect x="150" y="36" width="84" height="26" rx="4" fill="#0A5751"/>
+          <text x="138" y="104" text-anchor="end" font-family="IBM Plex Mono" font-size="12" fill="#54625E">FLI ≥ 60</text>
+          <rect x="150" y="88" width="372" height="26" rx="4" fill="#0E7C74"/>
+          <rect x="234" y="88" width="288" height="26" fill="url(#hatch)"/>
+          <line x1="234" y1="30" x2="234" y2="128" stroke="#A86A18" stroke-width="1.4" stroke-dasharray="4 3"/>
+          <line x1="234" y1="138" x2="522" y2="138" stroke="#A86A18" stroke-width="1.2"/>
+          <line x1="234" y1="134" x2="234" y2="142" stroke="#A86A18" stroke-width="1.2"/>
+          <line x1="522" y1="134" x2="522" y2="142" stroke="#A86A18" stroke-width="1.2"/>
+          <text x="378" y="160" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#A86A18">the un-coded diagnostic gap</text>
+        </svg>
+        <figcaption>Illustrative. The distance between those bars is RQ1's headline number; who lives inside the hatched gap is RQ2 and RQ3.</figcaption>
+      </figure>
+    </section>
+
+    <div id="items"></div>
+
+    <footer>
+      <div class="closing">
+        <h3>Carry these through</h3>
+        <p><b>Tier.</b> Duplicating the Controlled Tier tutorial puts you on <span class="mono">wb-silky-artichoke-2408.C2024Q3R8</span>, used as-is (no <span class="mono">_base</span> on Researcher Workbench 2.0). Registered Tier (<span class="mono">R2024Q3R8</span>) is also sufficient for RQ1–RQ3 and carries fewer policies — duplicate that tutorial instead if you prefer.</p>
+        <p><b>Verify gates.</b> Steps 01, 03, 07 need your eyes on live data: confirm the resolved concepts, confirm analyte units, and fill the SDOH survey IDs + response logic. The page can't reach your CDR — those are genuinely on you.</p>
+        <p><b>Cost &amp; disclosure.</b> Your <span class="mono">user-pod-&lt;username&gt;-XXXX</span> credits fund this. Stop the app when idle, mind the 4-hour autostop on long bootstrap/imputation runs (checkpoint to the bucket), and suppress any reported cell <span class="mono">&lt; 20</span> before exporting.</p>
+      </div>
+      <p class="fineprint">Setup follows the official "Getting Started in the new Researcher Workbench 2.0" guide; CDR strings (R2024Q3R8 / C2024Q3R8) are current as of writing — confirm against your workspace Data Dictionary. The analysis code is a template: concept IDs, units, and survey codings are surfaced for inspection, not run blind.</p>
+    </footer>
+  </main>
+</div>
+
+<!-- ===================== raw R blocks (read as text) ===================== -->
+<div hidden>
+<script type="text/plain" id="src-connect">
+# Corrected connection block — paste at the very top of the project.
+# The All of Us R Analysis Environment did NOT inject the env vars this session,
+# so set them explicitly. (Harmless if a future launch does populate them.)
+install.packages("allofus")              # once per environment (persists on the disk)
+library(allofus); library(tidyverse); library(dbplyr); library(DBI)
+
+Sys.setenv(
+  GOOGLE_PROJECT           = "wb-blissful-plum-9347",              # your workspace project (billing)
+  GOOGLE_CLOUD_PROJECT     = "wb-blissful-plum-9347",
+  WORKSPACE_GOOGLE_PROJECT = "wb-blissful-plum-9347",
+  WORKSPACE_CDR            = "wb-silky-artichoke-2408.C2024Q3R8",  # Controlled Tier v8 — NO _base
+  OPENBLAS_NUM_THREADS     = 2,                                    # cap threads to your 2 vCPUs
+  OMP_NUM_THREADS          = 2
+)
+
+con <- aou_connect(CDR = Sys.getenv("WORKSPACE_CDR"))   # plain name; do NOT append _base
+DBI::dbListTables(con)[1:20]
+
+# Green light: the OMOP tables the run sheet needs are all present.
+needed <- c("person", "measurement", "condition_occurrence",
+            "concept", "concept_relationship", "concept_ancestor")
+tables <- DBI::dbListTables(con)
+needed %in% tables          # expect: TRUE TRUE TRUE TRUE TRUE TRUE
+setdiff(needed, tables)     # expect: character(0)
+</script>
+
+<script type="text/plain" id="src-00">
+# `con` is already live from the Connect step. Define the shared helpers once.
+concept <- tbl(con, "concept")
+
+# ICD-10-CM regex -> STANDARD concept_ids (Maps to -> SNOMED) + descendants.
+resolve_icd <- function(con, code_regex) {
+  cr <- tbl(con, "concept_relationship"); ca <- tbl(con, "concept_ancestor")
+  src <- tbl(con, "concept") |>
+    filter(vocabulary_id == "ICD10CM", str_detect(concept_code, code_regex)) |>
+    select(concept_id)
+  std <- src |>
+    inner_join(filter(cr, relationship_id == "Maps to"),
+               by = c("concept_id" = "concept_id_1")) |>
+    transmute(concept_id = concept_id_2) |> distinct()
+  desc <- std |>
+    inner_join(ca, by = c("concept_id" = "ancestor_concept_id")) |>
+    transmute(concept_id = descendant_concept_id)
+  std |> union(desc) |> distinct() |> pull(concept_id)
+}
+
+# Per-person MOST RECENT numeric measurement for a set of concept_ids.
+pull_recent <- function(con, concept_ids, value_name) {
+  d <- sym(paste0(value_name, "_date"))
+  tbl(con, "measurement") |>
+    filter(measurement_concept_id %in% concept_ids, !is.na(value_as_number)) |>
+    group_by(person_id) |>
+    filter(measurement_date == max(measurement_date, na.rm = TRUE)) |>
+    summarise(!!value_name := mean(value_as_number, na.rm = TRUE),
+              !!d := max(measurement_date, na.rm = TRUE), .groups = "drop")
+}
+
+# Per-person indicator that any qualifying condition code is present.
+has_condition <- function(con, concept_ids, flag_name) {
+  tbl(con, "condition_occurrence") |>
+    filter(condition_concept_id %in% concept_ids) |>
+    distinct(person_id) |> mutate(!!flag_name := 1L)
+}
+</script>
+
+<script type="text/plain" id="src-01">
+# Labs by LOINC (standard measurement concepts).
+loinc_map <- tribble(
+  ~analyte, ~loinc,
+  "alt", "1742-6",  "ast", "1920-8",
+  "plt", "777-3",   "plt2", "26515-7",
+  "ggt", "2324-2",  "tg",  "2571-8",
+  "bmi", "39156-5"
+)
+lab_concepts <- concept |>
+  filter(vocabulary_id == "LOINC", concept_code %in% local(loinc_map$loinc),
+         standard_concept == "S") |>
+  select(concept_id, concept_code, concept_name) |> collect()
+print(lab_concepts)   # <-- eyeball: right analytes, standard concepts?
+
+# Waist + BMI sometimes arrive as program physical measurements -> resolve by name.
+pm_candidates <- concept |>
+  filter(standard_concept == "S", domain_id == "Measurement",
+         str_detect(str_to_lower(concept_name), "waist|body mass index")) |>
+  select(concept_id, concept_code, concept_name, vocabulary_id) |> collect()
+print(pm_candidates)  # <-- pick waist + BMI concept_ids you trust
+
+id_of  <- function(code) lab_concepts$concept_id[lab_concepts$concept_code == code]
+alt_ids <- id_of("1742-6"); ast_ids <- id_of("1920-8")
+plt_ids <- c(id_of("777-3"), id_of("26515-7"))
+ggt_ids <- id_of("2324-2"); tg_ids  <- id_of("2571-8")
+bmi_ids <- pm_candidates$concept_id[str_detect(str_to_lower(pm_candidates$concept_name), "body mass index")]
+waist_ids <- pm_candidates$concept_id[str_detect(str_to_lower(pm_candidates$concept_name), "waist")]
+
+# Condition concept sets (standard, mapped from ICD-10-CM).
+masld_ids   <- resolve_icd(con, "^(K76\\.0|K75\\.81)$")
+liver_any   <- resolve_icd(con, "^(K7[0-7]|B1[6-9])")
+alcohol_ids <- resolve_icd(con, "^(K70|F10)")
+viralhep_ids<- resolve_icd(con, "^B1[6-9]")
+dm_ids      <- resolve_icd(con, "^E1[01]")
+htn_ids     <- resolve_icd(con, "^I1[0-6]")
+lipid_ids   <- resolve_icd(con, "^E78")
+cat("masld:", length(masld_ids), " liver_any:", length(liver_any), "\n")
+</script>
+
+<script type="text/plain" id="src-02">
+person <- tbl(con, "person")
+demo <- person |>
+  left_join(concept |> select(sex_concept = concept_id, sex_name = concept_name),
+            by = c("sex_at_birth_concept_id" = "sex_concept")) |>
+  transmute(person_id, birth_datetime,
+            sex_female = if_else(sex_name == "Female", 1L, 0L)) |>
+  collect()
+
+flags <- demo |> select(person_id) |>
+  left_join(collect(has_condition(con, masld_ids,   "coded_masld")), by = "person_id") |>
+  left_join(collect(has_condition(con, liver_any,   "any_liver")),   by = "person_id") |>
+  left_join(collect(has_condition(con, alcohol_ids, "alcohol_dz")),  by = "person_id") |>
+  left_join(collect(has_condition(con, viralhep_ids,"viral_hep")),   by = "person_id") |>
+  left_join(collect(has_condition(con, dm_ids,      "dm")),          by = "person_id") |>
+  left_join(collect(has_condition(con, htn_ids,     "htn")),         by = "person_id") |>
+  left_join(collect(has_condition(con, lipid_ids,   "lipid")),       by = "person_id") |>
+  mutate(across(c(coded_masld, any_liver, alcohol_dz, viral_hep, dm, htn, lipid),
+                ~ coalesce(., 0L)))
+</script>
+
+<script type="text/plain" id="src-03">
+# --- First PROFILE UNITS so the bounds below aren't guesswork (Step 03's verify gate) ---
+unit_profile <- function(ids) tbl(con, "measurement") |>
+  filter(measurement_concept_id %in% ids) |>
+  count(unit_source_value, unit_concept_id, sort = TRUE) |> collect()
+unit_profile(tg_ids); unit_profile(plt_ids); unit_profile(waist_ids)  # expect mg/dL, 10^9/L, cm
+# If a unit you don't expect dominates, convert it (or restrict to the expected unit) before bounding.
+
+# Each pull stays remote; only the per-person summary is collected.
+panel <- reduce(
+  list(
+    pull_recent(con, alt_ids,   "alt"),
+    pull_recent(con, ast_ids,   "ast"),
+    pull_recent(con, plt_ids,   "plt"),
+    pull_recent(con, ggt_ids,   "ggt"),
+    pull_recent(con, tg_ids,    "tg"),
+    pull_recent(con, bmi_ids,   "bmi"),
+    pull_recent(con, waist_ids, "waist")
+  ),
+  ~ full_join(.x, .y, by = "person_id")
+) |> collect()
+
+# UNIT / plausibility QC -- the single biggest source of error.
+# Adjust ranges to the units you confirmed in Step 01's measurement metadata.
+panel <- panel |>
+  mutate(
+    alt   = if_else(between(alt,   1, 1000), alt,   NA_real_),
+    ast   = if_else(between(ast,   1, 1000), ast,   NA_real_),
+    plt   = if_else(between(plt,  10, 1000), plt,   NA_real_),   # 10^9/L
+    ggt   = if_else(between(ggt,   1, 2000), ggt,   NA_real_),
+    tg    = if_else(between(tg,   10, 5000), tg,    NA_real_),   # mg/dL
+    bmi   = if_else(between(bmi,  10,   80), bmi,   NA_real_),
+    waist = if_else(between(waist,40,  200), waist, NA_real_)    # cm
+  )
+summary(panel |> select(alt, ast, plt, ggt, tg, bmi, waist))
+</script>
+
+<script type="text/plain" id="src-04">
+analytic <- panel |>
+  left_join(demo,  by = "person_id") |>
+  left_join(flags, by = "person_id") |>
+  mutate(
+    index_date   = pmax(ast_date, alt_date, plt_date, na.rm = TRUE),  # FIB-4 anchor
+    age_at_index = as.numeric(difftime(index_date, as.Date(birth_datetime),
+                                       units = "days")) / 365.25
+  ) |>
+  filter(age_at_index >= 18)
+
+# Base study population: adults, no competing etiology (alcohol / viral hepatitis).
+base_pop <- analytic |> filter(alcohol_dz == 0, viral_hep == 0)
+nrow(base_pop)
+</script>
+
+<script type="text/plain" id="src-05">
+rq1 <- base_pop |>
+  mutate(
+    L       = 0.953*log(tg) + 0.139*bmi + 0.718*log(ggt) + 0.053*waist - 15.745,
+    fli     = exp(L) / (1 + exp(L)) * 100,
+    hsi     = 8*(alt/ast) + bmi + sex_female*2 + dm*2,
+    fli_pos = fli >= 60,
+    cmrf_any   = (bmi >= 25) | dm == 1 | htn == 1 | lipid == 1,
+    masld_appx = fli_pos & cmrf_any,
+    coded      = coded_masld == 1
+  )
+
+wilson <- function(x, n, conf = .95){ z <- qnorm(1-(1-conf)/2); p <- x/n
+  c(est=p, lwr=((p+z^2/(2*n))-z*sqrt(p*(1-p)/n+z^2/(4*n^2)))/(1+z^2/n),
+            upr=((p+z^2/(2*n))+z*sqrt(p*(1-p)/n+z^2/(4*n^2)))/(1+z^2/n)) }
+cohen_kappa <- function(a, b){ t<-table(a,b); n<-sum(t)
+  po<-sum(diag(t))/n; pe<-sum(rowSums(t)*colSums(t))/n^2; (po-pe)/(1-pe) }
+
+d1 <- rq1 |> filter(!is.na(fli), !is.na(coded))
+p_coded <- mean(d1$coded); p_fli <- mean(d1$fli_pos)
+prev_tbl <- tibble(
+  measure = c("coded","fli_pos","masld_appx"),
+  bind_rows(as_tibble_row(wilson(sum(d1$coded),       nrow(d1))),
+            as_tibble_row(wilson(sum(d1$fli_pos),     nrow(d1))),
+            as_tibble_row(wilson(sum(d1$masld_appx, na.rm=TRUE), nrow(d1)))))
+print(prev_tbl)
+
+# Headline RQ1: absolute difference (index - code) with a bootstrap 95% CI.
+set.seed(1); R <- 2000; n <- nrow(d1)
+boot <- replicate(R, { i <- sample.int(n, n, TRUE)
+  mean(d1$fli_pos[i]) - mean(d1$coded[i]) })
+cat(sprintf("Abs diff (FLI - coded): %.4f  95%% CI [%.4f, %.4f]\n",
+            p_fli - p_coded, quantile(boot,.025), quantile(boot,.975)))
+cat("Kappa(coded, fli_pos):", round(cohen_kappa(d1$coded, d1$fli_pos), 3), "\n")
+print(with(d1, table(coded, fli_pos)))   # undercapture = coded=FALSE & fli_pos=TRUE
+</script>
+
+<script type="text/plain" id="src-06">
+rq2 <- base_pop |>
+  mutate(fib4 = (age_at_index * ast) / (plt * sqrt(alt))) |>
+  filter(!is.na(fib4), any_liver == 0) |>                 # seemingly healthy denominator
+  mutate(
+    fib4_cat = case_when(fib4 < 1.3 ~ "low",
+                         fib4 <= 2.67 ~ "indeterminate",
+                         TRUE ~ "high"),
+    fib4_cat_adj = case_when(age_at_index > 65 & fib4 < 2.0  ~ "low",
+                             age_at_index > 65 & fib4 <= 2.67 ~ "indeterminate",
+                             age_at_index > 65               ~ "high",
+                             fib4 < 1.3 ~ "low", fib4 <= 2.67 ~ "indeterminate",
+                             TRUE ~ "high")
+  )
+
+rq2_summary <- rq2 |> count(fib4_cat) |>
+  mutate(prop = n/sum(n),
+         lwr  = map2_dbl(n, sum(n), ~wilson(.x, .y)["lwr"]),
+         upr  = map2_dbl(n, sum(n), ~wilson(.x, .y)["upr"]))
+print(rq2_summary)
+cat("Indeterminate-or-worse:",
+    round(mean(rq2$fib4_cat %in% c("indeterminate","high")), 4), "\n")
+
+# Most striking subgroup: FIB-4 high AND FLI-positive but never coded.
+rq2 |> mutate(fli = exp(0.953*log(tg)+0.139*bmi+0.718*log(ggt)+0.053*waist-15.745) /
+                    (1+exp(0.953*log(tg)+0.139*bmi+0.718*log(ggt)+0.053*waist-15.745))*100) |>
+  summarise(high_and_steatotic = mean(fib4_cat == "high" & fli >= 60, na.rm = TRUE))
+</script>
+
+<script type="text/plain" id="src-07">
+# RQ3 — score SDOH with the VALIDATED AOUSDOHtools package (Koleck et al., JAMIA 2024).
+# One calc_*() per construct; each takes a long survey frame and returns person_id + score.
+install.packages("AOUSDOHtools")              # once per environment
+library(AOUSDOHtools); library(purrr)
+
+# 1. Pull the SDOH survey in the long shape the functions expect. ds_survey already
+#    carries question_concept_id / answer_concept_id (confirm the survey label string).
+sdoh_long <- tbl(con, "ds_survey") |>
+  filter(survey == "Social Determinants of Health") |>
+  select(person_id, question_concept_id, answer_concept_id) |>
+  collect()
+
+# 2. Validated construct scores (add/drop constructs per your protocol).
+SDOH <- list(
+  calc_food_insecurity(sdoh_long),     # food_insecurity (Hunger Vital Sign)
+  calc_housing_insecurity(sdoh_long),  # housing_insecurity
+  calc_edd_frequency(sdoh_long),       # everyday-discrimination frequency
+  calc_stress_category(sdoh_long)      # perceived-stress category
+) |> reduce(full_join, by = "person_id")
+names(SDOH)   # <-- confirm the score column names before binarizing below
+
+# 3. SES items live in OTHER surveys (not the SDOH survey) -> pull by question text.
+ses <- tbl(con, "ds_survey") |>
+  filter(survey %in% c("The Basics", "Health Care Access & Utilization")) |>
+  select(person_id, question, answer) |> collect() |>
+  mutate(q = case_when(str_detect(str_to_lower(question), "income")            ~ "income",
+                       str_detect(str_to_lower(question), "grade|education")   ~ "education",
+                       str_detect(str_to_lower(question), "insurance|coverage")~ "insurance",
+                       TRUE ~ NA_character_)) |>
+  filter(!is.na(q)) |> distinct(person_id, q, .keep_all = TRUE) |>
+  pivot_wider(id_cols = person_id, names_from = q, values_from = answer)
+
+# 4. Binarize to 0/1 disadvantage flags, then a 0..k cumulative burden.
+#    Cutoffs sit on validated scores but are still a choice — adjust to your protocol.
+sdoh_scored <- SDOH |>
+  left_join(ses, by = "person_id") |>
+  transmute(
+    person_id,
+    d_food    = food_insecurity > 0,
+    d_housing = housing_insecurity > 0,
+    d_discrim = edd_frequency >= median(edd_frequency, na.rm = TRUE),
+    d_stress  = stress_category %in% c("Moderate", "High"),
+    d_income  = str_detect(replace_na(income, ""), "less than|10,000|24,999"),
+    d_educ    = str_detect(str_to_lower(replace_na(education, "")), "never attended|grade|high school"),
+    d_insure  = str_detect(str_to_lower(replace_na(insurance, "")), "none|medicaid|no insurance")
+  ) |>
+  mutate(across(starts_with("d_"), ~ as.integer(replace_na(., FALSE))),
+         sdoh_burden = rowSums(across(starts_with("d_"))))
+
+# 5. Model who stays in the gap (index-positive only -> isolates coding, not disease).
+gap_df <- rq1 |> filter(fli >= 60) |>
+  transmute(person_id, in_gap = as.integer(coded == FALSE),
+            age_at_index, sex_female, bmi) |>
+  inner_join(sdoh_scored, by = "person_id")
+
+fit <- glm(in_gap ~ sdoh_burden + age_at_index + sex_female + bmi,
+           data = gap_df, family = binomial())
+exp(cbind(OR = coef(fit), confint.default(fit)))   # per-unit-burden OR (headline)
+
+# Dose-response (ordered burden) for the "cumulative" claim.
+gap_df |> mutate(burden_f = factor(pmin(sdoh_burden, 3))) |>
+  glm(in_gap ~ burden_f + age_at_index + sex_female + bmi, data = _, family = binomial()) |>
+  (\(m) exp(cbind(OR = coef(m), confint.default(m))))()
+</script>
+
+<script type="text/plain" id="src-08">
+dir.create("outputs", showWarnings = FALSE)
+
+# ---- 1. The COLLECTED DATASET (so you never recompute it; survives autostop) ----
+saveRDS(analytic, "outputs/analytic_dataset.rds")   # one row per person, all variables
+saveRDS(base_pop, "outputs/base_pop.rds")
+
+# ---- 2. Cohort flow / attrition counts (the N at each step, for your methods table) ----
+cohort_flow <- tibble(
+  step = c("≥1 required lab present", "adults ≥18", "minus alcohol/viral-hep = base_pop",
+           "FLI computable", "FIB-4 computable"),
+  n = c(nrow(analytic),
+        sum(analytic$age_at_index >= 18, na.rm = TRUE),
+        nrow(base_pop),
+        sum(!is.na(rq1$fli)),
+        sum(!is.na(base_pop$ast) & !is.na(base_pop$alt) & !is.na(base_pop$plt)))
+)
+print(cohort_flow); write_csv(cohort_flow, "outputs/cohort_flow.csv")
+
+# ---- 3. Disclosure self-check: HALT if any reported summary cell is 1..19 ----
+small_cells <- function(df, col = "n") df |> filter(.data[[col]] > 0, .data[[col]] < 20)
+stopifnot(nrow(small_cells(rq2_summary)) == 0, nrow(small_cells(cohort_flow)) == 0)
+
+# ---- 4. Result summaries + provenance ----
+saveRDS(list(prev = prev_tbl, rq2 = rq2_summary, rq3 = broom::tidy(fit)),
+        "outputs/masld_results.rds")
+write_csv(prev_tbl, "outputs/rq1_prevalence.csv"); write_csv(rq2_summary, "outputs/rq2_fib4.csv")
+writeLines(capture.output(sessionInfo()), "outputs/sessionInfo.txt")
+cat("allofus", as.character(packageVersion("allofus")),
+    "| CDR", Sys.getenv("WORKSPACE_CDR"), "\n", file = "outputs/provenance.txt")
+
+# ---- 5. Push to the workspace bucket ----
+system(paste0("gsutil -m cp -r outputs ", Sys.getenv("WORKSPACE_BUCKET"), "/"))
+
+# ---- Resume after a restart (paste in a fresh session, then re-run from Step 00) ----
+# system(paste0("gsutil -m cp -r ", Sys.getenv("WORKSPACE_BUCKET"), "/outputs ."))
+# analytic <- readRDS("outputs/analytic_dataset.rds"); base_pop <- readRDS("outputs/base_pop.rds")
+
+cat("\nSaved dataset + cohort flow + results + provenance. Cells <20 suppressed. Now stop the app.\n")
+</script>
+</div>
+
+<script>
+const ITEMS = [
+  // ---------------- SETUP ----------------
+  { group:"Setup", L:"A", id:"access", title:"Sign in to Workbench 2.0",
+    sub:"Get from the legacy login into the Verily-powered 2.0 environment.",
+    steps:[
+      `Go to <code class="inline">workbench.researchallofus.org/login</code> and sign in with your <code class="inline">@researchallofus.org</code> account.`,
+      `Under <b>"Migrate your Workspaces to Researcher Workbench 2.0,"</b> click <b>"Go to My Workspaces."</b>`,
+      `Click <b>"Open Verily Workbench"</b> — you're redirected to <code class="inline">workbench.verily.com</code>.`,
+      `Choose <b>"Continue with Google"</b> with the same account and accept the Terms of Use &amp; Privacy Policy (first login only).`
+    ],
+    calls:[{k:"info", tag:"Prereq", html:`Controlled Tier access requirements (ID verification, RCR training, DUCC) must be current. 2.0 workspaces appear only under the <b>"Workspaces"</b> tab.`}]},
+
+  { group:"Setup", L:"B", id:"duplicate", title:"Duplicate the Controlled Tier tutorial workspace",
+    sub:"The tutorial arrives pre-wired with the data collection and policies — no catalog step, no conflict.",
+    steps:[
+      `Find <b>"All of Us Tutorial Workspace: Getting Started with Controlled Tier Data (v8)"</b> on the landing page / Workspaces tab. Favorite it.`,
+      `You have <b>read-only</b> access, so click <b>Duplicate</b> for your own editable copy.`,
+      `In the prompts, <b>rename</b> it and select <b>your</b> billing pod <code class="inline">user-pod-&lt;username&gt;-XXXX</code> — not the tutorial's.`,
+      `Edit description / Researcher Use Statement, keep region <b>us-central1</b>, confirm, and open the duplicate.`
+    ],
+    calls:[
+      {k:"tip", tag:"Why this avoids the conflict", html:`The tutorial already has the <b>Controlled Tier v8 (C2024Q3R8)</b> collection and its perimeter/group policies attached. Your duplicate inherits them on a clean workspace — no "Data from Catalog" step, no custom-app collision.`},
+      {k:"warn", tag:"Permanent", html:`The <b>billing pod can't be changed</b> after duplication — pick your <code class="inline">user-pod-…</code> credits pod in the prompts.`},
+      {k:"info", tag:"Confirm", html:`Once open, check the <b>Resources</b> tab to confirm the Controlled Tier collection came across — it should already be listed.`}
+    ]},
+
+  { group:"Setup", L:"C", id:"app", title:"Launch the R Analysis Environment (RStudio)",
+    sub:"Use the approved app — a custom container is what tripped the policy before.",
+    steps:[
+      `Go to the <b>Apps</b> tab and choose <b>"R Analysis Environment"</b> (RStudio).`,
+      `The <b>Default configuration — 2 CPUs / 13 GB, 500 GB disk</b> — is exactly what this workflow is tuned for; keep it. (500 GB is more disk than you'll use and bills continuously, but it's harmless.)`,
+      `Start it; after a few minutes RStudio opens in the browser.`
+    ],
+    calls:[{k:"warn", tag:"Do not", html:`Don't build this from a custom GitHub devcontainer — that generic image skips the All of Us wiring (so <code class="inline">WORKSPACE_CDR</code> stays empty) and trips the app policy. The built-in app injects the env vars and complies with the perimeter policy.`}]},
+
+  { group:"Setup", L:"D", id:"connect", title:"Connect to the CDR",
+    sub:"Set the env vars explicitly (the app didn't inject them), connect with the plain CDR name, verify the tables.",
+    code:"src-connect", codeNote:"top of project",
+    calls:[
+      {k:"warn", tag:"No _base", html:`On Researcher Workbench 2.0 the CDR name is used <b>as-is</b> — the working CDR is <code class="inline">wb-silky-artichoke-2408.C2024Q3R8</code>. Do <b>not</b> append <code class="inline">_base</code>; that legacy suffix points at a dataset that doesn't exist here. The R Analysis Environment also didn't populate the env vars, so the block sets them explicitly.`},
+      {k:"tip", tag:"Green light", html:`<code class="inline">needed %in% tables</code> returns six <code class="inline">TRUE</code>s and <code class="inline">setdiff(needed, tables)</code> is <code class="inline">character(0)</code>. That's your go for Step 00.`}
+    ]},
+
+  // ---------------- ANALYSIS ----------------
+  { group:"Analysis", L:"00", id:"s00", title:"Session helpers",
+    sub:"con is live from Connect — just define the shared helper functions.", code:"src-00"},
+
+  { group:"Analysis", L:"01", id:"s01", title:"Resolve concept IDs",
+    sub:"Pull labs, physical measurements, and condition sets from the vocabulary — not hard-coded IDs.",
+    code:"src-01",
+    gate:{ text:`Step 01 prints <b>lab_concepts</b> and <b>pm_candidates</b>. Confirm the right standard concepts before the panel pull — pick the waist and BMI rows you trust.`,
+           label:"I checked the printed concepts" }},
+
+  { group:"Analysis", L:"02", id:"s02", title:"Demographics + condition flags",
+    sub:"One row per person: sex, birth date, and a yes/no flag for each diagnosis family.", code:"src-02"},
+
+  { group:"Analysis", L:"03", id:"s03", title:"Lab / PM panel",
+    sub:"Most recent value per analyte, kept remote until one row per person, then bounded.",
+    code:"src-03",
+    gate:{ text:`The bounds assume specific units (TG mg/dL, platelets 10⁹/L, waist cm). All of Us labs are mixed-unit — check <b>unit_source_value</b> / <b>unit_concept_id</b> and adjust, or every index is silently wrong.`,
+           label:"I confirmed analyte units" }},
+
+  { group:"Analysis", L:"04", id:"s04", title:"Assemble the analytic table",
+    sub:"Join everything, compute age at index on UTC-safe dates, drop alcohol / viral-hepatitis etiologies.", code:"src-04",
+    calls:[{k:"info", tag:"Rigor", html:`ICD codes undercount heavy drinking. For a stricter MASLD denominator, also exclude high alcohol intake from the <b>Lifestyle</b> survey (via <code class="inline">aou_survey()</code>) — or carry it as a sensitivity covariate. MetALD-range drinkers are not MASLD.`}]},
+
+  { group:"Analysis", L:"05", id:"s05", title:"RQ1 — the prevalence gap",
+    sub:"FLI, HSI, prevalences with CIs, the absolute coded-vs-index difference with a bootstrap CI, κ, and the 2×2.", code:"src-05"},
+
+  { group:"Analysis", L:"06", id:"s06", title:"RQ2 — fibrosis risk in the gap",
+    sub:"FIB-4 across the un-coded, no-liver-code population — standard and age-adjusted bands.", code:"src-06"},
+
+  { group:"Analysis", L:"07", id:"s07", title:"RQ3 — SDOH and the gap",
+    sub:"Score SDOH with the validated AOUSDOHtools package, add SES items, then model who stays un-coded.",
+    code:"src-07",
+    gate:{ text:`AOUSDOHtools handles the concept mapping, so the only things to confirm against live data: the survey label string (<code class="inline">"Social Determinants of Health"</code>), the score column names from <code class="inline">names(SDOH)</code>, and the binarization cutoffs in step 4. The package functions themselves run as written.`,
+           label:"I confirmed survey label, score names + cutoffs" },
+    calls:[{k:"info", tag:"Validated source", html:`<code class="inline">AOUSDOHtools</code> (CRAN) provides one <code class="inline">calc_*()</code> per construct — <code class="inline">calc_food_insecurity</code>, <code class="inline">calc_edd_frequency</code>, <code class="inline">calc_stress_category</code>, etc. — implementing the scoring from Koleck et al., <i>JAMIA</i> 2024. Income, education, and insurance aren't in the SDOH survey, so step 3 pulls them from The Basics / Health Care Access by question text.`}]},
+
+  { group:"Analysis", L:"08", id:"s08", title:"Save dataset, results & provenance",
+    sub:"Persist the collected dataset, a cohort-flow table, summaries, and session info, then push to the bucket — it survives autostop.", code:"src-08",
+    calls:[{k:"warn", tag:"When done", html:`Stop the app from the <b>Apps</b> tab so idle compute stops billing. Your outputs persist in the bucket — reload them after any restart with the commented <code class="inline">readRDS</code> lines at the bottom of the block.`}]}
+];
+
+const itemsEl = document.getElementById('items');
+const railEl  = document.getElementById('railList');
+const done = new Array(ITEMS.length).fill(false);
+let lastGroup = null, railOl = null;
+
+ITEMS.forEach((it, i) => {
+  // band header when group changes
+  if (it.group !== lastGroup){
+    const band = document.createElement('div');
+    band.className = 'band';
+    band.innerHTML = it.group === 'Setup'
+      ? `<span class="bn">Setup</span> Workspace &amp; connection`
+      : `<span class="bn">Analysis</span> Run sheet · paste in order`;
+    itemsEl.appendChild(band);
+    const rt = document.createElement('p'); rt.className='rail-title'; rt.textContent=it.group;
+    railEl.appendChild(rt);
+    railOl = document.createElement('ol'); railEl.appendChild(railOl);
+    lastGroup = it.group;
+  }
+
+  const art = document.createElement('article');
+  art.className = 'item' + (it.gate ? ' is-gate' : '');
+  art.id = 'item-' + it.id;
+  let inner = `
+    <div class="item-head">
+      <span class="item-num">${it.L}</span>
+      <div><h2>${it.title}</h2><p class="sub">${it.sub}</p></div>
+      <label class="done-toggle"><input type="checkbox" data-i="${i}"> done</label>
+    </div>`;
+  if (it.steps) inner += `<ol class="steps">${it.steps.map(s=>`<li>${s}</li>`).join('')}</ol>`;
+  if (it.gate) inner += `<div class="gate"><span class="gate-tag">Verify</span>
+      <div class="gate-body"><p>${it.gate.text}</p>
+      <label class="gate-check"><input type="checkbox" data-gate="${it.id}"> ${it.gate.label}</label></div></div>`;
+  if (it.code) inner += `<div class="code"><div class="code-bar"><span class="code-tag">R</span>
+      ${it.codeNote?`<span class="code-note">${it.codeNote}</span>`:``}
+      <button class="copy" data-copy="${it.code}">Copy block</button></div>
+      <pre><code id="render-${it.code}"></code></pre></div>`;
+  if (it.calls) it.calls.forEach(c => inner += `<div class="call ${c.k}"><span class="tag">${c.tag}</span><div>${c.html}</div></div>`);
+  art.innerHTML = inner;
+  itemsEl.appendChild(art);
+  if (it.code) document.getElementById('render-'+it.code).textContent =
+      document.getElementById(it.code).textContent.replace(/^\n/,'').replace(/\s+$/,'');
+
+  const li = document.createElement('li');
+  li.innerHTML = `<a href="#item-${it.id}" data-rail="${i}" class="${it.gate?'gate':''}">
+      <span class="rn">${it.L}</span><span>${it.title}</span></a>`;
+  railOl.appendChild(li);
+});
+
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const code = document.getElementById(btn.dataset.copy).textContent.replace(/^\n/,'').replace(/\s+$/,'');
+    try { await navigator.clipboard.writeText(code); }
+    catch { const t=document.createElement('textarea'); t.value=code; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+    const old = btn.textContent; btn.textContent='Copied ✓'; btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=old; btn.classList.remove('copied');},1400);
+  });
+});
+
+const fill=document.getElementById('meterFill'), count=document.getElementById('meterCount');
+function refresh(){ const d=done.filter(Boolean).length; fill.style.width=(d/ITEMS.length*100)+'%';
+  count.textContent=d+' / '+ITEMS.length+' done'; }
+document.querySelectorAll('[data-i]').forEach(cb=>cb.addEventListener('change',e=>{
+  const i=+e.target.dataset.i; done[i]=e.target.checked;
+  document.getElementById('item-'+ITEMS[i].id).classList.toggle('done',done[i]);
+  document.querySelector(`[data-rail="${i}"]`).classList.toggle('done',done[i]); refresh();
+}));
+document.querySelectorAll('[data-gate]').forEach(cb=>cb.addEventListener('change',e=>{
+  document.getElementById('item-'+e.target.dataset.gate).classList.toggle('cleared',e.target.checked);
+}));
+
+const links=[...document.querySelectorAll('[data-rail]')];
+const obs=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){
+  const id=en.target.id.replace('item-',''); const i=ITEMS.findIndex(x=>x.id===id);
+  links.forEach(l=>l.classList.toggle('active',+l.dataset.rail===i)); }}),
+  {rootMargin:'-45% 0px -50% 0px', threshold:0});
+ITEMS.forEach(it=>obs.observe(document.getElementById('item-'+it.id)));
+refresh();
+</script>
+</body>
+</html>
