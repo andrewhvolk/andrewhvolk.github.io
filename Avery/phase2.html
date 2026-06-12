@@ -110,6 +110,58 @@
   .call.info .tag{background:var(--info-ink)}
   .call b{font-weight:600}
 
+  ul.checklist{list-style:none; margin:.9rem 0 0; padding:0}
+  ul.checklist li{font-family:"IBM Plex Mono"; font-size:.8rem; color:var(--ink-soft); padding:.3rem 0;
+    border-top:1px dashed var(--line)}
+  ul.checklist li:first-child{border-top:none}
+  ul.checklist b{color:var(--ink)}
+
+  /* teaching layer — visible only when Teach mode is on */
+  .teach-toggle{display:flex; align-items:center; gap:.4rem; font-family:"IBM Plex Mono"; font-size:.72rem;
+    color:var(--ink-soft); cursor:pointer; white-space:nowrap; user-select:none}
+  .teach-toggle input{accent-color:var(--teal); cursor:pointer}
+  .teach-toggle:has(input:checked){color:var(--teal-deep); font-weight:600}
+  .teach-only{display:none}
+  body.teach .teach-only{display:block}
+  .why{border-left:3px solid var(--teal); background:var(--teal-wash); border-radius:0 8px 8px 0; padding:.7rem .9rem; margin:0 0 .9rem}
+  .why-tag{font-family:"IBM Plex Mono"; font-size:.6rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--teal-deep); font-weight:600; display:block; margin-bottom:.25rem}
+  .why p{margin:0; font-size:.9rem; color:var(--ink)}
+  .call.decision{background:#EEEFF7; border:1px solid #CFD2E6; color:#3a3a63}
+  .call.decision .tag{background:#46467A; color:#fff}
+  details.hood{margin:.9rem 0 0; border:1px solid var(--line); border-radius:8px; background:#FBFCFC}
+  details.hood summary{cursor:pointer; padding:.6rem .85rem; font-family:"IBM Plex Mono"; font-size:.72rem;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); list-style:none}
+  details.hood summary::-webkit-details-marker{display:none}
+  details.hood summary::before{content:"\25B8  "; color:var(--teal)}
+  details.hood[open] summary::before{content:"\25BE  "}
+  details.hood .hood-body{padding:.2rem .9rem .85rem; font-size:.88rem; color:var(--ink)}
+  details.hood .hood-body p{margin:.55rem 0 0}
+  details.hood .hood-body code{font-family:"IBM Plex Mono"; font-size:.85em; background:var(--teal-wash);
+    color:var(--teal-deep); padding:.05em .3em; border-radius:4px}
+
+  /* mentor layer — visible only when Mentor view is on */
+  .mentor-only{display:none}
+  body.mentor .mentor-only{display:block}
+  .call.mentor{background:#EDEFEF; border:1px solid #CFD8D5; color:#243430}
+  .call.mentor .tag{background:var(--ink); color:#fff}
+
+  /* glossary */
+  details.glossary{background:var(--surface); border:1px solid var(--line); border-radius:12px; margin:1.4rem 0 0}
+  details.glossary > summary{cursor:pointer; padding:1rem 1.4rem; font-family:"Space Grotesk"; font-weight:600;
+    font-size:1.05rem; list-style:none; color:var(--ink)}
+  details.glossary > summary::-webkit-details-marker{display:none}
+  details.glossary > summary::before{content:"\25B8  "; color:var(--teal)}
+  details.glossary[open] > summary::before{content:"\25BE  "}
+  .gloss-body{padding:.2rem 1.4rem 1.3rem; border-top:1px solid var(--line)}
+  .gloss-body h4{font-family:"IBM Plex Mono"; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--teal-deep); margin:1.2rem 0 .5rem}
+  .gloss-body dl{margin:0; display:grid; grid-template-columns:10.5rem 1fr; gap:.4rem .9rem}
+  .gloss-body dt{font-weight:600; font-family:"IBM Plex Mono"; font-size:.8rem; color:var(--ink)}
+  .gloss-body dd{margin:0; font-size:.88rem; color:var(--ink-soft)}
+  .gloss-body dd code{font-family:"IBM Plex Mono"; font-size:.86em; color:var(--teal-deep)}
+  @media (max-width:680px){ .gloss-body dl{grid-template-columns:1fr; gap:.05rem .9rem} .gloss-body dd{margin:0 0 .55rem} }
+
   .gate{background:var(--amber-wash); border:1px solid var(--amber-line); border-radius:10px;
     padding:.9rem 1rem; margin:1.1rem 0 0; display:flex; gap:.8rem; align-items:flex-start}
   .gate-tag{font-family:"IBM Plex Mono"; font-weight:600; font-size:.66rem; letter-spacing:.1em;
@@ -158,6 +210,8 @@
       <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
       <div class="meter-count" id="meterCount">0 / 13 done</div>
     </div>
+    <label class="teach-toggle"><input type="checkbox" id="teachToggle"> Teach mode</label>
+    <label class="teach-toggle"><input type="checkbox" id="mentorToggle"> Mentor view</label>
   </div>
 </div>
 
@@ -195,7 +249,50 @@
       </figure>
     </section>
 
+    <div class="teach-only"><div class="why" style="margin:0 0 1.4rem"><span class="why-tag">Teach mode is on</span><p style="margin:0">Each step now shows <b>why</b> it's done, a <b>predict-first</b> nudge before you run it, the <b>decisions</b> behind methods choices, and an <b>Under the hood</b> panel for the deeper mechanics. Turn it off in the top bar to collapse back to the plain run sheet.</p></div></div>
+
+    <div class="mentor-only"><div class="call mentor" style="margin:0 0 1.4rem"><span class="tag">Mentor view</span><div>Each milestone now shows a <b>Mentor prompt</b> — a question to ask the student to check real understanding, not just completion. Toggle it off in the top bar to hide them.</div></div></div>
+
     <div id="items"></div>
+
+    <details class="glossary" id="glossary">
+      <summary>Glossary — key terms</summary>
+      <div class="gloss-body">
+        <h4>Data &amp; infrastructure</h4>
+        <dl>
+          <dt>OMOP</dt><dd>A common data model that reshapes every health system's records into the same standard tables, so one analysis works across sources.</dd>
+          <dt>CDR</dt><dd>Curated Data Repository — the versioned All of Us dataset you analyze (here, v8 Controlled Tier, <code>C2024Q3R8</code>).</dd>
+          <dt>BigQuery</dt><dd>Google's cloud data warehouse where the CDR lives as tables; R sends it SQL and gets results back.</dd>
+          <dt>dbplyr</dt><dd>The R package that translates dplyr pipelines into SQL so they run inside BigQuery.</dd>
+          <dt>concept_id</dt><dd>The numeric ID a vocabulary assigns to a clinical idea; the database stores these, not names.</dd>
+          <dt>SNOMED / LOINC</dt><dd>Standard vocabularies for conditions (SNOMED) and lab tests (LOINC).</dd>
+        </dl>
+        <h4>Clinical indices</h4>
+        <dl>
+          <dt>MASLD</dt><dd>Metabolic dysfunction–associated steatotic liver disease — the current name for what was called NAFLD.</dd>
+          <dt>Steatosis</dt><dd>Fat accumulation in the liver; what FLI/HSI estimate — not the full MASLD definition.</dd>
+          <dt>FLI</dt><dd>Fatty Liver Index — a 0–100 score from triglycerides, BMI, GGT, and waist; ≥ 60 suggests steatosis.</dd>
+          <dt>HSI</dt><dd>Hepatic Steatosis Index — an alternative steatosis score from ALT/AST, BMI, sex, and diabetes.</dd>
+          <dt>FIB-4</dt><dd>A fibrosis-risk score from age, AST, ALT, and platelets; bands flag low / indeterminate / high risk.</dd>
+        </dl>
+        <h4>Statistics</h4>
+        <dl>
+          <dt>Prevalence</dt><dd>The share of a population with a condition at a point in time.</dd>
+          <dt>Confidence interval</dt><dd>The plausible range for a true value; for a difference, crossing 0 means uncertain; for an odds ratio, crossing 1.</dd>
+          <dt>Wilson interval</dt><dd>A confidence interval for a proportion that stays sensible near 0% and 100% and at small counts.</dd>
+          <dt>Cohen's kappa</dt><dd>Agreement between two methods beyond chance; can be low even when raw agreement is high for a rare condition.</dd>
+          <dt>Bootstrap</dt><dd>Estimating uncertainty by resampling the data many times instead of assuming a formula.</dd>
+          <dt>Odds ratio</dt><dd>From logistic regression — how the odds of an outcome change per unit of a predictor (&gt; 1 = higher odds).</dd>
+        </dl>
+        <h4>Governance</h4>
+        <dl>
+          <dt>Perimeter</dt><dd>The enforced cloud boundary around the workspace that restricts moving data out.</dd>
+          <dt>Egress</dt><dd>Data leaving the workspace; row-level egress is prohibited and monitored, and alerts fire on violations.</dd>
+          <dt>Cell suppression</dt><dd>Not reporting any count under 20, to protect participant privacy.</dd>
+          <dt>SDOH</dt><dd>Social determinants of health (e.g., food/housing insecurity, discrimination), scored here via AOUSDOHtools.</dd>
+        </dl>
+      </div>
+    </details>
 
     <footer>
       <div class="closing">
@@ -596,6 +693,7 @@ const ITEMS = [
   // ---------------- SETUP ----------------
   { group:"Setup", L:"A", id:"access", title:"Sign in to Workbench 2.0",
     sub:"Get from the legacy login into the Verily-powered 2.0 environment.",
+    why:`All of Us data never leaves a secure cloud. Signing in isn't just authentication — it's how you enter the protected environment where the data physically lives. You analyze it in place rather than downloading it to your laptop.`,
     steps:[
       `Go to <code class="inline">workbench.researchallofus.org/login</code> and sign in with your <code class="inline">@researchallofus.org</code> account.`,
       `Under <b>"Migrate your Workspaces to Researcher Workbench 2.0,"</b> click <b>"Go to My Workspaces."</b>`,
@@ -606,6 +704,7 @@ const ITEMS = [
 
   { group:"Setup", L:"B", id:"duplicate", title:"Duplicate the Controlled Tier tutorial workspace",
     sub:"The tutorial arrives pre-wired with the data collection and policies — no catalog step, no conflict.",
+    why:`A workspace is permanently bound to one data collection and its policies the moment data is attached. Duplicating the tutorial inherits a correct, policy-compliant binding — which is exactly why building one from scratch tripped the perimeter earlier. You're choosing a known-good starting point over a blank slate.`,
     steps:[
       `Find <b>"All of Us Tutorial Workspace: Getting Started with Controlled Tier Data (v8)"</b> on the landing page / Workspaces tab. Favorite it.`,
       `You have <b>read-only</b> access, so click <b>Duplicate</b> for your own editable copy.`,
@@ -620,6 +719,7 @@ const ITEMS = [
 
   { group:"Setup", L:"C", id:"app", title:"Launch the R Analysis Environment (RStudio)",
     sub:"Use the approved app — a custom container is what tripped the policy before.",
+    why:`Your code runs on a cloud machine inside the perimeter, not on your computer. The approved app is pre-wired to the data and the policies; a custom image isn't — which is why it both fails to connect and violates policy. Same R, different (compliant) plumbing.`,
     steps:[
       `Go to the <b>Apps</b> tab and choose <b>"R Analysis Environment"</b> (RStudio).`,
       `The <b>Default configuration — 2 CPUs / 13 GB, 500 GB disk</b> — is exactly what this workflow is tuned for; keep it. (500 GB is more disk than you'll use and bills continuously, but it's harmless.)`,
@@ -629,6 +729,8 @@ const ITEMS = [
 
   { group:"Setup", L:"D", id:"connect", title:"Connect to the CDR",
     sub:"Set the env vars explicitly (the app didn't inject them), connect with the plain CDR name, verify the tables.",
+    why:`aou_connect() opens a connection to BigQuery, the cloud warehouse where the CDR lives as database tables. From here on your R code mostly writes SQL behind the scenes and sends it to BigQuery — the data stays in the cloud and only your results come back.`,
+    hood:`<p>The CDR isn't a file you load into R — it's a set of tables in Google BigQuery. <code>aou_connect()</code> returns a <i>connection</i>, and <code>tbl(con, 'person')</code> is a <i>lazy</i> reference, not the data itself.</p><p>When you pipe dplyr verbs onto that reference, the <code>dbplyr</code> package translates them into SQL and only runs it when you call <code>collect()</code>. That's why the heavy work happens in the cloud and only a small summary lands in R — and why the earlier UNION error was a SQL-dialect problem, not an R one.</p>`,
     code:"src-connect", codeNote:"top of project",
     calls:[
       {k:"warn", tag:"No _base", html:`On Researcher Workbench 2.0 the CDR name is used <b>as-is</b> — the working CDR is <code class="inline">wb-silky-artichoke-2408.C2024Q3R8</code>. Do <b>not</b> append <code class="inline">_base</code>; that legacy suffix points at a dataset that doesn't exist here. The R Analysis Environment also didn't populate the env vars, so the block sets them explicitly.`},
@@ -637,44 +739,113 @@ const ITEMS = [
 
   // ---------------- ANALYSIS ----------------
   { group:"Analysis", L:"00", id:"s00", title:"Session helpers",
-    sub:"con is live from Connect — just define the shared helper functions.", code:"src-00"},
+    sub:"con is live from Connect — just define the shared helper functions.",
+    why:`Defining the helpers once keeps every later step short. resolve_icd() turns plain ICD-10 patterns into the standard concept sets the database actually uses; pull_recent() gets one most-recent value per person; has_condition() flags a diagnosis. Read them now so the later one-liners make sense.`, code:"src-00"},
 
   { group:"Analysis", L:"01", id:"s01", title:"Resolve concept IDs",
     sub:"Pull labs, physical measurements, and condition sets from the vocabulary — not hard-coded IDs.",
+    why:`The database doesn't store "MASLD" or "ALT" by name — it stores numeric concept_ids from controlled vocabularies (SNOMED for conditions, LOINC for labs). Before you can count anything you have to translate human terms into those IDs. Resolving them from the vocabulary is reproducible and survives CDR updates; hard-coding IDs is fragile.`,
+    predict:`Before running, predict: how many concept_ids should "MASLD" (K76.0 / K75.81) resolve to — a handful, or hundreds? And what would a count of <b>0</b> for any analyte tell you about your search?`,
+    decision:`We include each standard concept's <i>descendants</i> (via concept_ancestor), so a general code also captures its more specific children. That widens capture — good for not missing cases — at some cost to specificity. A deliberate trade you should be able to defend.`,
+    hood:`<p>An ICD-10 code is a <i>source</i> concept. The query follows the "Maps to" relationship to the <i>standard</i> SNOMED concept, then pulls descendants from the concept_ancestor table. That two-hop mapping is why you can't just filter conditions by the raw ICD string.</p><p>The IDs are combined in R with <code>unique(c(...))</code> rather than a SQL <code>UNION</code> — BigQuery rejects a bare UNION, and doing it in R sidesteps the dialect issue entirely.</p>`,
     code:"src-01",
     gate:{ text:`Step 01 prints <b>lab_concepts</b> and <b>pm_candidates</b>. Confirm the right standard concepts before the panel pull — pick the waist and BMI rows you trust.`,
            label:"I checked the printed concepts" }},
 
   { group:"Analysis", L:"02", id:"s02", title:"Demographics + condition flags",
-    sub:"One row per person: sex, birth date, and a yes/no flag for each diagnosis family.", code:"src-02"},
+    sub:"One row per person: sex, birth date, and a yes/no flag for each diagnosis family.",
+    why:`Everything downstream is "one row per person," so this step builds that backbone: a table keyed by person_id with sex, birth date, and a yes/no flag per diagnosis family. A flag means "does this person have any code in the set" — which is the population definition of a coded diagnosis.`,
+    predict:`Predict: will the demographics table have roughly as many rows as the whole cohort, or far fewer? (Think about whether everyone has a birth date versus whether everyone has a given diagnosis.)`, code:"src-02"},
 
   { group:"Analysis", L:"03", id:"s03", title:"Lab / PM panel",
     sub:"Most recent value per analyte, kept remote until one row per person, then bounded.",
+    why:`FLI and FIB-4 need a single value per analyte per person, but the measurement table has many rows per person over time. This step reduces each analyte to its most-recent value, then bounds out impossible values. Getting "one clean value per person" right is what makes the indices trustworthy.`,
+    predict:`Predict: All of Us pools labs from many health systems. Do you expect every triglyceride result in the same unit? What happens to FLI if 10% are in mmol/L instead of mg/dL and you don't catch it?`,
+    hood:`<p>"Most recent per person" is a <i>window</i> operation: partition rows by person_id, find each person's max measurement_date, then keep those rows. The code computes that max as an explicit column first (<code>mutate</code>) before filtering, because a window function placed directly inside a grouped filter is the kind of thing some SQL engines reject.</p><p>Then each analyte is collected and joined in R — small per-person tables — instead of one big database join, which is simpler to debug and lower-risk.</p>`,
     code:"src-03",
     gate:{ text:`The bounds assume specific units (TG mg/dL, platelets 10⁹/L, waist cm). All of Us labs are mixed-unit — check <b>unit_source_value</b> / <b>unit_concept_id</b> and adjust, or every index is silently wrong.`,
            label:"I confirmed analyte units" }},
 
   { group:"Analysis", L:"04", id:"s04", title:"Assemble the analytic table",
-    sub:"Join everything, compute age at index on UTC-safe dates, drop alcohol / viral-hepatitis etiologies.", code:"src-04",
+    sub:"Join everything, compute age at index on UTC-safe dates, drop alcohol / viral-hepatitis etiologies.",
+    why:`This is where the analysis cohort is defined. You join the pieces, compute age at an index date, and apply exclusions. Every inclusion/exclusion choice here changes the denominator — so this step is as much a scientific decision as a technical one.`,
+    decision:`We exclude alcohol (K70/F10) and viral-hepatitis (B16–B19) codes so the steatosis we measure is more likely metabolic (MASLD) than another cause. We also anchor the index date on the AST/ALT/platelet labs — so a person with FLI inputs but none of those three has no index date and drops out. That keeps FIB-4 well-defined but shrinks the FLI denominator: a real trade to name in your Limitations.`, code:"src-04",
     calls:[{k:"info", tag:"Rigor", html:`ICD codes undercount heavy drinking. For a stricter MASLD denominator, also exclude high alcohol intake from the <b>Lifestyle</b> survey (via <code class="inline">aou_survey()</code>) — or carry it as a sensitivity covariate. MetALD-range drinkers are not MASLD.`}]},
 
   { group:"Analysis", L:"05", id:"s05", title:"RQ1 — the prevalence gap",
-    sub:"FLI, HSI, prevalences with CIs, the absolute coded-vs-index difference with a bootstrap CI, κ, and the 2×2.", code:"src-05"},
+    sub:"FLI, HSI, prevalences with CIs, the absolute coded-vs-index difference with a bootstrap CI, κ, and the 2×2.",
+    why:`This answers RQ1: how big is the gap between who's coded and who an index would flag. You compute FLI/HSI, get each prevalence with a confidence interval, then the absolute difference with a bootstrap interval, plus kappa and the 2×2 to show agreement and the specific undercaptured cell.`,
+    predict:`Predict the direction before you look: will index-based prevalence be <i>higher</i> or <i>lower</i> than code-based? If codes undercount disease, what sign should the absolute difference have?`,
+    decision:`We treat FLI ≥ 60 as "index-positive" and use the standard FIB-4 bands. These cut-offs come from the validation literature, not from this data — reasonable defaults, but a different threshold would move the prevalence. Report the cut-off you used, and ideally check sensitivity to it.`,
+    hood:`<p>We use <i>Wilson</i> confidence intervals for proportions rather than the textbook normal approximation, which misbehaves near 0% / 100% and at small counts. <i>Cohen's kappa</i> measures agreement beyond chance — two methods can agree on 90% of people yet score low kappa if the condition is rare.</p><p>The difference's interval comes from a <i>bootstrap</i> — resampling people many times to see how much the gap wobbles — which avoids assuming a formula for the variance of a difference of dependent proportions.</p>`, code:"src-05"},
 
   { group:"Analysis", L:"06", id:"s06", title:"RQ2 — fibrosis risk in the gap",
-    sub:"FIB-4 across the un-coded, no-liver-code population — standard and age-adjusted bands.", code:"src-06"},
+    sub:"FIB-4 across the un-coded, no-liver-code population — standard and age-adjusted bands.",
+    why:`This answers RQ2: among people the system treats as "fine" (no liver code), how many have elevated fibrosis risk by FIB-4? It's the clinical sharp end of the gap — not just "fatty liver missed," but "possible advanced disease missed."`,
+    predict:`Predict: in a general adult population, roughly what fraction do you expect to land in the indeterminate or high FIB-4 bands? Will the age-adjusted cut-off move people in or out of "high"?`, code:"src-06"},
 
   { group:"Analysis", L:"07", id:"s07", title:"RQ3 — SDOH and the gap",
     sub:"Score SDOH with the validated AOUSDOHtools package, add SES items, then model who stays un-coded.",
+    why:`This answers RQ3: is staying un-coded patterned by social disadvantage? You score validated SDOH constructs, add socioeconomic items, and model who remains in the gap. It turns "there's a gap" into "the gap may be inequitable."`,
+    hood:`<p>Rather than hand-coding survey items, this uses <code>AOUSDOHtools</code>, which implements peer-reviewed scoring for All of Us SDOH constructs — so your food-insecurity or discrimination scores match how others define them. Income, education, and insurance aren't in the SDOH survey, so they're pulled from other surveys by question text.</p><p>The model is <i>logistic regression</i>: the outcome is binary (in the gap or not), and each coefficient, exponentiated, is an <i>odds ratio</i> — how the odds of staying un-coded change per unit of disadvantage.</p>`,
     code:"src-07",
     gate:{ text:`AOUSDOHtools handles the concept mapping, so the only things to confirm against live data: the survey label string (<code class="inline">"Social Determinants of Health"</code>), the score column names from <code class="inline">names(SDOH)</code>, and the binarization cutoffs in step 4. The package functions themselves run as written.`,
            label:"I confirmed survey label, score names + cutoffs" },
     calls:[{k:"info", tag:"Validated source", html:`<code class="inline">AOUSDOHtools</code> (CRAN) provides one <code class="inline">calc_*()</code> per construct — <code class="inline">calc_food_insecurity</code>, <code class="inline">calc_edd_frequency</code>, <code class="inline">calc_stress_category</code>, etc. — implementing the scoring from Koleck et al., <i>JAMIA</i> 2024. Income, education, and insurance aren't in the SDOH survey, so step 3 pulls them from The Basics / Health Care Access by question text.`}]},
 
   { group:"Analysis", L:"08", id:"s08", title:"Save dataset, results & provenance",
-    sub:"Persist the collected dataset, a cohort-flow table, summaries, and session info, then push to the bucket — it survives autostop.", code:"src-08",
-    calls:[{k:"warn", tag:"When done", html:`Stop the app from the <b>Apps</b> tab so idle compute stops billing. Your outputs persist in the bucket — reload them after any restart with the commented <code class="inline">readRDS</code> lines at the bottom of the block.`}]}
+    sub:"Persist the collected dataset, a cohort-flow table, summaries, and session info, then push to the bucket — it survives autostop.",
+    why:`Saving isn't an afterthought — it's what makes the work reproducible and hand-offable. You persist the row-level dataset (stays in the workspace), the aggregate summaries (can leave), and a provenance record of versions, so anyone can trace exactly how a number was produced.`, code:"src-08",
+    calls:[{k:"warn", tag:"When done", html:`Stop the app from the <b>Apps</b> tab so idle compute stops billing. Your outputs persist in the bucket — reload them after any restart with the commented <code class="inline">readRDS</code> lines at the bottom of the block.`}]},
+
+  { group:"Handoff", L:"09", id:"handoff", title:"Hand off to Phase 3",
+    sub:"What you've exported, where it lives, and what may leave the workspace.",
+    steps:[
+      `<b>Push the aggregates to the bucket.</b> Your <code class="inline">./outputs</code> files sit on the environment's disk (gone if it's deleted). Set <code class="inline">WORKSPACE_BUCKET</code> from the Resources tab and re-run the Step 08 push — the bucket is the durable, team-shareable store.`,
+      `<b>Give the writing team the aggregate set only</b> — they feed the build sheet's Step 01 numbers sheet.`,
+      `<b>Keep the row-level files in the workspace.</b> Use <code class="inline">analytic_dataset.rds</code> / <code class="inline">base_pop.rds</code> only to re-run or add a subgroup <i>inside</i> the workspace.`,
+      `<b>Re-check anything built after Step 08</b> (Table 1, figures, new tables): every reported cell ≥ 20, and no figure plots row-level points.`,
+      `<b>Download only the small aggregate files</b> through the Workbench's supported export, then write from those.`
+    ],
+    checklist:[
+      `<b>Stays in the workspace</b> · analytic_dataset.rds, base_pop.rds — row-level, never leaves`,
+      `<b>Goes to Phase 3</b> · masld_results.rds, rq1_prevalence.csv, rq2_fib4.csv, cohort_flow.csv`,
+      `<b>Travels with the results</b> · sessionInfo.txt, provenance.txt — reproducibility`
+    ],
+    calls:[
+      {k:"warn", tag:"Never leaves", html:`Participant / row-level data — the two <code class="inline">.rds</code> cohort files — must not be downloaded, copied, or screenshotted out of the workspace. That's the rule egress monitoring enforces.`},
+      {k:"tip", tag:"What may leave", html:`Aggregate summaries only, with <b>no cell under 20</b>. Step 08's disclosure check already cleared the original tables; re-check anything you build afterward.`},
+      {k:"info", tag:"Confirm the click-path", html:`The supported-download step in Workbench 2.0 is still rolling out and egress is monitored — verify the current export method in the Workbench 2.0 support docs before your first download. An accidental row-level or oversized download triggers an egress alert.`}
+    ]},
+
+  { group:"Handoff", L:"10", id:"email", title:"Email the PI & write your reflection",
+    sub:"Send Dr. Volk the aggregate files, then write a short reflection in your own words from the prompts.",
+    steps:[
+      `<b>Attach only the six aggregate files</b> — <code class="inline">masld_results.rds</code>, <code class="inline">rq1_prevalence.csv</code>, <code class="inline">rq2_fib4.csv</code>, <code class="inline">cohort_flow.csv</code>, <code class="inline">sessionInfo.txt</code>, <code class="inline">provenance.txt</code>.`,
+      `<b>Never attach the row-level files.</b> <code class="inline">analytic_dataset.rds</code> and <code class="inline">base_pop.rds</code> stay in the workspace — don't attach, paste, or screenshot them. Share those with Dr. Volk through workspace access instead.`,
+      `<b>Get the six files onto your computer first.</b> You can't attach from inside the perimeter, so download them via the Workbench's supported export — then re-confirm each is a summary with no cell under 20.`,
+      `<b>Compose from your normal email</b> to Dr. Volk, attach only those six, and in the body state what's attached, note the row-level data stays in the workspace, and paste your reflection.`,
+      `<b>Send</b> — keep it small; if anything looks large or non-aggregate, stop and recheck rather than risk an egress alert.`
+    ],
+    calls:[
+      {k:"tip", tag:"Write your reflection — your words", html:`A short paragraph (3–6 honest sentences), answering for yourself:<ul style="margin:.5rem 0 0; padding-left:1.1rem"><li><b>Learned:</b> What do you understand now about how All of Us data is organized and queried (R → BigQuery, mapping ICD codes to standard concepts, keeping the heavy work in the database) that you didn't before?</li><li><b>Struggled:</b> What was the hardest part to get working, and what finally fixed it?</li><li><b>Still unsure:</b> What methods choices, cutoffs, or process steps do you want to confirm with Dr. Volk before treating the results as final?</li></ul>`},
+      {k:"info", tag:"Why it matters", html:`The "still unsure" items are the ones worth the PI's input — they're analytic-judgment calls, not mistakes. Naming them clearly at handoff is exactly what a good reflection does.`}
+    ]}
 ];
+
+const MENTOR = {
+  connect: `Ask her to explain, without looking, where the data physically lives and what <code>aou_connect()</code> returns. Can she say why nothing is "downloaded" to her machine?`,
+  s01: `Have her explain why ICD codes are mapped to standard concepts, and what including descendants buys us — and costs us. What would a resolved count of 0 mean?`,
+  s02: `Ask why a diagnosis flag is "any code in the set," and what that misses — a single miscode, or a condition managed without ever being coded.`,
+  s03: `Ask her to walk through how "most recent value per person" is computed, and why mixed lab units threaten FLI. What did the unit check actually show?`,
+  s04: `Probe the index-date choice: who gets dropped, and is that defensible for RQ1? Have her state the tradeoff as a limitation in her own words.`,
+  s05: `Ask her to read the absolute difference and its CI in plain language, explain why kappa can be low even when raw agreement looks high, and why Wilson rather than the normal approximation.`,
+  s06: `Ask what an "indeterminate" FIB-4 means clinically, and why the un-coded high-FIB-4 subgroup is the part of the gap that matters most.`,
+  s07: `Ask her to interpret one odds ratio in words, and to say clearly why this is association, not causation.`,
+  s08: `Ask which files may leave the workspace and which may not — and why — and what "provenance" buys a future reader trying to reproduce a number.`,
+  handoff: `Before she exports anything, ask her to point to which files are row-level and which are aggregate, and to predict what would trip an egress alert.`,
+  email: `Ask her to name, from the attachment list alone, anything that must not be emailed — and to explain the safer route for the row-level files.`
+};
 
 const itemsEl = document.getElementById('items');
 const railEl  = document.getElementById('railList');
@@ -686,9 +857,13 @@ ITEMS.forEach((it, i) => {
   if (it.group !== lastGroup){
     const band = document.createElement('div');
     band.className = 'band';
-    band.innerHTML = it.group === 'Setup'
-      ? `<span class="bn">Setup</span> Workspace &amp; connection`
-      : `<span class="bn">Analysis</span> Run sheet · paste in order`;
+    const BANDS = {
+      Setup:    ['Setup', 'Workspace &amp; connection'],
+      Analysis: ['Analysis', 'Run sheet · paste in order'],
+      Handoff:  ['Handoff', 'Exports → Phase 3']
+    };
+    const bd = BANDS[it.group] || [it.group, ''];
+    band.innerHTML = `<span class="bn">${bd[0]}</span> ${bd[1]}`;
     itemsEl.appendChild(band);
     const rt = document.createElement('p'); rt.className='rail-title'; rt.textContent=it.group;
     railEl.appendChild(rt);
@@ -705,15 +880,21 @@ ITEMS.forEach((it, i) => {
       <div><h2>${it.title}</h2><p class="sub">${it.sub}</p></div>
       <label class="done-toggle"><input type="checkbox" data-i="${i}"> done</label>
     </div>`;
+  if (it.why) inner += `<div class="teach-only"><div class="why"><span class="why-tag">Why this step</span><p>${it.why}</p></div></div>`;
+  if (it.decision) inner += `<div class="teach-only"><div class="call decision"><span class="tag">Decision</span><div>${it.decision}</div></div></div>`;
   if (it.steps) inner += `<ol class="steps">${it.steps.map(s=>`<li>${s}</li>`).join('')}</ol>`;
   if (it.gate) inner += `<div class="gate"><span class="gate-tag">Verify</span>
       <div class="gate-body"><p>${it.gate.text}</p>
       <label class="gate-check"><input type="checkbox" data-gate="${it.id}"> ${it.gate.label}</label></div></div>`;
+  if (it.predict) inner += `<div class="teach-only"><div class="call info"><span class="tag">Predict first</span><div>${it.predict}</div></div></div>`;
   if (it.code) inner += `<div class="code"><div class="code-bar"><span class="code-tag">R</span>
       ${it.codeNote?`<span class="code-note">${it.codeNote}</span>`:``}
       <button class="copy" data-copy="${it.code}">Copy block</button></div>
       <pre><code id="render-${it.code}"></code></pre></div>`;
+  if (it.hood) inner += `<div class="teach-only"><details class="hood"><summary>Under the hood</summary><div class="hood-body">${it.hood}</div></details></div>`;
+  if (it.checklist) inner += `<ul class="checklist">${it.checklist.map(c=>`<li>${c}</li>`).join('')}</ul>`;
   if (it.calls) it.calls.forEach(c => inner += `<div class="call ${c.k}"><span class="tag">${c.tag}</span><div>${c.html}</div></div>`);
+  if (MENTOR[it.id]) inner += `<div class="mentor-only"><div class="call mentor"><span class="tag">Mentor prompt</span><div>${MENTOR[it.id]}</div></div></div>`;
   art.innerHTML = inner;
   itemsEl.appendChild(art);
   if (it.code) document.getElementById('render-'+it.code).textContent =
@@ -723,6 +904,21 @@ ITEMS.forEach((it, i) => {
   li.innerHTML = `<a href="#item-${it.id}" data-rail="${i}" class="${it.gate?'gate':''}">
       <span class="rn">${it.L}</span><span>${it.title}</span></a>`;
   railOl.appendChild(li);
+});
+
+// Rail link to the glossary
+const refTitle = document.createElement('p');
+refTitle.className = 'rail-title'; refTitle.textContent = 'Reference';
+railEl.appendChild(refTitle);
+const refOl = document.createElement('ol');
+refOl.innerHTML = `<li><a href="#glossary"><span class="rn">§</span><span>Glossary</span></a></li>`;
+railEl.appendChild(refOl);
+
+document.getElementById('teachToggle').addEventListener('change', e => {
+  document.body.classList.toggle('teach', e.target.checked);
+});
+document.getElementById('mentorToggle').addEventListener('change', e => {
+  document.body.classList.toggle('mentor', e.target.checked);
 });
 
 document.querySelectorAll('.copy').forEach(btn => {
