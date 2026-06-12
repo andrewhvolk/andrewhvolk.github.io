@@ -243,30 +243,38 @@ setdiff(needed, tables)     # expect: character(0)
 concept <- tbl(con, "concept")
 
 # ICD-10-CM regex -> STANDARD concept_ids (Maps to -> SNOMED) + descendants.
+# Combines IDs in R (no SQL UNION) to avoid BigQuery's "expected ALL/DISTINCT" error.
 resolve_icd <- function(con, code_regex) {
   cr <- tbl(con, "concept_relationship"); ca <- tbl(con, "concept_ancestor")
-  src <- tbl(con, "concept") |>
+  std <- tbl(con, "concept") |>
     filter(vocabulary_id == "ICD10CM", str_detect(concept_code, code_regex)) |>
-    select(concept_id)
-  std <- src |>
+    select(concept_id) |>
     inner_join(filter(cr, relationship_id == "Maps to"),
                by = c("concept_id" = "concept_id_1")) |>
-    transmute(concept_id = concept_id_2) |> distinct()
-  desc <- std |>
-    inner_join(ca, by = c("concept_id" = "ancestor_concept_id")) |>
-    transmute(concept_id = descendant_concept_id)
-  std |> union(desc) |> distinct() |> pull(concept_id)
+    transmute(concept_id = concept_id_2) |>
+    distinct() |> pull(concept_id)           # bring the small ID list into R
+  if (!length(std)) return(integer(0))       # nothing matched -> empty set
+  desc <- ca |>
+    filter(ancestor_concept_id %in% std) |>
+    pull(descendant_concept_id)
+  unique(c(std, desc))                        # combine in R, no SQL UNION
 }
 
 # Per-person MOST RECENT numeric measurement for a set of concept_ids.
+# Window max is made explicit (mutate -> filter) so BigQuery doesn't see a
+# window function inside a grouped filter.
 pull_recent <- function(con, concept_ids, value_name) {
-  d <- sym(paste0(value_name, "_date"))
+  vd <- paste0(value_name, "_date")
   tbl(con, "measurement") |>
     filter(measurement_concept_id %in% concept_ids, !is.na(value_as_number)) |>
     group_by(person_id) |>
-    filter(measurement_date == max(measurement_date, na.rm = TRUE)) |>
-    summarise(!!value_name := mean(value_as_number, na.rm = TRUE),
-              !!d := max(measurement_date, na.rm = TRUE), .groups = "drop")
+    mutate(mx_date = max(measurement_date, na.rm = TRUE)) |>   # most-recent date per person
+    ungroup() |>
+    filter(measurement_date == mx_date) |>
+    group_by(person_id) |>
+    summarise(!!value_name := mean(value_as_number, na.rm = TRUE),  # avg same-day duplicates
+              !!sym(vd)    := max(measurement_date, na.rm = TRUE),
+              .groups = "drop")
 }
 
 # Per-person indicator that any qualifying condition code is present.
