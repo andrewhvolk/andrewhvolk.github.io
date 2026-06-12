@@ -218,6 +218,9 @@
 install.packages("allofus")              # once per environment (persists on the disk)
 library(allofus); library(tidyverse); library(dbplyr); library(DBI)
 
+# NOTE: the project + CDR below are Avery's workspace. If you are a different user,
+# replace GOOGLE_PROJECT and WORKSPACE_CDR with YOUR values — get the project from
+# `wb workspace describe` and the CDR dataset from the workspace Resources tab.
 Sys.setenv(
   GOOGLE_PROJECT           = "wb-blissful-plum-9347",              # your workspace project (billing)
   GOOGLE_CLOUD_PROJECT     = "wb-blissful-plum-9347",
@@ -314,6 +317,11 @@ ggt_ids <- id_of("2324-2"); tg_ids  <- id_of("2571-8")
 bmi_ids <- pm_candidates$concept_id[str_detect(str_to_lower(pm_candidates$concept_name), "body mass index")]
 waist_ids <- pm_candidates$concept_id[str_detect(str_to_lower(pm_candidates$concept_name), "waist")]
 
+# Safety check: each analyte must resolve to >=1 concept, or its index is all-NA later.
+lab_ids <- list(alt=alt_ids, ast=ast_ids, plt=plt_ids, ggt=ggt_ids, tg=tg_ids, bmi=bmi_ids, waist=waist_ids)
+print(lengths(lab_ids))                 # concepts resolved per analyte
+stopifnot(all(lengths(lab_ids) > 0))    # any 0? re-pick from lab_concepts / pm_candidates above
+
 # Condition concept sets (standard, mapped from ICD-10-CM).
 masld_ids   <- resolve_icd(con, "^(K76\\.0|K75\\.81)$")
 liver_any   <- resolve_icd(con, "^(K7[0-7]|B1[6-9])")
@@ -327,6 +335,12 @@ cat("masld:", length(masld_ids), " liver_any:", length(liver_any), "\n")
 
 <script type="text/plain" id="src-02">
 person <- tbl(con, "person")
+
+# Confirm the person columns this step relies on exist in your CDR (names can vary).
+need <- c("person_id", "birth_datetime", "sex_at_birth_concept_id")
+print(need %in% DBI::dbListFields(con, "person"))           # expect TRUE TRUE TRUE
+stopifnot(all(need %in% DBI::dbListFields(con, "person")))  # any FALSE? fix that column name below
+
 demo <- person |>
   left_join(concept |> select(sex_concept = concept_id, sex_name = concept_name),
             by = c("sex_at_birth_concept_id" = "sex_concept")) |>
@@ -354,19 +368,19 @@ unit_profile <- function(ids) tbl(con, "measurement") |>
 unit_profile(tg_ids); unit_profile(plt_ids); unit_profile(waist_ids)  # expect mg/dL, 10^9/L, cm
 # If a unit you don't expect dominates, convert it (or restrict to the expected unit) before bounding.
 
-# Each pull stays remote; only the per-person summary is collected.
-panel <- reduce(
-  list(
-    pull_recent(con, alt_ids,   "alt"),
-    pull_recent(con, ast_ids,   "ast"),
-    pull_recent(con, plt_ids,   "plt"),
-    pull_recent(con, ggt_ids,   "ggt"),
-    pull_recent(con, tg_ids,    "tg"),
-    pull_recent(con, bmi_ids,   "bmi"),
-    pull_recent(con, waist_ids, "waist")
-  ),
-  ~ full_join(.x, .y, by = "person_id")
-) |> collect()
+# Each analyte is summarised to one row per person IN BigQuery, then collected and
+# joined locally in R (lower-risk than a single 7-way remote full join).
+panel <- list(
+  pull_recent(con, alt_ids,   "alt"),
+  pull_recent(con, ast_ids,   "ast"),
+  pull_recent(con, plt_ids,   "plt"),
+  pull_recent(con, ggt_ids,   "ggt"),
+  pull_recent(con, tg_ids,    "tg"),
+  pull_recent(con, bmi_ids,   "bmi"),
+  pull_recent(con, waist_ids, "waist")
+) |>
+  lapply(collect) |>                          # pull each small per-person table into R
+  reduce(full_join, by = "person_id")         # join in R, no remote 7-way join
 
 # UNIT / plausibility QC -- the single biggest source of error.
 # Adjust ranges to the units you confirmed in Step 01's measurement metadata.
@@ -540,10 +554,10 @@ saveRDS(base_pop, "outputs/base_pop.rds")
 
 # ---- 2. Cohort flow / attrition counts (the N at each step, for your methods table) ----
 cohort_flow <- tibble(
-  step = c("≥1 required lab present", "adults ≥18", "minus alcohol/viral-hep = base_pop",
-           "FLI computable", "FIB-4 computable"),
-  n = c(nrow(analytic),
-        sum(analytic$age_at_index >= 18, na.rm = TRUE),
+  step = c("≥1 lab/measurement present", "adults ≥18 with index date",
+           "minus alcohol/viral-hep = base_pop", "FLI computable", "FIB-4 computable"),
+  n = c(nrow(panel),
+        nrow(analytic),
         nrow(base_pop),
         sum(!is.na(rq1$fli)),
         sum(!is.na(base_pop$ast) & !is.na(base_pop$alt) & !is.na(base_pop$plt)))
@@ -555,6 +569,7 @@ small_cells <- function(df, col = "n") df |> filter(.data[[col]] > 0, .data[[col
 stopifnot(nrow(small_cells(rq2_summary)) == 0, nrow(small_cells(cohort_flow)) == 0)
 
 # ---- 4. Result summaries + provenance ----
+if (!requireNamespace("broom", quietly = TRUE)) install.packages("broom")
 saveRDS(list(prev = prev_tbl, rq2 = rq2_summary, rq3 = broom::tidy(fit)),
         "outputs/masld_results.rds")
 write_csv(prev_tbl, "outputs/rq1_prevalence.csv"); write_csv(rq2_summary, "outputs/rq2_fib4.csv")
@@ -562,8 +577,11 @@ writeLines(capture.output(sessionInfo()), "outputs/sessionInfo.txt")
 cat("allofus", as.character(packageVersion("allofus")),
     "| CDR", Sys.getenv("WORKSPACE_CDR"), "\n", file = "outputs/provenance.txt")
 
-# ---- 5. Push to the workspace bucket ----
-system(paste0("gsutil -m cp -r outputs ", Sys.getenv("WORKSPACE_BUCKET"), "/"))
+# ---- 5. Push to the workspace bucket (skips safely if the bucket var isn't set) ----
+bkt <- Sys.getenv("WORKSPACE_BUCKET")
+if (nzchar(bkt)) system(paste0("gsutil -m cp -r outputs ", bkt, "/")) else
+  message("WORKSPACE_BUCKET not set — outputs saved locally in ./outputs (they persist ",
+          "on the disk). Set WORKSPACE_BUCKET to also copy them to the bucket.")
 
 # ---- Resume after a restart (paste in a fresh session, then re-run from Step 00) ----
 # system(paste0("gsutil -m cp -r ", Sys.getenv("WORKSPACE_BUCKET"), "/outputs ."))
