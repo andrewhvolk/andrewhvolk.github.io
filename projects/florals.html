@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Joint Project Plan — What Florists Are Taught &amp; What the Mathematics Says (Milks &amp; Volk)</title>
+<style>
+:root{
+  --bg:#eef3ea;
+  --panel:#fffdf7;
+  --ink:#253022;
+  --muted:#52604d;
+  --accent:#8b4b61;
+  --gold:#98751d;
+  --green:#5b7a50;
+  --line:#cdd7c4;
+  --soft:#f6f1df;
+  --blue:#405d78;
+  --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size:16.5px;
+  line-height:1.55;
+}
+a{color:var(--accent)}
+header{
+  max-width:1200px;
+  margin:0 auto;
+  padding:44px 28px 28px;
+  display:grid;
+  grid-template-columns:1fr 290px;
+  gap:34px;
+  align-items:start;
+}
+.eyebrow{
+  font-family: "Courier New", monospace;
+  color:var(--gold);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+h1{
+  font-size:clamp(2rem,4.2vw,3.1rem);
+  line-height:1.06;
+  font-weight:600;
+  max-width:780px;
+}
+.lede{
+  margin-top:16px;
+  max-width:760px;
+  color:var(--muted);
+  font-size:1.04rem;
+}
+.meta{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:18px;
+  font-family:"Courier New", monospace;
+  font-size:.75rem;
+}
+.meta span{
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:999px;
+  padding:5px 10px;
+  color:var(--muted);
+}
+.actions{
+  margin-top:20px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+button{
+  font-family:"Courier New", monospace;
+  border:1px solid var(--ink);
+  background:transparent;
+  color:var(--ink);
+  padding:8px 13px;
+  border-radius:7px;
+  cursor:pointer;
+}
+button:hover{background:var(--ink);color:white}
+.progress{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+}
+.progress h2{
+  font-size:1.1rem;
+  margin-bottom:8px;
+}
+.bar{
+  height:14px;
+  border-radius:999px;
+  background:#dce5d3;
+  overflow:hidden;
+  margin:12px 0;
+}
+.fill{
+  height:100%;
+  width:0%;
+  background:var(--accent);
+  transition:width .25s ease;
+}
+#progressText{
+  font-family:"Courier New", monospace;
+  color:var(--muted);
+  font-size:.85rem;
+}
+.layout{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 28px 70px;
+  display:grid;
+  grid-template-columns:245px 1fr;
+  gap:34px;
+}
+nav{
+  position:sticky;
+  top:18px;
+  align-self:start;
+  max-height:calc(100vh - 36px);
+  overflow:auto;
+}
+nav h2{
+  font-family:"Courier New", monospace;
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+nav a{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:6px 8px;
+  border-radius:7px;
+  color:var(--ink);
+  text-decoration:none;
+  font-size:.88rem;
+}
+nav a:hover{background:var(--panel)}
+nav .tick{
+  color:var(--muted);
+  font-family:"Courier New", monospace;
+  font-size:.72rem;
+}
+section.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px 28px;
+  margin-bottom:24px;
+}
+section.alert{
+  background:var(--soft);
+  border-left:5px solid var(--gold);
+}
+h2.sec{
+  font-size:1.45rem;
+  line-height:1.15;
+  font-weight:600;
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  flex-wrap:wrap;
+}
+.count{
+  font-family:"Courier New", monospace;
+  color:var(--muted);
+  font-size:.75rem;
+  font-weight:normal;
+}
+.onesent{
+  margin:8px 0 16px;
+  color:var(--muted);
+  font-style:italic;
+}
+ul.check{list-style:none}
+ul.check li{
+  display:flex;
+  gap:11px;
+  align-items:flex-start;
+  padding:7px 0;
+  border-bottom:1px dashed #dfe6d8;
+}
+ul.check li:last-child{border-bottom:0}
+input[type=checkbox]{
+  width:18px;
+  height:18px;
+  flex:none;
+  margin-top:4px;
+  accent-color:var(--green);
+}
+.done label{
+  color:var(--muted);
+  text-decoration:line-through;
+  text-decoration-color:#bbc7b0;
+}
+.note{
+  margin-top:14px;
+  padding:12px 14px;
+  border-left:4px solid var(--blue);
+  background:#eef4f8;
+  color:#263947;
+  font-size:.93rem;
+}
+.journal-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:14px;
+  margin-top:14px;
+}
+.journal{
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  padding:16px 17px;
+}
+.journal h3{
+  font-size:1.07rem;
+  margin-bottom:6px;
+}
+.tag{
+  display:inline-block;
+  font-family:"Courier New", monospace;
+  font-size:.68rem;
+  padding:3px 7px;
+  border-radius:5px;
+  background:#e4eadf;
+  color:#405438;
+  margin-bottom:8px;
+}
+.journal p{font-size:.92rem;color:var(--muted);margin:8px 0}
+.journal ul{margin:8px 0 0 18px;font-size:.9rem;color:var(--ink)}
+.small{
+  font-size:.86rem;
+  color:var(--muted);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+  font-size:.92rem;
+}
+th,td{
+  border:1px solid var(--line);
+  padding:8px 10px;
+  vertical-align:top;
+}
+th{
+  background:#eef4e8;
+  text-align:left;
+}
+footer{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 28px 50px;
+  font-family:"Courier New", monospace;
+  color:var(--muted);
+  font-size:.78rem;
+}
+@media(max-width:900px){
+  header{grid-template-columns:1fr}
+  .layout{grid-template-columns:1fr}
+  nav{position:static;max-height:none}
+  nav a{display:inline-flex;border:1px solid var(--line);background:var(--panel);margin:2px}
+}
+@media print{
+  header,.actions,nav{display:none}
+  .layout{display:block;padding:0}
+  section.card{break-inside:avoid;border:1px solid #999}
+}
+
+.owner{
+  display:inline-block;
+  font-family:"Courier New", monospace;
+  font-size:.64rem;
+  letter-spacing:.05em;
+  padding:2px 7px;
+  border-radius:5px;
+  margin-right:8px;
+  vertical-align:1px;
+  white-space:nowrap;
+}
+.owner.cm{background:#f0dde3;color:#7c3850;border:1px solid #d8b3bf}
+.owner.av{background:#dde6ee;color:#33506b;border:1px solid #b3c5d6}
+.owner.both{background:#efe6cc;color:#6e5414;border:1px solid #d6c79a}
+.filterbar{
+  margin-top:14px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.flabel{
+  font-family:"Courier New", monospace;
+  font-size:.72rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.fbtn{
+  font-size:.78rem;
+  padding:6px 13px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  color:var(--muted);
+}
+.fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ownerstats{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin-top:4px;
+  font-family:"Courier New", monospace;
+  font-size:.8rem;
+  color:var(--muted);
+}
+.ostat{display:flex;align-items:center;gap:4px}
+
+</style>
+</head>
+<body>
+<header>
+<div>
+<div class="eyebrow">Joint project plan · Milks × Volk · ready to begin</div>
+<h1>What Florists Are Taught &amp; What the Mathematics Says</h1>
+<p class="lede">The working plan for our paper: document the mathematical rules taught in floral design, review the real mathematics underneath them, compare both against the experimental record, and close with a research agenda proposing studies that could test the standard rules. Every task below is tagged <strong>CM</strong> (Milks), <strong>AV</strong> (Volk), or <strong>Shared</strong> so we can work in parallel — use the filter buttons to see just your column.</p>
+<div class="meta"><span>Dr. Chelsea J. Milks — floral design &amp; event planning</span><span>Dr. Andrew H. Volk — mathematics</span><span>Identity: expository review + research agenda</span><span>Ladder: JHM → JMA → Bridges 2027 → HortTechnology</span></div>
+<div class="actions">
+<button id="saveBtn">Save Progress</button>
+<button id="clearBtn">Clear Checks</button>
+<button id="printBtn">Print / Save PDF</button>
+<button id="wordBtn">Export Simple Word File</button>
+</div>
+<div class="filterbar">
+<span class="flabel">Show tasks:</span>
+<button class="fbtn active" data-owner="all">All</button>
+<button class="fbtn" data-owner="cm">Milks</button>
+<button class="fbtn" data-owner="av">Volk</button>
+<button class="fbtn" data-owner="both">Shared</button>
+</div>
+</div>
+<div class="progress">
+<h2>Checklist Progress</h2>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div id="progressText">0 / 0 complete</div>
+<div class="ownerstats" id="ownerStats"></div>
+<p class="small" style="margin-top:10px">Progress is stored locally in this browser after clicking Save Progress.</p>
+</div>
+</header>
+<div class="layout">
+<nav><h2>Project Map</h2><a href="#kickoff">0 This week <span class="tick" data-for="kickoff"></span></a><a href="#strategy">1 Strategy <span class="tick" data-for="strategy"></span></a><a href="#authors">2 Roles &amp; voice <span class="tick" data-for="authors"></span></a><a href="#journals">3 Journal ladder <span class="tick" data-for="journals"></span></a><a href="#frame">4 Article frame <span class="tick" data-for="frame"></span></a><a href="#methods">5 Sourcing note <span class="tick" data-for="methods"></span></a><a href="#cases">6 Rule case table <span class="tick" data-for="cases"></span></a><a href="#studies">7 Proposed studies <span class="tick" data-for="studies"></span></a><a href="#figures">8 Tables &amp; figures <span class="tick" data-for="figures"></span></a><a href="#sections">9 Draft sections <span class="tick" data-for="sections"></span></a><a href="#readiness">10 Readiness <span class="tick" data-for="readiness"></span></a><a href="#jhm">11 Plan A: JHM <span class="tick" data-for="jhm"></span></a><a href="#jma">12 Plan B: JMA <span class="tick" data-for="jma"></span></a><a href="#bridges">13 Plan C: Bridges <span class="tick" data-for="bridges"></span></a><a href="#hort">14 Plan D: HortTech <span class="tick" data-for="hort"></span></a><a href="#rapid">15 Retargeting kit <span class="tick" data-for="rapid"></span></a></nav>
+<main>
+
+<section class="card alert" data-sec="kickoff" id="kickoff">
+<h2 class="sec">0 · This week: parallel starting moves <span class="count"></span></h2>
+<p class="onesent">Six tasks — three each — that can begin immediately and independently.</p>
+<ul class="check">
+<li data-owner="cm"><input id="kk1" type="checkbox"/><label for="kk1"><span class="owner cm">CM</span>Pull the floral-design curricula, AIFD materials, and event-planning course texts that state the five rules; flag the exact pages where each rule is printed.</label></li>
+<li data-owner="cm"><input id="kk2" type="checkbox"/><label for="kk2"><span class="owner cm">CM</span>Photograph or sketch one example arrangement per rule from your own teaching stock for the schematic figures.</label></li>
+<li data-owner="cm"><input id="kk3" type="checkbox"/><label for="kk3"><span class="owner cm">CM</span>Join the Bridges mailing list and note the HortTechnology/ASHS author-fee pages for the ladder decisions.</label></li>
+<li data-owner="av"><input id="kk4" type="checkbox"/><label for="kk4"><span class="owner av">AV</span>Set up the shared workspace: cloud folder, master manuscript doc, and a Zotero library seeded with the source list.</label></li>
+<li data-owner="av"><input id="kk5" type="checkbox"/><label for="kk5"><span class="owner av">AV</span>Draft the Movement II outline: φ and Fibonacci convergence, symmetry classes, curvature and the serpentine line, the hand-tie helix, golden-angle packing.</label></li>
+<li data-owner="av"><input id="kk6" type="checkbox"/><label for="kk6"><span class="owner av">AV</span>Read the Journal of Humanistic Mathematics author policies and note anonymization requirements for double-anonymous review.</label></li>
+</ul>
+<div class="note">When both columns above are done, schedule a one-hour sync to lock Section 1 decisions and divide the drafting calendar.</div>
+</section>
+
+<section class="card" data-sec="strategy" id="strategy">
+<h2 class="sec">1 · Strategy and identity <span class="count"></span></h2>
+<p class="onesent">One master manuscript, one structure, one verdict vocabulary, one submission ladder — agreed before drafting.</p>
+<ul class="check">
+<li data-owner="both"><input id="st1" type="checkbox"/><label for="st1"><span class="owner both">Shared</span>Adopt the four-movement structure: (I) the rules as taught, (II) the mathematics underneath, (III) the experimental record, (IV) a call for research with proposed studies.</label></li>
+<li data-owner="both"><input id="st2" type="checkbox"/><label for="st2"><span class="owner both">Shared</span>Choose the working title. Shortlist: <em>The Florist's Golden Ratio: Taught Rules, Real Mathematics, and the Missing Experiments</em> · <em>Does the Bouquet Know Mathematics?</em> · <em>Counting Stems: What Floral Design Teaches and What the Evidence Shows</em>.</label></li>
+<li data-owner="both"><input id="st3" type="checkbox"/><label for="st3"><span class="owner both">Shared</span>Adopt the verdict vocabulary for every rule: <em>true of the object</em>, <em>supported for perception</em>, <em>useful heuristic — unvalidated</em>, or <em>unsupported as a universal</em>.</label></li>
+<li data-owner="both"><input id="st4" type="checkbox"/><label for="st4"><span class="owner both">Shared</span>Confirm the submission ladder: Journal of Humanistic Mathematics → Journal of Mathematics and the Arts → Bridges 2027 → HortTechnology, with the Virginia Journal of Science as a regional fallback.</label></li>
+<li data-owner="both"><input id="st5" type="checkbox"/><label for="st5"><span class="owner both">Shared</span>Agree the register: warm, first-person plural, concrete bouquets, humor welcome — while every formula stays exact and every empirical claim stays cited.</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="authors" id="authors">
+<h2 class="sec">2 · Roles, order, and voice <span class="count"></span></h2>
+<p class="onesent">The two-discipline pairing is the paper's signature; the division of labor makes it run.</p>
+<ul class="check">
+<li data-owner="cm"><input id="au1" type="checkbox"/><label for="au1"><span class="owner cm">CM</span>Lead Movement I: the rules as actually taught, each anchored to a curriculum, manual, or classroom citation.</label></li>
+<li data-owner="av"><input id="au2" type="checkbox"/><label for="au2"><span class="owner av">AV</span>Lead Movement II: the mathematics underneath, written so a florist can follow it and a mathematician can respect it.</label></li>
+<li data-owner="both"><input id="au3" type="checkbox"/><label for="au3"><span class="owner both">Shared</span>Co-write Movements III and IV: Milks vets stimulus feasibility, Volk vets the statistics.</label></li>
+<li data-owner="both"><input id="au4" type="checkbox"/><label for="au4"><span class="owner both">Shared</span>Finalize author order in writing; choose the corresponding author; verify ORCIDs and institutional emails.</label></li>
+<li data-owner="cm"><input id="au5" type="checkbox"/><label for="au5"><span class="owner cm">CM</span>Draft the CRediT-style contribution statement for joint approval (conceptualization, investigation, visualization, writing, review).</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="journals" id="journals">
+<h2 class="sec">3 · The journal ladder <span class="count"></span></h2>
+<p class="onesent">Four peer-reviewed homes where an engaging math-meets-floristry review is the expected genre.</p>
+<ul class="check">
+<li data-owner="av"><input id="jo1" type="checkbox"/><label for="jo1"><span class="owner av">AV</span>Plan A — <strong>Journal of Humanistic Mathematics</strong>: confirm scope fit, no-fee open access, double-anonymous review, and the roughly one-year publication timeline; record submission requirements.</label></li>
+<li data-owner="av"><input id="jo2" type="checkbox"/><label for="jo2"><span class="owner av">AV</span>Plan B — <strong>Journal of Mathematics and the Arts</strong> (Taylor &amp; Francis): record author guidelines, reference style, and the no-fee subscription route.</label></li>
+<li data-owner="cm"><input id="jo3" type="checkbox"/><label for="jo3"><span class="owner cm">CM</span>Plan C — <strong>Bridges 2027 Proceedings</strong>: track the call for papers (regular-paper deadlines typically land around February), the 8–12 page template, and the requirement that one author registers and attends.</label></li>
+<li data-owner="cm"><input id="jo4" type="checkbox"/><label for="jo4"><span class="owner cm">CM</span>Plan D — <strong>HortTechnology</strong> (ASHS): verify current author charges and membership pricing; note that it published the consumer-arrangement studies our paper reviews.</label></li>
+</ul>
+<div class="journal-grid">
+<div class="journal"><span class="tag">Plan A</span><h3>Journal of Humanistic Mathematics</h3><p>Open access, zero fees, double-anonymous review; publishes aesthetic and pedagogical mathematics for a general mathematical audience. Slow but kind.</p></div>
+<div class="journal"><span class="tag">Plan B</span><h3>Journal of Mathematics and the Arts</h3><p>The strongest topical fit in existence for this paper; indexed Taylor &amp; Francis title; expository math–art reviews are core scope.</p></div>
+<div class="journal"><span class="tag">Plan C</span><h3>Bridges 2027</h3><p>Peer-reviewed proceedings and a joyful math-art community; condensed version; attendance required — and they would adore a live spiral hand-tie.</p></div>
+<div class="journal"><span class="tag">Plan D</span><h3>HortTechnology</h3><p>Floral-design education readership already invested in arrangement research; verify ASHS fees first.</p></div>
+</div>
+</section>
+
+<section class="card" data-sec="frame" id="frame">
+<h2 class="sec">4 · The article frame: four movements, five rules <span class="count"></span></h2>
+<p class="onesent">The whole paper hangs on five standard taught rules, each examined as: taught form → real mathematics → experimental record → proposed test.</p>
+<ul class="check">
+<li data-owner="cm"><input id="fr1" type="checkbox"/><label for="fr1"><span class="owner cm">CM</span>Rule 1 — <strong>Proportion</strong>: collect the taught sources for "flowers 1.5× the container," the "3:5:8 rule," and golden-ratio placement.</label></li>
+<li data-owner="cm"><input id="fr2" type="checkbox"/><label for="fr2"><span class="owner cm">CM</span>Rule 2 — <strong>Odd numbers</strong>: collect the taught sources for "always use odd stem counts" and Fibonacci groupings (3, 5, 8).</label></li>
+<li data-owner="cm"><input id="fr3" type="checkbox"/><label for="fr3"><span class="owner cm">CM</span>Rule 3 — <strong>Symmetry and balance</strong>: collect Western symmetric/asymmetric balance teaching plus ikebana's shin–soe–hikae triangle with its conventional angles and length ratios.</label></li>
+<li data-owner="cm"><input id="fr4" type="checkbox"/><label for="fr4"><span class="owner cm">CM</span>Rule 4 — <strong>Curves</strong>: collect the taught sources for crescent and Hogarth S-curve silhouettes.</label></li>
+<li data-owner="cm"><input id="fr5" type="checkbox"/><label for="fr5"><span class="owner cm">CM</span>Rule 5 — <strong>The spiral hand-tie</strong>: document the taught technique (consistent angle, one direction, single binding point) and the claim that spiral construction looks better.</label></li>
+<li data-owner="both"><input id="fr6" type="checkbox"/><label for="fr6"><span class="owner both">Shared</span>Write the scope sentence: aesthetic mathematics of arrangements only; plant biology appears solely as the source of design analogies.</label></li>
+<li data-owner="both"><input id="fr7" type="checkbox"/><label for="fr7"><span class="owner both">Shared</span>Write the through-line: the rules are real, the mathematics is real, but the experiments connecting them at the <em>arrangement</em> level are mostly missing — and we propose how to run them.</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="methods" id="methods">
+<h2 class="sec">5 · The honest sourcing note <span class="count"></span></h2>
+<p class="onesent">One transparent paragraph on what was consulted and what counts as evidence of teaching versus evidence of truth.</p>
+<ul class="check">
+<li data-owner="av"><input id="me1" type="checkbox"/><label for="me1"><span class="owner av">AV</span>Write the sourcing paragraph: databases and practitioner sources consulted, with the key search themes (golden-ratio aesthetics, symmetry preference, curvature preference, phyllotaxis, floral pedagogy, consumer arrangement studies).</label></li>
+<li data-owner="both"><input id="me2" type="checkbox"/><label for="me2"><span class="owner both">Shared</span>State the evidence tiers in plain language: curricula show what is <em>taught</em>; experiments show what is <em>true of perception</em>; mathematics shows what is <em>true of the object</em>.</label></li>
+<li data-owner="av"><input id="me3" type="checkbox"/><label for="me3"><span class="owner av">AV</span>Verify DOIs and details for the scholarly anchors (Markowsky; McManus; Bertamini; Hůla &amp; Flegr; Bar &amp; Neta; Vogel; Douady &amp; Couder; Spehar; Ijiri; Knuth; Wu; and company) in the shared Zotero library.</label></li>
+<li data-owner="cm"><input id="me4" type="checkbox"/><label for="me4"><span class="owner cm">CM</span>Verify the practitioner and curriculum sources: edition, page numbers, and exact wording of each taught rule.</label></li>
+<li data-owner="av"><input id="me5" type="checkbox"/><label for="me5"><span class="owner av">AV</span>Flag the ikebana symmetry preprint (Hitsuwari &amp; Jacobsen) as not yet peer-reviewed wherever cited.</label></li>
+<li data-owner="cm"><input id="me6" type="checkbox"/><label for="me6"><span class="owner cm">CM</span>Keep a private source-coding spreadsheet for reviewer questions; it stays out of the manuscript.</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="cases" id="cases">
+<h2 class="sec">6 · The rule case-study table <span class="count"></span></h2>
+<p class="onesent">The paper's centerpiece: one row per taught rule, ending in a verdict and a proposed test.</p>
+<ul class="check">
+<li data-owner="av"><input id="ca1" type="checkbox"/><label for="ca1"><span class="owner av">AV</span>Build the Table 1 skeleton with the six columns below.</label></li>
+<li data-owner="cm"><input id="ca2" type="checkbox"/><label for="ca2"><span class="owner cm">CM</span>Fill the "As taught" column from the verified curriculum sources.</label></li>
+<li data-owner="av"><input id="ca3" type="checkbox"/><label for="ca3"><span class="owner av">AV</span>Fill the "Actual mathematics" and "Experimental record" columns with citations.</label></li>
+<li data-owner="both"><input id="ca4" type="checkbox"/><label for="ca4"><span class="owner both">Shared</span>Agree each verdict together; every verdict must cite at least one teaching source and one empirical or mathematical source.</label></li>
+<li data-owner="both"><input id="ca5" type="checkbox"/><label for="ca5"><span class="owner both">Shared</span>Cross-reference every "Proposed test" cell to its full design in Section 7.</label></li>
+</ul>
+<table>
+<thead><tr><th>Taught rule</th><th>As taught</th><th>The actual mathematics</th><th>Experimental record</th><th>Verdict</th><th>Proposed test</th></tr></thead>
+<tbody>
+<tr><td>Proportion</td><td>Flowers ≈1.5× container; 3:5:8</td><td>3:5:8 ≈ Fibonacci ratios converging to φ ≈ 1.618</td><td>Century of rectangle studies: no reliable φ peak; strong individual differences</td><td>Useful heuristic; φ-universality unsupported</td><td>Study 1</td></tr>
+<tr><td>Odd stem counts</td><td>"Always odd numbers," 3-5-8 groupings</td><td>Parity and grouping perception; no theorem favors odd</td><td>Essentially untested for arrangements</td><td>Heuristic, unvalidated</td><td>Study 2</td></tr>
+<tr><td>Symmetry / balance</td><td>Mirror balance (West); scalene triangle (ikebana)</td><td>Reflection vs. rotational symmetry; deliberate asymmetry as composition</td><td>Category-dependent: symmetrized flowers not preferred; expertise moderates</td><td>Perceptual but contextual, not universal</td><td>Study 3</td></tr>
+<tr><td>Curves</td><td>Crescent, Hogarth S-curve "most graceful"</td><td>Curvature, serpentine arcs (Hogarth 1753)</td><td>Curvature preference robust; the one privileged S-curve weakly supported</td><td>Curved-silhouette preference plausible; "best curve" unsupported</td><td>Study 4</td></tr>
+<tr><td>Spiral hand-tie</td><td>Consistent angle, one direction, single binding point; "spiral looks better"</td><td>Helical packing of cylinders; genuinely algorithmic</td><td>Construction validity obvious; aesthetic superiority untested</td><td>True of the object; aesthetic claim unvalidated</td><td>Study 5</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="card" data-sec="studies" id="studies">
+<h2 class="sec">7 · Movement IV: the proposed studies <span class="count"></span></h2>
+<p class="onesent">Each study written concretely enough that we could run it next semester — classroom feasibility is a feature, not a confession.</p>
+<ul class="check">
+<li data-owner="av"><input id="pd1" type="checkbox"/><label for="pd1"><span class="owner av">AV</span><strong>Study 1 — The proportion ladder:</strong> design the stimulus series (height-to-container ratios 1.0–2.2 including 1.5 and φ), the forced-choice and rating tasks, the randomized ranges that dodge the range-artifact problem, and the analysis of modes and individual differences.</label></li>
+<li data-owner="cm"><input id="pd2" type="checkbox"/><label for="pd2"><span class="owner cm">CM</span><strong>Study 2 — Odd vs. even:</strong> design buildable posy pairs (4 vs. 5 stems, 7 vs. 8) with visual density controlled; specify the preference and "which looks professionally made" questions.</label></li>
+<li data-owner="cm"><input id="pd3" type="checkbox"/><label for="pd3"><span class="owner cm">CM</span><strong>Study 3 — The symmetry triptych:</strong> plan identical-material builds three ways (mirror-symmetric, slightly relaxed, ikebana-style scalene) and the photography protocol; rater groups: floral-design students, math students, general public.</label></li>
+<li data-owner="cm"><input id="pd4" type="checkbox"/><label for="pd4"><span class="owner cm">CM</span><strong>Study 4 — Which curve?</strong> Plan same-flower builds as vertical line, crescent, and Hogarth S-curve to test whether curvature preference transfers to whole arrangements.</label></li>
+<li data-owner="av"><input id="pd5" type="checkbox"/><label for="pd5"><span class="owner av">AV</span><strong>Study 5 — Spiral vs. parallel:</strong> design the blind-rating protocol and the simple image analysis of dome uniformity comparing spiral and parallel hand-ties of identical stems.</label></li>
+<li data-owner="av"><input id="pd6" type="checkbox"/><label for="pd6"><span class="owner av">AV</span><strong>Study 6 (stretch) — Measuring the bouquet's angles:</strong> design the overhead-photography measurement of angular spacing in real round bouquets against golden-angle packing.</label></li>
+<li data-owner="both"><input id="pd7" type="checkbox"/><label for="pd7"><span class="owner both">Shared</span>For each study, finalize stimuli, participants, task, analysis, and the taught rule it would confirm or retire; note IRB/ethics review for human raters.</label></li>
+<li data-owner="both"><input id="pd8" type="checkbox"/><label for="pd8"><span class="owner both">Shared</span>Frame the agenda invitationally: these are experiments a floristry program and a math department can run together — and we intend to.</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="figures" id="figures">
+<h2 class="sec">8 · Tables and figures <span class="count"></span></h2>
+<p class="onesent">A small set of warm, permission-safe visuals that carry the argument.</p>
+<ul class="check">
+<li data-owner="cm"><input id="fg1" type="checkbox"/><label for="fg1"><span class="owner cm">CM</span>Sketch the Figure 1 concepts: the five rules as schematic drawings (proportion ratio, stem counts, symmetry triptych, the three curves, the spiral cross-section) — original line art only, no copyrighted photos.</label></li>
+<li data-owner="av"><input id="fg2" type="checkbox"/><label for="fg2"><span class="owner av">AV</span>Produce the publication versions: vector originals plus 300+ dpi exports of Figure 1 from the sketches.</label></li>
+<li data-owner="av"><input id="fg3" type="checkbox"/><label for="fg3"><span class="owner av">AV</span>Figure 2: the proposed-study design diagram (the proportion-ladder stimuli works well).</label></li>
+<li data-owner="av"><input id="fg4" type="checkbox"/><label for="fg4"><span class="owner av">AV</span>Optional Figure 3: golden-angle (137.5°) packing beside a schematic bouquet head.</label></li>
+<li data-owner="both"><input id="fg5" type="checkbox"/><label for="fg5"><span class="owner both">Shared</span>Final figure review: accurate to practice (Milks) and accurate to mathematics (Volk).</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="sections" id="sections">
+<h2 class="sec">9 · Draft the sections in order <span class="count"></span></h2>
+<p class="onesent">Write the middle first (rules → math → evidence), then the agenda, and only then the opening and abstract.</p>
+<ul class="check">
+<li data-owner="cm"><input id="sc1" type="checkbox"/><label for="sc1"><span class="owner cm">CM</span>Draft Movement I: the rules as taught, each anchored to its citation.</label></li>
+<li data-owner="av"><input id="sc2" type="checkbox"/><label for="sc2"><span class="owner av">AV</span>Draft Movement II: what φ actually is, what 3:5:8 converges to, which symmetry classes the forms occupy, what curve the Hogarth line is, why the hand-tie is a helix, what the golden angle optimizes.</label></li>
+<li data-owner="both"><input id="sc3" type="checkbox"/><label for="sc3"><span class="owner both">Shared</span>Draft Movement III: the experimental record per rule, with the agreed verdicts from Table 1.</label></li>
+<li data-owner="both"><input id="sc4" type="checkbox"/><label for="sc4"><span class="owner both">Shared</span>Draft Movement IV: the call for research and Studies 1–6.</label></li>
+<li data-owner="both"><input id="sc5" type="checkbox"/><label for="sc5"><span class="owner both">Shared</span>Draft the Discussion: why unvalidated rules persist (teachable, memorable, mostly harmless) and what floral education gains either way the experiments come out.</label></li>
+<li data-owner="cm"><input id="sc6" type="checkbox"/><label for="sc6"><span class="owner cm">CM</span>Draft the Introduction: open inside a classroom moment — a student asking <em>why</em> 1.5×? — then the question: which of these rules would survive an experiment?</label></li>
+<li data-owner="av"><input id="sc7" type="checkbox"/><label for="sc7"><span class="owner av">AV</span>Draft the Abstract last: purpose, the five rules, the verdicts, the proposed agenda — 150–250 words with an engaging first sentence.</label></li>
+</ul>
+</section>
+
+<section class="card alert" data-sec="readiness" id="readiness">
+<h2 class="sec">10 · Readiness gates <span class="count"></span></h2>
+<p class="onesent">Four quality gates before any submission.</p>
+<ul class="check">
+<li data-owner="av"><input id="rg1" type="checkbox"/><label for="rg1"><span class="owner av">AV</span><strong>Math gate:</strong> every formula, ratio, angle, and convergence claim checked; nothing overstated.</label></li>
+<li data-owner="cm"><input id="rg2" type="checkbox"/><label for="rg2"><span class="owner cm">CM</span><strong>Practice gate:</strong> every "florists are taught X" claim matches a citable curriculum or manual; no straw-man rules.</label></li>
+<li data-owner="both"><input id="rg3" type="checkbox"/><label for="rg3"><span class="owner both">Shared</span><strong>Evidence gate:</strong> every empirical claim cited; the preprint flagged; verdicts match Table 1.</label></li>
+<li data-owner="both"><input id="rg4" type="checkbox"/><label for="rg4"><span class="owner both">Shared</span><strong>Tone gate:</strong> read the introduction and one case study aloud; if it sounds like a compliance document, rewrite until it sounds like the two of us teaching.</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="jhm" id="jhm">
+<h2 class="sec">11 · Plan A: Journal of Humanistic Mathematics <span class="count"></span></h2>
+<p class="onesent">Submit here first: the genre fit is exact and the cost is zero.</p>
+<ul class="check">
+<li data-owner="av"><input id="ja1" type="checkbox"/><label for="ja1"><span class="owner av">AV</span>Prepare the submission as an <em>Article</em> (argument-driven) through the journal's system.</label></li>
+<li data-owner="cm"><input id="ja2" type="checkbox"/><label for="ja2"><span class="owner cm">CM</span>Accessibility read: confirm the mathematics sections are followable by the journal's general mathematical audience and that floristry terms are defined at first use.</label></li>
+<li data-owner="av"><input id="ja3" type="checkbox"/><label for="ja3"><span class="owner av">AV</span>Anonymize for double-anonymous review ("in the first author's classroom…" → "in a floral-design classroom…").</label></li>
+<li data-owner="both"><input id="ja4" type="checkbox"/><label for="ja4"><span class="owner both">Shared</span>Decide the timeline posture: the journal averages roughly a year from submission to publication — agree now how long to wait before laddering down.</label></li>
+<li data-owner="both"><input id="ja5" type="checkbox"/><label for="ja5"><span class="owner both">Shared</span>Cover note thesis: a mathematician and a floral-design educator jointly audit the mathematics their disciplines exchange — and propose the experiments neither has run.</label></li>
+</ul>
+<div class="note"><strong>Journal notes:</strong> Online-only, open access, peer reviewed; scope explicitly includes aesthetic and pedagogical aspects of mathematics for a general mathematical audience; no author charges of any kind; double-anonymous review; CC BY-NC-ND license with authors retaining copyright.</div>
+</section>
+
+<section class="card" data-sec="jma" id="jma">
+<h2 class="sec">12 · Plan B: Journal of Mathematics and the Arts <span class="count"></span></h2>
+<p class="onesent">The strongest topical fit; use if Plan A declines or the team prefers the indexed Taylor &amp; Francis venue.</p>
+<ul class="check">
+<li data-owner="av"><input id="jb1" type="checkbox"/><label for="jb1"><span class="owner av">AV</span>Retitle toward the math–arts interface: <em>Mathematics, Perception, and Myth in Floral Design</em>.</label></li>
+<li data-owner="av"><input id="jb2" type="checkbox"/><label for="jb2"><span class="owner av">AV</span>Restructure to lead with Movement II's mathematics and the visual forms; compress the sourcing paragraph further.</label></li>
+<li data-owner="av"><input id="jb3" type="checkbox"/><label for="jb3"><span class="owner av">AV</span>Apply Taylor &amp; Francis author guidelines (abstract, keywords, reference style, figure specs); choose the no-fee subscription route unless funded open access is available.</label></li>
+<li data-owner="both"><input id="jb4" type="checkbox"/><label for="jb4"><span class="owner both">Shared</span>Cover-letter thesis: floral arrangement is a widely practiced visual art saturated with mathematical claims that the math–arts literature has never audited.</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="bridges" id="bridges">
+<h2 class="sec">13 · Plan C: Bridges 2027 Proceedings <span class="count"></span></h2>
+<p class="onesent">A condensed, joyful version for the math-art community — peer-reviewed, fast, and presentable in person.</p>
+<ul class="check">
+<li data-owner="cm"><input id="bc1" type="checkbox"/><label for="bc1"><span class="owner cm">CM</span>Track the Bridges 2027 call (regular-paper deadlines typically land around February) and the camera-ready 8–12 page template.</label></li>
+<li data-owner="both"><input id="bc2" type="checkbox"/><label for="bc2"><span class="owner both">Shared</span>Condense the paper to the Bridges format; pick the three liveliest rules if space demands.</label></li>
+<li data-owner="cm"><input id="bc3" type="checkbox"/><label for="bc3"><span class="owner cm">CM</span>Budget for registration and attendance — at least one author must present.</label></li>
+<li data-owner="cm"><input id="bc4" type="checkbox"/><label for="bc4"><span class="owner cm">CM</span>Draft the companion workshop proposal: a live spiral hand-tie as participatory mathematics.</label></li>
+<li data-owner="both"><input id="bc5" type="checkbox"/><label for="bc5"><span class="owner both">Shared</span>If both a Bridges paper and a journal article go forward, ensure they differ substantially and disclose the overlap to both venues.</label></li>
+</ul>
+<div class="note"><strong>Conference notes:</strong> Regular papers receive 30-minute presentation slots; submissions go through EasyChair in camera-ready format; proceedings publish openly in the Bridges Archive.</div>
+</section>
+
+<section class="card" data-sec="hort" id="hort">
+<h2 class="sec">14 · Plan D: HortTechnology (practitioner track) <span class="count"></span></h2>
+<p class="onesent">The floral-education readership option — the journal already publishing consumer-arrangement research.</p>
+<ul class="check">
+<li data-owner="cm"><input id="hd1" type="checkbox"/><label for="hd1"><span class="owner cm">CM</span>Reframe toward floral-design education: what instructors teach, what evidence exists, what classroom-feasible studies would settle it.</label></li>
+<li data-owner="cm"><input id="hd2" type="checkbox"/><label for="hd2"><span class="owner cm">CM</span>Confirm current ASHS author charges and membership pricing; apply ASHS manuscript guidelines.</label></li>
+<li data-owner="av"><input id="hd3" type="checkbox"/><label for="hd3"><span class="owner av">AV</span>Record the Virginia Journal of Science fallback specs in the retargeting notes: MS Word, Times New Roman 12 pt double-spaced, 1″ margins, author-date citations with a Literature Cited list, tables and figures after the references, three suggested reviewers.</label></li>
+</ul>
+</section>
+
+<section class="card" data-sec="rapid" id="rapid">
+<h2 class="sec">15 · Rapid retargeting kit <span class="count"></span></h2>
+<p class="onesent">Keep the manuscript journal-agnostic so a decision letter costs days, not months.</p>
+<ul class="check">
+<li data-owner="av"><input id="rr1" type="checkbox"/><label for="rr1"><span class="owner av">AV</span>Maintain one master manuscript; journal-specific wording lives only in the title page, abstract variant, and cover letter.</label></li>
+<li data-owner="cm"><input id="rr2" type="checkbox"/><label for="rr2"><span class="owner cm">CM</span>Draft the JHM and HortTechnology abstract variants (humanistic/general audience; education/practice).</label></li>
+<li data-owner="av"><input id="rr3" type="checkbox"/><label for="rr3"><span class="owner av">AV</span>Draft the JMA and Bridges abstract variants (math–arts interface; condensed/presentable) and load multiple reference styles in Zotero.</label></li>
+<li data-owner="both"><input id="rr4" type="checkbox"/><label for="rr4"><span class="owner both">Shared</span>After any rejection, log the stated reason, decide within a week, and submit to the next rung unless reviewers found a substantive flaw worth fixing first.</label></li>
+<li data-owner="both"><input id="rr5" type="checkbox"/><label for="rr5"><span class="owner both">Shared</span>Whatever the venue outcome, run Studies 1–5 anyway: the follow-up empirical paper is the stronger publication, and this review is its foundation.</label></li>
+</ul>
+</section>
+
+</main>
+</div>
+<footer>Joint project plan for Dr. Chelsea J. Milks and Dr. Andrew H. Volk · CM = Milks · AV = Volk · Shared = both authors · Ladder: Journal of Humanistic Mathematics → Journal of Mathematics and the Arts → Bridges 2027 → HortTechnology.</footer>
+<script>
+const boxes = Array.from(document.querySelectorAll('input[type=checkbox]'));
+const fill = document.getElementById('fill');
+const progressText = document.getElementById('progressText');
+const ownerStats = document.getElementById('ownerStats');
+const STORAGE_KEY = 'bouquet_milks_volk_project_plan_v1';
+
+function updateProgress(){
+  boxes.forEach(b => b.closest('li')?.classList.toggle('done', b.checked));
+  const done = boxes.filter(b=>b.checked).length;
+  const total = boxes.length;
+  fill.style.width = total ? (done/total*100).toFixed(1)+'%' : '0%';
+  progressText.textContent = done + ' / ' + total + ' complete';
+  const stats = {cm:[0,0], av:[0,0], both:[0,0]};
+  boxes.forEach(b=>{
+    const o = b.closest('li')?.dataset.owner;
+    if(stats[o]){ stats[o][1]++; if(b.checked) stats[o][0]++; }
+  });
+  ownerStats.innerHTML =
+    '<span class="ostat"><span class="owner cm">CM</span> Milks '+stats.cm[0]+'/'+stats.cm[1]+'</span>'+
+    '<span class="ostat"><span class="owner av">AV</span> Volk '+stats.av[0]+'/'+stats.av[1]+'</span>'+
+    '<span class="ostat"><span class="owner both">Shared</span> '+stats.both[0]+'/'+stats.both[1]+'</span>';
+  document.querySelectorAll('[data-sec]').forEach(sec=>{
+    const bs = Array.from(sec.querySelectorAll('input[type=checkbox]'));
+    const dn = bs.filter(b=>b.checked).length;
+    const cnt = sec.querySelector('.count');
+    if(cnt) cnt.textContent = dn + ' / ' + bs.length;
+    const tick = document.querySelector('.tick[data-for="'+sec.dataset.sec+'"]');
+    if(tick) tick.textContent = dn + '/' + bs.length;
+  });
+}
+boxes.forEach(b=>b.addEventListener('change', updateProgress));
+
+document.querySelectorAll('.fbtn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+    const o = btn.dataset.owner;
+    document.querySelectorAll('ul.check li').forEach(li=>{
+      li.style.display = (o==='all' || li.dataset.owner===o) ? '' : 'none';
+    });
+  });
+});
+
+document.getElementById('saveBtn').addEventListener('click', ()=>{
+  const state = {};
+  boxes.forEach(b=>state[b.id]=b.checked);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  const btn = document.getElementById('saveBtn');
+  const txt = btn.textContent;
+  btn.textContent='Saved';
+  setTimeout(()=>btn.textContent=txt,1400);
+});
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  if(confirm('Clear all checklist progress?')){
+    boxes.forEach(b=>b.checked=false);
+    localStorage.removeItem(STORAGE_KEY);
+    updateProgress();
+  }
+});
+document.getElementById('printBtn').addEventListener('click', ()=>window.print());
+document.getElementById('wordBtn').addEventListener('click', ()=>{
+  const content = document.querySelector('main').innerHTML;
+  const wordHTML = '<html><head><meta charset="utf-8"><title>Project Plan</title><style>body{font-family:Times New Roman,serif;font-size:12pt;line-height:1.5} h2{font-size:14pt} li{margin-bottom:4pt} table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:5px} .owner{font-family:Courier New,monospace;font-size:9pt;border:1px solid #888;padding:1px 4px;margin-right:6px}</style></head><body><h1>What Florists Are Taught and What the Mathematics Says: Joint Project Plan (Milks and Volk)</h1>'+content+'</body></html>';
+  const blob = new Blob(['\ufeff', wordHTML], {type:'application/msword'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'Bouquet_Article_Project_Plan_Milks_Volk.doc';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+try{
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
+  boxes.forEach(b=>{ if(saved[b.id]) b.checked=true; });
+}catch(e){}
+updateProgress();
+</script>
+</body>
+</html>
