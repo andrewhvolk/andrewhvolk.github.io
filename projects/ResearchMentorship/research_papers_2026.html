@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Papers 2026 — Program Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F5F2;
+    --surface: #FFFFFF;
+    --surface-2: #FBFBF9;
+    --ink: #18233D;
+    --slate: #5B6472;
+    --faint: #9499A1;
+    --line: #E5E6E2;
+
+    --pub: #0F6E56; --pub-bg: #E1F5EE; --pub-tx: #085041;
+    --sub: #185FA5; --sub-bg: #E6F1FB; --sub-tx: #0C447C;
+    --wrt: #BA7517; --wrt-bg: #FAEEDA; --wrt-tx: #633806;
+    --pln: #6B6A66; --pln-bg: #F1EFE8; --pln-tx: #2C2C2A;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Space Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image: radial-gradient(circle, rgba(24,35,61,0.055) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 940px; margin: 0 auto; padding: 56px 28px 72px; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sub);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+
+  .deck {
+    max-width: 62ch;
+    font-size: 1.06rem;
+    color: var(--slate);
+    margin-bottom: 36px;
+  }
+
+  .phases {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+  .phase {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 14px;
+    position: relative;
+    overflow: hidden;
+    min-width: 120px;
+  }
+  .phase::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  }
+  .phase.pub::before { background: var(--pub); }
+  .phase.sub::before { background: var(--sub); }
+  .phase.wrt::before { background: var(--wrt); }
+  .phase.pln::before { background: var(--pln); }
+  .phase .count { font-family: var(--font-mono); font-size: 1.9rem; font-weight: 700; line-height: 1; }
+  .phase.pub .count { color: var(--pub-tx); }
+  .phase.sub .count { color: var(--sub-tx); }
+  .phase.wrt .count { color: var(--wrt-tx); }
+  .phase.pln .count { color: var(--pln-tx); }
+  .phase .plabel {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--slate); margin-top: 8px;
+  }
+  .phase-sep {
+    color: var(--faint);
+    font-size: 1.4rem;
+    font-weight: 300;
+    user-select: none;
+    flex-shrink: 0;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .phases {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+    }
+    .phase-sep {
+      transform: rotate(90deg);
+      margin: -2px 0;
+    }
+  }
+
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin: 52px 0 18px; flex-wrap: wrap; }
+  .sec-head h2 {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.5rem;
+    letter-spacing: -0.01em; color: var(--ink);
+  }
+  .sec-head .meta { font-family: var(--font-mono); font-size: 0.72rem; color: var(--faint); letter-spacing: 0.08em; }
+
+  .map {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 16px; padding: 24px 22px 28px;
+  }
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 14px; }
+  .legend span {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--slate);
+  }
+  .legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .dot-pub { background: var(--pub-bg); border: 1px solid var(--pub); }
+  .dot-sub { background: var(--sub-bg); border: 1px solid var(--sub); }
+  .dot-wrt { background: var(--wrt-bg); border: 1px solid var(--wrt); }
+  .dot-pln { background: var(--pln-bg); border: 1px solid var(--pln); }
+  .mermaid { display: flex; justify-content: center; overflow-x: auto; }
+  .mermaid svg { max-width: 100%; height: auto; }
+
+  .theme-map {
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 12px; padding: 8px 10px; margin: 6px 0 10px;
+    display: flex; justify-content: center; overflow-x: auto;
+  }
+  .theme-map svg { max-width: 100%; height: auto; }
+  .theme-map svg text, .theme-map svg span, .theme-map svg div { font-size: 16px !important; }
+
+  .theme {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 16px; padding: 6px 18px 8px; margin-bottom: 12px;
+  }
+  .theme-head {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.12rem;
+    padding: 10px 0 2px; color: var(--ink);
+  }
+  .theme-note {
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em;
+    color: var(--faint); padding-bottom: 6px;
+  }
+  .entry {
+    display: grid; grid-template-columns: 40px 1fr auto; align-items: baseline;
+    gap: 12px; padding: 6px 0; border-top: 1px solid var(--line);
+  }
+  .entry .num {
+    font-family: var(--font-mono); font-size: 0.95rem; color: var(--faint);
+    font-weight: 700; letter-spacing: -0.02em;
+  }
+  .entry-title { font-size: 0.95rem; color: var(--ink); }
+  .dep {
+    display: inline-block; margin-top: 2px; font-family: var(--font-mono);
+    font-size: 0.68rem; letter-spacing: 0.04em; color: var(--slate);
+  }
+  .dep.up { color: var(--wrt-tx); }
+  .dep.wait { color: var(--sub-tx); }
+  .pill {
+    font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; white-space: nowrap;
+  }
+  .pill-pub { background: var(--pub-bg); color: var(--pub-tx); }
+  .pill-sub { background: var(--sub-bg); color: var(--sub-tx); }
+  .pill-wrt { background: var(--wrt-bg); color: var(--wrt-tx); }
+  .pill-pln { background: var(--pln-bg); color: var(--pln-tx); }
+
+  footer {
+    margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line);
+    font-size: 0.88rem; color: var(--slate); max-width: 66ch;
+  }
+  footer code {
+    font-family: var(--font-mono); font-size: 0.82rem;
+    background: var(--surface-2); border: 1px solid var(--line);
+    padding: 1px 6px; border-radius: 5px; color: var(--ink);
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 40px 18px 56px; }
+    .entry { grid-template-columns: 32px 1fr; }
+    .entry .pill { grid-column: 2; justify-self: start; margin-top: 6px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .wrap > * { animation: rise 0.5s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Research program · 2026</p>
+  <h1>Research Papers 2026</h1>
+  <p class="deck">A living map of thirty-seven active and planned papers — organized into six programs: 3D printing Math, Math in Literature, Biostats, Math Degrees, Math in Arts and Humanities, and Education. Arrows trace dependencies: a paper can't begin until the one feeding it is finished.</p>
+
+  <div class="phases">
+    <div class="phase pln">
+      <div class="count">27</div>
+      <div class="plabel">Planning</div>
+    </div>
+    <div class="phase-sep">→</div>
+    <div class="phase wrt">
+      <div class="count">8</div>
+      <div class="plabel">Writing</div>
+    </div>
+    <div class="phase-sep">→</div>
+    <div class="phase sub">
+      <div class="count">1</div>
+      <div class="plabel">Submitted</div>
+    </div>
+    <div class="phase-sep">→</div>
+    <div class="phase pub">
+      <div class="count">1</div>
+      <div class="plabel">Published</div>
+    </div>
+  </div>
+
+  <div class="sec-head">
+    <h2>Research programs &amp; projects</h2>
+    <span class="meta">37 projects · updated Jun 2026</span>
+  </div>
+
+  <div class="theme">
+    <div class="theme-head">A. 3D printing Math</div>
+    <div class="theme-map">
+      <pre class="mermaid">
+flowchart LR
+    classDef writing   fill:#FAEEDA,stroke:#BA7517,color:#633806
+    classDef planning  fill:#F1EFE8,stroke:#888780,color:#2C2C2A
+    P1["1. Math Manipulatives and 3D Printing Review"]:::writing --> P2["2. Open Repository of 3D Math Demos"]:::planning
+    P1 --> P3["3. OpenSCAD in Math Curriculum"]:::planning
+      </pre>
+    </div>
+    <div class="entry">
+      <span class="num">01</span><div><div class="entry-title">Math Manipulatives and 3D Printing Review</div><span class="dep up">Unblocks #2, #3</span></div><span class="pill pill-wrt">Writing</span>
+    </div>
+    <div class="entry">
+      <span class="num">02</span><div><div class="entry-title">Developing an Open and Free Repository of 3D Printable mathematics tools and demos</div><span class="dep wait">Waits on #1</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">03</span><div><div class="entry-title">OpenSCAD and its relevance to 3D printing and positioning within mathematical curricular frameworks</div><span class="dep wait">Waits on #1</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+  </div>
+
+  <div class="theme">
+    <div class="theme-head">B. Math in Literature</div>
+    <div class="theme-note">Short student articles (1,500–2,500 words) · 16 works</div>
+    <div class="theme-map">
+      <pre class="mermaid">
+flowchart TB
+    classDef planning  fill:#F1EFE8,stroke:#888780,color:#2C2C2A
+    subgraph Borges["Borges"]
+        direction LR
+        P4["4. Library of Babel"]:::planning
+        P5["5. Garden of Forking Paths"]:::planning
+        P6["6. The Aleph"]:::planning
+        P7["7. Book of Sand"]:::planning
+        P8["8. Circular Ruins"]:::planning
+        P9["9. Lottery in Babylon"]:::planning
+        P10["10. Tlön, Uqbar"]:::planning
+        P11["11. Death & Compass"]:::planning
+    end
+    subgraph NonBorges["Non-Borges"]
+        direction LR
+        P12["12. Flatland"]:::planning
+        P13["13. Tortoise & Achilles"]:::planning
+        P14["14. Cent mille poèmes"]:::planning
+        P15["15. Nine Billion Names"]:::planning
+        P16["16. Castle of crossed destinies"]:::planning
+        P17["17. Count of Monte Cristo"]:::planning
+        P18["18. Arcadia"]:::planning
+        P19["19. Division by Zero"]:::planning
+    end
+      </pre>
+    </div>
+    <div class="entry">
+      <span class="num">04</span><div><div class="entry-title">The Library of Babel</div><span class="dep">Borges · combinatorics, information theory</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">05</span><div><div class="entry-title">The Garden of Forking Paths</div><span class="dep">Borges · branching time, decision trees</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">06</span><div><div class="entry-title">The Aleph</div><span class="dep">Borges · Cantorian infinity</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">07</span><div><div class="entry-title">The Book of Sand</div><span class="dep">Borges · dense orderings, countability</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">08</span><div><div class="entry-title">The Circular Ruins</div><span class="dep">Borges · recursion, self-reference</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">09</span><div><div class="entry-title">The Lottery in Babylon</div><span class="dep">Borges · probability, random processes</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">10</span><div><div class="entry-title">Tlön, Uqbar, Orbis Tertius</div><span class="dep">Borges · alternative axiom systems</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">11</span><div><div class="entry-title">Death and the Compass</div><span class="dep">Borges · geometry, symmetry, networks</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">12</span><div><div class="entry-title">Flatland</div><span class="dep">Abbott · dimension, geometry, analogy</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">13</span><div><div class="entry-title">What the Tortoise Said to Achilles</div><span class="dep">Carroll · logic, infinite regress</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">14</span><div><div class="entry-title">Cent mille milliards de poèmes</div><span class="dep">Queneau · combinatorics, constraint</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">15</span><div><div class="entry-title">The Nine Billion Names of God</div><span class="dep">Clarke · permutation, enumeration</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">16</span><div><div class="entry-title">The Castle of Crossed Destinies</div><span class="dep">Calvino · combinatorial narrative</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">17</span><div><div class="entry-title">The Count of Monte Cristo</div><span class="dep">Calvino · maze search, optimization</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">18</span><div><div class="entry-title">Arcadia</div><span class="dep">Stoppard · chaos, iteration, entropy</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">19</span><div><div class="entry-title">Division by Zero</div><span class="dep">Chiang · consistency, foundations</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+  </div>
+
+  <div class="theme">
+    <div class="theme-head">C. Biostats · All of Us</div>
+    <div class="theme-map">
+      <pre class="mermaid">
+flowchart LR
+    classDef writing   fill:#FAEEDA,stroke:#BA7517,color:#633806
+    classDef planning  fill:#F1EFE8,stroke:#888780,color:#2C2C2A
+    P20["20. MASLD underdiagnosis"]:::writing --> P21["21. NAFLD + mental health"]:::writing
+      </pre>
+    </div>
+    <div class="entry">
+      <span class="num">20</span>
+      <div><div class="entry-title">MASLD underdiagnosis</div><span class="dep up">Unblocks #21</span></div>
+      <span class="pill pill-wrt">Writing</span>
+    </div>
+    <div class="entry">
+      <span class="num">21</span>
+      <div><div class="entry-title">NAFLD + mental health</div><span class="dep wait">Waits on #20</span></div>
+      <span class="pill pill-wrt">Writing</span>
+    </div>
+  </div>
+
+  <div class="theme">
+    <div class="theme-head">D. Math Degrees</div>
+    <div class="theme-map">
+      <pre class="mermaid">
+flowchart TB
+    classDef writing   fill:#FAEEDA,stroke:#BA7517,color:#633806
+    classDef planning  fill:#F1EFE8,stroke:#888780,color:#2C2C2A
+    P22["22. Math major paper classification (CIP)"]:::writing --> P23["23. Math majors course requirements in Virginia colleges"]:::planning
+    P23 --> P24["24. Math majors course requirements in US colleges"]:::planning
+    P23 --> P25["25. Math Graduate Program Requirements in Virginia colleges"]:::planning
+    P25 --> P26["26. Math Graduate Program Requirements in US colleges"]:::planning
+    P24 --> P27["27. Grad programs vs undergrad requirements"]:::planning
+    P26 --> P27
+      </pre>
+    </div>
+    <div class="entry">
+      <span class="num">22</span>
+      <div><div class="entry-title">What is a math major paper classification (CIP)?</div><span class="dep up">Unblocks #23</span></div>
+      <span class="pill pill-wrt">Writing</span>
+    </div>
+    <div class="entry">
+      <span class="num">23</span>
+      <div><div class="entry-title">Math majors course requirements in Virginia colleges</div><span class="dep up">Waits on #22 · Unblocks #24, #25</span></div>
+      <span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">24</span>
+      <div><div class="entry-title">Math majors course requirements in US colleges</div><span class="dep up">Waits on #23 · Unblocks #27</span></div>
+      <span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">25</span>
+      <div><div class="entry-title">Math Graduate Program Requirements in Virginia colleges</div><span class="dep up">Waits on #23 · Unblocks #26</span></div>
+      <span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">26</span>
+      <div><div class="entry-title">Math Graduate Program Requirements in US colleges</div><span class="dep up">Waits on #25 · Unblocks #27</span></div>
+      <span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">27</span>
+      <div><div class="entry-title">Do colleges with math grad programs have different undergrad math requirements?</div><span class="dep wait">Waits on #24, #26</span></div>
+      <span class="pill pill-pln">Planning</span>
+    </div>
+  </div>
+
+  <div class="theme">
+    <div class="theme-head">E. Math in Arts and Humanities</div>
+    <div class="theme-map">
+      <pre class="mermaid">
+flowchart LR
+    classDef writing   fill:#FAEEDA,stroke:#BA7517,color:#633806
+    classDef planning  fill:#F1EFE8,stroke:#888780,color:#2C2C2A
+    subgraph History["History"]
+        P29["29. Art + math timeline"]:::planning
+        P30["30. Iberian mathematicians"]:::planning
+    end
+    P28["28. Math + florals"]:::writing
+      </pre>
+    </div>
+    <div class="entry">
+      <span class="num">28</span><div><div class="entry-title">Math + florals</div></div><span class="pill pill-wrt">Writing</span>
+    </div>
+    <div class="entry">
+      <span class="num">29</span><div><div class="entry-title">A combined timeline of art + math movements</div><span class="dep">History · timeline drafted</span></div><span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">30</span>
+      <div><div class="entry-title">Trailblazers of Iberian mathematics (pre-1800)</div><span class="dep">History · abstract + outline drafted</span></div>
+      <span class="pill pill-pln">Planning</span>
+    </div>
+  </div>
+
+  <div class="theme">
+    <div class="theme-head">F. Education</div>
+    <div class="theme-note">Studies on Higher Ed, pedagogy, and collaboration</div>
+    <div class="theme-map">
+      <pre class="mermaid">
+flowchart TB
+    classDef published fill:#E1F5EE,stroke:#0F6E56,color:#085041
+    classDef submitted fill:#E6F1FB,stroke:#185FA5,color:#0C447C
+    classDef writing   fill:#FAEEDA,stroke:#BA7517,color:#633806
+    classDef planning  fill:#F1EFE8,stroke:#888780,color:#2C2C2A
+
+    subgraph Diss["Dissertation"]
+        direction TB
+        P33["33. Diss study 1: Nudge in Higher Ed"]:::writing
+        P34["34. Diss study 2: Higher Ed Initiatives"]:::writing
+        P35["35. Diss study 3: Eng. Honors participation"]:::writing
+        P33 ~~~ P34
+        P34 ~~~ P35
+    end
+    subgraph Collab["Collaboration & AI"]
+        direction TB
+        P31["31. AI + job satisfaction"]:::published --> P32["32. AI + faculty lesson planning"]:::submitted
+        P36["36. Undergrad async collaboration"]:::planning
+        P37["37. Problem solving across disciplines"]:::planning
+        P32 ~~~ P36
+        P36 ~~~ P37
+    end
+      </pre>
+    </div>
+    <div class="entry">
+      <span class="num">31</span>
+      <div><div class="entry-title">AI + job satisfaction</div><span class="dep up">Unblocks #32</span></div>
+      <span class="pill pill-pub">Published</span>
+    </div>
+    <div class="entry">
+      <span class="num">32</span>
+      <div><div class="entry-title">AI + faculty lesson planning</div><span class="dep wait">Waits on #31</span></div>
+      <span class="pill pill-sub">Submitted</span>
+    </div>
+    <div class="entry">
+      <span class="num">33</span><div><div class="entry-title">Dissertation study 1: Nudge in Higher Ed</div></div><span class="pill pill-wrt">Writing</span>
+    </div>
+    <div class="entry">
+      <span class="num">34</span><div><div class="entry-title">Dissertation study 2: Higher Ed Initiatives</div></div><span class="pill pill-wrt">Writing</span>
+    </div>
+    <div class="entry">
+      <span class="num">35</span><div><div class="entry-title">Dissertation study 3: Engineering majors participation in Honors Programs</div></div><span class="pill pill-wrt">Writing</span>
+    </div>
+    <div class="entry">
+      <span class="num">36</span>
+      <div><div class="entry-title">Undergrad research asynchronous collaboration</div></div>
+      <span class="pill pill-pln">Planning</span>
+    </div>
+    <div class="entry">
+      <span class="num">37</span><div><div class="entry-title">Perspectives on problem solving across disciplines</div></div><span class="pill pill-pln">Planning</span>
+    </div>
+  </div>
+
+  <footer>
+    A living document. The map is generated from Mermaid source embedded in this file — to move a paper between phases, change its <code>:::class</code>; to add a dependency, add a line like <code>P7 --&gt; P14</code>. The four <code>classDef</code> lines control every color. The <em>Math in Literature</em> papers (#4 and #5–#19) are the sixteen short student articles in the program. Needs an internet connection on first load to fetch fonts and the Mermaid library.
+  </footer>
+
+</div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'loose',
+    flowchart: { curve: 'basis', padding: 8, rankSpacing: 22, nodeSpacing: 18 },
+    themeVariables: {
+      fontFamily: "'Inter', sans-serif",
+      fontSize: '16px',
+      lineColor: '#A2A8AF',
+      primaryColor: '#FFFFFF',
+      primaryBorderColor: '#D8DAD5',
+      primaryTextColor: '#18233D',
+      clusterBkg: '#FBFBF9',
+      clusterBorder: '#E5E6E2',
+      titleColor: '#18233D'
+    }
+  });
+</script>
+</body>
+</html>

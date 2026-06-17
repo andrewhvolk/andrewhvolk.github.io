@@ -1,0 +1,79 @@
+flowchart TB
+    %% ===== Status styles — edit these hex colors to restyle everything =====
+    classDef published fill:#E1F5EE,stroke:#0F6E56,color:#085041
+    classDef submitted fill:#E6F1FB,stroke:#185FA5,color:#0C447C
+    classDef writing   fill:#FAEEDA,stroke:#BA7517,color:#633806
+    classDef planning  fill:#F1EFE8,stroke:#888780,color:#2C2C2A
+
+    subgraph A["A. 3D printing Math"]
+        direction LR
+        P1["1. Math Manipulatives and 3D Printing Review"]:::writing --> P2["2. Open Repository of 3D Math Demos"]:::planning
+        P1 --> P3["3. OpenSCAD in Math Curriculum"]:::planning
+    end
+
+    subgraph B["B. Math in Literature"]
+        subgraph Borges["Borges"]
+            direction LR
+            P4["4. Library of Babel"]:::planning
+            P5["5. Garden of Forking Paths"]:::planning
+            P6["6. The Aleph"]:::planning
+            P7["7. Book of Sand"]:::planning
+            P8["8. Circular Ruins"]:::planning
+            P9["9. Lottery in Babylon"]:::planning
+            P10["10. Tlön, Uqbar"]:::planning
+            P11["11. Death & Compass"]:::planning
+        end
+        subgraph NonBorges["Non-Borges"]
+            direction LR
+            P12["12. Flatland"]:::planning
+            P13["13. Tortoise & Achilles"]:::planning
+            P14["14. Cent mille poèmes"]:::planning
+            P15["15. Nine Billion Names"]:::planning
+            P16["16. Castle of crossed destinies"]:::planning
+            P17["17. Count of Monte Cristo"]:::planning
+            P18["18. Arcadia"]:::planning
+            P19["19. Division by Zero"]:::planning
+        end
+    end
+
+    subgraph C["C. Biostats"]
+        subgraph AllOfUs["All of Us"]
+            P20["20. MASLD underdiagnosis"]:::writing --> P21["21. NAFLD + mental health"]:::writing
+        end
+    end
+
+    subgraph D["D. Math Degrees"]
+        P22["22. Math major paper classification (CIP)"]:::writing --> P23["23. Math majors course requirements in Virginia colleges"]:::planning
+        P23 --> P24["24. Math majors course requirements in US colleges"]:::planning
+        P23 --> P25["25. Math Graduate Program Requirements in Virginia colleges"]:::planning
+        P25 --> P26["26. Math Graduate Program Requirements in US colleges"]:::planning
+        P24 --> P27["27. Grad programs vs undergrad requirements"]:::planning
+        P26 --> P27
+    end
+
+    subgraph E["E. Math in Arts and Humanities"]
+        subgraph History["History"]
+            P29["29. Art + math timeline"]:::planning
+            P30["30. Iberian mathematicians"]:::planning
+        end
+        P28["28. Math + florals"]:::writing
+    end
+
+    subgraph F["F. Education"]
+        subgraph Diss["Dissertation"]
+            direction TB
+            P33["33. Diss study 1: Nudge in Higher Ed"]:::writing
+            P34["34. Diss study 2: Higher Ed Initiatives"]:::writing
+            P35["35. Diss study 3: Eng. Honors participation"]:::writing
+            P33 ~~~ P34
+            P34 ~~~ P35
+        end
+        subgraph Collab["Collaboration & AI"]
+            direction TB
+            P31["31. AI + job satisfaction"]:::published --> P32["32. AI + faculty lesson planning"]:::submitted
+            P36["36. Undergrad async collaboration"]:::planning
+            P37["37. Problem solving across disciplines"]:::planning
+            P32 ~~~ P36
+            P36 ~~~ P37
+        end
+    end
