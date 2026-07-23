@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desmos 3D to STL</title>
+<style>
+:root{
+  --paper:#F4F6F1;
+  --panel:#FFFFFF;
+  --ink:#17212C;
+  --muted:#66717D;
+  --line:#DCE2D6;
+  --grid:#E5EADF;
+  --accent:#2D70B3;
+  --accent-ink:#1C4A78;
+  --view:#0F141C;
+  --signal:#B6472B;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:26px 26px;
+  line-height:1.45;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 80px}
+@media(min-width:980px){
+  .wrap{display:grid;grid-template-columns:410px 1fr;gap:22px;align-items:start}
+  .col-view{position:sticky;top:18px}
+}
+
+/* header */
+header{grid-column:1/-1;margin-bottom:6px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(24px,4.5vw,34px);letter-spacing:-.02em;line-height:1.1;margin:4px 0 10px}
+h1 em{font-style:normal;color:var(--accent)}
+.pipeline{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--accent-ink)}
+.pipeline .st{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:4px 9px;white-space:nowrap}
+.pipeline .ar{color:var(--muted)}
+
+/* cards */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:14px;box-shadow:0 1px 0 rgba(23,33,44,.04)}
+.card h2{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline}
+.card h2 .count{color:var(--accent-ink)}
+.hint{font-size:13px;color:var(--muted);margin-top:8px}
+.hint code{font-family:var(--mono);font-size:12px;background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:1px 5px;word-break:break-all}
+
+textarea{
+  width:100%;min-height:110px;resize:vertical;font-family:var(--mono);font-size:12px;
+  border:1px solid var(--line);border-radius:6px;padding:10px;background:#FBFCFA;color:var(--ink)
+}
+textarea:focus,input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button{
+  font-family:var(--mono);font-size:13px;letter-spacing:.02em;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  border-radius:6px;padding:9px 14px;transition:background .12s
+}
+button:hover{background:var(--paper)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.primary:hover{background:var(--accent-ink)}
+button:disabled{opacity:.45;cursor:default}
+button.ghost{border-style:dashed;color:var(--muted)}
+
+/* settings */
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.field input,.field select{
+  width:100%;font-family:var(--mono);font-size:13px;padding:8px;border:1px solid var(--line);
+  border-radius:6px;background:#FBFCFA;color:var(--ink)
+}
+
+/* ledger */
+.ledger{border-top:1px solid var(--line)}
+.srow{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--line)}
+.chip{width:12px;height:12px;border-radius:3px;flex:none;border:1px solid rgba(0,0,0,.15)}
+.eq{flex:1;font-family:var(--mono);font-size:11.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.srow .badge{font-family:var(--mono);font-size:10px;color:var(--muted);flex:none;min-width:52px;text-align:right}
+.srow select{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:4px;padding:3px;background:#FBFCFA;flex:none}
+.skiplist{font-family:var(--mono);font-size:11px;color:var(--signal);margin-top:8px}
+.skiplist div{margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* progress */
+.progress{height:8px;border:1px solid var(--line);border-radius:5px;background:var(--paper);overflow:hidden;margin-top:10px;display:none}
+.progress .bar{height:100%;width:0%;background:var(--accent);transition:width .15s}
+.status{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px;min-height:16px}
+.status.err{color:var(--signal)}
+
+/* viewport */
+.viewport{position:relative;background:var(--view);border:1px solid var(--line);border-radius:8px;overflow:hidden;height:56vh;min-height:340px}
+@media(min-width:980px){.viewport{height:72vh}}
+.viewport canvas{display:block;width:100%;height:100%;touch-action:none}
+.vp-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#5C6B7E;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-align:center;padding:0 24px}
+.vp-stats{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:11px;color:#8FA0B5;pointer-events:none}
+.vp-hint{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:11px;color:#5C6B7E;pointer-events:none}
+
+.export-note{font-size:13px;color:var(--muted);margin-top:10px}
+.export-note strong{color:var(--ink)}
+
+a{color:var(--accent-ink)}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Implicit surface press</div>
+  <h1>Desmos 3D <em>&rarr;</em> OpenSCAD <em>&rarr;</em> STL</h1>
+  <div class="pipeline">
+    <span class="st">f(x,y,z)&thinsp;=&thinsp;0</span><span class="ar">&rarr;</span>
+    <span class="st">marching&nbsp;tetrahedra</span><span class="ar">&rarr;</span>
+    <span class="st">union(){ polyhedron&hellip; }</span><span class="ar">&rarr;</span>
+    <span class="st">.stl</span>
+  </div>
+</header>
+
+<div class="col-ctrl">
+
+  <div class="card">
+    <h2>1 &middot; Graph input</h2>
+    <textarea id="input" spellcheck="false" placeholder="Paste the graph state JSON here, or plain LaTeX equations (one per line)&#10;&#10;Example line:&#10;\left(\frac{x}{2}\right)^{2}+y^{2}+(z-1)^{2}=1\left\{z>0\right\}"></textarea>
+    <div class="row">
+      <button id="btnDemo" class="ghost">Load example &middot; Hello Kitty</button>
+      <button id="btnParse" class="primary">Read equations</button>
+    </div>
+    <p class="hint" id="fetchHint">
+      To grab your own graph: open it at desmos.com/3d on a computer, open the browser
+      console (F12) and run <code>copy(JSON.stringify(Calc.getState()))</code>, then paste here.
+      Plain equation lists work too.
+    </p>
+    <div class="status" id="parseStatus"></div>
+  </div>
+
+  <div class="card" id="surfCard" style="display:none">
+    <h2>2 &middot; Surfaces <span class="count" id="surfCount"></span></h2>
+    <div class="ledger" id="ledger"></div>
+    <div class="skiplist" id="skiplist"></div>
+    <p class="hint">auto picks solid or shell per equation; flip inverts which side is solid.</p>
+  </div>
+
+  <div class="card" id="buildCard" style="display:none">
+    <h2>3 &middot; Mesh</h2>
+    <div class="settings">
+      <div class="field"><label for="selRes">Resolution</label>
+        <select id="selRes">
+          <option value="70">Draft &middot; 70</option>
+          <option value="110" selected>Standard &middot; 110</option>
+          <option value="150">Fine &middot; 150</option>
+          <option value="200">Ultra &middot; 200</option>
+        </select>
+      </div>
+      <div class="field"><label for="inpShell">Shell thickness (units)</label>
+        <input id="inpShell" type="number" step="0.02" min="0.02" value="0.16">
+      </div>
+      <div class="field"><label for="inpScale">Scale (mm per unit)</label>
+        <input id="inpScale" type="number" step="0.5" min="0.1" value="5">
+      </div>
+      <div class="field"><label for="inpName">File name</label>
+        <input id="inpName" type="text" value="desmos-model">
+      </div>
+    </div>
+    <div class="row"><button id="btnBuild" class="primary">Build mesh</button></div>
+    <div class="progress" id="prog"><div class="bar" id="progBar"></div></div>
+    <div class="status" id="buildStatus"></div>
+  </div>
+
+  <div class="card" id="exportCard" style="display:none">
+    <h2>4 &middot; Export</h2>
+    <div class="row">
+      <button id="btn3mf" class="primary">Download colored .3mf</button>
+      <button id="btnScad">Download .scad</button>
+      <button id="btnStl">Download .stl</button>
+    </div>
+    <p class="export-note">
+      The <strong>.3mf</strong> stores every surface's Desmos color as per&#8209;face
+      color on one assembled object. Drag it onto an empty plate in Bambu&nbsp;Studio
+      or OrcaSlicer and accept the <em>Standard 3MF Color Parsing</em> prompt: the
+      slicer reads the seven colours and matches or appends filaments to them. It also
+      opens with colour in the Windows 3D&nbsp;Viewer and other 3MF tools. On a
+      single&#8209;extruder printer you can still print it by mapping those colours to
+      an AMS or pausing to swap filament.
+    </p>
+    <p class="export-note">
+      The <strong>.scad</strong> holds one polyhedron per surface inside a
+      <span style="font-family:var(--mono)">union()</span>; its coloured preview matches
+      Desmos, but note that pressing <strong>F6</strong> and exporting <em>STL</em> drops
+      colour, since STL stores no colour and the union fuses the parts. The direct
+      <strong>.stl</strong> is likewise geometry only. Use the <strong>.3mf</strong> when
+      colour matters.
+    </p>
+  </div>
+
+</div>
+
+<div class="col-view">
+  <div class="viewport" id="viewport">
+    <div class="vp-empty" id="vpEmpty">mesh preview appears here<br>after step 3</div>
+    <div class="vp-stats" id="vpStats"></div>
+    <div class="vp-hint">drag to orbit &middot; pinch or scroll to zoom</div>
+  </div>
+</div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============================================================
+   Desmos 3D -> mesh core (DOM-free)
+   ============================================================ */
+"use strict";
+
+/* ---------- LaTeX tokenizer ---------- */
+function latexTokens(src) {
+  // normalize
+  let s = src
+    .replace(/\\left\|/g, "|").replace(/\\right\|/g, "|")
+    .replace(/\\left/g, "").replace(/\\right/g, "")
+    .replace(/\\operatorname\{([A-Za-z]+)\}/g, "\\$1")
+    .replace(/\\ /g, " ");
+  const toks = [];
+  let i = 0;
+  const isDigit = c => c >= "0" && c <= "9";
+  const isAlpha = c => /[A-Za-z]/.test(c);
+  while (i < s.length) {
+    const c = s[i];
+    if (c === " " || c === "\t" || c === "\n") { i++; continue; }
+    if (isDigit(c) || (c === "." && isDigit(s[i + 1]))) {
+      let j = i + 1;
+      while (j < s.length && (isDigit(s[j]) || s[j] === ".")) j++;
+      toks.push({ t: "num", v: parseFloat(s.slice(i, j)) });
+      i = j; continue;
+    }
+    if (c === "\\") {
+      let j = i + 1;
+      if (j < s.length && !isAlpha(s[j])) { // \{ \} \, etc.
+        const ch = s[j];
+        if (ch === "{") toks.push({ t: "{" });
+        else if (ch === "}") toks.push({ t: "}" });
+        else if (ch === ",") { /* thin space */ }
+        else toks.push({ t: "op", v: ch });
+        i = j + 1; continue;
+      }
+      while (j < s.length && isAlpha(s[j])) j++;
+      const name = s.slice(i + 1, j);
+      i = j;
+      if (name === "cdot" || name === "times") { toks.push({ t: "op", v: "*" }); continue; }
+      if (name === "le" || name === "leq") { toks.push({ t: "cmp", v: "<=" }); continue; }
+      if (name === "ge" || name === "geq") { toks.push({ t: "cmp", v: ">=" }); continue; }
+      if (name === "pi") { toks.push({ t: "num", v: Math.PI }); continue; }
+      if (name === "tau") { toks.push({ t: "num", v: 2 * Math.PI }); continue; }
+      toks.push({ t: "cmd", v: name });
+      continue;
+    }
+    if (isAlpha(c)) {
+      // identifier: single letter, optional _{...} or _x subscript
+      let name = c; i++;
+      if (s[i] === "_") {
+        i++;
+        if (s[i] === "{") {
+          let j = i + 1, sub = "";
+          while (j < s.length && s[j] !== "}") { sub += s[j]; j++; }
+          name += "_" + sub; i = j + 1;
+        } else { name += "_" + s[i]; i++; }
+      }
+      toks.push({ t: "id", v: name });
+      continue;
+    }
+    if (c === "<" || c === ">") {
+      if (s[i + 1] === "=") { toks.push({ t: "cmp", v: c + "=" }); i += 2; }
+      else { toks.push({ t: "cmp", v: c }); i++; }
+      continue;
+    }
+    if (c === "=") { toks.push({ t: "eq" }); i++; continue; }
+    if ("+-*/^(){}|,".includes(c)) {
+      if (c === "(" || c === ")" || c === "{" || c === "}" || c === "|" || c === ",")
+        toks.push({ t: c });
+      else toks.push({ t: "op", v: c });
+      i++; continue;
+    }
+    throw new Error("Unexpected character '" + c + "'");
+  }
+  return toks;
+}
+
+/* ---------- Pratt-ish parser producing AST ----------
+   AST nodes: {k:"num",v}, {k:"var",v}, {k:"bin",op,a,b}, {k:"neg",a},
+              {k:"call",fn,a}, {k:"abs",a}
+------------------------------------------------------ */
+const FUNCS = {
+  sin: "Math.sin", cos: "Math.cos", tan: "Math.tan",
+  sec: "__sec", csc: "__csc", cot: "__cot",
+  arcsin: "Math.asin", arccos: "Math.acos", arctan: "Math.atan",
+  sinh: "Math.sinh", cosh: "Math.cosh", tanh: "Math.tanh",
+  ln: "Math.log", log: "Math.log10", exp: "Math.exp",
+  abs: "Math.abs", sqrt: "Math.sqrt",
+  floor: "Math.floor", ceil: "Math.ceil", round: "Math.round",
+  sign: "Math.sign", min: "Math.min", max: "Math.max", mod: "__mod"
+};
+
+function parseLatexExpr(toks, posObj) {
+  const P = posObj;
+  const peek = () => toks[P.i];
+  const next = () => toks[P.i++];
+  const expect = (t) => {
+    const tk = next();
+    if (!tk || tk.t !== t) throw new Error("Expected '" + t + "'");
+    return tk;
+  };
+
+  function parseAdditive() {
+    let a = parseTermChain();
+    for (;;) {
+      const tk = peek();
+      if (tk && tk.t === "op" && (tk.v === "+" || tk.v === "-")) {
+        next();
+        const b = parseTermChain();
+        a = { k: "bin", op: tk.v, a, b };
+      } else break;
+    }
+    return a;
+  }
+
+  // sequence of factors joined by implicit multiplication, * and /
+  function parseTermChain() {
+    let a = parseSigned();
+    for (;;) {
+      const tk = peek();
+      if (!tk) break;
+      if (tk.t === "op" && (tk.v === "*" || tk.v === "/")) {
+        next();
+        const b = parseSigned(tk.v === "/" ? true : false);
+        a = { k: "bin", op: tk.v, a, b };
+        continue;
+      }
+      // implicit multiplication starts?
+      if (tk.t === "num" || tk.t === "id" || tk.t === "(" || tk.t === "|" ||
+          (tk.t === "cmd" && tk.v !== "")) {
+        const b = parsePostfix();
+        a = { k: "bin", op: "*", a, b };
+        continue;
+      }
+      break;
+    }
+    return a;
+  }
+
+  function parseSigned(noSign) {
+    const tk = peek();
+    if (!noSign && tk && tk.t === "op" && (tk.v === "-" || tk.v === "+")) {
+      next();
+      const a = parseSigned();
+      return tk.v === "-" ? { k: "neg", a } : a;
+    }
+    return parsePostfix();
+  }
+
+  function parsePostfix() {
+    let a = parseAtom();
+    for (;;) {
+      const tk = peek();
+      if (tk && tk.t === "op" && tk.v === "^") {
+        next();
+        const e = parseExponent();
+        a = { k: "bin", op: "^", a, b: e };
+      } else break;
+    }
+    return a;
+  }
+
+  function parseExponent() {
+    const tk = peek();
+    if (tk && tk.t === "{") { next(); const e = parseAdditive(); expect("}"); return e; }
+    if (tk && tk.t === "op" && tk.v === "-") { next(); return { k: "neg", a: parseExponent() }; }
+    if (tk && (tk.t === "num" || tk.t === "id")) { next(); return tk.t === "num" ? { k: "num", v: tk.v } : { k: "var", v: tk.v }; }
+    if (tk && tk.t === "(") return parseAtom();
+    throw new Error("Bad exponent");
+  }
+
+  function parseAtom() {
+    const tk = next();
+    if (!tk) throw new Error("Unexpected end of expression");
+    if (tk.t === "num") return { k: "num", v: tk.v };
+    if (tk.t === "id") {
+      if (tk.v === "e") return { k: "var", v: "e" };
+      return { k: "var", v: tk.v };
+    }
+    if (tk.t === "(") { const a = parseAdditive(); expect(")"); return a; }
+    if (tk.t === "{") { const a = parseAdditive(); expect("}"); return a; }
+    if (tk.t === "|") { const a = parseAdditive(); expect("|"); return { k: "abs", a }; }
+    if (tk.t === "cmd") {
+      const name = tk.v;
+      if (name === "frac") {
+        expect("{"); const a = parseAdditive(); expect("}");
+        expect("{"); const b = parseAdditive(); expect("}");
+        return { k: "bin", op: "/", a, b };
+      }
+      if (name === "sqrt") {
+        let root = null;
+        if (peek() && peek().t === "op" && peek().v === "[") { /* not produced */ }
+        expect("{"); const a = parseAdditive(); expect("}");
+        return root ? { k: "bin", op: "^", a, b: { k: "bin", op: "/", a: { k: "num", v: 1 }, b: root } }
+                    : { k: "call", fn: "sqrt", a: [a] };
+      }
+      if (FUNCS[name]) {
+        // optional ^{n} between func and arg: \cos^{2}x
+        let pow = null;
+        if (peek() && peek().t === "op" && peek().v === "^") { next(); pow = parseExponent(); }
+        let arg;
+        if (peek() && peek().t === "(") { next(); 
+          const args = [parseAdditive()];
+          while (peek() && peek().t === ",") { next(); args.push(parseAdditive()); }
+          expect(")");
+          arg = args;
+        } else {
+          arg = [parseSigned()]; // \cos a  or \cos 2x -> cos(2)…? Desmos: applies to the factor
+        }
+        let node = { k: "call", fn: name, a: arg };
+        if (pow) node = { k: "bin", op: "^", a: node, b: pow };
+        return node;
+      }
+      throw new Error("Unknown command \\" + name);
+    }
+    throw new Error("Unexpected token '" + (tk.v || tk.t) + "'");
+  }
+
+  return parseAdditive();
+}
+
+/* ---------- Split a Desmos latex line into equation + constraints ----------
+   Braces in LaTeX serve two roles here: argument groups (after ^, \frac, \sqrt)
+   and set-builder restrictions {z>1.5}. Only top-level set braces become
+   constraint groups; argument braces stay in the token stream. */
+function splitLine(latex) {
+  const toks = latexTokens(latex);
+  const main = [], groups = [];
+  // context stack; each frame: {type, sink, pending, caret}
+  const root = { type: "root", sink: main, pending: 0, caret: false };
+  const stack = [root];
+  const top = () => stack[stack.length - 1];
+  for (const tk of toks) {
+    const t = top();
+    if (tk.t === "cmd" && tk.v === "frac") { t.pending = 2; t.sink.push(tk); continue; }
+    if (tk.t === "cmd" && tk.v === "sqrt") { t.pending = 1; t.sink.push(tk); continue; }
+    if (tk.t === "op" && tk.v === "^") { t.caret = true; t.sink.push(tk); continue; }
+    if (tk.t === "{") {
+      if (t.caret || t.pending > 0) {
+        if (t.caret) t.caret = false; else t.pending--;
+        t.sink.push(tk);
+        stack.push({ type: "arg", sink: t.sink, pending: 0, caret: false });
+      } else if (stack.length === 1) {
+        const grp = [];
+        groups.push(grp);
+        stack.push({ type: "set", sink: grp, pending: 0, caret: false });
+      } else {
+        t.sink.push(tk);
+        stack.push({ type: "inline", sink: t.sink, pending: 0, caret: false });
+      }
+      continue;
+    }
+    if (tk.t === "}") {
+      const closed = stack.pop();
+      if (!closed || closed.type === "root") throw new Error("Unbalanced braces");
+      if (closed.type !== "set") closed.sink.push(tk);
+      continue;
+    }
+    if (tk.t === "(") { t.caret = false; t.sink.push(tk); stack.push({ type: "paren", sink: t.sink, pending: t.pending, caret: false }); t.pending = 0; continue; }
+    if (tk.t === ")") { const c = stack.pop(); c.sink.push(tk); continue; }
+    t.caret = false;
+    t.sink.push(tk);
+  }
+  return { main, groups };
+}
+
+/* main tokens -> {lhs,rhs} ASTs (or single expr if no '=') ; also cmp chains */
+function parseEquation(mainToks) {
+  const idx = mainToks.findIndex(tk => tk.t === "eq");
+  const cmpIdx = mainToks.findIndex(tk => tk.t === "cmp");
+  if (cmpIdx >= 0 && idx < 0) return null; // pure inequality line — not a surface
+  if (idx < 0) return { expr: parseLatexExpr(mainToks, { i: 0 }) };
+  const L = mainToks.slice(0, idx), R = mainToks.slice(idx + 1);
+  const pl = { i: 0 }, pr = { i: 0 };
+  const lhs = parseLatexExpr(L, pl), rhs = parseLatexExpr(R, pr);
+  if (pl.i !== L.length || pr.i !== R.length) throw new Error("Trailing tokens");
+  return { lhs, rhs };
+}
+
+/* constraint group tokens -> list of {a,op,b} pairs from chained comparisons */
+function parseConstraints(groupToks) {
+  // split by cmp tokens at depth 0
+  const exprs = [], ops = [];
+  let cur = [], depth = 0;
+  for (const tk of groupToks) {
+    if (tk.t === "(") depth++;
+    if (tk.t === ")") depth--;
+    if (tk.t === "cmp" && depth === 0) { exprs.push(cur); ops.push(tk.v); cur = []; }
+    else cur.push(tk);
+  }
+  exprs.push(cur);
+  if (ops.length === 0) return [];
+  const asts = exprs.map(ts => {
+    const p = { i: 0 };
+    const a = parseLatexExpr(ts, p);
+    if (p.i !== ts.length) throw new Error("Bad constraint");
+    return a;
+  });
+  const out = [];
+  for (let i = 0; i < ops.length; i++) {
+    const op = ops[i], a = asts[i], b = asts[i + 1];
+    // satisfied region g<=0
+    if (op === "<" || op === "<=") out.push({ k: "bin", op: "-", a, b });
+    else out.push({ k: "bin", op: "-", a: b, b: a });
+  }
+  return out;
+}
+
+/* ---------- AST utilities ---------- */
+function freeVars(node, set) {
+  set = set || new Set();
+  if (!node) return set;
+  if (node.k === "var") set.add(node.v);
+  if (node.a) { if (Array.isArray(node.a)) node.a.forEach(n => freeVars(n, set)); else freeVars(node.a, set); }
+  if (node.b) freeVars(node.b, set);
+  return set;
+}
+
+function astToJs(node, defs) {
+  switch (node.k) {
+    case "num": return "(" + node.v + ")";
+    case "var": {
+      const v = node.v;
+      if (v === "x" || v === "y" || v === "z") return v;
+      if (defs && v in defs) return "(" + defs[v] + ")";
+      if (v === "e") return "(Math.E)";
+      throw new Error("Unknown variable '" + v + "'");
+    }
+    case "neg": return "(-" + astToJs(node.a, defs) + ")";
+    case "abs": return "Math.abs(" + astToJs(node.a, defs) + ")";
+    case "bin": {
+      const a = astToJs(node.a, defs), b = astToJs(node.b, defs);
+      if (node.op === "^") {
+        if (node.b.k === "num" && node.b.v === 2) return "((" + a + ")*(" + a + "))";
+        if (node.b.k === "num" && node.b.v === 3) return "((" + a + ")*(" + a + ")*(" + a + "))";
+        return "Math.pow(" + a + "," + b + ")";
+      }
+      return "(" + a + node.op + b + ")";
+    }
+    case "call": {
+      const fn = FUNCS[node.fn];
+      if (!fn) throw new Error("Unknown function " + node.fn);
+      return fn + "(" + node.a.map(n => astToJs(n, defs)).join(",") + ")";
+    }
+  }
+  throw new Error("Bad AST node");
+}
+
+const HELPERS =
+  "var __sec=function(t){return 1/Math.cos(t)},__csc=function(t){return 1/Math.sin(t)}," +
+  "__cot=function(t){return 1/Math.tan(t)},__mod=function(a,b){return ((a%b)+b)%b};";
+
+function compileXYZ(node, defs) {
+  const src = HELPERS + "return (" + astToJs(node, defs) + ");";
+  return new Function("x", "y", "z", src);
+}
+
+/* ---------- State intake ---------- */
+function intake(input) {
+  // Accepts: full Desmos state JSON, {expressions:{list}}, an array, or plain latex lines
+  let list = null, viewport = null, title = "desmos-model";
+  const txt = input.trim();
+  if (txt.startsWith("{") || txt.startsWith("[")) {
+    const j = JSON.parse(txt);
+    if (Array.isArray(j)) list = j.map(l => (typeof l === "string" ? { type: "expression", latex: l } : l));
+    else {
+      list = (j.expressions && j.expressions.list) || j.list;
+      if (j.graph && j.graph.viewport) viewport = j.graph.viewport;
+      if (j.title) title = j.title;
+    }
+    if (!list) throw new Error("Could not find an expression list in this JSON.");
+  } else {
+    list = txt.split(/\n+/).map(s => s.trim()).filter(Boolean)
+      .map(s => ({ type: "expression", latex: s }));
+  }
+  return { list, viewport, title };
+}
+
+const FALLBACK_COLORS = ["#c74440", "#2d70b3", "#388c46", "#6042a6", "#fa7e19", "#000000"];
+
+function classify(list) {
+  const colorDefs = {};   // name -> [r,g,b] 0..1
+  const defsAst = {};     // name -> ast
+  const surfaces = [];
+  const skipped = [];
+
+  let ci = 0;
+  for (const e of list) {
+    if (e.type !== "expression" || !e.latex) continue;
+    const latex = e.latex;
+
+    // color definition?  name = rgb(a,b,c) / hsv
+    const m = latex.match(/^([A-Za-z](?:_\{?[A-Za-z0-9]+\}?)?)\s*=\s*\\operatorname\{(rgb|hsv)\}/);
+    if (m) {
+      const nums = latex.match(/\(([^)]*)\)/);
+      if (nums) {
+        const parts = nums[1].replace(/\\left|\\right|\\[a-zA-Z]+|\s/g, "").split(",").map(Number);
+        const name = m[1].replace(/[{}]/g, "");
+        if (m[2] === "rgb") colorDefs[name] = parts.map(v => Math.min(1, Math.max(0, v / 255)));
+        else colorDefs[name] = hsv2rgb(parts[0], parts.length > 1 ? parts[1] : 1, parts.length > 2 ? parts[2] : 1);
+      }
+      continue;
+    }
+
+    let parts, eq;
+    try {
+      parts = splitLine(latex);
+      eq = parseEquation(parts.main);
+    } catch (err) {
+      skipped.push({ latex, why: err.message });
+      continue;
+    }
+    if (!eq) { skipped.push({ latex, why: "inequality-only line" }); continue; }
+
+    if (eq.lhs && eq.lhs.k === "var" && !["x", "y", "z"].includes(eq.lhs.v)) {
+      defsAst[eq.lhs.v] = eq.rhs;             // scalar definition (slider, constant)
+      continue;
+    }
+    if (!eq.lhs) { skipped.push({ latex, why: "not an equation" }); continue; }
+
+    const fv = freeVars(eq.lhs, freeVars(eq.rhs));
+    const usesXYZ = fv.has("x") || fv.has("y") || fv.has("z");
+    if (!usesXYZ) { skipped.push({ latex, why: "no x, y or z" }); continue; }
+    if (e.hidden) { skipped.push({ latex, why: "hidden in Desmos" }); continue; }
+
+    let constraints = [];
+    try { for (const g of parts.groups) constraints = constraints.concat(parseConstraints(g)); }
+    catch (err) { skipped.push({ latex, why: "constraint: " + err.message }); continue; }
+
+    surfaces.push({
+      latex,
+      lhs: eq.lhs, rhs: eq.rhs, constraints,
+      colorLatex: (e.colorLatex || "").replace(/[{}\\]/g, ""),
+      colorHex: e.color || FALLBACK_COLORS[ci++ % FALLBACK_COLORS.length],
+      mode: "auto", // auto | solid | solidFlip | shell | off
+    });
+  }
+  return { colorDefs, defsAst, surfaces, skipped };
+}
+
+function hsv2rgb(h, s, v) {
+  h = ((h % 360) + 360) % 360;
+  const f = (n) => {
+    const k = (n + h / 60) % 6;
+    return v - v * s * Math.max(0, Math.min(k, 4 - k, 1));
+  };
+  return [f(5), f(3), f(1)];
+}
+
+/* Resolve scalar defs to numbers (iterative, handles chains) */
+function resolveDefs(defsAst) {
+  const vals = {}, errs = {};
+  let changed = true, guard = 0;
+  while (changed && guard++ < 12) {
+    changed = false;
+    for (const name in defsAst) {
+      if (name in vals) continue;
+      try {
+        const fn = compileXYZ(defsAst[name], vals);
+        const v = fn(0, 0, 0);
+        if (Number.isFinite(v)) { vals[name] = v; changed = true; delete errs[name]; }
+      } catch (err) { errs[name] = err.message; }
+    }
+  }
+  return { vals, errs };
+}
+
+/* ---------- Field construction ---------- */
+function buildFields(surf, defVals) {
+  const F = compileXYZ({ k: "bin", op: "-", a: surf.lhs, b: surf.rhs }, defVals);
+  const clips = surf.constraints.map(c => compileXYZ(c, defVals));
+  return { F, clips };
+}
+
+function makeField(F, clips, sign, shellT) {
+  // returns f(x,y,z): <=0 inside
+  if (shellT != null) {
+    const h = shellT / 2;
+    return (x, y, z) => {
+      let v = Math.abs(F(x, y, z)) - h;
+      for (let i = 0; i < clips.length; i++) { const g = clips[i](x, y, z); if (g > v) v = g; }
+      return v;
+    };
+  }
+  return (x, y, z) => {
+    let v = sign * F(x, y, z);
+    for (let i = 0; i < clips.length; i++) { const g = clips[i](x, y, z); if (g > v) v = g; }
+    return v;
+  };
+}
+
+/* Coarse scan: one pass stores F values + clip flags, then derives solid
+   occupancy for both signs and surface-crossing cells (catches thin shells). */
+function coarseScan(F, clips, box, n) {
+  const [x0, y0, z0, x1, y1, z1] = box;
+  const s = n + 1;
+  const f = new Float64Array(s * s * s);
+  const ok = new Uint8Array(s * s * s);
+  const xs = new Float64Array(s), ys = new Float64Array(s), zs = new Float64Array(s);
+  for (let i = 0; i < s; i++) {
+    xs[i] = x0 + (x1 - x0) * i / n;
+    ys[i] = y0 + (y1 - y0) * i / n;
+    zs[i] = z0 + (z1 - z0) * i / n;
+  }
+  for (let k = 0; k < s; k++)
+    for (let j = 0; j < s; j++) {
+      const base = (k * s + j) * s;
+      for (let i = 0; i < s; i++) {
+        const x = xs[i], y = ys[j], z = zs[k];
+        let v = F(x, y, z);
+        if (!Number.isFinite(v)) v = NaN;
+        f[base + i] = v;
+        let good = !Number.isNaN(v);
+        for (let c = 0; c < clips.length && good; c++) {
+          const g = clips[c](x, y, z);
+          if (!(g <= 0)) good = false;
+        }
+        ok[base + i] = good ? 1 : 0;
+      }
+    }
+  function stats(sign) {
+    let count = 0, touches = false;
+    let b = [Infinity, Infinity, Infinity, -Infinity, -Infinity, -Infinity];
+    for (let k = 0; k < s; k++)
+      for (let j = 0; j < s; j++) {
+        const base = (k * s + j) * s;
+        for (let i = 0; i < s; i++) {
+          if (!ok[base + i]) continue;
+          if (sign * f[base + i] <= 0) {
+            count++;
+            if (i === 0 || j === 0 || k === 0 || i === n || j === n || k === n) touches = true;
+            if (xs[i] < b[0]) b[0] = xs[i]; if (xs[i] > b[3]) b[3] = xs[i];
+            if (ys[j] < b[1]) b[1] = ys[j]; if (ys[j] > b[4]) b[4] = ys[j];
+            if (zs[k] < b[2]) b[2] = zs[k]; if (zs[k] > b[5]) b[5] = zs[k];
+          }
+        }
+      }
+    return { count, touches, bbox: count ? b : null };
+  }
+  // sign-crossing cells (either endpoint clipped-in)
+  let crossCount = 0;
+  const cb = [Infinity, Infinity, Infinity, -Infinity, -Infinity, -Infinity];
+  const mark = (i, j, k) => {
+    crossCount++;
+    if (xs[i] < cb[0]) cb[0] = xs[i]; if (xs[i] > cb[3]) cb[3] = xs[i];
+    if (ys[j] < cb[1]) cb[1] = ys[j]; if (ys[j] > cb[4]) cb[4] = ys[j];
+    if (zs[k] < cb[2]) cb[2] = zs[k]; if (zs[k] > cb[5]) cb[5] = zs[k];
+  };
+  for (let k = 0; k < s; k++)
+    for (let j = 0; j < s; j++)
+      for (let i = 0; i < s; i++) {
+        const a = (k * s + j) * s + i, va = f[a];
+        if (Number.isNaN(va)) continue;
+        if (i < n) { const b2 = a + 1; const vb = f[b2]; if (!Number.isNaN(vb) && (va <= 0) !== (vb <= 0) && (ok[a] || ok[b2])) { mark(i, j, k); mark(i + 1, j, k); } }
+        if (j < n) { const b2 = a + s; const vb = f[b2]; if (!Number.isNaN(vb) && (va <= 0) !== (vb <= 0) && (ok[a] || ok[b2])) { mark(i, j, k); mark(i, j + 1, k); } }
+        if (k < n) { const b2 = a + s * s; const vb = f[b2]; if (!Number.isNaN(vb) && (va <= 0) !== (vb <= 0) && (ok[a] || ok[b2])) { mark(i, j, k); mark(i, j, k + 1); } }
+      }
+  const cell = [(x1 - x0) / n, (y1 - y0) / n, (z1 - z0) / n];
+  return { pos: stats(1), neg: stats(-1), crossCount, crossBbox: crossCount ? cb : null, cell };
+}
+
+function expandBox(b, cell, outer) {
+  const e = [
+    b[0] - cell[0], b[1] - cell[1], b[2] - cell[2],
+    b[3] + cell[0], b[4] + cell[1], b[5] + cell[2]
+  ];
+  if (outer) {
+    e[0] = Math.max(e[0], outer[0]); e[1] = Math.max(e[1], outer[1]); e[2] = Math.max(e[2], outer[2]);
+    e[3] = Math.min(e[3], outer[3]); e[4] = Math.min(e[4], outer[4]); e[5] = Math.min(e[5], outer[5]);
+  }
+  return e;
+}
+
+function unionBoxes(a, b) {
+  if (!a) return b ? b.slice() : null;
+  if (!b) return a.slice();
+  return [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.min(a[2], b[2]),
+          Math.max(a[3], b[3]), Math.max(a[4], b[4]), Math.max(a[5], b[5])];
+}
+
+/* Decide orientation / mode automatically. Retries at finer coarse grids so
+   small features (eyes, buttons) are not missed. */
+function autoResolve(surf, fields, box, shellT) {
+  if (surf.mode === "off") return null;
+  const tryNs = [48, 96, 144];
+  for (const n of tryNs) {
+    const sc = coarseScan(fields.F, fields.clips, box, n);
+    const anything = sc.pos.count || sc.neg.count || sc.crossCount;
+    if (!anything) continue;
+
+    const finish = (mode, sign, bbox) => ({
+      field: makeField(fields.F, fields.clips, sign, mode === "shell" ? shellT : null),
+      bbox: expandBox(bbox, sc.cell, box),
+      resolved: mode === "shell" ? "shell" : (sign === 1 ? "solid" : "solidFlip"),
+    });
+
+    if (surf.mode === "shell")
+      return sc.crossBbox ? finish("shell", 1, sc.crossBbox) : null;
+    if (surf.mode === "solid")
+      return sc.pos.count ? finish("solid", 1, unionBoxes(sc.pos.bbox, sc.crossBbox)) : null;
+    if (surf.mode === "solidFlip")
+      return sc.neg.count ? finish("solid", -1, unionBoxes(sc.neg.bbox, sc.crossBbox)) : null;
+
+    // auto
+    const okP = sc.pos.count > 0 && !sc.pos.touches;
+    const okM = sc.neg.count > 0 && !sc.neg.touches;
+    if (okP && okM)
+      return sc.pos.count <= sc.neg.count
+        ? finish("solid", 1, unionBoxes(sc.pos.bbox, sc.crossBbox))
+        : finish("solid", -1, unionBoxes(sc.neg.bbox, sc.crossBbox));
+    if (okP) return finish("solid", 1, unionBoxes(sc.pos.bbox, sc.crossBbox));
+    if (okM) return finish("solid", -1, unionBoxes(sc.neg.bbox, sc.crossBbox));
+    if (sc.crossBbox) return finish("shell", 1, sc.crossBbox);
+  }
+  return null;
+}
+
+/* ---------- Marching tetrahedra (Kuhn subdivision, crack-free) ---------- */
+const KUHN_PERMS = [
+  [0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]
+];
+
+function meshField(field, bbox, voxel, opts) {
+  const pad = voxel * 2.5;
+  const x0 = bbox[0] - pad, y0 = bbox[1] - pad, z0 = bbox[2] - pad;
+  const nx = Math.max(2, Math.ceil((bbox[3] + pad - x0) / voxel));
+  const ny = Math.max(2, Math.ceil((bbox[4] + pad - y0) / voxel));
+  const nz = Math.max(2, Math.ceil((bbox[5] + pad - z0) / voxel));
+  if ((nx + 1) * (ny + 1) * (nz + 1) > 30e6) throw new Error("Grid too large; lower the resolution.");
+  const sx = nx + 1, sy = ny + 1, sz = nz + 1;
+  const vals = new Float32Array(sx * sy * sz);
+  const px = new Float64Array(sx), py = new Float64Array(sy), pz = new Float64Array(sz);
+  for (let i = 0; i < sx; i++) px[i] = x0 + i * voxel;
+  for (let j = 0; j < sy; j++) py[j] = y0 + j * voxel;
+  for (let k = 0; k < sz; k++) pz[k] = z0 + k * voxel;
+  for (let k = 0; k < sz; k++)
+    for (let j = 0; j < sy; j++) {
+      const base = (k * sy + j) * sx;
+      const y = py[j], z = pz[k];
+      for (let i = 0; i < sx; i++) {
+        let v = field(px[i], y, z);
+        if (!Number.isFinite(v)) v = 1e9;
+        vals[base + i] = v;
+      }
+    }
+
+  const verts = [];           // flat xyz
+  const tris = [];            // indices
+  const edgeCache = new Map();
+  const gi = (i, j, k) => (k * sy + j) * sx + i;
+
+  function edgeVertex(iA, iB) {
+    const key = iA < iB ? iA * 1e9 + iB : iB * 1e9 + iA;
+    let idx = edgeCache.get(key);
+    if (idx !== undefined) return idx;
+    const va = vals[iA], vb = vals[iB];
+    let t = va / (va - vb);
+    if (!Number.isFinite(t)) t = 0.5;
+    t = Math.min(1, Math.max(0, t));
+    const ax = px[iA % sx], ay = py[((iA / sx) | 0) % sy], az = pz[(iA / (sx * sy)) | 0];
+    const bx = px[iB % sx], by = py[((iB / sx) | 0) % sy], bz = pz[(iB / (sx * sy)) | 0];
+    idx = verts.length / 3;
+    verts.push(ax + (bx - ax) * t, ay + (by - ay) * t, az + (bz - az) * t);
+    edgeCache.set(key, idx);
+    return idx;
+  }
+
+  const corner = new Int32Array(4);
+  const cpos = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+
+  function emit(a, b, c, inx, iny, inz) {
+    // orient outward: normal away from inside centroid
+    const ax = verts[a * 3], ay = verts[a * 3 + 1], az = verts[a * 3 + 2];
+    const bx = verts[b * 3], by = verts[b * 3 + 1], bz = verts[b * 3 + 2];
+    const cx = verts[c * 3], cy = verts[c * 3 + 1], cz = verts[c * 3 + 2];
+    const ux = bx - ax, uy = by - ay, uz = bz - az;
+    const vx = cx - ax, vy = cy - ay, vz = cz - az;
+    const nxx = uy * vz - uz * vy, nyy = uz * vx - ux * vz, nzz = ux * vy - uy * vx;
+    const mx = (ax + bx + cx) / 3 - inx, my = (ay + by + cy) / 3 - iny, mz = (az + bz + cz) / 3 - inz;
+    if (nxx * mx + nyy * my + nzz * mz >= 0) tris.push(a, b, c);
+    else tris.push(a, c, b);
+  }
+
+  for (let k = 0; k < nz; k++)
+    for (let j = 0; j < ny; j++)
+      for (let i = 0; i < nx; i++) {
+        // skip cubes with all same sign quickly
+        const c000 = vals[gi(i, j, k)];
+        let allPos = c000 > 0, allNeg = c000 <= 0, skip = true;
+        for (let dz = 0; dz < 2 && skip; dz++)
+          for (let dy = 0; dy < 2 && skip; dy++)
+            for (let dx = 0; dx < 2; dx++) {
+              const v = vals[gi(i + dx, j + dy, k + dz)];
+              if (v > 0) allNeg = false; else allPos = false;
+              if (!allPos && !allNeg) { skip = false; break; }
+            }
+        if (skip) continue;
+
+        for (const perm of KUHN_PERMS) {
+          // tet vertices: walk from (i,j,k) adding axes in perm order
+          let ci = i, cj = j, ck = k;
+          corner[0] = gi(ci, cj, ck); cpos[0][0] = ci; cpos[0][1] = cj; cpos[0][2] = ck;
+          for (let s = 0; s < 3; s++) {
+            if (perm[s] === 0) ci++; else if (perm[s] === 1) cj++; else ck++;
+            corner[s + 1] = gi(ci, cj, ck);
+            cpos[s + 1][0] = ci; cpos[s + 1][1] = cj; cpos[s + 1][2] = ck;
+          }
+          let mask = 0, insN = 0, inx = 0, iny = 0, inz = 0;
+          for (let s = 0; s < 4; s++) {
+            if (vals[corner[s]] <= 0) {
+              mask |= 1 << s; insN++;
+              inx += px[cpos[s][0]]; iny += py[cpos[s][1]]; inz += pz[cpos[s][2]];
+            }
+          }
+          if (mask === 0 || mask === 15) continue;
+          inx /= insN; iny /= insN; inz /= insN;
+
+          const inside = [], outside = [];
+          for (let s = 0; s < 4; s++) (mask & (1 << s) ? inside : outside).push(corner[s]);
+
+          if (insN === 1) {
+            const a = edgeVertex(inside[0], outside[0]);
+            const b = edgeVertex(inside[0], outside[1]);
+            const c = edgeVertex(inside[0], outside[2]);
+            emit(a, b, c, inx, iny, inz);
+          } else if (insN === 3) {
+            const a = edgeVertex(outside[0], inside[0]);
+            const b = edgeVertex(outside[0], inside[1]);
+            const c = edgeVertex(outside[0], inside[2]);
+            emit(a, b, c, inx, iny, inz);
+          } else { // 2-2: quad
+            const a = edgeVertex(inside[0], outside[0]);
+            const b = edgeVertex(inside[0], outside[1]);
+            const c = edgeVertex(inside[1], outside[1]);
+            const d = edgeVertex(inside[1], outside[0]);
+            emit(a, b, c, inx, iny, inz);
+            emit(a, c, d, inx, iny, inz);
+          }
+        }
+      }
+
+  return { verts: new Float32Array(verts), tris: new Uint32Array(tris) };
+}
+
+/* ---------- Exports ---------- */
+function meshToBinarySTL(meshes, scale) {
+  let nTri = 0;
+  for (const m of meshes) nTri += m.tris.length / 3;
+  const buf = new ArrayBuffer(84 + nTri * 50);
+  const dv = new DataView(buf);
+  const header = "desmos3d->stl";
+  for (let i = 0; i < header.length; i++) dv.setUint8(i, header.charCodeAt(i));
+  dv.setUint32(80, nTri, true);
+  let off = 84;
+  for (const m of meshes) {
+    const V = m.verts, T = m.tris;
+    for (let t = 0; t < T.length; t += 3) {
+      const a = T[t] * 3, b = T[t + 1] * 3, c = T[t + 2] * 3;
+      const ax = V[a] * scale, ay = V[a + 1] * scale, az = V[a + 2] * scale;
+      const bx = V[b] * scale, by = V[b + 1] * scale, bz = V[b + 2] * scale;
+      const cx = V[c] * scale, cy = V[c + 1] * scale, cz = V[c + 2] * scale;
+      let nx = (by - ay) * (cz - az) - (bz - az) * (cy - ay);
+      let ny = (bz - az) * (cx - ax) - (bx - ax) * (cz - az);
+      let nz = (bx - ax) * (cy - ay) - (by - ay) * (cx - ax);
+      const len = Math.hypot(nx, ny, nz) || 1;
+      dv.setFloat32(off, nx / len, true); dv.setFloat32(off + 4, ny / len, true); dv.setFloat32(off + 8, nz / len, true);
+      dv.setFloat32(off + 12, ax, true); dv.setFloat32(off + 16, ay, true); dv.setFloat32(off + 20, az, true);
+      dv.setFloat32(off + 24, bx, true); dv.setFloat32(off + 28, by, true); dv.setFloat32(off + 32, bz, true);
+      dv.setFloat32(off + 36, cx, true); dv.setFloat32(off + 40, cy, true); dv.setFloat32(off + 44, cz, true);
+      dv.setUint16(off + 48, 0, true);
+      off += 50;
+    }
+  }
+  return buf;
+}
+
+function meshesToScad(meshes, scale, title) {
+  const L = [];
+  L.push("// " + title);
+  L.push("// Generated from a Desmos 3D graph — one polyhedron per surface.");
+  L.push("// Press F6 (full render) to union everything into a single manifold,");
+  L.push("// then File > Export > STL.");
+  L.push("// Note: the colours below show in OpenSCAD's preview but are dropped by STL");
+  L.push("// export (STL stores no colour, and the union fuses the parts). For a");
+  L.push("// colour-faithful file, use the .3mf export from the web app instead.");
+  L.push("");
+  L.push("scale_mm = " + scale + "; // millimetres per Desmos unit");
+  L.push("");
+  const names = [];
+  meshes.forEach((m, i) => {
+    const name = "surface_" + i;
+    names.push({ name, color: m.color });
+    const V = m.verts, T = m.tris;
+    const pts = [];
+    for (let v = 0; v < V.length; v += 3)
+      pts.push("[" + V[v].toFixed(4) + "," + V[v + 1].toFixed(4) + "," + V[v + 2].toFixed(4) + "]");
+    const fcs = [];
+    for (let t = 0; t < T.length; t += 3)
+      fcs.push("[" + T[t] + "," + T[t + 2] + "," + T[t + 1] + "]"); // reversed: OpenSCAD wants CW from outside
+    L.push("module " + name + "() {");
+    L.push("  polyhedron(points=[" + pts.join(",") + "],");
+    L.push("             faces=[" + fcs.join(",") + "], convexity=10);");
+    L.push("}");
+    L.push("");
+  });
+  L.push("scale(scale_mm) union() {");
+  for (const n of names) {
+    const c = n.color || [0.6, 0.6, 0.6];
+    L.push("  color([" + c.map(v => v.toFixed(3)).join(",") + "]) " + n.name + "();");
+  }
+  L.push("}");
+  return L.join("\n");
+}
+
+/* ---------- colored 3MF export (pure JS, store-only zip) ---------- */
+function __crc32(bytes) {
+  let table = __crc32.t;
+  if (!table) {
+    table = __crc32.t = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1); table[n] = c >>> 0; }
+  }
+  let c = 0xFFFFFFFF;
+  for (let i = 0; i < bytes.length; i++) c = table[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function __zipStore(files) {
+  const chunks = [], central = [];
+  let offset = 0;
+  const enc = s => new TextEncoder().encode(s);
+  const u16 = n => [n & 255, (n >> 8) & 255];
+  const u32 = n => [n & 255, (n >> 8) & 255, (n >> 16) & 255, (n >>> 24) & 255];
+  for (const f of files) {
+    const name = enc(f.name), data = f.data, crc = __crc32(data);
+    const lh = new Uint8Array([].concat(u32(0x04034b50), u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0)));
+    chunks.push(lh, name, data);
+    const ch = new Uint8Array([].concat(u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset)));
+    central.push({ head: ch, name });
+    offset += lh.length + name.length + data.length;
+  }
+  const cstart = offset; let clen = 0;
+  for (const c of central) { chunks.push(c.head, c.name); clen += c.head.length + c.name.length; }
+  chunks.push(new Uint8Array([].concat(u32(0x06054b50), u16(0), u16(0), u16(central.length), u16(central.length), u32(clen), u32(cstart), u16(0))));
+  let total = 0; for (const c of chunks) total += c.length;
+  const out = new Uint8Array(total); let p = 0;
+  for (const c of chunks) { out.set(c, p); p += c.length; }
+  return out;
+}
+function __xml(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function __hex2(n) { return Math.round(Math.min(1, Math.max(0, n)) * 255).toString(16).padStart(2, "0"); }
+function meshesTo3MF(meshes, scale, title) {
+  const enc = s => new TextEncoder().encode(s);
+  // distinct colors -> color-group indices
+  const colors = [], colorIndex = new Map();
+  const idxOf = (c) => {
+    const hex = __hex2(c[0]) + __hex2(c[1]) + __hex2(c[2]);
+    if (!colorIndex.has(hex)) { colorIndex.set(hex, colors.length); colors.push(hex); }
+    return colorIndex.get(hex);
+  };
+  // merge every surface into ONE mesh, remembering each triangle's color index
+  const verts = [], tris = [], triColor = [];
+  for (const m of meshes) {
+    const ci = idxOf(m.color || [0.6, 0.6, 0.6]);
+    const base = verts.length / 3, V = m.verts, T = m.tris;
+    for (let i = 0; i < V.length; i++) verts.push(V[i]);
+    for (let i = 0; i < T.length; i += 3) {
+      tris.push(T[i] + base, T[i + 1] + base, T[i + 2] + base);
+      triColor.push(ci);
+    }
+  }
+  const NS = 'xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02" xmlns:m="http://schemas.microsoft.com/3dmanufacturing/material/2015/02"';
+  const L = [];
+  L.push('<?xml version="1.0" encoding="UTF-8"?>');
+  L.push('<model unit="millimeter" xml:lang="en-US" ' + NS + '>');
+  L.push('<metadata name="Application">Desmos3D-to-3MF</metadata>');
+  L.push('<metadata name="Title">' + __xml(title || "Desmos model") + '</metadata>');
+  L.push(' <resources>');
+  // FACE COLORING: a color group Bambu/Orca recognize for "Standard 3MF Color Parsing"
+  L.push('  <m:colorgroup id="1">');
+  colors.forEach(hex => L.push('   <m:color color="#' + hex.toUpperCase() + 'FF"/>'));
+  L.push('  </m:colorgroup>');
+  L.push('  <object id="2" name="' + __xml(title || "model") + '" type="model" pid="1" pindex="0">');
+  L.push('   <mesh>');
+  const vs = [];
+  for (let v = 0; v < verts.length; v += 3)
+    vs.push('<vertex x="' + (verts[v] * scale).toFixed(4) + '" y="' + (verts[v + 1] * scale).toFixed(4) + '" z="' + (verts[v + 2] * scale).toFixed(4) + '"/>');
+  L.push('    <vertices>' + vs.join("") + '</vertices>');
+  const ts = [];
+  for (let t = 0; t < tris.length; t += 3) {
+    const k = triColor[t / 3];
+    ts.push('<triangle v1="' + tris[t] + '" v2="' + tris[t + 1] + '" v3="' + tris[t + 2] + '" pid="1" p1="' + k + '"/>');
+  }
+  L.push('    <triangles>' + ts.join("") + '</triangles>');
+  L.push('   </mesh>');
+  L.push('  </object>');
+  L.push(' </resources>');
+  L.push(' <build>');
+  L.push('  <item objectid="2"/>');
+  L.push(' </build>');
+  L.push('</model>');
+  const model = L.join("\n");
+
+  // filament hints for the import color dialog / Open Project
+  const proj = {
+    filament_colour: colors.map(h => "#" + h.toUpperCase()),
+    filament_type: colors.map(() => "PLA"),
+    filament_settings_id: colors.map(() => "Generic PLA"),
+    version: "1.0.0", from: "Desmos3D-to-3MF",
+  };
+  const projectSettings = JSON.stringify(proj, null, 2);
+
+  const ct = '<?xml version="1.0" encoding="UTF-8"?>\n<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+    + '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+    + '<Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/>'
+    + '<Override PartName="/Metadata/project_settings.config" ContentType="application/json"/>'
+    + '</Types>';
+  const rels = '<?xml version="1.0" encoding="UTF-8"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>';
+  return __zipStore([
+    { name: "[Content_Types].xml", data: enc(ct) },
+    { name: "_rels/.rels", data: enc(rels) },
+    { name: "3D/3dmodel.model", data: enc(model) },
+    { name: "Metadata/project_settings.config", data: enc(projectSettings) },
+  ]);
+}
+
+const DEMO_STATE = {"version":11,"randomSeed":"78065a846d0a6cb2f5f6686a4f4c4d78","graph":{"viewport":{"xmin":-13.720682482897363,"ymin":-13.215978359417687,"zmin":-13.053719343698607,"xmax":12.666381669641769,"ymax":13.171085793121446,"zmax":13.333344808840526},"worldRotation3D":[0.12660947915145387,-0.9910521600032233,0.04225702239798974,0.9400745837745359,0.1334751518184064,0.31375812465685565,-0.31659092963970276,8.453243436601927e-18,0.948562166265274],"axis3D":[0.9910521600080155,-0.13347515181905859,6.310393696736359e-15],"product":"graphing-3d","threeDMode":true,"__v12ViewportLatexStash":{"xmin":"-13.720682482897363","xmax":"12.666381669641769","ymin":"-13.215978359417687","ymax":"13.171085793121446","zmin":"-13.053719343698607","zmax":"13.333344808840526"}},"expressions":{"list":[{"type":"folder","id":"168","title":"Colors","collapsed":true},{"type":"expression","id":"167","folderId":"168","color":"#2d70b3","latex":"c=\\operatorname{rgb}\\left(245,245,250\\right)"},{"type":"expression","id":"173","folderId":"168","color":"#c74440","latex":"c_{1}=\\operatorname{rgb}\\left(0,0,0\\right)"},{"type":"expression","id":"177","folderId":"168","color":"#aaaaaa","latex":"c_{2}=\\operatorname{rgb}\\left(250,210,0\\right)"},{"type":"expression","id":"225","folderId":"168","color":"#aaaaaa","latex":"c_{3}=\\operatorname{rgb}\\left(60,190,250\\right)"},{"type":"expression","id":"237","folderId":"168","color":"#388c46","latex":"c_{4}=\\operatorname{rgb}\\left(255,105,180\\right)"},{"type":"folder","id":"185","title":"Hello Kitty"},{"type":"expression","id":"1","folderId":"185","color":"#c74440","latex":"4.5=\\left(\\frac{x}{1.2}\\right)^{2}+\\left(y\\right)^{2}+\\left(z-5\\right)^{2}","colorLatex":"c"},{"type":"expression","id":"258","folderId":"185","color":"#2d70b3","latex":"\\left(\\frac{x}{1.21}\\right)^{2}+\\left(y\\right)^{2}+\\left(\\frac{z}{3}\\right)^{2}=3\\left\\{z>1.5\\right\\}"},{"type":"expression","id":"268","folderId":"185","color":"#aaaaaa","latex":"\\left(\\frac{x}{2.1}\\right)^{2}+\\left(\\frac{y}{1.65}\\right)^{2}+\\left(z-1.3\\right)^{2}=1","colorLatex":"c"},{"type":"expression","id":"270","folderId":"185","color":"#2d70b3","latex":"\\left(\\frac{x}{1.9}-0.4\\right)^{2}+\\left(\\frac{y}{1.2}\\right)^{2}+\\left(\\frac{z}{1.3}-0.6\\right)^{2}=0.4","colorLatex":"c"},{"type":"expression","id":"269","folderId":"185","color":"#c74440","latex":"\\left(\\frac{x}{1.9}+0.4\\right)^{2}+\\left(\\frac{y}{1.2}\\right)^{2}+\\left(\\frac{z}{1.3}-0.6\\right)^{2}=0.4","colorLatex":"c"},{"type":"expression","id":"172","folderId":"185","color":"#c74440","latex":"\\left(x+1.05\\right)^{2}+\\left(y+1.8\\right)^{2}+\\left(\\frac{z}{1.05}-4.7\\right)^{2}=0.1","colorLatex":"c_{1}"},{"type":"expression","id":"175","folderId":"185","color":"#388c46","latex":"\\left(x-1.05\\right)^{2}+\\left(y+1.8\\right)^{2}+\\left(\\frac{z}{1.05}-4.7\\right)^{2}=0.1","colorLatex":"c_{1}"},{"type":"expression","id":"176","folderId":"185","color":"#6042a6","latex":"\\left(\\frac{x}{1.2}\\right)^{2}+\\left(y+1.9\\right)^{2}+\\left(z-4.5\\right)^{2}=0.08","colorLatex":"c_{2}"},{"type":"expression","id":"180","folderId":"185","color":"#388c46","latex":"z-7.3=-\\frac{\\left(\\left(x\\cos a-z\\sin a\\right)-2.7\\right)}{1.1}^{2}-\\left(y\\right)^{2}\\left\\{z>5\\right\\}","colorLatex":"c"},{"type":"expression","id":"182","folderId":"185","color":"#aaaaaa","latex":"a=-0.6","hidden":true},{"type":"expression","id":"183","folderId":"185","color":"#c74440","latex":"z-7.3=-\\left(\\frac{\\left(\\left(x\\cos b-z\\sin b\\right)-0.2\\right)}{1}+2.7\\right)^{2}-\\left(y\\right)^{2}\\left\\{z>5\\right\\}","colorLatex":"c"},{"type":"expression","id":"184","folderId":"185","color":"#2d70b3","latex":"b=0.6","hidden":true},{"type":"expression","id":"187","folderId":"185","color":"#c74440","latex":"z-6.4=\\frac{\\left(\\left(x\\cos d-z\\sin d\\right)-4.5\\right)^{2}}{0.8}+\\left(y+1.5\\right)^{2}\\left\\{z<7.35\\right\\}\\left\\{x>0.3\\right\\}"},{"type":"expression","id":"190","folderId":"185","color":"#2d70b3","latex":"d=-6.85","hidden":true},{"type":"expression","id":"191","folderId":"185","color":"#c74440","latex":"z-6.6=-\\frac{\\left(\\left(x\\cos f-z\\sin f\\right)-4.9\\right)^{2}}{0.7}-\\left(y+1.2\\right)^{2}\\left\\{z>5.5\\right\\}\\left\\{x<2.5\\right\\}"},{"type":"expression","id":"192","folderId":"185","color":"#6042a6","latex":"f=-6.85","hidden":true},{"type":"expression","id":"193","folderId":"185","color":"#aaaaaa","latex":"\\left(\\frac{x\\cos g+z\\sin g}{0.7}-0.4\\right)^{2}+\\left(y-0.5\\right)^{2}+\\left(\\frac{z}{1.15}-2.7\\right)^{2}=1\\left\\{4.5>z>1\\right\\}","colorLatex":"c"},{"type":"expression","id":"208","folderId":"185","color":"#c74440","latex":"\\left(\\frac{x\\cos g+z\\sin g}{0.7}-0.4\\right)^{2}+\\left(y-0.5\\right)^{2}+\\left(\\frac{z}{1.15}-2.7\\right)^{2}=1\\left\\{x<2.3\\right\\}","colorLatex":"c_{2}"},{"type":"expression","id":"194","folderId":"185","color":"#c74440","latex":"g=-0.45","hidden":true},{"type":"expression","id":"196","folderId":"185","color":"#388c46","latex":"i=-0.5","hidden":true},{"type":"expression","id":"195","folderId":"185","color":"#2d70b3","latex":"\\left(\\frac{\\left(x\\cos i+z\\sin i\\right)}{0.7}+3.7\\right)^{2}+\\left(y-0\\right)^{2}+\\left(\\frac{z}{1.15}-2.2\\right)^{2}=1\\left\\{x<-1.7\\right\\}\\left\\{z>1.5\\right\\}","colorLatex":"c"},{"type":"expression","id":"209","folderId":"185","color":"#6042a6","latex":"\\left(\\frac{\\left(x\\cos i+z\\sin i\\right)}{0.7}+3.7\\right)^{2}+\\left(y-0\\right)^{2}+\\left(\\frac{z}{1.15}-2.2\\right)^{2}=1\\left\\{z>2\\right\\}","colorLatex":"c_{2}"},{"type":"folder","id":"198","title":"Cinnamoroll","collapsed":true},{"type":"expression","id":"200","folderId":"198","color":"#c74440","latex":"\\left(\\frac{\\left(x\\right)}{2.5}+3.02\\right)^{2}+\\left(\\frac{y}{2.26}\\right)^{2}+\\left(\\frac{z}{1.5}-3.32\\right)^{2}=1","colorLatex":"c"},{"type":"expression","id":"201","folderId":"198","color":"#2d70b3","latex":"\\left(\\frac{x\\cos j-z\\sin j}{0.9}+3.5\\right)^{2}+\\left(y\\right)^{2}+\\left(\\frac{z}{1.2}-4\\right)^{2}=1","colorLatex":"c"},{"type":"expression","id":"221","folderId":"198","color":"#c74440","latex":"\\left(\\frac{-x\\cos j-z\\sin j}{0.9}-12\\right)^{2}+\\left(y\\right)^{2}+\\left(\\frac{z}{1.2}-4\\right)^{2}=1","colorLatex":"c"},{"type":"expression","id":"203","folderId":"198","color":"#6042a6","latex":"j=-0.4","hidden":true},{"type":"expression","id":"202","folderId":"198","color":"#388c46","latex":"z-9=-\\left(\\frac{x\\cos k-z\\sin k}{0.4}-3\\right)^{2}-\\left(\\frac{y}{0.5}\\right)^{2}\\left\\{3<z<5\\right\\}\\left\\{x<-3.5\\right\\}","colorLatex":"c"},{"type":"expression","id":"222","folderId":"198","color":"#2d70b3","latex":"z-9=-\\left(\\frac{-x\\cos k-z\\sin k}{0.4}-22\\right)^{2}-\\left(\\frac{y}{0.5}\\right)^{2}\\left\\{3<z<5\\right\\}\\left\\{x>-12\\right\\}","colorLatex":"c"},{"type":"expression","id":"204","folderId":"198","color":"#aaaaaa","latex":"k=-1.04","hidden":true},{"type":"expression","id":"205","folderId":"198","color":"#c74440","latex":"\\left(\\frac{x\\cos l-z\\sin l}{1.5}+1.55\\right)^{2}+\\left(\\frac{y}{1.2}\\right)^{2}+\\left(z-3.55\\right)^{2}=1\\left\\{x<-2\\right\\}","colorLatex":"c"},{"type":"expression","id":"223","folderId":"198","color":"#388c46","latex":"\\left(\\frac{-x\\cos l-z\\sin l}{1.5}-8\\right)^{2}+\\left(\\frac{y}{1.2}\\right)^{2}+\\left(z-3.55\\right)^{2}=1\\left\\{x<-10\\right\\}","colorLatex":"c"},{"type":"expression","id":"210","folderId":"198","color":"#aaaaaa","latex":"l=-0.3","hidden":true},{"type":"expression","id":"212","folderId":"198","color":"#2d70b3","latex":"\\frac{\\left(x+7.58\\right)^{2}}{0.3}+\\frac{\\left(y\\right)^{2}}{0.2}-\\frac{\\left(z-5.75\\right)^{2}}{1}=1\\left\\{2.5<z<6\\right\\}","colorLatex":"c"},{"type":"expression","id":"216","folderId":"198","color":"#c74440","latex":"\\left(\\frac{x}{2.05}+3.7\\right)^{2}+\\left(\\frac{y}{1.8}\\right)^{2}+\\left(\\frac{z}{1.12}-1.8\\right)^{2}=1","colorLatex":"c"},{"type":"expression","id":"219","folderId":"198","color":"#6042a6","latex":"\\left(\\frac{x}{1.5}+5.9\\right)^{2}+\\left(\\frac{y}{1.5}\\right)^{2}+\\left(\\frac{z}{1.5}-0.7\\right)^{2}=0.1","colorLatex":"c"},{"type":"expression","id":"220","folderId":"198","color":"#aaaaaa","latex":"\\left(\\frac{x}{1.5}+4.2\\right)^{2}+\\left(\\frac{y}{1.5}\\right)^{2}+\\left(\\frac{z}{1.5}-0.7\\right)^{2}=0.1","colorLatex":"c"},{"type":"expression","id":"226","folderId":"198","color":"#c74440","latex":"\\left(\\frac{x}{0.8}+10.8\\right)^{2}+\\left(y+2\\right)^{2}+\\left(\\frac{z}{1.1}-4.65\\right)^{2}=0.09","colorLatex":"c_{3}"},{"type":"expression","id":"227","folderId":"198","color":"#2d70b3","latex":"\\left(\\frac{x}{0.8}+8.08\\right)^{2}+\\left(y+2\\right)^{2}+\\left(\\frac{z}{1.1}-4.65\\right)^{2}=0.09","colorLatex":"c_{3}"},{"type":"expression","id":"231","folderId":"198","color":"#c74440","latex":"\\left(\\frac{x\\cos l-z\\sin l}{1.5}+3.2\\right)^{2}+\\left(\\frac{y}{1.5}\\right)^{2}+\\left(\\frac{z}{2}-1.58\\right)^{2}=0.1","colorLatex":"c"},{"type":"expression","id":"233","folderId":"198","color":"#388c46","latex":"\\left(\\frac{x\\cos l-z\\sin d}{2}+3.4\\right)^{2}+\\left(\\frac{y}{1.8}+0.3\\right)^{2}+\\left(\\frac{z}{2.1}-1.85\\right)^{2}=0.1","colorLatex":"c"},{"type":"expression","id":"271","folderId":"198","color":"#388c46","latex":"\\left(\\frac{x}{1.4}+4.4\\right)^{2}+\\left(y+1.5\\right)^{2}+\\left(\\frac{z}{1.1}-4\\right)^{2}=0.09","colorLatex":"c_{4}"},{"type":"expression","id":"272","folderId":"198","color":"#6042a6","latex":"\\left(\\frac{x}{1.4}+6.3\\right)^{2}+\\left(y+1.55\\right)^{2}+\\left(\\frac{z}{1.1}-4\\right)^{2}=0.09","colorLatex":"c_{4}"},{"type":"folder","id":"235","title":"My Melody","collapsed":true},{"type":"expression","id":"236","folderId":"235","color":"#2d70b3","latex":"4.5=\\left(\\frac{x}{1.3}-5.2\\right)^{2}+y^{2}+\\left(z-5\\right)^{2}","colorLatex":"c_{4}"},{"type":"expression","id":"238","folderId":"235","color":"#6042a6","latex":"\\left(\\frac{x}{2}-3.4\\right)^{2}+\\left(y+1.5\\right)^{2}+\\left(\\frac{z}{1.35}-3.3\\right)^{2}=1\\left\\{y<0\\right\\}","colorLatex":"c"},{"type":"expression","id":"240","folderId":"235","color":"#c74440","latex":"\\left(\\frac{x\\cos v-z\\sin v}{1.2}-3.7\\right)^{2}+\\left(y\\right)^{2}+\\left(\\frac{z}{2.1}-3.45\\right)^{2}=1","colorLatex":"c_{4}"},{"type":"expression","id":"244","folderId":"235","color":"#aaaaaa","latex":"\\left(\\frac{\\left(-x\\cos v-z\\sin v\\right)}{1.2}+7.2\\right)^{2}+\\left(y+0.6\\right)^{2}+\\left(\\frac{z}{2.1}-3.\\right)^{2}=1\\left\\{z<8.6\\right\\}","colorLatex":"c_{4}"},{"type":"expression","id":"245","folderId":"235","color":"#c74440","latex":"\\left(\\frac{\\left(-x\\cos g-z\\sin g\\right)}{1.1}+2.4\\right)^{2}+\\left(y+0.6\\right)^{2}+\\left(\\frac{z}{1.1}-6.8\\right)^{2}=1","colorLatex":"c_{4}"},{"type":"expression","id":"241","folderId":"235","color":"#2d70b3","latex":"v=0.17","hidden":true},{"type":"expression","id":"242","folderId":"235","color":"#388c46","latex":"\\left(x-5.8\\right)^{2}+\\left(y+2.2\\right)^{2}+\\left(\\frac{z}{1.3}-3.45\\right)^{2}=0.1","colorLatex":"c_{1}"},{"type":"expression","id":"243","folderId":"235","color":"#6042a6","latex":"\\left(x-7.8\\right)^{2}+\\left(y+2.2\\right)^{2}+\\left(\\frac{z}{1.3}-3.45\\right)^{2}=0.1","colorLatex":"c_{1}"},{"type":"expression","id":"247","folderId":"235","color":"#388c46","latex":"\\left(x-6.8\\right)^{2}+\\left(y+2.3\\right)^{2}+\\left(\\frac{z}{0.7}-5.8\\right)^{2}=0.1","colorLatex":"c_{2}"},{"type":"expression","id":"249","folderId":"235","color":"#aaaaaa","latex":"\\left(\\frac{x}{2}-3.4\\right)^{2}+\\left(\\frac{y}{1.6}\\right)^{2}+\\left(\\frac{z}{2}-1\\right)^{2}=1\\left\\{z>1\\right\\}","colorLatex":"c"},{"type":"expression","id":"250","folderId":"235","color":"#c74440","latex":"\\left(\\frac{x}{2}-3.4\\right)^{2}+\\left(\\frac{y}{1.65}\\right)^{2}+\\left(z-1.5\\right)^{2}=1","colorLatex":"c"},{"type":"expression","id":"253","folderId":"235","color":"#6042a6","latex":"\\frac{z}{2}=\\left(-\\frac{x}{2}+13\\right)+\\left(y-6.4\\right)\\left\\{4>z>2.5\\right\\}\\left\\{7<x<8.6\\right\\}","colorLatex":"c_{4}"},{"type":"expression","id":"254","folderId":"235","color":"#aaaaaa","latex":"1.4z=\\left(-x+13\\right)+\\left(3y+1.8\\right)\\left\\{4>z>2.5\\right\\}\\left\\{6.6>x>5\\right\\}","colorLatex":"c_{4}"},{"type":"expression","id":"255","folderId":"235","color":"#c74440","latex":"\\left(\\frac{x}{1.9}-4\\right)^{2}+\\left(\\frac{y}{1.2}\\right)^{2}+\\left(\\frac{z}{1.3}-0.6\\right)^{2}=0.4","colorLatex":"c"},{"type":"expression","id":"256","folderId":"235","color":"#2d70b3","latex":"\\left(\\frac{x}{1.9}-3.15\\right)^{2}+\\left(\\frac{y}{1.2}\\right)^{2}+\\left(\\frac{z}{1.3}-0.6\\right)^{2}=0.4","colorLatex":"c"},{"type":"expression","id":"260","folderId":"235","color":"#2d70b3","latex":"\\left(y+2\\right)^{2}+\\left(z-6.5\\right)^{2}=\\frac{x}{2}-2.6\\left\\{x<6.3\\right\\}"},{"type":"expression","id":"262","folderId":"235","color":"#6042a6","latex":"\\left(\\frac{x\\cos w-z\\sin w}{0.9}-5.7\\right)^{2}+\\left(y\\cos p-z\\sin p+1.2\\right)^{2}+\\left(\\frac{z}{1.3}-2.3\\right)^{2}=0.5\\left\\{3.8>z>2.2\\right\\}","colorLatex":"c"},{"type":"expression","id":"261","folderId":"235","color":"#2d70b3","latex":"\\left(y+2\\right)^{2}+\\left(z-6.5\\right)^{2}=-\\frac{x}{2}+2.7\\left\\{x>4.25\\right\\}"},{"type":"expression","id":"266","folderId":"235","color":"#388c46","latex":"\\left(\\frac{-x\\cos w-z\\sin w}{0.9}+9.3\\right)^{2}+\\left(y\\cos p-z\\sin p+1.2\\right)^{2}+\\left(\\frac{z}{1.3}-2.3\\right)^{2}=0.5\\left\\{3.8>z>2.2\\right\\}","colorLatex":"c"},{"type":"expression","id":"265","folderId":"235","color":"#2d70b3","latex":"p=-0.2","hidden":true},{"type":"expression","id":"264","folderId":"235","color":"#c74440","latex":"w=0.15","hidden":true}]},"includeFunctionParametersInRandomSeed":true,"doNotMigrate3dLineWidthZero":true,"doNotMigrateMovablePointStyle":true};
+</script>
+<script>
+/* ============================================================
+   UI + preview
+   ============================================================ */
+"use strict";
+const $ = id => document.getElementById(id);
+const raf = () => new Promise(r => requestAnimationFrame(r));
+
+const S = {
+  parsed: null,      // {colorDefs, defVals, surfaces, skipped, box, title}
+  meshes: null,      // [{verts,tris,color,name}]
+  span: 1,
+};
+
+/* ---------- parse step ---------- */
+$("btnDemo").addEventListener("click", () => {
+  $("input").value = JSON.stringify(DEMO_STATE);
+  $("inpName").value = "hello-kitty-and-friends";
+  doParse();
+});
+$("btnParse").addEventListener("click", doParse);
+
+function doParse() {
+  const st = $("parseStatus");
+  st.classList.remove("err");
+  S.parsed = null; S.meshes = null;
+  $("surfCard").style.display = "none";
+  $("buildCard").style.display = "none";
+  $("exportCard").style.display = "none";
+  const raw = $("input").value;
+  if (!raw.trim()) { st.textContent = "Nothing to read yet — paste a graph first."; st.classList.add("err"); return; }
+  let got;
+  try { got = intake(raw); }
+  catch (e) { st.textContent = "Could not read that: " + e.message; st.classList.add("err"); return; }
+  const { colorDefs, defsAst, surfaces, skipped } = classify(got.list);
+  const { vals, errs } = resolveDefs(defsAst);
+  for (const name in errs)
+    skipped.push({ latex: name + " = …", why: "definition failed: " + errs[name] });
+
+  const vp = got.viewport;
+  const box = vp
+    ? [vp.xmin, vp.ymin, vp.zmin, vp.xmax, vp.ymax, vp.zmax]
+    : [-10, -10, -10, 10, 10, 10];
+
+  S.parsed = { colorDefs, defVals: vals, surfaces, skipped, box };
+  if (surfaces.length === 0) {
+    st.textContent = "No surface equations found. Lines need x, y or z and an equals sign.";
+    st.classList.add("err");
+    renderSkips(skipped);
+    if (skipped.length) $("surfCard").style.display = "";
+    return;
+  }
+  st.textContent = surfaces.length + " surface" + (surfaces.length > 1 ? "s" : "") +
+    ", " + Object.keys(vals).length + " constants" +
+    (skipped.length ? ", " + skipped.length + " skipped" : "") + ".";
+  renderLedger();
+  $("surfCard").style.display = "";
+  $("buildCard").style.display = "";
+}
+
+function surfColor(surf) {
+  const p = S.parsed;
+  if (surf.colorLatex && p.colorDefs[surf.colorLatex]) return p.colorDefs[surf.colorLatex];
+  const h = surf.colorHex || "#666666";
+  return [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
+}
+
+function renderLedger() {
+  const led = $("ledger");
+  led.innerHTML = "";
+  const p = S.parsed;
+  $("surfCount").textContent = p.surfaces.length;
+  p.surfaces.forEach((surf, i) => {
+    const row = document.createElement("div");
+    row.className = "srow";
+    const chip = document.createElement("span");
+    chip.className = "chip";
+    const c = surfColor(surf).map(v => Math.round(v * 255));
+    chip.style.background = "rgb(" + c.join(",") + ")";
+    const eq = document.createElement("span");
+    eq.className = "eq";
+    eq.textContent = prettyLatex(surf.latex);
+    eq.title = surf.latex;
+    const sel = document.createElement("select");
+    [["auto", "auto"], ["solid", "solid"], ["solidFlip", "flip"], ["shell", "shell"], ["off", "skip"]]
+      .forEach(([v, t]) => {
+        const o = document.createElement("option");
+        o.value = v; o.textContent = t;
+        sel.appendChild(o);
+      });
+    sel.value = surf.mode;
+    sel.addEventListener("change", () => { surf.mode = sel.value; });
+    const badge = document.createElement("span");
+    badge.className = "badge";
+    badge.id = "badge" + i;
+    row.append(chip, eq, sel, badge);
+    led.appendChild(row);
+  });
+  renderSkips(p.skipped);
+}
+
+function renderSkips(skipped) {
+  const el = $("skiplist");
+  el.innerHTML = "";
+  skipped.forEach(s => {
+    const d = document.createElement("div");
+    d.textContent = "skipped (" + s.why + "): " + prettyLatex(s.latex);
+    d.title = s.latex;
+    el.appendChild(d);
+  });
+}
+
+function prettyLatex(lx) {
+  return lx
+    .replace(/\\left|\\right/g, "")
+    .replace(/\\operatorname\{([a-z]+)\}/g, "$1")
+    .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, "($1)/($2)")
+    .replace(/\\(sin|cos|tan|pi|sqrt|ln|log|exp)/g, "$1")
+    .replace(/\\\{/g, "{").replace(/\\\}/g, "}")
+    .replace(/\s+/g, "");
+}
+
+/* ---------- build step ---------- */
+$("btnBuild").addEventListener("click", buildAll);
+
+async function buildAll() {
+  const p = S.parsed;
+  if (!p) return;
+  const st = $("buildStatus");
+  st.classList.remove("err");
+  const btn = $("btnBuild");
+  btn.disabled = true;
+  $("prog").style.display = "";
+  const bar = $("progBar");
+  const RES = parseFloat($("selRes").value);
+  const shellT = Math.max(0.02, parseFloat($("inpShell").value) || 0.16);
+  try {
+    // pass 1: resolve orientation + bounding boxes
+    const resolved = [];
+    let unionBox = null;
+    for (let i = 0; i < p.surfaces.length; i++) {
+      const surf = p.surfaces[i];
+      const badge = $("badge" + i);
+      if (surf.mode === "off") { badge.textContent = "—"; continue; }
+      st.textContent = "Scanning surface " + (i + 1) + " of " + p.surfaces.length + "…";
+      bar.style.width = (i / p.surfaces.length * 45) + "%";
+      await raf();
+      let fields;
+      try { fields = buildFields(surf, p.defVals); }
+      catch (e) { badge.textContent = "error"; badge.title = e.message; continue; }
+      const r = autoResolve(surf, fields, p.box, shellT);
+      if (!r) { badge.textContent = "empty"; continue; }
+      badge.textContent = r.resolved === "shell" ? "shell" : (r.resolved === "solidFlip" ? "solid−" : "solid");
+      resolved.push({ i, surf, r });
+      unionBox = unionBoxes(unionBox, r.bbox);
+    }
+    if (!resolved.length) throw new Error("No geometry found inside the graph's viewport.");
+
+    // pass 2: fine mesh
+    const span = Math.max(unionBox[3] - unionBox[0], unionBox[4] - unionBox[1], unionBox[5] - unionBox[2]);
+    const voxel = span / RES;
+    S.span = span;
+    const meshes = [];
+    let tot = 0;
+    for (let n = 0; n < resolved.length; n++) {
+      const { i, surf, r } = resolved[n];
+      st.textContent = "Meshing surface " + (n + 1) + " of " + resolved.length + "…";
+      bar.style.width = (45 + n / resolved.length * 55) + "%";
+      await raf();
+      const m = meshField(r.field, r.bbox, voxel, {});
+      m.color = surfColor(surf);
+      m.name = prettyLatex(surf.latex).slice(0, 60);
+      if (m.tris.length) {
+        meshes.push(m);
+        tot += m.tris.length / 3;
+        $("badge" + i).textContent = ($("badge" + i).textContent + " · " + (m.tris.length / 3)).slice(0, 24);
+      } else $("badge" + i).textContent = "empty";
+    }
+    bar.style.width = "100%";
+    S.meshes = meshes;
+    const scale = parseFloat($("inpScale").value) || 5;
+    st.textContent = tot.toLocaleString() + " triangles · about " +
+      (span * scale / 10).toFixed(1) + " cm across at current scale.";
+    $("exportCard").style.display = "";
+    showPreview();
+  } catch (e) {
+    st.textContent = e.message;
+    st.classList.add("err");
+  } finally {
+    btn.disabled = false;
+    setTimeout(() => { $("prog").style.display = "none"; bar.style.width = "0%"; }, 600);
+  }
+}
+
+/* ---------- downloads ---------- */
+function download(name, blob) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+const fileBase = () => ($("inpName").value.trim() || "desmos-model").replace(/[^\w.-]+/g, "-");
+
+$("btnStl").addEventListener("click", () => {
+  if (!S.meshes) return;
+  const scale = parseFloat($("inpScale").value) || 5;
+  download(fileBase() + ".stl", new Blob([meshToBinarySTL(S.meshes, scale)], { type: "model/stl" }));
+});
+$("btnScad").addEventListener("click", () => {
+  if (!S.meshes) return;
+  const scale = parseFloat($("inpScale").value) || 5;
+  download(fileBase() + ".scad",
+    new Blob([meshesToScad(S.meshes, scale, fileBase())], { type: "text/plain" }));
+});
+$("btn3mf").addEventListener("click", () => {
+  if (!S.meshes) return;
+  const scale = parseFloat($("inpScale").value) || 5;
+  download(fileBase() + ".3mf",
+    new Blob([meshesTo3MF(S.meshes, scale, fileBase())], { type: "model/3mf" }));
+});
+
+/* ---------- three.js preview ---------- */
+let THREE_ = null, renderer = null, scene = null, camera = null, modelGroup = null;
+const view = { az: 0.7, el: 0.42, dist: 3, target: [0, 0, 0] };
+
+function initThree() {
+  if (renderer) return true;
+  if (typeof THREE === "undefined") return false;
+  THREE_ = THREE;
+  const vp = $("viewport");
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  vp.insertBefore(renderer.domElement, vp.firstChild);
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0f141c);
+  camera = new THREE.PerspectiveCamera(45, 1, 0.01, 5000);
+  scene.add(new THREE.HemisphereLight(0xdfe8f5, 0x2a3140, 0.95));
+  const d1 = new THREE.DirectionalLight(0xffffff, 0.75); d1.position.set(1, 2, 1.4); scene.add(d1);
+  const d2 = new THREE.DirectionalLight(0x9db8d8, 0.28); d2.position.set(-1.5, -1, -0.6); scene.add(d2);
+  bindControls(renderer.domElement);
+  const resize = () => {
+    const w = vp.clientWidth, h = vp.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    drawOnce();
+  };
+  window.addEventListener("resize", resize);
+  resize();
+  return true;
+}
+
+function showPreview() {
+  if (!initThree()) {
+    $("vpEmpty").innerHTML = "preview library failed to load —<br>exports still work";
+    return;
+  }
+  $("vpEmpty").style.display = "none";
+  if (modelGroup) { scene.remove(modelGroup); modelGroup.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); }); }
+  modelGroup = new THREE_.Group();
+  modelGroup.rotation.x = -Math.PI / 2; // Desmos is z-up
+
+  let lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
+  let tot = 0;
+  for (const m of S.meshes) {
+    const g = new THREE_.BufferGeometry();
+    g.setAttribute("position", new THREE_.BufferAttribute(m.verts, 3));
+    g.setIndex(new THREE_.BufferAttribute(m.tris, 1));
+    g.computeVertexNormals();
+    const mat = new THREE_.MeshStandardMaterial({
+      color: new THREE_.Color(m.color[0], m.color[1], m.color[2]),
+      roughness: 0.62, metalness: 0.05,
+    });
+    modelGroup.add(new THREE_.Mesh(g, mat));
+    tot += m.tris.length / 3;
+    for (let v = 0; v < m.verts.length; v += 3) {
+      for (let a = 0; a < 3; a++) {
+        const val = m.verts[v + a];
+        if (val < lo[a]) lo[a] = val;
+        if (val > hi[a]) hi[a] = val;
+      }
+    }
+  }
+  // center at origin (remember: group is rotated, do centering pre-rotation)
+  const cx = (lo[0] + hi[0]) / 2, cy = (lo[1] + hi[1]) / 2, cz = (lo[2] + hi[2]) / 2;
+  modelGroup.children.forEach(ch => ch.position.set(-cx, -cy, -cz));
+  scene.add(modelGroup);
+  const span = Math.max(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]);
+  view.dist = span * 1.5;
+  view.target = [0, 0, 0];
+  $("vpStats").textContent = tot.toLocaleString() + " tris · " + S.meshes.length + " surfaces";
+  drawOnce();
+}
+
+function drawOnce() {
+  if (!renderer || !scene) return;
+  const { az, el, dist } = view;
+  camera.position.set(
+    dist * Math.cos(el) * Math.sin(az),
+    dist * Math.sin(el),
+    dist * Math.cos(el) * Math.cos(az)
+  );
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+}
+
+function bindControls(el) {
+  let drag = false, px = 0, py = 0, pinch = 0;
+  el.addEventListener("pointerdown", e => { drag = true; px = e.clientX; py = e.clientY; el.setPointerCapture(e.pointerId); });
+  el.addEventListener("pointerup", e => { drag = false; });
+  el.addEventListener("pointercancel", () => { drag = false; });
+  el.addEventListener("pointermove", e => {
+    if (!drag) return;
+    view.az -= (e.clientX - px) * 0.008;
+    view.el = Math.max(-1.5, Math.min(1.5, view.el + (e.clientY - py) * 0.008));
+    px = e.clientX; py = e.clientY;
+    drawOnce();
+  });
+  el.addEventListener("wheel", e => {
+    e.preventDefault();
+    view.dist *= Math.exp(e.deltaY * 0.0012);
+    drawOnce();
+  }, { passive: false });
+  el.addEventListener("touchstart", e => {
+    if (e.touches.length === 2) {
+      drag = false;
+      pinch = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    }
+  }, { passive: true });
+  el.addEventListener("touchmove", e => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      if (pinch > 0) view.dist *= pinch / d;
+      pinch = d;
+      drawOnce();
+    }
+  }, { passive: false });
+}
+
+</script>
+</body>
+</html>
