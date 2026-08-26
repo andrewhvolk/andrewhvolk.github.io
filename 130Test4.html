@@ -392,7 +392,7 @@
       <span class="breadcrumb-sep" aria-hidden="true">›</span>
       <a href="courses/math130.html">MATH 130</a>
       <span class="breadcrumb-sep" aria-hidden="true">›</span>
-      <span class="breadcrumb-current" aria-current="page">Test 4 Practice Lab</span>
+      <span class="breadcrumb-current" aria-current="page">Final Exam Practice Lab</span>
     </nav>
   </div>
 </div>
@@ -411,9 +411,9 @@
 <main class="test4-lab-main">
 <div id="app-container">
     <div id="screen-welcome">
-        <div class="eyebrow">Math 130 · Test 4</div>
-        <h1>Test 4 Blueprint Practice Lab</h1>
-        <p class="subtle">A question-by-question Math 130 Test 4 practice generator. Each mission follows the test blueprint sequence, uses changed parameters, and gives immediate feedback while you build the work you would show for full credit.</p>
+        <div class="eyebrow">Math 130 · Final Exam</div>
+        <h1>Final Exam Blueprint Practice Lab</h1>
+        <p class="subtle">A question-by-question Math 130 final review generator based on the current practice blueprint. Each mission uses changed parameters and gives immediate feedback. Confirm the official Fall exam coverage and formula sheet in Canvas or in class.</p>
         <div class="topic-list" aria-label="Practice lab topics">
             <div class="topic-pill">Exact trig values & right triangles</div>
             <div class="topic-pill">Arc length, sectors & angular speed</div>
@@ -428,7 +428,7 @@
             <label class="mode-card"><input type="radio" name="practice-mode" value="test"> <strong>Test Mode</strong><br><span class="subtle">Timer, hidden hints first, one scored attempt before review.</span></label>
         </div>
         <details class="formula-panel" open>
-            <summary>Formula sheet available during practice</summary>
+            <summary>Formula reference used during practice</summary>
             <ul class="formula-list">
                 <li>Heron: A = √(s(s - a)(s - b)(s - c))</li>
                 <li>Semiperimeter: s = (a + b + c)/2</li>
@@ -439,7 +439,7 @@
             </ul>
         </details>
         <div class="review-actions">
-            <button type="button" onclick="startApp()">Start the Test 4 Practice</button>
+            <button type="button" onclick="startApp()">Start the Final Exam Practice</button>
             <button type="button" id="resume-button" class="hidden" onclick="resumeSavedSession()">Resume Saved Session</button>
         </div>
     </div>
@@ -510,8 +510,8 @@
     </div>
 
     <div id="screen-certificate" class="hidden certificate">
-        <div class="cert-title">Certificate of Test 4 Practice Completion</div>
-        <p>You completed the Math 130 Test 4 Blueprint Practice Lab.</p>
+        <div class="cert-title">Certificate of Final Exam Practice Completion</div>
+        <p>You completed the Math 130 Final Exam Blueprint Practice Lab.</p>
         <p id="cert-score" style="font-weight: bold; color: var(--primary); font-size: 1.15em;"></p>
         <div id="cert-report" class="report-grid"></div>
         <div id="cert-review" class="mastery-panel"></div>
@@ -521,7 +521,7 @@
         </div>
         <div class="hint-box">
             <strong>On-test formula reminders:</strong>
-            <p class="subtle" style="margin: 6px 0 10px;">The actual Test 4 formula list is intentionally limited to these items; all other setup comes from the question context and student work.</p>
+            <p class="subtle" style="margin: 6px 0 10px;">This is the formula reference used by the practice lab, not confirmation of the official Fall final formula sheet. Check Canvas or the in-class announcement.</p>
             <ul class="formula-list">
                 <li>Heron: A = √(s(s - a)(s - b)(s - c))</li>
                 <li>Semiperimeter: s = (a + b + c)/2</li>

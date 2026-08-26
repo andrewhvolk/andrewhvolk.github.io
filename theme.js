@@ -295,55 +295,76 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const math130FallSchedule = [
-    ['Week 1', 'Aug 24', 'Mon', 'Intro'],
-    ['Week 1', 'Aug 26', 'Wed', 'Review - Chapter R'],
-    ['Week 1', 'Aug 28', 'Fri', 'Review'],
-    ['Week 2', 'Aug 31', 'Mon', 'Review'],
-    ['Week 2', 'Sep 2', 'Wed', '1.1-1.2, Quiz 1'],
+    ['Week 1', 'Aug 24', 'Mon', 'Intro; initial knowledge check and ALEKS setup complete'],
+    ['Week 1', 'Aug 26', 'Wed', 'Targeted Chapter R review'],
+    ['Week 1', 'Aug 28', 'Fri', 'Chapter R review and paper practice'],
+    ['Week 2', 'Aug 31', 'Mon', 'Chapter R review'],
+    ['Week 2', 'Sep 2', 'Wed', '1.1-1.2; Canvas due 2:10 PM: R.1-R.3, R.4-R.5, Quiz 1'],
     ['Week 2', 'Sep 4', 'Fri', '1.2'],
     ['Week 3', 'Sep 7', 'Mon', '1.4'],
-    ['Week 3', 'Sep 9', 'Wed', '2.1, Quiz 2'],
+    ['Week 3', 'Sep 9', 'Wed', '2.1; Canvas due 2:10 PM: R.6, 1.1/1.2/1.4, Quiz 2'],
     ['Week 3', 'Sep 11', 'Fri', '2.2'],
     ['Week 4', 'Sep 14', 'Mon', '2.4'],
-    ['Week 4', 'Sep 16', 'Wed', '2.5, Quiz 3'],
+    ['Week 4', 'Sep 16', 'Wed', '2.5; Canvas due 2:10 PM: 2.1/2.2/2.4, Quiz 3'],
     ['Week 4', 'Sep 18', 'Fri', '3.1'],
-    ['Week 5', 'Sep 21', 'Mon', 'Review, Quiz 4'],
-    ['Week 5', 'Sep 23', 'Wed', 'Test 1'],
+    ['Week 5', 'Sep 21', 'Mon', 'Review; Canvas due 2:10 PM: Quiz 4'],
+    ['Week 5', 'Sep 23', 'Wed', 'Canvas due 2:10 PM: 2.5/3.1, Test 1'],
     ['Week 5', 'Sep 25', 'Fri', '4.2'],
     ['Week 6', 'Sep 28', 'Mon', '4.2'],
-    ['Week 6', 'Sep 30', 'Wed', '4.3, Quiz 5'],
+    ['Week 6', 'Sep 30', 'Wed', '4.3; Canvas due 2:10 PM: 4.2, Quiz 5'],
     ['Week 6', 'Oct 2', 'Fri', '4.3'],
     ['Week 7', 'Oct 5', 'Mon', 'Geometry: Polygon'],
-    ['Week 7', 'Oct 7', 'Wed', 'Geometry: Polygon, Quiz 6'],
+    ['Week 7', 'Oct 7', 'Wed', 'Geometry: Polygon; Canvas due 2:10 PM: 4.3, Quiz 6'],
     ['Week 7', 'Oct 9', 'Fri', 'Geometry: Polygon'],
     ['Week 8', 'Oct 12', 'Mon', 'Geometry: Polygon'],
-    ['Week 8', 'Oct 14', 'Wed', 'Geometry: Circles, Quiz 7'],
+    ['Week 8', 'Oct 14', 'Wed', 'Geometry: Circles; Canvas due 2:10 PM: Quiz 7'],
     ['Week 8', 'Oct 16', 'Fri', 'Fall Break'],
     ['Week 9', 'Oct 19', 'Mon', 'Geometry: Circles'],
-    ['Week 9', 'Oct 21', 'Wed', 'Geometry: Circles, Quiz 8'],
+    ['Week 9', 'Oct 21', 'Wed', 'Geometry: Circles; Canvas due 2:10 PM: Quiz 8'],
     ['Week 9', 'Oct 23', 'Fri', 'Geometry: Circles'],
     ['Week 10', 'Oct 26', 'Mon', 'Geometry: Circles'],
-    ['Week 10', 'Oct 28', 'Wed', 'Review, Quiz 9'],
-    ['Week 10', 'Oct 30', 'Fri', 'Test 2'],
+    ['Week 10', 'Oct 28', 'Wed', 'Test 2 review; Canvas due 2:10 PM: Quiz 9'],
+    ['Week 10', 'Oct 30', 'Fri', 'Canvas due 2:10 PM: Geometry, Test 2'],
     ['Week 11', 'Nov 2', 'Mon', '5.1'],
     ['Week 11', 'Nov 4', 'Wed', '5.2'],
     ['Week 11', 'Nov 6', 'Fri', '5.2'],
     ['Week 12', 'Nov 9', 'Mon', '5.3'],
-    ['Week 12', 'Nov 11', 'Wed', '5.3, Quiz 10'],
+    ['Week 12', 'Nov 11', 'Wed', '5.3; Canvas due 2:10 PM: 5.1/5.2 and Quiz 10'],
     ['Week 12', 'Nov 13', 'Fri', '5.3'],
     ['Week 13', 'Nov 16', 'Mon', '5.7, 7.1'],
-    ['Week 13', 'Nov 18', 'Wed', '7.1, Quiz 11'],
+    ['Week 13', 'Nov 18', 'Wed', '7.1; Canvas due 2:10 PM: 5.3/5.7, Quiz 11'],
     ['Week 13', 'Nov 20', 'Fri', '7.1'],
     ['Break', 'Nov 23', 'Mon', 'Thanksgiving Break'],
     ['Break', 'Nov 25', 'Wed', 'Thanksgiving Break'],
     ['Break', 'Nov 27', 'Fri', 'Thanksgiving Break'],
-    ['Week 14', 'Nov 30', 'Mon', '8.4'],
-    ['Week 14', 'Dec 2', 'Wed', '8.4, Quiz 12'],
+    ['Week 14', 'Nov 30', 'Mon', '8.4; Canvas due 2:10 PM: 7.1'],
+    ['Week 14', 'Dec 2', 'Wed', '8.4; Canvas due 2:10 PM: 8.4, Quiz 12'],
     ['Week 14', 'Dec 4', 'Fri', 'Applications'],
-    ['Week 15', 'Dec 7', 'Mon', 'Review, Quiz 13'],
-    ['Week 15', 'Dec 9', 'Wed', 'Test 3'],
+    ['Week 15', 'Dec 7', 'Mon', 'Review; Canvas due 2:10 PM: Quiz 13'],
+    ['Week 15', 'Dec 9', 'Wed', 'Canvas due 2:10 PM: Test 3'],
     ['Week 15', 'Dec 11', 'Fri', 'Review'],
-    ['Finals', 'Dec 14', 'Mon', 'Final Exam']
+    ['Finals', 'Dec 14', 'Mon', 'Canvas due 1:00 PM: Final Exam']
+];
+
+const math130CanvasDueDates = [
+    ['2026-09-02T14:10:00', 'Sep 2 at 2:10 PM', 'R.1-R.3, R.4-R.5, and Quiz 1'],
+    ['2026-09-09T14:10:00', 'Sep 9 at 2:10 PM', 'R.6, 1.1/1.2/1.4, and Quiz 2'],
+    ['2026-09-16T14:10:00', 'Sep 16 at 2:10 PM', '2.1/2.2/2.4 and Quiz 3'],
+    ['2026-09-21T14:10:00', 'Sep 21 at 2:10 PM', 'Quiz 4'],
+    ['2026-09-23T14:10:00', 'Sep 23 at 2:10 PM', '2.5/3.1 and Test 1'],
+    ['2026-09-30T14:10:00', 'Sep 30 at 2:10 PM', '4.2 and Quiz 5'],
+    ['2026-10-07T14:10:00', 'Oct 7 at 2:10 PM', '4.3 and Quiz 6'],
+    ['2026-10-14T14:10:00', 'Oct 14 at 2:10 PM', 'Quiz 7'],
+    ['2026-10-21T14:10:00', 'Oct 21 at 2:10 PM', 'Quiz 8'],
+    ['2026-10-28T14:10:00', 'Oct 28 at 2:10 PM', 'Quiz 9'],
+    ['2026-10-30T14:10:00', 'Oct 30 at 2:10 PM', 'Geometry and Test 2'],
+    ['2026-11-11T14:10:00', 'Nov 11 at 2:10 PM', '5.1/5.2 and Quiz 10'],
+    ['2026-11-18T14:10:00', 'Nov 18 at 2:10 PM', '5.3/5.7 and Quiz 11'],
+    ['2026-11-30T14:10:00', 'Nov 30 at 2:10 PM', '7.1'],
+    ['2026-12-02T14:10:00', 'Dec 2 at 2:10 PM', '8.4 and Quiz 12'],
+    ['2026-12-07T14:10:00', 'Dec 7 at 2:10 PM', 'Quiz 13'],
+    ['2026-12-09T14:10:00', 'Dec 9 at 2:10 PM', 'Test 3'],
+    ['2026-12-14T13:00:00', 'Dec 14 at 1:00 PM', 'Final Exam']
 ];
 
 const math130FallUnits = [
@@ -481,7 +502,9 @@ function ensureMath130FallStyles() {
     style.id = 'math130-fall-2026-styles';
     style.textContent = `
         .math130-fall-flow {
-            width: var(--site-content-width, min(1180px, calc(100vw - 2rem)));
+            box-sizing: border-box;
+            width: 100%;
+            max-width: var(--site-content-width, min(1180px, calc(100vw - 2rem)));
             margin: clamp(1.5rem, 4vw, 2.5rem) auto;
             padding: clamp(1.1rem, 2.4vw, 1.6rem);
             border: 1px solid var(--border-subtle, #e2e8f0);
@@ -516,6 +539,25 @@ function ensureMath130FallStyles() {
             margin: 0;
             color: var(--text-muted, #64748b);
             max-width: 76ch;
+        }
+        .math130-fall-flow__notice {
+            display: grid;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+            padding: 0.9rem 1rem;
+            border-left: 4px solid var(--primary-main, #2563eb);
+            border-radius: 0.6rem;
+            background: color-mix(in srgb, var(--primary-main, #2563eb) 8%, var(--bg-surface, #fff));
+        }
+        .math130-fall-flow__notice p {
+            margin: 0;
+        }
+        .math130-fall-flow__notice-label {
+            color: var(--primary-main, #2563eb);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
         .math130-fall-flow__grid {
             display: grid;
@@ -654,7 +696,7 @@ function buildMath130UnitCard(unit) {
 function buildMath130ScheduleTable(rows = math130FallSchedule) {
     const body = rows.map(([week, date, day, topic]) => {
         const quiz = /Quiz/.test(topic);
-        const majorAssessment = /Test|Final Exam/.test(topic);
+        const majorAssessment = /Canvas due.*(?:Test [123]|Final Exam)/.test(topic);
         const assessment = quiz || majorAssessment;
         const breakRow = /Break/.test(topic);
         return `<tr data-assessment="${assessment ? 'true' : 'false'}" data-quiz="${quiz ? 'true' : 'false'}" data-major-assessment="${majorAssessment ? 'true' : 'false'}" data-break="${breakRow ? 'true' : 'false'}"><td>${escapeHtml(week)}</td><td>${escapeHtml(date)}</td><td>${escapeHtml(day)}</td><td>${escapeHtml(topic)}</td></tr>`;
@@ -668,16 +710,29 @@ function buildMath130ScheduleTable(rows = math130FallSchedule) {
         </div>`;
 }
 
+function getMath130NextCanvasDue(now = new Date()) {
+    return math130CanvasDueDates.find(([isoDate]) => new Date(isoDate) >= now) || null;
+}
+
 function buildMath130DashboardFlow() {
     const section = document.createElement('section');
     section.id = 'math130-fall-2026-flow';
     section.className = 'math130-fall-flow';
     section.setAttribute('aria-labelledby', 'math130-fall-2026-flow-title');
+    const nextDue = getMath130NextCanvasDue();
+    const nextDueCopy = nextDue
+        ? `<strong>Next Canvas master deadline:</strong> ${escapeHtml(nextDue[1])} - ${escapeHtml(nextDue[2])}.`
+        : '<strong>All listed Fall 2026 Canvas deadlines have passed.</strong>';
     section.innerHTML = `
         <div class="math130-fall-flow__header">
             <p class="math130-fall-flow__kicker">Fall 2026 Semester Flow</p>
             <h2 id="math130-fall-2026-flow-title">Follow the course by assessment window.</h2>
-            <p class="math130-fall-flow__lede">The Fall 2026 calendar has thirteen quizzes, three tests, and a cumulative final. Each page below is positioned around the dates, assignments, and topics students will see in class.</p>
+            <p class="math130-fall-flow__lede">Canvas supplies the master due dates and times. Quiz and test coverage remains subject to the current Canvas instructions and in-class announcements.</p>
+        </div>
+        <div class="math130-fall-flow__notice" role="status">
+            <p class="math130-fall-flow__notice-label">Start here</p>
+            <p><strong>Day one is complete:</strong> the class finished the initial knowledge check and set up modular ALEKS learning accounts.</p>
+            <p>${nextDueCopy}</p>
         </div>
         <div class="math130-fall-flow__grid">
             ${math130FallUnits.map(buildMath130UnitCard).join('')}
@@ -703,6 +758,7 @@ function buildMath130PageFlow(config) {
             <p class="math130-fall-flow__kicker">Fall 2026 MATH 130 Flow</p>
             <h2 id="math130-fall-2026-flow-title">${escapeHtml(config.title)} fits in ${escapeHtml(unit.label)}.</h2>
             <p class="math130-fall-flow__lede"><strong>${escapeHtml(unit.dates)}:</strong> ${escapeHtml(unit.topics)} <strong>${escapeHtml(unit.assessment)}.</strong></p>
+            <p class="math130-fall-flow__lede">Dates and times follow the Canvas assignment list. Confirm quiz and test coverage in Canvas or in class.</p>
         </div>
         <ul class="math130-fall-flow__mini-schedule">${rowList}</ul>
         <div class="math130-fall-flow__actions">
