@@ -3096,6 +3096,207 @@ body.light .math-review-page,
   margin-bottom: 0.5rem;
 }
 
+/* MATH 130 unit pathways: the primary learn -> practice -> checkpoint route */
+.learning-path {
+  display: grid;
+  gap: var(--spacing-6);
+}
+
+.learning-path__header {
+  display: grid;
+  gap: 0.65rem;
+  max-width: 78ch;
+}
+
+.learning-path__eyebrow,
+.learning-step__meta,
+.learning-path__status {
+  font-family: var(--type-meta-family);
+  font-size: var(--meta-sm);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.learning-path__eyebrow,
+.learning-step__meta {
+  color: var(--primary-main);
+}
+
+.learning-path__header h2,
+.learning-step h3,
+.learning-path__bridge h3 {
+  margin: 0;
+  font-family: var(--type-display-family);
+}
+
+.learning-path__header p,
+.learning-step p,
+.learning-path__bridge p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.learning-path__status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.learning-path__status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0.32rem 0.68rem;
+  border: 1px solid color-mix(in srgb, var(--primary-main) 32%, var(--border-subtle));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface));
+  color: var(--text-main);
+}
+
+.learning-path__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr));
+  gap: 1rem;
+}
+
+.learning-step {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  min-height: 100%;
+  padding: 1.1rem;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--site-card-radius, 0.85rem);
+  background: var(--gradient-card-surface, var(--bg-surface));
+  box-shadow: var(--shadow);
+}
+
+.learning-step::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-main), transparent);
+}
+
+.learning-step--assessment::before {
+  background: linear-gradient(90deg, var(--emerald-main), transparent);
+}
+
+.learning-step__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+.learning-step__actions a,
+.learning-step__actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.55rem 0.72rem;
+  border: 1px solid var(--primary-main);
+  border-radius: 0.55rem;
+  background: transparent;
+  color: var(--primary-main);
+  font: 700 0.82rem var(--type-body-family);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.learning-step__actions .learning-action--primary {
+  background: var(--primary-main);
+  color: #fff;
+}
+
+.learning-step__actions a:hover,
+.learning-step__actions button:hover,
+.learning-step__actions a:focus-visible,
+.learning-step__actions button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--primary-main) 20%, transparent);
+}
+
+.learning-path__bridge {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--warning-main) 50%, var(--border-subtle));
+  border-left-width: 5px;
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--warning-main) 8%, var(--bg-surface));
+  scroll-margin-top: 9rem;
+}
+
+.learning-path__readiness {
+  padding: 0.85rem 1rem;
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, var(--emerald-main) 9%, var(--bg-surface));
+  color: var(--text-main);
+  line-height: 1.55;
+}
+
+.learning-path__library {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+}
+
+.learning-path__library > summary {
+  cursor: pointer;
+  color: var(--primary-main);
+  font-weight: 800;
+}
+
+.learning-library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.learning-library-card {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.9rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.7rem;
+  background: var(--bg-surface);
+}
+
+.learning-library-card strong {
+  color: var(--text-main);
+}
+
+.learning-library-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.learning-library-card__links a {
+  color: var(--primary-main);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .learning-step__actions {
+    flex-direction: column;
+  }
+
+  .learning-step__actions a,
+  .learning-step__actions button {
+    width: 100%;
+  }
+}
+
 /* Reuse cv-section-nav on review pages */
 .review-section-nav {
   position: sticky;
@@ -3105,6 +3306,10 @@ body.light .math-review-page,
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: inset 0 -1px 0 var(--border-transparent);
+}
+
+.review-page .tab-content {
+  scroll-margin-top: 9rem;
 }
 
 .review-section-nav__inner {
@@ -3160,6 +3365,18 @@ body.light .math-review-page,
 @media (max-width: 640px) {
   .review-page-header {
     padding: clamp(1.25rem, 3vw, 1.75rem) 0;
+  }
+
+  .review-section-nav {
+    top: 9.95rem;
+  }
+
+  .review-page .tab-content {
+    scroll-margin-top: 14rem;
+  }
+
+  .learning-path__bridge {
+    scroll-margin-top: 14rem;
   }
 }
 

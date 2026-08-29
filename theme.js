@@ -307,7 +307,7 @@ const math130FallSchedule = [
     ['Week 4', 'Sep 14', 'Mon', '2.4'],
     ['Week 4', 'Sep 16', 'Wed', '2.5; ALEKS 2.1/2.2/2.4 due; Quiz 3 on paper (Canvas master date 2:10 PM)'],
     ['Week 4', 'Sep 18', 'Fri', '3.1'],
-    ['Week 5', 'Sep 21', 'Mon', 'Review; Quiz 4 on paper (Canvas master date 2:10 PM)'],
+    ['Week 5', 'Sep 21', 'Mon', 'Review; Quiz 4 final Unit 1 learning checkpoint on paper (Canvas master date 2:10 PM; coverage planned until confirmed)'],
     ['Week 5', 'Sep 23', 'Wed', 'ALEKS 2.5/3.1 due; Test 1 on paper (Canvas master date 2:10 PM)'],
     ['Week 5', 'Sep 25', 'Fri', '4.2'],
     ['Week 6', 'Sep 28', 'Mon', '4.2'],
@@ -323,7 +323,7 @@ const math130FallSchedule = [
     ['Week 9', 'Oct 21', 'Wed', 'Geometry: Circles; Quiz 8 on paper (Canvas master date 2:10 PM)'],
     ['Week 9', 'Oct 23', 'Fri', 'Geometry: Circles'],
     ['Week 10', 'Oct 26', 'Mon', 'Geometry: Circles'],
-    ['Week 10', 'Oct 28', 'Wed', 'Test 2 review; Quiz 9 right-triangle-trig bridge on paper (Canvas master date 2:10 PM; confirm coverage)'],
+    ['Week 10', 'Oct 28', 'Wed', 'Test 2 review; Quiz 9 Unit 3 right-triangle-trig bridge on paper (Canvas master date 2:10 PM; coverage planned until confirmed in Canvas or class)'],
     ['Week 10', 'Oct 30', 'Fri', 'ALEKS Geometry due; Test 2 on paper (Canvas master date 2:10 PM)'],
     ['Week 11', 'Nov 2', 'Mon', '5.1'],
     ['Week 11', 'Nov 4', 'Wed', '5.2'],
@@ -340,7 +340,7 @@ const math130FallSchedule = [
     ['Week 14', 'Nov 30', 'Mon', '8.4; ALEKS 7.1 due at 2:10 PM'],
     ['Week 14', 'Dec 2', 'Wed', '8.4; ALEKS 8.4 due; Quiz 12 on paper (Canvas master date 2:10 PM)'],
     ['Week 14', 'Dec 4', 'Fri', 'Applications'],
-    ['Week 15', 'Dec 7', 'Mon', 'Review; Quiz 13 on paper (Canvas master date 2:10 PM)'],
+    ['Week 15', 'Dec 7', 'Mon', 'Cumulative Test 3 readiness check; Quiz 13 on paper (Canvas master date 2:10 PM)'],
     ['Week 15', 'Dec 9', 'Wed', 'Test 3 on paper (Canvas master date 2:10 PM)'],
     ['Week 15', 'Dec 11', 'Fri', 'Review'],
     ['Finals', 'Dec 14', 'Mon', 'Final Exam on paper (Canvas master date 1:00 PM)']
@@ -350,19 +350,19 @@ const math130CanvasDueDates = [
     ['2026-09-02T14:10:00', 'Sep 2 at 2:10 PM', 'ALEKS R.1-R.5; Quiz 1 on paper'],
     ['2026-09-09T14:10:00', 'Sep 9 at 2:10 PM', 'ALEKS R.6 and 1.1/1.2/1.4; Quiz 2 on paper'],
     ['2026-09-16T14:10:00', 'Sep 16 at 2:10 PM', 'ALEKS 2.1/2.2/2.4; Quiz 3 on paper'],
-    ['2026-09-21T14:10:00', 'Sep 21 at 2:10 PM', 'Quiz 4 on paper'],
+    ['2026-09-21T14:10:00', 'Sep 21 at 2:10 PM', 'Quiz 4 final Unit 1 learning checkpoint on paper; coverage planned until confirmed'],
     ['2026-09-23T14:10:00', 'Sep 23 at 2:10 PM', 'ALEKS 2.5/3.1; Test 1 on paper'],
     ['2026-09-30T14:10:00', 'Sep 30 at 2:10 PM', 'ALEKS 4.2; Quiz 5 on paper'],
     ['2026-10-07T14:10:00', 'Oct 7 at 2:10 PM', 'ALEKS 4.3; Quiz 6 on paper'],
     ['2026-10-14T14:10:00', 'Oct 14 at 2:10 PM', 'Quiz 7 on paper'],
     ['2026-10-21T14:10:00', 'Oct 21 at 2:10 PM', 'Quiz 8 on paper'],
-    ['2026-10-28T14:10:00', 'Oct 28 at 2:10 PM', 'Quiz 9 right-triangle-trig bridge on paper; confirm coverage'],
+    ['2026-10-28T14:10:00', 'Oct 28 at 2:10 PM', 'Quiz 9 Unit 3 right-triangle-trig bridge on paper; coverage planned until confirmed'],
     ['2026-10-30T14:10:00', 'Oct 30 at 2:10 PM', 'ALEKS Geometry; Test 2 on paper'],
     ['2026-11-11T14:10:00', 'Nov 11 at 2:10 PM', 'ALEKS 5.1/5.2; Quiz 10 on paper'],
     ['2026-11-18T14:10:00', 'Nov 18 at 2:10 PM', 'ALEKS 5.3/5.7; Quiz 11 on paper'],
     ['2026-11-30T14:10:00', 'Nov 30 at 2:10 PM', 'ALEKS 7.1'],
     ['2026-12-02T14:10:00', 'Dec 2 at 2:10 PM', 'ALEKS 8.4; Quiz 12 on paper'],
-    ['2026-12-07T14:10:00', 'Dec 7 at 2:10 PM', 'Quiz 13 on paper'],
+    ['2026-12-07T14:10:00', 'Dec 7 at 2:10 PM', 'Quiz 13 cumulative Test 3 readiness check on paper'],
     ['2026-12-09T14:10:00', 'Dec 9 at 2:10 PM', 'Test 3 on paper'],
     ['2026-12-14T13:00:00', 'Dec 14 at 1:00 PM', 'Final Exam on paper']
 ];
@@ -370,36 +370,47 @@ const math130CanvasDueDates = [
 const math130FallUnits = [
     {
         key: 'unit1',
+        starts: '2026-08-24T00:00:00',
+        ends: '2026-09-23T23:59:59',
         label: 'Unit 1 / Test 1',
         dates: 'Aug 24-Sep 23',
         assessment: 'Test 1: Sep 23 at 2:10 PM',
         href: '/130Test1.html',
         title: 'Foundations, algebra, functions, and coordinate skills',
         topics: 'Intro; Chapter R review; 1.1-1.2; 1.4; 2.1; 2.2; 2.4; 2.5; 3.1; Quizzes 1-4; review.',
+        coverage: 'Planned sequence: Quizzes 1-4 follow Units 1A-1D; Unit 1E and the mixed Test 1 checkpoint provide cumulative readiness.',
         range: [0, 13]
     },
     {
         key: 'unit2',
+        starts: '2026-09-24T00:00:00',
+        ends: '2026-10-30T23:59:59',
         label: 'Unit 2 / Test 2',
         dates: 'Sep 25-Oct 30',
         assessment: 'Test 2: Oct 30 at 2:10 PM',
         href: '/130Test2.html',
         title: 'Interest, logarithms, polygons, and circles',
-        topics: '4.2; 4.3; polygon geometry; circle geometry; Quizzes 5-8; Quiz 9 bridge; review.',
+        topics: '4.2; 4.3; polygon geometry; circle geometry; Quizzes 5-8; Test 2 review.',
+        coverage: 'Test 2 preparation ends with Unit 2E. Quiz 9 is displayed separately as a Unit 3 bridge and does not extend this study path unless Canvas or class announces an adjustment.',
         range: [14, 29]
     },
     {
         key: 'unit3',
+        starts: '2026-10-31T00:00:00',
+        ends: '2026-12-09T23:59:59',
         label: 'Unit 3 / Test 3',
-        dates: 'Nov 2-Dec 9',
+        dates: 'Oct 28-Dec 9',
         assessment: 'Test 3: Dec 9 at 2:10 PM',
         href: '/130Test3.html',
         title: 'Trigonometry, applications, and vectors',
         topics: '5.1; 5.2; 5.3; 5.7; 7.1; Thanksgiving break; 8.4; applications; Quizzes 10-13; review.',
+        coverage: 'Quiz 9 opens this unit as a bridge. Quiz 13 is planned as a cumulative Test 3 readiness check rather than a new-content checkpoint.',
         range: [30, 46]
     },
     {
         key: 'final',
+        starts: '2026-12-10T00:00:00',
+        ends: '2026-12-14T23:59:59',
         label: 'Final Exam Review',
         dates: 'Dec 11-Dec 14',
         assessment: 'Final Exam: Dec 14 at 1:00 PM',
@@ -408,6 +419,7 @@ const math130FallUnits = [
         secondaryLabel: 'Open Guided Final Review',
         title: 'Cumulative final exam preparation',
         topics: 'Final review day, cumulative organization, formula recall, and targeted practice.',
+        coverage: 'Cumulative retrieval begins during Units 2 and 3; Dec 11 is the final organized review rather than the first cumulative pass.',
         range: [47, 48]
     }
 ];
@@ -717,28 +729,36 @@ function getMath130NextCanvasDue(now = new Date()) {
     return math130CanvasDueDates.find(([isoDate]) => new Date(isoDate) >= now) || null;
 }
 
+function getMath130ActiveUnit(now = new Date()) {
+    return math130FallUnits.find((unit) => unit.starts && unit.ends && now >= new Date(unit.starts) && now <= new Date(unit.ends))
+        || math130FallUnits.find((unit) => unit.starts && now < new Date(unit.starts))
+        || math130FallUnits[math130FallUnits.length - 1];
+}
+
 function buildMath130DashboardFlow() {
     const section = document.createElement('section');
     section.id = 'math130-fall-2026-flow';
     section.className = 'math130-fall-flow';
     section.setAttribute('aria-labelledby', 'math130-fall-2026-flow-title');
     const nextDue = getMath130NextCanvasDue();
+    const activeUnit = getMath130ActiveUnit();
     const nextDueCopy = nextDue
         ? `<strong>Next Canvas master deadline:</strong> ${escapeHtml(nextDue[1])} - ${escapeHtml(nextDue[2])}.`
         : '<strong>All listed Fall 2026 Canvas deadlines have passed.</strong>';
     section.innerHTML = `
         <div class="math130-fall-flow__header">
-            <p class="math130-fall-flow__kicker">Fall 2026 Semester Flow</p>
-            <h2 id="math130-fall-2026-flow-title">Follow the course by assessment window.</h2>
-            <p class="math130-fall-flow__lede">Canvas supplies the master dates and times. ALEKS work is online; quizzes and tests are paper assessments in class unless announced otherwise. Coverage remains subject to Canvas and in-class instructions.</p>
+            <p class="math130-fall-flow__kicker">This week in MATH 130</p>
+            <h2 id="math130-fall-2026-flow-title">Continue with ${escapeHtml(activeUnit.label)}.</h2>
+            <p class="math130-fall-flow__lede">Use the unit sequence for the lesson deck, its targeted practice, and the next checkpoint. Canvas remains the master source for dates and any coverage adjustment.</p>
         </div>
         <div class="math130-fall-flow__notice" role="status">
-            <p class="math130-fall-flow__notice-label">Start here</p>
+            <p class="math130-fall-flow__notice-label">Next action</p>
             <p><strong>Day one is complete:</strong> the class finished the initial knowledge check and set up modular ALEKS learning accounts.</p>
             <p>${nextDueCopy}</p>
         </div>
-        <div class="math130-fall-flow__grid">
-            ${math130FallUnits.map(buildMath130UnitCard).join('')}
+        <div class="math130-fall-flow__actions">
+            <a class="math130-fall-flow__link" href="${escapeHtml(activeUnit.href)}#tab-slides">Open the current sequence</a>
+            <a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="https://canvas.liberty.edu/" target="_blank" rel="noopener noreferrer">Check Canvas</a>
         </div>
         <details>
             <summary>Show the full Fall 2026 meeting calendar</summary>
@@ -755,20 +775,22 @@ function buildMath130PageFlow(config) {
     section.id = 'math130-fall-2026-flow';
     section.className = 'math130-fall-flow math130-fall-flow--compact';
     section.setAttribute('aria-labelledby', 'math130-fall-2026-flow-title');
-    const rowList = rows.map(([, date, day, topic]) => `<li><strong>${escapeHtml(date)} (${escapeHtml(day)}):</strong> ${escapeHtml(topic)}</li>`).join('');
     section.innerHTML = `
         <div class="math130-fall-flow__header">
-            <p class="math130-fall-flow__kicker">Fall 2026 MATH 130 Flow</p>
-            <h2 id="math130-fall-2026-flow-title">${escapeHtml(config.title)} fits in ${escapeHtml(unit.label)}.</h2>
+            <p class="math130-fall-flow__kicker">Current assessment window</p>
+            <h2 id="math130-fall-2026-flow-title">${escapeHtml(unit.label)} · ${escapeHtml(unit.dates)}</h2>
             <p class="math130-fall-flow__lede"><strong>${escapeHtml(unit.dates)}:</strong> ${escapeHtml(unit.topics)} <strong>${escapeHtml(unit.assessment)}.</strong></p>
-            <p class="math130-fall-flow__lede">Dates and times follow the Canvas assignment list. Confirm quiz and test coverage in Canvas or in class.</p>
+            <p class="math130-fall-flow__lede"><strong>Coverage status — planned:</strong> ${escapeHtml(unit.coverage)} Canvas or an in-class announcement can confirm or adjust the final coverage.</p>
         </div>
-        <ul class="math130-fall-flow__mini-schedule">${rowList}</ul>
         <div class="math130-fall-flow__actions">
             <a class="math130-fall-flow__link" href="/courses/math130.html">Back to MATH 130 Dashboard</a>
             ${config.prev ? `<a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="${escapeHtml(config.prev)}">Previous</a>` : ''}
             ${config.next ? `<a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="${escapeHtml(config.next)}">Next</a>` : ''}
-        </div>`;
+        </div>
+        <details>
+            <summary>Show this assessment window's meeting schedule</summary>
+            ${buildMath130ScheduleTable(rows)}
+        </details>`;
     return section;
 }
 
