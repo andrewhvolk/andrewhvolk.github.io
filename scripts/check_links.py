@@ -16,7 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 HTML_FILES = [
     path
     for path in ROOT.rglob("*.html")
-    if ".git" not in path.parts and not any(part.startswith("_") for part in path.parts)
+    if ".git" not in path.parts
+    and "node_modules" not in path.parts
+    and not any(part.startswith("_") for part in path.parts)
 ]
 ATTR_RE = re.compile(r"""(?:href|src)=["']([^"']+)["']""", re.IGNORECASE)
 EXTERNAL_PREFIXES = (

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math 130 Final Exam Blueprint Practice Lab</title>
     <link rel="stylesheet" href="/styles.css">
-    <script src="/theme.js" defer></script>
+    <script src="/theme.js?v=20260828-2" defer></script>
     <style>
         :root {
             --primary: #23395d;
@@ -95,6 +95,21 @@
         #app-container button:disabled { background-color: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
         #app-container .button-success { background-color: var(--success); }
         #app-container .button-success:hover:not(:disabled) { background-color: #166534; box-shadow: 0 8px 20px rgba(21, 128, 61, 0.25); }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 12px 18px;
+            border: 2px solid var(--secondary);
+            border-radius: 10px;
+            color: var(--secondary);
+            font-weight: 800;
+            text-decoration: none;
+            text-align: center;
+        }
+        .resource-link:hover, .resource-link:focus-visible { background: var(--soft-blue); outline: 3px solid rgba(37, 99, 235, 0.22); outline-offset: 2px; }
 
         .hidden { display: none !important; }
 
@@ -404,7 +419,7 @@
     <div class="review-page-header__chips">
       <span class="review-page-header__chip">🧭 Blueprint Sequence</span>
       <span class="review-page-header__chip">🔁 Unlimited Practice</span>
-      <span class="review-page-header__chip--accent review-page-header__chip">📐 Trig + Algebra Review</span>
+      <span class="review-page-header__chip--accent review-page-header__chip">📅 Dec 14 · 1:00 PM</span>
     </div>
   </div>
 </header>
@@ -414,6 +429,7 @@
         <div class="eyebrow">Math 130 · Final Exam</div>
         <h1>Final Exam Blueprint Practice Lab</h1>
         <p class="subtle">A question-by-question Math 130 final review generator based on the current practice blueprint. Each mission uses changed parameters and gives immediate feedback. Confirm the official Fall exam coverage and formula sheet in Canvas or in class.</p>
+        <div class="answer-directions"><strong>Assessment format:</strong> The final is a paper assessment in class. Canvas supplies the master date and time: <strong>Monday, Dec 14 at 1:00 PM</strong>.</div>
         <div class="topic-list" aria-label="Practice lab topics">
             <div class="topic-pill">Exact trig values & right triangles</div>
             <div class="topic-pill">Arc length, sectors & angular speed</div>
@@ -441,6 +457,8 @@
         <div class="review-actions">
             <button type="button" onclick="startApp()">Start the Final Exam Practice</button>
             <button type="button" id="resume-button" class="hidden" onclick="resumeSavedSession()">Resume Saved Session</button>
+            <a class="resource-link" href="/math130_final_lecture.html">Open Guided Final Review</a>
+            <a class="resource-link" href="/courses/math130.html">Return to MATH 130</a>
         </div>
     </div>
 

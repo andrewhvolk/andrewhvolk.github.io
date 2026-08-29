@@ -297,74 +297,74 @@ document.addEventListener('DOMContentLoaded', () => {
 const math130FallSchedule = [
     ['Week 1', 'Aug 24', 'Mon', 'Intro; initial knowledge check and ALEKS setup complete'],
     ['Week 1', 'Aug 26', 'Wed', 'Targeted Chapter R review'],
-    ['Week 1', 'Aug 28', 'Fri', 'Chapter R review and paper practice'],
+    ['Week 1', 'Aug 28', 'Fri', 'Factor-first review, rational-expression bridge, and guided ALEKS practice'],
     ['Week 2', 'Aug 31', 'Mon', 'Chapter R review'],
-    ['Week 2', 'Sep 2', 'Wed', '1.1-1.2; Canvas due 2:10 PM: R.1-R.3, R.4-R.5, Quiz 1'],
+    ['Week 2', 'Sep 2', 'Wed', '1.1-1.2; ALEKS R.1-R.5 due; Quiz 1 on paper (Canvas master date 2:10 PM)'],
     ['Week 2', 'Sep 4', 'Fri', '1.2'],
     ['Week 3', 'Sep 7', 'Mon', '1.4'],
-    ['Week 3', 'Sep 9', 'Wed', '2.1; Canvas due 2:10 PM: R.6, 1.1/1.2/1.4, Quiz 2'],
+    ['Week 3', 'Sep 9', 'Wed', '2.1; ALEKS R.6 and 1.1/1.2/1.4 due; Quiz 2 on paper (Canvas master date 2:10 PM)'],
     ['Week 3', 'Sep 11', 'Fri', '2.2'],
     ['Week 4', 'Sep 14', 'Mon', '2.4'],
-    ['Week 4', 'Sep 16', 'Wed', '2.5; Canvas due 2:10 PM: 2.1/2.2/2.4, Quiz 3'],
+    ['Week 4', 'Sep 16', 'Wed', '2.5; ALEKS 2.1/2.2/2.4 due; Quiz 3 on paper (Canvas master date 2:10 PM)'],
     ['Week 4', 'Sep 18', 'Fri', '3.1'],
-    ['Week 5', 'Sep 21', 'Mon', 'Review; Canvas due 2:10 PM: Quiz 4'],
-    ['Week 5', 'Sep 23', 'Wed', 'Canvas due 2:10 PM: 2.5/3.1, Test 1'],
+    ['Week 5', 'Sep 21', 'Mon', 'Review; Quiz 4 on paper (Canvas master date 2:10 PM)'],
+    ['Week 5', 'Sep 23', 'Wed', 'ALEKS 2.5/3.1 due; Test 1 on paper (Canvas master date 2:10 PM)'],
     ['Week 5', 'Sep 25', 'Fri', '4.2'],
     ['Week 6', 'Sep 28', 'Mon', '4.2'],
-    ['Week 6', 'Sep 30', 'Wed', '4.3; Canvas due 2:10 PM: 4.2, Quiz 5'],
+    ['Week 6', 'Sep 30', 'Wed', '4.3; ALEKS 4.2 due; Quiz 5 on paper (Canvas master date 2:10 PM)'],
     ['Week 6', 'Oct 2', 'Fri', '4.3'],
     ['Week 7', 'Oct 5', 'Mon', 'Geometry: Polygon'],
-    ['Week 7', 'Oct 7', 'Wed', 'Geometry: Polygon; Canvas due 2:10 PM: 4.3, Quiz 6'],
+    ['Week 7', 'Oct 7', 'Wed', 'Geometry: Polygon; ALEKS 4.3 due; Quiz 6 on paper (Canvas master date 2:10 PM)'],
     ['Week 7', 'Oct 9', 'Fri', 'Geometry: Polygon'],
     ['Week 8', 'Oct 12', 'Mon', 'Geometry: Polygon'],
-    ['Week 8', 'Oct 14', 'Wed', 'Geometry: Circles; Canvas due 2:10 PM: Quiz 7'],
+    ['Week 8', 'Oct 14', 'Wed', 'Geometry: Circles; Quiz 7 on paper (Canvas master date 2:10 PM)'],
     ['Week 8', 'Oct 16', 'Fri', 'Fall Break'],
     ['Week 9', 'Oct 19', 'Mon', 'Geometry: Circles'],
-    ['Week 9', 'Oct 21', 'Wed', 'Geometry: Circles; Canvas due 2:10 PM: Quiz 8'],
+    ['Week 9', 'Oct 21', 'Wed', 'Geometry: Circles; Quiz 8 on paper (Canvas master date 2:10 PM)'],
     ['Week 9', 'Oct 23', 'Fri', 'Geometry: Circles'],
     ['Week 10', 'Oct 26', 'Mon', 'Geometry: Circles'],
-    ['Week 10', 'Oct 28', 'Wed', 'Test 2 review; Canvas due 2:10 PM: Quiz 9'],
-    ['Week 10', 'Oct 30', 'Fri', 'Canvas due 2:10 PM: Geometry, Test 2'],
+    ['Week 10', 'Oct 28', 'Wed', 'Test 2 review; Quiz 9 right-triangle-trig bridge on paper (Canvas master date 2:10 PM; confirm coverage)'],
+    ['Week 10', 'Oct 30', 'Fri', 'ALEKS Geometry due; Test 2 on paper (Canvas master date 2:10 PM)'],
     ['Week 11', 'Nov 2', 'Mon', '5.1'],
     ['Week 11', 'Nov 4', 'Wed', '5.2'],
     ['Week 11', 'Nov 6', 'Fri', '5.2'],
     ['Week 12', 'Nov 9', 'Mon', '5.3'],
-    ['Week 12', 'Nov 11', 'Wed', '5.3; Canvas due 2:10 PM: 5.1/5.2 and Quiz 10'],
+    ['Week 12', 'Nov 11', 'Wed', '5.3; ALEKS 5.1/5.2 due; Quiz 10 on paper (Canvas master date 2:10 PM)'],
     ['Week 12', 'Nov 13', 'Fri', '5.3'],
     ['Week 13', 'Nov 16', 'Mon', '5.7, 7.1'],
-    ['Week 13', 'Nov 18', 'Wed', '7.1; Canvas due 2:10 PM: 5.3/5.7, Quiz 11'],
+    ['Week 13', 'Nov 18', 'Wed', '7.1; ALEKS 5.3/5.7 due; Quiz 11 on paper (Canvas master date 2:10 PM)'],
     ['Week 13', 'Nov 20', 'Fri', '7.1'],
     ['Break', 'Nov 23', 'Mon', 'Thanksgiving Break'],
     ['Break', 'Nov 25', 'Wed', 'Thanksgiving Break'],
     ['Break', 'Nov 27', 'Fri', 'Thanksgiving Break'],
-    ['Week 14', 'Nov 30', 'Mon', '8.4; Canvas due 2:10 PM: 7.1'],
-    ['Week 14', 'Dec 2', 'Wed', '8.4; Canvas due 2:10 PM: 8.4, Quiz 12'],
+    ['Week 14', 'Nov 30', 'Mon', '8.4; ALEKS 7.1 due at 2:10 PM'],
+    ['Week 14', 'Dec 2', 'Wed', '8.4; ALEKS 8.4 due; Quiz 12 on paper (Canvas master date 2:10 PM)'],
     ['Week 14', 'Dec 4', 'Fri', 'Applications'],
-    ['Week 15', 'Dec 7', 'Mon', 'Review; Canvas due 2:10 PM: Quiz 13'],
-    ['Week 15', 'Dec 9', 'Wed', 'Canvas due 2:10 PM: Test 3'],
+    ['Week 15', 'Dec 7', 'Mon', 'Review; Quiz 13 on paper (Canvas master date 2:10 PM)'],
+    ['Week 15', 'Dec 9', 'Wed', 'Test 3 on paper (Canvas master date 2:10 PM)'],
     ['Week 15', 'Dec 11', 'Fri', 'Review'],
-    ['Finals', 'Dec 14', 'Mon', 'Canvas due 1:00 PM: Final Exam']
+    ['Finals', 'Dec 14', 'Mon', 'Final Exam on paper (Canvas master date 1:00 PM)']
 ];
 
 const math130CanvasDueDates = [
-    ['2026-09-02T14:10:00', 'Sep 2 at 2:10 PM', 'R.1-R.3, R.4-R.5, and Quiz 1'],
-    ['2026-09-09T14:10:00', 'Sep 9 at 2:10 PM', 'R.6, 1.1/1.2/1.4, and Quiz 2'],
-    ['2026-09-16T14:10:00', 'Sep 16 at 2:10 PM', '2.1/2.2/2.4 and Quiz 3'],
-    ['2026-09-21T14:10:00', 'Sep 21 at 2:10 PM', 'Quiz 4'],
-    ['2026-09-23T14:10:00', 'Sep 23 at 2:10 PM', '2.5/3.1 and Test 1'],
-    ['2026-09-30T14:10:00', 'Sep 30 at 2:10 PM', '4.2 and Quiz 5'],
-    ['2026-10-07T14:10:00', 'Oct 7 at 2:10 PM', '4.3 and Quiz 6'],
-    ['2026-10-14T14:10:00', 'Oct 14 at 2:10 PM', 'Quiz 7'],
-    ['2026-10-21T14:10:00', 'Oct 21 at 2:10 PM', 'Quiz 8'],
-    ['2026-10-28T14:10:00', 'Oct 28 at 2:10 PM', 'Quiz 9'],
-    ['2026-10-30T14:10:00', 'Oct 30 at 2:10 PM', 'Geometry and Test 2'],
-    ['2026-11-11T14:10:00', 'Nov 11 at 2:10 PM', '5.1/5.2 and Quiz 10'],
-    ['2026-11-18T14:10:00', 'Nov 18 at 2:10 PM', '5.3/5.7 and Quiz 11'],
-    ['2026-11-30T14:10:00', 'Nov 30 at 2:10 PM', '7.1'],
-    ['2026-12-02T14:10:00', 'Dec 2 at 2:10 PM', '8.4 and Quiz 12'],
-    ['2026-12-07T14:10:00', 'Dec 7 at 2:10 PM', 'Quiz 13'],
-    ['2026-12-09T14:10:00', 'Dec 9 at 2:10 PM', 'Test 3'],
-    ['2026-12-14T13:00:00', 'Dec 14 at 1:00 PM', 'Final Exam']
+    ['2026-09-02T14:10:00', 'Sep 2 at 2:10 PM', 'ALEKS R.1-R.5; Quiz 1 on paper'],
+    ['2026-09-09T14:10:00', 'Sep 9 at 2:10 PM', 'ALEKS R.6 and 1.1/1.2/1.4; Quiz 2 on paper'],
+    ['2026-09-16T14:10:00', 'Sep 16 at 2:10 PM', 'ALEKS 2.1/2.2/2.4; Quiz 3 on paper'],
+    ['2026-09-21T14:10:00', 'Sep 21 at 2:10 PM', 'Quiz 4 on paper'],
+    ['2026-09-23T14:10:00', 'Sep 23 at 2:10 PM', 'ALEKS 2.5/3.1; Test 1 on paper'],
+    ['2026-09-30T14:10:00', 'Sep 30 at 2:10 PM', 'ALEKS 4.2; Quiz 5 on paper'],
+    ['2026-10-07T14:10:00', 'Oct 7 at 2:10 PM', 'ALEKS 4.3; Quiz 6 on paper'],
+    ['2026-10-14T14:10:00', 'Oct 14 at 2:10 PM', 'Quiz 7 on paper'],
+    ['2026-10-21T14:10:00', 'Oct 21 at 2:10 PM', 'Quiz 8 on paper'],
+    ['2026-10-28T14:10:00', 'Oct 28 at 2:10 PM', 'Quiz 9 right-triangle-trig bridge on paper; confirm coverage'],
+    ['2026-10-30T14:10:00', 'Oct 30 at 2:10 PM', 'ALEKS Geometry; Test 2 on paper'],
+    ['2026-11-11T14:10:00', 'Nov 11 at 2:10 PM', 'ALEKS 5.1/5.2; Quiz 10 on paper'],
+    ['2026-11-18T14:10:00', 'Nov 18 at 2:10 PM', 'ALEKS 5.3/5.7; Quiz 11 on paper'],
+    ['2026-11-30T14:10:00', 'Nov 30 at 2:10 PM', 'ALEKS 7.1'],
+    ['2026-12-02T14:10:00', 'Dec 2 at 2:10 PM', 'ALEKS 8.4; Quiz 12 on paper'],
+    ['2026-12-07T14:10:00', 'Dec 7 at 2:10 PM', 'Quiz 13 on paper'],
+    ['2026-12-09T14:10:00', 'Dec 9 at 2:10 PM', 'Test 3 on paper'],
+    ['2026-12-14T13:00:00', 'Dec 14 at 1:00 PM', 'Final Exam on paper']
 ];
 
 const math130FallUnits = [
@@ -372,7 +372,7 @@ const math130FallUnits = [
         key: 'unit1',
         label: 'Unit 1 / Test 1',
         dates: 'Aug 24-Sep 23',
-        assessment: 'Test 1: Sep 23',
+        assessment: 'Test 1: Sep 23 at 2:10 PM',
         href: '/130Test1.html',
         title: 'Foundations, algebra, functions, and coordinate skills',
         topics: 'Intro; Chapter R review; 1.1-1.2; 1.4; 2.1; 2.2; 2.4; 2.5; 3.1; Quizzes 1-4; review.',
@@ -382,17 +382,17 @@ const math130FallUnits = [
         key: 'unit2',
         label: 'Unit 2 / Test 2',
         dates: 'Sep 25-Oct 30',
-        assessment: 'Test 2: Oct 30',
+        assessment: 'Test 2: Oct 30 at 2:10 PM',
         href: '/130Test2.html',
         title: 'Interest, logarithms, polygons, and circles',
-        topics: '4.2; 4.3; polygon geometry; circle geometry; Quizzes 5-9; review.',
+        topics: '4.2; 4.3; polygon geometry; circle geometry; Quizzes 5-8; Quiz 9 bridge; review.',
         range: [14, 29]
     },
     {
         key: 'unit3',
         label: 'Unit 3 / Test 3',
         dates: 'Nov 2-Dec 9',
-        assessment: 'Test 3: Dec 9',
+        assessment: 'Test 3: Dec 9 at 2:10 PM',
         href: '/130Test3.html',
         title: 'Trigonometry, applications, and vectors',
         topics: '5.1; 5.2; 5.3; 5.7; 7.1; Thanksgiving break; 8.4; applications; Quizzes 10-13; review.',
@@ -402,8 +402,10 @@ const math130FallUnits = [
         key: 'final',
         label: 'Final Exam Review',
         dates: 'Dec 11-Dec 14',
-        assessment: 'Final Exam: Dec 14',
+        assessment: 'Final Exam: Dec 14 at 1:00 PM',
         href: '/130Test4.html',
+        secondaryHref: '/math130_final_lecture.html',
+        secondaryLabel: 'Open Guided Final Review',
         title: 'Cumulative final exam preparation',
         topics: 'Final review day, cumulative organization, formula recall, and targeted practice.',
         range: [47, 48]
@@ -412,9 +414,9 @@ const math130FallUnits = [
 
 const math130FallPageMap = {
     '/courses/math130.html': { type: 'dashboard', key: 'dashboard', title: 'MATH 130 Dashboard' },
-    '/130Test1.html': { type: 'unit', key: 'unit1', title: 'Test 1 Study Guide', prev: '/courses/math130.html', next: '/130Test2.html' },
+    '/130Test1.html': { type: 'unit', key: 'unit1', title: 'Test 1 Review', prev: '/courses/math130.html', next: '/130Test2.html' },
     '/130Test2.html': { type: 'unit', key: 'unit2', title: 'Test 2 Review', prev: '/130Test1.html', next: '/130Test3.html' },
-    '/130Test3.html': { type: 'unit', key: 'unit3', title: 'Test 3 Study Guide', prev: '/130Test2.html', next: '/130Test4.html' },
+    '/130Test3.html': { type: 'unit', key: 'unit3', title: 'Test 3 Review', prev: '/130Test2.html', next: '/130Test4.html' },
     '/130Test4.html': { type: 'unit', key: 'final', title: 'Final Exam Practice Lab', prev: '/130Test3.html', next: '/math130_final_lecture.html', finalPage: true },
     '/130Q10.html': { type: 'support', key: 'unit3', title: 'Quiz 10 Notes', prev: '/130Test3.html', next: '/130quiz10.html' },
     '/130quiz10.html': { type: 'support', key: 'unit3', title: 'Quiz 10 Practice', prev: '/130Q10.html', next: '/130Test3.html' },
@@ -690,13 +692,14 @@ function buildMath130UnitCard(unit) {
             <p class="math130-fall-flow__assessment">${escapeHtml(unit.assessment)}</p>
             <p class="math130-fall-flow__topics">${escapeHtml(unit.topics)}</p>
             <a class="math130-fall-flow__link" href="${escapeHtml(unit.href)}">Open ${escapeHtml(unit.label)}</a>
+            ${unit.secondaryHref ? `<a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="${escapeHtml(unit.secondaryHref)}">${escapeHtml(unit.secondaryLabel)}</a>` : ''}
         </article>`;
 }
 
 function buildMath130ScheduleTable(rows = math130FallSchedule) {
     const body = rows.map(([week, date, day, topic]) => {
         const quiz = /Quiz/.test(topic);
-        const majorAssessment = /Canvas due.*(?:Test [123]|Final Exam)/.test(topic);
+        const majorAssessment = /(?:Test [123]|Final Exam) on paper/.test(topic);
         const assessment = quiz || majorAssessment;
         const breakRow = /Break/.test(topic);
         return `<tr data-assessment="${assessment ? 'true' : 'false'}" data-quiz="${quiz ? 'true' : 'false'}" data-major-assessment="${majorAssessment ? 'true' : 'false'}" data-break="${breakRow ? 'true' : 'false'}"><td>${escapeHtml(week)}</td><td>${escapeHtml(date)}</td><td>${escapeHtml(day)}</td><td>${escapeHtml(topic)}</td></tr>`;
@@ -727,7 +730,7 @@ function buildMath130DashboardFlow() {
         <div class="math130-fall-flow__header">
             <p class="math130-fall-flow__kicker">Fall 2026 Semester Flow</p>
             <h2 id="math130-fall-2026-flow-title">Follow the course by assessment window.</h2>
-            <p class="math130-fall-flow__lede">Canvas supplies the master due dates and times. Quiz and test coverage remains subject to the current Canvas instructions and in-class announcements.</p>
+            <p class="math130-fall-flow__lede">Canvas supplies the master dates and times. ALEKS work is online; quizzes and tests are paper assessments in class unless announced otherwise. Coverage remains subject to Canvas and in-class instructions.</p>
         </div>
         <div class="math130-fall-flow__notice" role="status">
             <p class="math130-fall-flow__notice-label">Start here</p>

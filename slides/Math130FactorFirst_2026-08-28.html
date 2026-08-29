@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATH 130 — Factor First | August 28, 2026</title>
+  <style>
+    :root {
+      --navy-950: #041b3d;
+      --navy-900: #06295b;
+      --navy-800: #123c75;
+      --navy-700: #2f5790;
+      --gold: #d1ad5c;
+      --gold-soft: #f7edcf;
+      --paper: #fbfcff;
+      --panel: #f0f3f8;
+      --ink: #182235;
+      --muted: #657085;
+      --green: #138a66;
+      --red: #c2413d;
+      --blue: #2375bd;
+      --shadow: 0 22px 70px rgba(4, 27, 61, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--navy-950);
+      color: var(--ink);
+      font-family: Inter, Aptos, "Segoe UI", Arial, sans-serif;
+    }
+
+    button, a { font: inherit; }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: var(--paper);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: clamp(1rem, 2.4vh, 2rem);
+      padding: clamp(2.2rem, 5vw, 5.5rem) clamp(2.2rem, 6vw, 7rem) clamp(3.8rem, 6vh, 5rem);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateX(2%);
+      transition: opacity 180ms ease, transform 180ms ease;
+      background: var(--paper);
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    .slide.navy {
+      color: white;
+      background:
+        radial-gradient(circle at 86% 12%, rgba(209, 173, 92, 0.18), transparent 27%),
+        linear-gradient(145deg, var(--navy-950), var(--navy-900));
+    }
+
+    .slide.gold-wash {
+      background:
+        linear-gradient(130deg, rgba(247, 237, 207, 0.82), rgba(251, 252, 255, 0.94) 44%),
+        var(--paper);
+    }
+
+    .eyebrow {
+      margin: 0 0 0.55rem;
+      color: var(--navy-700);
+      font-size: clamp(0.85rem, 1.2vw, 1.15rem);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .navy .eyebrow { color: var(--gold); }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2 {
+      margin-bottom: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--navy-900);
+      letter-spacing: -0.035em;
+    }
+
+    .navy h1, .navy h2, .navy h3 { color: white; }
+
+    h1 { font-size: clamp(3.4rem, 7vw, 7.2rem); line-height: 0.95; }
+    h2 { font-size: clamp(2.7rem, 5.1vw, 5.3rem); line-height: 1; }
+    h3 { margin-bottom: 0.5rem; font-size: clamp(1.35rem, 2.1vw, 2.2rem); }
+
+    .subtitle {
+      max-width: 52rem;
+      margin: 1.3rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1.25rem, 2vw, 2rem);
+      line-height: 1.45;
+    }
+
+    .navy .subtitle { color: rgba(255,255,255,0.82); }
+
+    .slide-body {
+      display: flex;
+      min-height: 0;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .center { text-align: center; align-items: center; }
+    .max-70 { max-width: 70rem; margin-inline: auto; }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: clamp(1rem, 2vw, 2rem);
+      width: 100%;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      padding: clamp(1.2rem, 2.5vw, 2.5rem);
+      border: 1px solid #dbe2ec;
+      border-radius: 1.25rem;
+      background: white;
+      box-shadow: 0 12px 32px rgba(4, 27, 61, 0.08);
+    }
+
+    .navy .card {
+      border-color: rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.09);
+      color: white;
+      box-shadow: none;
+    }
+
+    .card.gold { border-color: #e2c77f; background: var(--gold-soft); }
+    .card.blue { border-color: #bdd7ef; background: #eef7ff; }
+    .card.green { border-color: #a8dccd; background: #edf9f5; }
+
+    .number {
+      display: inline-grid;
+      width: 2.4em;
+      height: 2.4em;
+      margin-bottom: 0.8rem;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--navy-900);
+      color: white;
+      font-weight: 900;
+    }
+
+    .agenda-card p, .lane p, .card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.5vw, 1.45rem);
+      line-height: 1.45;
+    }
+
+    .navy .card p { color: rgba(255,255,255,0.82); }
+
+    .math {
+      font-family: "Cambria Math", Cambria, Georgia, serif;
+      font-size: clamp(2.5rem, 5vw, 5.3rem);
+      line-height: 1.15;
+      letter-spacing: 0.015em;
+    }
+
+    .math.medium { font-size: clamp(2rem, 3.8vw, 4.2rem); }
+    .math.small { font-size: clamp(1.45rem, 2.7vw, 3rem); }
+
+    .formula-box {
+      display: grid;
+      min-height: 7.5rem;
+      padding: clamp(1rem, 2vw, 2rem);
+      place-items: center;
+      border-radius: 1.2rem;
+      background: var(--navy-900);
+      color: white;
+      text-align: center;
+    }
+
+    .formula-box.gold { background: var(--gold); color: var(--navy-950); }
+
+    .question-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .question-meta {
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      color: var(--navy-900);
+      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.8rem, 1.5vw, 1.4rem);
+      margin-top: clamp(1.1rem, 2.2vh, 2rem);
+    }
+
+    .choice {
+      display: grid;
+      min-height: clamp(5rem, 11vh, 8rem);
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.3rem;
+      border: 2px solid #d8e0ea;
+      border-radius: 1.1rem;
+      background: white;
+      font-size: clamp(1.2rem, 2vw, 2rem);
+    }
+
+    .choice-letter {
+      display: grid;
+      width: 2.25em;
+      height: 2.25em;
+      place-items: center;
+      border-radius: 0.7rem;
+      background: var(--navy-900);
+      color: white;
+      font-weight: 900;
+    }
+
+    .answer-callout {
+      margin-top: 1.3rem;
+      padding: 1rem 1.3rem;
+      border-left: 0.45rem solid var(--green);
+      border-radius: 0.75rem;
+      background: #eaf8f3;
+      color: #075943;
+      font-size: clamp(1.1rem, 1.65vw, 1.55rem);
+      font-weight: 750;
+    }
+
+    .reveal {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(0.5rem);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .slide.show-answer .reveal {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .steps {
+      display: grid;
+      gap: 0.8rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 0.9rem;
+      color: var(--ink);
+      font-size: clamp(1.15rem, 1.8vw, 1.75rem);
+      line-height: 1.35;
+    }
+
+    .navy .steps li { color: white; }
+
+    .steps strong {
+      display: grid;
+      width: 2.15em;
+      height: 2.15em;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--navy-950);
+    }
+
+    .mantra {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.7rem, 1.8vw, 1.5rem);
+      margin: 2rem auto 0;
+    }
+
+    .mantra span {
+      padding: 0.8rem 1.2rem;
+      border-radius: 0.9rem;
+      background: white;
+      color: var(--navy-900);
+      font-size: clamp(1.2rem, 2vw, 2rem);
+      font-weight: 850;
+      box-shadow: var(--shadow);
+    }
+
+    .mantra b { color: var(--gold); font-size: 2rem; }
+
+    .route-buttons, .slide-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1.25rem;
+    }
+
+    .action-button {
+      min-height: 3.2rem;
+      padding: 0.75rem 1.1rem;
+      border: 0;
+      border-radius: 0.8rem;
+      background: var(--navy-900);
+      color: white;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .action-button.secondary { border: 2px solid var(--navy-900); background: transparent; color: var(--navy-900); }
+    .navy .action-button.secondary { border-color: white; color: white; }
+    .action-button:hover, .action-button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    .timer {
+      display: grid;
+      gap: 0.9rem;
+      align-items: center;
+      justify-items: center;
+      margin-top: 1rem;
+    }
+
+    .timer-display {
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(4.5rem, 10vw, 10rem);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      color: var(--navy-900);
+    }
+
+    .timer.running .timer-display { color: var(--green); }
+    .timer.expired .timer-display { color: var(--red); }
+
+    .timer-controls { display: flex; gap: 0.65rem; }
+
+    .lane {
+      display: flex;
+      min-height: 17rem;
+      flex-direction: column;
+      padding: 1.5rem;
+      border-top: 0.55rem solid var(--navy-900);
+      border-radius: 1.1rem;
+      background: white;
+      box-shadow: 0 12px 30px rgba(4, 27, 61, 0.1);
+    }
+
+    .lane:nth-child(2) { border-top-color: var(--gold); }
+    .lane:nth-child(3) { border-top-color: var(--green); }
+    .lane h3 { color: var(--navy-900); }
+    .lane .finish { margin-top: auto; padding-top: 0.8rem; font-weight: 850; color: var(--navy-800); }
+
+    .slide.workshop {
+      gap: 0.55rem;
+      padding-top: clamp(1.5rem, 3vw, 2.8rem);
+    }
+
+    .workshop h2 { font-size: clamp(2.4rem, 4.2vw, 4.35rem); }
+    .workshop .slide-body { justify-content: flex-start; }
+    .workshop .grid-3 { gap: clamp(0.75rem, 1.4vw, 1.25rem); }
+    .workshop .lane { min-height: 0; padding: 1rem 1.25rem; }
+    .workshop .lane h3 { font-size: clamp(1.15rem, 1.8vw, 1.75rem); }
+    .workshop .lane p { font-size: clamp(0.92rem, 1.25vw, 1.15rem); }
+    .workshop .timer { gap: 0.35rem; margin-top: 0.45rem; }
+    .workshop .timer-display { font-size: clamp(3.5rem, 7.5vw, 7.2rem); line-height: 0.9; }
+
+    .warning {
+      padding: 0.9rem 1.1rem;
+      border-left: 0.45rem solid var(--gold);
+      border-radius: 0.65rem;
+      background: var(--gold-soft);
+      color: var(--navy-900);
+      font-size: clamp(1.1rem, 1.7vw, 1.6rem);
+      font-weight: 750;
+    }
+
+    .slide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: clamp(0.78rem, 1vw, 0.95rem);
+    }
+
+    .navy .slide-footer { color: rgba(255,255,255,0.66); }
+
+    .kbd-hint { font-weight: 750; }
+
+    .deck-controls {
+      position: fixed;
+      z-index: 30;
+      right: 1.1rem;
+      bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.42rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 0.8rem;
+      background: rgba(4, 27, 61, 0.92);
+      color: white;
+      box-shadow: 0 12px 30px rgba(4, 27, 61, 0.25);
+    }
+
+    .deck-controls button {
+      width: 2.35rem;
+      height: 2.35rem;
+      border: 0;
+      border-radius: 0.55rem;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .deck-controls button:hover, .deck-controls button:focus-visible { background: var(--navy-700); outline: 2px solid var(--gold); }
+    #slide-counter { min-width: 4.4rem; text-align: center; font-variant-numeric: tabular-nums; font-weight: 800; }
+
+    .progress-track {
+      position: fixed;
+      z-index: 31;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.35rem;
+      background: rgba(4,27,61,0.12);
+    }
+
+    #progress-bar { width: 0; height: 100%; background: var(--gold); transition: width 180ms ease; }
+
+    .speaker-notes { display: none; }
+
+    #notes-panel {
+      position: fixed;
+      z-index: 50;
+      top: 1rem;
+      right: 1rem;
+      bottom: 4.4rem;
+      display: none;
+      width: min(32rem, calc(100vw - 2rem));
+      overflow: auto;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid #d5ddea;
+      border-radius: 1rem;
+      background: rgba(255,255,255,0.97);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    #notes-panel.open { display: block; }
+    #notes-panel h3 { margin-bottom: 0.75rem; color: var(--navy-900); }
+    #notes-content { white-space: pre-line; font-size: 1rem; line-height: 1.5; }
+
+    #help-panel {
+      position: fixed;
+      z-index: 60;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(4, 27, 61, 0.72);
+    }
+
+    #help-panel.open { display: grid; }
+    .help-card { width: min(38rem, calc(100vw - 2rem)); padding: 2rem; border-radius: 1rem; background: white; box-shadow: var(--shadow); }
+    .help-card dl { display: grid; grid-template-columns: auto 1fr; gap: 0.65rem 1rem; }
+    .help-card dt { font-weight: 900; color: var(--navy-900); }
+    .help-card dd { margin: 0; }
+
+    .appendix-tag {
+      display: inline-block;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      color: var(--navy-900);
+      font-weight: 850;
+    }
+
+    @media (max-width: 850px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .grid-2, .choices { grid-template-columns: 1fr; }
+      .slide { overflow-y: auto; padding-bottom: 5.5rem; }
+      .lane { min-height: auto; }
+      .choice { min-height: 4rem; }
+    }
+
+    @media print {
+      html, body { overflow: visible; background: white; }
+      .deck { height: auto; }
+      .slide { position: relative; display: grid; min-height: 100vh; opacity: 1; visibility: visible; transform: none; page-break-after: always; }
+      .deck-controls, .progress-track, #notes-panel, #help-panel { display: none !important; }
+      .reveal { opacity: 1; visibility: visible; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck" aria-live="polite">
+    <section class="slide navy active" data-title="Factor First">
+      <header>
+        <p class="eyebrow">MATH 130 · Friday, August 28, 2026</p>
+        <h1>Factor First</h1>
+        <p class="subtitle">A focused bridge from algebra review to rational expressions.</p>
+      </header>
+      <div class="slide-body center">
+        <div class="mantra">
+          <span>Diagnose</span><b>→</b><span>Factor</span><b>→</b><span>Apply</span><b>→</b><span>Practice</span>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>50-minute guided session</span><span class="kbd-hint">Press → to begin · ? for controls</span></footer>
+      <aside class="speaker-notes">0:00–0:01
+Welcome students as they open Top Hat. Do not discuss answers or ALEKS percentages. Frame today as a fast diagnostic followed by practice at the right level.</aside>
+    </section>
+
+    <section class="slide" data-title="Today’s flow">
+      <header><p class="eyebrow">Today’s flow</p><h2>One chain. Five moves.</h2></header>
+      <div class="slide-body">
+        <div class="grid-4">
+          <article class="card agenda-card"><span class="number">1</span><h3>Entrance check</h3><p>Three private responses in Top Hat.</p></article>
+          <article class="card agenda-card"><span class="number">2</span><h3>Factor toolbox</h3><p>GCF, squares, and simple trinomials.</p></article>
+          <article class="card agenda-card"><span class="number">3</span><h3>Rational bridge</h3><p>Restrictions and safe cancellation.</p></article>
+          <article class="card agenda-card"><span class="number">4</span><h3>Practice + exit</h3><p>Work your lane and show one result.</p></article>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>MATH 130 · Factor First</span><span>Individual thinking before partner talk</span></footer>
+      <aside class="speaker-notes">0:01–0:02
+Preview the structure. Emphasize that the entrance check is low-stakes and used only to route today’s work.</aside>
+    </section>
+
+    <section class="slide gold-wash" data-title="Entrance check setup">
+      <header><p class="eyebrow">Top Hat · Entrance check</p><h2>Join now. Work alone.</h2></header>
+      <div class="slide-body center">
+        <div class="grid-3 max-70">
+          <article class="card"><span class="number">1</span><h3>Open Top Hat</h3><p>Choose MATH 130 and today’s Entrance Check.</p></article>
+          <article class="card"><span class="number">2</span><h3>Use paper</h3><p>Write enough work to diagnose your first step.</p></article>
+          <article class="card"><span class="number">3</span><h3>Submit privately</h3><p>No leaderboard. We will use the class pattern.</p></article>
+        </div>
+        <p class="warning" style="margin-top:1.5rem">Do not use notes, ALEKS, or a calculator.</p>
+      </div>
+      <footer class="slide-footer"><span>Three questions · about three minutes</span><span>Instructor: launch teacher-paced set</span></footer>
+      <aside class="speaker-notes">0:02–0:03
+Top Hat setup: teacher-paced, participation/diagnostic only, hide the response distribution until each question closes. Use the exact prompts and choices on the next three slides.</aside>
+    </section>
+
+    <section class="slide" data-title="Entrance question 1">
+      <header class="question-head"><div><p class="eyebrow">Entrance check · 1 of 3</p><h2>Positive exponents only</h2></div><span class="question-meta">45 seconds</span></header>
+      <div class="slide-body">
+        <div class="formula-box"><span class="math">x<sup>5</sup> ÷ x<sup>8</sup></span></div>
+        <div class="choices">
+          <div class="choice"><span class="choice-letter">A</span><span class="math small">x<sup>3</sup></span></div>
+          <div class="choice"><span class="choice-letter">B</span><span class="math small">1/x<sup>3</sup></span></div>
+          <div class="choice"><span class="choice-letter">C</span><span class="math small">x<sup>13</sup></span></div>
+          <div class="choice"><span class="choice-letter">D</span><span class="math small">1/x<sup>13</sup></span></div>
+        </div>
+        <div class="answer-callout reveal"><strong>Answer: B.</strong> Subtract exponents: 5 − 8 = −3, then move to the denominator.</div>
+      </div>
+      <footer class="slide-footer"><span>Submit one choice in Top Hat</span><span>R = reveal after poll closes</span></footer>
+      <aside class="speaker-notes">0:03–0:04
+Correct answer: B. Close after 45 seconds. Do not reteach yet; reveal, state “subtract, then flip,” and advance. Route trigger: fewer than 70% correct → use Appendix A later.</aside>
+    </section>
+
+    <section class="slide" data-title="Entrance question 2">
+      <header class="question-head"><div><p class="eyebrow">Entrance check · 2 of 3</p><h2>Interval notation</h2></div><span class="question-meta">60 seconds</span></header>
+      <div class="slide-body">
+        <div class="formula-box"><span class="math medium">{ x | −2 &lt; x ≤ 4 }</span></div>
+        <div class="choices">
+          <div class="choice"><span class="choice-letter">A</span><span class="math small">[−2, 4]</span></div>
+          <div class="choice"><span class="choice-letter">B</span><span class="math small">(−2, 4]</span></div>
+          <div class="choice"><span class="choice-letter">C</span><span class="math small">[−2, 4)</span></div>
+          <div class="choice"><span class="choice-letter">D</span><span class="math small">(−2, 4)</span></div>
+        </div>
+        <div class="answer-callout reveal"><strong>Answer: B.</strong> −2 is excluded; 4 is included.</div>
+      </div>
+      <footer class="slide-footer"><span>Translate each endpoint separately</span><span>R = reveal after poll closes</span></footer>
+      <aside class="speaker-notes">0:04–0:05
+Correct answer: B. Close after 60 seconds. Route trigger: fewer than 70% correct → use Appendix B later.</aside>
+    </section>
+
+    <section class="slide" data-title="Entrance question 3">
+      <header class="question-head"><div><p class="eyebrow">Entrance check · 3 of 3</p><h2>Factor completely</h2></div><span class="question-meta">90 seconds</span></header>
+      <div class="slide-body">
+        <div class="formula-box"><span class="math">6x<sup>3</sup> − 9x<sup>2</sup></span></div>
+        <div class="choices">
+          <div class="choice"><span class="choice-letter">A</span><span class="math small">3x<sup>2</sup>(2x − 3)</span></div>
+          <div class="choice"><span class="choice-letter">B</span><span class="math small">3x(2x<sup>2</sup> − 3x)</span></div>
+          <div class="choice"><span class="choice-letter">C</span><span class="math small">x<sup>2</sup>(6x − 9)</span></div>
+          <div class="choice"><span class="choice-letter">D</span><span class="math small">3x<sup>2</sup>(2x + 3)</span></div>
+        </div>
+        <div class="answer-callout reveal"><strong>Answer: A.</strong> It removes the full numerical and variable GCF.</div>
+      </div>
+      <footer class="slide-footer"><span>“Completely” matters</span><span>R = reveal after poll closes</span></footer>
+      <aside class="speaker-notes">0:05–0:07
+Correct answer: A. B and C are equivalent but not completely factored; D has a sign error. Route trigger: fewer than 50% correct → omit the LCD extension and remain on factor types.</aside>
+    </section>
+
+    <section class="slide navy" data-title="Today’s route">
+      <header><p class="eyebrow">Entrance results · 37 responses</p><h2>Today’s route: factor first</h2></header>
+      <div class="slide-body">
+        <div class="grid-3">
+          <article class="card"><h3>Quotient exponents · 81%</h3><p><strong>30 of 37 correct.</strong><br>Give one-sentence feedback; no repair.</p></article>
+          <article class="card"><h3>Interval notation · 89%</h3><p><strong>33 of 37 correct.</strong><br>No repair; Appendix B stays closed.</p></article>
+          <article class="card"><h3>Complete factoring · 73%</h3><p><strong>27 of 37 correct.</strong><br>Proceed, with extra attention to the full GCF.</p><div class="slide-actions"><button class="action-button" data-goto="8">Start the lesson</button></div></article>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>Ten respondents still need support with complete factoring</span><span>Keep the LCD extension if pacing holds</span></footer>
+      <aside class="speaker-notes">0:07–0:08
+Actual results: quotient exponents 30/37 (81%), interval notation 33/37 (89%), and complete factoring 27/37 (73%). Skip both appendix repairs. Spend no more than 30 seconds correcting each of the first two questions. On factoring, name the distinction between an equivalent expression and a completely factored expression, then begin the GCF lesson. Preserve the optional LCD extension unless the factor practice runs long.</aside>
+    </section>
+
+    <section class="slide navy" data-title="Factor-first chain">
+      <header><p class="eyebrow">Core target</p><h2>Every rational expression begins here.</h2></header>
+      <div class="slide-body center">
+        <div class="mantra">
+          <span>Factor completely</span><b>→</b><span>State restrictions</span><b>→</b><span>Cancel factors</span><b>→</b><span>Find the LCD</span>
+        </div>
+        <p class="subtitle" style="margin-top:2.5rem">We will practice the first three moves, then add the fourth if the class is ready.</p>
+      </div>
+      <footer class="slide-footer"><span>Write the chain at the top of your paper</span><span>Factor first</span></footer>
+      <aside class="speaker-notes">0:08–0:09
+Have students copy the four-move chain. State the non-negotiable language: “We cancel factors, not terms.”</aside>
+    </section>
+
+    <section class="slide" data-title="GCF worked example">
+      <header><p class="eyebrow">Factor type 1</p><h2>Start with the GCF</h2></header>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <ol class="steps"><li><strong>1</strong><span>Find the GCF of every term.</span></li><li><strong>2</strong><span>Factor it out.</span></li><li><strong>3</strong><span>Check by distributing.</span></li></ol>
+          </div>
+          <div>
+            <div class="formula-box"><span class="math medium">6x<sup>3</sup> − 9x<sup>2</sup></span></div>
+            <div class="formula-box gold reveal" style="margin-top:1rem"><span class="math medium">3x<sup>2</sup>(2x − 3)</span></div>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>Ask: “What divides every term?”</span><span>R = reveal</span></footer>
+      <aside class="speaker-notes">0:09–0:12
+Model the coefficient GCF and the minimum variable exponent. Reveal only after students say both pieces. Check by distributing back.</aside>
+    </section>
+
+    <section class="slide gold-wash" data-title="GCF student try">
+      <header><p class="eyebrow">Your turn · 90 seconds</p><h2>Factor completely</h2></header>
+      <div class="slide-body center">
+        <div class="formula-box max-70" style="width:100%"><span class="math">8x<sup>4</sup> − 12x<sup>3</sup></span></div>
+        <p class="subtitle">Work alone for 45 seconds. Then compare one line with a partner.</p>
+        <div class="answer-callout reveal"><strong>4x<sup>3</sup>(2x − 3)</strong>. Distribute to verify.</div>
+      </div>
+      <footer class="slide-footer"><span>Write the GCF before the parentheses</span><span>R = reveal</span></footer>
+      <aside class="speaker-notes">0:12–0:14
+Scan for students factoring only 2x or 4x. Ask a student to justify why x³ is the largest common variable factor.</aside>
+    </section>
+
+    <section class="slide" data-title="Difference of squares">
+      <header><p class="eyebrow">Factor type 2</p><h2>Difference of squares</h2></header>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card blue">
+            <h3>Pattern</h3>
+            <div class="formula-box"><span class="math medium">a<sup>2</sup> − b<sup>2</sup><br>= (a − b)(a + b)</span></div>
+            <p style="margin-top:1rem">Two perfect squares with subtraction.</p>
+          </div>
+          <div class="card">
+            <h3>Try it</h3>
+            <div class="formula-box"><span class="math medium">9x<sup>2</sup> − 16</span></div>
+            <div class="answer-callout reveal"><strong>(3x − 4)(3x + 4)</strong></div>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>A sum of squares does not use this pattern</span><span>R = reveal</span></footer>
+      <aside class="speaker-notes">0:14–0:17
+Ask students to name a and b before factoring. Contrast briefly with 9x² + 16, which does not factor over the reals by this pattern.</aside>
+    </section>
+
+    <section class="slide navy" data-title="Simple trinomial">
+      <header><p class="eyebrow">Factor type 3</p><h2>For x² + bx + c</h2></header>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Find p and q</h3>
+            <p class="math small">p · q = c</p>
+            <p class="math small">p + q = b</p>
+            <p class="math small">(x + p)(x + q)</p>
+          </div>
+          <div class="card">
+            <h3>Try it</h3>
+            <div class="formula-box gold"><span class="math medium">x<sup>2</sup> + 9x + 20</span></div>
+            <div class="answer-callout reveal"><strong>(x + 4)(x + 5)</strong></div>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>Multiply to 20 · add to 9</span><span>R = reveal</span></footer>
+      <aside class="speaker-notes">0:17–0:21
+Give 45 seconds before hints. Do not introduce a&gt;1 or full grouping unless entrance Question 3 was at least 70% correct and the class finishes early.</aside>
+    </section>
+
+    <section class="slide navy" data-title="Rational expression bridge">
+      <header><p class="eyebrow">Apply the factor toolbox</p><h2>Restrictions survive cancellation</h2></header>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <ol class="steps"><li><strong>1</strong><span>Factor numerator.</span></li><li><strong>2</strong><span>Factor denominator.</span></li><li><strong>3</strong><span>Write original restrictions.</span></li><li><strong>4</strong><span>Cancel common factors.</span></li></ol>
+          </div>
+          <div>
+            <div class="formula-box gold"><span class="math medium">(x<sup>2</sup> − 9)/(x<sup>2</sup> + 6x + 9)</span></div>
+            <div class="formula-box reveal" style="margin-top:0.9rem"><span class="math small">(x+3)(x−3) / [(x+3)(x+3)]<br><br>= (x−3)/(x+3), &nbsp; x ≠ −3</span></div>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>Cancel factors, never terms</span><span>R = reveal</span></footer>
+      <aside class="speaker-notes">0:21–0:25
+Before revealing the factorization, have students identify both factor types. Write x≠−3 before canceling. Emphasize that the excluded value comes from the original denominator.</aside>
+    </section>
+
+    <section class="slide gold-wash" data-title="Rational expression student try">
+      <header><p class="eyebrow">Your turn · 3 minutes</p><h2>Simplify and state restrictions</h2></header>
+      <div class="slide-body center">
+        <div class="formula-box max-70" style="width:100%"><span class="math medium">(x<sup>2</sup> − 25)/(x<sup>2</sup> + 2x − 15)</span></div>
+        <p class="subtitle">Write the restriction before you cancel.</p>
+        <div class="answer-callout reveal"><strong>(x − 5)/(x − 3)</strong>, with <strong>x ≠ −5, 3</strong>.</div>
+      </div>
+      <footer class="slide-footer"><span>Numerator: difference of squares</span><span>R = reveal</span></footer>
+      <aside class="speaker-notes">0:25–0:28
+Expected factors: (x−5)(x+5) / [(x+5)(x−3)]. Look for the common error of reporting only x≠3 after cancellation.</aside>
+    </section>
+
+    <section class="slide workshop" data-title="Workshop lanes">
+      <header><p class="eyebrow">Guided workshop · 13 minutes</p><h2>Work the lane ALEKS gives you</h2></header>
+      <div class="slide-body">
+        <div class="grid-3">
+          <article class="lane"><h3>Lane A · Repair</h3><p>Negative exponents → interval notation → union/intersection.</p><p class="finish">Finish one current topic or write one precise question.</p></article>
+          <article class="lane"><h3>Lane B · Core</h3><p>GCF → simple factoring → restrictions → simplify/multiply rational expressions.</p><p class="finish">Show a fully factored line.</p></article>
+          <article class="lane"><h3>Lane C · Extend</h3><p>LCD with shared factors → add unlike rational expressions.</p><p class="finish">Explain why no factor is duplicated.</p></article>
+        </div>
+        <div class="timer" data-seconds="780">
+          <div class="timer-display" aria-live="polite">13:00</div>
+          <div class="timer-controls"><button class="action-button timer-toggle">Start</button><button class="action-button secondary timer-reset">Reset</button><a class="action-button" href="../130Test1.html#tab-topics" target="_blank" rel="noopener">Open Test 1 Topics</a></div>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>Instructor circulates first to students who have not started post-diagnostic work</span><span>T = start/pause timer</span></footer>
+      <aside class="speaker-notes">0:28–0:41
+Keep engagement indicators private. Require a completed ALEKS topic or a written work sample/question. Do not launch the Test 1 page’s random Practice Mode; it includes later coordinate and quadratic-application topics.</aside>
+    </section>
+
+    <section class="slide" data-title="Debrief">
+      <header><p class="eyebrow">Whole-class debrief · 5 minutes</p><h2>Which error cost the most?</h2></header>
+      <div class="slide-body">
+        <div class="grid-3">
+          <article class="card"><h3>Incomplete factoring</h3><p>A GCF remains inside the parentheses.</p></article>
+          <article class="card"><h3>Canceling terms</h3><p>Something separated by + or − is crossed out.</p></article>
+          <article class="card"><h3>Lost restriction</h3><p>A canceled denominator factor is forgotten.</p></article>
+        </div>
+        <div class="answer-callout reveal"><strong>Repair sentence:</strong> Factor completely first. Record restrictions from the original denominator. Cancel only complete factors.</div>
+      </div>
+      <footer class="slide-footer"><span>Use one anonymous work sample</span><span>R = reveal repair sentence</span></footer>
+      <aside class="speaker-notes">0:41–0:46
+Choose the most frequent observed error. If factoring was secure, skip quickly to the optional LCD extension on the next slide. Otherwise, reteach with one student-generated example and skip the LCD.</aside>
+    </section>
+
+    <section class="slide navy" data-title="Optional LCD extension">
+      <header><p class="eyebrow">Optional extension</p><h2>Do not duplicate a shared factor</h2></header>
+      <div class="slide-body center">
+        <div class="formula-box gold max-70" style="width:100%"><span class="math medium">1/(x<sup>2</sup> − 4) + 1/(x<sup>2</sup> + x − 6)</span></div>
+        <p class="subtitle">Factor both denominators. What is the least common denominator?</p>
+        <div class="answer-callout reveal"><strong>LCD = (x − 2)(x + 2)(x + 3)</strong><br>because both denominators already share one factor of (x − 2).</div>
+      </div>
+      <footer class="slide-footer"><span>Use only if entrance factoring was strong</span><span>R = reveal</span></footer>
+      <aside class="speaker-notes">Use within 0:41–0:46 only if factoring is secure.
+Factored denominators: (x−2)(x+2) and (x−2)(x+3). Ask why the LCD contains only one copy of x−2.</aside>
+    </section>
+
+    <section class="slide gold-wash" data-title="Exit check setup">
+      <header><p class="eyebrow">Top Hat · Exit check</p><h2>Show the complete chain</h2></header>
+      <div class="slide-body center">
+        <div class="card max-70">
+          <h3>Question 1</h3><p>Simplify and preserve every original restriction.</p>
+          <h3 style="margin-top:1.25rem">Question 2</h3><p>Identify your next-step blocker so the next class can respond.</p>
+        </div>
+      </div>
+      <footer class="slide-footer"><span>About three minutes</span><span>Launch the Top Hat Exit Check</span></footer>
+      <aside class="speaker-notes">0:46–0:47
+Launch the two-question exit set. Use Question 1 for correctness and Question 2 for planning. Hide the response distribution until Question 1 closes.</aside>
+    </section>
+
+    <section class="slide" data-title="Exit question 1">
+      <header class="question-head"><div><p class="eyebrow">Exit check · 1 of 2</p><h2>Simplify + keep restrictions</h2></div><span class="question-meta">90 seconds</span></header>
+      <div class="slide-body">
+        <div class="formula-box"><span class="math medium">(x<sup>2</sup> − 4)/(x<sup>2</sup> + x − 6)</span></div>
+        <div class="choices">
+          <div class="choice"><span class="choice-letter">A</span><span class="math small">(x+2)/(x+3), x≠−3</span></div>
+          <div class="choice"><span class="choice-letter">B</span><span class="math small">(x+2)/(x+3), x≠2,−3</span></div>
+          <div class="choice"><span class="choice-letter">C</span><span class="math small">(x−2)/(x−3), x≠2,3</span></div>
+          <div class="choice"><span class="choice-letter">D</span><span class="math small">1, x≠2,−3</span></div>
+        </div>
+        <div class="answer-callout reveal"><strong>Answer: B.</strong> The canceled factor still contributes x ≠ 2.</div>
+      </div>
+      <footer class="slide-footer"><span>Use your paper work</span><span>R = reveal after poll closes</span></footer>
+      <aside class="speaker-notes">0:47–0:49
+Correct answer: B. Suggested mastery split: 75%+ ready for LCD/addition; 50–74% needs one more factor/restriction bridge; below 50% needs a factoring intervention before rational operations.</aside>
+    </section>
+
+    <section class="slide" data-title="Exit question 2">
+      <header class="question-head"><div><p class="eyebrow">Exit check · 2 of 2</p><h2>Where is your next blocker?</h2></div><span class="question-meta">30 seconds</span></header>
+      <div class="slide-body">
+        <div class="choices">
+          <div class="choice"><span class="choice-letter">A</span><span>Choosing a factor method</span></div>
+          <div class="choice"><span class="choice-letter">B</span><span>Factoring completely</span></div>
+          <div class="choice"><span class="choice-letter">C</span><span>Finding restrictions</span></div>
+          <div class="choice"><span class="choice-letter">D</span><span>Canceling only factors</span></div>
+        </div>
+        <div class="answer-callout reveal"><strong>Optional E:</strong> I am ready for LCDs and unlike denominators.</div>
+      </div>
+      <footer class="slide-footer"><span>No correct answer · choose the first place you hesitate</span><span>R = reveal optional E</span></footer>
+      <aside class="speaker-notes">0:49–0:49:30
+This is an ungraded planning item. If Top Hat supports five choices, include E from the reveal. Otherwise use A–D and identify extension-ready students from Question 1.</aside>
+    </section>
+
+    <section class="slide navy" data-title="Next action">
+      <header><p class="eyebrow">Before Wednesday</p><h2>Finish the current review modules</h2></header>
+      <div class="slide-body center">
+        <div class="grid-3 max-70">
+          <article class="card"><h3>R.1–R.3</h3><p>Complete the assigned modular ALEKS learning.</p></article>
+          <article class="card"><h3>R.4–R.5</h3><p>Complete the assigned modular ALEKS learning.</p></article>
+          <article class="card"><h3>Quiz 1</h3><p>Canvas date: Sep. 2 at 2:10 PM. Confirm content in Canvas or class.</p></article>
+        </div>
+        <p class="subtitle" style="margin-top:2rem">When stuck, bring one written line and one precise question.</p>
+      </div>
+      <footer class="slide-footer"><span>MATH 130 · Friday complete</span><span>Stop here</span></footer>
+      <aside class="speaker-notes">0:49:30–0:50
+Close with the Canvas master deadline. Do not show the appendix unless needed. Export or note the Top Hat results for planning; do not display a public ranking.</aside>
+    </section>
+
+    <section class="slide" data-title="Appendix A — negative exponents">
+      <header><div><span class="appendix-tag">Appendix A · five-minute repair</span><p class="eyebrow" style="margin-top:1rem">Negative exponents</p><h2>Combine first. Then move.</h2></div></header>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card"><div class="formula-box"><span class="math medium">x<sup>m</sup>/x<sup>n</sup> = x<sup>m−n</sup></span></div><p style="margin-top:1rem">A negative result moves across the fraction bar.</p></div>
+          <div class="card"><h3>Try it</h3><div class="formula-box"><span class="math medium">y<sup>−3</sup>/y<sup>5</sup></span></div><div class="answer-callout reveal"><strong>y<sup>−8</sup> = 1/y<sup>8</sup></strong></div></div>
+        </div>
+        <div class="slide-actions"><button class="action-button" data-goto="8">Return to Factor First</button></div>
+      </div>
+      <footer class="slide-footer"><span>x⁻² is not −x²</span><span>R = reveal</span></footer>
+      <aside class="speaker-notes">Maximum five minutes.
+Use only when entrance Question 1 is below 70%. Have students say “subtract first, then move” and return to slide 8.</aside>
+    </section>
+
+    <section class="slide" data-title="Appendix B — intervals">
+      <header><div><span class="appendix-tag">Appendix B · five-minute repair</span><p class="eyebrow" style="margin-top:1rem">Interval notation</p><h2>Translate each endpoint</h2></div></header>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card"><h3>Open endpoint</h3><p class="math small">&lt; or &gt; → ( )</p><p>Not included.</p></div>
+          <div class="card"><h3>Closed endpoint</h3><p class="math small">≤ or ≥ → [ ]</p><p>Included.</p></div>
+        </div>
+        <div class="formula-box" style="margin-top:1rem"><span class="math medium">−3 ≤ x &lt; 7 &nbsp; → &nbsp; [−3, 7)</span></div>
+        <div class="slide-actions"><button class="action-button" data-goto="8">Return to Factor First</button></div>
+      </div>
+      <footer class="slide-footer"><span>Infinity always uses parentheses</span><span>Return to main lesson</span></footer>
+      <aside class="speaker-notes">Maximum five minutes.
+Use only when entrance Question 2 is below 70%. Ask students to translate the left endpoint, then the right endpoint, then return to slide 8.</aside>
+    </section>
+  </main>
+
+  <div class="progress-track" aria-hidden="true"><div id="progress-bar"></div></div>
+  <nav class="deck-controls" aria-label="Slide controls">
+    <button id="prev-slide" aria-label="Previous slide">←</button>
+    <span id="slide-counter">1 / 23</span>
+    <button id="next-slide" aria-label="Next slide">→</button>
+    <button id="reveal-answer" aria-label="Reveal answer">R</button>
+    <button id="toggle-notes" aria-label="Toggle presenter notes">N</button>
+    <button id="toggle-fullscreen" aria-label="Toggle fullscreen">⛶</button>
+    <button id="toggle-help" aria-label="Show keyboard help">?</button>
+  </nav>
+
+  <aside id="notes-panel" aria-label="Presenter notes"><h3 id="notes-title">Presenter notes</h3><div id="notes-content"></div></aside>
+  <div id="help-panel" role="dialog" aria-modal="true" aria-label="Keyboard controls">
+    <div class="help-card">
+      <h3>Keyboard controls</h3>
+      <dl><dt>→ / Space</dt><dd>Next slide</dd><dt>←</dt><dd>Previous slide</dd><dt>R</dt><dd>Reveal or hide answer</dd><dt>N</dt><dd>Toggle presenter notes</dd><dt>T</dt><dd>Start or pause current timer</dd><dt>F</dt><dd>Toggle fullscreen</dd><dt>Home / End</dt><dd>First / last slide</dd><dt>?</dt><dd>Open or close this help</dd></dl>
+      <button class="action-button" id="close-help">Close</button>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const counter = document.getElementById('slide-counter');
+      const progress = document.getElementById('progress-bar');
+      const notesPanel = document.getElementById('notes-panel');
+      const notesTitle = document.getElementById('notes-title');
+      const notesContent = document.getElementById('notes-content');
+      const helpPanel = document.getElementById('help-panel');
+      let index = 0;
+      let activeTimer = null;
+
+      function updateNotes() {
+        const slide = slides[index];
+        notesTitle.textContent = `Presenter notes · ${index + 1}. ${slide.dataset.title || ''}`;
+        notesContent.textContent = slide.querySelector('.speaker-notes')?.textContent.trim() || 'No notes for this slide.';
+      }
+
+      function showSlide(nextIndex, pushHash = true) {
+        const bounded = Math.max(0, Math.min(slides.length - 1, nextIndex));
+        slides[index]?.classList.remove('active');
+        index = bounded;
+        slides[index].classList.add('active');
+        counter.textContent = `${index + 1} / ${slides.length}`;
+        progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+        updateNotes();
+        if (pushHash) history.replaceState(null, '', `#${index + 1}`);
+        document.title = `${slides[index].dataset.title || 'MATH 130'} | MATH 130`;
+      }
+
+      function next() { showSlide(index + 1); }
+      function previous() { showSlide(index - 1); }
+      function toggleReveal() { slides[index].classList.toggle('show-answer'); }
+      function toggleNotes() { notesPanel.classList.toggle('open'); updateNotes(); }
+      function toggleHelp() { helpPanel.classList.toggle('open'); }
+      async function toggleFullscreen() {
+        if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
+        else await document.exitFullscreen?.();
+      }
+
+      function timerForSlide() { return slides[index].querySelector('.timer'); }
+
+      function renderTimer(timer) {
+        const display = timer.querySelector('.timer-display');
+        const remaining = Number(timer.dataset.remaining ?? timer.dataset.seconds ?? 0);
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        display.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        timer.classList.toggle('expired', remaining <= 0);
+      }
+
+      function pauseTimer(timer) {
+        if (!timer) return;
+        clearInterval(Number(timer.dataset.intervalId));
+        timer.dataset.intervalId = '';
+        timer.classList.remove('running');
+        timer.querySelector('.timer-toggle').textContent = 'Start';
+        activeTimer = null;
+      }
+
+      function toggleTimer(timer = timerForSlide()) {
+        if (!timer) return;
+        if (timer.classList.contains('running')) { pauseTimer(timer); return; }
+        if (activeTimer && activeTimer !== timer) pauseTimer(activeTimer);
+        timer.dataset.remaining ??= timer.dataset.seconds;
+        if (Number(timer.dataset.remaining) <= 0) timer.dataset.remaining = timer.dataset.seconds;
+        timer.classList.add('running');
+        timer.querySelector('.timer-toggle').textContent = 'Pause';
+        activeTimer = timer;
+        const id = setInterval(() => {
+          timer.dataset.remaining = String(Math.max(0, Number(timer.dataset.remaining) - 1));
+          renderTimer(timer);
+          if (Number(timer.dataset.remaining) <= 0) pauseTimer(timer);
+        }, 1000);
+        timer.dataset.intervalId = String(id);
+      }
+
+      function resetTimer(timer) {
+        pauseTimer(timer);
+        timer.dataset.remaining = timer.dataset.seconds;
+        renderTimer(timer);
+      }
+
+      document.getElementById('prev-slide').addEventListener('click', previous);
+      document.getElementById('next-slide').addEventListener('click', next);
+      document.getElementById('reveal-answer').addEventListener('click', toggleReveal);
+      document.getElementById('toggle-notes').addEventListener('click', toggleNotes);
+      document.getElementById('toggle-fullscreen').addEventListener('click', toggleFullscreen);
+      document.getElementById('toggle-help').addEventListener('click', toggleHelp);
+      document.getElementById('close-help').addEventListener('click', toggleHelp);
+      helpPanel.addEventListener('click', event => { if (event.target === helpPanel) toggleHelp(); });
+
+      document.querySelectorAll('[data-goto]').forEach(button => button.addEventListener('click', () => showSlide(Number(button.dataset.goto) - 1)));
+      document.querySelectorAll('.timer').forEach(timer => {
+        timer.dataset.remaining = timer.dataset.seconds;
+        renderTimer(timer);
+        timer.querySelector('.timer-toggle').addEventListener('click', () => toggleTimer(timer));
+        timer.querySelector('.timer-reset').addEventListener('click', () => resetTimer(timer));
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.target.matches('button, a, input, textarea, select')) return;
+        if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') { event.preventDefault(); next(); }
+        else if (event.key === 'ArrowLeft' || event.key === 'PageUp') { event.preventDefault(); previous(); }
+        else if (event.key === 'Home') { event.preventDefault(); showSlide(0); }
+        else if (event.key === 'End') { event.preventDefault(); showSlide(slides.length - 1); }
+        else if (event.key.toLowerCase() === 'r') toggleReveal();
+        else if (event.key.toLowerCase() === 'n') toggleNotes();
+        else if (event.key.toLowerCase() === 'f') toggleFullscreen();
+        else if (event.key.toLowerCase() === 't') toggleTimer();
+        else if (event.key === '?' || (event.shiftKey && event.key === '/')) toggleHelp();
+        else if (event.key === 'Escape' && helpPanel.classList.contains('open')) toggleHelp();
+      });
+
+      const initial = Number(location.hash.replace('#',''));
+      showSlide(Number.isInteger(initial) && initial >= 1 && initial <= slides.length ? initial - 1 : 0, false);
+    })();
+  </script>
+</body>
+</html>

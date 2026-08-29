@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/styles.css">
-<script src="theme.js"></script>
-<title>Math 130 – Test 1 Study Guide</title>
+<script src="theme.js?v=20260828-2"></script>
+<title>Math 130 — Test 1 Review (Fall 2026)</title>
 <script id="katex-js-cdn" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <!-- Page-specific external CSS: KaTeX styles are required for math formula rendering. -->
 <link id="katex-css-cdn" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -177,6 +177,20 @@
   .video-link .yt-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
   .video-embed-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; margin-top: 1.1rem; font-weight: 600; }
 
+  /* Sequential Unit 1 pathway */
+  .unit-sequence { display: grid; gap: 1rem; }
+  .sequence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1rem; }
+  .sequence-card { position: relative; display: grid; align-content: start; gap: 0.75rem; padding: 1.2rem; border: 1px solid var(--border-subtle); border-radius: 16px; background: var(--gradient-card-surface); box-shadow: var(--shadow); overflow: hidden; }
+  .sequence-card::before { content: ""; position: absolute; inset: 0 auto auto 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary-main), transparent); }
+  .sequence-card h3 { margin: 0; font-family: var(--type-display-family); font-size: 1.2rem; line-height: 1.25; }
+  .sequence-card p { margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.55; }
+  .sequence-meta { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; flex-wrap: wrap; font-family: var(--type-meta-family); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary-main); }
+  .sequence-actions { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: auto; }
+  .sequence-actions a, .sequence-actions button, .checkpoint-choice { display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; padding: 0.58rem 0.8rem; border: 1px solid var(--primary-main); border-radius: 8px; background: var(--bg-surface); color: var(--primary-main); font: 600 0.82rem var(--type-body-family); text-decoration: none; cursor: pointer; transition: 0.18s ease; }
+  .sequence-actions a:first-child, .checkpoint-choice.primary { background: var(--primary-main); color: var(--bg-surface); }
+  .sequence-actions a:hover, .sequence-actions button:hover, .checkpoint-choice:hover { transform: translateY(-1px); box-shadow: 0 5px 14px var(--accent-glow); }
+  .checkpoint-chooser { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.55rem; margin: 1rem auto 1.5rem; max-width: 900px; }
+
   /* Progress History */
   .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
   .progress-header h2 { font-family: var(--type-display-family); font-size: 1.5rem; font-weight: 400; }
@@ -271,7 +285,7 @@
     /* Hide everything except formula sheet */
     .review-section-nav, .review-page-header, .page-context-bar,
     .print-btn, .theme-toggle, .video-link, .video-embed-label,
-    #tab-topics, #tab-practice, #tab-quiz, #tab-checklist, #tab-progress { display: none !important; }
+    #tab-slides, #tab-topics, #tab-practice, #tab-quiz, #tab-checklist, #tab-progress { display: none !important; }
     #tab-formulas { display: block !important; }
 
     /* Formula layout */
@@ -363,18 +377,19 @@
 <header class="page-shell-header review-page-header">
   <div class="container">
     <p class="page-shell-header__eyebrow">Fall 2026</p>
-    <h1>Math 130 — Test 1</h1>
-    <p class="subtitle">Interactive study guide covering all tested topics. Review concepts, practice problems, and quiz yourself.</p>
+    <h1>Math 130 — Test 1 Review</h1>
+    <p class="subtitle">A full-unit review organized around the Fall 2026 Canvas sequence. Canvas supplies the master dates; official quiz and test coverage can be adjusted there or in class.</p>
     <div class="review-page-header__chips">
       <span class="review-page-header__chip">📝 Paper Test</span>
       <span class="review-page-header__chip">💻 Modular ALEKS Learning</span>
-      <span class="review-page-header__chip--accent review-page-header__chip">📐 10 Core Topics</span>
+      <span class="review-page-header__chip--accent review-page-header__chip">📐 11 Core Topics</span>
     </div>
   </div>
 </header>
 
 <nav class="review-section-nav" aria-label="Page sections">
   <div class="review-section-nav__inner">
+    <a href="#tab-slides">Sequence</a>
     <a href="#tab-topics">Topics</a>
     <a href="#tab-formulas">Formulas</a>
     <a href="#tab-practice">Practice</a>
@@ -386,17 +401,72 @@
 
 <div class="container review-shell review-shell--below-banner">
 
+  <!-- SEQUENTIAL PATH -->
+  <div id="tab-slides" class="tab-content active">
+    <div class="card review-card unit-sequence">
+      <div>
+        <h2 style="margin-top:0">Unit 1: learn → practice → checkpoint</h2>
+        <p>Move through these windows in order. Each HTML deck teaches the skills, includes retrieval and worked practice, and ends with a closed-notes readiness check. Then use the matching targeted pool below. Canvas supplies the master dates; your instructor may adjust official assessment coverage.</p>
+      </div>
+      <div class="sequence-grid">
+        <article class="sequence-card">
+          <div class="sequence-meta"><span>Unit 1A</span><span>Quiz 1 · Sep 2</span></div>
+          <h3>Algebra Foundations: Factor First</h3>
+          <p>Intervals, exponent rules, factoring, and rational expressions. ALEKS Review R.1–R.5 is the pacing anchor.</p>
+          <div class="sequence-actions"><a href="slides/Math130Unit1A.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q1')">Targeted practice</button><button type="button" onclick="launchQuiz('q1')">Checkpoint</button></div>
+        </article>
+        <article class="sequence-card">
+          <div class="sequence-meta"><span>Unit 1B</span><span>Quiz 2 · Sep 9</span></div>
+          <h3>Linear Equations and Lines</h3>
+          <p>Linear equations, formula rearrangement, slope, line forms, and parallel/perpendicular relationships.</p>
+          <div class="sequence-actions"><a href="slides/Math130Unit1B.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q2')">Targeted practice</button><button type="button" onclick="launchQuiz('q2')">Checkpoint</button></div>
+        </article>
+        <article class="sequence-card">
+          <div class="sequence-meta"><span>Unit 1C</span><span>Quiz 3 · Sep 16</span></div>
+          <h3>Functions and Coordinate Geometry</h3>
+          <p>Functions, domain and range, midpoint, distance, and circles. This closes the Functions/Relations gap in the old review path.</p>
+          <div class="sequence-actions"><a href="slides/Math130Unit1C.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q3')">Targeted practice</button><button type="button" onclick="launchQuiz('q3')">Checkpoint</button></div>
+        </article>
+        <article class="sequence-card">
+          <div class="sequence-meta"><span>Unit 1D</span><span>Quiz 4 · Sep 21</span></div>
+          <h3>Quadratic Equations and Applications</h3>
+          <p>Standard form, solving quadratics, the vertex, and contextual interpretation. Sections 2.5 and 3.1 are due Sep 23.</p>
+          <div class="sequence-actions"><a href="slides/Math130Unit1D.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q4')">Targeted practice</button><button type="button" onclick="launchQuiz('q4')">Checkpoint</button></div>
+        </article>
+        <article class="sequence-card">
+          <div class="sequence-meta"><span>Unit 1E</span><span>Test 1 · Sep 23</span></div>
+          <h3>Test 1 Mixed Retrieval</h3>
+          <p>Interleaved work from all four learning windows. Use results to return to one targeted pool rather than restarting everything.</p>
+          <div class="sequence-actions"><a href="slides/Math130Unit1E.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('test1')">Mixed practice</button><button type="button" onclick="launchQuiz('test1')">Test checkpoint</button></div>
+        </article>
+        <article class="sequence-card">
+          <div class="sequence-meta"><span>Class archive</span><span>Aug 28</span></div>
+          <h3>Friday Factor-First Session</h3>
+          <p>The launch-ready class deck built from the ALEKS reports and entrance-check results. Keep it as a focused intervention, not the entire Unit 1 sequence.</p>
+          <div class="sequence-actions"><a href="slides/Math130FactorFirst_2026-08-28.html" target="_blank" rel="noopener">Open session deck</a></div>
+        </article>
+      </div>
+    </div>
+  </div>
+
   <!-- TOPICS -->
-  <div id="tab-topics" class="tab-content active">
+  <div id="tab-topics" class="tab-content">
     <div class="card review-card" style="margin-bottom:1.25rem">
-      <h2 style="margin-top:0">Quizzes in this unit (in class · on paper)</h2>
-      <p>Four quizzes lead up to <strong>Test 1 (Wed, Sep 23)</strong>. Canvas supplies the master dates and times; confirm content coverage in Canvas or in class before using the topic practice below.</p>
-      <ul>
-        <li><strong>Quiz 1 · Sep 2 at 2:10 PM</strong> — coverage to be confirmed</li>
-        <li><strong>Quiz 2 · Sep 9 at 2:10 PM</strong> — coverage to be confirmed</li>
-        <li><strong>Quiz 3 · Sep 16 at 2:10 PM</strong> — coverage to be confirmed</li>
-        <li><strong>Quiz 4 · Sep 21 at 2:10 PM</strong> — coverage to be confirmed</li>
-      </ul>
+      <h2 style="margin-top:0">Canvas master plan for Test 1</h2>
+      <p>ALEKS work is completed online. Quizzes and Test 1 are paper assessments in class; their Canvas entries supply the master dates and times. The ALEKS group beside a quiz is a pacing marker, not a guarantee of quiz coverage.</p>
+      <div class="table-scroll">
+        <table class="history-table">
+          <thead><tr><th>Canvas date</th><th>ALEKS due</th><th>Paper assessment</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Sep 2 · 2:10 PM</strong></td><td>Review R.1–R.3 and R.4–R.5</td><td>Quiz 1</td></tr>
+            <tr><td><strong>Sep 9 · 2:10 PM</strong></td><td>Review R.6 and Sections 1.1, 1.2, 1.4</td><td>Quiz 2</td></tr>
+            <tr><td><strong>Sep 16 · 2:10 PM</strong></td><td>Sections 2.1, 2.2, 2.4</td><td>Quiz 3</td></tr>
+            <tr><td><strong>Sep 21 · 2:10 PM</strong></td><td>Continue current ALEKS module</td><td>Quiz 4</td></tr>
+            <tr class="best-row"><td><strong>Sep 23 · 2:10 PM</strong></td><td>Sections 2.5 and 3.1</td><td><strong>Test 1</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warning-box"><b>Use the sequence by stage.</b> Finish the matching A–D deck, then use its targeted practice and checkpoint. Use the mixed Test 1 pools only after the four learning windows.</div>
     </div>
     <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">01</span><span class="topic-title">Sets — Intervals, Union, Intersection</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><b>Set-builder notation</b>: e.g. <span class="k">\{x \mid x \geq 3\}</span></li><li><b>Interval notation</b>: brackets [ ] include; parentheses ( ) exclude</li><li><b>Union</b> <span class="k">A \cup B</span>: elements in <em>either</em> set</li><li><b>Intersection</b> <span class="k">A \cap B</span>: elements in <em>both</em> sets</li></ul><h4>Common Intervals</h4><div class="formula-box review-formula-box"><span class="k">[a, b] \quad (a, b) \quad [a, \infty) \quad (-\infty, b]</span></div><div class="tip-box review-callout review-callout--tip">⚡ ∞ and −∞ always get parentheses, never brackets!</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=lsvjiAsBZUM" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Intersection and Union of Two Intervals</div><div class="yt-sub">Interval notation with number line visuals</div></div></a><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=fezDDJij25U" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Intersection and Union of Discrete Sets</div><div class="yt-sub">Working with finite sets — listing elements in ∩ and ∪</div></div></a></div></div></div>
 
@@ -417,6 +487,8 @@
     <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">09</span><span class="topic-title">Lines — Slope, Forms, Parallel & Perpendicular</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><ul><li><b>Slope-intercept</b>: <span class="k">y = mx + b</span></li><li><b>Point-slope</b>: <span class="k">y - y_1 = m(x - x_1)</span></li><li><b>General</b>: <span class="k">Ax + By + C = 0</span></li></ul><div class="formula-box review-formula-box"><span class="k">\text{Parallel: } m_1 = m_2 \qquad \text{Perp: } m_1 \cdot m_2 = -1</span></div><div class="tip-box review-callout review-callout--tip">⚡ Perpendicular: flip and negate. Slope 3 → perp slope −1/3.</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=4umbDjZ2R1I" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Slope Intercept vs Point Slope Form</div><div class="yt-sub">When to use each form and converting between them</div></div></a><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=acsR7w0I__w" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Finding Slopes of Parallel and Perpendicular Lines</div><div class="yt-sub">Identifying slopes and graphing parallel &amp; perpendicular lines</div></div></a></div></div></div>
 
     <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">10</span><span class="topic-title">Maximum/Minimum of a Quadratic — Vertex</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><div class="formula-box review-formula-box"><span class="k">x = -\frac{b}{2a}</span></div><p>Plug back into <span class="k">f(x)</span> for the max/min <b>value</b>.</p><ul><li><span class="k">a > 0</span> → minimum</li><li><span class="k">a < 0</span> → maximum</li></ul><div class="tip-box review-callout review-callout--tip">⚡ The question usually wants the y-value (height, etc.), not the x-value.</div><div class="video-embed-label">📺 Video Walkthrough</div><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=ygH-Y5YG5kE" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Vertex of a Parabola</div><div class="yt-sub">NancyPi — clear walkthrough of the vertex formula</div></div></a></div></div></div>
+
+    <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">11</span><span class="topic-title">Functions — Notation, Domain &amp; Range</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li>A relation is a <b>function</b> when each input has exactly one output.</li><li><span class="k">f(a)</span> means substitute <span class="k">a</span> for every input variable.</li><li><b>Domain</b> is the set of allowable inputs; <b>range</b> is the resulting outputs.</li><li>Exclude denominator zeros; require an even-root radicand to be nonnegative.</li></ul><div class="formula-box review-formula-box"><span class="k">\operatorname{dom}\!\left(\frac{1}{x-a}\right)=(-\infty,a)\cup(a,\infty)</span></div><div class="tip-box review-callout review-callout--tip">⚡ Repeated outputs are allowed. A repeated input with two different outputs is not a function.</div></div></div></div>
   </div>
 
   <!-- FORMULAS -->
@@ -457,6 +529,13 @@
       <div class="formula-item"><div class="label">Power</div><div class="formula-box review-formula-box"><span class="k">(a^m)^n=a^{mn}</span></div></div>
       <div class="formula-item"><div class="label">Negative</div><div class="formula-box review-formula-box"><span class="k">a^{-n}=\frac{1}{a^n}</span></div></div>
     </div></div>
+
+    <div class="formula-section review-formula-section"><h3>🔁 Functions &amp; Domain</h3><div class="formula-grid">
+      <div class="formula-item"><div class="label">Function value</div><div class="formula-box review-formula-box"><span class="k">f(a):\;\text{substitute }a\text{ for every }x</span></div></div>
+      <div class="formula-item"><div class="label">Rational domain</div><div class="formula-box review-formula-box"><span class="k">\text{denominator}\ne0</span></div></div>
+      <div class="formula-item"><div class="label">Even-root domain</div><div class="formula-box review-formula-box"><span class="k">\text{radicand}\ge0</span></div></div>
+      <div class="formula-item"><div class="label">Graph test</div><div class="formula-box review-formula-box" style="font-family:var(--type-body-family);font-size:0.85rem;color:var(--text-muted)">A vertical line intersects a function graph at most once.</div></div>
+    </div></div>
   </div>
 
   <!-- PRACTICE -->
@@ -467,7 +546,7 @@
 
   <!-- CHECKLIST -->
   <div id="tab-checklist" class="tab-content">
-    <div class="progress-summary" id="checklist-progress">0 of 12 complete</div>
+    <div class="progress-summary" id="checklist-progress">0 of 14 complete</div>
     <div id="checklist-items"></div>
   </div>
 
@@ -534,6 +613,8 @@ const allProblems=[
 // Factoring
 {id:'factor-a',label:'Factoring',pts:'4 pts',topicIdx:3,warning:'Don\'t forget to pull out the GCF before trying to factor the trinomial.',text:'Factor completely: <span class="k">2x^2-6x-108</span>',solution:'<div class="step">GCF = 2: <span class="k">2(x^2-3x-54)</span>. Numbers that multiply to \u221254 and add to \u22123: \u22129 and +6.<br><span class="k">=2(x-9)(x+6)</span></div>'},
 {id:'factor-b',label:'Factoring',pts:'4 pts',topicIdx:3,warning:'Look for variable GCF too \u2014 factor out the highest power of the variable common to all terms.',text:'Factor completely: <span class="k">2x^5-18x^4+28x^3</span>',solution:'<div class="step">GCF = <span class="k">2x^3</span>: <span class="k">2x^3(x^2-9x+14)</span>. Numbers: \u22127 and \u22122.<br><span class="k">=2x^3(x-7)(x-2)</span></div>'},
+// Absolute value
+{id:'absolute-equation',label:'Absolute Value Equation',pts:'3 pts',topicIdx:1,warning:'Isolate the absolute-value expression first, then write both cases. An absolute value cannot equal a negative number.',text:'Solve: <span class="k">|2x-1|=7</span>',solution:'<div class="step"><span class="k">2x-1=7</span> or <span class="k">2x-1=-7</span>, so <span class="k">x=4</span> or <span class="k">x=-3</span>.</div>'},
 // Sets & Intervals
 {id:'sets-int-a',label:'Sets & Intervals',pts:'4 pts',topicIdx:0,warning:'\u2229 means overlap/intersection. Draw both intervals on a number line to see where they share space.',text:'Let <span class="k">B=\\{x\\mid x\\geq -5\\}</span> and <span class="k">C=\\{x\\mid x<2\\}</span>.<br><br>Write <span class="k">B\\cap C</span> in interval notation.',solution:'<div class="step">B = [\u22125, \u221e) and C = (\u2212\u221e, 2). The overlap is <span class="k">[-5,\\;2)</span></div>'},
 {id:'sets-int-b',label:'Sets & Intervals',pts:'4 pts',topicIdx:0,warning:'When one set contains the other entirely, the union is just the larger set.',text:'Let <span class="k">A=\\{x\\mid x\\geq 9\\}</span> and <span class="k">B=\\{x\\mid x\\geq -5\\}</span>.<br><br>Write <span class="k">A\\cup B</span> in interval notation.',solution:'<div class="step">A = [9, \u221e) and B = [\u22125, \u221e). B already contains A, so <span class="k">A\\cup B=[-5,\\;\\infty)</span></div>'},
@@ -566,28 +647,41 @@ const allProblems=[
 {id:'solve-rat-b',label:'Solve Rational Equation',pts:'5 pts',topicIdx:5,warning:'ALWAYS check your answer in the original equation. If it makes any denominator zero, it\'s extraneous \u2014 no solution.',text:'Solve for x: <span class="k">\\dfrac{3}{x-3}=\\dfrac{x}{x-3}+7</span>',solution:'<div class="step">Multiply by (x\u22123): 3 = x + 7(x\u22123) \u2192 3 = 8x \u2212 21 \u2192 x = 3. But x = 3 makes the denominator 0 \u2192 <b>No solution</b></div>'},
 // Solve quadratic
 {id:'solve-quad-a',label:'Solve Quadratic Equation',pts:'5 pts',topicIdx:5,warning:'Move ALL terms to one side first (set equal to 0) before factoring.',text:'Solve for x: <span class="k">5x^2=-3x+2</span>',solution:'<div class="step">5x\u00b2 + 3x \u2212 2 = 0 \u2192 (5x\u22122)(x+1) = 0 \u2192 <span class="k">x=\\frac{2}{5}</span> or <span class="k">x=-1</span></div>'},
-{id:'solve-quad-b',label:'Solve Quadratic Equation',pts:'5 pts',topicIdx:5,warning:'Combine like terms carefully before factoring. Double-check all signs when moving terms across.',text:'Solve for x: <span class="k">2x^2-4x+9=x+12</span>',solution:'<div class="step">2x\u00b2 \u2212 5x \u2212 3 = 0 \u2192 (2x+1)(x\u22123) = 0 \u2192 <span class="k">x=-\\frac{1}{2}</span> or <span class="k">x=3</span></div>'}
+{id:'solve-quad-b',label:'Solve Quadratic Equation',pts:'5 pts',topicIdx:5,warning:'Combine like terms carefully before factoring. Double-check all signs when moving terms across.',text:'Solve for x: <span class="k">2x^2-4x+9=x+12</span>',solution:'<div class="step">2x\u00b2 \u2212 5x \u2212 3 = 0 \u2192 (2x+1)(x\u22123) = 0 \u2192 <span class="k">x=-\\frac{1}{2}</span> or <span class="k">x=3</span></div>'},
+// Functions and domain
+{id:'function-eval',label:'Function Evaluation',pts:'3 pts',topicIdx:10,warning:'Use parentheses when substituting a negative input so the exponent applies correctly.',text:'For <span class="k">f(x)=2x^2-5x+1</span>, find <span class="k">f(-3)</span>.',solution:'<div class="step"><span class="k">f(-3)=2(-3)^2-5(-3)+1=18+15+1=34</span></div>'},
+{id:'function-domain',label:'Function Domain',pts:'3 pts',topicIdx:10,warning:'A rational function excludes every input that makes its original denominator zero.',text:'State the domain of <span class="k">g(x)=\\dfrac{1}{x^2-9}</span> in interval notation.',solution:'<div class="step">Exclude <span class="k">x=-3,3</span>. Domain: <span class="k">(-\\infty,-3)\\cup(-3,3)\\cup(3,\\infty)</span></div>'}
 ];
 
-let practiceInit=false,practiceQueue=[],practiceCorrect=0,practiceMissed=0,practiceIdx=0,practiceSolShown=false;
+const practiceWindows={
+  q1:{title:'Quiz 1 foundations',ids:['factor-a','factor-b','absolute-equation','sets-int-a','sets-int-b','sets-fin-a','sets-fin-b','exp-a','exp-b','rat-add','rat-sub','rat-mult']},
+  q2:{title:'Quiz 2 linear equations and lines',ids:['solve-lin-a','solve-lin-b','line-eq','line-par','line-perp']},
+  q3:{title:'Quiz 3 functions and coordinate geometry',ids:['function-eval','function-domain','midpoint','distance','circle']},
+  q4:{title:'Quiz 4 quadratics and applications',ids:['solve-quad-a','solve-quad-b','vertex']},
+  test1:{title:'Test 1 mixed retrieval',ids:null}
+};
+let practiceInit=false,practiceQueue=[],practicePool=[],activePracticeKey='test1',practiceCorrect=0,practiceMissed=0,practiceIdx=0,practiceSolShown=false;
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 
 function initPracticeView(){
   practiceInit=true;
   const hist=loadHist().practice;
   const bestLine=hist.length?`<div style="margin-bottom:1rem"><span class="history-badge badge-green">Best: ${Math.min(...hist.map(h=>h.retries))} retries</span> <span style="color:var(--text-muted);font-size:0.82rem">across ${hist.length} session${hist.length>1?'s':''}</span></div>`:'';
-  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:var(--type-display-family);font-size:1.8rem;margin-bottom:0.5rem">Practice Mode</h2><p>${allProblems.length} problems in random order. Work each on paper, reveal the solution, then mark it. Missed problems recycle until you get them all right.</p>${bestLine}<button class="practice-start-btn" onclick="startPractice()" type="button">Start Practice</button></div>`;
+  document.getElementById('practice-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:var(--type-display-family);font-size:1.8rem;margin-bottom:0.5rem">Targeted Practice</h2><p>Choose the learning window you have finished. Problems randomize within that window; missed problems recycle until cleared.</p><div class="checkpoint-chooser">${Object.entries(practiceWindows).map(([key,w])=>`<button class="checkpoint-choice ${key==='test1'?'primary':''}" onclick="startPractice('${key}')" type="button">${w.title}</button>`).join('')}</div>${bestLine}</div>`;
 }
 
-function startPractice(){
+function startPractice(key='test1'){
+  activePracticeKey=practiceWindows[key]?key:'test1';
+  const selected=practiceWindows[activePracticeKey];
+  practicePool=selected.ids?allProblems.filter(p=>selected.ids.includes(p.id)):[...allProblems];
   allProblems.forEach(p=>p._missed=false);
-  practiceQueue=shuffle(allProblems.map((_,i)=>i));practiceCorrect=0;practiceMissed=0;practiceIdx=0;showPP();
+  practiceQueue=shuffle(practicePool);practiceCorrect=0;practiceMissed=0;practiceIdx=0;showPP();
 }
 
 function showPP(){
   const c=document.getElementById('practice-container');
   if(!c)return;
-  const pi=practiceQueue[practiceIdx],p=allProblems[pi];
+  const p=practiceQueue[practiceIdx];
   if(!p){initPracticeView();return;}
   const rem=practiceQueue.length-practiceIdx;
   practiceSolShown=false;
@@ -597,7 +691,7 @@ function showPP(){
 
 function revealPS(){
   if(practiceSolShown)return;practiceSolShown=true;
-  const pi=practiceQueue[practiceIdx],p=allProblems[pi];
+  const p=practiceQueue[practiceIdx];
   document.getElementById('psol').classList.add('show');
   const warnHtml=p.warning?'<div class="warning-box review-callout review-callout--warning"><b>Watch out:</b> '+p.warning+'</div>':'';
   document.getElementById('pbtns').innerHTML='<button class="practice-action-btn got-it" onclick="pGot()">✓ Got It</button><button class="practice-action-btn missed" onclick="pMiss()">✗ Missed It</button>'+warnHtml;
@@ -606,8 +700,8 @@ function revealPS(){
 
 function pGot(){practiceCorrect++;practiceIdx++;practiceIdx>=practiceQueue.length?showPC():showPP()}
 function pMiss(){
-  const pi=practiceQueue[practiceIdx],p=allProblems[pi];
-  p._missed=true;practiceQueue.push(pi);practiceMissed++;practiceIdx++;
+  const p=practiceQueue[practiceIdx];
+  p._missed=true;practiceQueue.push(p);practiceMissed++;practiceIdx++;
   if(practiceIdx>=practiceQueue.length){showPC();return;}
   showPP();
   // Show review link after re-render
@@ -617,34 +711,42 @@ function pMiss(){
 
 function showPC(){
   // Save session
-  saveSession('practice',{correct:practiceCorrect,retries:practiceMissed,total:allProblems.length});
-  document.getElementById('practice-container').innerHTML=`<div class="practice-complete"><div class="big-check">🎉</div><h2>All Problems Cleared!</h2><div class="practice-stats-final"><div class="final-stat"><span class="num stat-green">${practiceCorrect}</span><span class="lbl">Correct</span></div><div class="final-stat"><span class="num stat-red">${practiceMissed}</span><span class="lbl">Retries</span></div><div class="final-stat"><span class="num stat-blue">${allProblems.length}</span><span class="lbl">Problems</span></div></div><p>${practiceMissed===0?'Perfect run — every problem on the first try!':'You cleared them all. Review the retried topics before test day.'}</p><button class="practice-start-btn" onclick="startPractice()" type="button">Practice Again</button></div>`;
+  saveSession('practice',{key:activePracticeKey,correct:practiceCorrect,retries:practiceMissed,total:practicePool.length});
+  document.getElementById('practice-container').innerHTML=`<div class="practice-complete"><div class="big-check">🎉</div><h2>${practiceWindows[activePracticeKey].title} cleared!</h2><div class="practice-stats-final"><div class="final-stat"><span class="num stat-green">${practiceCorrect}</span><span class="lbl">Correct</span></div><div class="final-stat"><span class="num stat-red">${practiceMissed}</span><span class="lbl">Retries</span></div><div class="final-stat"><span class="num stat-blue">${practicePool.length}</span><span class="lbl">Problems</span></div></div><p>${practiceMissed===0?'Perfect run — every problem on the first try!':'You cleared them all. Review the retried topics before moving on.'}</p><button class="practice-start-btn" onclick="startPractice(activePracticeKey)" type="button">Practice This Window Again</button> <button class="checkpoint-choice" onclick="initPracticeView()" type="button">Choose Another Window</button></div>`;
 }
 
 // ═══ QUIZ ═══
-const quizQ=[
-{q:'What is the factored form of \\(x^2-49\\)?',opts:['(x-7)(x+7)','(x-49)(x+1)','(x-7)^2','(x+7)^2'],ans:0,exp:'Difference of squares: a²−b²=(a−b)(a+b).'},
-{q:'Interval notation for \\(\\{x\\mid x\\geq 3\\}\\):',opts:['(3,\\infty)','[3,\\infty)','[3,\\infty]','(3,\\infty]'],ans:1,exp:'≥ includes 3 → bracket. ∞ → always parenthesis.'},
-{q:'\\(A\\cap B\\) if \\(A=\\{1,2,3\\}\\), \\(B=\\{2,3,4\\}\\)?',opts:['\\{1,2,3,4\\}','\\{2,3\\}','\\{1,4\\}','\\{2\\}'],ans:1,exp:'Intersection = elements in BOTH sets.'},
-{q:'Simplify \\(x^5\\cdot x^{-2}\\):',opts:['x^{10}','x^7','x^3','\\frac{1}{x^3}'],ans:2,exp:'Product rule: 5+(−2)=3.'},
-{q:'Midpoint of \\((2,6)\\) and \\((8,10)\\):',opts:['(5,8)','(10,16)','(6,4)','(3,2)'],ans:0,exp:'((2+8)/2,(6+10)/2)=(5,8).'},
-{q:'Circle with center \\((0,3)\\), radius 4:',opts:['x^2+(y-3)^2=4','x^2+(y-3)^2=16','(x-3)^2+y^2=16','x^2+(y+3)^2=16'],ans:1,exp:'(x−0)²+(y−3)²=4²=16.'},
-{q:'Slope perpendicular to \\(y=2x+1\\):',opts:['2','-2','\\frac{1}{2}','-\\frac{1}{2}'],ans:3,exp:'Perp slopes multiply to −1. 2→−1/2.'},
-{q:'Vertex x-coord of \\(f(x)=-3x^2+12x+5\\):',opts:['x=-2','x=2','x=4','x=-4'],ans:1,exp:'x=−12/(2·(−3))=2.'},
-{q:'Factor \\(x^3-8\\):',opts:['(x-2)(x^2+2x+4)','(x-2)(x^2-2x+4)','(x-2)(x+2)^2','(x-8)(x^2+1)'],ans:0,exp:'Diff of cubes: (a−b)(a²+ab+b²).'},
-{q:'Solve \\(3x^2+x-2=0\\):',opts:['x=\\frac{2}{3},\\;x=-1','x=\\frac{1}{3},\\;x=-2','x=-\\frac{2}{3},\\;x=1','x=2,\\;x=-\\frac{1}{3}'],ans:0,exp:'(3x−2)(x+1)=0.'},
-{q:'Distance from \\((0,0)\\) to \\((3,4)\\):',opts:['7','5','25','\\sqrt{7}'],ans:1,exp:'√(9+16)=√25=5.'},
-{q:'Rational equation with variables in denominator — you must:',opts:['Cross multiply only','Check for extraneous solutions','Use quadratic formula','Factor numerators'],ans:1,exp:'Excluded values make denominators 0. Always check.'}
+const quizQuestions=[
+{stage:'q1',q:'What is the factored form of \\(x^2-49\\)?',opts:['(x-7)(x+7)','(x-49)(x+1)','(x-7)^2','(x+7)^2'],ans:0,exp:'Difference of squares: a²−b²=(a−b)(a+b).'},
+{stage:'q1',q:'Interval notation for \\(\\{x\\mid x\\geq 3\\}\\):',opts:['(3,\\infty)','[3,\\infty)','[3,\\infty]','(3,\\infty]'],ans:1,exp:'≥ includes 3 → bracket. ∞ → always parenthesis.'},
+{stage:'q1',q:'\\(A\\cap B\\) if \\(A=\\{1,2,3\\}\\), \\(B=\\{2,3,4\\}\\)?',opts:['\\{1,2,3,4\\}','\\{2,3\\}','\\{1,4\\}','\\{2\\}'],ans:1,exp:'Intersection = elements in BOTH sets.'},
+{stage:'q1',q:'Simplify \\(x^5\\cdot x^{-2}\\):',opts:['x^{10}','x^7','x^3','\\frac{1}{x^3}'],ans:2,exp:'Product rule: 5+(−2)=3.'},
+{stage:'q1',q:'Solve \\(|2x-1|=7\\):',opts:['x=4 only','x=-3 only','x=4 or x=-3','x=3 or x=-4'],ans:2,exp:'Set 2x−1 equal to 7 and −7, then solve both equations.'},
+{stage:'q3',q:'Midpoint of \\((2,6)\\) and \\((8,10)\\):',opts:['(5,8)','(10,16)','(6,4)','(3,2)'],ans:0,exp:'((2+8)/2,(6+10)/2)=(5,8).'},
+{stage:'q3',q:'Circle with center \\((0,3)\\), radius 4:',opts:['x^2+(y-3)^2=4','x^2+(y-3)^2=16','(x-3)^2+y^2=16','x^2+(y+3)^2=16'],ans:1,exp:'(x−0)²+(y−3)²=4²=16.'},
+{stage:'q2',q:'Slope perpendicular to \\(y=2x+1\\):',opts:['2','-2','\\frac{1}{2}','-\\frac{1}{2}'],ans:3,exp:'Perpendicular slopes multiply to −1. 2→−1/2.'},
+{stage:'q4',q:'Vertex x-coordinate of \\(f(x)=-3x^2+12x+5\\):',opts:['x=-2','x=2','x=4','x=-4'],ans:1,exp:'x=−12/(2·(−3))=2.'},
+{stage:'q1',q:'Factor \\(x^3-8\\):',opts:['(x-2)(x^2+2x+4)','(x-2)(x^2-2x+4)','(x-2)(x+2)^2','(x-8)(x^2+1)'],ans:0,exp:'Difference of cubes: (a−b)(a²+ab+b²).'},
+{stage:'q4',q:'Solve \\(3x^2+x-2=0\\):',opts:['x=\\frac{2}{3},\\;x=-1','x=\\frac{1}{3},\\;x=-2','x=-\\frac{2}{3},\\;x=1','x=2,\\;x=-\\frac{1}{3}'],ans:0,exp:'(3x−2)(x+1)=0.'},
+{stage:'q3',q:'Distance from \\((0,0)\\) to \\((3,4)\\):',opts:['7','5','25','\\sqrt{7}'],ans:1,exp:'√(9+16)=√25=5.'},
+{stage:'q1',q:'A rational equation with variables in a denominator requires you to:',opts:['Cross multiply only','Check for extraneous solutions','Use the quadratic formula','Ignore restrictions'],ans:1,exp:'Excluded values make denominators zero, so every candidate must be checked.'},
+{stage:'q2',q:'Solve \\(4(2x-3)=5x+9\\):',opts:['x=3','x=7','x=-7','x=\\frac{7}{3}'],ans:1,exp:'8x−12=5x+9, so 3x=21 and x=7.'},
+{stage:'q2',q:'Solve \\(V=\\frac{1}{3}Bh\\) for \\(h\\):',opts:['h=\\frac{V}{3B}','h=\\frac{3V}{B}','h=3BV','h=\\frac{B}{3V}'],ans:1,exp:'Multiply by 3, then divide by B: h=3V/B.'},
+{stage:'q2',q:'The line parallel to \\(y=-2x+1\\) through \\((1,4)\\) is:',opts:['y=-2x+6','y=2x+2','y=-\\frac12x+\\frac92','y=-2x+3'],ans:0,exp:'Parallel means slope −2. Point-slope gives y−4=−2(x−1), so y=−2x+6.'},
+{stage:'q3',q:'For \\(f(x)=2x^2-5x+1\\), what is \\(f(-3)\\)?',opts:['4','16','34','-2'],ans:2,exp:'Use parentheses: 2(−3)²−5(−3)+1=34.'},
+{stage:'q3',q:'The domain of \\(g(x)=1/(x^2-9)\\) excludes:',opts:['x=0','x=3 only','x=-3 only','x=-3 and x=3'],ans:3,exp:'x²−9=(x−3)(x+3), so both denominator zeros are excluded.'},
+{stage:'q4',q:'The maximum value of \\(g(t)=-5t^2+30t+4\\) is:',opts:['3','34','49','94'],ans:2,exp:'The vertex occurs at t=3, and g(3)=49.'}
 ];
 
-let quizStarted=false,quizIdx=0,quizScore=0,quizAns=false;
+const quizWindows={q1:'Quiz 1 foundations',q2:'Quiz 2 linear equations and lines',q3:'Quiz 3 functions and coordinate geometry',q4:'Quiz 4 quadratics and applications',test1:'Test 1 mixed checkpoint'};
+let quizQ=[...quizQuestions],activeQuizKey='test1',quizStarted=false,quizIdx=0,quizScore=0,quizAns=false;
 function initQuizView(){
   const hist=loadHist().quiz;
-  const bestLine=hist.length?`<div style="margin-bottom:1rem"><span class="history-badge badge-green">Best: ${Math.max(...hist.map(h=>h.score))}/${quizQ.length} (${Math.max(...hist.map(h=>h.pct))}%)</span> <span style="color:var(--text-muted);font-size:0.82rem">across ${hist.length} attempt${hist.length>1?'s':''}</span></div>`:'';
-  document.getElementById('quiz-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:var(--type-display-family);font-size:1.8rem;margin-bottom:0.5rem">Test Your Knowledge</h2><p>12 questions covering all topics. No time limit.</p>${bestLine}<button class="quiz-start-btn" onclick="startQuiz()">Begin Quiz</button></div>`;
+  const bestLine=hist.length?`<div style="margin-bottom:1rem"><span class="history-badge badge-green">Best: ${Math.max(...hist.map(h=>h.pct))}%</span> <span style="color:var(--text-muted);font-size:0.82rem">across ${hist.length} attempt${hist.length>1?'s':''}</span></div>`:'';
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-intro"><h2 style="font-family:var(--type-display-family);font-size:1.8rem;margin-bottom:0.5rem">Aligned Checkpoints</h2><p>Choose the checkpoint that follows your current learning window. The Test 1 checkpoint mixes all four windows.</p><div class="checkpoint-chooser">${Object.entries(quizWindows).map(([key,title])=>`<button class="checkpoint-choice ${key==='test1'?'primary':''}" onclick="startQuiz('${key}')" type="button">${title}</button>`).join('')}</div>${bestLine}</div>`;
 }
 
-function startQuiz(){quizStarted=true;quizIdx=0;quizScore=0;for(let i=quizQ.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[quizQ[i],quizQ[j]]=[quizQ[j],quizQ[i]]}showQ()}
+function startQuiz(key='test1'){activeQuizKey=quizWindows[key]?key:'test1';quizQ=shuffle(activeQuizKey==='test1'?quizQuestions:quizQuestions.filter(q=>q.stage===activeQuizKey));quizStarted=true;quizIdx=0;quizScore=0;showQ()}
 
 function showQ(){
   quizAns=false;const q=quizQ[quizIdx],L=['A','B','C','D'],pct=(quizIdx/quizQ.length)*100,c=document.getElementById('quiz-container');
@@ -657,13 +759,16 @@ function selAns(i){if(quizAns)return;quizAns=true;const q=quizQ[quizIdx],ok=i===
 function nextQ(){quizIdx++;showQ()}
 function showRes(){
   const p=Math.round(quizScore/quizQ.length*100);
-  saveSession('quiz',{score:quizScore,total:quizQ.length,pct:p});
+  saveSession('quiz',{key:activeQuizKey,score:quizScore,total:quizQ.length,pct:p});
   const best=Math.max(...loadHist().quiz.map(h=>h.pct));
-  document.getElementById('quiz-container').innerHTML=`<div class="quiz-results"><div class="quiz-score">${quizScore}/${quizQ.length}</div><p>${p}% — ${p>=90?"Excellent!":p>=70?"Good! Review missed topics.":"Keep studying."}</p><div style="margin-bottom:1.25rem"><span class="history-badge badge-green">Personal best: ${best}%</span></div><button class="quiz-start-btn" onclick="startQuiz()">Retake</button></div>`;
+  document.getElementById('quiz-container').innerHTML=`<div class="quiz-results"><div class="quiz-score">${quizScore}/${quizQ.length}</div><p><strong>${quizWindows[activeQuizKey]}</strong><br>${p}% — ${p>=90?"Ready for the next step.":p>=70?"Close. Correct misses, then retry.":"Return to the matching deck and targeted practice."}</p><div style="margin-bottom:1.25rem"><span class="history-badge badge-green">Personal best: ${best}%</span></div><button class="quiz-start-btn" onclick="startQuiz(activeQuizKey)">Retake This Checkpoint</button> <button class="checkpoint-choice" onclick="initQuizView()" type="button">Choose Another</button></div>`;
 }
 
+function launchPractice(key){startPractice(key);document.getElementById('tab-practice').scrollIntoView({behavior:'smooth',block:'start'});}
+function launchQuiz(key){startQuiz(key);document.getElementById('tab-quiz').scrollIntoView({behavior:'smooth',block:'start'});}
+
 // ═══ CHECKLIST ═══
-const clTopics=['Sets — set-builder to interval notation','Sets — union & intersection of finite sets','Sets — union & intersection of intervals','Absolute value simplification','Exponent rules — positive exponents','Factoring — GCF, trinomials, grouping','Factoring — difference of squares & cubes','Rational expressions — all operations','Solve linear equations (with fractions)','Solve quadratic equations','Midpoint, distance, lines, circles','Vertex formula — max/min of quadratic'];
+const clTopics=['Sets — set-builder to interval notation','Sets — union & intersection of finite sets','Sets — union & intersection of intervals','Absolute value simplification','Exponent rules — positive exponents','Factoring — GCF, trinomials, grouping','Factoring — difference of squares & cubes','Rational expressions — all operations and restrictions','Solve linear equations and rearrange formulas','Slope, line forms, parallel and perpendicular','Functions — notation, domain and range','Midpoint, distance, and circles','Solve quadratic equations','Vertex formula — max/min of quadratic'];
 let ckState={};
 function storeOk(){try{localStorage.setItem('__t','t');localStorage.removeItem('__t');return true}catch(e){return false}}
 function initCL(){if(storeOk())ckState=JSON.parse(localStorage.getItem('m130cl')||'{}');document.getElementById('checklist-items').innerHTML=clTopics.map((t,i)=>`<div class="checklist-item ${ckState[i]?'checked':''}" onclick="togCk(this,${i})"><div class="check-box">${ckState[i]?'✓':''}</div><span class="check-label">${t}</span></div>`).join('');updProg()}
