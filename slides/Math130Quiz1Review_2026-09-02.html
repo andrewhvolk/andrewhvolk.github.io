@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="MATH 130 September 2 lecture: factoring review followed by the in-class Quiz 1. Offline HTML slides with worked steps and a 25-minute quiz timer.">
+<title>MATH 130 · Review and Quiz 1 · September 2, 2026</title>
+<style>
+:root{color-scheme:light;--ink:#142536;--blue:#165dad;--muted:#526372;--line:#cbd5df;--scale:1}
+*{box-sizing:border-box}body{margin:0;background:#17212c;color:var(--ink);font-family:Arial,sans-serif;overflow:hidden}button,select{font:inherit}button,select{border:1px solid #9aacbe;border-radius:4px;padding:8px 11px;background:white;color:var(--ink);cursor:pointer}button:hover{background:#e8f2ff}button:disabled{cursor:default;opacity:.4}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #f0b94a;outline-offset:3px}
+.viewport{height:calc(100dvh - 70px);display:flex;align-items:center;justify-content:center;overflow:hidden}.stage{position:relative;width:1280px;height:720px;flex-shrink:0;background:#fff;transform:scale(var(--scale));transform-origin:center}.slide{position:absolute;inset:0;background:#fff;padding:46px 64px 68px;display:none}.slide.active{display:block}.eyebrow{margin:0 0 18px;font-size:23px;font-weight:700;letter-spacing:.035em;color:var(--blue)}h1{font-size:76px;line-height:1.09;letter-spacing:-.035em;margin:92px 0 37px}h2{font-size:48px;line-height:1.12;letter-spacing:-.02em;margin:0 0 35px;white-space:nowrap}h3{font-size:33px;margin:0 0 20px}p{margin:0 0 22px;line-height:1.32;font-size:31px}.subtitle{font-size:36px;max-width:1030px;line-height:1.3}.math{font-family:'Cambria Math',Cambria,Georgia,serif;white-space:nowrap;font-weight:400}.big{font-size:59px;line-height:1.28}.medium{font-size:42px;line-height:1.35}.accent{color:var(--blue)}.quiet{color:var(--muted)}.label{font-size:26px;font-weight:bold}.columns{display:grid;grid-template-columns:1fr 1fr;gap:64px}.warmup{margin-top:72px}.warmup .math{margin:24px 0 38px}.warmup .prompt{font-size:28px}.rule{border-top:2px solid var(--line);padding-top:24px}.steps{margin-top:15px}.steps p{margin:13px 0;font-size:39px}.steps .check{margin-top:28px;font-size:31px;color:var(--muted)}.split-layout{display:grid;grid-template-columns:740px 1fr;gap:38px}.side-note{font-size:30px;line-height:1.42;border-left:3px solid var(--blue);padding-left:25px;margin-top:26px}.side-note p{font-size:29px}.fraction{display:inline-flex;flex-direction:column;vertical-align:middle;align-items:stretch;text-align:center;line-height:1.1;margin:0 .06em}.fraction>span{padding:0 .15em}.fraction>span:first-child{border-bottom:2px solid currentColor;padding-bottom:.12em}.fraction>span:last-child{padding-top:.12em}sup{font-size:.63em;line-height:0;vertical-align:super}.reveal-step{visibility:hidden}.reveal-step.shown{visibility:visible}.foot{position:absolute;left:64px;right:64px;bottom:25px;display:flex;justify-content:space-between;font-size:19px;color:var(--muted)}.checklist{padding-left:35px;margin:34px 0 0}.checklist li{font-size:34px;line-height:1.28;margin-bottom:25px;padding-left:9px}.quiz-meta{font-size:34px;margin:34px 0 40px}.ready-list{padding-left:33px;margin:0 0 31px}.ready-list li{font-size:30px;line-height:1.35;margin:14px 0}.launch-quiz{background:var(--blue);color:white;font-size:27px;border-color:var(--blue);padding:15px 24px}.launch-quiz:hover{color:var(--ink)}.quiz-slide{text-align:center}.quiz-slide h2{margin-top:26px;font-size:62px}.quiz-time{font-size:190px;font-variant-numeric:tabular-nums;line-height:1;margin:37px 0 28px;letter-spacing:-.04em}.quiz-warning{font-size:31px;min-height:42px;color:var(--blue);margin:15px 0}.quiz-slide.urgent .quiz-time{color:#a33c14}.closing{font-size:76px;line-height:1.1;margin:110px 0 35px}.toolbar{position:fixed;bottom:0;left:0;right:0;min-height:70px;background:#17212c;color:white;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;font-size:14px}.toolbar a{color:#d4eaff;margin:0 5px}.toolbar select{max-width:225px}.toolbar .timer{padding:0 8px;min-width:110px;line-height:1.25}.toolbar output{font-size:22px;font-weight:bold;display:block;font-variant-numeric:tabular-nums}.toolbar .phase{font-size:12px;color:#d2dce6}.toolbar button{font-size:14px}.toolbar #quizSetup{background:#f4d38b}.progress{height:4px;position:absolute;bottom:0;left:0;background:var(--blue);width:0;transition:width .15s}.screen-reader{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}dialog{border:0;border-radius:8px;padding:28px;max-width:min(930px,94vw);max-height:85vh;overflow:auto;color:var(--ink);font-size:18px;line-height:1.5}dialog::backdrop{background:#0009}dialog h2{font-size:30px;white-space:normal;margin-bottom:10px}dialog p,dialog li{font-size:18px}dialog header{display:flex;justify-content:space-between;align-items:start;gap:25px}dialog table{border-collapse:collapse;width:100%;font-size:16px;margin:20px 0}dialog td,dialog th{padding:8px;border-bottom:1px solid var(--line);text-align:left}dialog .notice{background:#fff2d7;padding:13px}dialog details{margin:15px 0}dialog summary{cursor:pointer;font-weight:bold}.notes-copy{white-space:pre-line}body.blanked .stage{visibility:hidden}
+@media(max-width:1100px){.toolbar{min-height:105px;flex-wrap:wrap;gap:5px;font-size:12px;padding:6px}.viewport{height:calc(100dvh - 105px)}.toolbar button,.toolbar select{font-size:12px;padding:6px}.toolbar select{max-width:180px}.toolbar .timer{min-width:95px}}
+@media(max-width:550px){.toolbar{min-height:145px}.viewport{height:calc(100dvh - 145px)}.toolbar a{display:none}.toolbar select{max-width:155px}}
+@media print{body{overflow:visible;background:white}.viewport{display:block;height:auto}.stage{transform:none!important;width:1280px;height:auto}.slide{position:relative;display:block!important;width:1280px;height:720px;break-after:page}.reveal-step{visibility:visible}.toolbar,dialog,.progress,.launch-quiz{display:none!important}.foot{bottom:25px}@page{size:13.333in 7.5in;margin:0}}
+</style>
+</head>
+<body>
+<main class="viewport" aria-label="MATH 130 lecture presentation"><div class="stage" id="stage">
+<section class="slide active" data-title="Review and Quiz 1" data-minutes="1" aria-hidden="false">
+  <p class="eyebrow">MATH 130 · WEDNESDAY, SEPTEMBER 2, 2026</p>
+  <h1>Show the steps.<br>Keep the factors.</h1>
+  <p class="subtitle">A short review of algebra foundations,<br>then Quiz 1 in class.</p>
+  <footer class="foot"><span>MATH 130 · UNIT 1</span><span>01 / 13</span></footer>
+</section>
+<section class="slide" data-title="Two quick retrieval checks" data-minutes="2" aria-hidden="true">
+  <p class="eyebrow">RETRIEVE · WORK IN YOUR NOTES</p><h2>Two quick checks</h2>
+  <div class="columns warmup">
+    <div><p class="label">1 · Write the interval.</p><p class="math big">−2 &lt; x ≤ 7</p><p class="prompt">Which endpoint is included?<br>Explain the two symbols.</p></div>
+    <div><p class="label">2 · Simplify. Assume x ≠ 0.</p><p class="math big"><span class="fraction" role="math" aria-label="15 x cubed over 20 x to the sixth"><span>15x<sup>3</sup></span><span>20x<sup>6</sup></span></span></p><p class="prompt">Use positive exponents<br>in the final answer.</p></div>
+  </div><footer class="foot"><span>WRITE FIRST · THEN COMPARE</span><span>02 / 13</span></footer>
+</section>
+<section class="slide" data-title="Check endpoints and exponent order" data-minutes="1" aria-hidden="true">
+  <p class="eyebrow">CHECK YOUR REASONING</p><h2>Two rules worth keeping straight</h2>
+  <div class="columns warmup">
+    <div><p class="math big accent">(−2, 7]</p><p>−2 is excluded: use <strong>(</strong>.<br>7 is included: use <strong>]</strong>.</p></div>
+    <div><p class="math medium">x<sup>3</sup> ÷ x<sup>6</sup> = x<sup>3−6</sup> = x<sup>−3</sup></p><p class="math big accent"><span class="fraction"><span>3</span><span>4x<sup>3</sup></span></span></p><p>Subtract top exponent<br>minus bottom exponent.</p></div>
+  </div><footer class="foot"><span>A NEGATIVE EXPONENT MEANS A RECIPROCAL</span><span>03 / 13</span></footer>
+</section>
+<section class="slide" data-title="GCF before the pattern" data-minutes="2" aria-hidden="true">
+  <p class="eyebrow">FACTOR COMPLETELY</p><h2>Take out the GCF first</h2>
+  <div class="split-layout"><div class="steps"><p class="math big">9x<sup>2</sup> − 36</p><p class="math reveal-step">= 9(x<sup>2</sup> − 4)</p><p class="math reveal-step">= 9(x − 2)(x + 2)</p><p class="check reveal-step">Check: 9(x<sup>2</sup> − 4) = 9x<sup>2</sup> − 36.</p></div><div class="side-note"><p>First: what divides<br><strong>every term</strong>?</p><p>Then: is the remaining expression a difference of squares?</p><p>Keep the 9 outside.</p></div></div>
+  <footer class="foot"><span>ONE MINUS FACTOR · ONE PLUS FACTOR</span><span>04 / 13</span></footer>
+</section>
+<section class="slide" data-title="Find the pair and split" data-minutes="2" aria-hidden="true">
+  <p class="eyebrow">LEADING COEFFICIENT GREATER THAN 1</p><h2>Use product ac and sum b</h2>
+  <p class="math big">6x<sup>2</sup> + 13x + 6</p>
+  <div class="steps"><p class="math reveal-step">ac = 6 · 6 = 36 &nbsp;&nbsp;&nbsp; m + n = 13</p><p class="reveal-step"><strong>9 and 4:</strong> 9 · 4 = 36, and 9 + 4 = 13.</p><p class="math reveal-step accent">6x<sup>2</sup> + 9x + 4x + 6</p></div>
+  <p class="rule" style="margin-top:37px">The four-term line must equal the original expression.</p>
+  <footer class="foot"><span>CHECK BOTH CONDITIONS BEFORE GROUPING</span><span>05 / 13</span></footer>
+</section>
+<section class="slide" data-title="Group, factor, and check" data-minutes="2" aria-hidden="true">
+  <p class="eyebrow">THE SAME EXAMPLE · FINISH THE METHOD</p><h2>Match the whole binomial</h2>
+  <div class="steps"><p class="math">6x<sup>2</sup> + 9x + 4x + 6</p><p class="math reveal-step">= 3x(2x + 3) + 2(2x + 3)</p><p class="math reveal-step accent">= (3x + 2)(2x + 3)</p><p class="math check reveal-step">Check: 6x<sup>2</sup> + 9x + 4x + 6 = 6x<sup>2</sup> + 13x + 6.</p></div>
+  <p class="rule" style="margin-top:35px">The outside factors are 3x and 2.<br>The shared factor is the entire binomial 2x + 3.</p>
+  <footer class="foot"><span>AN ANSWER ALONE DOES NOT SHOW THE GROUPING METHOD</span><span>06 / 13</span></footer>
+</section>
+<section class="slide" data-title="Independent GCF and signed grouping" data-minutes="3" aria-hidden="true">
+  <p class="eyebrow">YOUR TURN · WRITE EVERY LINE</p><h2>GCF, then split and group</h2>
+  <p class="math big" style="margin-top:45px">4x<sup>2</sup> − 14x − 8</p>
+  <ol class="checklist" style="margin-top:44px"><li>Take out the GCF.</li><li>Use the <strong>remaining quadratic</strong> to find ac and the pair.</li><li>Split, group, factor, and expand to check.</li></ol>
+  <footer class="foot"><span>WORK ON YOUR OWN BEFORE COMPARING</span><span>07 / 13</span></footer>
+</section>
+<section class="slide" data-title="Check the negative group" data-minutes="3" aria-hidden="true">
+  <p class="eyebrow">CHECK YOUR WORK</p><h2>Distribute the negative factor back</h2>
+  <div class="steps"><p class="math">4x<sup>2</sup> − 14x − 8 = 2(2x<sup>2</sup> − 7x − 4)</p><p class="math reveal-step">ac = −8; &nbsp; use 1 and −8.</p><p class="math reveal-step">= 2[2x<sup>2</sup> + x − 8x − 4]</p><p class="math reveal-step">= 2[x(2x + 1) − 4(2x + 1)]</p><p class="math reveal-step accent">= 2(x − 4)(2x + 1)</p><p class="math check reveal-step">Check: 2(2x<sup>2</sup> + x − 8x − 4) = 4x<sup>2</sup> − 14x − 8.</p></div>
+  <footer class="foot"><span>−4(2x + 1) = −8x − 4 · THE OUTSIDE GCF STAYS</span><span>08 / 13</span></footer>
+</section>
+<section class="slide" data-title="Keep original restrictions" data-minutes="3" aria-hidden="true">
+  <p class="eyebrow">FACTOR BEFORE CANCELING</p><h2>Restrictions survive cancellation</h2>
+  <p class="math medium"><span class="fraction"><span>x<sup>2</sup> − 9</span><span>x<sup>2</sup> + x − 12</span></span> <span class="reveal-step">= <span class="fraction"><span>(x − 3)(x + 3)</span><span>(x − 3)(x + 4)</span></span></span></p>
+  <p class="reveal-step" style="margin-top:36px">From the original denominator: <span class="math">x ≠ 3, −4</span>.</p>
+  <p class="math medium reveal-step accent">= <span class="fraction"><span>x + 3</span><span>x + 4</span></span>, &nbsp; x ≠ 3, −4</p>
+  <p class="rule reveal-step" style="margin-top:32px">Cancel a whole factor. Keep <strong>both</strong> original restrictions.</p>
+  <footer class="foot"><span>WHY IS x = 3 STILL EXCLUDED?</span><span>09 / 13</span></footer>
+</section>
+<section class="slide" data-title="A final self-check" data-minutes="1" aria-hidden="true">
+  <p class="eyebrow">BEFORE YOU FINISH A PROBLEM</p><h2>Make the reasoning visible</h2>
+  <ol class="checklist"><li>Does each line still equal the original expression?</li><li>For grouping: did you show the pair and the split?</li><li>Did you keep the GCF and check by expanding?</li><li>For a fraction: did you keep every original restriction?</li></ol>
+  <footer class="foot"><span>YOU CAN CHECK YOUR OWN WORK</span><span>10 / 13</span></footer>
+</section>
+<section class="slide" data-title="Quiz 1 setup" data-minutes="2" aria-hidden="true">
+  <p class="eyebrow">QUIZ 1 · IN CLASS</p><h2>One page. Show your work.</h2>
+  <p class="quiz-meta">6 questions &nbsp;·&nbsp; 100 points &nbsp;·&nbsp; 25 minutes</p>
+  <ol class="ready-list"><li>Write your name in the top-right box.</li><li>Work inside each question’s area, beside its expression.</li><li>Follow the announced resource rules.</li><li>Wait for the instruction to begin.</li></ol>
+  <button class="launch-quiz" id="beginQuiz" type="button">Begin quiz · start 25:00</button>
+  <footer class="foot"><span>EACH STUDENT RECEIVES ONE VERSION, A OR B</span><span>11 / 13</span></footer>
+</section>
+<section class="slide quiz-slide" data-title="Quiz 1 in progress" data-minutes="25" aria-hidden="true">
+  <p class="eyebrow">QUIZ 1</p><h2>Time remaining</h2><p class="quiz-time" id="quizTime">25:00</p><p class="quiz-warning" id="quizWarning">Work independently. Show your reasoning.</p><p class="quiet" style="font-size:27px">Keep your work inside the question areas.</p>
+  <footer class="foot"><span>MATH 130 · SEPTEMBER 2, 2026</span><span>12 / 13</span></footer>
+</section>
+<section class="slide" data-title="Stop and submit" data-minutes="3" aria-hidden="true">
+  <p class="eyebrow">QUIZ 1 · SUBMIT</p><h2 class="closing">Please stop writing.</h2><p class="subtitle">Check that your name is on the page.<br>Hand in your quiz as directed.</p><p class="quiet" style="margin-top:43px">Make sure your page has been collected before leaving.</p>
+  <footer class="foot"><span>THANK YOU</span><span>13 / 13</span></footer>
+</section>
+<div class="progress" id="progress"></div>
+</div></main>
+<nav class="toolbar" aria-label="Presentation controls">
+  <button id="prev" type="button" title="Previous step or slide (Left arrow)">←</button>
+  <select id="jump" aria-label="Jump to slide"></select>
+  <button id="next" type="button" title="Next step or slide (Right arrow / Space)">→</button>
+  <button id="reveal" type="button" title="Reveal or hide all worked steps on this slide (R)">Reveal</button>
+  <div class="timer"><span class="phase" id="phaseLabel">Review · not started</span><output id="timerDisplay" aria-label="Timer remaining">20:00</output></div>
+  <button id="timerToggle" type="button" title="Start or pause the timer (T)">Start review</button>
+  <button id="quizSetup" type="button" title="End review and prepare to distribute the quiz (Q)">Quiz setup</button>
+  <button id="notes" type="button" title="Show instructor notes on this screen (N)">Notes</button>
+  <button id="fullscreen" type="button" title="Toggle full screen (F)">Full screen</button>
+  <button id="restart" type="button" title="Reset the whole session after confirmation">Reset</button>
+  <a href="../130Test1.html#tab-slides">Unit 1</a>
+</nav>
+<p class="screen-reader" id="announcement" role="status" aria-live="polite"></p>
+<dialog id="notesDialog" aria-labelledby="notesHeading">
+ <header><h2 id="notesHeading">Instructor notes</h2><button id="closeNotes" type="button">Close</button></header>
+ <p class="notice"><strong>These notes appear on the shared screen.</strong> Close before projecting. No quiz questions or quiz answers are included in this deck.</p>
+ <h3 style="font-size:22px" id="noteSlideTitle"></h3><p class="notes-copy" id="noteText"></p>
+ <details><summary>50-minute plan and controls</summary>
+ <table><thead><tr><th>Elapsed time</th><th>Slides</th><th>Action</th></tr></thead><tbody>
+ <tr><td>0–4 min</td><td>1–3</td><td>Open and retrieve intervals / exponents.</td></tr>
+ <tr><td>4–10 min</td><td>4–6</td><td>GCF, then a complete positive ac example.</td></tr>
+ <tr><td>10–16 min</td><td>7–8</td><td>Independent GCF + signed grouping; debrief.</td></tr>
+ <tr><td>16–20 min</td><td>9–10</td><td>Rational restrictions and final self-check.</td></tr>
+ <tr><td>20–22 min</td><td>11</td><td>Distribute one quiz page per student.</td></tr>
+ <tr><td>22–47 min</td><td>12</td><td>25 uninterrupted minutes for Quiz 1.</td></tr>
+ <tr><td>47–50 min</td><td>13</td><td>Stop and collect all pages.</td></tr>
+ </tbody></table>
+ <p><strong>Start review</strong> starts the 20-minute review countdown. At zero the deck moves to setup and starts its 2-minute countdown. The quiz does not begin automatically: click <strong>Begin quiz</strong> only after distribution and instructions. It always starts a full 25 minutes. At zero, the deck moves to collection and starts a 3-minute countdown.</p>
+ <p>If you finish review early, choose <strong>Quiz setup</strong>. If behind, stop reviewing; do not borrow the quiz’s 25 minutes. For a late start, use slides 5–8 as the short route, then give the restrictions reminder and distribute. Apply established accommodations separately; do not shorten anyone’s authorized time.</p>
+ <p>Arrows / Space advance one worked step at a time. R toggles worked steps, T pauses/resumes the timer, Q opens quiz setup, N opens these notes, F toggles full screen, B blanks/unblanks the slide. End opens quiz setup. During the quiz, review navigation is locked to keep solutions off the screen. Reset asks for confirmation. Timer state survives a reload in the same tab when browser storage is available; a warning appears if storage is unavailable.</p>
+ <p>All review work can be done in existing notebooks. No Top Hat setup, entrance handout, separate exit ticket, or new ALEKS account setup is needed. No new LCD or rational-addition material is introduced before the quiz.</p>
+ </details>
+ <details><summary>Quiz administration and sources</summary><p>Use the separately prepared Guide V2 A/B print master: single-sided, one page per student, alternating versions. Keep the instructor key private. Announce existing resource policies rather than changing them today. Do not display quiz answer keys during administration.</p><p>[Sources] Course sequence: August 28 completed foundations, August 31 factoring-by-grouping lecture, and the separately prepared Quiz 1 Guide V2 package. Today is Wednesday, September 2, 2026. The 50-minute class duration is carried forward from the established session plan. The review expressions were written for this deck and differ from both quiz versions. Canvas dates are unchanged; homework remains in ALEKS.</p></details>
+</dialog>
+<script>
+(() => {
+ 'use strict';
+ const slides=[...document.querySelectorAll('.slide')], $=id=>document.getElementById(id);
+ const SETUP=10, QUIZ=11, COLLECT=12, DURATIONS={review:1200,setup:120,quiz:1500,collect:180};
+ const STORAGE='math130-sep02-quiz1-session-v1';
+ const notes=[
+  '0–1 minute. Start the review timer as class begins. Say: “We will use the first part of class to make our methods visible, then you will have 25 minutes for Quiz 1.” Students use existing notes or a notebook; no extra paper is distributed for review.',
+  '1–3 minutes. Give about 60 seconds of individual writing, then a brief comparison. Ask one student for the endpoint explanation and another for the exponent subtraction. Do not launch a separate polling tool.',
+  '3–4 minutes. Interval: (−2,7]. Quotient: coefficient 15/20=3/4; exponent 3−6=−3, so 3/(4x³). Correct only these two likely errors: confusing included endpoints and subtracting exponents in reverse.',
+  '4–6 minutes. Ask for the full GCF before revealing. Reveal each line separately. Stress that x²−4 is a difference of squares, not (x−2)², and that 9 remains outside. Expand the inner factors to verify.',
+  '6–8 minutes. Ask for ac and the required sum before revealing 9 and 4. Check both 9·4=36 and 9+4=13. Replace 13x with 9x+4x. The reverse split 4x+9x is also valid.',
+  '8–10 minutes. Factor each group before the final binomial. The common factor is 2x+3. The reverse split gives 2x(3x+2)+3(3x+2), which is equally valid. Expand all four products to check the middle coefficient.',
+  '10–13 minutes. Allow individual work, then a short comparison. Circulate for three things: GCF 2 first; inner ac=−8 rather than the original ac; a signed pair with sum −7. If time is tight, have students complete the split and grouping lines before discussing the check.',
+  '13–16 minutes. Reveal the solution one line at a time. Ask students to distribute −4 across (2x+1): both terms become negative. The reverse split is valid: 2[2x(x−4)+1(x−4)]. Retain the outside GCF 2. Expand the binomials, then distribute 2.',
+  '16–19 minutes. Ask students to factor both polynomials and state the original exclusions before revealing cancellation. Numerator=(x−3)(x+3); denominator=(x−3)(x+4). The reduced fraction is (x+3)/(x+4), but x=3 is still excluded. Do not move on to LCDs or addition.',
+  '19–20 minutes. Read the self-check once. This is the last review slide. End the review at minute 20 even if discussion is unfinished. The review timer will move to setup automatically when it reaches zero.',
+  '20–22 minutes. Distribute the PRIVATE Guide V2 blank master, one A or B page per student. Ensure each student has one page, not both versions. Announce existing resource rules and accommodations. Click Begin quiz only when everyone is ready; this gives a full 25 minutes.',
+  '22–47 minutes. The review controls are locked while the quiz timer is running or paused. Do not show earlier worked examples or reveal quiz solutions. Use Pause only for a class-wide interruption; resume with the remaining time. Follow approved accommodations separately. Warnings appear at 5 minutes and 1 minute.',
+  '47–50 minutes. Stop writing and collect every quiz page. Check names during collection without grading on the spot. Do not add an exit ticket. Store scans for the private grading workflow; confirm the A/B version and perform the required manual sign-sensitive review before releasing grades.'
+ ];
+ let state={slide:0,phase:'review',remaining:1200,deadline:null,status:'idle',steps:{}};
+ let storageOK=true;
+ try {const saved=JSON.parse(sessionStorage.getItem(STORAGE)||'null');if(saved&&DURATIONS[saved.phase]&&Number.isFinite(saved.remaining)&&Number.isInteger(saved.slide)&&saved.slide>=0&&saved.slide<slides.length&&['idle','running','paused','done'].includes(saved.status))state={...state,...saved};}catch{storageOK=false;}
+ function save(){try{sessionStorage.setItem(STORAGE,JSON.stringify(state));}catch{storageOK=false;}}
+ const locked=()=>state.phase==='quiz';
+ const format=seconds=>`${String(Math.floor(Math.max(0,seconds)/60)).padStart(2,'0')}:${String(Math.max(0,seconds)%60).padStart(2,'0')}`;
+ function remaining(){return state.status==='running'?Math.max(0,Math.ceil((state.deadline-Date.now())/1000)):state.remaining;}
+ function announce(text){$('announcement').textContent=text;}
+ function fit(){const view=document.querySelector('.viewport');document.documentElement.style.setProperty('--scale',Math.min(view.clientWidth/1280,view.clientHeight/720));}
+ function fragments(){return [...slides[state.slide].querySelectorAll('.reveal-step')];}
+ function display(){
+   slides.forEach((slide,i)=>{slide.classList.toggle('active',i===state.slide);slide.setAttribute('aria-hidden',String(i!==state.slide));slide.inert=i!==state.slide;});
+   const count=state.steps[state.slide]||0;
+   fragments().forEach((part,i)=>{part.classList.toggle('shown',i<count);part.setAttribute('aria-hidden',String(i>=count));});
+   $('jump').value=String(state.slide);$('prev').disabled=locked()||state.slide===0;$('next').disabled=locked()||state.slide>=COLLECT;
+   $('jump').disabled=locked();$('reveal').disabled=locked()||!fragments().length;
+   $('reveal').textContent=fragments().length&&count===fragments().length?'Hide steps':'Reveal';
+   $('quizSetup').disabled=locked()||state.phase==='collect';
+   $('progress').style.width=`${(state.slide+1)/slides.length*100}%`;
+   $('noteSlideTitle').textContent=`Slide ${state.slide+1} · ${slides[state.slide].dataset.title}`;
+   $('noteText').textContent=notes[state.slide];
+   $('beginQuiz').disabled=state.phase==='quiz'||state.phase==='collect';
+   tick(false);save();
+ }
+ function phase(phaseName){state.phase=phaseName;state.remaining=DURATIONS[phaseName];state.deadline=Date.now()+state.remaining*1000;state.status='running';state.slide=phaseName==='setup'?SETUP:phaseName==='quiz'?QUIZ:phaseName==='collect'?COLLECT:state.slide;display();announce(phaseName==='quiz'?'Quiz started. 25 minutes.':phaseName==='collect'?'Please stop writing. Submit your quiz.':'Quiz setup.');}
+ function setup(){if(locked()||state.phase==='collect')return;if(state.phase!=='setup')phase('setup');else{state.slide=SETUP;display();}}
+ function go(index){
+   if(locked())return;
+   index=Math.min(COLLECT,Math.max(0,index));
+   if(index===SETUP){setup();return;}
+   if(index===QUIZ){setup();return;}
+   if(index===COLLECT&&state.phase!=='collect'){setup();return;}
+   state.slide=index;display();
+ }
+ function advance(){if(locked())return;const parts=fragments(),count=state.steps[state.slide]||0;if(count<parts.length){state.steps[state.slide]=count+1;display();}else go(state.slide+1);}
+ function previous(){if(locked())return;const count=state.steps[state.slide]||0;if(count>0){state.steps[state.slide]=count-1;display();}else go(state.slide-1);}
+ function reveal(){if(locked())return;const count=fragments().length;state.steps[state.slide]=(state.steps[state.slide]||0)===count?0:count;display();}
+ function toggleTimer(){
+   if(state.status==='done')return;
+   if(state.status==='running'){state.remaining=remaining();state.deadline=null;state.status='paused';}
+   else{state.deadline=Date.now()+state.remaining*1000;state.status='running';}
+   tick(false);save();
+ }
+ function tick(transition=true){
+   const left=remaining();
+   if(transition&&left===0&&state.status==='running'){
+     if(state.phase==='review'){phase('setup');return;}
+     if(state.phase==='quiz'){phase('collect');return;}
+     state.status='done';state.remaining=0;state.deadline=null;save();
+   }
+   const labels={review:'Review',setup:'Quiz setup',quiz:'Quiz',collect:'Collection'};
+   $('timerDisplay').textContent=format(left);
+   $('phaseLabel').textContent=labels[state.phase]+(state.status==='paused'?' · paused':state.status==='idle'?' · not started':state.status==='done'?' · complete':'');
+   $('timerToggle').textContent=state.status==='running'?'Pause':state.status==='idle'?'Start review':state.status==='paused'?'Resume':'Complete';
+   $('timerToggle').disabled=state.status==='done';
+   $('timerToggle').title=storageOK?'Start or pause the timer (T)':'Browser storage unavailable: keep this tab open; timer will not survive reload.';
+   if(!storageOK)$('phaseLabel').textContent+=' · keep tab open';
+   $('quizTime').textContent=state.phase==='quiz'?format(left):'25:00';
+   $('quizWarning').textContent=state.phase==='quiz'&&state.status==='paused'?'Timer paused. Follow your instructor’s directions.':left<=60&&state.phase==='quiz'?'1 minute or less remains.':left<=300&&state.phase==='quiz'?'5 minutes or less remain.':'Work independently. Show your reasoning.';
+   slides[QUIZ].classList.toggle('urgent',state.phase==='quiz'&&left<=60);
+ }
+ slides.forEach((slide,i)=>{const option=document.createElement('option');option.value=i;option.textContent=`${i+1}. ${slide.dataset.title}`;$('jump').append(option);});
+ $('prev').addEventListener('click',previous);$('next').addEventListener('click',advance);$('reveal').addEventListener('click',reveal);
+ $('jump').addEventListener('change',e=>go(Number(e.target.value)));$('timerToggle').addEventListener('click',toggleTimer);$('quizSetup').addEventListener('click',setup);
+ $('beginQuiz').addEventListener('click',()=>{if(state.phase!=='quiz'&&state.phase!=='collect')phase('quiz');});
+ $('notes').addEventListener('click',()=>$('notesDialog').showModal());$('closeNotes').addEventListener('click',()=>$('notesDialog').close());
+ function fullScreen(){if(document.fullscreenElement)document.exitFullscreen?.().catch(()=>{});else document.documentElement.requestFullscreen?.().catch(()=>announce('Full screen is unavailable; use the browser full-screen command.'));}
+ $('fullscreen').addEventListener('click',fullScreen);
+ $('restart').addEventListener('click',()=>{if(confirm('Reset this class session and all timers? This discards the current quiz countdown.')){state={slide:0,phase:'review',remaining:1200,deadline:null,status:'idle',steps:{}};document.body.classList.remove('blanked');display();}});
+ document.addEventListener('keydown',event=>{
+   if($('notesDialog').open||/INPUT|TEXTAREA|SELECT/.test(event.target.tagName)||event.altKey||event.ctrlKey||event.metaKey)return;
+   if(event.target.tagName==='BUTTON'&&[' ','Enter'].includes(event.key))return;
+   const key=event.key.toLowerCase();
+   if(['arrowright','arrowleft',' ','pagedown','pageup','home','end','r','t','q','n','f','b'].includes(key))event.preventDefault();
+   if(['arrowright',' ','pagedown'].includes(key))advance();else if(['arrowleft','pageup'].includes(key))previous();
+   else if(key==='home')go(0);else if(key==='end'||key==='q')setup();else if(key==='r')reveal();else if(key==='t')toggleTimer();
+   else if(key==='n')$('notesDialog').showModal();else if(key==='f')fullScreen();else if(key==='b')document.body.classList.toggle('blanked');
+ });
+ window.addEventListener('resize',fit);document.addEventListener('visibilitychange',()=>tick());
+ if(state.phase==='quiz')state.slide=QUIZ;
+ display();fit();tick();setInterval(tick,250);
+})();
+</script>
+</body>
+</html>

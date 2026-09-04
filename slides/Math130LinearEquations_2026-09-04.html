@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MATH 130 Friday September 4 data-informed lecture on equations with fractions, formula rearrangement, rational equations, and quadratic roots">
+  <title>MATH 130 - Equations with Fractions and Roots - September 4, 2026</title>
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="framework/math130-slides.css">
+  <script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]]}};</script>
+  <script defer src="vendor/mathjax/tex-chtml.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#lecture-slides">Skip to lecture slides</a>
+  <div class="reveal" id="lecture-slides"><div class="slides">
+
+<section class="title-slide" data-title="Equations with Fractions and Roots" data-block-id="math130-20260904-title" data-phase="activate" data-component="title" data-objectives="" data-minutes="1">
+  <p class="eyebrow">MATH 130 · FRIDAY, SEPTEMBER 4</p>
+  <h1>Equations with Fractions and Roots</h1>
+  <p class="subtitle">Clear denominators, rearrange formulas, and turn factors into solutions</p>
+  <p class="lecture-meta">50 minutes · Quiz 2 on Wednesday, September 9 at 2:10 PM</p>
+  <aside class="notes"><p>0–1 minute. Students need only their existing notes or notebook. No paper handout or Top Hat setup is required. Explain that today’s examples were selected from the current class ALEKS results.</p><p>[Sources] Local course schedule in 130Test1.html and ALEKS aggregate screenshots supplied by the instructor on September 4.</p></aside>
+</section>
+
+<section class="component-slide component-roadmap" data-title="What the class data says" data-block-id="math130-20260904-data" data-phase="activate" data-component="roadmap" data-objectives="u1b-linear u1b-formula u1b-rational u1b-roots" data-minutes="3">
+  <h2>What the class data says</h2>
+  <div class="comparison-grid">
+    <div class="component-card"><span class="card-label">Review R.6</span><p style="font-size:1.55em"><strong>61%</strong></p><p>Rebuild rational-expression skills where they support equation solving.</p></div>
+    <div class="component-card"><span class="card-label">Sections 1.1, 1.2, 1.4</span><p style="font-size:1.55em"><strong>42%</strong></p><p>Prioritize fractional equations, special cases, formulas, and roots.</p></div>
+  </div>
+  <div class="formula-focus" style="margin-top:24px"><p><strong>Today’s pathway:</strong> restrictions → clear fractions → classify solutions → rearrange → solve rational and quadratic equations.</p></div>
+  <p class="slide-meta"><span>Focus · 3 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>1–4 minutes. These are aggregate progress percentages, not grades. Name the priorities without singling out students. Canvas remains the authority for the September 9 due date; the content emphasis is adjusted to match current ALEKS evidence.</p><p>[Sources] ALEKS screenshots: Review R.6 at 61% and Sections 1.1, 1.2, 1.4 at 42%; local 130Test1.html schedule.</p></aside>
+</section>
+
+<section class="component-slide component-poll" data-title="Entrance check: prerequisites" data-block-id="math130-20260904-entrance" data-phase="activate" data-component="poll" data-objectives="u1b-rational u1b-linear" data-minutes="5">
+  <h2>Entrance check: prerequisites</h2><span class="pacing-badge">Work in your notes · 3 minutes</span>
+  <div class="poll-panel">
+    <ol>
+      <li>State the restriction: $\dfrac{x+2}{x-3}$.</li>
+      <li>Simplify: $\dfrac{6x^2-12x}{3x}$.</li>
+      <li>Solve: $\dfrac{x}{2}+3=7$.</li>
+    </ol>
+    <button class="answer-toggle" type="button" data-answer-toggle="math130-20260904-entrance-answer">Reveal check</button>
+    <div id="math130-20260904-entrance-answer" class="solution-panel" data-answer hidden><span class="card-label">Check</span><p>$x\ne3$ &nbsp;&nbsp; $2x-4$, with $x\ne0$ &nbsp;&nbsp; $x=8$</p></div>
+  </div>
+  <p class="slide-meta"><span>Retrieve · 5 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>4–9 minutes. Give three quiet minutes, then check quickly. Item 2 must retain the original restriction x≠0 even after cancellation. If fewer than two-thirds are secure on item 2, explicitly factor the numerator before canceling.</p><p>[Sources] ALEKS R.6 topics on restrictions, GCF factoring, and equivalent rational expressions. New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Clear fractions before solving" data-block-id="math130-20260904-clear-fractions" data-phase="model" data-component="worked-example" data-objectives="u1b-linear" data-minutes="6">
+  <h2>Clear fractions before solving</h2>
+  <div class="worked-example">
+    <div class="example-prompt"><span class="card-label">Solve and check</span><p>$\dfrac{x+1}{3}-\dfrac{x-2}{4}=2$</p></div>
+    <ol class="worked-steps">
+      <li class="fragment">LCD $=12$. Multiply <strong>every term</strong> by $12$.</li>
+      <li class="fragment">$4(x+1)-3(x-2)=24$</li>
+      <li class="fragment">$4x+4-3x+6=24$, so $x=14$.</li>
+      <li class="fragment">Check: $15/3-12/4=5-3=2$.</li>
+    </ol>
+  </div>
+  <div class="warning-panel" style="margin-top:24px"><p>Keep each numerator grouped until after the LCD is distributed.</p></div>
+  <p class="slide-meta"><span>Model · 6 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>9–15 minutes. This directly addresses the low-progress fractional-coefficient and binomial-denominator equation skills. Ask students what 12÷3 and 12÷4 contribute before revealing the distributed equation. Check in the original equation.</p><p>[Sources] ALEKS Sections 1.1, 1.2, 1.4 topics on fractional coefficients and binomial denominators. New example written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-comparison" data-title="One, none, or infinitely many" data-block-id="math130-20260904-special-cases" data-phase="explain" data-component="comparison" data-objectives="u1b-linear" data-minutes="5">
+  <h2>One, none, or infinitely many</h2>
+  <div class="comparison-grid">
+    <div class="component-card"><span class="card-label">True statement remains</span><p>$2(x-3)=2x-6$</p><p class="fragment">$2x-6=2x-6$</p><p class="fragment"><strong>Infinitely many solutions</strong></p></div>
+    <div class="component-card"><span class="card-label">False statement remains</span><p>$\dfrac{x+1}{2}=\dfrac{x+5}{2}$</p><p class="fragment">$x+1=x+5$</p><p class="fragment"><strong>No solution</strong></p></div>
+  </div>
+  <div class="check-panel" style="margin-top:24px"><p>If the variable remains, solve for one value. If it disappears, classify the statement.</p></div>
+  <p class="slide-meta"><span>Explain · 5 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>15–20 minutes. Have students simplify both examples before revealing the labels. Emphasize that “all real numbers” is not the same as x=0. Ask what remains after subtracting x from both sides in the second example.</p><p>[Sources] ALEKS topic “Solving equations with zero, one, or infinitely many solutions,” shown at 29% progress. New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Rearrange a formula with fractions" data-block-id="math130-20260904-formula" data-phase="model" data-component="worked-example" data-objectives="u1b-formula" data-minutes="5">
+  <h2>Rearrange a formula with fractions</h2>
+  <div class="worked-example">
+    <div class="example-prompt"><span class="card-label">Solve for b</span><p>$d=\dfrac{a+b}{c}$</p></div>
+    <ol class="worked-steps">
+      <li class="fragment">Restriction: $c\ne0$.</li>
+      <li class="fragment">Clear the denominator: $cd=a+b$.</li>
+      <li class="fragment">Isolate the requested variable: $b=cd-a$.</li>
+      <li class="fragment">Check by substituting $cd-a$ for $b$.</li>
+    </ol>
+  </div>
+  <div class="formula-focus" style="margin-top:24px"><p>Treat letters like numbers. Undo operations in reverse order and preserve grouping.</p></div>
+  <p class="slide-meta"><span>Model · 5 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>20–25 minutes. Connect literal equations to the same equivalence moves students use with x. After the model, ask students orally how to solve V=(1/3)Bh for h: multiply by 3, then divide by B.</p><p>[Sources] ALEKS formula-rearrangement topics, including a linear equation with fractions at 37% and rational-equation formula type 2 at 20%. New example written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Solve a rational equation safely" data-block-id="math130-20260904-rational-equation" data-phase="model" data-component="worked-example" data-objectives="u1b-rational" data-minutes="5">
+  <h2>Solve a rational equation safely</h2>
+  <div class="worked-example">
+    <div class="example-prompt"><span class="card-label">Solve and verify</span><p>$\dfrac{2}{x-1}=\dfrac{3}{x+2}$</p></div>
+    <ol class="worked-steps">
+      <li class="fragment">Restrictions: $x\ne1,-2$.</li>
+      <li class="fragment">Multiply by $(x-1)(x+2)$: $2(x+2)=3(x-1)$.</li>
+      <li class="fragment">$2x+4=3x-3$, so $x=7$.</li>
+      <li class="fragment">$7$ is allowed, and both sides equal $1/3$.</li>
+    </ol>
+  </div>
+  <div class="warning-panel" style="margin-top:24px"><p>Write restrictions first. A solution that makes an original denominator zero must be rejected.</p></div>
+  <p class="slide-meta"><span>Model · 5 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>25–30 minutes. Call the method “multiply every term by the LCD.” Cross multiplication is only a shortcut when there is exactly one fraction on each side. Require a denominator check before accepting x=7.</p><p>[Sources] ALEKS R.6 denominator skills and Section 1.1/1.2/1.4 rational-equation topic at 29% progress. New example written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="From factoring to quadratic roots" data-block-id="math130-20260904-quadratic" data-phase="model" data-component="worked-example" data-objectives="u1b-roots" data-minutes="6">
+  <h2>From factoring to quadratic roots</h2>
+  <div class="worked-example">
+    <div class="example-prompt"><span class="card-label">Solve by factoring</span><p>$6x^2+x-2=0$</p></div>
+    <ol class="worked-steps">
+      <li class="fragment">$ac=-12$. Use $4$ and $-3$: $6x^2+4x-3x-2=0$.</li>
+      <li class="fragment">Group: $2x(3x+2)-1(3x+2)=0$.</li>
+      <li class="fragment">Factor: $(2x-1)(3x+2)=0$.</li>
+      <li class="fragment">Zero-product property: $x=\dfrac12$ or $x=-\dfrac23$.</li>
+    </ol>
+  </div>
+  <div class="check-panel" style="margin-top:24px"><p>Factoring produces expressions. Setting each factor equal to zero produces the roots.</p></div>
+  <p class="slide-meta"><span>Connect · 6 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>30–36 minutes. This reconnects Monday’s split-the-middle-term method to the current root-finding skills. Ask students to supply ac, the pair 4 and −3, and the two GCFs before revealing each step.</p><p>[Sources] Prior MATH 130 factoring lesson and ALEKS quadratic-root topics shown at 20–39% progress. New example written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-practice" data-title="Mixed guided practice" data-block-id="math130-20260904-practice" data-phase="practice" data-component="practice" data-objectives="u1b-linear u1b-formula u1b-roots" data-minutes="6">
+  <h2>Mixed guided practice</h2>
+  <div class="practice-panel"><span class="card-label">Work first · compare methods · then reveal</span>
+    <ol>
+      <li>Solve: $\dfrac{2x-1}{3}+\dfrac{x+2}{6}=\dfrac52$.</li>
+      <li>Solve $v=\dfrac{d-d_0}{t}$ for $d$.</li>
+      <li>Solve: $4x^2-12x=0$.</li>
+    </ol>
+    <button class="answer-toggle" type="button" data-answer-toggle="math130-20260904-practice-answer">Reveal solutions</button>
+    <div id="math130-20260904-practice-answer" class="solution-panel dense" data-answer hidden><span class="card-label">Solutions</span><ol><li>LCD $6$: $2(2x-1)+(x+2)=15$, so $x=3$.</li><li>$vt=d-d_0$, so $d=vt+d_0$.</li><li>$4x(x-3)=0$, so $x=0$ or $x=3$.</li></ol></div>
+  </div>
+  <p class="slide-meta"><span>Practice · 6 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>36–42 minutes. Give four minutes for individual work and two for comparison. Require the LCD step in item 1, the inverse-operation step in item 2, and the GCF before the zero-product property in item 3.</p><p>[Sources] Current ALEKS topic gaps across R.6 and Sections 1.1, 1.2, 1.4. New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-practice" data-title="Quiz 2 readiness check" data-block-id="math130-20260904-checkpoint" data-phase="assess" data-component="practice" data-objectives="u1b-linear u1b-formula u1b-roots" data-minutes="6">
+  <h2>Quiz 2 readiness check</h2><span class="pacing-badge">No notes · 4 minutes</span>
+  <div class="practice-panel"><span class="card-label">Show the decisive step</span>
+    <ol>
+      <li>Solve: $\dfrac{x}{3}-\dfrac{x-2}{5}=\dfrac4{15}$.</li>
+      <li>Classify: $\dfrac{x+4}{2}=\dfrac{x-2}{2}+3$.</li>
+      <li>Solve $V=\dfrac13Bh$ for $h$.</li>
+      <li>Solve: $3x^2-7x+2=0$.</li>
+    </ol>
+    <button class="answer-toggle" type="button" data-answer-toggle="math130-20260904-check-answer">Reveal key</button>
+    <div id="math130-20260904-check-answer" class="solution-panel dense" data-answer hidden><span class="card-label">Key</span><ol><li>$x=-1$.</li><li>Infinitely many solutions.</li><li>$h=3V/B$.</li><li>$(3x-1)(x-2)=0$, so $x=1/3$ or $x=2$.</li></ol></div>
+  </div>
+  <p class="slide-meta"><span>Assess · 6 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>42–48 minutes. Students work for four minutes, then self-mark each item as secure, correctable, or not yet secure. Do not collect an extra page. Use the pattern of misses to decide whether the next meeting needs a short reteach before Quiz 2.</p><p>[Sources] September 9 learning window and current ALEKS class-progress evidence. New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-summary" data-title="Choose the next ALEKS target" data-block-id="math130-20260904-exit" data-phase="synthesize" data-component="summary" data-objectives="u1b-linear u1b-formula u1b-rational u1b-roots" data-minutes="2">
+  <h2>Choose the next ALEKS target</h2>
+  <div class="summary-grid">
+    <div class="component-card"><span class="card-label">If fractions caused the miss</span><p>Start with fractional coefficients, binomial denominators, or rational equations.</p></div>
+    <div class="component-card"><span class="card-label">If factoring caused the miss</span><p>Start with roots of $ax^2+bx=0$ or a quadratic with $a&gt;1$.</p></div>
+  </div>
+  <div class="formula-focus" style="margin-top:24px"><p><strong>Quiz 2:</strong> Wednesday, September 9 at 2:10 PM. Continue ALEKS Review R.6 and Sections 1.1, 1.2, and 1.4.</p></div>
+  <p class="slide-meta"><span>Target · 2 min</span><span>Friday, Sep 4</span></p>
+  <aside class="notes"><p>48–50 minutes. Have each student write one specific ALEKS topic to work next. Avoid “review everything.” Remind students that Canvas supplies the master due date and that official quiz coverage may be adjusted by the instructor.</p><p>[Sources] Local 130Test1.html schedule and ALEKS aggregate screenshots supplied September 4.</p></aside>
+</section>
+
+  </div></div>
+  <script src="vendor/reveal/reveal.js"></script>
+  <script>window.MATH130_DECK={"id":"Math130LinearEquations_2026-09-04","title":"Equations with Fractions and Roots","section":"Review R.6 · Sections 1.1, 1.2, 1.4","session":"2026-09-04","duration":50};</script>
+  <script src="framework/math130-slides.js"></script>
+</body>
+</html>

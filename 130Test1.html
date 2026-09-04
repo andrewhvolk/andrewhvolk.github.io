@@ -414,12 +414,15 @@
           <h3>Algebra Foundations: Factor First</h3>
           <p>Intervals, exponent rules, factoring, and rational expressions. ALEKS Review R.1–R.5 is the pacing anchor.</p>
           <div class="sequence-actions"><a href="slides/Math130Unit1A.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q1')">Targeted practice</button><button type="button" onclick="launchQuiz('q1')">Checkpoint</button></div>
+          <p><strong>Class sequence:</strong> <a href="slides/Math130FactorFirst_2026-08-28.html" target="_blank" rel="noopener">Aug 28: Factor first</a> → <a href="slides/Math130CommonDenominators_2026-08-31.html" target="_blank" rel="noopener">Aug 31: Split the middle term and factor by grouping</a> → <a href="slides/Math130Quiz1Review_2026-09-02.html" target="_blank" rel="noopener">Sep 2: Review and in-class Quiz 1</a>. Use the full Unit 1A practice and checkpoint for additional R.1–R.5 review.</p>
+          <p><a href="output/pdf/Math130CommonDenominators_2026-08-31_Handout.pdf" target="_blank" rel="noopener">Open the Aug 31 printable / fillable handout</a> for practice and the exit check on one double-sided sheet.</p>
         </article>
         <article class="sequence-card">
           <div class="sequence-meta"><span>Unit 1B</span><span>Quiz 2 · Sep 9</span></div>
-          <h3>Linear Equations and Lines</h3>
-          <p>Linear equations, formula rearrangement, slope, line forms, and parallel/perpendicular relationships.</p>
-          <div class="sequence-actions"><a href="slides/Math130Unit1B.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q2')">Targeted practice</button><button type="button" onclick="launchQuiz('q2')">Checkpoint</button></div>
+          <h3>Equations, Formulas, and Roots</h3>
+          <p>Fractional and rational equations, formula rearrangement, special cases, and quadratic roots. This emphasis follows the current ALEKS R.6 and Sections 1.1, 1.2, 1.4 evidence.</p>
+          <div class="sequence-actions"><a href="slides/Math130LinearEquations_2026-09-04.html" target="_blank" rel="noopener">Open Sep 4 deck</a><button type="button" onclick="launchPractice('q2')">Targeted practice</button><button type="button" onclick="launchQuiz('q2')">Checkpoint</button></div>
+          <p><strong>Class sequence:</strong> <a href="slides/Math130LinearEquations_2026-09-04.html" target="_blank" rel="noopener">Sep 4: Equations with fractions and roots</a> → ALEKS-targeted practice → Quiz 2 on Sep 9.</p>
         </article>
         <article class="sequence-card">
           <div class="sequence-meta"><span>Unit 1C</span><span>Quiz 3 · Sep 16</span></div>
@@ -642,6 +645,8 @@ const allProblems=[
 // Solve linear
 {id:'solve-lin-a',label:'Solve Linear Equation',pts:'5 pts',topicIdx:5,warning:'When distributing a negative, it flips the sign of EVERY term inside the parentheses.',text:'Solve for x: <span class="k">-9x+26=-4(x-9)</span>',solution:'<div class="step">\u22129x + 26 = \u22124x + 36 \u2192 \u22125x = 10 \u2192 <span class="k">x=-2</span></div>'},
 {id:'solve-lin-b',label:'Solve Linear Equation (Fractions)',pts:'5 pts',topicIdx:5,warning:'When clearing fractions, multiply EVERY term on BOTH sides by the LCD \u2014 don\'t miss any.',text:'Solve for x: <span class="k">-\\frac{1}{2}x-\\frac{4}{3}=\\frac{7x-7}{3}</span>',solution:'<div class="step">Multiply both sides by 6: \u22123x \u2212 8 = 14x \u2212 14 \u2192 \u221217x = \u22126 \u2192 <span class="k">x=\\frac{6}{17}</span></div>'},
+{id:'solve-special',label:'Classify a Linear Equation',pts:'4 pts',topicIdx:5,warning:'If the variable disappears, classify the statement that remains. A true statement means every real number works.',text:'Classify the solution set: <span class="k">3(x-2)+5=3x-1</span>',solution:'<div class="step">Both sides simplify to <span class="k">3x-1</span>, so the equation is true for <b>all real numbers</b>.</div>'},
+{id:'solve-formula',label:'Rearrange a Formula',pts:'4 pts',topicIdx:5,warning:'Clear the denominator before isolating the requested variable, and keep grouped numerators together.',text:'Solve for b: <span class="k">d=\\dfrac{a+b}{c}</span>',solution:'<div class="step">Multiply by c: <span class="k">cd=a+b</span>. Subtract a: <span class="k">b=cd-a</span>, with c\u22600.</div>'},
 // Solve rational
 {id:'solve-rat-a',label:'Solve Rational Equation',pts:'5 pts',topicIdx:5,warning:'Cross-multiplication only works when there\'s a SINGLE fraction on each side of the equals sign.',text:'Solve for x: <span class="k">\\dfrac{6}{x-4}=\\dfrac{10}{x-2}</span>',solution:'<div class="step">Cross-multiply: 6(x\u22122) = 10(x\u22124) \u2192 6x\u221212 = 10x\u221240 \u2192 \u22124x = \u221228 \u2192 <span class="k">x=7</span></div>'},
 {id:'solve-rat-b',label:'Solve Rational Equation',pts:'5 pts',topicIdx:5,warning:'ALWAYS check your answer in the original equation. If it makes any denominator zero, it\'s extraneous \u2014 no solution.',text:'Solve for x: <span class="k">\\dfrac{3}{x-3}=\\dfrac{x}{x-3}+7</span>',solution:'<div class="step">Multiply by (x\u22123): 3 = x + 7(x\u22123) \u2192 3 = 8x \u2212 21 \u2192 x = 3. But x = 3 makes the denominator 0 \u2192 <b>No solution</b></div>'},
@@ -655,7 +660,7 @@ const allProblems=[
 
 const practiceWindows={
   q1:{title:'Quiz 1 foundations',ids:['factor-a','factor-b','absolute-equation','sets-int-a','sets-int-b','sets-fin-a','sets-fin-b','exp-a','exp-b','rat-add','rat-sub','rat-mult']},
-  q2:{title:'Quiz 2 linear equations and lines',ids:['solve-lin-a','solve-lin-b','line-eq','line-par','line-perp']},
+  q2:{title:'Quiz 2 equations, formulas, and roots',ids:['solve-lin-a','solve-lin-b','solve-special','solve-formula','solve-rat-a','solve-rat-b','solve-quad-a','solve-quad-b']},
   q3:{title:'Quiz 3 functions and coordinate geometry',ids:['function-eval','function-domain','midpoint','distance','circle']},
   q4:{title:'Quiz 4 quadratics and applications',ids:['solve-quad-a','solve-quad-b','vertex']},
   test1:{title:'Test 1 mixed retrieval',ids:null}
@@ -724,7 +729,7 @@ const quizQuestions=[
 {stage:'q1',q:'Solve \\(|2x-1|=7\\):',opts:['x=4 only','x=-3 only','x=4 or x=-3','x=3 or x=-4'],ans:2,exp:'Set 2x−1 equal to 7 and −7, then solve both equations.'},
 {stage:'q3',q:'Midpoint of \\((2,6)\\) and \\((8,10)\\):',opts:['(5,8)','(10,16)','(6,4)','(3,2)'],ans:0,exp:'((2+8)/2,(6+10)/2)=(5,8).'},
 {stage:'q3',q:'Circle with center \\((0,3)\\), radius 4:',opts:['x^2+(y-3)^2=4','x^2+(y-3)^2=16','(x-3)^2+y^2=16','x^2+(y+3)^2=16'],ans:1,exp:'(x−0)²+(y−3)²=4²=16.'},
-{stage:'q2',q:'Slope perpendicular to \\(y=2x+1\\):',opts:['2','-2','\\frac{1}{2}','-\\frac{1}{2}'],ans:3,exp:'Perpendicular slopes multiply to −1. 2→−1/2.'},
+{stage:'q2',q:'Classify \\(3(x-2)+5=3x-1\\):',opts:['x=0','x=-1','No solution','Infinitely many solutions'],ans:3,exp:'Both sides simplify to 3x−1, so every real number satisfies the equation.'},
 {stage:'q4',q:'Vertex x-coordinate of \\(f(x)=-3x^2+12x+5\\):',opts:['x=-2','x=2','x=4','x=-4'],ans:1,exp:'x=−12/(2·(−3))=2.'},
 {stage:'q1',q:'Factor \\(x^3-8\\):',opts:['(x-2)(x^2+2x+4)','(x-2)(x^2-2x+4)','(x-2)(x+2)^2','(x-8)(x^2+1)'],ans:0,exp:'Difference of cubes: (a−b)(a²+ab+b²).'},
 {stage:'q4',q:'Solve \\(3x^2+x-2=0\\):',opts:['x=\\frac{2}{3},\\;x=-1','x=\\frac{1}{3},\\;x=-2','x=-\\frac{2}{3},\\;x=1','x=2,\\;x=-\\frac{1}{3}'],ans:0,exp:'(3x−2)(x+1)=0.'},
@@ -732,13 +737,14 @@ const quizQuestions=[
 {stage:'q1',q:'A rational equation with variables in a denominator requires you to:',opts:['Cross multiply only','Check for extraneous solutions','Use the quadratic formula','Ignore restrictions'],ans:1,exp:'Excluded values make denominators zero, so every candidate must be checked.'},
 {stage:'q2',q:'Solve \\(4(2x-3)=5x+9\\):',opts:['x=3','x=7','x=-7','x=\\frac{7}{3}'],ans:1,exp:'8x−12=5x+9, so 3x=21 and x=7.'},
 {stage:'q2',q:'Solve \\(V=\\frac{1}{3}Bh\\) for \\(h\\):',opts:['h=\\frac{V}{3B}','h=\\frac{3V}{B}','h=3BV','h=\\frac{B}{3V}'],ans:1,exp:'Multiply by 3, then divide by B: h=3V/B.'},
-{stage:'q2',q:'The line parallel to \\(y=-2x+1\\) through \\((1,4)\\) is:',opts:['y=-2x+6','y=2x+2','y=-\\frac12x+\\frac92','y=-2x+3'],ans:0,exp:'Parallel means slope −2. Point-slope gives y−4=−2(x−1), so y=−2x+6.'},
+{stage:'q2',q:'Solve \\(\\dfrac{2}{x-1}=\\dfrac{3}{x+2}\\):',opts:['x=-7','x=1','x=7','No solution'],ans:2,exp:'Restrictions are x≠1,−2. Then 2(x+2)=3(x−1), so x=7, which is allowed.'},
+{stage:'q2',q:'Solve \\(3x^2-7x+2=0\\):',opts:['x=-\\frac13 or x=-2','x=\\frac13 or x=2','x=-\\frac23 or x=1','x=\\frac23 or x=-1'],ans:1,exp:'Factor as (3x−1)(x−2)=0, so x=1/3 or x=2.'},
 {stage:'q3',q:'For \\(f(x)=2x^2-5x+1\\), what is \\(f(-3)\\)?',opts:['4','16','34','-2'],ans:2,exp:'Use parentheses: 2(−3)²−5(−3)+1=34.'},
 {stage:'q3',q:'The domain of \\(g(x)=1/(x^2-9)\\) excludes:',opts:['x=0','x=3 only','x=-3 only','x=-3 and x=3'],ans:3,exp:'x²−9=(x−3)(x+3), so both denominator zeros are excluded.'},
 {stage:'q4',q:'The maximum value of \\(g(t)=-5t^2+30t+4\\) is:',opts:['3','34','49','94'],ans:2,exp:'The vertex occurs at t=3, and g(3)=49.'}
 ];
 
-const quizWindows={q1:'Quiz 1 foundations',q2:'Quiz 2 linear equations and lines',q3:'Quiz 3 functions and coordinate geometry',q4:'Quiz 4 quadratics and applications',test1:'Test 1 mixed checkpoint'};
+const quizWindows={q1:'Quiz 1 foundations',q2:'Quiz 2 equations, formulas, and roots',q3:'Quiz 3 functions and coordinate geometry',q4:'Quiz 4 quadratics and applications',test1:'Test 1 mixed checkpoint'};
 let quizQ=[...quizQuestions],activeQuizKey='test1',quizStarted=false,quizIdx=0,quizScore=0,quizAns=false;
 function initQuizView(){
   const hist=loadHist().quiz;
