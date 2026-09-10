@@ -117,7 +117,7 @@
   .quiz-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
   .quiz-progress-bar { flex: 1; height: 6px; background: var(--bg-surface); border-radius: 3px; overflow: hidden; }
   .quiz-progress-fill { height: 100%; background: var(--primary-main); border-radius: 3px; transition: width 0.4s ease; }
-  .quiz-counter { font-family: var(--type-meta-family); font-size: 0.8rem; color: var(--text-muted); var(--bg-surface)-space: nowrap; }
+  .quiz-counter { font-family: var(--type-meta-family); font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
   .quiz-question-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
   .quiz-question { font-size: 1.05rem; margin-bottom: 1.25rem; }
   .quiz-options { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -266,7 +266,7 @@
     .practice-btn-row > * { text-align: center; justify-content: center; }
     .practice-stats-final { gap: 1rem; }
     .progress-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-    .history-table { display: block; overflow-x: auto; var(--bg-surface)-space: nowrap; }
+    .history-table { display: block; overflow-x: auto; white-space: nowrap; }
   }
 
   /* PRINT STYLES */
@@ -325,6 +325,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body class="review-page review-page--sections">
+<a class="skip-to-main" href="#tab-slides">Skip to main content</a>
 <div class="math-review-page">
 <nav class="top-nav" aria-label="Primary">
   <div class="top-nav-inner">
@@ -389,13 +390,10 @@
 
 <nav class="review-section-nav" aria-label="Page sections">
   <div class="review-section-nav__inner">
-    <a href="#tab-slides">Sequence</a>
-    <a href="#tab-topics">Topics</a>
-    <a href="#tab-formulas">Formulas</a>
+    <a href="#tab-slides">Plan</a>
+    <a href="#tab-topics">Learn</a>
     <a href="#tab-practice">Practice</a>
-    <a href="#tab-quiz">Quiz</a>
-    <a href="#tab-checklist">Checklist</a>
-    <a href="#tab-progress">Progress</a>
+    <a href="#tab-checklist">Progress</a>
   </div>
 </nav>
 
@@ -405,51 +403,64 @@
   <div id="tab-slides" class="tab-content active">
     <div class="card review-card unit-sequence">
       <div>
-        <h2 style="margin-top:0">Unit 1: learn → practice → checkpoint</h2>
-        <p>Move through these windows in order. Each HTML deck teaches the skills, includes retrieval and worked practice, and ends with a closed-notes readiness check. Then use the matching targeted pool below. Canvas supplies the master dates; your instructor may adjust official assessment coverage.</p>
+        <p class="section-kicker">Current learning window</p>
+        <h2 style="margin-top:0">Continue with Unit 1C</h2>
+        <p>Learn the current material, complete Sections 2.1, 2.2, and 2.4 in ALEKS, then use the matching practice and checkpoint. Canvas remains the source of truth for dates.</p>
       </div>
-      <div class="sequence-grid">
-        <article class="sequence-card">
-          <div class="sequence-meta"><span>Unit 1A</span><span>Quiz 1 · Sep 2</span></div>
-          <h3>Algebra Foundations: Factor First</h3>
-          <p>Intervals, exponent rules, factoring, and rational expressions. ALEKS Review R.1–R.5 is the pacing anchor.</p>
-          <div class="sequence-actions"><a href="slides/Math130Unit1A.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q1')">Targeted practice</button><button type="button" onclick="launchQuiz('q1')">Checkpoint</button></div>
-          <p><strong>Class sequence:</strong> <a href="slides/Math130FactorFirst_2026-08-28.html" target="_blank" rel="noopener">Aug 28: Factor first</a> → <a href="slides/Math130CommonDenominators_2026-08-31.html" target="_blank" rel="noopener">Aug 31: Split the middle term and factor by grouping</a> → <a href="slides/Math130Quiz1Review_2026-09-02.html" target="_blank" rel="noopener">Sep 2: Review and in-class Quiz 1</a>. Use the full Unit 1A practice and checkpoint for additional R.1–R.5 review.</p>
-          <p><a href="output/pdf/Math130CommonDenominators_2026-08-31_Handout.pdf" target="_blank" rel="noopener">Open the Aug 31 printable / fillable handout</a> for practice and the exit check on one double-sided sheet.</p>
-        </article>
-        <article class="sequence-card">
-          <div class="sequence-meta"><span>Unit 1B</span><span>Quiz 2 · Sep 9</span></div>
-          <h3>Equations, Formulas, and Roots</h3>
-          <p><strong>Quiz 2 scope:</strong> fractional linear equations, formula rearrangement, mixture models, and quadratic equations solved by factoring, completing the square, or the quadratic formula. Rational equations with variable denominators and special-case linear equations remain useful ALEKS and Test 1 review, but they are not on Quiz 2.</p>
-          <div class="sequence-actions"><a href="slides/Math130Quiz2Review_2026-09-07_typeset.pptx" target="_blank" rel="noopener">Download Sep 7 Quiz 2 review</a><a href="slides/Math130LinearEquations_2026-09-04.html" target="_blank" rel="noopener">Open Sep 4 deck</a><button type="button" onclick="launchPractice('q2')">Targeted practice</button><button type="button" onclick="launchQuiz('q2')">Checkpoint</button></div>
-          <p><strong>Class sequence:</strong> <a href="slides/Math130LinearEquations_2026-09-04.html" target="_blank" rel="noopener">Sep 4: Equations with fractions and roots</a> → <a href="slides/Math130Quiz2Review_2026-09-07_typeset.pptx" target="_blank" rel="noopener">Sep 7: Quiz 2 review and ALEKS module checklist</a> → Sep 9: final Quiz 2 review and in-class Quiz 2.</p>
-        </article>
-        <article class="sequence-card">
-          <div class="sequence-meta"><span>Unit 1C</span><span>Quiz 3 · Sep 16</span></div>
+      <div class="sequence-grid sequence-grid--current">
+        <article class="sequence-card sequence-card--current">
+          <div class="sequence-meta"><span>Unit 1C · Current</span><span>Quiz 3 · Sep 16</span></div>
           <h3>Functions and Coordinate Geometry</h3>
-          <p>Functions, domain and range, midpoint, distance, and circles. This closes the Functions/Relations gap in the old review path.</p>
-          <div class="sequence-actions"><a href="slides/Math130CoordinateGeometry_2026-09-11.pptx" target="_blank" rel="noopener">Download Sep 11 coordinate geometry deck</a><a href="slides/Math130Unit1C.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q3')">Targeted practice</button><button type="button" onclick="launchQuiz('q3')">Checkpoint</button></div>
-          <p><strong>Class sequence:</strong> <a href="slides/Math130CoordinateGeometry_2026-09-11.pptx" target="_blank" rel="noopener">Sep 11: distance, midpoint, slope, line equations, intercepts, and circle form</a>. Continue Sections 2.1, 2.2, and 2.4 in ALEKS before Quiz 3.</p>
+          <p>Distance, midpoint, slope, line equations, intercepts, circle form, functions, domain, and range.</p>
+          <div class="sequence-actions"><a href="slides/Math130Unit1C.html" target="_blank" rel="noopener">Open Unit 1C lesson</a><button type="button" onclick="launchPractice('q3')">Practice Unit 1C</button><button type="button" onclick="launchQuiz('q3')">Checkpoint</button></div>
+          <details class="sequence-card__files"><summary>Friday lecture file</summary><p><a href="slides/Math130CoordinateGeometry_2026-09-11.pptx" target="_blank" rel="noopener">Download the Sep 11 coordinate geometry deck</a></p></details>
         </article>
+      </div>
+
+      <section class="sequence-coming" aria-labelledby="unit1-next-title">
+        <p class="section-kicker">Coming next</p>
+        <h3 id="unit1-next-title">Finish Unit 1 and prepare for Test 1</h3>
+        <div class="sequence-grid sequence-grid--next">
         <article class="sequence-card">
           <div class="sequence-meta"><span>Unit 1D</span><span>Quiz 4 · Sep 21</span></div>
           <h3>Quadratic Equations and Applications</h3>
-          <p>Standard form, solving quadratics, the vertex, and contextual interpretation. Sections 2.5 and 3.1 are due Sep 23.</p>
+          <p>Quadratic forms, solving methods, the vertex, and applications.</p>
           <div class="sequence-actions"><a href="slides/Math130Unit1D.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q4')">Targeted practice</button><button type="button" onclick="launchQuiz('q4')">Checkpoint</button></div>
         </article>
         <article class="sequence-card">
           <div class="sequence-meta"><span>Unit 1E</span><span>Test 1 · Sep 23</span></div>
           <h3>Test 1 Mixed Retrieval</h3>
-          <p>Interleaved work from all four learning windows. Use results to return to one targeted pool rather than restarting everything.</p>
+          <p>Mixed work from Units 1A–1D after the four learning windows are complete.</p>
           <div class="sequence-actions"><a href="slides/Math130Unit1E.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('test1')">Mixed practice</button><button type="button" onclick="launchQuiz('test1')">Test checkpoint</button></div>
         </article>
-        <article class="sequence-card">
-          <div class="sequence-meta"><span>Class archive</span><span>Aug 28</span></div>
-          <h3>Friday Factor-First Session</h3>
-          <p>The launch-ready class deck built from the ALEKS reports and entrance-check results. Keep it as a focused intervention, not the entire Unit 1 sequence.</p>
-          <div class="sequence-actions"><a href="slides/Math130FactorFirst_2026-08-28.html" target="_blank" rel="noopener">Open session deck</a></div>
-        </article>
-      </div>
+        </div>
+      </section>
+
+      <details class="sequence-archive">
+        <summary>Previous units and class files</summary>
+        <div class="sequence-grid sequence-grid--archive">
+          <article class="sequence-card">
+            <div class="sequence-meta"><span>Unit 1A · Complete</span><span>Quiz 1 · Sep 2</span></div>
+            <h3>Algebra Foundations: Factor First</h3>
+            <p>Intervals, exponent rules, factoring, and rational expressions.</p>
+            <div class="sequence-actions"><a href="slides/Math130Unit1A.html" target="_blank" rel="noopener">Unit 1A lesson</a><button type="button" onclick="launchPractice('q1')">Practice</button><button type="button" onclick="launchQuiz('q1')">Checkpoint</button></div>
+            <details class="sequence-card__files"><summary>Class files</summary><p><a href="slides/Math130FactorFirst_2026-08-28.html" target="_blank" rel="noopener">Aug 28 lesson</a> · <a href="slides/Math130CommonDenominators_2026-08-31.html" target="_blank" rel="noopener">Aug 31 lesson</a> · <a href="slides/Math130Quiz1Review_2026-09-02.html" target="_blank" rel="noopener">Sep 2 review</a> · <a href="output/pdf/Math130CommonDenominators_2026-08-31_Handout.pdf" target="_blank" rel="noopener">Printable handout</a></p></details>
+          </article>
+          <article class="sequence-card">
+            <div class="sequence-meta"><span>Unit 1B · Complete</span><span>Quiz 2 · Sep 9</span></div>
+            <h3>Equations, Formulas, and Roots</h3>
+            <p>Fractional equations, formula rearrangement, mixtures, and quadratic-solving methods.</p>
+            <div class="sequence-actions"><a href="slides/Math130LinearEquations_2026-09-04.html" target="_blank" rel="noopener">Unit 1B lesson</a><button type="button" onclick="launchPractice('q2')">Practice</button><button type="button" onclick="launchQuiz('q2')">Checkpoint</button></div>
+            <details class="sequence-card__files"><summary>Class file</summary><p><a href="slides/Math130Quiz2Review_2026-09-07_typeset.pptx" target="_blank" rel="noopener">Download the Sep 7 Quiz 2 review</a></p></details>
+          </article>
+          <article class="sequence-card">
+            <div class="sequence-meta"><span>Class archive</span><span>Aug 28</span></div>
+            <h3>Factor-First Session</h3>
+            <p>A focused intervention built from the initial ALEKS and entrance-check results.</p>
+            <div class="sequence-actions"><a href="slides/Math130FactorFirst_2026-08-28.html" target="_blank" rel="noopener">Open session deck</a></div>
+          </article>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -471,6 +482,7 @@
         </table>
       </div>
       <div class="warning-box"><b>Use the sequence by stage.</b> Finish the matching A–D deck, then use its targeted practice and checkpoint. Use the mixed Test 1 pools only after the four learning windows.</div>
+      <div class="sequence-actions"><a href="#tab-formulas">Open the formula sheet</a></div>
     </div>
     <div class="topic-card"><button class="topic-header topic-toggle" type="button"><span class="topic-number">01</span><span class="topic-title">Sets — Intervals, Union, Intersection</span><span class="topic-chevron">▼</span></button><div class="topic-body"><div class="topic-content"><h4>Key Concepts</h4><ul><li><b>Set-builder notation</b>: e.g. <span class="k">\{x \mid x \geq 3\}</span></li><li><b>Interval notation</b>: brackets [ ] include; parentheses ( ) exclude</li><li><b>Union</b> <span class="k">A \cup B</span>: elements in <em>either</em> set</li><li><b>Intersection</b> <span class="k">A \cap B</span>: elements in <em>both</em> sets</li></ul><h4>Common Intervals</h4><div class="formula-box review-formula-box"><span class="k">[a, b] \quad (a, b) \quad [a, \infty) \quad (-\infty, b]</span></div><div class="tip-box review-callout review-callout--tip">⚡ ∞ and −∞ always get parentheses, never brackets!</div><div class="video-embed-label">📺 Video Walkthroughs</div><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=lsvjiAsBZUM" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">How to Find the Intersection and Union of Two Intervals</div><div class="yt-sub">Interval notation with number line visuals</div></div></a><a class="video-link review-video-link" href="https://www.youtube.com/watch?v=fezDDJij25U" target="_blank" rel="noopener" onclick="event.stopPropagation()"><div class="yt-icon"></div><div class="yt-info"><div class="yt-title">Intersection and Union of Discrete Sets</div><div class="yt-sub">Working with finite sets — listing elements in ∩ and ∪</div></div></a></div></div></div>
 
@@ -600,15 +612,15 @@ function renderLatexString(s){return s.replace(/\\?\\\((.+?)\\?\\\)/g,(_,t)=>{co
 setTimeout(()=>{ if(!quizStarted) initQuizView(); if(!practiceInit) initPracticeView(); renderProgress(); },200);
 
 initTopicToggles();
-function toggleTopic(c,btn){c.classList.toggle('open');const trigger=btn||c.querySelector('.topic-toggle');if(trigger)trigger.setAttribute('aria-expanded',String(c.classList.contains('open')));setTimeout(renderMath,100)}
-function initTopicToggles(){document.querySelectorAll('.topic-card').forEach((card,idx)=>{const btn=card.querySelector('.topic-toggle');const body=card.querySelector('.topic-body');if(!btn||!body)return;if(!body.id)body.id=`topic-body-${idx+1}`;btn.setAttribute('aria-controls',body.id);btn.setAttribute('aria-expanded',String(card.classList.contains('open')));btn.addEventListener('click',()=>toggleTopic(card,btn));});}
+function setTopicState(card,trigger,expanded){const body=card.querySelector('.topic-body');card.classList.toggle('open',expanded);if(trigger)trigger.setAttribute('aria-expanded',String(expanded));if(body)body.hidden=!expanded;}
+function toggleTopic(card,btn){const trigger=btn||card.querySelector('.topic-toggle');setTopicState(card,trigger,!card.classList.contains('open'));setTimeout(renderMath,100)}
+function initTopicToggles(){document.querySelectorAll('.topic-card').forEach((card,idx)=>{const btn=card.querySelector('.topic-toggle');const body=card.querySelector('.topic-body');if(!btn||!body)return;if(!body.id)body.id=`topic-body-${idx+1}`;btn.setAttribute('aria-controls',body.id);setTopicState(card,btn,card.classList.contains('open'));btn.addEventListener('click',()=>toggleTopic(card,btn));});}
 function goToTopic(idx){
   // Open the card and scroll to it (all sections visible)
   const cards=document.querySelectorAll('.topic-card');
   const card=cards[idx];
-  if(!card.classList.contains('open'))card.classList.add('open');
   const btn=card.querySelector('.topic-toggle');
-  if(btn)btn.setAttribute('aria-expanded','true');
+  setTopicState(card,btn,true);
   setTimeout(()=>{card.scrollIntoView({behavior:'smooth',block:'start'});renderMath();},100);
 }
 

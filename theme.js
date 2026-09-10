@@ -519,8 +519,8 @@ function ensureMath130FallStyles() {
             box-sizing: border-box;
             width: 100%;
             max-width: var(--site-content-width, min(1180px, calc(100vw - 2rem)));
-            margin: clamp(1.5rem, 4vw, 2.5rem) auto;
-            padding: clamp(1.1rem, 2.4vw, 1.6rem);
+            margin: clamp(1rem, 2.5vw, 1.75rem) auto;
+            padding: clamp(1rem, 2vw, 1.35rem);
             border: 1px solid var(--border-subtle, #e2e8f0);
             border-radius: var(--site-card-radius, 0.75rem);
             background: linear-gradient(180deg, var(--bg-surface, #fff), color-mix(in srgb, var(--primary-main, #2563eb) 6%, var(--bg-surface, #fff)));
@@ -528,8 +528,8 @@ function ensureMath130FallStyles() {
             color: var(--text-main, #0f172a);
         }
         .math130-fall-flow--compact {
-            margin-top: 1.25rem;
-            margin-bottom: 1.25rem;
+            margin-top: 0.9rem;
+            margin-bottom: 0.9rem;
         }
         .math130-fall-flow__header {
             display: grid;
@@ -679,6 +679,7 @@ function ensureMath130FallStyles() {
             .math130-fall-flow {
                 width: min(100vw - 1rem, 100%);
                 border-radius: 0.65rem;
+                margin-block: 0.75rem;
             }
             .math130-fall-flow__actions {
                 flex-direction: column;
@@ -729,6 +730,27 @@ function getMath130NextCanvasDue(now = new Date()) {
     return math130CanvasDueDates.find(([isoDate]) => new Date(isoDate) >= now) || null;
 }
 
+function getMath130NextCanvasDueForUnit(unit, now = new Date()) {
+    if (!unit?.starts || !unit?.ends) return null;
+    const unitStart = new Date(unit.starts);
+    const unitEnd = new Date(unit.ends);
+    return math130CanvasDueDates.find(([isoDate]) => {
+        const due = new Date(isoDate);
+        return due >= now && due >= unitStart && due <= unitEnd;
+    }) || null;
+}
+
+function math130PageLabel(href) {
+    return ({
+        '/courses/math130.html': 'MATH 130 dashboard',
+        '/130Test1.html': 'Unit 1 / Test 1',
+        '/130Test2.html': 'Unit 2 / Test 2',
+        '/130Test3.html': 'Unit 3 / Test 3',
+        '/130Test4.html': 'Final practice',
+        '/math130_final_lecture.html': 'Guided final review'
+    })[href] || 'Related page';
+}
+
 function getMath130ActiveUnit(now = new Date()) {
     return math130FallUnits.find((unit) => unit.starts && unit.ends && now >= new Date(unit.starts) && now <= new Date(unit.ends))
         || math130FallUnits.find((unit) => unit.starts && now < new Date(unit.starts))
@@ -749,19 +771,18 @@ function buildMath130DashboardFlow() {
         <div class="math130-fall-flow__header">
             <p class="math130-fall-flow__kicker">This week in MATH 130</p>
             <h2 id="math130-fall-2026-flow-title">Continue with ${escapeHtml(activeUnit.label)}.</h2>
-            <p class="math130-fall-flow__lede">Use the unit sequence for the lesson deck, its targeted practice, and the next checkpoint. Canvas remains the master source for dates and any coverage adjustment.</p>
+            <p class="math130-fall-flow__lede">Open the current unit for the next lesson, ALEKS priority, practice, and checkpoint.</p>
         </div>
         <div class="math130-fall-flow__notice" role="status">
             <p class="math130-fall-flow__notice-label">Next action</p>
-            <p><strong>Day one is complete:</strong> the class finished the initial knowledge check and set up modular ALEKS learning accounts.</p>
             <p>${nextDueCopy}</p>
         </div>
         <div class="math130-fall-flow__actions">
-            <a class="math130-fall-flow__link" href="${escapeHtml(activeUnit.href)}#tab-slides">Open the current sequence</a>
+            <a class="math130-fall-flow__link" href="${escapeHtml(activeUnit.href)}#tab-slides">Continue ${escapeHtml(activeUnit.label)}</a>
             <a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="https://canvas.liberty.edu/" target="_blank" rel="noopener noreferrer">Check Canvas</a>
         </div>
         <details>
-            <summary>Show the full Fall 2026 meeting calendar</summary>
+            <summary>Full Fall 2026 calendar</summary>
             ${buildMath130ScheduleTable()}
         </details>`;
     return section;
@@ -771,6 +792,16 @@ function buildMath130PageFlow(config) {
     const unit = math130FallUnits.find((entry) => entry.key === config.key);
     if (!unit) return null;
     const rows = math130RowsForUnit(unit);
+    const nextDue = getMath130NextCanvasDueForUnit(unit);
+    const nextDueCopy = nextDue
+        ? `<strong>Next deadline:</strong> ${escapeHtml(nextDue[1])} — ${escapeHtml(nextDue[2])}.`
+        : `<strong>Assessment:</strong> ${escapeHtml(unit.assessment)}.`;
+    const previousLink = config.prev && config.prev !== '/courses/math130.html'
+        ? `<a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="${escapeHtml(config.prev)}">Previous: ${escapeHtml(math130PageLabel(config.prev))}</a>`
+        : '';
+    const nextLink = config.next
+        ? `<a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="${escapeHtml(config.next)}">Next: ${escapeHtml(math130PageLabel(config.next))}</a>`
+        : '';
     const section = document.createElement('section');
     section.id = 'math130-fall-2026-flow';
     section.className = 'math130-fall-flow math130-fall-flow--compact';
@@ -779,16 +810,17 @@ function buildMath130PageFlow(config) {
         <div class="math130-fall-flow__header">
             <p class="math130-fall-flow__kicker">Current assessment window</p>
             <h2 id="math130-fall-2026-flow-title">${escapeHtml(unit.label)} · ${escapeHtml(unit.dates)}</h2>
-            <p class="math130-fall-flow__lede"><strong>${escapeHtml(unit.dates)}:</strong> ${escapeHtml(unit.topics)} <strong>${escapeHtml(unit.assessment)}.</strong></p>
-            <p class="math130-fall-flow__lede"><strong>Coverage status — planned:</strong> ${escapeHtml(unit.coverage)} Canvas or an in-class announcement can confirm or adjust the final coverage.</p>
+            <p class="math130-fall-flow__lede">${nextDueCopy}</p>
         </div>
         <div class="math130-fall-flow__actions">
-            <a class="math130-fall-flow__link" href="/courses/math130.html">Back to MATH 130 Dashboard</a>
-            ${config.prev ? `<a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="${escapeHtml(config.prev)}">Previous</a>` : ''}
-            ${config.next ? `<a class="math130-fall-flow__link math130-fall-flow__link--secondary" href="${escapeHtml(config.next)}">Next</a>` : ''}
+            <a class="math130-fall-flow__link" href="/courses/math130.html">MATH 130 dashboard</a>
+            ${previousLink}
+            ${nextLink}
         </div>
         <details>
-            <summary>Show this assessment window's meeting schedule</summary>
+            <summary>Dates and coverage details</summary>
+            <p class="math130-fall-flow__lede"><strong>Topics:</strong> ${escapeHtml(unit.topics)}</p>
+            <p class="math130-fall-flow__lede"><strong>Planned coverage:</strong> ${escapeHtml(unit.coverage)} Canvas or an in-class announcement can adjust it.</p>
             ${buildMath130ScheduleTable(rows)}
         </details>`;
     return section;
