@@ -410,8 +410,8 @@
       <div class="sequence-grid sequence-grid--current">
         <article class="sequence-card sequence-card--current">
           <div class="sequence-meta"><span>Unit 1C · Current</span><span>Quiz 3 · Sep 16</span></div>
-          <h3>Functions and Coordinate Geometry</h3>
-          <p>Distance, midpoint, slope, line equations, intercepts, circle form, functions, domain, and range.</p>
+          <h3>Coordinate Geometry + Quadratic Applications</h3>
+          <p>Distance, midpoint, slope, line equations, intercepts, and circle form, plus a cumulative quadratic application. Function evaluation and domain move to the next learning window.</p>
           <div class="sequence-actions"><a href="slides/Math130Unit1C.html" target="_blank" rel="noopener">Open Unit 1C lesson</a><button type="button" onclick="launchPractice('q3')">Practice Unit 1C</button><button type="button" onclick="launchQuiz('q3')">Checkpoint</button></div>
           <details class="sequence-card__files"><summary>Friday lecture file</summary><p><a href="slides/Math130CoordinateGeometry_2026-09-11.pptx?v=20260911-1" target="_blank" rel="noopener">Download the Sep 11 coordinate geometry deck</a></p></details>
         </article>
@@ -423,8 +423,8 @@
         <div class="sequence-grid sequence-grid--next">
         <article class="sequence-card">
           <div class="sequence-meta"><span>Unit 1D</span><span>Quiz 4 · Sep 21</span></div>
-          <h3>Quadratic Equations and Applications</h3>
-          <p>Quadratic forms, solving methods, the vertex, and applications.</p>
+          <h3>Quadratics, Applications + Deferred Functions</h3>
+          <p>Quadratic forms, solving methods, the vertex, and applications, followed by function evaluation and domain after Quiz 3.</p>
           <div class="sequence-actions"><a href="slides/Math130Unit1D.html" target="_blank" rel="noopener">Open HTML deck</a><button type="button" onclick="launchPractice('q4')">Targeted practice</button><button type="button" onclick="launchQuiz('q4')">Checkpoint</button></div>
         </article>
         <article class="sequence-card">
@@ -643,6 +643,11 @@ const allProblems=[
 {id:'line-eq',label:'Equation of a Line',pts:'4 pts',topicIdx:8,warning:'Double-check your slope sign when subtracting negatives in the rise/run calculation.',text:'Given <span class="k">A(8,-8)</span> and <span class="k">B(1,16)</span>, find the equation of line AB.',solution:'<div class="step">Slope: <span class="k">m=\\frac{16-(-8)}{1-8}=-\\frac{24}{7}</span>. Point-slope with A:<br><span class="k">y+8=-\\frac{24}{7}(x-8) \\implies y=-\\frac{24}{7}x+\\frac{136}{7}</span></div>'},
 // Circle
 {id:'circle',label:'Circle Equation',pts:'3 pts',topicIdx:7,warning:'The right side is r\u00b2, not r. Radius 5 means you write 25 on the right side.',text:'Write an equation of the circle with center (4, 2) and radius 5.',solution:'<div class="step"><span class="k">(x-4)^2+(y-2)^2=25</span></div>'},
+// Quiz 3 aligned practice: current coordinate geometry plus retained quadratic solving
+{id:'q3-slope',label:'Quiz 3 · Slope from Two Points',pts:'Current ALEKS skill',topicIdx:8,warning:'Subtract coordinates in the same order in the numerator and denominator.',text:'Find the slope of the line through <span class="k">(-2,5)</span> and <span class="k">(4,-7)</span>.',solution:'<div class="step"><span class="k">m=\\dfrac{-7-5}{4-(-2)}=\\dfrac{-12}{6}=-2</span>.</div>'},
+{id:'q3-intercepts',label:'Quiz 3 · Intercepts',pts:'Current ALEKS skill',topicIdx:8,warning:'For the x-intercept set y=0; for the y-intercept set x=0.',text:'Find both intercepts of <span class="k">3x+2y=12</span>.',solution:'<div class="step">Set <span class="k">y=0</span>: <span class="k">3x=12</span>, so the x-intercept is <span class="k">(4,0)</span>.</div><div class="step">Set <span class="k">x=0</span>: <span class="k">2y=12</span>, so the y-intercept is <span class="k">(0,6)</span>.</div>'},
+{id:'q3-quad-area',label:'Quiz 3 · Quadratic Application',pts:'Cumulative skill',topicIdx:5,warning:'Define the dimensions, form an equation equal to zero, and reject a negative length.',text:'A rectangle has area <span class="k">54\\text{ ft}^2</span>. Its length is 3 feet more than its width. Find both dimensions.',solution:'<div class="step">Let the width be <span class="k">x</span>, so the length is <span class="k">x+3</span>. Then <span class="k">x(x+3)=54</span>.</div><div class="step"><span class="k">x^2+3x-54=0=(x+9)(x-6)</span>, so <span class="k">x=-9</span> or <span class="k">x=6</span>.</div><div class="step">Reject the negative length. The rectangle is <b>6 ft by 9 ft</b>.</div>'},
+{id:'q3-quad-motion',label:'Quiz 3 · Quadratic Application',pts:'Cumulative skill',topicIdx:5,warning:'Solve when height equals zero, then reject any negative time.',text:'A ball\'s height is <span class="k">h(t)=-16t^2+48t+64</span>. When does it hit the ground?',solution:'<div class="step">Set height to zero: <span class="k">-16t^2+48t+64=0</span>. Divide by <span class="k">-16</span>: <span class="k">t^2-3t-4=0</span>.</div><div class="step"><span class="k">(t-4)(t+1)=0</span>, so <span class="k">t=4</span> or <span class="k">t=-1</span>.</div><div class="step">Reject negative time. The ball hits the ground after <b>4 seconds</b>.</div>'},
 // Exponents
 {id:'exp-a',label:'Exponent Simplification',pts:'4 pts',topicIdx:2,warning:'When dividing, subtract exponents: top minus bottom. Subtracting a negative means adding.',text:'Simplify with positive exponents only: <span class="k">\\dfrac{m^2 n^{-1} p^{-5}}{m^{-6} n^3 p^7}</span>',solution:'<div class="step">Subtract exponents: <span class="k">m^{2-(-6)}n^{-1-3}p^{-5-7}=m^8 n^{-4}p^{-12}=\\dfrac{m^8}{n^4 p^{12}}</span></div>'},
 {id:'exp-b',label:'Exponent Simplification',pts:'4 pts',topicIdx:2,warning:'Simplify inside the parentheses FIRST (including flipping negative exponents), then raise to the power.',text:'Simplify with positive exponents only: <span class="k">\\left(\\dfrac{3x}{y^{-3}\\cdot 6z^2}\\right)^4</span>',solution:'<div class="step">Simplify inside: <span class="k">\\frac{3x\\cdot y^3}{6z^2}=\\frac{xy^3}{2z^2}</span>. Raise to 4th power: <span class="k">\\frac{x^4 y^{12}}{16z^8}</span></div>'},
@@ -687,8 +692,8 @@ const allProblems=[
 const practiceWindows={
   q1:{title:'Quiz 1 foundations',ids:['factor-a','factor-b','absolute-equation','sets-int-a','sets-int-b','sets-fin-a','sets-fin-b','exp-a','exp-b','rat-add','rat-sub','rat-mult']},
   q2:{title:'Quiz 2 aligned practice · 12 problems',ids:['q2-linear-frac-a','q2-linear-frac-b','q2-formula-a','q2-formula-b','q2-mixture-a','q2-mixture-b','q2-factor-a','q2-factor-b','q2-square-a','q2-square-b','q2-quadratic-formula-a','q2-quadratic-formula-b']},
-  q3:{title:'Quiz 3 functions and coordinate geometry',ids:['function-eval','function-domain','midpoint','distance','circle']},
-  q4:{title:'Quiz 4 quadratics and applications',ids:['solve-quad-a','solve-quad-b','vertex']},
+  q3:{title:'Quiz 3 aligned practice · coordinate geometry + quadratic applications',ids:['midpoint','distance','q3-slope','line-eq','q3-intercepts','circle','q3-quad-area','q3-quad-motion']},
+  q4:{title:'Quiz 4 quadratics, applications, and deferred function skills',ids:['solve-quad-a','solve-quad-b','vertex','function-eval','function-domain']},
   test1:{title:'Test 1 mixed retrieval',ids:null}
 };
 let practiceInit=false,practiceQueue=[],practicePool=[],activePracticeKey='test1',practiceCorrect=0,practiceMissed=0,practiceIdx=0,practiceSolShown=false;
@@ -759,6 +764,10 @@ const quizQuestions=[
 {stage:'q1',q:'Factor \\(x^3-8\\):',opts:['(x-2)(x^2+2x+4)','(x-2)(x^2-2x+4)','(x-2)(x+2)^2','(x-8)(x^2+1)'],ans:0,exp:'Difference of cubes: (a−b)(a²+ab+b²).'},
 {stage:'q4',q:'Solve \\(3x^2+x-2=0\\):',opts:['x=\\frac{2}{3},\\;x=-1','x=\\frac{1}{3},\\;x=-2','x=-\\frac{2}{3},\\;x=1','x=2,\\;x=-\\frac{1}{3}'],ans:0,exp:'(3x−2)(x+1)=0.'},
 {stage:'q3',q:'Distance from \\((0,0)\\) to \\((3,4)\\):',opts:['7','5','25','\\sqrt{7}'],ans:1,exp:'√(9+16)=√25=5.'},
+{stage:'q3',q:'What is the slope of the line through \\((-2,5)\\) and \\((4,-7)\\)?',opts:['-2','2','-\\frac{1}{2}','\\frac{1}{2}'],ans:0,exp:'m=(−7−5)/(4−(−2))=−12/6=−2.'},
+{stage:'q3',q:'What are the intercepts of \\(3x+2y=12\\)?',opts:['(4,0)\\text{ and }(0,6)','(6,0)\\text{ and }(0,4)','(3,0)\\text{ and }(0,2)','(-4,0)\\text{ and }(0,-6)'],ans:0,exp:'Set y=0 to get x=4; set x=0 to get y=6.'},
+{stage:'q3',q:'A rectangle has area \\(54\\text{ ft}^2\\), and its length is 3 ft more than its width. What are its dimensions?',opts:['6\\text{ ft by }9\\text{ ft}','3\\text{ ft by }18\\text{ ft}','9\\text{ ft by }12\\text{ ft}','2\\text{ ft by }27\\text{ ft}'],ans:0,exp:'Let width be x. Then x(x+3)=54, so (x+9)(x−6)=0. Reject x=−9; the dimensions are 6 ft by 9 ft.'},
+{stage:'q3',q:'A ball has height \\(h(t)=-16t^2+48t+64\\). When does it hit the ground?',opts:['1\\text{ second}','3\\text{ seconds}','4\\text{ seconds}','-1\\text{ second}'],ans:2,exp:'Set h(t)=0. Dividing by −16 gives t²−3t−4=0=(t−4)(t+1). Reject t=−1, so t=4 seconds.'},
 {stage:'q1',q:'A rational equation with variables in a denominator requires you to:',opts:['Cross multiply only','Check for extraneous solutions','Use the quadratic formula','Ignore restrictions'],ans:1,exp:'Excluded values make denominators zero, so every candidate must be checked.'},
 {stage:'q2',q:'Clear the fractions and solve: \\(\\dfrac{2x+3}{5}+\\dfrac{x-1}{2}=4\\).',opts:['x=\\frac{13}{3}','x=\\frac{3}{13}','x=4','x=-\\frac{13}{3}'],ans:0,exp:'The LCD is 10. Multiplying every term gives 2(2x+3)+5(x−1)=40, so 9x=39 and x=13/3.'},
 {stage:'q2',q:'Solve \\(Q=r+srt\\) for \\(t\\).',opts:['\\frac{Q-r}{sr}','\\frac{Q}{sr}-r','\\frac{Q-r}{s}','\\frac{r-Q}{sr}'],ans:0,exp:'Subtract r, then divide by sr: t=(Q−r)/(sr).'},
@@ -766,12 +775,12 @@ const quizQuestions=[
 {stage:'q2',q:'Solve by factoring: \\(3x^2-x-2=0\\).',opts:['x=1\\text{ or }x=-\\frac{2}{3}','x=-1\\text{ or }x=\\frac{2}{3}','x=2\\text{ or }x=-\\frac{1}{3}','x=-2\\text{ or }x=\\frac{1}{3}'],ans:0,exp:'Factor as (3x+2)(x−1)=0. The solutions are x=−2/3 and x=1.'},
 {stage:'q2',q:'Solve by completing the square: \\(x^2-4x-6=0\\).',opts:['x=2\\pm\\sqrt{10}','x=-2\\pm\\sqrt{10}','x=4\\pm\\sqrt{6}','x=2\\pm10'],ans:0,exp:'Write x²−4x=6 and add 4 to both sides: (x−2)²=10, so x=2±√10.'},
 {stage:'q2',q:'Use the quadratic formula on \\(4x^2-2x-3=0\\). What are the exact simplified roots?',opts:['x=\\frac{1\\pm\\sqrt{13}}{4}','x=\\frac{-1\\pm\\sqrt{13}}{4}','x=\\frac{1\\pm\\sqrt{52}}{4}','x=\\frac{2\\pm\\sqrt{13}}{8}'],ans:0,exp:'a=4, b=−2, c=−3, so the discriminant is 52. Then x=(2±2√13)/8=(1±√13)/4.'},
-{stage:'q3',q:'For \\(f(x)=2x^2-5x+1\\), what is \\(f(-3)\\)?',opts:['4','16','34','-2'],ans:2,exp:'Use parentheses: 2(−3)²−5(−3)+1=34.'},
-{stage:'q3',q:'The domain of \\(g(x)=1/(x^2-9)\\) excludes:',opts:['x=0','x=3 only','x=-3 only','x=-3 and x=3'],ans:3,exp:'x²−9=(x−3)(x+3), so both denominator zeros are excluded.'},
+{stage:'q4',q:'For \\(f(x)=2x^2-5x+1\\), what is \\(f(-3)\\)?',opts:['4','16','34','-2'],ans:2,exp:'Use parentheses: 2(−3)²−5(−3)+1=34.'},
+{stage:'q4',q:'The domain of \\(g(x)=1/(x^2-9)\\) excludes:',opts:['x=0','x=3 only','x=-3 only','x=-3 and x=3'],ans:3,exp:'x²−9=(x−3)(x+3), so both denominator zeros are excluded.'},
 {stage:'q4',q:'The maximum value of \\(g(t)=-5t^2+30t+4\\) is:',opts:['3','34','49','94'],ans:2,exp:'The vertex occurs at t=3, and g(3)=49.'}
 ];
 
-const quizWindows={q1:'Quiz 1 foundations',q2:'Quiz 2 aligned checkpoint · 6 skills',q3:'Quiz 3 functions and coordinate geometry',q4:'Quiz 4 quadratics and applications',test1:'Test 1 mixed checkpoint'};
+const quizWindows={q1:'Quiz 1 foundations',q2:'Quiz 2 aligned checkpoint · 6 skills',q3:'Quiz 3 aligned checkpoint · coordinate geometry + quadratic applications',q4:'Quiz 4 quadratics, applications, and deferred function skills',test1:'Test 1 mixed checkpoint'};
 let quizQ=[...quizQuestions],activeQuizKey='test1',quizStarted=false,quizIdx=0,quizScore=0,quizAns=false;
 function initQuizView(){
   const hist=loadHist().quiz;
