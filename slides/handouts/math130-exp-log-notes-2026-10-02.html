@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MATH 130 guided notes for Friday October 2: exponential graphs, interest models, and an introduction to logarithms. Add #key to the address to show the instructor key.">
+  <title>MATH 130 Guided Notes - Exponentials to Logarithms - October 2, 2026</title>
+  <style>
+    :root {
+      --ink: #1b2430;
+      --muted: #5a6573;
+      --line: #9aa7b4;
+      --soft: #eef3f7;
+      --accent: #183b5b;
+      --key: #b42318;
+    }
+    * { box-sizing: border-box; }
+    html { background: #d9dee3; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 10.5pt;
+      line-height: 1.35;
+    }
+    .page {
+      background: #fff;
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0.3in auto;
+      padding: 0.5in 0.6in;
+      break-after: page;
+      position: relative;
+    }
+    .page:last-child { break-after: auto; }
+    @page { size: letter; margin: 0; }
+    @media print {
+      html { background: #fff; }
+      .page { margin: 0; box-shadow: none; }
+    }
+    h1, h2, h3 { font-family: "Helvetica Neue", Arial, sans-serif; color: var(--accent); margin: 0; }
+    h1 { font-size: 17pt; }
+    h2 { font-size: 12.5pt; border-bottom: 2px solid var(--accent); padding-bottom: 2px; margin: 12px 0 6px; }
+    h3 { font-size: 10.5pt; margin: 0 0 4px; }
+    p { margin: 3px 0; }
+    .header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; border-bottom: 3px solid var(--accent); padding-bottom: 6px; }
+    .header .meta { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9pt; color: var(--muted); text-align: right; }
+    .name-line { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.5pt; margin-top: 8px; }
+    .kicker { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.5pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .running { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 3px; margin-bottom: 4px; }
+    .footer { position: absolute; bottom: 0.3in; left: 0.6in; right: 0.6in; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8pt; color: var(--muted); display: flex; justify-content: space-between; }
+    .box { border: 1.5px solid var(--line); border-radius: 6px; padding: 7px 9px; margin: 6px 0; }
+    .facts { background: var(--soft); border-color: var(--accent); }
+    .example { border-color: var(--accent); }
+    .example > .label, .try > .label {
+      display: inline-block; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.5pt; font-weight: 700;
+      color: #fff; background: var(--accent); border-radius: 3px; padding: 1px 6px; margin-bottom: 3px;
+    }
+    .try > .label { background: var(--muted); }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .work { position: relative; }
+    .work .ans { display: block; }
+    .blank { display: inline-block; min-width: 1.1in; border-bottom: 1px solid var(--ink); text-align: center; padding: 0 3px; }
+    .blank.short { min-width: 0.6in; }
+    .blank.wide { min-width: 2in; }
+    .ans { visibility: hidden; }
+    body.key .ans { visibility: visible; color: var(--key); }
+    body.key .key-flag { display: inline; }
+    .key-flag { display: none; color: var(--key); font-weight: 700; }
+    ol, ul { margin: 3px 0; padding-left: 20px; }
+    li { margin: 2px 0; }
+    table.values { border-collapse: collapse; font-size: 10pt; margin: 4px 0; }
+    table.values th, table.values td { border: 1px solid var(--line); padding: 2px 8px; text-align: center; min-width: 0.42in; height: 0.3in; }
+    table.values th { background: var(--soft); font-family: "Helvetica Neue", Arial, sans-serif; }
+    table.convert { border-collapse: collapse; width: 100%; font-size: 10.5pt; }
+    table.convert th, table.convert td { border: 1px solid var(--line); padding: 4px 8px; height: 0.36in; }
+    table.convert th { background: var(--soft); font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9pt; text-align: left; }
+    .grid-svg { display: block; }
+    .self { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.5pt; color: var(--muted); white-space: nowrap; }
+    .note { font-size: 9pt; color: var(--muted); }
+  </style>
+  <script>
+    window.MathJax = { tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]] } };
+  </script>
+  <script defer src="../vendor/mathjax/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section class="page">
+  <div class="header">
+    <div>
+      <p class="kicker">MATH 130 · Guided notes · Sections 4.2 and 4.3</p>
+      <h1>From Exponentials to Logarithms</h1>
+    </div>
+    <div class="meta"><span class="key-flag">INSTRUCTOR KEY · </span>Friday, October 2, 2026<br>Quiz 6 (Section 4.3): Wednesday, October 7</div>
+  </div>
+  <p class="name-line">Name ________________________________ &nbsp;&nbsp; Fill in each example as it is worked on the whiteboard.</p>
+
+  <div class="box facts">
+    <h3>Why these topics today</h3>
+    <p>Class ALEKS progress: Section 4.2 is at 56% and Section 4.3 is at 18%. The lowest skills are continuous interest, graphing $b^x$ with its asymptote, converting natural logarithms, and solving exponential equations with logarithms. Today targets exactly those skills.</p>
+  </div>
+
+  <h2>Warm-up</h2>
+  <div class="three">
+    <div class="box"><p>1. Evaluate $2^{-3}$ and $\left(\tfrac12\right)^{-2}$.</p><p class="ans">$\tfrac18$ and $4$</p></div>
+    <div class="box"><p>2. Evaluate $5000(1.04)^3$ to the nearest cent.</p><p class="ans">$\$5624.32$</p></div>
+    <div class="box"><p>3. Use a calculator: $e^{0.5}\approx$ ______</p><p class="ans">$1.6487$</p></div>
+  </div>
+
+  <h2>Part 1 · Exponential functions (Section 4.2)</h2>
+  <div class="box facts">
+    <p>An exponential function has the form $f(x)=b^x$ where $b&gt;0$ and $b\ne$ <span class="blank short"><span class="ans">$1$</span></span>.</p>
+    <div class="two">
+      <div>
+        <p>y-intercept: <span class="blank"><span class="ans">$(0,1)$</span></span></p>
+        <p>Horizontal asymptote: <span class="blank"><span class="ans">$y=0$</span></span></p>
+      </div>
+      <div>
+        <p>Domain: <span class="blank"><span class="ans">$(-\infty,\infty)$</span></span></p>
+        <p>Range: <span class="blank"><span class="ans">$(0,\infty)$</span></span></p>
+      </div>
+    </div>
+    <p>If $b&gt;1$ the graph shows <span class="blank"><span class="ans">growth</span></span>; if $0&lt;b&lt;1$ the graph shows <span class="blank"><span class="ans">decay</span></span>.</p>
+  </div>
+
+  <div class="box example">
+    <span class="label">Whiteboard Example 1</span>
+    <p>Complete the table, plot both functions on the grid, and draw the asymptote as a dashed line: $f(x)=2^x$ and $g(x)=\left(\tfrac13\right)^x$.</p>
+    <div class="two" style="align-items:center">
+      <table class="values">
+        <tr><th>$x$</th><th>$-2$</th><th>$-1$</th><th>$0$</th><th>$1$</th><th>$2$</th></tr>
+        <tr><th>$f(x)=2^x$</th><td><span class="ans">$\tfrac14$</span></td><td><span class="ans">$\tfrac12$</span></td><td><span class="ans">$1$</span></td><td><span class="ans">$2$</span></td><td><span class="ans">$4$</span></td></tr>
+        <tr><th>$g(x)=\left(\tfrac13\right)^x$</th><td><span class="ans">$9$</span></td><td><span class="ans">$3$</span></td><td><span class="ans">$1$</span></td><td><span class="ans">$\tfrac13$</span></td><td><span class="ans">$\tfrac19$</span></td></tr>
+      </table>
+      <svg class="grid-svg" data-grid data-curves="2,0.3333333" width="250" height="220" role="img" aria-label="Blank coordinate grid from x equals negative 3 to 3 and y equals negative 1 to 9"></svg>
+    </div>
+    <p>Which function is growth? <span class="blank"><span class="ans">$f(x)=2^x$</span></span> &nbsp; Which is decay? <span class="blank"><span class="ans">$g(x)=\left(\tfrac13\right)^x$</span></span></p>
+  </div>
+
+  <div class="box try">
+    <span class="label">Your turn</span>
+    <p>For $h(x)=3^x$, find $h(-2)$, $h(0)$, and $h(2)$. State the asymptote and whether $h$ shows growth or decay.</p>
+    <p class="ans">$h(-2)=\tfrac19$, $h(0)=1$, $h(2)=9$. Asymptote $y=0$. Growth, since $3&gt;1$.</p>
+  </div>
+
+  <div class="footer"><span>MATH 130 · Prof. Volk · Fall 2026</span><span>Page 1 of 4</span></div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+  <div class="running"><span>From Exponentials to Logarithms · Part 1 continued</span><span>Friday, October 2</span></div>
+
+  <div class="box facts">
+    <h3>Three interest models</h3>
+    <p class="note">$P$ = principal, $r$ = annual rate as a decimal, $t$ = years, $n$ = compounding periods per year.</p>
+    <table class="convert" style="margin-top:4px">
+      <tr><th style="width:26%">Model</th><th style="width:40%">Formula</th><th>On Test 2?</th></tr>
+      <tr><td>Simple interest</td><td><span class="ans">$A=P(1+rt)$</span></td><td><span class="ans">Not printed. Memorize.</span></td></tr>
+      <tr><td>Compound interest</td><td><span class="ans">$A=P\left(1+\tfrac rn\right)^{nt}$</span></td><td><span class="ans">Printed on the test.</span></td></tr>
+      <tr><td>Continuous compounding</td><td><span class="ans">$A=Pe^{rt}$</span></td><td><span class="ans">Printed on the test.</span></td></tr>
+    </table>
+    <p>Common values of $n$: annually <span class="blank short"><span class="ans">$1$</span></span>, quarterly <span class="blank short"><span class="ans">$4$</span></span>, monthly <span class="blank short"><span class="ans">$12$</span></span>, daily <span class="blank short"><span class="ans">$365$</span></span>.</p>
+  </div>
+
+  <div class="box example work" style="min-height:2.35in">
+    <span class="label">Whiteboard Example 2</span>
+    <p>$\$2000$ is invested at $5\%$ for $6$ years. Find the balance with (a) simple interest, (b) interest compounded quarterly, and (c) interest compounded continuously.</p>
+    <div class="ans">
+      <p>(a) $A=2000(1+0.05\cdot6)=2000(1.3)=\$2600.00$</p>
+      <p>(b) $A=2000\left(1+\tfrac{0.05}{4}\right)^{4\cdot6}=2000(1.0125)^{24}\approx\$2694.70$</p>
+      <p>(c) $A=2000e^{0.05\cdot6}=2000e^{0.3}\approx\$2699.72$</p>
+      <p>Order: simple $&lt;$ quarterly $&lt;$ continuous. Round only at the final step.</p>
+    </div>
+  </div>
+
+  <div class="box try work" style="min-height:1.25in">
+    <span class="label">Your turn</span>
+    <p>$\$5000$ is invested at $4\%$ for $10$ years. Find the balance if interest is compounded monthly, and if it is compounded continuously.</p>
+    <div class="ans"><p>Monthly: $5000\left(1+\tfrac{0.04}{12}\right)^{120}\approx\$7454.16$ &nbsp;&nbsp; Continuous: $5000e^{0.4}\approx\$7459.12$</p></div>
+  </div>
+
+  <div class="box facts">
+    <p>Growth by $r$ per period: multiply by <span class="blank"><span class="ans">$1+r$</span></span> &nbsp;&nbsp; Decay by $r$ per period: multiply by <span class="blank"><span class="ans">$1-r$</span></span></p>
+  </div>
+
+  <div class="box example">
+    <span class="label">Whiteboard Example 3</span>
+    <div class="two">
+      <div class="work" style="min-height:1.45in">
+        <p>(a) A $\$24{,}000$ car loses $15\%$ of its value each year. Find its value after $4$ years.</p>
+        <div class="ans"><p>$V=24000(1-0.15)^4=24000(0.85)^4$</p><p>$V\approx\$12{,}528.15$</p></div>
+      </div>
+      <div class="work" style="min-height:1.45in">
+        <p>(b) $P(t)=18000(1.023)^t$ gives a town’s population $t$ years after 2020. Estimate the population in 2030.</p>
+        <div class="ans"><p>$t=2030-2020=10$</p><p>$P(10)=18000(1.023)^{10}\approx22{,}596$ people</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box try work" style="min-height:0.9in">
+    <span class="label">Your turn</span>
+    <p>A $60$ mg dose of medicine decreases by $12\%$ each hour. How much remains after $5$ hours?</p>
+    <div class="ans"><p>$60(1-0.12)^5=60(0.88)^5\approx31.66$ mg</p></div>
+  </div>
+
+  <div class="footer"><span>MATH 130 · Prof. Volk · Fall 2026</span><span>Page 2 of 4</span></div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page">
+  <div class="running"><span>From Exponentials to Logarithms · Part 2</span><span>Friday, October 2</span></div>
+
+  <h2 style="margin-top:4px">Part 2 · Logarithms (Section 4.3)</h2>
+  <div class="box facts">
+    <p><strong>Key idea:</strong> a logarithm is an <span class="blank"><span class="ans">exponent</span></span>. $\log_b x$ answers the question “$b$ to what power gives $x$?”</p>
+    <p style="font-size:12pt; text-align:center; margin:6px 0">$\log_b x = y \quad\iff\quad$ <span class="blank wide"><span class="ans">$b^y = x$</span></span></p>
+    <div class="two">
+      <p>$\log x$ means base <span class="blank short"><span class="ans">$10$</span></span> (common log)</p>
+      <p>$\ln x$ means base <span class="blank short"><span class="ans">$e$</span></span> (natural log)</p>
+    </div>
+    <p>Restrictions: the base satisfies $b&gt;0$, $b\ne1$, and the input satisfies $x$ <span class="blank short"><span class="ans">$&gt;0$</span></span>.</p>
+  </div>
+
+  <div class="box example">
+    <span class="label">Whiteboard Example 4</span>
+    <p>Rewrite each equation in the other form.</p>
+    <table class="convert">
+      <tr><th style="width:50%">Given</th><th>Other form</th></tr>
+      <tr><td>$\log_2 32=5$</td><td><span class="ans">$2^5=32$</span></td></tr>
+      <tr><td>$10^{-2}=0.01$</td><td><span class="ans">$\log 0.01=-2$</span></td></tr>
+      <tr><td>$\ln x=3$</td><td><span class="ans">$e^3=x$</span></td></tr>
+      <tr><td>$e^{0.4}=y$</td><td><span class="ans">$\ln y=0.4$</span></td></tr>
+    </table>
+  </div>
+
+  <div class="box try">
+    <span class="label">Your turn</span>
+    <div class="two">
+      <p>(a) $\log_6 36=2$ &nbsp; <span class="ans">$6^2=36$</span></p>
+      <p>(b) $10^{1.5}=x$ &nbsp; <span class="ans">$\log x=1.5$</span></p>
+      <p>(c) $\ln 8=x$ &nbsp; <span class="ans">$e^x=8$</span></p>
+      <p>(d) $e^{-1}=y$ &nbsp; <span class="ans">$\ln y=-1$</span></p>
+    </div>
+  </div>
+
+  <div class="box example">
+    <span class="label">Whiteboard Example 5</span>
+    <p>Evaluate without a calculator. Ask: “the base to what power gives the input?”</p>
+    <div class="three" style="margin-top:4px">
+      <p>$\log_3 81=$ <span class="blank short"><span class="ans">$4$</span></span></p>
+      <p>$\log_5 \tfrac1{25}=$ <span class="blank short"><span class="ans">$-2$</span></span></p>
+      <p>$\log 1000=$ <span class="blank short"><span class="ans">$3$</span></span></p>
+      <p>$\ln e^7=$ <span class="blank short"><span class="ans">$7$</span></span></p>
+      <p>$\log_4 2=$ <span class="blank short"><span class="ans">$\tfrac12$</span></span></p>
+      <p>$\log_9 1=$ <span class="blank short"><span class="ans">$0$</span></span></p>
+    </div>
+    <p>Why are $\log_2(-8)$ and $\ln 0$ undefined? <span class="blank wide" style="min-width:3.2in"><span class="ans">$b^y$ is always positive, so the input must be positive.</span></span></p>
+  </div>
+
+  <div class="box try">
+    <span class="label">Your turn</span>
+    <div class="three">
+      <p>$\log_2 64=$ <span class="blank short"><span class="ans">$6$</span></span></p>
+      <p>$\log 0.001=$ <span class="blank short"><span class="ans">$-3$</span></span></p>
+      <p>$\log_7 \tfrac17=$ <span class="blank short"><span class="ans">$-1$</span></span></p>
+      <p>$\ln\sqrt e=$ <span class="blank short"><span class="ans">$\tfrac12$</span></span></p>
+      <p>$\log_{2} 1=$ <span class="blank short"><span class="ans">$0$</span></span></p>
+      <p>$\log_{8} 2=$ <span class="blank short"><span class="ans">$\tfrac13$</span></span></p>
+    </div>
+  </div>
+
+  <div class="box example">
+    <span class="label">Whiteboard Example 7</span>
+    <p>Change of base: $\log_b a=\dfrac{\ln a}{\ln b}$ &nbsp; (or $\dfrac{\log a}{\log b}$). Round to four decimal places.</p>
+    <div class="three">
+      <p>$\log 250\approx$ <span class="blank short"><span class="ans">$2.3979$</span></span></p>
+      <p>$\ln 0.3\approx$ <span class="blank short"><span class="ans">$-1.2040$</span></span></p>
+      <p>$\log_2 20\approx$ <span class="blank short"><span class="ans">$4.3219$</span></span></p>
+    </div>
+    <p>Reasonableness check for $\log_2 20$: $2^4=$ <span class="blank short"><span class="ans">$16$</span></span> and $2^5=$ <span class="blank short"><span class="ans">$32$</span></span>, so the answer lies between $4$ and $5$. &nbsp; <strong>Your turn:</strong> $\log_3 50\approx$ <span class="blank short"><span class="ans">$3.5609$</span></span></p>
+  </div>
+
+  <div class="footer"><span>MATH 130 · Prof. Volk · Fall 2026</span><span>Page 3 of 4</span></div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page">
+  <div class="running"><span>From Exponentials to Logarithms · Part 2 continued</span><span>Friday, October 2</span></div>
+
+  <div class="box example">
+    <span class="label">Whiteboard Example 6</span>
+    <p>Solve. First convert to exponential form.</p>
+    <div class="two">
+      <div class="work" style="min-height:0.85in"><p>(a) $\log_x 49=2$</p><p class="ans">$x^2=49$, so $x=7$ (reject $-7$: a base must be positive)</p></div>
+      <div class="work" style="min-height:0.85in"><p>(b) $\log_2 x=-3$</p><p class="ans">$x=2^{-3}=\tfrac18$</p></div>
+      <div class="work" style="min-height:0.85in"><p>(c) $\ln x=2.5$</p><p class="ans">$x=e^{2.5}\approx12.1825$</p></div>
+      <div class="work" style="min-height:0.85in"><p>(d) $\log_3(2x-1)=2$</p><p class="ans">$2x-1=3^2=9$, so $x=5$</p></div>
+    </div>
+  </div>
+
+  <div class="box try">
+    <span class="label">Your turn</span>
+    <div class="two">
+      <p>(a) $\log_x 81=4$ &nbsp; <span class="ans">$x=3$</span></p>
+      <p>(b) $\log_5 x=3$ &nbsp; <span class="ans">$x=125$</span></p>
+      <p>(c) $\ln x=-1.2$ &nbsp; <span class="ans">$x=e^{-1.2}\approx0.3012$</span></p>
+      <p>(d) $\log(x+4)=2$ &nbsp; <span class="ans">$x+4=100$, so $x=96$</span></p>
+    </div>
+  </div>
+
+  <div class="box example">
+    <span class="label">Whiteboard Example 8</span>
+    <p>Solve. Isolate the exponential expression first, then use logarithms. Round to four decimal places.</p>
+    <div class="three">
+      <div class="work" style="min-height:1.5in"><p>(a) $5^x=42$</p><div class="ans"><p>$x=\dfrac{\ln42}{\ln5}\approx2.3223$</p></div></div>
+      <div class="work" style="min-height:1.5in"><p>(b) $3e^{2x}=45$</p><div class="ans"><p>$e^{2x}=15$</p><p>$2x=\ln15$</p><p>$x\approx1.3540$</p></div></div>
+      <div class="work" style="min-height:1.5in"><p>(c) When does $\$2000$ at $5\%$ compounded continuously reach $\$4000$?</p><div class="ans"><p>$e^{0.05t}=2$, $t=\tfrac{\ln2}{0.05}\approx13.86$ yr</p></div></div>
+    </div>
+  </div>
+
+  <div class="box try">
+    <span class="label">Your turn</span>
+    <div class="two">
+      <p>(a) $4^x=30$ &nbsp; <span class="ans">$x=\tfrac{\ln30}{\ln4}\approx2.4534$</span></p>
+      <p>(b) $6e^{0.3x}=90$ &nbsp; <span class="ans">$e^{0.3x}=15$, $x=\tfrac{\ln15}{0.3}\approx9.0268$</span></p>
+    </div>
+  </div>
+
+  <h2>Quiz 6 readiness check <span class="note" style="font-weight:400">(no notes · mark each: ✓ secure · ~ correctable · ✗ not yet)</span></h2>
+  <div class="two">
+    <div class="box"><p>1. $\$3000$ at $6\%$ compounded continuously for $5$ years. Find $A$. <span class="self">✓ ~ ✗</span></p><p class="ans">$3000e^{0.3}\approx\$4049.58$</p></div>
+    <div class="box"><p>2. Write $\ln y=1.8$ in exponential form. <span class="self">✓ ~ ✗</span></p><p class="ans">$y=e^{1.8}$</p></div>
+    <div class="box"><p>3. Evaluate $\log_2\tfrac1{16}$. <span class="self">✓ ~ ✗</span></p><p class="ans">$-4$</p></div>
+    <div class="box"><p>4. Solve $2^x=11$ (four decimal places). <span class="self">✓ ~ ✗</span></p><p class="ans">$x=\tfrac{\ln11}{\ln2}\approx3.4594$</p></div>
+  </div>
+  <p style="margin-top:6px"><strong>My next ALEKS topic:</strong> ____________________________________________________________</p>
+
+  <div class="footer"><span>MATH 130 · Prof. Volk · Fall 2026</span><span>Page 4 of 4</span></div>
+</section>
+
+<script>
+  (function () {
+    if (location.hash === "#key") document.body.classList.add("key");
+    var NS = "http://www.w3.org/2000/svg";
+    function el(name, attrs) {
+      var node = document.createElementNS(NS, name);
+      for (var k in attrs) node.setAttribute(k, attrs[k]);
+      return node;
+    }
+    document.querySelectorAll("[data-grid]").forEach(function (svg) {
+      var xmin = -3, xmax = 3, ymin = -1, ymax = 9;
+      var w = Number(svg.getAttribute("width")), h = Number(svg.getAttribute("height"));
+      var sx = w / (xmax - xmin), sy = h / (ymax - ymin);
+      var X = function (x) { return (x - xmin) * sx; };
+      var Y = function (y) { return (ymax - y) * sy; };
+      for (var x = xmin; x <= xmax; x++) svg.appendChild(el("line", { x1: X(x), y1: 0, x2: X(x), y2: h, stroke: "#c9d2db", "stroke-width": 1 }));
+      for (var y = ymin; y <= ymax; y++) svg.appendChild(el("line", { x1: 0, y1: Y(y), x2: w, y2: Y(y), stroke: "#c9d2db", "stroke-width": 1 }));
+      svg.appendChild(el("line", { x1: 0, y1: Y(0), x2: w, y2: Y(0), stroke: "#1b2430", "stroke-width": 1.6 }));
+      svg.appendChild(el("line", { x1: X(0), y1: 0, x2: X(0), y2: h, stroke: "#1b2430", "stroke-width": 1.6 }));
+      [[1, 0], [2, 0], [-1, 0], [-2, 0]].forEach(function (p) {
+        var t = el("text", { x: X(p[0]), y: Y(0) + 11, "font-size": 8, "text-anchor": "middle", fill: "#5a6573" }); t.textContent = p[0]; svg.appendChild(t);
+      });
+      [2, 4, 6, 8].forEach(function (v) {
+        var t = el("text", { x: X(0) - 4, y: Y(v) + 3, "font-size": 8, "text-anchor": "end", fill: "#5a6573" }); t.textContent = v; svg.appendChild(t);
+      });
+      var group = el("g", { "class": "ans" });
+      group.appendChild(el("line", { x1: 0, y1: Y(0), x2: w, y2: Y(0), stroke: "#b42318", "stroke-width": 1.4, "stroke-dasharray": "5 4" }));
+      (svg.getAttribute("data-curves") || "").split(",").filter(Boolean).forEach(function (b) {
+        var base = Number(b), pts = [];
+        for (var i = 0; i <= 120; i++) {
+          var xv = xmin + (xmax - xmin) * i / 120, yv = Math.pow(base, xv);
+          if (yv <= ymax + 0.5) pts.push(X(xv).toFixed(1) + "," + Y(yv).toFixed(1));
+        }
+        group.appendChild(el("polyline", { points: pts.join(" "), fill: "none", stroke: "#b42318", "stroke-width": 2 }));
+      });
+      svg.appendChild(group);
+    });
+  })();
+</script>
+</body>
+</html>
