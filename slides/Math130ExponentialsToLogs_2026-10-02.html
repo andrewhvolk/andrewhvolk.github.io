@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MATH 130 Friday October 2 data-informed lecture that closes Section 4.2 gaps in exponential graphs and interest, then introduces Section 4.3 logarithms before Quiz 6">
+  <title>MATH 130 - From Exponentials to Logarithms - October 2, 2026</title>
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="framework/math130-slides.css">
+  <script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]]}};</script>
+  <script defer src="vendor/mathjax/tex-chtml.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#lecture-slides">Skip to lecture slides</a>
+  <div class="reveal" id="lecture-slides"><div class="slides">
+
+<section class="title-slide" data-title="From Exponentials to Logarithms" data-block-id="math130-20261002-title" data-phase="activate" data-component="title" data-objectives="" data-minutes="1">
+  <p class="eyebrow">MATH 130 · FRIDAY, OCTOBER 2</p>
+  <h1>From Exponentials to Logarithms</h1>
+  <p class="subtitle">Finish the Section 4.2 models, then learn the logarithm as the exponent</p>
+  <p class="lecture-meta">50 minutes · Guided notes handout · Quiz 6 (Section 4.3) on Wednesday, October 7</p>
+  <aside class="notes"><p>0–1 minute. Distribute the guided notes handout. Each whiteboard example on these slides has a matching numbered box on the handout. Work each example on the whiteboard first; reveal the slide steps only afterward as a check.</p><p>[Sources] Local course schedule in 130Test2.html and ALEKS reports (Module Topic Summary, Detailed Progress, Activity Breakdown) generated September 30, 2026.</p></aside>
+</section>
+
+<section class="component-slide component-roadmap" data-title="What the class data says" data-block-id="math130-20261002-data" data-phase="activate" data-component="roadmap" data-objectives="u2a-graph u2a-interest u2b-convert u2b-solve" data-minutes="2">
+  <h2>What the class data says</h2>
+  <div class="comparison-grid">
+    <div class="component-card"><span class="card-label">Section 4.2 · current module</span><p style="font-size:1.55em"><strong>56%</strong></p><p>Lowest: continuous interest (31%), graphing $b^x$ with its asymptote (36%), simple vs. compound interest (44%).</p></div>
+    <div class="component-card"><span class="card-label">Section 4.3 · next module</span><p style="font-size:1.55em"><strong>18%</strong></p><p>Lowest: natural-log conversion (8%), solving exponential equations with logs (10–13%), evaluating logs (18%).</p></div>
+  </div>
+  <div class="formula-focus" style="margin-top:24px"><p><strong>Today’s pathway:</strong> graph $b^x$ → compare interest models → growth and decay → logs are exponents → evaluate → solve.</p></div>
+  <p class="slide-meta"><span>Focus · 2 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>1–3 minutes. These are aggregate class progress figures, not grades. About 29% of Section 4.2 topics are marked “ready to learn,” which means many students have not yet reached them rather than having failed them. Section 4.2 skills return on Test 2 (October 30) and feed directly into Section 4.3.</p><p>[Sources] ALEKS Module Topic Summary Report, generated September 30, 2026 at 2:32 PM.</p></aside>
+</section>
+
+<section class="component-slide component-poll" data-title="Warm-up: exponent fluency" data-block-id="math130-20261002-warmup" data-phase="activate" data-component="poll" data-objectives="u2a-graph u2a-interest" data-minutes="3">
+  <h2>Warm-up: exponent fluency</h2><span class="pacing-badge">Handout page 1 · 2 minutes</span>
+  <div class="poll-panel">
+    <ol>
+      <li>Evaluate $2^{-3}$ and $\left(\tfrac12\right)^{-2}$.</li>
+      <li>Evaluate $5000(1.04)^3$ to the nearest cent.</li>
+      <li>Use a calculator: $e^{0.5}\approx$ ?</li>
+    </ol>
+    <button class="answer-toggle" type="button" data-answer-toggle="math130-20261002-warmup-answer">Reveal check</button>
+    <div id="math130-20261002-warmup-answer" class="solution-panel" data-answer hidden><span class="card-label">Check</span><p>$\tfrac18$ and $4$ &nbsp;&nbsp; $\$5624.32$ &nbsp;&nbsp; $1.6487$</p></div>
+  </div>
+  <p class="slide-meta"><span>Retrieve · 3 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>3–6 minutes. Item 1 prepares the negative inputs in the graphing table. Item 2 checks calculator entry of a power. Item 3 confirms every student can locate the e^x key; resolve calculator problems now, before the interest example.</p><p>[Sources] ALEKS 4.2 topics “Using a calculator to evaluate exponential expressions” (87%) and “... involving base e” (72%). New items written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Whiteboard Example 1: graph b^x" data-block-id="math130-20261002-graph" data-phase="model" data-component="worked-example" data-objectives="u2a-graph" data-minutes="5">
+  <h2>Whiteboard Example 1: graph $f(x)=b^x$</h2>
+  <div class="worked-example">
+    <div class="example-prompt"><span class="card-label">Table, graph, asymptote</span><p>$f(x)=2^x$ and $g(x)=\left(\tfrac13\right)^x$</p></div>
+    <ol class="worked-steps">
+      <li class="fragment">$x=-2,-1,0,1,2$: $f$ gives $\tfrac14,\tfrac12,1,2,4$; $g$ gives $9,3,1,\tfrac13,\tfrac19$.</li>
+      <li class="fragment">Both pass through $(0,1)$ because $b^0=1$.</li>
+      <li class="fragment">Horizontal asymptote $y=0$. Domain $(-\infty,\infty)$, range $(0,\infty)$.</li>
+      <li class="fragment">$b&gt;1$: growth (rises). $0&lt;b&lt;1$: decay (falls).</li>
+    </ol>
+  </div>
+  <p class="slide-meta"><span>Model · 5 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>6–11 minutes. Build both tables on the board, plot the points, and sketch the asymptote as a dashed line before drawing the curves. Ask: can 2^x ever equal zero or a negative number? That question justifies the asymptote and the range. Use the next slide to confirm the pattern.</p><p>[Sources] ALEKS 4.2 “Graphing an exponential function and its asymptote: f(x)=b^x” at 36% progress. New example written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-interactive" data-title="Explore the base" data-block-id="math130-20261002-explore" data-phase="explain" data-component="interactive" data-objectives="u2a-graph" data-minutes="1">
+  <h2>Explore the base $b$</h2>
+  <div class="interactive-panel" data-exp-graph>
+    <canvas width="900" height="560" aria-label="Graph of y equals b to the x, with the point (0, 1) marked"></canvas>
+    <div>
+      <label for="math130-20261002-base">Base $b$ = <output>2.0</output></label>
+      <input id="math130-20261002-base" type="range" min="0.2" max="4" step="0.1" value="2">
+      <div class="check-panel" style="margin-top:24px"><p>Every curve passes through $(0,1)$ and stays above $y=0$. What happens at $b=1$?</p></div>
+    </div>
+  </div>
+  <p class="slide-meta"><span>Explore · 1 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>11–12 minutes. Slide the base below 1 and above 1. At b=1 the graph is the horizontal line y=1, which is why the base of an exponential function must satisfy b&gt;0 and b≠1. The same restriction returns for logarithm bases later today.</p><p>[Sources] Framework exponential-graph component.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Whiteboard Example 2: three interest models" data-block-id="math130-20261002-interest" data-phase="model" data-component="worked-example" data-objectives="u2a-interest" data-minutes="6">
+  <h2>Whiteboard Example 2: three interest models</h2>
+  <div class="worked-example">
+    <div class="example-prompt"><span class="card-label">$\$2000$ at $5\%$ for $6$ years</span><p>Find the balance under simple, quarterly, and continuous interest.</p></div>
+    <ol class="worked-steps">
+      <li class="fragment">Simple: $A=P(1+rt)=2000(1+0.05\cdot6)=\$2600.00$</li>
+      <li class="fragment">Quarterly: $A=P\left(1+\tfrac rn\right)^{nt}=2000\left(1+\tfrac{0.05}{4}\right)^{24}\approx\$2694.70$</li>
+      <li class="fragment">Continuous: $A=Pe^{rt}=2000e^{0.3}\approx\$2699.72$</li>
+      <li class="fragment">Simple interest $&lt;$ compound $&lt;$ continuous, for the same $P$, $r$, $t$.</li>
+    </ol>
+  </div>
+  <div class="warning-panel" style="margin-top:24px"><p>Convert the rate to a decimal. Compute the exponent $nt$ or $rt$ first, then use parentheses.</p></div>
+  <p class="slide-meta"><span>Model · 6 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>12–18 minutes. Write the three formulas side by side and label P, r, n, t in each. Ask students to supply n for quarterly (4) and the exponent nt=24 before calculating. Round only at the final step. The compound and continuous formulas are printed on Test 2; simple interest must be remembered.</p><p>[Sources] ALEKS 4.2 “Calculating and comparing simple interest and compound interest” (44%), “... compound interest” (56%), and “... continuous compound interest” (31%). Formula status from 130Test2.html. New example written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Whiteboard Example 3: growth, decay, and models" data-block-id="math130-20261002-growth" data-phase="model" data-component="worked-example" data-objectives="u2a-model" data-minutes="4">
+  <h2>Whiteboard Example 3: growth, decay, and models</h2>
+  <div class="comparison-grid">
+    <div class="component-card"><span class="card-label">(a) Decay by a percent</span><p>A $\$24{,}000$ car loses $15\%$ of its value each year. Find its value after $4$ years.</p><p class="fragment">$V=24000(1-0.15)^4=24000(0.85)^4$</p><p class="fragment"><strong>$\approx\$12{,}528.15$</strong></p></div>
+    <div class="component-card"><span class="card-label">(b) Evaluate a given model</span><p>$P(t)=18000(1.023)^t$ gives a town’s population $t$ years after 2020. Estimate the population in 2030.</p><p class="fragment">$t=2030-2020=10$</p><p class="fragment"><strong>$P(10)\approx22{,}596$ people</strong></p></div>
+  </div>
+  <div class="check-panel" style="margin-top:24px"><p>Growth factor $1+r$; decay factor $1-r$. Always find $t$ from the problem’s starting point.</p></div>
+  <p class="slide-meta"><span>Model · 4 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>18–22 minutes. In (a), ask why the factor is 0.85 and not 0.15. In (b), the common error is substituting t=2030. Round the population to a whole number of people.</p><p>[Sources] ALEKS 4.2 “Finding a final amount in a word problem on exponential growth or decay” (59%) and “Evaluating an exponential function that models a real-world situation” (46%). New examples written for this session.</p></aside>
+</section>
+
+<section class="section-slide" data-title="Part 2: logarithms" data-block-id="math130-20261002-part2" data-phase="explain" data-component="section" data-objectives="" data-minutes="0">
+  <p class="eyebrow">SECTION 4.3</p>
+  <h2>A logarithm is an exponent</h2>
+  <p class="subtitle">$\log_b x$ answers the question: “$b$ to what power gives $x$?”</p>
+  <aside class="notes"><p>Transition. Write the question form on the board and leave it up for the rest of class.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Whiteboard Example 4: convert between forms" data-block-id="math130-20261002-convert" data-phase="model" data-component="worked-example" data-objectives="u2b-convert" data-minutes="5">
+  <h2>Whiteboard Example 4: convert between forms</h2>
+  <div class="formula-focus"><p>$\log_b x = y \iff b^y = x$ &nbsp;&nbsp;·&nbsp;&nbsp; $\log x=\log_{10}x$ &nbsp;&nbsp;·&nbsp;&nbsp; $\ln x=\log_e x$</p></div>
+  <div class="decision-guide" style="margin-top:24px">
+    <div><p>$\log_2 32=5$</p><p class="fragment">$\iff 2^5=32$</p></div>
+    <div><p>$10^{-2}=0.01$</p><p class="fragment">$\iff \log 0.01=-2$</p></div>
+    <div><p>$\ln x=3$</p><p class="fragment">$\iff e^3=x$</p></div>
+    <div><p>$e^{0.4}=y$</p><p class="fragment">$\iff \ln y=0.4$</p></div>
+  </div>
+  <p class="slide-meta"><span>Model · 5 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>22–27 minutes. Teach the “base stays the base; the log equals the exponent” loop: circle the base, draw an arrow to the other side, then to the exponent. Spend the most time on the two natural-log rows, because ln conversion is the lowest topic in the class report (8%). The base of ln is e even though it is not written.</p><p>[Sources] ALEKS 4.3 “Converting between logarithmic and exponential equations” (23%) and “Converting between natural logarithmic and exponential equations” (8%). New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Whiteboard Example 5: evaluate without a calculator" data-block-id="math130-20261002-evaluate" data-phase="model" data-component="worked-example" data-objectives="u2b-evaluate" data-minutes="4">
+  <h2>Whiteboard Example 5: evaluate without a calculator</h2>
+  <div class="grid-3">
+    <div class="component-card"><p>$\log_3 81$</p><p class="fragment">$3^{?}=81 \Rightarrow \mathbf{4}$</p></div>
+    <div class="component-card"><p>$\log_5 \tfrac1{25}$</p><p class="fragment">$5^{?}=5^{-2} \Rightarrow \mathbf{-2}$</p></div>
+    <div class="component-card"><p>$\log 1000$</p><p class="fragment">$10^{?}=1000 \Rightarrow \mathbf{3}$</p></div>
+    <div class="component-card"><p>$\ln e^7$</p><p class="fragment">$e^{?}=e^7 \Rightarrow \mathbf{7}$</p></div>
+    <div class="component-card"><p>$\log_4 2$</p><p class="fragment">$4^{1/2}=2 \Rightarrow \mathbf{\tfrac12}$</p></div>
+    <div class="component-card"><p>$\log_9 1$</p><p class="fragment">$9^{0}=1 \Rightarrow \mathbf{0}$</p></div>
+  </div>
+  <div class="warning-panel" style="margin-top:24px"><p>$\log_b x$ is defined only for $x&gt;0$. So $\log_2(-8)$ and $\ln 0$ are undefined.</p></div>
+  <p class="slide-meta"><span>Model · 4 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>27–31 minutes. Rewrite each as a question, “3 to what power is 81?”, before answering. The fraction and square-root cases are the ones students miss: rewrite 1/25 as 5^(−2) and 2 as 4^(1/2). Connect the domain warning to the range of b^x from Example 1.</p><p>[Sources] ALEKS 4.3 “Evaluating logarithmic expressions” at 18% progress. New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Whiteboard Example 6: solve log equations" data-block-id="math130-20261002-solve-log" data-phase="model" data-component="worked-example" data-objectives="u2b-solve" data-minutes="5">
+  <h2>Whiteboard Example 6: solve $\log_b a=c$</h2>
+  <div class="decision-guide">
+    <div><p>$\log_x 49=2$</p><p class="fragment">$x^2=49 \Rightarrow x=7$ &nbsp;(reject $-7$)</p></div>
+    <div><p>$\log_2 x=-3$</p><p class="fragment">$x=2^{-3}=\tfrac18$</p></div>
+    <div><p>$\ln x=2.5$</p><p class="fragment">$x=e^{2.5}\approx12.1825$</p></div>
+    <div><p>$\log_3(2x-1)=2$</p><p class="fragment">$2x-1=3^2=9 \Rightarrow x=5$</p></div>
+  </div>
+  <div class="check-panel" style="margin-top:24px"><p>Convert to exponential form first. A base must be positive and not equal to $1$.</p></div>
+  <p class="slide-meta"><span>Model · 5 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>31–36 minutes. The unknown can sit in the base, the argument, or inside an expression; the first step is always the conversion from Example 4. Ask why −7 is rejected as a base. For the last item, check that 2(5)−1=9 is positive.</p><p>[Sources] ALEKS 4.3 “Solving an equation of the form log_b a = c” at 21% progress. Inverse-log equations are marked Memorize in 130Test2.html. New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Whiteboard Example 7: calculator and change of base" data-block-id="math130-20261002-calculator" data-phase="model" data-component="worked-example" data-objectives="u2b-evaluate" data-minutes="3">
+  <h2>Whiteboard Example 7: calculator and change of base</h2>
+  <div class="worked-example">
+    <div class="example-prompt"><span class="card-label">Round to four decimal places</span><p>$\log 250$, &nbsp; $\ln 0.3$, &nbsp; $\log_2 20$</p></div>
+    <ol class="worked-steps">
+      <li class="fragment">$\log 250\approx2.3979$ &nbsp;(use the LOG key)</li>
+      <li class="fragment">$\ln 0.3\approx-1.2040$ &nbsp;(negative because $0.3&lt;1$)</li>
+      <li class="fragment">$\log_2 20=\dfrac{\ln 20}{\ln 2}\approx4.3219$</li>
+      <li class="fragment">Reasonable? $2^4=16$ and $2^5=32$, so the answer is between $4$ and $5$.</li>
+    </ol>
+  </div>
+  <p class="slide-meta"><span>Model · 3 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>36–39 minutes. Have students enter each value along with you. The estimate in the last step is the habit to build: it catches ln 2 / ln 20 inversions.</p><p>[Sources] ALEKS 4.3 “Using a calculator to evaluate natural and common logarithmic expressions” at 33%. Change of base is marked Memorize in 130Test2.html. New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-worked-example" data-title="Whiteboard Example 8: solve exponential equations" data-block-id="math130-20261002-solve-exp" data-phase="model" data-component="worked-example" data-objectives="u2b-solve" data-minutes="6">
+  <h2>Whiteboard Example 8: solve exponential equations</h2>
+  <div class="grid-3">
+    <div class="component-card"><span class="card-label">(a)</span><p>$5^x=42$</p><p class="fragment">$x=\log_5 42=\dfrac{\ln42}{\ln5}$</p><p class="fragment"><strong>$x\approx2.3223$</strong></p></div>
+    <div class="component-card"><span class="card-label">(b)</span><p>$3e^{2x}=45$</p><p class="fragment">$e^{2x}=15 \Rightarrow 2x=\ln15$</p><p class="fragment"><strong>$x\approx1.3540$</strong></p></div>
+    <div class="component-card"><span class="card-label">(c) Back to Example 2</span><p>When does $\$2000$ at $5\%$ continuous reach $\$4000$?</p><p class="fragment">$2000e^{0.05t}=4000$</p><p class="fragment">$e^{0.05t}=2 \Rightarrow 0.05t=\ln2$</p><p class="fragment"><strong>$t\approx13.86$ years</strong></p></div>
+  </div>
+  <div class="warning-panel" style="margin-top:24px"><p>Isolate the exponential expression first. Then take $\ln$ of both sides (or convert to log form).</p></div>
+  <p class="slide-meta"><span>Model · 6 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>39–45 minutes. In (b), the common error is taking ln before dividing by 3. Part (c) closes the loop with Section 4.2: logarithms answer “how long?” questions that exponential models raise.</p><p>[Sources] ALEKS 4.3 “Solving an exponential equation by using logarithms: Decimal answers, basic” (10%) and “... by using natural logarithms” (13%). New examples written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-practice" data-title="Quiz 6 readiness check" data-block-id="math130-20261002-checkpoint" data-phase="assess" data-component="practice" data-objectives="u2a-interest u2b-convert u2b-evaluate u2b-solve" data-minutes="4">
+  <h2>Quiz 6 readiness check</h2><span class="pacing-badge">Handout page 4 · no notes · 3 minutes</span>
+  <div class="practice-panel"><span class="card-label">Show the decisive step</span>
+    <ol>
+      <li>$\$3000$ at $6\%$ compounded continuously for $5$ years. Find $A$.</li>
+      <li>Write $\ln y=1.8$ in exponential form.</li>
+      <li>Evaluate $\log_2\tfrac1{16}$.</li>
+      <li>Solve $2^x=11$. Round to four decimal places.</li>
+    </ol>
+    <button class="answer-toggle" type="button" data-answer-toggle="math130-20261002-check-answer">Reveal key</button>
+    <div id="math130-20261002-check-answer" class="solution-panel dense" data-answer hidden><span class="card-label">Key</span><ol><li>$3000e^{0.3}\approx\$4049.58$</li><li>$y=e^{1.8}$</li><li>$-4$</li><li>$x=\tfrac{\ln11}{\ln2}\approx3.4594$</li></ol></div>
+  </div>
+  <p class="slide-meta"><span>Assess · 4 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>45–49 minutes. Students work silently, then self-mark each item as secure, correctable, or not yet secure on the handout. Use the pattern of misses to plan Monday: if item 2 or 3 is weak, open Monday with a conversion drill.</p><p>[Sources] Current ALEKS gaps across Sections 4.2 and 4.3. New items written for this session.</p></aside>
+</section>
+
+<section class="component-slide component-summary" data-title="Choose the next ALEKS target" data-block-id="math130-20261002-exit" data-phase="synthesize" data-component="summary" data-objectives="u2a-graph u2a-interest u2b-convert u2b-solve" data-minutes="1">
+  <h2>Choose the next ALEKS target</h2>
+  <div class="summary-grid">
+    <div class="component-card"><span class="card-label">If item 1 was the miss</span><p>Finish Section 4.2: continuous interest, then simple vs. compound interest.</p></div>
+    <div class="component-card"><span class="card-label">If items 2–4 were the miss</span><p>Start Section 4.3 with conversion, then evaluation, then solving.</p></div>
+  </div>
+  <div class="formula-focus" style="margin-top:24px"><p><strong>Quiz 6:</strong> Wednesday, October 7 on Section 4.3. Write one specific ALEKS topic on your handout before you leave.</p></div>
+  <p class="slide-meta"><span>Target · 1 min</span><span>Friday, Oct 2</span></p>
+  <aside class="notes"><p>49–50 minutes. Avoid “review everything.” Canvas remains the authority for due dates and quiz coverage.</p><p>[Sources] Local 130Test2.html schedule and ALEKS reports generated September 30, 2026.</p></aside>
+</section>
+
+  </div></div>
+  <script src="vendor/reveal/reveal.js"></script>
+  <script>window.MATH130_DECK={"id":"Math130ExponentialsToLogs_2026-10-02","title":"From Exponentials to Logarithms","section":"Sections 4.2 and 4.3","session":"2026-10-02","duration":50};</script>
+  <script src="framework/math130-slides.js"></script>
+</body>
+</html>
