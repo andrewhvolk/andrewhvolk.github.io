@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f2ef">
+  <title>Motion Lab — Constant Velocity Buggy</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202d3b;
+      --muted: #718091;
+      --line: #e7e9eb;
+      --paper: #ffffff;
+      --canvas: #f3f2ef;
+      --blue: #3d79e8;
+      --blue-deep: #285fc8;
+      --orange: #f28a47;
+      --green: #59a985;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(ellipse at 8% 0%, rgba(255,255,255,.9), transparent 34rem), var(--canvas);
+    }
+    button, input { font: inherit; }
+    button { color: inherit; }
+
+    .page { width: min(1100px, calc(100% - 48px)); margin: 0 auto; padding: 30px 0 42px; }
+    .masthead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 27px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 760; letter-spacing: .025em; }
+    .brand-mark { display: grid; width: 31px; height: 31px; place-items: center; border-radius: 10px; color: white; background: var(--ink); }
+    .brand-mark svg { width: 17px; height: 17px; }
+    .chapter { display: inline-flex; align-items: center; gap: 8px; color: #82909d; font-size: 11px; font-weight: 720; letter-spacing: .105em; text-transform: uppercase; }
+    .chapter-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
+    .intro { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin: 0 3px 20px; }
+    .eyebrow { margin: 0 0 8px; color: var(--blue-deep); font-size: 11px; font-weight: 780; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(30px, 4.2vw, 43px); line-height: 1.06; letter-spacing: -.055em; font-weight: 760; }
+    .intro-copy { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .topic-pill { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 4px; padding: 9px 12px; border: 1px solid #e3e8ed; border-radius: 999px; color: #526271; background: rgba(255,255,255,.7); font-size: 11px; font-weight: 680; }
+    .topic-pill svg { width: 14px; height: 14px; color: var(--green); }
+
+    .lab-card { overflow: hidden; border: 1px solid rgba(218,222,225,.85); border-radius: 23px; background: var(--paper); box-shadow: 0 18px 55px rgba(42,51,61,.07), 0 2px 6px rgba(42,51,61,.025); }
+    .instrument-layout { display: grid; grid-template-columns: minmax(0,1fr) 278px; gap: 15px; padding: 16px; }
+    .scene-wrap { min-width: 0; }
+    .scene-topline { display: flex; align-items: center; justify-content: space-between; padding: 1px 2px 11px; }
+    .scene-heading { display: inline-flex; align-items: center; gap: 8px; color: #657584; font-size: 11px; font-weight: 740; letter-spacing: .055em; text-transform: uppercase; }
+    .scene-heading svg { width: 15px; height: 15px; color: #8294a4; }
+    .live-status { display: inline-flex; align-items: center; gap: 7px; color: #7f8b96; font-size: 11px; font-weight: 650; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #b6c0c8; box-shadow: 0 0 0 3px #f1f3f4; }
+    .live-status[data-state="running"] { color: #41866a; }
+    .live-status[data-state="running"] .live-dot { background: #59b285; box-shadow: 0 0 0 3px #e6f4ed; }
+    .live-status[data-state="paused"] { color: #a67338; }
+    .live-status[data-state="paused"] .live-dot { background: #e6a151; box-shadow: 0 0 0 3px #fcf1e1; }
+    .live-status[data-state="complete"] { color: var(--blue-deep); }
+    .live-status[data-state="complete"] .live-dot { background: var(--blue); box-shadow: 0 0 0 3px #e8effd; }
+
+    .scene { position: relative; height: 370px; overflow: hidden; isolation: isolate; border: 1px solid #ebe6dc; border-radius: 17px; background: linear-gradient(180deg,#e8f0f1 0%,#f5f0e4 72%,#eee7d9 100%); }
+    .scene::before { position: absolute; z-index: -1; inset: 0; background-image: linear-gradient(rgba(77,105,120,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(77,105,120,.045) 1px,transparent 1px); background-size: 28px 28px; content: ""; mask-image: linear-gradient(to bottom,black,transparent 72%); }
+    .sun { position: absolute; top: 34px; right: 12%; width: 46px; height: 46px; border-radius: 50%; background: #f5c987; box-shadow: 0 0 0 12px rgba(245,201,135,.16),0 0 40px rgba(239,183,107,.18); }
+    .cloud { position: absolute; top: 71px; left: 18%; width: 87px; height: 19px; border-radius: 30px; background: rgba(255,255,255,.7); }
+    .cloud::before,.cloud::after { position: absolute; bottom: 5px; border-radius: 50%; background: inherit; content: ""; }
+    .cloud::before { left: 16px; width: 28px; height: 28px; }
+    .cloud::after { left: 39px; width: 21px; height: 21px; }
+    .hills { position: absolute; right: -4%; bottom: 82px; left: -4%; height: 88px; border-radius: 50% 50% 0 0 / 80% 80% 0 0; background: #cfddd1; opacity: .8; }
+    .hills::before { position: absolute; right: 50%; bottom: -12px; left: -4%; height: 72px; border-radius: 50% 50% 0 0 / 80% 80% 0 0; background: #dbe5d8; content: ""; }
+    .road { position: absolute; right: 0; bottom: 75px; left: 0; height: 4px; background: #7a817b; box-shadow: 0 1px 0 rgba(255,255,255,.56),0 7px 0 rgba(131,133,120,.1); }
+    .road::before { position: absolute; top: 1px; right: 0; left: 0; height: 1px; background: repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.7) 22px 34px,transparent 34px 48px); content: ""; }
+    .scene-tag { position: absolute; top: 13px; left: 14px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 9px; border: 1px solid rgba(255,255,255,.75); border-radius: 8px; color: #6b7b7d; background: rgba(255,255,255,.64); backdrop-filter: blur(5px); font-size: 9px; font-weight: 740; letter-spacing: .085em; text-transform: uppercase; }
+    .scene-tag span:first-child { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+    .buggy { position: absolute; z-index: 3; bottom: 65px; width: 128px; height: 72px; transform: translateX(-50%); filter: drop-shadow(0 7px 3px rgba(47,60,69,.12)); will-change: left; }
+    .buggy svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .wheel-spin { transform-box: fill-box; transform-origin: center; }
+    .scene.is-playing .wheel-spin { animation: wheel-turn var(--wheel-period,1.15s) linear infinite; }
+    @keyframes wheel-turn { to { transform: rotate(360deg); } }
+    .position-stem { position: absolute; z-index: 2; bottom: 62px; width: 1px; height: 13px; background: linear-gradient(to bottom,rgba(61,121,232,.72),rgba(61,121,232,.2)); transform: translateX(-50%); }
+    .position-cap { position: absolute; z-index: 4; bottom: 58px; width: 8px; height: 8px; border: 2px solid white; border-radius: 50%; background: var(--blue); box-shadow: 0 1px 5px rgba(33,77,153,.25); transform: translateX(-50%); }
+    .target-guide { position: absolute; z-index: 1; top: 88px; bottom: 62px; width: 1px; border-left: 1px dashed rgba(226,125,61,.62); transform: translateX(-50%); pointer-events: none; }
+    .ruler { position: absolute; right: 4%; bottom: 14px; left: 22%; height: 48px; border-top: 1px solid rgba(160,145,116,.2); border-bottom: 1px solid rgba(160,145,116,.18); background: rgba(255,252,245,.68); }
+    .ruler-line { position: absolute; top: 13px; right: 0; left: 0; height: 1px; background: #9c917d; }
+    .tick { position: absolute; top: 0; width: 1px; height: 12px; background: #a49985; }
+    .tick.major { height: 17px; width: 1.5px; background: #746b5e; }
+    .tick.zero { z-index: 1; width: 2px; height: 20px; background: var(--orange); }
+    .tick.selected { z-index: 2; width: 2px; height: 20px; background: var(--orange); box-shadow: 0 0 0 3px rgba(242,138,71,.13); }
+    .tick-label { position: absolute; top: 23px; color: #837969; font-size: 8px; font-weight: 650; line-height: 1; white-space: nowrap; transform: translateX(-50%); }
+    .tick-label.edge-start { transform: none; }
+    .tick-label.edge-end { transform: translateX(-100%); }
+    .tick-label.selected-label { color: #bb6b38; font-weight: 800; }
+    .scale-note { position: absolute; right: 7px; bottom: 2px; color: #a69d8e; font-size: 8px; font-weight: 680; letter-spacing: .08em; text-transform: uppercase; }
+
+    .side-panel { display: flex; flex-direction: column; gap: 10px; padding-top: 27px; }
+    .challenge-card { padding: 14px; border: 1px solid #e7ebee; border-radius: 15px; background: linear-gradient(145deg,#fbfcfd,#f5f8fa); }
+    .card-kicker { color: #82909d; font-size: 9px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+    .challenge-card h2 { margin: 6px 0 5px; font-size: 15px; font-weight: 740; letter-spacing: -.025em; }
+    .challenge-copy { margin: 0; color: #74828e; font-size: 10px; line-height: 1.5; }
+    .setting { margin-top: 13px; }
+    .setting-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; color: #687784; font-size: 10px; font-weight: 690; }
+    .setting output { color: #365777; font-size: 10px; font-weight: 760; font-variant-numeric: tabular-nums; }
+    .setting input[type="range"] { display: block; width: 100%; height: 15px; margin: 0; accent-color: var(--blue); cursor: pointer; }
+    .setting input[type="range"]:disabled { cursor: not-allowed; opacity: .55; }
+    .range-ends { display: flex; justify-content: space-between; margin-top: -1px; color: #a1aab1; font-size: 8px; font-variant-numeric: tabular-nums; }
+    .challenge-button { display: flex; width: 100%; align-items: center; justify-content: center; gap: 7px; min-height: 34px; margin-top: 11px; border: 1px solid #dce6ed; border-radius: 9px; color: #526f87; background: white; cursor: pointer; font-size: 10px; font-weight: 720; }
+    .challenge-button:hover { border-color: #bfcedb; background: #fafdff; }
+    .challenge-button:focus-visible,.control-button:focus-visible,input:focus-visible { outline: 3px solid rgba(61,121,232,.3); outline-offset: 2px; }
+    .challenge-button svg { width: 13px; height: 13px; }
+    .stopwatch-card { min-height: 127px; padding: 14px 15px; border: 1px solid #344351; border-radius: 15px; color: white; background: linear-gradient(145deg,#2c3947,#202b37); box-shadow: inset 0 1px rgba(255,255,255,.07),0 9px 18px rgba(34,48,62,.1); }
+    .instrument-label { display: flex; align-items: center; gap: 7px; color: #b7c3cc; font-size: 10px; font-weight: 720; letter-spacing: .095em; text-transform: uppercase; }
+    .instrument-label svg { width: 14px; height: 14px; color: #8ba5c6; }
+    .digital-time { margin: 17px 0 6px; color: #f8fbff; font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size: clamp(25px,3vw,32px); font-variant-numeric: tabular-nums; letter-spacing: -.06em; line-height: 1; text-shadow: 0 0 15px rgba(139,177,232,.25); }
+    .stopwatch-caption { color: #8f9eaa; font-size: 9px; }
+    .readout-card { display: flex; align-items: center; justify-content: space-between; min-height: 57px; padding: 10px 13px; border: 1px solid #e8eaeb; border-radius: 13px; background: white; }
+    .readout-title { color: #85919c; font-size: 9px; font-weight: 700; letter-spacing: .075em; text-transform: uppercase; }
+    .readout-value { margin-top: 4px; font-size: 16px; font-weight: 740; font-variant-numeric: tabular-nums; letter-spacing: -.035em; }
+    .readout-symbol { display: grid; width: 27px; height: 27px; place-items: center; border-radius: 9px; color: var(--blue-deep); background: #edf3ff; font-size: 14px; font-weight: 740; }
+    .use-materials-note { margin-top: auto; padding: 10px 11px; border: 1px solid #f0e2d3; border-radius: 11px; color: #8b745f; background: #fff8f0; font-size: 9px; line-height: 1.5; }
+    .use-materials-note strong { color: #765d47; }
+
+    .control-panel { padding: 15px 17px 16px; border-top: 1px solid #eef0f1; background: linear-gradient(180deg,#fff,#fdfdfc); }
+    .transport-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .transport-buttons { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .control-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 1px solid #e1e5e8; border-radius: 10px; color: #526170; background: white; cursor: pointer; font-size: 11px; font-weight: 720; transition: border-color .15s ease,background .15s ease,transform .15s ease; }
+    .control-button:hover:not(:disabled) { border-color: #cbd3da; background: #fafbfd; }
+    .control-button:active:not(:disabled) { transform: translateY(1px); }
+    .control-button svg { width: 15px; height: 15px; }
+    .control-button.primary { min-width: 125px; border-color: var(--blue); color: white; background: var(--blue); box-shadow: 0 5px 12px rgba(61,121,232,.2); }
+    .control-button.primary:hover:not(:disabled) { border-color: var(--blue-deep); background: var(--blue-deep); }
+    .control-button:disabled { cursor: not-allowed; opacity: .45; }
+    .pause-icon { display: none; }
+    .control-button.primary.is-playing .play-icon { display: none; }
+    .control-button.primary.is-playing .pause-icon { display: block; }
+    .control-hint { display: flex; align-items: center; gap: 7px; color: #9aa3ac; font-size: 10px; white-space: nowrap; }
+    .control-hint svg { width: 13px; height: 13px; }
+    .timeline { margin-top: 14px; }
+    .timeline-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; color: #798692; font-size: 10px; font-weight: 700; letter-spacing: .055em; text-transform: uppercase; }
+    .frame-counter { color: #a0a9b0; font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size: 9px; letter-spacing: .04em; }
+    .timeline input[type="range"] { display: block; width: 100%; height: 16px; margin: 0; accent-color: var(--blue); cursor: pointer; }
+    .timeline input[type="range"]:disabled { cursor: not-allowed; opacity: .5; }
+    .timeline-ends { display: flex; justify-content: space-between; margin-top: 2px; color: #a5adb4; font-size: 9px; font-variant-numeric: tabular-nums; }
+    .challenge-strip { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 13px 17px 15px; border-top: 1px solid #f0f1f2; background: #fbfcfc; }
+    .challenge-strip p { margin: 0; color: #7c8995; font-size: 10px; line-height: 1.5; }
+    .challenge-strip strong { color: #586a78; font-weight: 720; }
+    .practice-tag { flex: 0 0 auto; padding: 6px 8px; border-radius: 7px; color: #758692; background: #eef2f4; font-size: 8px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .footer-note { display: flex; justify-content: space-between; gap: 12px; margin: 14px 4px 0; color: #99a1a9; font-size: 10px; line-height: 1.5; }
+    .footer-note strong { color: #77838f; font-weight: 700; }
+    kbd { padding: 2px 5px; border: 1px solid #dde1e4; border-radius: 4px; color: #71808e; background: rgba(255,255,255,.7); font: inherit; font-size: 9px; }
+
+    @media (max-width: 900px) {
+      .page { width: min(100% - 34px,760px); }
+      .instrument-layout { grid-template-columns: minmax(0,1fr) 250px; gap: 12px; }
+      .scene { height: 350px; }
+      .buggy { width: 105px; height: 59px; }
+      .position-stem { height: 2px; bottom: 62px; }
+    }
+    @media (max-width: 720px) {
+      .page { width: min(100% - 26px,560px); padding-top: 20px; }
+      .masthead { margin-bottom: 22px; }
+      .intro { align-items: flex-start; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+      .topic-pill { margin: 0; }
+      .instrument-layout { grid-template-columns: minmax(0,1fr); gap: 12px; padding: 12px 12px 0; }
+      .scene { height: 300px; }
+      .side-panel { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: 8px; padding-top: 0; }
+      .challenge-card { grid-row: span 3; }
+      .stopwatch-card { min-height: 104px; padding: 11px; }
+      .digital-time { margin: 13px 0 5px; font-size: clamp(20px,4.5vw,27px); }
+      .readout-card { min-height: 48px; padding: 8px 10px; }
+      .readout-value { font-size: 14px; }
+      .use-materials-note { grid-column: 1 / -1; margin-top: 1px; }
+      .control-hint { align-self: flex-end; }
+    }
+    @media (max-width: 480px) {
+      .page { width: calc(100% - 20px); padding-top: 15px; }
+      .chapter { font-size: 9px; }
+      .intro-copy { font-size: 13px; }
+      .lab-card { border-radius: 18px; }
+      .instrument-layout { padding: 10px 10px 0; }
+      .scene { height: 262px; }
+      .sun { top: 26px; width: 35px; height: 35px; }
+      .cloud { top: 62px; }
+      .ruler { right: 4%; left: 32%; bottom: 8px; height: 48px; }
+      .ruler-line { top: 13px; }
+      .tick-label { top: 23px; font-size: 7px; }
+      .scale-note { right: 3px; font-size: 7px; }
+      .buggy { bottom: 49px; width: 85px; height: 48px; }
+      .road { bottom: 54px; }
+      .position-stem { bottom: 56px; height: 2px; }
+      .position-cap { bottom: 52px; }
+      .target-guide { top: 82px; bottom: 56px; }
+      .side-panel { grid-template-columns: minmax(0,1fr); }
+      .challenge-card { grid-row: auto; }
+      .challenge-card { padding: 13px; }
+      .stopwatch-card { min-height: 88px; }
+      .digital-time { margin: 11px 0 5px; font-size: 27px; }
+      .readout-card { min-height: 54px; }
+      .use-materials-note { margin-top: 0; }
+      .control-panel { padding: 13px 12px 14px; }
+      .transport-row { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .transport-buttons { width: 100%; }
+      .control-button { min-height: 39px; padding: 0 9px; }
+      .control-button.primary { flex: 1; min-width: 0; }
+      .control-hint { align-self: flex-end; }
+      .challenge-strip { align-items: flex-start; flex-direction: column; gap: 8px; padding: 12px; }
+      .footer-note { flex-direction: column; gap: 5px; margin: 12px 3px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .scene.is-playing .wheel-spin { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M3 14.8 7.2 5.3l2.7 6 2-4.1 5.1 7.6H3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="14.8" cy="4.4" r="1.3" fill="#f3a45d"/></svg>
+        </span>
+        Motion Lab
+      </div>
+      <div class="chapter"><span class="chapter-dot"></span> Kinematics · Activity 2</div>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Explore motion before the lab</p>
+        <h1 id="page-title">Constant velocity buggy</h1>
+        <p class="intro-copy">Set a speed, predict a time, then try to pause right as the buggy reaches your mark.</p>
+      </div>
+      <div class="topic-pill">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m-3.5-3.5L12 8l-3.5 3.5M3.2 3.5v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        2 m track · 25 cm marks
+      </div>
+    </section>
+
+    <section class="lab-card" aria-label="Constant velocity buggy practice sandbox">
+      <div class="instrument-layout">
+        <div class="scene-wrap">
+          <div class="scene-topline">
+            <div class="scene-heading">
+              <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 14.5V3.8h12v10.7M3 8.2h12M6 3.8v2.1m3-2.1v2.1m3-2.1v2.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Track &amp; ruler
+            </div>
+            <div class="live-status" id="runStatus" data-state="ready" aria-live="polite">
+              <span class="live-dot"></span><span id="statusText">Ready · set up a challenge</span>
+            </div>
+          </div>
+
+          <div class="scene" id="scene" aria-label="Two meter track with 25 centimeter marks and a moving buggy">
+            <div class="sun" aria-hidden="true"></div>
+            <div class="cloud" aria-hidden="true"></div>
+            <div class="hills" aria-hidden="true"></div>
+            <div class="scene-tag"><span></span><span>Track A · 2 m</span></div>
+            <div class="target-guide" id="targetGuide" aria-hidden="true"></div>
+            <div class="road" aria-hidden="true"></div>
+            <div class="position-stem" id="positionStem" aria-hidden="true"></div>
+            <div class="buggy" id="buggy" aria-label="Buggy">
+              <svg viewBox="0 0 200 112" role="img" aria-label="Orange and blue toy buggy">
+                <ellipse cx="100" cy="100" rx="73" ry="6" fill="#4b554f" opacity=".16"/>
+                <g class="wheel-spin">
+                  <circle cx="52" cy="82" r="20" fill="#263443"/><circle cx="52" cy="82" r="11" fill="#b9c5c9"/><circle cx="52" cy="82" r="4" fill="#71808a"/>
+                  <path d="M52 72v6m0 8v6m-10-10h6m8 0h6m-17-7 4 4m6 6 4 4m0-14-4 4m-6 6-4 4" stroke="#87969f" stroke-width="1.6" stroke-linecap="round"/>
+                </g>
+                <g class="wheel-spin">
+                  <circle cx="149" cy="82" r="20" fill="#263443"/><circle cx="149" cy="82" r="11" fill="#b9c5c9"/><circle cx="149" cy="82" r="4" fill="#71808a"/>
+                  <path d="M149 72v6m0 8v6m-10-10h6m8 0h6m-17-7 4 4m6 6 4 4m0-14-4 4m-6 6-4 4" stroke="#87969f" stroke-width="1.6" stroke-linecap="round"/>
+                </g>
+                <path d="M25 72c2-7 9-13 19-15l12-2 17-25c3-5 8-8 14-8h33c8 0 15 4 20 10l18 23 13 4c7 2 11 7 12 14l1 9h-18a17 17 0 0 0-34 0H69a17 17 0 0 0-34 0H22l3-10Z" fill="#f18a4d"/>
+                <path d="m80 30-16 24h38V27H88c-3 0-6 1-8 3Zm28-3v27h42l-15-19c-3-5-8-8-14-8h-13Z" fill="#617e8b"/>
+                <path d="M24 68h154M103 27v27" stroke="#d96d37" stroke-width="2" opacity=".8"/>
+                <path d="M31 68h10m103 0h28" stroke="#ffd3a4" stroke-width="3" stroke-linecap="round"/>
+                <path d="M187 66h7v8h-7" fill="#ffdf92"/><path d="M25 70h-4v7h4" fill="#d86b3b"/><circle cx="189" cy="69" r="2" fill="#fff2c8"/>
+              </svg>
+            </div>
+            <div class="position-cap" id="positionCap" aria-hidden="true"></div>
+            <div class="ruler" id="ruler" aria-label="Ruler from zero to two meters with marks every 0.25 meters">
+              <div class="ruler-line"></div><div id="rulerTicks"></div><span class="scale-note">meters</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side-panel" aria-label="Challenge and live instruments">
+          <div class="challenge-card">
+            <span class="card-kicker">Your challenge</span>
+            <h2>Predict, then pause</h2>
+            <p class="challenge-copy" id="challengePrompt">At this speed, predict when the buggy’s front will reach the orange mark. Start it and pause it yourself as it crosses.</p>
+            <div class="setting">
+              <label class="setting-heading" for="speedSlider"><span>Simulated constant speed</span><output id="speedOutput" for="speedSlider">0.20 m/s</output></label>
+              <input id="speedSlider" type="range" min="0.10" max="0.50" step="0.05" value="0.20" aria-label="Choose the buggy's constant simulated speed">
+              <div class="range-ends"><span>0.10 m/s</span><span>0.50 m/s</span></div>
+            </div>
+            <div class="setting">
+              <label class="setting-heading" for="targetSlider"><span>Orange challenge mark</span><output id="targetOutput" for="targetSlider">1.00 m</output></label>
+              <input id="targetSlider" type="range" min="0.25" max="2.00" step="0.25" value="1.00" aria-label="Choose a challenge mark on the ruler">
+              <div class="range-ends"><span>0.25 m</span><span>2.00 m</span></div>
+            </div>
+            <button class="challenge-button" id="newChallengeButton" type="button">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.2 7A5.3 5.3 0 0 0 3.6 4.8L2.5 6m0 0V3.3M2.5 6h2.8m-2.5 3A5.3 5.3 0 0 0 12.4 11l1.1-1.2m0 0v2.7m0-2.7h-2.8" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              New random challenge
+            </button>
+          </div>
+
+          <div class="stopwatch-card">
+            <div class="instrument-label">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8.7" r="5.5" stroke="currentColor" stroke-width="1.4"/><path d="M6 1.8h4M8 3.2v1.2m0 4.3 2.4 1.5M12.5 4l1-.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Stopwatch
+            </div>
+            <div class="digital-time" id="timer" aria-label="Elapsed time">00:00.00</div>
+            <div class="stopwatch-caption" id="stopwatchCaption">starts when front edge crosses 0</div>
+          </div>
+          <div class="readout-card">
+            <div><div class="readout-title">Buggy position</div><div class="readout-value" id="positionValue">0.00 m</div></div>
+            <div class="readout-symbol" aria-hidden="true">x</div>
+          </div>
+          <div class="use-materials-note"><strong>For your report:</strong> use the physical buggy, ruler, and stopwatch to collect the submitted data. This page does not store lab results.</div>
+        </aside>
+      </div>
+
+      <div class="control-panel">
+        <div class="transport-row">
+          <div class="transport-buttons">
+            <button class="control-button" id="resetButton" type="button" title="Reset the buggy and stopwatch without changing the settings">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.2 5.3A5.5 5.5 0 1 1 2.5 9M3.2 2.5v2.9H.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Reset run
+            </button>
+            <button class="control-button primary" id="playButton" type="button" aria-label="Start buggy">
+              <svg class="play-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3.2c0-.7.8-1.1 1.4-.7l6.1 4.1a.9.9 0 0 1 0 1.5l-6.1 4.1c-.6.4-1.4 0-1.4-.7V3.2Z"/></svg>
+              <svg class="pause-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 3.2c0-.4.3-.7.7-.7h1.6c.4 0 .7.3.7.7v9.6c0 .4-.3.7-.7.7H4.7c-.4 0-.7-.3-.7-.7V3.2Zm5 0c0-.4.3-.7.7-.7h1.6c.4 0 .7.3.7.7v9.6c0 .4-.3.7-.7.7H9.7c-.4 0-.7-.3-.7-.7V3.2Z"/></svg>
+              <span id="playLabel">Start buggy</span>
+            </button>
+            <button class="control-button" id="stepButton" type="button" title="Advance exactly one 60 Hz simulation frame">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 3.4v9.2L10 8l-6.5-4.6ZM11.8 3.5v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Step one frame
+            </button>
+          </div>
+          <div class="control-hint"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.2v11.6M2.2 8h11.6m-9.6-3.8 7.6 7.6m0-7.6-7.6 7.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>One frame = 1/60 s</div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-head"><label for="timelineSlider">Scrub the run</label><span class="frame-counter" id="frameCounter">FRAME 000 / 615</span></div>
+          <input id="timelineSlider" type="range" min="0" max="615" step="1" value="0" aria-label="Scrub the buggy motion one frame at a time">
+          <div class="timeline-ends"><span>5 cm before start</span><span id="endTimeLabel">Track end · 0:10.00</span></div>
+        </div>
+      </div>
+
+      <div class="challenge-strip">
+        <p><strong>Try it:</strong> Run three different speed and distance combinations. Does doubling the speed halve the travel time? Does doubling the distance double it? The orange mark is a target, not an automatic stop.</p>
+        <span class="practice-tag">Practice only · no saved data</span>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      <span><strong>Activity 2:</strong> take your submitted measurements with the lab materials and enter them in the assignment document.</span>
+      <span><kbd>Space</kbd> play / pause &nbsp; <kbd>→</kbd> step forward &nbsp; <kbd>←</kbd> step back</span>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const FPS = 60;
+      const TRACK_LENGTH = 2;
+      const MARK_INTERVAL = 0.25;
+      const LEAD_IN_DISTANCE = 0.05;
+      let speed = 0.20;
+      let targetDistance = 1.00;
+      let frame = 0;
+      let isPlaying = false;
+      let isComplete = false;
+      let previousTimestamp = null;
+      let accumulatedMilliseconds = 0;
+      let animationRequest = null;
+
+      const scene = document.getElementById('scene');
+      const ruler = document.getElementById('ruler');
+      const rulerTicks = document.getElementById('rulerTicks');
+      const buggy = document.getElementById('buggy');
+      const positionStem = document.getElementById('positionStem');
+      const positionCap = document.getElementById('positionCap');
+      const targetGuide = document.getElementById('targetGuide');
+      const timer = document.getElementById('timer');
+      const stopwatchCaption = document.getElementById('stopwatchCaption');
+      const positionValue = document.getElementById('positionValue');
+      const runStatus = document.getElementById('runStatus');
+      const statusText = document.getElementById('statusText');
+      const speedSlider = document.getElementById('speedSlider');
+      const speedOutput = document.getElementById('speedOutput');
+      const targetSlider = document.getElementById('targetSlider');
+      const targetOutput = document.getElementById('targetOutput');
+      const challengePrompt = document.getElementById('challengePrompt');
+      const newChallengeButton = document.getElementById('newChallengeButton');
+      const playButton = document.getElementById('playButton');
+      const playLabel = document.getElementById('playLabel');
+      const resetButton = document.getElementById('resetButton');
+      const stepButton = document.getElementById('stepButton');
+      const timelineSlider = document.getElementById('timelineSlider');
+      const frameCounter = document.getElementById('frameCounter');
+      const endTimeLabel = document.getElementById('endTimeLabel');
+
+      buildRuler();
+      render();
+      updateWheelSpeed();
+
+      function leadInFrames() { return Math.round((LEAD_IN_DISTANCE / speed) * FPS); }
+      function totalFrames() { return leadInFrames() + Math.round((TRACK_LENGTH / speed) * FPS); }
+      function elapsedSeconds() { return Math.max(0, frame - leadInFrames()) / FPS; }
+      function physicalPosition() { return Math.min(TRACK_LENGTH, -LEAD_IN_DISTANCE + (frame * speed / FPS)); }
+      function measuredPosition() { return Math.max(0, physicalPosition()); }
+      function formatClock(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainder = (seconds - minutes * 60).toFixed(2).padStart(5, '0');
+        return `${String(minutes).padStart(2,'0')}:${remainder}`;
+      }
+      function shortClock(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainder = (seconds - minutes * 60).toFixed(2).padStart(5, '0');
+        return `${minutes}:${remainder}`;
+      }
+      function buildRuler() {
+        const fragment = document.createDocumentFragment();
+        const marks = Math.round(TRACK_LENGTH / MARK_INTERVAL);
+        for (let mark = 0; mark <= marks; mark += 1) {
+          const distance = mark * MARK_INTERVAL;
+          const tick = document.createElement('span');
+          tick.className = `tick${mark % 2 === 0 ? ' major' : ''}${mark === 0 ? ' zero' : ''}`;
+          tick.dataset.distance = distance.toFixed(2);
+          tick.style.left = `${(distance / TRACK_LENGTH) * 100}%`;
+          fragment.appendChild(tick);
+          const label = document.createElement('span');
+          label.className = `tick-label${mark === 0 ? ' edge-start' : mark === marks ? ' edge-end' : ''}`;
+          label.dataset.distance = distance.toFixed(2);
+          label.style.left = `${(distance / TRACK_LENGTH) * 100}%`;
+          label.textContent = Number.isInteger(distance) ? distance.toFixed(0) : distance.toFixed(2).replace(/0$/, '');
+          fragment.appendChild(label);
+        }
+        rulerTicks.appendChild(fragment);
+      }
+      function updateChallengePrompt() {
+        challengePrompt.textContent = `At ${speed.toFixed(2)} m/s, predict when the buggy’s front will reach ${targetDistance.toFixed(2)} m. Start it and pause it yourself as it crosses the orange mark.`;
+      }
+      function updatePosition() {
+        const position = physicalPosition();
+        const pointX = ruler.offsetLeft + (position / TRACK_LENGTH) * ruler.offsetWidth;
+        const buggyWidth = buggy.getBoundingClientRect().width;
+        buggy.style.left = `${pointX - buggyWidth * .47}px`;
+        positionStem.style.left = `${pointX}px`;
+        positionCap.style.left = `${pointX}px`;
+        const targetX = ruler.offsetLeft + (targetDistance / TRACK_LENGTH) * ruler.offsetWidth;
+        targetGuide.style.left = `${targetX}px`;
+        const selected = targetDistance.toFixed(2);
+        rulerTicks.querySelectorAll('[data-distance]').forEach(element => {
+          const active = element.dataset.distance === selected;
+          element.classList.toggle('selected', active && element.classList.contains('tick'));
+          element.classList.toggle('selected-label', active && element.classList.contains('tick-label'));
+        });
+        positionValue.textContent = `${measuredPosition().toFixed(2)} m`;
+        const elapsed = elapsedSeconds();
+        timer.textContent = formatClock(elapsed);
+        timer.setAttribute('aria-label', `Elapsed time ${formatClock(elapsed)}`);
+        stopwatchCaption.textContent = isComplete ? 'buggy reached the end of the track' : elapsed === 0 ? 'starts when front edge crosses 0' : 'elapsed time · min : sec';
+        const duration = TRACK_LENGTH / speed;
+        timelineSlider.max = String(totalFrames());
+        timelineSlider.value = String(frame);
+        timelineSlider.disabled = isPlaying;
+        frameCounter.textContent = `FRAME ${String(frame).padStart(3,'0')} / ${String(totalFrames()).padStart(3,'0')}`;
+        endTimeLabel.textContent = `Track end · ${shortClock(duration)}`;
+      }
+      function updateStatus() {
+        let state = 'ready';
+        let text = 'Ready · set up a challenge';
+        let label = 'Start buggy';
+        if (isPlaying) {
+          state = 'running'; text = 'Buggy moving · pause at the orange mark'; label = 'Pause buggy';
+        } else if (isComplete) {
+          state = 'complete'; text = 'Track end · reset or replay'; label = 'Replay run';
+        } else if (frame > 0) {
+          state = 'paused'; text = 'Paused · adjust with frame controls'; label = 'Resume buggy';
+        }
+        runStatus.dataset.state = state;
+        statusText.textContent = text;
+        playLabel.textContent = label;
+        playButton.setAttribute('aria-label', label);
+        playButton.classList.toggle('is-playing', isPlaying);
+        scene.classList.toggle('is-playing', isPlaying);
+        stepButton.disabled = isPlaying || isComplete;
+        speedSlider.disabled = isPlaying || frame > 0 || isComplete;
+        targetSlider.disabled = isPlaying || frame > 0 || isComplete;
+        newChallengeButton.disabled = false;
+      }
+      function render() {
+        speedOutput.textContent = `${speed.toFixed(2)} m/s`;
+        targetOutput.textContent = `${targetDistance.toFixed(2)} m`;
+        updateChallengePrompt();
+        updatePosition();
+        updateStatus();
+      }
+      function stopAnimation() {
+        isPlaying = false;
+        previousTimestamp = null;
+        accumulatedMilliseconds = 0;
+        if (animationRequest !== null) {
+          cancelAnimationFrame(animationRequest);
+          animationRequest = null;
+        }
+      }
+      function advance(frames) {
+        frame = Math.min(totalFrames(), frame + frames);
+        if (frame >= totalFrames()) {
+          frame = totalFrames();
+          isComplete = true;
+          stopAnimation();
+        }
+        render();
+      }
+      function animate(timestamp) {
+        animationRequest = null;
+        if (!isPlaying) return;
+        if (previousTimestamp === null) previousTimestamp = timestamp;
+        const elapsedMilliseconds = Math.min(timestamp - previousTimestamp, 250);
+        previousTimestamp = timestamp;
+        accumulatedMilliseconds += elapsedMilliseconds;
+        const frameDuration = 1000 / FPS;
+        const framesToAdvance = Math.floor(accumulatedMilliseconds / frameDuration);
+        if (framesToAdvance > 0) {
+          accumulatedMilliseconds -= framesToAdvance * frameDuration;
+          advance(framesToAdvance);
+        }
+        if (isPlaying) animationRequest = requestAnimationFrame(animate);
+      }
+      function start() {
+        if (isComplete) {
+          frame = 0;
+          isComplete = false;
+        }
+        isPlaying = true;
+        previousTimestamp = null;
+        accumulatedMilliseconds = 0;
+        render();
+        if (animationRequest === null) animationRequest = requestAnimationFrame(animate);
+      }
+      function togglePlayback() {
+        if (isPlaying) {
+          stopAnimation();
+          render();
+        } else {
+          start();
+        }
+      }
+      function resetRun() {
+        stopAnimation();
+        frame = 0;
+        isComplete = false;
+        render();
+      }
+      function stepForward() {
+        if (isPlaying || isComplete) return;
+        advance(1);
+      }
+      function stepBackward() {
+        if (isPlaying || frame === 0) return;
+        frame = Math.max(0, frame - 1);
+        isComplete = false;
+        render();
+      }
+      function chooseNewChallenge() {
+        stopAnimation();
+        const speedChoices = Array.from({length: 9}, (_, index) => Number((0.10 + index * 0.05).toFixed(2)));
+        const markChoices = Array.from({length: 8}, (_, index) => Number(((index + 1) * MARK_INTERVAL).toFixed(2)));
+        let nextSpeed = speedChoices[Math.floor(Math.random() * speedChoices.length)];
+        let nextTarget = markChoices[Math.floor(Math.random() * markChoices.length)];
+        if (nextSpeed === speed && nextTarget === targetDistance) nextTarget = markChoices[(markChoices.indexOf(nextTarget) + 1) % markChoices.length];
+        speed = nextSpeed;
+        targetDistance = nextTarget;
+        speedSlider.value = speed.toFixed(2);
+        targetSlider.value = targetDistance.toFixed(2);
+        frame = 0;
+        isComplete = false;
+        render();
+        updateWheelSpeed();
+      }
+      function updateWheelSpeed() {
+        const scalePixelsPerMeter = ruler.offsetWidth / TRACK_LENGTH;
+        const wheelRadiusPixels = 20 * (buggy.clientWidth / 200);
+        const periodSeconds = (2 * Math.PI * wheelRadiusPixels) / (speed * scalePixelsPerMeter);
+        scene.style.setProperty('--wheel-period', `${periodSeconds}s`);
+      }
+
+      speedSlider.addEventListener('input', () => {
+        if (isPlaying || frame > 0 || isComplete) return;
+        speed = Number(speedSlider.value);
+        render();
+        updateWheelSpeed();
+      });
+      targetSlider.addEventListener('input', () => {
+        if (isPlaying || frame > 0 || isComplete) return;
+        targetDistance = Number(targetSlider.value);
+        render();
+      });
+      newChallengeButton.addEventListener('click', chooseNewChallenge);
+      playButton.addEventListener('click', togglePlayback);
+      resetButton.addEventListener('click', resetRun);
+      stepButton.addEventListener('click', stepForward);
+      timelineSlider.addEventListener('input', () => {
+        if (isPlaying) stopAnimation();
+        frame = Math.max(0, Math.min(totalFrames(), Number(timelineSlider.value)));
+        isComplete = frame >= totalFrames();
+        render();
+      });
+      window.addEventListener('keydown', event => {
+        if (event.altKey || event.ctrlKey || event.metaKey) return;
+        const target = event.target;
+        if (target instanceof HTMLElement && (target.isContentEditable || target.matches('button,input,select,textarea'))) return;
+        if (event.code === 'Space') {
+          event.preventDefault();
+          togglePlayback();
+        } else if (event.key === 'ArrowRight' && !isPlaying) {
+          event.preventDefault();
+          stepForward();
+        } else if (event.key === 'ArrowLeft' && !isPlaying) {
+          event.preventDefault();
+          stepBackward();
+        }
+      });
+      if ('ResizeObserver' in window) {
+        const observer = new ResizeObserver(() => {
+          updatePosition();
+          updateWheelSpeed();
+        });
+        observer.observe(scene);
+      } else {
+        window.addEventListener('resize', () => {
+          updatePosition();
+          updateWheelSpeed();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
