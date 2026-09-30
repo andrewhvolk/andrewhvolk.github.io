@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Install OpenSCAD, add optional libraries, and create a printable Sierpiński tetrahedron with recursion.">
+  <meta name="theme-color" content="#174c70">
+  <title>OpenSCAD Fractal Solids Guide</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23174c70' d='M12 2 2 20h20L12 2Zm0 5.6 5.2 9H6.8L12 7.6Z'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #132238;
+      --ink-soft: #46556a;
+      --paper: #f4f0e8;
+      --paper-bright: #fffdf8;
+      --blueprint: #174c70;
+      --blueprint-deep: #0b2b43;
+      --teal: #168294;
+      --orange: #ef6c3d;
+      --line: #ced5da;
+      --code: #151a21;
+      --code-2: #202731;
+      --white: #ffffff;
+      --display: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Arial, sans-serif;
+      --mono: "Cascadia Code", "Cascadia Mono", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(rgba(23, 76, 112, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 76, 112, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 34px 34px;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    code, pre { font-family: var(--mono); }
+    code { font-size: .92em; }
+    .icon {
+      width: 1.25em;
+      height: 1.25em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 68px;
+      padding: 0 max(24px, calc((100vw - 1160px) / 2));
+      border-bottom: 1px solid rgba(19, 34, 56, .12);
+      background: rgba(244, 240, 232, .94);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-weight: 800; letter-spacing: -.02em; }
+    .brand-mark { display: grid; place-items: center; width: 36px; height: 36px; color: var(--white); background: var(--blueprint); border-radius: 8px; transform: rotate(-3deg); }
+    .brand-mark .icon { width: 21px; }
+    .site-header nav { display: flex; gap: 26px; }
+    .site-header nav a { color: var(--ink-soft); font-size: .9rem; font-weight: 700; text-decoration: none; }
+    .site-header nav a:hover, .site-header nav a:focus-visible { color: var(--teal); }
+
+    .hero, .section, footer { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(34px, 7vw, 92px); align-items: center; min-height: 650px; padding: 78px 0 88px; }
+    .eyebrow { margin: 0 0 10px; color: var(--teal); font-size: .78rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    h1, h2 { font-family: var(--display); font-weight: 600; letter-spacing: -.045em; line-height: 1.02; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(3rem, 6.4vw, 5.8rem); }
+    h2 { margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3.5rem); }
+    h3 { margin: 0; font-size: 1.15rem; line-height: 1.25; }
+    .lede { max-width: 680px; margin: 24px 0 0; color: var(--ink-soft); font-size: clamp(1.08rem, 1.8vw, 1.34rem); line-height: 1.55; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 17px; border: 1px solid var(--ink); border-radius: 7px; font-weight: 800; text-decoration: none; transition: transform .16s ease, box-shadow .16s ease; }
+    .button .icon { width: 18px; }
+    .button .icon:last-child { width: 14px; opacity: .75; }
+    .button.primary { color: var(--white); background: var(--ink); }
+    .button.secondary { background: rgba(255, 253, 248, .72); }
+    .button:hover, .button:focus-visible { transform: translateY(-1px); box-shadow: 0 9px 24px rgba(19, 34, 56, .13); }
+    .quick-facts { display: flex; flex-wrap: wrap; gap: 11px 22px; margin: 24px 0 0; padding: 0; list-style: none; color: var(--ink-soft); font-size: .9rem; font-weight: 700; }
+    .quick-facts li { display: flex; align-items: center; gap: 7px; }
+    .quick-facts .icon { width: 16px; color: var(--teal); }
+
+    .fractal-figure { position: relative; margin: 0; padding: 28px; color: var(--teal); border: 1px solid rgba(23, 76, 112, .28); background: var(--paper-bright); box-shadow: 18px 18px 0 rgba(23, 76, 112, .09); }
+    .fractal-figure::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(23, 76, 112, .1); pointer-events: none; }
+    .fractal-figure > svg { display: block; width: 100%; height: auto; }
+    .fractal-figure > svg path, .fractal-figure > svg use { fill: none; stroke: currentColor; stroke-width: 4; stroke-linejoin: round; }
+    .fractal-figure .ghost { stroke: var(--blueprint); stroke-width: 1.5; stroke-dasharray: 6 7; opacity: .45; }
+    .fractal-figure figcaption { display: grid; grid-template-columns: auto 1fr; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .9rem; }
+    .fractal-figure figcaption strong { color: var(--orange); }
+
+    .section { padding: 90px 0; border-top: 1px solid rgba(19, 34, 56, .18); scroll-margin-top: 68px; }
+    .section-heading { display: grid; grid-template-columns: 72px minmax(0, 800px); gap: 22px; margin-bottom: 42px; }
+    .section-heading p:not(.eyebrow) { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
+    .step-number { color: var(--orange); font-family: var(--display); font-size: 2.2rem; line-height: 1; }
+
+    .platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .platform-card { min-height: 250px; padding: 24px; border: 1px solid var(--line); background: rgba(255, 253, 248, .72); }
+    .card-icon { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 24px; color: var(--teal); border: 1px solid currentColor; border-radius: 50%; }
+    .card-icon .icon { width: 20px; }
+    .platform-card p { color: var(--ink-soft); }
+    .platform-card pre, .library-grid pre { overflow-x: auto; margin: 18px 0 0; padding: 10px 12px; color: #dfe8ee; background: var(--blueprint-deep); font-size: .82rem; }
+    .card-note { font-size: .88rem; }
+
+    .libraries { position: relative; }
+    .library-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0 0 34px; padding: 0; list-style: none; background: var(--line); border: 1px solid var(--line); }
+    .library-steps li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; padding: 20px; background: var(--paper-bright); }
+    .library-steps li > span { display: grid; place-items: center; width: 28px; height: 28px; color: var(--white); background: var(--teal); border-radius: 50%; font-weight: 900; }
+    .library-steps p { margin: 4px 0 0; color: var(--ink-soft); font-size: .9rem; }
+    .library-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .library-grid article { padding: 26px; border-top: 4px solid var(--teal); background: var(--paper-bright); }
+    .library-grid article:last-child { border-top-color: var(--orange); }
+    .library-title { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+    .library-title span { color: var(--ink-soft); font-size: .78rem; font-weight: 800; }
+    .library-grid p { color: var(--ink-soft); }
+    .library-grid a { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; color: var(--blueprint); font-weight: 900; }
+    .library-grid a .icon { width: 14px; }
+    .path-note { display: flex; align-items: flex-start; gap: 10px; margin: 24px 0 0; color: var(--ink-soft); font-size: .9rem; }
+    .path-note .icon { flex: none; width: 19px; color: var(--teal); }
+
+    .build { width: 100%; max-width: none; padding-inline: max(24px, calc((100vw - 1160px) / 2)); color: var(--white); border: 0; background: var(--blueprint-deep); }
+    .build .section-heading { width: min(1160px, 100%); }
+    .build h2 { color: var(--white); }
+    .build .section-heading p:not(.eyebrow) { color: rgba(255,255,255,.7); }
+    .build .eyebrow { color: #78cad4; }
+    .build-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(270px, .65fr); gap: 24px; }
+    .code-window { min-width: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.13); background: var(--code); box-shadow: 0 28px 80px rgba(0,0,0,.25); }
+    .code-bar { display: flex; align-items: center; gap: 7px; min-height: 42px; padding: 0 14px; border-bottom: 1px solid rgba(255,255,255,.11); background: var(--code-2); }
+    .code-bar span { width: 9px; height: 9px; border-radius: 50%; background: #e46d52; }
+    .code-bar span:nth-child(2) { background: #d7a941; }
+    .code-bar span:nth-child(3) { background: #53a77a; }
+    .code-bar b { margin-left: 7px; color: rgba(255,255,255,.6); font-family: var(--mono); font-size: .76rem; font-weight: 500; }
+    .code-window pre { overflow: auto; margin: 0; padding: 24px; color: #e4e9ed; font-size: clamp(.73rem, 1.25vw, .88rem); line-height: 1.6; tab-size: 2; }
+    .depth-panel { padding: 25px; color: var(--ink); background: var(--paper-bright); }
+    .depth-head, .depth-row { display: grid; grid-template-columns: .7fr 1fr 1.25fr; gap: 10px; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+    .depth-head { margin-top: 18px; color: var(--ink-soft); font-size: .72rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .depth-row.recommended { color: var(--white); background: var(--teal); border-color: var(--teal); font-weight: 900; }
+    .depth-panel p { color: var(--ink-soft); font-size: .9rem; }
+    .depth-panel .weld-note { margin: 18px -25px -25px; padding: 18px 25px 22px; color: var(--ink); background: #f4e6d7; }
+
+    .workflow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .workflow article { position: relative; padding: 26px 25px; border: 1px solid var(--line); background: rgba(255, 253, 248, .74); }
+    .workflow article > span { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 20px; color: var(--white); background: var(--blueprint); border-radius: 50%; }
+    .workflow .icon { width: 20px; }
+    .workflow p { margin-bottom: 0; color: var(--ink-soft); }
+    kbd { padding: 2px 6px; border: 1px solid #aeb7bf; border-bottom-width: 2px; border-radius: 4px; background: var(--white); font: 700 .8rem var(--mono); }
+    .print-check { display: grid; grid-template-columns: 210px 1fr; gap: 30px; margin-top: 18px; padding: 28px; color: var(--white); background: var(--ink); }
+    .print-check ul { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; margin: 0; padding: 0; list-style: none; }
+    .print-check li { display: flex; align-items: flex-start; gap: 8px; color: rgba(255,255,255,.78); font-size: .91rem; }
+    .print-check li .icon { flex: none; width: 17px; color: #78cad4; }
+
+    footer { display: flex; justify-content: space-between; gap: 36px; padding: 42px 0 64px; border-top: 1px solid rgba(19, 34, 56, .18); color: var(--ink-soft); }
+    footer p { max-width: 570px; margin: 4px 0 0; font-size: .86rem; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px 18px; }
+    .footer-links a { color: var(--blueprint); font-size: .86rem; font-weight: 800; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 860px) {
+      .site-header nav { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 58px; }
+      .fractal-figure { max-width: 520px; }
+      .platform-grid, .library-grid, .workflow { grid-template-columns: 1fr; }
+      .library-steps { grid-template-columns: 1fr; }
+      .build-grid { grid-template-columns: 1fr; }
+      .print-check { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .site-header { padding-inline: 18px; }
+      .brand { font-size: .9rem; }
+      .hero, .section, footer { width: min(100% - 32px, 1160px); }
+      .hero { min-height: auto; padding-block: 46px 66px; }
+      h1 { font-size: 3rem; }
+      .section { padding-block: 64px; }
+      .section-heading { grid-template-columns: 1fr; gap: 8px; }
+      .actions { display: grid; }
+      .button { justify-content: center; }
+      .fractal-figure { padding: 18px; box-shadow: 10px 10px 0 rgba(23, 76, 112, .09); }
+      .fractal-figure figcaption { grid-template-columns: 1fr; gap: 0; }
+      .library-title { display: block; }
+      .library-title span { display: block; margin-top: 4px; }
+      .path-note { display: block; overflow-wrap: anywhere; }
+      .print-check ul { grid-template-columns: 1fr; }
+      footer { display: block; }
+      .footer-links { justify-content: flex-start; margin-top: 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .button { transition: none; }
+      .button:hover, .button:focus-visible { transform: none; }
+    }
+
+    @media print {
+      .site-header { position: static; }
+      .actions { display: none; }
+      .hero { min-height: auto; }
+      .section, .hero { break-inside: avoid; padding-block: 36px; }
+      .build { color: var(--ink); background: var(--white); }
+      .build h2, .build .section-heading p:not(.eyebrow) { color: var(--ink); }
+      .code-window { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="visually-hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="icon-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 12.5-9.17 4.17a2 2 0 0 1-1.66 0L2 12.5"/><path d="m22 17.5-9.17 4.17a2 2 0 0 1-1.66 0L2 17.5"/></symbol>
+      <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+      <symbol id="icon-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+      <symbol id="icon-code" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="icon-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+      <symbol id="icon-terminal" viewBox="0 0 24 24"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="14" x="3" y="5" rx="2"/></symbol>
+      <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9Z"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="OpenSCAD fractal guide home">
+      <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#icon-layers"></use></svg></span>
+      <span>OpenSCAD Fractal Guide</span>
+    </a>
+    <nav aria-label="Guide sections">
+      <a href="#install">Install</a>
+      <a href="#libraries">Libraries</a>
+      <a href="#build">Build</a>
+      <a href="#print">Print</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Mathematics Department quick guide</p>
+        <h1>From recursion to a printable Sierpiński solid</h1>
+        <p class="lede">Install OpenSCAD, add optional geometry libraries, and turn a recursive definition into a connected tetrahedral model ready for slicing.</p>
+        <div class="actions">
+          <a class="button primary" href="https://openscad.org/downloads.html" target="_blank" rel="noreferrer noopener">
+            <svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg>
+            Download OpenSCAD
+            <svg class="icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+          </a>
+          <a class="button secondary" id="download-scad" href="#build" download="sierpinski_tetrahedron.scad">
+            <svg class="icon" aria-hidden="true"><use href="#icon-code"></use></svg>
+            Download starter SCAD
+          </a>
+        </div>
+        <ul class="quick-facts" aria-label="Guide highlights">
+          <li><svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg> No library required</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg> Windows, macOS, and Linux</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg> Printable overlap included</li>
+        </ul>
+      </div>
+
+      <figure class="fractal-figure">
+        <svg viewBox="0 0 320 275" role="img" aria-labelledby="fractal-title fractal-desc">
+          <title id="fractal-title">First recursive stage of a Sierpiński tetrahedron</title>
+          <desc id="fractal-desc">Four smaller wireframe tetrahedra occupy the corners of one larger tetrahedron.</desc>
+          <defs>
+            <g id="tetra">
+              <path d="M0 98 L64 0 L128 98 Z"></path>
+              <path d="M0 98 L64 70 L128 98"></path>
+              <path d="M64 0 L64 70"></path>
+            </g>
+          </defs>
+          <path class="ghost" d="M40 225 L160 18 L280 225 Z M40 225 L160 165 L280 225 M160 18 L160 165"></path>
+          <use href="#tetra" transform="translate(88, 22) scale(.48)"></use>
+          <use href="#tetra" transform="translate(13, 142) scale(.48)"></use>
+          <use href="#tetra" transform="translate(163, 142) scale(.48)"></use>
+          <use href="#tetra" transform="translate(88, 112) scale(.48)"></use>
+        </svg>
+        <figcaption>
+          <strong>Recursive rule</strong>
+          <span>Place four half-size copies at the vertices.</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="install">
+      <div class="section-heading">
+        <span class="step-number">01</span>
+        <div>
+          <p class="eyebrow">Install the modeller</p>
+          <h2>Start with the stable OpenSCAD release</h2>
+          <p>Use the official download page. Development snapshots are useful later, but the stable build is the simpler classroom default.</p>
+        </div>
+      </div>
+
+      <div class="platform-grid">
+        <article class="platform-card">
+          <div class="card-icon"><svg class="icon" aria-hidden="true"><use href="#icon-box"></use></svg></div>
+          <h3>Windows</h3>
+          <p>Download the 64-bit EXE installer, or install from Windows Terminal.</p>
+          <pre><code>winget install --id=OpenSCAD.OpenSCAD -e</code></pre>
+        </article>
+        <article class="platform-card">
+          <div class="card-icon"><svg class="icon" aria-hidden="true"><use href="#icon-box"></use></svg></div>
+          <h3>macOS</h3>
+          <p>Choose the macOS installer listed for your Mac on the <a href="https://openscad.org/downloads.html" target="_blank" rel="noopener noreferrer">official downloads page</a>. Open the DMG, then drag OpenSCAD into Applications.</p>
+          <p class="card-note">If macOS blocks the first launch, control-click the app and choose Open.</p>
+        </article>
+        <article class="platform-card">
+          <div class="card-icon"><svg class="icon" aria-hidden="true"><use href="#icon-terminal"></use></svg></div>
+          <h3>Linux</h3>
+          <p>On Debian or Ubuntu, install the repository package. Other distributions can use the official AppImage.</p>
+          <pre><code>sudo apt-get install openscad</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section libraries" id="libraries">
+      <div class="section-heading">
+        <span class="step-number">02</span>
+        <div>
+          <p class="eyebrow">Optional libraries</p>
+          <h2>Add helpers after the basic model works</h2>
+          <p>The Sierpiński example below uses only native OpenSCAD. Libraries become useful when you add rounded parts, paths, labels, fixtures, or more complicated polyhedra.</p>
+        </div>
+      </div>
+
+      <ol class="library-steps">
+        <li><span>1</span><div><strong>Open the library folder</strong><p>In OpenSCAD, choose <b>File → Show Library Folder</b>.</p></div></li>
+        <li><span>2</span><div><strong>Extract each library once</strong><p>Place its top-level folder inside <code>libraries</code>; for example, <code>libraries/BOSL2/std.scad</code>.</p></div></li>
+        <li><span>3</span><div><strong>Restart and verify</strong><p>Open <b>Help → Library Info</b> and confirm the folder appears in the search path.</p></div></li>
+      </ol>
+
+      <div class="library-grid">
+        <article>
+          <div class="library-title"><h3>BOSL2</h3><span>OpenSCAD 2021.01+</span></div>
+          <p>Broad geometry toolkit with transforms, attachable shapes, paths, sweeps, polyhedral data structures, and math helpers.</p>
+          <pre><code>include &lt;BOSL2/std.scad&gt;</code></pre>
+          <a href="https://github.com/BelfrySCAD/BOSL2" target="_blank" rel="noreferrer noopener">Download BOSL2 <svg class="icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
+        </article>
+        <article>
+          <div class="library-title"><h3>MCAD</h3><span>Mechanical and mathematical parts</span></div>
+          <p>Smaller collection with regular shapes, curves, constants, transformations, gears, and common mechanical components.</p>
+          <pre><code>use &lt;MCAD/regular_shapes.scad&gt;</code></pre>
+          <a href="https://github.com/openscad/MCAD" target="_blank" rel="noreferrer noopener">Download MCAD <svg class="icon" aria-hidden="true"><use href="#icon-external"></use></svg></a>
+        </article>
+      </div>
+
+      <p class="path-note"><svg class="icon" aria-hidden="true"><use href="#icon-folder"></use></svg> Default user library folders: <code>Documents\OpenSCAD\libraries</code> on Windows, <code>~/Documents/OpenSCAD/libraries</code> on macOS, and <code>~/.local/share/OpenSCAD/libraries</code> on Linux.</p>
+    </section>
+
+    <section class="section build" id="build">
+      <div class="section-heading light-heading">
+        <span class="step-number">03</span>
+        <div>
+          <p class="eyebrow">Build the fractal</p>
+          <h2>Four copies, half scale, repeated</h2>
+          <p>At depth <i>d</i>, the model contains 4<sup>d</sup> tetrahedra. Its similarity dimension is log(4) / log(2) = 2.</p>
+        </div>
+      </div>
+
+      <div class="build-grid">
+        <div class="code-window">
+          <div class="code-bar"><span></span><span></span><span></span><b>sierpinski_tetrahedron.scad</b></div>
+          <pre><code id="visible-scad">// Printable Sierpinski tetrahedron
+edge  = 64;    // outer edge length, mm
+depth = 3;     // 4^3 = 64 small tetrahedra
+weld  = 1.03;  // slight overlap for a connected print
+
+corners = [
+  [ 1,  1,  1], [ 1, -1, -1],
+  [-1,  1, -1], [-1, -1,  1]
+];
+
+module tetrahedron(side) {
+  scale(side / (2 * sqrt(2)))
+    polyhedron(
+      points = corners,
+      faces  = [[0,2,1], [0,1,3],
+                [0,3,2], [1,2,3]]
+    );
+}
+
+module sierpinski(side, level) {
+  if (level == 0) {
+    scale([weld, weld, weld]) tetrahedron(side);
+  } else {
+    for (p = corners)
+      translate(p * (side / (4 * sqrt(2))))
+        sierpinski(side / 2, level - 1);
+  }
+}
+
+color("#f26b38") sierpinski(edge, depth);</code></pre>
+        </div>
+
+        <aside class="depth-panel" aria-labelledby="depth-title">
+          <h3 id="depth-title">Choose a sensible depth</h3>
+          <div class="depth-head"><span>Depth</span><span>Pieces</span><span>Leaf edge</span></div>
+          <div class="depth-row"><span>0</span><span>1</span><span>64 mm</span></div>
+          <div class="depth-row"><span>1</span><span>4</span><span>32 mm</span></div>
+          <div class="depth-row"><span>2</span><span>16</span><span>16 mm</span></div>
+          <div class="depth-row recommended"><span>3</span><span>64</span><span>8 mm</span></div>
+          <div class="depth-row"><span>4</span><span>256</span><span>4 mm</span></div>
+          <p><strong>Start at depth 3.</strong> Depth 4 is still practical on many computers. Depth 5 creates 1,024 leaves and can make rendering and slicing noticeably slower.</p>
+          <p class="weld-note"><strong>Why <code>weld = 1.03</code>?</strong> The exact fractal touches only at points. A 3% enlargement gives neighboring leaves real overlap, producing one printable body.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="print">
+      <div class="section-heading">
+        <span class="step-number">04</span>
+        <div>
+          <p class="eyebrow">Render and export</p>
+          <h2>Check the solid before spending filament</h2>
+        </div>
+      </div>
+
+      <div class="workflow" aria-label="OpenSCAD export workflow">
+        <article><span><svg class="icon" aria-hidden="true"><use href="#icon-play"></use></svg></span><h3>Preview</h3><p>Open the SCAD file and press <kbd>F5</kbd>. Rotate the view and confirm all four branches appear at each level.</p></article>
+        <article><span><svg class="icon" aria-hidden="true"><use href="#icon-layers"></use></svg></span><h3>Render</h3><p>Press <kbd>F6</kbd>. Read the console. If the model is disconnected or non-manifold, increase <code>weld</code> slightly.</p></article>
+        <article><span><svg class="icon" aria-hidden="true"><use href="#icon-download"></use></svg></span><h3>Export</h3><p>Choose <b>File → Export → Export as STL</b>, then inspect the sliced preview before printing.</p></article>
+      </div>
+
+      <div class="print-check">
+        <h3>Before you print</h3>
+        <ul>
+          <li><svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg> Keep the smallest tetrahedron edges and struts wider than your printer can reproduce.</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg> Use a flat orientation or a brim if the first-layer contact is small.</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg> Confirm the slicer shows one connected object with no missing leaves.</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg> Record <code>edge</code>, <code>depth</code>, <code>weld</code>, layer height, and material with the print.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>Sources and further help</strong>
+      <p>Installation and library paths are based on the current OpenSCAD documentation and the upstream library repositories.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://openscad.org/downloads.html" target="_blank" rel="noreferrer noopener">OpenSCAD downloads</a>
+      <a href="https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries" target="_blank" rel="noreferrer noopener">Library manual</a>
+      <a href="https://github.com/BelfrySCAD/BOSL2" target="_blank" rel="noreferrer noopener">BOSL2</a>
+      <a href="https://github.com/openscad/MCAD" target="_blank" rel="noreferrer noopener">MCAD</a>
+    </div>
+  </footer>
+
+  <script id="scad-source" type="text/plain">// Printable Sierpinski tetrahedron
+// Four half-size copies are placed at the vertices at each recursive step.
+// The exact fractal touches only at points, so weld slightly enlarges the
+// leaves to produce one connected, printable body.
+
+edge  = 64;    // outer edge length, mm
+depth = 3;     // 4^3 = 64 small tetrahedra
+weld  = 1.03;  // slight overlap for a connected print
+
+corners = [
+  [ 1,  1,  1], [ 1, -1, -1],
+  [-1,  1, -1], [-1, -1,  1]
+];
+
+module tetrahedron(side) {
+  scale(side / (2 * sqrt(2)))
+    polyhedron(
+      points = corners,
+      faces  = [[0,2,1], [0,1,3],
+                [0,3,2], [1,2,3]]
+    );
+}
+
+module sierpinski(side, level) {
+  if (level == 0) {
+    scale([weld, weld, weld]) tetrahedron(side);
+  } else {
+    for (p = corners)
+      translate(p * (side / (4 * sqrt(2))))
+        sierpinski(side / 2, level - 1);
+  }
+}
+
+color("#f26b38") sierpinski(edge, depth);
+</script>
+  <script>
+    (() => {
+      const link = document.getElementById("download-scad");
+      const source = document.getElementById("scad-source");
+      if (!link || !source || !window.Blob || !window.URL) return;
+      const blob = new Blob([source.textContent + "\n"], { type: "text/plain;charset=utf-8" });
+      const objectUrl = URL.createObjectURL(blob);
+      link.href = objectUrl;
+      window.addEventListener("pagehide", () => URL.revokeObjectURL(objectUrl), { once: true });
+    })();
+  </script>
+</body>
+</html>
