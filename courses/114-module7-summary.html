@@ -54,6 +54,10 @@
       display: block;
       margin: 0.2em 0 0.4em 1em;
     }
+    @media (max-width: 640px) {
+      .summary-sheet { padding: 1.25rem 1rem; }
+      .summary-columns { columns: 1; }
+    }
     .copyright { text-align: center; margin-top: 1em; font-size: 10pt; color: var(--text-muted); }
     @media print {
       body { background: var(--bg-surface); }
@@ -72,6 +76,14 @@
       .copyright { font-size: 7pt; margin-top: 0.4em; }
       @page { size: letter; margin: 0.45in; }
     }
+    .summary-switch {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem;
+      margin: 0 0 1.25rem;
+    }
+    .summary-switch__back { margin-right: auto; }
+    .summary-switch__label { font-size: 0.85rem; color: var(--text-muted); }
+    .summary-switch .button[aria-current="page"] { pointer-events: none; opacity: 0.75; }
+    @media print { .summary-switch { display: none !important; } }
   </style>
 </head>
 <body>
@@ -118,6 +130,8 @@
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
       <a href="math114.html">MATH 114</a>
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="math114-module7.html">Module 7</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
       <span class="breadcrumb-current" aria-current="page">Module 7 Summary</span>
     </nav>
   </div>
@@ -129,6 +143,13 @@
   </div>
 </header>
 <main id="main-content" class="container course-page summary-page">
+  <nav class="summary-switch" aria-label="Module 7 summaries">
+      <a href="math114-module7.html" class="button button-secondary summary-switch__back">&larr; Back to Module 7 lesson</a>
+      <span class="summary-switch__label">View as:</span>
+      <a href="114-module7-summary.html" class="button" aria-current="page">Text summary</a>
+      <a href="math114-module7-infographic.html" class="button button-secondary">Infographic</a>
+  </nav>
+
   <article class="summary-sheet">
 
   <h1>MATH 114 Module 7: Graphics and Correlation</h1>
@@ -231,7 +252,7 @@
 
   <div class="summary-block">
     <h2>Resources</h2>
-    <p>Visual version: <a href="math114-module7-infographic.html">Module 7 infographic</a> &nbsp;·&nbsp; Lesson: andrewhvolk.github.io/courses/math114-module7.html &nbsp;·&nbsp; Slides: andrewhvolk.github.io/pdfs/114Module7Slides.pdf &nbsp;·&nbsp; Desmos Scientific and Excel Online</p>
+    <p>Visual version: <a href="math114-module7-infographic.html">Module 7 infographic</a> &nbsp;·&nbsp; Lesson: <a href="math114-module7.html">andrewhvolk.github.io/courses/math114-module7.html</a> &nbsp;·&nbsp; Slides: andrewhvolk.github.io/pdfs/114Module7Slides.pdf &nbsp;·&nbsp; Desmos Scientific and Excel Online</p>
   </div>
 
   </div>

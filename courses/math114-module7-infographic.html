@@ -10,6 +10,14 @@
   <link rel="stylesheet" href="/styles.css">
   <script src="../theme.js"></script>
     <style>
+    .summary-switch {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem;
+      margin: 0 0 1.25rem;
+    }
+    .summary-switch__back { margin-right: auto; }
+    .summary-switch__label { font-size: 0.85rem; color: var(--text-muted); }
+    .summary-switch .button[aria-current="page"] { pointer-events: none; opacity: 0.75; }
+    @media print { .summary-switch { display: none !important; } }
     .ig-root {
       --ig-surface: var(--bg-surface, #ffffff);
       --ig-plot: color-mix(in srgb, var(--ig-surface) 94%, #64748b);
@@ -203,6 +211,8 @@
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
       <a href="math114.html">MATH 114</a>
       <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="math114-module7.html">Module 7</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
       <span class="breadcrumb-current" aria-current="page">Module 7 Infographic</span>
     </nav>
   </div>
@@ -214,6 +224,14 @@
   </div>
 </header>
 <main id="main-content" class="container course-page ig-page ig-root">
+
+  <nav class="summary-switch" aria-label="Module 7 summaries">
+      <a href="math114-module7.html" class="button button-secondary summary-switch__back">&larr; Back to Module 7 lesson</a>
+      <span class="summary-switch__label">View as:</span>
+      <a href="114-module7-summary.html" class="button button-secondary">Text summary</a>
+      <a href="math114-module7-infographic.html" class="button" aria-current="page">Infographic</a>
+  </nav>
+
 
   <div class="ig-hero">
     <div>
@@ -333,8 +351,8 @@
   </div>
 
   <p class="ig-links">
-    Text summary: <a href="114-module7-summary.html">Module 7 one-page summary</a> &nbsp;·&nbsp;
-    <a href="math114-module7.html">Module 7 lesson</a> &nbsp;·&nbsp;
+    <a href="math114-module7.html">&larr; Back to Module 7 lesson</a> &nbsp;·&nbsp;
+    Text version: <a href="114-module7-summary.html">Module 7 one-page summary</a> &nbsp;·&nbsp;
     <a href="../pdfs/114Module7Slides.pdf">Lecture slides</a> &nbsp;·&nbsp; &copy; Andrew H. Volk 2026
   </p>
 
