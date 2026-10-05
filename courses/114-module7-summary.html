@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 7 Summary | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 7 summary: interpreting graphics, cautions about graphs, correlation, scatterplots, and causality.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/114-module7-summary.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="../theme.js"></script>
+    <style>
+    .summary-page {
+      max-width: 960px;
+      padding-bottom: 3rem;
+    }
+    .summary-sheet {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color, #d9e2ec);
+      border-radius: 18px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+      padding: 2rem 2.5rem;
+      font-family: var(--type-body-family);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+    .summary-sheet h1,
+    .summary-sheet h2,
+    .summary-sheet h3 { font-family: var(--type-display-family); }
+    .summary-sheet h1 { font-size: 1.5rem; margin: 0.3em 0 0.2em; }
+    .summary-sheet h2 { font-size: 1.12rem; margin: 0.9em 0 0.25em; }
+    .summary-sheet h3 { font-size: 1rem; margin: 0.6em 0 0.2em; }
+    .summary-sheet p { margin: 0 0 0.5em; }
+    .summary-sheet ul, .summary-sheet ol { margin: 0 0 0.6em 1.25em; }
+    .summary-sheet li { margin-bottom: 0; }
+    article.summary-sheet .summary-columns li + li { margin-top: 0.2em; }
+    .summary-sheet .summary-columns ul > li { list-style: disc outside; }
+    .summary-sheet .summary-columns ol > li { list-style: decimal outside; }
+    .summary-sheet .summary-columns li::marker { color: var(--text-muted) !important; }
+    .summary-sheet .summary-columns ul,
+    .summary-sheet .summary-columns ol { margin-left: 0; padding-left: 1.3em; }
+    .summary-meta { margin-bottom: 0.8em; }
+    .summary-due {
+      border: 1px solid var(--border-color, #d9e2ec);
+      border-radius: 10px;
+      padding: 0.6em 0.9em;
+      margin-bottom: 0.4em;
+    }
+    .summary-columns { columns: 2 22rem; column-gap: 2.25rem; }
+    .summary-block { break-inside: avoid; margin: 0 0 0.6em; padding: 0; }
+    .summary-block > h2:first-child { margin-top: 0.4em; }
+    .formula {
+      font-family: var(--type-mono-family, monospace);
+      display: block;
+      margin: 0.2em 0 0.4em 1em;
+    }
+    .copyright { text-align: center; margin-top: 1em; font-size: 10pt; color: var(--text-muted); }
+    @media print {
+      body { background: var(--bg-surface); }
+      .top-nav, .page-context-bar, .course-header, .site-footer, .skip-to-main { display: none !important; }
+      .summary-page { max-width: none; padding: 0; margin: 0; }
+      .summary-sheet { border: none; box-shadow: none; border-radius: 0; padding: 0; font-size: 8.2pt; line-height: 1.24; }
+      .summary-sheet h1 { font-size: 13pt; margin-top: 0; }
+      .summary-sheet h2 { font-size: 10pt; margin: 0.55em 0 0.15em; }
+      .summary-sheet h3 { font-size: 9pt; margin: 0.35em 0 0.1em; }
+      .summary-sheet p, .summary-sheet ul, .summary-sheet ol { margin-bottom: 0.3em; }
+      article.summary-sheet .summary-columns li + li { margin-top: 0.05em; }
+      .summary-block { break-inside: auto; }
+      .summary-sheet h2, .summary-sheet h3 { break-after: avoid; }
+      .summary-sheet li, .summary-sheet p { break-inside: avoid; }
+      .summary-columns { columns: 2; column-gap: 0.3in; }
+      .copyright { font-size: 7pt; margin-top: 0.4em; }
+      @page { size: letter; margin: 0.45in; }
+    }
+  </style>
+</head>
+<body>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="../learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 7 Summary</span>
+    </nav>
+  </div>
+</div>
+<header class="course-header course-header--unit">
+  <div class="container">
+    <h1>Module 7 Summary</h1>
+    <p class="subtitle">Graphics, correlation, and causality on a single printable page.</p>
+  </div>
+</header>
+<main id="main-content" class="container course-page summary-page">
+  <article class="summary-sheet">
+
+  <h1>MATH 114 Module 7: Graphics and Correlation</h1>
+  <p class="summary-meta"><strong>Reading:</strong> Chapter 5, Sections D and E (Statistics) &nbsp;·&nbsp; <strong>Name:</strong> ______________________________</p>
+
+  <div class="summary-due">
+    <strong>Due dates (11:59 p.m.):</strong>
+    Homework 7 (20 questions), Sunday, Oct 11, 2026 &nbsp;·&nbsp;
+    Quiz 7 (10 questions), Monday, Oct 12, 2026 &nbsp;·&nbsp;
+    Project 2, Friday, Oct 16, 2026. Confirm all dates in Canvas.<br>
+    <strong>Outcomes:</strong> interpret graphics and visualizations; distinguish correlation from causation; construct and interpret scatterplots.
+  </div>
+
+  <div class="summary-columns">
+
+  <div class="summary-block">
+    <h2>1. Reading Common Graphics</h2>
+    <ul>
+      <li><strong>Multiple bar graph:</strong> bars for two or more groups side by side. Read each bar's height against the vertical axis; compare within a category and across categories.</li>
+      <li><strong>Stack plot:</strong> bands stacked on one another. A band's value is its <em>top edge minus its bottom edge</em>; the top edge is the total. Two bands are equal when they are equally thick. The total grew most in the interval where the top edge rises most steeply. Stack plots show totals well; a double bar graph makes group-to-group comparison easier.</li>
+      <li><strong>Infographics and surveys:</strong> number of people = percentage &times; group size (e.g., 40% of 500 = 0.40 &times; 500 = 200). Two percentages from one survey need not describe the <em>same</em> people, so similar percentages do not prove overlap.</li>
+      <li><strong>Geographical map:</strong> regions shaded by data category (e.g., energy use per person by state).</li>
+      <li><strong>Contour map:</strong> curves connect points with equal values (e.g., 80&deg;F). Values between two contours lie between their labels.</li>
+      <li><strong>Three-dimensional graphic:</strong> can show richer data but is hard to read precisely; it works best when it can be rotated online.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h2>2. Cautions About Graphics</h2>
+    <ul>
+      <li><strong>Perceptual distortion:</strong> the data may be shown by length, but the eye responds to area. Doubling both height and width looks four times as large.</li>
+      <li><strong>Vertical axis not starting at zero:</strong> makes variation look <em>larger</em> than it is, though it is useful for showing small-scale trends. Redrawn with zero, the same changes look smaller.</li>
+      <li><strong>Unequal horizontal intervals:</strong> distort trends; exponential growth can look linear.</li>
+      <li><strong>Exponential (logarithmic) scale:</strong> each equal step multiplies the value, usually by 10. Use it when data span a very large range (e.g., 5 to 500,000) so that both small and large values remain visible.</li>
+      <li><strong>Percentage change graphs:</strong> a falling but positive percentage change means the quantity is <em>still increasing</em>, only more slowly.</li>
+      <li><strong>Pictographs:</strong> graphs embellished with artwork; appealing, but they can distract or mislead.</li>
+      <li><strong>3-D bars:</strong> change only the appearance; they add no information.</li>
+      <li><strong>Error bars:</strong> show the range in which a value probably lies. If one flat line can pass through every error bar, the data do not show a significant difference.</li>
+    </ul>
+    <p><strong>Judging a media graphic:</strong> check the source and date, the axis labels and units, where each scale starts, whether intervals are equal, and what is actually being compared.</p>
+  </div>
+
+  <div class="summary-block">
+    <h2>3. Calculations From Graphs</h2>
+    <p><strong>Difference over a career:</strong>
+      <span class="formula">(annual amount A &minus; annual amount B) &times; years</span>
+      Example: ($60,000 &minus; $40,000) &times; 30 = $600,000.</p>
+    <p><strong>Percentage difference</strong> (&ldquo;A earns ___% more than B&rdquo;; B is the reference):
+      <span class="formula">(A &minus; B) &divide; B &times; 100%</span>
+      Example: (60,000 &minus; 50,000) &divide; 50,000 &times; 100% = 20% more.</p>
+    <p><strong>Rate per 1,000 people</strong> (Project 2):
+      <span class="formula">(number of deaths &divide; population) &times; 1000</span></p>
+  </div>
+
+  <div class="summary-block">
+    <h2>4. Constructing Graphs</h2>
+    <ul>
+      <li><strong>Double bar graph:</strong> place the bars in the order requested (e.g., group 1 left, group 2 right) and use the axis range given in the problem. Check several bars against the table.</li>
+      <li><strong>One category from a stacked bar:</strong> use only that segment's labeled value, not the length of the whole bar.</li>
+      <li><strong>Scatterplot:</strong> put the first-named variable on the horizontal axis unless told otherwise; label both axes with units; choose evenly spaced scales; plot one point per data pair. In Excel: select both columns, then Insert &rarr; Scatter.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h2>5. Correlation and Scatterplots</h2>
+    <p>A <strong>correlation</strong> exists when higher values of one variable consistently go with higher (or consistently with lower) values of another.</p>
+    <ul>
+      <li><strong>Positive:</strong> both variables tend to increase (or decrease) together.</li>
+      <li><strong>Negative:</strong> one increases while the other decreases.</li>
+      <li><strong>None:</strong> no apparent relationship.</li>
+      <li><strong>Strength:</strong> the more closely the points follow the general trend (a straight line), the stronger the correlation, whether positive or negative. A loose cloud with a visible trend is <em>weak</em>; in a <em>perfect</em> correlation every point lies on the line.</li>
+      <li><strong>Stating a conclusion:</strong> name both variables and the direction, and phrase it cautiously (&ldquo;states with higher X may be likely to have lower Y&rdquo;).</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h2>6. Correlation Is Not Causation</h2>
+    <h3>Three possible explanations</h3>
+    <ol>
+      <li><strong>Coincidence:</strong> no plausible link exists between the variables.</li>
+      <li><strong>Common underlying cause:</strong> a third factor drives both. Examples: better health care lowers infant mortality and raises life expectancy; overall growth in population or time can raise two unrelated counts together.</li>
+      <li><strong>Direct cause:</strong> one variable causes the other, possibly as only one of several causes. Suspected causality still requires further evidence.</li>
+    </ol>
+    <h3>Guidelines for establishing causality</h3>
+    <ol>
+      <li>The effect is correlated with the cause even while other factors vary.</li>
+      <li>Groups that differ only in the cause differ in the effect.</li>
+      <li>More of the cause produces more of the effect.</li>
+      <li>The effect remains after accounting for other potential causes.</li>
+      <li>Test with an experiment if possible (animals, cell cultures, or computer models when human testing is unethical).</li>
+      <li>Identify the physical mechanism.</li>
+    </ol>
+    <h3>Levels of confidence</h3>
+    <ul>
+      <li><strong>Possible cause:</strong> a correlation exists, but causality is undetermined.</li>
+      <li><strong>Probable cause:</strong> some guidelines are met, so causality is reasonably suspected.</li>
+      <li><strong>Beyond reasonable doubt:</strong> a physical model explains the causality so well that doubt seems unreasonable (not beyond <em>all</em> doubt).</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h2>Resources</h2>
+    <p>Lesson: andrewhvolk.github.io/courses/math114-module7.html &nbsp;·&nbsp; Slides: andrewhvolk.github.io/pdfs/114Module7Slides.pdf &nbsp;·&nbsp; Desmos Scientific and Excel Online</p>
+  </div>
+
+  </div>
+
+  <p class="copyright">
+    &copy; Andrew H. Volk 2026
+  </p>
+
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
