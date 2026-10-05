@@ -4,17 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MATH 114: Quantitative Reasoning | Prof. Volk's Office</title>
-  <meta name="description" content="MATH 114 course hub with Fall 2026 quick-start links, unit pages, final review, and common tools.">
+  <meta name="description" content="MATH 114 course hub: every module with its Fall 2026 due dates, lesson, slides, videos and practice, plus calculators, formula sheets and the final review.">
   <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Prof. Volk's Office">
   <meta property="og:title" content="MATH 114: Quantitative Reasoning">
-  <meta property="og:description" content="MATH 114 course hub with Fall 2026 quick-start links, unit pages, final review, and common tools.">
+  <meta property="og:description" content="MATH 114 course hub: every module with its Fall 2026 due dates, lesson, slides, videos and practice, plus calculators, formula sheets and the final review.">
   <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114.html">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css?v=20260910-1">
   <script src="/theme.js?v=20260910-1" defer></script>
+  <style>
+    .hub-toolbar { display: grid; gap: 0.75rem; }
+    .hub-toolbar__row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
+    .hub-toolbar__label {
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted);
+      margin: 0; min-width: 4.5rem; font-family: var(--type-body-family);
+    }
+    .hub-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 0; padding: 0; }
+    .hub-chips li { margin: 0 !important; }
+    .hub-chips a {
+      display: inline-block; padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.9rem;
+      border: 1px solid var(--border-subtle); background: var(--bg-surface); text-decoration: none;
+      color: var(--text-main); font-weight: 600;
+    }
+    .hub-chips a:hover, .hub-chips a:focus-visible { border-color: var(--primary-main); }
+    .hub-chips--jump a { min-width: 2.4rem; text-align: center; font-variant-numeric: tabular-nums; }
+    .hub-note { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
+    .hub-card { scroll-margin-top: 5rem; }
+    .hub-due { font-size: 0.92rem; margin: 0 0 0.25rem; display: grid; gap: 0.1rem; }
+    .hub-card ul { font-size: 0.92rem; margin-bottom: 0.9rem; }
+    .hub-card--test { border-style: dashed; }
+  </style>
 </head>
 <body class="course-hub-page">
 <a class="skip-to-main" href="#main-content">Skip to main content</a>
@@ -67,85 +89,241 @@
 
 <header class="page-hero">
   <div class="page-hero__inner">
-    <p class="page-hero__eyebrow">Course Hub</p>
+    <p class="page-hero__eyebrow">Course Hub · Fall 2026</p>
     <h1>MATH 114: Quantitative Reasoning</h1>
-    <p class="page-hero__lede">Work through the modules in order, use the review pages when needed, and submit graded work in Canvas.</p>
-    <ul class="badge-list" aria-label="Course highlights">
-      <li><span class="site-badge">Fall 2026</span></li>
-      <li><span class="site-badge">Modules and review pages</span></li>
-    </ul>
+    <p class="page-hero__lede">Every module in one place: its due dates, lesson, slides, videos, and practice. Work through the modules in order and submit graded work in Canvas.</p>
     <div class="page-actions">
       <a href="/courses/math114-module1.html" class="button">Start Module 1</a>
-      <a href="/courses/math114-resources.html" class="button button-secondary">Module resource index</a>
-      <a href="#course-index" class="button button-secondary">All modules</a>
+      <a href="https://canvas.liberty.edu/" class="button button-secondary external-destination" target="_blank" rel="noopener noreferrer">Open Canvas</a>
     </div>
   </div>
 </header>
 
 <main id="main-content" class="site-main">
-  <section id="course-index" class="site-section" aria-labelledby="units-title">
+  <section class="site-section site-section--compact hub-toolbar" aria-label="Course tools and module navigation">
+    <div class="hub-toolbar__row">
+      <h2 class="hub-toolbar__label" id="tools-title">Tools</h2>
+      <ul class="hub-chips" aria-labelledby="tools-title">
+        <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific</a></li>
+        <li><a href="https://www.desmos.com/graphing" target="_blank" rel="noopener noreferrer">Desmos Graphing</a></li>
+        <li><a href="https://www.microsoft365.com/launch/excel" target="_blank" rel="noopener noreferrer">Excel Online</a></li>
+        <li><a href="/pdfs/FormulaSheet.pdf">Formula sheet (PDF)</a></li>
+        <li><a href="/courses/test3-formulas.html">Test 3 formulas</a></li>
+        <li><a href="/courses/test4-formulas.html">Final formulas</a></li>
+      </ul>
+    </div>
+    <nav class="hub-toolbar__row" aria-label="Jump to a module">
+      <h2 class="hub-toolbar__label">Module</h2>
+      <div class="hub-chips hub-chips--jump"><a href="#module-1">1</a><a href="#module-2">2</a><a href="#module-3">3</a><a href="#module-4">4</a><a href="#module-5">5</a><a href="#module-6">6</a><a href="#module-7">7</a><a href="#module-8">8</a><a href="#module-9">9</a><a href="#module-10">10</a><a href="#module-11">11</a><a href="#module-12">12</a><a href="#module-13">13</a><a href="#module-14">14</a><a href="#final-review">Final</a></div>
+    </nav>
+    <p class="hub-note">All deadlines are 11:59 p.m. and the same for every section. Course Requirements Checklist: <strong>Sun, Aug 30</strong>. Canvas has the official assignment details.</p>
+  </section>
+
+  <section class="site-section" id="unit-foundations" aria-labelledby="unit-foundations-title">
     <div class="section-header">
-      <p class="section-kicker">Work Through the Course</p>
-      <h2 id="units-title">All modules, in order.</h2>
-      <p>Start at Module 1 and move straight through — each page flows into the next, teaches the concept with worked examples, and ends by pointing you to Canvas to submit the graded work.</p>
-      <p><a href="/courses/math114-resources.html">Open the one-page resource index</a> for module slides, homework videos, practice, tools, and formula references.</p>
+      <p class="section-kicker">Chapters 1–3</p>
+      <h2 id="unit-foundations-title">Foundations</h2>
     </div>
     <div class="card-grid course-dashboard-grid">
-      <article class="course-card">
-        <span class="course-card__meta">Foundations · Chapters 1–3</span>
-        <h3>Getting started</h3>
+      <article class="course-card hub-card" id="module-1">
+        <span class="course-card__meta">Module 1</span>
+        <h3>Thinking &amp; Number Sense</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Aug 30</strong></span><span>Quiz <strong>Mon, Aug 31</strong></span></p>
         <ul>
-          <li><a href="/courses/math114-module1.html">Module 1 — Thinking &amp; Number Sense</a></li>
-          <li><a href="/courses/math114-module2.html">Module 2 — Problem Solving &amp; Units</a></li>
-          <li><a href="/courses/math114-module3.html">Module 3 — Numbers in the Real World</a></li>
-          <li><a href="/courses/math114-test1.html"><strong>Test 1 review</strong></a></li>
+          <li><a href="/pdfs/114Module1Spring25.pdf">Lecture slides (PDF)</a></li>
+          <li><a href="/courses/114-module1-summary.html">Printable one-page summary</a></li>
+          <li><a href="https://youtu.be/T_xHzUHMRQI" target="_blank" rel="noopener noreferrer">Homework 1 walkthrough, including #8 (video)</a></li>
+          <li><a href="https://youtu.be/sYTCd1L2Rps" target="_blank" rel="noopener noreferrer">Welcome to MATH 114 (video)</a></li>
         </ul>
+        <a href="/courses/math114-module1.html" class="button">Open lesson</a>
       </article>
-      <article class="course-card">
-        <span class="course-card__meta">Managing Money · Chapters 4–5</span>
-        <h3>Money &amp; data literacy</h3>
+      <article class="course-card hub-card" id="module-2">
+        <span class="course-card__meta">Module 2</span>
+        <h3>Problem Solving &amp; Units</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Sep 6</strong></span><span>Quiz <strong>Mon, Sep 7</strong></span></p>
         <ul>
-          <li><a href="/courses/math114-module5.html">Module 5 — Interest &amp; Compounding</a></li>
-          <li><a href="/courses/math114-module6.html">Module 6 — Loans &amp; Savings Plans</a></li>
-          <li><a href="/courses/math114-module7.html">Module 7 — Graphics &amp; Correlation</a></li>
-          <li><a href="/courses/math114-test2.html"><strong>Test 2 review</strong></a></li>
+          <li><a href="/pdfs/114Module2Spring25.pdf">Lecture slides (PDF)</a></li>
         </ul>
+        <a href="/courses/math114-module2.html" class="button">Open lesson</a>
       </article>
-      <article class="course-card">
-        <span class="course-card__meta">Statistics &amp; Growth · Chapters 6 &amp; 8</span>
-        <h3>Describing &amp; modeling data</h3>
+      <article class="course-card hub-card" id="module-3">
+        <span class="course-card__meta">Module 3</span>
+        <h3>Numbers in the Real World</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Sep 13</strong></span><span>Quiz <strong>Mon, Sep 14</strong></span></p>
         <ul>
-          <li><a href="/courses/math114-module9.html">Module 9 — Describing Data</a></li>
-          <li><a href="/courses/math114-module10.html">Module 10 — The Normal Distribution</a></li>
-          <li><a href="/courses/math114-module11.html">Module 11 — Exponential &amp; Logistic Growth</a></li>
-          <li><a href="/courses/math114-test3.html"><strong>Test 3 review</strong></a></li>
+          <li><a href="/pdfs/114Module3Spring25.pdf">Lecture slides (PDF)</a></li>
+          <li><a href="https://youtu.be/wpSkYpF03BE" target="_blank" rel="noopener noreferrer">Homework 3 walkthrough (video)</a></li>
         </ul>
+        <a href="/courses/math114-module3.html" class="button">Open lesson</a>
       </article>
-      <article class="course-card">
-        <span class="course-card__meta">Modeling &amp; Final · Chapter 9</span>
-        <h3>Modeling &amp; the final</h3>
+      <article class="course-card hub-card hub-card--test" id="module-4">
+        <span class="course-card__meta">Module 4 · Test 1</span>
+        <h3>Test 1 Review</h3>
+        <p class="hub-due"><span>Project 1 <strong>Fri, Sep 18</strong></span><span>Review <strong>Sun, Sep 20</strong></span><span>Test 1 <strong>Mon, Sep 21</strong></span></p>
         <ul>
-          <li><a href="/courses/math114-module13.html">Module 13 — Linear Modeling</a></li>
-          <li><a href="/courses/math114-module14.html">Module 14 — Nonlinear Modeling</a></li>
-          <li><a href="/courses/math114-final-review.html"><strong>Final review &amp; exam</strong></a></li>
+          <li><a href="/pdfs/114Module4Spring25.pdf">Module 4 review slides (PDF)</a></li>
+          <li><a href="https://youtu.be/m4i2FI82RPs" target="_blank" rel="noopener noreferrer">Test 1 practice: 28 worked problems (video)</a></li>
+          <li><a href="https://youtu.be/d0QyrtXzmfQ" target="_blank" rel="noopener noreferrer">How to complete a frequency table (video)</a></li>
+          <li><a href="https://youtu.be/2T34DvLslhg" target="_blank" rel="noopener noreferrer">Project 1 instructions (video)</a></li>
         </ul>
+        <a href="/courses/math114-test1.html" class="button">Open Test 1 review</a>
+      </article>
+    </div>
+  </section>
+  <section class="site-section" id="unit-money" aria-labelledby="unit-money-title">
+    <div class="section-header">
+      <p class="section-kicker">Chapters 4–5</p>
+      <h2 id="unit-money-title">Money and data</h2>
+    </div>
+    <div class="card-grid course-dashboard-grid">
+      <article class="course-card hub-card" id="module-5">
+        <span class="course-card__meta">Module 5</span>
+        <h3>Interest &amp; Compounding</h3>
+        <p class="hub-due"><span>Homework <strong>Tue, Sep 29</strong></span><span>Quiz <strong>Wed, Sep 30</strong></span></p>
+        <ul>
+          <li><a href="/pdfs/114Module5Spring25.pdf">Lecture slides (PDF)</a></li>
+          <li><a href="https://youtu.be/jIGUzHvs25g" target="_blank" rel="noopener noreferrer">Interest and compounding lecture (video)</a></li>
+        </ul>
+        <a href="/courses/math114-module5.html" class="button">Open lesson</a>
+      </article>
+      <article class="course-card hub-card" id="module-6">
+        <span class="course-card__meta">Module 6</span>
+        <h3>Loans &amp; Savings Plans</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Oct 4</strong></span><span>Quiz <strong>Mon, Oct 5</strong></span></p>
+        <ul>
+          <li><a href="/pdfs/114Module6Slides.pdf">Lecture slides (PDF)</a></li>
+          <li><a href="https://youtu.be/AVUpJVBRsfI" target="_blank" rel="noopener noreferrer">Loan and savings calculations lecture (video)</a></li>
+          <li><a href="https://youtu.be/HFo9cDZW2X0" target="_blank" rel="noopener noreferrer">Loan payment, short version (video)</a></li>
+        </ul>
+        <a href="/courses/math114-module6.html" class="button">Open lesson</a>
+      </article>
+      <article class="course-card hub-card" id="module-7">
+        <span class="course-card__meta">Module 7</span>
+        <h3>Graphics &amp; Correlation</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Oct 11</strong></span><span>Quiz <strong>Mon, Oct 12</strong></span></p>
+        <ul>
+          <li><a href="/pdfs/114Module7Slides.pdf">Lecture slides (PDF)</a></li>
+          <li><a href="/courses/114-module7-summary.html">Printable one-page summary</a></li>
+          <li><a href="/courses/math114-module7-infographic.html">Visual infographic summary</a></li>
+        </ul>
+        <a href="/courses/math114-module7.html" class="button">Open lesson</a>
+      </article>
+      <article class="course-card hub-card hub-card--test" id="module-8">
+        <span class="course-card__meta">Module 8 · Test 2</span>
+        <h3>Test 2 Review</h3>
+        <p class="hub-due"><span>Project 2 <strong>Fri, Oct 16</strong></span><span>Review <strong>Sun, Oct 18</strong></span><span>Test 2 <strong>Mon, Oct 19</strong></span></p>
+        <ul>
+          <li><a href="/pdfs/FormulaSheet.pdf">Course formula sheet (PDF)</a></li>
+          <li><a href="https://youtu.be/3TJFd5SLkFE" target="_blank" rel="noopener noreferrer">Test 2 practice: 37 worked problems (video)</a></li>
+          <li><a href="https://youtu.be/d0QyrtXzmfQ" target="_blank" rel="noopener noreferrer">How to complete a frequency table (video)</a></li>
+          <li><a href="https://youtu.be/AqI10auGYWU" target="_blank" rel="noopener noreferrer">Project 2 help (video)</a></li>
+        </ul>
+        <a href="/courses/math114-test2.html" class="button">Open Test 2 review</a>
+      </article>
+    </div>
+  </section>
+  <section class="site-section" id="unit-statistics" aria-labelledby="unit-statistics-title">
+    <div class="section-header">
+      <p class="section-kicker">Chapters 6 and 8</p>
+      <h2 id="unit-statistics-title">Statistics and growth</h2>
+    </div>
+    <div class="card-grid course-dashboard-grid">
+      <article class="course-card hub-card" id="module-9">
+        <span class="course-card__meta">Module 9</span>
+        <h3>Describing Data</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Oct 25</strong></span><span>Quiz <strong>Mon, Oct 26</strong></span></p>
+        <ul>
+          <li><a href="/pdfs/114Module9Spring25.pdf">Lecture slides (PDF)</a></li>
+          <li><a href="/courses/basic-statistical-measures.html">Statistics summary and Excel examples</a></li>
+        </ul>
+        <a href="/courses/math114-module9.html" class="button">Open lesson</a>
+      </article>
+      <article class="course-card hub-card" id="module-10">
+        <span class="course-card__meta">Module 10</span>
+        <h3>The Normal Distribution</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Nov 1</strong></span><span>Quiz <strong>Mon, Nov 2</strong></span></p>
+        <ul>
+          <li><a href="/pdfs/114Module10Spring25.pdf">Lecture slides (PDF)</a></li>
+          <li><a href="/courses/NormalDistributionGame.html">68–95–99.7 explorer and z-score calculator</a></li>
+          <li><a href="https://youtu.be/rWprz1MvhOI" target="_blank" rel="noopener noreferrer">Using the 68–95–99.7 rule (video)</a></li>
+        </ul>
+        <a href="/courses/math114-module10.html" class="button">Open lesson</a>
+      </article>
+      <article class="course-card hub-card" id="module-11">
+        <span class="course-card__meta">Module 11</span>
+        <h3>Exponential &amp; Logistic Growth</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Nov 8</strong></span><span>Quiz <strong>Mon, Nov 9</strong></span></p>
+        <ul>
+          <li><a href="/pdfs/114Module11Slides.pdf">Lecture slides (PDF)</a></li>
+          <li><a href="/courses/knowledgegrowth.html">Growth-model review and quiz prep</a></li>
+          <li><a href="/employeepay.html">Penny-doubling pay demo</a></li>
+          <li><a href="/chessboard.html">Chessboard rice demo</a></li>
+        </ul>
+        <a href="/courses/math114-module11.html" class="button">Open lesson</a>
+      </article>
+      <article class="course-card hub-card hub-card--test" id="module-12">
+        <span class="course-card__meta">Module 12 · Test 3</span>
+        <h3>Test 3 Review</h3>
+        <p class="hub-due"><span>Project 3 <strong>Fri, Nov 13</strong></span><span>Review <strong>Sun, Nov 15</strong></span><span>Test 3 <strong>Mon, Nov 16</strong></span></p>
+        <ul>
+          <li><a href="/courses/Module12_Practice_Test.html">Interactive practice test</a></li>
+          <li><a href="/courses/test3-formulas.html">Test 3 formula sheet and z-table</a></li>
+          <li><a href="https://youtu.be/RUz9L_W9Mp4" target="_blank" rel="noopener noreferrer">Project 3 help (video)</a></li>
+        </ul>
+        <a href="/courses/math114-test3.html" class="button">Open Test 3 review</a>
+      </article>
+    </div>
+  </section>
+  <section class="site-section" id="unit-modeling" aria-labelledby="unit-modeling-title">
+    <div class="section-header">
+      <p class="section-kicker">Chapter 9</p>
+      <h2 id="unit-modeling-title">Modeling and the final</h2>
+    </div>
+    <div class="card-grid course-dashboard-grid">
+      <article class="course-card hub-card" id="module-13">
+        <span class="course-card__meta">Module 13</span>
+        <h3>Linear Modeling</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Nov 29</strong></span><span>Quiz <strong>Mon, Nov 30</strong></span></p>
+        <ul>
+          <li><a href="/114Mod13.html">Interactive practice: rates of change and linear equations</a></li>
+          <li><a href="https://canvas.liberty.edu/" target="_blank" rel="noopener noreferrer">Slides and videos in Canvas</a></li>
+        </ul>
+        <a href="/courses/math114-module13.html" class="button">Open lesson</a>
+      </article>
+      <article class="course-card hub-card" id="module-14">
+        <span class="course-card__meta">Module 14</span>
+        <h3>Nonlinear Modeling</h3>
+        <p class="hub-due"><span>Homework <strong>Sun, Dec 6</strong></span><span>Quiz <strong>Mon, Dec 7</strong></span></p>
+        <ul>
+          <li><a href="/courses/knowledgegrowth.html">Growth-model review and quiz prep</a></li>
+          <li><a href="https://canvas.liberty.edu/" target="_blank" rel="noopener noreferrer">Slides and videos in Canvas</a></li>
+        </ul>
+        <a href="/courses/math114-module14.html" class="button">Open lesson</a>
+      </article>
+      <article class="course-card hub-card hub-card--test" id="final-review">
+        <span class="course-card__meta">Final exam · Test 4</span>
+        <h3>Final Review</h3>
+        <p class="hub-due"><span>Review <strong>Sun, Dec 13</strong></span><span>Final exam <strong>Mon, Dec 14</strong></span></p>
+        <ul>
+          <li><a href="/courses/final-exam-review-guide.html">Question-by-question study guide</a></li>
+          <li><a href="/courses/test4-formulas.html">Final exam formula reference</a></li>
+          <li><a href="/finalreview114.html">Final review lab: 10 missions from formulas to finance</a></li>
+          <li><a href="/114review.html">Statistics and sampling review lab: 7 missions</a></li>
+        </ul>
+        <a href="/courses/math114-final-review.html" class="button">Open final review</a>
       </article>
     </div>
   </section>
 
   <section class="site-section site-section--compact">
     <details class="course-hub-details">
-      <summary>Calculators, references, and course details</summary>
+      <summary>Extra credit and course details</summary>
       <div class="course-hub-details__content course-hub-details__grid">
         <div>
-          <h2>Calculators and references</h2>
+          <h2>Optional extra credit</h2>
           <ul>
-            <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific Calculator</a></li>
-            <li><a href="https://www.desmos.com/graphing" target="_blank" rel="noopener noreferrer">Desmos Graphing Calculator</a></li>
-            <li><a href="https://www.microsoft365.com/launch/excel?" target="_blank" rel="noopener noreferrer">Excel Online</a></li>
-            <li><a href="/pdfs/FormulaSheet.pdf">Formula sheet (PDF)</a></li>
-            <li><a href="/courses/test3-formulas.html">Test 3 formula sheet</a></li>
-            <li><a href="/courses/test4-formulas.html">Final exam formula reference</a></li>
+            <li>Project Proposal: <strong>Fri, Dec 4</strong></li>
+            <li>Observatory Visit: <strong>Tue, Dec 15</strong></li>
           </ul>
         </div>
         <div>
