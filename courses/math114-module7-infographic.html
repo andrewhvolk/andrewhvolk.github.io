@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 7 Infographic | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 7 visual summary: misleading graphs, stack plots, exponential scales, error bars, correlation, and causality.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module7-infographic.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="../theme.js"></script>
+    <style>
+    .summary-switch {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem;
+      margin: 0 0 1.25rem;
+    }
+    .summary-switch__back { margin-right: auto; }
+    .summary-switch__label { font-size: 0.85rem; color: var(--text-muted); }
+    .summary-switch .button[aria-current="page"] { pointer-events: none; opacity: 0.75; }
+    @media print { .summary-switch { display: none !important; } }
+    .ig-root {
+      --ig-surface: var(--bg-surface, #ffffff);
+      --ig-plot: color-mix(in srgb, var(--ig-surface) 94%, #64748b);
+      --ig-text: var(--text-main, #0f172a);
+      --ig-muted: var(--text-muted, #64748b);
+      --ig-grid: color-mix(in srgb, var(--ig-muted) 22%, transparent);
+      --ig-axis: color-mix(in srgb, var(--ig-muted) 70%, transparent);
+      --ig-border: var(--border-subtle, #e2e8f0);
+      --series-1: #2a78d6;
+      --series-2: #eb6834;
+      --series-3: #1baf7a;
+      --ig-alert: #e34948;
+      color: var(--ig-text);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:where(:not([data-theme="light"])) .ig-root {
+        --series-1: #3987e5;
+        --series-2: #d95926;
+        --series-3: #199e70;
+        --ig-alert: #e66767;
+      }
+    }
+    :root[data-theme="dark"] .ig-root {
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --series-3: #199e70;
+      --ig-alert: #e66767;
+    }
+    .ig-page { max-width: 1080px; padding-bottom: 3rem; }
+    .ig-hero {
+      display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 0.75rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .ig-hero h2 { font-family: var(--type-display-family); font-size: 1.6rem; margin: 0; }
+    .ig-hero p { margin: 0.2rem 0 0; color: var(--ig-muted); }
+    .ig-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+    .ig-chips li {
+      border: 1px solid var(--ig-border); border-radius: 999px; padding: 0.3rem 0.8rem;
+      background: var(--ig-surface); font-size: 0.9rem; margin: 0 !important;
+    }
+    .ig-chips strong { font-variant-numeric: tabular-nums; }
+    .ig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+    .ig-card {
+      background: var(--ig-surface); border: 1px solid var(--ig-border); border-radius: 14px;
+      padding: 1rem 1.1rem 0.9rem; display: flex; flex-direction: column; gap: 0.45rem; min-width: 0;
+    }
+    .ig-card--wide { grid-column: 1 / -1; }
+    .ig-part { font-family: var(--type-display-family); font-size: 1.15rem; margin: 1.5rem 0 0.6rem; }
+    .ig-hero + .ig-part { margin-top: 0.5rem; }
+    .ig-kicker {
+      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ig-muted); font-weight: 700;
+      margin: 0;
+    }
+    .ig-card h3 { font-family: var(--type-display-family); font-size: 1.08rem; margin: 0; }
+    .ig-card p { margin: 0; font-size: 0.92rem; line-height: 1.45; }
+    .ig-card svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .ig-card > svg { max-height: 190px; margin: 0 auto; }
+    .ig-card--two > svg { max-height: 170px; }
+    .ig-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .ig-legend { display: flex; gap: 1rem; font-size: 0.82rem; color: var(--ig-muted); margin: 0; padding: 0; list-style: none; }
+    .ig-legend li { display: flex; align-items: center; gap: 0.35rem; margin: 0 !important; }
+    .ig-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+    .ig-gallery { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.6rem; }
+    .ig-mini { margin: 0; text-align: center; }
+    .ig-mini figcaption { font-size: 0.8rem; color: var(--ig-muted); margin-top: 0.2rem; }
+    .ig-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem; list-style: none; margin: 0; padding: 0; counter-reset: step; }
+    .ig-steps li {
+      counter-increment: step; position: relative; margin: 0 !important; padding: 0.55rem 0.6rem 0.55rem 2.3rem;
+      border: 1px solid var(--ig-border); border-radius: 10px; font-size: 0.86rem; line-height: 1.35;
+    }
+    .ig-steps li::before {
+      content: counter(step); position: absolute; left: 0.55rem; top: 0.5rem; width: 1.35rem; height: 1.35rem;
+      border-radius: 50%; background: var(--series-1); color: #fff; font-weight: 700; font-size: 0.78rem;
+      display: grid; place-items: center;
+    }
+    .ig-formula {
+      font-family: var(--type-mono-family, ui-monospace, monospace); font-size: 0.88rem;
+      background: var(--ig-plot); border-radius: 8px; padding: 0.4rem 0.6rem; margin: 0;
+    }
+    .ig-check { list-style: none; margin: 0; padding: 0; font-size: 0.88rem; }
+    .ig-check li { margin: 0 0 0.2rem !important; padding-left: 1.3rem; position: relative; }
+    .ig-check li::before { content: "\2713"; position: absolute; left: 0; color: var(--series-1); font-weight: 700; }
+    .ig-links { margin-top: 1rem; font-size: 0.9rem; color: var(--ig-muted); text-align: center; }
+
+    /* SVG roles */
+    .ig-root svg text { font-family: var(--type-body-family, system-ui, sans-serif); font-size: 10px; }
+    .ig-root svg .sm { font-size: 9px; }
+    .ig-root svg .b { font-weight: 700; }
+    .ig-root svg .ink { fill: var(--ig-text); }
+    .ig-root svg .muted { fill: var(--ig-muted); }
+    .ig-root svg .on-fill { fill: #ffffff; }
+    .ig-root svg .s1 { fill: var(--series-1); }
+    .ig-root svg .s2 { fill: var(--series-2); }
+    .ig-root svg .empty { fill: var(--ig-grid); }
+    .ig-root svg .gap { stroke: var(--ig-surface); stroke-width: 2; stroke-linejoin: round; }
+    .ig-root svg .ring { stroke: var(--ig-surface); stroke-width: 1.5; }
+    .ig-root svg .grid { stroke: var(--ig-grid); stroke-width: 1; }
+    .ig-root svg .axis { stroke: var(--ig-axis); stroke-width: 1; }
+    .ig-root svg .annot { stroke: var(--ig-text); stroke-width: 1; fill: none; }
+    .ig-root svg .plotbg { fill: var(--ig-plot); }
+    .ig-root svg .err { stroke: var(--ig-muted); stroke-width: 1.5; }
+    .ig-root svg .flat { stroke: var(--ig-alert); stroke-width: 2; stroke-dasharray: 5 4; }
+    .ig-root svg .node { fill: var(--ig-surface); stroke: var(--series-1); stroke-width: 2; }
+    .ig-root svg .node-c { stroke: var(--series-3); }
+    .ig-root svg .arrow { stroke: var(--ig-text); stroke-width: 1.5; }
+    .ig-root svg .arrowhead { fill: var(--ig-text); }
+    .ig-root svg .dotted { stroke: var(--ig-muted); stroke-width: 1.5; stroke-dasharray: 2 3; }
+    .ig-root svg .lad { fill: var(--series-1); }
+    .ig-root svg .lad1 { fill-opacity: 0.35; }
+    .ig-root svg .lad2 { fill-opacity: 0.65; }
+    .ig-root svg path[class~="s1"]:hover, .ig-root svg circle:hover, .ig-root svg rect.s2:hover { opacity: 0.8; }
+
+    @media (min-width: 960px) {
+      .ig-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .ig-card--two { grid-column: span 2; }
+    }
+    @media (max-width: 640px) {
+      .ig-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media print {
+      body { background: #fff; }
+      .top-nav, .page-context-bar, .course-header, .site-footer, .skip-to-main { display: none !important; }
+      .ig-page { max-width: none; padding: 0; margin: 0; }
+      .ig-hero { margin-bottom: 0.12in; }
+      .ig-hero h2 { font-size: 15pt; }
+      .ig-hero p, .ig-chips li { font-size: 8pt; }
+      .ig-chips li { padding: 0.1rem 0.5rem; }
+      .ig-grid { grid-template-columns: repeat(3, 1fr); gap: 0.1in; }
+      .ig-card { padding: 0.08in 0.1in; gap: 0.04in; border-radius: 8px; break-inside: avoid; }
+      .ig-card--wide { grid-column: 1 / -1; }
+      .ig-card--two { grid-column: span 2; }
+      .ig-part { font-size: 11pt; margin: 0 0 0.08in; }
+      .ig-part--break { break-before: page; }
+      .ig-card h3 { font-size: 9.5pt; }
+      .ig-card > svg { max-height: 1.12in; }
+      .ig-pair svg { max-height: 1.12in; }
+      .ig-card--two > svg { max-height: 1.2in; }
+      .ig-mini svg { max-height: 0.85in; margin: 0 auto; }
+      .ig-kicker { font-size: 6pt; }
+      .ig-card p, .ig-steps li, .ig-check, .ig-formula, .ig-legend, .ig-mini figcaption { font-size: 7.4pt; }
+      .ig-steps { grid-template-columns: repeat(6, 1fr); gap: 0.05in; }
+      .ig-steps li { padding: 0.04in 0.05in 0.04in 0.26in; }
+      .ig-steps li::before { width: 0.17in; height: 0.17in; font-size: 6.5pt; left: 0.04in; top: 0.04in; }
+      .ig-links { font-size: 7pt; margin-top: 0.06in; }
+      @page { size: letter; margin: 0.4in; }
+    }
+
+  </style>
+</head>
+<body>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="../learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="math114-module7.html">Module 7</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Module 7 Infographic</span>
+    </nav>
+  </div>
+</div>
+<header class="course-header course-header--unit">
+  <div class="container">
+    <h1>Module 7 Infographic</h1>
+    <p class="subtitle">Graphics, correlation, and causality at a glance.</p>
+  </div>
+</header>
+<main id="main-content" class="container course-page ig-page ig-root">
+
+  <nav class="summary-switch" aria-label="Module 7 summaries">
+      <a href="math114-module7.html" class="button button-secondary summary-switch__back">&larr; Back to Module 7 lesson</a>
+      <span class="summary-switch__label">View as:</span>
+      <a href="114-module7-summary.html" class="button button-secondary">Text summary</a>
+      <a href="math114-module7-infographic.html" class="button" aria-current="page">Infographic</a>
+  </nav>
+
+
+  <div class="ig-hero">
+    <div>
+      <h2>Module 7: Graphics and Correlation</h2>
+      <p>Chapter 5, Sections D and E &nbsp;·&nbsp; Read graphs without being fooled, and know when a correlation means cause.</p>
+    </div>
+    <ul class="ig-chips" aria-label="Due dates">
+      <li>Homework 7 &nbsp;<strong>Sun, Oct 11</strong></li>
+      <li>Quiz 7 &nbsp;<strong>Mon, Oct 12</strong></li>
+      <li>Project 2 &nbsp;<strong>Fri, Oct 16</strong></li>
+    </ul>
+  </div>
+
+  <h2 class="ig-part">Part 1 · Reading and building graphs</h2>
+  <div class="ig-grid">
+
+    <article class="ig-card">
+      <p class="ig-kicker">Caution 1 · Vertical axis</p>
+      <h3>Same data, two stories</h3>
+      <div class="ig-pair"><svg viewBox="0 0 150 120" role="img" aria-label="Bars of 92 and 96 on an axis from 0 to 100" xmlns="http://www.w3.org/2000/svg"><text class="ink b" x="75.0" y="12" text-anchor="middle">Axis starts at 0</text><line class="grid" x1="30" x2="144" y1="100" y2="100"/><text class="muted sm" x="26" y="103" text-anchor="end">0</text><line class="grid" x1="30" x2="144" y1="61" y2="61"/><text class="muted sm" x="26" y="64" text-anchor="end">50</text><line class="grid" x1="30" x2="144" y1="22" y2="22"/><text class="muted sm" x="26" y="25" text-anchor="end">100</text><path class="s1" d="M48,100 V32.2 Q48,28.2 52,28.2 H74 Q78,28.2 78,32.2 V100 Z"><title>Value 92</title></path><text class="ink sm" x="63" y="24.2" text-anchor="middle">92</text><path class="s1" d="M100,100 V29.1 Q100,25.1 104,25.1 H126 Q130,25.1 130,29.1 V100 Z"><title>Value 96</title></path><text class="ink sm" x="115" y="21.1" text-anchor="middle">96</text><line class="axis" x1="30" x2="144" y1="100" y2="100"/></svg><svg viewBox="0 0 150 120" role="img" aria-label="Bars of 92 and 96 on an axis from 90 to 97" xmlns="http://www.w3.org/2000/svg"><text class="ink b" x="75.0" y="12" text-anchor="middle">Axis starts at 90</text><line class="grid" x1="30" x2="144" y1="100" y2="100"/><text class="muted sm" x="26" y="103" text-anchor="end">90</text><line class="grid" x1="30" x2="144" y1="61" y2="61"/><text class="muted sm" x="26" y="64" text-anchor="end">93.5</text><line class="grid" x1="30" x2="144" y1="22" y2="22"/><text class="muted sm" x="26" y="25" text-anchor="end">97</text><path class="s1" d="M48,100 V81.7 Q48,77.7 52,77.7 H74 Q78,77.7 78,81.7 V100 Z"><title>Value 92</title></path><text class="ink sm" x="63" y="73.7" text-anchor="middle">92</text><path class="s1" d="M100,100 V37.1 Q100,33.1 104,33.1 H126 Q130,33.1 130,37.1 V100 Z"><title>Value 96</title></path><text class="ink sm" x="115" y="29.1" text-anchor="middle">96</text><line class="axis" x1="30" x2="144" y1="100" y2="100"/></svg></div>
+      <p>A 4-point gap looks huge when the axis starts at 90. Starting above zero exaggerates variation, although it can be useful for showing small-scale trends.</p>
+    </article>
+    <article class="ig-card">
+      <p class="ig-kicker">Caution 2 · Perception</p>
+      <h3>Length vs. area</h3>
+      <svg viewBox="0 0 300 128" role="img" aria-label="Doubling a value with bar length versus doubling both sides of a square, which quadruples its area" xmlns="http://www.w3.org/2000/svg"><text class="ink b" x="70" y="12" text-anchor="middle">Honest: length</text><path class="s1" d="M35,108 V76 Q35,72 39,72 H57 Q61,72 61,76 V108 Z"><title>Value 1</title></path><path class="s1" d="M79,108 V40 Q79,36 83,36 H101 Q105,36 105,40 V108 Z"><title>Value 2</title></path><line class="axis" x1="20" x2="120" y1="108" y2="108"/><text class="muted sm" x="70" y="122" text-anchor="middle">2&#215; value = 2&#215; ink</text><text class="ink b" x="225" y="12" text-anchor="middle">Misleading: area</text><rect class="s2" x="168" y="72" width="36" height="36" rx="4"><title>Value 1</title></rect><rect class="s2" x="212" y="36" width="72" height="72" rx="4"><title>Value 2, drawn twice as wide and twice as tall</title></rect><line class="axis" x1="160" x2="292" y1="108" y2="108"/><text class="muted sm" x="225" y="122" text-anchor="middle">2&#215; wide and tall = 4&#215; ink</text></svg>
+      <p>The eye reads area. Doubling both the width and height of a picture makes it look four times as large. Pictographs and 3-D bars add decoration, not information.</p>
+    </article>
+    <article class="ig-card">
+      <p class="ig-kicker">Caution 3 · Scale choice</p>
+      <h3>When to use an exponential scale</h3>
+      <svg viewBox="0 0 300 138" role="img" aria-label="The values 5 and 500,000 on an exponential scale, where both are visible, and on a linear scale, where 5 is lost at zero" xmlns="http://www.w3.org/2000/svg"><text class="ink b" x="10" y="14">Exponential scale</text><line class="axis" x1="22" x2="282" y1="44" y2="44"/><line class="axis" x1="22" x2="22" y1="40" y2="48"/><text class="muted sm" x="22" y="60" text-anchor="middle">1</text><line class="axis" x1="65.3" x2="65.3" y1="40" y2="48"/><text class="muted sm" x="65.3" y="60" text-anchor="middle">10</text><line class="axis" x1="108.7" x2="108.7" y1="40" y2="48"/><text class="muted sm" x="108.7" y="60" text-anchor="middle">100</text><line class="axis" x1="152" x2="152" y1="40" y2="48"/><text class="muted sm" x="152" y="60" text-anchor="middle">1k</text><line class="axis" x1="195.3" x2="195.3" y1="40" y2="48"/><text class="muted sm" x="195.3" y="60" text-anchor="middle">10k</text><line class="axis" x1="238.7" x2="238.7" y1="40" y2="48"/><text class="muted sm" x="238.7" y="60" text-anchor="middle">100k</text><line class="axis" x1="282" x2="282" y1="40" y2="48"/><text class="muted sm" x="282" y="60" text-anchor="middle">1M</text><circle class="s1 ring" cx="52.3" cy="44" r="5"><title>5</title></circle><text class="ink sm" x="52.3" y="31" text-anchor="middle">5</text><circle class="s1 ring" cx="269" cy="44" r="5"><title>500,000</title></circle><text class="ink sm" x="269" y="31" text-anchor="middle">500,000</text><text class="ink b" x="10" y="88">Linear scale</text><line class="axis" x1="22" x2="282" y1="116" y2="116"/><line class="axis" x1="22" x2="22" y1="112" y2="120"/><text class="muted sm" x="22" y="132" text-anchor="middle">0k</text><line class="axis" x1="74" x2="74" y1="112" y2="120"/><text class="muted sm" x="74" y="132" text-anchor="middle">100k</text><line class="axis" x1="126" x2="126" y1="112" y2="120"/><text class="muted sm" x="126" y="132" text-anchor="middle">200k</text><line class="axis" x1="178" x2="178" y1="112" y2="120"/><text class="muted sm" x="178" y="132" text-anchor="middle">300k</text><line class="axis" x1="230" x2="230" y1="112" y2="120"/><text class="muted sm" x="230" y="132" text-anchor="middle">400k</text><line class="axis" x1="282" x2="282" y1="112" y2="120"/><text class="muted sm" x="282" y="132" text-anchor="middle">500k</text><circle class="s1 ring" cx="22" cy="116" r="5"><title>5</title></circle><circle class="s1 ring" cx="282" cy="116" r="5"><title>500,000</title></circle><text class="ink sm" x="26" y="103">5 is lost at zero</text><text class="ink sm" x="282" y="103" text-anchor="end">500,000</text></svg>
+      <p>Each step multiplies by 10. Use it when the data span a very large range, so small and large values both remain visible.</p>
+    </article>
+    <article class="ig-card">
+      <p class="ig-kicker">Graphic type</p>
+      <h3>Reading a stack plot</h3>
+      <svg viewBox="0 0 300 150" role="img" aria-label="Stack plot of two groups. Each band is its top edge minus its bottom edge; the top edge is the total." xmlns="http://www.w3.org/2000/svg"><line class="grid" x1="30" x2="230" y1="124" y2="124"/><text class="muted sm" x="26" y="127" text-anchor="end">0</text><line class="grid" x1="30" x2="230" y1="87.3" y2="87.3"/><text class="muted sm" x="26" y="90.3" text-anchor="end">4</text><line class="grid" x1="30" x2="230" y1="50.7" y2="50.7"/><text class="muted sm" x="26" y="53.7" text-anchor="end">8</text><line class="grid" x1="30" x2="230" y1="14" y2="14"/><text class="muted sm" x="26" y="17" text-anchor="end">12</text><polygon class="s1 gap" points="30,124 30,96.5 70,92.8 110,88.2 150,84.6 190,81.8 230,78.2 230,124"><title>Group A band</title></polygon><polygon class="s2 gap" points="30,81.8 70,72.7 110,60.7 150,46.1 190,32.3 230,19.5 230,78.2 190,81.8 150,84.6 110,88.2 70,92.8 30,96.5"><title>Group B band</title></polygon><text class="muted sm" x="30" y="136" text-anchor="middle">2000</text><text class="muted sm" x="110" y="136" text-anchor="middle">2010</text><text class="muted sm" x="190" y="136" text-anchor="middle">2020</text><line class="axis" x1="30" x2="230" y1="124" y2="124"/><text class="on-fill sm b" x="70" y="110.2" text-anchor="middle">Group A</text><text class="on-fill sm b" x="150" y="66.2" text-anchor="middle">Group B</text><path class="annot" d="M236,19.5 h5 V78.2 h-5"/><text class="ink sm" x="245" y="46.8">B = top</text><text class="ink sm" x="245" y="57.8">&#8722; bottom</text><text class="ink sm" x="245" y="13.5">Top edge</text><text class="ink sm" x="245" y="22.5">= total</text></svg>
+      <ul class="ig-legend" aria-label="Legend">
+        <li><i style="background:var(--series-1)"></i>Group A</li>
+        <li><i style="background:var(--series-2)"></i>Group B</li>
+      </ul>
+      <p>Two bands are equal when they are equally thick. The total grew most where the top edge climbs most steeply. A double bar graph makes group-to-group comparison easier.</p>
+    </article>
+    <article class="ig-card">
+      <p class="ig-kicker">Caution 4 · Uncertainty</p>
+      <h3>Reading error bars</h3>
+      <svg viewBox="0 0 296 126" role="img" aria-label="Six values with error bars; a single flat line passes through every error bar, so the differences are not significant" xmlns="http://www.w3.org/2000/svg"><line class="grid" x1="34" x2="290" y1="108" y2="108"/><text class="muted sm" x="30" y="111" text-anchor="end">0.8</text><line class="grid" x1="34" x2="290" y1="64" y2="64"/><text class="muted sm" x="30" y="67" text-anchor="end">1.0</text><line class="grid" x1="34" x2="290" y1="20" y2="20"/><text class="muted sm" x="30" y="23" text-anchor="end">1.2</text><line class="flat" x1="34" x2="290" y1="64" y2="64"/><line class="err" x1="56" x2="56" y1="42" y2="72.8"/><line class="err" x1="51" x2="61" y1="42" y2="42"/><line class="err" x1="51" x2="61" y1="72.8" y2="72.8"/><circle class="s1 ring" cx="56" cy="57.4" r="4.5"><title>Group 1: 1.03 (range 0.96 to 1.10)</title></circle><text class="muted sm" x="56" y="121" text-anchor="middle">G1</text><line class="err" x1="99" x2="99" y1="57.4" y2="83.8"/><line class="err" x1="94" x2="104" y1="57.4" y2="57.4"/><line class="err" x1="94" x2="104" y1="83.8" y2="83.8"/><circle class="s1 ring" cx="99" cy="70.6" r="4.5"><title>Group 2: 0.97 (range 0.91 to 1.03)</title></circle><text class="muted sm" x="99" y="121" text-anchor="middle">G2</text><line class="err" x1="142" x2="142" y1="35.4" y2="70.6"/><line class="err" x1="137" x2="147" y1="35.4" y2="35.4"/><line class="err" x1="137" x2="147" y1="70.6" y2="70.6"/><circle class="s1 ring" cx="142" cy="53" r="4.5"><title>Group 3: 1.05 (range 0.97 to 1.13)</title></circle><text class="muted sm" x="142" y="121" text-anchor="middle">G3</text><line class="err" x1="185" x2="185" y1="50.8" y2="81.6"/><line class="err" x1="180" x2="190" y1="50.8" y2="50.8"/><line class="err" x1="180" x2="190" y1="81.6" y2="81.6"/><circle class="s1 ring" cx="185" cy="66.2" r="4.5"><title>Group 4: 0.99 (range 0.92 to 1.06)</title></circle><text class="muted sm" x="185" y="121" text-anchor="middle">G4</text><line class="err" x1="228" x2="228" y1="59.6" y2="90.4"/><line class="err" x1="223" x2="233" y1="59.6" y2="59.6"/><line class="err" x1="223" x2="233" y1="90.4" y2="90.4"/><circle class="s1 ring" cx="228" cy="75" r="4.5"><title>Group 5: 0.95 (range 0.88 to 1.02)</title></circle><text class="muted sm" x="228" y="121" text-anchor="middle">G5</text><line class="err" x1="271" x2="271" y1="46.4" y2="72.8"/><line class="err" x1="266" x2="276" y1="46.4" y2="46.4"/><line class="err" x1="266" x2="276" y1="72.8" y2="72.8"/><circle class="s1 ring" cx="271" cy="59.6" r="4.5"><title>Group 6: 1.02 (range 0.96 to 1.08)</title></circle><text class="muted sm" x="271" y="121" text-anchor="middle">G6</text><line class="flat" x1="178" x2="196" y1="4" y2="4"/><text class="ink sm" x="290" y="7" text-anchor="end">one flat line fits all</text></svg>
+      <p>Each bar shows where a value probably lies. If one flat line passes through every bar, the data do not show a significant difference.</p>
+    </article>
+    <article class="ig-card">
+      <p class="ig-kicker">Infographics and surveys</p>
+      <h3>Percent of a group</h3>
+      <svg viewBox="0 0 152 79" role="img" aria-label="50 squares, each 10 students; 20 are filled, showing 40 percent of 500 is 200" xmlns="http://www.w3.org/2000/svg"><rect class="s1" x="4" y="4" width="12" height="12" rx="2"/><rect class="s1" x="19" y="4" width="12" height="12" rx="2"/><rect class="s1" x="34" y="4" width="12" height="12" rx="2"/><rect class="s1" x="49" y="4" width="12" height="12" rx="2"/><rect class="s1" x="64" y="4" width="12" height="12" rx="2"/><rect class="s1" x="79" y="4" width="12" height="12" rx="2"/><rect class="s1" x="94" y="4" width="12" height="12" rx="2"/><rect class="s1" x="109" y="4" width="12" height="12" rx="2"/><rect class="s1" x="124" y="4" width="12" height="12" rx="2"/><rect class="s1" x="139" y="4" width="12" height="12" rx="2"/><rect class="s1" x="4" y="19" width="12" height="12" rx="2"/><rect class="s1" x="19" y="19" width="12" height="12" rx="2"/><rect class="s1" x="34" y="19" width="12" height="12" rx="2"/><rect class="s1" x="49" y="19" width="12" height="12" rx="2"/><rect class="s1" x="64" y="19" width="12" height="12" rx="2"/><rect class="s1" x="79" y="19" width="12" height="12" rx="2"/><rect class="s1" x="94" y="19" width="12" height="12" rx="2"/><rect class="s1" x="109" y="19" width="12" height="12" rx="2"/><rect class="s1" x="124" y="19" width="12" height="12" rx="2"/><rect class="s1" x="139" y="19" width="12" height="12" rx="2"/><rect class="empty" x="4" y="34" width="12" height="12" rx="2"/><rect class="empty" x="19" y="34" width="12" height="12" rx="2"/><rect class="empty" x="34" y="34" width="12" height="12" rx="2"/><rect class="empty" x="49" y="34" width="12" height="12" rx="2"/><rect class="empty" x="64" y="34" width="12" height="12" rx="2"/><rect class="empty" x="79" y="34" width="12" height="12" rx="2"/><rect class="empty" x="94" y="34" width="12" height="12" rx="2"/><rect class="empty" x="109" y="34" width="12" height="12" rx="2"/><rect class="empty" x="124" y="34" width="12" height="12" rx="2"/><rect class="empty" x="139" y="34" width="12" height="12" rx="2"/><rect class="empty" x="4" y="49" width="12" height="12" rx="2"/><rect class="empty" x="19" y="49" width="12" height="12" rx="2"/><rect class="empty" x="34" y="49" width="12" height="12" rx="2"/><rect class="empty" x="49" y="49" width="12" height="12" rx="2"/><rect class="empty" x="64" y="49" width="12" height="12" rx="2"/><rect class="empty" x="79" y="49" width="12" height="12" rx="2"/><rect class="empty" x="94" y="49" width="12" height="12" rx="2"/><rect class="empty" x="109" y="49" width="12" height="12" rx="2"/><rect class="empty" x="124" y="49" width="12" height="12" rx="2"/><rect class="empty" x="139" y="49" width="12" height="12" rx="2"/><rect class="empty" x="4" y="64" width="12" height="12" rx="2"/><rect class="empty" x="19" y="64" width="12" height="12" rx="2"/><rect class="empty" x="34" y="64" width="12" height="12" rx="2"/><rect class="empty" x="49" y="64" width="12" height="12" rx="2"/><rect class="empty" x="64" y="64" width="12" height="12" rx="2"/><rect class="empty" x="79" y="64" width="12" height="12" rx="2"/><rect class="empty" x="94" y="64" width="12" height="12" rx="2"/><rect class="empty" x="109" y="64" width="12" height="12" rx="2"/><rect class="empty" x="124" y="64" width="12" height="12" rx="2"/><rect class="empty" x="139" y="64" width="12" height="12" rx="2"/></svg>
+      <p class="ig-formula">40% of 500 = 0.40 &#215; 500 = 200</p>
+      <p>Each square is 10 students. Two similar percentages from one survey need not describe the <em>same</em> students.</p>
+    </article>
+    <article class="ig-card">
+      <p class="ig-kicker">Calculations</p>
+      <h3>Formulas from graphs</h3>
+      <p><strong>Difference over a career</strong></p>
+      <p class="ig-formula">(A &#8722; B) &#215; years<br>($60k &#8722; $40k) &#215; 30 = $600,000</p>
+      <p><strong>Percentage difference</strong> (B is the reference)</p>
+      <p class="ig-formula">(A &#8722; B) &#247; B &#215; 100%<br>(60k &#8722; 50k) &#247; 50k = 20% more</p>
+      <p><strong>Rate per 1,000</strong> (Project 2)</p>
+      <p class="ig-formula">deaths &#247; population &#215; 1000</p>
+    </article>
+    <article class="ig-card ig-card--two">
+      <p class="ig-kicker">Construct it yourself</p>
+      <h3>Graph-building checklist</h3>
+      <ul class="ig-check">
+        <li>Double bar graph: keep the requested bar order and axis range.</li>
+        <li>One category from a stacked bar: use that segment only.</li>
+        <li>Scatterplot: first-named variable on the horizontal axis.</li>
+        <li>Label axes with units; use evenly spaced scales.</li>
+        <li>Excel: select both columns, Insert &#8594; Scatter.</li>
+        <li>Judging media graphics: check the source, date, labels, and scales.</li>
+      </ul>
+    </article>
+
+  </div>
+
+  <h2 class="ig-part ig-part--break">Part 2 · Correlation and causation</h2>
+  <div class="ig-grid">
+
+    <article class="ig-card ig-card--wide">
+      <p class="ig-kicker">Correlation · type and strength</p>
+      <h3>What scatterplots tell you</h3>
+      <div class="ig-gallery"><figure class="ig-mini"><svg viewBox="0 0 104 96" role="img" aria-label="Strong positive scatterplot" xmlns="http://www.w3.org/2000/svg"><rect class="plotbg" x="8" y="4" width="92" height="88" rx="4"/><line class="axis" x1="8" x2="100" y1="92" y2="92"/><line class="axis" x1="8" x2="8" y1="4" y2="92"/><circle class="s1 ring" cx="40.4" cy="57.5" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="20.9" cy="74.7" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="56.8" cy="46.3" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="54.6" cy="46.4" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="18.2" cy="83.6" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="22.3" cy="77.6" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="48.2" cy="52.6" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="32.6" cy="70.4" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="63.9" cy="33.4" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="46" cy="57.4" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="90.9" cy="10.2" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="37.7" cy="61.2" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="26.5" cy="71.6" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="78.5" cy="22.2" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="29.3" cy="76.8" r="3.6"><title>Strong positive</title></circle><circle class="s1 ring" cx="44.1" cy="60.4" r="3.6"><title>Strong positive</title></circle></svg><figcaption>Strong positive</figcaption></figure><figure class="ig-mini"><svg viewBox="0 0 104 96" role="img" aria-label="Weak positive scatterplot" xmlns="http://www.w3.org/2000/svg"><rect class="plotbg" x="8" y="4" width="92" height="88" rx="4"/><line class="axis" x1="8" x2="100" y1="92" y2="92"/><line class="axis" x1="8" x2="8" y1="4" y2="92"/><circle class="s1 ring" cx="57.7" cy="39.8" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="31.2" cy="67.8" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="68" cy="45.8" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="60.6" cy="36.2" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="50.4" cy="59.3" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="69.4" cy="10.2" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="34.2" cy="82.5" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="83.1" cy="28.1" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="71.8" cy="40.5" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="24.4" cy="37.4" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="47.7" cy="53.7" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="53.1" cy="57" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="18.3" cy="85.8" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="59.7" cy="63.8" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="83.1" cy="28.8" r="3.6"><title>Weak positive</title></circle><circle class="s1 ring" cx="61.3" cy="20.8" r="3.6"><title>Weak positive</title></circle></svg><figcaption>Weak positive</figcaption></figure><figure class="ig-mini"><svg viewBox="0 0 104 96" role="img" aria-label="No correlation scatterplot" xmlns="http://www.w3.org/2000/svg"><rect class="plotbg" x="8" y="4" width="92" height="88" rx="4"/><line class="axis" x1="8" x2="100" y1="92" y2="92"/><line class="axis" x1="8" x2="8" y1="4" y2="92"/><circle class="s1 ring" cx="60.2" cy="51.1" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="80.3" cy="16.6" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="52" cy="36.4" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="20" cy="33.8" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="65.4" cy="13.2" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="78.9" cy="63.2" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="45.2" cy="36.1" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="17" cy="50.7" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="28.3" cy="75" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="19.8" cy="29.1" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="25.3" cy="65.8" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="45.6" cy="21.8" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="21.5" cy="51.6" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="57.8" cy="20.9" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="78.7" cy="22.3" r="3.6"><title>No correlation</title></circle><circle class="s1 ring" cx="36.8" cy="54" r="3.6"><title>No correlation</title></circle></svg><figcaption>No correlation</figcaption></figure><figure class="ig-mini"><svg viewBox="0 0 104 96" role="img" aria-label="Weak negative scatterplot" xmlns="http://www.w3.org/2000/svg"><rect class="plotbg" x="8" y="4" width="92" height="88" rx="4"/><line class="axis" x1="8" x2="100" y1="92" y2="92"/><line class="axis" x1="8" x2="8" y1="4" y2="92"/><circle class="s1 ring" cx="43.1" cy="10.7" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="27" cy="46.1" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="28.9" cy="22.9" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="52.8" cy="36.5" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="60.9" cy="54.7" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="47.7" cy="40.7" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="43.9" cy="70.6" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="68.8" cy="76.4" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="55.2" cy="65" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="19.5" cy="29.5" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="84.9" cy="72.1" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="77.1" cy="85.8" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="45.7" cy="45.4" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="64.4" cy="54" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="20.1" cy="10.2" r="3.6"><title>Weak negative</title></circle><circle class="s1 ring" cx="27.8" cy="19" r="3.6"><title>Weak negative</title></circle></svg><figcaption>Weak negative</figcaption></figure><figure class="ig-mini"><svg viewBox="0 0 104 96" role="img" aria-label="Strong negative scatterplot" xmlns="http://www.w3.org/2000/svg"><rect class="plotbg" x="8" y="4" width="92" height="88" rx="4"/><line class="axis" x1="8" x2="100" y1="92" y2="92"/><line class="axis" x1="8" x2="8" y1="4" y2="92"/><circle class="s1 ring" cx="41.6" cy="36.1" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="27" cy="22.2" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="23.1" cy="19.2" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="83" cy="74.9" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="62.8" cy="54.5" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="42.2" cy="34.1" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="43.5" cy="32.1" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="92.2" cy="78.8" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="51.4" cy="47.3" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="23.2" cy="18.4" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="41.8" cy="37.1" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="27.8" cy="15.1" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="17.1" cy="10.2" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="26.6" cy="23.4" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="57.3" cy="46.1" r="3.6"><title>Strong negative</title></circle><circle class="s1 ring" cx="91.1" cy="82.5" r="3.6"><title>Strong negative</title></circle></svg><figcaption>Strong negative</figcaption></figure><figure class="ig-mini"><svg viewBox="0 0 104 96" role="img" aria-label="Perfect positive scatterplot" xmlns="http://www.w3.org/2000/svg"><rect class="plotbg" x="8" y="4" width="92" height="88" rx="4"/><line class="axis" x1="8" x2="100" y1="92" y2="92"/><line class="axis" x1="8" x2="8" y1="4" y2="92"/><circle class="s1 ring" cx="17" cy="83.3" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="22" cy="78.6" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="26.9" cy="73.9" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="31.8" cy="69.2" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="36.8" cy="64.5" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="41.7" cy="59.8" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="46.6" cy="55.1" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="51.5" cy="50.4" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="56.5" cy="45.6" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="61.4" cy="40.9" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="66.3" cy="36.2" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="71.2" cy="31.5" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="76.2" cy="26.8" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="81.1" cy="22.1" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="86" cy="17.4" r="3.6"><title>Perfect positive</title></circle><circle class="s1 ring" cx="91" cy="12.7" r="3.6"><title>Perfect positive</title></circle></svg><figcaption>Perfect positive</figcaption></figure></div>
+      <p><strong>Positive:</strong> both rise (or fall) together. <strong>Negative:</strong> one rises as the other falls. <strong>Strength:</strong> the closer the points hug a straight line, the stronger the correlation. State a conclusion cautiously: &ldquo;higher X <em>may be likely</em> to go with lower Y.&rdquo;</p>
+    </article>
+    <article class="ig-card ig-card--two">
+      <p class="ig-kicker">Correlation is not causation</p>
+      <h3>Why do X and Y move together?</h3>
+      <svg viewBox="0 0 330 140" role="img" aria-label="Three explanations for a correlation between X and Y: coincidence, a common underlying cause, or a direct cause" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker></defs><text class="ink b" x="55" y="14" text-anchor="middle">Coincidence</text><text class="ink b" x="165" y="14" text-anchor="middle">Common cause</text><text class="ink b" x="275" y="14" text-anchor="middle">Direct cause</text><rect class="node" x="23.0" y="41" width="64" height="26" rx="13"/><text class="ink sm b" x="55" y="58" text-anchor="middle">X</text><rect class="node" x="23.0" y="91" width="64" height="26" rx="13"/><text class="ink sm b" x="55" y="108" text-anchor="middle">Y</text><line class="dotted" x1="55" y1="67" x2="55" y2="91"/><text class="muted sm" x="63" y="83">?</text><rect class="node node-c" x="133.0" y="29" width="64" height="26" rx="13"/><text class="ink sm b" x="165" y="46" text-anchor="middle">Third factor</text><rect class="node" x="98.0" y="95" width="64" height="26" rx="13"/><text class="ink sm b" x="130" y="112" text-anchor="middle">X</text><rect class="node" x="168.0" y="95" width="64" height="26" rx="13"/><text class="ink sm b" x="200" y="112" text-anchor="middle">Y</text><line class="arrow" x1="155" y1="55" x2="136" y2="93" marker-end="url(#ah)"/><line class="arrow" x1="175" y1="55" x2="194" y2="93" marker-end="url(#ah)"/><line class="dotted" x1="162" y1="108" x2="168" y2="108"/><rect class="node" x="243.0" y="41" width="64" height="26" rx="13"/><text class="ink sm b" x="275" y="58" text-anchor="middle">X</text><rect class="node" x="243.0" y="95" width="64" height="26" rx="13"/><text class="ink sm b" x="275" y="112" text-anchor="middle">Y</text><line class="arrow" x1="275" y1="67" x2="275" y2="93" marker-end="url(#ah)"/><text class="muted sm" x="55" y="134" text-anchor="middle">no plausible link</text><text class="muted sm" x="165" y="134" text-anchor="middle">a lurking variable drives both</text><text class="muted sm" x="275" y="134" text-anchor="middle">X actually changes Y</text></svg>
+      <p>Example of a common cause: better health care both lowers infant mortality and raises life expectancy. Growth in overall population or time can raise two unrelated counts together.</p>
+    </article>
+    <article class="ig-card">
+      <p class="ig-kicker">Confidence in causality</p>
+      <h3>How sure can we be?</h3>
+      <svg viewBox="0 0 306 122" role="img" aria-label="Three rising levels of confidence in causality: possible cause, probable cause, beyond reasonable doubt" xmlns="http://www.w3.org/2000/svg"><path class="lad lad1" d="M6,104 V84 Q6,78 12,78 H94 Q100,78 100,84 V104 Z"><title>Possible cause</title></path><text class="ink sm b" x="53" y="60" text-anchor="middle">Possible cause</text><text class="muted sm" x="53" y="71" text-anchor="middle">a correlation exists</text><path class="lad lad2" d="M106,104 V60 Q106,54 112,54 H194 Q200,54 200,60 V104 Z"><title>Probable cause</title></path><text class="ink sm b" x="153" y="36" text-anchor="middle">Probable cause</text><text class="muted sm" x="153" y="47" text-anchor="middle">some guidelines are met</text><path class="lad lad3" d="M206,104 V36 Q206,30 212,30 H294 Q300,30 300,36 V104 Z"><title>Beyond reasonable doubt</title></path><text class="ink sm b" x="253" y="12" text-anchor="middle">Beyond reasonable doubt</text><text class="muted sm" x="253" y="23" text-anchor="middle">a physical model explains it</text><line class="axis" x1="0" x2="306" y1="104" y2="104"/><text class="muted sm" x="306" y="118" text-anchor="end">more confidence &#8594;</text></svg>
+      <p>&ldquo;Beyond reasonable doubt&rdquo; is not &ldquo;beyond <em>all</em> doubt.&rdquo;</p>
+    </article>
+    <article class="ig-card ig-card--wide">
+      <p class="ig-kicker">Establishing causality · six guidelines</p>
+      <h3>Building the case that X causes Y</h3>
+      <ol class="ig-steps">
+        <li>Effect tracks the cause even while other factors vary.</li>
+        <li>Groups differing only in the cause differ in the effect.</li>
+        <li>More of the cause gives more of the effect.</li>
+        <li>Effect remains after ruling out other causes.</li>
+        <li>Test with an experiment (animals, cells, or models if needed).</li>
+        <li>Find the physical mechanism.</li>
+      </ol>
+    </article>
+
+  </div>
+
+  <p class="ig-links">
+    <a href="math114-module7.html">&larr; Back to Module 7 lesson</a> &nbsp;·&nbsp;
+    Text version: <a href="114-module7-summary.html">Module 7 one-page summary</a> &nbsp;·&nbsp;
+    <a href="../pdfs/114Module7Slides.pdf">Lecture slides</a> &nbsp;·&nbsp; &copy; Andrew H. Volk 2026
+  </p>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
