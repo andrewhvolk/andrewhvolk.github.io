@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH114 Test 2 - Study Guide Supplement</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/styles.css">
+<style>
+body { font-family: Arial, sans-serif; font-size: 10pt; margin: 0.5in; color: var(--text-main); background-color: var(--bg-surface); }
+h1 { text-align:center; border-bottom: 1px solid var(--text-main); padding-bottom: 0.2rem; margin-bottom: 0.1in; font-size: 16pt; }
+.subtitle { text-align:center; margin: 0 0 0.25in; font-size: 9.5pt; }
+h2 { color:#003366; font-size: 12.5pt; margin: 0.15in 0 0.05in; border-bottom: 1px solid #c8d3e0; }
+h3 { font-size: 10.5pt; margin: 0.1in 0 0.03in; }
+ul { margin: 0.03in 0 0.08in; padding-left: 1.1em; line-height: 1.4; }
+li { margin-bottom: 0.03in; }
+p { margin: 0.03in 0; }
+code { background:#f3f3f3; color:#111; padding:1px 4px; border-radius:2px; white-space: nowrap; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:0.35in; }
+.formula { margin: 0.04in 0 0.06in; padding: 0.06in 0.1in; border-left: 3px solid #003366; background: rgba(0, 51, 102, 0.05); }
+.frac { display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; margin: 0 0.15em; }
+.frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 0.2em; }
+.frac > span:last-child { padding: 0 0.2em; }
+.note { font-size: 9pt; font-style: italic; }
+.back { text-align:center; margin-bottom: 0.15in; font-size: 9.5pt; }
+@media (max-width: 700px) {
+  body { margin: 16px; }
+  .grid { grid-template-columns: 1fr; gap: 0; }
+}
+@media print {
+  body { margin: 0.4in; font-size: 9.5pt; color:#000; background:#fff; }
+  .back { display:none; }
+  h2 { color:#003366; }
+}
+</style>
+</head>
+<body>
+<p class="back"><a href="/courses/math114-test2.html">← Back to Test 2 Review</a></p>
+<h1>MATH114: Quantitative Reasoning - Test 2 Study Guide Supplement</h1>
+<p class="subtitle">Use with the <a href="/pdfs/FormulaSheet.pdf">course formula sheet</a>. This page adds the formulas and concepts that sheet doesn't cover.</p>
+
+<div class="grid">
+  <div>
+    <h2>Loans &amp; Lump Sums</h2>
+    <h3>Loan payment (installment loan)</h3>
+    <div class="formula">
+      PMT =
+      <span class="frac"><span>P × (APR/n)</span><span>1 − (1 + APR/n)<sup>−nY</sup></span></span>
+    </div>
+    <p class="note">P = amount borrowed. Note the <strong>negative</strong> exponent. This is different from the savings-plan formula.</p>
+
+    <h3>Deposit needed now (present value)</h3>
+    <div class="formula">
+      P =
+      <span class="frac"><span>A</span><span>(1 + APR/n)<sup>nY</sup></span></span>
+    </div>
+    <p class="note">Daily compounding: n = 365. Monthly: n = 12. Quarterly: n = 4.</p>
+
+    <h3>Years to reach a target balance</h3>
+    <div class="formula">
+      Y =
+      <span class="frac"><span>log(A/P)</span><span>n × log(1 + APR/n)</span></span>
+    </div>
+
+    <h3>Monthly interest on a balance</h3>
+    <div class="formula">Monthly interest = balance × <span class="frac"><span>APR</span><span>12</span></span></div>
+
+    <h3>Simple vs. compound interest</h3>
+    <ul>
+      <li><strong>Simple:</strong> interest paid only on the original principal.</li>
+      <li><strong>Compound:</strong> interest paid on principal <em>plus</em> earlier interest.</li>
+    </ul>
+
+    <h2>Stocks</h2>
+    <div class="formula">
+      P/E ratio = <span class="frac"><span>share price</span><span>earnings per share</span></span>
+      &nbsp;⇒&nbsp;
+      EPS = <span class="frac"><span>share price</span><span>P/E</span></span>
+    </div>
+    <ul>
+      <li>P/E <strong>above</strong> its historical range → stock seems overpriced.</li>
+      <li>P/E <strong>below</strong> its historical range → stock seems underpriced.</li>
+    </ul>
+  </div>
+
+  <div>
+    <h2>Budgeting</h2>
+    <h3>Convert everything to the same time period</h3>
+    <ul>
+      <li>Weekly → monthly: <code>× 4</code> (when told 1 month = 4 weeks)</li>
+      <li>Annual → monthly: <code>÷ 12</code> &nbsp; Semiannual → monthly: <code>÷ 6</code> &nbsp; Quarterly → monthly: <code>÷ 3</code></li>
+      <li>Daily → annual: <code>× 365</code> &nbsp; Monthly → annual: <code>× 12</code></li>
+    </ul>
+    <div class="formula">Net monthly cash flow = monthly income − monthly expenses</div>
+    <p class="note">Negative cash flow means spending more than you earn.</p>
+    <div class="formula">Percent of budget = <span class="frac"><span>category spending</span><span>income</span></span> × 100%</div>
+    <p class="note">Compare that percent to the chart's national average for the person's age group.</p>
+    <div class="formula">Cost of a class vs. working = tuition + wages you give up</div>
+
+    <h2>Statistics Concepts</h2>
+    <ul>
+      <li><strong>Qualitative:</strong> categories or labels (professions, colors). <strong>Quantitative:</strong> numbers you can count or measure (population, height).</li>
+      <li><strong>Sampling:</strong> <em>simple random</em> means every member has an equal chance (names drawn from a hat). <em>Systematic</em> means every k-th member. <em>Stratified</em> means you split into groups and sample from each. <em>Convenience</em> means whoever is easy to reach.</li>
+      <li><strong>Correlation:</strong> points rising left to right are <em>positive</em>, and falling is <em>negative</em>. Points close to a line mean a <em>strong</em> correlation, and loosely scattered points mean a <em>weak</em> one. No pattern means <em>no correlation</em>.</li>
+      <li><strong>Bar graphs:</strong> describe each group's trend separately (steady increase, peak then decrease, and so on).</li>
+    </ul>
+
+    <h2>Algebra Review</h2>
+    <ul>
+      <li>Exponent rules: <code>a<sup>m</sup> × a<sup>n</sup> = a<sup>m+n</sup></code> and <code>a<sup>1/2</sup> = √a</code></li>
+      <li>Solving equations: undo operations in reverse order (add or subtract first, then multiply or divide). Check by plugging your answer back in.</li>
+    </ul>
+
+    <h2>Calculator Tips</h2>
+    <ul>
+      <li>Write percents as decimals (4% → 0.04).</li>
+      <li>Put whole exponents in parentheses: <code>^(12*19)</code></li>
+      <li>Don't round until the final answer.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
