@@ -78,7 +78,7 @@
                 Use the interactive table below to explore journals. Always visit the official journal website (linked where available) for the most current submission guidelines, deadlines, and scope. Remember that presenting at <strong class="font-semibold">undergraduate research conferences</strong> (like those listed on the <a href="https://www.maa.org/sections/meetings" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">MAA Sections page</a> or CUR events) is another excellent way to share your work and get feedback.
             </p>
              <p class="text-sm text-slate-500">
-                Note: <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/link-2.svg" alt="Link icon" class="icon link-icon opacity-70"> indicates a link to the journal's website. Use the controls below to filter and sort the table.
+                Note: <img src="https://cdn.jsdelivr.net/npm/lucide-static@1.55.0/icons/link-2.svg" alt="Link icon" class="icon link-icon opacity-70"> indicates a link to the journal's website. Use the controls below to filter and sort the table.
             </p>
         </section>
 
@@ -218,13 +218,13 @@
                      <label class="block text-sm font-medium text-slate-700 mb-1">Sort by:</label>
                      <div class="flex flex-wrap gap-2">
                          <button id="sort-name" data-column="name" aria-label="Sort by journal name" class="sort-button flex-1 text-xs px-3 py-1.5 border border-slate-300 rounded-md bg-white hover:bg-slate-100 transition-colors">
-                             Name <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
+                             Name <img src="https://cdn.jsdelivr.net/npm/lucide-static@1.55.0/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
                          </button>
                          <button id="sort-type" data-column="type" aria-label="Sort by type" class="sort-button flex-1 text-xs px-3 py-1.5 border border-slate-300 rounded-md bg-white hover:bg-slate-100 transition-colors">
-                             Type <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
+                             Type <img src="https://cdn.jsdelivr.net/npm/lucide-static@1.55.0/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
                          </button>
                          <button id="sort-ug-focus" data-column="undergradFocus" aria-label="Sort by undergraduate focus" class="sort-button flex-1 text-xs px-3 py-1.5 border border-slate-300 rounded-md bg-white hover:bg-slate-100 transition-colors">
-                             UG Focus <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
+                             UG Focus <img src="https://cdn.jsdelivr.net/npm/lucide-static@1.55.0/icons/arrow-up.svg" alt="Sort direction" class="icon sort-icon w-3 h-3 inline-block ml-1">
                          </button>
                      </div>
                 </div>
@@ -351,12 +351,12 @@
 
                 let nameCellContent = journal.name;
                 if (journal.url && journal.url !== '#') {
-                    nameCellContent = `<a href="${journal.url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 hover:underline group font-medium">${journal.name}<img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/link-2.svg" alt="Link" class="icon link-icon"></a>`;
+                    nameCellContent = `<a href="${journal.url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 hover:underline group font-medium">${journal.name}<img src="https://cdn.jsdelivr.net/npm/lucide-static@1.55.0/icons/link-2.svg" alt="Link" class="icon link-icon"></a>`;
                 } else {
                      nameCellContent = `<span class="font-medium">${journal.name}</span> <span class="text-slate-400 text-xs italic">(No link found)</span>`;
                 }
 
-                const typeIconUrl = `https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/${journal.icon || 'help-circle.svg'}`;
+                const typeIconUrl = `https://cdn.jsdelivr.net/npm/lucide-static@1.55.0/icons/${journal.icon || 'help-circle.svg'}`;
                 const typeCellContent = `<div class="flex items-center"><img src="${typeIconUrl}" alt="${journal.type} icon" class="icon" title="${journal.type}"><span class="text-slate-700">${journal.type}</span></div>`;
 
                 const cells = [
