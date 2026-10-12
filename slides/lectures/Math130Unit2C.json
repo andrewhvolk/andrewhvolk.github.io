@@ -543,24 +543,24 @@
       "max_slides": 28,
       "rehearsal": {
         "status": "pending_live_rehearsal",
-        "planned_instruction_minutes": 38.0,
-        "reserved_buffer_minutes": 5,
-        "available_flex_minutes": 17.0,
+        "planned_instruction_minutes": 50.0,
+        "reserved_buffer_minutes": 5.0,
+        "available_flex_minutes": 5.0,
         "stopping_points": [
           {
             "after_block": "math130unit2c-u2c-polygons-synthesize",
-            "planned_elapsed": 12.5,
-            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+            "planned_elapsed": 16.5,
+            "action": "Check the exit responses. Preserve the next worked model and practice. If behind, collect a complete setup and finish the calculation during review."
           },
           {
             "after_block": "math130unit2c-u2c-triangles-synthesize",
-            "planned_elapsed": 24.5,
-            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+            "planned_elapsed": 33.0,
+            "action": "Check the exit responses. Preserve the next worked model and practice. If behind, collect a complete setup and finish the calculation during review."
           },
           {
             "after_block": "math130unit2c-u2c-similarity-synthesize",
-            "planned_elapsed": 36.5,
-            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+            "planned_elapsed": 48.0,
+            "action": "Check the exit responses. Preserve the next worked model and practice. If behind, collect a complete setup and finish the calculation during review."
           }
         ]
       },
@@ -619,7 +619,7 @@
         },
         {
           "id": "math130unit2c-u2c-polygons-activate",
-          "title": "Predict: compute polygon angle sums and areas",
+          "title": "Exterior Angles: One Complete Turn",
           "phase": "activate",
           "component": "poll",
           "objectives": [
@@ -633,67 +633,131 @@
           "instructor_notes": [
             "Require an individual prediction before discussion."
           ],
-          "verification": []
+          "verification": [
+            "Check the labeled geometry and accessibility text of exterior-turn.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/exterior-turn.svg",
+              "alt": "Five exterior turns, measured between an extended incoming side and the outgoing side, accompany one clockwise circuit of a convex pentagon.",
+              "caption": "Measure each turn in the same direction."
+            }
+          ]
         },
         {
           "id": "math130unit2c-u2c-polygons-explain",
-          "title": "compute polygon angle sums and areas",
+          "title": "Polygon Angle Sums and Area",
           "phase": "explain",
           "component": "decision",
           "objectives": [
             "u2c-polygons"
           ],
-          "minutes": 2.5,
+          "minutes": 2.0,
           "source_slides": [
             20,
             21
           ],
           "content": [
-            "Interior-angle sum: $(n-2)180^\\circ$.",
-            "Exterior-angle sum: $360^\\circ$.",
-            "Compound-shape area comes from decomposing into familiar pieces."
+            "Interior-angle sum: $(n-2)180^\\circ$; convex-polygon exterior-angle sum: $360^\\circ$.",
+            "Parallelogram area: $A=bh$. Trapezoid area: $A=\\tfrac12(b_1+b_2)h$; use the perpendicular height.",
+            "For a regular hexagon, $e=360/6=60^\\circ$ and $i=180-60=120^\\circ$."
           ],
           "instructor_notes": [],
-          "verification": []
+          "verification": [
+            "Check the labeled geometry and accessibility text of octagon-triangulation.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/octagon-triangulation.svg",
+              "alt": "Five diagonals from vertex A partition a convex octagon into six nonoverlapping triangles. The eight vertices are A through H.",
+              "caption": "Diagonals from one vertex give n − 2 triangles."
+            }
+          ]
         },
         {
           "id": "math130unit2c-u2c-polygons-model",
-          "title": "Model the Skill: compute polygon angle sums and areas",
+          "title": "Octagon, Trapezoid, and Parallelogram",
           "phase": "model",
           "component": "derivation",
           "objectives": [
             "u2c-polygons"
           ],
-          "minutes": 3.0,
+          "minutes": 4.0,
           "source_slides": [
             22,
             23
           ],
           "content": [
-            "Find an octagon’s interior-angle sum and the area of a trapezoid with bases 12 and 20 and height 7."
+            "Find an octagon's interior-angle sum, a trapezoid's area (bases 12 and 20, height 7), and a parallelogram's area (base 9, height 8)."
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify polygon angle formulas and all area computations."
+            "Verify polygon angle formulas, the trapezoid area, and the parallelogram area.",
+            "Check the labeled geometry and accessibility text of polygon-area-model.svg."
           ],
           "steps": [
             "$(8-2)180^\\circ=1080^\\circ$.",
-            "$A=\\tfrac12(12+20)(7)=112$ square units.",
-            "Angle measure uses degrees; area uses square units."
+            "$A_{trap}=\\tfrac12(12+20)(7)=112$ square units.",
+            "$A_{para}=bh=9(8)=72$ square units.",
+            "Use perpendicular height; angle measure uses degrees and area uses square units."
           ],
           "audit_checks": [
             "u2c-polygons"
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/polygon-area-model.svg",
+              "alt": "An octagon has eight sides. A trapezoid has parallel bases 12 and 20 and perpendicular height 7. A parallelogram has base 9 and perpendicular height 8. Heights have right-angle marks.",
+              "caption": "Dashed heights meet the bases at right angles."
+            }
           ]
         },
         {
-          "id": "math130unit2c-u2c-polygons-practice",
-          "title": "You Try: compute polygon angle sums and areas",
+          "id": "math130unit2c-u2c-polygons-area-practice",
+          "title": "Area Practice: Parallelogram and Trapezoid",
           "phase": "practice",
           "component": "practice",
           "objectives": [
             "u2c-polygons"
           ],
-          "minutes": 3.0,
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Find the parallelogram’s area. Explain which displayed measurement is unnecessary.",
+            "Find the trapezoid’s area. Identify its two parallel bases and perpendicular height."
+          ],
+          "instructor_notes": [
+            "Students must identify the height before substituting.",
+            "Pause before revealing both solutions."
+          ],
+          "verification": [
+            "Independently check the calculation, units, correspondence, and given figure."
+          ],
+          "answer": [
+            "$A_{para}=11(4)=44$ square meters. The 5-meter slanted side is unnecessary.",
+            "$A_{trap}=\\tfrac12(6+12)(4)=36$ square meters."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/quadrilateral-practice.svg",
+              "alt": "The first figure has base 11, perpendicular height 4, and slanted side 5. The second has parallel bases 6 and 12 with perpendicular height 4. All lengths are in meters. Neither area is displayed.",
+              "caption": "Use the perpendicular height in both formulas."
+            }
+          ]
+        },
+        {
+          "id": "math130unit2c-u2c-polygons-practice",
+          "title": "A Regular Polygon with a 24° Exterior Angle",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2c-polygons"
+          ],
+          "minutes": 1.5,
           "source_slides": [
             24,
             25
@@ -704,17 +768,61 @@
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
-          "verification": [],
+          "verification": [
+            "Check the labeled geometry and accessibility text of regular-polygon-angle.svg."
+          ],
           "answer": [
             "$n=360/24=15$ sides.",
             "Each interior angle is $180-24=156^\\circ$."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/regular-polygon-angle.svg",
+              "alt": "The incoming side extends horizontally through the vertex. The outgoing side turns 24 degrees. The adjacent interior angle is labeled i equals question mark. The complete polygon and its number of sides are intentionally not shown.",
+              "caption": "Only one vertex is shown. The polygon is regular."
+            }
+          ]
+        },
+        {
+          "id": "math130unit2c-u2c-polygons-compound-model",
+          "title": "Compound Area: Partition and Subtract",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2c-polygons"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Find the shaded area. All dimensions are in meters."
+          ],
+          "instructor_notes": [
+            "Trace the outside rectangle and distinguish the two missing regions."
+          ],
+          "verification": [
+            "Independently check the calculation, units, correspondence, and given figure."
+          ],
+          "steps": [
+            "The outside rectangle has area $12(8)=96$ square meters.",
+            "The corner cutout has area $4(3)=12$. The interior hole has area $2(1)=2$.",
+            "The shaded area is $96-12-2=82$ square meters.",
+            "A partition gives the same result: $12(5)+8(3)-2=82$."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/compound-area-model.svg",
+              "alt": "The outside bounding rectangle is 12 by 8 meters. A bottom-right cutout is 4 by 3 meters. An interior rectangular hole is 2 by 1 meter. The cutout and hole are separate regions, each subtracted once.",
+              "caption": "Subtract each missing region exactly once."
+            }
           ]
         },
         {
           "id": "math130unit2c-u2c-polygons-feedback",
-          "title": "Check and Diagnose: compute polygon angle sums and areas",
+          "title": "Compound Area Practice",
           "phase": "feedback",
-          "component": "comparison",
+          "component": "practice",
           "objectives": [
             "u2c-polygons"
           ],
@@ -724,47 +832,66 @@
             27
           ],
           "content": [
-            "Use n for the number of sides, not the number of triangles drawn.",
-            "Subtract holes only after computing the outer area."
+            "Find the shaded area using the diagram. Show which regions you add or subtract. All dimensions are in meters."
           ],
           "instructor_notes": [
-            "Ask students to explain why the incorrect path fails."
+            "Have students identify the outside rectangle, corner cutout, and interior hole before calculating.",
+            "Ask for a second valid decomposition after revealing the answer."
           ],
           "verification": [
-            "Verify polygon angle formulas and all area computations."
+            "Verify polygon angle formulas and all area computations.",
+            "Check the labeled geometry and accessibility text of compound-area.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/compound-area.svg",
+              "alt": "An L-shaped region fits inside a 15 by 10 meter rectangle. A bottom-right cutout is 5 by 4 meters and an interior rectangular hole is 3 by 2 meters. A dashed line shows one possible partition. The shaded area is not provided.",
+              "caption": "The cutout and the interior hole are separate regions."
+            }
+          ],
+          "answer": [
+            "$A=15(10)-5(4)-3(2)=124$ square meters.",
+            "An alternative partition gives $15(6)+10(4)-3(2)=124$. Subtract the hole exactly once."
           ]
         },
         {
           "id": "math130unit2c-u2c-polygons-synthesize",
-          "title": "Make It Stick: compute polygon angle sums and areas",
+          "title": "Polygon Exit Practice",
           "phase": "synthesize",
-          "component": "summary",
+          "component": "practice",
           "objectives": [
             "u2c-polygons"
           ],
-          "minutes": 0.5,
+          "minutes": 1.5,
           "source_slides": [
             28,
             29
           ],
           "content": [
-            "Describe a decision process for selecting a polygon-area formula."
+            "A regular 12-gon has how large an interior-angle sum and how large each interior angle?",
+            "A pentagon has interior angles 95°, 120°, 110°, 100°, and x°. Find x."
           ],
           "instructor_notes": [
-            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+            "Use these two responses to check both regular-polygon reasoning and a missing angle.",
+            "If behind, collect the setups and complete the calculations in the review period."
           ],
           "verification": [],
-          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective.",
+          "answer": [
+            "For $n=12$, the sum is $(12-2)180^\\circ=1800^\\circ$. Each angle is $1800^\\circ/12=150^\\circ$.",
+            "The pentagon sum is $540^\\circ$. Thus $x=540-(95+120+110+100)=115$, so the missing angle is $115^\\circ$."
+          ]
         },
         {
           "id": "math130unit2c-u2c-triangles-activate",
-          "title": "Predict: select and apply triangle area and Pythagorean formulas",
+          "title": "Choosing a Triangle Area Formula",
           "phase": "activate",
           "component": "poll",
           "objectives": [
             "u2c-triangles"
           ],
-          "minutes": 1.0,
+          "minutes": 0.5,
           "source_slides": [],
           "content": [
             "What information determines whether to use $A=bh/2$, Heron’s formula, or the equilateral formula?"
@@ -776,28 +903,39 @@
         },
         {
           "id": "math130unit2c-u2c-triangles-explain",
-          "title": "select and apply triangle area and Pythagorean formulas",
+          "title": "Triangle Area: Match the Given Information",
           "phase": "explain",
           "component": "decision",
           "objectives": [
             "u2c-triangles"
           ],
-          "minutes": 2.5,
+          "minutes": 2.0,
           "source_slides": [
             31,
             32
           ],
           "content": [
-            "Use $A=bh/2$ when a base and perpendicular height are known.",
-            "Use Heron’s formula with three sides.",
-            "For an equilateral triangle, $A=s^2\\sqrt3/4$."
+            "Known base and height: $A=\\tfrac12 bh$. For $b=10$ and $h=6$, $A=30$ square units.",
+            "Right triangle with a missing leg: use $a^2+b^2=c^2$, then $A=\\tfrac12 ab$. Here $c$ is the hypotenuse.",
+            "Three sides: use Heron’s formula, $A=\\sqrt{s(s-a)(s-b)(s-c)}$, where $s=(a+b+c)/2$.",
+            "Equilateral triangle with side $s$: $A=s^2\\sqrt3/4$."
           ],
           "instructor_notes": [],
-          "verification": []
+          "verification": [
+            "Check the labeled geometry and accessibility text of triangle-data.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/triangle-data.svg",
+              "alt": "The first triangle labels a base b and a perpendicular height h. The second labels perpendicular legs a and b and hypotenuse c with a right-angle mark. The third labels three side lengths a, b, c. The fourth has three equal sides s with matching tick marks.",
+              "caption": "Use the given measurements to choose a method."
+            }
+          ]
         },
         {
           "id": "math130unit2c-u2c-triangles-model",
-          "title": "Model the Skill: select and apply triangle area and Pythagorean formulas",
+          "title": "Equilateral Triangle: Exact Area",
           "phase": "model",
           "component": "derivation",
           "objectives": [
@@ -809,100 +947,218 @@
             34
           ],
           "content": [
-            "Find the area of an equilateral triangle with side 1600 km."
+            "Apply the equilateral formula for side 4 units, then for side 1600 km."
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify Heron, equilateral, and Pythagorean calculations."
+            "Verify Heron, equilateral, and Pythagorean calculations.",
+            "Check the labeled geometry and accessibility text of equilateral-area.svg."
           ],
           "steps": [
-            "$A=s^2\\sqrt3/4=1600^2\\sqrt3/4$.",
-            "$A=640000\\sqrt3\\approx1108512.52$ square kilometers.",
-            "The exact radical form is preferred unless an approximation is requested."
+            "For $s=4$, $A=4^2\\sqrt3/4=4\\sqrt3$ square units.",
+            "For $s=1600$ km, $A=1600^2\\sqrt3/4=640000\\sqrt3$ square kilometers.",
+            "$A\\approx1108512.52$ square kilometers.",
+            "Keep the exact radical form unless an approximation is requested."
           ],
           "audit_checks": [
             "u2c-triangles"
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/equilateral-area.svg",
+              "alt": "A geometrically equilateral triangle has three sides of 1600 kilometers. A dashed perpendicular altitude bisects the base into two 800 kilometer segments. The altitude is labeled h, not precomputed.",
+              "caption": "Equal sides give two congruent right triangles."
+            }
+          ]
+        },
+        {
+          "id": "math130unit2c-u2c-triangles-heron-model",
+          "title": "Heron’s Formula: A Worked Example",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2c-triangles"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Find the area of a triangle with sides 5, 6, and 7 units. Give exact form, then round to two decimal places."
+          ],
+          "instructor_notes": [
+            "Emphasize the semiperimeter and show all three subtractions."
+          ],
+          "verification": [
+            "Independently check the calculation, units, correspondence, and given figure."
+          ],
+          "steps": [
+            "Check $5+6>7$. The semiperimeter is $s=(5+6+7)/2=9$.",
+            "Then $s-a=4$, $s-b=3$, and $s-c=2$.",
+            "$A=\\sqrt{9(4)(3)(2)}=\\sqrt{216}=6\\sqrt6$ square units.",
+            "$A\\approx14.70$ square units. Round after finding the exact value."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/heron-model.svg",
+              "alt": "A non-right triangle has side lengths a equals 5, b equals 6, and c equals 7, drawn with a common scale. No altitude or computed area is shown.",
+              "caption": "The semiperimeter is half the perimeter."
+            }
+          ]
+        },
+        {
+          "id": "math130unit2c-u2c-triangles-right-model",
+          "title": "Right Triangle: Height Before Area",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2c-triangles"
+          ],
+          "minutes": 1.5,
+          "source_slides": [],
+          "content": [
+            "A right triangle has base 8 and hypotenuse 17 units. Find its perpendicular height, then its area."
+          ],
+          "instructor_notes": [
+            "Ask why the hypotenuse is not the height."
+          ],
+          "verification": [
+            "Independently check the calculation, units, correspondence, and given figure."
+          ],
+          "steps": [
+            "The 17-unit side is opposite the right angle, so it is the hypotenuse.",
+            "$h^2+8^2=17^2$, so $h^2=289-64=225$.",
+            "$h=\\sqrt{225}=15$ units. A length is positive.",
+            "$A=\\tfrac12(8)(15)=60$ square units."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/right-area-model.svg",
+              "alt": "A right triangle has base 8, hypotenuse 17, and unknown perpendicular height h. Its sides are drawn proportionally. No height or area answer is printed.",
+              "caption": "Find the missing leg before using the area formula."
+            }
           ]
         },
         {
           "id": "math130unit2c-u2c-triangles-practice",
-          "title": "You Try: select and apply triangle area and Pythagorean formulas",
+          "title": "Triangle Area Practice",
           "phase": "practice",
           "component": "practice",
           "objectives": [
             "u2c-triangles"
           ],
-          "minutes": 3.0,
+          "minutes": 4.0,
           "source_slides": [
             35,
             36
           ],
           "content": [
-            "Find the area of a triangle with sides 7, 8, and 9 using Heron’s formula."
+            "Triangle 1 has sides 7, 8, and 9. Find its area using Heron’s formula.",
+            "Triangle 2 has base 9 and hypotenuse 15. Find its perpendicular height with $a^2+b^2=c^2$, then its area."
           ],
           "instructor_notes": [
-            "Pause before revealing the solution."
+            "Have students label the perpendicular height and hypotenuse before calculating.",
+            "Keep exact values through the work; round to one decimal place only when requested."
           ],
-          "verification": [],
+          "verification": [
+            "Check the labeled geometry and accessibility text of triangle-practice.svg."
+          ],
           "answer": [
-            "$s=12$ and $A=\\sqrt{12\\cdot5\\cdot4\\cdot3}=12\\sqrt5\\approx26.83$."
+            "$s=12$, so $A=\\sqrt{12(5)(4)(3)}=12\\sqrt5\\approx26.8$ square units.",
+            "$h=\\sqrt{15^2-9^2}=12$ units, so $A=\\tfrac12(9)(12)=54.0$ square units."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/triangle-practice.svg",
+              "alt": "The first triangle has side lengths 7, 8, and 9 drawn proportionally, with no right-angle mark. The second is a right triangle with base 9, hypotenuse 15, and unknown perpendicular height h. Answers are absent.",
+              "caption": "Lengths use the same units within each triangle."
+            }
           ]
         },
         {
           "id": "math130unit2c-u2c-triangles-feedback",
-          "title": "Check and Diagnose: select and apply triangle area and Pythagorean formulas",
+          "title": "Error Analysis: Slanted Side or Height?",
           "phase": "feedback",
-          "component": "comparison",
+          "component": "practice",
           "objectives": [
             "u2c-triangles"
           ],
-          "minutes": 2.0,
+          "minutes": 1.0,
           "source_slides": [
             37,
             38
           ],
           "content": [
-            "Height must be perpendicular to the chosen base.",
-            "The Pythagorean theorem applies only to right triangles."
+            "A student uses $A=\\tfrac12(10)(13)=65$. Identify the error and correct the area.",
+            "Can $a^2+b^2=c^2$ be used for this whole triangle? Explain."
           ],
           "instructor_notes": [
-            "Ask students to explain why the incorrect path fails."
+            "Require students to point to the perpendicular altitude before revealing the correction."
           ],
           "verification": [
-            "Verify Heron, equilateral, and Pythagorean calculations."
+            "Verify Heron, equilateral, and Pythagorean calculations.",
+            "Check the labeled geometry and accessibility text of triangle-height.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/triangle-height.svg",
+              "alt": "An obtuse triangle has base 10 and perpendicular height 12. Its 13-unit slanted side joins the right end of the base to the opposite vertex. The altitude meets the extended base outside the triangle. No area answer is printed.",
+              "caption": "The perpendicular height can lie outside an obtuse triangle."
+            }
+          ],
+          "answer": [
+            "The 13-unit side is slanted. Use $h=12$: $A=\\tfrac12(10)(12)=60$ square units.",
+            "The whole triangle is obtuse. Apply the Pythagorean theorem only to the small right triangle formed by the altitude."
           ]
         },
         {
           "id": "math130unit2c-u2c-triangles-synthesize",
-          "title": "Make It Stick: select and apply triangle area and Pythagorean formulas",
+          "title": "Which Triangle Area Method?",
           "phase": "synthesize",
-          "component": "summary",
+          "component": "practice",
           "objectives": [
             "u2c-triangles"
           ],
-          "minutes": 0.5,
+          "minutes": 2.5,
           "source_slides": [
             39,
             40
           ],
           "content": [
-            "Name the given information that triggers each triangle-area method."
+            "Choose an appropriate method for each of the three triangles shown. Find the exact areas in square units."
           ],
           "instructor_notes": [
-            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+            "Ask students to name a method before calculating.",
+            "Accept a valid alternative method with a complete setup."
           ],
           "verification": [],
-          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective.",
+          "answer": [
+            "Triangle 1: $A=\\tfrac12(14)(5)=35$.",
+            "Triangle 2: $A=6^2\\sqrt3/4=9\\sqrt3$.",
+            "Triangle 3: $s=8$ and $A=\\sqrt{8(3)(3)(2)}=12$. Alternatively, find height 4 and use $A=bh/2$."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/mixed-triangle-practice.svg",
+              "alt": "Triangle 1 has base 14 and perpendicular height 5. Triangle 2 has all three sides equal to 6. Triangle 3 has sides 5, 5, and 6, and no height is given. Figures have uniform scales within each triangle and no computed areas.",
+              "caption": "The problem gives measurements, so you choose the method."
+            }
+          ]
         },
         {
           "id": "math130unit2c-u2c-similarity-activate",
-          "title": "Predict: solve similarity proportions and convert navigation angles",
+          "title": "Corresponding Vertices and Sides",
           "phase": "activate",
           "component": "poll",
           "objectives": [
             "u2c-similarity"
           ],
-          "minutes": 1.0,
+          "minutes": 0.5,
           "source_slides": [],
           "content": [
             "How does vertex order prevent a similarity proportion from using mismatched sides?"
@@ -910,17 +1166,27 @@
           "instructor_notes": [
             "Require an individual prediction before discussion."
           ],
-          "verification": []
+          "verification": [
+            "Check the labeled geometry and accessibility text of corresponding-triangles.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/corresponding-triangles.svg",
+              "alt": "A right triangle ABC and a larger rotated right triangle DEF are similar. A corresponds to D, B to E, C to F. Blue sides AB and DE correspond, teal sides AC and DF correspond, and orange sides BC and EF correspond. Angle marks confirm the mapping.",
+              "caption": "Rotation preserves the matching angles and sides."
+            }
+          ]
         },
         {
           "id": "math130unit2c-u2c-similarity-explain",
-          "title": "solve similarity proportions and convert navigation angles",
+          "title": "Similarity and Navigation Angles",
           "phase": "explain",
           "component": "concept",
           "objectives": [
             "u2c-similarity"
           ],
-          "minutes": 2.5,
+          "minutes": 2.0,
           "source_slides": [
             42,
             43
@@ -928,49 +1194,141 @@
           "content": [
             "Corresponding vertices must remain in the same order.",
             "DMS conversion uses 60 minutes per degree and 60 seconds per minute.",
-            "One nautical mile corresponds to one minute of latitude."
+            "One minute of latitude is approximately one nautical mile. One nautical mile is exactly 1852 m.",
+            "Example: $5$ nmi $=5(1852)=9260$ m $=9.26$ km."
           ],
-          "instructor_notes": [],
-          "verification": []
+          "instructor_notes": [
+            "The Earth detail is schematic and magnified. Angular minutes are not minutes of time.",
+            "Nautical-mile definition: IALA Dictionary, https://www.iala.int/wiki/dictionary/index.php/Nautical_mile. Angular subdivisions: NOAA, https://oceanservice.noaa.gov/facts/latitude.html."
+          ],
+          "verification": [
+            "Check the labeled geometry and accessibility text of dms-navigation.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/dms-navigation.svg",
+              "alt": "One degree contains 60 angular minutes, one minute contains 60 angular seconds, and one second is 1/3600 degree. A schematic Earth meridian arc is magnified to illustrate that one minute of latitude is approximately one nautical mile. A nautical mile is exactly 1852 meters.",
+              "caption": "Primes denote angular minutes and seconds."
+            }
+          ]
         },
         {
           "id": "math130unit2c-u2c-similarity-model",
-          "title": "Model the Skill: solve similarity proportions and convert navigation angles",
+          "title": "Similarity Proportions and DMS",
           "phase": "model",
           "component": "worked-example",
           "objectives": [
             "u2c-similarity"
           ],
-          "minutes": 3.0,
+          "minutes": 2.0,
           "source_slides": [
             44,
             45
           ],
           "content": [
-            "Solve $6/9=10/x$, then convert $45^\\circ22'18''$ to decimal degrees."
+            "Match the sides to solve $6/9=10/x$. Convert $45^\\circ22'18''$ to decimal degrees, rounded to six decimal places."
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify similarity proportions and all DMS conversions."
+            "Verify similarity proportions and all DMS conversions.",
+            "Check the labeled geometry and accessibility text of similarity-dms-model.svg."
           ],
           "steps": [
             "$6x=90$, so $x=15$.",
-            "$45+22/60+18/3600=45.371667^\\circ$.",
+            "Add $45+22/60+18/3600$ to obtain approximately $45.371667^\\circ$.",
             "Corresponding sides stay in the same order and DMS uses factors of 60."
           ],
           "audit_checks": [
             "u2c-similarity"
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/similarity-dms-model.svg",
+              "alt": "The similar triangles label AB as 6, DE as 9, BC as 10, and EF as x. The second visual separates 45 degrees, 22 minutes, and 18 seconds and shows divisors 60 for minutes and 3600 for seconds when converting to degrees. The answer for x is not printed.",
+              "caption": "Match sides by vertex order. Convert each angular part."
+            }
+          ]
+        },
+        {
+          "id": "math130unit2c-u2c-similarity-shrinking-model",
+          "title": "Similar Triangles: Angles and Shrinking",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2c-similarity"
+          ],
+          "minutes": 2.5,
+          "source_slides": [],
+          "content": [
+            "For $\\triangle ABC\\sim\\triangle DEF$, find $\\angle D$, $\\angle F$, $DF$, and $EF$. Round angles to 0.1° and lengths to 0.01 unit."
+          ],
+          "instructor_notes": [
+            "Corresponding vertices are A-D, B-E, C-F.",
+            "The given angle labels are rounded to a tenth. Check the rounded third angle against the actual triangle geometry."
+          ],
+          "verification": [
+            "Independently check the calculation, units, correspondence, and given figure."
+          ],
+          "steps": [
+            "$\\angle D\\approx59.5^\\circ$. The third angle is $180-59.5-53.1=67.4^\\circ$, so $\\angle F\\approx67.4^\\circ$.",
+            "The scale from ABC to DEF is $k=DE/AB=10/15=2/3<1$.",
+            "$DF=13(2/3)=26/3\\approx8.67$ units.",
+            "$EF=14(2/3)=28/3\\approx9.33$ units. Apply the same factor to both sides."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/similarity-shrinking-model.svg",
+              "alt": "Triangle ABC has exact sides AB equals 15, AC equals 13, and BC equals 14. Angle A is approximately 59.5 degrees and angle B approximately 53.1 degrees, rounded to a tenth. The rotated similar triangle DEF has DE equals 10, while DF and EF are unknown. The target is a uniform two-thirds scale of the source.",
+              "caption": "The matching target sides are shorter by the same factor."
+            }
+          ]
+        },
+        {
+          "id": "math130unit2c-u2c-similarity-decimal-dms-model",
+          "title": "Decimal Degrees to DMS: Successive Remainders",
+          "phase": "model",
+          "component": "derivation",
+          "objectives": [
+            "u2c-similarity"
+          ],
+          "minutes": 1.5,
+          "source_slides": [],
+          "content": [
+            "Convert $135.721^\\circ$ to DMS. Keep seconds to one decimal place."
+          ],
+          "instructor_notes": [
+            "Ask students to identify which remainder moves to the next step."
+          ],
+          "verification": [
+            "Independently check the calculation, units, correspondence, and given figure."
+          ],
+          "steps": [
+            "The whole degrees are $135$. The fractional degree part is $0.721$.",
+            "$0.721(60)=43.26$: keep $43$ minutes and the remainder $0.26$.",
+            "$0.26(60)=15.6$ seconds.",
+            "$135.721^\\circ=135^\\circ43'15.6''$."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/decimal-dms-model.svg",
+              "alt": "The angle 135.721 degrees separates into 135 whole degrees and a 0.721 degree remainder. Multiply fractional degrees by 60 for minutes, retain the whole minutes, and multiply only the fractional minutes by 60 for seconds. Computed minutes and seconds are not printed.",
+              "caption": "Multiply only the fractional remainder at each stage."
+            }
           ]
         },
         {
           "id": "math130unit2c-u2c-similarity-practice",
-          "title": "You Try: solve similarity proportions and convert navigation angles",
+          "title": "Scale Factor and Decimal Degrees",
           "phase": "practice",
           "component": "practice",
           "objectives": [
             "u2c-similarity"
           ],
-          "minutes": 3.0,
+          "minutes": 2.0,
           "source_slides": [
             46,
             47
@@ -981,69 +1339,111 @@
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
-          "verification": [],
+          "verification": [
+            "Check the labeled geometry and accessibility text of similarity-practice.svg."
+          ],
           "answer": [
+            "$0.625(60)=37.5$: keep $37'$ and convert the remainder, $0.5(60)=30''$.",
             "$73.625^\\circ=73^\\circ37'30''$.",
-            "The larger side is $14(3/2)=21$."
+            "The larger side is $14(3/2)=21$ units."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/similarity-practice.svg",
+              "alt": "The smaller similar triangle has blue side AB equal to 14 and the rotated larger triangle has corresponding blue side DE labeled question mark. The scale factor is 3/2. The angle 73.625 degrees is separated into 73 whole degrees and 0.625 of a degree. The answers are not displayed.",
+              "caption": "Apply the scale factor to corresponding lengths."
+            }
           ]
         },
         {
           "id": "math130unit2c-u2c-similarity-feedback",
-          "title": "Check and Diagnose: solve similarity proportions and convert navigation angles",
+          "title": "Error Analysis: DMS and Correspondence",
           "phase": "feedback",
           "component": "misconception",
           "objectives": [
             "u2c-similarity"
           ],
-          "minutes": 2.0,
+          "minutes": 1.5,
           "source_slides": [
             49,
             50
           ],
           "content": [
-            "Do not pair noncorresponding sides.",
-            "Carry minutes before seconds when converting DMS."
+            "A student reports $0.5^\\circ$ as $0^\\circ50'$. Correct and explain the conversion.",
+            "For $\\triangle ABC\\sim\\triangle DEF$, correct $AB/DE=EF/BC$."
           ],
           "instructor_notes": [
-            "Ask students to explain why the incorrect path fails."
+            "Distinguish base-60 conversion from reading digits after the decimal point.",
+            "Use the illustration to show how rounding can require two carries."
           ],
           "verification": [
-            "Verify similarity proportions and all DMS conversions."
+            "Verify similarity proportions and all DMS conversions.",
+            "Check the labeled geometry and accessibility text of dms-regrouping.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/dms-regrouping.svg",
+              "alt": "If rounding produces 12 degrees 59 minutes 60 seconds, carry the 60 seconds into one minute. Then carry 60 minutes into one degree, obtaining 13 degrees 0 minutes 0 seconds. In normalized DMS, minutes and seconds each lie from zero inclusive to 60 exclusive.",
+              "caption": "Carry seconds into minutes, then minutes into degrees."
+            }
+          ],
+          "answer": [
+            "$0.5(60)=30$, giving $0^\\circ30'00''$.",
+            "$AB/DE=BC/EF$. Keep the same triangle in each numerator."
           ]
         },
         {
           "id": "math130unit2c-u2c-similarity-synthesize",
-          "title": "Make It Stick: solve similarity proportions and convert navigation angles",
+          "title": "Quiz 7 Practice: Similarity and DMS",
           "phase": "synthesize",
-          "component": "summary",
+          "component": "practice",
           "objectives": [
             "u2c-similarity"
           ],
-          "minutes": 0.5,
+          "minutes": 3.0,
           "source_slides": [
             51,
             52
           ],
           "content": [
-            "Explain how proportional reasoning connects similar triangles and map/navigation scale."
+            "Use $k$ for the scale from ABC to DEF. Find $k$, $\\angle E$, $\\angle F$, $DF$, and $EF$ (angles to 0.1°).",
+            "Convert $120^\\circ48'50''$ to decimal degrees (six decimal places)."
           ],
           "instructor_notes": [
-            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+            "Require the correspondence and scale factor before accepting the side lengths.",
+            "Angles in the illustration are rounded to a tenth, while side lengths are exact.",
+            "If behind, collect the similarity setup and assign the DMS conversion for completion after class."
           ],
           "verification": [],
-          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective.",
+          "answer": [
+            "Angles: $\\angle E\\approx22.6^\\circ$ and $\\angle F\\approx180-90-22.6=67.4^\\circ$.",
+            "Scale: $k=21/12=7/4$.",
+            "$DF=5k=8.75$, $EF=13k=22.75$ units.",
+            "Degrees: $120+48/60+50/3600$ gives approximately $120.813889^\\circ$."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit2c/visuals/quiz-similarity-practice.svg",
+              "alt": "A right triangle ABC has AB equals 12, AC equals 5, BC equals 13, and angle B approximately 22.6 degrees. A rotated similar triangle DEF has DE equals 21. Students must find corresponding angles E and F and sides DF and EF. No requested values are displayed.",
+              "caption": "Determine the scale from the corresponding given sides."
+            }
+          ]
         },
         {
           "id": "unit2c-part2-closing",
-          "title": "Session Summary and Exit Ticket",
+          "title": "Final Exit: Area and Navigation",
           "phase": "synthesize",
-          "component": "summary",
+          "component": "practice",
           "objectives": [
             "u2c-polygons",
             "u2c-triangles",
             "u2c-similarity"
           ],
-          "minutes": 1.5,
+          "minutes": 2.0,
           "source_slides": [
             53,
             54,
@@ -1051,12 +1451,17 @@
             57
           ],
           "content": [
-            "State the most important idea from today without looking at your notes.",
-            "Complete one representative setup and identify the step most likely to cause an error.",
-            "Write one question that should be answered before the next assessment."
+            "Find the area of a trapezoid with bases 8 m and 14 m and perpendicular height 5 m. State which measurement must be perpendicular.",
+            "A ship moves north by $6'$ of latitude. Estimate the distance in nautical miles and kilometers.",
+            "Record one skill to review before Quiz 7."
           ],
           "answer": [
-            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+            "$A=\\tfrac12(8+14)(5)=55$ square meters. The height is perpendicular to both parallel bases.",
+            "The distance is approximately $6$ nmi. This is approximately $6(1.852)=11.112$ km, or about $11.1$ km."
+          ],
+          "instructor_notes": [
+            "Collect these responses to identify the next review targets.",
+            "Treat the latitude-to-distance relationship as approximate."
           ]
         }
       ]
