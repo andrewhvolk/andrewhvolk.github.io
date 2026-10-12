@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import html
 import json
 import math
@@ -415,6 +416,13 @@ def render_block(block: dict, session: dict, deck: dict) -> str:
     )
 
 
+def framework_asset_url(relative_path: str) -> str:
+    """Refresh cached styles and controls when their contents change."""
+    contents = (ROOT / relative_path).read_text(encoding="utf-8")
+    version = hashlib.sha256(contents.encode("utf-8")).hexdigest()[:12]
+    return f"{relative_path}?v={version}"
+
+
 def deck_html(manifest: dict, session: dict) -> str:
     deck = manifest["deck"]
     blocks = "\n".join(render_block(block, session, deck) for block in session["blocks"])
@@ -431,7 +439,7 @@ def deck_html(manifest: dict, session: dict) -> str:
   <title>MATH 130 - {esc(session["title"])}</title>
   <link rel="stylesheet" href="vendor/reveal/reset.css">
   <link rel="stylesheet" href="vendor/reveal/reveal.css">
-  <link rel="stylesheet" href="framework/math130-slides.css">
+  <link rel="stylesheet" href="{framework_asset_url('framework/math130-slides.css')}">
   <script>window.MathJax={{tex:{{inlineMath:[['$','$'],['\\\\(','\\\\)']],displayMath:[['$$','$$'],['\\\\[','\\\\]']]}}}};</script>
   <script defer src="vendor/mathjax/tex-chtml.js"></script>
 </head>
@@ -442,7 +450,7 @@ def deck_html(manifest: dict, session: dict) -> str:
   </div></div>
   <script src="vendor/reveal/reveal.js"></script>
   <script>window.MATH130_DECK={json.dumps(metadata, ensure_ascii=False)};</script>
-  <script src="framework/math130-slides.js"></script>
+  <script src="{framework_asset_url('framework/math130-slides.js')}"></script>
 </body>
 </html>
 """
