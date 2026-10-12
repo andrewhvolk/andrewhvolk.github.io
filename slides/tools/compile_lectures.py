@@ -147,6 +147,12 @@ def validate_manifest(path: Path, manifest: dict) -> list[str]:
                 errors.append(f"{block_id}: derivation requires at least two staged steps")
             if block.get("component") == "worked-example" and len(block.get("steps", [])) < 2:
                 errors.append(f"{block_id}: worked example requires at least two staged steps")
+            visual_layout = block.get("visual_layout")
+            if visual_layout is not None:
+                if visual_layout != "split":
+                    errors.append(f"{block_id}: visual_layout must be split")
+                if not block.get("assets") or block.get("component") in {"title", "chapter", "roadmap", "diagram"}:
+                    errors.append(f"{block_id}: visual_layout requires assets and a supported content component")
             for asset in block.get("assets", []):
                 if not asset.get("alt"):
                     errors.append(f"{block_id}: every asset requires alt text")
@@ -220,9 +226,10 @@ def render_assets(block: dict) -> str:
         return ""
     figures = []
     for asset in assets:
+        caption = asset.get("caption", asset["alt"])
         figures.append(
             f'<figure><img class="deck-image" src="{esc(asset["src"])}" '
-            f'alt="{esc(asset["alt"])}"><figcaption>{esc(asset["alt"])}</figcaption></figure>'
+            f'alt="{esc(asset["alt"])}"><figcaption>{esc(caption)}</figcaption></figure>'
         )
     return f'<div class="asset-grid asset-count-{len(assets)}">{"".join(figures)}</div>'
 
@@ -245,7 +252,7 @@ def answer_panel(block: dict, label: str = "Reveal solution") -> str:
         return ""
     answer_id = f"{block['id']}-answer"
     return (
-        f'<button class="answer-toggle" type="button" data-answer-toggle="{answer_id}">'
+        f'<button class="answer-toggle" type="button" data-answer-toggle="{answer_id}" data-show-label="{esc(label)}">'
         f'{esc(label)}</button>'
         f'<div id="{answer_id}" class="solution-panel" data-answer hidden>'
         f'<span class="card-label">Feedback and solution</span>{render_items(answer)}</div>'
@@ -313,6 +320,13 @@ def render_block(block: dict, session: dict, deck: dict) -> str:
     classes = f"component-slide component-{component}"
     if block.get("optional"):
         classes += " optional-slide"
+    visual_assets = ""
+    if block.get("visual_layout"):
+        classes += f' visual-slide visual-layout-{block["visual_layout"]}'
+        visual_assets = render_assets(block)
+        # Place the figure beside the complete teaching component, including its
+        # hidden answer, instead of rendering it twice in nested layouts.
+        block = {**block, "assets": []}
 
     if component == "diagram":
         body = (
@@ -329,6 +343,8 @@ def render_block(block: dict, session: dict, deck: dict) -> str:
                 for index, step in enumerate(steps, 1)
             ) + "</div>"
         )
+        if visual_assets:
+            body = f'<p class="visual-prompt">{esc(content[0])}</p>' + body
     elif component == "comparison":
         split = max(1, (len(content) + 1) // 2)
         body = (
@@ -358,11 +374,15 @@ def render_block(block: dict, session: dict, deck: dict) -> str:
             f'{render_items(content, ordered=True)}{answer_panel(block)}</div>'
         )
     elif component == "misconception":
+        check_panel = "" if block.get("answer") else (
+            '<div class="check-panel"><strong>Self-check</strong>'
+            '<p>What evidence confirms the setup, sign, unit, or magnitude?</p></div>'
+        )
         body = (
             f'<div class="misconception-grid"><div class="warning-panel">'
-            f'<span class="card-label">{component_label}</span>{render_items(content)}</div>'
-            f'<div class="check-panel"><strong>Self-check</strong>'
-            f'<p>What evidence confirms the setup, sign, unit, or magnitude?</p></div></div>'
+            f'<span class="card-label">{component_label}</span>{render_items(content)}'
+            f'{answer_panel(block, "Reveal correction")}</div>'
+            f'{check_panel}</div>'
         )
     elif component == "poll":
         body = (
@@ -387,6 +407,8 @@ def render_block(block: dict, session: dict, deck: dict) -> str:
             f'<div class="component-card"><span class="card-label">{component_label}</span>'
             f'{render_items(content)}{render_table(block)}{render_assets(block)}</div>'
         )
+    if visual_assets:
+        body = f'<div class="visual-composition"><div class="visual-copy">{body}</div>{visual_assets}</div>'
     return (
         f'<section class="{classes}" {attrs}>{optional}{checkpoint}<h2>{esc(title)}</h2>'
         f'{body}{footer}{notes_html}</section>'

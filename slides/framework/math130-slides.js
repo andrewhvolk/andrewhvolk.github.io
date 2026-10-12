@@ -76,6 +76,7 @@
     });
     current?.dispatchEvent(new CustomEvent("math130:reset", { bubbles: true }));
     Reveal.sync();
+    Reveal.navigateFragment(-1);
   }
 
   function buildToolbar() {

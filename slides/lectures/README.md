@@ -16,6 +16,16 @@ answers, assets, verification items, independent audit identifiers, pacing
 checkpoints, and instructor notes. Every session also records its reserved
 buffer, stopping points, live-rehearsal state, and pilot candidacy.
 
+Content blocks can set `visual_layout: "split"` to place their assets beside
+the teaching component while keeping staged steps and hidden answers intact.
+Each asset requires descriptive `alt` text and may supply a shorter `caption`.
+The default layout and caption behavior of other blocks stay the same.
+
+Unit 2C session 2 uses editable SVG geometry. Regenerate those assets with
+`node tools/build_unit2c_visuals.cjs`. The normal mathematical audit also runs
+`tools/verify_unit2c_visuals.py`, which independently checks proportions,
+perpendicular heights, area calculations, DMS, and practice answer visibility.
+
 Supported phases are `activate`, `explain`, `model`, `practice`, `feedback`,
 and `synthesize`. Supported components are title, chapter, roadmap, concept,
 formula, derivation, diagram, comparison, decision, worked example, practice,

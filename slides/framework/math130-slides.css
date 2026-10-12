@@ -56,7 +56,7 @@ body { margin: 0; }
   color: #fff;
   text-align: center;
 }
-.chapter-slide p:not(.slide-meta) {
+.chapter-slide p:not(.slide-meta):not(.eyebrow) {
   font-size: 1.08em;
   margin-left: auto;
   margin-right: auto;
@@ -75,7 +75,8 @@ body { margin: 0; }
 .reveal h2 { font-size: 1.58em; }
 .reveal h3 { font-size: 1.12em; }
 .title-slide h1, .title-slide h2, .title-slide h3,
-.section-slide h1, .section-slide h2, .section-slide h3 { color: #fff; }
+.section-slide h1, .section-slide h2, .section-slide h3,
+.chapter-slide h1, .chapter-slide h2, .chapter-slide h3 { color: #fff; }
 
 .reveal p, .reveal li { line-height: 1.35; }
 .reveal ul, .reveal ol { margin: 0.35em 0 0.35em 1.15em; }
@@ -314,6 +315,53 @@ body { margin: 0; }
   max-width: 100%;
   object-fit: contain;
 }
+
+/* Opt-in compositions for authored mathematical diagrams. */
+.visual-composition {
+  align-items: center;
+  display: grid;
+  gap: 46px;
+  grid-template-columns: 1fr 1.08fr;
+}
+.visual-copy, .visual-composition > .asset-grid { min-width: 0; }
+.visual-slide .asset-grid figure { margin: 0; }
+.visual-slide .deck-image {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+  max-height: 620px;
+  width: 100%;
+}
+.visual-slide .asset-grid figcaption {
+  color: var(--muted);
+  font-size: 0.58em;
+  margin-top: 12px;
+}
+.visual-slide .decision-guide,
+.visual-slide .comparison-grid,
+.visual-slide .misconception-grid,
+.visual-slide .worked-example { grid-template-columns: 1fr; gap: 18px; }
+.visual-slide .decision-guide > div,
+.visual-slide .component-card,
+.visual-slide .example-prompt {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.visual-slide .decision-guide > div { align-items: start; }
+.visual-slide .decision-guide p,
+.visual-slide .practice-panel li,
+.visual-slide .solution-panel li { line-height: 1.25; }
+.visual-slide .derivation-step { padding: 0.42em 0.55em; }
+.visual-slide .visual-prompt { font-size: 0.88em; margin: 0 0 0.7em; }
+.visual-slide .practice-panel { padding: 0.55em 0.65em; }
+.visual-layout-split.component-practice .visual-composition,
+.visual-layout-split.component-misconception .visual-composition { grid-template-columns: 1.4fr 1fr; gap: 32px; }
+.visual-slide .solution-panel { font-size: 0.94em; padding: 0.45em 0.6em; }
+.visual-slide .worked-steps { font-size: 0.94em; margin: 0; }
 .image-grid .deck-image { max-height: 215px; }
 .image-grid {
   display: grid;

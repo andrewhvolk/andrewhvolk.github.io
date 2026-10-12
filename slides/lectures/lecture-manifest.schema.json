@@ -130,10 +130,12 @@
             "required": ["src", "alt"],
             "properties": {
               "src": { "type": "string" },
-              "alt": { "type": "string", "minLength": 1 }
+              "alt": { "type": "string", "minLength": 1 },
+              "caption": { "type": "string" }
             }
           }
         },
+        "visual_layout": { "const": "split" },
         "table": {
           "type": "object",
           "required": ["headers", "rows"],

@@ -8,8 +8,10 @@ import json
 import math
 import sys
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
 from compile_lectures import load_manifests
+from verify_unit2c_visuals import verify as verify_unit2c_visuals
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "migration" / "math-audit"
@@ -37,6 +39,32 @@ def calculations() -> dict[str, list[str]]:
     close(math.sqrt(12 * 5 * 4 * 3), 26.83)
     close(math.hypot(6, 3), 6.71)
     close(math.degrees(math.atan2(3, 6)), 26.57)
+    close((6+12)*4/2,36,0.000001)
+    close(11*4,44,0.000001)
+    close(12*8-4*3-2*1,82,0.000001)
+    close(15*10-5*4-3*2,124,0.000001)
+    close((12-2)*180,1800,0.000001)
+    close((12-2)*180/12,150,0.000001)
+    close(360/6,60,0.000001)
+    close(180-360/6,120,0.000001)
+    close((5-2)*180-(95+120+110+100),115,0.000001)
+    close(math.sqrt(9*4*3*2),6*math.sqrt(6),0.000001)
+    close(math.sqrt(17**2-8**2),15,0.000001)
+    close(0.5*8*math.sqrt(17**2-8**2),60,0.000001)
+    close(0.5*14*5,35,0.000001)
+    close(0.5*10*6,30,0.000001)
+    close(4**2*math.sqrt(3)/4,4*math.sqrt(3),0.000001)
+    close(6**2*math.sqrt(3)/4,9*math.sqrt(3),0.000001)
+    close(math.sqrt(8*3*3*2),12,0.000001)
+    close(13*(10/15),26/3,0.000001)
+    close(14*(10/15),28/3,0.000001)
+    close(5*(21/12),8.75,0.000001)
+    close(13*(21/12),22.75,0.000001)
+    close(135+43/60+15.6/3600,135.721,0.000001)
+    close(120+48/60+50/3600,120.813889,0.000001)
+    close(5*1852/1000,9.26,0.000001)
+    close(6*1852/1000,11.112,0.000001)
+    close((8+14)*5/2,55,0.000001)
 
     return {
         "u2a-graph": [
@@ -68,12 +96,21 @@ def calculations() -> dict[str, list[str]]:
         "u2c-language": ["Verified line, ray, segment, and angle notation, including ray endpoint A and angle vertex B."],
         "u2c-angle-types": ["Verified vertical angles are equal and adjacent linear-pair angles sum to $180^\\circ$."],
         "u2c-parallel": ["Solved both congruent and supplementary parallel-line equations by substitution."],
-        "u2c-polygons": ["Verified octagon sum $1080^\\circ$, regular 15-gon interior angle $156^\\circ$, and trapezoid area 112 square units."],
+        "u2c-polygons": [
+            "Verified octagon sum $1080^\\circ$, regular 15-gon interior angle $156^\\circ$, trapezoid area 112, and parallelogram area 72 square units.",
+            "Verified independent quadrilateral areas 44 and 36, compound areas 82 and 124, regular 12-gon sum 1800 and angle 150, pentagon missing angle 115, and exit trapezoid area 55.",
+        ],
         "u2c-triangles": [
             f"Recomputed equilateral area $640000\\sqrt3={640000 * math.sqrt(3):.2f}$ square kilometers.",
             f"Recomputed Heron area $12\\sqrt5={12 * math.sqrt(5):.2f}$ square units.",
+            "Verified right-triangle height 12 and area 54 square units from base 9 and hypotenuse 15.",
+            "Verified added Heron model $6\\sqrt6\\approx14.70$, 8-15-17 area 60, and mixed areas 35, $9\\sqrt3$, and 12 square units.",
         ],
-        "u2c-similarity": ["Cross-multiplication gives $x=15$; DMS conversions give $45.371667^\\circ$ and $73^\\circ37'30''$."],
+        "u2c-similarity": [
+            "Cross-multiplication gives $x=15$; DMS conversions give $45.371667^\\circ$ and $73^\\circ37'30''$.",
+            "Verified shrinking sides $26/3$ and $28/3$, enlargement sides 8.75 and 22.75, and geometric agreement of all rounded angle labels.",
+            "Verified $135.721^\\circ=135^\\circ43'15.6''$, reverse DMS result $120.813889^\\circ$, and nautical-mile conversions 9.26 and approximately 11.112 km.",
+        ],
         "u2d-area": ["Verified compound-area subtraction: 130 square units in the model and 96 square units in practice."],
         "u2d-circle": ["Verified circumference doubles, area quadruples, and annulus areas are differences of squared radii."],
         "u2d-theorems": ["Verified inscribed angle $55^\\circ$, chord angle $60^\\circ$, and intercepted practice arc $74^\\circ$."],
@@ -118,9 +155,9 @@ REQUIRED_FRAGMENTS = {
     "u2c-language": ["vertex B"],
     "u2c-angle-types": ["133^\\\\circ"],
     "u2c-parallel": ["$x=15$", "$x=16$"],
-    "u2c-polygons": ["1080^\\\\circ", "112$ square units", "156^\\\\circ"],
-    "u2c-triangles": ["640000\\\\sqrt3", "12\\\\sqrt5"],
-    "u2c-similarity": ["45.371667", "73^\\\\circ37'30''", "14(3/2)=21"],
+    "u2c-polygons": ["1080^\\\\circ", "112$ square units", "156^\\\\circ", "360/6=60", "=44$ square meters", "=36$ square meters", "=82$ square meters", "=124$ square meters", "=1800^\\\\circ", "=115$", "115^\\\\circ", "=55$ square meters"],
+    "u2c-triangles": ["640000\\\\sqrt3", "12\\\\sqrt5", "6\\\\sqrt6", "14.70", "289-64=225", "=60$ square units", "=35$", "9\\\\sqrt3"],
+    "u2c-similarity": ["45.371667", "73^\\\\circ37'30''", "14(3/2)=21", "26/3", "28/3", "8.75", "22.75", "43'15.6''", "120.813889", "9.26", "11.112"],
     "u2d-area": ["130 square units", "96$ square units"],
     "u2d-circle": ["27\\\\pi", "39\\\\pi"],
     "u2d-theorems": ["55^\\\\circ", "60^\\\\circ", "74°"],
@@ -202,7 +239,12 @@ def main() -> int:
             }
 
     assets = {}
-    for relative, claim in ASSET_EVIDENCE.items():
+    diagram_evidence = dict(ASSET_EVIDENCE)
+    try:
+        diagram_evidence.update(verify_unit2c_visuals())
+    except (AssertionError, OSError, ET.ParseError) as exc:
+        failures.append(f"Unit 2C diagram audit: {exc}")
+    for relative, claim in diagram_evidence.items():
         path = ROOT / relative
         if not path.exists():
             failures.append(f"missing audited asset: {relative}")
