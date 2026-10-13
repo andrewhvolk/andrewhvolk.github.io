@@ -2,9 +2,9 @@
 
 - **Output:** `Math130Unit2C-part1.html`
 - **Class period:** 55 minutes
-- **Planned instruction:** 38 minutes
+- **Planned instruction:** 40 minutes
 - **Reserved buffer:** 5 minutes
-- **Additional flex:** 12 minutes
+- **Additional flex:** 10 minutes
 - **Live rehearsal status:** Pending
 
 ## Run Of Show
@@ -29,16 +29,16 @@
 | 16 | Predict: use parallel-line relationships to solve angle equations | 1 | 25.5 |  |  |
 | 17 | use parallel-line relationships to solve angle equations | 2.5 | 28 |  |  |
 | 18 | Model the Skill: use parallel-line relationships to solve angle equations | 3 | 31 |  |  |
-| 19 | You Try: use parallel-line relationships to solve angle equations | 3 | 34 |  |  |
-| 20 | Check and Diagnose: use parallel-line relationships to solve angle equations | 2 | 36 |  |  |
-| 21 | Make It Stick: use parallel-line relationships to solve angle equations | 0.5 | 36.5 |  |  |
-| 22 | Session Summary and Exit Ticket | 1.5 | 38 |  |  |
+| 19 | You Try: use parallel-line relationships to solve angle equations | 5 | 36 |  |  |
+| 20 | Check and Diagnose: use parallel-line relationships to solve angle equations | 2 | 38 |  |  |
+| 21 | Make It Stick: use parallel-line relationships to solve angle equations | 0.5 | 38.5 |  |  |
+| 22 | Session Summary and Exit Ticket | 1.5 | 40 |  |  |
 
 ## Explicit Stopping Points
 
 - **12.5 minutes, after `math130unit2c-u2c-language-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 - **24.5 minutes, after `math130unit2c-u2c-angle-types-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- **36.5 minutes, after `math130unit2c-u2c-parallel-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- **38.5 minutes, after `math130unit2c-u2c-parallel-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 
 ## Live Rehearsal Record
 

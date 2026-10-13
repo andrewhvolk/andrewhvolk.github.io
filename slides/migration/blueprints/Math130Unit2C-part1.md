@@ -24,7 +24,7 @@
 | 16 | Predict: use parallel-line relationships to solve angle equations | activate | poll | 1.0 | Authored |
 | 17 | use parallel-line relationships to solve angle equations | explain | decision | 2.5 | 13 |
 | 18 | Model the Skill: use parallel-line relationships to solve angle equations | model | worked-example | 3.0 | 14 |
-| 19 | You Try: use parallel-line relationships to solve angle equations | practice | practice | 3.0 | 15 |
+| 19 | You Try: use parallel-line relationships to solve angle equations | practice | practice | 5.0 | 15 |
 | 20 | Check and Diagnose: use parallel-line relationships to solve angle equations | feedback | comparison | 2.0 | 16 |
 | 21 | Make It Stick: use parallel-line relationships to solve angle equations | synthesize | summary | 0.5 | 17 |
 | 22 | Session Summary and Exit Ticket | synthesize | summary | 1.5 | Authored |

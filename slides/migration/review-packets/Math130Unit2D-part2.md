@@ -1,7 +1,7 @@
 # Review Packet: Radians, Velocity, and Solid Geometry
 
 - **Output:** `Math130Unit2D-part2.html`
-- **Required timing:** 38 of 55 minutes
+- **Required timing:** 43 of 55 minutes
 - **Reserved classroom buffer:** 5 minutes
 - **Required slides:** 22
 - **Status:** Pending instructor review
@@ -29,21 +29,38 @@ Mapped source slides in this session: 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
 - [ ] Verify all solid-geometry formulas, dimensions, and units.
 - [ ] Verify formula: `$s=r\theta`
 - [ ] Verify formula: `$A=\tfrac12r^2\theta`
+- [ ] Verify formula: `$r=s/\theta`
+- [ ] Verify formula: `$\theta=2A/r^2`
 - [ ] Verify formula: `$\theta_{rad}=\theta_{deg}\pi/180`
 - [ ] Verify formula: `$r=12`
 - [ ] Verify formula: `$\theta=120^\circ`
 - [ ] Verify formula: `$120^\circ=2\pi/3`
 - [ ] Verify formula: `$s=r\theta=12(2\pi/3)=8\pi\approx25.133`
 - [ ] Verify formula: `$A=\tfrac12r^2\theta=48\pi\approx150.796`
+- [ ] Verify formula: `$6\pi`
+- [ ] Verify formula: `$2\pi/5`
+- [ ] Verify formula: `$25\pi/6`
+- [ ] Verify formula: `$67.425^\circ`
+- [ ] Verify formula: `$22^\circ18'36''`
 - [ ] Verify formula: `$40^\circ=2\pi/9`
 - [ ] Verify formula: `$s=9(2\pi/9)=2\pi`
+- [ ] Verify formula: `$r=s/\theta=6\pi/(2\pi/5)=15`
+- [ ] Verify formula: `$25\pi/6=\tfrac12(5^2)\theta`
+- [ ] Verify formula: `$\theta=\pi/3=60^\circ`
+- [ ] Verify formula: `$135^\circ=3\pi/4`
+- [ ] Verify formula: `$67.425^\circ=67^\circ25'30''`
+- [ ] Verify formula: `$22^\circ18'36''=22.31^\circ`
 - [ ] Verify formula: `$\pi r^2`
 - [ ] Verify formula: `$\omega=\theta/t`
 - [ ] Verify formula: `$v=r\omega`
 - [ ] Verify formula: `$d=vt=r\theta`
+- [ ] Verify formula: `$v=rω`
 - [ ] Verify formula: `$v=r\omega=4(3)=12`
 - [ ] Verify formula: `$d=vt=12(10)=120`
 - [ ] Verify formula: `$v=r\omega=0.35(8)=2.8`
+- [ ] Verify formula: `$18(360)/60=108^\circ/s`
+- [ ] Verify formula: `$108^\circ/s=3\pi/5`
+- [ ] Verify formula: `$v=3(3\pi/5)=9\pi/5\approx5.7`
 - [ ] Verify formula: `$V=\pi r^2h`
 - [ ] Verify formula: `$SA=2\pi r^2+2\pi rh`
 - [ ] Verify formula: `$V=\pi(R^2-r^2)h`
@@ -53,10 +70,10 @@ Mapped source slides in this session: 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
 
 ## Rehearsal Plan
 
-Planned instruction: 38 minutes; available flex: 17 minutes.
-- At 12.5 minutes after `math130unit2d-u2d-radians-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- At 24.5 minutes after `math130unit2d-u2d-velocity-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- At 36.5 minutes after `math130unit2d-u2d-solids-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+Planned instruction: 43 minutes; available flex: 12 minutes.
+- At 15.5 minutes after `math130unit2d-u2d-radians-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- At 29.5 minutes after `math130unit2d-u2d-velocity-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- At 41.5 minutes after `math130unit2d-u2d-solids-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 
 ## Quality Gates
 

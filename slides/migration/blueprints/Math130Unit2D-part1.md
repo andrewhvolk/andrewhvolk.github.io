@@ -21,10 +21,10 @@
 | 13 | You Try: use circle terminology and circumference-area formulas | practice | practice | 3.0 | 8 |
 | 14 | Check and Diagnose: use circle terminology and circumference-area formulas | feedback | misconception | 2.0 | 9 |
 | 15 | Make It Stick: use circle terminology and circumference-area formulas | synthesize | summary | 0.5 | Authored |
-| 16 | Predict: apply inscribed-angle, chord, and arc theorems | activate | poll | 1.0 | Authored |
-| 17 | apply inscribed-angle, chord, and arc theorems | explain | decision | 2.5 | 10 |
-| 18 | Model the Skill: apply inscribed-angle, chord, and arc theorems | model | worked-example | 3.0 | 11 |
-| 19 | You Try: apply inscribed-angle, chord, and arc theorems | practice | practice | 3.0 | Authored |
-| 20 | Check and Diagnose: apply inscribed-angle, chord, and arc theorems | feedback | comparison | 2.0 | 12 |
-| 21 | Make It Stick: apply inscribed-angle, chord, and arc theorems | synthesize | summary | 0.5 | Authored |
+| 16 | Predict: apply central-angle, inscribed-angle, chord, and arc relationships | activate | poll | 1.0 | Authored |
+| 17 | apply central-angle, inscribed-angle, chord, and arc relationships | explain | decision | 2.5 | 10 |
+| 18 | Model the Skill: apply central-angle, inscribed-angle, chord, and arc relationships | model | worked-example | 3.0 | 11 |
+| 19 | You Try: apply central-angle, inscribed-angle, chord, and arc relationships | practice | practice | 4.0 | Authored |
+| 20 | Check and Diagnose: apply central-angle, inscribed-angle, chord, and arc relationships | feedback | comparison | 2.0 | 12 |
+| 21 | Make It Stick: apply central-angle, inscribed-angle, chord, and arc relationships | synthesize | summary | 0.5 | Authored |
 | 22 | Session Summary and Exit Ticket | synthesize | summary | 1.5 | Authored |

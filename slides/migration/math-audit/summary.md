@@ -140,7 +140,7 @@ Computations were independently recalculated with Python’s standard math libra
 ## Diagram Evidence
 
 - `assets/math130unit2a/slide-05-1.png`: Graph labels $f(x)=2^x$, $(0,1)$, and $y=0$ consistently with the model. SHA-256 `20bc19d8582026c6cc980f02647624380ac23c3ee48310605a1c9c4055a68b35`
-- `assets/math130unit2b/corrected/log-transform.svg`: Graph labels the transformed logarithm, asymptote $x=-1$, and both intercepts. SHA-256 `00f208b2557fe621df94d93157b6b3e17391c944b7275266560cf804f64f55bf`
+- `assets/math130unit2b/corrected/log-transform.svg`: Graph labels the transformed logarithm, asymptote $x=-1$, and both intercepts. SHA-256 `015018fa8a5bde5ee842d75ddf0b8c8064a567019a9a973e11ead0b97b38ee2a`
 - `assets/math130unit3c/corrected/s_skill2_ladder.png`: Diagram labels a 20 ft hypotenuse, $65^\circ$ ground angle, right angle, and unknown height. SHA-256 `304d790b8ee257a5eede54521383c96b5dc63e9201e377d3bc29dbc3e1d6f003`
 - `assets/math130unit3d/corrected/s_component_form.png`: Diagram shows displacement 5 right and 6 down from $A=(-2,5)$ to $B=(3,-1)$. SHA-256 `adf6220e2343c1edbcd7cf2876bb630c5c1eb268a6133f2c66d6d0fe56f0115c`
 - `assets/math130unit3d/corrected/s_scalar_multiplication.png`: Diagram correctly shows $v$, $2v$, and $-v$. SHA-256 `580b7fa0fd353eeac0963be9871c055f4b4a6188db11d6be5295439f4681b3f1`

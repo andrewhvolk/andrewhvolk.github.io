@@ -2,9 +2,9 @@
 
 - **Output:** `Math130Unit2D-part2.html`
 - **Class period:** 55 minutes
-- **Planned instruction:** 38 minutes
+- **Planned instruction:** 43 minutes
 - **Reserved buffer:** 5 minutes
-- **Additional flex:** 12 minutes
+- **Additional flex:** 7 minutes
 - **Live rehearsal status:** Pending
 
 ## Run Of Show
@@ -17,28 +17,28 @@
 | 4 | Predict: convert angle measures and compute arc length and sector area | 1 | 1.5 |  |  |
 | 5 | convert angle measures and compute arc length and sector area | 2.5 | 4 |  |  |
 | 6 | Model the Skill: convert angle measures and compute arc length and sector area | 3 | 7 |  |  |
-| 7 | You Try: convert angle measures and compute arc length and sector area | 3 | 10 |  |  |
-| 8 | Check and Diagnose: convert angle measures and compute arc length and sector area | 2 | 12 |  |  |
-| 9 | Make It Stick: convert angle measures and compute arc length and sector area | 0.5 | 12.5 |  |  |
-| 10 | Predict: relate angular velocity, linear velocity, and distance | 1 | 13.5 |  |  |
-| 11 | relate angular velocity, linear velocity, and distance | 2.5 | 16 |  |  |
-| 12 | Model the Skill: relate angular velocity, linear velocity, and distance | 3 | 19 |  |  |
-| 13 | You Try: relate angular velocity, linear velocity, and distance | 3 | 22 |  |  |
-| 14 | Check and Diagnose: relate angular velocity, linear velocity, and distance | 2 | 24 |  |  |
-| 15 | Make It Stick: relate angular velocity, linear velocity, and distance | 0.5 | 24.5 |  |  |
-| 16 | Predict: select volume and surface-area formulas for solids | 1 | 25.5 |  |  |
-| 17 | select volume and surface-area formulas for solids | 2.5 | 28 |  |  |
-| 18 | Model the Skill: select volume and surface-area formulas for solids | 3 | 31 |  |  |
-| 19 | You Try: select volume and surface-area formulas for solids | 3 | 34 |  |  |
-| 20 | Check and Diagnose: select volume and surface-area formulas for solids | 2 | 36 |  |  |
-| 21 | Make It Stick: select volume and surface-area formulas for solids | 0.5 | 36.5 |  |  |
-| 22 | Session Summary and Exit Ticket | 1.5 | 38 |  |  |
+| 7 | You Try: convert angle measures and compute arc length and sector area | 6 | 13 |  |  |
+| 8 | Check and Diagnose: convert angle measures and compute arc length and sector area | 2 | 15 |  |  |
+| 9 | Make It Stick: convert angle measures and compute arc length and sector area | 0.5 | 15.5 |  |  |
+| 10 | Predict: relate angular velocity, linear velocity, and distance | 1 | 16.5 |  |  |
+| 11 | relate angular velocity, linear velocity, and distance | 2.5 | 19 |  |  |
+| 12 | Model the Skill: relate angular velocity, linear velocity, and distance | 3 | 22 |  |  |
+| 13 | You Try: relate angular velocity, linear velocity, and distance | 5 | 27 |  |  |
+| 14 | Check and Diagnose: relate angular velocity, linear velocity, and distance | 2 | 29 |  |  |
+| 15 | Make It Stick: relate angular velocity, linear velocity, and distance | 0.5 | 29.5 |  |  |
+| 16 | Predict: select volume and surface-area formulas for solids | 1 | 30.5 |  |  |
+| 17 | select volume and surface-area formulas for solids | 2.5 | 33 |  |  |
+| 18 | Model the Skill: select volume and surface-area formulas for solids | 3 | 36 |  |  |
+| 19 | You Try: select volume and surface-area formulas for solids | 3 | 39 |  |  |
+| 20 | Check and Diagnose: select volume and surface-area formulas for solids | 2 | 41 |  |  |
+| 21 | Make It Stick: select volume and surface-area formulas for solids | 0.5 | 41.5 |  |  |
+| 22 | Session Summary and Exit Ticket | 1.5 | 43 |  |  |
 
 ## Explicit Stopping Points
 
-- **12.5 minutes, after `math130unit2d-u2d-radians-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- **24.5 minutes, after `math130unit2d-u2d-velocity-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- **36.5 minutes, after `math130unit2d-u2d-solids-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- **15.5 minutes, after `math130unit2d-u2d-radians-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- **29.5 minutes, after `math130unit2d-u2d-velocity-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- **41.5 minutes, after `math130unit2d-u2d-solids-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 
 ## Live Rehearsal Record
 

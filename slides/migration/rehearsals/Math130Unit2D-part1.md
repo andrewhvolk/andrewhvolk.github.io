@@ -2,9 +2,9 @@
 
 - **Output:** `Math130Unit2D-part1.html`
 - **Class period:** 55 minutes
-- **Planned instruction:** 38 minutes
+- **Planned instruction:** 39 minutes
 - **Reserved buffer:** 5 minutes
-- **Additional flex:** 12 minutes
+- **Additional flex:** 11 minutes
 - **Live rehearsal status:** Pending
 
 ## Run Of Show
@@ -26,19 +26,19 @@
 | 13 | You Try: use circle terminology and circumference-area formulas | 3 | 22 |  |  |
 | 14 | Check and Diagnose: use circle terminology and circumference-area formulas | 2 | 24 |  |  |
 | 15 | Make It Stick: use circle terminology and circumference-area formulas | 0.5 | 24.5 |  |  |
-| 16 | Predict: apply inscribed-angle, chord, and arc theorems | 1 | 25.5 |  |  |
-| 17 | apply inscribed-angle, chord, and arc theorems | 2.5 | 28 |  |  |
-| 18 | Model the Skill: apply inscribed-angle, chord, and arc theorems | 3 | 31 |  |  |
-| 19 | You Try: apply inscribed-angle, chord, and arc theorems | 3 | 34 |  |  |
-| 20 | Check and Diagnose: apply inscribed-angle, chord, and arc theorems | 2 | 36 |  |  |
-| 21 | Make It Stick: apply inscribed-angle, chord, and arc theorems | 0.5 | 36.5 |  |  |
-| 22 | Session Summary and Exit Ticket | 1.5 | 38 |  |  |
+| 16 | Predict: apply central-angle, inscribed-angle, chord, and arc relationships | 1 | 25.5 |  |  |
+| 17 | apply central-angle, inscribed-angle, chord, and arc relationships | 2.5 | 28 |  |  |
+| 18 | Model the Skill: apply central-angle, inscribed-angle, chord, and arc relationships | 3 | 31 |  |  |
+| 19 | You Try: apply central-angle, inscribed-angle, chord, and arc relationships | 4 | 35 |  |  |
+| 20 | Check and Diagnose: apply central-angle, inscribed-angle, chord, and arc relationships | 2 | 37 |  |  |
+| 21 | Make It Stick: apply central-angle, inscribed-angle, chord, and arc relationships | 0.5 | 37.5 |  |  |
+| 22 | Session Summary and Exit Ticket | 1.5 | 39 |  |  |
 
 ## Explicit Stopping Points
 
 - **12.5 minutes, after `math130unit2d-u2d-area-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 - **24.5 minutes, after `math130unit2d-u2d-circle-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- **36.5 minutes, after `math130unit2d-u2d-theorems-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- **37.5 minutes, after `math130unit2d-u2d-theorems-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 
 ## Live Rehearsal Record
 

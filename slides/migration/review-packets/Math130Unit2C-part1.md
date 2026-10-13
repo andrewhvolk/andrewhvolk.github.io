@@ -1,7 +1,7 @@
 # Review Packet: Geometry Foundations and Angle Relationships
 
 - **Output:** `Math130Unit2C-part1.html`
-- **Required timing:** 38 of 55 minutes
+- **Required timing:** 40 of 55 minutes
 - **Reserved classroom buffer:** 5 minutes
 - **Required slides:** 22
 - **Status:** Pending instructor review
@@ -26,8 +26,8 @@ Mapped source slides in this session: 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
 - [x] Computational audit evidence: Solved both congruent and supplementary parallel-line equations by substitution.
 - [ ] Verify angle classifications and supplementary calculations.
 - [ ] Verify all parallel-line angle equations.
-- [ ] Verify formula: `$\overleftrightarrow{AB}`
 - [ ] Verify formula: `$\overrightarrow{AB}`
+- [ ] Verify formula: `$\overleftrightarrow{AB}`
 - [ ] Verify formula: `$\overline{AB}`
 - [ ] Verify formula: `$\angle ABC`
 - [ ] Verify formula: `$47^\circ`
@@ -38,17 +38,23 @@ Mapped source slides in this session: 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
 - [ ] Verify formula: `$30=2x`
 - [ ] Verify formula: `$x=15`
 - [ ] Verify formula: `$55^\circ`
+- [ ] Verify formula: `$x`
 - [ ] Verify formula: `$(4x+8)^\circ`
 - [ ] Verify formula: `$(6x+12)^\circ`
+- [ ] Verify formula: `$64^\circ`
+- [ ] Verify formula: `$53^\circ`
 - [ ] Verify formula: `$4x+8+6x+12=180`
 - [ ] Verify formula: `$x=16`
+- [ ] Verify formula: `$72^\circ`
+- [ ] Verify formula: `$108^\circ`
+- [ ] Verify formula: `$180^\circ-64^\circ-53^\circ=63^\circ`
 
 ## Rehearsal Plan
 
-Planned instruction: 38 minutes; available flex: 17 minutes.
+Planned instruction: 40 minutes; available flex: 15 minutes.
 - At 12.5 minutes after `math130unit2c-u2c-language-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 - At 24.5 minutes after `math130unit2c-u2c-angle-types-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- At 36.5 minutes after `math130unit2c-u2c-parallel-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- At 38.5 minutes after `math130unit2c-u2c-parallel-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 
 ## Quality Gates
 

@@ -20,7 +20,7 @@
     },
     {
       "id": "u2d-theorems",
-      "text": "apply inscribed-angle, chord, and arc theorems"
+      "text": "apply central-angle, inscribed-angle, chord, and arc relationships"
     },
     {
       "id": "u2d-radians",
@@ -46,9 +46,9 @@
       "max_slides": 26,
       "rehearsal": {
         "status": "pending_live_rehearsal",
-        "planned_instruction_minutes": 38.0,
-        "reserved_buffer_minutes": 5,
-        "available_flex_minutes": 17.0,
+        "planned_instruction_minutes": 39.0,
+        "reserved_buffer_minutes": 5.0,
+        "available_flex_minutes": 16.0,
         "stopping_points": [
           {
             "after_block": "math130unit2d-u2d-area-synthesize",
@@ -62,7 +62,7 @@
           },
           {
             "after_block": "math130unit2d-u2d-theorems-synthesize",
-            "planned_elapsed": 36.5,
+            "planned_elapsed": 37.5,
             "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
           }
         ]
@@ -104,7 +104,7 @@
           "content": [
             "decompose figures and compute area accurately",
             "use circle terminology and circumference-area formulas",
-            "apply inscribed-angle, chord, and arc theorems"
+            "apply central-angle, inscribed-angle, chord, and arc relationships"
           ]
         },
         {
@@ -380,7 +380,7 @@
         },
         {
           "id": "math130unit2d-u2d-theorems-activate",
-          "title": "Predict: apply inscribed-angle, chord, and arc theorems",
+          "title": "Predict: apply central-angle, inscribed-angle, chord, and arc relationships",
           "phase": "activate",
           "component": "poll",
           "objectives": [
@@ -389,7 +389,7 @@
           "minutes": 1.0,
           "source_slides": [],
           "content": [
-            "How does an inscribed angle compare with its intercepted arc?"
+            "How does an intercepted arc compare with its central angle and an inscribed angle?"
           ],
           "instructor_notes": [
             "Require an individual prediction before discussion."
@@ -398,7 +398,7 @@
         },
         {
           "id": "math130unit2d-u2d-theorems-explain",
-          "title": "apply inscribed-angle, chord, and arc theorems",
+          "title": "apply central-angle, inscribed-angle, chord, and arc relationships",
           "phase": "explain",
           "component": "decision",
           "objectives": [
@@ -409,16 +409,17 @@
             10
           ],
           "content": [
+            "A central angle has the same measure as its intercepted arc.",
             "An inscribed angle measures half its intercepted arc.",
             "Equal chords intercept equal arcs.",
-            "Angles formed by intersecting chords use half the sum of intercepted arcs."
+            "Angles formed by intersecting chords inside a circle use half the sum of the intercepted arcs."
           ],
           "instructor_notes": [],
           "verification": []
         },
         {
           "id": "math130unit2d-u2d-theorems-model",
-          "title": "Model the Skill: apply inscribed-angle, chord, and arc theorems",
+          "title": "Model the Skill: apply central-angle, inscribed-angle, chord, and arc relationships",
           "phase": "model",
           "component": "worked-example",
           "objectives": [
@@ -429,16 +430,17 @@
             11
           ],
           "content": [
-            "Find an inscribed angle intercepting a $110^\\circ$ arc and a chord angle intercepting arcs $80^\\circ$ and $40^\\circ$."
+            "Use a central angle of 72° and its minor arc; then find an inscribed angle intercepting a 110° arc and a chord angle intercepting arcs 80° and 40°."
           ],
           "instructor_notes": [],
           "verification": [
             "Verify every circle theorem against its diagram."
           ],
           "steps": [
+            "The central angle and minor arc are both 72°.",
             "The inscribed angle is $110^\\circ/2=55^\\circ$.",
             "The intersecting-chord angle is $(80^\\circ+40^\\circ)/2=60^\\circ$.",
-            "The vertex location determines which half-arc rule applies."
+            "Locate the vertex first; the vertex determines which circle-angle rule applies."
           ],
           "audit_checks": [
             "u2d-theorems"
@@ -446,15 +448,16 @@
         },
         {
           "id": "math130unit2d-u2d-theorems-practice",
-          "title": "You Try: apply inscribed-angle, chord, and arc theorems",
+          "title": "You Try: apply central-angle, inscribed-angle, chord, and arc relationships",
           "phase": "practice",
           "component": "practice",
           "objectives": [
             "u2d-theorems"
           ],
-          "minutes": 3.0,
+          "minutes": 4.0,
           "source_slides": [],
           "content": [
+            "A central angle and an inscribed angle intercept the same minor arc. If the central angle is 86°, find the arc measure and the inscribed angle.",
             "An inscribed angle measures 37°. Find its intercepted arc."
           ],
           "instructor_notes": [
@@ -462,12 +465,13 @@
           ],
           "verification": [],
           "answer": [
+            "The minor arc is 86°; the inscribed angle is half of that, 43°.",
             "The intercepted arc measures 74°."
           ]
         },
         {
           "id": "math130unit2d-u2d-theorems-feedback",
-          "title": "Check and Diagnose: apply inscribed-angle, chord, and arc theorems",
+          "title": "Check and Diagnose: apply central-angle, inscribed-angle, chord, and arc relationships",
           "phase": "feedback",
           "component": "comparison",
           "objectives": [
@@ -490,7 +494,7 @@
         },
         {
           "id": "math130unit2d-u2d-theorems-synthesize",
-          "title": "Make It Stick: apply inscribed-angle, chord, and arc theorems",
+          "title": "Make It Stick: apply central-angle, inscribed-angle, chord, and arc relationships",
           "phase": "synthesize",
           "component": "summary",
           "objectives": [
@@ -499,7 +503,7 @@
           "minutes": 0.5,
           "source_slides": [],
           "content": [
-            "State the vertex-and-arc information needed before applying a circle-angle theorem."
+            "Use vertex location to decide whether the intercepted arc matches a central angle or is twice an inscribed angle."
           ],
           "instructor_notes": [
             "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
@@ -540,23 +544,23 @@
       "max_slides": 26,
       "rehearsal": {
         "status": "pending_live_rehearsal",
-        "planned_instruction_minutes": 38.0,
-        "reserved_buffer_minutes": 5,
-        "available_flex_minutes": 17.0,
+        "planned_instruction_minutes": 43.0,
+        "reserved_buffer_minutes": 5.0,
+        "available_flex_minutes": 12.0,
         "stopping_points": [
           {
             "after_block": "math130unit2d-u2d-radians-synthesize",
-            "planned_elapsed": 12.5,
+            "planned_elapsed": 15.5,
             "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
           },
           {
             "after_block": "math130unit2d-u2d-velocity-synthesize",
-            "planned_elapsed": 24.5,
+            "planned_elapsed": 29.5,
             "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
           },
           {
             "after_block": "math130unit2d-u2d-solids-synthesize",
-            "planned_elapsed": 36.5,
+            "planned_elapsed": 41.5,
             "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
           }
         ]
@@ -647,6 +651,7 @@
           "content": [
             "Radians measure arc length per radius.",
             "$s=r\\theta$ and $A=\\tfrac12r^2\\theta$ require radians.",
+            "For inverse problems, solve $r=s/\\theta$ or $\\theta=2A/r^2$ before substituting.",
             "Convert degrees using $\\theta_{rad}=\\theta_{deg}\\pi/180$."
           ],
           "instructor_notes": [],
@@ -689,19 +694,28 @@
           "objectives": [
             "u2d-radians"
           ],
-          "minutes": 3.0,
+          "minutes": 6.0,
           "source_slides": [
             18
           ],
           "content": [
-            "Find the arc length for radius 9 and central angle 40°."
+            "Find the arc length for radius 9 and central angle 40°.",
+            "An arc has length $6\\pi$ units and central angle $2\\pi/5$ radians. Solve for the radius.",
+            "A sector has radius 5 units and area $25\\pi/6$ square units. Find its central angle in radians and degrees.",
+            "Convert 135° to radians.",
+            "Convert $67.425^\\circ$ to DMS and $22^\\circ18'36''$ to decimal degrees."
           ],
           "instructor_notes": [
-            "Pause before revealing the solution."
+            "Ask students to name the unknown before choosing an equation.",
+            "For DMS, use 60 seconds per minute and 60 minutes per degree; pause before revealing solutions."
           ],
           "verification": [],
           "answer": [
-            "$40^\\circ=2\\pi/9$ radians, so $s=9(2\\pi/9)=2\\pi$."
+            "$40^\\circ=2\\pi/9$ radians, so $s=9(2\\pi/9)=2\\pi$.",
+            "$r=s/\\theta=6\\pi/(2\\pi/5)=15$ units.",
+            "$25\\pi/6=\\tfrac12(5^2)\\theta$ gives $\\theta=\\pi/3=60^\\circ$.",
+            "$135^\\circ=3\\pi/4$ radians.",
+            "$67.425^\\circ=67^\\circ25'30''$; $22^\\circ18'36''=22.31^\\circ$."
           ]
         },
         {
@@ -719,6 +733,7 @@
           ],
           "content": [
             "Do not insert degrees directly into radian formulas.",
+            "For an arc, isolate $r=s/\\theta$ when radius is unknown; for a sector, isolate $\\theta=2A/r^2$.",
             "Sector area should be the same fraction of $\\pi r^2$ as the angle is of a full rotation."
           ],
           "instructor_notes": [
@@ -741,7 +756,7 @@
             21
           ],
           "content": [
-            "Explain the unit check that confirms an arc-length calculation."
+            "Explain how you would recover a radius from arc length and angle, then recover a central angle from sector area and radius."
           ],
           "instructor_notes": [
             "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
@@ -782,7 +797,8 @@
           "content": [
             "Angular speed: $\\omega=\\theta/t$.",
             "Linear speed: $v=r\\omega$.",
-            "Distance: $d=vt=r\\theta$."
+            "Distance: $d=vt=r\\theta$.",
+            "For rpm, multiply by 360°/60 to get degrees per second; use 2π/60 to get radians per second for $v=rω$."
           ],
           "instructor_notes": [],
           "verification": []
@@ -823,17 +839,20 @@
           "objectives": [
             "u2d-velocity"
           ],
-          "minutes": 3.0,
+          "minutes": 5.0,
           "source_slides": [],
           "content": [
-            "A wheel of radius 0.35 m turns at 8 rad/s. Find rim speed."
+            "A wheel of radius 0.35 m turns at 8 rad/s. Find rim speed.",
+            "A wheel of radius 3 ft turns at 18 revolutions per minute. Find angular speed in degrees per second and rim speed in feet per second."
           ],
           "instructor_notes": [
-            "Pause before revealing the solution."
+            "Require units in both the converted angular speed and linear speed.",
+            "Pause before revealing the two solutions."
           ],
           "verification": [],
           "answer": [
-            "$v=r\\omega=0.35(8)=2.8$ m/s."
+            "$v=r\\omega=0.35(8)=2.8$ m/s.",
+            "$18(360)/60=108^\\circ/s$; $108^\\circ/s=3\\pi/5$ rad/s, so $v=3(3\\pi/5)=9\\pi/5\\approx5.7$ ft/s."
           ]
         },
         {
@@ -850,7 +869,8 @@
           ],
           "content": [
             "Angular units must be radians for $v=r\\omega$.",
-            "Distinguish revolutions per minute from radians per second."
+            "For rev/min, convert to degrees per second with 360/60 and radians per second with 2π/60 before using $v=rω$.",
+            "Check that linear speed units include distance per time."
           ],
           "instructor_notes": [
             "Ask students to explain why the incorrect path fails."
@@ -870,7 +890,7 @@
           "minutes": 0.5,
           "source_slides": [],
           "content": [
-            "Describe how radius affects linear speed at fixed angular speed."
+            "Describe how to convert rpm to degrees per second and radians per second, then use radius to find rim speed."
           ],
           "instructor_notes": [
             "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
@@ -1021,9 +1041,10 @@
             30
           ],
           "content": [
-            "State the most important idea from today without looking at your notes.",
-            "Complete one representative setup and identify the step most likely to cause an error.",
-            "Write one question that should be answered before the next assessment."
+            "Quiz 8 readiness: identify central versus inscribed angles and determine the intercepted arc.",
+            "Given θ and r, compute arc length or sector area; given arc length, solve for r; given sector area, solve for θ.",
+            "Retrieve degrees↔radians and DMS conversions, then convert rpm to degrees per second and linear speed.",
+            "Record one skill to revisit before Quiz 8."
           ],
           "answer": [
             "Use the objective roadmap to identify any skill that still needs deliberate practice."

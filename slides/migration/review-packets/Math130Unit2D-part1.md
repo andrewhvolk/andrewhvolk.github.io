@@ -1,7 +1,7 @@
 # Review Packet: Area and Circle Geometry
 
 - **Output:** `Math130Unit2D-part1.html`
-- **Required timing:** 38 of 55 minutes
+- **Required timing:** 39 of 55 minutes
 - **Reserved classroom buffer:** 5 minutes
 - **Required slides:** 22
 - **Status:** Pending instructor review
@@ -13,7 +13,7 @@
 |---|---:|---:|---:|---:|---:|---:|
 | decompose figures and compute area accurately | yes | yes | yes | yes | yes | yes |
 | use circle terminology and circumference-area formulas | yes | yes | yes | yes | yes | yes |
-| apply inscribed-angle, chord, and arc theorems | yes | yes | yes | yes | yes | yes |
+| apply central-angle, inscribed-angle, chord, and arc relationships | yes | yes | yes | yes | yes | yes |
 
 ## Source Coverage
 
@@ -37,18 +37,15 @@ Mapped source slides in this session: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
 - [ ] Verify formula: `$36\pi`
 - [ ] Verify formula: `$36\pi-9\pi=27\pi`
 - [ ] Verify formula: `$A=\pi(8^2-5^2)=39\pi`
-- [ ] Verify formula: `$110^\circ`
-- [ ] Verify formula: `$80^\circ`
-- [ ] Verify formula: `$40^\circ`
 - [ ] Verify formula: `$110^\circ/2=55^\circ`
 - [ ] Verify formula: `$(80^\circ+40^\circ)/2=60^\circ`
 
 ## Rehearsal Plan
 
-Planned instruction: 38 minutes; available flex: 17 minutes.
+Planned instruction: 39 minutes; available flex: 16 minutes.
 - At 12.5 minutes after `math130unit2d-u2d-area-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 - At 24.5 minutes after `math130unit2d-u2d-circle-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- At 36.5 minutes after `math130unit2d-u2d-theorems-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- At 37.5 minutes after `math130unit2d-u2d-theorems-synthesize`: Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
 
 ## Quality Gates
 
