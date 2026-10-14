@@ -670,19 +670,18 @@
                 <p>A surface pushes back only as hard as it needs to so the object does not sink into it. So the normal force is not a fixed number. It adjusts to match how hard the object is pressing <em>into</em> the surface.</p>
             </div>
 
-            <h3>The Forces on a Block Sitting on a Ramp</h3>
-            <p>The diagram below shows only the two forces every block on a ramp has: gravity and the normal force. On your assignment you will add the other forces your problem describes (a push and friction), each drawn as an arrow from the block in the direction it acts.</p>
+            <h3>The Forces on a Block Resting on a Ramp</h3>
+            <p>The diagram below shows a block sitting still on a rough ramp. Three forces act on it: gravity, the normal force, and friction (which keeps it from sliding down). Notice the direction of each arrow. When you draw your own free-body diagram, start from the block and draw every force in the direction it acts on the block.</p>
 
             <div class="interactive-demo" style="background: #f8f9fa; color: #2c3e50; border: 1px solid #d0d7de;">
-                <svg viewBox="0 0 520 290" role="img" aria-label="Block on a 30 degree incline with weight pointing straight down, normal force perpendicular to the ramp, and the weight split into components along and into the ramp" style="width: 100%; max-width: 560px; height: auto;">
+                <svg viewBox="0 0 520 290" role="img" aria-label="Block at rest on a ramp with weight pointing straight down, normal force perpendicular to the ramp, friction pointing up the ramp, and the weight split into pieces along and into the ramp" style="width: 100%; max-width: 560px; height: auto;">
                     <defs>
                         <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
                         <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2471a3"/></marker>
+                        <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1e8449"/></marker>
                         <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7f8c8d"/></marker>
                     </defs>
                     <polygon points="60,260 460,260 460,29" fill="#e5e8e8" stroke="#2c3e50" stroke-width="2"/>
-                    <path d="M 120 260 A 60 60 0 0 0 112 230" fill="none" stroke="#2c3e50" stroke-width="1.5"/>
-                    <text x="128" y="250" font-size="16" fill="#2c3e50">θ</text>
                     <g transform="translate(247.5 123.4) rotate(-30)">
                         <rect x="-28" y="-22" width="56" height="44" fill="#f5cba7" stroke="#a04000" stroke-width="2"/>
                     </g>
@@ -690,10 +689,12 @@
                     <text x="255" y="232" font-size="15" fill="#c0392b" font-weight="bold">W = mg</text>
                     <line x1="247.5" y1="123.4" x2="207.5" y2="54" stroke="#2471a3" stroke-width="3" marker-end="url(#arrow-blue)"/>
                     <text x="160" y="48" font-size="15" fill="#2471a3" font-weight="bold">N</text>
+                    <line x1="268" y1="134" x2="326" y2="100.5" stroke="#1e8449" stroke-width="3" marker-end="url(#arrow-green)"/>
+                    <text x="262" y="80" font-size="15" fill="#1e8449" font-weight="bold">f (friction)</text>
                     <line x1="247.5" y1="123.4" x2="286" y2="190" stroke="#7f8c8d" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-gray)"/>
-                    <text x="292" y="200" font-size="14" fill="#7f8c8d">mg cos θ (into ramp)</text>
+                    <text x="292" y="200" font-size="14" fill="#7f8c8d">piece into ramp</text>
                     <line x1="247.5" y1="123.4" x2="203" y2="149" stroke="#7f8c8d" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow-gray)"/>
-                    <text x="62" y="158" font-size="14" fill="#7f8c8d">mg sin θ (down ramp)</text>
+                    <text x="70" y="158" font-size="14" fill="#7f8c8d">piece down ramp</text>
                 </svg>
                 <p style="font-size: 0.95em;">Solid arrows are real forces. Dashed arrows are the two <em>pieces</em> of gravity, not extra forces.</p>
             </div>
@@ -701,10 +702,10 @@
             <div class="step-by-step">
                 <h3>🔧 Splitting Gravity into Two Pieces</h3>
                 <p>Gravity always pulls straight down, but on a ramp it is easier to think about it in two pieces:</p>
-                <div class="step"><strong>Into the ramp:</strong> mg cos θ. This piece presses the block against the surface.</div>
-                <div class="step"><strong>Along the ramp:</strong> mg sin θ. This piece tries to slide the block downhill.</div>
-                <div class="step"><strong>Newton's First/Second Law perpendicular to the ramp:</strong> the block does not sink into the ramp or fly off of it, so the forces in that direction balance: N = mg cos θ.</div>
-                <div class="step"><strong>Check a flat floor:</strong> θ = 0°, cos 0° = 1, so N = mg. That matches what you already know about a box on a floor.</div>
+                <div class="step"><strong>Into the ramp:</strong> this piece presses the block against the surface.</div>
+                <div class="step"><strong>Along the ramp:</strong> this piece tries to slide the block downhill. Friction opposes it.</div>
+                <div class="step"><strong>Newton's laws perpendicular to the ramp:</strong> the block does not sink into the ramp or fly off of it, so the normal force exactly balances whatever is pressing the block into the surface.</div>
+                <div class="step"><strong>Try it yourself:</strong> sketch the triangle formed by W and its two pieces. How do the pieces compare when the ramp is gentle? When it is steep? Your textbook's section on inclined planes shows how to write each piece using sine and cosine.</div>
             </div>
 
             <div class="warning-box">
@@ -714,16 +715,13 @@
             </div>
 
             <div class="interactive-demo">
-                <h3>🎚️ Explore: Tilt the Ramp</h3>
-                <p>Use a 10 kg block (W = mg = 98 N). Drag the slider and watch how the two pieces of gravity, and the normal force, respond.</p>
-                <label for="incline-angle" style="font-weight: bold;">Angle θ: <span id="incline-angle-value">0</span>°</label><br>
-                <input type="range" id="incline-angle" min="0" max="90" value="0" step="1" style="width: 80%; max-width: 420px;">
+                <h3>🎚️ Explore: Press On a Box</h3>
+                <p>A 10 kg box (W = mg = 98 N) sits on a flat floor. Use the slider to press down on it with your hand (positive) or pull up on it (negative), and watch how the floor's normal force responds.</p>
+                <label for="press-force" style="font-weight: bold;">Hand force: <span id="press-force-value">0</span> N</label><br>
+                <input type="range" id="press-force" min="-98" max="98" value="0" step="1" style="width: 80%; max-width: 420px;">
                 <div style="background: rgba(255,255,255,0.92); color: #2c3e50; border-radius: 8px; padding: 18px; margin-top: 15px; text-align: left;">
-                    <div style="margin-bottom: 10px;"><strong>Normal force N = mg cos θ:</strong> <span id="incline-normal">98.0</span> N
-                        <div style="background: #d6eaf8; border-radius: 4px; height: 14px; margin-top: 4px;"><div id="incline-normal-bar" style="background: #2471a3; height: 14px; border-radius: 4px; width: 100%;"></div></div>
-                    </div>
-                    <div><strong>Downhill piece mg sin θ:</strong> <span id="incline-parallel">0.0</span> N
-                        <div style="background: #fadbd8; border-radius: 4px; height: 14px; margin-top: 4px;"><div id="incline-parallel-bar" style="background: #c0392b; height: 14px; border-radius: 4px; width: 0%;"></div></div>
+                    <div><strong>Normal force from the floor:</strong> <span id="press-normal">98.0</span> N
+                        <div style="background: #d6eaf8; border-radius: 4px; height: 14px; margin-top: 4px;"><div id="press-normal-bar" style="background: #2471a3; height: 14px; border-radius: 4px; width: 50%;"></div></div>
                     </div>
                 </div>
             </div>
@@ -731,20 +729,20 @@
             <div class="concept-box">
                 <h3>🧠 How to Reason Through a "Does N Change?" Question</h3>
                 <ol>
-                    <li>Ask: what is pressing the block into the surface? (On a ramp, only the mg cos θ piece of gravity, unless another force pushes into the surface.)</li>
-                    <li>Ask: what happens to that piece as θ changes? Think about the two extremes: a flat floor (θ = 0°) and a vertical wall (θ = 90°). How hard does a block press against a wall it is sliding down?</li>
+                    <li>Ask: what is pressing the object into the surface?</li>
+                    <li>Ask: as the situation changes, does that "into the surface" push get stronger, weaker, or stay the same?</li>
                     <li>State your answer in words: does N get bigger, smaller, or stay the same, and <em>why</em>? A one-sentence reason earns more than the answer alone.</li>
                 </ol>
-                <p>This is a qualitative question, so no numbers are required. You may still mention N = mg cos θ to support your explanation.</p>
+                <p>A qualitative question needs no numbers, but a clear reason is required.</p>
             </div>
 
             <div class="quiz-box">
                 <h3>✅ Self-Check Questions</h3>
                 <ol>
                     <li>Which direction does the normal force point on a ramp: straight up, or perpendicular to the ramp?</li>
-                    <li>Which piece of gravity tries to slide a block downhill: mg sin θ or mg cos θ?</li>
+                    <li>Which piece of gravity tries to slide a block downhill, and which force opposes it?</li>
                     <li>Why doesn't friction change the size of the normal force?</li>
-                    <li>A block sits on a flat floor and then on a steep ramp. On which surface does it press harder into the surface?</li>
+                    <li>If you pull up on a box sitting on the floor, what happens to the normal force? Why?</li>
                 </ol>
             </div>
         </section>
@@ -824,21 +822,17 @@
             });
         });
 
-        // Incline explorer: N = mg cos θ, downhill piece = mg sin θ for a 10 kg block
+        // Press-on-a-box explorer: N = mg + hand force for a 10 kg box on a flat floor
         (function () {
-            const slider = document.getElementById('incline-angle');
+            const slider = document.getElementById('press-force');
             if (!slider) return;
             const weight = 10 * 9.8;
             function update() {
-                const deg = Number(slider.value);
-                const rad = deg * Math.PI / 180;
-                const normal = weight * Math.cos(rad);
-                const parallel = weight * Math.sin(rad);
-                document.getElementById('incline-angle-value').textContent = deg;
-                document.getElementById('incline-normal').textContent = normal.toFixed(1);
-                document.getElementById('incline-parallel').textContent = parallel.toFixed(1);
-                document.getElementById('incline-normal-bar').style.width = (normal / weight * 100) + '%';
-                document.getElementById('incline-parallel-bar').style.width = (parallel / weight * 100) + '%';
+                const hand = Number(slider.value);
+                const normal = weight + hand;
+                document.getElementById('press-force-value').textContent = hand;
+                document.getElementById('press-normal').textContent = normal.toFixed(1);
+                document.getElementById('press-normal-bar').style.width = (normal / (2 * weight) * 100) + '%';
             }
             slider.addEventListener('input', update);
             update();
