@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Kinematics Tutorial - Master Physics Motion</title>
     <style>
+        /* Standalone page: mirror the site's light design tokens from /styles.css */
+        :root {
+            color-scheme: light;
+            --bg-base: #f8fafc;
+            --bg-surface: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-subtle: #e2e8f0;
+            --primary-main: #2563eb;
+            --emerald-main: #10b981;
+            --danger-main: #ef4444;
+            --warning-main: #f59e0b;
+            --surface-transparent: color-mix(in srgb, var(--bg-surface) 80%, transparent);
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
@@ -169,11 +183,14 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px 10px;
         }
         .nav-menu a {
             color: var(--bg-surface);
             text-decoration: none;
-            margin: 0 15px;
             padding: 8px 15px;
             border-radius: 5px;
             transition: background-color 0.3s;
