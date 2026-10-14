@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test 2 Hardest Problems | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Test 2: how-to guides and worked examples for the problem types students miss most often on the second exam.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-test2-hardest.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114: Test 2 Hardest Problems">
+  <meta property="og:description" content="How-to guides and worked examples for the problem types students miss most often on MATH 114 Test 2.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/math114-test2-hardest.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cw-prose { max-width: 72ch; }
+    .cw-prose h3 { margin-top: 1.4rem; }
+    .cw-prose ul, .cw-prose ol { margin: 0.5rem 0 0.75rem 1.25rem; line-height: 1.6; }
+    .cw-example { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 0.4rem 1.1rem; margin: 0.75rem 0; }
+    .cw-example > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); padding: 0.6rem 0; list-style-position: inside; }
+    .cw-example__body { padding: 0.2rem 0 0.8rem; line-height: 1.7; }
+    .cw-example__body .cw-answer { border-left: 3px solid var(--primary-main); padding-left: 0.8rem; margin-top: 0.6rem; }
+    .hp-formula { margin: 0.6rem 0; padding: 0.6rem 0.9rem; border-left: 3px solid var(--primary-main); background: var(--bg-subtle, rgba(0, 51, 102, 0.05)); border-radius: 0 0.5rem 0.5rem 0; overflow-x: auto; }
+    .hp-frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 0.15em; }
+    .hp-frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 0.25em; }
+    .hp-frac > span:last-child { padding: 0 0.25em; }
+    .hp-meter { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--text-muted); margin: 0.2rem 0 0.8rem; }
+    .hp-meter__bar { flex: 0 0 140px; height: 0.5rem; border-radius: 999px; background: var(--border-subtle); overflow: hidden; }
+    .hp-meter__bar > span { display: block; height: 100%; background: var(--primary-main); }
+    .hp-trap { border: 1px dashed var(--border-subtle); border-radius: 0.6rem; padding: 0.5rem 0.9rem; margin: 0.6rem 0; }
+    .hp-trap strong { color: var(--primary-main); }
+    .hp-toc { columns: 2; column-gap: 2rem; }
+    .hp-toc li { break-inside: avoid; }
+    @media (max-width: 700px) { .hp-toc { columns: 1; } .hp-meter__bar { flex-basis: 90px; } }
+    @media print { .cw-example { break-inside: avoid; } .cw-example:not([open]) > .cw-example__body { display: block; } }
+  </style>
+</head>
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
+<nav class="top-nav" aria-label="Primary">
+  <div class="top-nav-inner">
+    <div class="top-nav-branding">
+      <a class="top-nav-title" href="/index.html">Prof. Volk's Office</a>
+    </div>
+    <div class="top-nav-actions">
+      <ul class="top-nav-links">
+        <li><a href="/index.html">Home</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu" aria-current="page">Courses</button>
+          <ul class="dropdown-menu">
+            <li><a href="/learn.html">Course Home</a></li>
+            <li><a href="/courses/math114.html" aria-current="page">MATH 114</a></li>
+            <li><a href="/courses/math130.html">MATH 130</a></li>
+            <li><a href="/courses/physics-labs.html">Physics Labs</a></li>
+          </ul>
+        </li>
+        <li><a href="/projects.html">Tools &amp; Resources</a></li>
+        <li><a href="/CV.html">About / CV</a></li>
+        <li><a href="/club/">Math Club</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <ul class="top-nav-utilities" aria-label="More">
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="menu">More</button>
+          <ul class="dropdown-menu dropdown-menu--right">
+            <li><a class="external-destination" href="https://www.youtube.com/learnabundantly" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button id="theme-toggle-btn" class="theme-toggle" aria-label="Toggle Theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-context-bar">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/index.html">Home</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/learn.html">Courses</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114.html">MATH 114</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <a href="/courses/math114-test2.html">Test 2 Review</a>
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current" aria-current="page">Hardest Problems</span>
+    </nav>
+  </div>
+</div>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Test Prep</p>
+    <h1>Test 2: The Hardest Problem Types</h1>
+    <p class="page-hero__lede">The problem types students have missed most often on Test 2, ranked from hardest down. Each one has a step-by-step method, a worked example, and a practice problem with a hidden answer. The numbers here are new; they are not the test questions.</p>
+    <ul class="badge-list" aria-label="Page highlights">
+      <li><span class="site-badge">10 problem types</span></li>
+      <li><span class="site-badge">Worked examples</span></li>
+      <li><span class="site-badge">Practice with answers</span></li>
+    </ul>
+    <div class="page-actions">
+      <a href="#time-to-goal" class="button">Start with the hardest</a>
+      <a href="../pdfs/FormulaSheet.pdf" class="button button-secondary">Formula Sheet</a>
+      <a href="test2-supplement.html" class="button button-secondary">Study Guide</a>
+      <a href="math114-test2.html" class="button button-secondary">Test 2 Review</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="site-main">
+  <section class="site-section site-note" aria-labelledby="how-title">
+    <h2 id="how-title">How to use this page</h2>
+    <div class="cw-prose">
+      <p>The bar under each heading shows roughly how many students got that type right on the first try in past Test 2 results. Read the method, open the worked example, then cover it up and do the practice problem on your own before checking.</p>
+      <ul>
+        <li>Keep every decimal in your calculator until the last step. Most "close but wrong" answers come from rounding in the middle.</li>
+        <li>Write the APR as a decimal (5.5% → 0.055) and put the whole exponent in parentheses: <code>(1 + 0.055/12)^(12*20)</code>.</li>
+        <li>Several of these are two-part questions. Answer <em>both</em> parts; that is where most partial credit was lost.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="toc-title">
+    <div class="section-header">
+      <p class="section-kicker">Ranked hardest first</p>
+      <h2 id="toc-title">Problem types on this page</h2>
+    </div>
+    <ol class="hp-toc cw-prose">
+      <li><a href="#time-to-goal">How long until an account reaches a goal</a></li>
+      <li><a href="#present-value">How much to deposit now (present value)</a></li>
+      <li><a href="#returns">Total and annual return on an investment</a></li>
+      <li><a href="#net-cost">Net cost of a class vs. working</a></li>
+      <li><a href="#pe-ratio">P/E ratio and "overpriced or underpriced"</a></li>
+      <li><a href="#loan-payment">Monthly loan payment</a></li>
+      <li><a href="#cash-flow">Net monthly cash flow</a></li>
+      <li><a href="#spending">Spending vs. the national average</a></li>
+      <li><a href="#savings-plan">Savings plan: balance or monthly deposit</a></li>
+      <li><a href="#card-interest">Monthly credit card interest</a></li>
+    </ol>
+  </section>
+
+  <!-- 1 -->
+  <section class="site-section" id="time-to-goal" aria-labelledby="t1-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #1 · Compound interest</p>
+      <h2 id="t1-title">How long until an account reaches a goal?</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:36%"></span></span><span>About 1 in 3 right on the first try</span></div>
+    <div class="cw-prose">
+      <p>You know the starting deposit, the APR, how often it compounds, and the target balance. The unknown is the <em>exponent</em>, so you need logarithms.</p>
+      <div class="hp-formula">
+        Y = <span class="hp-frac"><span>log(A ÷ P)</span><span>n × log(1 + APR/n)</span></span>
+      </div>
+      <ol>
+        <li>Identify P (starting deposit), A (goal), APR, and n (annually 1, quarterly 4, monthly 12, <strong>weekly 52</strong>, daily 365).</li>
+        <li>Top: divide A by P, then take log.</li>
+        <li>Bottom: compute 1 + APR/n, take log, then multiply by n.</li>
+        <li>Divide and round to the nearest year at the very end.</li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> using n = 4 for weekly (it's 52); taking log(A) − P instead of log(A ÷ P); forgetting to multiply the bottom by n; typing <code>log(1 + 0.048)/12</code> instead of <code>log(1 + 0.048/12)</code>.</div>
+
+      <details class="cw-example">
+        <summary>Worked example: $6,000 grows to $250,000 at 4.8% compounded monthly</summary>
+        <div class="cw-example__body">
+          <p>P = 6,000, A = 250,000, APR = 0.048, n = 12.</p>
+          <div class="cw-answer">
+            <p>Top: log(250,000 ÷ 6,000) = log(41.667) ≈ 1.61979</p>
+            <p>Bottom: 12 × log(1 + 0.048/12) = 12 × log(1.004) ≈ 12 × 0.0017337 ≈ 0.020804</p>
+            <p>Y ≈ 1.61979 ÷ 0.020804 ≈ 77.86, so about <strong>78 years</strong>.</p>
+            <p>Calculator entry: <code>log(250000/6000)/(12*log(1+0.048/12))</code></p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: $12,500 at 6% compounded quarterly. How many years to reach $400,000?</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>Y = log(400,000 ÷ 12,500) ÷ (4 × log(1 + 0.06/4)) = log(32) ÷ (4 × log(1.015)) ≈ 58.19, so about <strong>58 years</strong>.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="site-section" id="present-value" aria-labelledby="t2-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #2 · Compound interest</p>
+      <h2 id="t2-title">How much do I deposit now? (Present value)</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:44%"></span></span><span>Fewer than half right on the first try</span></div>
+    <div class="cw-prose">
+      <p>A single deposit today, no more deposits later, and a target amount in the future. You are running the compound interest formula <em>backward</em>: divide instead of multiply.</p>
+      <div class="hp-formula">
+        P = <span class="hp-frac"><span>A</span><span>(1 + APR/n)<sup>n × Y</sup></span></span>
+      </div>
+      <ol>
+        <li>Find the growth factor (1 + APR/n)<sup>nY</sup> first and write it down.</li>
+        <li>Divide the goal A by that factor.</li>
+        <li>Sanity check: P must be <strong>smaller</strong> than A. If your answer is bigger, you multiplied.</li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> multiplying by the growth factor; using the savings-plan formula (that is for <em>monthly</em> deposits, not one deposit now); exponent n × Y not in parentheses; using n = 360 for daily (use 365).</div>
+
+      <details class="cw-example">
+        <summary>Worked example: $95,000 in 25 years at 4.2% compounded daily</summary>
+        <div class="cw-example__body">
+          <p>A = 95,000, APR = 0.042, n = 365, Y = 25, so nY = 9,125.</p>
+          <div class="cw-answer">
+            <p>Growth factor: (1 + 0.042/365)<sup>9125</sup> ≈ 2.85748</p>
+            <p>P = 95,000 ÷ 2.85748 ≈ <strong>$33,246.09</strong></p>
+            <p>Calculator entry: <code>95000/(1+0.042/365)^(365*25)</code></p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: You want $60,000 in 20 years at 5.5% compounded monthly. Deposit now?</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>P = 60,000 ÷ (1 + 0.055/12)<sup>240</sup> ≈ <strong>$20,022.52</strong></p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="site-section" id="returns" aria-labelledby="t3-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #3 · Investments</p>
+      <h2 id="t3-title">Total return and annual return</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:45%"></span></span><span>Fewer than half right on the first try; many got only one of the two parts</span></div>
+    <div class="cw-prose">
+      <p>You buy for one price and sell years later. The question asks for <strong>two</strong> answers. They are not the same thing, and the annual return is <em>not</em> the total return divided by the number of years.</p>
+      <div class="hp-formula">
+        Total return = <span class="hp-frac"><span>sell − buy</span><span>buy</span></span> × 100%
+        &nbsp;&nbsp;&nbsp;
+        Annual return = (<span class="hp-frac"><span>sell</span><span>buy</span></span>)<sup>1/Y</sup> − 1, then × 100%
+      </div>
+      <ol>
+        <li>Compute the ratio sell ÷ buy and keep it in your calculator.</li>
+        <li>Total return: ratio − 1, times 100.</li>
+        <li>Annual return: ratio raised to the power (1/Y), minus 1, times 100.</li>
+        <li>Round each to one decimal place only at the end.</li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> dividing the total return by Y (that ignores compounding); typing <code>^1/8</code> instead of <code>^(1/8)</code>; dividing by the sell price instead of the buy price. If the investment lost money, both answers are <em>negative</em>.</div>
+
+      <details class="cw-example">
+        <summary>Worked example: Bought for $4,800, sold for $7,350 eight years later</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>Ratio: 7,350 ÷ 4,800 = 1.53125</p>
+            <p>Total return: (1.53125 − 1) × 100% = <strong>53.1%</strong></p>
+            <p>Annual return: (1.53125<sup>1/8</sup> − 1) × 100% ≈ (1.054704 − 1) × 100% ≈ <strong>5.5%</strong></p>
+            <p>Notice 53.1 ÷ 8 ≈ 6.6% is <em>wrong</em>; compounding means a smaller yearly rate builds to the total.</p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Worked example (a loss): Bought for $12,000, sold for $9,600 three years later</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>Ratio: 9,600 ÷ 12,000 = 0.8</p>
+            <p>Total return: (0.8 − 1) × 100% = <strong>−20.0%</strong></p>
+            <p>Annual return: (0.8<sup>1/3</sup> − 1) × 100% ≈ <strong>−7.2%</strong></p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: $2,500 grows to $6,100 in 12 years</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>Ratio 2.44. Total return <strong>144.0%</strong>. Annual return 2.44<sup>1/12</sup> − 1 ≈ <strong>7.7%</strong>.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="site-section" id="net-cost" aria-labelledby="t4-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #4 · Budgeting</p>
+      <h2 id="t4-title">Net cost of taking a class instead of working</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:46%"></span></span><span>Fewer than half right on the first try</span></div>
+    <div class="cw-prose">
+      <p>The class costs you twice: the tuition you pay <em>and</em> the wages you give up by not working those hours. Add them.</p>
+      <div class="hp-formula">
+        Net cost = (credits × tuition per credit) + (weeks × hours per week × hourly wage)
+      </div>
+      <ol>
+        <li>Tuition: multiply credits by the price per credit-hour.</li>
+        <li>Hours of time: multiply hours <em>per week</em> by the number of <em>weeks</em>.</li>
+        <li>Lost wages: multiply those hours by the hourly pay.</li>
+        <li>Add tuition and lost wages.</li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> using only one week of lost wages; <em>subtracting</em> the wages from tuition (you lose them, so they add to the cost); multiplying credits by weeks; reading the numbers in the wrong order when they appear in a sentence. Label every number before you calculate.</div>
+
+      <details class="cw-example">
+        <summary>Worked example: 16-week, 4-credit course, 10 hours/week, $380 per credit, job pays $14/hour</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>Tuition: 4 × $380 = $1,520</p>
+            <p>Hours given up: 16 weeks × 10 hours = 160 hours</p>
+            <p>Lost wages: 160 × $14 = $2,240</p>
+            <p>Net cost: $1,520 + $2,240 = <strong>$3,760</strong></p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Related: least expensive option. $360 parking pass, or $3/day parking 4 days a week for 30 weeks?</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>Daily option: $3 × 4 × 30 = $360. The two cost the same, so neither is cheaper. Always put both options on the <em>same time period</em> before comparing.</p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: 15-week, 3-credit course, 8 hours/week, $425 per credit, job pays $16/hour</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>Tuition 3 × 425 = $1,275. Lost wages 15 × 8 × 16 = $1,920. Net cost <strong>$3,195</strong>.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="site-section" id="pe-ratio" aria-labelledby="t5-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #5 · Stocks</p>
+      <h2 id="t5-title">P/E ratio: earnings per share, then "overpriced or underpriced?"</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:53%"></span></span><span>About half fully right; most others got only partial credit</span></div>
+    <div class="cw-prose">
+      <p>Almost half the class lost points on the <em>second</em> part of this question, the judgment call. Do both parts.</p>
+      <div class="hp-formula">
+        P/E = <span class="hp-frac"><span>share price</span><span>earnings per share</span></span>
+        &nbsp;⇒&nbsp;
+        Earnings per share = <span class="hp-frac"><span>share price</span><span>P/E</span></span>
+      </div>
+      <ol>
+        <li>Part (a): divide the share price by the P/E ratio. Round to the nearest cent.</li>
+        <li>Part (b): compare the <strong>current P/E</strong> (not the earnings) to the historical range.
+          <ul>
+            <li>Current P/E <strong>above</strong> the range → <strong>overpriced</strong> (you pay more per dollar of earnings than usual).</li>
+            <li>Current P/E <strong>inside</strong> the range → about right.</li>
+            <li>Current P/E <strong>below</strong> the range → <strong>underpriced</strong>.</li>
+          </ul>
+        </li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> multiplying price × P/E; comparing the earnings per share (a dollar amount) to the P/E range (ratios); leaving part (b) blank.</div>
+
+      <details class="cw-example">
+        <summary>Worked example: Price $62.40, P/E 22.5, historical P/E range 15 to 18</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>(a) Earnings per share = 62.40 ÷ 22.5 ≈ <strong>$2.77</strong></p>
+            <p>(b) 22.5 is above the 15–18 range, so the stock seems <strong>overpriced</strong>.</p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: Price $38.75, P/E 9.5, historical range 12 to 16</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>(a) 38.75 ÷ 9.5 ≈ <strong>$4.08</strong>. (b) 9.5 is below 12–16, so <strong>underpriced</strong>.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="site-section" id="loan-payment" aria-labelledby="t6-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #6 · Loans</p>
+      <h2 id="t6-title">Monthly loan payment</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:54%"></span></span><span>About half right on the first try</span></div>
+    <div class="cw-prose">
+      <p>Student loans, car loans, and mortgages all use the same installment-loan formula. The exponent is <strong>negative</strong>.</p>
+      <div class="hp-formula">
+        PMT = <span class="hp-frac"><span>P × (APR/n)</span><span>1 − (1 + APR/n)<sup>−nY</sup></span></span>
+      </div>
+      <ol>
+        <li>P is the amount borrowed, n = 12 for monthly payments.</li>
+        <li>Top: P × APR/12.</li>
+        <li>Bottom: 1 − (1 + APR/12)<sup>−12Y</sup>. Compute this separately and check it is between 0 and 1.</li>
+        <li>Divide top by bottom.</li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> dropping the minus sign in the exponent (gives a negative or huge answer); using the savings-plan formula; dividing P by the number of months (that ignores interest and is always too low).</div>
+
+      <details class="cw-example">
+        <summary>Worked example: $24,500 borrowed at 6.4% APR for 10 years</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>APR/12 = 0.064/12 ≈ 0.0053333; 12Y = 120</p>
+            <p>Top: 24,500 × 0.0053333 ≈ 130.667</p>
+            <p>Bottom: 1 − (1.0053333)<sup>−120</sup> ≈ 1 − 0.52819 ≈ 0.47181</p>
+            <p>PMT ≈ 130.667 ÷ 0.47181 ≈ <strong>$276.95 per month</strong></p>
+            <p>Calculator entry: <code>24500*(0.064/12)/(1-(1+0.064/12)^(-120))</code></p>
+            <p>Bonus: total paid ≈ 276.95 × 120 ≈ $33,233.71, so total interest ≈ $8,733.71.</p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: $18,000 at 5% APR for 15 years</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>PMT = 18,000 × (0.05/12) ÷ (1 − (1 + 0.05/12)<sup>−180</sup>) ≈ <strong>$142.34</strong></p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="site-section" id="cash-flow" aria-labelledby="t7-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #7 · Budgeting</p>
+      <h2 id="t7-title">Net monthly cash flow</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:57%"></span></span><span>A little over half right on the first try</span></div>
+    <div class="cw-prose">
+      <p>Every income and expense has to be converted to <strong>per month</strong> before you add anything. Use the conversions the problem gives you (usually 1 month = 4 weeks).</p>
+      <div class="hp-formula">
+        weekly × 4 &nbsp;·&nbsp; yearly ÷ 12 &nbsp;·&nbsp; semiannually ÷ 6 &nbsp;·&nbsp; quarterly ÷ 3<br>
+        Net monthly cash flow = total monthly income − total monthly expenses
+      </div>
+      <ol>
+        <li>Make two columns: income and expenses.</li>
+        <li>Convert each line to monthly and write it next to the original.</li>
+        <li>Total each column, then subtract. A negative answer is allowed and common.</li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> "semiannually" means twice a year, so divide by <strong>6</strong>, not 2; skipping a small line item; dropping the negative sign.</div>
+
+      <details class="cw-example">
+        <summary>Worked example: a full budget table</summary>
+        <div class="cw-example__body">
+          <p>Income: salary $33,600/year; tutoring $75/week.<br>
+          Expenses: rent $1,650/month; groceries $85/week; car insurance $480 semiannually; renter's insurance $180/year; utilities $140/month; entertainment $450/month; car payment $520/month.</p>
+          <div class="cw-answer">
+            <p>Income: 33,600 ÷ 12 = 2,800; 75 × 4 = 300. Total <strong>$3,100</strong>.</p>
+            <p>Expenses: 1,650 + (85 × 4 = 340) + (480 ÷ 6 = 80) + (180 ÷ 12 = 15) + 140 + 450 + 520 = <strong>$3,195</strong>.</p>
+            <p>Net cash flow: 3,100 − 3,195 = <strong>−$95 per month</strong>.</p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: income $2,600/month plus $40/week from a side job</summary>
+        <div class="cw-example__body">
+          <p>Expenses: rent $900/month; food $70/week; car insurance $600 semiannually; gym $240/year; gas $95/month; textbooks $400/year; other $300/month.</p>
+          <div class="cw-answer">
+            <p>Income: 2,600 + 160 = $2,760. Expenses: 900 + 280 + 100 + 20 + 95 + 33.33 + 300 ≈ $1,728.33. Net ≈ <strong>$1,032 per month</strong>.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="site-section" id="spending" aria-labelledby="t8-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #8 · Budgeting</p>
+      <h2 id="t8-title">Is this spending above, at, or below the national average?</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:57%"></span></span><span>A little over half right on the first try</span></div>
+    <div class="cw-prose">
+      <p>The test gives a chart of the percent of spending by category and age group. You turn the person's spending into a percent and compare.</p>
+      <ol>
+        <li>Percent spent = category spending ÷ income × 100%. Use the <strong>same time period</strong> for both (monthly ÷ monthly).</li>
+        <li>Find the person's <strong>age group</strong> column and the right <strong>category</strong> row on the chart.</li>
+        <li>Higher than the chart → above average. Lower → below. Within about a point → at.</li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> reading the wrong age group; comparing a dollar amount to a percent; dividing income by spending (upside down).</div>
+
+      <details class="cw-example">
+        <summary>Worked example: A 45-year-old earns $4,200/month and spends $380/month on entertainment</summary>
+        <div class="cw-example__body">
+          <p class="note"><em>For practice only, suppose the chart shows 5% for entertainment in the 45–54 age group. On the test, read the real value from the chart.</em></p>
+          <div class="cw-answer">
+            <p>380 ÷ 4,200 × 100% ≈ 9.0%</p>
+            <p>9.0% is higher than 5%, so this spending is <strong>above average</strong>.</p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: Earns $3,800/month, spends $610 on transportation. Suppose the chart says 16%.</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>610 ÷ 3,800 ≈ 16.1%, essentially equal to 16%, so <strong>at the average</strong>.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="site-section" id="savings-plan" aria-labelledby="t9-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #9 · Savings plans</p>
+      <h2 id="t9-title">Savings plan: find the balance, or find the monthly deposit</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:59%"></span></span><span>About 3 in 5 right on the first try</span></div>
+    <div class="cw-prose">
+      <p>Use this when money goes in <strong>every month</strong> (retirement accounts, college funds). Decide first whether you are finding the ending balance A or the monthly payment PMT.</p>
+      <div class="hp-formula">
+        A = PMT × <span class="hp-frac"><span>(1 + APR/n)<sup>nY</sup> − 1</span><span>APR/n</span></span>
+        &nbsp;&nbsp;&nbsp;
+        PMT = <span class="hp-frac"><span>A × (APR/n)</span><span>(1 + APR/n)<sup>nY</sup> − 1</span></span>
+      </div>
+      <ol>
+        <li>"How much will it be worth?" → solve for A.</li>
+        <li>"How much should you deposit monthly?" → solve for PMT.</li>
+        <li>Check: the balance A should be much more than PMT × number of months (that's the interest at work); the PMT should be much less than A ÷ number of months.</li>
+      </ol>
+      <div class="hp-trap"><strong>Common traps:</strong> using the present-value formula (that's a single deposit); forgetting the "− 1" in the numerator; dividing by APR instead of APR/12.</div>
+
+      <details class="cw-example">
+        <summary>Worked example (balance): $250/month at 6% APR for 20 years</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>APR/12 = 0.005; nY = 240</p>
+            <p>(1.005)<sup>240</sup> − 1 ≈ 3.31020 − 1 = 2.31020</p>
+            <p>A = 250 × 2.31020 ÷ 0.005 ≈ <strong>$115,510.22</strong></p>
+            <p>Check: you deposited 250 × 240 = $60,000, so the rest is interest.</p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Worked example (deposit): Want $120,000 in 15 years at 4.5% compounded monthly</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>APR/12 = 0.00375; nY = 180</p>
+            <p>PMT = 120,000 × 0.00375 ÷ ((1.00375)<sup>180</sup> − 1) ≈ 450 ÷ 0.96156 ≈ <strong>$467.99 per month</strong></p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: (a) $175/month at 5% for 30 years. (b) Monthly deposit to reach $50,000 in 10 years at 4%.</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>(a) A ≈ <strong>$145,645.26</strong>. (b) PMT ≈ <strong>$339.56</strong>.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="site-section" id="card-interest" aria-labelledby="t10-title">
+    <div class="section-header">
+      <p class="section-kicker">Hardest #10 · Interest</p>
+      <h2 id="t10-title">Monthly interest on a credit card balance</h2>
+    </div>
+    <div class="hp-meter"><span class="hp-meter__bar"><span style="width:64%"></span></span><span>About 2 in 3 right on the first try</span></div>
+    <div class="cw-prose">
+      <p>This one is short, but the wrong answer choices are designed around the easy mistakes.</p>
+      <div class="hp-formula">
+        Monthly interest = balance × <span class="hp-frac"><span>APR</span><span>12</span></span>
+      </div>
+      <div class="hp-trap"><strong>Common traps:</strong> forgetting to divide by 12 (that gives a full year of interest); using 24 instead of 0.24 (answer 100 times too big); dividing the balance by 12 first and forgetting the rate.</div>
+
+      <details class="cw-example">
+        <summary>Worked example: $2,400 average balance at 19.8% annual interest</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>2,400 × 0.198 ÷ 12 = <strong>$39.60 per month</strong></p>
+            <p>The trap answer $475.20 is a whole year of interest.</p>
+          </div>
+        </div>
+      </details>
+      <details class="cw-example">
+        <summary>Your turn: $5,200 balance at 21.9% annual interest</summary>
+        <div class="cw-example__body">
+          <div class="cw-answer">
+            <p>5,200 × 0.219 ÷ 12 = <strong>$94.90</strong></p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="site-section site-note" aria-labelledby="which-title">
+    <h2 id="which-title">Which formula? A 10-second check</h2>
+    <div class="cw-prose">
+      <ul>
+        <li><strong>One deposit</strong>, find the future balance → compound interest A = P(1 + APR/n)<sup>nY</sup>.</li>
+        <li><strong>One deposit</strong>, find what to deposit now → present value (divide).</li>
+        <li><strong>One deposit</strong>, find how long → logarithm formula.</li>
+        <li><strong>Monthly deposits</strong> into savings → savings plan formula.</li>
+        <li><strong>Monthly payments</strong> on money you borrowed → loan payment formula (negative exponent).</li>
+        <li><strong>Bought and sold</strong> → total and annual return.</li>
+      </ul>
+      <p>More formulas: <a href="test2-supplement.html">Test 2 study guide supplement</a> · <a href="../pdfs/FormulaSheet.pdf">Formula sheet (PDF)</a></p>
+    </div>
+  </section>
+
+  <nav class="course-sequence-nav" aria-label="MATH 114 module navigation">
+    <a href="math114-test2.html" class="button button-secondary course-sequence-nav__link">&larr; Test 2 Review</a>
+    <a href="/courses/math114.html#module-8" class="button button-secondary course-sequence-nav__link">All modules</a>
+    <a href="test2-supplement.html" class="button course-sequence-nav__link">Study guide &rarr;</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/index.html">Home</a>
+      <a href="/learn.html">Courses</a>
+      <a href="/projects.html">Tools &amp; Resources</a>
+      <a href="/CV.html">About / CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
