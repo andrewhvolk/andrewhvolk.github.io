@@ -43,6 +43,8 @@ const metadata = new Function(
 )(generatorDefinitions);
 const quizConfig = new Function(`${quizConfigSource}\nreturn QUIZ_CONFIG;`)();
 const checklist = new Function(`${checklistSource}\nreturn DEFAULT_CHECKLIST;`)();
+const groupsSource = requireMatch(/function getPracticeGroups\(focus = practiceFocus\) \{[\s\S]*?\n    \}/, 'practice focus routing');
+const practiceGroups = new Function('generators', 'QUIZ_CONFIG', 'practiceFocus', 'PRACTICE_SECTIONS', `${groupsSource}\nreturn { focused: getPracticeGroups(), all: getPracticeGroups('all') };`)(metadata.generators, quizConfig, 'quiz8', metadata.sections);
 
 assert.equal(new Set(generatorDefinitions.map(gen => gen.id)).size, generatorDefinitions.length, 'Generator IDs must be unique.');
 assert.equal(metadata.generators.length, generatorDefinitions.length, 'Every generator must receive routing metadata.');
@@ -145,6 +147,11 @@ assert.deepEqual(verifyBlueprint(8, 8, 105), [
     'quiz8_arc_multi', 'quiz8_central_multi', 'quiz8_inscribed_multi', 'rad_deg',
     'quiz8_sector_multi', 'dms', 'dms_to_dec', 'quiz8_speed_multi'
 ]);
+assert.deepEqual(practiceGroups.focused.flatMap(group => group.generators.map(gen => gen.id)), quizConfig[8].blueprint.map(entry => entry.id), 'The default individual drills must cover all eight Quiz 8 prompts in order.');
+assert.equal(practiceGroups.all.flatMap(group => group.generators).length, generatorDefinitions.length, 'The broader Test 2 practice must remain available.');
+assert.equal(checklist.find(item => item.id === 'geo_18b').practiceId, 'quiz8_central_multi');
+assert.equal(checklist.find(item => item.id === 'geo_18c').practiceId, 'quiz8_inscribed_multi');
+assert.equal(quizConfig[7].blueprint.find(entry => entry.id === 'dms_to_dec').variant, 'integer-seconds', 'Quiz 7 must retain its integer-second format.');
 
 function near(actual, expected, label) {
     assert.ok(Math.abs(actual - expected) < 1e-8, `${label}: expected ${expected}, received ${actual}.`);
@@ -201,6 +208,9 @@ for (let sample = 0; sample < 40; sample++) {
     assert.ok(arcBC < 180, 'Quiz 8 two-letter arc BC must always be a minor arc.');
     near(inscribed.fields[0].answer, arcBC / 2, 'Quiz 8 inscribed angle from arc BC');
     near(inscribed.fields[1].answer, arcBC, 'Quiz 8 arc addition');
+    const highlightedArcs = [...inscribed.svg.matchAll(/<path d="M([\d.-]+),([\d.-]+) A78,78 0 0,(\d) ([\d.-]+),([\d.-]+)"/g)];
+    assert.equal(highlightedArcs.length, 2, 'The inscribed triangle should highlight its two minor arcs.');
+    highlightedArcs.forEach(arc => assert.equal(arc[3], '0', 'Increasing mathematical angles require counterclockwise SVG arcs.'));
 
     const sector = generate('quiz8_sector_multi');
     const sectorGiven = sector.q.match(/when \$r=([\d.]+)\$ and \$\\theta=([\d.]+)\$ radians/);
@@ -215,6 +225,70 @@ for (let sample = 0; sample < 40; sample++) {
     near(speed.fields[0].answer, Number(speedGiven[2]) * 6, 'Quiz 8 angular speed');
     near(speed.fields[1].answer, Math.PI * Number(speedGiven[1]) * Number(speedGiven[2]) / 60, 'Quiz 8 linear speed');
 }
+
+const originalRandom = Math.random;
+try {
+    for (const degrees of [12.016666, 12.999999, 169.999999]) {
+        Math.random = () => (degrees - 10) / 160;
+        const question = generate('dms');
+        const totalSeconds = Math.round(degrees * 3600);
+        assert.deepEqual(question.fields.map(field => field.answer), [Math.floor(totalSeconds / 3600), Math.floor(totalSeconds / 60) % 60, totalSeconds % 60], 'DMS rounding must carry seconds and minutes correctly.');
+    }
+    Math.random = () => 0.91;
+    const majorSector = generate('quiz8_sector_multi');
+    assert.ok(majorSector.fields[1].answer > Math.PI, 'Inverse-sector practice must include major sectors.');
+    assert.ok(Math.abs(Number(majorSector.fields[1].answer.toFixed(2)) * 180 / Math.PI - majorSector.fields[2].answer) > 0.005, 'This regression case must expose premature rounding before conversion.');
+    assert.match(majorSector.solution, /unrounded/);
+} finally {
+    Math.random = originalRandom;
+}
+
+for (let sample = 0; sample < 200; sample++) {
+    const radians = generate('rad_deg');
+    const degrees = Number(radians.q.match(/Convert \$([\d.]+)\^\\circ/)?.[1]);
+    assert.ok(Number.isFinite(degrees), 'The default radians drill must start with degrees.');
+    assert.match(radians.q, /3 decimal places/);
+    near(radians.a, degrees * Math.PI / 180, 'Default degree-to-radian drill');
+    assert.equal(radians.tol, 0.0005);
+
+    const decimal = generate('dms_to_dec');
+    const dms = decimal.q.match(/\$(\d+)\^\\circ\\, (\d+)'\\, ([\d.]+)''/);
+    assert.ok(dms, 'DMS prompt must disclose degrees, minutes, and fractional seconds.');
+    near(decimal.a, Number(dms[1]) + Number(dms[2]) / 60 + Number(dms[3]) / 3600, 'Default DMS-to-decimal drill');
+    assert.equal(decimal.tol, 0.00005);
+
+    const speed = generate('speed');
+    assert.equal(speed.fields.length, 2, 'The general speed drill must cover both Quiz 8 answers.');
+    assert.match(speed.q, /degrees per second/);
+    assert.match(speed.q, /feet per second/);
+    assert.doesNotMatch(speed.q, /inches per minute|radians per minute/);
+    assert.match(speed.solution, /r=.*\/2=/, 'Worked speed solutions must show diameter-to-radius conversion.');
+
+    const angles = generate('inscribed_angle');
+    assert.equal(angles.fields.length, 2);
+    assert.ok(['quiz8_central_multi', 'quiz8_inscribed_multi'].includes(angles.inputType), 'The general angle drill must use one of the two planned quiz models.');
+}
+for (const variant of ['arc-length', 'inverse-arc-length', 'sector-area', 'inverse-sector-area']) {
+    for (let sample = 0; sample < 100; sample++) {
+        const question = generate('circles', variant);
+        validateQuestion(generatorById.get('circles'), question);
+        assert.match(question.q, /two decimal places/);
+        if (variant === 'inverse-sector-area') {
+            const values = question.q.match(/A=([\d.]+).*r=([\d.]+)/);
+            const theta = 2 * Number(values[1]) / Number(values[2]) ** 2;
+            near(question.fields[0].answer, theta, 'Visual inverse-sector radians');
+            near(question.fields[1].answer, theta * 180 / Math.PI, 'Visual inverse-sector degrees');
+        } else {
+            const radius = Number(question.q.match(/r=([\d.]+)/)?.[1]);
+            const theta = Number(question.q.match(/theta=([\d.]+)/)?.[1]);
+            const expected = variant === 'inverse-arc-length'
+                ? Number(question.q.match(/s=([\d.]+)/)[1]) / (theta * Math.PI / 180)
+                : variant === 'arc-length' ? radius * theta : 0.5 * radius * radius * theta;
+            near(question.a, expected, `Visual ${variant}`);
+        }
+    }
+}
+assert.match(generate('rad_deg', 'decimal-radians-to-degrees').q, /radians to degrees/);
 
 const examStart = html.indexOf('function startMockExam() {');
 const examEnd = html.indexOf('if (selected.some(selection => !selection))', examStart);
@@ -288,4 +362,26 @@ const invalidDms = runGrader({
 assert.match(invalidDms.feedback, /degrees must be a whole number from 0 to 359; minutes and seconds must be whole numbers from 0 to 59/);
 assert.ok(invalidDms.results['Quiz 7'].earned < 10, 'Out-of-range DMS minutes must not receive credit.');
 
-process.stdout.write(`Math 130 Test 2 checks passed: ${generatorDefinitions.length} generators × 100 samples; Quiz 7/8 blueprints; 3/3/14 cumulative split; partial credit, DMS validation, and practice hints.\n`);
+const sectorCredit = generate('quiz8_sector_multi');
+sectorCredit.points = 20;
+const onlyArea = Object.fromEntries(sectorCredit.fields.map((field, index) => [field.id, index === 0 ? Number(field.answer.toFixed(2)) : -1]));
+assert.equal(runGrader(sectorCredit, onlyArea, true).score, 10, 'The forward sector problem should earn half of the question credit.');
+const onlyDegrees = Object.fromEntries(sectorCredit.fields.map((field, index) => [field.id, index === 2 ? Number(field.answer.toFixed(2)) : -1]));
+assert.equal(runGrader(sectorCredit, onlyDegrees, true).score, 5, 'The two inverse-sector outputs share the other half of the question credit.');
+
+for (let sample = 0; sample < 100; sample++) {
+    let earned = 0;
+    for (const entry of quizConfig[8].blueprint) {
+        const question = generate(entry.id, entry.variant);
+        question.points = entry.points;
+        const values = question.fields
+            ? Object.fromEntries(question.fields.map(field => [field.id, field.integer ? field.answer : Number(field.answer.toFixed(entry.id === 'dms' ? 0 : 2))]))
+            : { 'answer-input': Number(question.a.toFixed(entry.id === 'rad_deg' ? 3 : 4)) };
+        const result = runGrader(question, values, true);
+        assert.equal(result.score, entry.points, `${entry.id}: correctly rounded answers must receive full credit.`);
+        earned += result.score;
+    }
+    assert.equal(earned, 105, 'A fully correct Quiz 8 checkpoint must earn 105/105.');
+}
+
+process.stdout.write(`Math 130 Test 2 checks passed: ${generatorDefinitions.length} generators × 100 samples; Quiz 8 default drills and 4 visual variants; 100 fully graded Quiz 8 checkpoints; Quiz 7/8 blueprints; cumulative split; DMS carries, major sectors, diagram arcs, weighted partial credit, and practice hints.\n`);

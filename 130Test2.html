@@ -1248,8 +1248,8 @@
 <div class="review-option-copy">Similar Triangles, Parallel Lines, Triangle/Polygon Areas, Degrees ↔ DMS Conversions</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(8)">
-<div class="review-option-title">Topic practice — Circle geometry</div>
-<div class="review-option-copy">Radians, Arcs, Sectors, Speed, Circle Theorems</div>
+<div class="review-option-title">Quiz 8 practice — 8 questions</div>
+<div class="review-option-copy">Circle Diagrams, Degrees → Radians, DMS, Arcs, Sectors, Speed (°/s and ft/s)</div>
 </button>
 </div>
 </div>
@@ -1612,17 +1612,17 @@
             { id: 'geo_8', cat: 'Circles', label: 'Word problem involving the area between two concentric circles', done: false, practiceId: 'basic_circles' },
             { id: 'geo_9', cat: 'Circles', label: 'Converting degrees-minutes-seconds to decimal degrees', done: false, practiceId: 'dms_to_dec', videoUrl: 'http://www.youtube.com/watch?v=FcDyaiHO4GQ' },
             { id: 'geo_10', cat: 'Circles', label: 'Converting decimal degrees to degrees-minutes-seconds', done: false, practiceId: 'dms', videoUrl: 'http://www.youtube.com/watch?v=FcDyaiHO4GQ' },
-            { id: 'geo_11', cat: 'Circles', label: 'Converting degrees to radians and radians to degrees (Problem type 1)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
-            { id: 'geo_12', cat: 'Circles', label: 'Converting degrees to radians and radians to degrees (Problem type 2)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
-            { id: 'geo_12b', cat: 'Circles', label: 'Converting decimal radians to degrees (no $\\pi$, e.g. 4.5 rad)', done: false, practiceId: 'rad_deg', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_11', cat: 'Circles', label: 'Converting degrees to radians and radians to degrees (Problem type 1)', done: false, practiceId: 'rad_deg', practiceVariant: 'random', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_12', cat: 'Circles', label: 'Converting degrees to radians and radians to degrees (Problem type 2)', done: false, practiceId: 'rad_deg', practiceVariant: 'random', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
+            { id: 'geo_12b', cat: 'Circles', label: 'Converting decimal radians to degrees (no $\\pi$, e.g. 4.5 rad)', done: false, practiceId: 'rad_deg', practiceVariant: 'decimal-radians-to-degrees', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
             { id: 'geo_13', cat: 'Circles', label: 'Sketching an angle with absolute value less than $2\\pi$ radians in standard position', done: false, practiceId: 'std_pos_angle', videoUrl: 'http://www.youtube.com/watch?v=JmLN3QxshlE' },
             { id: 'geo_14', cat: 'Circles', label: 'Drawing an arc to find a central angle or an arc length on the unit circle', done: false, practiceId: 'quiz8_arc_multi', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
             { id: 'geo_15', cat: 'Circles', label: 'Drawing an arc to find a central angle or an arc length on a non-unit circle', done: false, practiceId: 'quiz8_arc_multi', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
             { id: 'geo_16', cat: 'Circles', label: 'Arc length and central angle measure', done: false, practiceId: 'quiz8_arc_multi', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
             { id: 'geo_17', cat: 'Circles', label: 'Area of a sector of a circle', done: false, practiceId: 'quiz8_sector_multi', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
             { id: 'geo_18', cat: 'Circles', label: 'Using the area formula for a sector of a circle in a real-world situation', done: false, practiceId: 'quiz8_sector_multi', videoUrl: 'http://www.youtube.com/watch?v=XUus6-9E9sQ' },
-            { id: 'geo_18b', cat: 'Circles', label: 'Inscribed angle theorem: finding arcs and angles from a diameter', done: false, practiceId: 'quiz8_theorems_multi' },
-            { id: 'geo_18c', cat: 'Circles', label: 'Multi-step circle problems: arc addition with diameter constraint', done: false, practiceId: 'quiz8_theorems_multi' },
+            { id: 'geo_18b', cat: 'Circles', label: 'Central and inscribed angles intercepting the same arc', done: false, practiceId: 'quiz8_central_multi' },
+            { id: 'geo_18c', cat: 'Circles', label: 'Inscribed triangles: find a missing angle and minor arc', done: false, practiceId: 'quiz8_inscribed_multi' },
             { id: 'geo_18d', cat: 'Circles', label: 'Intersecting chords angle theorem', done: false, practiceId: 'circle_multi' },
             { id: 'geo_19', cat: 'Circles', label: 'Angular and linear speed', done: false, practiceId: 'quiz8_speed_multi' }
     ];
@@ -2026,9 +2026,11 @@
         },
         {
             id: 'rad_deg', section: 'Circles',
-            label: 'Radians ↔ Degrees',
-            generate: (variant = 'random') => {
-                const type = variant === 'degrees-to-radians' ? 0 : Math.random();
+            label: 'Degrees → Radians (3 Places)',
+            generate: (variant = 'degrees-to-radians') => {
+                const type = variant === 'degrees-to-radians' ? 0
+                    : variant === 'pi-radians-to-degrees' ? 0.5
+                    : variant === 'decimal-radians-to-degrees' ? 0.9 : Math.random();
                 if (type < 0.33) {
                     // Degrees → Radians
                     const assessmentMode = variant === 'degrees-to-radians';
@@ -2067,7 +2069,7 @@
 
         {
             id: 'std_pos_angle', section: 'Circles',
-            label: 'Standard-Position Angle Sketch (Radians)',
+            label: 'Reference Angles (Additional Test 2 Practice)',
             generate: () => {
                 const denOptions = [2, 3, 4, 6];
                 const den = denOptions[Math.floor(Math.random() * denOptions.length)];
@@ -2100,9 +2102,9 @@
         },
         {
             id: 'dms', section: 'Triangles, Lines & Areas',
-            label: 'Convert DMS',
+            label: 'Decimal Degrees → DMS (Nearest Second)',
             generate: () => {
-                const deg = (Math.random() * 80 + 10).toFixed(6);
+                const deg = (Math.random() * 160 + 10).toFixed(6);
                 let d = Math.floor(Number(deg));
                 const rem = (Number(deg) - d) * 60;
                 let m = Math.floor(rem);
@@ -2133,9 +2135,9 @@
         },
         {
             id: 'dms_to_dec', section: 'Triangles, Lines & Areas',
-            label: 'DMS → Decimal Degrees',
-            generate: (variant = 'integer-seconds') => {
-                const d = Math.floor(Math.random() * 80) + 10;
+            label: 'DMS → Decimal Degrees (4 Places)',
+            generate: (variant = 'tenths-seconds') => {
+                const d = Math.floor(Math.random() * 160) + 10;
                 const m = Math.floor(Math.random() * 60);
                 const s = variant === 'tenths-seconds'
                     ? Number((Math.random() * 59.9).toFixed(1))
@@ -2151,184 +2153,18 @@
             }
         },
 
-{
-    id: 'inscribed_angle', section: 'Circles',
-    label: 'Circle Theorems',
-    generate: () => {
-        const type = Math.random();
+        {
+            id: 'inscribed_angle', section: 'Circles',
+            label: 'Circle Angles and Arcs (Quiz 8 Models)',
+            generate: () => {
+                const id = Math.random() < 0.5 ? 'quiz8_central_multi' : 'quiz8_inscribed_multi';
+                return generators.find(gen => gen.id === id).generate();
+            }
+        },
 
-        if (type < 0.25) {
-            // Basic: inscribed angle = half arc
-            const arcVal = (Math.floor(Math.random() * 20) + 5) * 4; 
-            const angleVal = arcVal / 2;
-            const isFindingAngle = Math.random() > 0.5;
-            const pointAt = (degrees, radius = 50) => {
-                const radians = degrees * Math.PI / 180;
-                return { x: 60 + radius * Math.cos(radians), y: 60 - radius * Math.sin(radians) };
-            };
-            const vertex = pointAt(90);
-            const arcStart = pointAt(270 - arcVal / 2);
-            const arcEnd = pointAt(270 + arcVal / 2);
-            const arcLabel = pointAt(270, 43);
-            const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
-                <circle cx="60" cy="60" r="50" fill="none" stroke="var(--text-main)" stroke-width="2"/>
-                <line x1="${vertex.x.toFixed(1)}" y1="${vertex.y.toFixed(1)}" x2="${arcStart.x.toFixed(1)}" y2="${arcStart.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="2"/>
-                <line x1="${vertex.x.toFixed(1)}" y1="${vertex.y.toFixed(1)}" x2="${arcEnd.x.toFixed(1)}" y2="${arcEnd.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="2"/>
-                <path d="M${arcStart.x.toFixed(1)},${arcStart.y.toFixed(1)} A50,50 0 0,1 ${arcEnd.x.toFixed(1)},${arcEnd.y.toFixed(1)}" fill="none" stroke="var(--emerald-main)" stroke-width="2.5"/>
-                ${svgOutlinedText({ x: arcLabel.x, y: arcLabel.y - 4, text: isFindingAngle ? `${arcVal}°` : '?', fill: 'var(--emerald-main)', fontSize: 11, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: vertex.x, y: vertex.y + 16, text: isFindingAngle ? 'x' : `${angleVal}°`, fill: 'var(--primary-main)', fontSize: 11, fontWeight: 'bold' })}
-            </svg>`;
-            return {
-                q: isFindingAngle 
-                    ? `Find the measure of the inscribed angle $x$ if the intercepted arc is $${arcVal}^\\circ$.` 
-                    : `Find the measure of the intercepted arc if the inscribed angle is $${angleVal}^\\circ$.`,
-                svg: svg, inputType: 'number', a: isFindingAngle ? angleVal : arcVal, tol: 0.1,
-                svgAltText: isFindingAngle
-                    ? `Circle with two chords meeting at an inscribed angle marked x; they intercept a minor arc labeled ${arcVal} degrees.`
-                    : `Circle with two chords meeting at an inscribed angle labeled ${angleVal} degrees; the intercepted minor arc is unknown.`,
-                solution: isFindingAngle 
-                    ? `The inscribed angle is half the arc: $${arcVal} / 2 = ${angleVal}^\\circ$.` 
-                    : `The intercepted arc is twice the angle: $${angleVal} \\cdot 2 = ${arcVal}^\\circ$.`
-            };
-        } else if (type < 0.5) {
-            // Diameter + inscribed angle: angle in semicircle = 90°, find missing arc
-            // AC is a diameter → arc ABC = 180°. Given arc AB, find arc BC.
-            const arcAB = (Math.floor(Math.random() * 12) + 3) * 8; // 24 to 120
-            const arcBC = 180 - arcAB;
-            const pointAt = degrees => {
-                const radians = degrees * Math.PI / 180;
-                return { x: 100 + 80 * Math.cos(radians), y: 100 - 80 * Math.sin(radians) };
-            };
-            const A = pointAt(180), B = pointAt(180 + arcAB), C = pointAt(0);
-            const arcABLabel = pointAt(180 + arcAB / 2);
-            const arcBCLabel = pointAt(180 + arcAB + arcBC / 2);
-            const svg = `<svg viewBox="0 0 200 200" class="svg-canvas" width="280" height="280">
-                <circle cx="100" cy="100" r="80" fill="none" stroke="var(--text-main)" stroke-width="2"/>
-                <line x1="${A.x.toFixed(1)}" y1="${A.y.toFixed(1)}" x2="${C.x.toFixed(1)}" y2="${C.y.toFixed(1)}" stroke="var(--text-main)" stroke-width="2"/>
-                <line x1="${A.x.toFixed(1)}" y1="${A.y.toFixed(1)}" x2="${B.x.toFixed(1)}" y2="${B.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="1.8"/>
-                <line x1="${C.x.toFixed(1)}" y1="${C.y.toFixed(1)}" x2="${B.x.toFixed(1)}" y2="${B.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="1.8"/>
-                <path d="M${A.x.toFixed(1)},${A.y.toFixed(1)} A80,80 0 0,1 ${B.x.toFixed(1)},${B.y.toFixed(1)}" fill="none" stroke="var(--emerald-main)" stroke-width="3"/>
-                <path d="M${B.x.toFixed(1)},${B.y.toFixed(1)} A80,80 0 0,1 ${C.x.toFixed(1)},${C.y.toFixed(1)}" fill="none" stroke="var(--warning-main)" stroke-width="3"/>
-                ${svgOutlinedText({ x: A.x - 12, y: A.y - 4, text: 'A', fontSize: 13, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: C.x + 12, y: C.y - 4, text: 'C', fontSize: 13, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: B.x, y: B.y + 15, text: 'B', fontSize: 13, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: arcABLabel.x - 4, y: arcABLabel.y + 15, text: `${arcAB}°`, fill: 'var(--emerald-main)', fontSize: 11, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: arcBCLabel.x + 3, y: arcBCLabel.y + 15, text: '?', fill: 'var(--warning-main)', fontSize: 12, fontWeight: 'bold' })}
-            </svg>`;
-            return {
-                q: `$\\overline{AC}$ is a diameter. Arc $\\widehat{AB} = ${arcAB}^\\circ$. Find arc $\\widehat{BC}$.`,
-                svg: svg, inputType: 'number', a: arcBC, tol: 0.1,
-                svgAltText: `Circle with diameter AC and point B on the semicircle. Arc AB is ${arcAB}° and arc BC is unknown on semicircle ABC.`,
-                solution: `Since $\\overline{AC}$ is a diameter, the semicircle $\\widehat{ABC} = 180^\\circ$. <br> $\\widehat{BC} = 180^\\circ - ${arcAB}^\\circ = ${arcBC}^\\circ$`
-            };
-        } else if (type < 0.75) {
-            // Multi-step: Given one inscribed angle, find an arc, then use arc addition to find another arc
-            // Setup: AC is diameter. ∠DBC = α (inscribed angle intercepting arc DC). Arc AB = β.
-            // Find: arc CD = 2α, arc AD = 180 - arcAB - arcCD (since A→B→C is 180° and D is on the major arc side)
-            const angleDBC = Math.floor(Math.random() * 25) + 15; // 15-39°
-            const arcAB = (Math.floor(Math.random() * 8) + 4) * 6; // 24-72°
-            const arcDC = angleDBC * 2; // inscribed angle theorem
-            const arcBC = 180 - arcAB; // semicircle
-            const arcAD = 360 - arcAB - arcBC - arcDC; // full circle
-            const center = { x: 110, y: 110 }, radius = 85;
-            const pointAt = degrees => {
-                const radians = degrees * Math.PI / 180;
-                return { x: center.x + radius * Math.cos(radians), y: center.y - radius * Math.sin(radians) };
-            };
-            const A = pointAt(180), B = pointAt(180 + arcAB), C = pointAt(0), D = pointAt(arcDC);
-            const intersectionT = (center.y - B.y) / (D.y - B.y);
-            const E = { x: B.x + intersectionT * (D.x - B.x), y: center.y };
-            const arcABLabel = pointAt(180 + arcAB / 2);
-            const toUnit = point => {
-                const length = Math.hypot(point.x - B.x, point.y - B.y);
-                return { x: (point.x - B.x) / length, y: (point.y - B.y) / length };
-            };
-            const unitBD = toUnit(D), unitBC = toUnit(C);
-            const angleLabel = { x: B.x + (unitBD.x + unitBC.x) * 18, y: B.y + (unitBD.y + unitBC.y) * 18 };
-            // Pick which unknown to ask for
-            const subType = Math.random();
-            let question, answer, solution;
-            if (subType < 0.25) {
-                question = `$\\overline{AC}$ is a diameter. $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$. Find arc $\\widehat{CD}$.`;
-                answer = arcDC;
-                solution = `$\\angle DBC$ is an inscribed angle that intercepts arc $\\widehat{CD}$. <br> $\\widehat{CD} = 2 \\times ${angleDBC}^\\circ = ${arcDC}^\\circ$`;
-            } else if (subType < 0.5) {
-                question = `$\\overline{AC}$ is a diameter. $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$. Find arc $\\widehat{AD}$.`;
-                answer = arcAD;
-                solution = `First, $\\widehat{CD} = 2 \\times ${angleDBC}^\\circ = ${arcDC}^\\circ$. Semicircle: $\\widehat{BC} = 180^\\circ - ${arcAB}^\\circ = ${arcBC}^\\circ$. <br> $\\widehat{AD} = 360^\\circ - ${arcAB}^\\circ - ${arcBC}^\\circ - ${arcDC}^\\circ = ${arcAD}^\\circ$`;
-            } else if (subType < 0.75) {
-                // Find ∠AEB where E is intersection — this is (arcAB + arcDC)/2 as a chord-chord angle
-                const angleAEB = (arcAB + arcDC) / 2;
-                question = `$\\overline{AC}$ is a diameter. $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$. Chords $\\overline{AC}$ and $\\overline{BD}$ intersect at $E$. Find $\\angle AEB$.`;
-                answer = angleAEB;
-                solution = `When two chords intersect, the angle equals half the sum of the intercepted arcs. <br> $\\widehat{CD} = 2 \\times ${angleDBC}^\\circ = ${arcDC}^\\circ$. <br> $\\angle AEB = \\frac{\\widehat{AB} + \\widehat{CD}}{2} = \\frac{${arcAB} + ${arcDC}}{2} = ${angleAEB}^\\circ$`;
-            } else {
-                // Find ∠AED (supplementary to ∠AEB)
-                const angleAEB = (arcAB + arcDC) / 2;
-                const angleAED = 180 - angleAEB;
-                question = `$\\overline{AC}$ is a diameter. $\\angle DBC = ${angleDBC}^\\circ$ and arc $\\widehat{AB} = ${arcAB}^\\circ$. Chords $\\overline{AC}$ and $\\overline{BD}$ intersect at $E$. Find $\\angle AED$.`;
-                answer = angleAED;
-                solution = `First, find $\\angle AEB$: $\\widehat{CD} = 2(${angleDBC}) = ${arcDC}^\\circ$, so $\\angle AEB = \\frac{${arcAB} + ${arcDC}}{2} = ${angleAEB}^\\circ$. <br> $\\angle AED$ and $\\angle AEB$ are supplementary: $\\angle AED = 180 - ${angleAEB} = ${angleAED}^\\circ$.`;
-            }
-            const svg = `<svg viewBox="0 0 220 220" class="svg-canvas" width="280" height="280">
-                <circle cx="${center.x}" cy="${center.y}" r="${radius}" fill="none" stroke="var(--text-main)" stroke-width="2"/>
-                <line x1="${A.x.toFixed(1)}" y1="${A.y.toFixed(1)}" x2="${C.x.toFixed(1)}" y2="${C.y.toFixed(1)}" stroke="var(--text-main)" stroke-width="2"/>
-                <line x1="${B.x.toFixed(1)}" y1="${B.y.toFixed(1)}" x2="${D.x.toFixed(1)}" y2="${D.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="1.5" stroke-dasharray="4"/>
-                <line x1="${A.x.toFixed(1)}" y1="${A.y.toFixed(1)}" x2="${B.x.toFixed(1)}" y2="${B.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="1.5"/>
-                <line x1="${C.x.toFixed(1)}" y1="${C.y.toFixed(1)}" x2="${B.x.toFixed(1)}" y2="${B.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="1.5"/>
-                <line x1="${C.x.toFixed(1)}" y1="${C.y.toFixed(1)}" x2="${D.x.toFixed(1)}" y2="${D.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="1.5"/>
-                <circle cx="${E.x.toFixed(1)}" cy="${E.y.toFixed(1)}" r="2.5" fill="var(--text-muted)"/>
-                ${svgOutlinedText({ x: A.x - 13, y: A.y - 3, text: 'A', fontSize: 13, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: C.x + 12, y: C.y - 3, text: 'C', fontSize: 13, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: B.x - 7, y: B.y + 17, text: 'B', fontSize: 13, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: D.x + 9, y: D.y - 8, text: 'D', fontSize: 13, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: E.x + 5, y: E.y - 7, text: 'E', fill: 'var(--text-muted)', fontSize: 12, fontWeight: 'bold' })}
-                ${svgOutlinedText({ x: arcABLabel.x - 8, y: arcABLabel.y + 13, text: `${arcAB}°`, fill: 'var(--primary-main)', fontSize: 11, fontWeight: '600' })}
-                ${svgOutlinedText({ x: angleLabel.x, y: angleLabel.y, text: `${angleDBC}°`, fill: 'var(--text-muted)', fontSize: 12, fontWeight: '600' })}
-            </svg>`;
-            return {
-                q: question,
-                svg: svg,
-                svgAltText: `Circle with diameter AC and non-diameter chord BD intersecting at point E. Given ∠DBC = ${angleDBC}° and arc AB = ${arcAB}°, use inscribed-angle and arc relationships to find the requested value.`,
-                inputType: 'number', a: answer, tol: 0.1, solution: solution
-            };
-        } else {
-            // Supplementary inscribed angles: opposite angles in a cyclic quadrilateral
-            const arcAB = (Math.floor(Math.random() * 10) + 5) * 8; // 40-120
-            const arcBC = (Math.floor(Math.random() * 10) + 5) * 6; // 30-90
-            const arcCD = (Math.floor(Math.random() * 8) + 3) * 8; // 24-80
-            const arcDA = 360 - arcAB - arcBC - arcCD;
-            if (arcDA <= 0 || arcDA >= 180) {
-                // Fallback to simple inscribed angle if bad geometry
-                const arcVal = (Math.floor(Math.random() * 20) + 5) * 4; 
-                const angleVal = arcVal / 2;
-                return {
-                    q: `Find the inscribed angle if the intercepted arc is $${arcVal}^\\circ$.`,
-                    inputType: 'number', a: angleVal, tol: 0.1,
-                    solution: `Inscribed angle $= \\frac{${arcVal}}{2} = ${angleVal}^\\circ$`
-                };
-            }
-            // ∠A inscribes arc BCD = arcBC + arcCD
-            const angleA = (arcBC + arcCD) / 2;
-            // ∠C inscribes arc DAB = arcDA + arcAB 
-            const angleC = (arcDA + arcAB) / 2;
-            const askForAngle = Math.random() > 0.5;
-            return {
-                q: askForAngle
-                    ? `In cyclic quadrilateral $ABCD$: arc $\\widehat{AB} = ${arcAB}^\\circ$, arc $\\widehat{BC} = ${arcBC}^\\circ$, arc $\\widehat{CD} = ${arcCD}^\\circ$. Find $\\angle A$.`
-                    : `In cyclic quadrilateral $ABCD$: arc $\\widehat{AB} = ${arcAB}^\\circ$, arc $\\widehat{BC} = ${arcBC}^\\circ$, arc $\\widehat{CD} = ${arcCD}^\\circ$. Find $\\angle C$.`,
-                inputType: 'number', 
-                a: askForAngle ? angleA : angleC, tol: 0.1,
-                solution: askForAngle
-                    ? `Arc $\\widehat{DA} = 360 - ${arcAB} - ${arcBC} - ${arcCD} = ${arcDA}^\\circ$. <br> $\\angle A$ inscribes $\\widehat{BCD} = ${arcBC} + ${arcCD} = ${arcBC + arcCD}^\\circ$. <br> $\\angle A = \\frac{${arcBC + arcCD}}{2} = ${angleA}^\\circ$`
-                    : `Arc $\\widehat{DA} = 360 - ${arcAB} - ${arcBC} - ${arcCD} = ${arcDA}^\\circ$. <br> $\\angle C$ inscribes $\\widehat{DAB} = ${arcDA} + ${arcAB} = ${arcDA + arcAB}^\\circ$. <br> $\\angle C = \\frac{${arcDA + arcAB}}{2} = ${angleC}^\\circ$`
-            };
-        }
-    }
-},
 {
     id: 'circle_multi', section: 'Circles',
-    label: 'Circle Theorems (Full Problem)',
+    label: 'Intersecting Chords (Additional Test 2 Practice)',
     generate: () => {
         // Mirrors real exam Q15: AC is diameter, BD is NOT.
         // Given: ∠DBC = α, arc AB = β
@@ -2899,7 +2735,7 @@
                         { id: 'q8-arc-r', label: '(b) $r$', answer: answerRadius, tolerance: 0.005 }
                     ],
                     hint: 'Use $s=r\\theta$, with the angle in radians. Convert the degree angle before solving for radius.',
-                    solution: `(a) $s=r\\theta=(${radius})(${thetaRad})=${answerLength.toFixed(2)}$. <br>(b) Convert $${thetaDeg}^\\circ$ to radians, then $r=\\frac{s}{\\theta}=\\frac{${knownArc}}{${(thetaDeg * Math.PI / 180).toFixed(4)}}=${answerRadius.toFixed(2)}$.`
+                    solution: `(a) $s=r\\theta=(${radius})(${thetaRad})=${answerLength.toFixed(2)}$. <br>(b) $\\theta=${thetaDeg}\\pi/180$ rad. Keep that exact value: $r=\\frac{${knownArc}}{${thetaDeg}\\pi/180}\\approx${answerRadius.toFixed(2)}$.`
                 };
             }
         },
@@ -2964,8 +2800,8 @@
                     <line x1="${A.x.toFixed(1)}" y1="${A.y.toFixed(1)}" x2="${B.x.toFixed(1)}" y2="${B.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="2"/>
                     <line x1="${B.x.toFixed(1)}" y1="${B.y.toFixed(1)}" x2="${C.x.toFixed(1)}" y2="${C.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="2"/>
                     <line x1="${C.x.toFixed(1)}" y1="${C.y.toFixed(1)}" x2="${A.x.toFixed(1)}" y2="${A.y.toFixed(1)}" stroke="var(--primary-main)" stroke-width="2"/>
-                    <path d="M${A.x.toFixed(1)},${A.y.toFixed(1)} A${radius},${radius} 0 0,1 ${B.x.toFixed(1)},${B.y.toFixed(1)}" fill="none" stroke="var(--emerald-main)" stroke-width="3"/>
-                    <path d="M${B.x.toFixed(1)},${B.y.toFixed(1)} A${radius},${radius} 0 0,1 ${C.x.toFixed(1)},${C.y.toFixed(1)}" fill="none" stroke="var(--warning-main)" stroke-width="3"/>
+                    <path d="M${A.x.toFixed(1)},${A.y.toFixed(1)} A${radius},${radius} 0 0,0 ${B.x.toFixed(1)},${B.y.toFixed(1)}" fill="none" stroke="var(--emerald-main)" stroke-width="3"/>
+                    <path d="M${B.x.toFixed(1)},${B.y.toFixed(1)} A${radius},${radius} 0 0,0 ${C.x.toFixed(1)},${C.y.toFixed(1)}" fill="none" stroke="var(--warning-main)" stroke-width="3"/>
                     ${svgOutlinedText({ x: A.x - 8, y: A.y - 8, text: 'A', fontSize: 13, fontWeight: 'bold' })}
                     ${svgOutlinedText({ x: B.x + 9, y: B.y, text: 'B', fontSize: 13, fontWeight: 'bold' })}
                     ${svgOutlinedText({ x: C.x, y: C.y + 16, text: 'C', fontSize: 13, fontWeight: 'bold' })}
@@ -3014,20 +2850,20 @@
                 const thetaA = Number((Math.random() * 3.5 + 0.6).toFixed(1));
                 const areaA = 0.5 * radiusA * radiusA * thetaA;
                 const radiusB = Number((Math.random() * 4 + 3).toFixed(1));
-                const thetaB = Number((Math.random() * 4.2 + 0.8).toFixed(1));
-                const areaB = Number((0.5 * radiusB * radiusB * thetaB).toFixed(2));
+                const thetaB = Number((Math.random() * 5.2 + 0.8).toFixed(1));
+                const areaB = Number((0.5 * radiusB * radiusB * thetaB).toFixed(1));
                 const answerTheta = 2 * areaB / (radiusB * radiusB);
                 const answerDegrees = answerTheta * 180 / Math.PI;
                 return {
                     q: `Find each missing quantity. Round to two decimal places. <br>(a) Sector area $A$ when $r=${radiusA}$ and $\\theta=${thetaA}$ radians. <br>(b) Find $\\theta$ in radians and degrees when $A=${areaB}$ and $r=${radiusB}$.`,
                     inputType: 'quiz8_sector_multi',
                     fields: [
-                        { id: 'q8-sector-area', label: '(a) $A$', answer: areaA, tolerance: 0.005 },
+                        { id: 'q8-sector-area', label: '(a) $A$', answer: areaA, tolerance: 0.005, weight: 2 },
                         { id: 'q8-sector-rad', label: '(b) $\\theta$ (radians)', answer: answerTheta, tolerance: 0.005 },
                         { id: 'q8-sector-deg', label: '(b) $\\theta$ (degrees)', answer: answerDegrees, tolerance: 0.005 }
                     ],
-                    hint: 'Use $A=\\frac12r^2\\theta$. For the inverse part, solve for radians first, then convert to degrees.',
-                    solution: `(a) $A=\\frac12(${radiusA})^2(${thetaA})=${areaA.toFixed(2)}$. <br>(b) $\\theta=\\frac{2A}{r^2}=\\frac{2(${areaB})}{(${radiusB})^2}=${answerTheta.toFixed(2)}$ rad, then $${answerTheta.toFixed(2)}\\cdot\\frac{180^\\circ}{\\pi}=${answerDegrees.toFixed(2)}^\\circ$.`
+                    hint: 'Use $A=\\frac12r^2\\theta$. Solve for radians first, then convert the unrounded result to degrees. A sector may exceed 180°.',
+                    solution: `(a) $A=\\frac12(${radiusA})^2(${thetaA})=${areaA.toFixed(2)}$ square units. <br>(b) $\\theta=\\frac{2(${areaB})}{(${radiusB})^2}\\approx${answerTheta.toFixed(2)}$ rad. Use the unrounded fraction: $\\frac{2(${areaB})}{(${radiusB})^2}\\cdot\\frac{180^\\circ}{\\pi}\\approx${answerDegrees.toFixed(2)}^\\circ$.`
                 };
             }
         },
@@ -3053,14 +2889,14 @@
                         { id: 'q8-speed-angular', label: '(a) Angular speed (°/s)', answer: angularDegreesPerSecond, tolerance: 0.005 },
                         { id: 'q8-speed-linear', label: '(b) Linear speed (ft/s)', answer: linearFeetPerSecond, tolerance: 0.005 }
                     ],
-                    hint: 'Convert revolutions per minute to revolutions per second. One revolution is 360° and the circumference is π times the diameter.',
-                    solution: `(a) $${rpm}\\frac{rev}{min}\\cdot\\frac{360^\\circ}{rev}\\cdot\\frac{1 min}{60 s}=${angularDegreesPerSecond}^\\circ/s$. <br>(b) $v=\\frac{${rpm}\\cdot\\pi(${diameter})}{60}=${linearFeetPerSecond.toFixed(2)}$ ft/s.`
+                    hint: 'Convert minutes to seconds. Use 360° per revolution for angular speed. For linear speed, first use radius = diameter/2 and radians per second.',
+                    solution: `(a) $${rpm}\\frac{rev}{min}\\cdot\\frac{360^\\circ}{rev}\\cdot\\frac{1 min}{60 s}=${angularDegreesPerSecond}^\\circ/s$. <br>(b) $r=${diameter}/2=${diameter / 2}$ ft and $\\omega=${rpm}(2\\pi)/60$ rad/s. Then $v=r\\omega=(${diameter / 2})\\frac{${rpm}(2\\pi)}{60}\\approx${linearFeetPerSecond.toFixed(2)}$ ft/s.`
                 };
             }
         },
         {
             id: 'basic_circles', section: 'Circles',
-            label: 'Basic Circles',
+            label: 'Circle Area and Circumference (Additional Practice)',
             generate: () => {
                 const r = Math.floor(Math.random() * 15) + 3;
                 if (Math.random() > 0.6) {
@@ -3143,140 +2979,71 @@
         },
         {
             id: 'circles', section: 'Circles',
-            label: 'Sectors & Arcs (Visual)',
+            label: 'Arcs and Sectors (Visual Quiz 8 Practice)',
             generate: (variant = 'random') => {
-                const rNum = Number((Math.random() * 10 + 2).toFixed(1));
-                const isDeg = Math.random() > 0.5;
-                let thetaStr, thetaSvgLabel, thetaRad;
-
-                if (isDeg) {
-                    const deg = Math.floor(Math.random() * 120) + 30;
-                    thetaStr = `${deg}^\\circ`;
-                    thetaSvgLabel = `${deg}°`;
-                    thetaRad = deg * Math.PI / 180;
-                } else {
-                    const num = Math.floor(Math.random() * 3) + 1;
-                    const den = Math.floor(Math.random() * 4) + 3;
-                    thetaStr = `\\frac{${num}\\pi}{${den}}`;
-                    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
-                    const divisor = gcd(num, den);
-                    const reducedNum = num / divisor;
-                    const reducedDen = den / divisor;
-
-                    if (reducedDen === 1) {
-                        thetaSvgLabel = `${reducedNum === 1 ? '' : reducedNum}π`;
-                    } else {
-                        thetaSvgLabel = `${reducedNum === 1 ? '' : reducedNum}π/${reducedDen}`;
-                    }
-                    thetaRad = (num * Math.PI) / den;
-                }
-
-                const centerX = 60;
-                const centerY = 60;
-                const radius = 50;
-                const startX = centerX + radius;
-                const startY = centerY;
-                const endX = centerX + radius * Math.cos(thetaRad);
-                const endY = centerY - radius * Math.sin(thetaRad);
-                const largeArcFlag = thetaRad > Math.PI ? 1 : 0;
-                const modeOptions = ['arc-length', 'sector-area', 'inverse-arc-length', 'inverse-sector-area'];
-                const mode = modeOptions.includes(variant) ? variant : modeOptions[Math.floor(Math.random() * modeOptions.length)];
-                const radiusLabel = mode === 'inverse-arc-length' ? 'r = ?' : `r = ${rNum}`;
-                const angleLabel = mode === 'inverse-sector-area' ? 'θ = ?' : thetaSvgLabel;
-
-                const svg = `<svg viewBox="0 0 120 120" class="svg-canvas" width="250" height="250">
-                    <path d="M${centerX},${centerY} L${startX},${startY} A${radius},${radius} 0 ${largeArcFlag},0 ${endX.toFixed(2)},${endY.toFixed(2)} Z" fill="var(--accent-glow)" stroke="var(--primary-main)" stroke-width="2"/>
-                    <text x="85" y="75" fill="var(--text-main)" font-size="12">${radiusLabel}</text>
-                    <text x="45" y="45" fill="var(--text-main)" font-size="12">${angleLabel}</text>
+                const modes = ['arc-length', 'sector-area', 'inverse-arc-length', 'inverse-sector-area'];
+                const mode = modes.includes(variant) ? variant : modes[Math.floor(Math.random() * modes.length)];
+                const r = Number((Math.random() * 4 + 3).toFixed(1));
+                const degrees = Math.floor(Math.random() * 100) + 40;
+                const givenArc = Number((Math.random() * 30 + 15).toFixed(1));
+                const baseTheta = Number((Math.random() * 5.2 + 0.8).toFixed(1));
+                const givenArea = Number((0.5 * r * r * baseTheta).toFixed(1));
+                const theta = mode === 'inverse-arc-length' ? degrees * Math.PI / 180
+                    : mode === 'inverse-sector-area' ? 2 * givenArea / (r * r) : baseTheta;
+                const endX = 115 + 78 * Math.cos(theta), endY = 110 - 78 * Math.sin(theta);
+                const radiusLabel = mode === 'inverse-arc-length' ? 'r = ?' : `r = ${r}`;
+                const angleLabel = mode === 'inverse-sector-area' ? 'θ = ?'
+                    : mode === 'inverse-arc-length' ? `${degrees}°` : `${theta} rad`;
+                const svg = `<svg viewBox="0 0 230 220" class="svg-canvas" width="300" height="285">
+                    <circle cx="115" cy="110" r="78" fill="none" stroke="var(--text-muted)" stroke-width="1.5"/>
+                    <path d="M115,110 L193,110 A78,78 0 ${theta > Math.PI ? 1 : 0},0 ${endX.toFixed(2)},${endY.toFixed(2)} Z" fill="var(--accent-glow)" stroke="var(--primary-main)" stroke-width="2"/>
+                    ${svgOutlinedText({ x: 115, y: 18, text: angleLabel, fontSize: 13 })}
+                    ${svgOutlinedText({ x: 115, y: 210, text: radiusLabel, fontSize: 13 })}
                 </svg>`;
-
+                const visual = { svg, svgAltText: `Sector with ${radiusLabel} and ${angleLabel}. Use the given quantities to find the requested unknown.` };
                 if (mode === 'arc-length') {
-                    const answer = rNum * thetaRad;
-                    return {
-                        q: `Find the arc length $s$ given radius $r=${rNum}$ and central angle $\\theta=${thetaStr}$. (Round to 1 decimal place)`,
-                        svg, inputType: 'number', a: answer, tol: 0.05,
-                        svgAltText: `Sector of a circle with radius ${rNum} and central angle ${thetaSvgLabel}. Find arc length s of the highlighted arc.`,
-                        hint: 'Use $s=r\\theta$ with the angle measured in radians.',
-                        solution: `First, ensure $\\theta$ is in radians: ${thetaRad.toFixed(3)}. <br> $s = r\\theta = (${rNum})(${thetaRad.toFixed(3)}) = ${answer.toFixed(1)}$`
-                    };
-                }
-                if (mode === 'sector-area') {
-                    const answer = 0.5 * rNum * rNum * thetaRad;
-                    return {
-                        q: `Find the area $A$ of the sector given radius $r=${rNum}$ and central angle $\\theta=${thetaStr}$. (Round to 1 decimal place)`,
-                        svg, inputType: 'number', a: answer, tol: 0.05,
-                        svgAltText: `Sector of a circle with radius ${rNum} and central angle ${thetaSvgLabel}. Find the shaded sector area A.`,
-                        hint: 'Use $A=\\frac12r^2\\theta$ with the angle measured in radians.',
-                        solution: `First, ensure $\\theta$ is in radians: ${thetaRad.toFixed(3)}. <br> $A = \\frac{1}{2}r^2\\theta = \\frac{1}{2}(${rNum})^2(${thetaRad.toFixed(3)}) = ${answer.toFixed(1)}$`
+                    const answer = r * theta;
+                    return { ...visual,
+                        q: `Find arc length $s$ when $r=${r}$ and $\\theta=${theta}$ radians. Round to two decimal places.`,
+                        inputType: 'number', a: answer, tol: 0.005,
+                        hint: 'Use $s=r\\theta$; the angle is already in radians.',
+                        solution: `$s=(${r})(${theta})=${answer.toFixed(2)}$ linear units.`
                     };
                 }
                 if (mode === 'inverse-arc-length') {
-                    const arcLength = Number((Math.random() * 70 + 10).toFixed(1));
-                    const answer = arcLength / thetaRad;
-                    return {
-                        q: `Find the radius $r$ when the arc length is $s=${arcLength}$ and the central angle is $\\theta=${thetaStr}$. Round to one decimal place.`,
-                        svg, inputType: 'number', a: answer, tol: 0.05,
-                        svgAltText: `Sector with central angle ${thetaSvgLabel}, marked radius unknown, and given arc length ${arcLength}. Find the radius.`,
-                        hint: 'Convert the angle to radians, then rearrange $s=r\\theta$ to isolate the radius.',
-                        solution: `Convert the angle to radians: $\\theta=${thetaRad.toFixed(3)}$. Then $r=\\frac{s}{\\theta}=\\frac{${arcLength}}{${thetaRad.toFixed(3)}}=${answer.toFixed(1)}$.`
+                    const answer = givenArc / theta;
+                    return { ...visual,
+                        q: `Find radius $r$ when arc length $s=${givenArc}$ and $\\theta=${degrees}^\\circ$. Round to two decimal places.`,
+                        inputType: 'number', a: answer, tol: 0.005,
+                        hint: 'Convert degrees to radians, then solve $r=s/\\theta$.',
+                        solution: `$\\theta=${degrees}\\pi/180$ rad. Keep this exact value: $r=\\frac{${givenArc}}{${degrees}\\pi/180}=${answer.toFixed(2)}$ linear units.`
                     };
                 }
-                const givenArea = Number((0.5 * rNum * rNum * thetaRad).toFixed(2));
-                const answer = 2 * givenArea / (rNum * rNum);
-                return {
-                    q: `A sector has area $A=${givenArea}$ and radius $r=${rNum}$. Find its central angle $\\theta$ in radians. Round to two decimal places.`,
-                    svg, inputType: 'number', a: answer, tol: 0.005,
-                    svgAltText: `Sector with radius ${rNum}, unknown central angle, and given area ${givenArea}. Find the angle in radians.`,
-                    hint: 'Rearrange $A=\\frac12r^2\\theta$ to isolate $\\theta$.',
-                    solution: `$\\theta=\\frac{2A}{r^2}=\\frac{2(${givenArea})}{(${rNum})^2}=${answer.toFixed(2)}$ radians.`
+                if (mode === 'sector-area') {
+                    const answer = 0.5 * r * r * theta;
+                    return { ...visual,
+                        q: `Find sector area $A$ when $r=${r}$ and $\\theta=${theta}$ radians. Round to two decimal places.`,
+                        inputType: 'number', a: answer, tol: 0.005,
+                        hint: 'Use $A=\\frac12r^2\\theta$; square the radius.',
+                        solution: `$A=\\frac12(${r})^2(${theta})=${answer.toFixed(2)}$ square units.`
+                    };
+                }
+                const answerDegrees = theta * 180 / Math.PI;
+                return { ...visual,
+                    q: `A sector has area $A=${givenArea}$ square units and radius $r=${r}$ units. Find $\\theta$ in radians and degrees. Round both answers to two decimal places.`,
+                    fields: [
+                        { id: 'sector-radians', label: '$\\theta$ (radians)', answer: theta, tolerance: 0.005 },
+                        { id: 'sector-degrees', label: '$\\theta$ (degrees)', answer: answerDegrees, tolerance: 0.005 }
+                    ],
+                    hint: 'Find $\\theta=2A/r^2$ in radians, then multiply the unrounded result by $180/\\pi$. A sector may exceed 180°.',
+                    solution: `$\\theta=\\frac{2(${givenArea})}{(${r})^2}\\approx${theta.toFixed(2)}$ rad. Using the unrounded fraction, $\\theta=\\frac{2(${givenArea})}{(${r})^2}\\frac{180}{\\pi}\\approx${answerDegrees.toFixed(2)}^\\circ$.`
                 };
             }
         },
         {
             id: 'speed', section: 'Circles',
-            label: 'Angular & Linear Speed',
-            generate: (variant = 'random') => {
-                const r = Math.floor(Math.random() * 15) + 5;
-                const rpm = Math.floor(Math.random() * 50) + 10;
-                const modes = ['radians-per-minute', 'inches-per-minute', 'degrees-per-second', 'feet-per-second'];
-                const mode = modes.includes(variant) ? variant : modes[Math.floor(Math.random() * modes.length)];
-
-                if (mode === 'radians-per-minute') {
-                    const ans = 2 * Math.PI * rpm;
-                    return {
-                        q: `A wheel is rotating at $${rpm}$ revolutions per minute (rpm). Find the angular speed $\\omega$ in radians per minute. (Round to 1 decimal place)`,
-                        inputType: 'number', a: ans, tol: 0.05,
-                        hint: 'Multiply revolutions per minute by $2\\pi$ radians per revolution.',
-                        solution: `One revolution is $2\\pi$ radians. $\\omega = ${rpm} \\text{ rev/min} \\cdot 2\\pi \\text{ rad/rev} = ${ans.toFixed(1)}$`
-                    };
-                }
-                if (mode === 'inches-per-minute') {
-                    const ans = 2 * Math.PI * rpm * r;
-                    return {
-                        q: `A wheel with radius $r = ${r}$ inches is rotating at $${rpm}$ rpm. Find the linear speed $v$ in inches per minute. (Round to 1 decimal place)`,
-                        inputType: 'number', a: ans, tol: 0.05,
-                        hint: 'Find angular speed in radians per minute, then use $v=r\\omega$.',
-                        solution: `First find angular speed $\\omega = ${rpm} \\cdot 2\\pi$. Then $v = r\\omega = ${r}(${rpm} \\cdot 2\\pi) = ${ans.toFixed(1)}$`
-                    };
-                }
-                if (mode === 'degrees-per-second') {
-                    const answer = rpm * 6;
-                    return {
-                        q: `A wheel rotates at ${rpm} revolutions per minute. Find its angular speed in degrees per second.`,
-                        inputType: 'number', a: answer, tol: 0.001,
-                        hint: 'Convert revolutions to degrees and minutes to seconds.',
-                        solution: `$${rpm}\\frac{rev}{min}\\cdot\\frac{360^\\circ}{rev}\\cdot\\frac{1 min}{60 s}=${answer}^\\circ/s$.`
-                    };
-                }
-                const diameter = Math.floor(Math.random() * 9) + 6;
-                const answer = Math.PI * diameter * rpm / 60;
-                return {
-                    q: `A merry-go-round with diameter ${diameter} feet rotates at ${rpm} rpm. Find the linear speed at its outer edge in feet per second. Round to two decimal places.`,
-                    inputType: 'number', a: answer, tol: 0.005,
-                    hint: 'Multiply the circumference by revolutions per minute, then divide by 60 to convert to feet per second.',
-                    solution: `$v=\\frac{${rpm}\\cdot\\pi(${diameter})}{60}=${answer.toFixed(2)}$ ft/s.`
-                };
-            }
+            label: 'Angular and Linear Speed (Quiz 8 Units)',
+            generate: () => generators.find(gen => gen.id === 'quiz8_speed_multi').generate()
         },
         {
             id: 'logexp', section: 'Section 4.3',
@@ -3415,7 +3182,7 @@
         exp_table_graph: ['exponential-models', 'horizontal-asymptote'],
         rad_deg: ['degree-radian-conversion'], std_pos_angle: ['reference-angle'],
         dms: ['decimal-degrees-to-dms'], dms_to_dec: ['dms-to-decimal-degrees'],
-        inscribed_angle: ['circle-angle-theorems', 'arc-measure'],
+        inscribed_angle: ['central-angle', 'inscribed-angle', 'intercepted-arc', 'arc-addition'],
         circle_multi: ['intersecting-chords', 'circle-angle-theorems', 'arc-measure'],
         similar_triangles: ['similar-triangles'], parallel_angles: ['parallel-line-angles'],
         quiz7_similar_multi: ['similar-triangles', 'corresponding-angles'],
@@ -3423,7 +3190,7 @@
         herons: ['herons-formula'], piecewise_rect: ['composite-area'],
         logexp_conv: ['log-exponential-conversion'], basic_areas: ['area-formulas'],
         basic_circles: ['circle-area-circumference'], transversals: ['parallel-segment-proportions'],
-        circles: ['arc-length', 'sector-area'], speed: ['angular-linear-speed'],
+        circles: ['arc-length', 'inverse-arc-length', 'sector-area', 'inverse-sector-area'], speed: ['angular-speed-degrees-per-second', 'linear-speed-feet-per-second'],
         logexp: ['logarithmic-equations', 'change-of-base'], eval_log: ['evaluate-logarithms'],
         log_props: ['logarithm-properties'], right_triangle_area: ['pythagorean-theorem', 'triangle-area'],
         quiz8_arc_multi: ['arc-length', 'inverse-arc-length'],
@@ -3456,6 +3223,8 @@
     let currentQuiz = null;
     let currentQuestion = null;
     let currentRetries = 0;
+    let currentPracticeVariant;
+    let practiceFocus = 'quiz8';
 
     // --- VIDEO WATCH TRACKING ---
     function renderVideoState() {
@@ -3697,7 +3466,7 @@
                     <div class="check-box">${item.done ? '<i data-lucide="check" style="width:16px; color:var(--bg-surface);"></i>' : ''}</div>
                     <span style="flex: 1;">${item.label}</span>
                     ${item.videoUrl ? `<a href="${item.videoUrl}" target="_blank" rel="noopener noreferrer" class="practice-link" onclick="event.stopPropagation()" title="Watch Video" aria-label="Watch related video"><i data-lucide="play" style="width:18px; height:18px;"></i></a>` : ''}
-                    ${item.practiceId ? `<button type="button" class="practice-link" onclick="goToPractice('${item.practiceId}', event)" title="Jump to Interactive Practice" aria-label="Jump to interactive practice"><i data-lucide="pen-tool" style="width:18px; height:18px;"></i></button>` : ''}
+                    ${item.practiceId ? `<button type="button" class="practice-link" onclick="goToPractice('${item.practiceId}', event, ${item.practiceVariant ? `'${item.practiceVariant}'` : 'undefined'})" title="Jump to Interactive Practice" aria-label="Jump to interactive practice"><i data-lucide="pen-tool" style="width:18px; height:18px;"></i></button>` : ''}
                 `;
                 div.addEventListener('click', (event) => {
                     if (event.target.closest('.practice-link')) return;
@@ -3725,38 +3494,72 @@
     }
 
     // Function to jump to a specific practice generator
-    window.goToPractice = function(id, event) {
+    window.goToPractice = function(id, event, variant) {
         event.stopPropagation(); // Prevents the checklist item from toggling when you click the pen
         
         // Switch to the Practice Tab
         showTab('practice');
+        if (!getPracticeGroups().some(group => group.generators.some(gen => gen.id === id))) {
+            setPracticeFocus('all');
+        }
         
         // Select the specific quiz button
-        document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.quiz-btn[data-id]').forEach(b => b.classList.remove('active'));
         const targetBtn = document.querySelector(`.quiz-btn[data-id="${id}"]`);
         if (targetBtn) targetBtn.classList.add('active');
         
         // Start the quiz and scroll to the top
-        startQuiz(id);
+        startQuiz(id, variant);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    function getPracticeGroups(focus = practiceFocus) {
+        if (focus === 'quiz8') {
+            return [{ label: 'Quiz 8 skills · practice in quiz order', generators: QUIZ_CONFIG[8].blueprint.map(entry => generators.find(gen => gen.id === entry.id)) }];
+        }
+        return PRACTICE_SECTIONS.map(section => ({ label: section.label, generators: generators.filter(gen => gen.sectionKey === section.key) }))
+            .filter(group => group.generators.length);
+    }
+
+    function setPracticeFocus(focus) {
+        practiceFocus = focus === 'all' ? 'all' : 'quiz8';
+        currentQuiz = null;
+        currentQuestion = null;
+        document.getElementById('quiz-active-area').style.display = 'none';
+        renderQuizCategories();
+    }
 
     function renderQuizCategories() {
         const container = document.getElementById('quiz-categories');
         container.innerHTML = '';
-        PRACTICE_SECTIONS.filter(section => generators.some(gen => gen.sectionKey === section.key)).forEach(section => {
+        const focusControls = document.createElement('div');
+        focusControls.setAttribute('role', 'group');
+        focusControls.setAttribute('aria-label', 'Practice topic selection');
+        focusControls.style.cssText = 'width: 100%; margin-bottom: 1rem;';
+        for (const [focus, label] of [['quiz8', 'Quiz 8 preparation'], ['all', 'All Test 2 topics']]) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = `quiz-btn${practiceFocus === focus ? ' active' : ''}`;
+            button.setAttribute('aria-pressed', String(practiceFocus === focus));
+            button.textContent = label;
+            button.addEventListener('click', () => setPracticeFocus(focus));
+            focusControls.appendChild(button);
+        }
+        container.appendChild(focusControls);
+        getPracticeGroups().forEach(section => {
             const group = document.createElement('div');
             group.style.cssText = 'width: 100%; margin-bottom: 0.5rem;';
             group.innerHTML = `<div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">${section.label}</div>`;
             const btnRow = document.createElement('div');
             btnRow.style.cssText = 'display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;';
-            generators.filter(gen => gen.sectionKey === section.key).forEach(gen => {
+            section.generators.forEach(gen => {
                 const btn = document.createElement('button');
+                btn.type = 'button';
                 btn.className = 'quiz-btn';
                 btn.textContent = gen.label;
                 btn.dataset.id = gen.id;
                 btn.addEventListener('click', () => {
-                    document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.quiz-btn[data-id]').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     startQuiz(gen.id);
                 });
@@ -3847,8 +3650,9 @@
         });
     }
 
-    function startQuiz(id) {
+    function startQuiz(id, variant) {
         currentQuiz = generators.find(g => g.id === id);
+        currentPracticeVariant = variant;
         document.getElementById('quiz-active-area').style.display = 'block';
         loadQuestion();
     }
@@ -3876,7 +3680,7 @@
         } else {
             if (!currentQuiz) return;
             currentRetries = 0;
-            currentQuestion = currentQuiz.generate();
+            currentQuestion = currentQuiz.generate(currentPracticeVariant);
         }
         
         document.getElementById('question-display').innerHTML = currentQuestion.q;
@@ -4071,7 +3875,7 @@
                 const minimumOk = field.min == null || userValue >= field.min;
                 const maximumOk = field.max == null || userValue <= field.max;
                 const tolerance = field.tolerance ?? field.tol ?? currentQuestion.tol ?? 0.0000001;
-                const correct = integerOk && minimumOk && maximumOk && Math.abs(userValue - field.answer) <= tolerance;
+                const correct = integerOk && minimumOk && maximumOk && Math.abs(userValue - field.answer) <= tolerance + 1e-10;
                 if (input) input.classList.add(correct ? 'inp-correct' : 'inp-wrong');
                 evaluatedParts.push({ field, correct, integerOk, minimumOk, maximumOk });
             }
@@ -4082,8 +3886,9 @@
             }
             isCorrect = partResults.correct === partResults.total;
             const questionPoints = currentQuestion.points ?? 1;
+            const totalWeight = evaluatedParts.reduce((sum, part) => sum + (part.field.weight ?? 1), 0);
             earnedPoints = evaluatedParts.reduce((sum, part) => {
-                const partPoints = part.field.points == null ? questionPoints / evaluatedParts.length : part.field.points;
+                const partPoints = part.field.points == null ? questionPoints * (part.field.weight ?? 1) / totalWeight : part.field.points;
                 return sum + (part.correct ? partPoints : 0);
             }, 0);
         } else if (currentQuestion.inputType === 'dms') {
@@ -4204,7 +4009,7 @@
                 showInvalidNumberFeedback();
                 return;
             }
-            isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol;
+            isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol + 1e-10;
         } else {
             const input = document.getElementById('answer-input');
             const userVal = parseStrictNumber(input.value);
@@ -4212,7 +4017,7 @@
                 showInvalidNumberFeedback();
                 return;
             }
-            isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol;
+            isCorrect = Math.abs(userVal - currentQuestion.a) <= currentQuestion.tol + 1e-10;
         }
 
         if (!Array.isArray(currentQuestion.fields)) earnedPoints = isCorrect ? (currentQuestion.points ?? 1) : 0;
@@ -4451,7 +4256,7 @@
                 { id: 'right_triangle_area', points: 10 },
                 { id: 'herons', points: 10 },
                 { id: 'dms', points: 10 },
-                { id: 'dms_to_dec', points: 10 }
+                { id: 'dms_to_dec', variant: 'integer-seconds', points: 10 }
             ]
         },
         8: {
