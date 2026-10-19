@@ -65,6 +65,25 @@ def calculations() -> dict[str, list[str]]:
     close(5*1852/1000,9.26,0.000001)
     close(6*1852/1000,11.112,0.000001)
     close((8+14)*5/2,55,0.000001)
+    # October 19 readiness lesson: independent calculations from the givens.
+    close(124/2,62,0.000001)
+    close(360-78-2*66,150,0.000001)
+    close((360-78-2*66)/2,75,0.000001)
+    close(101+18/60+24.7/3600,101.3068611111,0.0000001)
+    close(112+36/60+18.5/3600,112.6051388889,0.0000001)
+    close(math.radians(137.6),2.401572,0.000001)
+    assert round((38.726145*3600)%60)==34
+    assert round((58.417862*3600)%60)==4
+    close(6*1.4,8.4,0.000001)
+    close(.5*6**2*1.4,25.2,0.000001)
+    close(24/math.radians(80),54/pi,0.000001)
+    close(21/math.radians(105),36/pi,0.000001)
+    close(2*35.4/4**2,4.425,0.000001)
+    close(math.degrees(4.425),253.533824345,0.00001)
+    close(.5*20**2*math.radians(150),500*pi/3,0.000001)
+    close(24*360/60,144,0.000001)
+    close(6*24*2*pi/60,24*pi/5,0.000001)
+    close(4*30*2*pi/60,4*pi,0.000001)
 
     return {
         "u2a-graph": [
@@ -117,6 +136,10 @@ def calculations() -> dict[str, list[str]]:
         "u2d-radians": ["Verified $120^\\circ=2\\pi/3$, $s=8\\pi$, sector area $48\\pi$, and practice arc $2\\pi$."],
         "u2d-velocity": ["Verified $v=12$ ft/s and $d=120$ ft in the model; practice rim speed is 2.8 m/s."],
         "u2d-solids": ["Verified hollow-cylinder material volume $70\\pi$; practice cylinder volume $90\\pi$ and surface area $78\\pi$."],
+        "u2d-ready-angles": ["Verified central/inscribed result 62°, triangle angle 75°, and remaining arc 150° from arc AB 78° and angle ABC 66°."],
+        "u2d-ready-conversions": ["Verified both DMS directions, nearest-second rounding, four-decimal degree answers, and 137.6° = 2.402 rad to three decimals."],
+        "u2d-ready-arcs": ["Verified arc 8.4, sector 25.2, inverse radii 54/π and 36/π, inverse angle 4.425 rad ≈ 253.53°, and corrected sprinkler area 500π/3."],
+        "u2d-ready-speed": ["Verified diameter-to-radius conversion, 144°/s and 24π/5 ft/s in the model, plus 180°/s and 4π ft/s in practice."],
         "u2e-algebra": [
             f"Recomputed quarterly balance $A={2500 * (1 + 0.052 / 4) ** 24:.2f}$ and monthly practice balance $A={4000 * (1 + 0.06 / 12) ** 120:.2f}$.",
         ],
@@ -164,6 +187,10 @@ REQUIRED_FRAGMENTS = {
     "u2d-radians": ["8\\\\pi", "48\\\\pi", "2\\\\pi"],
     "u2d-velocity": ["12$ ft/s", "120$ ft", "2.8$ m/s"],
     "u2d-solids": ["70\\\\pi", "90\\\\pi", "78\\\\pi"],
+    "u2d-ready-angles": ["62^\\\\circ", "150^\\\\circ", "75^\\\\circ"],
+    "u2d-ready-conversions": ["38°43′34″", "101.3069", "2.402", "58°25′04″", "112.6051"],
+    "u2d-ready-arcs": ["8.4", "25.2", "54/\\\\pi", "36/\\\\pi", "4.425", "253.53", "523.60"],
+    "u2d-ready-speed": ["144^\\\\circ", "24\\\\pi/5", "180^\\\\circ", "4\\\\pi"],
     "u2e-algebra": ["3408.53", "7277.59"],
     "u2e-angle": ["150^\\\\circ", "6\\\\pi", "8\\\\pi/3"],
     "u2e-geometry": ["91$ square units", "$x=10$", "2$ m/s"],
@@ -189,6 +216,11 @@ REQUIRED_FRAGMENTS = {
 
 
 ASSET_EVIDENCE = {
+    "assets/unit2d/central-inscribed.svg": "The 124° central angle and an inscribed angle intercept the same minor arc; B lies outside that arc.",
+    "assets/unit2d/inscribed-triangle.svg": "Angular positions A198°, B276°, C66° give arc AB78°, arc BC150°, and inscribed angle ABC66°.",
+    "assets/unit2d/arc-sector.svg": "Radius6 and angle1.4rad match the highlighted sector geometry.",
+    "assets/unit2d/large-sector.svg": "Radius4 and area35.4 give a major sector of 4.425rad, below a full rotation.",
+    "assets/unit2d/rotating-wheel.svg": "The labeled12ft line spans a full diameter, with24rpm given separately.",
     "assets/math130unit2a/slide-05-1.png": "Graph labels $f(x)=2^x$, $(0,1)$, and $y=0$ consistently with the model.",
     "assets/math130unit2b/corrected/log-transform.svg": "Graph labels the transformed logarithm, asymptote $x=-1$, and both intercepts.",
     "assets/math130unit3c/corrected/s_skill2_ladder.png": "Diagram labels a 20 ft hypotenuse, $65^\\circ$ ground angle, right angle, and unknown height.",

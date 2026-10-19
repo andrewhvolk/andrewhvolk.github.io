@@ -235,7 +235,10 @@ def main() -> int:
             else:
                 print(f"PASS {chooser}")
 
-    actual_pages = {path.name for path in ROOT.glob("Math130Unit*.html")}
+    # Unit 1 is an older HTML library, outside the canonical Unit 2/3 manifests.
+    # Dated session filenames are allowed by the manifest contract.
+    actual_pages = {path.name for path in ROOT.glob("Math130Unit[23]*.html")}
+    actual_pages.update(name for name in expected_pages if (ROOT / name).exists())
     if actual_pages != expected_pages:
         failures += 1
         print("FAIL generated page set")

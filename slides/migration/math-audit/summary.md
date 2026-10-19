@@ -65,6 +65,18 @@ Computations were independently recalculated with Python’s standard math libra
 ## u2d-radians
 - Verified $120^\circ=2\pi/3$, $s=8\pi$, sector area $48\pi$, and practice arc $2\pi$.
 
+## u2d-ready-angles
+- Verified central/inscribed result 62°, triangle angle 75°, and remaining arc 150° from arc AB 78° and angle ABC 66°.
+
+## u2d-ready-arcs
+- Verified arc 8.4, sector 25.2, inverse radii 54/π and 36/π, inverse angle 4.425 rad ≈ 253.53°, and corrected sprinkler area 500π/3.
+
+## u2d-ready-conversions
+- Verified both DMS directions, nearest-second rounding, four-decimal degree answers, and 137.6° = 2.402 rad to three decimals.
+
+## u2d-ready-speed
+- Verified diameter-to-radius conversion, 144°/s and 24π/5 ft/s in the model, plus 180°/s and 4π ft/s in practice.
+
 ## u2d-solids
 - Verified hollow-cylinder material volume $70\pi$; practice cylinder volume $90\pi$ and surface area $78\pi$.
 
@@ -139,6 +151,11 @@ Computations were independently recalculated with Python’s standard math libra
 
 ## Diagram Evidence
 
+- `assets/unit2d/central-inscribed.svg`: The 124° central angle and an inscribed angle intercept the same minor arc; B lies outside that arc. SHA-256 `c7e71bbbdec16189fdd32eecd4b320a2cc849a9a0b302e0f980402ce6a7ca348`
+- `assets/unit2d/inscribed-triangle.svg`: Angular positions A198°, B276°, C66° give arc AB78°, arc BC150°, and inscribed angle ABC66°. SHA-256 `bbfaad5e4fed5d60b843796d50bbb19a388be00059d5e4c9ef1765f8b68df16a`
+- `assets/unit2d/arc-sector.svg`: Radius6 and angle1.4rad match the highlighted sector geometry. SHA-256 `47c54661ceca041eed52a0dadc02136a9215c7126d51130fce60d9941e743fc7`
+- `assets/unit2d/large-sector.svg`: Radius4 and area35.4 give a major sector of 4.425rad, below a full rotation. SHA-256 `61dea1ae67fb913bab9a530156059783ecd010c210f62f43900042fd94b6ef7a`
+- `assets/unit2d/rotating-wheel.svg`: The labeled12ft line spans a full diameter, with24rpm given separately. SHA-256 `736c2d00e36fab9167f3f622a2fe0205c4fc31688936171efff448928ad3dbfc`
 - `assets/math130unit2a/slide-05-1.png`: Graph labels $f(x)=2^x$, $(0,1)$, and $y=0$ consistently with the model. SHA-256 `20bc19d8582026c6cc980f02647624380ac23c3ee48310605a1c9c4055a68b35`
 - `assets/math130unit2b/corrected/log-transform.svg`: Graph labels the transformed logarithm, asymptote $x=-1$, and both intercepts. SHA-256 `015018fa8a5bde5ee842d75ddf0b8c8064a567019a9a973e11ead0b97b38ee2a`
 - `assets/math130unit3c/corrected/s_skill2_ladder.png`: Diagram labels a 20 ft hypotenuse, $65^\circ$ ground angle, right angle, and unknown height. SHA-256 `304d790b8ee257a5eede54521383c96b5dc63e9201e377d3bc29dbc3e1d6f003`

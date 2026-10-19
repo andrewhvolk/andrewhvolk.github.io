@@ -7,7 +7,8 @@
     "section": "Unit 2",
     "source": "Math130Unit2D.pptx",
     "canonical": true,
-    "chooser_output": "Math130Unit2D.html"
+    "chooser_output": "Math130Unit2D.html",
+    "featured_session": "unit2d-quiz8-20261019"
   },
   "objectives": [
     {
@@ -33,6 +34,22 @@
     {
       "id": "u2d-solids",
       "text": "select volume and surface-area formulas for solids"
+    },
+    {
+      "id": "u2d-ready-angles",
+      "text": "Read circle diagrams and connect central angles, inscribed angles, and arcs"
+    },
+    {
+      "id": "u2d-ready-conversions",
+      "text": "Convert DMS, decimal degrees, and radians with the requested precision"
+    },
+    {
+      "id": "u2d-ready-arcs",
+      "text": "Find arc length and sector area, then solve backwards for radius or angle"
+    },
+    {
+      "id": "u2d-ready-speed",
+      "text": "Convert rpm to angular and linear speed using the radius"
     }
   ],
   "sessions": [
@@ -1051,6 +1068,694 @@
           ]
         }
       ]
+    },
+    {
+      "id": "unit2d-quiz8-20261019",
+      "title": "Quiz 8 Preparation · Monday, October 19",
+      "subtitle": "A 55-minute lesson with diagram practice, conversions, inverse arc and sector problems, and rotational speed. Solids follow Quiz 8.",
+      "output": "math130-quiz8-readiness-2026-10-19.html",
+      "duration_minutes": 55,
+      "min_slides": 31,
+      "max_slides": 31,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 50,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 5,
+        "stopping_points": [
+          {
+            "after_block": "quiz8-angles-retrieve",
+            "planned_elapsed": 8.0,
+            "action": "Protect independent practice. Shorten discussion or skip the optional extension if behind; do not start solids."
+          },
+          {
+            "after_block": "quiz8-conversions-retrieve",
+            "planned_elapsed": 18.0,
+            "action": "Protect independent practice. Shorten discussion or skip the optional extension if behind; do not start solids."
+          },
+          {
+            "after_block": "quiz8-arcs-retrieve",
+            "planned_elapsed": 35.0,
+            "action": "Protect independent practice. Shorten discussion or skip the optional extension if behind; do not start solids."
+          },
+          {
+            "after_block": "quiz8-speed-retrieve",
+            "planned_elapsed": 47.0,
+            "action": "Protect independent practice. Shorten discussion or skip the optional extension if behind; do not start solids."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "quiz8-title",
+          "title": "Circles: Quiz 8 preparation",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Monday, October 19, 2026 · Angles, conversions, arcs, sectors, and speed"
+          ]
+        },
+        {
+          "id": "quiz8-roadmap",
+          "title": "Today’s practice sequence",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Read the circle diagram",
+            "Convert the angle and keep precision",
+            "Find the unknown in an arc or sector",
+            "Convert rpm and use the radius"
+          ]
+        },
+        {
+          "id": "quiz8-angles-predict",
+          "title": "Where is the vertex?",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-ready-angles"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Locate O and B. Which angle is central and which is inscribed?"
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/central-inscribed.svg",
+              "alt": "Circle centered at O. Central angle AOD is 124 degrees. Point B lies outside the minor arc AD, with chords BA and BD. Find angle ABD and minor arc AD.",
+              "caption": "O is the center. Both angles intercept arc AD."
+            }
+          ],
+          "visual_layout": "split"
+        },
+        {
+          "id": "quiz8-angles-explain",
+          "title": "Angles and intercepted arcs",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u2d-ready-angles"
+          ],
+          "minutes": 1,
+          "source_slides": [],
+          "content": [
+            "A central angle equals the measure of its intercepted arc.",
+            "An inscribed angle is half its intercepted arc.",
+            "All arcs around a circle total 360°."
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/central-inscribed.svg",
+              "alt": "Circle centered at O. Central angle AOD is 124 degrees. Point B lies outside the minor arc AD, with chords BA and BD. Find angle ABD and minor arc AD.",
+              "caption": "O is the center. Both angles intercept arc AD."
+            }
+          ],
+          "visual_layout": "split"
+        },
+        {
+          "id": "quiz8-angles-model",
+          "title": "Central and inscribed angles",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-ready-angles"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "Find angle ABD and minor arc AD."
+          ],
+          "steps": [
+            "The central angle AOD is 124°, so minor arc AD is 124°.",
+            "Angle ABD intercepts that same arc: $124^\\circ/2=62^\\circ$.",
+            "The vertex location determines the rule."
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/central-inscribed.svg",
+              "alt": "Circle centered at O. Central angle AOD is 124 degrees. Point B lies outside the minor arc AD, with chords BA and BD. Find angle ABD and minor arc AD.",
+              "caption": "O is the center. Both angles intercept arc AD."
+            }
+          ],
+          "visual_layout": "split",
+          "audit_checks": [
+            "u2d-ready-angles"
+          ]
+        },
+        {
+          "id": "quiz8-angles-practice",
+          "title": "Triangle and arc practice",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-ready-angles"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "Find angle BAC and minor arc BC.",
+            "Show the intermediate arc or triangle-angle calculation."
+          ],
+          "answer": [
+            "Arc AC is $2(66^\\circ)=132^\\circ$.",
+            "Arc BC is $360^\\circ-78^\\circ-132^\\circ=150^\\circ$.",
+            "Angle BAC is $150^\\circ/2=75^\\circ$."
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/inscribed-triangle.svg",
+              "alt": "Triangle ABC inscribed in a circle. Minor arc AB is 78 degrees and angle ABC is 66 degrees. Find angle BAC and minor arc BC.",
+              "caption": "Given: arc AB = 78° and angle ABC = 66°."
+            }
+          ],
+          "visual_layout": "split",
+          "instructor_notes": [
+            "Packet page 1. Collect an individual setup before discussion."
+          ]
+        },
+        {
+          "id": "quiz8-angles-feedback",
+          "title": "Two routes to the same angle",
+          "phase": "feedback",
+          "component": "comparison",
+          "objectives": [
+            "u2d-ready-angles"
+          ],
+          "minutes": 1,
+          "source_slides": [],
+          "content": [
+            "Arc route: double the inscribed angle, subtract known arcs from 360°, then halve the remaining arc.",
+            "Triangle route: angle ACB is 39°, so angle BAC is 180° − 66° − 39° = 75°."
+          ],
+          "instructor_notes": [
+            "Annotate the same figure; do not introduce intersecting-chord arithmetic today."
+          ]
+        },
+        {
+          "id": "quiz8-angles-retrieve",
+          "title": "Circle-angle checkpoint",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-ready-angles"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Name the vertex and intercepted arc before calculating.",
+            "Central angle = arc. Inscribed angle = half the arc."
+          ],
+          "pacing_checkpoint": "Use the elapsed-time target to protect independent practice."
+        },
+        {
+          "id": "quiz8-conversions-predict",
+          "title": "Which conversion is needed?",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-ready-conversions"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "What changes when an angle is written as DMS, decimal degrees, or radians?",
+            "Which form is required in $s=r\\theta$?"
+          ]
+        },
+        {
+          "id": "quiz8-conversions-explain",
+          "title": "Angle conversion rules",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2d-ready-conversions"
+          ],
+          "minutes": 1,
+          "source_slides": [],
+          "content": [
+            "$1^\\circ=60\\prime$ and $1\\prime=60\\prime\\prime$.",
+            "DMS to decimal: $D+M/60+S/3600$.",
+            "Degrees to radians: multiply by $\\pi/180$.",
+            "Radians to degrees: multiply by $180/\\pi$."
+          ]
+        },
+        {
+          "id": "quiz8-dms-model",
+          "title": "Decimal degrees to DMS",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-ready-conversions"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "Convert 38.726145° to DMS, to the nearest second."
+          ],
+          "steps": [
+            "Degrees: 38°. Multiply the decimal part by 60: $0.726145(60)=43.5687$.",
+            "Minutes: 43′. Multiply the remaining decimal by 60: $0.5687(60)=34.122$.",
+            "Round once, at the end: 38°43′34″."
+          ],
+          "instructor_notes": [
+            "Keep all calculator digits until seconds. If rounding produces 60 seconds, carry one minute."
+          ],
+          "audit_checks": [
+            "u2d-ready-conversions"
+          ]
+        },
+        {
+          "id": "quiz8-decimal-model",
+          "title": "DMS to decimal degrees",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-ready-conversions"
+          ],
+          "minutes": 1.5,
+          "source_slides": [],
+          "content": [
+            "Convert 101°18′24.7″ to decimal degrees, to four decimal places."
+          ],
+          "steps": [
+            "$101+18/60+24.7/3600=101.3068611\\ldots$",
+            "Rounded to four decimal places: 101.3069°."
+          ]
+        },
+        {
+          "id": "quiz8-radians-model",
+          "title": "Decimal degrees to radians",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-ready-conversions"
+          ],
+          "minutes": 1,
+          "source_slides": [],
+          "content": [
+            "Convert 137.6° to radians, to three decimal places."
+          ],
+          "steps": [
+            "$137.6(\\pi/180)=2.401572\\ldots$",
+            "Keep π in the calculator expression. Round the final answer: 2.402 rad."
+          ]
+        },
+        {
+          "id": "quiz8-conversions-practice",
+          "title": "Conversion practice",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-ready-conversions"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "Convert 58.417862° to DMS, to the nearest second.",
+            "Convert 112°36′18.5″ to decimal degrees, to four decimal places."
+          ],
+          "answer": [
+            "$0.417862(60)=25.07172$; $0.07172(60)=4.3032$: 58°25′04″.",
+            "$112+36/60+18.5/3600=112.6051388\\ldots$: 112.6051°."
+          ],
+          "instructor_notes": [
+            "Packet page 2. If time is short, students finish the second conversion immediately after class."
+          ]
+        },
+        {
+          "id": "quiz8-conversions-feedback",
+          "title": "Precision and notation",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2d-ready-conversions"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Minutes and seconds use base 60. A decimal degree is not DMS notation.",
+            "Match the question’s requested decimal places. Round the final result once."
+          ]
+        },
+        {
+          "id": "quiz8-conversions-retrieve",
+          "title": "Conversion checkpoint",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-ready-conversions"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "DMS to decimal uses division by 60 and 3600.",
+            "Decimal to DMS uses the fractional part twice, multiplying by 60."
+          ],
+          "pacing_checkpoint": "Use the elapsed-time target to protect independent practice."
+        },
+        {
+          "id": "quiz8-arcs-predict",
+          "title": "Length or area?",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-ready-arcs"
+          ],
+          "minutes": 1,
+          "source_slides": [],
+          "content": [
+            "The same radius and angle determine both a curved distance and a shaded area.",
+            "Which quantity uses square units?"
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/arc-sector.svg",
+              "alt": "A circular sector with radius 6 units and central angle 1.4 radians. The curved boundary is marked s and the region A.",
+              "caption": "The curved boundary is a length; the shaded region is an area."
+            }
+          ],
+          "visual_layout": "split"
+        },
+        {
+          "id": "quiz8-arcs-explain",
+          "title": "Arc and sector formulas",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2d-ready-arcs"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "Arc length: $s=r\\theta$. Sector area: $A=\\tfrac12r^2\\theta$.",
+            "Both formulas require θ in radians.",
+            "Unknown radius: $r=s/\\theta$.",
+            "Unknown sector angle: $\\theta=2A/r^2$, then convert to degrees if requested."
+          ]
+        },
+        {
+          "id": "quiz8-arcs-model",
+          "title": "One sector, two measurements",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-ready-arcs"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "Radius = 6 units and angle = 1.4 rad. Find arc length and sector area."
+          ],
+          "steps": [
+            "$s=6(1.4)=8.4$ units.",
+            "$A=\\tfrac12(6^2)(1.4)=25.2$ square units.",
+            "The radius is squared only in the area formula."
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/arc-sector.svg",
+              "alt": "A circular sector with radius 6 units and central angle 1.4 radians. The curved boundary is marked s and the region A.",
+              "caption": "The curved boundary is a length; the shaded region is an area."
+            }
+          ],
+          "visual_layout": "split",
+          "audit_checks": [
+            "u2d-ready-arcs"
+          ]
+        },
+        {
+          "id": "quiz8-arcs-practice",
+          "title": "Solve backwards for radius",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-ready-arcs"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "Together: an arc is 24 units long with central angle 80°. Find the radius.",
+            "Then independently: an arc is 21 units long with central angle 105°. Find the radius."
+          ],
+          "answer": [
+            "$r=24/(80\\pi/180)=54/\\pi\\approx17.19$ units.",
+            "$r=21/(105\\pi/180)=36/\\pi\\approx11.46$ units."
+          ],
+          "instructor_notes": [
+            "Packet page 3. Model the first setup on the board; leave the second unrevealed for an individual attempt."
+          ]
+        },
+        {
+          "id": "quiz8-sector-model",
+          "title": "Solve backwards for angle",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-ready-arcs"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "A sector has area 35.4 square units and radius 4 units. Find θ in radians and degrees."
+          ],
+          "steps": [
+            "$\\theta=2A/r^2=2(35.4)/4^2=4.425$ rad.",
+            "$\\theta_{deg}=4.425(180/\\pi)\\approx253.53^\\circ$.",
+            "The angle is between π and 2π radians, so a sector larger than a semicircle is reasonable."
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/large-sector.svg",
+              "alt": "A sector larger than a semicircle has radius 4 units and area 35.4 square units. Its central angle is unknown.",
+              "caption": "The highlighted sector can have an angle above 180°."
+            }
+          ],
+          "visual_layout": "split"
+        },
+        {
+          "id": "quiz8-sector-practice",
+          "title": "Check an inverse-sector setup",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-ready-arcs"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "Without looking at the model, write an equation for a sector with area 35.4 and radius 4.",
+            "Solve for the angle in radians and degrees.",
+            "Explain why an angle above 180° is allowed."
+          ],
+          "answer": [
+            "$35.4=\\tfrac12(4^2)\\theta$, so θ = 4.425 rad ≈ 253.53°.",
+            "A sector can cover more than half a circle while remaining below a full 360° turn."
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/large-sector.svg",
+              "alt": "A sector larger than a semicircle has radius 4 units and area 35.4 square units. Its central angle is unknown.",
+              "caption": "The highlighted sector can have an angle above 180°."
+            }
+          ],
+          "visual_layout": "split",
+          "instructor_notes": [
+            "This is a retrieval attempt on the same numbers, not a second new example. Use the packet space to check algebra and units."
+          ]
+        },
+        {
+          "id": "quiz8-arcs-feedback",
+          "title": "Check the setup before arithmetic",
+          "phase": "feedback",
+          "component": "comparison",
+          "objectives": [
+            "u2d-ready-arcs"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "For radius, divide arc length by the angle in radians.",
+            "For angle, double the sector area and divide by the squared radius.",
+            "A 150° sector with radius 20 has area $500\\pi/3\\approx523.60$ square units."
+          ],
+          "instructor_notes": [
+            "The final comparison corrects the legacy sprinkler example. Show the fraction-of-circle check: (150/360)π(20²). If behind, make this a quick oral check."
+          ]
+        },
+        {
+          "id": "quiz8-arcs-retrieve",
+          "title": "Arc and sector checkpoint",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-ready-arcs"
+          ],
+          "minutes": 1,
+          "source_slides": [],
+          "content": [
+            "Circle the requested unknown first.",
+            "Convert degrees to radians before substitution.",
+            "Check whether the answer is a length, an area, or an angle."
+          ],
+          "pacing_checkpoint": "Use the elapsed-time target to protect independent practice."
+        },
+        {
+          "id": "quiz8-speed-predict",
+          "title": "Same rotation, different distance",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-ready-speed"
+          ],
+          "minutes": 0.5,
+          "source_slides": [],
+          "content": [
+            "Do the center and the rim have the same angular speed?",
+            "Does a point farther from the center travel farther per turn?"
+          ]
+        },
+        {
+          "id": "quiz8-speed-explain",
+          "title": "From rpm to speed",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u2d-ready-speed"
+          ],
+          "minutes": 1.5,
+          "source_slides": [],
+          "content": [
+            "Use radius = diameter ÷ 2.",
+            "Degrees per second: $n\\cdot360/60$.",
+            "Radians per second: $\\omega=n\\cdot2\\pi/60$.",
+            "Linear speed: $v=r\\omega$ in distance units per second."
+          ]
+        },
+        {
+          "id": "quiz8-speed-model",
+          "title": "A rotating wheel",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-ready-speed"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "Diameter = 12 ft, rotation = 24 rpm. Find angular speed in degrees/s and rim speed in ft/s."
+          ],
+          "steps": [
+            "$r=12/2=6$ ft.",
+            "$24(360)/60=144^\\circ/\\mathrm{s}$.",
+            "$\\omega=24(2\\pi)/60=4\\pi/5$ rad/s.",
+            "$v=6(4\\pi/5)=24\\pi/5\\approx15.08$ ft/s."
+          ],
+          "assets": [
+            {
+              "src": "assets/unit2d/rotating-wheel.svg",
+              "alt": "A wheel with diameter 12 feet makes 24 revolutions per minute. Find angular speed in degrees per second and rim speed in feet per second.",
+              "caption": "The given length crosses the entire wheel."
+            }
+          ],
+          "visual_layout": "split",
+          "audit_checks": [
+            "u2d-ready-speed"
+          ]
+        },
+        {
+          "id": "quiz8-speed-practice",
+          "title": "Rotation practice",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-ready-speed"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "A wheel has diameter 8 ft and turns at 30 rpm.",
+            "Find angular speed in degrees/s and linear speed at the rim in ft/s.",
+            "Write the diameter-to-radius step and both unit conversions."
+          ],
+          "answer": [
+            "$r=4$ ft. Angular speed = $30(360)/60=180^\\circ/\\mathrm{s}$.",
+            "$\\omega=30(2\\pi)/60=\\pi$ rad/s.",
+            "$v=4\\pi\\approx12.57$ ft/s."
+          ],
+          "instructor_notes": [
+            "Packet page 4. Protect an individual attempt even if earlier discussion runs long."
+          ]
+        },
+        {
+          "id": "quiz8-speed-feedback",
+          "title": "Two common speed errors",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u2d-ready-speed"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "Using the diameter in $v=r\\omega$ doubles the speed.",
+            "Degrees/s cannot go directly into $v=r\\omega$; use radians/s.",
+            "Convert minutes to seconds once, and label the final units."
+          ]
+        },
+        {
+          "id": "quiz8-speed-retrieve",
+          "title": "Speed checkpoint",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-ready-speed"
+          ],
+          "minutes": 1,
+          "source_slides": [],
+          "content": [
+            "Radius first. Convert rpm. Then multiply radius by radians per second.",
+            "A sensible answer includes a distance unit and a time unit."
+          ],
+          "pacing_checkpoint": "Use the elapsed-time target to protect independent practice."
+        },
+        {
+          "id": "quiz8-exit",
+          "title": "Independent exit check",
+          "phase": "synthesize",
+          "component": "practice",
+          "objectives": [],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "An arc is $8\\pi$ ft long and its central angle is 120°. Find the radius.",
+            "A wheel has diameter 6 ft and turns at 20 rpm. Find angular speed in degrees/s and rim speed in ft/s."
+          ],
+          "answer": [
+            "$r=8\\pi/(2\\pi/3)=12$ ft.",
+            "$r=3$ ft; angular speed = $120^\\circ/\\mathrm{s}$; $v=2\\pi$ ft/s."
+          ],
+          "instructor_notes": [
+            "Collect setups and exact answers. If either setup is missing, assign one targeted practice set before Wednesday."
+          ]
+        }
+      ],
+      "date": "2026-10-19",
+      "downloads": {
+        "practice": "../pdfs/math130-quiz8-readiness-practice-2026-10-19.pdf",
+        "pdf": "math130-quiz8-readiness-2026-10-19.pdf",
+        "pptx": "math130-quiz8-readiness-2026-10-19.pptx"
+      }
     }
   ],
   "source_disposition": [

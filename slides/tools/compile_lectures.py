@@ -289,6 +289,11 @@ def render_block(block: dict, session: dict, deck: dict) -> str:
             f'<h1>{esc(title)}</h1><p class="subtitle">{esc(content[0])}</p>'
             f'<p class="lecture-meta">{esc(session["duration_minutes"])} minutes · Offline capable</p>'
         )
+        if session.get('downloads'):
+            links = [('practice', 'Practice packet'), ('pdf', 'Slides PDF'), ('pptx', 'PowerPoint')]
+            body += '<p class="lecture-resources">' + ' '.join(
+                f'<a href="{esc(session["downloads"][key])}">{label}</a>' for key, label in links
+            ) + '</p>'
         return f'<section class="title-slide" {attrs}>{body}{notes_html}</section>'
     if component == "chapter":
         return (
@@ -459,7 +464,27 @@ def deck_html(manifest: dict, session: dict) -> str:
 def chooser_html(manifest: dict) -> str:
     deck = manifest["deck"]
     cards = []
-    for index, session in enumerate(manifest["sessions"], 1):
+    featured_id = deck.get("featured_session")
+    featured = next((item for item in manifest["sessions"] if item["id"] == featured_id), None)
+    sessions = [item for item in manifest["sessions"] if item["id"] != featured_id]
+    featured_html = ""
+    if featured:
+        downloads = featured.get("downloads", {})
+        download_links = " ".join(
+            f'<a href="{esc(downloads[key])}">{label}</a>'
+            for key, label in [("practice", "Print the practice packet"), ("pdf", "Slides PDF"), ("pptx", "PowerPoint")]
+            if key in downloads
+        )
+        featured_html = (
+            '<article class="featured-session" aria-labelledby="featured-title">'
+            '<p class="session-number">Monday, October 19 · Quiz 8 preparation</p>'
+            f'<h2 id="featured-title">{esc(featured["title"])}</h2>'
+            '<p>Begin with circle diagrams, then practice conversions, arc and sector problems, and rotational speed. '
+            'Quiz 8 is Wednesday, October 21. Solids follow the quiz.</p>'
+            f'<a class="session-link" href="{esc(featured["output"])}">Open October 19 lesson</a>'
+            f'<p class="download-links">{download_links}</p></article>'
+        )
+    for index, session in enumerate(sessions, 1):
         objectives = [
             item["text"] for item in manifest["objectives"]
             if item["id"] in {
@@ -486,7 +511,8 @@ def chooser_html(manifest: dict) -> str:
   <main class="session-chooser">
     <p class="eyebrow">MATH 130 · {esc(deck["section"])}</p>
     <h1>{esc(deck["title"])}</h1>
-    <p class="lede">This lecture is organized as two complete class meetings. Choose the session you are teaching or reviewing.</p>
+    <p class="lede">{'Choose a focused lesson or revisit the full unit sessions below.' if featured else 'This lecture is organized as two complete class meetings. Choose the session you are teaching or reviewing.'}</p>
+    {featured_html}
     <div class="session-grid">{"".join(cards)}</div>
     <p class="legacy-note"><a href="{esc(deck["id"])}.pdf">Legacy PDF</a> remains available until instructor approval is complete.</p>
   </main>
@@ -793,7 +819,7 @@ def sync_review_status(manifests: list[dict], math_audit: dict) -> None:
         writer.writerows(rows)
 
 
-def compile_all() -> int:
+def compile_all(deck_ids: set[str] | None = None) -> int:
     loaded = load_manifests()
     math_audit = load_math_audit()
     if math_audit.get("status") != "pass":
@@ -813,14 +839,18 @@ def compile_all() -> int:
         manifests.append(manifest)
     if failures:
         return 1
+    selected = [manifest for manifest in manifests if not deck_ids or manifest['deck']['id'] in deck_ids]
+    if deck_ids and deck_ids - {item['deck']['id'] for item in selected}:
+        raise ValueError(f"Unknown deck selection: {sorted(deck_ids)}")
     for generated_dir in (
         MIGRATION / "blueprints", MIGRATION / "review-packets",
         MIGRATION / "rehearsals", MIGRATION / "pilots"
     ):
         generated_dir.mkdir(parents=True, exist_ok=True)
-        for old_file in generated_dir.glob("Math130Unit*.md"):
-            old_file.unlink()
-    for manifest in manifests:
+        if not deck_ids:
+            for old_file in generated_dir.glob("Math130Unit*.md"):
+                old_file.unlink()
+    for manifest in selected:
         for session in manifest["sessions"]:
             (ROOT / session["output"]).write_text(deck_html(manifest, session), encoding="utf-8")
             write_review_packet(manifest, session, math_audit)
@@ -838,4 +868,8 @@ def compile_all() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(compile_all())
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--deck', action='append', help='Compile only a named canonical deck; repeat for multiple decks.')
+    arguments = parser.parse_args()
+    sys.exit(compile_all(set(arguments.deck) if arguments.deck else None))

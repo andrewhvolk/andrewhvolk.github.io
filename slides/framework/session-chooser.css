@@ -57,6 +57,11 @@ h1 { font-size: clamp(2.6rem, 7vw, 5rem); margin: 0.15em 0; }
 .session-link:focus-visible, .session-link:hover { background: #03477f; outline: 4px solid #8ac4ed; }
 .legacy-note { margin-top: 30px; }
 .legacy-note a { color: var(--blue); }
+.featured-session { margin-top: 32px; padding: 24px 0; border-top: 3px solid var(--blue); border-bottom: 1px solid var(--line); }
+.featured-session h2 { font-size: 2rem; margin: 0.3em 0; }
+.featured-session p { max-width: 850px; line-height: 1.6; }
+.download-links { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.download-links a { color: var(--blue); font-weight: 700; }
 @media (max-width: 760px) {
   .session-grid { grid-template-columns: 1fr; }
 }
