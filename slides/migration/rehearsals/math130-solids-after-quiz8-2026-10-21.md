@@ -14,7 +14,7 @@
 | 1 | Cylinders: Volume and Surface Area | 0 | 0 |  |  |
 | 2 | Today’s sequence | 0 | 0 |  |  |
 | 3 | Capacity or covering? | 3 | 3 |  |  |
-| 4 | Build the cylinder formulas from its parts | 4 | 7 |  |  |
+| 4 | Cylinder volume and surface-area formulas | 4 | 7 |  |  |
 | 5 | Model: diameter given, radius required | 5 | 12 |  |  |
 | 6 | You try: closed-cylinder volume and area | 5 | 17 |  |  |
 | 7 | Check the setup before the arithmetic | 2 | 19 |  |  |

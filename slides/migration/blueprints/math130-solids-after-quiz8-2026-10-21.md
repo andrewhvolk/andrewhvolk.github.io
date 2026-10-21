@@ -9,7 +9,7 @@
 | 1 | Cylinders: Volume and Surface Area | activate | title | 0 | Authored |
 | 2 | Today’s sequence | activate | roadmap | 0 | Authored |
 | 3 | Capacity or covering? | activate | poll | 3 | Authored |
-| 4 | Build the cylinder formulas from its parts | explain | concept | 4 | Authored |
+| 4 | Cylinder volume and surface-area formulas | explain | formula | 4 | Authored |
 | 5 | Model: diameter given, radius required | model | worked-example | 5 | Authored |
 | 6 | You try: closed-cylinder volume and area | practice | practice | 5 | Authored |
 | 7 | Check the setup before the arithmetic | feedback | comparison | 2 | Authored |
