@@ -1,4 +1,4 @@
-# Quiz 8 Preparation · Monday, October 19 Blueprint
+# Circle, Radian, and Speed Review · Monday, October 19 Blueprint
 
 - **Output:** `math130-quiz8-readiness-2026-10-19.html`
 - **Duration:** 55 minutes
@@ -6,7 +6,7 @@
 
 | # | Block | Phase | Component | Minutes | Source |
 |---:|---|---|---|---:|---|
-| 1 | Circles: Quiz 8 preparation | activate | title | 0 | Authored |
+| 1 | Circle, Radian, and Speed Review | activate | title | 0 | Authored |
 | 2 | Today’s practice sequence | activate | roadmap | 0 | Authored |
 | 3 | Where is the vertex? | activate | poll | 0.5 | Authored |
 | 4 | Angles and intercepted arcs | explain | concept | 1 | Authored |

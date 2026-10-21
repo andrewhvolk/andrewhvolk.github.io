@@ -143,11 +143,8 @@ assert.deepEqual(verifyBlueprint(7, 8, 100), [
     'quiz7_similar_multi', 'quiz7_parallel_multi', 'basic_areas', 'basic_areas',
     'right_triangle_area', 'herons', 'dms', 'dms_to_dec'
 ]);
-assert.deepEqual(verifyBlueprint(8, 8, 105), [
-    'quiz8_arc_multi', 'quiz8_central_multi', 'quiz8_inscribed_multi', 'rad_deg',
-    'quiz8_sector_multi', 'dms', 'dms_to_dec', 'quiz8_speed_multi'
-]);
-assert.deepEqual(practiceGroups.focused.flatMap(group => group.generators.map(gen => gen.id)), quizConfig[8].blueprint.map(entry => entry.id), 'The default individual drills must cover all eight Quiz 8 prompts in order.');
+assert.equal(quizConfig[8].practiceGenerator, 'dms', 'Quiz 8 practice must focus only on decimal degrees to DMS.');
+assert.deepEqual(practiceGroups.focused.flatMap(group => group.generators.map(gen => gen.id)), ['dms'], 'The default individual drills must contain only the Quiz 8 conversion skill.');
 assert.equal(practiceGroups.all.flatMap(group => group.generators).length, generatorDefinitions.length, 'The broader Test 2 practice must remain available.');
 assert.equal(checklist.find(item => item.id === 'geo_18b').practiceId, 'quiz8_central_multi');
 assert.equal(checklist.find(item => item.id === 'geo_18c').practiceId, 'quiz8_inscribed_multi');
@@ -258,7 +255,7 @@ for (let sample = 0; sample < 200; sample++) {
     assert.equal(decimal.tol, 0.00005);
 
     const speed = generate('speed');
-    assert.equal(speed.fields.length, 2, 'The general speed drill must cover both Quiz 8 answers.');
+    assert.equal(speed.fields.length, 2, 'The general speed drill must cover both Test 2 speed quantities.');
     assert.match(speed.q, /degrees per second/);
     assert.match(speed.q, /feet per second/);
     assert.doesNotMatch(speed.q, /inches per minute|radians per minute/);
@@ -266,7 +263,7 @@ for (let sample = 0; sample < 200; sample++) {
 
     const angles = generate('inscribed_angle');
     assert.equal(angles.fields.length, 2);
-    assert.ok(['quiz8_central_multi', 'quiz8_inscribed_multi'].includes(angles.inputType), 'The general angle drill must use one of the two planned quiz models.');
+    assert.ok(['quiz8_central_multi', 'quiz8_inscribed_multi'].includes(angles.inputType), 'The general angle drill must use one of the two Test 2 circle-angle models.');
 }
 for (const variant of ['arc-length', 'inverse-arc-length', 'sector-area', 'inverse-sector-area']) {
     for (let sample = 0; sample < 100; sample++) {

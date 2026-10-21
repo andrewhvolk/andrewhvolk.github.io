@@ -1,4 +1,4 @@
-# Review Packet: Quiz 8 Preparation · Monday, October 19
+# Review Packet: Circle, Radian, and Speed Review · Monday, October 19
 
 - **Output:** `math130-quiz8-readiness-2026-10-19.html`
 - **Required timing:** 50 of 55 minutes
@@ -65,7 +65,6 @@ Mapped source slides in this session: None
 - [ ] Verify formula: `$30(360)/60=180^\circ/\mathrm{s}`
 - [ ] Verify formula: `$\omega=30(2\pi)/60=\pi`
 - [ ] Verify formula: `$v=4\pi\approx12.57`
-- [ ] Verify formula: `$8\pi`
 - [ ] Verify formula: `$r=8\pi/(2\pi/3)=12`
 - [ ] Verify formula: `$r=3`
 - [ ] Verify formula: `$120^\circ/\mathrm{s}`

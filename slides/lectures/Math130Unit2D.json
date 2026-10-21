@@ -8,7 +8,7 @@
     "source": "Math130Unit2D.pptx",
     "canonical": true,
     "chooser_output": "Math130Unit2D.html",
-    "featured_session": "unit2d-quiz8-20261019"
+    "featured_session": "unit2d-solids-20261021"
   },
   "objectives": [
     {
@@ -33,7 +33,7 @@
     },
     {
       "id": "u2d-solids",
-      "text": "select volume and surface-area formulas for solids"
+      "text": "select cylinder volume and surface-area formulas and find hollow-cylinder material volume"
     },
     {
       "id": "u2d-ready-angles",
@@ -1058,21 +1058,20 @@
             30
           ],
           "content": [
-            "Quiz 8 readiness: identify central versus inscribed angles and determine the intercepted arc.",
-            "Given θ and r, compute arc length or sector area; given arc length, solve for r; given sector area, solve for θ.",
-            "Retrieve degrees↔radians and DMS conversions, then convert rpm to degrees per second and linear speed.",
-            "Record one skill to revisit before Quiz 8."
+            "Circle review: identify central versus inscribed angles and determine the intercepted arc.",
+            "For Test 2 practice, compute arcs and sectors, convert angle measures, and relate angular and linear speed.",
+            "Record one Unit 2D topic to revisit before Test 2."
           ],
           "answer": [
-            "Use the objective roadmap to identify any skill that still needs deliberate practice."
+            "Use the objective roadmap to select a topic for deliberate practice before Test 2."
           ]
         }
       ]
     },
     {
       "id": "unit2d-quiz8-20261019",
-      "title": "Quiz 8 Preparation · Monday, October 19",
-      "subtitle": "A 55-minute lesson with diagram practice, conversions, inverse arc and sector problems, and rotational speed. Solids follow Quiz 8.",
+      "title": "Circle, Radian, and Speed Review · Monday, October 19",
+      "subtitle": "A past 55-minute Unit 2D review of circle diagrams, angle conversions, arcs, sectors, and rotational speed.",
       "output": "math130-quiz8-readiness-2026-10-19.html",
       "duration_minutes": 55,
       "min_slides": 31,
@@ -1112,14 +1111,14 @@
       "blocks": [
         {
           "id": "quiz8-title",
-          "title": "Circles: Quiz 8 preparation",
+          "title": "Circle, Radian, and Speed Review",
           "phase": "activate",
           "component": "title",
           "objectives": [],
           "minutes": 0,
           "source_slides": [],
           "content": [
-            "Monday, October 19, 2026 · Angles, conversions, arcs, sectors, and speed"
+            "Monday, October 19, 2026 · Unit 2D review of circle diagrams, conversions, arcs, sectors, and rotational speed"
           ]
         },
         {
@@ -1738,24 +1737,220 @@
           "minutes": 3,
           "source_slides": [],
           "content": [
-            "An arc is $8\\pi$ ft long and its central angle is 120°. Find the radius.",
-            "A wheel has diameter 6 ft and turns at 20 rpm. Find angular speed in degrees/s and rim speed in ft/s."
+            "Circle review: identify central versus inscribed angles and determine the intercepted arc.",
+            "For Test 2 practice, compute arcs and sectors, convert angle measures, and relate angular and linear speed.",
+            "Record one topic to revisit before Test 2."
           ],
           "answer": [
             "$r=8\\pi/(2\\pi/3)=12$ ft.",
             "$r=3$ ft; angular speed = $120^\\circ/\\mathrm{s}$; $v=2\\pi$ ft/s."
           ],
           "instructor_notes": [
-            "Collect setups and exact answers. If either setup is missing, assign one targeted practice set before Wednesday."
+            "Collect setups and exact answers. If either setup is missing, assign one targeted practice set before Test 2."
           ]
         }
       ],
-      "date": "2026-10-19",
-      "downloads": {
-        "practice": "../pdfs/math130-quiz8-readiness-practice-2026-10-19.pdf",
-        "pdf": "math130-quiz8-readiness-2026-10-19.pdf",
-        "pptx": "math130-quiz8-readiness-2026-10-19.pptx"
-      }
+      "date": "2026-10-19"
+    },
+    {
+      "id": "unit2d-solids-20261021",
+      "title": "Cylinder Volume and Surface Area · Wednesday, October 21",
+      "date_label": "Wednesday, October 21 · Quiz 8 and solids lesson",
+      "subtitle": "Administer Quiz 8 first (15 minutes; decimal degrees to DMS only), then teach this 30-minute introduction to cylinder solids.",
+      "output": "math130-solids-after-quiz8-2026-10-21.html",
+      "duration_minutes": 30,
+      "min_slides": 9,
+      "max_slides": 9,
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 25,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 5,
+        "stopping_points": [
+          {
+            "after_block": "solids-cylinder-practice",
+            "planned_elapsed": 17,
+            "action": "If students still confuse radius and diameter or square and cubic units, use the flex time to reteach those distinctions before moving on."
+          },
+          {
+            "after_block": "solids-hollow-cylinder-model",
+            "planned_elapsed": 23,
+            "action": "If on pace, complete the two-minute exit and keep the final five minutes flexible; if behind, let students answer the exit while you check the pipe setup."
+          }
+        ]
+      },
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "blocks": [
+        {
+          "id": "solids-after-quiz8-title",
+          "title": "Cylinders: Volume and Surface Area",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Wednesday, October 21, 2026 · 30-minute solids lesson after the 15-minute DMS-only Quiz 8"
+          ],
+          "instructor_notes": [
+            "Administer and collect the paper quiz before beginning this lesson."
+          ]
+        },
+        {
+          "id": "solids-after-quiz8-roadmap",
+          "title": "Today’s sequence",
+          "phase": "activate",
+          "component": "roadmap",
+          "objectives": [],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Quiz 8 · 15 minutes · decimal degrees → DMS only",
+            "Lesson · distinguish capacity from exposed surface",
+            "Model and practice closed-cylinder volume and total surface area",
+            "Extend to material volume in a hollow cylinder"
+          ]
+        },
+        {
+          "id": "solids-cylinder-activate",
+          "title": "Capacity or covering?",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "A sealed can holds a drink and is painted over every outside surface, including both circular ends. Which measurement describes the drink it can hold? Which describes the paint needed?"
+          ],
+          "instructor_notes": [
+            "Have every student name the quantity and its unit before taking responses."
+          ]
+        },
+        {
+          "id": "solids-cylinder-formulas",
+          "title": "Build the cylinder formulas from its parts",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "The circular base has area $\\pi r^2$. Stacking that area through height $h$ gives volume: $V=\\pi r^2h$, measured in cubic units.",
+            "A closed cylinder unwraps to two circles and one rectangle: $SA=2\\pi r^2+2\\pi rh$, measured in square units."
+          ],
+          "instructor_notes": [
+            "Label radius and height before substitution. Total surface area includes both circular ends."
+          ]
+        },
+        {
+          "id": "solids-cylinder-model",
+          "title": "Model: diameter given, radius required",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 5,
+          "source_slides": [],
+          "content": [
+            "A closed cylinder has diameter 10 cm and height 8 cm. Find its exact volume and total surface area."
+          ],
+          "steps": [
+            "Convert diameter to radius: $r=10/2=5$ cm.",
+            "Volume: $V=\\pi(5)^2(8)=200\\pi\\text{ cm}^3\\approx628.32\\text{ cm}^3$.",
+            "Total surface area: $SA=2\\pi(5)^2+2\\pi(5)(8)=130\\pi\\text{ cm}^2\\approx408.41\\text{ cm}^2$."
+          ],
+          "instructor_notes": [
+            "Pause after the radius conversion; have students predict whether the answers need square or cubic units."
+          ]
+        },
+        {
+          "id": "solids-cylinder-practice",
+          "title": "You try: closed-cylinder volume and area",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 5,
+          "source_slides": [],
+          "content": [
+            "A closed cylinder has radius 3 cm and height 10 cm. Find its exact volume and total surface area. Include units."
+          ],
+          "answer": [
+            "$V=\\pi(3)^2(10)=90\\pi\\text{ cm}^3\\approx282.74\\text{ cm}^3$.",
+            "$SA=2\\pi(3)^2+2\\pi(3)(10)=78\\pi\\text{ cm}^2\\approx245.04\\text{ cm}^2$."
+          ],
+          "instructor_notes": [
+            "Give students quiet think time before comparing setups."
+          ],
+          "pacing_checkpoint": "At 17 minutes into the teaching block, check whether radius and unit choices are secure."
+        },
+        {
+          "id": "solids-cylinder-feedback",
+          "title": "Check the setup before the arithmetic",
+          "phase": "feedback",
+          "component": "comparison",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "Use the radius in both formulas; when the problem gives diameter, divide it by two first.",
+            "Volume uses cubic units. Surface area uses square units and counts only the surfaces that are present."
+          ]
+        },
+        {
+          "id": "solids-hollow-cylinder-model",
+          "title": "Extension: material in a hollow cylinder",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "A pipe segment has outer radius 4 cm, inner radius 3 cm, and length 10 cm. Find the volume of material."
+          ],
+          "steps": [
+            "Material cross-section is the outer circle minus the inner circle: $V=\\pi(R^2-r^2)h$.",
+            "$V=\\pi(4^2-3^2)(10)=70\\pi\\text{ cm}^3\\approx219.91\\text{ cm}^3$.",
+            "Subtract the hollow interior; keep the final unit cubic because the result is volume."
+          ],
+          "instructor_notes": [
+            "Connect the subtraction to a picture of an outer cylinder with the hollow center removed."
+          ],
+          "pacing_checkpoint": "At 23 minutes into teaching, protect the exit check and use the remaining five minutes as flex."
+        },
+        {
+          "id": "solids-cylinder-exit",
+          "title": "Exit check: what is being measured?",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u2d-solids"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "A closed cylinder has $r=3$ cm and $h=7$ cm. One student labels its capacity $63\\pi$ cm$^2$ and its total surface area $60\\pi$ cm$^3$. Identify and correct the mix-up."
+          ],
+          "answer": [
+            "Capacity is volume: $63\\pi$ cm$^3$. Total surface area is $60\\pi$ cm$^2$. The student switched both the quantities and their units.",
+            "Keep the final five minutes flexible for completion, correction, or a second radius-versus-diameter check."
+          ]
+        }
+      ],
+      "date": "2026-10-21"
     }
   ],
   "source_disposition": [

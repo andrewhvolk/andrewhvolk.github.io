@@ -13,7 +13,7 @@
 |---|---:|---:|---:|---:|---:|---:|
 | convert angle measures and compute arc length and sector area | yes | yes | yes | yes | yes | yes |
 | relate angular velocity, linear velocity, and distance | yes | yes | yes | yes | yes | yes |
-| select volume and surface-area formulas for solids | yes | yes | yes | yes | yes | yes |
+| select cylinder volume and surface-area formulas and find hollow-cylinder material volume | yes | yes | yes | yes | yes | yes |
 
 ## Source Coverage
 

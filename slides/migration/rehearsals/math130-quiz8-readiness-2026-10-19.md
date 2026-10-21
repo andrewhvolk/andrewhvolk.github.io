@@ -1,4 +1,4 @@
-# Timed Rehearsal: Quiz 8 Preparation · Monday, October 19
+# Timed Rehearsal: Circle, Radian, and Speed Review · Monday, October 19
 
 - **Output:** `math130-quiz8-readiness-2026-10-19.html`
 - **Class period:** 55 minutes
@@ -11,7 +11,7 @@
 
 | Slide | Teaching block | Planned min | Cumulative min | Actual min | Notes |
 |---:|---|---:|---:|---:|---|
-| 1 | Circles: Quiz 8 preparation | 0 | 0 |  |  |
+| 1 | Circle, Radian, and Speed Review | 0 | 0 |  |  |
 | 2 | Today’s practice sequence | 0 | 0 |  |  |
 | 3 | Where is the vertex? | 0.5 | 0.5 |  |  |
 | 4 | Angles and intercepted arcs | 1 | 1.5 |  |  |

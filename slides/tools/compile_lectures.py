@@ -475,14 +475,15 @@ def chooser_html(manifest: dict) -> str:
             for key, label in [("practice", "Print the practice packet"), ("pdf", "Slides PDF"), ("pptx", "PowerPoint")]
             if key in downloads
         )
+        featured_label = featured.get("date_label", "Featured lesson")
+        download_html = f'<p class="download-links">{download_links}</p>' if download_links else ""
         featured_html = (
             '<article class="featured-session" aria-labelledby="featured-title">'
-            '<p class="session-number">Monday, October 19 · Quiz 8 preparation</p>'
+            f'<p class="session-number">{esc(featured_label)}</p>'
             f'<h2 id="featured-title">{esc(featured["title"])}</h2>'
-            '<p>Begin with circle diagrams, then practice conversions, arc and sector problems, and rotational speed. '
-            'Quiz 8 is Wednesday, October 21. Solids follow the quiz.</p>'
-            f'<a class="session-link" href="{esc(featured["output"])}">Open October 19 lesson</a>'
-            f'<p class="download-links">{download_links}</p></article>'
+            f'<p>{esc(featured["subtitle"])}</p>'
+            f'<a class="session-link" href="{esc(featured["output"])}">Open featured lesson</a>'
+            f'{download_html}</article>'
         )
     for index, session in enumerate(sessions, 1):
         objectives = [
