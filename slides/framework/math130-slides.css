@@ -503,7 +503,81 @@ body { margin: 0; }
   .classroom-toolbar { display: none; }
 }
 
+/* Notes view (math130-slides.js): slides stacked as a scrolling page, the default on phones. */
+.view-switch {
+  background: #fff;
+  border-radius: 999px;
+  bottom: 14px;
+  box-shadow: 0 4px 14px rgba(8, 26, 45, 0.25);
+  color: var(--navy);
+  font: 700 14px/1 Arial, Helvetica, sans-serif;
+  left: 14px;
+  padding: 10px 14px;
+  position: fixed;
+  text-decoration: none;
+  z-index: 60;
+}
+.view-switch:focus-visible { outline: 3px solid #f2b705; outline-offset: 2px; }
+
+html.notes-view, html.notes-view body { height: auto; overflow: auto; }
+.notes-view .reveal {
+  font-size: 17px;
+  height: auto;
+  margin: 0 auto;
+  max-width: 900px;
+  overflow: visible;
+  position: static;
+}
+.notes-view .reveal .slides {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: auto;
+  inset: auto;
+  margin: 0;
+  overflow: visible;
+  padding: 64px 12px 72px;
+  perspective: none;
+  pointer-events: auto;
+  position: static;
+  text-align: left;
+  transform: none;
+  width: auto;
+}
+.notes-view .reveal .slides > section {
+  display: block !important;
+  height: auto;
+  left: auto;
+  min-height: 0;
+  opacity: 1;
+  padding: 22px 20px 26px;
+  position: relative;
+  scroll-margin-top: 60px;
+  top: auto;
+  transform: none;
+  visibility: visible;
+  width: auto;
+}
+.notes-view .reveal h1 { font-size: 1.75em; }
+.notes-view .reveal h2 { font-size: 1.35em; }
+.notes-view .reveal .fragment { opacity: 1; visibility: visible; transform: none; }
+.notes-view .reveal aside.notes { display: none; }
+.notes-view .slide-meta,
+.notes-view .source-note,
+.notes-view .optional-badge {
+  margin-top: 14px;
+  position: static;
+}
+.notes-view .optional-badge { display: inline-block; margin: 0 0 10px; }
+.notes-view .reveal img, .notes-view .reveal svg, .notes-view .reveal canvas { height: auto; max-width: 100%; }
+.notes-view .reveal mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+@media (max-width: 700px) {
+  /* One column on phones: every grid in a slide stacks. */
+  .notes-view .reveal section * { grid-template-columns: minmax(0, 1fr) !important; }
+}
+
 @media print {
+  .view-switch { display: none !important; }
   .slide-nav, .classroom-toolbar, .reveal .controls, .reveal .progress { display: none !important; }
   [data-answer][hidden] { display: block !important; }
   .fragment { opacity: 1 !important; visibility: visible !important; }
