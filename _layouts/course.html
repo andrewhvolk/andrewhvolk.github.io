@@ -127,7 +127,7 @@ wide: true
       <p>Check Canvas first, then email or book a time.</p>
       <ul>
         <li><a href="mailto:{{ p.email }}">{{ p.email }}</a></li>
-        <li><a href="{{ p.booking_url }}">Book a meeting</a></li>
+        <li><a href="{{ p.booking_url | xml_escape }}">Book a meeting</a></li>
         <li><span class="course-side__note">Office {{ p.office }}</span></li>
       </ul>
     </section>

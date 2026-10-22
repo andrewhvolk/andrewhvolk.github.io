@@ -99,7 +99,18 @@ Run these local checks before pushing:
 python scripts/check_css_links.py
 python scripts/check_links.py
 python scripts/check_html_structure.py
+python scripts/check_course_dates.py
 ```
+
+`check_course_dates.py` fails when the MATH 130 due dates in `_data/math130.yml` and the
+`math130CanvasDueDates` list in `theme.js` disagree. Each new semester, update both.
+
+## Site Navigation
+
+Lesson, review, lab manual, and Math Club pages use a compact bar at the top: a back link to
+the course page (to the matching row, for example `/courses/math114.html#module-9`), a home
+link, and the theme toggle. Copy that `<nav class="course-bar">` block from a neighboring page
+when adding a new page. `learn.html` and `contact.html` redirect to the home page.
 
 ## Notes
 
