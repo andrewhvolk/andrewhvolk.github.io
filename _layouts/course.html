@@ -23,16 +23,20 @@ wide: true
       <h2 id="part-{{ forloop.index }}">{{ part.name }}</h2>
       <div class="course-part__list">
         {%- for m in part.modules %}
-        <details class="course-module" id="{{ m.label | slugify }}" data-last-date="{{ m.dates.last.date | date: '%Y-%m-%d' }}">
-          <summary>
+        {%- capture row_text %}
             <span class="course-module__text">
               <span class="course-module__title">{{ m.title }}</span>
-              <span class="course-module__meta">{{ m.label }}{% for d in m.dates %} · {{ d.kind }} {{ d.date | date: "%a, %b %-d" }}{% endfor %}</span>
+              <span class="course-module__meta">{{ m.label }}{% for d in m.dates %} · {{ d.kind }} {{ d.date | date: "%a, %b %-d" }}{% if d.time %}, {{ d.time }}{% endif %}{% endfor %}</span>
             </span>
             <span class="course-module__badge" hidden>This week</span>
+        {%- endcapture %}
+        {%- if m.handouts or m.videos or m.practice or m.lesson %}
+        <details class="course-module" id="{{ m.label | slugify }}" data-last-date="{{ m.dates.last.date | date: '%Y-%m-%d' }}">
+          <summary>{{ row_text }}
             {% include hub-icon.html name="chevron" %}
           </summary>
           <div class="course-module__body">
+            {%- if m.handouts or m.videos or m.practice %}
             <div class="course-module__groups">
               {%- if m.handouts %}
               <div class="course-module__group">
@@ -65,9 +69,18 @@ wide: true
               </div>
               {%- endif %}
             </div>
-            <a class="hub-btn hub-btn--solid hub-btn--sm" href="{{ m.lesson }}">{% if m.review %}Open the full review{% else %}Open the lesson{% endif %} {% include hub-icon.html name="arrow" %}</a>
+            {%- endif %}
+            {%- if m.lesson %}
+            <a class="hub-btn hub-btn--solid hub-btn--sm" href="{{ m.lesson }}">{% if m.lesson_label %}{{ m.lesson_label }}{% elsif m.review %}Open the full review{% else %}Open the lesson{% endif %} {% include hub-icon.html name="arrow" %}</a>
+            {%- endif %}
           </div>
         </details>
+        {%- else %}
+        <div class="course-module course-module--static" id="{{ m.label | slugify }}" data-last-date="{{ m.dates.last.date | date: '%Y-%m-%d' }}">
+          <div class="course-module__row">{{ row_text }}
+          </div>
+        </div>
+        {%- endif %}
         {%- endfor %}
       </div>
     </section>
@@ -79,7 +92,7 @@ wide: true
       <h2 id="upcoming-heading">Coming up</h2>
       <ul class="course-upcoming">
         {%- for part in c.parts %}{% for m in part.modules %}{% for d in m.dates %}
-        <li data-date="{{ d.date | date: '%Y-%m-%d' }}"><span>{% if d.kind == "Homework" or d.kind == "Quiz" %}{{ m.label }} {{ d.kind | downcase }}{% elsif d.kind == "Review" %}{{ m.title }}{% else %}{{ d.kind }}{% endif %}</span><time datetime="{{ d.date | date: '%Y-%m-%d' }}">{{ d.date | date: "%a, %b %-d" }}</time></li>
+        <li data-date="{{ d.date | date: '%Y-%m-%d' }}"><span>{% if d.kind == "Homework" or d.kind == "Quiz" or d.kind == "Prelab quiz" or d.kind == "Report" %}{{ m.label }} {{ d.kind | downcase }}{% elsif d.kind == "Review" %}{{ m.title }}{% else %}{{ d.kind }}{% endif %}</span><time datetime="{{ d.date | date: '%Y-%m-%d' }}">{{ d.date | date: "%a, %b %-d" }}{% if d.time %}, {{ d.time }}{% endif %}</time></li>
         {%- endfor %}{% endfor %}{% endfor %}
         {%- for e in c.extras %}
         <li data-date="{{ e.date | date: '%Y-%m-%d' }}"><span>{{ e.label }}</span><time datetime="{{ e.date | date: '%Y-%m-%d' }}">{{ e.date | date: "%a, %b %-d" }}</time></li>
@@ -87,6 +100,18 @@ wide: true
       </ul>
     </section>
 
+    {%- if c.checklist %}
+    <section class="course-side" aria-labelledby="checklist-heading">
+      <h2 id="checklist-heading">{{ c.checklist_title | default: "Before class" }}</h2>
+      <ul class="course-checklist">
+        {%- for item in c.checklist %}
+        <li>{{ item }}</li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {%- if c.tools %}
     <section class="course-side" aria-labelledby="tools-heading">
       <h2 id="tools-heading">Tools</h2>
       <ul>
@@ -95,6 +120,7 @@ wide: true
         {%- endfor %}
       </ul>
     </section>
+    {%- endif %}
 
     <section class="course-side" aria-labelledby="help-heading">
       <h2 id="help-heading">Help</h2>
