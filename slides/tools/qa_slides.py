@@ -131,8 +131,8 @@ def check_chooser(path: Path, manifest: dict) -> list[str]:
     for session in manifest["sessions"]:
         if session["output"] not in hrefs:
             errors.append(f"chooser does not link to {session['output']}")
-    if "Legacy PDF" not in text:
-        errors.append("chooser does not preserve the legacy PDF link")
+    if f'{manifest["deck"]["id"]}.pdf' not in hrefs:
+        errors.append("chooser does not link to the deck PDF")
     return errors
 
 

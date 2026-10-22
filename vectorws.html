@@ -26,8 +26,19 @@
         .step-card { transition: all 0.3s ease; }
         .step-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
     </style>
+<style id="m130-topbar-style">
+  .m130-topbar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 16px; margin: 0; padding: 10px max(16px, env(safe-area-inset-left)); background: #f7f5f0; border-bottom: 1px solid #e4e0d8; color: #66625b; font: 15px/1.45 "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif; position: relative; z-index: 50; }
+  .m130-topbar a { color: #2d5b8c; font-weight: 600; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+  .m130-topbar a:hover, .m130-topbar a:focus-visible { text-decoration: underline; }
+  @media (prefers-color-scheme: dark) { .m130-topbar { background: #17181b; border-color: #2f3136; color: #a3a09a; } .m130-topbar a { color: #8db4e2; } }
+  @media print { .m130-topbar { display: none; } }
+  /* Long equations scroll inside their own box on phones instead of widening the page. */
+  mjx-container { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+  .flex > p { min-width: 0; }
+</style>
 </head>
 <body class="bg-slate-50 text-slate-800 leading-relaxed">
+<nav class="m130-topbar" aria-label="Course"><a href="/courses/math130.html#sections-7-1-and-8-4"><span aria-hidden="true">&larr;</span>&nbsp;MATH 130</a><span>Interactive lesson and worksheet on vectors (Section 8.4).</span></nav>
 
     <nav class="bg-indigo-700 text-white p-6 shadow-lg sticky top-0 z-50">
         <div class="max-w-5xl mx-auto flex justify-between items-center">

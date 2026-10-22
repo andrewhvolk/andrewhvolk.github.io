@@ -515,7 +515,7 @@ def chooser_html(manifest: dict) -> str:
     <p class="lede">{'Choose a focused lesson or revisit the full unit sessions below.' if featured else 'This lecture is organized as two complete class meetings. Choose the session you are teaching or reviewing.'}</p>
     {featured_html}
     <div class="session-grid">{"".join(cards)}</div>
-    <p class="legacy-note"><a href="{esc(deck["id"])}.pdf">Legacy PDF</a> remains available until instructor approval is complete.</p>
+    <p class="legacy-note">Prefer one file? <a href="{esc(deck["id"])}.pdf">Download all slides as a PDF</a>.</p>
   </main>
 </body>
 </html>
