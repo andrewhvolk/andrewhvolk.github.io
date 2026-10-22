@@ -531,6 +531,108 @@
     display: none;
   }
 
+  /* Single-column page with titled rows (Math Club). */
+  .hub-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    max-width: 46rem;
+  }
+
+  .hub-stack .hub-section > p {
+    max-width: 64ch;
+  }
+
+  .hub-rows {
+    background: var(--hub-surface);
+    border: 1px solid var(--hub-border);
+    border-radius: var(--hub-radius);
+    overflow: hidden;
+  }
+
+  .hub-rows li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 16px 20px;
+    scroll-margin-top: 16px;
+  }
+
+  .hub-rows li + li {
+    border-top: 1px solid var(--hub-border);
+  }
+
+  /* Old club links land on a row; tint it so the reader sees where they arrived. */
+  .hub-rows li:target {
+    background: var(--hub-soft);
+  }
+
+  .hub-rows__title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .hub-rows__text {
+    font-size: 1rem;
+    color: var(--hub-muted);
+  }
+
+  .hub-rows__meta {
+    font-size: 0.9375rem;
+    color: var(--hub-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hub-rows .is-today .hub-rows__meta {
+    color: var(--hub-accent);
+    font-weight: 600;
+  }
+
+  .hub-rows[hidden] {
+    display: none;
+  }
+
+  .hub-rows .is-past .hub-rows__title {
+    color: var(--hub-muted);
+  }
+
+  /* Collapsed list of past events (Math Club). */
+  .hub-past[hidden] {
+    display: none;
+  }
+
+  .hub-past > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    color: var(--hub-accent);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .hub-past > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .hub-past > summary:hover {
+    color: var(--hub-accent-hover);
+  }
+
+  .hub-past .hub-chevron {
+    transition: transform 0.15s ease;
+  }
+
+  .hub-past[open] .hub-chevron {
+    transform: rotate(180deg);
+  }
+
+  .hub-past[open] > summary {
+    margin-bottom: 8px;
+  }
+
   /* Footer */
   .hub footer.hub-footer {
     display: flex;
@@ -608,7 +710,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .hub a.hub-course-card,
-    .course-module .hub-chevron {
+    .course-module .hub-chevron,
+    .hub-past .hub-chevron {
       transition: none;
     }
 

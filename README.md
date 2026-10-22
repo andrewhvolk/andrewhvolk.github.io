@@ -4,7 +4,7 @@ This repository contains the source for a static academic website with course ma
 
 ## Repository Structure
 
-- `index.html`, `CV.html`, `learn.html`, `projects.html`: core public pages.
+- `index.html`, `CV.html`, `club/index.html`, `projects.html`: core public pages.
 - `courses/`: course-specific pages, handouts, and lab resources.
 - `pdfs/`: downloadable PDFs used by course and project pages.
 - `slides/`: slide exports (`.pdf`, `.pptx`, image previews).
@@ -34,6 +34,10 @@ updates do not require editing HTML:
 - `_data/physlab1.yml` and `_data/physlab2.yml`: one row per lab with its prelab quiz and report
   dates. A course may add `checklist` (shown as "Before lab"), and a row with no links shows as a
   plain row instead of one that opens.
+- `_data/club.yml`: the Math Club page (`club/index.html`): introduction, upcoming events, teams,
+  and honor societies. Each event needs a `name` and `date` and may add `time` and `text`. Once
+  its date passes, an event moves into a collapsed "Past events" list on its own
+  (`setupClubEvents()` in `theme.js`). Rooms are announced by email, so events list no room.
 - `_layouts/hub.html` and `_layouts/course.html`: page templates. `_includes/` holds the footer and icons.
 - `assets/css/pages-hub.css`: styles for these pages (scoped to `body.hub`), built into `styles.css` as usual.
 
@@ -107,10 +111,15 @@ python scripts/check_course_dates.py
 
 ## Site Navigation
 
-Lesson, review, lab manual, and Math Club pages use a compact bar at the top: a back link to
+Lesson, review, and lab manual pages use a compact bar at the top: a back link to
 the course page (to the matching row, for example `/courses/math114.html#module-9`), a home
 link, and the theme toggle. Copy that `<nav class="course-bar">` block from a neighboring page
 when adding a new page. `learn.html` and `contact.html` redirect to the home page.
+
+The Math Club is one page, `club/index.html`, built from `_data/club.yml`. The older club pages
+(`club/events.html`, `club/leadership.html`, `club/research.html`, `club/competition.html`,
+`club/interdisciplinary.html`, `club/honor-societies.html`, and the five capitalized pages such as
+`club/CompetitionTeam.html`) redirect to the matching section, for example `/club/#competition`.
 
 ## Notes
 

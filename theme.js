@@ -961,3 +961,43 @@ function setupCourseHub() {
 }
 
 document.addEventListener('DOMContentLoaded', setupCourseHub);
+
+// Math Club page (club/index.html, built from _data/club.yml).
+// The build sorts events into upcoming and a collapsed "Past events" list; this moves any
+// event that has passed since the last build into the past list, newest first.
+function setupClubEvents() {
+    const list = document.querySelector('[data-club-events]');
+    if (!list) return;
+    const today = localDateKey();
+    const past = document.querySelector('[data-club-past]');
+    const pastList = past && past.querySelector('[data-club-past-list]');
+    let shown = 0;
+    list.querySelectorAll('li[data-date]').forEach((item) => {
+        if (item.dataset.date < today) {
+            if (pastList) {
+                item.classList.add('is-past');
+                pastList.prepend(item);
+            } else {
+                item.remove();
+            }
+            return;
+        }
+        shown += 1;
+        if (item.dataset.date === today) {
+            item.classList.add('is-today');
+            const time = item.querySelector('time');
+            if (time) time.textContent = 'Today';
+        }
+    });
+    if (pastList) {
+        const count = pastList.querySelectorAll('li').length;
+        const label = past.querySelector('[data-club-past-count]');
+        if (label) label.textContent = String(count);
+        past.hidden = count === 0;
+    }
+    list.hidden = shown === 0;
+    const empty = document.querySelector('[data-club-events-empty]');
+    if (empty) empty.hidden = shown > 0;
+}
+
+document.addEventListener('DOMContentLoaded', setupClubEvents);
