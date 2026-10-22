@@ -21,6 +21,36 @@ This repository contains the source for a static academic website with course ma
 4. Verify that all local links still resolve.
 5. Commit and publish.
 
+## Home, About, and Course Pages (Jekyll)
+
+GitHub Pages builds these pages with Jekyll from short data files, so routine
+updates do not require editing HTML:
+
+- `_data/courses.yml`: the courses listed on the home page each semester.
+- `_data/profile.yml`: name, title, email, office, and shared links.
+- `_data/math114.yml`: MATH 114 modules, due dates, slides, handouts, videos, and practice links.
+- `_layouts/hub.html` and `_layouts/course.html`: page templates. `_includes/` holds the footer and icons.
+- `assets/css/pages-hub.css`: styles for these pages (scoped to `body.hub`), built into `styles.css` as usual.
+
+To add another course page, copy `_data/math114.yml` to a new file such as
+`_data/math130.yml`, then create the page with front matter only:
+
+```yaml
+---
+layout: course
+course: math130
+title: "MATH 130: Advanced Technical Mathematics | Prof. Volk's Office"
+description: "..."
+---
+```
+
+The current module opens automatically based on today's date, and "Coming up"
+lists the next six dated items (handled by `setupCourseHub()` in `theme.js`).
+On the About page (`CV.html`), the CV download button appears once a PDF exists
+at the `cv_pdf` path in its front matter.
+
+All other HTML files have no front matter, so Jekyll copies them unchanged.
+
 ## Repository Conventions
 
 - Use lowercase kebab-case for new HTML filenames (example: `simple-pendulum-lab-manual.html`).

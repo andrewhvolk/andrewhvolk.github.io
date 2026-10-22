@@ -908,3 +908,54 @@ function setupMath130Fall2026Flow() {
 }
 
 document.addEventListener('DOMContentLoaded', setupMath130Fall2026Flow);
+
+// Course hub pages built from _data/<course>.yml (see _layouts/course.html).
+// Opens and labels the current module, and trims "Coming up" to the next dates.
+function localDateKey(date = new Date()) {
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+function setupCourseHub() {
+    const hub = document.querySelector('.course-hub');
+    if (!hub) return;
+    const today = localDateKey();
+
+    const modules = Array.from(hub.querySelectorAll('.course-module[data-last-date]'));
+    const current = modules.find((module) => module.dataset.lastDate >= today);
+    if (current) {
+        current.open = true;
+        const badge = current.querySelector('.course-module__badge');
+        if (badge) badge.hidden = false;
+        const jump = document.querySelector('[data-jump-this-week]');
+        if (jump) {
+            jump.href = `#${current.id}`;
+            jump.hidden = false;
+        }
+    }
+
+    const upcoming = hub.querySelector('[data-upcoming]');
+    if (upcoming) {
+        const list = upcoming.querySelector('ul');
+        const items = Array.from(list.querySelectorAll('li[data-date]'))
+            .sort((a, b) => a.dataset.date.localeCompare(b.dataset.date));
+        let shown = 0;
+        items.forEach((item) => {
+            const keep = item.dataset.date >= today && shown < 6;
+            if (!keep) {
+                item.remove();
+                return;
+            }
+            shown += 1;
+            if (item.dataset.date === today) {
+                item.classList.add('is-today');
+                const time = item.querySelector('time');
+                if (time) time.textContent = 'Today';
+            }
+            list.appendChild(item);
+        });
+        if (!shown) upcoming.hidden = true;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', setupCourseHub);

@@ -1,0 +1,109 @@
+---
+layout: hub
+wide: true
+---
+{%- assign c = site.data[page.course] -%}
+{%- assign p = site.data.profile -%}
+<a class="hub-back" href="/">{% include hub-icon.html name="back" %} {{ p.name }}</a>
+
+<header class="hub-course-head">
+  <p class="hub-kicker">{{ c.code }} · {{ c.term }}</p>
+  <h1 class="hub-title">{{ c.title }}</h1>
+  <p class="hub-lede">{{ c.intro }}</p>
+  <div class="hub-actions">
+    <a class="hub-btn hub-btn--solid" href="{{ c.canvas }}">Open Canvas</a>
+    <a class="hub-btn" href="#main-content" data-jump-this-week hidden>Jump to this week</a>
+  </div>
+</header>
+
+<div class="course-hub">
+  <main id="main-content" class="course-hub__modules">
+    {%- for part in c.parts %}
+    <section class="course-part" aria-labelledby="part-{{ forloop.index }}">
+      <h2 id="part-{{ forloop.index }}">{{ part.name }}</h2>
+      <div class="course-part__list">
+        {%- for m in part.modules %}
+        <details class="course-module" id="{{ m.label | slugify }}" data-last-date="{{ m.dates.last.date | date: '%Y-%m-%d' }}">
+          <summary>
+            <span class="course-module__text">
+              <span class="course-module__title">{{ m.title }}</span>
+              <span class="course-module__meta">{{ m.label }}{% for d in m.dates %} · {{ d.kind }} {{ d.date | date: "%a, %b %-d" }}{% endfor %}</span>
+            </span>
+            <span class="course-module__badge" hidden>This week</span>
+            {% include hub-icon.html name="chevron" %}
+          </summary>
+          <div class="course-module__body">
+            <div class="course-module__groups">
+              {%- if m.handouts %}
+              <div class="course-module__group">
+                <h3>Slides and handouts</h3>
+                <ul>
+                  {%- for r in m.handouts %}
+                  <li><a class="hub-res" href="{{ r.url }}">{% include hub-icon.html name="doc" %}<span>{{ r.label }}</span></a></li>
+                  {%- endfor %}
+                </ul>
+              </div>
+              {%- endif %}
+              {%- if m.videos %}
+              <div class="course-module__group">
+                <h3>Videos</h3>
+                <ul>
+                  {%- for r in m.videos %}
+                  <li><a class="hub-res" href="{{ r.url }}">{% include hub-icon.html name="video" %}<span>{{ r.label }}</span></a></li>
+                  {%- endfor %}
+                </ul>
+              </div>
+              {%- endif %}
+              {%- if m.practice %}
+              <div class="course-module__group">
+                <h3>Practice and tools</h3>
+                <ul>
+                  {%- for r in m.practice %}
+                  <li><a class="hub-res" href="{{ r.url }}">{% include hub-icon.html name="practice" %}<span>{{ r.label }}</span></a></li>
+                  {%- endfor %}
+                </ul>
+              </div>
+              {%- endif %}
+            </div>
+            <a class="hub-btn hub-btn--solid hub-btn--sm" href="{{ m.lesson }}">{% if m.review %}Open the full review{% else %}Open the lesson{% endif %} {% include hub-icon.html name="arrow" %}</a>
+          </div>
+        </details>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endfor %}
+  </main>
+
+  <aside class="course-hub__side" aria-label="Course details">
+    <section class="course-side" data-upcoming aria-labelledby="upcoming-heading">
+      <h2 id="upcoming-heading">Coming up</h2>
+      <ul class="course-upcoming">
+        {%- for part in c.parts %}{% for m in part.modules %}{% for d in m.dates %}
+        <li data-date="{{ d.date | date: '%Y-%m-%d' }}"><span>{% if d.kind == "Homework" or d.kind == "Quiz" %}{{ m.label }} {{ d.kind | downcase }}{% elsif d.kind == "Review" %}{{ m.title }}{% else %}{{ d.kind }}{% endif %}</span><time datetime="{{ d.date | date: '%Y-%m-%d' }}">{{ d.date | date: "%a, %b %-d" }}</time></li>
+        {%- endfor %}{% endfor %}{% endfor %}
+        {%- for e in c.extras %}
+        <li data-date="{{ e.date | date: '%Y-%m-%d' }}"><span>{{ e.label }}</span><time datetime="{{ e.date | date: '%Y-%m-%d' }}">{{ e.date | date: "%a, %b %-d" }}</time></li>
+        {%- endfor %}
+      </ul>
+    </section>
+
+    <section class="course-side" aria-labelledby="tools-heading">
+      <h2 id="tools-heading">Tools</h2>
+      <ul>
+        {%- for t in c.tools %}
+        <li><a href="{{ t.url }}">{{ t.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </section>
+
+    <section class="course-side" aria-labelledby="help-heading">
+      <h2 id="help-heading">Help</h2>
+      <p>Check Canvas first, then email or book a time.</p>
+      <ul>
+        <li><a href="mailto:{{ p.email }}">{{ p.email }}</a></li>
+        <li><a href="{{ p.booking_url }}">Book a meeting</a></li>
+        <li><span class="course-side__note">Office {{ p.office }}</span></li>
+      </ul>
+    </section>
+  </aside>
+</div>
