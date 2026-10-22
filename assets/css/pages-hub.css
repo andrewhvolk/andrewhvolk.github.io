@@ -371,6 +371,18 @@
     background: var(--hub-hover);
   }
 
+  /* The list clips anything outside a row, so draw the focus ring inside the row header.
+     A mouse click shows no ring; keyboard focus still does. */
+  .hub .course-module > summary:focus-visible {
+    outline-offset: -3px;
+    border-radius: 0;
+  }
+
+  .hub .course-module > summary:focus:not(:focus-visible),
+  .hub .hub-past > summary:focus:not(:focus-visible) {
+    outline: none;
+  }
+
   .course-module__text {
     flex: 1;
     min-width: 0;
