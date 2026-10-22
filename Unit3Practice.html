@@ -56,6 +56,9 @@
         .practice-sheet li:last-child {
             margin-bottom: 0;
         }
+        .answers { margin: 0.25rem 0 1.25rem; }
+        .answers summary { cursor: pointer; font-weight: 600; color: var(--accent-strong, #2d5b8c); }
+        .answers ul { margin-top: 0.5rem; }
         .image-placeholder {
             background: var(--surface-container-highest);
             border: 1px dashed color-mix(in srgb, var(--bg-surface) 40%, var(--border-subtle));
@@ -94,7 +97,7 @@
 <header class="course-header course-header--unit">
   <div class="container">
     <h1>Math 130 Unit 3 Practice Questions</h1>
-    <p class="subtitle">A consolidated review set for Modules 10 through 13 covering trigonometry, applications, and vectors.</p>
+    <p class="subtitle">Practice with answers for Sections 5.1 to 8.4: trigonometry, applications, and vectors.</p>
   </div>
 </header>
 <main class="container course-page practice-page">
@@ -102,7 +105,7 @@
 
 
     <h1>Math 130 Unit 3 Practice Questions</h1>
-    <p>Practice questions for all 33 Unit 3 objectives, grouped by textbook section. Each section notes which Fall 2026 quiz covers it. Every section is on Test 3 and the Quiz 13 readiness check. Dates are on the <a href="/courses/math130.html#sections-5-1-5-3">MATH 130 page</a>.</p>
+    <p>Practice questions for all 33 Unit 3 objectives, grouped by textbook section. Try each question first, then open "Show answers" to check your work. Answers are rounded to two decimal places unless noted. Each section notes which Fall 2026 quiz covers it. Every section is on Test 3 and the Quiz 13 readiness check. Dates are on the <a href="/courses/math130.html#sections-5-1-5-3">MATH 130 page</a>.</p>
 
     <hr>
 
@@ -112,12 +115,12 @@
     <p class="assessment">Covered on Quiz 10 and Test 3.</p>
 
     <h4>1. Sketching an angle with absolute value less than 360 degrees in standard position</h4>
-    <div class="image-placeholder"></div>
     <ul>
         <li><strong>Q1:</strong> Sketch the angle 150&deg; in standard position.</li>
         <li><strong>Q2:</strong> Sketch the angle -85&deg; in standard position.</li>
         <li><strong>Q3:</strong> Sketch the angle 210&deg; in standard position.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> 150° ends in Quadrant II, 30° short of the negative x-axis.</li><li><strong>Q2:</strong> −85° turns clockwise and ends in Quadrant IV, 5° short of the negative y-axis.</li><li><strong>Q3:</strong> 210° ends in Quadrant III, 30° past the negative x-axis.</li></ul></details>
 
     <h4>2. Sketching an angle in standard position given in degrees and finding a coterminal angle</h4>
     <ul>
@@ -125,6 +128,7 @@
         <li><strong>Q2:</strong> Sketch 280&deg; in standard position and find one negative coterminal angle.</li>
         <li><strong>Q3:</strong> Sketch 45&deg; in standard position and find one negative coterminal angle.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Ends in Quadrant III. Positive coterminal angle: 260°.</li><li><strong>Q2:</strong> Ends in Quadrant IV. Negative coterminal angle: −80°.</li><li><strong>Q3:</strong> Ends in Quadrant I. Negative coterminal angle: −315°.</li></ul></details>
 
     <h4>3. Sketching an angle in standard position given in radians and finding a coterminal angle</h4>
     <ul>
@@ -132,6 +136,7 @@
         <li><strong>Q2:</strong> Sketch -7&pi;/6 in standard position and find a positive coterminal angle.</li>
         <li><strong>Q3:</strong> Sketch &pi;/4 in standard position and find a negative coterminal angle.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Ends in Quadrant III. Positive coterminal angle: 10π/3.</li><li><strong>Q2:</strong> Ends in Quadrant II. Positive coterminal angle: 5π/6.</li><li><strong>Q3:</strong> Ends in Quadrant I. Negative coterminal angle: −7π/4.</li></ul></details>
 
     <h4>4. Sketching an angle with absolute value greater than 360 degrees in standard position</h4>
     <ul>
@@ -139,6 +144,7 @@
         <li><strong>Q2:</strong> Sketch the angle -400&deg; in standard position.</li>
         <li><strong>Q3:</strong> Sketch the angle 13&pi;/3 in standard position.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> 420° is one full turn plus 60°, so it ends in Quadrant I like 60°.</li><li><strong>Q2:</strong> −400° is one full clockwise turn plus 40° more, so it ends in Quadrant IV like 320°.</li><li><strong>Q3:</strong> 13π/3 is two full turns plus π/3, so it ends in Quadrant I like π/3.</li></ul></details>
 
     <h4>5. Arc length and central angle measure</h4>
     <ul>
@@ -146,6 +152,7 @@
         <li><strong>Q2:</strong> Find the distance a wheel of diameter 3 ft travels in one complete rotation.</li>
         <li><strong>Q3:</strong> A central angle of 120&deg; intercepts an arc of 15 inches. Find the radius of the circle.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> s = rθ = 4(π/3) = 4π/3 ft ≈ 4.19 ft.</li><li><strong>Q2:</strong> One rotation is the circumference: 3π ft ≈ 9.42 ft.</li><li><strong>Q3:</strong> 120° = 2π/3, so r = s/θ = 15 ÷ (2π/3) = 45/(2π) ≈ 7.16 in.</li></ul></details>
 
     <h3>Section 5.2 (8 Topics)</h3>
     <p class="assessment">Covered on Quiz 10 and Test 3.</p>
@@ -156,14 +163,15 @@
         <li><strong>Q2:</strong> Use a calculator to approximate cos(&pi;/7) to four decimal places.</li>
         <li><strong>Q3:</strong> Use a calculator to approximate tan(195&deg;) to four decimal places.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> sin 42° ≈ 0.6691 (degree mode).</li><li><strong>Q2:</strong> cos(π/7) ≈ 0.9010 (radian mode).</li><li><strong>Q3:</strong> tan 195° ≈ 0.2679 (degree mode).</li></ul></details>
 
     <h4>7. Sine, cosine, and tangent ratios: Numbers for side lengths</h4>
-    <div class="image-placeholder"></div>
     <ul>
         <li><strong>Q1:</strong> Given a right triangle with legs 3 and 4, and hypotenuse 5, find sin(&theta;) where &theta; is opposite the side of length 3.</li>
         <li><strong>Q2:</strong> In a right triangle where the adjacent side to &theta; is 8 and the hypotenuse is 17, find cos(&theta;).</li>
         <li><strong>Q3:</strong> For a right triangle with legs 5 and 12, find tan(&theta;) for the angle adjacent to the side of length 12.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> sin θ = 3/5.</li><li><strong>Q2:</strong> cos θ = 8/17.</li><li><strong>Q3:</strong> The angle adjacent to 12 is opposite 5, so tan θ = 5/12.</li></ul></details>
 
     <h4>8. Sine, cosine, and tangent ratios: Variables for side lengths</h4>
     <ul>
@@ -171,6 +179,7 @@
         <li><strong>Q2:</strong> In a right triangle with hypotenuse c and legs a and b, what is tan(&theta;) for the angle adjacent to a?</li>
         <li><strong>Q3:</strong> If a right triangle has an adjacent leg m and opposite leg n, express cos(&theta;) in terms of m and n.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> sin θ = x/z.</li><li><strong>Q2:</strong> tan θ = b/a.</li><li><strong>Q3:</strong> cos θ = m/√(m² + n²).</li></ul></details>
 
     <h4>9. Using the Pythagorean Theorem to find a sine, cosine, or tangent ratio in a right triangle</h4>
     <ul>
@@ -178,6 +187,7 @@
         <li><strong>Q2:</strong> If cos(&theta;) = 7/25 in a right triangle, find tan(&theta;).</li>
         <li><strong>Q3:</strong> Given tan(&theta;) = 8/15, use the Pythagorean theorem to find sin(&theta;).</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Opposite 3, hypotenuse 5, adjacent 4: cos θ = 4/5.</li><li><strong>Q2:</strong> Adjacent 7, hypotenuse 25, opposite 24: tan θ = 24/7.</li><li><strong>Q3:</strong> Opposite 8, adjacent 15, hypotenuse 17: sin θ = 8/17.</li></ul></details>
 
     <h4>10. Using the Pythagorean Theorem to find several trigonometric ratios in a right triangle</h4>
     <ul>
@@ -185,6 +195,7 @@
         <li><strong>Q2:</strong> If the hypotenuse is 13 and one leg is 5, find csc(&theta;) and sec(&theta;) for the angle adjacent to the leg of length 5.</li>
         <li><strong>Q3:</strong> Given sin(&theta;) = 9/41, find the exact values of the remaining five trigonometric functions.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Hypotenuse 10. sin θ = 3/5, cos θ = 4/5, tan θ = 3/4, csc θ = 5/3, sec θ = 5/4, cot θ = 4/3.</li><li><strong>Q2:</strong> The other leg is 12. csc θ = 13/12 and sec θ = 13/5.</li><li><strong>Q3:</strong> Adjacent side 40. cos θ = 40/41, tan θ = 9/40, csc θ = 41/9, sec θ = 41/40, cot θ = 40/9.</li></ul></details>
 
     <h4>11. Using a trigonometric ratio to find a side length in a right triangle</h4>
     <ul>
@@ -192,6 +203,7 @@
         <li><strong>Q2:</strong> Find the adjacent leg of a right triangle if the angle is 45&deg; and the hypotenuse is 10.</li>
         <li><strong>Q3:</strong> If an angle is 60&deg; and the opposite leg is 15&radic;3, find the hypotenuse.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> 20 sin 30° = 10.</li><li><strong>Q2:</strong> 10 cos 45° = 5√2 ≈ 7.07.</li><li><strong>Q3:</strong> 15√3 ÷ sin 60° = 30.</li></ul></details>
 
     <h4>12. Using trigonometry to find a length in a word problem with one right triangle</h4>
     <ul>
@@ -199,14 +211,15 @@
         <li><strong>Q2:</strong> A kite is flying on 150 feet of string. If the angle of elevation is 40&deg;, how high is the kite?</li>
         <li><strong>Q3:</strong> A tree casts a 20-foot shadow when the sun's angle of elevation is 55&deg;. Find the height of the tree.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> cos 70° = 4/L, so L = 4 ÷ cos 70° ≈ 11.70 ft.</li><li><strong>Q2:</strong> h = 150 sin 40° ≈ 96.42 ft.</li><li><strong>Q3:</strong> h = 20 tan 55° ≈ 28.56 ft.</li></ul></details>
 
     <h4>13. Using trigonometry to find lengths in a figure involving two right triangles</h4>
-    <div class="image-placeholder"></div>
     <ul>
         <li><strong>Q1:</strong> Two buildings are 50 ft apart. From the top of the shorter building, the angle of elevation to the taller is 30&deg; and the angle of depression to its base is 45&deg;. Find the height of the taller building.</li>
         <li><strong>Q2:</strong> A surveyor is 100 ft from a tower. The angle of elevation to the top of a given antenna on the tower is 60&deg;, and to the bottom of the antenna is 45&deg;. Find the antenna's length.</li>
         <li><strong>Q3:</strong> From a boat, the angle of elevation to the top of a cliff is 25&deg;. After sailing 200 ft closer, the angle is 40&deg;. How high is the cliff?</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> The 45° depression makes the shorter building 50 ft tall. The rise above it is 50 tan 30° ≈ 28.87 ft, so the taller building is about 78.87 ft.</li><li><strong>Q2:</strong> 100 tan 60° − 100 tan 45° ≈ 173.21 − 100 = 73.21 ft.</li><li><strong>Q3:</strong> With h = d tan 25° = (d − 200) tan 40°, d ≈ 450.2 ft and h ≈ 209.9 ft.</li></ul></details>
 
     <hr>
 
@@ -221,6 +234,7 @@
         <li><strong>Q2:</strong> Sketch -45&deg; and identify its reference angle &theta;&prime;.</li>
         <li><strong>Q3:</strong> Sketch 300&deg; and identify its reference angle &theta;&prime;.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Quadrant III; θ′ = 30°.</li><li><strong>Q2:</strong> Quadrant IV; θ′ = 45°.</li><li><strong>Q3:</strong> Quadrant IV; θ′ = 60°.</li></ul></details>
 
     <h4>15. Reference angles in degrees: Problem type 1</h4>
     <ul>
@@ -228,6 +242,7 @@
         <li><strong>Q2:</strong> Find the reference angle for 250&deg;.</li>
         <li><strong>Q3:</strong> Find the reference angle for -70&deg;.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> 45°.</li><li><strong>Q2:</strong> 70°.</li><li><strong>Q3:</strong> 70°.</li></ul></details>
 
     <h4>16. Sketching an angle with absolute value greater than 360 degrees, and also its reference angle</h4>
     <ul>
@@ -235,6 +250,7 @@
         <li><strong>Q2:</strong> Sketch -500&deg; and identify its reference angle.</li>
         <li><strong>Q3:</strong> Sketch 750&deg; and identify its reference angle.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> 400° is coterminal with 40° (Quadrant I); θ′ = 40°.</li><li><strong>Q2:</strong> −500° is coterminal with 220° (Quadrant III); θ′ = 40°.</li><li><strong>Q3:</strong> 750° is coterminal with 30° (Quadrant I); θ′ = 30°.</li></ul></details>
 
     <h4>17. Reference angles in degrees: Problem type 2</h4>
     <ul>
@@ -242,6 +258,7 @@
         <li><strong>Q2:</strong> Find the reference angle for -800&deg;.</li>
         <li><strong>Q3:</strong> Find the reference angle for 1020&deg;.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> 560° → 200°; θ′ = 20°.</li><li><strong>Q2:</strong> −800° → 280°; θ′ = 80°.</li><li><strong>Q3:</strong> 1020° → 300°; θ′ = 60°.</li></ul></details>
 
     <h4>18. Sketching an angle with absolute value less than 2&pi; radians, and also its reference angle</h4>
     <ul>
@@ -249,6 +266,7 @@
         <li><strong>Q2:</strong> Sketch -&pi;/3 and mark its reference angle.</li>
         <li><strong>Q3:</strong> Sketch 7&pi;/4 and mark its reference angle.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Quadrant II; θ′ = π/6.</li><li><strong>Q2:</strong> Quadrant IV; θ′ = π/3.</li><li><strong>Q3:</strong> Quadrant IV; θ′ = π/4.</li></ul></details>
 
     <h4>19. Reference angles in radians: Problem type 1</h4>
     <ul>
@@ -256,6 +274,7 @@
         <li><strong>Q2:</strong> Find the reference angle for -3&pi;/4.</li>
         <li><strong>Q3:</strong> Find the reference angle for 2&pi;/3.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> π/6.</li><li><strong>Q2:</strong> π/4.</li><li><strong>Q3:</strong> π/3.</li></ul></details>
 
     <h4>20. Determining the location of a terminal point given the signs of trigonometric values</h4>
     <ul>
@@ -263,6 +282,7 @@
         <li><strong>Q2:</strong> Identify the quadrant in which &theta; lies if tan(&theta;) &lt; 0 and sec(&theta;) &lt; 0.</li>
         <li><strong>Q3:</strong> Identify the quadrant in which &theta; lies if csc(&theta;) &gt; 0 and cot(&theta;) &lt; 0.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Quadrant IV.</li><li><strong>Q2:</strong> sec θ < 0 means cos θ < 0, and tan θ < 0, so Quadrant II.</li><li><strong>Q3:</strong> csc θ > 0 means sin θ > 0, and cot θ < 0, so Quadrant II.</li></ul></details>
 
     <h4>21. Finding values of trigonometric functions given information about an angle: Problem type 1</h4>
     <ul>
@@ -270,6 +290,7 @@
         <li><strong>Q2:</strong> The point (5, -12) is on the terminal side of an angle &theta;. Find all six trigonometric functions.</li>
         <li><strong>Q3:</strong> The point (-2, -5) is on the terminal side of an angle &theta;. Find tan(&theta;).</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> r = 5. sin θ = 3/5 and cos θ = −4/5.</li><li><strong>Q2:</strong> r = 13. sin θ = −12/13, cos θ = 5/13, tan θ = −12/5, csc θ = −13/12, sec θ = 13/5, cot θ = −5/12.</li><li><strong>Q3:</strong> tan θ = y/x = 5/2.</li></ul></details>
 
     <hr>
 
@@ -284,6 +305,7 @@
         <li><strong>Q2:</strong> Solve for leg b in a right triangle where B = 50&deg; and hypotenuse c = 22.</li>
         <li><strong>Q3:</strong> Solve for leg a in a right triangle where B = 25&deg; and leg b = 10.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> a = 14 sin 35° ≈ 8.03.</li><li><strong>Q2:</strong> b = 22 sin 50° ≈ 16.85.</li><li><strong>Q3:</strong> a = b ÷ tan 25° = 10 ÷ tan 25° ≈ 21.45.</li></ul></details>
 
     <h4>23. Using trigonometry to find a length in a word problem with one right triangle</h4>
     <ul>
@@ -291,6 +313,7 @@
         <li><strong>Q2:</strong> A plane flies 150 miles on a bearing of 210&deg;. How far south is it from the starting point?</li>
         <li><strong>Q3:</strong> A hiker walks 5 miles east and 12 miles north. What is the direct distance from the start?</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Bearing 120° is 30° south of east. East: 80 sin 120° ≈ 69.28 mi.</li><li><strong>Q2:</strong> Bearing 210° is 30° west of south. South: 150 cos 30° ≈ 129.90 mi.</li><li><strong>Q3:</strong> √(5² + 12²) = 13 mi.</li></ul></details>
 
     <h4>24. Using trigonometric functions and the formula d=rt in a real-world situation</h4>
     <ul>
@@ -298,6 +321,7 @@
         <li><strong>Q2:</strong> A submarine descends at an angle of 5&deg; at 15 mph. How deep is it after 30 minutes?</li>
         <li><strong>Q3:</strong> A plane climbs at 12&deg; at 300 mph. How long to reach an altitude of 3 miles?</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Distance 800 mi. South: 800 cos 30° ≈ 692.82 mi.</li><li><strong>Q2:</strong> Distance 7.5 mi. Depth: 7.5 sin 5° ≈ 0.654 mi ≈ 3,451 ft.</li><li><strong>Q3:</strong> Climb rate: 300 sin 12° ≈ 62.37 mph, so 3 ÷ 62.37 ≈ 0.048 h ≈ 2.9 minutes.</li></ul></details>
 
     <h4>25. Using a trigonometric ratio to find an angle measure in a right triangle</h4>
     <ul>
@@ -305,6 +329,7 @@
         <li><strong>Q2:</strong> In a right triangle, hypotenuse c = 50 and leg a = 30. Find angle B.</li>
         <li><strong>Q3:</strong> In a right triangle, leg b = 7 and hypotenuse c = 14. Find angle A.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> tan A = 15/20, so A ≈ 36.87°.</li><li><strong>Q2:</strong> cos B = 30/50, so B ≈ 53.13°.</li><li><strong>Q3:</strong> cos A = 7/14, so A = 60°.</li></ul></details>
 
     <h4>26. Using trigonometry to find angles of elevation or depression in a word problem</h4>
     <ul>
@@ -312,6 +337,7 @@
         <li><strong>Q2:</strong> From a 100-foot cliff, the angle of depression to a boat is 15&deg;. How far is the boat from the base of the cliff?</li>
         <li><strong>Q3:</strong> An airplane climbs 1000 feet over a ground distance of 5000 feet. What is the angle of climb?</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> tan θ = 50/40, so θ ≈ 51.34°.</li><li><strong>Q2:</strong> d = 100 ÷ tan 15° ≈ 373.21 ft.</li><li><strong>Q3:</strong> tan θ = 1000/5000, so θ ≈ 11.31°.</li></ul></details>
 
     <h4>27. Solving a right triangle</h4>
     <ul>
@@ -319,6 +345,7 @@
         <li><strong>Q2:</strong> Solve the right triangle where a = 18 and b = 24.</li>
         <li><strong>Q3:</strong> Solve the right triangle where B = 65&deg; and a = 10.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> B = 48°, a = 25 sin 42° ≈ 16.73, b = 25 cos 42° ≈ 18.58.</li><li><strong>Q2:</strong> c = 30, A ≈ 36.87°, B ≈ 53.13°.</li><li><strong>Q3:</strong> A = 25°, b = 10 tan 65° ≈ 21.45, c = 10 ÷ cos 65° ≈ 23.66.</li></ul></details>
 
     <h4>28. Using trigonometry to find a length in a word problem with two right triangles</h4>
     <ul>
@@ -326,6 +353,7 @@
         <li><strong>Q2:</strong> A person is standing between two trees. The angle of elevation to the top of the 30 ft tree is 45&deg; and to the top of the 40 ft tree is 60&deg;. How far apart are the trees?</li>
         <li><strong>Q3:</strong> From the top of a 150 ft lighthouse, the angles of depression to two boats in a line are 25&deg; and 40&deg;. Find the distance between the boats.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Distance to the building: 40 ÷ tan 35° ≈ 57.13 ft. Height: 40 + 57.13 tan 20° ≈ 60.79 ft.</li><li><strong>Q2:</strong> The person is 30 ft from the 30 ft tree and 40 ÷ tan 60° ≈ 23.09 ft from the 40 ft tree, so the trees are about 53.09 ft apart (measuring from ground level).</li><li><strong>Q3:</strong> 150 ÷ tan 25° − 150 ÷ tan 40° ≈ 321.68 − 178.76 ≈ 142.91 ft.</li></ul></details>
 
     <hr>
 
@@ -335,12 +363,12 @@
     <p class="assessment">Covered on Quiz 12 and Test 3.</p>
 
     <h4>29. Writing a vector in component form given its initial and terminal points</h4>
-    <div class="image-placeholder"></div>
     <ul>
         <li><strong>Q1:</strong> Find the component form of the vector with initial point (-2, 3) and terminal point (4, 1).</li>
         <li><strong>Q2:</strong> Find the component form of the vector with initial point (0, -5) and terminal point (6, -2).</li>
         <li><strong>Q3:</strong> Find the component form of the vector with initial point (1, 1) and terminal point (-3, -4).</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> ⟨6, −2⟩.</li><li><strong>Q2:</strong> ⟨6, 3⟩.</li><li><strong>Q3:</strong> ⟨−4, −5⟩.</li></ul></details>
 
     <h4>30. Vector addition and scalar multiplication: Component form</h4>
     <ul>
@@ -348,6 +376,7 @@
         <li><strong>Q2:</strong> Given u = &lang;15, 20&rang; and v = &lang;-5, 12&rang;, find the magnitude of u + v.</li>
         <li><strong>Q3:</strong> Given v = &lang;4, -7&rang;, find 3v.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> ⟨4, 3⟩.</li><li><strong>Q2:</strong> u + v = ⟨10, 32⟩; magnitude √1124 = 2√281 ≈ 33.53.</li><li><strong>Q3:</strong> ⟨12, −21⟩.</li></ul></details>
 
     <h4>31. Finding the magnitude and direction of a vector given its graph</h4>
     <ul>
@@ -355,6 +384,7 @@
         <li><strong>Q2:</strong> A vector extends from (-1,4) to (2,2). Find its magnitude.</li>
         <li><strong>Q3:</strong> A vector extends from (-3,-3) to (0,0). Find its direction angle.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Magnitude 5; direction angle ≈ 53.13°.</li><li><strong>Q2:</strong> ⟨3, −2⟩, so magnitude √13 ≈ 3.61.</li><li><strong>Q3:</strong> ⟨3, 3⟩, so direction angle 45°.</li></ul></details>
 
     <h4>32. Finding the direction angle of a vector given in ai+bj form</h4>
     <ul>
@@ -362,6 +392,7 @@
         <li><strong>Q2:</strong> Find the direction angle of v = -2i + 2&radic;3j.</li>
         <li><strong>Q3:</strong> Find the exact component form of a vector with magnitude 10 and direction angle 150&deg;.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> Quadrant IV; θ = 315°.</li><li><strong>Q2:</strong> Quadrant II; θ = 120°.</li><li><strong>Q3:</strong> ⟨10 cos 150°, 10 sin 150°⟩ = ⟨−5√3, 5⟩.</li></ul></details>
 
     <h3>Chapter 8 Supplementary Topics (1 Topic)</h3>
 
@@ -371,6 +402,7 @@
         <li><strong>Q2:</strong> Read the graph of vector r pointing left 4 units and up 2 units. Write its component form.</li>
         <li><strong>Q3:</strong> From a graph showing u and v added head-to-tail, determine the component form of the resultant r.</li>
     </ul>
+    <details class="answers"><summary>Show answers</summary><ul><li><strong>Q1:</strong> ⟨3, 5⟩.</li><li><strong>Q2:</strong> ⟨−4, 2⟩.</li><li><strong>Q3:</strong> The resultant is r = u + v: add the x-components of u and v, then the y-components.</li></ul></details>
 
 
   </section>
