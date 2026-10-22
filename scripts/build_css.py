@@ -23,7 +23,6 @@ MODULES = [
     "pages-courses.css",
     "pages-tools.css",
     "pages-cv.css",
-    "pages-mathclub.css",
     "pages-review.css",
     "pages-hub.css",
     "utilities.css",

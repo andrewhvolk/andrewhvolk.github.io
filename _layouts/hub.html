@@ -11,13 +11,13 @@
   <meta property="og:title" content="{{ page.og_title | default: page.title }}">
   <meta property="og:description" content="{{ page.description }}">
   <meta property="og:url" content="https://andrewhvolk.github.io{{ page.url | replace: 'index.html', '' }}">
-  <meta property="og:image" content="https://andrewhvolk.github.io/headshot150.jpg">
+  <meta property="og:image" content="https://andrewhvolk.github.io{{ page.og_image | default: '/headshot150.jpg' }}">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap">
-  <link rel="stylesheet" href="/styles.css?v=20261022-3">
+  <link rel="stylesheet" href="/styles.css?v=20261022-4">
   <script>(function(){var s;try{s=localStorage.getItem('theme')}catch(e){}document.documentElement.setAttribute('data-theme',(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches))?'dark':'light')})();</script>
   <script src="/theme.js" defer></script>
 </head>
