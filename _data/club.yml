@@ -8,9 +8,10 @@ intro: >-
 announcements: >-
   Math Club sends a newsletter and email updates at least once a month.
 
-# Events, in date order. Each needs a name and a date (YYYY-MM-DD); time and text are
-# optional. Once its date passes, an event moves into the collapsed "Past events" list on
-# its own. Rooms are announced by email, so the page shows no room.
+# Events, in date order. Each needs a name and a date (YYYY-MM-DD). Time, text, and
+# `link: { label, url }` (a link shown after the text) are optional. Once its date passes,
+# an event moves into the collapsed "Past events" list on its own. Rooms are announced by
+# email, so the page shows no room.
 events:
   - name: "Math Majors, Donuts, and Coffee"
     date: 2026-10-26
@@ -23,6 +24,7 @@ events:
     date: 2026-11-30
     time: "10:30 to 11:30 AM"
     text: "Teams race to estimate answers to quantitative questions. The contest returns after its first run last fall."
+    link: { label: "How the Estimathon works", url: /club/estimathon.html }
   - name: "Math Activity"
     date: 2026-12-07
     time: "10:30 to 11:30 AM"

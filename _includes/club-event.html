@@ -4,6 +4,8 @@
   <span class="hub-rows__title">{{ include.e.name }}</span>
   <span class="hub-rows__meta"><time datetime="{{ d }}">{{ include.e.date | date: "%a, %b %-d" }}</time>{% if include.e.time %}, {{ include.e.time }}{% endif %}</span>
   {%- if include.e.text %}
-  <span class="hub-rows__text">{{ include.e.text }}</span>
+  <span class="hub-rows__text">{{ include.e.text }}{% if include.e.link %} <a href="{{ include.e.link.url }}">{{ include.e.link.label }}</a>{% endif %}</span>
+  {%- elsif include.e.link %}
+  <span class="hub-rows__text"><a href="{{ include.e.link.url }}">{{ include.e.link.label }}</a></span>
   {%- endif %}
 </li>

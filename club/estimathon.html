@@ -1,0 +1,78 @@
+---
+layout: hub
+title: "Estimathon | Math Club | Prof. Volk's Office"
+og_title: "The Liberty Estimathon"
+og_image: /club/LUMClogoV1.png
+description: "How the Liberty Math Club Estimathon works: the format, the rules, how scoring works, and practice questions."
+---
+<a class="hub-back" href="/club/#events">{% include hub-icon.html name="back" %} Math Club</a>
+
+<main id="main-content" class="hub-prose hub-doc">
+  <p class="hub-kicker">Liberty Math Club</p>
+  <h1 class="hub-title">The Estimathon</h1>
+  <p>The Estimathon is a team contest in estimation. Teams have 30 minutes to answer 13 questions whose exact answers almost no one knows, such as how many gas stations in the United States have a convenience store. Instead of a single number, each answer is a range. A narrow range that contains the true value scores well. A range that misses costs a team a great deal.</p>
+  <p>No calculus or advanced mathematics is needed. The contest rewards reasoning about size, sensible assumptions, and teamwork.</p>
+
+  <h2 id="format">Format</h2>
+  <ul>
+    <li>Students compete in teams.</li>
+    <li>Each team receives the same 13 questions and has 30 minutes.</li>
+    <li>Every answer is a positive number. A team answers with an interval, a minimum and a maximum, such as [2,000, 8,000]. Both ends must be positive.</li>
+    <li>Each team has 18 answer slips. A slip lists the team name, the question number, and the interval. Slips can be turned in at any time during the 30 minutes.</li>
+    <li>A team may answer the same question more than once. Only its last slip for that question counts, whether it was right or wrong.</li>
+    <li>A scoreboard updates during the contest as slips are graded.</li>
+  </ul>
+
+  <h2 id="rules">Rules</h2>
+  <ul>
+    <li>No calculators, phones, internet, or other reference material.</li>
+    <li>Paper, pencils, and teammates are allowed.</li>
+    <li>An interval is <strong>good</strong> if it contains the correct answer.</li>
+    <li>The team with the <strong>lowest</strong> score wins.</li>
+  </ul>
+
+  <h2 id="scoring">Scoring</h2>
+  <p>Each good interval earns points based on how wide it is: divide the maximum by the minimum, round up, and subtract 1. A perfect guess scores 0. A team's total is</p>
+  <p class="hub-formula">Score = (10 + <var>P</var>) &times; 2<sup><var>M</var></sup></p>
+  <p>where <var>P</var> is the sum of the points from all good intervals and <var>M</var> is the number of questions without a good interval, whether missed or left blank. Each of those doubles the score, so a wide range that is right usually beats a narrow range that is wrong.</p>
+  <div class="hub-table-wrap">
+    <table class="hub-table">
+      <caption>If the correct answer is 42</caption>
+      <thead>
+        <tr><th scope="col">Interval</th><th scope="col">Result</th><th scope="col">Points</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>[10, 30]</td><td>Missed (does not contain 42)</td><td>Doubles the score</td></tr>
+        <tr><td>[1, 1,000]</td><td>Good</td><td>999</td></tr>
+        <tr><td>[20, 200]</td><td>Good</td><td>9</td></tr>
+        <tr><td>[30, 60]</td><td>Good</td><td>1</td></tr>
+        <tr><td>[40, 45]</td><td>Good</td><td>1</td></tr>
+        <tr><td>[42, 42]</td><td>Good</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>For example, a team with good intervals on 11 questions earning 39 points in all, and 2 questions missed, scores (10 + 39) &times; 2<sup>2</sup> = 196.</p>
+
+  <h2 id="tips">Tips</h2>
+  <ul>
+    <li>Break a question into pieces you can estimate, such as people, rates, and time, and multiply.</li>
+    <li>Think in powers of ten first. Being within a factor of 10 is a good start.</li>
+    <li>Answer every question. A blank question doubles the score just as a wrong one does.</li>
+    <li>Save a few slips. Use them to fix a missed question or to narrow a range once the team agrees.</li>
+  </ul>
+
+  <h2 id="practice">Practice questions</h2>
+  <p>Give a range for each, then open it to check. Try to keep every range within a factor of 2 or 3.</p>
+  <div class="hub-practice">
+    <details><summary>How many seconds are in one week?</summary><p>604,800</p></details>
+    <details><summary>How many keys are on a standard piano?</summary><p>88</p></details>
+    <details><summary>How many bones are in an adult human body?</summary><p>206</p></details>
+    <details><summary>How tall is Mount Everest, in feet?</summary><p>About 29,032 feet</p></details>
+    <details><summary>How long is a marathon, in feet?</summary><p>About 138,400 feet (26.2 miles)</p></details>
+    <details><summary>What is the average distance from Earth to the Moon, in miles?</summary><p>About 238,900 miles</p></details>
+  </div>
+
+  <div class="hub-actions">
+    <a class="hub-btn hub-btn--solid" href="/club/#events">See Math Club events</a>
+  </div>
+</main>
