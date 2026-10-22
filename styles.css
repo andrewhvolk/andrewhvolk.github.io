@@ -5129,7 +5129,7 @@ body.math130-course-page {
   .hub-page {
     max-width: 880px;
     margin: 0 auto;
-    padding: 56px 24px 28px;
+    padding: 32px 24px 28px;
     display: flex;
     flex-direction: column;
     gap: 44px;
@@ -5137,8 +5137,16 @@ body.math130-course-page {
 
   .hub-page--wide {
     max-width: 1040px;
-    padding-top: 32px;
     gap: 36px;
+  }
+
+  /* The back link belongs to the header below it, so keep it close. */
+  .hub-page > .hub-back {
+    margin-bottom: -28px;
+  }
+
+  .hub-page--wide > .hub-back {
+    margin-bottom: -20px;
   }
 
   .hub-title {
