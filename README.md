@@ -26,7 +26,8 @@ This repository contains the source for a static academic website with course ma
 GitHub Pages builds these pages with Jekyll from short data files, so routine
 updates do not require editing HTML:
 
-- `_data/courses.yml`: the courses listed on the home page each semester.
+- `_data/courses.yml`: the courses listed on the home page each semester. Courses under `past`
+  appear in a collapsed "Past courses" list below the current ones.
 - `_data/profile.yml`: name, title, email, office, and shared links.
 - `_data/math114.yml`: MATH 114 modules, due dates, slides, handouts, videos, and practice links.
 - `_data/math130.yml`: MATH 130 units and quiz cycles in the same format. A date may add `time`

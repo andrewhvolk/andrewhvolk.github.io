@@ -633,6 +633,11 @@
     margin-bottom: 8px;
   }
 
+  /* Past courses on the home page: keep cards the same width as the current ones. */
+  .hub-past .hub-course-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
   /* Footer */
   .hub footer.hub-footer {
     display: flex;

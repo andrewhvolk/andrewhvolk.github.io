@@ -33,5 +33,23 @@ description: "Course pages for Prof. Andrew H. Volk's mathematics and physics co
       </li>
       {%- endfor %}
     </ul>
+    {%- if courses.past and courses.past.size > 0 %}
+    <details class="hub-past">
+      <summary><span>Past courses ({{ courses.past.size }})</span>{% include hub-icon.html name="chevron" %}</summary>
+      <ul class="hub-course-grid">
+        {%- for c in courses.past %}
+        <li>
+          <a class="hub-course-card" href="{{ c.url }}">
+            <span class="hub-course-card__text">
+              <span class="hub-course-card__title">{{ c.title }}</span>
+              <span class="hub-course-card__code">{{ c.code }}</span>
+            </span>
+            {% include hub-icon.html name="arrow" %}
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </details>
+    {%- endif %}
   </section>
 </main>
