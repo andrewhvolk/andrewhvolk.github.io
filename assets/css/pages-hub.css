@@ -578,6 +578,21 @@
     color: var(--hub-muted);
   }
 
+  .hub-rows__meta {
+    font-size: 0.9375rem;
+    color: var(--hub-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hub-rows .is-today .hub-rows__meta {
+    color: var(--hub-accent);
+    font-weight: 600;
+  }
+
+  .hub-rows[hidden] {
+    display: none;
+  }
+
   /* Footer */
   .hub footer.hub-footer {
     display: flex;

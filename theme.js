@@ -961,3 +961,31 @@ function setupCourseHub() {
 }
 
 document.addEventListener('DOMContentLoaded', setupCourseHub);
+
+// Math Club page (club/index.html, built from _data/club.yml).
+// The build already drops past events; this also drops ones that passed since the last build.
+function setupClubEvents() {
+    const list = document.querySelector('[data-club-events]');
+    if (!list) return;
+    const today = localDateKey();
+    let shown = 0;
+    list.querySelectorAll('li[data-date]').forEach((item) => {
+        if (item.dataset.date < today) {
+            item.remove();
+            return;
+        }
+        shown += 1;
+        if (item.dataset.date === today) {
+            item.classList.add('is-today');
+            const time = item.querySelector('time');
+            if (time) time.textContent = 'Today';
+        }
+    });
+    if (!shown) {
+        list.hidden = true;
+        const empty = document.querySelector('[data-club-events-empty]');
+        if (empty) empty.hidden = false;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', setupClubEvents);

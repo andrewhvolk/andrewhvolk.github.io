@@ -3,7 +3,7 @@ layout: hub
 title: "Math Club | Prof. Volk's Office"
 og_title: "Liberty University Math Club"
 og_image: /club/LUMClogoV1.png
-description: "The Liberty University Math Club: research, competition, and interdisciplinary teams, and the Kappa Mu Epsilon and Pi Mu Epsilon honor societies."
+description: "The Liberty University Math Club: upcoming events, the research, competition, and interdisciplinary teams, and the Kappa Mu Epsilon and Pi Mu Epsilon honor societies."
 ---
 {%- assign p = site.data.profile -%}
 {%- assign c = site.data.club -%}
@@ -19,11 +19,30 @@ description: "The Liberty University Math Club: research, competition, and inter
 </header>
 
 <main id="main-content" class="hub-stack">
+  {%- assign today = site.time | date: "%Y-%m-%d" -%}
+  {%- assign upcoming = 0 %}
   <section class="hub-section" id="events" aria-labelledby="events-heading">
     <div class="hub-section-head">
       <h2 id="events-heading">Events</h2>
+      <p>Rooms are announced by email.</p>
     </div>
-    <p>Events are announced by email. To receive announcements, email the faculty advisor, {{ p.name }}, at <a href="mailto:{{ p.email }}?subject=Math%20Club">{{ p.email }}</a>.</p>
+    <ul class="hub-rows" data-club-events>
+      {%- for e in c.events %}
+      {%- assign d = e.date | date: "%Y-%m-%d" %}
+      {%- if d >= today %}
+      {%- assign upcoming = upcoming | plus: 1 %}
+      <li data-date="{{ d }}">
+        <span class="hub-rows__title">{{ e.name }}</span>
+        <span class="hub-rows__meta"><time datetime="{{ d }}">{{ e.date | date: "%a, %b %-d" }}</time>{% if e.time %}, {{ e.time }}{% endif %}</span>
+        {%- if e.text %}
+        <span class="hub-rows__text">{{ e.text }}</span>
+        {%- endif %}
+      </li>
+      {%- endif %}
+      {%- endfor %}
+    </ul>
+    <p class="hub-note" data-club-events-empty{% if upcoming > 0 %} hidden{% endif %}>No events are scheduled right now.</p>
+    <p>To receive announcements, email the faculty advisor, {{ p.name }}, at <a href="mailto:{{ p.email }}?subject=Math%20Club">{{ p.email }}</a>.</p>
   </section>
 
   <section class="hub-section" id="teams" aria-labelledby="teams-heading">

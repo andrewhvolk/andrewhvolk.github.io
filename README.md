@@ -34,8 +34,10 @@ updates do not require editing HTML:
 - `_data/physlab1.yml` and `_data/physlab2.yml`: one row per lab with its prelab quiz and report
   dates. A course may add `checklist` (shown as "Before lab"), and a row with no links shows as a
   plain row instead of one that opens.
-- `_data/club.yml`: the Math Club page (`club/index.html`): introduction, teams, and honor
-  societies. The page lists no event dates; it tells students that events are announced by email.
+- `_data/club.yml`: the Math Club page (`club/index.html`): introduction, upcoming events, teams,
+  and honor societies. Each event needs a `name` and `date` and may add `time` and `text`. Past
+  events drop off the page on their own (`setupClubEvents()` in `theme.js`). Rooms are announced
+  by email, so events list no room.
 - `_layouts/hub.html` and `_layouts/course.html`: page templates. `_includes/` holds the footer and icons.
 - `assets/css/pages-hub.css`: styles for these pages (scoped to `body.hub`), built into `styles.css` as usual.
 
