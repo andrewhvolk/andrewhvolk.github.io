@@ -20,28 +20,38 @@ description: "The Liberty University Math Club: upcoming events, the research, c
 
 <main id="main-content" class="hub-stack">
   {%- assign today = site.time | date: "%Y-%m-%d" -%}
-  {%- assign upcoming = 0 %}
+  {%- assign upcoming = 0 -%}
+  {%- assign past = 0 -%}
+  {%- for e in c.events -%}
+    {%- assign d = e.date | date: "%Y-%m-%d" -%}
+    {%- if d >= today %}{% assign upcoming = upcoming | plus: 1 %}{% else %}{% assign past = past | plus: 1 %}{% endif -%}
+  {%- endfor %}
   <section class="hub-section" id="events" aria-labelledby="events-heading">
     <div class="hub-section-head">
       <h2 id="events-heading">Events</h2>
       <p>Rooms are announced by email.</p>
     </div>
-    <ul class="hub-rows" data-club-events>
+    <ul class="hub-rows" data-club-events{% if upcoming == 0 %} hidden{% endif %}>
       {%- for e in c.events %}
       {%- assign d = e.date | date: "%Y-%m-%d" %}
       {%- if d >= today %}
-      {%- assign upcoming = upcoming | plus: 1 %}
-      <li data-date="{{ d }}">
-        <span class="hub-rows__title">{{ e.name }}</span>
-        <span class="hub-rows__meta"><time datetime="{{ d }}">{{ e.date | date: "%a, %b %-d" }}</time>{% if e.time %}, {{ e.time }}{% endif %}</span>
-        {%- if e.text %}
-        <span class="hub-rows__text">{{ e.text }}</span>
-        {%- endif %}
-      </li>
+      {% include club-event.html e=e %}
       {%- endif %}
       {%- endfor %}
     </ul>
     <p class="hub-note" data-club-events-empty{% if upcoming > 0 %} hidden{% endif %}>No events are scheduled right now.</p>
+    <details class="hub-past" data-club-past{% if past == 0 %} hidden{% endif %}>
+      <summary><span>Past events (<span data-club-past-count>{{ past }}</span>)</span>{% include hub-icon.html name="chevron" %}</summary>
+      <ul class="hub-rows" data-club-past-list>
+        {%- assign newest_first = c.events | reverse %}
+        {%- for e in newest_first %}
+        {%- assign d = e.date | date: "%Y-%m-%d" %}
+        {%- if d < today %}
+        {% include club-event.html e=e past=true %}
+        {%- endif %}
+        {%- endfor %}
+      </ul>
+    </details>
     <p>To receive announcements, email the faculty advisor, {{ p.name }}, at <a href="mailto:{{ p.email }}?subject=Math%20Club">{{ p.email }}</a>.</p>
   </section>
 

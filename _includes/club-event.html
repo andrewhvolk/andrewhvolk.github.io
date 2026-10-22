@@ -1,0 +1,9 @@
+{%- comment -%} One Math Club event row. Used by club/index.html for upcoming and past events. {%- endcomment -%}
+{%- assign d = include.e.date | date: "%Y-%m-%d" -%}
+<li data-date="{{ d }}"{% if include.past %} class="is-past"{% endif %}>
+  <span class="hub-rows__title">{{ include.e.name }}</span>
+  <span class="hub-rows__meta"><time datetime="{{ d }}">{{ include.e.date | date: "%a, %b %-d" }}</time>{% if include.e.time %}, {{ include.e.time }}{% endif %}</span>
+  {%- if include.e.text %}
+  <span class="hub-rows__text">{{ include.e.text }}</span>
+  {%- endif %}
+</li>

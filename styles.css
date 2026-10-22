@@ -5626,6 +5626,46 @@ body.math130-course-page {
     display: none;
   }
 
+  .hub-rows .is-past .hub-rows__title {
+    color: var(--hub-muted);
+  }
+
+  /* Collapsed list of past events (Math Club). */
+  .hub-past[hidden] {
+    display: none;
+  }
+
+  .hub-past > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    color: var(--hub-accent);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .hub-past > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .hub-past > summary:hover {
+    color: var(--hub-accent-hover);
+  }
+
+  .hub-past .hub-chevron {
+    transition: transform 0.15s ease;
+  }
+
+  .hub-past[open] .hub-chevron {
+    transform: rotate(180deg);
+  }
+
+  .hub-past[open] > summary {
+    margin-bottom: 8px;
+  }
+
   /* Footer */
   .hub footer.hub-footer {
     display: flex;
@@ -5703,7 +5743,8 @@ body.math130-course-page {
 
   @media (prefers-reduced-motion: reduce) {
     .hub a.hub-course-card,
-    .course-module .hub-chevron {
+    .course-module .hub-chevron,
+    .hub-past .hub-chevron {
       transition: none;
     }
 
