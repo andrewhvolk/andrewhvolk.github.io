@@ -1,19 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting to Prof. Volk's Office</title>
-  <meta http-equiv="refresh" content="0; url=/">
-  <link rel="canonical" href="https://andrewhvolk.github.io/">
-  <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-<main class="site-main">
-  <section class="site-section site-note">
-    <h1>Contact details moved to the home page.</h1>
-    <p><a href="/">Open the home page</a> or email <a href="mailto:ahvolk@liberty.edu">ahvolk@liberty.edu</a>.</p>
-  </section>
+---
+layout: hub
+title: "Contact | Prof. Volk's Office"
+og_title: "Contact Andrew H. Volk"
+description: "How to reach Andrew H. Volk: email, office location, and a link to book a meeting."
+---
+{%- assign p = site.data.profile -%}
+<a class="hub-back" href="/">{% include hub-icon.html name="back" %} {{ p.name }}</a>
+
+<main id="main-content" class="hub-prose">
+  <h1 class="hub-title">Contact</h1>
+  <p>For course questions, check Canvas first. For anything else, email me or book a meeting.</p>
+  <dl class="hub-contact">
+    <div>
+      <dt>Email</dt>
+      <dd><a href="mailto:{{ p.email }}">{{ p.email }}</a></dd>
+    </div>
+    <div>
+      <dt>Office</dt>
+      <dd>{{ p.office }}, {{ p.institution }}</dd>
+    </div>
+    <div>
+      <dt>Meetings</dt>
+      <dd>Book a time online. <a href="/bookings.html">How booking works</a></dd>
+    </div>
+  </dl>
+  <div class="hub-actions">
+    <a class="hub-btn hub-btn--solid" href="{{ p.booking_url | xml_escape }}">Book a meeting</a>
+    <a class="hub-btn" href="mailto:{{ p.email }}">Email me</a>
+  </div>
 </main>
-</body>
-</html>

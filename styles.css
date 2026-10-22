@@ -5326,6 +5326,35 @@ body.math130-course-page {
     line-height: 1.7;
   }
 
+  /* Contact page: label and value pairs. */
+  .hub-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 4px 0 6px;
+  }
+
+  .hub-contact > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 2px 16px;
+  }
+
+  .hub-contact dt {
+    font-weight: 600;
+  }
+
+  .hub-contact dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 480px) {
+    .hub-contact > div {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .hub-coming-soon {
     display: inline-flex;
     align-items: center;

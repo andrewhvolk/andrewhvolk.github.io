@@ -115,7 +115,7 @@ python scripts/check_course_dates.py
 Lesson, review, and lab manual pages use a compact bar at the top: a back link to
 the course page (to the matching row, for example `/courses/math114.html#module-9`), a home
 link, and the theme toggle. Copy that `<nav class="course-bar">` block from a neighboring page
-when adding a new page. `learn.html` and `contact.html` redirect to the home page.
+when adding a new page. `learn.html` redirects to the home page. `contact.html` is the one place for email, office, and the booking link (from `_data/profile.yml`); other pages link to it.
 
 The Math Club is one page, `club/index.html`, built from `_data/club.yml`. The older club pages
 (`club/events.html`, `club/leadership.html`, `club/research.html`, `club/competition.html`,
