@@ -1,0 +1,14 @@
+{% assign p = site.data.profile %}
+<footer class="hub-footer">
+  <nav class="hub-footer__links" aria-label="Footer">
+    <a href="/"{% if page.url == '/' or page.url == '/index.html' %} aria-current="page"{% endif %}>Courses</a>
+    <a href="/CV.html"{% if page.url == '/CV.html' %} aria-current="page"{% endif %}>About and CV</a>
+    <a href="{{ p.math_club_url }}">Math Club</a>
+    <a href="{{ p.youtube_url }}">YouTube</a>
+    <a href="{{ p.past_labs_url }}">Past lab pages</a>
+  </nav>
+  <div class="hub-footer__end">
+    <button id="theme-toggle-btn" class="hub-theme-toggle" type="button" aria-label="Switch between light and dark mode"></button>
+    <span>© {{ site.time | date: "%Y" }} {{ p.name }}</span>
+  </div>
+</footer>
