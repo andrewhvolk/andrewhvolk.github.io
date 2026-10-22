@@ -21,6 +21,7 @@ The primary development workflow involves generating canonical assets from sourc
     python scripts/check_css_links.py        # Checks for canonical stylesheet includes
     python scripts/check_links.py          # Verifies internal link resolution
     python scripts/check_html_structure.py # Validates HTML structure
+    python scripts/check_course_dates.py   # MATH 130 dates: _data/math130.yml vs theme.js
     ```
 
 **Testing:**

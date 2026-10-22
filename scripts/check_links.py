@@ -1,8 +1,9 @@
 """Check local href/src references in HTML files.
 
 Absolute site paths such as /styles.css are resolved from the repository root.
-Templated JavaScript strings and Office-export support bundle references are
-skipped because they are not static page links.
+Templated JavaScript strings and Office-export metadata files (.xml, .thmx, .mso,
+.vml) are skipped because they are not static page links. Images under legacy/
+are checked like any other file, since live pages still display them.
 """
 
 from __future__ import annotations
@@ -43,9 +44,6 @@ def should_skip(raw: str) -> bool:
         return True
     suffix = Path(value.split("#", 1)[0].split("?", 1)[0]).suffix.lower()
     if suffix in SKIP_EXTENSIONS:
-        return True
-    normalized = value.replace("\\", "/")
-    if normalized.startswith("legacy/") or "/legacy/" in normalized:
         return True
     return False
 

@@ -11,7 +11,7 @@ description: "Course pages for Prof. Andrew H. Volk's mathematics and physics co
     <p class="hub-muted">{{ p.title }}, {{ p.institution }}</p>
     <p class="hub-muted"><a href="mailto:{{ p.email }}">{{ p.email }}</a> · Office {{ p.office }}</p>
   </div>
-  <a class="hub-btn" href="{{ p.booking_url }}">Book a meeting</a>
+  <a class="hub-btn" href="{{ p.booking_url | xml_escape }}">Book a meeting</a>
 </header>
 
 <main id="main-content">

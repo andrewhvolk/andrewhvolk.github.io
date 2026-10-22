@@ -517,6 +517,13 @@ header h1 {
   box-shadow: none;
 }
 
+/* On phones, count the padding inside the full width so the page does not scroll sideways. */
+@media (max-width: 768px) {
+  .reading-flow {
+    box-sizing: border-box;
+  }
+}
+
 .reading-flow > * + * {
   margin-top: var(--reading-block-space);
 }
