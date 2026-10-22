@@ -31,6 +31,9 @@ updates do not require editing HTML:
 - `_data/math114.yml`: MATH 114 modules, due dates, slides, handouts, videos, and practice links.
 - `_data/math130.yml`: MATH 130 units and quiz cycles in the same format. A date may add `time`
   (shown after the date) and a row may add `lesson_label` to rename its main button.
+- `_data/physlab1.yml` and `_data/physlab2.yml`: one row per lab with its prelab quiz and report
+  dates. A course may add `checklist` (shown as "Before lab"), and a row with no links shows as a
+  plain row instead of one that opens.
 - `_layouts/hub.html` and `_layouts/course.html`: page templates. `_includes/` holds the footer and icons.
 - `assets/css/pages-hub.css`: styles for these pages (scoped to `body.hub`), built into `styles.css` as usual.
 

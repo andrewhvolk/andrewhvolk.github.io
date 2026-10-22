@@ -350,11 +350,15 @@
     border-top: 1px solid var(--hub-border);
   }
 
-  .course-module > summary {
+  .course-module > summary,
+  .course-module__row {
     display: flex;
     align-items: center;
     gap: 16px;
     padding: 16px 20px;
+  }
+
+  .course-module > summary {
     cursor: pointer;
     list-style: none;
   }
@@ -490,6 +494,18 @@
   }
 
   .course-side__note {
+    color: var(--hub-muted);
+  }
+
+  .hub ul.course-checklist {
+    list-style: disc;
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .course-checklist li::marker {
     color: var(--hub-muted);
   }
 
