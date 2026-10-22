@@ -29,7 +29,7 @@ description: "The Liberty University Math Club: upcoming events, the research, c
   <section class="hub-section" id="events" aria-labelledby="events-heading">
     <div class="hub-section-head">
       <h2 id="events-heading">Events</h2>
-      <p>Rooms are announced by email.</p>
+      <p>Rooms are announced in club emails.</p>
     </div>
     <ul class="hub-rows" data-club-events{% if upcoming == 0 %} hidden{% endif %}>
       {%- for e in c.events %}
@@ -52,7 +52,7 @@ description: "The Liberty University Math Club: upcoming events, the research, c
         {%- endfor %}
       </ul>
     </details>
-    <p>To receive announcements, email the faculty advisor, {{ p.name }}. His email is on the <a href="/contact.html">Contact page</a>.</p>
+    <p>{{ c.announcements }} To get them, use the "Email to join" button above, or find the faculty advisor's email on the <a href="/contact.html">Contact page</a>.</p>
   </section>
 
   <section class="hub-section" id="teams" aria-labelledby="teams-heading">
