@@ -30,7 +30,9 @@ updates do not require editing HTML:
   appear in a collapsed "Past courses" list below the current ones.
 - `_data/profile.yml`: name, title, email, office, and shared links.
 - `_data/math114.yml`: MATH 114 modules, due dates, slides, handouts, videos, and practice links.
-- `_data/math130.yml`: MATH 130 units and quiz cycles in the same format. A date may add `time`
+- `_data/math130.yml`: MATH 130 units and quiz cycles in the same format. Its main unit slides go under
+  `handouts` and dated class-session decks under `sessions`; the group names come from
+  `handouts_label` and `sessions_label`. A date may add `time`
   (shown after the date) and a row may add `lesson_label` to rename its main button.
 - `_data/physlab1.yml` and `_data/physlab2.yml`: one row per lab with its prelab quiz and report
   dates. A course may add `checklist` (shown as "Before lab"), and a row with no links shows as a
