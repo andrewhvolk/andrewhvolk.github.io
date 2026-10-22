@@ -27,7 +27,7 @@ wide: true
           <summary>
             <span class="course-module__text">
               <span class="course-module__title">{{ m.title }}</span>
-              <span class="course-module__meta">{{ m.label }}{% for d in m.dates %} · {{ d.kind }} {{ d.date | date: "%a, %b %-d" }}{% endfor %}</span>
+              <span class="course-module__meta">{{ m.label }}{% for d in m.dates %} · {{ d.kind }} {{ d.date | date: "%a, %b %-d" }}{% if d.time %}, {{ d.time }}{% endif %}{% endfor %}</span>
             </span>
             <span class="course-module__badge" hidden>This week</span>
             {% include hub-icon.html name="chevron" %}
@@ -65,7 +65,7 @@ wide: true
               </div>
               {%- endif %}
             </div>
-            <a class="hub-btn hub-btn--solid hub-btn--sm" href="{{ m.lesson }}">{% if m.review %}Open the full review{% else %}Open the lesson{% endif %} {% include hub-icon.html name="arrow" %}</a>
+            <a class="hub-btn hub-btn--solid hub-btn--sm" href="{{ m.lesson }}">{% if m.lesson_label %}{{ m.lesson_label }}{% elsif m.review %}Open the full review{% else %}Open the lesson{% endif %} {% include hub-icon.html name="arrow" %}</a>
           </div>
         </details>
         {%- endfor %}
@@ -79,7 +79,7 @@ wide: true
       <h2 id="upcoming-heading">Coming up</h2>
       <ul class="course-upcoming">
         {%- for part in c.parts %}{% for m in part.modules %}{% for d in m.dates %}
-        <li data-date="{{ d.date | date: '%Y-%m-%d' }}"><span>{% if d.kind == "Homework" or d.kind == "Quiz" %}{{ m.label }} {{ d.kind | downcase }}{% elsif d.kind == "Review" %}{{ m.title }}{% else %}{{ d.kind }}{% endif %}</span><time datetime="{{ d.date | date: '%Y-%m-%d' }}">{{ d.date | date: "%a, %b %-d" }}</time></li>
+        <li data-date="{{ d.date | date: '%Y-%m-%d' }}"><span>{% if d.kind == "Homework" or d.kind == "Quiz" %}{{ m.label }} {{ d.kind | downcase }}{% elsif d.kind == "Review" %}{{ m.title }}{% else %}{{ d.kind }}{% endif %}</span><time datetime="{{ d.date | date: '%Y-%m-%d' }}">{{ d.date | date: "%a, %b %-d" }}{% if d.time %}, {{ d.time }}{% endif %}</time></li>
         {%- endfor %}{% endfor %}{% endfor %}
         {%- for e in c.extras %}
         <li data-date="{{ e.date | date: '%Y-%m-%d' }}"><span>{{ e.label }}</span><time datetime="{{ e.date | date: '%Y-%m-%d' }}">{{ e.date | date: "%a, %b %-d" }}</time></li>

@@ -29,6 +29,8 @@ updates do not require editing HTML:
 - `_data/courses.yml`: the courses listed on the home page each semester.
 - `_data/profile.yml`: name, title, email, office, and shared links.
 - `_data/math114.yml`: MATH 114 modules, due dates, slides, handouts, videos, and practice links.
+- `_data/math130.yml`: MATH 130 units and quiz cycles in the same format. A date may add `time`
+  (shown after the date) and a row may add `lesson_label` to rename its main button.
 - `_layouts/hub.html` and `_layouts/course.html`: page templates. `_includes/` holds the footer and icons.
 - `assets/css/pages-hub.css`: styles for these pages (scoped to `body.hub`), built into `styles.css` as usual.
 

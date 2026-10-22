@@ -901,6 +901,8 @@ function applyMath130FallTextUpdates(config) {
 function setupMath130Fall2026Flow() {
     const config = getMath130PageConfig();
     if (!config) return;
+    // Course hub pages (_layouts/course.html) already show the schedule; skip the injected flow.
+    if (document.body.classList.contains('hub')) return;
     document.body.classList.add('math130-fall-2026-enhanced');
     ensureMath130FallStyles();
     applyMath130FallTextUpdates(config);
