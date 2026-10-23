@@ -7,6 +7,27 @@
   const config = window.MATH130_DECK || {};
   const sections = Array.from(document.querySelectorAll(".reveal .slides > section"));
 
+  // Notes view: the slides stacked as a scrolling page. Phones get it by default because a
+  // 1600 x 900 slide shrunk to a phone screen is unreadable. ?view=notes or ?view=slides overrides.
+  const requestedView = new URLSearchParams(window.location.search).get("view");
+  const notesView = requestedView ? requestedView === "notes"
+    : window.matchMedia("(max-width: 700px)").matches;
+
+  function viewUrl(view) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("view", view);
+    url.hash = "";
+    return url.toString();
+  }
+
+  function buildViewSwitch(view, label) {
+    const link = document.createElement("a");
+    link.className = "view-switch";
+    link.href = viewUrl(view);
+    link.textContent = label;
+    document.body.appendChild(link);
+  }
+
   function titleFor(section, index) {
     return section.dataset.title ||
       section.querySelector("h1,h2,h3")?.textContent.trim() ||
@@ -29,7 +50,8 @@
       link.textContent = titleFor(section, index);
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        Reveal.slide(index);
+        if (notesView) section.scrollIntoView({ behavior: "smooth", block: "start" });
+        else Reveal.slide(index);
         nav.classList.remove("open");
         button.setAttribute("aria-expanded", "false");
       });
@@ -194,6 +216,19 @@
     options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
   }, window.MathJax || {});
 
+  if (notesView) {
+    document.documentElement.classList.add("notes-view", "deck-ready");
+    sections.forEach((section, index) => { section.id = section.id || `slide-${index + 1}`; });
+    buildNavigation();
+    bindAnswers();
+    bindExponentialGraphs();
+    bindPracticeGenerators();
+    buildViewSwitch("slides", "Present as slides");
+    reportOfflineProblems();
+    window.Math130Slides = { config, view: "notes" };
+    return;
+  }
+
   Reveal.initialize({
     width: 1600,
     height: 900,
@@ -218,6 +253,7 @@
   bindExponentialGraphs();
   bindPracticeGenerators();
   buildToolbar();
+  buildViewSwitch("notes", "Read as notes");
   reportOfflineProblems();
 
   document.addEventListener("keydown", (event) => {
