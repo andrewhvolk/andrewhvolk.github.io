@@ -5599,6 +5599,33 @@ body.math130-course-page {
     gap: 16px 28px;
   }
 
+  /* "By the end, you can" goals at the top of an open module. */
+  .course-module__goals {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 16px;
+    background: var(--hub-soft);
+    border-radius: 8px;
+  }
+
+  .hub .course-module__goals h3 {
+    font-family: var(--hub-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--hub-accent);
+  }
+
+  .hub .course-module__goals ul {
+    list-style: disc;
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 1rem;
+  }
+
   .course-module__group {
     display: flex;
     flex-direction: column;
