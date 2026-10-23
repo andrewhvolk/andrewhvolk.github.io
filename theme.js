@@ -1,3 +1,18 @@
+// Apply a saved light or dark choice on pages that do not set it in their <head>
+// (hub pages do; older lesson, review, and lab pages do not).
+(function applySavedTheme() {
+    if (document.documentElement.hasAttribute('data-theme')) return;
+    let saved = null;
+    try {
+        saved = localStorage.getItem('theme');
+    } catch (error) {
+        saved = null;
+    }
+    if (saved === 'dark' || saved === 'light') {
+        document.documentElement.setAttribute('data-theme', saved);
+    }
+})();
+
 const mobileNavMediaQuery = window.matchMedia('(max-width: 768px)');
 
 const menuToggleLabel = (expanded) => expanded ? 'Close navigation menu' : 'Open navigation menu';
@@ -906,7 +921,9 @@ function setupMath130Fall2026Flow() {
     document.body.classList.add('math130-fall-2026-enhanced');
     ensureMath130FallStyles();
     applyMath130FallTextUpdates(config);
-    insertMath130FallFlow(config);
+    // Dates and the previous/next unit links live on the course page (/courses/math130.html),
+    // so the review pages no longer get the injected "current assessment window" panel.
+    // insertMath130FallFlow(config) is kept for reference but not called.
 }
 
 document.addEventListener('DOMContentLoaded', setupMath130Fall2026Flow);
