@@ -30,19 +30,29 @@ wide: true
             </span>
             <span class="course-module__badge" hidden>This week</span>
         {%- endcapture %}
-        {%- if m.handouts or m.videos or m.practice or m.lesson %}
+        {%- if m.handouts or m.sessions or m.videos or m.practice or m.lesson %}
         <details class="course-module" id="{{ m.label | slugify }}" data-last-date="{{ m.dates.last.date | date: '%Y-%m-%d' }}">
           <summary>{{ row_text }}
             {% include hub-icon.html name="chevron" %}
           </summary>
           <div class="course-module__body">
-            {%- if m.handouts or m.videos or m.practice %}
+            {%- if m.handouts or m.sessions or m.videos or m.practice %}
             <div class="course-module__groups">
               {%- if m.handouts %}
               <div class="course-module__group">
-                <h3>Slides and handouts</h3>
+                <h3>{{ c.handouts_label | default: 'Slides and handouts' }}</h3>
                 <ul>
                   {%- for r in m.handouts %}
+                  <li><a class="hub-res" href="{{ r.url }}">{% include hub-icon.html name="doc" %}<span>{{ r.label }}</span></a></li>
+                  {%- endfor %}
+                </ul>
+              </div>
+              {%- endif %}
+              {%- if m.sessions %}
+              <div class="course-module__group">
+                <h3>{{ c.sessions_label | default: 'Class sessions' }}</h3>
+                <ul>
+                  {%- for r in m.sessions %}
                   <li><a class="hub-res" href="{{ r.url }}">{% include hub-icon.html name="doc" %}<span>{{ r.label }}</span></a></li>
                   {%- endfor %}
                 </ul>
