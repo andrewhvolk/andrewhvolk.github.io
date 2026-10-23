@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 10 Summary | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 10 summary: the normal distribution, the 68-95-99.7 rule, standard scores, and percentiles.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/114-module10-summary.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="../theme.js"></script>
+    <style>
+    .summary-page {
+      max-width: 960px;
+      padding-bottom: 3rem;
+    }
+    .summary-sheet {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color, #d9e2ec);
+      border-radius: 18px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+      padding: 2rem 2.5rem;
+      font-family: var(--type-body-family);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+    .summary-sheet h1,
+    .summary-sheet h2,
+    .summary-sheet h3 { font-family: var(--type-display-family); }
+    .summary-sheet h1 { font-size: 1.5rem; margin: 0.3em 0 0.2em; }
+    .summary-sheet h2 { font-size: 1.12rem; margin: 0.9em 0 0.25em; }
+    .summary-sheet h3 { font-size: 1rem; margin: 0.6em 0 0.2em; }
+    .summary-sheet p { margin: 0 0 0.5em; }
+    .summary-sheet ul, .summary-sheet ol { margin: 0 0 0.6em 1.25em; }
+    .summary-sheet li { margin-bottom: 0; }
+    article.summary-sheet .summary-columns li + li { margin-top: 0.2em; }
+    .summary-sheet .summary-columns ul > li { list-style: disc outside; }
+    .summary-sheet .summary-columns ol > li { list-style: decimal outside; }
+    .summary-sheet .summary-columns ul,
+    .summary-sheet .summary-columns ol { margin-left: 0; padding-left: 1.3em; }
+    .summary-meta { margin-bottom: 0.8em; }
+    .summary-due {
+      border: 1px solid var(--border-color, #d9e2ec);
+      border-radius: 10px;
+      padding: 0.6em 0.9em;
+      margin-bottom: 0.4em;
+    }
+    .summary-columns { columns: 2 22rem; column-gap: 2.25rem; }
+    .summary-block { break-inside: avoid; margin: 0 0 0.6em; padding: 0; }
+    .summary-block > h2:first-child { margin-top: 0.4em; }
+    .formula {
+      font-family: var(--type-mono-family, monospace);
+      display: block;
+      margin: 0.2em 0 0.4em 1em;
+    }
+    @media (max-width: 640px) {
+      .summary-sheet { padding: 1.25rem 1rem; }
+      .summary-columns { columns: 1; }
+    }
+    .copyright { text-align: center; margin-top: 1em; font-size: 10pt; color: var(--text-muted); }
+    @media print {
+      body { background: var(--bg-surface); }
+      .top-nav, .page-context-bar, .course-header, .site-footer, .skip-to-main { display: none !important; }
+      .summary-page { max-width: none; padding: 0; margin: 0; }
+      .summary-sheet { border: none; box-shadow: none; border-radius: 0; padding: 0; font-size: 8.2pt; line-height: 1.24; }
+      .summary-sheet h1 { font-size: 13pt; margin-top: 0; }
+      .summary-sheet h2 { font-size: 10pt; margin: 0.55em 0 0.15em; }
+      .summary-sheet h3 { font-size: 9pt; margin: 0.35em 0 0.1em; }
+      .summary-sheet p, .summary-sheet ul, .summary-sheet ol { margin-bottom: 0.3em; }
+      article.summary-sheet .summary-columns li + li { margin-top: 0.05em; }
+      .summary-block { break-inside: auto; }
+      .summary-sheet h2, .summary-sheet h3 { break-after: avoid; }
+      .summary-sheet li, .summary-sheet p { break-inside: avoid; }
+      .summary-columns { columns: 2; column-gap: 0.3in; }
+      .copyright { font-size: 7pt; margin-top: 0.4em; }
+      @page { size: letter; margin: 0.45in; }
+    }
+    .summary-switch {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem;
+      margin: 0 0 1.25rem;
+    }
+    .summary-switch__back { margin-right: auto; }
+    .summary-switch__label { font-size: 0.85rem; color: var(--text-muted); }
+    .summary-switch .button[aria-current="page"] { pointer-events: none; opacity: 0.75; }
+    @media print { .summary-switch { display: none !important; } }
+  </style>
+</head>
+<body>
+<nav class="course-bar" aria-label="Site">
+  <div class="course-bar__inner">
+    <a class="course-bar__back" href="/courses/math114.html#module-10"><span aria-hidden="true">&larr;</span> MATH 114</a>
+    <a class="course-bar__home" href="/">Andrew H. Volk</a>
+    <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="Toggle Theme"></button>
+  </div>
+</nav>
+<header class="course-header course-header--unit">
+  <div class="container">
+    <h1>Module 10 Summary</h1>
+    <p class="subtitle">The normal distribution, the 68&ndash;95&ndash;99.7 rule, standard scores, and percentiles on a single printable page.</p>
+  </div>
+</header>
+<main id="main-content" class="container course-page summary-page">
+  <nav class="summary-switch" aria-label="Module 10 summary">
+      <a href="math114-module10.html" class="button button-secondary summary-switch__back">&larr; Back to Module 10 lesson</a>
+  </nav>
+
+  <article class="summary-sheet">
+
+  <h1>MATH 114 Module 10: The Normal Distribution</h1>
+  <p class="summary-meta"><strong>Reading:</strong> Chapter 6, Section C &nbsp;&middot;&nbsp; <strong>Name:</strong> ______________________________</p>
+
+  <div class="summary-due">
+    <strong>Due dates (11:59 p.m.):</strong>
+    Homework 10 (20 questions), Sunday, Nov 1, 2026 &nbsp;&middot;&nbsp;
+    Quiz 10 (10 questions), Monday, Nov 2, 2026. Confirm all dates in Canvas.<br>
+    <strong>Outcomes:</strong> recognize a normal distribution; apply the 68&ndash;95&ndash;99.7 rule; compute standard scores; find and use percentiles.
+  </div>
+
+  <div class="summary-columns">
+
+  <div class="summary-block">
+    <h2>1. The Normal Distribution</h2>
+    <p>A <strong>normal distribution</strong> is symmetric and bell-shaped, with a single peak at its center. The mean, median, and mode are all equal at that peak. The standard deviation sets the width: a larger standard deviation gives a wider, flatter bell.</p>
+    <h3>When to expect a normal shape</h3>
+    <ol>
+      <li>Most values cluster near the mean, giving one well-defined peak.</li>
+      <li>Values spread evenly around the mean, so the distribution is symmetric.</li>
+      <li>Values far from the mean are rare, so the tails thin out.</li>
+      <li>Many small factors (genes, environment, chance) shape the variable. <em>Example:</em> foot length is close to normal; scores on an easy test are not, because they pile up near 100 and are left-skewed.</li>
+    </ol>
+  </div>
+
+  <div class="summary-block">
+    <h2>2. The 68&ndash;95&ndash;99.7 Rule</h2>
+    <p>In a normal distribution:</p>
+    <ul>
+      <li>about <strong>68%</strong> of values lie within <strong>1</strong> standard deviation of the mean;</li>
+      <li>about <strong>95%</strong> lie within <strong>2</strong> standard deviations;</li>
+      <li>about <strong>99.7%</strong> lie within <strong>3</strong> standard deviations.</li>
+    </ul>
+    <h3>The pieces of the bell</h3>
+    <p>Split each band in half, since the curve is symmetric:</p>
+    <ul>
+      <li>mean to 1 SD: 68 &divide; 2 = <strong>34%</strong></li>
+      <li>1 SD to 2 SD: (95 &minus; 68) &divide; 2 = <strong>13.5%</strong></li>
+      <li>2 SD to 3 SD: (99.7 &minus; 95) &divide; 2 = <strong>2.35%</strong></li>
+      <li>beyond 3 SD on one side: (100 &minus; 99.7) &divide; 2 = <strong>0.15%</strong></li>
+      <li>each half of the curve: <strong>50%</strong></li>
+    </ul>
+    <p><strong>Method:</strong> draw the bell; label the mean, then mean &plusmn; 1, 2 and 3 SD; write 34, 13.5, 2.35 and 0.15 in the regions; add the regions the question asks for.</p>
+    <p><strong>Example:</strong> legal quarters have a mean weight of 5.67 g with SD 0.07 g. A vending machine accepts only 5.53 to 5.81 g, which is mean &plusmn; 2 SD. It accepts about 95% and rejects about <strong>5%</strong> of legal quarters.</p>
+  </div>
+
+  <div class="summary-block">
+    <h2>3. Standard Scores (z-scores)</h2>
+    <p>The <strong>standard score</strong> is the number of standard deviations a value lies above or below the mean:</p>
+    <span class="formula">z = (data value &minus; mean) &divide; standard deviation</span>
+    <ul>
+      <li><strong>Positive z:</strong> above the mean. <strong>Negative z:</strong> below the mean. <strong>z = 0:</strong> at the mean.</li>
+      <li><strong>Example (IQ, mean 100, SD 15):</strong> 85 &rarr; z = (85 &minus; 100)/15 = &minus;1.00; 100 &rarr; z = 0; 125 &rarr; z = 25/15 &asymp; 1.67.</li>
+      <li><strong>Working backward:</strong> data value = mean + z &times; standard deviation.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h2>4. Percentiles</h2>
+    <p>The <strong>percentile</strong> of a data value is the percentage of all values that are <em>less than</em> it. Find it from the z-score with the standard score table.</p>
+    <ul>
+      <li>z = &minus;1 &rarr; 15.87th; z = 0 &rarr; 50th; z = 1 &rarr; 84.13th; z = 2 &rarr; 97.72nd.</li>
+      <li><strong>Percent above</strong> a value = 100% &minus; its percentile. (Above z = &minus;1: 100 &minus; 15.87 = 84.13%.)</li>
+      <li><strong>Percent between</strong> two values = the larger percentile &minus; the smaller one.</li>
+    </ul>
+    <h3>Example: cholesterol (mean 178, SD 41)</h3>
+    <ol>
+      <li>Level 190: z = (190 &minus; 178)/41 &asymp; 0.29, which the table puts at about the <strong>62nd percentile</strong>.</li>
+      <li>90th percentile: the table gives z &asymp; 1.3 (90.32%), so the level is 178 + 1.3 &times; 41 &asymp; <strong>231</strong>.</li>
+    </ol>
+  </div>
+
+  <div class="summary-block">
+    <h2>5. Excel Online</h2>
+    <ul>
+      <li><code>=STANDARDIZE(x, mean, sd)</code> gives the z-score.</li>
+      <li><code>=NORM.DIST(x, mean, sd, TRUE)</code> gives the fraction of values below x (multiply by 100 for the percentile).</li>
+      <li><code>=NORM.INV(p, mean, sd)</code> gives the value at a percentile (p as a decimal, such as 0.90).</li>
+    </ul>
+    <p>Excel and the table can differ slightly in the second decimal place, because the table rounds z.</p>
+  </div>
+
+  <div class="summary-block">
+    <h2>Resources</h2>
+    <p>Lesson: <a href="math114-module10.html">andrewhvolk.github.io/courses/math114-module10.html</a> &nbsp;&middot;&nbsp; Slides: andrewhvolk.github.io/pdfs/math114-module10-slides-2026-10-26.pdf &nbsp;&middot;&nbsp; Practice: <a href="NormalDistributionGame.html">Normal curve explorer and z-score calculator</a> &nbsp;&middot;&nbsp; Desmos Scientific and Excel Online</p>
+  </div>
+
+  </div>
+
+  <p class="copyright">
+    &copy; Andrew H. Volk 2026
+  </p>
+
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/">Courses</a>
+      <a href="/CV.html">About and CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+      <a href="https://www.youtube.com/learnabundantly">YouTube</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
