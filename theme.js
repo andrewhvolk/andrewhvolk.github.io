@@ -338,7 +338,7 @@ const math130FallSchedule = [
     ['Week 9', 'Oct 21', 'Wed', 'Geometry: Circles; Quiz 8 on paper (Canvas master date 2:10 PM)'],
     ['Week 9', 'Oct 23', 'Fri', 'Geometry: Circles'],
     ['Week 10', 'Oct 26', 'Mon', 'Geometry: Circles'],
-    ['Week 10', 'Oct 28', 'Wed', 'Test 2 review; Quiz 9 Unit 3 right-triangle-trig bridge on paper (Canvas master date 2:10 PM; coverage planned until confirmed in Canvas or class)'],
+    ['Week 10', 'Oct 28', 'Wed', 'Test 2 review; Quiz 9 on circles on paper (Canvas master date 2:10 PM)'],
     ['Week 10', 'Oct 30', 'Fri', 'ALEKS Geometry due; Test 2 on paper (Canvas master date 2:10 PM)'],
     ['Week 11', 'Nov 2', 'Mon', '5.1'],
     ['Week 11', 'Nov 4', 'Wed', '5.2'],
@@ -375,7 +375,7 @@ const math130CanvasDueDates = [
     ['2026-10-07T14:11:00', 'Oct 7 at 2:11 PM', 'ALEKS Geometry module opens'],
     ['2026-10-14T14:10:00', 'Oct 14 at 2:10 PM', 'Quiz 7 on paper'],
     ['2026-10-21T14:10:00', 'Oct 21 at 2:10 PM', 'Quiz 8 on paper'],
-    ['2026-10-28T14:10:00', 'Oct 28 at 2:10 PM', 'Quiz 9 Unit 3 right-triangle-trig bridge on paper; coverage planned until confirmed'],
+    ['2026-10-28T14:10:00', 'Oct 28 at 2:10 PM', 'Quiz 9 on circles on paper'],
     ['2026-10-30T14:10:00', 'Oct 30 at 2:10 PM', 'ALEKS Geometry; Test 2 on paper'],
     ['2026-11-11T14:10:00', 'Nov 11 at 2:10 PM', 'ALEKS 5.1/5.2; Quiz 10 on paper'],
     ['2026-11-18T14:10:00', 'Nov 18 at 2:10 PM', 'ALEKS 5.3/5.7; Quiz 11 on paper'],
@@ -409,8 +409,8 @@ const math130FallUnits = [
         assessment: 'Test 2: Oct 30 at 2:10 PM',
         href: '/130Test2.html',
         title: 'Interest, logarithms, polygons, and circles',
-        topics: '4.2; 4.3; polygon geometry; circle geometry; Quizzes 5-8; Test 2 review.',
-        coverage: 'Test 2 preparation ends with Unit 2E. Quiz 9 is displayed separately as a Unit 3 bridge and does not extend this study path unless Canvas or class announces an adjustment.',
+        topics: '4.2; 4.3; polygon geometry; circle geometry; Quizzes 5-9; Test 2 review.',
+        coverage: 'Test 2 preparation ends with Unit 2E. Quiz 9 (circles) is part of Unit 2 and of Test 2 preparation.',
         range: [15, 29]
     },
     {
@@ -418,12 +418,12 @@ const math130FallUnits = [
         starts: '2026-10-31T00:00:00',
         ends: '2026-12-09T23:59:59',
         label: 'Unit 3 / Test 3',
-        dates: 'Oct 28-Dec 9',
+        dates: 'Nov 2-Dec 9',
         assessment: 'Test 3: Dec 9 at 2:10 PM',
         href: '/130Test3.html',
         title: 'Trigonometry, applications, and vectors',
         topics: '5.1; 5.2; 5.3; 5.7; 7.1; Thanksgiving break; 8.4; applications; Quizzes 10-13; review.',
-        coverage: 'Quiz 9 opens this unit as a bridge. Quiz 13 is planned as a cumulative Test 3 readiness check rather than a new-content checkpoint.',
+        coverage: 'An optional right-triangle-trig bridge opens this unit. Quiz 13 is planned as a cumulative Test 3 readiness check rather than a new-content checkpoint.',
         range: [30, 46]
     },
     {
