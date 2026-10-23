@@ -1,0 +1,124 @@
+SQUARE PACKING MANIPULATIVE - FABRICATION RECORD
+Release 1.1.0, 23 October 2026
+https://andrewhvolk.github.io/RW26.html
+
+
+--------------------------------------------------------------------------
+WHERE THESE NUMBERS COME FROM
+--------------------------------------------------------------------------
+
+Everything below is read from the two saved Bambu Studio project files in
+slicer/, not reconstructed from memory or from a slicer profile. Each file
+carries the complete effective configuration for the job it describes, together
+with the client version that wrote it. Both are included in this release so the
+record can be checked rather than taken on trust.
+
+    slicer/SquareSliderPrint1.3mf   2026-03-24
+        The adjustable frame assembly, first iteration: one frame, two sliders
+        at 125 x 16.67 x 5.0 mm, three pins.
+
+    slicer/OverlappingCorners.3mf   2026-03-31
+        One overlapping-corners half at 100.0 x 100.0 x 25.0 mm, plus the unit
+        cubes at 20.0 x 20.0 x 20.0 mm.
+
+Both files have had the Bambu account id of their author removed from the
+model metadata. Nothing else was altered.
+
+
+--------------------------------------------------------------------------
+COMMON TO EVERY COMPONENT
+--------------------------------------------------------------------------
+
+    Slicer                      Bambu Studio 02.04.00.70
+    Printer                     Bambu Lab A1
+    Nozzle                      0.4 mm stainless steel
+    Build plate                 Textured PEI
+    Material                    Bambu Lab PLA Matte
+    Layer height                0.20 mm, first layer 0.20 mm
+    Top shell                   5 layers
+    Bottom shell                3 layers
+    Top surface pattern         Monotonic line
+    Bottom surface pattern      Monotonic
+    Internal solid infill       Zig-zag
+    Sparse infill density       15%
+    Supports                    Normal (automatic), 30 degree threshold,
+                                not limited to the build plate, default
+                                support and interface materials
+    Elephant-foot compensation  0.075 mm
+    Wall generator              Classic
+
+
+--------------------------------------------------------------------------
+DIFFERENT BETWEEN THE TWO PRINTS
+--------------------------------------------------------------------------
+
+These four settings are not common, and reporting a single value for them
+would be wrong. The moving parts were given more walls and a slower outer
+wall than the static pieces.
+
+                          Frame and sliders       Corners and cubes
+                          24 March                31 March
+    Process preset        0.20mm Standard         0.20mm Strength
+                          @BBL A1                 @BBL A1 - Copy
+    Wall loops            2                       3
+    Sparse infill         Grid                    Gyroid
+    Outer-wall speed      200 mm/s                60 mm/s
+    Brim                  Outer only, 5 mm        Brim ears
+    Print sequence        By layer                By object
+
+
+--------------------------------------------------------------------------
+ONE COMPONENT WITH NO SURVIVING PROJECT FILE
+--------------------------------------------------------------------------
+
+No saved project survives for "Frame and Slider Assembly 2.0", the second
+iteration of the adjustable frame. A print-monitor screenshot taken during that
+job records 201 layers, 68.18 g and 2 h 12 m 47 s. The assembly measures
+20.0 mm tall in its CAD. A 20 mm part needs 100 layers at 0.20 mm and 200 at
+0.10 mm, so that print appears to have run at roughly 0.10 mm - finer than its
+24 March predecessor.
+
+This is an inference from two measurements, not a reading from a file. It is
+recorded here because it matters to anyone reproducing the part, and flagged
+because it is weaker evidence than everything above it.
+
+
+--------------------------------------------------------------------------
+MEASURED GEOMETRY
+--------------------------------------------------------------------------
+
+Measured from the meshes, not from drawings.
+
+    Frame, both iterations      115.0 x 115.0 mm in plan, 20 mm walls
+    Usable tray field           100 mm
+    Universal bar height        5.0 mm
+    Unit cube                   20.0 x 20.0 x 20.0 mm
+    Overlapping-corners half    100.0 x 100.0 x 25.0 mm
+
+    Between iteration 1.0 and 2.0 the frame did not change. Slider width went
+    from 16.67 to 15.00 mm, pin length from 19.17 to 14.17 mm - exactly one bar
+    height shorter - and overall assembly height from 22.5 to 20.0 mm.
+
+The demonstration set used sixteen 20 mm cubes, not twelve flat tiles.
+
+
+--------------------------------------------------------------------------
+CLEARANCES
+--------------------------------------------------------------------------
+
+The four clearance values in the SOLIDWORKS model are TOTALS, not per-side
+figures. Their own comment fields say so. A replicator who applies them per
+side gets twice the intended slop.
+
+    Frame tolerance   0.16 mm total   ("the total extra space on the top and
+                                        bottom of the frames")
+    Track tolerance   0.08 mm total   ("the total extra width of the track")
+    Slider tolerance  0.16 mm total   ("the total extra width on the inside of
+                                        the slider, so it wont grip the frame
+                                        too much")
+    Pin tolerance     0.16 mm total   ("the total subtracted width of the pin
+                                        so it wont grip the sliders too much")
+
+Per side that is 0.08 mm on the frame, slider and pin, and 0.04 mm on the
+track. These are specific to the printer, material and settings above;
+replication on another machine will need recalibration.
