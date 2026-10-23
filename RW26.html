@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CAD and printable files for a 3D-printed square-packing manipulative, with the mathematical bounds it represents, a prototype log, and calibration notes.">
+  <meta name="theme-color" content="#174c70">
+  <title>Square Packing Project Files</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23174c70' stroke-width='2' d='M3 3h18v18H3Z'/%3E%3Cpath fill='none' stroke='%23ef6c3d' stroke-width='2' d='M7 7h7v7H7Z'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #132238;
+      --ink-soft: #46556a;
+      --paper: #f4f0e8;
+      --paper-bright: #fffdf8;
+      --blueprint: #174c70;
+      --blueprint-deep: #0b2b43;
+      --teal: #168294;
+      --orange: #ef6c3d;
+      --amber: #9a6b12;
+      --line: #ced5da;
+      --code: #151a21;
+      --grid: rgba(23, 76, 112, .035);
+      --display: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Arial, sans-serif;
+      --mono: "Cascadia Code", "Cascadia Mono", Consolas, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --ink: #e8edf3;
+        --ink-soft: #a7b4c4;
+        --paper: #11171f;
+        --paper-bright: #19212c;
+        --blueprint: #6fb2d8;
+        --blueprint-deep: #a8d2ea;
+        --teal: #4fc3d4;
+        --orange: #ff8a5c;
+        --amber: #e0b155;
+        --line: #2d3947;
+        --grid: rgba(111, 178, 216, .05);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        var(--paper);
+      background-size: 34px 34px;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--blueprint); }
+    code, pre { font-family: var(--mono); }
+    code { font-size: .9em; }
+
+    .icon {
+      width: 1.1em; height: 1.1em;
+      fill: none; stroke: currentColor; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+      flex: none;
+    }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+    /* ---------- header ---------- */
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+      min-height: 64px;
+      padding: 8px max(16px, calc((100vw - 1060px) / 2));
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper) 92%, transparent);
+      backdrop-filter: blur(8px);
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-weight: 700; text-decoration: none; color: var(--ink);
+      letter-spacing: .01em;
+    }
+    .brand-mark {
+      display: grid; place-items: center;
+      width: 30px; height: 30px; border-radius: 7px;
+      background: var(--blueprint); color: var(--paper-bright);
+    }
+    .site-header nav { display: flex; gap: 4px; flex-wrap: wrap; }
+    .site-header nav a {
+      padding: 5px 10px; border-radius: 6px;
+      font-size: .875rem; text-decoration: none; color: var(--ink-soft);
+    }
+    .site-header nav a:hover { background: color-mix(in srgb, var(--blueprint) 12%, transparent); color: var(--blueprint); }
+
+    /* ---------- layout ---------- */
+    main { padding: 0 max(16px, calc((100vw - 1060px) / 2)) 80px; }
+    section { margin-top: 56px; scroll-margin-top: 90px; }
+    h1, h2, h3 { font-family: var(--display); line-height: 1.2; margin: 0; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.9rem); letter-spacing: -.01em; }
+    h2 {
+      font-size: clamp(1.35rem, 3vw, 1.8rem); color: var(--blueprint-deep);
+      padding-bottom: 8px; border-bottom: 2px solid var(--line); margin-bottom: 18px;
+    }
+    h3 { font-size: 1.1rem; margin: 26px 0 8px; }
+    p { margin: 0 0 14px; max-width: 74ch; }
+    ul { max-width: 74ch; padding-left: 22px; margin: 0 0 14px; }
+    li { margin-bottom: 6px; }
+
+    .eyebrow {
+      font-family: var(--sans); font-size: .72rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase; color: var(--teal);
+      margin: 0 0 10px;
+    }
+
+    .hero { padding-top: 44px; }
+    .byline { color: var(--ink-soft); margin: 14px 0 0; font-size: 1.02rem; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 11px; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--paper-bright);
+      font-size: .8rem; color: var(--ink-soft);
+    }
+    .chip strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- callout ---------- */
+    .callout {
+      margin: 26px 0; padding: 18px 20px;
+      border-left: 4px solid var(--orange); border-radius: 0 10px 10px 0;
+      background: color-mix(in srgb, var(--orange) 9%, var(--paper-bright));
+    }
+    .callout.info { border-left-color: var(--teal); background: color-mix(in srgb, var(--teal) 9%, var(--paper-bright)); }
+    .callout h3 { margin-top: 0; font-family: var(--sans); font-size: 1rem; font-weight: 700; }
+    .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+
+    /* ---------- figures ---------- */
+    figure {
+      margin: 26px 0; padding: 20px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: var(--paper-bright);
+    }
+    figure svg { display: block; width: 100%; height: auto; }
+    figure svg text { font-family: var(--sans); }
+    figure svg text.mono { font-family: var(--mono); }
+    figcaption {
+      margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
+      font-size: .875rem; color: var(--ink-soft); max-width: 74ch;
+    }
+    figcaption b { color: var(--ink); }
+
+    /* ---------- tables ---------- */
+    .table-wrap { overflow-x: auto; margin: 20px 0; }
+    table { border-collapse: collapse; width: 100%; min-width: 540px; font-size: .9rem; }
+    th, td {
+      text-align: left; vertical-align: top;
+      padding: 9px 12px; border-bottom: 1px solid var(--line);
+    }
+    th {
+      font-family: var(--sans); font-size: .76rem; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase; color: var(--blueprint-deep);
+      background: color-mix(in srgb, var(--blueprint) 8%, transparent);
+      border-bottom: 2px solid var(--line);
+    }
+    tbody tr:hover { background: color-mix(in srgb, var(--blueprint) 4%, transparent); }
+    td code { background: color-mix(in srgb, var(--ink) 7%, transparent); padding: 1px 5px; border-radius: 4px; }
+    .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .yes { color: var(--teal); font-weight: 600; }
+    .no  { color: var(--orange); font-weight: 600; }
+    .pend { color: var(--amber); font-weight: 600; }
+
+    /* ---------- downloads ---------- */
+    .dl-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); margin: 20px 0; }
+    .dl {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 15px 16px; border: 1px solid var(--line); border-radius: 11px;
+      background: var(--paper-bright); text-decoration: none; color: inherit;
+      transition: border-color .15s, transform .15s;
+    }
+    .dl:hover { border-color: var(--blueprint); transform: translateY(-1px); }
+    .dl .icon { width: 1.3em; height: 1.3em; color: var(--blueprint); margin-top: 3px; }
+    .dl-name, .dl-desc, .dl-size { display: block; }
+    .dl-name { font-family: var(--mono); font-size: .86rem; font-weight: 600; word-break: break-all; }
+    .dl-desc { font-size: .83rem; color: var(--ink-soft); margin-top: 3px; }
+    .dl-size { font-size: .75rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; margin-top: 5px; }
+
+    .primary-dl {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 11px 20px; border-radius: 9px;
+      background: var(--blueprint); color: var(--paper-bright);
+      font-weight: 600; text-decoration: none;
+    }
+    .primary-dl:hover { background: var(--blueprint-deep); }
+
+    pre {
+      margin: 14px 0; padding: 14px 16px; overflow-x: auto;
+      border-radius: 9px; background: var(--code); color: #e6edf3;
+      font-size: .82rem; line-height: 1.55;
+    }
+
+    .refs { font-size: .88rem; color: var(--ink-soft); }
+    .refs li { margin-bottom: 10px; }
+
+    footer {
+      padding: 26px max(16px, calc((100vw - 1060px) / 2));
+      border-top: 1px solid var(--line);
+      font-size: .85rem; color: var(--ink-soft);
+    }
+    footer a { color: var(--blueprint); }
+
+    @media (max-width: 620px) {
+      .site-header nav { width: 100%; }
+      section { margin-top: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="visually-hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M8 3v18M16 3v18M3 8h18M3 16h18"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h6"/></symbol>
+      <symbol id="i-archive" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <a class="brand" href="#top">
+      <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-grid"></use></svg></span>
+      <span>Square Packing Files</span>
+    </a>
+    <nav aria-label="Page sections">
+      <a href="#maths">The problem</a>
+      <a href="#files">Download</a>
+      <a href="#build">How it was built</a>
+      <a href="#printing">Printing</a>
+      <a href="#licence">Licence</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <p class="eyebrow">Liberty University Research Week 2026</p>
+      <h1>A 3D-printed square-packing manipulative</h1>
+      <p class="byline">
+        Andrew&nbsp;H.&nbsp;Volk, Jacob&nbsp;Drambi, and Joseph&nbsp;Holt &middot;
+        School of Mathematics and School of Engineering, Liberty University
+      </p>
+      <div class="meta-row">
+        <span class="chip">Release <strong>1.0.0</strong></span>
+        <span class="chip">Updated <strong>23 October 2026</strong></span>
+        <span class="chip">Licence <strong>CC BY 4.0</strong></span>
+        <span class="chip"><strong>Partial</strong> release</span>
+      </div>
+
+      <div class="callout">
+        <h3>What this release does and does not contain</h3>
+        <p>
+          Four model concepts were built for this project. This release publishes the
+          two that were modelled in OpenSCAD, with corrected mathematics, printable
+          exports, and calibration notes.
+        </p>
+        <p>
+          It does <b>not</b> yet contain the adjustable frame-and-slider assembly
+          demonstrated at Research Week and described in the accompanying manuscript.
+          That model was built in SOLIDWORKS; its sources and neutral exports will be
+          added in a later release. Cite the version number, and check back before
+          relying on this page as the complete record.
+        </p>
+      </div>
+
+      <p>
+        <a class="primary-dl" href="rw26/square-packing-files-v1.0.0.zip" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+          Download everything &middot; 99&nbsp;KB
+        </a>
+      </p>
+    </section>
+
+    <section id="maths">
+      <p class="eyebrow">The mathematics</p>
+      <h2>Three cases, and one that is still open</h2>
+
+      <p>
+        Square packing asks a question anyone can state: if you have <i>n</i> identical
+        unit squares, what is the smallest square that holds all of them? Write that
+        smallest side as <i>s</i>(<i>n</i>). For perfect squares the answer is the obvious
+        grid. Elsewhere it is not obvious at all, and rotating a piece can do better than
+        lining everything up.
+      </p>
+
+      <p>
+        The artifact concentrates on three values, chosen because together they walk from
+        settled mathematics into unsettled mathematics.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Case</th><th>Lower bound</th><th>Best published construction</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>n = 5</b></td>
+              <td class="num">2 + 1/&radic;2 &asymp; 2.707107</td>
+              <td class="num">2 + 1/&radic;2 &asymp; 2.707107</td>
+              <td class="yes">Exact optimum</td>
+            </tr>
+            <tr>
+              <td><b>n = 10</b></td>
+              <td class="num">3 + 1/&radic;2 &asymp; 3.707107</td>
+              <td class="num">3 + 1/&radic;2 &asymp; 3.707107</td>
+              <td class="yes">Exact optimum</td>
+            </tr>
+            <tr>
+              <td><b>n = 11</b></td>
+              <td class="num">2 + 4/&radic;5 &asymp; 3.788854</td>
+              <td class="num">&le; 3.87708359</td>
+              <td class="no">Unresolved</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        For <i>n</i>&nbsp;=&nbsp;5 and <i>n</i>&nbsp;=&nbsp;10 the two columns agree, so the
+        value is known exactly. For <i>n</i>&nbsp;=&nbsp;11 they do not meet, and everything
+        between them is open.
+      </p>
+
+      <figure>
+        <svg viewBox="0 0 800 212" role="img" aria-label="Number line from 3.68 to 3.92 showing the exact value of s(10) at 3.707107, the proved lower bound for s(11) at 3.788854, the best known construction at 3.877084, and the unresolved band between them.">
+          <defs>
+            <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="0" y2="7" stroke="var(--orange)" stroke-width="2.5" opacity=".22"/>
+            </pattern>
+          </defs>
+
+          <rect x="370.3" y="74" width="235.3" height="26" fill="url(#hatch)"/>
+          <rect x="370.3" y="74" width="235.3" height="26" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+          <line x1="60" y1="87" x2="740" y2="87" stroke="var(--ink-soft)" stroke-width="2"/>
+          <g stroke="var(--ink-soft)" stroke-width="2">
+            <line x1="80" y1="81" x2="80" y2="93"/>
+            <line x1="720" y1="81" x2="720" y2="93"/>
+          </g>
+          <g class="mono" font-size="12" fill="var(--ink-soft)" text-anchor="middle">
+            <text x="80" y="117">3.68</text>
+            <text x="720" y="117">3.92</text>
+          </g>
+
+          <g stroke="var(--teal)" stroke-width="3"><line x1="152.3" y1="62" x2="152.3" y2="112"/></g>
+          <circle cx="152.3" cy="87" r="6" fill="var(--teal)"/>
+          <g text-anchor="middle">
+            <text x="152.3" y="46" font-size="13" font-weight="700" fill="var(--teal)">s(10) exact</text>
+            <text x="152.3" y="143" font-size="12" fill="var(--ink-soft)" class="mono">3.707107</text>
+          </g>
+
+          <g stroke="var(--blueprint)" stroke-width="3"><line x1="370.3" y1="62" x2="370.3" y2="112"/></g>
+          <circle cx="370.3" cy="87" r="6" fill="var(--blueprint)"/>
+          <g text-anchor="middle">
+            <text x="370.3" y="46" font-size="13" font-weight="700" fill="var(--blueprint)">s(11) &ge; this</text>
+            <text x="370.3" y="143" font-size="12" fill="var(--ink-soft)" class="mono">3.788854</text>
+            <text x="370.3" y="161" font-size="11" fill="var(--ink-soft)">proved</text>
+          </g>
+
+          <g stroke="var(--blueprint)" stroke-width="3"><line x1="605.6" y1="62" x2="605.6" y2="112"/></g>
+          <circle cx="605.6" cy="87" r="6" fill="var(--blueprint)"/>
+          <g text-anchor="middle">
+            <text x="605.6" y="46" font-size="13" font-weight="700" fill="var(--blueprint)">s(11) &le; this</text>
+            <text x="605.6" y="143" font-size="12" fill="var(--ink-soft)" class="mono">3.877084</text>
+            <text x="605.6" y="161" font-size="11" fill="var(--ink-soft)">constructed</text>
+          </g>
+
+          <g stroke="var(--orange)" stroke-width="2" fill="none">
+            <path d="M370.3 176v8h235.3v-8"/>
+          </g>
+          <text x="488" y="204" text-anchor="middle" font-size="13"
+                font-weight="700" fill="var(--orange)">s(11) is somewhere in here</text>
+        </svg>
+        <figcaption>
+          <b>Figure 1. The open interval for <i>n</i> = 11.</b>
+          Stromquist proved that eleven unit squares cannot fit inside a square smaller
+          than 3.788854. Gensane and Ryckelynck built an arrangement that fits inside
+          3.87708359. No one has closed the hatched band in between, and
+          <i>s</i>(11) is somewhere inside it.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <svg viewBox="0 0 800 300" role="img" aria-label="Four nested squares drawn to scale showing the frames for n equals 5, n equals 10, the n equals 11 lower bound, and the n equals 11 best known construction, with a unit tile for comparison.">
+          <g transform="translate(40,34)">
+            <rect x="0" y="0" width="220.0" height="220.0" fill="none" stroke="var(--blueprint)" stroke-width="2.5"/>
+            <rect x="0" y="5.1" width="214.9" height="214.9" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-dasharray="7 4"/>
+            <rect x="0" y="9.7" width="210.3" height="210.3" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+            <rect x="0" y="66.4" width="153.6" height="153.6" fill="none" stroke="var(--ink-soft)" stroke-width="2.5"/>
+            <rect x="0" y="163.3" width="56.7" height="56.7" fill="color-mix(in srgb, var(--ink) 14%, transparent)" stroke="var(--ink)" stroke-width="1.5"/>
+            <text x="28.4" y="196" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">1</text>
+          </g>
+
+          <g font-size="13">
+            <g transform="translate(300,56)">
+              <rect x="0" y="-10" width="26" height="3" fill="var(--blueprint)"/>
+              <text x="38" y="-4" font-weight="700" fill="var(--blueprint)">n = 11, best known construction</text>
+              <text x="38" y="14" font-size="12" fill="var(--ink-soft)" class="mono">3.877084 &mdash; it fits</text>
+            </g>
+            <g transform="translate(300,112)">
+              <rect x="0" y="-10" width="26" height="3" fill="var(--orange)"/>
+              <text x="38" y="-4" font-weight="700" fill="var(--orange)">n = 11, proved lower bound</text>
+              <text x="38" y="14" font-size="12" fill="var(--ink-soft)" class="mono">3.788854 &mdash; it cannot fit</text>
+            </g>
+            <g transform="translate(300,168)">
+              <rect x="0" y="-10" width="26" height="3" fill="var(--teal)"/>
+              <text x="38" y="-4" font-weight="700" fill="var(--teal)">n = 10, exact optimum</text>
+              <text x="38" y="14" font-size="12" fill="var(--ink-soft)" class="mono">3.707107</text>
+            </g>
+            <g transform="translate(300,224)">
+              <rect x="0" y="-10" width="26" height="3" fill="var(--ink-soft)"/>
+              <text x="38" y="-4" font-weight="700" fill="var(--ink-soft)">n = 5, exact optimum</text>
+              <text x="38" y="14" font-size="12" fill="var(--ink-soft)" class="mono">2.707107</text>
+            </g>
+          </g>
+        </svg>
+        <figcaption>
+          <b>Figure 2. The four frames, to scale, with a unit tile.</b>
+          The two <i>n</i>&nbsp;=&nbsp;11 frames differ by less than the width of the line
+          drawing them. Eleven tiles provably cannot be forced into the dashed one and
+          demonstrably do fit in the solid one; the unsolved question lives in the
+          sliver between. At a 25&nbsp;mm tile that sliver is about 2.2&nbsp;mm of plastic.
+        </figcaption>
+      </figure>
+
+      <div class="callout info">
+        <h3>Why the release prints a frame that cannot be filled</h3>
+        <p>
+          Handing someone a frame that defeats them is the whole lesson. Failing to fill
+          the <code>n=11 NO</code> frame proves nothing on its own &mdash; plenty of
+          solvable puzzles defeat people. What makes it impossible is a proof, and what
+          makes the larger frame merely <i>the best anyone has managed</i> is the absence
+          of one. The two pieces in a hand are the difference between a construction, an
+          upper bound, a lower bound, and a settled optimum.
+        </p>
+      </div>
+    </section>
+
+    <section id="files">
+      <p class="eyebrow">Release 1.0.0</p>
+      <h2>Download</h2>
+
+      <div class="dl-grid">
+        <a class="dl" href="rw26/files/frames-and-tiles.scad" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-code"></use></svg>
+          <span>
+            <span class="dl-name">frames-and-tiles.scad</span>
+            <span class="dl-desc">Parametric source for the twelve tiles and four frames. Echoes a verification line per frame when compiled.</span>
+            <span class="dl-size">8 KB &middot; OpenSCAD</span>
+          </span>
+        </a>
+        <a class="dl" href="rw26/files/frames-plate.stl" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-box"></use></svg>
+          <span>
+            <span class="dl-name">frames-plate.stl</span>
+            <span class="dl-desc">All four frames, two by two on one plate. 213 &times; 208 &times; 10 mm.</span>
+            <span class="dl-size">1004 KB &middot; ASCII STL</span>
+          </span>
+        </a>
+        <a class="dl" href="rw26/files/tiles-plate.stl" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-box"></use></svg>
+          <span>
+            <span class="dl-name">tiles-plate.stl</span>
+            <span class="dl-desc">Twelve unit tiles on one plate. 111 &times; 82 &times; 6 mm.</span>
+            <span class="dl-size">20 KB &middot; ASCII STL</span>
+          </span>
+        </a>
+        <a class="dl" href="rw26/files/overlapping-corners.scad" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-code"></use></svg>
+          <span>
+            <span class="dl-name">overlapping-corners.scad</span>
+            <span class="dl-desc">Source for the sliding two-plate concept, with its three dated revisions documented in the header.</span>
+            <span class="dl-size">8 KB &middot; OpenSCAD</span>
+          </span>
+        </a>
+        <a class="dl" href="rw26/files/overlapping-corners-pair.stl" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-box"></use></svg>
+          <span>
+            <span class="dl-name">overlapping-corners-pair.stl</span>
+            <span class="dl-desc">Both halves laid out for one plate. 212 &times; 212 &times; 25 mm.</span>
+            <span class="dl-size">33 KB &middot; ASCII STL</span>
+          </span>
+        </a>
+        <a class="dl" href="rw26/files/README.txt" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-file"></use></svg>
+          <span>
+            <span class="dl-name">README.txt</span>
+            <span class="dl-desc">Everything on this page, plus the full calibration procedure, in one text file.</span>
+            <span class="dl-size">6 KB &middot; Plain text</span>
+          </span>
+        </a>
+        <a class="dl" href="rw26/files/LICENSE.txt" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-file"></use></svg>
+          <span>
+            <span class="dl-name">LICENSE.txt</span>
+            <span class="dl-desc">CC BY 4.0, with the suggested attribution string.</span>
+            <span class="dl-size">1 KB &middot; Plain text</span>
+          </span>
+        </a>
+        <a class="dl" href="rw26/square-packing-files-v1.0.0.zip" download>
+          <svg class="icon" aria-hidden="true"><use href="#i-archive"></use></svg>
+          <span>
+            <span class="dl-name">square-packing-files-v1.0.0.zip</span>
+            <span class="dl-desc">The whole release in one archive.</span>
+            <span class="dl-size">99 KB &middot; ZIP</span>
+          </span>
+        </a>
+      </div>
+
+      <h3>Regenerating the exports</h3>
+      <p>Both plates come from one source file, so nothing can drift out of step:</p>
+<pre><code>openscad -D 'part="frames"' -o frames-plate.stl frames-and-tiles.scad
+openscad -D 'part="tiles"'  -o tiles-plate.stl  frames-and-tiles.scad
+
+openscad -D 'show_cube=false' -D 'slideblue=112' \
+         -o overlapping-corners-pair.stl overlapping-corners.scad</code></pre>
+      <p>
+        Compiling <code>frames-and-tiles.scad</code> prints a verification line for every
+        frame, reporting its effective ratio against the bound it represents and flagging
+        <code>DEMONSTRATION BROKEN</code> if an edit has pushed a frame to the wrong side
+        of its bound.
+      </p>
+    </section>
+
+    <section id="build">
+      <p class="eyebrow">Development record</p>
+      <h2>How it was built</h2>
+
+      <p>
+        Three people worked in three different CAD environments and produced four model
+        concepts before the team settled on a final design. Each concept solved a problem
+        the previous one had exposed.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Concept</th><th>Tool</th><th>What it was</th><th>What it contributed</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1. Frames and tiles</b><br><span class="num">March 2026</span></td>
+              <td>OpenSCAD</td>
+              <td>Twelve flat tiles plus one rigid labelled frame per case.</td>
+              <td>Fixed the twelve-tile set size the final artifact kept. No adjustability, and the first version had zero fit clearance. <b>Published here, corrected.</b></td>
+            </tr>
+            <tr>
+              <td><b>2. Sliding-wall corner</b><br><span class="num">March 2026</span></td>
+              <td>OpenSCAD</td>
+              <td>Two 5&nbsp;mm walls, 21&nbsp;mm tall, meeting at a right angle with a 45&deg; diagonal bar.</td>
+              <td>First attempt at a boundary that moves rather than a frame that is fixed.</td>
+            </tr>
+            <tr>
+              <td><b>3. Overlapping corners</b><br><span class="num">30 March &ndash; 9 April 2026</span></td>
+              <td>OpenSCAD</td>
+              <td>Two congruent plates whose diagonal overlap shrinks the enclosed square continuously, so one pair covers every case.</td>
+              <td>Established the 100&nbsp;mm field and the 5&nbsp;mm bar height the final family uses. No captive slider, so the halves drift. <b>Published here.</b></td>
+            </tr>
+            <tr>
+              <td><b>4. Frame, sliders, track, pins</b><br><span class="num">Final</span></td>
+              <td>SOLIDWORKS</td>
+              <td>A four-part family: frame, inner slider, corner slider, pin. Printed as <i>Frame and Slider Assembly 2.0</i>.</td>
+              <td>The delivered artifact. Captive sliders and pins hold a setting after adjustment. <b class="pend">Not yet published here.</b></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What changed inside concept 3</h3>
+      <p>
+        The sliding-plate model is the only one whose revisions were captured with dates,
+        so its history is exact rather than reconstructed:
+      </p>
+      <ul>
+        <li><b>30 March 2026</b> &mdash; first working version: 40&nbsp;mm triangle leg, 10&nbsp;mm border layers, 20&nbsp;mm tile pitch, dependent on an external library, every piece a separate solid.</li>
+        <li><b>31 March 2026</b> &mdash; each colour unioned into one solid per half. A printability fix: the separately emitted overlapping pieces were not one watertight body.</li>
+        <li><b>9 April 2026</b> &mdash; triangle leg raised to 105/&radic;2 so the overlap diagonal spans the full corner-to-corner distance; border layers halved from 10 to 5&nbsp;mm, converging on the final family's universal bar height; tile pitch dropped from 20 to 16&nbsp;mm; library dependency removed.</li>
+      </ul>
+
+      <h3>A correction worth stating plainly</h3>
+      <p>
+        The first concept's source hard-coded case multipliers that did not match the
+        literature: 2.41421356 for <i>n</i>&nbsp;=&nbsp;5, 3.306 for <i>n</i>&nbsp;=&nbsp;10,
+        a bracket of guesses for <i>n</i>&nbsp;=&nbsp;11, and 3.5 for
+        <i>n</i>&nbsp;=&nbsp;12. They were placeholders from the project's first week that
+        were never revisited. The file published here replaces them with the published
+        values, each sourced in a comment, and drops <i>n</i>&nbsp;=&nbsp;12 entirely,
+        because the sources this project cites do not settle it and printing a frame
+        implies a claim about a bound.
+      </p>
+    </section>
+
+    <section id="printing">
+      <p class="eyebrow">Fabrication</p>
+      <h2>Printing and calibration</h2>
+
+      <p>
+        The Research Week components were printed on a Bambu Lab A1 with a 0.4&nbsp;mm
+        stainless-steel nozzle in Bambu Lab PLA Matte and PLA Basic. The settings below
+        are given with their provenance, because not all of them could be confirmed
+        against a surviving slicer profile.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Setting</th><th>Value</th><th>Provenance</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Printer</td><td>Bambu Lab A1</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Build plate</td><td>Textured PEI</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Nozzle</td><td>0.4 mm stainless steel</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Material</td><td>Bambu Lab PLA Matte and PLA Basic</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Layer height</td><td>0.20 mm</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Top shell</td><td>5 layers, 1 mm</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Bottom shell</td><td>3 layers</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Sparse infill</td><td>15% gyroid</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Support threshold</td><td>30&deg;</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Wall generator</td><td>Arachne</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Elephant-foot compensation</td><td>0 mm, switched off</td><td class="yes">Confirmed</td></tr>
+            <tr><td>Wall loops</td><td>2</td><td class="pend">Profile says 2; the project record said 3</td></tr>
+            <tr><td>Outer-wall speed</td><td>&mdash;</td><td class="pend">Profile says 200 mm/s; the project record said 60</td></tr>
+            <tr><td>Supports</td><td>&mdash;</td><td class="pend">Profile says tree, limited to the plate; the record said normal, unlimited</td></tr>
+            <tr><td>Bambu Studio version</td><td>&mdash;</td><td class="no">Not recoverable</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Neither plate in this release needs supports. Both are flat-bottomed with no
+        overhangs. A brim helps the frames, whose walls are 4&nbsp;mm wide and
+        10&nbsp;mm tall and can lift at the corners.
+      </p>
+
+      <h3>Clearance is deliberately asymmetric</h3>
+      <p>
+        The two kinds of dimensional error are not equally harmful. A frame that is too
+        tight is annoying. A frame that is too loose lets someone produce an arrangement
+        that appears to beat a published bound, which teaches something false. So the
+        release tightens in one direction and loosens in the other:
+      </p>
+      <ul>
+        <li>tiles print slightly <b>under</b> nominal, so they slide;</li>
+        <li>frames that must close are sized slightly <b>over</b> their bound;</li>
+        <li>the <i>n</i>&nbsp;=&nbsp;11 lower-bound frame is sized slightly <b>under</b> its bound, so that after every tolerance it remains provably impossible to fill.</li>
+      </ul>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>Default</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>tile_side</code></td><td class="num">25 mm</td><td>Nominal mathematical unit square</td></tr>
+            <tr><td><code>tile_clearance</code></td><td class="num">0.30 mm</td><td>Total, subtracted from the printed tile</td></tr>
+            <tr><td><code>frame_margin</code></td><td class="num">0.40 mm</td><td>Total, added to frames that must close</td></tr>
+            <tr><td><code>bound_margin</code></td><td class="num">0.40 mm</td><td>Total, subtracted from the impossible frame</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        To re-tune for a different printer, print the tiles plate first and measure a tile
+        across two opposite faces. Adjust <code>tile_clearance</code> until a printed tile
+        measures 24.7&nbsp;mm, then re-export the frames. Do not enlarge the frames to fit
+        oversized tiles &mdash; that is the change that breaks the
+        <i>n</i>&nbsp;=&nbsp;11 demonstration. Recompile after any edit and read the
+        echoed verification lines.
+      </p>
+    </section>
+
+    <section id="licence">
+      <p class="eyebrow">Reuse</p>
+      <h2>Licence and citation</h2>
+
+      <p>
+        The OpenSCAD sources, the STL exports, and the documentation in this release are
+        licensed <b>CC&nbsp;BY&nbsp;4.0</b>. Copy them, print them, adapt them, sell what
+        you make with them; just say where they came from. The licence does not cover the
+        published mathematical results the models represent, which belong to their authors
+        and are cited below.
+      </p>
+
+      <p>Suggested citation:</p>
+<pre><code>Volk, A. H., Drambi, J., &amp; Holt, J. (2026). Square packing manipulative
+    (Version 1.0.0) [3D model files].
+    https://andrewhvolk.github.io/RW26.html</code></pre>
+
+      <h3>References</h3>
+      <ul class="refs">
+        <li>Erd&#337;s, P., &amp; Graham, R. L. (1975). On packing squares with equal squares. <i>Journal of Combinatorial Theory, Series A, 19</i>(1), 119&ndash;123.</li>
+        <li>Friedman, E. (1998/2009). Packing unit squares in squares: A survey and new results. <i>The Electronic Journal of Combinatorics</i>, Dynamic Survey 7.</li>
+        <li>Gensane, T., &amp; Ryckelynck, P. (2005). Improved dense packings of congruent squares in a square. <i>Discrete &amp; Computational Geometry, 34</i>, 97&ndash;109.</li>
+        <li>G&ouml;bel, F. (1979). Geometrical packing and covering problems. In A. Schrijver (Ed.), <i>Packing and covering in combinatorics</i> (Mathematical Centre Tracts 106, pp. 179&ndash;199). Mathematisch Centrum.</li>
+        <li>Stromquist, W. (2003). Packing 10 or 11 unit squares in a square. <i>The Electronic Journal of Combinatorics, 10</i>(1), Article R8.</li>
+      </ul>
+
+      <div class="callout">
+        <h3>Check before you print</h3>
+        <p>
+          The <i>n</i>&nbsp;=&nbsp;11 case is open, which means this page can go out of
+          date in a way most project pages cannot. If a better construction or a matching
+          proof has appeared since October 2026, the frame labelled
+          <code>n=11 best</code> is no longer the best known and the demonstration needs
+          revising. Recheck the current status before reprinting a class set.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Developed for Liberty University Research Week 2026. The oral presentation received
+      an award and was selected for development as an associated paper for the
+      <i>Montview Journal of Research &amp; Scholarship</i>.
+    </p>
+    <p>
+      Andrew H. Volk &middot; School of Mathematics, Liberty University &middot;
+      <a href="https://andrewhvolk.github.io/">andrewhvolk.github.io</a>
+    </p>
+  </footer>
+</body>
+</html>
