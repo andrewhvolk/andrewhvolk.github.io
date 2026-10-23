@@ -24,6 +24,7 @@ MODULES = [
     "pages-tools.css",
     "pages-cv.css",
     "pages-review.css",
+    "pages-review-hub.css",
     "pages-hub.css",
     "utilities.css",
     "print.css",

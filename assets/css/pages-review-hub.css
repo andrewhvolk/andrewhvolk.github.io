@@ -1,0 +1,247 @@
+@layer pages {
+  /* MATH 130 review pages (130Test1-4.html, body.review-page) in the site design.
+     These pages keep their own interactive practice; this module only swaps their
+     colors, fonts, header, tabs, and cards for the hub look used by the course pages. */
+
+  body.review-page {
+    --bg-base: #f7f5f0;
+    --bg-body: #f7f5f0;
+    --bg-surface: #ffffff;
+    --bg-subtle: #f1eee7;
+    --text-main: #2b2a28;
+    --text-muted: #66625b;
+    --border-subtle: #e4e0d8;
+    --border-transparent: #e4e0d8;
+    --primary-main: #2d5b8c;
+    --primary-soft: #e7eef6;
+    --surface-transparent: #ffffff;
+    --glass-surface: #f7f5f0;
+    --shadow: none;
+    --type-display-family: "Source Serif 4", Georgia, serif;
+    --type-body-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --type-meta-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --review-bg: #f7f5f0;
+    --review-surface: #ffffff;
+    --review-surface-2: #f1eee7;
+    --review-border: #e4e0d8;
+    --review-accent: #2d5b8c;
+    --review-accent-soft: #e7eef6;
+    --review-accent-glow: transparent;
+    --review-accent-hover: #e7eef6;
+    --review-text: #2b2a28;
+    --review-muted: #66625b;
+    --review-body-muted: #66625b;
+    --review-semantic-body: #2b2a28;
+    --review-shadow: none;
+    --review-radius: 12px;
+    --review-h1-from: #2b2a28;
+    --review-h1-to: #2b2a28;
+    font-family: var(--type-body-family);
+  }
+
+  :root[data-theme="dark"] body.review-page {
+    --bg-base: #17181b;
+    --bg-body: #17181b;
+    --bg-surface: #1f2024;
+    --bg-subtle: #1b1c20;
+    --text-main: #e8e6e1;
+    --text-muted: #a3a09a;
+    --border-subtle: #2f3136;
+    --border-transparent: #2f3136;
+    --primary-main: #8db4e2;
+    --primary-soft: #24303d;
+    --surface-transparent: #1f2024;
+    --glass-surface: #17181b;
+    --review-bg: #17181b;
+    --review-surface: #1f2024;
+    --review-surface-2: #1b1c20;
+    --review-border: #2f3136;
+    --review-accent: #8db4e2;
+    --review-accent-soft: #24303d;
+    --review-accent-hover: #24303d;
+    --review-text: #e8e6e1;
+    --review-muted: #a3a09a;
+    --review-body-muted: #a3a09a;
+    --review-semantic-body: #e8e6e1;
+    --review-h1-from: #e8e6e1;
+    --review-h1-to: #e8e6e1;
+  }
+
+  body.review-page {
+    background: var(--bg-base);
+    color: var(--text-main);
+  }
+
+  /* Header: a plain, left-aligned title block like the course pages, not a colored banner. */
+  body.review-page .review-page-header {
+    background: var(--bg-base);
+    color: var(--text-main);
+    text-align: left;
+    padding: 28px 0 8px;
+  }
+
+  body.review-page .review-page-header::before,
+  body.review-page .review-page-header::after {
+    display: none;
+  }
+
+  body.review-page .review-page-header .container {
+    max-width: 1040px;
+  }
+
+  body.review-page .review-page-header h1 {
+    color: var(--text-main);
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    font-family: var(--type-display-family);
+    font-weight: 600;
+    font-size: 2.125rem;
+    letter-spacing: -0.01em;
+  }
+
+  body.review-page .review-page-header .page-shell-header__eyebrow,
+  body.review-page .review-page-header .subtitle {
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    max-width: 64ch;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  body.review-page .review-page-header a {
+    color: var(--primary-main);
+  }
+
+  /* Section tabs: underlined text links instead of filled pills. */
+  body.review-page .review-section-nav {
+    top: 54px;
+    background: var(--bg-base);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: inset 0 -1px 0 var(--border-subtle);
+  }
+
+  body.review-page .review-section-nav__inner {
+    max-width: 1040px;
+    justify-content: flex-start;
+    gap: 4px 20px;
+  }
+
+  body.review-page .review-section-nav__inner a {
+    padding: 12px 0;
+    border-radius: 0;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    box-shadow: none;
+    background: none;
+  }
+
+  body.review-page .review-section-nav__inner a:hover,
+  body.review-page .review-section-nav__inner a:focus-visible,
+  body.review-page .review-section-nav__inner a[aria-current],
+  body.review-page .review-section-nav__inner a.active,
+  body.review-page .review-section-nav__inner a.is-active {
+    background: none;
+    color: var(--text-main);
+    box-shadow: inset 0 -2px 0 var(--primary-main);
+  }
+
+  /* Cards: flat surfaces with a hairline border, like the course page lists. */
+  body.review-page .card,
+  body.review-page .review-card,
+  body.review-page .learning-step {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  body.review-page .learning-step::before,
+  body.review-page .card::before {
+    display: none;
+  }
+
+  body.review-page h2,
+  body.review-page h3 {
+    font-family: var(--type-display-family);
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  body.review-page .learning-path__eyebrow,
+  body.review-page .learning-step__meta,
+  body.review-page .section-eyebrow {
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+
+  body.review-page .learning-action--primary {
+    background: var(--primary-main);
+    border-color: var(--primary-main);
+    color: var(--bg-surface);
+    box-shadow: none;
+  }
+
+  /* Card headers are <header> elements; drop the page-header spacing they inherit. */
+  body.review-page .learning-path__header {
+    padding: 0;
+    margin: 0;
+    background: none;
+    min-height: 0;
+  }
+
+  /* Line the title block up with the content column below it. */
+  body.review-page .review-page-header .container,
+  body.review-page .review-section-nav__inner {
+    max-width: var(--review-shell-width, 1100px);
+    box-sizing: border-box;
+  }
+
+  /* Final exam lab (130Test4.html) uses its own color names. */
+  body.review-page {
+    --primary: #2b2a28;
+    --secondary: #2d5b8c;
+    --dark: #2b2a28;
+    --muted: #66625b;
+    --light: #f7f5f0;
+    --card: #ffffff;
+    --border: #e4e0d8;
+    --soft-blue: #e7eef6;
+  }
+
+  :root[data-theme="dark"] body.review-page {
+    --primary: #e8e6e1;
+    --secondary: #8db4e2;
+    --dark: #e8e6e1;
+    --muted: #a3a09a;
+    --light: #17181b;
+    --card: #1f2024;
+    --border: #2f3136;
+    --soft-blue: #24303d;
+  }
+
+  body.review-page .test4-lab-main {
+    background: var(--bg-base);
+  }
+
+  body.review-page .eyebrow {
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+
+  body.review-page .welcome-title {
+    font-family: var(--type-display-family);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+}
