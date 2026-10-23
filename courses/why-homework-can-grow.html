@@ -389,8 +389,16 @@
       .footer-note { text-align: left; }
     }
   </style>
+<style id="m130-topbar-style">
+  .m130-topbar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 16px; margin: 0; padding: 10px max(16px, env(safe-area-inset-left)); background: #f7f5f0; border-bottom: 1px solid #e4e0d8; color: #66625b; font: 15px/1.45 "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif; position: relative; z-index: 50; }
+  .m130-topbar a { color: #2d5b8c; font-weight: 600; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+  .m130-topbar a:hover, .m130-topbar a:focus-visible { text-decoration: underline; }
+  @media (prefers-color-scheme: dark) { .m130-topbar { background: #17181b; border-color: #2f3136; color: #a3a09a; } .m130-topbar a { color: #8db4e2; } }
+  @media print { .m130-topbar { display: none; } }
+</style>
 </head>
 <body>
+<nav class="m130-topbar" aria-label="Course"><a href="/courses/math130.html"><span aria-hidden="true">&larr;</span>&nbsp;MATH 130</a><span>Why some ALEKS assignments take longer than others.</span></nav>
   <div class="page">
     <header class="hero">
       <p class="eyebrow">MATH 130 · Quick guide</p>
