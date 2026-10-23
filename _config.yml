@@ -1,0 +1,26 @@
+# Jekyll build settings for GitHub Pages.
+#
+# Keep instructor-only notes, the slide pipeline, and build tooling off the public site.
+# Listing `exclude` replaces Jekyll's default list, so its defaults are repeated first.
+# Folders starting with "_" (for example slides/_math130_unit3c_wip) are skipped automatically.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  # Instructor-only slide notes
+  - slides/Math130CommonDenominators_2026-08-31_Instructor.html
+  - slides/Math130FactorFirst_2026-08-28_TopHat.md
+  # Slide pipeline and tooling
+  - slides/migration
+  - slides/tools
+  - slides/node_modules
+  - slides/package.json
+  - slides/package-lock.json
+  - scripts
+  - tests
+  - CLAUDE.md
+  - README.md
