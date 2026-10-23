@@ -36,6 +36,16 @@ wide: true
             {% include hub-icon.html name="chevron" %}
           </summary>
           <div class="course-module__body">
+            {%- if m.goals %}
+            <div class="course-module__goals">
+              <h3>By the end, you can</h3>
+              <ul>
+                {%- for g in m.goals %}
+                <li>{{ g }}</li>
+                {%- endfor %}
+              </ul>
+            </div>
+            {%- endif %}
             {%- if m.handouts or m.sessions or m.videos or m.practice %}
             <div class="course-module__groups">
               {%- if m.handouts %}
