@@ -113,3 +113,22 @@
     }
   }
 }
+
+/* Outside the layer on purpose: a few older pages reset every element's margin and padding
+   in their own (unlayered) styles, which beats any layered rule and squeezed the bar. */
+.course-bar__inner {
+  margin: 0 auto;
+  padding: 0.35rem 1rem;
+}
+
+.course-bar a.course-bar__home {
+  margin-left: auto;
+}
+
+.course-bar .theme-toggle {
+  margin-left: auto;
+}
+
+.course-bar .course-bar__home + .theme-toggle {
+  margin-left: 0;
+}

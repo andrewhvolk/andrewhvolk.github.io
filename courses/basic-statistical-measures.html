@@ -35,8 +35,16 @@
     /* Overall reset and font */
     * {
       box-sizing: border-box;
+    }
+    /* Reset spacing inside this page's own content only, so the shared top bar and header keep theirs. */
+    :where(.stats-page-shell) * {
       margin: 0;
       padding: 0;
+    }
+    /* In dark mode the header card is a dark surface with light text, like the rest of the page. */
+    :root[data-theme="dark"] {
+      --stats-header-surface: var(--bg-surface);
+      --stats-header-text: var(--text-main);
     }
     body {
       background-color: var(--stats-page-bg);
@@ -66,6 +74,7 @@
       text-align: center;
     }
     .header h1 {
+      color: inherit;
       font-size: 28px;
       margin-bottom: 10px;
     }

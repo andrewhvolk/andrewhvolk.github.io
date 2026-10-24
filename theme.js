@@ -1,6 +1,17 @@
 // Apply a saved light or dark choice on pages that do not set it in their <head>
 // (hub pages do; older lesson, review, and lab pages do not).
+// Pages that declare <meta name="color-scheme" content="light"> were designed for light mode
+// only (a few interactive tools); they always stay light and hide the theme button.
+function isLightOnlyPage() {
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    return !!meta && meta.getAttribute('content').trim() === 'light';
+}
+
 (function applySavedTheme() {
+    if (isLightOnlyPage()) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        return;
+    }
     if (document.documentElement.hasAttribute('data-theme')) return;
     let saved = null;
     try {
@@ -258,6 +269,7 @@ function setupGlobalNav(navRoot, index) {
 // 2. Wait for the page to load, then attach the button click logic
 document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('theme-toggle-btn');
+    if (toggleBtn && isLightOnlyPage()) toggleBtn.style.display = 'none';
 
     // Bridge data-theme to the review-page .light class used by review pages
     const syncReviewTheme = (theme) => {
