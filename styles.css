@@ -359,7 +359,8 @@ h6 {
 }
 
 a {
-  color: var(--primary-main);
+  /* --link-main is set only in dark mode, where the primary blue is too dark to read as text. */
+  color: var(--link-main, var(--primary-main));
   text-decoration-line: underline;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.16em;
@@ -1912,6 +1913,7 @@ main.error-main {
 /* Dark Theme Variables applied via JS */
 :root[data-theme="dark"] {
   color-scheme: dark;
+  --link-main: #8db4e2;
   --bg-base: #18201d;
   --bg-surface: #1f2724;
   --bg-subtle: #18201d;
@@ -4709,6 +4711,25 @@ body.math130-course-page {
   }
 }
 
+/* Outside the layer on purpose: a few older pages reset every element's margin and padding
+   in their own (unlayered) styles, which beats any layered rule and squeezed the bar. */
+.course-bar__inner {
+  margin: 0 auto;
+  padding: 0.35rem 1rem;
+}
+
+.course-bar a.course-bar__home {
+  margin-left: auto;
+}
+
+.course-bar .theme-toggle {
+  margin-left: auto;
+}
+
+.course-bar .course-bar__home + .theme-toggle {
+  margin-left: 0;
+}
+
 /* === components.css === */
 @layer components {
   .badge-list {
@@ -5276,6 +5297,14 @@ body.math130-course-page {
     font-family: var(--type-display-family);
     font-weight: 600;
     font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+
+  /* Small labels above card headings ("What Test 1 covers"); they inherited a surface color. */
+  body.review-page .section-kicker {
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
   }
 }
 

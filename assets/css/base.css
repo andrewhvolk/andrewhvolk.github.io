@@ -341,7 +341,8 @@ h6 {
 }
 
 a {
-  color: var(--primary-main);
+  /* --link-main is set only in dark mode, where the primary blue is too dark to read as text. */
+  color: var(--link-main, var(--primary-main));
   text-decoration-line: underline;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.16em;
@@ -1894,6 +1895,7 @@ main.error-main {
 /* Dark Theme Variables applied via JS */
 :root[data-theme="dark"] {
   color-scheme: dark;
+  --link-main: #8db4e2;
   --bg-base: #18201d;
   --bg-surface: #1f2724;
   --bg-subtle: #18201d;
