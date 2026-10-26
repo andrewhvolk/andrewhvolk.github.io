@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linear and Angular Velocity | MATH 130 | Oct 26, 2026</title>
+<style>
+:root { --ink:#1b2430; --muted:#5b6675; --accent:#0f6b6b; --accent2:#1f3a5f; --warn:#a33b20; --good:#1f7a3a; --bg:#fbfaf7; --card:#ffffff; --line:#d8dee6; }
+* { box-sizing:border-box; }
+html,body { margin:0; height:100%; background:#1d2733; font-family:"Segoe UI",system-ui,sans-serif; color:var(--ink); }
+.deck { height:100%; display:flex; align-items:center; justify-content:center; }
+.slide { display:none; width:min(96vw, calc(96vh * 16 / 9)); aspect-ratio:16/9; background:var(--bg); border-radius:10px;
+  padding:3.2% 4.5%; position:relative; overflow:hidden; font-size:min(2.05vw, 3.65vh); line-height:1.3; }
+.slide.active { display:flex; flex-direction:column; }
+.slide h1 { font-size:1.75em; margin:0 0 .45em; color:var(--accent2); }
+.slide h2 { font-size:1.4em; margin:0 0 .35em; color:var(--accent2); border-bottom:3px solid var(--accent); padding-bottom:.15em; }
+.kicker { color:var(--accent); font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:.7em; margin-bottom:.3em; }
+.m { font-family:"Cambria Math",Cambria,"Times New Roman",serif; font-size:1.08em; }
+.big { font-size:1.6em; }
+.center { text-align:center; }
+.row { display:flex; gap:3%; align-items:flex-start; }
+.row > * { flex:1; }
+ul { margin:.2em 0; padding-left:1.1em; } li { margin:.25em 0; }
+.chain { display:grid; grid-template-columns:auto 1fr; gap:.25em .7em; align-items:baseline; }
+.chain .n { background:var(--accent); color:#fff; border-radius:50%; width:1.5em; height:1.5em; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.85em; }
+.work { background:var(--card); border:1px solid var(--line); border-left:5px solid var(--accent); border-radius:6px; padding:.3em .7em; margin:.2em 0; }
+.work .lab { color:var(--muted); font-size:.72em; display:inline-block; min-width:10.5em; margin-right:.4em; }
+.blank { display:inline-block; min-width:6em; border-bottom:2px dashed var(--muted); }
+.ans { color:var(--good); font-weight:700; }
+.bad { color:var(--warn); font-weight:700; }
+.box { border:2px solid var(--accent2); border-radius:8px; padding:.5em .9em; background:#eef3f9; }
+.note { color:var(--muted); font-size:.78em; }
+.step { visibility:hidden; }
+.step.shown { visibility:visible; }
+.pill { display:inline-block; background:#e5f1f1; color:var(--accent); border-radius:999px; padding:.05em .6em; font-size:.75em; font-weight:700; }
+.footer { position:absolute; bottom:1.6%; left:4.5%; right:4.5%; display:flex; justify-content:space-between; font-size:.55em; color:var(--muted); }
+.notes { display:none; position:absolute; left:0; right:0; bottom:0; background:#fff8dc; border-top:2px solid #e2c766; padding:.5em 4.5%; font-size:.62em; color:#4a3b00; max-height:40%; overflow:auto; }
+body.show-notes .notes { display:block; }
+svg text { font-family:"Segoe UI",sans-serif; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.spin { transform-origin:200px 160px; animation:spin 6s linear infinite; }
+.help { position:fixed; right:10px; bottom:8px; color:#9fb0c2; font:12px "Segoe UI",sans-serif; }
+@media print {
+  html,body { background:#fff; height:auto; }
+  .deck { display:block; height:auto; }
+  .slide { display:flex !important; flex-direction:column; width:10in; height:5.625in; aspect-ratio:auto; font-size:15pt; border-radius:0; page-break-after:always; break-after:page; }
+  .step { visibility:visible !important; }
+  .help, .notes { display:none !important; }
+  @page { size:10in 5.625in; margin:0; }
+}
+.work p { margin:.25em 0 0; }
+.row .work { flex:1; }
+.row .work .lab { display:block; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- 1 Hook -->
+<section class="slide" data-notes="Ask for a guess before the reveal. Most students guess far too low. The rest of class is how to get this number in five steps.">
+  <div class="kicker">MATH 130 · Monday, October 26 · Linear and angular velocity</div>
+  <h1>How fast is the tip of a propeller?</h1>
+  <div class="row">
+    <div>
+      <p>A Cessna 310 propeller is <b>81 inches</b> across and turns at <b>2200 rpm</b>.</p>
+      <p>Guess: how fast is the tip moving, in miles per hour?</p>
+      <p class="step big">About <span class="ans">530 mph</span>.</p>
+      <p class="step">By the end of class you can get that number yourself, and do it on Quiz 9 (Wednesday) and Test 2 (Friday).</p>
+    </div>
+    <svg viewBox="0 0 400 320" style="max-height:62%" aria-label="Spinning two-blade propeller">
+      <circle cx="200" cy="160" r="150" fill="none" stroke="#c9d3e0" stroke-dasharray="6 6"/>
+      <g class="spin">
+        <rect x="188" y="12" width="24" height="296" rx="12" fill="#1f3a5f"/>
+        <circle cx="200" cy="160" r="20" fill="#0f6b6b"/>
+        <circle cx="200" cy="14" r="8" fill="#a33b20"/>
+      </g>
+      <text x="300" y="40" fill="#a33b20" font-size="16">tip</text>
+    </svg>
+  </div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 2 Same turn, different speed -->
+<section class="slide" data-notes="Let the animation run. Both dots finish a turn at the same moment, but the red dot covers a much longer path.">
+  <h2>Same turn, different speed</h2>
+  <div class="row">
+    <svg viewBox="0 0 400 320" style="max-height:70%" aria-label="Wheel with an inner and an outer dot">
+      <circle cx="200" cy="160" r="140" fill="#eef3f9" stroke="#1f3a5f" stroke-width="3"/>
+      <circle cx="200" cy="160" r="50" fill="none" stroke="#9fb0c2" stroke-dasharray="5 5"/>
+      <g class="spin">
+        <line x1="200" y1="160" x2="200" y2="20" stroke="#5b6675" stroke-width="2"/>
+        <circle cx="200" cy="110" r="10" fill="#0f6b6b"/>
+        <circle cx="200" cy="20" r="11" fill="#a33b20"/>
+      </g>
+      <circle cx="200" cy="160" r="5" fill="#1b2430"/>
+    </svg>
+    <div>
+      <ul>
+        <li class="step">Both dots turn through the <b>same angle</b> in the same time: the same <b>angular velocity</b> <span class="m">ω</span>.</li>
+        <li class="step">The outer dot travels a <b>bigger circle</b> in that time, so it moves faster: a bigger <b>linear velocity</b> <span class="m">v</span>.</li>
+        <li class="step"><span class="m">ω</span> = how fast it <b>turns</b> (radians per unit of time).<br><span class="m">v</span> = how fast a point <b>moves</b> (distance per unit of time).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 3 Predict -->
+<section class="slide" data-notes="Hands up (or Top Hat) before revealing. Common wrong answer: Ben has the larger angular velocity. Answer: same ω = 2π/10 ≈ 0.628 rad/s; vA ≈ 1.26 m/s, vB ≈ 3.77 m/s.">
+  <h2>Predict</h2>
+  <p>Ana sits <b>2 m</b> from the center of a merry-go-round. Ben sits <b>6 m</b> from the center. It turns once every <b>10 s</b>.</p>
+  <div class="row">
+    <div class="work"><span class="lab">Question 1</span>Who has the larger angular velocity?
+      <p class="step ans">Neither. Both turn 2π rad in 10 s: ω = 2π/10 ≈ 0.628 rad/s.</p></div>
+    <div class="work"><span class="lab">Question 2</span>Who has the larger linear velocity, and how many times larger?
+      <p class="step ans">Ben, 3 times larger: 6 m is 3 × 2 m. (Ana ≈ 1.26 m/s, Ben ≈ 3.77 m/s.)</p></div>
+  </div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 4 Where v = rω comes from -->
+<section class="slide" data-notes="One clean derivation. Point at s = rθ from arc length last week.">
+  <h2>Where <span class="m">v = rω</span> comes from</h2>
+  <div class="work m big center">v = <sup>s</sup>⁄<sub>t</sub></div>
+  <p class="step">On a circle, the distance traveled is an arc: <span class="m">s = rθ</span> (θ in radians).</p>
+  <div class="work m big center step">v = <sup>rθ</sup>⁄<sub>t</sub> = r · <sup>θ</sup>⁄<sub>t</sub> = <b>rω</b></div>
+  <p class="step box">Linear velocity = radius × angular velocity, with <span class="m">ω</span> in <b>radians</b> per unit of time. Radians have no units, so (ft)(rad/min) = ft/min.</p>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 5 Unit chain -->
+<section class="slide" data-notes="Have students copy this template into their notes. Every problem today uses these five lines in this order.">
+  <h2>The unit chain: five lines, every time</h2>
+  <div class="chain">
+    <span class="n">1</span><div><b>Radius.</b> Given a diameter? Divide by 2.</div>
+    <span class="n">2</span><div><b>Angular velocity in radians.</b> rpm × 2π rad per revolution.</div>
+    <span class="n">3</span><div><b>Multiply.</b> <span class="m">v = rω</span></div>
+    <span class="n">4</span><div><b>Convert units.</b> 12 in = 1 ft · 5280 ft = 1 mi · 60 min = 1 h · 1000 m = 1 km · 3600 s = 1 h</div>
+    <span class="n">5</span><div><b>Round once, at the end,</b> and write the units.</div>
+  </div>
+  <p class="note" style="margin-top:.8em">Shortcut for rpm: <span class="m">v = (rpm)(2πr)</span> gives distance per minute. It is the same as lines 2 and 3 together.</p>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 6 Worked example, fully shown -->
+<section class="slide" data-notes="Model every line out loud. Cross out units as they cancel. 1068.1 ft/min ≈ 12.14 mph.">
+  <div class="kicker">Worked example</div>
+  <h2>Riverboat paddle wheel</h2>
+  <p>The paddles have a radius of <b>8.50 ft</b> and turn at <b>20.0 rpm</b>. How fast is a paddle tip moving, in ft/min and mi/h?</p>
+  <div class="work"><span class="lab">1 · Radius</span><span class="m">r = 8.50 ft</span></div>
+  <div class="work"><span class="lab">2 · Radians per minute</span><span class="m">ω = 20.0 <sup>rev</sup>⁄<sub>min</sub> · <sup>2π rad</sup>⁄<sub>rev</sub> = 40π rad/min</span></div>
+  <div class="work"><span class="lab">3 · Multiply</span><span class="m">v = rω = 8.50(40π) = 340π ≈ <span class="ans">1068.1 ft/min</span></span></div>
+  <div class="work"><span class="lab">4–5 · Convert, round</span><span class="m">1068.1 <sup>ft</sup>⁄<sub>min</sub> · <sup>60 min</sup>⁄<sub>1 h</sub> · <sup>1 mi</sup>⁄<sub>5280 ft</sub> ≈ <span class="ans">12.1 mi/h</span></span></div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 7 Worked example, revealed -->
+<section class="slide" data-notes="Before each click, ask the class to say the next line. Point out: 11.25 × 3.6 = 40.5 km/h. Rounding to 11.3 first gives 40.7, which is wrong.">
+  <div class="kicker">Worked example · say the next line before I click</div>
+  <h2>Hang glider</h2>
+  <p>A hang glider flies a circular arc of radius <b>90.0 m</b> with angular velocity <b>0.125 rad/s</b>. Find its speed in m/s and km/h.</p>
+  <div class="work step"><span class="lab">1 · Radius</span><span class="m">r = 90.0 m</span></div>
+  <div class="work step"><span class="lab">2 · Radians per second</span><span class="m">ω = 0.125 rad/s</span> <span class="note">(already in radians)</span></div>
+  <div class="work step"><span class="lab">3 · Multiply</span><span class="m">v = rω = 90.0(0.125) = <span class="ans">11.25 m/s</span></span></div>
+  <div class="work step"><span class="lab">4–5 · Convert, round</span><span class="m">11.25 <sup>m</sup>⁄<sub>s</sub> · <sup>3600 s</sup>⁄<sub>1 h</sub> · <sup>1 km</sup>⁄<sub>1000 m</sub> = <span class="ans">40.5 km/h</span></span> <span class="note">Round 11.25 to 11.3 first and you get 40.7, which is wrong.</span></div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 8 Faded example -->
+<section class="slide" data-notes="Pairs, 4 minutes. Circulate. Answers: ω = 4400π rad/min; v = 178,200π ≈ 559,832 in/min; 46,652.7 ft/min; 530.1 mi/h.">
+  <div class="kicker">Your turn, with a head start · work with a partner</div>
+  <h2>Back to the propeller</h2>
+  <p>Diameter <b>81 in</b>, turning at <b>2200 rpm</b>. Find the tip speed in ft/min and mi/h.</p>
+  <div class="work"><span class="lab">1 · Radius (done for you)</span><span class="m">r = 81 ÷ 2 = 40.5 in</span></div>
+  <div class="work"><span class="lab">2 · Radians per minute</span><span class="m">ω = <span class="blank"></span></span> <span class="step ans m">= 2200 · 2π = 4400π rad/min</span></div>
+  <div class="work"><span class="lab">3 · Multiply</span><span class="m">v = <span class="blank"></span> in/min</span> <span class="step ans m">= 40.5(4400π) ≈ 559,832 in/min</span></div>
+  <div class="work"><span class="lab">4–5 · Convert, round</span><span class="m"><span class="blank"></span> ft/min and <span class="blank"></span> mi/h</span> <span class="step ans m">≈ 46,652.7 ft/min ≈ 530.1 mi/h</span></div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 9 Error spotting -->
+<section class="slide" data-notes="Students name the error in each wrong answer before you reveal it. These three are the most common mistakes on quizzes.">
+  <div class="kicker">Spot the error</div>
+  <h2>Three wrong answers, one right one</h2>
+  <p>A wheel <b>2.0 ft</b> across turns at <b>300 rpm</b>. Find the rim speed in ft/min.</p>
+  <div class="row">
+    <div class="work"><span class="lab">Answer A</span><span class="m">v = 2.0(300)(2π) ≈ 3769.9 ft/min</span>
+      <p class="step bad">Used the diameter. The answer is doubled.</p></div>
+    <div class="work"><span class="lab">Answer B</span><span class="m">v = 1.0(300)(360) = 108,000 ft/min</span>
+      <p class="step bad">Used degrees. ω must be in radians.</p></div>
+  </div>
+  <div class="row">
+    <div class="work"><span class="lab">Answer C</span><span class="m">v = 1.0(300) = 300 ft/min</span>
+      <p class="step bad">Left ω in rpm (forgot 2π per revolution).</p></div>
+    <div class="work"><span class="lab">Answer D</span><span class="m">v = 1.0(300)(2π) = 600π ≈ 1885.0 ft/min</span>
+      <p class="step ans">Correct: radius, radians, multiply.</p></div>
+  </div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 10 You try -->
+<section class="slide" data-notes="Individual, 3 minutes, on paper. Do not reveal until most pencils stop.">
+  <div class="kicker">You try · on your own</div>
+  <h2>Watch second hand (worksheet 12a)</h2>
+  <p>The sweep second hand of a watch is <b>21.0 mm</b> long. It makes one turn per minute.</p>
+  <p>Find the linear velocity of its tip in <b>mm/s</b> and in <b>cm/min</b>. Use the five lines.</p>
+  <div class="chain" style="margin-top:.6em">
+    <span class="n">1</span><div>Radius</div><span class="n">2</span><div>Radians per second</div><span class="n">3</span><div>Multiply</div><span class="n">4</span><div>Convert</div><span class="n">5</span><div>Round and label</div>
+  </div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 11 Answer + self-check -->
+<section class="slide" data-notes="Students mark each line of their own work. Ask: which line did you get wrong, if any?">
+  <div class="kicker">Check your work, line by line</div>
+  <h2>Watch second hand: answer</h2>
+  <div class="work step"><span class="lab">1 · Radius</span><span class="m">r = 21.0 mm</span></div>
+  <div class="work step"><span class="lab">2 · Radians per second</span><span class="m">ω = <sup>2π rad</sup>⁄<sub>60 s</sub> = <sup>π</sup>⁄<sub>30</sub> rad/s</span></div>
+  <div class="work step"><span class="lab">3 · Multiply</span><span class="m">v = 21.0 · <sup>π</sup>⁄<sub>30</sub> = 0.7π ≈ <span class="ans">2.2 mm/s</span></span></div>
+  <div class="work step"><span class="lab">4–5 · Convert, round</span><span class="m">0.7π <sup>mm</sup>⁄<sub>s</sub> · <sup>60 s</sup>⁄<sub>1 min</sub> · <sup>1 cm</sup>⁄<sub>10 mm</sub> ≈ <span class="ans">13.2 cm/min</span></span></div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 12 Stretch -->
+<section class="slide" data-notes="Test 2 style: speed plus area. Answers: v = 5104π ≈ 16,035 ft/min ≈ 182.2 mi/h; A = π(116)² ≈ 42,273 ft² ≈ 0.970 acre.">
+  <div class="kicker">Stretch · Test 2 style</div>
+  <h2>Wind turbine</h2>
+  <p>The blades of a GE 1.5s wind turbine are <b>116 ft</b> long and turn at <b>22.0 rpm</b>.</p>
+  <div class="row">
+    <div class="work"><span class="lab">a) Tip speed in ft/min and mi/h</span>
+      <p class="step m">r = 116 ft (the blade is the radius)<br>v = 116(22.0)(2π) = 5104π ≈ <span class="ans">16,035 ft/min</span><br>≈ <span class="ans">182.2 mi/h</span></p></div>
+    <div class="work"><span class="lab">b) Area swept by the blades, in acres (1 acre = 43,560 ft²)</span>
+      <p class="step m">A = πr² = π(116)² ≈ 42,273 ft²<br>42,273 ÷ 43,560 ≈ <span class="ans">0.970 acre</span></p></div>
+  </div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 13 This week -->
+<section class="slide" data-notes="Printed on Test 2: compound and continuous interest formulas and Heron's formula. Speed and circle formulas are from memory.">
+  <h2>This week</h2>
+  <div class="row">
+    <div class="box"><span class="pill">Wednesday</span>
+      <p><b>Quiz 9: circles</b>, in class on paper</p>
+      <ul class="note"><li>degrees to radians</li><li>circumference, arc length, sector area</li><li>central and inscribed angles</li><li>a volume word problem</li></ul>
+      <p class="note">Practice: Quiz 9 practice (PDF) on the course page</p></div>
+    <div class="box"><span class="pill">Friday</span>
+      <p><b>Test 2</b>, in class on paper</p>
+      <ul class="note"><li>Printed: compound and continuous interest, Heron's formula</li><li><b>From memory:</b> v = rω, rpm × 2π, arc length, sector area, circle formulas</li></ul>
+      <p class="note">Practice: Test 2 practice (PDF) and the Test 2 review page</p></div>
+  </div>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+<!-- 14 Exit ticket -->
+<section class="slide" data-notes="Collect. Answers: (a) 1 ft; (b) 3000π ≈ 9424.8 ft/min; (c) ≈ 107.1 mi/h. Anyone who used 2 ft or 360 needs a check-in before Wednesday.">
+  <div class="kicker">Exit ticket · hand in before you leave</div>
+  <h2>Box fan</h2>
+  <p>A box fan's blades are <b>24 in</b> across and turn at <b>1500 rpm</b>.</p>
+  <div class="work">a) What is the radius, in feet?</div>
+  <div class="work">b) What is the linear speed of a blade tip, in ft/min?</div>
+  <div class="work">c) What is that speed in mi/h?</div>
+  <p class="note">Show all five lines of the unit chain. Round only at the end.</p>
+  <div class="footer"><span>Linear and angular velocity</span><span class="pg"></span></div>
+</section>
+
+</div>
+<div class="help">→ / space: next · ←: back · N: notes · F: full screen</div>
+<script>
+(function () {
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  slides.forEach((s, k) => {
+    s.querySelector('.pg').textContent = (k + 1) + ' / ' + slides.length;
+    if (s.dataset.notes) { const n = document.createElement('div'); n.className = 'notes'; n.textContent = 'Notes: ' + s.dataset.notes; s.appendChild(n); }
+  });
+  function show(k) {
+    i = Math.max(0, Math.min(slides.length - 1, k));
+    slides.forEach((s, j) => s.classList.toggle('active', j === i));
+    history.replaceState(null, '', '#' + (i + 1));
+  }
+  function next() {
+    const hidden = slides[i].querySelector('.step:not(.shown)');
+    if (hidden) hidden.classList.add('shown'); else if (i < slides.length - 1) show(i + 1);
+  }
+  function back() {
+    const shown = [...slides[i].querySelectorAll('.step.shown')];
+    if (shown.length) shown[shown.length - 1].classList.remove('shown'); else show(i - 1);
+  }
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); back(); }
+    else if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('show-notes');
+    else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+    else if (e.key === 'Home') show(0); else if (e.key === 'End') show(slides.length - 1);
+  });
+  document.querySelector('.deck').addEventListener('click', e => { if (e.target.closest('a')) return; next(); });
+  const start = parseInt(location.hash.slice(1), 10);
+  show(Number.isFinite(start) ? start - 1 : 0);
+})();
+</script>
+</body>
+</html>
