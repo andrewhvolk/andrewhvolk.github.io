@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test 2 Review | MATH 130 | Oct 28, 2026</title>
+<style>
+:root { --ink:#1b2430; --muted:#5b6675; --accent:#0f6b6b; --accent2:#1f3a5f; --warn:#a33b20; --good:#1f7a3a; --bg:#fbfaf7; --card:#ffffff; --line:#d8dee6; }
+* { box-sizing:border-box; }
+html,body { margin:0; height:100%; background:#1d2733; font-family:"Segoe UI",system-ui,sans-serif; color:var(--ink); }
+.deck { height:100%; display:flex; align-items:center; justify-content:center; }
+.slide { display:none; width:min(96vw, calc(96vh * 16 / 9)); aspect-ratio:16/9; background:var(--bg); border-radius:10px;
+  padding:3.2% 4.5%; position:relative; overflow:hidden; font-size:min(2.05vw, 3.65vh); line-height:1.3; }
+.slide.active { display:flex; flex-direction:column; }
+.slide h1 { font-size:1.75em; margin:0 0 .45em; color:var(--accent2); }
+.slide h2 { font-size:1.4em; margin:0 0 .35em; color:var(--accent2); border-bottom:3px solid var(--accent); padding-bottom:.15em; }
+.kicker { color:var(--accent); font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:.7em; margin-bottom:.3em; }
+.m { font-family:"Cambria Math",Cambria,"Times New Roman",serif; font-size:1.08em; }
+.big { font-size:1.6em; }
+.center { text-align:center; }
+.row { display:flex; gap:3%; align-items:flex-start; }
+.row > * { flex:1; }
+ul { margin:.2em 0; padding-left:1.1em; } li { margin:.25em 0; }
+.chain { display:grid; grid-template-columns:auto 1fr; gap:.25em .7em; align-items:baseline; }
+.chain .n { background:var(--accent); color:#fff; border-radius:50%; width:1.5em; height:1.5em; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.85em; }
+.work { background:var(--card); border:1px solid var(--line); border-left:5px solid var(--accent); border-radius:6px; padding:.3em .7em; margin:.2em 0; }
+.work .lab { color:var(--muted); font-size:.72em; display:inline-block; min-width:10.5em; margin-right:.4em; }
+.blank { display:inline-block; min-width:6em; border-bottom:2px dashed var(--muted); }
+.ans { color:var(--good); font-weight:700; }
+.bad { color:var(--warn); font-weight:700; }
+.box { border:2px solid var(--accent2); border-radius:8px; padding:.5em .9em; background:#eef3f9; }
+.note { color:var(--muted); font-size:.78em; }
+.step { visibility:hidden; }
+.step.shown { visibility:visible; }
+.pill { display:inline-block; background:#e5f1f1; color:var(--accent); border-radius:999px; padding:.05em .6em; font-size:.75em; font-weight:700; }
+.footer { position:absolute; bottom:1.6%; left:4.5%; right:4.5%; display:flex; justify-content:space-between; font-size:.55em; color:var(--muted); }
+.notes { display:none; position:absolute; left:0; right:0; bottom:0; background:#fff8dc; border-top:2px solid #e2c766; padding:.5em 4.5%; font-size:.62em; color:#4a3b00; max-height:40%; overflow:auto; }
+body.show-notes .notes { display:block; }
+svg text { font-family:"Segoe UI",sans-serif; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.spin { transform-origin:200px 160px; animation:spin 6s linear infinite; }
+.help { position:fixed; right:10px; bottom:8px; color:#9fb0c2; font:12px "Segoe UI",sans-serif; }
+@media print {
+  html,body { background:#fff; height:auto; }
+  .deck { display:block; height:auto; }
+  .slide { display:flex !important; flex-direction:column; width:10in; height:5.625in; aspect-ratio:auto; font-size:15pt; border-radius:0; page-break-after:always; break-after:page; }
+  .step { visibility:visible !important; }
+  .help, .notes { display:none !important; }
+  @page { size:10in 5.625in; margin:0; }
+}
+.work p { margin:.25em 0 0; }
+.row .work { flex:1; }
+.row .work .lab { display:block; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:3%; }
+.two > .work { margin:0; }
+table.tbl { border-collapse:collapse; margin:.2em 0; }
+table.tbl td, table.tbl th { border:1px solid var(--line); padding:.15em .6em; text-align:center; }
+table.tbl th { background:#eef3f9; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- 1 -->
+<section class="slide" data-notes="Collect the take-home Quiz 9 first. Then frame today: every Test 2 question type, one model and one try each.">
+  <div class="kicker">MATH 130 · Wednesday, October 28 · Test 2 review</div>
+  <h1>Test 2 is Friday. Today: every question type, once.</h1>
+  <div class="row">
+    <div>
+      <ul>
+        <li><b>Turn in Quiz 9</b> now.</li>
+        <li>Test 2 covers <b>4.2</b> (exponentials and interest), <b>4.3</b> (logarithms) and <b>geometry</b> (polygons and circles).</li>
+        <li>For each type: I work a model, then you try one. Answers appear when we check.</li>
+        <li>Bring a scientific calculator on Friday, and show your work for full credit.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <b>Printed on Test 2</b>
+      <ul class="note"><li><span class="m">A = P(1 + r/n)<sup>nt</sup></span></li><li><span class="m">A = Pe<sup>rt</sup></span></li><li>Heron's formula</li></ul>
+      <b>From memory</b>
+      <ul class="note"><li>log ↔ exponential form, change of base</li><li>DMS, degrees ↔ radians</li><li>arc length, sector area, circle angle rules</li><li>triangle and trapezoid area, proportional segments</li><li><span class="m">v = rω</span></li></ul>
+    </div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 2 Interest table -->
+<section class="slide" data-notes="Remind: r as a decimal; n = 12 monthly, 365 daily. Store the full value, round to the cent at the end.">
+  <div class="kicker">Section 4.2 · Interest table</div>
+  <h2>Compounded n times per year, and continuously</h2>
+  <p class="formula note">A = P(1 + r/n)<sup>nt</sup> · A = Pe<sup>rt</sup> · r as a decimal · round to the nearest cent</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model: $3,000 at 4% for 15 years</span>
+      <table class="tbl m"><tr><th>n</th><th>12</th><th>365</th><th>continuous</th></tr>
+      <tr><th>A</th><td class="step">$5,460.90</td><td class="step">$5,466.18</td><td class="step">$5,466.36</td></tr></table>
+      <p class="step note m">e.g. 3000(1 + 0.04/12)<sup>180</sup> ≈ 5460.90</p></div>
+    <div class="work"><span class="lab">You try: $1,800 at 5.5% for 8 years</span>
+      <table class="tbl m"><tr><th>n</th><th>12</th><th>365</th><th>continuous</th></tr>
+      <tr><th>A</th><td class="step ans">$2,792.06</td><td class="step ans">$2,794.78</td><td class="step ans">$2,794.87</td></tr></table></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 3 Log forms -->
+<section class="slide" data-notes="Say it out loud: the base stays the base; the log IS the exponent.">
+  <div class="kicker">Section 4.3 · Log ↔ exponential form</div>
+  <h2>The log is the exponent</h2>
+  <div class="work m big center">log<sub>b</sub> x = y &nbsp;⟺&nbsp; b<sup>y</sup> = x</div>
+  <div class="two">
+    <div class="work"><span class="lab">Model</span>
+      <p class="m">16<sup>3/4</sup> = 8 &nbsp;→&nbsp; <span class="step">log<sub>16</sub> 8 = 3/4</span></p>
+      <p class="m">log<sub>9</sub> 243 = 2.5 &nbsp;→&nbsp; <span class="step">9<sup>2.5</sup> = 243</span></p></div>
+    <div class="work"><span class="lab">You try</span>
+      <p class="m">27<sup>2/3</sup> = 9 &nbsp;→&nbsp; <span class="step ans">log<sub>27</sub> 9 = 2/3</span></p>
+      <p class="m">log<sub>4</sub> 1024 = 5 &nbsp;→&nbsp; <span class="step ans">4<sup>5</sup> = 1024</span></p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 4 Solve -->
+<section class="slide" data-notes="ln x = c undoes to x = e^c. For b^x = c, take ln of both sides or use change of base. Three decimal places.">
+  <div class="kicker">Section 4.3 · Solve for x (three decimal places)</div>
+  <h2>Undo the log, or take the log</h2>
+  <p class="note m">ln x = c → x = e<sup>c</sup> · b<sup>x</sup> = c → x = ln c ÷ ln b</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model</span>
+      <p class="m">ln x = 2.7 → <span class="step">x = e<sup>2.7</sup> ≈ 14.880</span></p>
+      <p class="m">3<sup>x</sup> = 20 → <span class="step">x = ln 20 ÷ ln 3 ≈ 2.727</span></p></div>
+    <div class="work"><span class="lab">You try</span>
+      <p class="m">ln x = 3.2 → <span class="step ans">x = e<sup>3.2</sup> ≈ 24.533</span></p>
+      <p class="m">5<sup>x</sup> = 17 → <span class="step ans">x = ln 17 ÷ ln 5 ≈ 1.760</span></p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 5 DMS -->
+<section class="slide" data-notes="Decimal to DMS: decimal part × 60 for minutes, new decimal part × 60 for seconds. Keep the whole degrees.">
+  <div class="kicker">Geometry · Degrees, minutes, seconds</div>
+  <h2>DMS both directions</h2>
+  <p class="note m">DMS → decimal: D + M/60 + S/3600 (four places) · decimal → DMS: × 60, then × 60 again (nearest second)</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model</span>
+      <p class="m">52°17′48″ → <span class="step">52 + 17/60 + 48/3600 ≈ 52.2967°</span></p>
+      <p class="m">41.6375° → <span class="step">0.6375 × 60 = 38.25′; 0.25 × 60 = 15″ → 41°38′15″</span></p></div>
+    <div class="work"><span class="lab">You try</span>
+      <p class="m">18°05′33″ → <span class="step ans">18.0925°</span></p>
+      <p class="m">73.2186° → <span class="step ans">73°13′7″</span></p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 6 rad/deg -->
+<section class="slide" data-notes="Check the calculator is in degree mode only when it matters; these are plain multiplications.">
+  <div class="kicker">Geometry · Radians and degrees</div>
+  <h2>Multiply by π/180 or 180/π</h2>
+  <p class="note m">degrees → radians: × π/180 · radians → degrees: × 180/π</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model</span>
+      <p class="m">1.9 rad → <span class="step">1.9 × 180/π ≈ 108.9°</span></p>
+      <p class="m">147.3° → <span class="step">147.3 × π/180 ≈ 2.57 rad</span></p></div>
+    <div class="work"><span class="lab">You try</span>
+      <p class="m">4.1 rad → <span class="step ans">≈ 234.9°</span></p>
+      <p class="m">58.6° → <span class="step ans">≈ 1.02 rad</span></p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 7 arc/sector degrees -->
+<section class="slide" data-notes="With degrees, use the fraction of the circle. Round to one decimal place.">
+  <div class="kicker">Geometry · Arc length and sector area, θ in degrees</div>
+  <h2>Fraction of the whole circle</h2>
+  <p class="note m">s = (θ/360) · 2πr · A = (θ/360) · πr²</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model: r = 6.4, θ = 110°</span>
+      <p class="m step">s = (110/360)(2π)(6.4) ≈ 12.3</p>
+      <p class="m step">A = (110/360)π(6.4)² ≈ 39.3</p></div>
+    <div class="work"><span class="lab">You try: r = 8.2, θ = 50°</span>
+      <p class="m step ans">s ≈ 7.2</p>
+      <p class="m step ans">A ≈ 29.3</p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 8 arc/sector radians -->
+<section class="slide" data-notes="With radians, use s = rθ and A = ½r²θ directly. Exact answers in terms of π are fine to show first.">
+  <div class="kicker">Geometry · Arc length and sector area, θ in radians</div>
+  <h2>Use θ directly</h2>
+  <p class="note m">s = rθ · A = ½ r² θ</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model: r = 7, θ = 2π/5</span>
+      <p class="m step">s = 7(2π/5) = 2.8π ≈ 8.8</p>
+      <p class="m step">A = ½(49)(2π/5) = 9.8π ≈ 30.8</p></div>
+    <div class="work"><span class="lab">You try: r = 12, θ = 5π/6</span>
+      <p class="m step ans">s = 10π ≈ 31.4</p>
+      <p class="m step ans">A = 60π ≈ 188.5</p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 9 Heron + right triangle -->
+<section class="slide" data-notes="Heron is printed. For the right triangle, find the missing leg first, then ½ × leg × leg.">
+  <div class="kicker">Geometry · Triangle area</div>
+  <h2>Three sides, or a right triangle</h2>
+  <p class="note m">Heron (printed): s = (a + b + c)/2, A = √(s(s − a)(s − b)(s − c)) · right triangle: A = ½ · leg · leg</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model</span>
+      <p class="m">a = 1.8, b = 2.4, c = 3.1 cm<br><span class="step">s = 3.65; A = √(3.65·1.85·1.25·0.55) ≈ 2.2 cm²</span></p>
+      <p class="m">Right triangle: hypotenuse 6.5 cm, leg 2.5 cm<br><span class="step">other leg = √(6.5² − 2.5²) = 6.0; A = ½(2.5)(6.0) = 7.5 cm²</span></p></div>
+    <div class="work"><span class="lab">You try</span>
+      <p class="m">a = 2.6, b = 1.9, c = 3.3 cm<br><span class="step ans">s = 3.9; A ≈ 2.5 cm²</span></p>
+      <p class="m">Right triangle: hypotenuse 5.3 cm, leg 2.8 cm<br><span class="step ans">other leg = 4.5; A = 6.3 cm²</span></p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 10 trapezoid + parallel -->
+<section class="slide" data-notes="Trapezoid: the two parallel sides are the bases. Proportional segments: match top-to-bottom on both transversals.">
+  <div class="kicker">Geometry · Trapezoid and proportional segments</div>
+  <h2>Parallel sides and parallel lines</h2>
+  <div class="two">
+    <div class="work"><span class="lab">Trapezoid: A = ½ h (b₁ + b₂)</span>
+      <p class="m">Model: bases 3.4 and 7.8 cm, height 2.6 cm → <span class="step">½(2.6)(11.2) = 14.56 cm²</span></p>
+      <p class="m">You try: bases 4.2 and 9.5 cm, height 3.1 cm → <span class="step ans">21.24 cm²</span></p></div>
+    <div class="work"><span class="lab">Three parallel lines cut two transversals: AB/BC = DE/EF</span>
+      <svg viewBox="0 0 520 120" style="width:100%;height:4.2em;display:block;margin:.15em 0" aria-label="Three parallel lines crossed by two transversals">
+    <line x1="20" y1="15" x2="500" y2="15" stroke="#1f3a5f"/><line x1="20" y1="60" x2="500" y2="60" stroke="#1f3a5f"/><line x1="20" y1="105" x2="500" y2="105" stroke="#1f3a5f"/>
+    <line x1="120" y1="5" x2="190" y2="115" stroke="#0f6b6b" stroke-width="2"/><line x1="330" y1="5" x2="460" y2="115" stroke="#0f6b6b" stroke-width="2"/>
+    <text x="104" y="12">A</text><text x="150" y="56">B</text><text x="178" y="100">C</text>
+    <text x="318" y="12">D</text><text x="372" y="56">E</text><text x="425" y="100">F</text>
+  </svg>
+      <p class="m">Model: AB = 4.5, BC = 6.0, DE = 3.6 → <span class="step">EF = 3.6(6.0)/4.5 = 4.8</span></p>
+      <p class="m">You try: AB = 5.2, BC = 3.9, EF = 2.7 → <span class="step ans">DE = 2.7(5.2)/3.9 = 3.6</span></p></div>
+  </div>
+  
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 11 chords -->
+<section class="slide" data-notes="Three rules: vertical/supplementary angles at E; inscribed angle = half its arc; angle between two chords = half the sum of the two arcs it and its vertical angle cut off. Check: arc BC = 180 − arc AB because AC is a diameter.">
+  <div class="kicker">Geometry · Chords that cross</div>
+  <h2>Angles and arcs inside a circle</h2>
+  <div class="row">
+    <svg viewBox="0 0 300 260" style="max-height:62%" aria-label="Circle with diameter AC and chord BD crossing at E">
+      <circle cx="150" cy="130" r="100" fill="#eef3f9" stroke="#1f3a5f" stroke-width="2"/>
+      <line x1="50" y1="130" x2="250" y2="130" stroke="#1b2430" stroke-width="2"/>
+      <line x1="83.1" y1="55.7" x2="205.9" y2="212.9" stroke="#1b2430" stroke-width="2"/>
+      <line x1="83.1" y1="55.7" x2="250" y2="130" stroke="#0f6b6b" stroke-dasharray="5 4"/>
+      <text x="34" y="135">A</text><text x="70" y="50">B</text><text x="256" y="135">C</text><text x="208" y="232">D</text><text x="136" y="148">E</text>
+    </svg>
+    <div>
+      <p class="note">AC is a diameter. Chord BD crosses it at E.<br>Rules: ∠AEB + ∠AED = 180° · inscribed angle = ½ arc · ∠AEB = ½(arc AB + arc CD)</p>
+      <div class="work"><span class="lab">Model: ∠AED = 128°, arc AB = 48°</span>
+        <p class="m step">∠AEB = 180 − 128 = 52° · ∠ACB = ½(48) = 24° · arc CD = 2(52) − 48 = 56°</p></div>
+      <div class="work"><span class="lab">You try: ∠AED = 140°, arc AB = 30°</span>
+        <p class="m step ans">∠AEB = 40° · ∠ACB = 15° · arc CD = 50°</p></div>
+    </div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 12 speed -->
+<section class="slide" data-notes="The unit chain from Monday: radius, radians per minute, v = rω, convert, round once. Blade length is the radius.">
+  <div class="kicker">Geometry · Linear speed</div>
+  <h2>The unit chain, one more time</h2>
+  <p class="note">The blade length is the radius. v = (rpm)(2π)(r) gives feet per minute; × 60 ÷ 5280 gives miles per hour.</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model: blade 2.5 ft, 400 rpm</span>
+      <p class="m step">v = 400(2π)(2.5) = 2000π ≈ 6283.2 ft/min</p>
+      <p class="m step">6283.2 × 60 ÷ 5280 ≈ 71.4 mi/h</p></div>
+    <div class="work"><span class="lab">You try: blade 3.5 ft, 300 rpm</span>
+      <p class="m step ans">2100π ≈ 6597.3 ft/min</p>
+      <p class="m step ans">≈ 75.0 mi/h</p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 13 errors -->
+<section class="slide" data-notes="Ask which of these each student made most on Quizzes 5–9.">
+  <h2>Where points are usually lost</h2>
+  <div class="two">
+    <ul>
+      <li>Using the rate as a percent (4) instead of a decimal (0.04).</li>
+      <li>Moving the base to the wrong side when switching log ↔ exponential form.</li>
+      <li>Rounding in the middle of a calculation.</li>
+      <li>Using degrees in s = rθ or A = ½r²θ.</li>
+    </ul>
+    <ul>
+      <li>Forgetting the seconds step in decimal → DMS.</li>
+      <li>Using the diameter (or the whole trapezoid side) where the formula wants a radius or height.</li>
+      <li>Matching the wrong segments in a proportion.</li>
+      <li>Leaving off units: cm², ft/min, mi/h.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 14 plan -->
+<section class="slide" data-notes="Point students to the Test 2 practice PDF and the review page's readiness check.">
+  <h2>Before Friday</h2>
+  <div class="row">
+    <div class="box">
+      <b>Tonight and Thursday</b>
+      <ul class="note">
+        <li>Work the Test 2 practice PDF on the course page without notes, then check it.</li>
+        <li>Fill in the formula page from memory.</li>
+        <li>Take the Test 2 readiness check on the review page until you reach 80%.</li>
+        <li>Redo any problem type from today that you missed.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <b>Friday, October 30</b>
+      <ul class="note">
+        <li>Test 2, in class on paper</li>
+        <li>Scientific calculator</li>
+        <li>Show your work for full credit</li>
+        <li>Compound interest, continuous interest and Heron's formula are printed; everything else is from memory</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+</div>
+<div class="help">→ / space: next · ←: back · N: notes · F: full screen</div>
+<script>
+(function () {
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  slides.forEach((s, k) => {
+    s.querySelector('.pg').textContent = (k + 1) + ' / ' + slides.length;
+    if (s.dataset.notes) { const n = document.createElement('div'); n.className = 'notes'; n.textContent = 'Notes: ' + s.dataset.notes; s.appendChild(n); }
+  });
+  function show(k) {
+    i = Math.max(0, Math.min(slides.length - 1, k));
+    slides.forEach((s, j) => s.classList.toggle('active', j === i));
+    history.replaceState(null, '', '#' + (i + 1));
+  }
+  function next() {
+    const hidden = slides[i].querySelector('.step:not(.shown)');
+    if (hidden) hidden.classList.add('shown'); else if (i < slides.length - 1) show(i + 1);
+  }
+  function back() {
+    const shown = [...slides[i].querySelectorAll('.step.shown')];
+    if (shown.length) shown[shown.length - 1].classList.remove('shown'); else show(i - 1);
+  }
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); back(); }
+    else if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('show-notes');
+    else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+    else if (e.key === 'Home') show(0); else if (e.key === 'End') show(slides.length - 1);
+  });
+  document.querySelector('.deck').addEventListener('click', e => { if (e.target.closest('a')) return; next(); });
+  const start = parseInt(location.hash.slice(1), 10);
+  show(Number.isFinite(start) ? start - 1 : 0);
+})();
+</script>
+</body>
+</html>
