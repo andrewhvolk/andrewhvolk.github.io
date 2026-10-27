@@ -62,258 +62,236 @@ table.tbl th { background:#eef3f9; }
 <div class="deck">
 
 <!-- 1 -->
-<section class="slide" data-notes="Collect the take-home Quiz 9 first. Then frame today: every Test 2 question type, one model and one try each.">
+<section class="slide" data-notes="Collect the take-home Quiz 9 first. Then frame today: the ten kinds of Test 2 questions, one model and one try each. Stress: nothing is printed on the test.">
   <div class="kicker">MATH 130 · Wednesday, October 28 · Test 2 review</div>
-  <h1>Test 2 is Friday. Today: every question type, once.</h1>
+  <h1>Test 2 is Friday. Today: ten problem types, once each.</h1>
   <div class="row">
     <div>
       <ul>
         <li><b>Turn in Quiz 9</b> now.</li>
-        <li>Test 2 covers <b>4.2</b> (exponentials and interest), <b>4.3</b> (logarithms) and <b>geometry</b> (polygons and circles).</li>
+        <li>Test 2 has <b>10 questions, 20 points each</b>: about 30% Section 4.2, 20% Section 4.3 and 50% geometry.</li>
         <li>For each type: I work a model, then you try one. Answers appear when we check.</li>
-        <li>Bring a scientific calculator on Friday, and show your work for full credit.</li>
+        <li>Most questions have two parts, such as setup and answer. Show your work in each part.</li>
       </ul>
     </div>
     <div class="box">
-      <b>Printed on Test 2</b>
-      <ul class="note"><li><span class="m">A = P(1 + r/n)<sup>nt</sup></span></li><li><span class="m">A = Pe<sup>rt</sup></span></li><li>Heron's formula</li></ul>
-      <b>From memory</b>
-      <ul class="note"><li>log ↔ exponential form, change of base</li><li>DMS, degrees ↔ radians</li><li>arc length, sector area, circle angle rules</li><li>triangle and trapezoid area, proportional segments</li><li><span class="m">v = rω</span></li></ul>
+      <b>Nothing is printed on Test 2.</b>
+      <p class="note">Write every formula from memory, including:</p>
+      <ul class="note"><li>A = P(1 + r/n)<sup>nt</sup> and A = Pe<sup>rt</sup></li><li>log<sub>b</sub> x = y ⟺ b<sup>y</sup> = x</li><li>Heron: s = (a + b + c)/2, A = √(s(s−a)(s−b)(s−c))</li><li>radians = degrees × π/180; s = rθ; A = ½r²θ</li><li>v = rω, with ω = rpm × 2π</li></ul>
     </div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 2 Interest table -->
-<section class="slide" data-notes="Remind: r as a decimal; n = 12 monthly, 365 daily. Store the full value, round to the cent at the end.">
-  <div class="kicker">Section 4.2 · Interest table</div>
-  <h2>Compounded n times per year, and continuously</h2>
-  <p class="formula note">A = P(1 + r/n)<sup>nt</sup> · A = Pe<sup>rt</sup> · r as a decimal · round to the nearest cent</p>
+<!-- 2 compound -->
+<section class="slide" data-notes="n: annually 1, semiannually 2, quarterly 4, monthly 12, daily 365. Write the setup line with numbers substituted before calculating; the setup is worth points on its own.">
+  <div class="kicker">Section 4.2 · Compound interest</div>
+  <h2>A = P(1 + r/n)<sup>nt</sup></h2>
+  <p class="note">r as a decimal · n = 2 semiannually, 4 quarterly, 12 monthly · round to the nearest cent at the end</p>
   <div class="two">
-    <div class="work"><span class="lab">Model: $3,000 at 4% for 15 years</span>
-      <table class="tbl m"><tr><th>n</th><th>12</th><th>365</th><th>continuous</th></tr>
-      <tr><th>A</th><td class="step">$5,460.90</td><td class="step">$5,466.18</td><td class="step">$5,466.36</td></tr></table>
-      <p class="step note m">e.g. 3000(1 + 0.04/12)<sup>180</sup> ≈ 5460.90</p></div>
-    <div class="work"><span class="lab">You try: $1,800 at 5.5% for 8 years</span>
-      <table class="tbl m"><tr><th>n</th><th>12</th><th>365</th><th>continuous</th></tr>
-      <tr><th>A</th><td class="step ans">$2,792.06</td><td class="step ans">$2,794.78</td><td class="step ans">$2,794.87</td></tr></table></div>
+    <div class="work"><span class="lab">Model: $2,500 at 3.5% compounded monthly for 6 years</span>
+      <p class="m step">Setup: A = 2500(1 + 0.035/12)<sup>12·6</sup> = 2500(1 + 0.035/12)<sup>72</sup></p>
+      <p class="m step">A ≈ $3,083.25</p></div>
+    <div class="work"><span class="lab">You try: $7,000 at 5.2% compounded quarterly for 9 years</span>
+      <p class="m step ans">Setup: A = 7000(1 + 0.052/4)<sup>36</sup></p>
+      <p class="m step ans">A ≈ $11,143.92</p></div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 3 Log forms -->
-<section class="slide" data-notes="Say it out loud: the base stays the base; the log IS the exponent.">
-  <div class="kicker">Section 4.3 · Log ↔ exponential form</div>
+<!-- 3 continuous -->
+<section class="slide" data-notes="'Compounded continuously' is the trigger for Pe^rt. Multiply rt first, then e to that power.">
+  <div class="kicker">Section 4.2 · Continuous compounding</div>
+  <h2>A = Pe<sup>rt</sup></h2>
+  <p class="note">"Compounded continuously" means use e · multiply r × t first · round to the nearest cent</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model: $1,500 at 6.2% compounded continuously for 7 years</span>
+      <p class="m step">Setup: A = 1500e<sup>0.062·7</sup> = 1500e<sup>0.434</sup></p>
+      <p class="m step">A ≈ $2,315.13</p></div>
+    <div class="work"><span class="lab">You try: $9,000 at 3.8% compounded continuously for 11 years</span>
+      <p class="m step ans">Setup: A = 9000e<sup>0.418</sup></p>
+      <p class="m step ans">A ≈ $13,670.29</p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 4 growth/decay -->
+<section class="slide" data-notes="The base decides: greater than 1 is growth, between 0 and 1 is decay. The starting value doesn't matter.">
+  <div class="kicker">Section 4.2 · Exponential models</div>
+  <h2>Evaluate, then growth or decay</h2>
+  <p class="note m">f(t) = a · b<sup>t</sup> · b &gt; 1: growth · 0 &lt; b &lt; 1: decay</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model</span>
+      <p class="m">P(t) = 450(1.15)<sup>t</sup>, find P(6) → <span class="step">≈ 1040.88; 1.15 &gt; 1, growth</span></p>
+      <p class="m">f(t) = 3000(0.92)<sup>t</sup>, find f(4) → <span class="step">≈ 2149.18; 0.92 &lt; 1, decay</span></p></div>
+    <div class="work"><span class="lab">You try</span>
+      <p class="m">Q(t) = 1800(0.75)<sup>t</sup>, find Q(3) → <span class="step ans">≈ 759.38; decay</span></p>
+      <p class="m">R(t) = 250(1.06)<sup>t</sup>, find R(12) → <span class="step ans">≈ 503.05; growth</span></p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 5 log form + evaluate -->
+<section class="slide" data-notes="Two skills in one question: rewrite a power as a log, then evaluate a log by asking 'base to what power gives this number?'">
+  <div class="kicker">Section 4.3 · Logarithmic form and evaluating</div>
   <h2>The log is the exponent</h2>
-  <div class="work m big center">log<sub>b</sub> x = y &nbsp;⟺&nbsp; b<sup>y</sup> = x</div>
+  <div class="work m big center">b<sup>y</sup> = x &nbsp;⟺&nbsp; log<sub>b</sub> x = y</div>
   <div class="two">
     <div class="work"><span class="lab">Model</span>
-      <p class="m">16<sup>3/4</sup> = 8 &nbsp;→&nbsp; <span class="step">log<sub>16</sub> 8 = 3/4</span></p>
-      <p class="m">log<sub>9</sub> 243 = 2.5 &nbsp;→&nbsp; <span class="step">9<sup>2.5</sup> = 243</span></p></div>
+      <p class="m">(a) 5<sup>3</sup> = 125 in log form → <span class="step">log<sub>5</sub> 125 = 3</span></p>
+      <p class="m">(b) Evaluate log<sub>5</sub> 625 → <span class="step">5 to what power is 625? 5<sup>4</sup> = 625, so 4</span></p></div>
     <div class="work"><span class="lab">You try</span>
-      <p class="m">27<sup>2/3</sup> = 9 &nbsp;→&nbsp; <span class="step ans">log<sub>27</sub> 9 = 2/3</span></p>
-      <p class="m">log<sub>4</sub> 1024 = 5 &nbsp;→&nbsp; <span class="step ans">4<sup>5</sup> = 1024</span></p></div>
+      <p class="m">(a) 7<sup>2</sup> = 49 in log form → <span class="step ans">log<sub>7</sub> 49 = 2</span></p>
+      <p class="m">(b) Evaluate log<sub>9</sub> 729 → <span class="step ans">9<sup>3</sup> = 729, so 3</span></p></div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 4 Solve -->
-<section class="slide" data-notes="ln x = c undoes to x = e^c. For b^x = c, take ln of both sides or use change of base. Three decimal places.">
-  <div class="kicker">Section 4.3 · Solve for x (three decimal places)</div>
-  <h2>Undo the log, or take the log</h2>
-  <p class="note m">ln x = c → x = e<sup>c</sup> · b<sup>x</sup> = c → x = ln c ÷ ln b</p>
+<!-- 6 solve b^x = c -->
+<section class="slide" data-notes="Setup line: take ln of both sides, x ln b = ln c. Four decimal places, so keep full values until the end.">
+  <div class="kicker">Section 4.3 · Solving with logarithms</div>
+  <h2>b<sup>x</sup> = c: take the log of both sides</h2>
+  <p class="note m">x · ln b = ln c &nbsp;→&nbsp; x = ln c ÷ ln b · four decimal places</p>
   <div class="two">
-    <div class="work"><span class="lab">Model</span>
-      <p class="m">ln x = 2.7 → <span class="step">x = e<sup>2.7</sup> ≈ 14.880</span></p>
-      <p class="m">3<sup>x</sup> = 20 → <span class="step">x = ln 20 ÷ ln 3 ≈ 2.727</span></p></div>
-    <div class="work"><span class="lab">You try</span>
-      <p class="m">ln x = 3.2 → <span class="step ans">x = e<sup>3.2</sup> ≈ 24.533</span></p>
-      <p class="m">5<sup>x</sup> = 17 → <span class="step ans">x = ln 17 ÷ ln 5 ≈ 1.760</span></p></div>
+    <div class="work"><span class="lab">Model: 3<sup>x</sup> = 50</span>
+      <p class="m step">Setup: x ln 3 = ln 50</p>
+      <p class="m step">x = ln 50 ÷ ln 3 ≈ 3.5609</p></div>
+    <div class="work"><span class="lab">You try: 6<sup>x</sup> = 150</span>
+      <p class="m step ans">Setup: x ln 6 = ln 150</p>
+      <p class="m step ans">x ≈ 2.7965</p></div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 5 DMS -->
-<section class="slide" data-notes="Decimal to DMS: decimal part × 60 for minutes, new decimal part × 60 for seconds. Keep the whole degrees.">
-  <div class="kicker">Geometry · Degrees, minutes, seconds</div>
-  <h2>DMS both directions</h2>
-  <p class="note m">DMS → decimal: D + M/60 + S/3600 (four places) · decimal → DMS: × 60, then × 60 again (nearest second)</p>
-  <div class="two">
-    <div class="work"><span class="lab">Model</span>
-      <p class="m">52°17′48″ → <span class="step">52 + 17/60 + 48/3600 ≈ 52.2967°</span></p>
-      <p class="m">41.6375° → <span class="step">0.6375 × 60 = 38.25′; 0.25 × 60 = 15″ → 41°38′15″</span></p></div>
-    <div class="work"><span class="lab">You try</span>
-      <p class="m">18°05′33″ → <span class="step ans">18.0925°</span></p>
-      <p class="m">73.2186° → <span class="step ans">73°13′7″</span></p></div>
-  </div>
-  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
-</section>
-
-<!-- 6 rad/deg -->
-<section class="slide" data-notes="Check the calculator is in degree mode only when it matters; these are plain multiplications.">
-  <div class="kicker">Geometry · Radians and degrees</div>
-  <h2>Multiply by π/180 or 180/π</h2>
-  <p class="note m">degrees → radians: × π/180 · radians → degrees: × 180/π</p>
-  <div class="two">
-    <div class="work"><span class="lab">Model</span>
-      <p class="m">1.9 rad → <span class="step">1.9 × 180/π ≈ 108.9°</span></p>
-      <p class="m">147.3° → <span class="step">147.3 × π/180 ≈ 2.57 rad</span></p></div>
-    <div class="work"><span class="lab">You try</span>
-      <p class="m">4.1 rad → <span class="step ans">≈ 234.9°</span></p>
-      <p class="m">58.6° → <span class="step ans">≈ 1.02 rad</span></p></div>
-  </div>
-  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
-</section>
-
-<!-- 7 arc/sector degrees -->
-<section class="slide" data-notes="With degrees, use the fraction of the circle. Round to one decimal place.">
-  <div class="kicker">Geometry · Arc length and sector area, θ in degrees</div>
-  <h2>Fraction of the whole circle</h2>
-  <p class="note m">s = (θ/360) · 2πr · A = (θ/360) · πr²</p>
-  <div class="two">
-    <div class="work"><span class="lab">Model: r = 6.4, θ = 110°</span>
-      <p class="m step">s = (110/360)(2π)(6.4) ≈ 12.3</p>
-      <p class="m step">A = (110/360)π(6.4)² ≈ 39.3</p></div>
-    <div class="work"><span class="lab">You try: r = 8.2, θ = 50°</span>
-      <p class="m step ans">s ≈ 7.2</p>
-      <p class="m step ans">A ≈ 29.3</p></div>
-  </div>
-  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
-</section>
-
-<!-- 8 arc/sector radians -->
-<section class="slide" data-notes="With radians, use s = rθ and A = ½r²θ directly. Exact answers in terms of π are fine to show first.">
-  <div class="kicker">Geometry · Arc length and sector area, θ in radians</div>
-  <h2>Use θ directly</h2>
-  <p class="note m">s = rθ · A = ½ r² θ</p>
-  <div class="two">
-    <div class="work"><span class="lab">Model: r = 7, θ = 2π/5</span>
-      <p class="m step">s = 7(2π/5) = 2.8π ≈ 8.8</p>
-      <p class="m step">A = ½(49)(2π/5) = 9.8π ≈ 30.8</p></div>
-    <div class="work"><span class="lab">You try: r = 12, θ = 5π/6</span>
-      <p class="m step ans">s = 10π ≈ 31.4</p>
-      <p class="m step ans">A = 60π ≈ 188.5</p></div>
-  </div>
-  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
-</section>
-
-<!-- 9 Heron + right triangle -->
-<section class="slide" data-notes="Heron is printed. For the right triangle, find the missing leg first, then ½ × leg × leg.">
-  <div class="kicker">Geometry · Triangle area</div>
-  <h2>Three sides, or a right triangle</h2>
-  <p class="note m">Heron (printed): s = (a + b + c)/2, A = √(s(s − a)(s − b)(s − c)) · right triangle: A = ½ · leg · leg</p>
-  <div class="two">
-    <div class="work"><span class="lab">Model</span>
-      <p class="m">a = 1.8, b = 2.4, c = 3.1 cm<br><span class="step">s = 3.65; A = √(3.65·1.85·1.25·0.55) ≈ 2.2 cm²</span></p>
-      <p class="m">Right triangle: hypotenuse 6.5 cm, leg 2.5 cm<br><span class="step">other leg = √(6.5² − 2.5²) = 6.0; A = ½(2.5)(6.0) = 7.5 cm²</span></p></div>
-    <div class="work"><span class="lab">You try</span>
-      <p class="m">a = 2.6, b = 1.9, c = 3.3 cm<br><span class="step ans">s = 3.9; A ≈ 2.5 cm²</span></p>
-      <p class="m">Right triangle: hypotenuse 5.3 cm, leg 2.8 cm<br><span class="step ans">other leg = 4.5; A = 6.3 cm²</span></p></div>
-  </div>
-  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
-</section>
-
-<!-- 10 trapezoid + parallel -->
-<section class="slide" data-notes="Trapezoid: the two parallel sides are the bases. Proportional segments: match top-to-bottom on both transversals.">
-  <div class="kicker">Geometry · Trapezoid and proportional segments</div>
-  <h2>Parallel sides and parallel lines</h2>
-  <div class="two">
-    <div class="work"><span class="lab">Trapezoid: A = ½ h (b₁ + b₂)</span>
-      <p class="m">Model: bases 3.4 and 7.8 cm, height 2.6 cm → <span class="step">½(2.6)(11.2) = 14.56 cm²</span></p>
-      <p class="m">You try: bases 4.2 and 9.5 cm, height 3.1 cm → <span class="step ans">21.24 cm²</span></p></div>
-    <div class="work"><span class="lab">Three parallel lines cut two transversals: AB/BC = DE/EF</span>
-      <svg viewBox="0 0 520 120" style="width:100%;height:4.2em;display:block;margin:.15em 0" aria-label="Three parallel lines crossed by two transversals">
-    <line x1="20" y1="15" x2="500" y2="15" stroke="#1f3a5f"/><line x1="20" y1="60" x2="500" y2="60" stroke="#1f3a5f"/><line x1="20" y1="105" x2="500" y2="105" stroke="#1f3a5f"/>
-    <line x1="120" y1="5" x2="190" y2="115" stroke="#0f6b6b" stroke-width="2"/><line x1="330" y1="5" x2="460" y2="115" stroke="#0f6b6b" stroke-width="2"/>
-    <text x="104" y="12">A</text><text x="150" y="56">B</text><text x="178" y="100">C</text>
-    <text x="318" y="12">D</text><text x="372" y="56">E</text><text x="425" y="100">F</text>
-  </svg>
-      <p class="m">Model: AB = 4.5, BC = 6.0, DE = 3.6 → <span class="step">EF = 3.6(6.0)/4.5 = 4.8</span></p>
-      <p class="m">You try: AB = 5.2, BC = 3.9, EF = 2.7 → <span class="step ans">DE = 2.7(5.2)/3.9 = 3.6</span></p></div>
-  </div>
-  
-  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
-</section>
-
-<!-- 11 chords -->
-<section class="slide" data-notes="Three rules: vertical/supplementary angles at E; inscribed angle = half its arc; angle between two chords = half the sum of the two arcs it and its vertical angle cut off. Check: arc BC = 180 − arc AB because AC is a diameter.">
-  <div class="kicker">Geometry · Chords that cross</div>
-  <h2>Angles and arcs inside a circle</h2>
+<!-- 7 alternate angles -->
+<section class="slide" data-notes="Alternate interior and alternate exterior angles are equal when the lines are parallel. Set the expressions equal, solve, then substitute back to find the angle.">
+  <div class="kicker">Geometry · Parallel lines and a transversal</div>
+  <h2>Alternate angles are equal</h2>
   <div class="row">
-    <svg viewBox="0 0 300 260" style="max-height:62%" aria-label="Circle with diameter AC and chord BD crossing at E">
-      <circle cx="150" cy="130" r="100" fill="#eef3f9" stroke="#1f3a5f" stroke-width="2"/>
-      <line x1="50" y1="130" x2="250" y2="130" stroke="#1b2430" stroke-width="2"/>
-      <line x1="83.1" y1="55.7" x2="205.9" y2="212.9" stroke="#1b2430" stroke-width="2"/>
-      <line x1="83.1" y1="55.7" x2="250" y2="130" stroke="#0f6b6b" stroke-dasharray="5 4"/>
-      <text x="34" y="135">A</text><text x="70" y="50">B</text><text x="256" y="135">C</text><text x="208" y="232">D</text><text x="136" y="148">E</text>
+    <svg viewBox="0 0 280 170" style="max-height:48%" aria-label="Two parallel lines cut by a transversal">
+      <line x1="10" y1="50" x2="270" y2="50" stroke="#1f3a5f" stroke-width="2"/><line x1="10" y1="120" x2="270" y2="120" stroke="#1f3a5f" stroke-width="2"/>
+      <line x1="80" y1="165" x2="200" y2="5" stroke="#0f6b6b" stroke-width="2"/>
+      <text x="174" y="68" font-size="13">1</text><text x="98" y="113" font-size="13">2</text>
+      <text x="186" y="40" font-size="13">3</text><text x="80" y="140" font-size="13">4</text>
+      <text x="16" y="44" font-size="12">m</text><text x="16" y="114" font-size="12">n</text>
     </svg>
     <div>
-      <p class="note">AC is a diameter. Chord BD crosses it at E.<br>Rules: ∠AEB + ∠AED = 180° · inscribed angle = ½ arc · ∠AEB = ½(arc AB + arc CD)</p>
-      <div class="work"><span class="lab">Model: ∠AED = 128°, arc AB = 48°</span>
-        <p class="m step">∠AEB = 180 − 128 = 52° · ∠ACB = ½(48) = 24° · arc CD = 2(52) − 48 = 56°</p></div>
-      <div class="work"><span class="lab">You try: ∠AED = 140°, arc AB = 30°</span>
-        <p class="m step ans">∠AEB = 40° · ∠ACB = 15° · arc CD = 50°</p></div>
+      <p class="note">m ∥ n. Angles 1 and 2 are alternate interior; angles 3 and 4 are alternate exterior.</p>
+      <div class="work"><span class="lab">Model: alternate interior angles (2x + 27)° and (4x − 13)°</span>
+        <p class="m step">Equation: 2x + 27 = 4x − 13 → x = 20 → angle = 2(20) + 27 = 67°</p></div>
+      <div class="work"><span class="lab">You try: alternate exterior angles (5x − 12)° and (3x + 30)°</span>
+        <p class="m step ans">5x − 12 = 3x + 30 → x = 21 → angle = 93°</p></div>
     </div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 12 speed -->
-<section class="slide" data-notes="The unit chain from Monday: radius, radians per minute, v = rω, convert, round once. Blade length is the radius.">
-  <div class="kicker">Geometry · Linear speed</div>
-  <h2>The unit chain, one more time</h2>
-  <p class="note">The blade length is the radius. v = (rpm)(2π)(r) gives feet per minute; × 60 ÷ 5280 gives miles per hour.</p>
+<!-- 8 similar triangles -->
+<section class="slide" data-notes="Write the proportion in matching order: the same triangle's sides on top. ABC ~ DEF means AB matches DE and BC matches EF.">
+  <div class="kicker">Geometry · Similar triangles</div>
+  <h2>Matching sides are proportional</h2>
+  <p class="note">△ABC ~ △DEF means AB ↔ DE, BC ↔ EF, AC ↔ DF. Keep one triangle on top: AB/BC = DE/EF.</p>
   <div class="two">
-    <div class="work"><span class="lab">Model: blade 2.5 ft, 400 rpm</span>
-      <p class="m step">v = 400(2π)(2.5) = 2000π ≈ 6283.2 ft/min</p>
-      <p class="m step">6283.2 × 60 ÷ 5280 ≈ 71.4 mi/h</p></div>
-    <div class="work"><span class="lab">You try: blade 3.5 ft, 300 rpm</span>
-      <p class="m step ans">2100π ≈ 6597.3 ft/min</p>
-      <p class="m step ans">≈ 75.0 mi/h</p></div>
+    <div class="work"><span class="lab">Model: AB = 6, BC = 10, DE = 9, EF = x</span>
+      <p class="m step">Proportion: 6/10 = 9/x</p>
+      <p class="m step">6x = 90 → x = 15</p></div>
+    <div class="work"><span class="lab">You try: AB = 14, BC = 21, DE = 12, EF = x</span>
+      <p class="m step ans">14/21 = 12/x</p>
+      <p class="m step ans">14x = 252 → x = 18</p></div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 13 errors -->
-<section class="slide" data-notes="Ask which of these each student made most on Quizzes 5–9.">
+<!-- 9 Heron -->
+<section class="slide" data-notes="Heron is NOT printed. Semiperimeter first; each factor s − a, s − b, s − c must be positive.">
+  <div class="kicker">Geometry · Heron's formula (memorize it)</div>
+  <h2>Semiperimeter first, then the area</h2>
+  <p class="note m">s = (a + b + c)/2 · A = √(s(s − a)(s − b)(s − c))</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model: sides 5, 12, 13</span>
+      <p class="m step">s = (5 + 12 + 13)/2 = 15</p>
+      <p class="m step">A = √(15 · 10 · 3 · 2) = √900 = 30</p></div>
+    <div class="work"><span class="lab">You try: sides 7, 15, 20</span>
+      <p class="m step ans">s = 21</p>
+      <p class="m step ans">A = √(21 · 14 · 6 · 1) = √1764 = 42</p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 10 deg to rad + arc -->
+<section class="slide" data-notes="Two parts: the exact radian measure, then s = rθ with θ in radians. Give the exact value in π and a decimal.">
+  <div class="kicker">Geometry · Radians and arc length</div>
+  <h2>Convert to radians, then s = rθ</h2>
+  <p class="note m">radians = degrees × π/180 · s = rθ (θ in radians)</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model: r = 8, θ = 120°</span>
+      <p class="m step">120 × π/180 = 2π/3 rad</p>
+      <p class="m step">s = 8(2π/3) = 16π/3 ≈ 16.76</p></div>
+    <div class="work"><span class="lab">You try: r = 10, θ = 240°</span>
+      <p class="m step ans">4π/3 rad</p>
+      <p class="m step ans">s = 40π/3 ≈ 41.89</p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 11 sector + speed -->
+<section class="slide" data-notes="Two separate parts in one question. Sector: A = ½r²θ with θ in radians. Speed: v = r × rpm × 2π, in length per minute.">
+  <div class="kicker">Geometry · Sector area and linear speed</div>
+  <h2>A = ½r²θ, and v = rω</h2>
+  <p class="note m">θ in radians · ω = rpm × 2π rad per minute · v = rω in ft/min</p>
+  <div class="two">
+    <div class="work"><span class="lab">Model: sector r = 10, θ = 2π/5; wheel r = 2.5 ft at 160 rpm</span>
+      <p class="m step">A = ½(100)(2π/5) = 20π ≈ 62.83 square units</p>
+      <p class="m step">ω = 160(2π) = 320π; v = 2.5(320π) = 800π ≈ 2513.3 ft/min</p></div>
+    <div class="work"><span class="lab">You try: sector r = 6, θ = 5π/4; wheel r = 1.5 ft at 210 rpm</span>
+      <p class="m step ans">A = 22.5π ≈ 70.69 square units</p>
+      <p class="m step ans">v = 630π ≈ 1979.2 ft/min</p></div>
+  </div>
+  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
+</section>
+
+<!-- 12 errors -->
+<section class="slide" data-notes="Ask which of these each student made most often on Quizzes 5–9.">
   <h2>Where points are usually lost</h2>
   <div class="two">
     <ul>
-      <li>Using the rate as a percent (4) instead of a decimal (0.04).</li>
-      <li>Moving the base to the wrong side when switching log ↔ exponential form.</li>
+      <li>Rate as a percent (5.2) instead of a decimal (0.052).</li>
+      <li>Wrong n: quarterly is 4, semiannually is 2, monthly is 12.</li>
+      <li>Calling a model growth because the starting value is large. Only the base decides.</li>
+      <li>Moving the base to the wrong side in log form.</li>
       <li>Rounding in the middle of a calculation.</li>
-      <li>Using degrees in s = rθ or A = ½r²θ.</li>
     </ul>
     <ul>
-      <li>Forgetting the seconds step in decimal → DMS.</li>
-      <li>Using the diameter (or the whole trapezoid side) where the formula wants a radius or height.</li>
-      <li>Matching the wrong segments in a proportion.</li>
-      <li>Leaving off units: cm², ft/min, mi/h.</li>
+      <li>Solving for x but not finding the angle.</li>
+      <li>Mismatched sides in a similar-triangle proportion.</li>
+      <li>Skipping the semiperimeter, or a negative factor in Heron.</li>
+      <li>Using degrees in s = rθ or A = ½r²θ.</li>
+      <li>Leaving ω in rpm, or using a diameter as the radius.</li>
     </ul>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 14 plan -->
-<section class="slide" data-notes="Point students to the Test 2 practice PDF and the review page's readiness check.">
+<!-- 13 plan -->
+<section class="slide" data-notes="Point students to the Test 2 practice PDF and the review page's readiness check. Repeat: nothing is printed.">
   <h2>Before Friday</h2>
   <div class="row">
     <div class="box">
       <b>Tonight and Thursday</b>
       <ul class="note">
-        <li>Work the Test 2 practice PDF on the course page without notes, then check it.</li>
-        <li>Fill in the formula page from memory.</li>
+        <li>Write all the formulas from memory until you can do it without looking.</li>
+        <li>Redo every "you try" from today without notes.</li>
+        <li>Work the Test 2 practice PDF on the course page, then check it.</li>
         <li>Take the Test 2 readiness check on the review page until you reach 80%.</li>
-        <li>Redo any problem type from today that you missed.</li>
       </ul>
     </div>
     <div class="box">
       <b>Friday, October 30</b>
       <ul class="note">
-        <li>Test 2, in class on paper</li>
+        <li>Test 2, in class on paper: 10 questions, 200 points, 50 minutes</li>
+        <li>No formula sheet: everything is from memory</li>
         <li>Scientific calculator</li>
-        <li>Show your work for full credit</li>
-        <li>Compound interest, continuous interest and Heron's formula are printed; everything else is from memory</li>
+        <li>Show your work inside each question's box. A correct answer with no work gets no credit.</li>
       </ul>
     </div>
   </div>
