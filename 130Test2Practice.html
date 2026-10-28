@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Math 130 — Practice Test 2 (Fall 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap">
+<link rel="stylesheet" href="/styles.css?v=20261023-1">
+<script src="theme.js?v=20260928-1"></script>
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet" onerror="this.href='assets/vendor/katex/dist/katex.min.css'">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" onerror="loadLocalKatex()"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onerror="loadLocalKatex()"></script>
+<script>
+function loadLocalKatex() {
+    if (window.__katexLocal) return;
+    window.__katexLocal = true;
+    ['assets/vendor/katex/dist/katex.min.js', 'assets/vendor/katex/dist/contrib/auto-render.min.js'].forEach(function (src) {
+        var s = document.createElement('script'); s.src = src; s.async = false;
+        s.onload = function () { if (window.renderMath) window.renderMath(); };
+        document.head.appendChild(s);
+    });
+}
+</script>
+<script src="assets/js/math130-test2-skills.js?v=20261028-1"></script>
+<style>
+.pt-page { max-width: 980px; padding-bottom: 4rem; }
+.pt-intro { margin: 1rem 0 1.25rem; }
+.pt-intro p { margin: .35rem 0; }
+.pt-toolbar { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+  padding: .65rem .8rem; margin: 0 0 1.25rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: .75rem; }
+.pt-toolbar label { font-weight: 600; font-size: .95rem; }
+.pt-toolbar input { width: 6.5rem; padding: .35rem .5rem; border: 1px solid var(--border-subtle); border-radius: .4rem; background: var(--bg-surface); color: var(--text-main); font: inherit; }
+.pt-toolbar button { padding: .45rem .8rem; border-radius: .5rem; border: 1px solid var(--border-subtle); background: var(--bg-surface); color: var(--text-main); font: inherit; font-weight: 600; cursor: pointer; }
+.pt-toolbar button.primary { background: var(--primary-main); border-color: var(--primary-main); color: #fff; }
+.pt-toolbar .spacer { flex: 1; }
+.pt-timer { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 4.5rem; text-align: center; }
+.pt-timer.low { color: var(--danger-main); }
+.pt-formulas { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+.pt-formulas > div { border: 1px solid var(--border-subtle); border-radius: .75rem; padding: .75rem 1rem; background: var(--bg-surface); }
+.pt-formulas h3 { margin: 0 0 .35rem; font-size: 1rem; }
+.pt-formulas ul { margin: 0; padding-left: 1.1rem; }
+.pt-formulas li { margin: .2rem 0; }
+.pt-sheet h2 { font-size: 1.05rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin: 2rem 0 .6rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: .25rem; }
+.pt-q { border: 1px solid var(--border-subtle); border-radius: .75rem; padding: 1rem 1.1rem; margin: 0 0 1rem; background: var(--bg-surface); }
+.pt-q.is-right { border-color: var(--emerald-main); }
+.pt-q.is-partial { border-color: var(--warning-main); }
+.pt-q.is-wrong { border-color: var(--danger-main); }
+.pt-q__head { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+.pt-q__head p { margin: 0; }
+.pt-q__num { font-weight: 700; margin-right: .3rem; }
+.pt-q__pts { font-weight: 700; white-space: nowrap; }
+.pt-q__display { margin: .6rem 0 .2rem; font-size: 1.1rem; overflow-x: auto; }
+.pt-q__body { display: grid; grid-template-columns: 1fr minmax(0, 300px); gap: 1rem; align-items: start; margin-top: .6rem; }
+.pt-q__body.no-fig { grid-template-columns: 1fr; }
+.pt-q__fig svg { width: 100%; height: auto; max-height: 190px; }
+.pt-fields { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .5rem .9rem; }
+.pt-field label { display: block; font-size: .9rem; color: var(--text-muted); margin-bottom: .15rem; }
+.pt-field input { width: 100%; padding: .4rem .55rem; border: 1px solid var(--border-subtle); border-radius: .4rem; background: var(--bg-surface); color: var(--text-main); font: inherit; }
+.pt-field input.ok { border-color: var(--emerald-main); box-shadow: 0 0 0 1px var(--emerald-main); }
+.pt-field input.no { border-color: var(--danger-main); box-shadow: 0 0 0 1px var(--danger-main); }
+.pt-field .pt-correct { display: none; font-size: .85rem; color: var(--emerald-main); margin-top: .15rem; }
+.checked .pt-field input.no + .pt-correct, .show-key .pt-field .pt-correct { display: block; }
+.pt-work { display: none; }
+.pt-q__result { margin-top: .5rem; font-weight: 600; }
+.pt-q details { margin-top: .6rem; }
+.pt-q details summary { cursor: pointer; color: var(--primary-main); font-weight: 600; }
+.pt-q .pt-sol { margin: .4rem 0 0; }
+.pt-score { border: 2px solid var(--primary-main); border-radius: .9rem; padding: 1rem 1.2rem; margin: 0 0 1.5rem; background: var(--bg-surface); }
+.pt-score h2 { margin: 0 0 .3rem; }
+.pt-score table { border-collapse: collapse; width: 100%; margin: .6rem 0; }
+.pt-score td, .pt-score th { border-bottom: 1px solid var(--border-subtle); padding: .3rem .5rem; text-align: left; }
+.pt-score td.n { text-align: right; font-variant-numeric: tabular-nums; }
+.pt-hidden { display: none !important; }
+.pt-note { font-size: .9rem; color: var(--text-muted); }
+@media (max-width: 720px) {
+  .pt-formulas, .pt-q__body { grid-template-columns: 1fr; }
+  .pt-toolbar { position: static; }
+}
+@media print {
+  @page { size: letter; margin: .45in; }
+  .course-bar, .course-header, .pt-toolbar, .pt-intro, .pt-score, .pt-formulas, .theme-toggle, footer, #pt-version-note { display: none !important; }
+  body { background: #fff; font-size: 10pt; }
+  .pt-page { max-width: none; padding: 0; margin: 0; }
+  .pt-formulas { gap: .5rem; margin-bottom: .4rem; }
+  .pt-formulas > div { padding: .3rem .6rem; }
+  .pt-sheet h2 { break-before: page; margin: 0 0 .3rem; font-size: 9pt; }
+  .pt-sheet h2:first-of-type { break-before: auto; }
+  .pt-q { break-inside: avoid; border-color: #999; padding: .45rem .7rem; margin-bottom: .45rem; }
+  .pt-q__display { margin: 0; font-size: .9rem; }
+  .pt-q__body { grid-template-columns: 1fr 36%; gap: .6rem; margin-top: .2rem; }
+  .pt-q__fig svg { max-height: 1.5in; }
+  .pt-fields, .pt-q details, .pt-q__result { display: none; }
+  .pt-work { display: block; }
+  .pt-space { min-height: .8in; }
+  .pt-q.tall .pt-space { min-height: 1.35in; }
+  .pt-answer-lines { display: flex; flex-wrap: wrap; gap: .25rem 1.2rem; font-size: 9pt; }
+  .pt-answer-lines > .pt-line { flex: 1 1 1.7in; border-bottom: 1px solid #555; padding-bottom: .1rem; }
+  .show-key .pt-key-print { display: block !important; color: #1f7a3a; font-weight: 600; }
+}
+.pt-key-print { display: none; }
+.pt-print-head { display: none; }
+@media print {
+  .pt-print-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #333; padding-bottom: .2rem; margin-bottom: .4rem; }
+  .pt-print-head strong { font-size: 13pt; }
+  .pt-print-head span { min-width: 2.4in; border-bottom: 1px solid #555; }
+}
+</style>
+</head>
+<body class="tool-page-body">
+<nav class="course-bar" aria-label="Site">
+  <div class="course-bar__inner">
+    <a class="course-bar__back" href="/130Test2.html"><span aria-hidden="true">&larr;</span> Test 2 review</a>
+    <a class="course-bar__home" href="/">Andrew H. Volk</a>
+    <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="Toggle Theme"></button>
+  </div>
+</nav>
+<header class="course-header course-header--unit">
+  <div class="container">
+    <h1>Practice Test 2</h1>
+    <p class="subtitle">A full practice test built like Friday's Test 2: 15 questions, 200 points, 50 minutes. Every new version has new numbers.</p>
+  </div>
+</header>
+
+<main class="container course-page pt-page" id="main">
+  <section class="pt-intro">
+    <p><strong>How to use it.</strong> Take it like the real test: start the 50-minute timer, work on paper, then type your final answers and press <em>Check my answers</em>. Each question shows the worked solution after you check. Or press <em>Print</em> for a paper copy with work space.</p>
+    <p class="pt-note">Round as each question says. Money to the cent; logarithm answers and decimal degrees to four places; DMS to the nearest second. Answers within one unit of the last place count as correct. Type fractions like <code>3/2</code> or decimals like <code>1.5</code>.</p>
+  </section>
+
+  <div class="pt-toolbar" role="toolbar" aria-label="Practice test controls">
+    <label for="pt-version">Version</label>
+    <input id="pt-version" inputmode="numeric" autocomplete="off" aria-describedby="pt-version-note">
+    <button type="button" id="pt-load">Load</button>
+    <button type="button" id="pt-new">New version</button>
+    <span class="spacer"></span>
+    <span class="pt-timer" id="pt-timer" aria-live="off">50:00</span>
+    <button type="button" id="pt-timer-btn">Start timer</button>
+    <button type="button" class="primary" id="pt-check">Check my answers</button>
+    <button type="button" id="pt-key">Show answer key</button>
+    <button type="button" id="pt-print">Print</button>
+  </div>
+  <p class="pt-note" id="pt-version-note">Share a version by its number: the same number always gives the same test.</p>
+
+  <section class="pt-score pt-hidden" id="pt-score" aria-live="polite"></section>
+
+  <section class="pt-formulas" aria-label="Formulas">
+    <div>
+      <h3>Printed on Test 2</h3>
+      <ul>
+        <li>$A = P\left(1+\frac{r}{n}\right)^{nt}$ and $A = Pe^{rt}$</li>
+        <li>Change of base: $\log_b a = \frac{\ln a}{\ln b}$</li>
+        <li>Heron: $A = \sqrt{s(s-a)(s-b)(s-c)}$, $s = \frac{a+b+c}{2}$</li>
+      </ul>
+    </div>
+    <div>
+      <h3>From memory</h3>
+      <ul>
+        <li>$b^y = x \iff \log_b x = y$; $\ln x = c \iff x = e^c$</li>
+        <li>Trapezoid: $A = \frac12(b_1 + b_2)h$; DMS: $D + \frac{M}{60} + \frac{S}{3600}$</li>
+        <li>Inscribed angle $= \frac12$ arc; $s = r\theta$; $A = \frac12 r^2\theta$; $v = r\omega$, $\omega = \text{rpm}\times 2\pi$</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="pt-sheet" id="pt-sheet" aria-label="Practice test questions"></section>
+</main>
+
+<script>
+(function () {
+    'use strict';
+    const S = window.Math130Test2Skills;
+    const sheet = document.getElementById('pt-sheet');
+    const scoreBox = document.getElementById('pt-score');
+    const versionInput = document.getElementById('pt-version');
+    let test = [];
+    let version = 0;
+
+    const store = {
+        get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+        set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* private window */ } }
+    };
+    const answersKey = v => 'math130-practice-test2-v' + v;
+
+    window.renderMath = function () {
+        if (typeof window.renderMathInElement !== 'function') return;
+        window.renderMathInElement(document.getElementById('main'), {
+            delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+            throwOnError: false
+        });
+    };
+
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+    // A number as typed: allows $, commas, a degree sign and a fraction like 3/2.
+    function parseAnswer(raw) {
+        const s = String(raw || '').trim().replace(/[$,\s°′″'"]/g, '').replace(/−/g, '-');
+        if (!s) return null;
+        const frac = s.match(/^([+-]?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
+        if (frac) return Number(frac[2]) === 0 ? null : Number(frac[1]) / Number(frac[2]);
+        if (!/^[+-]?(\d+\.?\d*|\.\d+)(e[+-]?\d+)?$/i.test(s)) return null;
+        return Number(s);
+    }
+
+    function fmt(v) { return Number.isInteger(v) ? String(v) : String(Number(v.toFixed(4))); }
+
+    function build(v) {
+        version = v;
+        versionInput.value = v;
+        history.replaceState(null, '', '?v=' + v);
+        test = S.buildTest(v);
+        document.body.classList.remove('checked');
+        scoreBox.classList.add('pt-hidden');
+        const saved = store.get(answersKey(v)) || {};
+        sheet.innerHTML = `<div class="pt-print-head"><strong>MATH 130 Practice Test 2 · Version ${v}</strong><span>Name</span></div>` + S.PAGES.map((nums, p) => `
+            <h2>Page ${p + 1} of ${S.PAGES.length}</h2>
+            ${nums.map(n => question(test[n - 1], saved)).join('')}`).join('');
+        sheet.querySelectorAll('input').forEach(inp => inp.addEventListener('input', saveAnswers));
+        window.renderMath();
+    }
+
+    function question(q, saved) {
+        const fields = q.fields.map(f => `
+            <div class="pt-field">
+              <label for="${f.id}">${f.label}</label>
+              <input id="${f.id}" autocomplete="off" inputmode="decimal" value="${esc(saved[f.id] || '')}">
+              <div class="pt-correct">Answer: ${fmt(f.answer)}</div>
+            </div>`).join('');
+        const lines = q.fields.map(f => `<div class="pt-line">${f.label}</div>`).join('');
+        const tall = q.points >= 20;                              // two-part questions get more print space
+        return `
+          <article class="pt-q${tall ? ' tall' : ''}" id="q${q.n}" data-n="${q.n}">
+            <div class="pt-q__head">
+              <p><span class="pt-q__num">${q.n}.</span>${q.q}</p>
+              <span class="pt-q__pts">${q.points} pts</span>
+            </div>
+            ${q.display ? `<div class="pt-q__display">$$${q.display}$$</div>` : ''}
+            <div class="pt-q__body${q.svg ? '' : ' no-fig'}">
+              <div>
+                <div class="pt-work pt-space" aria-hidden="true"></div>
+                <div class="pt-answer-lines pt-work">${lines}</div>
+                <div class="pt-fields">${fields}</div>
+                <div class="pt-key-print">Answer: ${esc(q.key)}</div>
+                <div class="pt-q__result" aria-live="polite"></div>
+              </div>
+              ${q.svg ? `<div class="pt-q__fig">${q.svg}</div>` : ''}
+            </div>
+            <details class="pt-solution"><summary>Worked solution</summary><p class="pt-sol">${q.solution}</p><p class="pt-note">Hint: ${esc(q.hint)}</p></details>
+          </article>`;
+    }
+
+    function saveAnswers() {
+        const out = {};
+        sheet.querySelectorAll('input').forEach(inp => { if (inp.value) out[inp.id] = inp.value; });
+        store.set(answersKey(version), out);
+    }
+
+    function check() {
+        document.body.classList.add('checked');
+        let total = 0, earned = 0, blanks = 0;
+        const byArea = {};
+        const misses = [];
+        test.forEach(q => {
+            const weights = q.fields.reduce((a, f) => a + (f.weight == null ? 1 : f.weight), 0);
+            let got = 0, right = 0;
+            q.fields.forEach(f => {
+                const inp = document.getElementById(f.id);
+                const val = parseAnswer(inp.value);
+                if (val === null) blanks++;
+                const ok = val !== null
+                    && (!f.integer || Number.isInteger(val))
+                    && Math.abs(val - f.answer) <= (f.tolerance || 0) + 1e-9;
+                inp.classList.toggle('ok', ok);
+                inp.classList.toggle('no', !ok);
+                if (ok) { right++; got += q.points * (f.weight == null ? 1 : f.weight) / weights; }
+            });
+            got = Math.round(got * 10) / 10;
+            total += q.points; earned += got;
+            const card = document.getElementById('q' + q.n);
+            card.classList.remove('is-right', 'is-partial', 'is-wrong');
+            card.classList.add(right === q.fields.length ? 'is-right' : right ? 'is-partial' : 'is-wrong');
+            card.querySelector('.pt-q__result').textContent = `${fmt(got)} / ${q.points} points`;
+            if (right < q.fields.length) { card.querySelector('details').open = true; misses.push(q); }
+            const a = byArea[q.area] || (byArea[q.area] = { got: 0, of: 0 });
+            a.got += got; a.of += q.points;
+        });
+        const pctScore = Math.round(earned / total * 100);
+        scoreBox.innerHTML = `
+            <h2>Score: ${fmt(earned)} / ${total} (${pctScore}%)</h2>
+            <p>${pctScore >= 80 ? 'At the 80% readiness mark.' : 'Below the 80% readiness mark: rework the missed questions, then try a new version.'}${blanks ? ` ${blanks} answer box${blanks === 1 ? ' was' : 'es were'} blank.` : ''}</p>
+            <table><tr><th>Area</th><th class="n">Points</th></tr>
+            ${Object.entries(byArea).map(([k, a]) => `<tr><td>${k}</td><td class="n">${fmt(Math.round(a.got * 10) / 10)} / ${a.of}</td></tr>`).join('')}</table>
+            ${misses.length ? `<p><strong>Rework:</strong> ${misses.map(q => `<a href="#q${q.n}">Q${q.n} ${esc(q.label)}</a>`).join(' · ')}. For more of one type, use the <a href="130Test2.html#tab-practice">practice generators on the review page</a>.</p>` : '<p>Every question is right. Try a new version or print one for timed paper practice.</p>'}
+            <p class="pt-note">On paper, your work also counts: the real test gives partial credit for a correct method and requires work on most questions.</p>`;
+        scoreBox.classList.remove('pt-hidden');
+        scoreBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        stopTimer();
+    }
+
+    // ------------------------------------------------------------ timer
+    let timerEnd = 0, timerId = 0;
+    const timerEl = document.getElementById('pt-timer');
+    const timerBtn = document.getElementById('pt-timer-btn');
+    function tick() {
+        const left = Math.max(0, Math.round((timerEnd - Date.now()) / 1000));
+        timerEl.textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}`;
+        timerEl.classList.toggle('low', left <= 300);
+        if (left === 0) { stopTimer(); timerEl.textContent = 'Time'; }
+    }
+    function stopTimer() { clearInterval(timerId); timerId = 0; timerBtn.textContent = 'Start timer'; }
+    timerBtn.addEventListener('click', () => {
+        if (timerId) { stopTimer(); return; }
+        timerEnd = Date.now() + 50 * 60 * 1000;
+        timerId = setInterval(tick, 1000);
+        tick();
+        timerBtn.textContent = 'Stop timer';
+    });
+
+    // ------------------------------------------------------------ controls
+    const newVersion = () => 1000 + Math.floor(Math.random() * 9000);
+    document.getElementById('pt-new').addEventListener('click', () => build(newVersion()));
+    document.getElementById('pt-load').addEventListener('click', () => {
+        const v = parseInt(versionInput.value, 10);
+        if (Number.isFinite(v) && v > 0) build(v); else versionInput.focus();
+    });
+    versionInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('pt-load').click(); });
+    document.getElementById('pt-check').addEventListener('click', check);
+    const keyBtn = document.getElementById('pt-key');
+    keyBtn.addEventListener('click', () => {
+        const on = document.body.classList.toggle('show-key');
+        keyBtn.textContent = on ? 'Hide answer key' : 'Show answer key';
+        sheet.querySelectorAll('details.pt-solution').forEach(d => { d.open = on; });
+    });
+    document.getElementById('pt-print').addEventListener('click', () => window.print());
+
+    const fromUrl = parseInt(new URLSearchParams(location.search).get('v'), 10);
+    build(Number.isFinite(fromUrl) && fromUrl > 0 ? fromUrl : newVersion());
+    document.addEventListener('DOMContentLoaded', window.renderMath);
+    window.addEventListener('load', window.renderMath);
+})();
+</script>
+</body>
+</html>

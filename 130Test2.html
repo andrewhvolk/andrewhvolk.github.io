@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap">
   <link rel="stylesheet" href="/styles.css?v=20261023-1">
 <script src="theme.js?v=20260928-1"></script>
+<script src="assets/js/math130-test2-skills.js?v=20261028-1"></script>
 <title>Math 130 — Test 2 Review (Fall 2026)</title>
 
 <!-- KaTeX for Math Rendering (CDN first, local fallback) -->
@@ -919,6 +920,7 @@
       <div class="learning-step__actions">
         <a class="learning-action--primary" href="slides/Math130Unit2E.html" target="_blank" rel="noopener">Review with 2E</a>
         <button type="button" onclick="launchUnitExam()">Test 2 checkpoint</button>
+        <a href="130Test2Practice.html">Full practice test (15 questions, 200 points)</a>
       </div>
     </article>
   </div>
@@ -3005,6 +3007,38 @@
         quiz8_sector_multi: ['test2'], rad_deg: ['test2'],
         quiz8_speed_multi: ['test2'], circle_multi: ['test2']
     };
+    // The Test 2 question types come from assets/js/math130-test2-skills.js, shared
+    // with the full practice test (130Test2Practice.html): stated n, the test's
+    // fractional and half-integer log forms, four-place log answers, the slanted
+    // side on the trapezoid, whole-number Heron areas and four-place DMS. The
+    // definitions above stay as the fallback if that file does not load.
+    const TEST2_SKILLS = window.Math130Test2Skills;
+    function fromTest2Skill(name) {
+        const q = TEST2_SKILLS.skills[name](Math.random, 'rv-' + name);
+        return q.display ? { ...q, q: `${q.q}<br><small>Printed on Test 2: $${q.display}$</small>` } : q;
+    }
+    if (TEST2_SKILLS) {
+        const pick = list => list[Math.floor(Math.random() * list.length)];
+        const replacements = {
+            interest: () => fromTest2Skill(pick(['compound', 'continuous'])),
+            dms: () => fromTest2Skill('toDms'),
+            dms_to_dec: () => fromTest2Skill('toDecimal'),
+            logexp_conv: () => fromTest2Skill(pick(['toLog', 'toExp'])),
+            logexp: () => fromTest2Skill(pick(['solveLn', 'solveBase'])),
+            herons: () => fromTest2Skill('heron')
+        };
+        generatorDefinitions.forEach(gen => {
+            if (replacements[gen.id]) gen.generate = replacements[gen.id];
+            if (gen.id === 'basic_areas') {
+                const original = gen.generate;
+                gen.generate = variant => {
+                    const q = original(variant);
+                    return q.q === 'Find the area of the trapezoid.' ? fromTest2Skill('trapezoid') : q;
+                };
+            }
+        });
+    }
+
     const generators = generatorDefinitions.map(gen => {
         const sectionKey = SECTION_KEY_BY_LABEL[gen.section];
         if (!sectionKey) throw new Error(`Generator ${gen.id} has no practice section mapping.`);
