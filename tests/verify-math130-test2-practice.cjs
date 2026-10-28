@@ -94,6 +94,8 @@ const page = fs.readFileSync(path.join(__dirname, '..', '130Test2Practice.html')
 assert.ok(page.includes('assets/js/math130-test2-skills.js'), 'practice page does not load the skills module');
 const review = fs.readFileSync(path.join(__dirname, '..', '130Test2.html'), 'utf8');
 assert.ok(review.includes('assets/js/math130-test2-skills.js'), 'review page does not load the skills module');
-assert.ok(review.includes('130Test2Practice.html'), 'review page does not link the practice test');
+// The practice test is unlisted: shared by URL only, never linked or indexed.
+assert.ok(!review.includes('130Test2Practice'), 'review page links the unlisted practice test');
+assert.ok(page.includes('noindex'), 'practice page is missing noindex');
 
 console.log(`OK: ${TRIALS} practice tests, ${checked} questions checked.`);

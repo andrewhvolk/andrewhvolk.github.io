@@ -1,8 +1,8 @@
 /*
  * MATH 130 Test 2 skills: one generator per question type on the Fall 2026 Test 2.
  *
- * Used by 130Test2Practice.html (a full practice test) and by the practice
- * generators on 130Test2.html. Every generator takes a random source and returns
+ * Used by the full practice test and by the practice generators on
+ * 130Test2.html. Every generator takes a random source and returns
  * a question in the review page's format:
  *
  *   { q, svg?, svgAltText?, display?, fields: [{ id, label, answer, tolerance, ... }],
