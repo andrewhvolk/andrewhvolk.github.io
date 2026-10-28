@@ -43,10 +43,10 @@ for (let seed = 1; seed <= TRIALS; seed++) {
     const n = Number(q1.q.match(/\(\$n = (\d+)\$\)/)[1]);
     assert.ok({ 12: /monthly/, 4: /quarterly/, 2: /semiannually/ }[n].test(q1.q));
     assert.ok(ans(q1, 0) > 0 && ans(q2, 0) > 0);
-    // 3: b^(p/2) = x is exact.
+    // 3: b^(p/q) = x is exact; the value is a fraction with a short decimal (halves or quarters).
     const [b3, x3, y3] = q3.fields.map(f => f.answer);
     assert.ok(Number.isInteger(x3) && close(Math.pow(b3, y3), x3, 1e-6), `Q3 not exact: ${q3.q}`);
-    assert.ok(close(y3 * 2, Math.round(y3 * 2)) && !Number.isInteger(y3));
+    assert.ok(close(y3 * 4, Math.round(y3 * 4)) && !Number.isInteger(y3));
     // 4: b^v = x is exact, v a half-integer.
     const [b4, v4, x4] = q4.fields.map(f => f.answer);
     assert.ok(close(Math.pow(b4, v4), x4, 1e-6) && close(v4 % 1, 0.5));

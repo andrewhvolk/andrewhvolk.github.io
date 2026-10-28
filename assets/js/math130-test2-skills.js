@@ -88,9 +88,12 @@
         { n: 2, word: 'semiannually', rates: [3.4, 4.2, 4.6, 5.4, 5.8, 6.2] }
     ];
 
+    // Principals end in 50 ($2,050 to $8,950).
+    const principal = t => t.int(20, 89) * 100 + 50;
+
     function compound(rand, id = 'q') {
         const t = tools(rand);
-        const P = t.int(20, 90) * 100;
+        const P = principal(t);
         const c = t.pick(COMPOUNDING);
         const rPct = t.pick(c.rates);
         const years = t.int(4, 10);
@@ -110,7 +113,7 @@
 
     function continuous(rand, id = 'q') {
         const t = tools(rand);
-        const P = t.int(20, 90) * 100;
+        const P = principal(t);
         const rPct = t.pick([2.4, 3.2, 3.6, 4.2, 4.5, 4.8, 5.4, 6]);
         const years = t.int(4, 12);
         const rt = rPct / 100 * years;
@@ -126,37 +129,41 @@
     }
 
     // ------------------------------------------------------- 4.3 logs
-    // Exponential to log form: a perfect power raised to p/2, always a whole result.
+    // Exponential to log form: a perfect power raised to a fraction (halves or
+    // quarters, so the value is also a short decimal), always a whole result.
+    const FRACTIONAL = [
+        [4, 3, 2], [9, 3, 2], [16, 3, 2], [25, 3, 2],
+        [4, 5, 2], [9, 5, 2], [16, 5, 2], [25, 5, 2], [36, 5, 2],
+        [4, 7, 2], [9, 7, 2],
+        [16, 3, 4], [81, 3, 4], [16, 5, 4], [81, 5, 4], [16, 7, 4], [625, 3, 4]
+    ];
+
     function toLog(rand, id = 'q') {
         const t = tools(rand);
-        const choices = [];
-        [4, 9, 16, 25, 36, 49, 64, 81, 100].forEach(b => choices.push({ b, p: 3 }));
-        [4, 9, 16, 25, 36].forEach(b => choices.push({ b, p: 5 }));
-        const { b, p } = t.pick(choices);
-        const x = Math.round(Math.pow(Math.sqrt(b), p));
+        const [b, p, q] = t.pick(FRACTIONAL);
+        const x = Math.round(Math.pow(b, p / q));
         return {
-            q: `Write the exponential equation in logarithmic form: $${b}^{${p}/2} = ${x}$`,
+            q: `Write the exponential equation in logarithmic form: $${b}^{${p}/${q}} = ${x}$`,
             fields: [
                 { id: `${id}-b`, label: 'Log base $b$', answer: b, tolerance: 1e-6 },
                 { id: `${id}-x`, label: 'Argument', answer: x, tolerance: 1e-6 },
-                { id: `${id}-y`, label: 'Value (e.g. 1.5)', answer: p / 2, tolerance: 1e-6 }
+                { id: `${id}-y`, label: 'Value (e.g. 1.5)', answer: p / q, tolerance: 1e-6 }
             ],
             answerFormat: 'log',
             hint: 'The base stays the base, and the log equals the exponent: b^y = x means log_b x = y.',
-            solution: `Base ${b}, exponent $${p}/2$, result ${x}: $\\log_{${b}} ${x} = ${p}/2$ (or ${p / 2}).`,
-            key: `log_${b} ${x} = ${p}/2`
+            solution: `Base ${b}, exponent $${p}/${q}$, result ${x}: $\\log_{${b}} ${x} = ${p}/${q}$ (or ${p / q}).`,
+            key: `log_${b} ${x} = ${p}/${q}`
         };
     }
 
     // Log to exponential form: a perfect-square base and a half-integer value.
+    const HALF_POWERS = [[4, 1.5], [9, 1.5], [16, 1.5], [25, 1.5], [36, 1.5], [49, 1.5],
+        [4, 2.5], [49, 2.5], [4, 3.5], [9, 3.5], [16, 3.5], [9, 4.5], [4, 5.5]];
+
     function toExp(rand, id = 'q') {
         const t = tools(rand);
-        const choices = [];
-        [4, 9, 16, 25, 36, 49].forEach(b => [1.5, 2.5, 3.5].forEach(v => {
-            const x = Math.round(Math.pow(b, v));
-            if (x <= 120000) choices.push({ b, v, x });
-        }));
-        const { b, v, x } = t.pick(choices);
+        const [b, v] = t.pick(HALF_POWERS);
+        const x = Math.round(Math.pow(b, v));
         return {
             q: `Write the logarithmic equation in exponential form: $\\log_{${b}} ${x} = ${v}$`,
             fields: [
@@ -173,7 +180,7 @@
 
     function solveLn(rand, id = 'q') {
         const t = tools(rand);
-        const c = t.pick([1.6, 1.8, 2, 2.2, 2.5, 2.8, 3, 3.2, 3.5, 3.7, 4, 4.2, 4.5, 5, 5.5, 6, 7]);
+        const c = t.pick([1.6, 1.8, 2.2, 2.4, 2.5, 2.8, 3.2, 3.5, 3.7, 3.9, 4.2, 4.5, 4.8, 5.3, 5.5, 6.2]);
         const x = Math.exp(c);
         return {
             q: `Solve for $x$. Round to four decimal places. $\\ln x = ${c}$`,
@@ -192,7 +199,7 @@
             b = t.int(2, 9);
             c = t.int(Math.ceil(Math.pow(b, 1.2)), Math.floor(Math.pow(b, 3.5)));
             x = Math.log(c) / Math.log(b);
-        } while (Math.abs(x - Math.round(x)) < 0.02 || c > 900);
+        } while (Math.abs(x - Math.round(x)) < 0.02 || c > 900 || c % 5 === 0);
         return {
             q: `Solve for $x$. Round to four decimal places. $${b}^{x} = ${c}$`,
             display: '\\text{Change of base: } \\log_b a = \\frac{\\ln a}{\\ln b}',
@@ -352,7 +359,7 @@
     const UNITS = ['cm', 'm', 'in', 'ft'];
     // Height, overhang and slant from Pythagorean triples, so the slanted side is a
     // real length the figure can draw. The slanted side is a distractor.
-    const LEGS = [[3, 4, 5], [4, 3, 5], [6, 8, 10], [8, 6, 10], [5, 12, 13], [12, 5, 13], [8, 15, 17], [9, 12, 15], [12, 9, 15], [15, 8, 17]];
+    const LEGS = [[3, 4, 5], [4, 3, 5], [5, 12, 13], [15, 8, 17], [16, 12, 20], [20, 15, 25], [7, 24, 25], [24, 7, 25]];
 
     function trapezoid(rand, id = 'q') {
         const t = tools(rand);
@@ -390,9 +397,9 @@
     }
 
     // Heronian triangles: whole-number sides and area, as on the test.
-    const HERONIAN = [[5, 12, 13], [13, 14, 15], [9, 10, 17], [10, 17, 21], [11, 13, 20], [13, 20, 21], [9, 40, 41], [17, 25, 28],
-        [7, 15, 20], [8, 15, 17], [6, 25, 29], [15, 34, 35], [10, 13, 13], [12, 17, 25], [14, 30, 40], [20, 21, 29], [16, 25, 39],
-        [10, 35, 39], [13, 37, 40], [11, 25, 30], [15, 28, 41], [25, 34, 39]];
+    const HERONIAN = [[5, 12, 13], [13, 14, 15], [9, 10, 17], [7, 15, 20], [8, 15, 17], [6, 25, 29], [15, 34, 35],
+        [10, 13, 13], [12, 17, 25], [14, 30, 40], [20, 21, 29], [16, 25, 39], [10, 35, 39], [13, 37, 40], [11, 25, 30],
+        [15, 28, 41], [25, 34, 39], [13, 40, 45], [16, 17, 17], [25, 29, 36], [20, 37, 51], [7, 24, 25], [12, 35, 37]];
 
     function heron(rand, id = 'q') {
         const t = tools(rand);
@@ -466,7 +473,7 @@
     function inscribedArc(rand, id = 'q') {
         const t = tools(rand);
         const central = 2 * t.int(30, 80);
-        const r = t.int(4, 15);
+        const r = t.pick([4, 5, 7, 8, 11, 13, 14]);
         const u = t.pick(UNITS);
         const s = r * central * Math.PI / 180;
         const g = gcd(central, 180);
@@ -498,7 +505,7 @@
 
     function sector(rand, id = 'q') {
         const t = tools(rand);
-        const r = t.int(4, 16);
+        const r = t.pick([4, 5, 6, 7, 11, 13, 15, 16]);
         const [k, m] = t.pick(SECTOR_ANGLES);
         const A = 0.5 * r * r * k * Math.PI / m;
         const deg = 180 * k / m;
@@ -520,7 +527,7 @@
 
     function speed(rand, id = 'q') {
         const t = tools(rand);
-        const d = t.pick([2, 2.5, 3, 4, 5, 6, 7, 8]);
+        const d = t.pick([1.5, 2.5, 3.5, 4.5, 7, 8]);
         const rpm = 5 * t.int(8, 50);
         const v = (d / 2) * rpm * 2 * Math.PI;
         return {
