@@ -62,23 +62,23 @@ table.tbl th { background:#eef3f9; }
 <div class="deck">
 
 <!-- 1 -->
-<section class="slide" data-notes="Collect the take-home Quiz 9 first. Then frame today: the ten kinds of Test 2 questions, one model and one try each. Stress which three formulas are printed and which are from memory.">
+<section class="slide" data-notes="Collect the take-home Quiz 9 first. Then frame today: every kind of Test 2 question, one model and one try each. Stress which four formulas are printed (both interest formulas, change of base, Heron) and which are from memory.">
   <div class="kicker">MATH 130 · Wednesday, October 28 · Test 2 review</div>
   <h1>Test 2 is Friday. Today: every problem type from your Unit 2 quizzes.</h1>
   <div class="row">
     <div>
       <ul>
         <li><b>Turn in Quiz 9</b> now.</li>
-        <li>Test 2 has <b>16 questions, 200 points, on 4 pages</b>, built from the skills on Quizzes 5 to 9: about 20% Section 4.2, 20% Section 4.3, 30% polygons, 10% DMS and 20% circles.</li>
+        <li>Test 2 has <b>15 questions, 200 points, on 4 pages</b>, built from the skills on Quizzes 5 to 9: about 10% Section 4.2, 30% Section 4.3, 30% polygons, 10% DMS and 20% circles.</li>
         <li>For each type: I work a model, then you try one. Answers appear when we check.</li>
-        <li>Twelve questions are single skills worth 10 points; four have two parts worth 20. Show your work for every question.</li>
+        <li>Twelve questions are single skills: the four logarithm questions (3 to 6) are worth 15 points, the rest 10. Three have two parts worth 20. Show your work for every question.</li>
       </ul>
     </div>
     <div class="box">
       <b>Printed on Test 2</b>
-      <ul class="note"><li>A = P(1 + r/n)<sup>nt</sup> and A = Pe<sup>rt</sup></li><li>Heron: s = (a + b + c)/2, A = √(s(s−a)(s−b)(s−c))</li></ul>
+      <ul class="note"><li>A = P(1 + r/n)<sup>nt</sup> and A = Pe<sup>rt</sup></li><li>change of base: log<sub>b</sub> a = ln a ÷ ln b</li><li>Heron: s = (a + b + c)/2, A = √(s(s−a)(s−b)(s−c))</li></ul>
       <b>From memory</b>
-      <ul class="note"><li>log<sub>b</sub> x = y ⟺ b<sup>y</sup> = x</li><li>trapezoid: A = ½(b₁ + b₂)h</li><li>DMS: D + M/60 + S/3600; inscribed angle = ½ arc</li><li>radians = degrees × π/180; s = rθ; A = ½r²θ</li><li>v = rω, with ω = rpm × 2π</li></ul>
+      <ul class="note"><li>log<sub>b</sub> x = y ⟺ b<sup>y</sup> = x; ln x = c ⟺ x = e<sup>c</sup></li><li>trapezoid: A = ½(b₁ + b₂)h</li><li>DMS: D + M/60 + S/3600; inscribed angle = ½ arc</li><li>radians = degrees × π/180; s = rθ; A = ½r²θ</li><li>v = rω, with ω = rpm × 2π</li></ul>
     </div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
@@ -88,7 +88,7 @@ table.tbl th { background:#eef3f9; }
 <section class="slide" data-notes="n: annually 1, semiannually 2, quarterly 4, monthly 12, daily 365. Write the setup line with numbers substituted before calculating; the setup is worth points on its own.">
   <div class="kicker">Section 4.2 · Compound interest (Quiz 5)</div>
   <h2>A = P(1 + r/n)<sup>nt</sup></h2>
-  <p class="note">r as a decimal · n = 2 semiannually, 4 quarterly, 12 monthly · round to the nearest cent at the end</p>
+  <p class="note">r as a decimal · n = 2 semiannually, 4 quarterly, 12 monthly (Test 2 states n, e.g. "monthly (n = 12)") · round to the nearest cent at the end</p>
   <div class="two">
     <div class="work"><span class="lab">Model: $2,500 at 3.5% compounded monthly for 6 years</span>
       <p class="m step">Setup: A = 2500(1 + 0.035/12)<sup>12·6</sup> = 2500(1 + 0.035/12)<sup>72</sup></p>
@@ -116,52 +116,35 @@ table.tbl th { background:#eef3f9; }
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 4 growth/decay -->
-<section class="slide" data-notes="The base decides: greater than 1 is growth, between 0 and 1 is decay. The starting value doesn't matter.">
-  <div class="kicker">Section 4.2 · Exponential models (Quiz 5)</div>
-  <h2>Evaluate, then growth or decay</h2>
-  <p class="note m">f(t) = a · b<sup>t</sup> · b &gt; 1: growth · 0 &lt; b &lt; 1: decay</p>
-  <div class="two">
-    <div class="work"><span class="lab">Model</span>
-      <p class="m">P(t) = 450(1.15)<sup>t</sup>, find P(6) → <span class="step">≈ 1040.88; 1.15 &gt; 1, growth</span></p>
-      <p class="m">f(t) = 3000(0.92)<sup>t</sup>, find f(4) → <span class="step">≈ 2149.18; 0.92 &lt; 1, decay</span></p></div>
-    <div class="work"><span class="lab">You try</span>
-      <p class="m">Q(t) = 1800(0.75)<sup>t</sup>, find Q(3) → <span class="step ans">≈ 759.38; decay</span></p>
-      <p class="m">R(t) = 250(1.06)<sup>t</sup>, find R(12) → <span class="step ans">≈ 503.05; growth</span></p></div>
-  </div>
-  <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
-</section>
 
-<!-- 5 log form + evaluate -->
-<section class="slide" data-notes="Two skills in one question: rewrite a power as a log, then evaluate a log of a decimal. A number between 0 and 1 is a negative power of the base.">
-  <div class="kicker">Section 4.3 · Logarithmic form and evaluating (Quiz 6)</div>
-  <h2>The log is the exponent</h2>
+<!-- 5 log form both ways -->
+<section class="slide" data-notes="Test 2 Questions 3 and 4, like Spring 2026 problems 2 and 3. The exponent can be a fraction or a decimal; the rule doesn't change. The base stays the base, and the log equals the exponent. The rewritten equation is the whole answer.">
+  <div class="kicker">Section 4.3 · Exponential and logarithmic form (Quiz 6)</div>
+  <h2>The log is the exponent, even a fraction</h2>
   <div class="work m big center">b<sup>y</sup> = x &nbsp;⟺&nbsp; log<sub>b</sub> x = y</div>
   <div class="two">
     <div class="work"><span class="lab">Model</span>
-      <p class="m">(a) 5<sup>3</sup> = 125 in log form → <span class="step">log<sub>5</sub> 125 = 3</span></p>
-      <p class="m">(b) Evaluate log<sub>4</sub> 0.0625 → <span class="step">0.0625 = 1/16 = 4<sup>−2</sup>, so −2</span></p></div>
+      <p class="m">(a) 4<sup>3/2</sup> = 8 in log form → <span class="step">log<sub>4</sub> 8 = 3/2</span></p>
+      <p class="m">(b) log<sub>9</sub> 27 = 1.5 in exponential form → <span class="step">9<sup>1.5</sup> = 27</span></p></div>
     <div class="work"><span class="lab">You try</span>
-      <p class="m">(a) 7<sup>2</sup> = 49 in log form → <span class="step ans">log<sub>7</sub> 49 = 2</span></p>
-      <p class="m">(b) Evaluate log<sub>2</sub> 0.0625 → <span class="step ans">0.0625 = 1/16 = 2<sup>−4</sup>, so −4</span></p></div>
+      <p class="m">(a) 25<sup>3/2</sup> = 125 in log form → <span class="step ans">log<sub>25</sub> 125 = 3/2</span></p>
+      <p class="m">(b) log<sub>4</sub> 32 = 2.5 in exponential form → <span class="step ans">4<sup>2.5</sup> = 32</span></p></div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
 
-<!-- 6 solve b^x = c -->
-<section class="slide" data-notes="Setup line: take ln of both sides, x ln b = ln c. Four decimal places, so keep full values until the end.">
+<!-- 6 solve ln x = c and b^x = c -->
+<section class="slide" data-notes="Test 2 Questions 5 and 6, like Spring 2026 problem 4. ln x = c: rewrite in exponential form, x = e^c. b^x = c: x = log base b of c, then change of base, which is printed on Test 2. It is ln c divided by ln b, not ln(c/b). Four decimal places; round only at the end.">
   <div class="kicker">Section 4.3 · Solving with logarithms (Quiz 6)</div>
-  <h2>Take the log of both sides</h2>
-  <p class="note m">b<sup>x</sup> = c: x = ln c ÷ ln b · e<sup>x − k</sup> = c: x − k = ln c · four decimal places</p>
+  <h2>ln x = c and b<sup>x</sup> = c</h2>
+  <p class="note m">ln x = c → x = e<sup>c</sup> · b<sup>x</sup> = c → x = log<sub>b</sub> c = ln c ÷ ln b <span class="pill">change of base is printed</span> · four decimal places</p>
   <div class="two">
-    <div class="work"><span class="lab">Model: 3<sup>x</sup> = 50</span>
-      <p class="m step">Setup: x ln 3 = ln 50</p>
-      <p class="m step">x = ln 50 ÷ ln 3 ≈ 3.5609</p>
-      <p class="m">e<sup>x − 3</sup> = 12 → <span class="step">x − 3 = ln 12, x ≈ 5.4849</span></p></div>
-    <div class="work"><span class="lab">You try: 6<sup>x</sup> = 150</span>
-      <p class="m step ans">Setup: x ln 6 = ln 150</p>
-      <p class="m step ans">x ≈ 2.7965</p>
-      <p class="m">e<sup>x + 2</sup> = 50 → <span class="step ans">x = −2 + ln 50 ≈ 1.9120</span></p></div>
+    <div class="work"><span class="lab">Model</span>
+      <p class="m">ln x = 2.5 → <span class="step">x = e<sup>2.5</sup> ≈ 12.1825</span></p>
+      <p class="m">3<sup>x</sup> = 50 → <span class="step">x = log<sub>3</sub> 50 = ln 50 ÷ ln 3 ≈ 3.5609</span></p></div>
+    <div class="work"><span class="lab">You try</span>
+      <p class="m">ln x = 4.2 → <span class="step ans">x = e<sup>4.2</sup> ≈ 66.6863</span></p>
+      <p class="m">6<sup>x</sup> = 150 → <span class="step ans">x = ln 150 ÷ ln 6 ≈ 2.7965</span></p></div>
   </div>
   <div class="footer"><span>Test 2 review</span><span class="pg"></span></div>
 </section>
@@ -208,16 +191,16 @@ table.tbl th { background:#eef3f9; }
 </section>
 
 <!-- 9 Heron -->
-<section class="slide" data-notes="Heron's formula is printed on the test; the trapezoid formula is not. Semiperimeter first; each factor s − a, s − b, s − c must be positive.">
+<section class="slide" data-notes="Heron's formula is printed on the test; the trapezoid formula is not. The test gives the slanted side too: it is not the height. Use the perpendicular height only. Semiperimeter first; each factor s − a, s − b, s − c must be positive.">
   <div class="kicker">Geometry · Trapezoid and Heron's formula (Quiz 7)</div>
   <h2>Two areas: trapezoid from memory, Heron printed</h2>
-  <p class="note m">Trapezoid: A = ½(b₁ + b₂)h · Heron: s = (a + b + c)/2, A = √(s(s − a)(s − b)(s − c))</p>
+  <p class="note m">Trapezoid: A = ½(b₁ + b₂)h, h the perpendicular height, <b>not the slanted side</b> · Heron: s = (a + b + c)/2, A = √(s(s − a)(s − b)(s − c))</p>
   <div class="two">
-    <div class="work"><span class="lab">Model: trapezoid with parallel sides 10 m and 18 m, height 7 m; triangle with sides 5, 12, 13</span>
+    <div class="work"><span class="lab">Model: trapezoid with parallel sides 10 m and 18 m, slanted side 8 m, height 7 m; triangle with sides 5, 12, 13</span>
       <p class="m step">Trapezoid: ½(10 + 18)(7) = 98 m²</p>
       <p class="m step">s = (5 + 12 + 13)/2 = 15</p>
       <p class="m step">A = √(15 · 10 · 3 · 2) = √900 = 30</p></div>
-    <div class="work"><span class="lab">You try: trapezoid with parallel sides 6.5 cm and 11.5 cm, height 4 cm; triangle with sides 7, 15, 20</span>
+    <div class="work"><span class="lab">You try: trapezoid with parallel sides 6.5 cm and 11.5 cm, slanted side 5 cm, height 4 cm; triangle with sides 7, 15, 20</span>
       <p class="m step ans">Trapezoid: 36 cm²</p>
       <p class="m step ans">s = 21</p>
       <p class="m step ans">A = √(21 · 14 · 6 · 1) = √1764 = 42</p></div>
@@ -281,8 +264,9 @@ table.tbl th { background:#eef3f9; }
     <ul>
       <li>Rate as a percent (5.2) instead of a decimal (0.052).</li>
       <li>Wrong n: quarterly is 4, semiannually is 2, monthly is 12.</li>
-      <li>Calling a model growth because the starting value is large. Only the base decides.</li>
       <li>Moving the base to the wrong side in log form.</li>
+      <li>Change of base as ln(c ÷ b) instead of ln c ÷ ln b.</li>
+      <li>Using the trapezoid's slanted side as its height.</li>
       <li>Rounding in the middle of a calculation.</li>
     </ul>
     <ul>
@@ -314,8 +298,8 @@ table.tbl th { background:#eef3f9; }
     <div class="box">
       <b>Friday, October 30</b>
       <ul class="note">
-        <li>Test 2, in class on paper: 16 questions, 200 points, 50 minutes</li>
-        <li>Printed: interest formulas and Heron's formula; everything else from memory</li>
+        <li>Test 2, in class on paper: 15 questions, 200 points, 50 minutes</li>
+        <li>Printed: interest formulas, change of base and Heron's formula; everything else from memory</li>
         <li>Scientific calculator</li>
         <li>Show your work inside each question's box. A correct answer with no work gets no credit.</li>
       </ul>
