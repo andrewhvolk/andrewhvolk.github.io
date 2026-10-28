@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 11 Summary | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 11 summary: linear and exponential growth, doubling time, half-life, the Rule of 70, and logistic growth.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/114-module11-summary.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="../theme.js"></script>
+    <style>
+    .summary-page {
+      max-width: 960px;
+      padding-bottom: 3rem;
+    }
+    .summary-sheet {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color, #d9e2ec);
+      border-radius: 18px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+      padding: 2rem 2.5rem;
+      font-family: var(--type-body-family);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+    .summary-sheet h1,
+    .summary-sheet h2,
+    .summary-sheet h3 { font-family: var(--type-display-family); }
+    .summary-sheet h1 { font-size: 1.5rem; margin: 0.3em 0 0.2em; }
+    .summary-sheet h2 { font-size: 1.12rem; margin: 0.9em 0 0.25em; }
+    .summary-sheet h3 { font-size: 1rem; margin: 0.6em 0 0.2em; }
+    .summary-sheet p { margin: 0 0 0.5em; }
+    .summary-sheet ul, .summary-sheet ol { margin: 0 0 0.6em 1.25em; }
+    .summary-sheet li { margin-bottom: 0; }
+    article.summary-sheet .summary-columns li + li { margin-top: 0.2em; }
+    .summary-sheet .summary-columns ul > li { list-style: disc outside; }
+    .summary-sheet .summary-columns ol > li { list-style: decimal outside; }
+    .summary-sheet .summary-columns ul,
+    .summary-sheet .summary-columns ol { margin-left: 0; padding-left: 1.3em; }
+    .summary-meta { margin-bottom: 0.8em; }
+    .summary-due {
+      border: 1px solid var(--border-color, #d9e2ec);
+      border-radius: 10px;
+      padding: 0.6em 0.9em;
+      margin-bottom: 0.4em;
+    }
+    .summary-columns { columns: 2 22rem; column-gap: 2.25rem; }
+    .summary-block { break-inside: avoid; margin: 0 0 0.6em; padding: 0; }
+    .summary-block > h2:first-child { margin-top: 0.4em; }
+    .formula {
+      font-family: var(--type-mono-family, monospace);
+      display: block;
+      margin: 0.2em 0 0.4em 1em;
+    }
+    @media (max-width: 640px) {
+      .summary-sheet { padding: 1.25rem 1rem; }
+      .summary-columns { columns: 1; }
+    }
+    .copyright { text-align: center; margin-top: 1em; font-size: 10pt; color: var(--text-muted); }
+    @media print {
+      body { background: var(--bg-surface); }
+      .top-nav, .page-context-bar, .course-header, .site-footer, .skip-to-main { display: none !important; }
+      .summary-page { max-width: none; padding: 0; margin: 0; }
+      .summary-sheet { border: none; box-shadow: none; border-radius: 0; padding: 0; font-size: 8.2pt; line-height: 1.24; }
+      .summary-sheet h1 { font-size: 13pt; margin-top: 0; }
+      .summary-sheet h2 { font-size: 10pt; margin: 0.55em 0 0.15em; }
+      .summary-sheet h3 { font-size: 9pt; margin: 0.35em 0 0.1em; }
+      .summary-sheet p, .summary-sheet ul, .summary-sheet ol { margin-bottom: 0.3em; }
+      article.summary-sheet .summary-columns li + li { margin-top: 0.05em; }
+      .summary-block { break-inside: auto; }
+      .summary-sheet h2, .summary-sheet h3 { break-after: avoid; }
+      .summary-sheet li, .summary-sheet p { break-inside: avoid; }
+      .summary-columns { columns: 2; column-gap: 0.3in; }
+      .copyright { font-size: 7pt; margin-top: 0.4em; }
+      @page { size: letter; margin: 0.45in; }
+    }
+    .summary-switch {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem;
+      margin: 0 0 1.25rem;
+    }
+    .summary-switch__back { margin-right: auto; }
+    .summary-switch__label { font-size: 0.85rem; color: var(--text-muted); }
+    .summary-switch .button[aria-current="page"] { pointer-events: none; opacity: 0.75; }
+    @media print { .summary-switch { display: none !important; } }
+  </style>
+</head>
+<body>
+<nav class="course-bar" aria-label="Site">
+  <div class="course-bar__inner">
+    <a class="course-bar__back" href="/courses/math114.html#module-11"><span aria-hidden="true">&larr;</span> MATH 114</a>
+    <a class="course-bar__home" href="/">Andrew H. Volk</a>
+    <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="Toggle Theme"></button>
+  </div>
+</nav>
+<header class="course-header course-header--unit">
+  <div class="container">
+    <h1>Module 11 Summary</h1>
+    <p class="subtitle">Linear and exponential growth, doubling time and half-life, and logistic growth on a single printable page.</p>
+  </div>
+</header>
+<main id="main-content" class="container course-page summary-page">
+  <nav class="summary-switch" aria-label="Module 11 summary">
+      <a href="math114-module11.html" class="button button-secondary summary-switch__back">&larr; Back to Module 11 lesson</a>
+  </nav>
+
+  <article class="summary-sheet">
+
+  <h1>MATH 114 Module 11: Exponential Astonishment</h1>
+  <p class="summary-meta"><strong>Reading:</strong> Chapter 8, Sections A, B and C &nbsp;&middot;&nbsp; <strong>Name:</strong> ______________________________</p>
+
+  <div class="summary-due">
+    <strong>Due dates (11:59 p.m.):</strong>
+    Homework 11 (20 questions), Sunday, Nov 8, 2026 &nbsp;&middot;&nbsp;
+    Quiz 11 (10 questions), Monday, Nov 9, 2026. Confirm all dates in Canvas.<br>
+    <strong>Outcomes:</strong> tell linear from exponential growth; use doubling time, half-life and the Rule of 70; recognize logistic growth and carrying capacity.
+  </div>
+
+  <div class="summary-columns">
+
+  <div class="summary-block">
+    <h2>1. Linear vs. Exponential Growth</h2>
+    <ul>
+      <li><strong>Linear:</strong> grows by the same <em>amount</em> each period. <span class="formula">y = y<sub>0</sub> + r&middot;t</span></li>
+      <li><strong>Exponential:</strong> grows by the same <em>percentage</em> each period. <span class="formula">y = y<sub>0</sub>(1 + r)<sup>t</sup></span></li>
+      <li><strong>Exponential decay:</strong> shrinks by the same percentage each period. <span class="formula">y = y<sub>0</sub>(1 &minus; r)<sup>t</sup></span></li>
+    </ul>
+    <p><strong>Signal words:</strong> &ldquo;increases by 642 per year&rdquo; is linear; &ldquo;grows 30% per year&rdquo; or &ldquo;doubles every&hellip;&rdquo; is exponential.</p>
+    <p><strong>Examples:</strong> 1600 + 642(4) = <strong>4168</strong>; 150(1.3)<sup>3</sup> &asymp; <strong>330</strong>; 2000(1.1)<sup>3</sup> = <strong>2662</strong>; $500 at 8% for 3 years: 500(1.08)<sup>3</sup> &asymp; <strong>$629.86</strong>.</p>
+  </div>
+
+  <div class="summary-block">
+    <h2>2. Doubling Time</h2>
+    <p>The <strong>doubling time</strong> T is the time for a growing quantity to double.</p>
+    <span class="formula">y = y<sub>0</sub> &times; 2<sup>t/T</sup></span>
+    <ul>
+      <li><strong>Example:</strong> 50 spores doubling every hour: after 4 hours, 50 &times; 2<sup>4</sup> = <strong>800</strong>.</li>
+      <li><strong>Rule of 70:</strong> T &asymp; 70 &divide; (percent growth rate). At 5% per year, T &asymp; 70/5 = <strong>14 years</strong>. Works best for rates under about 15%.</li>
+      <li><strong>Exact:</strong> T = ln 2 &divide; ln(1 + r), with r as a decimal.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h2>3. Half-Life</h2>
+    <p>The <strong>half-life</strong> T is the time for a decaying quantity to fall to half its value.</p>
+    <span class="formula">y = y<sub>0</sub> &times; (1/2)<sup>t/T</sup></span>
+    <ul>
+      <li>After 1 half-life, 50% remains; after 2, 25%; after 3, 12.5%.</li>
+      <li><strong>Approximate half-life:</strong> T &asymp; 70 &divide; (percent decay rate).</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h2>4. Population Growth</h2>
+    <ul>
+      <li><strong>Growth rate</strong> = birth rate &minus; death rate. Rates per 1000 people: (25 &minus; 10)/1000 = 0.015 = <strong>1.5%</strong> per year.</li>
+      <li>At 1.5% per year the Rule of 70 gives a doubling time of about 70/1.5 &asymp; <strong>47 years</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="summary-block">
+    <h2>5. Logistic Growth</h2>
+    <p>Real populations cannot double forever. <strong>Logistic growth</strong> starts out nearly exponential and levels off at the <strong>carrying capacity</strong> K, the largest population the environment can sustain.</p>
+    <ol>
+      <li><strong>Slow start:</strong> few members, so few new ones.</li>
+      <li><strong>Rapid growth:</strong> close to exponential.</li>
+      <li><strong>Slowing:</strong> limited resources reduce the growth rate.</li>
+      <li><strong>Leveling off:</strong> the population approaches K and the growth rate approaches 0.</li>
+    </ol>
+  </div>
+
+  <div class="summary-block">
+    <h2>Resources</h2>
+    <p>Lesson: <a href="math114-module11.html">andrewhvolk.github.io/courses/math114-module11.html</a> &nbsp;&middot;&nbsp; Slides: andrewhvolk.github.io/pdfs/math114-module11-slides-2026-11-02.pdf &nbsp;&middot;&nbsp; Desmos Scientific and Excel Online</p>
+  </div>
+
+  </div>
+
+  <p class="copyright">
+    &copy; Andrew H. Volk 2026
+  </p>
+
+  </article>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/">Courses</a>
+      <a href="/CV.html">About and CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+      <a href="https://www.youtube.com/learnabundantly">YouTube</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
