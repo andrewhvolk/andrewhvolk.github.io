@@ -428,15 +428,14 @@
     // ------------------------------------------------------- DMS
     function toDms(rand, id = 'q') {
         const t = tools(rand);
-        let deg, d, m, s;
-        do {
-            deg = t.int(100000, 1700000) / 10000;          // four decimal places, 10° to 170°
-            d = Math.floor(deg);
-            const mins = (deg - d) * 60;
-            m = Math.floor(mins + 1e-9);
-            s = Math.round((mins - m) * 60);
-        } while (s === 60 || m === 60);
-        const mins = (deg - d) * 60;
+        // Four decimal places, 10° to 170°. Rounding to whole seconds first makes
+        // every carry (59.6″ → next minute) exact.
+        const tenThousandths = t.int(100000, 1700000);
+        const deg = tenThousandths / 10000;
+        const total = Math.round(tenThousandths * 0.36);  // seconds: deg × 3600
+        const d = Math.floor(total / 3600), m = Math.floor(total / 60) % 60, s = total % 60;
+        const d0 = Math.floor(deg), mins = (deg - d0) * 60, m0 = Math.floor(mins), secs = (mins - m0) * 60;
+        const carry = d !== d0 || m !== m0 ? ' (the seconds round up to 60, so carry 1 minute)' : '';
         return {
             q: `Convert $${fix(deg, 4)}^\\circ$ to degrees, minutes and seconds, to the nearest second.`,
             fields: [
@@ -445,7 +444,7 @@
                 { id: `${id}-s`, label: 'Seconds', answer: s, tolerance: 1, integer: true, min: 0, max: 59 }
             ],
             hint: 'Keep the whole degrees. Decimal part × 60 gives minutes; the new decimal part × 60 gives seconds.',
-            solution: `$${fix(deg - d, 4)} \\times 60 = ${fix(mins, 3)}'$, then $${fix(mins - m, 3)} \\times 60 = ${fix((mins - m) * 60, 2)}''$, so $${d}^\\circ\\,${m}'\\,${s}''$.`,
+            solution: `$${fix(deg - d0, 4)} \\times 60 = ${fix(mins, 3)}'$, then $${fix(mins - m0, 3)} \\times 60 = ${fix(secs, 2)}''$${carry}, so $${d}^\\circ\\,${m}'\\,${s}''$.`,
             key: `${d}° ${m}′ ${s}″`
         };
     }
@@ -541,7 +540,7 @@
         { skill: 'toLog', points: 15, label: 'Exponential to logarithmic form', area: 'Section 4.3' },
         { skill: 'toExp', points: 15, label: 'Logarithmic to exponential form', area: 'Section 4.3' },
         { skill: 'solveLn', points: 15, label: 'Solve ln x = c', area: 'Section 4.3' },
-        { skill: 'solveBase', points: 15, label: 'Solve b^x = c', area: 'Section 4.3' },
+        { skill: 'solveBase', points: 15, label: 'Solve bˣ = c', area: 'Section 4.3' },
         { skill: 'parallel', points: 20, label: 'Angles across parallel lines', area: 'Angles and polygons' },
         { skill: 'similar', points: 20, label: 'Similar triangles', area: 'Angles and polygons' },
         { skill: 'trapezoid', points: 10, label: 'Trapezoid area', area: 'Angles and polygons' },

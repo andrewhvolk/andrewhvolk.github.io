@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,600&amp;display=swap">
   <link rel="stylesheet" href="/styles.css?v=20261023-1">
 <script src="theme.js?v=20260928-1"></script>
-<script src="assets/js/math130-test2-skills.js?v=20261028-1"></script>
+<script src="assets/js/math130-test2-skills.js?v=20261028-2"></script>
 <title>Math 130 — Test 2 Review (Fall 2026)</title>
 
 <!-- KaTeX for Math Rendering (CDN first, local fallback) -->
@@ -272,6 +272,12 @@
         .quiz-btn { background: var(--bg-surface); box-shadow: inset 0 0 0 1px var(--border-transparent); color: var(--text-main); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.95rem; }
         .quiz-btn:hover { border-color: var(--primary-main); }
         .quiz-btn.active { background: var(--primary-main); color: var(--bg-surface); border-color: var(--primary-main); }
+        .quiz-btn__pts { margin-left: .35rem; font-size: .8em; opacity: .75; }
+        .test2-badge { display: inline-block; margin-left: .4rem; padding: 0 .4rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .02em; vertical-align: middle; background: var(--emerald-soft); color: var(--emerald-main); box-shadow: inset 0 0 0 1px var(--emerald-main); }
+        .quiz-btn.active .test2-badge { background: var(--bg-surface); }
+        .check-item.not-on-test { opacity: .72; }
+        .checklist-filter { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 1rem; }
+        .checklist-filter p { margin: 0; color: var(--text-muted); font-size: .9rem; }
 
         .quiz-box { text-align: center; padding: 1rem 0; }
         .question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.8; }
@@ -1167,8 +1173,8 @@
 <!-- Mock Exam CTA -->
 <div id="exam-cta" class="review-callout review-callout--exam review-callout--highlight">
 <h3 class="review-callout__title review-callout__title--exam">🎯 Test 2 Readiness Check</h3>
-<p class="review-callout__body review-callout__body--md">20 mixed practice questions from Sections 4.2, 4.3, and geometry. Test 2 itself follows Quizzes 5 to 9: about 20% Section 4.2, 20% Section 4.3, 30% polygons, 10% DMS, and 20% circles. The interest formulas and Heron's formula are printed on it; every other formula is from memory.</p>
-<button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Cumulative Checkpoint</button>
+<p class="review-callout__body review-callout__body--md">15 questions in the same order and point values as Test 2 (200 points), with new numbers every time: interest (20), logarithms (60), angles and polygons (60), DMS (20) and circles (40). Both interest formulas, change of base and Heron's formula are printed on Test 2; every other formula is from memory.</p>
+<button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Test 2 Checkpoint</button>
 </div>
 <!-- Mock Quiz CTA -->
 <div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg review-callout--padded">
@@ -1308,6 +1314,11 @@
 <div class="tab-content" id="tab-progress">
 <div class="card review-card">
 <h2>Topics Checklist</h2>
+<div class="checklist-filter" role="group" aria-label="Which skills to show">
+<button type="button" class="quiz-btn" data-checklist-filter="test2">Test 2 skills</button>
+<button type="button" class="quiz-btn" data-checklist-filter="all">All Unit 2 skills</button>
+<p id="checklist-filter-note"></p>
+</div>
 <div class="progress-summary" id="progress-summary"></div>
 <div id="checklist-container"></div>
 </div>
@@ -1421,8 +1432,13 @@
             { id: 'geo_19', cat: 'Circles', label: 'Angular and linear speed', done: false, practiceId: 'quiz8_speed_multi' }
     ];
 
+    // Checklist skills that Test 2 asks for; the rest of Unit 2 is extra practice.
+    const TEST2_CHECKLIST_IDS = new Set(['42_8', '42_9', '43_2', '43_6', '43_7b', '43_7c',
+        'geo_4', 'geo_4b', 'geo_4c', 'geo_4d', 'geo_9', 'geo_10', 'geo_11', 'geo_16', 'geo_17', 'geo_18b', 'geo_19']);
+
     let state = {
         theme: 'dark',
+        checklistFilter: 'test2',
         checklist: DEFAULT_CHECKLIST.map(item => ({...item})),
         history: [],
         videosWatched: []
@@ -1480,6 +1496,7 @@
             if (saved) {
                 const parsed = JSON.parse(saved);
                 state.theme = parsed.theme || state.theme;
+                state.checklistFilter = parsed.checklistFilter === 'all' ? 'all' : 'test2';
                 state.history = parsed.history || [];
                 state.videosWatched = parsed.videosWatched || [];
                 // Reconcile checklist: keep done states, but use defaults as source of truth
@@ -2994,24 +3011,25 @@
         quiz8_sector_multi: ['sector-area', 'inverse-sector-area', 'degree-radian-conversion'],
         quiz8_speed_multi: ['angular-speed-degrees-per-second', 'linear-speed-feet-per-second']
     };
+    // 'test2' marks a generator whose skill Test 2 asks for (it gets a Test 2 badge).
     const GENERATOR_ASSESSMENTS = {
-        interest: ['test2'], interest_table: ['test2'],
+        interest: ['test2'], interest_table: [],
         logexp_conv: ['test2'], logexp: ['test2'],
         dms: ['quiz7', 'quiz8', 'test2'], dms_to_dec: ['quiz7', 'test2'],
         basic_areas: ['quiz7', 'test2'], herons: ['quiz7', 'test2'],
         quiz7_similar_multi: ['quiz7', 'test2'], quiz7_parallel_multi: ['quiz7', 'test2'],
-        right_triangle_area: ['quiz7', 'test2'],
+        right_triangle_area: ['quiz7'],
         quiz8_arc_multi: ['test2'], quiz8_central_multi: ['test2'],
-        quiz8_inscribed_multi: ['test2'], quiz8_theorems_multi: ['test2'],
-        quiz8_sector_multi: ['test2'], rad_deg: ['test2'],
-        quiz8_speed_multi: ['test2'], circle_multi: ['test2']
+        quiz8_inscribed_multi: [], quiz8_theorems_multi: [],
+        quiz8_sector_multi: ['test2'], rad_deg: [],
+        quiz8_speed_multi: ['test2'], circle_multi: []
     };
     // The Test 2 question types come from assets/js/math130-test2-skills.js, shared
     // with the full practice test: stated n, the test's
     // fractional and half-integer log forms, four-place log answers, the slanted
     // side on the trapezoid, whole-number Heron areas and four-place DMS. The
     // definitions above stay as the fallback if that file does not load.
-    const TEST2_SKILLS = window.Math130Test2Skills;
+    const TEST2_SKILLS = typeof window !== 'undefined' ? window.Math130Test2Skills : undefined;
     function fromTest2Skill(name) {
         const q = TEST2_SKILLS.skills[name](Math.random, 'rv-' + name);
         return q.display ? { ...q, q: `${q.q}<br><small>Printed on Test 2: $${q.display}$</small>` } : q;
@@ -3026,6 +3044,20 @@
             logexp: () => fromTest2Skill(pick(['solveLn', 'solveBase'])),
             herons: () => fromTest2Skill('heron')
         };
+        // One generator per Test 2 question, in test order (ids test2_<skill>).
+        const SECTION_BY_AREA = { 'Section 4.2': 'Section 4.2', 'Section 4.3': 'Section 4.3',
+            'Angles and polygons': 'Angles & Polygons', 'Degrees, minutes, seconds': 'Triangles, Lines & Areas', 'Circles': 'Circles' };
+        TEST2_SKILLS.TEST2.forEach((item, i) => {
+            const id = `test2_${item.skill}`;
+            generatorDefinitions.push({
+                id, section: SECTION_BY_AREA[item.area], label: `Q${i + 1} · ${item.label}`,
+                testQuestion: i + 1, testPoints: item.points, testArea: item.area,
+                testPage: TEST2_SKILLS.PAGES.findIndex(page => page.includes(i + 1)) + 1,
+                generate: () => fromTest2Skill(item.skill)
+            });
+            GENERATOR_SKILLS[id] = [`test2-question-${i + 1}`];
+            GENERATOR_ASSESSMENTS[id] = ['test2'];
+        });
         generatorDefinitions.forEach(gen => {
             if (replacements[gen.id]) gen.generate = replacements[gen.id];
             if (gen.id === 'basic_areas') {
@@ -3050,7 +3082,7 @@
     let currentQuestion = null;
     let currentRetries = 0;
     let currentPracticeVariant;
-    let practiceFocus = 'quiz8';
+    let practiceFocus = 'test2';
 
     // --- VIDEO WATCH TRACKING ---
     function renderVideoState() {
@@ -3111,6 +3143,11 @@
         refreshIcons();
         loadState();
         applyTheme(state.theme);
+        document.querySelectorAll('[data-checklist-filter]').forEach(btn => btn.addEventListener('click', () => {
+            state.checklistFilter = btn.dataset.checklistFilter;
+            saveState();
+            renderChecklist();
+        }));
         renderChecklist();
         renderQuizCategories();
         renderCoverageAudit();
@@ -3197,13 +3234,24 @@
         container.innerHTML = '';
         
         const catOrder = ['Section 4.2', 'Section 4.3', 'Angles & Polygons', 'Circles'];
-        const categories = catOrder.filter(c => state.checklist.some(item => item.cat === c));
+        const onlyTest2 = state.checklistFilter !== 'all';
+        const shown = state.checklist.filter(item => !onlyTest2 || TEST2_CHECKLIST_IDS.has(item.id));
+        const categories = catOrder.filter(c => shown.some(item => item.cat === c));
+        document.querySelectorAll('[data-checklist-filter]').forEach(btn => {
+            const on = btn.dataset.checklistFilter === (onlyTest2 ? 'test2' : 'all');
+            btn.classList.toggle('active', on);
+            btn.setAttribute('aria-pressed', String(on));
+        });
+        const filterNote = document.getElementById('checklist-filter-note');
+        if (filterNote) filterNote.textContent = onlyTest2
+            ? `Showing the ${TEST2_CHECKLIST_IDS.size} skills Test 2 asks for.`
+            : 'Showing every Unit 2 skill; the ones on Test 2 are marked and listed first.';
 
         // Render progress summary bars
         const summaryEl = document.getElementById('progress-summary');
         summaryEl.innerHTML = '';
         categories.forEach(cat => {
-            const items = state.checklist.filter(i => i.cat === cat);
+            const items = shown.filter(i => i.cat === cat);
             const doneCount = items.filter(i => i.done).length;
             const pct = Math.round((doneCount / items.length) * 100);
             const div = document.createElement('div');
@@ -3226,16 +3274,18 @@
             section.innerHTML = `<h3>${cat}</h3><div class="checklist-grid"></div>`;
             const grid = section.querySelector('.checklist-grid');
             
-            const items = state.checklist.filter(i => i.cat === cat);
+            const items = shown.filter(i => i.cat === cat)
+                .sort((a, b) => TEST2_CHECKLIST_IDS.has(b.id) - TEST2_CHECKLIST_IDS.has(a.id));
             items.forEach(item => {
+                const onTest = TEST2_CHECKLIST_IDS.has(item.id);
                 const div = document.createElement('div');
-                div.className = `check-item ${item.done ? 'done' : ''}`;
+                div.className = `check-item ${item.done ? 'done' : ''}${!onlyTest2 && !onTest ? ' not-on-test' : ''}`;
                 div.setAttribute('role', 'button');
                 div.setAttribute('tabindex', '0');
                 div.setAttribute('aria-pressed', String(item.done));
                 div.innerHTML = `
                     <div class="check-box">${item.done ? '<i data-lucide="check" style="width:16px; color:var(--bg-surface);"></i>' : ''}</div>
-                    <span style="flex: 1;">${item.label}</span>
+                    <span style="flex: 1;">${item.label}${!onlyTest2 && onTest ? '<span class="test2-badge">Test 2</span>' : ''}</span>
                     ${item.videoUrl ? `<a href="${item.videoUrl}" target="_blank" rel="noopener noreferrer" class="practice-link" onclick="event.stopPropagation()" title="Watch Video" aria-label="Watch related video"><i data-lucide="play" style="width:18px; height:18px;"></i></a>` : ''}
                     ${item.practiceId ? `<button type="button" class="practice-link" onclick="goToPractice('${item.practiceId}', event, ${item.practiceVariant ? `'${item.practiceVariant}'` : 'undefined'})" title="Jump to Interactive Practice" aria-label="Jump to interactive practice"><i data-lucide="pen-tool" style="width:18px; height:18px;"></i></button>` : ''}
                 `;
@@ -3285,16 +3335,21 @@
     };
 
     function getPracticeGroups(focus = practiceFocus) {
-        if (focus === 'quiz8') {
-            const generator = generators.find(gen => gen.id === QUIZ_CONFIG[8].practiceGenerator);
-            return [{ label: 'Quiz 8 skill · decimal degrees to DMS', generators: generator ? [generator] : [] }];
+        const testTypes = generators.filter(gen => gen.testQuestion).sort((a, b) => a.testQuestion - b.testQuestion);
+        if (focus === 'test2' && testTypes.length) {
+            return [1, 2, 3, 4].map(page => {
+                const onPage = testTypes.filter(gen => gen.testPage === page);
+                const first = onPage[0].testQuestion, last = onPage[onPage.length - 1].testQuestion;
+                return { label: `Test 2 page ${page} · questions ${first}–${last}`, generators: onPage };
+            });
         }
-        return PRACTICE_SECTIONS.map(section => ({ label: section.label, generators: generators.filter(gen => gen.sectionKey === section.key) }))
+        return PRACTICE_SECTIONS.map(section => ({ label: section.label, generators: generators.filter(gen => gen.sectionKey === section.key && !gen.testQuestion)
+                .sort((a, b) => b.assessmentTags.includes('test2') - a.assessmentTags.includes('test2')) }))
             .filter(group => group.generators.length);
     }
 
     function setPracticeFocus(focus) {
-        practiceFocus = focus === 'all' ? 'all' : 'quiz8';
+        practiceFocus = focus === 'all' ? 'all' : 'test2';
         currentQuiz = null;
         currentQuestion = null;
         document.getElementById('quiz-active-area').style.display = 'none';
@@ -3308,7 +3363,7 @@
         focusControls.setAttribute('role', 'group');
         focusControls.setAttribute('aria-label', 'Practice topic selection');
         focusControls.style.cssText = 'width: 100%; margin-bottom: 1rem;';
-        for (const [focus, label] of [['quiz8', 'Quiz 8: Decimal Degrees → DMS'], ['all', 'All Test 2 topics']]) {
+        for (const [focus, label] of [['test2', 'Test 2: the 15 question types'], ['all', 'All Unit 2 skills']]) {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = `quiz-btn${practiceFocus === focus ? ' active' : ''}`;
@@ -3329,6 +3384,17 @@
                 btn.type = 'button';
                 btn.className = 'quiz-btn';
                 btn.textContent = gen.label;
+                if (gen.testQuestion) {
+                    const pts = document.createElement('span');
+                    pts.className = 'quiz-btn__pts';
+                    pts.textContent = `${gen.testPoints} pts`;
+                    btn.appendChild(pts);
+                } else if (gen.assessmentTags.includes('test2')) {
+                    const badge = document.createElement('span');
+                    badge.className = 'test2-badge';
+                    badge.textContent = 'Test 2';
+                    btn.appendChild(badge);
+                }
                 btn.dataset.id = gen.id;
                 btn.addEventListener('click', () => {
                     document.querySelectorAll('.quiz-btn[data-id]').forEach(b => b.classList.remove('active'));
@@ -3884,9 +3950,11 @@
     }
 
     function startMockExam() {
-        // Preserve the intended 3/3/14 split while using the aligned Quiz 7/8
-        // structures and including the DMS topics in the cumulative geometry pool.
-        const selected = [
+        // The checkpoint is Test 2 itself: its 15 question types in test order with
+        // their point values (200). The older 20-prompt mix is the fallback if the
+        // Test 2 skills file did not load.
+        const testTypes = generators.filter(gen => gen.testQuestion).sort((a, b) => a.testQuestion - b.testQuestion);
+        const selected = testTypes.length ? testTypes.map(gen => makeExamSelection(gen.id, gen.testPoints, null, gen.testArea)) : [
             makeExamSelection('interest_table', 1, null, 'Section 4.2'),
             makeExamSelection('interest', 1, null, 'Section 4.2'),
             makeExamSelection('interest', 1, null, 'Section 4.2'),
@@ -3909,7 +3977,7 @@
             makeExamSelection('circle_multi', 1, null, 'Geometry')
         ];
         if (selected.some(selection => !selection)) throw new Error('The Test 2 blueprint references a missing generator.');
-        shuffleInPlace(selected);
+        if (!testTypes.length) shuffleInPlace(selected);
 
         examState = {
             isActive: true,
@@ -3919,7 +3987,7 @@
             score: 0,
             total: selected.length,
             totalPoints: selected.reduce((sum, selection) => sum + selection.points, 0),
-            label: 'Test 2 Cumulative Checkpoint'
+            label: 'Test 2 Checkpoint'
         };
 
         // UI: hide selector, show progress bar
@@ -3931,7 +3999,7 @@
         document.getElementById('quiz-active-area').style.display = 'block';
 
         // Reset progress bar label
-        document.getElementById('exam-mode-label').textContent = 'Test 2 Cumulative Checkpoint';
+        document.getElementById('exam-mode-label').textContent = 'Test 2 Checkpoint';
         document.getElementById('btn-exit-exam').style.display = 'inline-block';
 
         // Load first question via shared loadQuestion path
@@ -4064,7 +4132,7 @@
                 endMockExam();
             }
             showTab('practice', { scroll: false });
-            setPracticeFocus('quiz8');
+            setPracticeFocus('all');
             startQuiz(config.practiceGenerator);
             document.getElementById('tab-practice')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             return;

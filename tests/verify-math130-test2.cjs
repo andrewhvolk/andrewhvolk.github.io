@@ -37,14 +37,17 @@ const generatorDefinitions = new Function(
     `${generatorSource}\nconst generators = generatorDefinitions; return generatorDefinitions;`
 )(svgOutlinedText, nudgeLabelFromSegments, computeReferenceAngle, formatReferencePiText);
 
+// The page loads the shared Test 2 skills file; load it the same way so the
+// Test 2 question generators and the generators that use it are checked too.
+const window = { Math130Test2Skills: require(path.join(root, 'assets', 'js', 'math130-test2-skills.js')) };
 const metadata = new Function(
-    'generatorDefinitions',
+    'generatorDefinitions', 'window',
     `${metadataSource}\nreturn { sections: PRACTICE_SECTIONS, sectionMap: SECTION_KEY_BY_LABEL, skills: GENERATOR_SKILLS, generators };`
-)(generatorDefinitions);
+)(generatorDefinitions, window);
 const quizConfig = new Function(`${quizConfigSource}\nreturn QUIZ_CONFIG;`)();
 const checklist = new Function(`${checklistSource}\nreturn DEFAULT_CHECKLIST;`)();
 const groupsSource = requireMatch(/function getPracticeGroups\(focus = practiceFocus\) \{[\s\S]*?\n    \}/, 'practice focus routing');
-const practiceGroups = new Function('generators', 'QUIZ_CONFIG', 'practiceFocus', 'PRACTICE_SECTIONS', `${groupsSource}\nreturn { focused: getPracticeGroups(), all: getPracticeGroups('all') };`)(metadata.generators, quizConfig, 'quiz8', metadata.sections);
+const practiceGroups = new Function('generators', 'QUIZ_CONFIG', 'practiceFocus', 'PRACTICE_SECTIONS', `${groupsSource}\nreturn { focused: getPracticeGroups(), all: getPracticeGroups('all') };`)(metadata.generators, quizConfig, 'test2', metadata.sections);
 
 assert.equal(new Set(generatorDefinitions.map(gen => gen.id)).size, generatorDefinitions.length, 'Generator IDs must be unique.');
 assert.equal(metadata.generators.length, generatorDefinitions.length, 'Every generator must receive routing metadata.');
@@ -144,8 +147,16 @@ assert.deepEqual(verifyBlueprint(7, 8, 100), [
     'right_triangle_area', 'herons', 'dms', 'dms_to_dec'
 ]);
 assert.equal(quizConfig[8].practiceGenerator, 'dms', 'Quiz 8 practice must focus only on decimal degrees to DMS.');
-assert.deepEqual(practiceGroups.focused.flatMap(group => group.generators.map(gen => gen.id)), ['dms'], 'The default individual drills must contain only the Quiz 8 conversion skill.');
-assert.equal(practiceGroups.all.flatMap(group => group.generators).length, generatorDefinitions.length, 'The broader Test 2 practice must remain available.');
+// The default practice view is the 15 Test 2 question types, in test order, by page.
+const testTypes = metadata.generators.filter(gen => gen.testQuestion).sort((a, b) => a.testQuestion - b.testQuestion);
+assert.deepEqual(testTypes.map(gen => gen.id), window.Math130Test2Skills.TEST2.map(item => `test2_${item.skill}`), 'Every Test 2 question type needs a generator.');
+assert.equal(testTypes.reduce((sum, gen) => sum + gen.testPoints, 0), 200, 'The Test 2 question types must total 200 points.');
+assert.deepEqual(practiceGroups.focused.map(group => group.generators.map(gen => gen.testQuestion)), window.Math130Test2Skills.PAGES, 'The default drills must follow the Test 2 pages.');
+assert.equal(practiceGroups.all.flatMap(group => group.generators).length, generatorDefinitions.filter(gen => !gen.testQuestion).length, 'The broader Unit 2 practice must remain available.');
+for (const gen of testTypes) assert.deepEqual(gen.assessmentTags, ['test2']);
+for (const id of ['interest_table', 'right_triangle_area', 'quiz8_inscribed_multi', 'quiz8_theorems_multi', 'rad_deg', 'circle_multi']) {
+    assert.ok(!generatorById.get(id).assessmentTags.includes('test2'), `${id} is not a Test 2 question type and must not carry the Test 2 badge.`);
+}
 assert.equal(checklist.find(item => item.id === 'geo_18b').practiceId, 'quiz8_central_multi');
 assert.equal(checklist.find(item => item.id === 'geo_18c').practiceId, 'quiz8_inscribed_multi');
 assert.equal(quizConfig[7].blueprint.find(entry => entry.id === 'dms_to_dec').variant, 'integer-seconds', 'Quiz 7 must retain its integer-second format.');
@@ -181,11 +192,13 @@ for (let sample = 0; sample < 40; sample++) {
     near(rightTriangle.a, 0.5 * base * Math.sqrt(hypotenuse ** 2 - base ** 2), 'Quiz 7 right-triangle area');
 
     const heron = generate('herons');
-    const sides = heron.q.match(/side lengths ([\d.]+), ([\d.]+), and ([\d.]+)/)?.slice(1).map(Number);
+    const sides = heron.q.match(/sides (\d+) \w+, (\d+) \w+ and (\d+) \w+/)?.slice(1).map(Number);
     assert.ok(sides, 'Heron generator should disclose all three side lengths.');
     const [a, b, c] = sides;
     const semiperimeter = (a + b + c) / 2;
-    near(heron.a, Math.sqrt(semiperimeter * (semiperimeter - a) * (semiperimeter - b) * (semiperimeter - c)), 'Heron area');
+    const heronArea = Math.sqrt(semiperimeter * (semiperimeter - a) * (semiperimeter - b) * (semiperimeter - c));
+    near(heron.fields[0].answer, heronArea, 'Heron area');
+    assert.ok(Number.isInteger(heronArea), 'Test 2 Heron triangles have whole-number areas.');
 
     const arc = generate('quiz8_arc_multi');
     const arcGiven = arc.q.match(/when \$r=([\d.]+)\$ and \$\\theta=([\d.]+)\$ radians/);
@@ -225,9 +238,10 @@ for (let sample = 0; sample < 40; sample++) {
 
 const originalRandom = Math.random;
 try {
-    for (const degrees of [12.016666, 12.999999, 169.999999]) {
-        Math.random = () => (degrees - 10) / 160;
+    for (let sample = 0; sample < 500; sample++) {
         const question = generate('dms');
+        const degrees = Number(question.q.match(/\$([\d.]+)\^\\circ\$/)[1]);
+        assert.match(String(degrees.toFixed(4)), /^\d+\.\d{4}$/, 'Test 2 DMS prompts use four decimal places.');
         const totalSeconds = Math.round(degrees * 3600);
         assert.deepEqual(question.fields.map(field => field.answer), [Math.floor(totalSeconds / 3600), Math.floor(totalSeconds / 60) % 60, totalSeconds % 60], 'DMS rounding must carry seconds and minutes correctly.');
     }
@@ -249,10 +263,9 @@ for (let sample = 0; sample < 200; sample++) {
     assert.equal(radians.tol, 0.0005);
 
     const decimal = generate('dms_to_dec');
-    const dms = decimal.q.match(/\$(\d+)\^\\circ\\, (\d+)'\\, ([\d.]+)''/);
-    assert.ok(dms, 'DMS prompt must disclose degrees, minutes, and fractional seconds.');
-    near(decimal.a, Number(dms[1]) + Number(dms[2]) / 60 + Number(dms[3]) / 3600, 'Default DMS-to-decimal drill');
-    assert.equal(decimal.tol, 0.00005);
+    const dms = decimal.q.match(/\$(\d+)\^\\circ\\,(\d+)'\\,(\d+)''\$/);
+    assert.ok(dms, 'DMS prompt must disclose whole degrees, minutes and seconds, as on Test 2.');
+    near(decimal.fields[0].answer, Number((Number(dms[1]) + Number(dms[2]) / 60 + Number(dms[3]) / 3600).toFixed(4)), 'Default DMS-to-decimal drill');
 
     const speed = generate('speed');
     assert.equal(speed.fields.length, 2, 'The general speed drill must cover both Test 2 speed quantities.');
@@ -289,12 +302,10 @@ assert.match(generate('rad_deg', 'decimal-radians-to-degrees').q, /radians to de
 
 const examStart = html.indexOf('function startMockExam() {');
 const examEnd = html.indexOf('if (selected.some(selection => !selection))', examStart);
-assert.ok(examStart >= 0 && examEnd > examStart, 'Could not find the cumulative Test 2 selection.');
-const cumulativeSelection = html.slice(examStart, examEnd);
-assert.equal((cumulativeSelection.match(/makeExamSelection\(/g) || []).length, 20, 'The cumulative exam must select 20 prompts.');
-assert.equal((cumulativeSelection.match(/'Section 4\.2'/g) || []).length, 3, 'The cumulative exam must include 3 Section 4.2 prompts.');
-assert.equal((cumulativeSelection.match(/'Section 4\.3'/g) || []).length, 3, 'The cumulative exam must include 3 Section 4.3 prompts.');
-assert.equal((cumulativeSelection.match(/'Geometry'/g) || []).length, 14, 'The cumulative exam must include 14 geometry prompts.');
+assert.ok(examStart >= 0 && examEnd > examStart, 'Could not find the Test 2 checkpoint selection.');
+const checkpointSelection = html.slice(examStart, examEnd);
+assert.ok(checkpointSelection.includes('testTypes.map(gen => makeExamSelection(gen.id, gen.testPoints, null, gen.testArea))'),
+    'The checkpoint must be the 15 Test 2 question types with their points.');
 
 // Exercise the real field grader with a small DOM stub to guard partial credit,
 // DMS bounds, and the first-try hint behavior without loading the whole page.
@@ -366,19 +377,19 @@ assert.equal(runGrader(sectorCredit, onlyArea, true).score, 10, 'The forward sec
 const onlyDegrees = Object.fromEntries(sectorCredit.fields.map((field, index) => [field.id, index === 2 ? Number(field.answer.toFixed(2)) : -1]));
 assert.equal(runGrader(sectorCredit, onlyDegrees, true).score, 5, 'The two inverse-sector outputs share the other half of the question credit.');
 
+// A fully correct Test 2 checkpoint, rounded the way the questions ask, earns 200/200.
 for (let sample = 0; sample < 100; sample++) {
     let earned = 0;
-    for (const entry of quizConfig[8].blueprint) {
-        const question = generate(entry.id, entry.variant);
-        question.points = entry.points;
-        const values = question.fields
-            ? Object.fromEntries(question.fields.map(field => [field.id, field.integer ? field.answer : Number(field.answer.toFixed(entry.id === 'dms' ? 0 : 2))]))
-            : { 'answer-input': Number(question.a.toFixed(entry.id === 'rad_deg' ? 3 : 4)) };
+    for (const gen of testTypes) {
+        const question = gen.generate();
+        question.points = gen.testPoints;
+        const values = Object.fromEntries(question.fields.map(field => [field.id,
+            field.integer ? field.answer : Number(field.answer.toFixed(field.tolerance < 0.001 ? 4 : 2))]));
         const result = runGrader(question, values, true);
-        assert.equal(result.score, entry.points, `${entry.id}: correctly rounded answers must receive full credit.`);
+        assert.ok(Math.abs(result.score - gen.testPoints) < 1e-9, `${gen.id}: correctly rounded answers must receive full credit (got ${result.score}).`);
         earned += result.score;
     }
-    assert.equal(earned, 105, 'A fully correct Quiz 8 checkpoint must earn 105/105.');
+    assert.ok(Math.abs(earned - 200) < 1e-9, 'A fully correct Test 2 checkpoint must earn 200/200.');
 }
 
-process.stdout.write(`Math 130 Test 2 checks passed: ${generatorDefinitions.length} generators × 100 samples; Quiz 8 default drills and 4 visual variants; 100 fully graded Quiz 8 checkpoints; Quiz 7/8 blueprints; cumulative split; DMS carries, major sectors, diagram arcs, weighted partial credit, and practice hints.\n`);
+process.stdout.write(`Math 130 Test 2 checks passed: ${generatorDefinitions.length} generators × 100 samples; Test 2 question types by page; 100 fully graded 200-point Test 2 checkpoints; Quiz 7 blueprint; DMS carries, major sectors, diagram arcs, weighted partial credit, and practice hints.\n`);
