@@ -1173,7 +1173,7 @@
 <!-- Mock Exam CTA -->
 <div id="exam-cta" class="review-callout review-callout--exam review-callout--highlight">
 <h3 class="review-callout__title review-callout__title--exam">🎯 Test 2 Readiness Check</h3>
-<p class="review-callout__body review-callout__body--md">15 questions in the same order and point values as Test 2 (200 points), with new numbers every time: interest (20), logarithms (60), angles and polygons (60), DMS (20) and circles (40). Both interest formulas, change of base and Heron's formula are printed on Test 2; every other formula is from memory.</p>
+<p class="review-callout__body review-callout__body--md">The 15 question types and point values of Test 2 (200 points), in a random order with new numbers every time: interest (20), logarithms (60), angles and polygons (60), DMS (20) and circles (40). Both interest formulas, change of base and Heron's formula are printed on Test 2; every other formula is from memory.</p>
 <button class="btn-primary" id="btn-start-exam" onclick="startMockExam()">Start Test 2 Checkpoint</button>
 </div>
 <!-- Mock Quiz CTA -->
@@ -3950,9 +3950,9 @@
     }
 
     function startMockExam() {
-        // The checkpoint is Test 2 itself: its 15 question types in test order with
-        // their point values (200). The older 20-prompt mix is the fallback if the
-        // Test 2 skills file did not load.
+        // The checkpoint is Test 2 itself: its 15 question types with their point
+        // values (200), in a random order each time. The older 20-prompt mix is the
+        // fallback if the Test 2 skills file did not load.
         const testTypes = generators.filter(gen => gen.testQuestion).sort((a, b) => a.testQuestion - b.testQuestion);
         const selected = testTypes.length ? testTypes.map(gen => makeExamSelection(gen.id, gen.testPoints, null, gen.testArea)) : [
             makeExamSelection('interest_table', 1, null, 'Section 4.2'),
@@ -3977,7 +3977,7 @@
             makeExamSelection('circle_multi', 1, null, 'Geometry')
         ];
         if (selected.some(selection => !selection)) throw new Error('The Test 2 blueprint references a missing generator.');
-        if (!testTypes.length) shuffleInPlace(selected);
+        shuffleInPlace(selected);
 
         examState = {
             isActive: true,
