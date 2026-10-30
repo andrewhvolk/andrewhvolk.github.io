@@ -619,8 +619,8 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
 
       <p>
         Three people worked in three different CAD environments (OpenSCAD, SOLIDWORKS
-        and Blender), and the concepts below overlapped in time rather than following
-        one another in sequence. Dates are those of the surviving files. All of this work
+        and Blender) and produced four model concepts, which overlapped in time rather
+        than following one another in sequence. Dates are those of the surviving files. All of this work
         preceded the Research Week presentation (20&ndash;23 April 2026).
       </p>
 
@@ -654,10 +654,10 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
               <td>First attempt at a boundary that moves rather than a frame that is fixed.</td>
             </tr>
             <tr>
-              <td><b>3. Overlapping corners</b><br><span class="num">30 March &ndash; 9 April 2026</span></td>
-              <td>OpenSCAD</td>
-              <td>Two congruent plates whose diagonal overlap shrinks the enclosed square continuously, so one pair covers every case.</td>
-              <td>Shares the 100&nbsp;mm field and the 5&nbsp;mm bar height of the SOLIDWORKS family. No captive slider, so the halves drift. <b>Published here.</b></td>
+              <td><b>3. Overlapping corners</b><br><span class="num">30 March &ndash; 13 April 2026</span></td>
+              <td>OpenSCAD and Blender</td>
+              <td>Two congruent plates, each a right triangle with an L-shaped raised border, whose diagonal overlap shrinks the enclosed square continuously, so one pair covers every case. Built in parallel in OpenSCAD and in Blender.</td>
+              <td>Shares the 100&nbsp;mm field and the 5&nbsp;mm bar height of the SOLIDWORKS family. No captive slider, so the halves drift. <b>OpenSCAD version published here.</b> <b class="pend">Blender version not published: its exports carry no usable scale.</b></td>
             </tr>
             <tr>
               <td><b>4. Frame, sliders, pin</b><br><span class="num">23 &amp; 26 March 2026</span></td>
@@ -665,26 +665,27 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
               <td>A four-part family (Squares Demo Frame, Slider1, Slider2, Pin) in two iterations. The frame is identical in both; the sliders narrowed from 16.67 to 15.00 mm, the pin shortened by exactly one bar height, the assembly from 22.5 to 20.0 mm.</td>
               <td>The artifact demonstrated at Research Week. Captive sliders and pins hold a setting after adjustment. <b>Published here, both iterations.</b></td>
             </tr>
-            <tr>
-              <td><b>5. Overlapping L-brackets</b><br><span class="num">2 &ndash; 13 April 2026</span></td>
-              <td>Blender</td>
-              <td>A return to the overlapping-corners principle as two L-shaped brackets with a diagonal brace.</td>
-              <td>The same principle as concept 3, modelled in Blender. <b class="pend">Not published: the export carries no usable scale.</b></td>
-            </tr>
           </tbody>
         </table>
       </div>
 
       <h3>What changed inside concept 3</h3>
       <p>
-        The sliding-plate model is the only one whose revisions were captured with dates,
-        so its history is exact rather than reconstructed:
+        The OpenSCAD version is the only source file whose revisions were recorded in the
+        file itself, so its history is exact rather than reconstructed:
       </p>
       <ul>
         <li><b>30 March 2026:</b> first working version: 40&nbsp;mm triangle leg, 10&nbsp;mm border layers, 20&nbsp;mm tile pitch, dependent on an external library, every piece a separate solid.</li>
         <li><b>31 March 2026:</b> each colour unioned into one solid per half. A printability fix: the separately emitted overlapping pieces were not one watertight body.</li>
         <li><b>9 April 2026:</b> triangle leg raised to 105/&radic;2 so the overlap diagonal spans the full corner-to-corner distance; border layers halved from 10 to 5&nbsp;mm, converging on the final family's universal bar height; tile pitch dropped from 20 to 16&nbsp;mm; library dependency removed.</li>
       </ul>
+      <p>
+        The Blender version was built in parallel and is dated by email: exports on
+        2&nbsp;April, on 9&nbsp;April (remade with better tolerances, then split into one
+        file per half), and on 13&nbsp;April (realigned to the axes). None carries a usable
+        scale, and the face meant to rest on the build plate is not planar, so it is not
+        published.
+      </p>
 
       <h3>A correction worth stating plainly</h3>
       <p>
