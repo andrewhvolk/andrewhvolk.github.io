@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 10 Practice: Worked Solutions | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 10 worked solutions: how to solve each type of question on the normal distribution practice quiz, with the 68-95-99.7 rule, z-scores, and the standard score table.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module10-worked-solutions.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;600;700&amp;display=swap">
+  <script src="../theme.js"></script>
+  <style>
+    .ws-page { max-width: 1100px; padding-bottom: 3rem; }
+    .ws-intro { margin: 0 0 1.5rem; max-width: 64ch; color: var(--text-muted); }
+    .ws-list { display: flex; flex-direction: column; gap: 1.75rem; }
+    .ws-frame { margin: 0; }
+    .ws-scaler { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-subtle, #e4e0d8); background: #F7F5F0; }
+    .ws-num { margin-top: 0.4rem; font-size: 0.9rem; color: var(--text-muted); text-align: right; }
+    /* Each slide is drawn on a fixed 1920 x 1080 canvas and scaled to the column width. */
+    .ws-slide { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; overflow: hidden; box-sizing: border-box; transform-origin: 0 0; transform: scale(var(--ws-scale, 0.5)); }
+    .ws-slide * { margin: 0; box-sizing: border-box; letter-spacing: normal; text-transform: none; }
+    .ws-slide h1, .ws-slide h2, .ws-slide h3, .ws-slide p, .ws-slide li, .ws-slide td, .ws-slide th { font-family: inherit; color: inherit; max-width: none; }
+    .ws-slide h1 { line-height: 1.1; font-weight: 600; }
+    .ws-slide h2 { line-height: 1.15; font-weight: 600; }
+    .ws-slide h3 { line-height: 1.2; font-weight: 600; }
+    .ws-slide p, .ws-slide li { line-height: 1.4; }
+    .ws-slide ol { list-style: decimal outside; padding-left: 1.4em; }
+    .ws-slide li { display: list-item; padding: 0; }
+    .ws-slide table { border-collapse: collapse; }
+    .ws-slide th, .ws-slide td { padding: 10px 20px; border: none; border-bottom: 1px solid #DDD6C8; background: transparent; font-weight: 400; }
+    .ws-slide th { font-weight: 600; }
+    .ws-slide svg { display: block; max-width: none; }
+    @media print {
+      .top-nav, .course-bar, .course-header, .site-footer, .ws-intro, .ws-num { display: none !important; }
+      .ws-page { max-width: none; padding: 0; }
+      .ws-frame { break-inside: avoid; }
+      .ws-scaler { border: none; border-radius: 0; }
+      @page { size: letter landscape; margin: 0.3in; }
+    }
+  </style>
+</head>
+<body>
+<nav class="course-bar" aria-label="Site">
+  <div class="course-bar__inner">
+    <a class="course-bar__back" href="/courses/math114.html#module-10"><span aria-hidden="true">&larr;</span> MATH 114</a>
+    <a class="course-bar__home" href="/">Andrew H. Volk</a>
+    <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="Toggle Theme"></button>
+  </div>
+</nav>
+<header class="course-header course-header--unit">
+  <div class="container">
+    <h1>Module 10 Practice: Worked Solutions</h1>
+    <p class="subtitle">How to solve each type of question on the Module 10 practice quiz in Canvas.</p>
+  </div>
+</header>
+<main id="main-content" class="container course-page ws-page">
+  <p class="ws-intro">Each quiz attempt uses new numbers, so these slides work one example of each question type. Follow the same steps with the numbers in your attempt. The <a href="/courses/test3-formulas.html">standard score (z) table</a> matches the one in the textbook.</p>
+  <div class="ws-list">
+    <figure class="ws-frame" id="slide-1">
+<div class="ws-scaler">
+<section id="slide-cover" class="ws-slide" aria-label="Slide 1 of 16" style="background:#1F2A44;color:#E9EEF5;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<svg aria-label="Outline of a bell-shaped normal curve" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:640px;top:560px;width:1200px;height:420px;opacity:0.35"><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#9DB8D9" stroke-width="6" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#9DB8D9" stroke-width="3"/></svg>
+<p style="font-size:28px;font-weight:600;color:#9DB8D9;letter-spacing:3px;text-transform:uppercase">MATH 114 · Module 10</p>
+<h1 style="font-family:'EB Garamond', Georgia, serif;font-size:120px;font-weight:600;line-height:1.05;color:#F7F5F0;width:1300px">The Normal Distribution: Worked Solutions</h1>
+<p style="font-size:36px;color:#C9D5E4;width:1100px;line-height:1.4">How to solve each type of problem on the Module 10 practice quiz</p>
+<p style="font-size:28px;color:#9DB8D9">Prof. Volk · Fall 2026</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 1 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-2">
+<div class="ws-scaler">
+<section id="slide-method" class="ws-slide" aria-label="Slide 2 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">The method</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">Every calculation follows the same four steps</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:40px">
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:72px;font-weight:700;color:#2D5B8C;line-height:1">1</p>
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Sketch</h3>
+<p style="font-size:28px;line-height:1.4">Draw the bell curve. Mark the mean in the middle and shade the region the question asks about.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:40px">
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:72px;font-weight:700;color:#2D5B8C;line-height:1">2</p>
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Standardize</h3>
+<p style="font-size:28px;line-height:1.4">Turn each data value into a z-score: how many standard deviations it sits from the mean.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:40px">
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:72px;font-weight:700;color:#2D5B8C;line-height:1">3</p>
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Look up</h3>
+<p style="font-size:28px;line-height:1.4">Whole-number z: use the 68-95-99.7 rule. Decimal z: use the standard score table.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:40px">
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:72px;font-weight:700;color:#2D5B8C;line-height:1">4</p>
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Answer</h3>
+<p style="font-size:28px;line-height:1.4">Check that the answer matches your sketch. A small shaded tail means a small percent.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 2 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-3">
+<div class="ws-scaler">
+<section id="slide-rule" class="ws-slide" aria-label="Slide 3 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">The tools</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">The 68-95-99.7 rule splits the curve into known pieces</h2>
+</div>
+<div style="display:flex;gap:40px;align-items:center">
+<div style="position:relative;width:1200px;height:440px">
+<svg aria-label="Normal curve divided at z = -3, -2, -1, 0, 1, 2, 3 with the area of each band shaded" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:1200px;height:420px"><path d="M440.0,380 L440.0,179.8 456.0,159.9 472.0,140.4 488.0,121.6 504.0,104.4 520.0,88.8 536.0,75.4 552.0,64.5 568.0,56.5 584.0,51.7 600.0,50.0 616.0,51.7 632.0,56.5 648.0,64.5 664.0,75.4 680.0,88.8 696.0,104.4 712.0,121.6 728.0,140.4 744.0,159.9 760.0,179.8 L760.0,380 Z" fill="#2D5B8C"/><path d="M280.0,380 L280.0,335.3 299.2,323.6 318.4,309.9 337.6,294.0 356.8,276.1 376.0,256.1 395.2,234.5 414.4,211.6 427.2,195.8 440.0,179.8 L440.0,380 Z" fill="#7FA3CC"/><path d="M760.0,380 L760.0,179.8 772.8,195.8 785.6,211.6 804.8,234.5 824.0,256.1 843.2,276.1 862.4,294.0 881.6,309.9 900.8,323.6 920.0,335.3 L920.0,380 Z" fill="#7FA3CC"/><path d="M120.0,380 L120.0,376.3 145.6,374.2 171.2,370.9 196.8,366.2 222.4,359.6 248.0,350.7 273.6,338.8 280.0,335.3 L280.0,380 Z" fill="#C9D9EC"/><path d="M920.0,380 L920.0,335.3 926.4,338.8 952.0,350.7 977.6,359.6 1003.2,366.2 1028.8,370.9 1054.4,374.2 1080.0,376.3 L1080.0,380 Z" fill="#C9D9EC"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="4" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="3"/><path d="M120,380 V394 M280,380 V394 M440,380 V394 M600,380 V394 M760,380 V394 M920,380 V394 M1080,380 V394" stroke="#1F2A44" stroke-width="3"/></svg>
+<p style="position:absolute;left:470px;top:240px;width:100px;font-size:32px;font-weight:700;color:#F7F5F0;text-align:center">34%</p>
+<p style="position:absolute;left:630px;top:240px;width:100px;font-size:32px;font-weight:700;color:#F7F5F0;text-align:center">34%</p>
+<p style="position:absolute;left:295px;top:318px;width:130px;font-size:28px;font-weight:700;color:#1F2A44;text-align:center">13.5%</p>
+<p style="position:absolute;left:775px;top:318px;width:130px;font-size:28px;font-weight:700;color:#1F2A44;text-align:center">13.5%</p>
+<p style="position:absolute;left:140px;top:300px;width:120px;font-size:24px;font-weight:600;color:#1F2A44;text-align:center">2.35%</p>
+<p style="position:absolute;left:940px;top:300px;width:120px;font-size:24px;font-weight:600;color:#1F2A44;text-align:center">2.35%</p>
+<p style="position:absolute;left:0px;top:330px;width:110px;font-size:24px;font-weight:600;color:#B4541C;text-align:center">0.15%</p>
+<p style="position:absolute;left:1090px;top:330px;width:110px;font-size:24px;font-weight:600;color:#B4541C;text-align:center">0.15%</p>
+<p style="position:absolute;left:80px;top:400px;width:80px;font-size:24px;text-align:center">−3</p>
+<p style="position:absolute;left:240px;top:400px;width:80px;font-size:24px;text-align:center">−2</p>
+<p style="position:absolute;left:400px;top:400px;width:80px;font-size:24px;text-align:center">−1</p>
+<p style="position:absolute;left:540px;top:400px;width:120px;font-size:24px;font-weight:600;color:#1F2A44;text-align:center">z = 0</p>
+<p style="position:absolute;left:720px;top:400px;width:80px;font-size:24px;text-align:center">1</p>
+<p style="position:absolute;left:880px;top:400px;width:80px;font-size:24px;text-align:center">2</p>
+<p style="position:absolute;left:1040px;top:400px;width:80px;font-size:24px;text-align:center">3</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:36px">
+<h3 style="font-size:32px;font-weight:600;color:#1F2A44">The z-score</h3>
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:36px;color:#1F2A44;line-height:1.3"><i>z</i> = (data value − mean) ÷ standard deviation</p>
+<p style="font-size:26px;line-height:1.4">Within 1 SD: 68%. Within 2: 95%. Within 3: 99.7%.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 3 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-4">
+<div class="ws-scaler">
+<section id="slide-normal" class="ws-slide" aria-label="Slide 4 of 16" style="background:#EEEAE1;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Questions 1 to 4 · Is it normal?</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">A variable is nearly normal when it passes four checks</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:40px">
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Single peak</h3>
+<p style="font-size:28px;line-height:1.4">Most values cluster near the mean.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:40px">
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Symmetric</h3>
+<p style="font-size:28px;line-height:1.4">Values spread evenly above and below the mean.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:40px">
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Tapering tails</h3>
+<p style="font-size:28px;line-height:1.4">Values far from the mean are increasingly rare.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:40px">
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Many factors</h3>
+<p style="font-size:28px;line-height:1.4">Each value results from many small, independent influences.</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#1F2A44;width:1500px">Ask what stops the data from being symmetric: a floor at zero, a ceiling such as 100%, or a few extreme values. Any of these produces skew.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 4 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-5">
+<div class="ws-scaler">
+<section id="slide-examples" class="ws-slide" aria-label="Slide 5 of 16" style="background:#EEEAE1;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Questions 1 to 4 · The question pool</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">Eight variables, one reason each</h2>
+</div>
+<table style="font-family:'IBM Plex Sans', Arial, sans-serif;font-size:26px;color:#3E4552;background:#FFFDF8;border:1px solid #DDD6C8">
+<tr style="background:#1F2A44"><th style="width:38%;color:#F7F5F0;text-align:left;padding:12px 20px">Variable</th><th style="width:22%;color:#F7F5F0;text-align:left">Verdict</th><th style="width:40%;color:#F7F5F0;text-align:left">Reason</th></tr>
+<tr><td>Household incomes in a large city</td><td style="color:#B4541C">Right-skewed</td><td>A few very high incomes stretch the tail</td></tr>
+<tr><td>Heights of adult men</td><td style="color:#2D5B8C">Nearly normal</td><td>Many genetic and environmental factors</td></tr>
+<tr><td>Siblings per student in a class</td><td style="color:#B4541C">Right-skewed</td><td>Floor at zero; a few large families</td></tr>
+<tr><td>Chip bags filled to 10 oz</td><td style="color:#2D5B8C">Nearly normal</td><td>Small random errors around the target</td></tr>
+<tr><td>Scores on a very easy test</td><td style="color:#B4541C">Left-skewed</td><td>Scores pile up near 100%</td></tr>
+<tr><td>Foot lengths of adult women</td><td style="color:#2D5B8C">Nearly normal</td><td>Many genetic and environmental factors</td></tr>
+<tr><td>Waiting times at a doctor’s office</td><td style="color:#B4541C">Right-skewed</td><td>Floor at zero; a few very long waits</td></tr>
+<tr><td>Rolling one fair die many times</td><td style="color:#B4541C">Uniform, not normal</td><td>Each face equally likely; no peak</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 5 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-6">
+<div class="ws-scaler">
+<section id="slide-between" class="ws-slide" aria-label="Slide 6 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Question 5 · Percent between two values</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">Add the bands between the two z-scores</h2>
+</div>
+<div style="display:flex;gap:44px;align-items:flex-start">
+<div style="width:780px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:28px 32px">
+<p style="font-size:28px;line-height:1.4;color:#1F2A44">Battery life: mean 20 hours, SD 2 hours. What percent of phones last between 18 and 24 hours?</p>
+</div>
+<ol style="font-size:28px;line-height:1.4;display:flex;flex-direction:column;gap:12px">
+<li>18 = 20 − 2, so 18 is at z = −1.</li>
+<li>24 = 20 + 2 × 2, so 24 is at z = 2.</li>
+<li>Add the bands from −1 to 2: 34 + 34 + 13.5.</li>
+</ol>
+<p style="font-size:32px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:12px 28px;border-radius:999px;width:340px;text-align:center">Answer: 81.5</p>
+</div>
+<div style="position:relative;width:840px;height:340px">
+<svg aria-label="Normal curve shaded from z = -1 to z = 2" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:840px;height:294px"><path d="M440.0,380 L440.0,179.8 459.2,155.9 478.4,132.8 497.6,111.1 516.8,91.7 536.0,75.4 555.2,62.7 574.4,54.2 593.6,50.3 600.0,50.0 606.4,50.3 625.6,54.2 644.8,62.7 664.0,75.4 683.2,91.7 702.4,111.1 721.6,132.8 740.8,155.9 760.0,179.8 779.2,203.8 798.4,227.0 817.6,249.1 836.8,269.6 856.0,288.2 875.2,304.8 894.4,319.3 913.6,331.7 920.0,335.3 L920.0,380 Z" fill="#9DB8D9"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="4"/><path d="M120,380 V398 M280,380 V398 M440,380 V398 M600,380 V398 M760,380 V398 M920,380 V398 M1080,380 V398" stroke="#1F2A44" stroke-width="4"/></svg>
+<p style="position:absolute;left:406px;top:150px;width:140px;font-size:36px;font-weight:700;color:#1F2A44;text-align:center">81.5%</p>
+<p style="position:absolute;left:34px;top:290px;width:100px;font-size:24px;text-align:center">14</p>
+<p style="position:absolute;left:146px;top:290px;width:100px;font-size:24px;text-align:center">16</p>
+<p style="position:absolute;left:258px;top:290px;width:100px;font-size:26px;font-weight:700;color:#1F2A44;text-align:center">18</p>
+<p style="position:absolute;left:370px;top:290px;width:100px;font-size:24px;text-align:center">20</p>
+<p style="position:absolute;left:482px;top:290px;width:100px;font-size:24px;text-align:center">22</p>
+<p style="position:absolute;left:594px;top:290px;width:100px;font-size:26px;font-weight:700;color:#1F2A44;text-align:center">24</p>
+<p style="position:absolute;left:706px;top:290px;width:100px;font-size:24px;text-align:center">26</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 6 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-7">
+<div class="ws-scaler">
+<section id="slide-tails" class="ws-slide" aria-label="Slide 7 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Questions 6 and 7 · Percent in one tail</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">A tail holds half of what lies outside</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:28px 32px">
+<p style="font-size:26px;line-height:1.4;color:#1F2A44">Mean 16 hours, SD 2.5 hours. What percent last <b>more than 21</b> hours?</p>
+<div style="position:relative;width:660px;height:262px">
+<svg aria-label="Normal curve with the right tail beyond z = 2 shaded" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:660px;height:231px"><path d="M920.0,380 L920.0,335.3 939.2,345.1 958.4,353.1 977.6,359.6 996.8,364.8 1016.0,368.8 1035.2,371.8 1054.4,374.2 1073.6,375.9 1092.8,377.1 1112.0,378.0 1131.2,378.7 1150.4,379.1 1176.0,379.5 L1176.0,380 Z" fill="#E3A57D"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="6" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="5"/><path d="M600,380 V400 M920,380 V400" stroke="#1F2A44" stroke-width="5"/></svg>
+<p style="position:absolute;left:500px;top:130px;width:130px;font-size:28px;font-weight:700;color:#B4541C;text-align:center">2.5%</p>
+<p style="position:absolute;left:290px;top:224px;width:80px;font-size:24px;text-align:center">16</p>
+<p style="position:absolute;left:466px;top:224px;width:80px;font-size:24px;font-weight:700;color:#1F2A44;text-align:center">21</p>
+</div>
+<p style="font-size:26px;line-height:1.4">21 = 16 + 2 × 2.5, so z = 2. Above 2: (100 − 95) ÷ 2.</p>
+<p style="font-size:28px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:10px 24px;border-radius:999px;width:280px;text-align:center">Answer: 2.5</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:28px 32px">
+<p style="font-size:26px;line-height:1.4;color:#1F2A44">Mean 27 hours, SD 2.5 hours. What percent last <b>less than 19.5</b> hours?</p>
+<div style="position:relative;width:660px;height:262px">
+<svg aria-label="Normal curve with the left tail below z = -3 shaded" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:660px;height:231px"><path d="M24.0,380 L24.0,379.5 49.6,379.1 75.2,378.5 100.8,377.5 120.0,376.3 L120.0,380 Z" fill="#E3A57D"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="6" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="5"/><path d="M600,380 V400 M120,380 V400" stroke="#1F2A44" stroke-width="5"/></svg>
+<p style="position:absolute;left:0px;top:130px;width:130px;font-size:28px;font-weight:700;color:#B4541C;text-align:center">0.15%</p>
+<p style="position:absolute;left:290px;top:224px;width:80px;font-size:24px;text-align:center">27</p>
+<p style="position:absolute;left:16px;top:224px;width:100px;font-size:24px;font-weight:700;color:#1F2A44;text-align:center">19.5</p>
+</div>
+<p style="font-size:26px;line-height:1.4">19.5 = 27 − 3 × 2.5, so z = −3. Below −3: (100 − 99.7) ÷ 2.</p>
+<p style="font-size:28px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:10px 24px;border-radius:999px;width:280px;text-align:center">Answer: 0.15</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 7 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-8">
+<div class="ws-scaler">
+<section id="slide-zscore" class="ws-slide" aria-label="Slide 8 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Questions 8 and 9 · z-scores</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">One formula, used forward or backward</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:20px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:36px 40px">
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Find the z-score</h3>
+<p style="font-size:28px;line-height:1.4">A student scores 78 on a test with mean 80 and SD 4.</p>
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:40px;color:#1F2A44;line-height:1.3"><i>z</i> = (78 − 80) ÷ 4 = −2 ÷ 4</p>
+<p style="font-size:28px;line-height:1.4">A negative z-score means the value is below the mean.</p>
+<p style="font-size:30px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:12px 28px;border-radius:999px;width:300px;text-align:center">Answer: −0.5</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:36px 40px">
+<h3 style="font-size:36px;font-weight:600;color:#1F2A44">Find the data value</h3>
+<p style="font-size:28px;line-height:1.4">A test has mean 81 and SD 3. What score has z = −2.5?</p>
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:40px;color:#1F2A44;line-height:1.3">value = mean + <i>z</i> × SD<br>= 81 + (−2.5)(3) = 81 − 7.5</p>
+<p style="font-size:30px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:12px 28px;border-radius:999px;width:300px;text-align:center">Answer: 73.5</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 8 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-9">
+<div class="ws-scaler">
+<section id="slide-compare" class="ws-slide" aria-label="Slide 9 of 16" style="background:#2D5B8C;color:#E9EEF5;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#D6E2F0;letter-spacing:2px;text-transform:uppercase">Question 10 · Comparing performances</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:80px;font-weight:600;color:#F7F5F0;line-height:1.1">Compare z-scores, not raw scores</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:30px;color:#D6E2F0">Student A: 82 on a test with mean 74, SD 4</p>
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:120px;font-weight:700;color:#F7F5F0;line-height:1"><i>z</i> = 2.0</p>
+<p style="font-size:30px;color:#F7F5F0;font-weight:600">About the 98th percentile: did better</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:30px;color:#D6E2F0">Student B: 88 on a test with mean 80, SD 8</p>
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:120px;font-weight:700;color:#F7F5F0;line-height:1"><i>z</i> = 1.0</p>
+<p style="font-size:30px;color:#F7F5F0;font-weight:600">About the 84th percentile</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#F7F5F0;width:1400px">B has the higher raw score, but A stands farther above their own class. A z-score puts different tests on the same scale.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#D6E2F0">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 9 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-10">
+<div class="ws-scaler">
+<section id="slide-percentile" class="ws-slide" aria-label="Slide 10 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Question 11 · Percentile from the table</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">The table gives the percent below a z-score</h2>
+</div>
+<div style="display:flex;gap:44px;align-items:flex-start">
+<div style="width:780px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:28px 32px">
+<p style="font-size:28px;line-height:1.4;color:#1F2A44">Heights: mean 64.5 inches, SD 3 inches. What is the percentile of a woman who is 66.3 inches tall?</p>
+</div>
+<ol style="font-size:28px;line-height:1.4;display:flex;flex-direction:column;gap:12px">
+<li>z = (66.3 − 64.5) ÷ 3 = 1.8 ÷ 3 = 0.6</li>
+<li>Find z = 0.6 in the table: 72.57.</li>
+<li>The percent below a value is its percentile.</li>
+</ol>
+<p style="font-size:32px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:12px 28px;border-radius:999px;width:340px;text-align:center">Answer: 72.57</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="position:relative;width:840px;height:370px">
+<svg aria-label="Normal curve shaded to the left of z = 0.6" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:840px;height:294px"><path d="M24.0,380 L24.0,379.5 75.2,378.5 120.0,376.3 171.2,370.9 222.4,359.6 273.6,338.8 324.8,304.8 376.0,256.1 427.2,195.8 478.4,132.8 529.6,80.4 555.2,62.7 580.8,52.4 600.0,50.0 619.2,52.4 644.8,62.7 670.4,80.4 696.0,104.4 L696.0,380 Z" fill="#9DB8D9"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="4"/><path d="M600,380 V398 M696,380 V398" stroke="#1F2A44" stroke-width="4"/></svg>
+<p style="position:absolute;left:230px;top:200px;width:160px;font-size:34px;font-weight:700;color:#1F2A44;text-align:center">72.57%</p>
+<p style="position:absolute;left:350px;top:290px;width:120px;font-size:24px;text-align:center">64.5</p>
+<p style="position:absolute;left:437px;top:326px;width:120px;font-size:26px;font-weight:700;color:#1F2A44;text-align:center">66.3</p>
+</div>
+<table style="font-size:26px;color:#3E4552;background:#FFFDF8;border:1px solid #DDD6C8;width:520px">
+<tr style="background:#EEEAE1"><th style="width:50%;text-align:center;padding:8px 16px">z</th><th style="width:50%;text-align:center">Percentile</th></tr>
+<tr><td style="text-align:center">0.5</td><td style="text-align:center">69.15</td></tr>
+<tr style="background:#9DB8D9"><td style="text-align:center;color:#1F2A44">0.6</td><td style="text-align:center;color:#1F2A44">72.57</td></tr>
+<tr><td style="text-align:center">0.7</td><td style="text-align:center">75.80</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 10 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-11">
+<div class="ws-scaler">
+<section id="slide-above" class="ws-slide" aria-label="Slide 11 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Question 12 · Percent above a value</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">For “taller than,” subtract from 100</h2>
+</div>
+<div style="display:flex;gap:44px;align-items:flex-start">
+<div style="width:780px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:28px 32px">
+<p style="font-size:28px;line-height:1.4;color:#1F2A44">Heights: mean 65.5 inches, SD 3 inches. What percent of women are taller than 66.4 inches?</p>
+</div>
+<ol style="font-size:28px;line-height:1.4;display:flex;flex-direction:column;gap:12px">
+<li>z = (66.4 − 65.5) ÷ 3 = 0.9 ÷ 3 = 0.3</li>
+<li>The table gives 61.79 at z = 0.3: that is the percent shorter.</li>
+<li>Percent taller = 100 − 61.79.</li>
+</ol>
+<p style="font-size:32px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:12px 28px;border-radius:999px;width:340px;text-align:center">Answer: 38.21</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="position:relative;width:840px;height:370px">
+<svg aria-label="Normal curve shaded to the right of z = 0.3" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:840px;height:294px"><path d="M648.0,380 L648.0,64.5 667.3,78.0 686.6,95.0 706.0,115.0 725.3,137.1 744.6,160.6 763.9,184.7 783.2,208.7 802.5,231.9 821.9,253.8 841.2,274.0 860.5,292.3 879.8,308.5 899.1,322.5 918.4,334.5 937.8,344.4 957.1,352.6 976.4,359.3 995.7,364.5 1015.0,368.6 1034.3,371.7 1053.7,374.1 1073.0,375.8 1098.7,377.4 1124.5,378.5 1150.2,379.1 1176.0,379.5 L1176.0,380 Z" fill="#9DB8D9"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="4"/><path d="M600,380 V398 M648,380 V398" stroke="#1F2A44" stroke-width="4"/></svg>
+<p style="position:absolute;left:220px;top:214px;width:150px;font-size:28px;color:#4B5563;text-align:center">61.79%</p>
+<p style="position:absolute;left:470px;top:236px;width:160px;font-size:34px;font-weight:700;color:#1F2A44;text-align:center">38.21%</p>
+<p style="position:absolute;left:330px;top:290px;width:120px;font-size:24px;text-align:center">65.5</p>
+<p style="position:absolute;left:400px;top:326px;width:120px;font-size:26px;font-weight:700;color:#1F2A44;text-align:center">66.4</p>
+</div>
+<table style="font-size:26px;color:#3E4552;background:#FFFDF8;border:1px solid #DDD6C8;width:520px">
+<tr style="background:#EEEAE1"><th style="width:50%;text-align:center;padding:8px 16px">z</th><th style="width:50%;text-align:center">Percentile</th></tr>
+<tr><td style="text-align:center">0.2</td><td style="text-align:center">57.93</td></tr>
+<tr style="background:#9DB8D9"><td style="text-align:center;color:#1F2A44">0.3</td><td style="text-align:center;color:#1F2A44">61.79</td></tr>
+<tr><td style="text-align:center">0.4</td><td style="text-align:center">65.54</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 11 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-12">
+<div class="ws-scaler">
+<section id="slide-reverse" class="ws-slide" aria-label="Slide 12 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Question 13 · Value at a percentile</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">Read the table in reverse</h2>
+</div>
+<div style="display:flex;gap:44px;align-items:flex-start">
+<div style="width:780px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:28px 32px">
+<p style="font-size:28px;line-height:1.4;color:#1F2A44">Heights: mean 64.5 inches, SD 2.5 inches. How tall is a woman at the 90th percentile?</p>
+</div>
+<ol style="font-size:28px;line-height:1.4;display:flex;flex-direction:column;gap:12px">
+<li>Search the percentile column for the entry closest to 90: 90.32, at z = 1.3.</li>
+<li>height = 64.5 + 1.3 × 2.5 = 64.5 + 3.25 = 67.75</li>
+<li>Round to one decimal place.</li>
+</ol>
+<p style="font-size:32px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:12px 28px;border-radius:999px;width:340px;text-align:center">Answer: 67.8</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="position:relative;width:840px;height:330px">
+<svg aria-label="Normal curve shaded to the left of z = 1.3, covering 90 percent of the area" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:840px;height:294px"><path d="M24.0,380 L24.0,379.5 75.4,378.5 120.4,376.3 171.8,370.8 223.2,359.4 274.6,338.3 326.0,303.8 377.4,254.6 428.9,193.8 480.3,130.6 531.7,78.8 557.4,61.5 583.1,51.8 602.4,50.0 621.6,53.0 647.3,64.1 673.0,82.7 698.8,107.2 724.5,136.2 750.2,167.6 775.9,199.6 795.1,223.1 808.0,238.2 L808.0,380 Z" fill="#9DB8D9"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="4"/><path d="M600,380 V398 M808,380 V398" stroke="#1F2A44" stroke-width="4"/></svg>
+<p style="position:absolute;left:300px;top:200px;width:140px;font-size:34px;font-weight:700;color:#1F2A44;text-align:center">90%</p>
+<p style="position:absolute;left:360px;top:290px;width:120px;font-size:24px;text-align:center">64.5</p>
+<p style="position:absolute;left:506px;top:290px;width:120px;font-size:26px;font-weight:700;color:#1F2A44;text-align:center">67.75</p>
+</div>
+<table style="font-size:26px;color:#3E4552;background:#FFFDF8;border:1px solid #DDD6C8;width:520px">
+<tr style="background:#EEEAE1"><th style="width:50%;text-align:center;padding:8px 16px">z</th><th style="width:50%;text-align:center">Percentile</th></tr>
+<tr><td style="text-align:center">1.2</td><td style="text-align:center">88.49</td></tr>
+<tr style="background:#9DB8D9"><td style="text-align:center;color:#1F2A44">1.3</td><td style="text-align:center;color:#1F2A44">90.32</td></tr>
+<tr><td style="text-align:center">1.4</td><td style="text-align:center">91.92</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 12 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-13">
+<div class="ws-scaler">
+<section id="slide-cereal-rule" class="ws-slide" aria-label="Slide 13 of 16" style="background:#EEEAE1;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Question 14 · Underfilled boxes, by the rule</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">Underfilled means below the label weight</h2>
+</div>
+<div style="display:flex;gap:44px;align-items:flex-start">
+<div style="width:780px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:28px 32px">
+<p style="font-size:28px;line-height:1.4;color:#1F2A44">Cereal boxes: mean 16.2 oz, SD 0.1 oz, label 16 oz. Using the 68-95-99.7 rule, what percent are underfilled?</p>
+</div>
+<ol style="font-size:28px;line-height:1.4;display:flex;flex-direction:column;gap:12px">
+<li>z = (16 − 16.2) ÷ 0.1 = −0.2 ÷ 0.1 = −2</li>
+<li>Underfilled is the tail below z = −2.</li>
+<li>That tail holds (100 − 95) ÷ 2 percent.</li>
+</ol>
+<p style="font-size:32px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:12px 28px;border-radius:999px;width:340px;text-align:center">Answer: 2.5</p>
+</div>
+<div style="position:relative;width:840px;height:340px">
+<svg aria-label="Normal curve with the left tail below z = -2 shaded" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:840px;height:294px"><path d="M24.0,380 L24.0,379.5 56.0,379.0 88.0,378.0 120.0,376.3 152.0,373.5 184.0,368.8 216.0,361.5 248.0,350.7 267.2,342.1 280.0,335.3 L280.0,380 Z" fill="#E3A57D"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="4"/><path d="M280,380 V398 M600,380 V398" stroke="#1F2A44" stroke-width="4"/></svg>
+<p style="position:absolute;left:60px;top:170px;width:130px;font-size:32px;font-weight:700;color:#B4541C;text-align:center">2.5%</p>
+<p style="position:absolute;left:136px;top:290px;width:120px;font-size:26px;font-weight:700;color:#1F2A44;text-align:center">16</p>
+<p style="position:absolute;left:360px;top:290px;width:120px;font-size:24px;text-align:center">16.2</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 13 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-14">
+<div class="ws-scaler">
+<section id="slide-cereal-table" class="ws-slide" aria-label="Slide 14 of 16" style="background:#EEEAE1;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Question 15 · Underfilled boxes, by the table</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">A decimal z-score needs the table</h2>
+</div>
+<div style="display:flex;gap:44px;align-items:flex-start">
+<div style="width:780px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C8;border-radius:16px;padding:28px 32px">
+<p style="font-size:28px;line-height:1.4;color:#1F2A44">Cereal boxes: mean 16.23 oz, SD 0.1 oz, label 16 oz. What percent are underfilled?</p>
+</div>
+<ol style="font-size:28px;line-height:1.4;display:flex;flex-direction:column;gap:12px">
+<li>z = (16 − 16.23) ÷ 0.1 = −0.23 ÷ 0.1 = −2.3</li>
+<li>Find z = −2.3 in the table: 1.07.</li>
+<li>Underfilled is the percent below, so no subtraction.</li>
+</ol>
+<p style="font-size:32px;font-weight:700;color:#F7F5F0;background:#1F2A44;padding:12px 28px;border-radius:999px;width:340px;text-align:center">Answer: 1.07</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="position:relative;width:840px;height:330px">
+<svg aria-label="Normal curve with the left tail below z = -2.3 shaded" width="1200" height="420" viewBox="0 0 1200 420" style="position:absolute;left:0px;top:0px;width:840px;height:294px"><path d="M24.0,380 L24.0,379.5 56.5,379.0 89.0,378.0 121.5,376.2 154.0,373.2 186.5,368.3 212.5,362.4 232.0,356.6 L232.0,380 Z" fill="#E3A57D"/><path d="M24.0,379.5 L72.0,378.6 120.0,376.3 168.0,371.4 216.0,361.5 264.0,343.6 312.0,314.7 360.0,272.9 408.0,219.4 456.0,159.9 504.0,104.4 552.0,64.5 600.0,50.0 648.0,64.5 696.0,104.4 744.0,159.9 792.0,219.4 840.0,272.9 888.0,314.7 936.0,343.6 984.0,361.5 1032.0,371.4 1080.0,376.3 1128.0,378.6 1176.0,379.5" fill="none" stroke="#1F2A44" stroke-width="5" stroke-linejoin="round"/><line x1="24" y1="380" x2="1176" y2="380" stroke="#1F2A44" stroke-width="4"/><path d="M232,380 V398 M600,380 V398" stroke="#1F2A44" stroke-width="4"/></svg>
+<p style="position:absolute;left:40px;top:170px;width:130px;font-size:32px;font-weight:700;color:#B4541C;text-align:center">1.07%</p>
+<p style="position:absolute;left:102px;top:290px;width:120px;font-size:26px;font-weight:700;color:#1F2A44;text-align:center">16</p>
+<p style="position:absolute;left:360px;top:290px;width:120px;font-size:24px;text-align:center">16.23</p>
+</div>
+<table style="font-size:26px;color:#3E4552;background:#FFFDF8;border:1px solid #DDD6C8;width:520px">
+<tr style="background:#DDD6C8"><th style="width:50%;text-align:center;padding:8px 16px">z</th><th style="width:50%;text-align:center">Percentile</th></tr>
+<tr><td style="text-align:center">−2.4</td><td style="text-align:center">0.82</td></tr>
+<tr style="background:#E3A57D"><td style="text-align:center;color:#1F2A44">−2.3</td><td style="text-align:center;color:#1F2A44">1.07</td></tr>
+<tr><td style="text-align:center">−2.2</td><td style="text-align:center">1.39</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 14 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-15">
+<div class="ws-scaler">
+<section id="slide-precision" class="ws-slide" aria-label="Slide 15 of 16" style="background:#1F2A44;color:#E9EEF5;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#9DB8D9;letter-spacing:2px;text-transform:uppercase">Question 16 · Rule or table?</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:80px;font-weight:600;color:#F7F5F0;line-height:1.1">The table is more precise</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:30px;color:#C9D5E4">Below z = −2 by the rule</p>
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:140px;font-weight:700;color:#F7F5F0;line-height:1">2.5%</p>
+<p style="font-size:30px;color:#C9D5E4">uses 95%, a rounded value</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:30px;color:#C9D5E4">Below z = −2 by the table</p>
+<p style="font-family:'EB Garamond', Georgia, serif;font-size:140px;font-weight:700;color:#9DB8D9;line-height:1">2.28%</p>
+<p style="font-size:30px;color:#C9D5E4">uses the true 95.4%</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;color:#F7F5F0;width:1400px">The rule is a quick estimate for whole-number z-scores. When the question says to use the table, give the table’s value.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#9DB8D9">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 15 of 16</figcaption>
+    </figure>
+    <figure class="ws-frame" id="slide-16">
+<div class="ws-scaler">
+<section id="slide-submit" class="ws-slide" aria-label="Slide 16 of 16" style="background:#F7F5F0;color:#3E4552;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:24px;font-weight:600;color:#2D5B8C;letter-spacing:2px;text-transform:uppercase">Before you submit</p>
+<h2 style="font-family:'EB Garamond', Georgia, serif;font-size:64px;font-weight:600;color:#1F2A44;line-height:1.1">Five habits that protect your score</h2>
+</div>
+<div style="display:flex;gap:48px;align-items:flex-start">
+<ol style="flex:1;font-size:32px;line-height:1.4;display:flex;flex-direction:column;gap:20px;color:#1F2A44">
+<li>Enter numbers only: no % sign and no units.</li>
+<li>Round z to one decimal place before you use the table.</li>
+<li>Round your answer as the question asks.</li>
+<li>Check the answer against your sketch: below, above, or between.</li>
+<li>No textbook? Use the z-table link in each question.</li>
+</ol>
+<div style="width:520px;display:flex;flex-direction:column;gap:16px;background:#1F2A44;border-radius:16px;padding:40px">
+<h3 style="font-size:32px;font-weight:600;color:#9DB8D9">Extra credit quiz</h3>
+<p style="font-size:30px;line-height:1.4;color:#F7F5F0">Due Friday, November 6, at 11:59 PM</p>
+<p style="font-size:26px;line-height:1.4;color:#C9D5E4">Unlimited attempts. Each attempt has new numbers, and your highest score counts.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#6B7280">MATH 114 · Module 10 Practice</p>
+</section>
+</div>
+      <figcaption class="ws-num">Slide 16 of 16</figcaption>
+    </figure>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/">Courses</a>
+      <a href="/CV.html">About and CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+      <a href="https://www.youtube.com/learnabundantly">YouTube</a>
+    </nav>
+  </div>
+</footer>
+<script>
+document.getElementById('current-year').textContent = new Date().getFullYear();
+(function () {
+  var frames = document.querySelectorAll('.ws-scaler');
+  function fit() {
+    frames.forEach(function (f) { f.style.setProperty('--ws-scale', (f.clientWidth / 1920).toFixed(4)); });
+  }
+  fit();
+  if (window.ResizeObserver) { new ResizeObserver(fit).observe(document.querySelector('.ws-list')); }
+  else { window.addEventListener('resize', fit); }
+  window.addEventListener('beforeprint', fit);
+})();
+</script>
+</body>
+</html>
