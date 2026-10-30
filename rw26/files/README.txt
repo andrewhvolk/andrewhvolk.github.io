@@ -1,5 +1,5 @@
 SQUARE PACKING MANIPULATIVE - PROJECT FILES
-Release 1.1.0, 23 October 2026
+Release 1.1.1, 30 October 2026
 https://andrewhvolk.github.io/RW26.html
 
 A. H. Volk, J. Drambi, and J. Holt, Liberty University
@@ -11,8 +11,8 @@ Licensed CC BY 4.0; see LICENSE.txt
 WHAT IS IN THIS RELEASE, AND WHAT IS NOT
 --------------------------------------------------------------------------
 
-This folder holds the two OpenSCAD concepts that preceded the final design.
-The SOLIDWORKS artifact and the slicer projects are in ../solidworks/ and
+This folder holds the two OpenSCAD model concepts. The SOLIDWORKS
+frame-and-slider assembly and the slicer projects are in ../solidworks/ and
 ../slicer/.
 
 Release 1.1.0 adds the artifact itself: the adjustable frame-and-slider
@@ -21,9 +21,13 @@ sources and 3MF exports, together with the two saved Bambu Studio project
 files that record how the parts were actually printed. See FABRICATION.txt
 one level up for the full fabrication record.
 
-One design is still outstanding: an overlapping-corners variant developed in
-Blender in April 2026, after the presentation. Its export carries no usable
-scale and is not included.
+Release 1.1.1 corrects the documentation only; no model file has changed.
+All development described here preceded the Research Week presentation. The
+fabrication record now states correctly which print used more walls, and the
+license now covers every file in the release.
+
+One model is not included: the Blender version of the overlapping-corners
+frame, whose export carries no usable scale.
 
 
 --------------------------------------------------------------------------
@@ -141,4 +145,4 @@ CITATION
 --------------------------------------------------------------------------
 
 Volk, A. H., Drambi, J., & Holt, J. (2026). Square packing manipulative
-    (Version 1.1.0) [3D model files]. https://andrewhvolk.github.io/RW26.html
+    (Version 1.1.1) [3D model files]. https://andrewhvolk.github.io/RW26.html
