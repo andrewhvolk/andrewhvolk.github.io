@@ -146,7 +146,8 @@
       border: 1px solid var(--line); border-radius: 12px;
       background: var(--paper-bright);
     }
-    figure svg { display: block; width: 100%; height: auto; }
+    figure svg, figure img { display: block; width: 100%; height: auto; }
+    figure img { border-radius: 6px; }
     figure svg text { font-family: var(--sans); }
     figure svg text.mono { font-family: var(--mono); }
     figcaption {
@@ -255,8 +256,8 @@
         School of Mathematics and School of Engineering, Liberty University
       </p>
       <div class="meta-row">
-        <span class="chip">Release <strong>1.1.0</strong></span>
-        <span class="chip">Updated <strong>23 October 2026</strong></span>
+        <span class="chip">Release <strong>1.1.1</strong></span>
+        <span class="chip">Updated <strong>30 October 2026</strong></span>
         <span class="chip">Licence <strong>CC BY 4.0</strong></span>
         <span class="chip">Sliced with <strong>Bambu Studio 02.04.00.70</strong></span>
       </div>
@@ -264,23 +265,27 @@
       <div class="callout info">
         <h3>What this release contains</h3>
         <p>
-          The adjustable frame-and-slider assembly demonstrated at Research Week, in both
-          its iterations: SOLIDWORKS sources, 3MF exports, and the two saved slicer
-          project files that recorded how the parts were actually printed. Alongside
-          them, the two OpenSCAD concepts that preceded it, with corrected mathematics
-          and calibration notes.
+          The adjustable frame-and-slider assembly in both of its iterations: SOLIDWORKS
+          sources, 3MF exports, and the two saved slicer project files that recorded how
+          the parts were actually printed. Alongside them, the two OpenSCAD concepts,
+          including the overlapping-corners frame, with corrected mathematics and
+          calibration notes.
         </p>
         <p>
-          One design is still outstanding: an overlapping-corners variant developed in
-          Blender in April 2026, after the presentation. Its export is not in a
-          publishable state and it is not included here.
+          One model is not included: the Blender version of the overlapping-corners
+          frame, whose export does not yet carry a usable scale.
+        </p>
+        <p>
+          Release 1.1.1 corrects the documentation only and extends the licence to every
+          file; the model files are byte-identical to 1.1.0, which
+          <a href="rw26/square-packing-files-v1.1.0.zip" download>remains available</a>.
         </p>
       </div>
 
       <p>
-        <a class="primary-dl" href="rw26/square-packing-files-v1.1.0.zip" download>
+        <a class="primary-dl" href="rw26/square-packing-files-v1.1.1.zip" download>
           <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
-          Download everything &middot; v1.1.0
+          Download everything &middot; v1.1.1
         </a>
       </p>
     </section>
@@ -410,12 +415,12 @@
             <g transform="translate(300,56)">
               <rect x="0" y="-10" width="26" height="3" fill="var(--blueprint)"/>
               <text x="38" y="-4" font-weight="700" fill="var(--blueprint)">n = 11, best known construction</text>
-              <text x="38" y="14" font-size="12" fill="var(--ink-soft)" class="mono">3.877084 &mdash; it fits</text>
+              <text x="38" y="14" font-size="12" fill="var(--ink-soft)" class="mono">3.877084: it fits</text>
             </g>
             <g transform="translate(300,112)">
               <rect x="0" y="-10" width="26" height="3" fill="var(--orange)"/>
               <text x="38" y="-4" font-weight="700" fill="var(--orange)">n = 11, proved lower bound</text>
-              <text x="38" y="14" font-size="12" fill="var(--ink-soft)" class="mono">3.788854 &mdash; it cannot fit</text>
+              <text x="38" y="14" font-size="12" fill="var(--ink-soft)" class="mono">3.788854: it cannot fit</text>
             </g>
             <g transform="translate(300,168)">
               <rect x="0" y="-10" width="26" height="3" fill="var(--teal)"/>
@@ -431,8 +436,8 @@
         </svg>
         <figcaption>
           <b>Figure 2. The four frames, to scale, with a unit tile.</b>
-          The two <i>n</i>&nbsp;=&nbsp;11 frames differ by less than the width of the line
-          drawing them. Eleven tiles provably cannot be forced into the dashed one and
+          The two <i>n</i>&nbsp;=&nbsp;11 frames differ by only 0.088 units, about
+          2&nbsp;percent of their side. Eleven tiles provably cannot be forced into the dashed one and
           demonstrably do fit in the solid one; the unsolved question lives in the
           sliver between. At a 25&nbsp;mm tile that sliver is about 2.2&nbsp;mm of plastic.
         </figcaption>
@@ -442,7 +447,7 @@
         <h3>Why the release prints a frame that cannot be filled</h3>
         <p>
           Handing someone a frame that defeats them is the whole lesson. Failing to fill
-          the <code>n=11 NO</code> frame proves nothing on its own &mdash; plenty of
+          the <code>n=11 NO</code> frame proves nothing on its own; plenty of
           solvable puzzles defeat people. What makes it impossible is a proof, and what
           makes the larger frame merely <i>the best anyone has managed</i> is the absence
           of one. The two pieces in a hand are the difference between a construction, an
@@ -452,10 +457,10 @@
     </section>
 
     <section id="files">
-      <p class="eyebrow">Release 1.1.0</p>
+      <p class="eyebrow">Release 1.1.1</p>
       <h2>Download</h2>
 
-      <h3>The artifact: adjustable frame and slider assembly</h3>
+      <h3>Adjustable frame and slider assembly</h3>
       <p>
         Joseph Holt's SOLIDWORKS model, in both iterations. The frame is identical across
         the two; every change is in the moving parts.
@@ -481,14 +486,14 @@
           <svg class="icon" aria-hidden="true"><use href="#i-code"></use></svg>
           <span>
             <span class="dl-name">Squares Demo Frame.SLDPRT</span>
-            <span class="dl-desc">The frame part itself. Its sibling files &mdash; the assembly, Slider1, Slider2 and Pin, in both iterations &mdash; are in the archive.</span>
+            <span class="dl-desc">The frame part itself. Its sibling files (the assembly, Slider1, Slider2 and Pin, in both iterations) are in the archive.</span>
             <span class="dl-size">126 KB &middot; SOLIDWORKS</span>
           </span>
         </a>
-        <a class="dl" href="rw26/square-packing-files-v1.1.0.zip" download>
+        <a class="dl" href="rw26/square-packing-files-v1.1.1.zip" download>
           <svg class="icon" aria-hidden="true"><use href="#i-archive"></use></svg>
           <span>
-            <span class="dl-name">square-packing-files-v1.1.0.zip</span>
+            <span class="dl-name">square-packing-files-v1.1.1.zip</span>
             <span class="dl-desc">Everything on this page, including all ten SOLIDWORKS files across both iterations.</span>
             <span class="dl-size">Complete release</span>
           </span>
@@ -613,10 +618,22 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
       <h2>How it was built</h2>
 
       <p>
-        Three people worked in three different CAD environments &mdash; OpenSCAD, SOLIDWORKS
-        and Blender &mdash; and produced four model concepts. Each solved a problem the
-        previous one had exposed.
+        Three people worked in three different CAD environments (OpenSCAD, SOLIDWORKS
+        and Blender), and the concepts below overlapped in time rather than following
+        one another in sequence. Dates are those of the surviving files. All of this work
+        preceded the Research Week presentation.
       </p>
+
+      <figure>
+        <img src="rw26/iterations.jpg" width="1600" height="884" loading="lazy"
+             alt="Four 3D-printed frames on a wooden table with green 20 mm cubes: a blue and a white overlapping-corner frame at the top, and two green tray-and-slider frames at the bottom, one partly disassembled.">
+        <figcaption>
+          <b>Figure 3. Four printed iterations of the adjustable frame, with unit cubes.</b>
+          Upper left and upper right: two overlapping-corner frames. Lower left (partly
+          disassembled) and lower right: the two tray-and-slider frames. Center: 20&nbsp;mm
+          unit cubes.
+        </figcaption>
+      </figure>
 
       <div class="table-wrap">
         <table>
@@ -628,7 +645,7 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
               <td><b>1. Frames and tiles</b><br><span class="num">March 2026</span></td>
               <td>OpenSCAD</td>
               <td>Twelve flat tiles plus one rigid labelled frame per case.</td>
-              <td>Fixed the twelve-tile set size the final artifact kept. No adjustability, and the first version had zero fit clearance. <b>Published here, corrected.</b></td>
+              <td>Twelve 25&nbsp;mm tiles; the demonstration set later used sixteen 20&nbsp;mm cubes. No adjustability, and the first version had zero fit clearance. <b>Published here, corrected.</b></td>
             </tr>
             <tr>
               <td><b>2. Sliding-wall corner</b><br><span class="num">March 2026</span></td>
@@ -640,19 +657,19 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
               <td><b>3. Overlapping corners</b><br><span class="num">30 March &ndash; 9 April 2026</span></td>
               <td>OpenSCAD</td>
               <td>Two congruent plates whose diagonal overlap shrinks the enclosed square continuously, so one pair covers every case.</td>
-              <td>Established the 100&nbsp;mm field and the 5&nbsp;mm bar height the final family uses. No captive slider, so the halves drift. <b>Published here.</b></td>
+              <td>Shares the 100&nbsp;mm field and the 5&nbsp;mm bar height of the SOLIDWORKS family. No captive slider, so the halves drift. <b>Published here.</b></td>
             </tr>
             <tr>
               <td><b>4. Frame, sliders, pin</b><br><span class="num">23 &amp; 26 March 2026</span></td>
               <td>SOLIDWORKS</td>
-              <td>A four-part family &mdash; Squares Demo Frame, Slider1, Slider2, Pin &mdash; in two iterations. The frame is identical in both; the sliders narrowed from 16.67 to 15.00 mm, the pin shortened by exactly one bar height, the assembly from 22.5 to 20.0 mm.</td>
+              <td>A four-part family (Squares Demo Frame, Slider1, Slider2, Pin) in two iterations. The frame is identical in both; the sliders narrowed from 16.67 to 15.00 mm, the pin shortened by exactly one bar height, the assembly from 22.5 to 20.0 mm.</td>
               <td>The artifact demonstrated at Research Week. Captive sliders and pins hold a setting after adjustment. <b>Published here, both iterations.</b></td>
             </tr>
             <tr>
-              <td><b>5. Overlapping L-brackets</b><br><span class="num">24 April 2026</span></td>
+              <td><b>5. Overlapping L-brackets</b></td>
               <td>Blender</td>
               <td>A return to the overlapping-corners principle as two L-shaped brackets with a diagonal brace.</td>
-              <td>Developed four weeks <i>after</i> the presentation, so it is later work rather than the demonstrated artifact. <b class="pend">Not published: the export carries no usable scale.</b></td>
+              <td>The same principle as concept 3, modelled in Blender. <b class="pend">Not published: the export carries no usable scale.</b></td>
             </tr>
           </tbody>
         </table>
@@ -664,9 +681,9 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
         so its history is exact rather than reconstructed:
       </p>
       <ul>
-        <li><b>30 March 2026</b> &mdash; first working version: 40&nbsp;mm triangle leg, 10&nbsp;mm border layers, 20&nbsp;mm tile pitch, dependent on an external library, every piece a separate solid.</li>
-        <li><b>31 March 2026</b> &mdash; each colour unioned into one solid per half. A printability fix: the separately emitted overlapping pieces were not one watertight body.</li>
-        <li><b>9 April 2026</b> &mdash; triangle leg raised to 105/&radic;2 so the overlap diagonal spans the full corner-to-corner distance; border layers halved from 10 to 5&nbsp;mm, converging on the final family's universal bar height; tile pitch dropped from 20 to 16&nbsp;mm; library dependency removed.</li>
+        <li><b>30 March 2026:</b> first working version: 40&nbsp;mm triangle leg, 10&nbsp;mm border layers, 20&nbsp;mm tile pitch, dependent on an external library, every piece a separate solid.</li>
+        <li><b>31 March 2026:</b> each colour unioned into one solid per half. A printability fix: the separately emitted overlapping pieces were not one watertight body.</li>
+        <li><b>9 April 2026:</b> triangle leg raised to 105/&radic;2 so the overlap diagonal spans the full corner-to-corner distance; border layers halved from 10 to 5&nbsp;mm, converging on the final family's universal bar height; tile pitch dropped from 20 to 16&nbsp;mm; library dependency removed.</li>
       </ul>
 
       <h3>A correction worth stating plainly</h3>
@@ -696,7 +713,7 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Common to every component</th><th>Value</th></tr>
+            <tr><th>Common to both saved projects</th><th>Value</th></tr>
           </thead>
           <tbody>
             <tr><td>Slicer</td><td class="yes">Bambu Studio 02.04.00.70</td></tr>
@@ -716,8 +733,8 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
       </div>
 
       <p>
-        Four settings are <b>not</b> common. The tolerance-critical moving parts were given
-        more walls and a slower outer wall than the static pieces &mdash; a deliberate choice
+        Six settings are <b>not</b> common. The corners and cubes were printed with more
+        walls, gyroid infill and a slower outer wall than the frame and sliders, which is
         worth knowing before you reprint either one.
       </p>
 
@@ -744,7 +761,7 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
           was demonstrated. A print-monitor screenshot from that job records 201 layers,
           68.18&nbsp;g and 2&nbsp;h&nbsp;12&nbsp;m&nbsp;47&nbsp;s, and the assembly measures
           20.0&nbsp;mm tall in CAD. A 20&nbsp;mm part needs 100 layers at 0.20&nbsp;mm and 200
-          at 0.10&nbsp;mm, so that print appears to have run at roughly 0.10&nbsp;mm &mdash;
+          at 0.10&nbsp;mm, so that print appears to have run at roughly 0.10&nbsp;mm,
           finer than its predecessor. That is an inference from two measurements, not a
           reading from a file, and it is flagged here as the weakest claim on the page.
         </p>
@@ -779,8 +796,8 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
       </div>
 
       <p>
-        Neither plate in this release needs supports. Both are flat-bottomed with no
-        overhangs. A brim helps the frames, whose walls are 4&nbsp;mm wide and
+        Neither OpenSCAD plate needs supports. Both are flat-bottomed with no
+        overhangs. A brim helps the OpenSCAD frames, whose walls are 4&nbsp;mm wide and
         10&nbsp;mm tall and can lift at the corners.
       </p>
 
@@ -815,7 +832,7 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
         To re-tune for a different printer, print the tiles plate first and measure a tile
         across two opposite faces. Adjust <code>tile_clearance</code> until a printed tile
         measures 24.7&nbsp;mm, then re-export the frames. Do not enlarge the frames to fit
-        oversized tiles &mdash; that is the change that breaks the
+        oversized tiles; that is the change that breaks the
         <i>n</i>&nbsp;=&nbsp;11 demonstration. Recompile after any edit and read the
         echoed verification lines.
       </p>
@@ -826,7 +843,8 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
       <h2>Licence and citation</h2>
 
       <p>
-        The OpenSCAD sources, the STL exports, and the documentation in this release are
+        Every file in this release (the OpenSCAD sources and STL exports, the SOLIDWORKS
+        sources and 3MF exports, the Bambu Studio projects, and the documentation) is
         licensed <b>CC&nbsp;BY&nbsp;4.0</b>. Copy them, print them, adapt them, sell what
         you make with them; just say where they came from. The licence does not cover the
         published mathematical results the models represent, which belong to their authors
@@ -835,16 +853,16 @@ openscad -D 'show_cube=false' -D 'slideblue=112' \
 
       <p>Suggested citation:</p>
 <pre><code>Volk, A. H., Drambi, J., &amp; Holt, J. (2026). Square packing manipulative
-    (Version 1.1.0) [3D model files].
+    (Version 1.1.1) [3D model files].
     https://andrewhvolk.github.io/RW26.html</code></pre>
 
       <h3>References</h3>
       <ul class="refs">
-        <li>Erd&#337;s, P., &amp; Graham, R. L. (1975). On packing squares with equal squares. <i>Journal of Combinatorial Theory, Series A, 19</i>(1), 119&ndash;123.</li>
-        <li>Friedman, E. (1998/2009). Packing unit squares in squares: A survey and new results. <i>The Electronic Journal of Combinatorics</i>, Dynamic Survey 7.</li>
-        <li>Gensane, T., &amp; Ryckelynck, P. (2005). Improved dense packings of congruent squares in a square. <i>Discrete &amp; Computational Geometry, 34</i>, 97&ndash;109.</li>
+        <li>Erd&#337;s, P., &amp; Graham, R. L. (1975). On packing squares with equal squares. <i>Journal of Combinatorial Theory, Series A, 19</i>(1), 119&ndash;123. <a href="https://doi.org/10.1016/0097-3165(75)90099-0">https://doi.org/10.1016/0097-3165(75)90099-0</a></li>
+        <li>Friedman, E. (1998/2009). Packing unit squares in squares: A survey and new results. <i>The Electronic Journal of Combinatorics</i>, Dynamic Survey 7. <a href="https://doi.org/10.37236/28">https://doi.org/10.37236/28</a></li>
+        <li>Gensane, T., &amp; Ryckelynck, P. (2005). Improved dense packings of congruent squares in a square. <i>Discrete &amp; Computational Geometry, 34</i>, 97&ndash;109. <a href="https://doi.org/10.1007/s00454-004-1129-z">https://doi.org/10.1007/s00454-004-1129-z</a></li>
         <li>G&ouml;bel, F. (1979). Geometrical packing and covering problems. In A. Schrijver (Ed.), <i>Packing and covering in combinatorics</i> (Mathematical Centre Tracts 106, pp. 179&ndash;199). Mathematisch Centrum.</li>
-        <li>Stromquist, W. (2003). Packing 10 or 11 unit squares in a square. <i>The Electronic Journal of Combinatorics, 10</i>(1), Article R8.</li>
+        <li>Stromquist, W. (2003). Packing 10 or 11 unit squares in a square. <i>The Electronic Journal of Combinatorics, 10</i>(1), Article R8. <a href="https://doi.org/10.37236/1701">https://doi.org/10.37236/1701</a></li>
       </ul>
 
       <div class="callout">
