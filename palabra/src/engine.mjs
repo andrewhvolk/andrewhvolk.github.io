@@ -47,19 +47,22 @@ export function plan(profile,content,cards,at,seed=1,options={}){
     const max=content.chapters.findIndex(c=>c.id===settings.position);
     const allowed=content.objectives.filter(o=>content.chapters.findIndex(c=>c.id===o.chapterId)<=max);
     const state=o=>evidenceState(profile.attempts,o,at);
-    const gaps=new Set(diagnosticReport(profile.attempts,allowed).filter(x=>x.tested&&x.correct<x.tested).map(x=>x.id));
+    const gaps=new Set(diagnosticReport(profile.attempts,allowed).filter(x=>x.tested&&x.correct<x.tested&&state(allowed.find(o=>o.id===x.id)).state!=='secure').map(x=>x.id));
     const priority=o=>gaps.has(o.id)?-2:state(o).state==='needs-review'?-1:state(o).state==='secure'?4:o.chapterId===settings.position?0:1;
     // Teach prerequisites before their dependents. A completed lesson suffices for introduction;
     // secure evidence remains a separate, stricter criterion.
     const ready=allowed.filter(o=>o.prerequisites.every(id=>profile.lessons.includes(id)||['learning','secure','provisional'].includes(evidenceState(profile.attempts,content.objectives.find(x=>x.id===id),at).state)));
     ready.sort((a,b)=>priority(a)-priority(b)||allowed.indexOf(a)-allowed.indexOf(b));
-    const count=Math.round(settings.minutes*.8), chosen=[];
-    for(const o of ready){
+    const count=Math.round(settings.minutes*.8), chosen=[],slots=Math.max(2,count-3);
+    // Reserve current work when its prerequisites are ready, alongside catch-up review.
+    const current=ready.filter(o=>o.chapterId===settings.position&&state(o).state!=='secure').slice(0,Math.max(1,Math.ceil(slots*.4)));
+    const ordered=[...current,...ready.filter(o=>!current.includes(o))];
+    for(const o of ordered){
       const candidates=content.exercises.filter(e=>e.objectiveIds.includes(o.id)&&e.reviewStatus==='reviewed'&&e.assessmentMode==='auto'&&(!e.vosotros||settings.vosotros)&& !['reading','listening'].includes(e.kind));
       const attempts=profile.attempts.filter(a=>a.objectiveIds.includes(o.id));
       candidates.sort((a,b)=>attempts.filter(x=>x.exerciseId===a.id).length-attempts.filter(x=>x.exerciseId===b.id).length);
       const e=candidates[0];if(e)chosen.push({kind:'exercise',exerciseId:e.id,reason:gaps.has(o.id)?'Diagnostic gap':state(o).state==='needs-review'?'A skill needs another look':profile.lessons.includes(o.id)?'Build independent recall':'Learn a prerequisite'});
-      if(chosen.length>=Math.max(2,count-3))break;
+      if(chosen.length>=slots)break;
     }
     const activeChapter=chosen.length?content.exercises.find(e=>e.id===chosen.at(-1).exerciseId).chapterId:settings.position;
     for(const kind of ['reading','listening','writing']){

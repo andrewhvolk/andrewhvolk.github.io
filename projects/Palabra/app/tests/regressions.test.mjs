@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {course} from '../content/course.mjs';
-import {emptyStore,newProfile,plan,commit,undo,nextReview} from '../src/engine.mjs';
+import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState} from '../src/engine.mjs';
 import {previewBackup,exportBackup,compactState} from '../src/persistence.mjs';
 import {recoverDrafts} from '../src/drafts.mjs';
 const data=JSON.parse(await readFile(new URL('../content/vocabulary.json',import.meta.url),'utf8'));
@@ -39,4 +39,16 @@ test('draft journal resumes matching cursor/revision and ignores stale or malfor
  const raw=JSON.stringify({revision:0,entries:[entry]});assert.equal(recoverDrafts(state,raw).profiles[0].sessions[0].drafts[0].answer,'está');assert.deepEqual(state.profiles[0].sessions[0].drafts,{});
  assert.equal(recoverDrafts({...state,revision:1},raw).profiles[0].sessions[0].drafts[0],undefined);
  assert.deepEqual(recoverDrafts(state,'{'),state);assert.deepEqual(recoverDrafts(state,JSON.stringify({revision:0,entries:[{...entry,answer:{bad:true}}]})),state);
+});
+test('new independent evidence retires diagnostic gaps and current work shares the plan',()=>{
+ const at=Date.UTC(2026,9,30,12),p=newProfile('catchup');p.settings.position='9b';p.lessons=course.objectives.map(o=>o.id);
+ const sampled=[...new Set(course.diagnostic.flatMap(id=>course.exercises.find(e=>e.id===id).objectiveIds))];
+ for(const id of sampled){p.attempts.push({id:'d-'+id,sessionId:'d',diagnostic:true,objectiveIds:[id],outcome:'incorrect',timestamp:at-5*86400000});
+  const variants=course.exercises.filter(e=>e.objectiveIds.includes(id)&&e.production).slice(0,3);
+  for(let i=0;i<6;i++)p.attempts.push({id:id+i,exerciseId:variants[i%3].id,objectiveIds:[id],timestamp:at-(i<3?2:1)*86400000,outcome:'correct',assessmentMode:'auto',production:true});
+  assert.equal(evidenceState(p.attempts,course.objectives.find(o=>o.id===id),at).state,'secure');
+ }
+ let next=plan(p,course,data.cards,at,1);assert(next.queue.some(i=>i.exerciseId?.startsWith('9b.')));assert(!next.queue.some(i=>i.reason==='Diagnostic gap'));
+ p.attempts=p.attempts.filter(a=>a.diagnostic);next=plan(p,course,data.cards,at,2);assert(next.queue.some(i=>i.reason==='Diagnostic gap'));assert(next.queue.some(i=>i.exerciseId?.startsWith('9b.')));
+ p.lessons=[];p.attempts=[];next=plan(p,course,data.cards,at,3);for(const item of next.queue.filter(i=>i.kind==='exercise')){const e=course.exercises.find(e=>e.id===item.exerciseId);for(const id of e.objectiveIds)assert.equal(course.objectives.find(o=>o.id===id).prerequisites.length,0);}
 });
