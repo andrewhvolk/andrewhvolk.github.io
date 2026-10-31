@@ -36,6 +36,7 @@ const recognition=new Set(['1a.infinitives-1','1a.infinitives-5','1a.infinitives
 for(const e of exercises){
  if(recognition.has(e.id)||/Answer in English/.test(e.prompt)&&!e.verbEvidence)e.production=false;
  e.productionType??=e.assessmentMode==='self'?'personal-response':e.production?'controlled-production':'recognition';
+ if(e.verbEvidence){const v=verbs.find(v=>v.id===e.verbEvidence.verb);e.formContrasts=Object.entries(v.forms).flatMap(([tense,forms])=>forms.map((form,i)=>({form,tense,person:tense==='affirmative-tú'?'tú':PERSONS[i]})));}
 }
 for(const o of objectives){const items=exercises.filter(e=>e.objectiveIds.includes(o.id));o.productionExerciseIds=items.filter(e=>e.production&&e.assessmentMode==='auto').map(e=>e.id);
  if(o.skillType==='conjugation')o.exerciseTargets=Object.fromEntries(items.filter(e=>e.verbEvidence).map(e=>[e.id,{...e.verbEvidence,context:e.context}]));

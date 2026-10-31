@@ -2,11 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {course} from '../content/course.mjs';
-import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards,practiceQueue,pendingSessions,showActiveSession} from '../src/engine.mjs';
+import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards,practiceQueue,pendingSessions,showActiveSession,grade} from '../src/engine.mjs';
 import {previewBackup,exportBackup,exportProfileBackup,addImportedProfile,compactState,memoryRepository} from '../src/persistence.mjs';
 import {recoverDrafts} from '../src/drafts.mjs';
 import {coverage} from '../src/validation.mjs';
 import {parseAssignment,assignmentLink,assignmentQueue} from '../src/assignments.mjs';
+import {voiceReadiness} from '../src/audio.mjs';
 const data=JSON.parse(await readFile(new URL('../content/vocabulary.json',import.meta.url),'utf8'));
 const decode=raw=>previewBackup(raw,data.cards,data.sections,course);
 test('legacy preference allowlist rejects markup, wrong types and unknown fields atomically',()=>{
@@ -121,4 +122,19 @@ test('teacher links preview validated scope, keep usual settings and include pre
 test('every chapter has a usable constrained complete-sentence application, with distinct scene choices',()=>{
  for(const c of course.chapters){const e=course.exercises.find(e=>e.id===`apply-${c.id}-sentence`);assert(e);assert(e.acceptedAnswers[0].split(' ').length>=3);assert(e.production);assert.equal(e.productionType,'controlled-production');}
  const scenes=course.exercises.filter(e=>e.kind==='scene-choice');assert.equal(scenes.length,3);assert(scenes.every(e=>!e.production&&e.scene&&e.options.includes(e.acceptedAnswers[0])));
+});
+test('voice readiness distinguishes loading, missing Spanish, selected voices and online dependencies',()=>{
+ assert.match(voiceReadiness([],false).status,/loading/);assert.match(voiceReadiness([],true).status,/text fallback/);
+ const voices=[{lang:'en-US',voiceURI:'en',name:'English'},{lang:'es-MX',voiceURI:'mx',name:'Mexico',localService:true},{lang:'es-ES',voiceURI:'es',name:'Spain',localService:false}];
+ assert.equal(voiceReadiness(voices,true).voice.voiceURI,'mx');assert.equal(voiceReadiness(voices,true,'es').voice.voiceURI,'es');assert.match(voiceReadiness(voices,true,'es').status,/internet/);assert(voiceReadiness(voices,true,'missing').fallback);
+});
+test('glossaries only contain passage words and constrained comprehension keys remain valid',()=>{
+ for(const stimulus of course.stimuli){const tokens=new Set(stimulus.SpanishText.toLocaleLowerCase('es').split(/[^\p{L}]+/u));assert(Object.keys(stimulus.glossary).every(word=>tokens.has(word)),stimulus.id);}
+ const first=course.stimuli.find(s=>s.id==='read-pe-school');assert(!Object.hasOwn(first.glossary,'contraseña'));
+ for(const e of course.exercises.filter(e=>e.options)){assert(e.options.includes(e.acceptedAnswers[0]));assert.equal(grade(e.acceptedAnswers[0],e).outcome,'correct');}
+});
+test('verb feedback identifies the actual person or tense conflict and accent-sensitive meaning',()=>{
+ const present=course.exercises.find(e=>e.id==='2a.present-ar-1');assert.match(grade('estudias',present).message,/tú.*present.*yo/s);
+ const past=course.exercises.find(e=>e.verbEvidence?.verb==='pagar'&&e.verbEvidence.tense==='preterite'&&e.verbEvidence.person==='yo');const result=grade('pague',past);assert.equal(result.outcome,'accent-or-orthography');assert.match(result.message,/written accent/);
+ const plural=course.exercises.find(e=>e.objectiveIds.includes('2b.plurals'));assert.match(grade('wrong',plural).message,/gender and number/);
 });

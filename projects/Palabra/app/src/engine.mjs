@@ -11,8 +11,10 @@ export function grade(answer,item){
   if(item.assessmentMode==='self')return {outcome:'self-assessed',message:'Use the checklist to compare your response. This is activity, not an automatic grammar or pronunciation score.'};
   const a=normalize(answer), answers=item.acceptedAnswers.map(normalize);
   if(answers.includes(a))return {outcome:'correct',message:item.feedback};
-  if(a&&answers.some(x=>accentless(x)===accentless(a)))return {outcome:'accent-or-orthography',message:`Check the accent or spelling: ${item.acceptedAnswers[0]}. Accents can change the person, tense, or meaning. ${item.feedback}`};
-  return {outcome:'incorrect',message:`Expected: ${item.acceptedAnswers.join(' / ')}. ${item.feedback}`};
+  const contrast=item.formContrasts?.filter(f=>normalize(f.form)===a),target=item.verbEvidence;
+  const detail=target&&contrast?.length?`You used ${contrast.map(f=>`${f.person} (${f.tense})`).join(' or ')} of ${target.verb}. This sentence asks for ${target.person} (${target.tense}). `:target?`Check ${target.person} in ${target.tense}; keep the subject and verb ending together. `:item.objectiveIds?.some(id=>/articles|adjectives|plurals|plural-description/.test(id))?'Match the noun’s gender and number, then check the ending. ':'';
+  if(a&&answers.some(x=>accentless(x)===accentless(a)))return {outcome:'accent-or-orthography',message:`${detail}Check the written accent: ${item.acceptedAnswers[0]}. Accents can change the person, tense, or meaning. ${item.feedback}`};
+  return {outcome:'incorrect',message:`${detail}Expected: ${item.acceptedAnswers.join(' / ')}. ${item.feedback}`};
 }
 export function evidenceState(attempts,objective,at){
   const all=attempts.filter(a=>a.objectiveIds?.includes(objective.id)&&!a.undone);
@@ -31,7 +33,7 @@ export function evidenceState(attempts,objective,at){
 export function diagnosticReport(attempts,objectives){const latest=attempts.filter(a=>a.diagnostic).at(-1)?.sessionId;return objectives.map(o=>{const a=attempts.filter(x=>x.diagnostic&&x.sessionId===latest&&x.objectiveIds.includes(o.id));const misses=a.filter(x=>x.outcome!=='correct'),targets=misses.filter(x=>x.verbEvidence).map(x=>`${x.verbEvidence.verb} · ${x.verbEvidence.person}${x.outcome==='accent-or-orthography'?' (written accent)':''}`);return {id:o.id,title:o.title,tested:a.length,correct:a.filter(x=>x.outcome==='correct').length,recommendation:!a.length?'Not sampled':!misses.length?'Promising sample; confirm in daily practice':`Review ${o.title.toLowerCase()}${targets.length?': '+targets.join('; '):''}`};});}
 export function seeded(seed){let x=seed>>>0;return ()=>{x=(Math.imul(1664525,x)+1013904223)>>>0;return x/4294967296;};}
 const shuffle=(items,random)=>{const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-export const defaultSettings={position:'2b',minutes:15,newLimit:10,vosotros:false,direction:'es-en',limit:20,verbsOnly:false,sections:['pe1','pe2','pe3','pe4','1a','1b','2a','2b'],deckMode:'class',speed:.85};
+export const defaultSettings={position:'2b',minutes:15,newLimit:10,vosotros:false,direction:'es-en',limit:20,verbsOnly:false,sections:['pe1','pe2','pe3','pe4','1a','1b','2a','2b'],deckMode:'class',voiceURI:'auto',speed:.85};
 export function vocabularyScope(position,sections){
  // The four independent introductory lists form a shared introductory word pool.
  // They are not claimed to map one-to-one to the three teaching topics.

@@ -6,8 +6,9 @@ const timestamp=x=>Number.isFinite(x)&&x>=0&&x<=8640000000000000;
 function settings(s,sections,chapters){
   assert(plain(s),'Missing preferences.');
   assert(Object.keys(s).every(k=>Object.hasOwn(defaultSettings,k)),'settings: unknown preference field.');
-  s={...s,deckMode:s.deckMode??'custom'}; // Existing explicit filters remain unchanged.
+  s={...s,deckMode:s.deckMode??'custom',voiceURI:s.voiceURI??'auto'}; // Existing explicit filters remain unchanged.
   assert(['class','custom'].includes(s.deckMode),'settings.deckMode must be class or custom.');
+  assert(typeof s.voiceURI==='string'&&s.voiceURI.length>0&&s.voiceURI.length<=300,'settings.voiceURI must be a browser voice identifier.');
   assert(Array.isArray(s.sections)&&s.sections.every(id=>sections.includes(id)),'Invalid vocabulary filters.');
   assert(['es-en','en-es','mixed'].includes(s.direction)&&[10,20,30,50].includes(s.limit),'Invalid review preferences.');
   assert(typeof s.verbsOnly==='boolean','settings.verbsOnly must be true or false.');
