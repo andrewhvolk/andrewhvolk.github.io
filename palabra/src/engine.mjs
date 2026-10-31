@@ -76,7 +76,7 @@ export function commit(profile,sessionId,input,content,cards,at){
   if(s.committed.includes(input.id))return p;
   if(s.completedAt||input.index!==s.cursor)throw Error('This answer is already saved, or another tab has moved the session. Reload to continue.');
   const item=s.queue[s.cursor];if(!item)throw Error('No pending item.');
-  const before={progress:structuredClone(p.progress),historyLength:p.history.length,attemptsLength:p.attempts.length,cursor:s.cursor};
+  const before={cardId:item.cardId||null,previous:item.cardId?structuredClone(p.progress[item.cardId]||null):null,historyLength:p.history.length,attemptsLength:p.attempts.length,cursor:s.cursor};
   const e=item.kind==='exercise'?content.exercises.find(e=>e.id===item.exerciseId):null;
   const outcome=e?grade(input.answer,e).outcome:input.correct?'correct':'incorrect';
   const retry=!!input.retry||!!s.drafts[s.cursor]?.retry;
@@ -89,16 +89,21 @@ export function commit(profile,sessionId,input,content,cards,at){
     if(!already)p.progress[item.cardId]=nextReview(p.progress[item.cardId],input.correct,at);else a.practiceOnly=true;
     if(!a.practiceOnly)p.history.push({id:item.cardId,correct:!!input.correct,at,direction:item.direction});
   }
-  p.attempts.push(a);s.undo.push({attemptId:a.id,before});s.committed.push(a.id);s.results[s.cursor]=a.id;s.cursor++;
+  // Only the latest session can legally undo. Keep its most recent 20 inverse events.
+  for(const other of p.sessions)if(other.id!==s.id)other.undo=[];
+  p.attempts.push(a);s.undo.push({attemptId:a.id,before});s.undo=s.undo.slice(-20);s.committed.push(a.id);s.results[s.cursor]=a.id;s.cursor++;
   if(s.cursor>=s.queue.length)s.completedAt=at;
   return p;
 }
 export function undo(profile,sessionId){
-  const p=structuredClone(profile),s=p.sessions.find(x=>x.id===sessionId),u=s?.undo.at(-1);if(!u)return p;
+  const p=structuredClone(profile),s=p.sessions.find(x=>x.id===sessionId),u=s?.undo.at(-1);
+  if(!u){if(s?.committed.length&&p.attempts.at(-1)?.sessionId!==sessionId)throw Error('Only the most recent learning event can be undone.');return p;}
   const tail=p.attempts.slice(u.before.attemptsLength);
   if(tail[0]?.id!==u.attemptId||tail.some(a=>a.sessionId!==sessionId||a.id!==u.attemptId&&!a.retry))throw Error('Only the most recent learning event can be undone. Later sessions already contain saved answers.');
   s.undo.pop();
-  p.progress=u.before.progress;p.history.length=u.before.historyLength;p.attempts.length=u.before.attemptsLength;s.cursor=u.before.cursor;s.committed=s.committed.filter(id=>id!==u.attemptId);delete s.results[s.cursor];delete s.drafts[s.cursor];
+  if(u.before.progress)p.progress=u.before.progress; // Existing v2 snapshots remain undoable.
+  else if(u.before.cardId){if(u.before.previous)p.progress[u.before.cardId]=u.before.previous;else delete p.progress[u.before.cardId];}
+  p.history.length=u.before.historyLength;p.attempts.length=u.before.attemptsLength;s.cursor=u.before.cursor;s.committed=s.committed.filter(id=>id!==u.attemptId);delete s.results[s.cursor];delete s.drafts[s.cursor];
   // The answer has already been shown: undo restores state, not an unseen assessment.
   if(s.queue[s.cursor].kind==='exercise')s.drafts[s.cursor]={retry:true,usedHint:true};
   s.completedAt=null;return p;

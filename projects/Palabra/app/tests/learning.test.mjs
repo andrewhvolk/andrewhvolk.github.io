@@ -97,7 +97,7 @@ test('v1 migration retains exact records, unknown recovery, no invented mastery'
  const broken=structuredClone(input);broken.progress[card.id].correct=99;assert.throws(()=>decode(JSON.stringify(broken)));assert.equal(progress[card.id].correct,7);
 });
 test('strict atomic malformed, oversized, version and unsafe-state rejection',()=>{
- assert.throws(()=>decode('{'));assert.throws(()=>decode('x'.repeat(10*1024*1024+1)));assert.throws(()=>decode(JSON.stringify({format:'palabra-backup',version:3})));
+ assert.throws(()=>decode('{'));assert.throws(()=>decode('x'.repeat(64*1024*1024+1)));assert.throws(()=>decode(JSON.stringify({format:'palabra-backup',version:3})));
  const s=emptyStore();s.profiles[0].displayName='<img src=x onerror=alert(1)>';assert.equal(decode(exportBackup(s)).state.profiles[0].displayName,s.profiles[0].displayName);
  s.profiles[0].lessons=['missing'];assert.throws(()=>decode(exportBackup(s)));s.profiles[0].lessons=[];s.contentVersion='future';assert.throws(()=>decode(exportBackup(s)));
 });

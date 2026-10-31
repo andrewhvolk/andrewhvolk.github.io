@@ -1,5 +1,5 @@
 import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs';
-const MAX=10*1024*1024;
+export const MAX_BACKUP_BYTES=64*1024*1024;
 const plain=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const assert=(ok,message)=>{if(!ok)throw Error(`${message} Nothing was changed.`);};
 const timestamp=x=>Number.isFinite(x)&&x>=0&&x<=8640000000000000;
@@ -24,7 +24,7 @@ function progress(input,ids){
   }return {valid,unknown};
 }
 export function previewBackup(raw,cards,sections,content){
-  assert(typeof raw==='string'&&raw.length<=MAX,'Choose a backup smaller than 10 MB.');let data;
+  assert(typeof raw==='string'&&new TextEncoder().encode(raw).length<=MAX_BACKUP_BYTES,'Choose a backup smaller than 64 MB.');let data;
   try{data=JSON.parse(raw);}catch{throw Error('This is not valid JSON. Nothing was changed.');}
   assert(plain(data)&&data.format==='palabra-backup'&&[1,SCHEMA].includes(data.version),'Unsupported Palabra backup.');
   const ids=new Set(cards.map(c=>c.id)), sectionIds=sections.map(s=>s.id),chapters=new Set(content.chapters.map(c=>c.id));let store,matched=0,unmatched=0;
@@ -70,7 +70,9 @@ export function previewBackup(raw,cards,sections,content){
         for(const [index,draft]of Object.entries(s.drafts))assert(/^\d+$/.test(index)&&Number(index)<s.queue.length&&plain(draft)&&(draft.answer===undefined||typeof draft.answer==='string'&&draft.answer.length<=4000)&&['usedHint','revealed','retry','audioFallback','audioPlayed'].every(k=>draft[k]===undefined||typeof draft[k]==='boolean'),'Invalid saved answer draft.');
         if(s.feedback)assert(plain(s.feedback)&&exIds.has(s.feedback.exerciseId)&&attempts.has(s.feedback.attemptId)&&plain(s.feedback.checklist)&&Object.values(s.feedback.checklist).every(v=>typeof v==='boolean'),'Invalid saved exercise feedback.');
         // Undo contains state snapshots; validate those too before they can become live data.
-        for(const u of s.undo){assert(plain(u)&&s.committed.includes(u.attemptId)&&plain(u.before)&&Number.isInteger(u.before.cursor)&&u.before.cursor>=0&&u.before.cursor<s.cursor&&Number.isInteger(u.before.historyLength)&&u.before.historyLength>=0&&u.before.historyLength<=p.history.length&&Number.isInteger(u.before.attemptsLength)&&u.before.attemptsLength>=0&&u.before.attemptsLength<p.attempts.length,'Invalid undo record.');progress(u.before.progress,ids);}
+        for(const u of s.undo){assert(plain(u)&&s.committed.includes(u.attemptId)&&plain(u.before)&&Number.isInteger(u.before.cursor)&&u.before.cursor>=0&&u.before.cursor<s.cursor&&Number.isInteger(u.before.historyLength)&&u.before.historyLength>=0&&u.before.historyLength<=p.history.length&&Number.isInteger(u.before.attemptsLength)&&u.before.attemptsLength>=0&&u.before.attemptsLength<p.attempts.length,'Invalid undo record.');
+          if(u.before.progress)progress(u.before.progress,ids);
+          else {assert(u.before.cardId===null||ids.has(u.before.cardId),'Invalid undo card.');assert(u.before.previous===null||u.before.cardId!==null,'Invalid undo schedule.');if(u.before.previous!==null)progress({[u.before.cardId]:u.before.previous},ids);}}
         sessions.add(s.id);
       }
       assert(p.activeSession===null||sessions.has(p.activeSession),'Missing active session.');
@@ -79,7 +81,22 @@ export function previewBackup(raw,cards,sections,content){
   }
   return {state:store,summary:{version:data.version,profiles:store.profiles.length,matched,unmatched,invalid:0,migrated:data.version===1?matched:0},raw:data};
 }
-export const exportBackup=state=>JSON.stringify({format:'palabra-backup',version:SCHEMA,exportedAt:new Date().toISOString(),state},null,2);
+export function compactState(state){
+ const next=structuredClone(state);
+ for(const p of next.profiles){const latest=p.attempts.at(-1)?.sessionId;
+  for(const s of p.sessions){s.undo=s.id===latest?s.undo.slice(-20):[];
+   // Convert old full-map snapshots without changing their inverse meaning.
+   for(const u of s.undo)if(u.before.progress){const item=s.queue[u.before.cursor],id=item?.cardId||null;u.before.cardId=id;u.before.previous=id?u.before.progress[id]||null:null;delete u.before.progress;}
+   if(s.completedAt){s.drafts={};s.results={};}
+  }
+ }
+ const seen=new Set();next.recovery=next.recovery.filter(r=>{const key=JSON.stringify(r);if(seen.has(key))return false;seen.add(key);return true;});
+ return next;
+}
+export function exportBackup(state){
+ const raw=JSON.stringify({format:'palabra-backup',version:SCHEMA,exportedAt:new Date().toISOString(),state:compactState(state)});
+ assert(new TextEncoder().encode(raw).length<=MAX_BACKUP_BYTES,'This browser backup exceeds 64 MB. Export individual profiles.');return raw;
+}
 export async function openRepository(indexedDB=globalThis.indexedDB){
   if(!indexedDB)throw Error('This browser cannot open local storage. You can practice in memory and export before leaving.');
   const db=await new Promise((resolve,reject)=>{const r=indexedDB.open('palabra-learning',2);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('state'))r.result.createObjectStore('state');};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.onblocked=()=>reject(Error('Close older Palabra tabs to upgrade local storage.'));});

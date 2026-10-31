@@ -1,11 +1,13 @@
+import {JOURNAL_KEY,recoverDrafts} from './drafts.mjs';
 import {course} from '../content/course.mjs';
 import {PERSONS} from '../content/verbs.mjs';
 import {dayKey,emptyStore,newProfile,eligibleCards,plan,startDiagnostic,commit,undo,grade,evidenceState,diagnosticReport,normalize} from './engine.mjs';
-import {openRepository,memoryRepository,previewBackup,exportBackup} from './persistence.mjs';
+import {openRepository,memoryRepository,previewBackup,exportBackup,compactState,MAX_BACKUP_BYTES} from './persistence.mjs';
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const main=$('#main'),modal=$('#modal');
 const nav=[['today','◈','Today'],['course','▤','Course'],['words','▧','Words'],['verbs','⌁','Verbs'],['practice','✳','Practice'],['progress','▥','Progress'],['settings','⚙','Settings']];
 let data,state,repo,volatile=false,stale=false,saving=Promise.resolve(),page='today',chapter=null,query='',wordPage=0,wordBox='all',verbQuery='',practiceChapter='2b',practiceKind='all',toastTimer,lastFocus,importPreview=null;
+let pendingDrafts=new Map(),draftTimer;
 const p=()=>state.profiles.find(x=>x.id===state.activeProfile);
 const s=()=>p().sessions.find(x=>x.id===p().activeSession);
 const ex=id=>course.exercises.find(e=>e.id===id),obj=id=>course.objectives.find(o=>o.id===id);
@@ -21,8 +23,12 @@ channel?.addEventListener('message',e=>{if(e.data>state?.revision){stale=true;st
 function mutate(fn,{renderAfter=true}={}){
  const job=saving.then(async()=>{
   if(stale)throw Error('Another tab saved progress. Reload this tab before continuing.');
-  const next=structuredClone(state);await fn(next,next.profiles.find(x=>x.id===next.activeProfile));
+  const entries=[...pendingDrafts.values()];const next=compactState(state);
+  for(const entry of entries){const se=next.profiles.find(x=>x.id===entry.profileId)?.sessions.find(x=>x.id===entry.sessionId);if(se&&!se.completedAt&&!se.feedback&&se.cursor===entry.index)se.drafts[entry.index]={...se.drafts[entry.index],answer:entry.answer};}
+  await fn(next,next.profiles.find(x=>x.id===next.activeProfile));
   try{state=await repo.write(next,state.revision);}catch(error){if(/Another tab/.test(error.message)){stale=true;throw error;}volatile=true;repo=memoryRepository(state);state=await repo.write(next,state.revision);toast('Device storage could not save. Practice continues in memory. Export a backup before closing this tab.');}
+  for(const entry of entries)if(pendingDrafts.get(entry.sessionId)===entry)pendingDrafts.delete(entry.sessionId);
+  persistDraftJournal();
   if(!volatile)channel?.postMessage(state.revision);
   status(volatile?'Practice in memory only · Export before leaving':'Saved in this browser',volatile);
   if(renderAfter)render();return true;
@@ -70,7 +76,11 @@ function skillQueue(id){return course.exercises.filter(e=>e.objectiveIds.include
 function selectedQueue(chap,kind){return course.exercises.filter(e=>e.chapterId===chap&&e.reviewStatus==='reviewed'&&(!e.vosotros||p().settings.vosotros)&&(kind==='all'||e.kind===kind||kind==='grammar'&&!['reading','listening','writing','speaking'].includes(e.kind))).slice(0,kind==='grammar'||kind==='all'?12:20).map(e=>e.id);}
 function spanishVoice(){return globalThis.speechSynthesis?.getVoices().find(v=>/^es[-_]/i.test(v.lang));}
 function speak(text,{onError}={}){const voice=spanishVoice();if(!voice||!globalThis.SpeechSynthesisUtterance){toast('No Spanish voice is available. Use the labeled text fallback for this activity.');onError?.();return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.voice=voice;u.lang=voice.lang;u.rate=s()?.settings.speed||p().settings.speed;u.onstart=()=>{if(onError)draft({audioPlayed:true}).catch(()=>{});};u.onerror=()=>{toast('Audio could not play. You can use the text fallback.');onError?.();};speechSynthesis.speak(u);}
-function sessionDraft(){const session=s();return session.drafts[session.cursor]||{};}
+function sessionDraft(){const session=s(),entry=pendingDrafts.get(session.id);return {...session.drafts[session.cursor],...(entry?.index===session.cursor?{answer:entry.answer}:{})};}
+function persistDraftJournal(){try{if(pendingDrafts.size)localStorage.setItem(JOURNAL_KEY,JSON.stringify({revision:state.revision,entries:[...pendingDrafts.values()]}));else localStorage.removeItem(JOURNAL_KEY);}catch{status('Draft awaiting save · keep this tab open',true);}}
+function stageAnswer(answer){const se=s();pendingDrafts.set(se.id,{profileId:p().id,sessionId:se.id,index:se.cursor,answer:answer.slice(0,4000)});persistDraftJournal();status('Saving draft…');clearTimeout(draftTimer);draftTimer=setTimeout(()=>mutate(()=>{},{renderAfter:false}).catch(()=>{}),300);}
+window.addEventListener('pagehide',()=>{if(pendingDrafts.size)mutate(()=>{},{renderAfter:false}).catch(()=>{});});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&pendingDrafts.size)mutate(()=>{},{renderAfter:false}).catch(()=>{});});
 async function draft(patch){const sid=s()?.id,index=s()?.cursor;if(!sid)return;await mutate((_,profile)=>{const session=profile.sessions.find(x=>x.id===sid);session.drafts[index]={...session.drafts[index],...patch};},{renderAfter:false});}
 function accentKeys(){return `<div class="accent-keys" aria-label="Spanish character input">${['á','é','í','ó','ú','ü','ñ','¿','¡'].map(c=>button(c,'accent','','data-char="'+c+'" aria-label="Insert '+c+'"')).join('')}</div>`;}
 function clockHtml(prompt){const match=prompt.match(/Clock (\d+):(\d+)/);if(!match)return '';const h=+match[1],m=+match[2],line=(angle,length,weight)=>`<line x1="70" y1="70" x2="${70+Math.sin(angle)*length}" y2="${70-Math.cos(angle)*length}" stroke="currentColor" stroke-width="${weight}" stroke-linecap="round"/>`;return `<svg viewBox="0 0 140 140" class="clock" role="img" aria-label="Clock showing ${h}:${String(m).padStart(2,'0')}"><circle cx="70" cy="70" r="65" fill="#f1edda" stroke="#aab79d"/>${[12,3,6,9].map((n,i)=>`<text x="${[70,124,70,16][i]}" y="${[24,76,128,76][i]}" text-anchor="middle" font-size="15">${n}</text>`).join('')}${line((h%12+m/60)*Math.PI/6,32,5)}${line(m*Math.PI/30,47,3)}<circle cx="70" cy="70" r="4" fill="currentColor"/></svg>`;}
@@ -98,12 +108,12 @@ async function checkAnswer(answer){
  });main.querySelector('.feedback')?.focus();
 }
 function download(name,text){const url=URL.createObjectURL(new Blob([text],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Backup prepared. Keep it somewhere you can find it.');}
-function importDialog(){showModal('Bring your progress along.',`<p>Choose a Palabra v1 or v2 JSON backup, or paste its JSON below. Nothing changes until you review and apply the preview.</p><label for="backup-file">Backup file (under 10 MB)</label><input id="backup-file" type="file" accept="application/json,.json"><div class="field" style="margin-top:20px"><label for="backup-json">Or paste backup JSON</label><textarea id="backup-json" maxlength="10485760" placeholder="{ … }"></textarea></div>${button('Preview pasted backup','preview-import','primary')}<p id="import-error" class="inline-error" role="alert"></p>`);}
+function importDialog(){showModal('Bring your progress along.',`<p>Choose a Palabra v1 or v2 JSON backup, or paste its JSON below. Nothing changes until you review and apply the preview.</p><label for="backup-file">Backup file (under 64 MB)</label><input id="backup-file" type="file" accept="application/json,.json"><div class="field" style="margin-top:20px"><label for="backup-json">Or paste backup JSON</label><textarea id="backup-json" maxlength="67108864" placeholder="{ … }"></textarea></div>${button('Preview pasted backup','preview-import','primary')}<p id="import-error" class="inline-error" role="alert"></p>`);}
 function previewImport(raw){importPreview=previewBackup(raw,data.cards,data.sections,course);const r=importPreview.summary;showModal('Review your import.',`<div class="import-preview"><p>Version ${r.version} · ${r.profiles} profile(s)</p><div class="metrics"><div class="metric"><label>Matched</label><b>${r.matched}</b></div><div class="metric"><label>Unmatched</label><b>${r.unmatched}</b></div><div class="metric"><label>Invalid</label><b>${r.invalid}</b></div><div class="metric"><label>Migrated</label><b>${r.migrated}</b></div></div><p>Applying replaces this browser’s current profile collection. A recovery snapshot of the current state and the original import will be retained. Unmatched v1 cards will be preserved there. No grammar mastery is invented from vocabulary history.</p><div class="actions">${button('Apply this backup','apply-import','primary')}${button('Cancel','close-modal')}</div></div>`);}
 document.addEventListener('click',async event=>{
  const el=event.target.closest('[data-action]');if(!el||el.disabled)return;const action=el.dataset.action,id=el.dataset.id;
  if(el.tagName==='BUTTON')event.preventDefault();
- try{switch(action){
+ try{if(pendingDrafts.size)await mutate(()=>{},{renderAfter:false});switch(action){
   case 'close-modal':modal.close();break;
   case 'start-daily':await launch();break;
   case 'start-words':await launch(null,{wordsOnly:true});break;
@@ -146,7 +156,7 @@ document.addEventListener('click',async event=>{
   case 'export-recovery':download(`palabra-recovery-${dayKey(Date.now())}.json`,JSON.stringify({recovery:state.recovery},null,2));break;
   case 'import-dialog':importDialog();break;
   case 'preview-import':previewImport($('#backup-json').value);break;
-  case 'apply-import':{const backup=importPreview;await mutate(next=>{const previous={...structuredClone(next),recovery:[]},priorRevision=next.revision;Object.assign(next,structuredClone(backup.state));next.revision=priorRevision;next.recovery.push({reason:'State before backup replacement. Retained for recovery.',backup:JSON.parse(exportBackup(previous))});next.recovery.push({reason:'Original imported backup',raw:backup.raw});});modal.close();importPreview=null;location.hash='today';break;}
+  case 'apply-import':{const backup=importPreview;await mutate(next=>{const previous={...structuredClone(next),recovery:[]},priorRevision=next.revision;Object.assign(next,structuredClone(backup.state));next.revision=priorRevision;next.recovery.push({reason:'State before backup replacement. Retained for recovery.',backup:JSON.parse(exportBackup(previous))});/* Original v1 records already live in recovery; v2 is represented by its validated state. */});modal.close();importPreview=null;location.hash='today';break;}
   case 'add-profile':showModal('A new local study space.',`<form id="profile-form"><div class="field"><label for="new-profile-name">Display name</label><input id="new-profile-name" maxlength="60" required></div><p class="tiny">The current profile and unfinished session stay saved.</p><button type="submit" class="primary">Create local profile</button></form>`);break;
   case 'reset-profile':showModal('Reset this profile?',`<p>This resets ${esc(p().displayName)}’s learning history and unfinished sessions. Other profiles remain. A recovery snapshot is retained in Settings.</p><div class="actions">${button('Keep learning','close-modal','primary')}${button('Reset this profile','confirm-reset','danger')}</div>`);break;
   case 'confirm-reset':await mutate((next,profile)=>{next.recovery.push({reason:'Profile before explicit reset',profile:structuredClone(profile)});const fresh=newProfile(profile.id,profile.displayName);fresh.settings=profile.settings;fresh.onboarded=true;next.profiles[next.profiles.findIndex(x=>x.id===profile.id)]=fresh;});modal.close();break;
@@ -154,7 +164,7 @@ document.addEventListener('click',async event=>{
 });
 document.addEventListener('submit',async event=>{
  event.preventDefault();const form=event.target;
- try{
+ try{if(pendingDrafts.size)await mutate(()=>{},{renderAfter:false});
   if(form.id==='onboarding-form'){const diagnostic=event.submitter?.value==='diagnostic';await mutate((_,profile)=>{profile.displayName=$('#display-name').value.trim()||'Learner';profile.settings.position=$('#class-position').value;profile.settings.minutes=Number($('#time-budget').value);profile.onboarded=true;},{renderAfter:false});if(diagnostic)await launch(null,{diagnostic:true});else render();}
   if(form.id==='answer-form')await checkAnswer();
   if(form.id==='retry-form'){const a=$('#retry-answer').value,e=ex(s().feedback.exerciseId),g=grade(a,e);await mutate((_,profile)=>{const se=profile.sessions.find(x=>x.id===profile.activeSession);se.feedback.retryAnswer=a;se.feedback.retryMessage=g.message;const original=profile.attempts.find(x=>x.id===se.feedback.attemptId);profile.attempts.push({...original,id:crypto.randomUUID(),answer:a,outcome:g.outcome,timestamp:Date.now(),retry:true,practiceOnly:true});});}
@@ -167,7 +177,7 @@ document.addEventListener('input',event=>{
  const el=event.target;
  if(el.id==='word-search'){const at=el.selectionStart;query=el.value;wordPage=0;renderWords();$('#word-search').focus();$('#word-search').setSelectionRange(at,at);}
  if(el.id==='verb-search'){const at=el.selectionStart;verbQuery=el.value;renderVerbs();$('#verb-search').focus();$('#verb-search').setSelectionRange(at,at);}
- if(el.id==='answer'&&s()&&!s().feedback)draft({answer:el.value}).catch(()=>{});
+ if(el.id==='answer'&&s()&&!s().feedback)stageAnswer(el.value);
 });
 document.addEventListener('change',async event=>{const el=event.target;try{
  if(el.id==='word-box'){wordBox=el.value;wordPage=0;renderWords();}
@@ -176,7 +186,7 @@ document.addEventListener('change',async event=>{const el=event.target;try{
  if(el.id==='practice-kind'){practiceKind=el.value;renderPractice();}
  if(el.id==='profile-select')await mutate(next=>{next.activeProfile=el.value;});
  if(el.dataset.rubric)await mutate((_,profile)=>{profile.sessions.find(x=>x.id===profile.activeSession).feedback.checklist[el.dataset.rubric]=el.checked;},{renderAfter:false});
- if(el.id==='backup-file'){const file=el.files[0];if(!file)return;if(file.size>10*1024*1024)throw Error('Choose a backup smaller than 10 MB. Nothing was changed.');previewImport(await file.text());}
+ if(el.id==='backup-file'){const file=el.files[0];if(!file)return;if(file.size>MAX_BACKUP_BYTES)throw Error('Choose a backup smaller than 64 MB. Nothing was changed.');previewImport(await file.text());}
  }catch(error){toast(error.message);if($('#import-error'))$('#import-error').textContent=error.message;}});
 document.addEventListener('keydown',event=>{
  if(modal.open||!s()||s().feedback)return;
@@ -187,7 +197,7 @@ document.addEventListener('keydown',event=>{
   if(sessionDraft().revealed&&['1','2'].includes(event.key)){event.preventDefault();main.querySelector(`[data-action=${event.key==='1'?'vocab-miss':'vocab-correct'}]`)?.click();}
  }
 });
-window.addEventListener('hashchange',navigate);
+window.addEventListener('hashchange',async()=>{if(pendingDrafts.size)await mutate(()=>{},{renderAfter:false}).catch(()=>{});navigate();});
 try{
  const response=await fetch(new URL('../content/vocabulary.json',import.meta.url));if(!response.ok)throw Error('Vocabulary could not load. Refresh the page to try again.');data=await response.json();
  try{repo=await openRepository();state=await repo.read();if(state)previewBackup(exportBackup(state),data.cards,data.sections,course);}
@@ -196,5 +206,6 @@ try{
   if(legacy){try{const old=JSON.parse(legacy);const migrated=previewBackup(JSON.stringify({...old,format:'palabra-backup'}),data.cards,data.sections,course);state=migrated.state;toast(`Migrated ${migrated.summary.matched} vocabulary schedules. The original v1 data is preserved.`);}catch(error){state.recovery.push({reason:'Legacy data could not be migrated; unchanged original retained.',raw:legacy});toast(error.message);}}
   try{state=await repo.write(state,0);}catch(error){volatile=true;repo=memoryRepository();state=await repo.write(state,0);toast('Device storage could not save. Practice in memory and export before leaving.');}
  }
+ try{state=recoverDrafts(state,localStorage.getItem(JOURNAL_KEY));}catch{}
  status(volatile?'Practice in memory only · Export before leaving':'Saved in this browser');navigate();
 }catch(error){main.innerHTML=`<section class="empty"><h1>Your study space couldn’t open.</h1><p>${esc(error.message)}</p><button onclick="location.reload()">Try again</button></section>`;}

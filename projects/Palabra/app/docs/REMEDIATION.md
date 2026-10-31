@@ -5,8 +5,8 @@ The public target is https://andrewhvolk.github.io/palabra/; the separate privat
 
 | Order | Scope | Status |
 |---|---|---|
-| 1 | Legacy import trust boundary and display escaping | Implemented; regression suite passes. Deployment verification pending. |
-| 2 | Bounded undo, compact backups, draft persistence | Pending |
+| 1 | Legacy import trust boundary and display escaping | Live in 92f1ec6; 17 tests, both Actions checks and public file hashes verified. |
+| 2 | Bounded undo, compact backups, draft persistence | Implemented: inverse events (20 latest), old snapshot conversion, compact exports, 64 MB byte cap, debounced drafts with small crash journal. 19 tests pass, including 21,950 attempts and repeated round trips. Deployment pending. |
 | 3 | Retire resolved diagnostic gaps and balance progression | Pending |
 | 4 | Chapter-aligned vocabulary and daily introduction budget | Pending |
 | 5 | Truthful production evidence and receptive objectives/coverage | Pending |

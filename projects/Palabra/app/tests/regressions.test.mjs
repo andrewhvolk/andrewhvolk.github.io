@@ -2,8 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {course} from '../content/course.mjs';
-import {emptyStore} from '../src/engine.mjs';
-import {previewBackup,exportBackup} from '../src/persistence.mjs';
+import {emptyStore,newProfile,plan,commit,undo,nextReview} from '../src/engine.mjs';
+import {previewBackup,exportBackup,compactState} from '../src/persistence.mjs';
+import {recoverDrafts} from '../src/drafts.mjs';
 const data=JSON.parse(await readFile(new URL('../content/vocabulary.json',import.meta.url),'utf8'));
 const decode=raw=>previewBackup(raw,data.cards,data.sections,course);
 test('legacy preference allowlist rejects markup, wrong types and unknown fields atomically',()=>{
@@ -16,4 +17,26 @@ test('legacy preference allowlist rejects markup, wrong types and unknown fields
  for(const [key,value]of Object.entries({minutes:'15',newLimit:21,vosotros:1,speed:NaN,verbsOnly:'false',position:'other',unknown:1})){
   const state=emptyStore();state.profiles[0].settings[key]=value;assert.throws(()=>decode(exportBackup(state)),/settings/);
  }
+});
+test('full-book schedules, bounded inverse undo, legacy snapshot migration and multi-year backups',()=>{
+ const at=Date.UTC(2026,9,30,12);let p=newProfile('long');p.settings.sections=data.sections.map(s=>s.id);p.settings.limit=50;
+ for(const c of data.cards)p.progress[c.id]=nextReview(null,true,at-864000000);
+ const session=plan(p,course,data.cards,at,9,{wordsOnly:true});p.sessions.push(session);p.activeSession=session.id;
+ for(let i=0;i<50;i++)p=commit(p,session.id,{id:'answer-'+i,index:i,correct:true},course,data.cards,at+i);
+ assert.equal(p.sessions[0].undo.length,20);assert(p.sessions[0].undo.every(u=>!u.before.progress));
+ const undone=undo(p,session.id);assert.equal(undone.sessions[0].cursor,49);assert.equal(undone.progress[session.queue[49].cardId].reviews,1);
+ let state={...emptyStore(),profiles:[p],activeProfile:p.id};let raw=exportBackup(state);assert(Buffer.byteLength(raw)<300000);assert.equal(decode(raw).state.profiles[0].attempts.length,50);
+ // Three years, 20 activities/day: retain all evidence and session resume records.
+ const sample=structuredClone(p.attempts[0]);for(let i=0;i<21900;i++)p.attempts.push({...sample,id:'year-'+i,timestamp:at+i*3600000,sessionId:session.id});
+ raw=exportBackup(state);assert(Buffer.byteLength(raw)<16*1024*1024);assert.equal(decode(raw).state.profiles[0].attempts.length,21950);
+ for(let i=0;i<3;i++){const restored=decode(raw).state;const again=exportBackup(restored);assert.equal(Buffer.byteLength(again),Buffer.byteLength(raw));raw=again;}
+ const legacy=structuredClone(state);legacy.profiles[0].sessions[0].undo=[{attemptId:'answer-49',before:{progress:structuredClone(p.progress),historyLength:49,attemptsLength:49,cursor:49}}];
+ const migrated=compactState(legacy);assert(!migrated.profiles[0].sessions[0].undo[0].before.progress);assert.equal(decode(exportBackup(migrated)).summary.matched,940);
+});
+test('draft journal resumes matching cursor/revision and ignores stale or malformed input',()=>{
+ const state=emptyStore(),p=state.profiles[0],session=plan(p,course,data.cards,Date.now(),1);p.sessions.push(session);p.activeSession=session.id;
+ const entry={profileId:p.id,sessionId:session.id,index:0,answer:'está'};
+ const raw=JSON.stringify({revision:0,entries:[entry]});assert.equal(recoverDrafts(state,raw).profiles[0].sessions[0].drafts[0].answer,'está');assert.deepEqual(state.profiles[0].sessions[0].drafts,{});
+ assert.equal(recoverDrafts({...state,revision:1},raw).profiles[0].sessions[0].drafts[0],undefined);
+ assert.deepEqual(recoverDrafts(state,'{'),state);assert.deepEqual(recoverDrafts(state,JSON.stringify({revision:0,entries:[{...entry,answer:{bad:true}}]})),state);
 });
