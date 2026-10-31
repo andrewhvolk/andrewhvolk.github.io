@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {course} from '../content/course.mjs';
-import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards,practiceQueue} from '../src/engine.mjs';
+import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards,practiceQueue,pendingSessions,showActiveSession} from '../src/engine.mjs';
 import {previewBackup,exportBackup,compactState} from '../src/persistence.mjs';
 import {recoverDrafts} from '../src/drafts.mjs';
 import {coverage} from '../src/validation.mjs';
@@ -92,4 +92,10 @@ test('manual queues include opted-in vosotros and explicitly filter tense/person
  p.settings.vosotros=false;assert(!practiceQueue(p,course,{objectiveId:'2a.present-ar'}).some(id=>id.endsWith('vosotros')));
  for(const tense of ['present','preterite','affirmative-tú']){const ids=practiceQueue(p,course,{verb:'ir',tense});assert(ids.length);assert(ids.every(id=>course.exercises.find(e=>e.id===id).verbEvidence.tense===tense));}
  const yo=practiceQueue(p,course,{verb:'ir',tense:'preterite',person:'yo'});assert(yo.length);assert(yo.every(id=>course.exercises.find(e=>e.id===id).verbEvidence.person==='yo'));
+});
+test('next-day dashboard and newest daily resume take precedence over old extra practice',()=>{
+ const at=Date.UTC(2026,9,30,12),p=newProfile('return');
+ const old=plan(p,course,data.cards,at-86400000,1,{practiceOnly:true}),daily=plan(p,course,data.cards,at,2),newer=plan(p,course,data.cards,at+100,3);p.sessions=[old,daily,newer];
+ assert.equal(pendingSessions(p)[0].id,newer.id);newer.completedAt=at+200;assert.equal(pendingSessions(p)[0].id,daily.id);
+ assert(showActiveSession(newer,at+300));assert(!showActiveSession(newer,at+86400000));assert(showActiveSession(old,at+86400000));
 });

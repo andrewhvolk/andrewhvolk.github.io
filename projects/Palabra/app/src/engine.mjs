@@ -41,6 +41,8 @@ export function vocabularyScope(position,sections){
 export function newProfile(id,name='Learner'){return {id,displayName:name,settings:structuredClone(defaultSettings),progress:{},history:[],attempts:[],lessons:[],sessions:[],activeSession:null,onboarded:false};}
 export function emptyStore(){return {version:SCHEMA,contentVersion:CONTENT_VERSION,revision:0,activeProfile:'default',profiles:[newProfile('default')],recovery:[]};}
 export const eligibleCards=(cards,settings)=>cards.filter(c=>c.sections.some(s=>settings.sections.includes(s))&&(!settings.verbsOnly||c.verbs.length));
+export function pendingSessions(profile){return profile.sessions.filter(s=>!s.completedAt&&s.cursor<s.queue.length).sort((a,b)=>(Number(a.diagnostic)+Number(a.practiceOnly)*2)-(Number(b.diagnostic)+Number(b.practiceOnly)*2)||b.createdAt-a.createdAt);}
+export const showActiveSession=(session,at)=>!!session&&(!session.completedAt||dayKey(session.completedAt)===dayKey(at));
 export function practiceQueue(profile,content,{objectiveId,chapterId,kind='all',verb,tense='all',person='all',limit=12}={}){
  const items=content.exercises.filter(e=>e.reviewStatus==='reviewed'&&(!e.vosotros||profile.settings.vosotros)&&(!objectiveId||e.objectiveIds.includes(objectiveId))&&(!chapterId||e.chapterId===chapterId)&&(!verb||e.verbEvidence?.verb===verb)&&(tense==='all'||e.verbEvidence?.tense===tense)&&(person==='all'||e.verbEvidence?.person===person)&&(kind==='all'||e.kind===kind||kind==='grammar'&&!['reading','listening','writing','speaking'].includes(e.kind)));
  const count=e=>profile.attempts.filter(a=>a.exerciseId===e.id).length;
