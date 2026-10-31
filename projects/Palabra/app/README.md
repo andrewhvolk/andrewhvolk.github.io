@@ -30,7 +30,7 @@ If the port is occupied, set `$env:PORT='4175'` before `npm start`. Serve over H
 ## What is included
 
 - Start: one action opens five saved starting-point questions; a complete beginner can go directly to a lesson. No required setup.
-- Today: one recommended Start/Continue action; recent difficulties, focused lessons, due words and rotating applications. Automatic lesson advancement, exact unfinished-session resume and a clear stopping point after daily completion.
+- Today: one compact card and a Start/Continue action; recent difficulties, focused lessons, due words and rotating applications. Automatic lesson advancement, exact unfinished-session resume and a clear stopping point after daily completion.
 - Course: 21 teaching chapters (three introductory topics plus 1A–9B), 48 language-pattern objectives (at least 12 authored variants in three contexts each), plus 42 distinct reading/listening objectives. There are 90 objective lessons and 780 activities.
 - Words: all 940 unchanged IDs, 315 through 2B, chapter/verb/box filters, bilingual accent-tolerant search, both directions, audio, five boxes, undo, and schedule-free extra practice.
 - Verbs: a restricted validated form dataset, reference, contextual typed drills, meaning selection before conjugation, person/tense evidence, accent feedback, affirmative commands and optional vosotros.
@@ -58,8 +58,10 @@ Original content was reviewed by the authoring agent against the linked grammati
 
 The [learning audit and research recommendations](docs/LEARNING-AUDIT.md) preserve the pre-guidance baseline. The [guided-learning update](docs/GUIDED-LEARNING.md) records implemented defaults and the remaining research roadmap. Reproduce the historical policy observations with `node docs/research/learning-probes.mjs`.
 
-See [sequential patch status](docs/REMEDIATION.md), [independent educator packet](docs/EDUCATOR-REVIEW.md), and [historical account setup notes](docs/CLOUD-SETUP.md). `npm run review:packet` regenerates the exact source snapshots; independent findings must be recorded separately. The public runtime and maintainable source are checked for deterministic parity in CI, alongside 45 learning tests and nine browser flows.
+See [sequential patch status](docs/REMEDIATION.md), [independent educator packet](docs/EDUCATOR-REVIEW.md), and [historical account setup notes](docs/CLOUD-SETUP.md). `npm run review:packet` regenerates the exact source snapshots; independent findings must be recorded separately. The public runtime and maintainable source are checked for deterministic parity in CI, alongside 45 learning tests and ten browser flows.
 
 Offline study requires one completed online cache preparation. Wait for “Ready offline”; device voices can still depend on internet. Updates wait for Save & update, preserving local progress. Cache Storage contains static curriculum only. Temporary guest work stays in memory: download before ending or closing. Local profiles are labels and remain readable to others using the same browser. Cross-device account resume is not enabled. The current direction is optional Palabra/SQL accounts with local-only use retained; no Google login is required.
 
 For local browser QA with an installed Chrome instead of downloaded Chromium, set `$env:PALABRA_BROWSER_CHANNEL='chrome'` before `npm run test:browser`. CI continues to use its installed Playwright Chromium.
+
+The study shell uses a single Menu for navigation, saved learners, settings/backups and offline details. The daily screen shows the current activity and remaining work; totals are in Progress. Save errors and recovery actions stay visible.
