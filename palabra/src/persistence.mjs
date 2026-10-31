@@ -1,4 +1,4 @@
-import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs?v=22a41353c8ec45fc';
+import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs?v=ab9cb4b21a32f00b';
 export const MAX_BACKUP_BYTES=64*1024*1024;
 const plain=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const assert=(ok,message)=>{if(!ok)throw Error(`${message} Nothing was changed.`);};
@@ -81,7 +81,9 @@ export function previewBackup(raw,cards,sections,content){
     }
     assert(pids.has(store.activeProfile),'Missing active profile.');
   }
-  return {state:store,summary:{version:data.version,profiles:store.profiles.length,matched,unmatched,invalid:0,migrated:data.version===1?matched:0},raw:data};
+  assert(data.scope===undefined||['profile','browser'].includes(data.scope),'Unknown backup scope.');
+  if(data.scope==='profile')assert(store.profiles.length===1,'A learner backup must contain one profile.');
+  return {state:store,summary:{scope:data.scope||'browser',version:data.version,profiles:store.profiles.length,matched,unmatched,invalid:0,migrated:data.version===1?matched:0},raw:data};
 }
 export function compactState(state){
  const next=structuredClone(state);
@@ -98,6 +100,20 @@ export function compactState(state){
 export function exportBackup(state){
  const raw=JSON.stringify({format:'palabra-backup',version:SCHEMA,exportedAt:new Date().toISOString(),state:compactState(state)});
  assert(new TextEncoder().encode(raw).length<=MAX_BACKUP_BYTES,'This browser backup exceeds 64 MB. Export individual profiles.');return raw;
+}
+export function exportProfileBackup(state,profileId=state.activeProfile){
+ const profile=state.profiles.find(p=>p.id===profileId);if(!profile)throw Error('Choose a learner first.');
+ const isolated={...state,revision:0,activeProfile:profileId,profiles:[profile],recovery:state.recovery.filter(r=>r.profileId===profileId&&!r.raw&&!r.backup&&!r.profile)};
+ const backup=JSON.parse(exportBackup(isolated));backup.scope='profile';return JSON.stringify(backup);
+}
+export function addImportedProfile(state,imported,idFactory){
+ const next=structuredClone(state),profile=structuredClone(imported.profiles[0]);
+ if(next.profiles.length>=50)throw Error('This browser already has 50 profiles. Export a browser backup before organizing them.');
+ if(next.profiles.some(p=>p.id===profile.id))profile.id=idFactory();
+ for(const session of profile.sessions)session.profileId=profile.id;
+ next.profiles.push(profile);next.activeProfile=profile.id;
+ for(const record of imported.recovery)if(record.profileId===imported.activeProfile)next.recovery.push({...structuredClone(record),profileId:profile.id});
+ return next;
 }
 export async function openRepository(indexedDB=globalThis.indexedDB){
   if(!indexedDB)throw Error('This browser cannot open local storage. You can practice in memory and export before leaving.');

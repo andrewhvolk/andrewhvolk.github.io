@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {course} from '../content/course.mjs';
 import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards,practiceQueue,pendingSessions,showActiveSession} from '../src/engine.mjs';
-import {previewBackup,exportBackup,compactState} from '../src/persistence.mjs';
+import {previewBackup,exportBackup,exportProfileBackup,addImportedProfile,compactState,memoryRepository} from '../src/persistence.mjs';
 import {recoverDrafts} from '../src/drafts.mjs';
 import {coverage} from '../src/validation.mjs';
 const data=JSON.parse(await readFile(new URL('../content/vocabulary.json',import.meta.url),'utf8'));
@@ -98,4 +98,14 @@ test('next-day dashboard and newest daily resume take precedence over old extra 
  const old=plan(p,course,data.cards,at-86400000,1,{practiceOnly:true}),daily=plan(p,course,data.cards,at,2),newer=plan(p,course,data.cards,at+100,3);p.sessions=[old,daily,newer];
  assert.equal(pendingSessions(p)[0].id,newer.id);newer.completedAt=at+200;assert.equal(pendingSessions(p)[0].id,daily.id);
  assert(showActiveSession(newer,at+300));assert(!showActiveSession(newer,at+86400000));assert(showActiveSession(old,at+86400000));
+});
+test('learner backup excludes other profiles and private recovery; import adds without replacing',()=>{
+ const state=emptyStore(),other=newProfile('other','Other learner');other.attempts=[];state.profiles.push(other);state.recovery=[{reason:'private',raw:{profiles:state.profiles}},{profileId:'other',progress:{secret:'not for export'}}];
+ const raw=exportProfileBackup(state);assert(!raw.includes('Other learner'));assert(!raw.includes('private'));assert(!raw.includes('secret'));
+ const imported=decode(raw);assert.equal(imported.summary.scope,'profile');assert.equal(imported.state.profiles.length,1);
+ const merged=addImportedProfile(state,imported.state,()=> 'new-local-id');assert.equal(merged.profiles.length,3);assert.equal(merged.activeProfile,'new-local-id');assert.deepEqual(merged.profiles[1],other);assert.equal(state.profiles.length,2);
+ assert.deepEqual(decode(exportBackup(merged)).state,merged);
+});
+test('memory-only guest work never changes the saved repository',async()=>{
+ const saved=memoryRepository(emptyStore()),before=await saved.read(),guest=memoryRepository();let temporary=emptyStore();temporary=await guest.write(temporary,0);temporary.profiles[0].displayName='Guest';await guest.write(temporary,1);assert.deepEqual(await saved.read(),before);assert.equal((await guest.read()).profiles[0].displayName,'Guest');
 });
