@@ -1,11 +1,11 @@
-import {initDelivery} from './delivery.mjs?v=4ebb911b0e7554fd';
-import {voiceReadiness} from './audio.mjs?v=4ebb911b0e7554fd';
-import {parseAssignment,assignmentLink,assignmentQueue} from './assignments.mjs?v=4ebb911b0e7554fd';
-import {JOURNAL_KEY,recoverDrafts} from './drafts.mjs?v=4ebb911b0e7554fd';
-import {course} from '../content/course.mjs?v=4ebb911b0e7554fd';
-import {PERSONS} from '../content/verbs.mjs?v=4ebb911b0e7554fd';
-import {dayKey,emptyStore,newProfile,eligibleCards,plan,startDiagnostic,commit,undo,grade,evidenceState,diagnosticReport,normalize,vocabularyScope,practiceQueue,pendingSessions,showActiveSession} from './engine.mjs?v=4ebb911b0e7554fd';
-import {openRepository,memoryRepository,previewBackup,exportBackup,compactState,MAX_BACKUP_BYTES,exportProfileBackup,addImportedProfile} from './persistence.mjs?v=4ebb911b0e7554fd';
+import {initDelivery} from './delivery.mjs?v=9c8e6b1621fb3d1c';
+import {voiceReadiness} from './audio.mjs?v=9c8e6b1621fb3d1c';
+import {parseAssignment,assignmentLink,assignmentQueue} from './assignments.mjs?v=9c8e6b1621fb3d1c';
+import {JOURNAL_KEY,recoverDrafts} from './drafts.mjs?v=9c8e6b1621fb3d1c';
+import {course} from '../content/course.mjs?v=9c8e6b1621fb3d1c';
+import {PERSONS} from '../content/verbs.mjs?v=9c8e6b1621fb3d1c';
+import {dayKey,emptyStore,newProfile,eligibleCards,plan,startDiagnostic,commit,undo,grade,evidenceState,diagnosticReport,normalize,vocabularyScope,practiceQueue,pendingSessions,showActiveSession} from './engine.mjs?v=9c8e6b1621fb3d1c';
+import {openRepository,memoryRepository,previewBackup,exportBackup,compactState,MAX_BACKUP_BYTES,exportProfileBackup,addImportedProfile} from './persistence.mjs?v=9c8e6b1621fb3d1c';
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const main=$('#main'),modal=$('#modal');
 const nav=[['today','◈','Today'],['course','▤','Course'],['words','▧','Words'],['verbs','⌁','Verbs'],['practice','✳','Practice'],['progress','▥','Progress'],['settings','⚙','Settings']];
@@ -246,7 +246,7 @@ document.addEventListener('keydown',event=>{
 window.addEventListener('beforeunload',event=>{if(guestContext&&(p().attempts.length||pendingDrafts.size)){event.preventDefault();event.returnValue='';}});
 window.addEventListener('hashchange',async()=>{if(pendingDrafts.size)await mutate(()=>{},{renderAfter:false}).catch(()=>{});navigate();});
 try{
- const response=await fetch(new URL('../content/vocabulary.json?v=4ebb911b0e7554fd',import.meta.url));if(!response.ok)throw Error('Vocabulary could not load. Refresh the page to try again.');data=await response.json();
+ const response=await fetch(new URL('../content/vocabulary.json?v=9c8e6b1621fb3d1c',import.meta.url));if(!response.ok)throw Error('Vocabulary could not load. Refresh the page to try again.');data=await response.json();
  try{repo=await openRepository();state=await repo.read();if(state)previewBackup(exportBackup(state),data.cards,data.sections,course);}
  catch(error){const unreadable=state;volatile=true;repo=memoryRepository();state=emptyStore();state.recovery.push({reason:'Local storage could not be opened. Existing browser data was not overwritten.',message:error.message,raw:unreadable||null});status('Practice in memory only · Export before leaving',true);toast(error.message);}
  if(!state){state=emptyStore();let legacy=null;try{legacy=localStorage.getItem('palabra-progress-v1');}catch{}
