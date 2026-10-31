@@ -1,0 +1,22 @@
+# Public audit remediation
+
+Work proceeds sequentially: implement, test, push, and verify Pages before the next patch.
+The public target is https://andrewhvolk.github.io/palabra/; the separate private Site and original live app are unchanged.
+
+| Order | Scope | Status |
+|---|---|---|
+| 1 | Legacy import trust boundary and display escaping | Implemented; regression suite passes. Deployment verification pending. |
+| 2 | Bounded undo, compact backups, draft persistence | Pending |
+| 3 | Retire resolved diagnostic gaps and balance progression | Pending |
+| 4 | Chapter-aligned vocabulary and daily introduction budget | Pending |
+| 5 | Truthful production evidence and receptive objectives/coverage | Pending |
+| 6 | Daily task rotation, tense/person selection, hints and retry accents | Pending |
+| 7 | Return/resume behavior, mobile navigation, save status and plain language | Pending |
+| 8 | Shared-device guest mode and profile-scoped backup | Pending |
+| 9 | Teacher practice links and lesson/application flow | Pending |
+| 10 | Voice readiness, relevant glossaries and feedback precision | Pending |
+| 11 | Offline delivery and release CI/source-output parity | Pending |
+| 12 | Google account cross-device progress | Requires an authorized Google OAuth client and cloud progress provider; no credentials are embedded in this project. |
+| 13 | Independent educator review | External review required; prepare a concrete review packet. Do not label author checks independent. |
+
+Regression fixtures contain synthetic data only. Vocabulary IDs and original schedules remain compatible.

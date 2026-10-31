@@ -3,10 +3,17 @@ const MAX=10*1024*1024;
 const plain=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const assert=(ok,message)=>{if(!ok)throw Error(`${message} Nothing was changed.`);};
 const timestamp=x=>Number.isFinite(x)&&x>=0&&x<=8640000000000000;
-function settings(s,sections){
+function settings(s,sections,chapters){
   assert(plain(s),'Missing preferences.');
+  assert(Object.keys(s).every(k=>Object.hasOwn(defaultSettings,k)),'settings: unknown preference field.');
   assert(Array.isArray(s.sections)&&s.sections.every(id=>sections.includes(id)),'Invalid vocabulary filters.');
   assert(['es-en','en-es','mixed'].includes(s.direction)&&[10,20,30,50].includes(s.limit),'Invalid review preferences.');
+  assert(typeof s.verbsOnly==='boolean','settings.verbsOnly must be true or false.');
+  assert(chapters.has(s.position),'settings.position is not a known chapter.');
+  assert([10,15,20].includes(s.minutes),'settings.minutes must be 10, 15 or 20.');
+  assert(Number.isInteger(s.newLimit)&&s.newLimit>=0&&s.newLimit<=20,'settings.newLimit must be an integer from 0 to 20.');
+  assert(typeof s.vosotros==='boolean','settings.vosotros must be true or false.');
+  assert(Number.isFinite(s.speed)&&s.speed>=.5&&s.speed<=1.25,'settings.speed must be between 0.5 and 1.25.');
   return {...structuredClone(defaultSettings),...s};
 }
 function progress(input,ids){
@@ -20,16 +27,20 @@ export function previewBackup(raw,cards,sections,content){
   assert(typeof raw==='string'&&raw.length<=MAX,'Choose a backup smaller than 10 MB.');let data;
   try{data=JSON.parse(raw);}catch{throw Error('This is not valid JSON. Nothing was changed.');}
   assert(plain(data)&&data.format==='palabra-backup'&&[1,SCHEMA].includes(data.version),'Unsupported Palabra backup.');
-  const ids=new Set(cards.map(c=>c.id)), sectionIds=sections.map(s=>s.id);let store,matched=0,unmatched=0;
+  const ids=new Set(cards.map(c=>c.id)), sectionIds=sections.map(s=>s.id),chapters=new Set(content.chapters.map(c=>c.id));let store,matched=0,unmatched=0;
   if(data.version===1){
     const r=progress(data.progress,ids);matched=Object.keys(r.valid).length;unmatched=Object.keys(r.unknown).length;
     assert(!data.history||Array.isArray(data.history),'Invalid history.');
     const history=(data.history||[]);assert(history.every(h=>plain(h)&&typeof h.id==='string'&&typeof h.correct==='boolean'&&timestamp(h.at)),'Invalid review history.');
     store=emptyStore();const p=newProfile('legacy','Imported vocabulary');p.onboarded=true;p.progress=r.valid;p.history=history.filter(h=>ids.has(h.id));
-    const s={...defaultSettings,...data.settings};
+    const legacy=data.settings??{};
+    assert(plain(legacy),'settings must be an object.');
+    assert(Object.keys(legacy).every(k=>['sections','direction','limit','verbsOnly'].includes(k)),'settings: unknown legacy preference field.');
+    const s={...structuredClone(defaultSettings),...legacy};
+    assert(Array.isArray(s.sections)&&s.sections.every(id=>typeof id==='string'),'settings.sections must be a list of chapter IDs.');
     // A removed section is reported and retained in the recovery, not silently lost.
     const unknownSections=(s.sections||[]).filter(id=>!sectionIds.includes(id));s.sections=(s.sections||defaultSettings.sections).filter(id=>sectionIds.includes(id));
-    p.settings=settings(s,sectionIds);store.profiles=[p];store.activeProfile=p.id;
+    p.settings=settings(s,sectionIds,chapters);store.profiles=[p];store.activeProfile=p.id;
     store.recovery=[{reason:'Original v1 import. Unmatched records remain here; original due timestamps are retained until the next review.',raw:data,unknownIds:Object.keys(r.unknown),unknownSections}];
   }else{
     store=structuredClone(data.state);
@@ -38,10 +49,9 @@ export function previewBackup(raw,cards,sections,content){
     assert(Number.isInteger(store.revision)&&store.revision>=0&&Array.isArray(store.recovery),'Invalid state metadata.');
     const pids=new Set();
     const exIds=new Set(content.exercises.map(e=>e.id)), objIds=new Set(content.objectives.map(o=>o.id));
-    const chapters=new Set(content.chapters.map(c=>c.id));
     for(const p of store.profiles){
       assert(plain(p)&&typeof p.id==='string'&&p.id.length<=100&&!pids.has(p.id)&&typeof p.displayName==='string'&&p.displayName.length<=100,'Invalid profile.');pids.add(p.id);
-      p.settings=settings(p.settings,sectionIds);
+      p.settings=settings(p.settings,sectionIds,chapters);
       assert(chapters.has(p.settings.position)&&[10,15,20].includes(p.settings.minutes)&&Number.isInteger(p.settings.newLimit)&&p.settings.newLimit>=0&&p.settings.newLimit<=20&&typeof p.settings.vosotros==='boolean'&&Number.isFinite(p.settings.speed)&&p.settings.speed>=.5&&p.settings.speed<=1.25,'Invalid learning preferences.');
       const r=progress(p.progress,ids);matched+=Object.keys(r.valid).length;unmatched+=Object.keys(r.unknown).length;p.progress=r.valid;
       if(Object.keys(r.unknown).length)store.recovery.push({reason:'Unmatched vocabulary schedules',profileId:p.id,progress:r.unknown});
@@ -55,7 +65,7 @@ export function previewBackup(raw,cards,sections,content){
         assert(plain(s)&&typeof s.id==='string'&&!sessions.has(s.id)&&s.profileId===p.id&&timestamp(s.createdAt)&&Array.isArray(s.queue)&&s.queue.length<=500&&Number.isInteger(s.cursor)&&s.cursor>=0&&s.cursor<=s.queue.length&&Array.isArray(s.committed)&&new Set(s.committed).size===s.committed.length&&s.committed.every(id=>attempts.has(id))&&s.committed.length===s.cursor&&plain(s.drafts)&&plain(s.results)&&Array.isArray(s.undo),'Invalid unfinished session.');
         assert(s.queue.every(i=>plain(i)&&(i.kind==='vocabulary'?ids.has(i.cardId):i.kind==='exercise'&&exIds.has(i.exerciseId))),'Unknown queued item.');
         assert(typeof s.practiceOnly==='boolean'&&typeof s.diagnostic==='boolean'&&(s.completedAt===null||timestamp(s.completedAt)),'Invalid session status.');
-        settings(s.settings,sectionIds);
+        s.settings=settings(s.settings,sectionIds,chapters);
         assert(chapters.has(s.settings.position)&&[10,15,20].includes(s.settings.minutes)&&Number.isInteger(s.settings.newLimit)&&s.settings.newLimit>=0&&s.settings.newLimit<=20&&typeof s.settings.vosotros==='boolean'&&Number.isFinite(s.settings.speed)&&s.settings.speed>=.5&&s.settings.speed<=1.25,'Invalid session preferences.');
         for(const [index,draft]of Object.entries(s.drafts))assert(/^\d+$/.test(index)&&Number(index)<s.queue.length&&plain(draft)&&(draft.answer===undefined||typeof draft.answer==='string'&&draft.answer.length<=4000)&&['usedHint','revealed','retry','audioFallback','audioPlayed'].every(k=>draft[k]===undefined||typeof draft[k]==='boolean'),'Invalid saved answer draft.');
         if(s.feedback)assert(plain(s.feedback)&&exIds.has(s.feedback.exerciseId)&&attempts.has(s.feedback.attemptId)&&plain(s.feedback.checklist)&&Object.values(s.feedback.checklist).every(v=>typeof v==='boolean'),'Invalid saved exercise feedback.');
