@@ -3,7 +3,6 @@ import {course} from '../../content/course.mjs';
 test.beforeEach(async({request})=>{await request.post('http://127.0.0.1:4179/__test/reset');});
 async function onboard(page){await page.goto('./');await page.getByLabel('Your name (optional)',{exact:true}).fill('CI learner');await page.getByText('New to Spanish, or following a class?',{exact:true}).click();await page.getByLabel('Class position (optional)',{exact:true}).selectOption('9b');await page.getByRole('button',{name:'Begin with a lesson →',exact:true}).click();await expect(page.getByRole('button',{name:'Try a sentence →',exact:true})).toBeVisible();await page.getByText('Options',{exact:true}).click();await page.getByRole('button',{name:'Finish early',exact:true}).click();await expect(page.getByRole('heading',{name:'A good place to pause.',exact:true})).toBeVisible();}
 async function startWords(page){await page.getByRole('link',{name:'Words',exact:true}).click();await page.getByRole('button',{name:'Scheduled word review',exact:true}).click();}
-async function advance(page,button){const before=await page.locator('#main').innerHTML();await button.click();await expect.poll(()=>page.locator('#main').innerHTML()).not.toBe(before);}
 
 test('9B scope, typed draft, scheduled commit and resumed cursor',async({page})=>{await onboard(page);await page.getByRole('link',{name:'Words',exact:true}).click();await expect(page.getByText('1–25 of 940 · 940 selected cards',{exact:true})).toBeVisible();await page.getByRole('link',{name:'Today',exact:true}).click();await startWords(page);const input=page.getByLabel('Your attempt (optional for self-graded vocabulary)',{exact:true});await input.fill('camión');await page.reload();await expect(input).toHaveValue('camión');await page.getByRole('button',{name:'Show answer →',exact:true}).click();await page.getByRole('button',{name:'I remembered',exact:true}).click();await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');await page.reload();await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');});
 test('unsafe v1 import is atomic and cannot create markup',async({page})=>{await onboard(page);await page.getByRole('link',{name:'Settings & backup ↗',exact:true}).click();await page.getByRole('button',{name:'↑ Import backup',exact:true}).click();await page.getByLabel('Or paste backup JSON',{exact:true}).fill(JSON.stringify({format:'palabra-backup',version:1,progress:{},history:[],settings:{sections:['1a'],direction:'es-en',limit:10,minutes:'<b id="injected">probe</b>'}}));await page.getByRole('button',{name:'Preview pasted backup',exact:true}).click();await expect(page.getByRole('alert')).toContainText('Nothing was changed');await expect(page.locator('#injected')).toHaveCount(0);});
@@ -18,9 +17,11 @@ test('one-click entry, five saved questions and a recommended lesson without con
  await page.screenshot({path:'test-results/guided-welcome-mobile.png',fullPage:true});
  await page.getByRole('button',{name:'Start learning →',exact:true}).click();await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuemax','5');
  for(let i=0;i<5;i++){
-  await advance(page,page.getByRole('button',{name:'I don’t know',exact:true}));
+  await page.getByRole('button',{name:'I don’t know',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Let’s look at the pattern.',exact:true})).toBeVisible();
   if(i===1){await page.reload();await expect(page.getByRole('heading',{name:'Let’s look at the pattern.',exact:true})).toBeVisible();}
   await page.getByRole('button',{name:i===4?'See your session summary →':'Next activity →',exact:true}).click();
+  if(i<4)await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
  }
  await expect(page.getByRole('heading',{name:'Your next lesson is ready.',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Continue my learning →',exact:true}).click();
@@ -40,17 +41,18 @@ test('guided completion offers a stopping point instead of another setup or comp
  for(let i=0;i<35;i++){
   if(await page.getByRole('button',{name:'Done for today →',exact:true}).isVisible())break;
   const lesson=page.getByRole('button',{name:'Try a sentence →',exact:true});
-  if(await lesson.isVisible()){await advance(page,lesson);continue;}
+  if(await lesson.isVisible()){await lesson.click();await expect(page.locator('#answer')).toBeVisible();continue;}
   const reveal=page.getByRole('button',{name:'Show answer →',exact:true});
-  if(await reveal.isVisible()){await reveal.click();await advance(page,page.getByRole('button',{name:'I remembered',exact:true}));continue;}
+  if(await reveal.isVisible()){const cursor=Number(await page.getByRole('progressbar').getAttribute('aria-valuenow'));await reveal.click();await page.getByRole('button',{name:'I remembered',exact:true}).click();await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(cursor+1));continue;}
   const continueButton=page.getByRole('button',{name:/^(Next activity|See your session summary) →$/});
-  if(await continueButton.isVisible()){await advance(page,continueButton);continue;}
+  if(await continueButton.isVisible()){await continueButton.click();await expect(continueButton).not.toBeVisible();continue;}
   const prompt=await page.locator('.exercise h2').last().textContent(),item=course.exercises.find(e=>e.prompt===prompt);
   expect(item,'The visible question has a real authored exercise').toBeTruthy();
   if(item.kind==='listening')await page.getByRole('button',{name:'Use text fallback',exact:true}).click();
   const input=page.locator('#answer');
   if(item.options)await input.selectOption(item.acceptedAnswers[0]);else await input.fill(item.assessmentMode==='self'?item.model:item.acceptedAnswers[0]);
-  await advance(page,page.getByRole('button',{name:item.assessmentMode==='self'?'Compare with checklist →':'Check answer →',exact:true}));
+  await page.getByRole('button',{name:item.assessmentMode==='self'?'Compare with checklist →':'Check answer →',exact:true}).click();
+  await expect(page.getByRole('button',{name:/^(Next activity|See your session summary) →$/})).toBeVisible();
  }
  await page.getByRole('button',{name:'Done for today →',exact:true}).click();
  await expect(page.getByRole('heading',{name:'You’re done for today',exact:true})).toBeVisible();

@@ -16,6 +16,8 @@ All profiles and backups used for tests were synthetic. No actual learner backup
 
 Generated-text parity normalizes Git CRLF checkouts to LF on Windows; vocabulary JSON and binaries remain exact-byte comparisons. A CRLF checkout probe passes and the deterministic build restores LF output.
 
+Browser tests wait for saved corrective feedback and specific cursor changes before reload or continuing. A generic HTML-change wait was removed after CI exposed an earlier-screen transition race; both affected journeys pass five consecutive local repetitions.
+
 The guided update passes 45 Node tests and nine local Chrome browser flows, including one-click entry, all five warm-up responses with reload, direct lesson handoff, an entire guided daily session, the completion/tomorrow state, automatic next-lesson preview, and switching between two saved learners. Existing offline/update/import/guest flows remain covered. Desktop and 320px screenshots are inspected. The vocabulary bytes and all 780 authored activities are unchanged. See GUIDED-LEARNING.md for policy, compatibility and remaining research gaps.
 
 ## Prior public deployment evidence
