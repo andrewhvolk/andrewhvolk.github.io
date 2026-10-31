@@ -18,7 +18,7 @@ test('one-click entry, five saved questions and a recommended lesson without con
  await page.screenshot({path:'test-results/guided-welcome-mobile.png',fullPage:true});
  await page.getByRole('button',{name:'Start learning →',exact:true}).click();await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuemax','5');
  for(let i=0;i<5;i++){
-  await page.getByRole('button',{name:'I don’t know',exact:true}).click();
+  await advance(page,page.getByRole('button',{name:'I don’t know',exact:true}));
   if(i===1){await page.reload();await expect(page.getByRole('heading',{name:'Let’s look at the pattern.',exact:true})).toBeVisible();}
   await page.getByRole('button',{name:i===4?'See your session summary →':'Next activity →',exact:true}).click();
  }
@@ -36,6 +36,7 @@ test('one-click entry, five saved questions and a recommended lesson without con
 test('guided completion offers a stopping point instead of another setup or compulsory session',async({page})=>{
  await page.goto('./');await page.getByText('New to Spanish, or following a class?',{exact:true}).click();
  await page.getByRole('button',{name:'Begin with a lesson →',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Try a sentence →',exact:true})).toBeVisible();
  for(let i=0;i<35;i++){
   if(await page.getByRole('button',{name:'Done for today →',exact:true}).isVisible())break;
   const lesson=page.getByRole('button',{name:'Try a sentence →',exact:true});

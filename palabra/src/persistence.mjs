@@ -1,4 +1,4 @@
-import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs?v=b2d604b1faf547af';
+import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs?v=c1f23a9e8bbbd4f9';
 export const MAX_BACKUP_BYTES=64*1024*1024;
 const plain=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const assert=(ok,message)=>{if(!ok)throw Error(`${message} Nothing was changed.`);};

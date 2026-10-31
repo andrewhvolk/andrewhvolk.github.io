@@ -1,4 +1,4 @@
-import {conjugate,FORM_SOURCE,verbs} from './verbs.mjs?v=b2d604b1faf547af';
+import {conjugate,FORM_SOURCE,verbs} from './verbs.mjs?v=c1f23a9e8bbbd4f9';
 export const chapters=[
  ['pe-school','En la escuela','Introductions, instructions, numbers & time'],['pe-class','En la clase','Objects, spelling & dates'],['pe-weather','El tiempo','Weather & seasons'],
  ['1a','Things you like to do','Infinitives & preferences'],['1b','People, in words','Articles & descriptions'],['2a','A day at school','Subjects, -ar verbs & schedules'],['2b','A place for everything','Estar, locations & plurals'],

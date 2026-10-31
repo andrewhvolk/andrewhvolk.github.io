@@ -1,4 +1,4 @@
-import {add,verbUnit} from './core.mjs?v=b2d604b1faf547af';
+import {add,verbUnit} from './core.mjs?v=c1f23a9e8bbbd4f9';
 verbUnit('3a.present-er-ir','3a','Present -er and -ir',['2a.present-ar'],
  'Regular -er verbs use -o, -es, -e, -emos, -éis, -en. Regular -ir verbs use -o, -es, -e, -imos, -ís, -en. The nosotros and vosotros endings distinguish the two classes.',
  ['Yo como pan.','Nosotros compartimos la fruta.'],'Do not use -amos for comer or escribir. Nosotros comemos but escribimos.',[

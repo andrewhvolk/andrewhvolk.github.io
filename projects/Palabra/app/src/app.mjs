@@ -27,6 +27,7 @@ function status(message,error=false){const el=$('#save-state');if(el.textContent
 const channel=typeof BroadcastChannel!=='undefined'?new BroadcastChannel('palabra-state-v2'):null;
 channel?.addEventListener('message',e=>{if(!guestContext&&e.data>state?.revision){stale=true;status('Newer progress in another tab. Reload to continue.',true);toast('Another tab saved progress. Reload before your next answer.');}});
 function mutate(fn,{renderAfter=true}={}){
+ status('Saving…');
  const job=saving.then(async()=>{
   if(stale)throw Error('Another tab saved progress. Reload this tab before continuing.');
   const entries=[...pendingDrafts.values()];const next=compactState(state);

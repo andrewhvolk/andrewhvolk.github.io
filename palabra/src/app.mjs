@@ -1,12 +1,12 @@
-import {initDelivery} from './delivery.mjs?v=b2d604b1faf547af';
-import {voiceReadiness} from './audio.mjs?v=b2d604b1faf547af';
-import {parseAssignment,assignmentLink,assignmentQueue} from './assignments.mjs?v=b2d604b1faf547af';
-import {JOURNAL_KEY,recoverDrafts} from './drafts.mjs?v=b2d604b1faf547af';
-import {course} from '../content/course.mjs?v=b2d604b1faf547af';
-import {PERSONS} from '../content/verbs.mjs?v=b2d604b1faf547af';
-import {dayKey,emptyStore,newProfile,eligibleCards,plan,startDiagnostic,commit,undo,grade,evidenceState,diagnosticReport,normalize,vocabularyScope,practiceQueue,pendingSessions,showActiveSession} from './engine.mjs?v=b2d604b1faf547af';
-import {guidedPlan,startWarmup,nextLearningStep,learningVocabularySettings,needsOnboarding} from './guidance.mjs?v=b2d604b1faf547af';
-import {openRepository,memoryRepository,previewBackup,exportBackup,compactState,MAX_BACKUP_BYTES,exportProfileBackup,addImportedProfile} from './persistence.mjs?v=b2d604b1faf547af';
+import {initDelivery} from './delivery.mjs?v=c1f23a9e8bbbd4f9';
+import {voiceReadiness} from './audio.mjs?v=c1f23a9e8bbbd4f9';
+import {parseAssignment,assignmentLink,assignmentQueue} from './assignments.mjs?v=c1f23a9e8bbbd4f9';
+import {JOURNAL_KEY,recoverDrafts} from './drafts.mjs?v=c1f23a9e8bbbd4f9';
+import {course} from '../content/course.mjs?v=c1f23a9e8bbbd4f9';
+import {PERSONS} from '../content/verbs.mjs?v=c1f23a9e8bbbd4f9';
+import {dayKey,emptyStore,newProfile,eligibleCards,plan,startDiagnostic,commit,undo,grade,evidenceState,diagnosticReport,normalize,vocabularyScope,practiceQueue,pendingSessions,showActiveSession} from './engine.mjs?v=c1f23a9e8bbbd4f9';
+import {guidedPlan,startWarmup,nextLearningStep,learningVocabularySettings,needsOnboarding} from './guidance.mjs?v=c1f23a9e8bbbd4f9';
+import {openRepository,memoryRepository,previewBackup,exportBackup,compactState,MAX_BACKUP_BYTES,exportProfileBackup,addImportedProfile} from './persistence.mjs?v=c1f23a9e8bbbd4f9';
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const main=$('#main'),modal=$('#modal');
 const nav=[['today','◈','Today'],['course','▤','Course'],['words','▧','Words'],['verbs','⌁','Verbs'],['practice','✳','Practice'],['progress','▥','Progress'],['settings','⚙','Settings']];
@@ -27,6 +27,7 @@ function status(message,error=false){const el=$('#save-state');if(el.textContent
 const channel=typeof BroadcastChannel!=='undefined'?new BroadcastChannel('palabra-state-v2'):null;
 channel?.addEventListener('message',e=>{if(!guestContext&&e.data>state?.revision){stale=true;status('Newer progress in another tab. Reload to continue.',true);toast('Another tab saved progress. Reload before your next answer.');}});
 function mutate(fn,{renderAfter=true}={}){
+ status('Saving…');
  const job=saving.then(async()=>{
   if(stale)throw Error('Another tab saved progress. Reload this tab before continuing.');
   const entries=[...pendingDrafts.values()];const next=compactState(state);
@@ -254,7 +255,7 @@ document.addEventListener('keydown',event=>{
 window.addEventListener('beforeunload',event=>{if(guestContext&&(p().attempts.length||pendingDrafts.size)){event.preventDefault();event.returnValue='';}});
 window.addEventListener('hashchange',async()=>{if(pendingDrafts.size)await mutate(()=>{},{renderAfter:false}).catch(()=>{});navigate();});
 try{
- const response=await fetch(new URL('../content/vocabulary.json?v=b2d604b1faf547af',import.meta.url));if(!response.ok)throw Error('Vocabulary could not load. Refresh the page to try again.');data=await response.json();
+ const response=await fetch(new URL('../content/vocabulary.json?v=c1f23a9e8bbbd4f9',import.meta.url));if(!response.ok)throw Error('Vocabulary could not load. Refresh the page to try again.');data=await response.json();
  try{repo=await openRepository();state=await repo.read();if(state)previewBackup(exportBackup(state),data.cards,data.sections,course);}
  catch(error){const unreadable=state;volatile=true;repo=memoryRepository();state=emptyStore();state.recovery.push({reason:'Local storage could not be opened. Existing browser data was not overwritten.',message:error.message,raw:unreadable||null});status('Practice in memory only · Export before leaving',true);toast(error.message);}
  if(!state){state=emptyStore();let legacy=null;try{legacy=localStorage.getItem('palabra-progress-v1');}catch{}
