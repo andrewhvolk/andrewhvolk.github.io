@@ -1,11 +1,11 @@
-import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs?v=f92baa39750e1611';
-import './catchup.mjs?v=f92baa39750e1611';
-import './middle.mjs?v=f92baa39750e1611';
-import './later.mjs?v=f92baa39750e1611';
-import {communication} from './communication.mjs?v=f92baa39750e1611';
-import './application.mjs?v=f92baa39750e1611';
-import {cultures} from './culture.mjs?v=f92baa39750e1611';
-import {verbs,PERSONS} from './verbs.mjs?v=f92baa39750e1611';
+import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs?v=4ebb911b0e7554fd';
+import './catchup.mjs?v=4ebb911b0e7554fd';
+import './middle.mjs?v=4ebb911b0e7554fd';
+import './later.mjs?v=4ebb911b0e7554fd';
+import {communication} from './communication.mjs?v=4ebb911b0e7554fd';
+import './application.mjs?v=4ebb911b0e7554fd';
+import {cultures} from './culture.mjs?v=4ebb911b0e7554fd';
+import {verbs,PERSONS} from './verbs.mjs?v=4ebb911b0e7554fd';
 const grammarRefs={
  'pe.spelling':['abecedario'],'pe.dates':['fecha'],'pe.numbers-time':['hora','cardinales'],
  '1a.infinitives':['gustar'],'1a.responses':['tampoco','también'],'1b.articles':['el','una'],'1b.adjectives':['concordancia'],'2a.subjects':['pronombres-personales-tónicos'],'2a.schedules':['ordinales','hora'],
