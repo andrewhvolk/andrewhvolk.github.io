@@ -6,7 +6,8 @@ Checks:
 2) duplicate CDN variants for the same library
 
 Slide decks are standalone documents and may load stylesheets from within the
-``slides`` directory.
+``slides`` directory. Palabra is an independently packaged application and may
+load stylesheets contained within ``projects/Palabra``.
 """
 from __future__ import annotations
 
@@ -45,6 +46,16 @@ def is_local_href(href: str) -> bool:
 def is_canonical_local_stylesheet(file_path: Path, href: str) -> bool:
     if href == "/styles.css":
         return True
+
+    if file_path.parts[:2] == ("projects", "Palabra"):
+        resolved = (ROOT / file_path.parent / href).resolve()
+        app_root = (ROOT / "projects" / "Palabra").resolve()
+        return resolved.is_relative_to(app_root) and resolved.is_file()
+
+    if file_path.parts and file_path.parts[0] == "palabra":
+        resolved = (ROOT / file_path.parent / href).resolve()
+        app_root = (ROOT / "palabra").resolve()
+        return resolved.is_relative_to(app_root) and resolved.is_file()
 
     if not file_path.parts or file_path.parts[0] != "slides":
         return False
