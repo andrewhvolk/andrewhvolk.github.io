@@ -1,0 +1,33 @@
+name: Palabra learning and browser checks
+on:
+  pull_request:
+    paths: ['projects/Palabra/app/**', 'palabra/**', '.github/workflows/palabra-checks.yml']
+  push:
+    branches: [main]
+    paths: ['projects/Palabra/app/**', 'palabra/**', '.github/workflows/palabra-checks.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/Palabra/app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.16.0'
+          cache: npm
+          cache-dependency-path: projects/Palabra/app/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run check:pages
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: palabra-browser-failures
+          path: projects/Palabra/app/test-results/
+          retention-days: 7

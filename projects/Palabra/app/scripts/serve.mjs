@@ -8,7 +8,7 @@ http.createServer(async(req,res)=>{
     const file=path.resolve(root,'.'+pathname+(pathname.endsWith('/')?'index.html':''));
     if(!file.startsWith(root+path.sep))throw Error('Invalid path');
     await stat(file);
-    const types={'.html':'text/html','.css':'text/css','.mjs':'text/javascript','.json':'application/json','.svg':'image/svg+xml'};
+    const types={'.html':'text/html','.css':'text/css','.mjs':'text/javascript','.js':'text/javascript','.json':'application/json','.webmanifest':'application/manifest+json','.png':'image/png','.svg':'image/svg+xml'};
     res.writeHead(200,{'Content-Type':(types[path.extname(file)]||'application/octet-stream')+'; charset=utf-8','Cache-Control':'no-store'});res.end(await readFile(file));
   }catch{res.writeHead(404);res.end('Not found');}
 }).listen(port,'127.0.0.1',()=>console.log(`Palabra: http://127.0.0.1:${port}`));

@@ -8,6 +8,11 @@
     "test": "node --test tests/*.test.mjs",
     "check": "node scripts/check-content.mjs",
     "build": "node scripts/build.mjs",
-    "build:pages": "node scripts/build-pages.mjs"
+    "build:pages": "node scripts/build-pages.mjs",
+    "test:browser": "playwright test",
+    "check:pages": "node scripts/check-pages.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
   }
 }
