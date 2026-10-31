@@ -1,10 +1,12 @@
 # Architecture and source record
 
+Historical initial-build record. The current public release and subsequent changes are documented in IMPLEMENTATION-STATUS.md, REMEDIATION.md and VERIFICATION.md. Operational hosting details are omitted from public documentation.
+
 Date: October 30, 2026 (America/New_York).
 
 ## Repository decision
 
-The intended workspace is `C:/Users/andre/Repos/andrewhvolk.github.io`, an existing static academic site with independent projects. No applicable AGENTS.md was found at the repository or applicable ancestor/project paths. CLAUDE.md was inspected for architecture conventions. Palabra lives only in `projects/Palabra/app/`. Root CSS, shared scripts, hosting integrations, and unrelated pending changes are untouched.
+The intended workspace is the `andrewhvolk.github.io` repository, an existing static academic site with independent projects. No applicable AGENTS.md was found at the repository or applicable ancestor/project paths. CLAUDE.md was inspected for architecture conventions. Palabra lives only in `projects/Palabra/app/`. Root CSS, shared scripts, hosting integrations, and unrelated pending changes are untouched.
 
 Decision: retain native static HTML/CSS/ES modules to match this nonempty repository and the working buildless baseline, rather than introduce a framework/build dependency into the academic site. `src/types.d.ts` declares content/state types; executable runtime schemas and tests validate data. Pure learning code is independent of DOM, browser storage, and speech. Package scripts use only Node’s standard library. All runtime paths work beneath a subdirectory.
 
@@ -23,7 +25,7 @@ Decision: retain native static HTML/CSS/ES modules to match this nonempty reposi
 
 The unchanged vocabulary is the handoff snapshot from original deployed source commit `6107e2bd3b9e018c6cfa4317825c0acae9a94d03`. The exact JSON is compared in tests; all 940 stable IDs and 22 list associations remain, including 315 through-2B cards. Introductory list filters pe1–pe4 are not represented as four official teaching chapters.
 
-The old Site at `https://realidades-word-garden.andrewhvolk.chatgpt.site` remains separate. Its historical Site identity is not bound in this build. The new `.openai/hosting.json` contains only the newly registered Palabra Site identity.
+The old Site at `https://realidades-word-garden.andrewhvolk.chatgpt.site` remains separate. Its historical Site identity is not bound in this build. Operational hosting identity is kept outside public source.
 
 Vocabulary source links remain in each section. Curriculum scope came from the supplied handoff and its [IXL alignment](https://www.ixl.com/spanish/skill-plans/realidades-level-1.pdf), [course outline](https://passporttolanguages.net/realidades-1-outline), and [chapter index](https://www.spanishdict.com/textbooks/9). Exact edition/year/ISBN and teacher pacing remain unverified. There is no publisher endorsement claim.
 
