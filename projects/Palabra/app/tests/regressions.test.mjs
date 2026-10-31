@@ -6,6 +6,7 @@ import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabula
 import {previewBackup,exportBackup,exportProfileBackup,addImportedProfile,compactState,memoryRepository} from '../src/persistence.mjs';
 import {recoverDrafts} from '../src/drafts.mjs';
 import {coverage} from '../src/validation.mjs';
+import {parseAssignment,assignmentLink,assignmentQueue} from '../src/assignments.mjs';
 const data=JSON.parse(await readFile(new URL('../content/vocabulary.json',import.meta.url),'utf8'));
 const decode=raw=>previewBackup(raw,data.cards,data.sections,course);
 test('legacy preference allowlist rejects markup, wrong types and unknown fields atomically',()=>{
@@ -46,7 +47,7 @@ test('new independent evidence retires diagnostic gaps and current work shares t
  const sampled=[...new Set(course.diagnostic.flatMap(id=>course.exercises.find(e=>e.id===id).objectiveIds))];
  for(const id of sampled){p.attempts.push({id:'d-'+id,sessionId:'d',diagnostic:true,objectiveIds:[id],outcome:'incorrect',timestamp:at-5*86400000});
   const objective=course.objectives.find(o=>o.id===id),items=course.exercises.filter(e=>e.objectiveIds.includes(id)&&(!objective.productionRequired||e.production));
-  let variants=items.slice(0,3);if(objective.exerciseTargets){outer:for(const a of items)for(const b of items)for(const c of items){const trio=[a,b,c];if(new Set(trio.map(e=>e.verbEvidence.person)).size>=3&&new Set(trio.map(e=>e.context)).size>=2){variants=trio;break outer;}}}
+  let variants=items.slice(0,3);if(objective.exerciseTargets){outer:for(const a of items.filter(e=>e.verbEvidence))for(const b of items.filter(e=>e.verbEvidence))for(const c of items.filter(e=>e.verbEvidence)){const trio=[a,b,c];if(new Set(trio.map(e=>e.verbEvidence.person)).size>=3&&new Set(trio.map(e=>e.context)).size>=2){variants=trio;break outer;}}}
   for(let i=0;i<6;i++)p.attempts.push({id:id+i,exerciseId:variants[i%3].id,objectiveIds:[id],timestamp:at-(i<3?2:1)*86400000,outcome:'correct',assessmentMode:'auto',production:true});
   assert.equal(evidenceState(p.attempts,course.objectives.find(o=>o.id===id),at).state,'secure');
  }
@@ -108,4 +109,16 @@ test('learner backup excludes other profiles and private recovery; import adds w
 });
 test('memory-only guest work never changes the saved repository',async()=>{
  const saved=memoryRepository(emptyStore()),before=await saved.read(),guest=memoryRepository();let temporary=emptyStore();temporary=await guest.write(temporary,0);temporary.profiles[0].displayName='Guest';await guest.write(temporary,1);assert.deepEqual(await saved.read(),before);assert.equal((await guest.read()).profiles[0].displayName,'Guest');
+});
+test('teacher links preview validated scope, keep usual settings and include prerequisite checks',()=>{
+ const p=newProfile('student'),before=structuredClone(p),scope={chapter:'2b',skill:'2b.estar',kind:'all',minutes:10};
+ const url=assignmentLink('https://andrewhvolk.github.io/palabra/?old=1#practice',scope);assert(!url.includes('student'));assert(!url.includes('old='));assert.deepEqual(parseAssignment(new URL(url).hash,course),scope);
+ const queue=assignmentQueue(p,course,scope,Date.now());assert(queue.prerequisiteCount>0);assert(queue.ids.some(id=>course.exercises.find(e=>e.id===id).objectiveIds.includes(scope.skill)));assert.deepEqual(p,before);
+ p.lessons=course.objectives.map(o=>o.id);assert.equal(assignmentQueue(p,course,scope,Date.now()).prerequisiteCount,0);
+ for(const bad of ['#assignment?chapter=bad&minutes=10','#assignment?chapter=2b&minutes=999','#assignment?chapter=2b&minutes=10&skill=9b.saber-conocer','#assignment?chapter=2b&minutes=10&name=student'])assert.throws(()=>parseAssignment(bad,course),/not changed/);
+ for(const c of course.chapters){const parsed=parseAssignment(new URL(assignmentLink(url,{chapter:c.id,minutes:15})).hash,course);assert(assignmentQueue(p,course,parsed,Date.now()).ids.length>0);}
+});
+test('every chapter has a usable constrained complete-sentence application, with distinct scene choices',()=>{
+ for(const c of course.chapters){const e=course.exercises.find(e=>e.id===`apply-${c.id}-sentence`);assert(e);assert(e.acceptedAnswers[0].split(' ').length>=3);assert(e.production);assert.equal(e.productionType,'controlled-production');}
+ const scenes=course.exercises.filter(e=>e.kind==='scene-choice');assert.equal(scenes.length,3);assert(scenes.every(e=>!e.production&&e.scene&&e.options.includes(e.acceptedAnswers[0])));
 });

@@ -3,6 +3,7 @@ import './catchup.mjs';
 import './middle.mjs';
 import './later.mjs';
 import {communication} from './communication.mjs';
+import './application.mjs';
 import {cultures} from './culture.mjs';
 import {verbs,PERSONS} from './verbs.mjs';
 const grammarRefs={
