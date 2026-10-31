@@ -2,7 +2,7 @@
  * Initial lesson progress is deliberately distinct from engine.evidenceState mastery.
  * This policy does not change vocabulary boxes or reinterpret old learning evidence.
  */
-import {dayKey,boundary,evidenceState,plan,pendingSessions,seeded,startDiagnostic,vocabularyScope} from './engine.mjs?v=6031c9fb9a37f249';
+import {dayKey,boundary,evidenceState,plan,pendingSessions,seeded,startDiagnostic,vocabularyScope} from './engine.mjs?v=d3dee7c2635f5bb6';
 
 const assessed=a=>!a.undone&&!a.retry&&!a.practiceOnly&&!a.diagnostic&&a.assessmentMode==='auto';
 const independent=a=>assessed(a)&&!a.usedHint&&!a.revealed;

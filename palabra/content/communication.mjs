@@ -1,4 +1,4 @@
-import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs?v=6031c9fb9a37f249';
+import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs?v=d3dee7c2635f5bb6';
 // Each row: chapter, original 50–120-word reading, three exact comprehension keys,
 // separate audio sentence/key, personal writing/speaking application, model response.
 const units=[

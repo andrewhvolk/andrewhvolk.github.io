@@ -1,4 +1,4 @@
-import {objectives,exercises} from './core.mjs?v=6031c9fb9a37f249';
+import {objectives,exercises} from './core.mjs?v=d3dee7c2635f5bb6';
 // Original constrained sentence applications. The cues constrain wording for reliable grading.
 const sentences=[
  ['pe-school','pe.greetings','Greet your female teacher in the morning. Use Buenos and profesora.','Buenos días, profesora'],
