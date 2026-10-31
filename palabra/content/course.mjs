@@ -1,10 +1,10 @@
-import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs';
-import './catchup.mjs';
-import './middle.mjs';
-import './later.mjs';
-import {communication} from './communication.mjs';
-import {cultures} from './culture.mjs';
-import {verbs,PERSONS} from './verbs.mjs';
+import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs?v=58415db71aab4d54';
+import './catchup.mjs?v=58415db71aab4d54';
+import './middle.mjs?v=58415db71aab4d54';
+import './later.mjs?v=58415db71aab4d54';
+import {communication} from './communication.mjs?v=58415db71aab4d54';
+import {cultures} from './culture.mjs?v=58415db71aab4d54';
+import {verbs,PERSONS} from './verbs.mjs?v=58415db71aab4d54';
 const grammarRefs={
  'pe.spelling':['abecedario'],'pe.dates':['fecha'],'pe.numbers-time':['hora','cardinales'],
  '1a.infinitives':['gustar'],'1a.responses':['tampoco','también'],'1b.articles':['el','una'],'1b.adjectives':['concordancia'],'2a.subjects':['pronombres-personales-tónicos'],'2a.schedules':['ordinales','hora'],

@@ -1,8 +1,8 @@
-import {JOURNAL_KEY,recoverDrafts} from './drafts.mjs';
-import {course} from '../content/course.mjs';
-import {PERSONS} from '../content/verbs.mjs';
-import {dayKey,emptyStore,newProfile,eligibleCards,plan,startDiagnostic,commit,undo,grade,evidenceState,diagnosticReport,normalize} from './engine.mjs';
-import {openRepository,memoryRepository,previewBackup,exportBackup,compactState,MAX_BACKUP_BYTES} from './persistence.mjs';
+import {JOURNAL_KEY,recoverDrafts} from './drafts.mjs?v=58415db71aab4d54';
+import {course} from '../content/course.mjs?v=58415db71aab4d54';
+import {PERSONS} from '../content/verbs.mjs?v=58415db71aab4d54';
+import {dayKey,emptyStore,newProfile,eligibleCards,plan,startDiagnostic,commit,undo,grade,evidenceState,diagnosticReport,normalize} from './engine.mjs?v=58415db71aab4d54';
+import {openRepository,memoryRepository,previewBackup,exportBackup,compactState,MAX_BACKUP_BYTES} from './persistence.mjs?v=58415db71aab4d54';
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const main=$('#main'),modal=$('#modal');
 const nav=[['today','◈','Today'],['course','▤','Course'],['words','▧','Words'],['verbs','⌁','Verbs'],['practice','✳','Practice'],['progress','▥','Progress'],['settings','⚙','Settings']];
@@ -199,7 +199,7 @@ document.addEventListener('keydown',event=>{
 });
 window.addEventListener('hashchange',async()=>{if(pendingDrafts.size)await mutate(()=>{},{renderAfter:false}).catch(()=>{});navigate();});
 try{
- const response=await fetch(new URL('../content/vocabulary.json',import.meta.url));if(!response.ok)throw Error('Vocabulary could not load. Refresh the page to try again.');data=await response.json();
+ const response=await fetch(new URL('../content/vocabulary.json?v=58415db71aab4d54',import.meta.url));if(!response.ok)throw Error('Vocabulary could not load. Refresh the page to try again.');data=await response.json();
  try{repo=await openRepository();state=await repo.read();if(state)previewBackup(exportBackup(state),data.cards,data.sections,course);}
  catch(error){const unreadable=state;volatile=true;repo=memoryRepository();state=emptyStore();state.recovery.push({reason:'Local storage could not be opened. Existing browser data was not overwritten.',message:error.message,raw:unreadable||null});status('Practice in memory only · Export before leaving',true);toast(error.message);}
  if(!state){state=emptyStore();let legacy=null;try{legacy=localStorage.getItem('palabra-progress-v1');}catch{}
