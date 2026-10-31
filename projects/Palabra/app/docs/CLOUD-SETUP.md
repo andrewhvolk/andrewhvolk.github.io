@@ -1,3 +1,5 @@
+> Historical proposal, superseded by the user’s preference for optional Palabra accounts backed by SQL with local-only study retained. Google/Firebase setup is not a current requirement. This document is retained as a record; account sync has not been implemented. See GUIDED-LEARNING.md for the current student flow and boundaries.
+
 # Google-account resume: configuration and release gate
 
 Status: **not enabled**. Public hosting, PWA installation and Chromebook Google login do not sync Palabra progress. The existing public app remains usable without credentials. This document is a concrete readiness plan, not a claim that authentication or cloud storage has shipped.

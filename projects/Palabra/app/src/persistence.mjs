@@ -6,7 +6,8 @@ const timestamp=x=>Number.isFinite(x)&&x>=0&&x<=8640000000000000;
 function settings(s,sections,chapters){
   assert(plain(s),'Missing preferences.');
   assert(Object.keys(s).every(k=>Object.hasOwn(defaultSettings,k)),'settings: unknown preference field.');
-  s={...s,deckMode:s.deckMode??'custom',voiceURI:s.voiceURI??'auto'}; // Existing explicit filters remain unchanged.
+  s={...s,pathMode:s.pathMode??'class',deckMode:s.deckMode??'custom',voiceURI:s.voiceURI??'auto'}; // Existing explicit filters and class limits remain unchanged.
+  assert(['automatic','class'].includes(s.pathMode),'settings.pathMode must be automatic or class.');
   assert(['class','custom'].includes(s.deckMode),'settings.deckMode must be class or custom.');
   assert(typeof s.voiceURI==='string'&&s.voiceURI.length>0&&s.voiceURI.length<=300,'settings.voiceURI must be a browser voice identifier.');
   assert(Array.isArray(s.sections)&&s.sections.every(id=>sections.includes(id)),'Invalid vocabulary filters.');
@@ -39,7 +40,7 @@ export function previewBackup(raw,cards,sections,content){
     const legacy=data.settings??{};
     assert(plain(legacy),'settings must be an object.');
     assert(Object.keys(legacy).every(k=>['sections','direction','limit','verbsOnly'].includes(k)),'settings: unknown legacy preference field.');
-    const s={...structuredClone(defaultSettings),...legacy,deckMode:'custom'};
+    const s={...structuredClone(defaultSettings),...legacy,pathMode:'class',deckMode:'custom'};
     assert(Array.isArray(s.sections)&&s.sections.every(id=>typeof id==='string'),'settings.sections must be a list of chapter IDs.');
     // A removed section is reported and retained in the recovery, not silently lost.
     const unknownSections=(s.sections||[]).filter(id=>!sectionIds.includes(id));s.sections=(s.sections||defaultSettings.sections).filter(id=>sectionIds.includes(id));
@@ -68,6 +69,7 @@ export function previewBackup(raw,cards,sections,content){
         assert(plain(s)&&typeof s.id==='string'&&!sessions.has(s.id)&&s.profileId===p.id&&timestamp(s.createdAt)&&Array.isArray(s.queue)&&s.queue.length<=500&&Number.isInteger(s.cursor)&&s.cursor>=0&&s.cursor<=s.queue.length&&Array.isArray(s.committed)&&new Set(s.committed).size===s.committed.length&&s.committed.every(id=>attempts.has(id))&&s.committed.length===s.cursor&&plain(s.drafts)&&plain(s.results)&&Array.isArray(s.undo),'Invalid unfinished session.');
         assert(s.queue.every(i=>plain(i)&&(i.kind==='vocabulary'?ids.has(i.cardId):i.kind==='exercise'&&exIds.has(i.exerciseId))),'Unknown queued item.');
         assert(typeof s.practiceOnly==='boolean'&&typeof s.diagnostic==='boolean'&&(s.completedAt===null||timestamp(s.completedAt)),'Invalid session status.');
+        assert((s.guided===undefined||typeof s.guided==='boolean')&&(s.warmup===undefined||typeof s.warmup==='boolean')&&(s.policyVersion===undefined||s.policyVersion===1)&&(s.focusObjectiveId===undefined||objIds.has(s.focusObjectiveId)),'Invalid learning path.');
         s.settings=settings(s.settings,sectionIds,chapters);
         assert(chapters.has(s.settings.position)&&[10,15,20].includes(s.settings.minutes)&&Number.isInteger(s.settings.newLimit)&&s.settings.newLimit>=0&&s.settings.newLimit<=20&&typeof s.settings.vosotros==='boolean'&&Number.isFinite(s.settings.speed)&&s.settings.speed>=.5&&s.settings.speed<=1.25,'Invalid session preferences.');
         for(const [index,draft]of Object.entries(s.drafts))assert(/^\d+$/.test(index)&&Number(index)<s.queue.length&&plain(draft)&&(draft.answer===undefined||typeof draft.answer==='string'&&draft.answer.length<=4000)&&['usedHint','hintShown','introSkipped','revealed','retry','audioFallback','audioPlayed'].every(k=>draft[k]===undefined||typeof draft[k]==='boolean'),'Invalid saved answer draft.');

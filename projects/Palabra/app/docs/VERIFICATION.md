@@ -4,15 +4,19 @@ All profiles and backups used for tests were synthetic. No actual learner backup
 
 ## Automated evidence
 
-- 34 passing Node learning/regression tests: scheduling/DST, grading/NFC/accents/ñ, irregular anchors and command exceptions, diagnostic scoring, planner progression and class scope, evidence breadth, reservation release, resumed queues/drafts, safe v1/v2 migration, profile isolation and malformed inputs.
+- 45 passing Node learning/regression tests: scheduling/DST, grading/NFC/accents/ñ, irregular anchors and command exceptions, diagnostic scoring, planner progression and class scope, evidence breadth, reservation release, resumed queues/drafts, safe v1/v2 migration, profile isolation and malformed inputs.
 - Full-book schedules plus 21,950 attempts survive repeated compact export/import cycles. Undo stores only recent inverse events; the old 12 MB single-session explosion is eliminated.
 - Content validation covers all 90 objectives, 780 activities, 21 chapters, answer keys, prerequisites, original reading lengths, assessment types, question links and unchanged vocabulary bytes.
-- Six Chromium flows run in GitHub Actions against actual generated /palabra output: 9B word scope + typed draft/committed-cursor resume; atomic unsafe-import rejection; previewed assignment + isolated guest; offline reload; consented release update + retained draft; 320px navigation/settings/save reflow.
+- Nine browser flows are covered (Playwright Chromium in CI; installed Chrome in local verification) against actual generated /palabra output: 9B word scope + typed draft/committed-cursor resume; atomic unsafe-import rejection; previewed assignment + isolated guest; offline reload; consented release update + retained draft; 320px navigation/settings/save reflow.
 - The browser server now uses production-like ten-minute cache headers. The update test covers stale HTTP-cached HTML; worker installation uses reload-mode requests and a release-versioned shell key.
-- Deterministic rebuild parity checks all 25 committed runtime assets. The same bytes were fetched anonymously from the public Pages URL, including manifest, worker and PNG icons.
+- Deterministic rebuild parity checks all 26 committed runtime assets. The same bytes were fetched anonymously from the public Pages URL, including manifest, worker and PNG icons.
 - Repository CSS links, local links, HTML structure and course dates pass. Original handoff app tests remain unchanged and pass.
 
-## Public deployment evidence
+## Guided student-flow verification
+
+The guided update passes 45 Node tests and nine local Chrome browser flows, including one-click entry, all five warm-up responses with reload, direct lesson handoff, an entire guided daily session, the completion/tomorrow state, automatic next-lesson preview, and switching between two saved learners. Existing offline/update/import/guest flows remain covered. Desktop and 320px screenshots are inspected. The vocabulary bytes and all 780 authored activities are unchanged. See GUIDED-LEARNING.md for policy, compatibility and remaining research gaps.
+
+## Prior public deployment evidence
 
 The latest verified runtime fix is commit 9b0d6d4600b911af107bf08160a88516041ed81c. Its Pages, CSS/repository and Palabra learning/browser workflows all succeeded. Palabra run: https://github.com/andrewhvolk/andrewhvolk.github.io/actions/runs/41162878503 . Pages run: https://github.com/andrewhvolk/andrewhvolk.github.io/actions/runs/41162877927 . Subsequent documentation changes also run these checks.
 
