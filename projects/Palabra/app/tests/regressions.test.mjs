@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {course} from '../content/course.mjs';
-import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState} from '../src/engine.mjs';
+import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards} from '../src/engine.mjs';
 import {previewBackup,exportBackup,compactState} from '../src/persistence.mjs';
 import {recoverDrafts} from '../src/drafts.mjs';
 const data=JSON.parse(await readFile(new URL('../content/vocabulary.json',import.meta.url),'utf8'));
@@ -51,4 +51,18 @@ test('new independent evidence retires diagnostic gaps and current work shares t
  let next=plan(p,course,data.cards,at,1);assert(next.queue.some(i=>i.exerciseId?.startsWith('9b.')));assert(!next.queue.some(i=>i.reason==='Diagnostic gap'));
  p.attempts=p.attempts.filter(a=>a.diagnostic);next=plan(p,course,data.cards,at,2);assert(next.queue.some(i=>i.reason==='Diagnostic gap'));assert(next.queue.some(i=>i.exerciseId?.startsWith('9b.')));
  p.lessons=[];p.attempts=[];next=plan(p,course,data.cards,at,3);for(const item of next.queue.filter(i=>i.kind==='exercise')){const e=course.exercises.find(e=>e.id===item.exerciseId);for(const id of e.objectiveIds)assert.equal(course.objectives.find(o=>o.id===id).prerequisites.length,0);}
+});
+test('every class position gets aligned vocabulary; imported custom filters remain custom',()=>{
+ let previous=0;for(const c of course.chapters){const sections=vocabularyScope(c.id,data.sections);const n=eligibleCards(data.cards,{...newProfile('p').settings,sections}).length;assert(n>=previous);previous=n;
+  if(c.id==='2b')assert.equal(n,315);if(c.id==='9b')assert.equal(n,940);
+  if(c.id.startsWith('pe-'))assert.deepEqual(sections,['pe1','pe2','pe3','pe4']);else assert(sections.includes(c.id));
+ }
+ const state=emptyStore();delete state.profiles[0].settings.deckMode;state.profiles[0].settings.sections=['1a'];const p=decode(exportBackup(state)).state.profiles[0];assert.equal(p.settings.deckMode,'custom');assert.deepEqual(p.settings.sections,['1a']);
+});
+test('early finish releases unreached introductions and practice does not consume the daily budget',()=>{
+ const at=Date.UTC(2026,9,30,12);let p=newProfile('p');p.settings.newLimit=4;
+ for(let i=0;i<2;i++){const s=plan(p,course,data.cards,at+i,20+i,{wordsOnly:true});assert.equal(s.queue.length,4);s.completedAt=at+i;s.endedEarly=true;p.sessions.push(s);}
+ const scheduled=plan(p,course,data.cards,at+2,22,{wordsOnly:true});assert.equal(scheduled.queue.length,4);p.sessions.push(scheduled);p=commit(p,scheduled.id,{id:'intro',index:0,correct:true},course,data.cards,at+3);p.sessions.at(-1).completedAt=at+4;
+ const practice=plan(p,course,data.cards,at+5,50,{wordsOnly:true,practiceOnly:true});p.sessions.push(practice);p=commit(p,practice.id,{id:'extra',index:0,correct:true},course,data.cards,at+6);
+ assert.equal(plan(p,course,data.cards,at+7,23,{wordsOnly:true}).queue.filter(i=>i.newCard).length,3);
 });

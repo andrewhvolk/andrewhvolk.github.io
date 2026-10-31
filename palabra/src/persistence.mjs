@@ -1,4 +1,4 @@
-import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs?v=58415db71aab4d54';
+import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs?v=b2d3f758611bfe17';
 export const MAX_BACKUP_BYTES=64*1024*1024;
 const plain=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const assert=(ok,message)=>{if(!ok)throw Error(`${message} Nothing was changed.`);};
@@ -6,6 +6,8 @@ const timestamp=x=>Number.isFinite(x)&&x>=0&&x<=8640000000000000;
 function settings(s,sections,chapters){
   assert(plain(s),'Missing preferences.');
   assert(Object.keys(s).every(k=>Object.hasOwn(defaultSettings,k)),'settings: unknown preference field.');
+  s={...s,deckMode:s.deckMode??'custom'}; // Existing explicit filters remain unchanged.
+  assert(['class','custom'].includes(s.deckMode),'settings.deckMode must be class or custom.');
   assert(Array.isArray(s.sections)&&s.sections.every(id=>sections.includes(id)),'Invalid vocabulary filters.');
   assert(['es-en','en-es','mixed'].includes(s.direction)&&[10,20,30,50].includes(s.limit),'Invalid review preferences.');
   assert(typeof s.verbsOnly==='boolean','settings.verbsOnly must be true or false.');
@@ -36,7 +38,7 @@ export function previewBackup(raw,cards,sections,content){
     const legacy=data.settings??{};
     assert(plain(legacy),'settings must be an object.');
     assert(Object.keys(legacy).every(k=>['sections','direction','limit','verbsOnly'].includes(k)),'settings: unknown legacy preference field.');
-    const s={...structuredClone(defaultSettings),...legacy};
+    const s={...structuredClone(defaultSettings),...legacy,deckMode:'custom'};
     assert(Array.isArray(s.sections)&&s.sections.every(id=>typeof id==='string'),'settings.sections must be a list of chapter IDs.');
     // A removed section is reported and retained in the recovery, not silently lost.
     const unknownSections=(s.sections||[]).filter(id=>!sectionIds.includes(id));s.sections=(s.sections||defaultSettings.sections).filter(id=>sectionIds.includes(id));

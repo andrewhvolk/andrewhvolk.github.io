@@ -28,16 +28,22 @@ export function evidenceState(attempts,objective,at){
 export function diagnosticReport(attempts,objectives){const latest=attempts.filter(a=>a.diagnostic).at(-1)?.sessionId;return objectives.map(o=>{const a=attempts.filter(x=>x.diagnostic&&x.sessionId===latest&&x.objectiveIds.includes(o.id));const misses=a.filter(x=>x.outcome!=='correct'),targets=misses.filter(x=>x.verbEvidence).map(x=>`${x.verbEvidence.verb} · ${x.verbEvidence.person}${x.outcome==='accent-or-orthography'?' (written accent)':''}`);return {id:o.id,title:o.title,tested:a.length,correct:a.filter(x=>x.outcome==='correct').length,recommendation:!a.length?'Not sampled':!misses.length?'Promising sample; confirm in daily practice':`Review ${o.title.toLowerCase()}${targets.length?': '+targets.join('; '):''}`};});}
 export function seeded(seed){let x=seed>>>0;return ()=>{x=(Math.imul(1664525,x)+1013904223)>>>0;return x/4294967296;};}
 const shuffle=(items,random)=>{const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-export const defaultSettings={position:'2b',minutes:15,newLimit:10,vosotros:false,direction:'es-en',limit:20,verbsOnly:false,sections:['pe1','pe2','pe3','pe4','1a','1b','2a','2b'],speed:.85};
+export const defaultSettings={position:'2b',minutes:15,newLimit:10,vosotros:false,direction:'es-en',limit:20,verbsOnly:false,sections:['pe1','pe2','pe3','pe4','1a','1b','2a','2b'],deckMode:'class',speed:.85};
+export function vocabularyScope(position,sections){
+ // The four independent introductory lists form a shared introductory word pool.
+ // They are not claimed to map one-to-one to the three teaching topics.
+ const ordered=[...sections].sort((a,b)=>a.order-b.order),last=ordered.findIndex(s=>s.id===position);
+ return ordered.filter((s,i)=>s.id.startsWith('pe')||i<=last).map(s=>s.id);
+}
 export function newProfile(id,name='Learner'){return {id,displayName:name,settings:structuredClone(defaultSettings),progress:{},history:[],attempts:[],lessons:[],sessions:[],activeSession:null,onboarded:false};}
 export function emptyStore(){return {version:SCHEMA,contentVersion:CONTENT_VERSION,revision:0,activeProfile:'default',profiles:[newProfile('default')],recovery:[]};}
 export const eligibleCards=(cards,settings)=>cards.filter(c=>c.sections.some(s=>settings.sections.includes(s))&&(!settings.verbsOnly||c.verbs.length));
 export function plan(profile,content,cards,at,seed=1,options={}){
   const random=seeded(seed),settings=structuredClone(profile.settings), selected=eligibleCards(cards,settings);
   const due=selected.filter(c=>profile.progress[c.id]?.due<=at).sort((a,b)=>profile.progress[a.id].due-profile.progress[b.id].due);
-  const introduced=new Set(profile.attempts.filter(a=>a.newCard&&dayKey(a.timestamp)===dayKey(at)&&!a.undone).map(a=>a.cardId));
-  // Exposures in existing plans reserve daily introductions, including abandoned plans.
-  for(const s of profile.sessions.filter(s=>dayKey(s.createdAt)===dayKey(at)&&!s.practiceOnly))for(const i of s.queue)if(i.newCard)introduced.add(i.cardId);
+  const introduced=new Set(profile.attempts.filter(a=>a.newCard&&!a.practiceOnly&&!a.diagnostic&&dayKey(a.timestamp)===dayKey(at)&&!a.undone).map(a=>a.cardId));
+  // Reserve only unreached cards in unfinished scheduled plans; early finish releases them.
+  for(const s of profile.sessions.filter(s=>!s.completedAt&&dayKey(s.createdAt)===dayKey(at)&&!s.practiceOnly&&!s.diagnostic))for(const i of s.queue.slice(s.cursor))if(i.newCard)introduced.add(i.cardId);
   const remaining=Math.max(0,settings.newLimit-introduced.size);
   const fresh=shuffle(selected.filter(c=>!profile.progress[c.id]&&!introduced.has(c.id)),random).slice(0,remaining);
   const vocabN=options.wordsOnly?settings.limit:Math.max(3,Math.round(settings.minutes/3));

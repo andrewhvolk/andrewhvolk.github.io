@@ -1,4 +1,4 @@
-import {add,verbUnit} from './core.mjs?v=58415db71aab4d54';
+import {add,verbUnit} from './core.mjs?v=b2d3f758611bfe17';
 add('pe.greetings','pe-school','Greetings, introductions & address',[],
  'Use tú with a friend and usted for respectful singular address. Fixed expressions let you introduce yourself before learning whole verb paradigms.',
  ['Hola, me llamo Ana.','Buenos días, profesora. ¿Cómo está usted?'], 'Do not use informal estás when this task asks for usted.',`

@@ -7,8 +7,8 @@ The public target is https://andrewhvolk.github.io/palabra/; the separate privat
 |---|---|---|
 | 1 | Legacy import trust boundary and display escaping | Live in 92f1ec6; 17 tests, both Actions checks and public file hashes verified. |
 | 2 | Bounded undo, compact backups, draft persistence | Implemented: inverse events (20 latest), old snapshot conversion, compact exports, 64 MB byte cap, debounced drafts with small crash journal. 19 tests pass, including 21,950 attempts and repeated round trips. Live in 68dc509; both Actions checks and four public module hashes verified. |
-| 3 | Retire resolved diagnostic gaps and balance progression | Implemented: independent secure evidence supersedes diagnostic misses; ready current objectives receive reserved slots while unresolved prerequisites return. 20 tests pass; deployment pending. |
-| 4 | Chapter-aligned vocabulary and daily introduction budget | Pending |
+| 3 | Retire resolved diagnostic gaps and balance progression | Implemented: independent secure evidence supersedes diagnostic misses; ready current objectives receive reserved slots while unresolved prerequisites return. Live in 1d3d65f; cache consistency follow-up a3c22f0. 20 tests, both Actions checks, public hashes and malformed-import browser check pass. |
+| 4 | Chapter-aligned vocabulary and daily introduction budget | Implemented: class-following scope with explicit Custom deck, all-position tests, shared introductory pool; release unused early-finished reservations and exclude practice. 22 tests pass; deployment pending. |
 | 5 | Truthful production evidence and receptive objectives/coverage | Pending |
 | 6 | Daily task rotation, tense/person selection, hints and retry accents | Pending |
 | 7 | Return/resume behavior, mobile navigation, save status and plain language | Pending |

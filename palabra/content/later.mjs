@@ -1,4 +1,4 @@
-import {add,verbUnit} from './core.mjs?v=58415db71aab4d54';
+import {add,verbUnit} from './core.mjs?v=b2d3f758611bfe17';
 verbUnit('7a.stem-ie','7a','Pensar, querer & preferir',['3a.present-er-ir'],
  'These verbs change a stem e to ie in stressed present forms; nosotros/vosotros keep e. Pensar + infinitive expresses an intention, querer + infinitive a desire, and preferir a preference.',
  ['Quiero comprar una camisa.','Preferimos los zapatos negros.'],'Nosotros pensamos, queremos and preferimos keep e. The last two letters alone cannot predict these forms.',[
