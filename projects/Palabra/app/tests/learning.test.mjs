@@ -79,7 +79,7 @@ test('undo after a revealed exercise cannot turn a known answer into independent
 });
 test('secure evidence requires independent cross-day and cross-variant production',()=>{
  const o=course.objectives.find(o=>o.id==='2a.present-ar');
- const attempts=Array.from({length:6},(_,i)=>({id:String(i),objectiveIds:[o.id],exerciseId:'e'+i%3,timestamp:at+Math.floor(i/3)*86400000,outcome:'correct',assessmentMode:'auto',production:true}));
+ const attempts=Array.from({length:6},(_,i)=>({id:String(i),objectiveIds:[o.id],exerciseId:['2a.present-ar-1','2a.present-ar-2','2a.present-ar-6'][i%3],timestamp:at+Math.floor(i/3)*86400000,outcome:'correct',assessmentMode:'auto',production:true}));
  assert.equal(evidenceState(attempts.slice(0,1),o,at).state,'learning');assert.equal(evidenceState(attempts,o,at+86400000).state,'secure');
  for(const flag of ['usedHint','revealed','retry','practiceOnly','diagnostic'])assert.notEqual(evidenceState(attempts.map(a=>({...a,[flag]:true})),o,at).state,'secure');
  assert.notEqual(evidenceState(attempts.map(a=>({...a,timestamp:at})),o,at).state,'secure');assert.notEqual(evidenceState(attempts.map(a=>({...a,production:false})),o,at).state,'secure');
@@ -107,7 +107,7 @@ test('storage failure, interrupted migration and conflict detection',async()=>{
  await assert.rejects(faulty.write(migration,0),/Quota/);assert.equal(migration.recovery[0].raw.version,1);assert.equal((await repo.read()).revision,1);
 });
 test('full content integrity, every objective minimum, and unchanged vocabulary IDs',async()=>{
- assert.deepEqual(validateContent(course,data.cards,data.sections),[]);assert.equal(coverage(course).length,48);assert(coverage(course).every(r=>r.reviewedItemCount>=12&&r.contexts.length>=3&&r.production));
+ assert.deepEqual(validateContent(course,data.cards,data.sections),[]);assert.equal(coverage(course).length,90);assert(coverage(course).filter(r=>!course.objectives.find(o=>o.id===r.objectiveId).receptive).every(r=>r.reviewedItemCount>=12&&r.contexts.length>=3&&r.production));assert(coverage(course).filter(r=>course.objectives.find(o=>o.id===r.objectiveId).receptive).every(r=>r.reviewedItemCount>=3&&!r.production));
  const vocabularyBytes=await readFile(new URL('../content/vocabulary.json',import.meta.url));assert.equal(createHash('sha256').update(vocabularyBytes).digest('hex'),'aa03513f9d70a85cc964cf35a868bd0e57163da98d50bdcfbbb2f4189be3772f');
  for(const e of course.exercises.filter(e=>e.assessmentMode==='auto'))for(const answer of e.acceptedAnswers)assert.equal(grade(answer,e).outcome,'correct',e.id);
  const c=structuredClone(course);c.objectives[0].prerequisites=[c.objectives[0].id];assert(validateContent(c,data.cards,data.sections).some(e=>e.includes('cycle')));

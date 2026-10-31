@@ -1,10 +1,10 @@
-import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs?v=b2d3f758611bfe17';
-import './catchup.mjs?v=b2d3f758611bfe17';
-import './middle.mjs?v=b2d3f758611bfe17';
-import './later.mjs?v=b2d3f758611bfe17';
-import {communication} from './communication.mjs?v=b2d3f758611bfe17';
-import {cultures} from './culture.mjs?v=b2d3f758611bfe17';
-import {verbs,PERSONS} from './verbs.mjs?v=b2d3f758611bfe17';
+import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs?v=d3ca4fff68f9b9b5';
+import './catchup.mjs?v=d3ca4fff68f9b9b5';
+import './middle.mjs?v=d3ca4fff68f9b9b5';
+import './later.mjs?v=d3ca4fff68f9b9b5';
+import {communication} from './communication.mjs?v=d3ca4fff68f9b9b5';
+import {cultures} from './culture.mjs?v=d3ca4fff68f9b9b5';
+import {verbs,PERSONS} from './verbs.mjs?v=d3ca4fff68f9b9b5';
 const grammarRefs={
  'pe.spelling':['abecedario'],'pe.dates':['fecha'],'pe.numbers-time':['hora','cardinales'],
  '1a.infinitives':['gustar'],'1a.responses':['tampoco','también'],'1b.articles':['el','una'],'1b.adjectives':['concordancia'],'2a.subjects':['pronombres-personales-tónicos'],'2a.schedules':['ordinales','hora'],
@@ -29,6 +29,15 @@ for(const o of objectives.filter(o=>o.skillType==='conjugation')){
  const sample=exercises.find(e=>e.objectiveIds.includes(o.id)&&e.verbEvidence?.tense==='present');if(!sample)continue;
  const v=verbs.find(v=>v.id===sample.verbEvidence.verb);
  exercises.push({...sample,id:`${o.id}-vosotros`,prompt:`In a group-address drill, ${v.infinitive} + vosotros/vosotras (present). Type the bare form.`,acceptedAnswers:[v.forms.present[4]],feedback:`Vosotros/vosotras takes ${v.forms.present[4]}. Ustedes takes the third-person plural form instead.`,kind:'form',vosotros:true,verbEvidence:{verb:v.id,tense:'present',person:PERSONS[4]},context:'group-address'});
+}
+// Typed choices are recognition, even when the learner types the supplied answer.
+const recognition=new Set(['1a.infinitives-1','1a.infinitives-5','1a.infinitives-9','2a.subjects-11','2a.subjects-12']);
+for(const e of exercises){
+ if(recognition.has(e.id)||/Answer in English/.test(e.prompt)&&!e.verbEvidence)e.production=false;
+ e.productionType??=e.assessmentMode==='self'?'personal-response':e.production?'controlled-production':'recognition';
+}
+for(const o of objectives){const items=exercises.filter(e=>e.objectiveIds.includes(o.id));o.productionExerciseIds=items.filter(e=>e.production&&e.assessmentMode==='auto').map(e=>e.id);
+ if(o.skillType==='conjugation')o.exerciseTargets=Object.fromEntries(items.filter(e=>e.verbEvidence).map(e=>[e.id,{...e.verbEvidence,context:e.context}]));
 }
 // A diagnostic samples all catch-up domains without creating scheduled vocabulary history.
 const diagnostic=['pe.greetings-2','pe.instructions-1','pe.numbers-time-1','pe.numbers-time-4','pe.objects-2','pe.spelling-1','pe.dates-10','pe.weather-1','1a.infinitives-1','1a.responses-2','1b.articles-7','1b.adjectives-1','2a.subjects-5','2a.present-ar-1','2a.present-ar-3','2a.schedules-11','2b.estar-3','2b.location-3','2b.plurals-3','read-2b-q2'];

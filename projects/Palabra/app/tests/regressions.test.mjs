@@ -5,6 +5,7 @@ import {course} from '../content/course.mjs';
 import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards} from '../src/engine.mjs';
 import {previewBackup,exportBackup,compactState} from '../src/persistence.mjs';
 import {recoverDrafts} from '../src/drafts.mjs';
+import {coverage} from '../src/validation.mjs';
 const data=JSON.parse(await readFile(new URL('../content/vocabulary.json',import.meta.url),'utf8'));
 const decode=raw=>previewBackup(raw,data.cards,data.sections,course);
 test('legacy preference allowlist rejects markup, wrong types and unknown fields atomically',()=>{
@@ -44,7 +45,8 @@ test('new independent evidence retires diagnostic gaps and current work shares t
  const at=Date.UTC(2026,9,30,12),p=newProfile('catchup');p.settings.position='9b';p.lessons=course.objectives.map(o=>o.id);
  const sampled=[...new Set(course.diagnostic.flatMap(id=>course.exercises.find(e=>e.id===id).objectiveIds))];
  for(const id of sampled){p.attempts.push({id:'d-'+id,sessionId:'d',diagnostic:true,objectiveIds:[id],outcome:'incorrect',timestamp:at-5*86400000});
-  const variants=course.exercises.filter(e=>e.objectiveIds.includes(id)&&e.production).slice(0,3);
+  const objective=course.objectives.find(o=>o.id===id),items=course.exercises.filter(e=>e.objectiveIds.includes(id)&&(!objective.productionRequired||e.production));
+  let variants=items.slice(0,3);if(objective.exerciseTargets){outer:for(const a of items)for(const b of items)for(const c of items){const trio=[a,b,c];if(new Set(trio.map(e=>e.verbEvidence.person)).size>=3&&new Set(trio.map(e=>e.context)).size>=2){variants=trio;break outer;}}}
   for(let i=0;i<6;i++)p.attempts.push({id:id+i,exerciseId:variants[i%3].id,objectiveIds:[id],timestamp:at-(i<3?2:1)*86400000,outcome:'correct',assessmentMode:'auto',production:true});
   assert.equal(evidenceState(p.attempts,course.objectives.find(o=>o.id===id),at).state,'secure');
  }
@@ -65,4 +67,17 @@ test('early finish releases unreached introductions and practice does not consum
  const scheduled=plan(p,course,data.cards,at+2,22,{wordsOnly:true});assert.equal(scheduled.queue.length,4);p.sessions.push(scheduled);p=commit(p,scheduled.id,{id:'intro',index:0,correct:true},course,data.cards,at+3);p.sessions.at(-1).completedAt=at+4;
  const practice=plan(p,course,data.cards,at+5,50,{wordsOnly:true,practiceOnly:true});p.sessions.push(practice);p=commit(p,practice.id,{id:'extra',index:0,correct:true},course,data.cards,at+6);
  assert.equal(plan(p,course,data.cards,at+7,23,{wordsOnly:true}).queue.filter(i=>i.newCard).length,3);
+});
+test('recognition cannot impersonate production, including old incorrectly labelled attempts',()=>{
+ const o=course.objectives.find(o=>o.id==='1a.infinitives'),at=Date.now();const ids=['1a.infinitives-1','1a.infinitives-5','1a.infinitives-9'];
+ assert(ids.every(id=>!course.exercises.find(e=>e.id===id).production));
+ const attempts=Array.from({length:6},(_,i)=>({exerciseId:ids[i%3],objectiveIds:[o.id],timestamp:at+Math.floor(i/3)*86400000,outcome:'correct',assessmentMode:'auto',production:true}));
+ assert.notEqual(evidenceState(attempts,o,at+86400000).state,'secure');
+ const form=course.objectives.find(o=>o.id==='2a.present-ar');const onePerson=['2a.present-ar-1','2a.present-ar-5','2a.present-ar-11'];
+ assert.notEqual(evidenceState(attempts.map((a,i)=>({...a,objectiveIds:[form.id],exerciseId:onePerson[i%3]})),form,at+86400000).state,'secure');
+});
+test('receptive evidence and coverage link questions without claiming grammar production',()=>{
+ const rows=coverage(course);assert.equal(course.objectives.filter(o=>o.receptive).length,42);
+ for(const e of course.exercises.filter(e=>['reading','listening'].includes(e.kind))){assert(e.objectiveIds.length);assert(e.objectiveIds.every(id=>course.objectives.find(o=>o.id===id).skillType===e.kind));assert.equal(e.production,false);}
+ assert.equal(rows.find(r=>r.objectiveId==='2b.estar').reading,0);assert.equal(rows.find(r=>r.objectiveId==='2b.reading').reading,3);assert.equal(rows.find(r=>r.objectiveId==='2b.listening').listening,3);
 });

@@ -20,10 +20,13 @@ export function evidenceState(attempts,objective,at){
   const diagnostic=all.filter(a=>a.diagnostic), independent=all.filter(a=>!a.diagnostic&&!a.practiceOnly&&!a.usedHint&&!a.revealed&&!a.retry&&a.assessmentMode==='auto'&&['correct','incorrect','accent-or-orthography'].includes(a.outcome));
   const recent=independent.slice(-10), accuracy=recent.length?recent.filter(a=>a.outcome==='correct').length/recent.length:0;
   const variants=new Set(recent.map(a=>a.exerciseId)).size, dates=new Set(recent.map(a=>dayKey(a.timestamp))).size;
-  const production=!objective.productionRequired||recent.some(a=>a.production&&a.outcome==='correct');
-  const secure=recent.length>=6&&accuracy>=.8&&dates>=2&&variants>=3&&production;
+  const production=!objective.productionRequired||recent.some(a=>a.production&&a.outcome==='correct'&&(!objective.productionExerciseIds||objective.productionExerciseIds.includes(a.exerciseId)));
+  const targets=objective.exerciseTargets,correctTargets=recent.filter(a=>a.outcome==='correct').map(a=>targets?.[a.exerciseId]).filter(Boolean);
+  const people=new Set(correctTargets.map(t=>t.person)),tenses=new Set(correctTargets.map(t=>t.tense)),contexts=new Set(correctTargets.map(t=>t.context));
+  const available=Object.values(targets||{}),breadth=!targets||(people.size>=Math.min(3,new Set(available.map(t=>t.person)).size)&&tenses.size===new Set(available.map(t=>t.tense)).size&&contexts.size>=2);
+  const secure=recent.length>=6&&accuracy>=.8&&dates>=2&&variants>=3&&production&&breadth;
   const latest=recent.at(-1);const stale=latest&&boundary(latest.timestamp,14)<=at;
-  return {state:secure?(stale?'needs-review':'secure'):recent.length>=3&&accuracy<.6?'needs-review':!independent.length&&diagnostic.length?'provisional':'learning',n:recent.length,accuracy,variants,dates};
+  return {state:secure?(stale?'needs-review':'secure'):recent.length>=3&&accuracy<.6?'needs-review':!independent.length&&diagnostic.length?'provisional':'learning',n:recent.length,accuracy,variants,dates,people:people.size,targetsSeen:new Set(correctTargets.map(t=>`${t.verb}/${t.tense}/${t.person}`)).size,targetsTotal:new Set(available.map(t=>`${t.verb}/${t.tense}/${t.person}`)).size};
 }
 export function diagnosticReport(attempts,objectives){const latest=attempts.filter(a=>a.diagnostic).at(-1)?.sessionId;return objectives.map(o=>{const a=attempts.filter(x=>x.diagnostic&&x.sessionId===latest&&x.objectiveIds.includes(o.id));const misses=a.filter(x=>x.outcome!=='correct'),targets=misses.filter(x=>x.verbEvidence).map(x=>`${x.verbEvidence.verb} · ${x.verbEvidence.person}${x.outcome==='accent-or-orthography'?' (written accent)':''}`);return {id:o.id,title:o.title,tested:a.length,correct:a.filter(x=>x.outcome==='correct').length,recommendation:!a.length?'Not sampled':!misses.length?'Promising sample; confirm in daily practice':`Review ${o.title.toLowerCase()}${targets.length?': '+targets.join('; '):''}`};});}
 export function seeded(seed){let x=seed>>>0;return ()=>{x=(Math.imul(1664525,x)+1013904223)>>>0;return x/4294967296;};}
@@ -51,7 +54,7 @@ export function plan(profile,content,cards,at,seed=1,options={}){
   let queue=[...vocab];
   if(!options.wordsOnly){
     const max=content.chapters.findIndex(c=>c.id===settings.position);
-    const allowed=content.objectives.filter(o=>content.chapters.findIndex(c=>c.id===o.chapterId)<=max);
+    const allowed=content.objectives.filter(o=>!o.receptive&&content.chapters.findIndex(c=>c.id===o.chapterId)<=max);
     const state=o=>evidenceState(profile.attempts,o,at);
     const gaps=new Set(diagnosticReport(profile.attempts,allowed).filter(x=>x.tested&&x.correct<x.tested&&state(allowed.find(o=>o.id===x.id)).state!=='secure').map(x=>x.id));
     const priority=o=>gaps.has(o.id)?-2:state(o).state==='needs-review'?-1:state(o).state==='secure'?4:o.chapterId===settings.position?0:1;

@@ -1,4 +1,4 @@
-import {chapters,objectives,exercises,stimuli} from './core.mjs?v=b2d3f758611bfe17';
+import {chapters,objectives,lessons,exercises,stimuli} from './core.mjs?v=d3ca4fff68f9b9b5';
 // Each row: chapter, original 50–120-word reading, three exact comprehension keys,
 // separate audio sentence/key, personal writing/speaking application, model response.
 const units=[
@@ -50,14 +50,22 @@ export const communication=[];
 for(const [chapterId,text,q1,q2,q3,audio,aq,application,model]of units){
  const ids=objectives.filter(o=>o.chapterId===chapterId).map(o=>o.id);
  const readId=`read-${chapterId}`,audioId=`audio-${chapterId}`;
+ for(const kind of ['reading','listening']){
+  const id=`${chapterId}.${kind}`,sourceRefs=['https://www.coe.int/en/web/common-european-framework-reference-languages'];
+  objectives.push({id,chapterId,title:kind==='reading'?'Find details in a short text':'Understand a short spoken message',skillType:kind,receptive:true,prerequisites:[],productionRequired:false,sourceRefs});
+  chapters.find(c=>c.id===chapterId).objectiveIds.push(id);
+  lessons.push({id:`lesson-${id}`,version:1,objectiveIds:[id],explanation:kind==='reading'?'Read the question first. Find the sentence that gives that detail, and check who, when or where it describes.':'Read the question, then listen for its detail. Replay as needed. Reading the transcript makes it supported practice.',examples:kind==='reading'?['¿Quién? Look for the person.','¿Cuándo? Look for the time or day.']:['Listen for names, numbers and places.','Replay a short phrase before opening the transcript.'],commonMistakes:['A familiar word alone may not answer the question. Check the whole message.'],sourceRefs,reviewStatus:'reviewed',provenance:'Original Palabra strategy lesson; author review, not an independent educator audit.'});
+ }
  stimuli.push({id:readId,kind:'reading',chapterId,SpanishText:text,glossary:{note:'A few bridge words are introduced for comprehension; use the passage to infer meaning.',...bridgeGlossary},sourceRefs:[],reviewStatus:'reviewed',provenance:'Original fictional passage, authored for Palabra. Not a textbook reading.'});
  stimuli.push({id:audioId,kind:'listening',chapterId,SpanishText:audio,transcript:audio,glossary:bridgeGlossary,sourceRefs:[],reviewStatus:'reviewed',provenance:'Original no-key browser TTS stimulus.'});
  for(const [i,q]of [q1,q2,q3].entries()){
-  const [prompt,answers]=q.split('|');exercises.push({id:`${readId}-q${i+1}`,version:1,chapterId,objectiveIds:[],kind:'reading',prompt,acceptedAnswers:answers.split(' / '),feedback:'Look back at the relevant sentence in the passage. Only this question is assessed; reading alone is exposure.',context:'reading',production:false,assessmentMode:'auto',reviewStatus:'reviewed',stimulusId:readId,prerequisites:ids,sourceRefs:[]});
+  const [prompt,answers]=q.split('|');exercises.push({id:`${readId}-q${i+1}`,version:1,chapterId,objectiveIds:[`${chapterId}.reading`],kind:'reading',prompt,acceptedAnswers:answers.split(' / '),feedback:'Look back at the relevant sentence in the passage. Only this question is assessed; reading alone is exposure.',context:'reading',production:false,productionType:'recognition',assessmentMode:'auto',reviewStatus:'reviewed',stimulusId:readId,prerequisites:ids,sourceRefs:[]});
  }
  const [prompt,answer]=aq.split('|');
- exercises.push({id:`${audioId}-q1`,version:1,chapterId,objectiveIds:[],kind:'listening',prompt,acceptedAnswers:answer.split(' / '),feedback:'Replay the sentence and focus on the requested detail. A revealed transcript is supported practice.',context:'audio',production:false,assessmentMode:'auto',reviewStatus:'reviewed',stimulusId:audioId,prerequisites:ids,sourceRefs:[]});
- exercises.push({id:`${audioId}-dictation`,version:1,chapterId,objectiveIds:[],kind:'listening',prompt:'Listen and type the full Spanish sentence. Accents count.',acceptedAnswers:[audio],feedback:'Compare each word and written accent with the transcript. Slow down and replay if needed.',context:'dictation',production:true,assessmentMode:'auto',reviewStatus:'reviewed',stimulusId:audioId,prerequisites:ids,sourceRefs:[]});
+ exercises.push({id:`${audioId}-q1`,version:1,chapterId,objectiveIds:[`${chapterId}.listening`],kind:'listening',prompt,acceptedAnswers:answer.split(' / '),feedback:'Replay the sentence and focus on the requested detail. A revealed transcript is supported practice.',context:'audio',production:false,productionType:'recognition',assessmentMode:'auto',reviewStatus:'reviewed',stimulusId:audioId,prerequisites:ids,sourceRefs:[]});
+ exercises.push({id:`${audioId}-dictation`,version:1,chapterId,objectiveIds:[`${chapterId}.listening`],kind:'listening',prompt:'Listen and type the full Spanish sentence. Accents count.',acceptedAnswers:[audio],feedback:'Compare each word and written accent with the transcript. Slow down and replay if needed.',context:'dictation',production:false,productionType:'transcription',assessmentMode:'auto',reviewStatus:'reviewed',stimulusId:audioId,prerequisites:ids,sourceRefs:[]});
+ const options=[audio,...units.filter(u=>u[0]!==chapterId).slice(0,3).map(u=>u[5])].sort((a,b)=>a.localeCompare(b,'es'));
+ exercises.push({id:`${audioId}-q2`,version:1,chapterId,objectiveIds:[`${chapterId}.listening`],kind:'listening',prompt:'Listen, then choose the sentence you heard.',options,acceptedAnswers:[audio],feedback:'Listen for the complete meaning, not just one familiar word. A transcript reveal makes this supported practice.',context:'audio-identification',production:false,productionType:'recognition',assessmentMode:'auto',reviewStatus:'reviewed',stimulusId:audioId,prerequisites:ids,sourceRefs:[]});
  for(const kind of ['writing','speaking'])exercises.push({id:`${kind}-${chapterId}`,version:1,chapterId,objectiveIds:[],kind,prompt:application,acceptedAnswers:[],feedback:'This open response uses your own checklist, not an automatic language score.',rubric:['I included every requested detail.','My subjects and verb forms match.','I checked noun/adjective agreement and written accents.','I can explain the meaning of what I wrote or said.'],model,context:kind,production:true,assessmentMode:'self',reviewStatus:'reviewed',prerequisites:ids,sourceRefs:[]});
  communication.push({chapterId,reading:readId,listening:audioId,writing:`writing-${chapterId}`,speaking:`speaking-${chapterId}`});
 }
