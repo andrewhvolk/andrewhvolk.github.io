@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {course} from '../content/course.mjs';
-import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards} from '../src/engine.mjs';
+import {emptyStore,newProfile,plan,commit,undo,nextReview,evidenceState,vocabularyScope,eligibleCards,practiceQueue} from '../src/engine.mjs';
 import {previewBackup,exportBackup,compactState} from '../src/persistence.mjs';
 import {recoverDrafts} from '../src/drafts.mjs';
 import {coverage} from '../src/validation.mjs';
@@ -80,4 +80,16 @@ test('receptive evidence and coverage link questions without claiming grammar pr
  const rows=coverage(course);assert.equal(course.objectives.filter(o=>o.receptive).length,42);
  for(const e of course.exercises.filter(e=>['reading','listening'].includes(e.kind))){assert(e.objectiveIds.length);assert(e.objectiveIds.every(id=>course.objectives.find(o=>o.id===id).skillType===e.kind));assert.equal(e.production,false);}
  assert.equal(rows.find(r=>r.objectiveId==='2b.estar').reading,0);assert.equal(rows.find(r=>r.objectiveId==='2b.reading').reading,3);assert.equal(rows.find(r=>r.objectiveId==='2b.listening').listening,3);
+});
+test('daily applications rotate questions, dictation and personal writing/speaking',()=>{
+ const p=newProfile('rotate');p.lessons=course.objectives.map(o=>o.id);const seen={reading:new Set(),listening:new Set(),personal:new Set()};
+ for(let i=0;i<5;i++){const next=plan(p,course,data.cards,Date.UTC(2026,9,30+i,12),7+i);
+  for(const q of next.queue.filter(q=>q.kind==='exercise')){const e=course.exercises.find(e=>e.id===q.exerciseId);if(['reading','listening','writing','speaking'].includes(e.kind)){assert.equal(e.chapterId,'2b');seen[['writing','speaking'].includes(e.kind)?'personal':e.kind].add(e.id);p.attempts.push({exerciseId:e.id,objectiveIds:e.objectiveIds,outcome:'correct',timestamp:next.createdAt,assessmentMode:e.assessmentMode});}}
+ }assert.equal(seen.reading.size,3);assert.equal(seen.listening.size,3);assert.equal(seen.personal.size,2);assert([...seen.listening].some(id=>id.endsWith('dictation')));
+});
+test('manual queues include opted-in vosotros and explicitly filter tense/person',()=>{
+ const p=newProfile('verbs');p.settings.vosotros=true;assert(practiceQueue(p,course,{objectiveId:'2a.present-ar'}).includes('2a.present-ar-vosotros'));
+ p.settings.vosotros=false;assert(!practiceQueue(p,course,{objectiveId:'2a.present-ar'}).some(id=>id.endsWith('vosotros')));
+ for(const tense of ['present','preterite','affirmative-tú']){const ids=practiceQueue(p,course,{verb:'ir',tense});assert(ids.length);assert(ids.every(id=>course.exercises.find(e=>e.id===id).verbEvidence.tense===tense));}
+ const yo=practiceQueue(p,course,{verb:'ir',tense:'preterite',person:'yo'});assert(yo.length);assert(yo.every(id=>course.exercises.find(e=>e.id===id).verbEvidence.person==='yo'));
 });

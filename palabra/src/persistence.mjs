@@ -1,4 +1,4 @@
-import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs?v=d3ca4fff68f9b9b5';
+import {emptyStore,newProfile,SCHEMA,CONTENT_VERSION,defaultSettings} from './engine.mjs?v=868b6f71c6145465';
 export const MAX_BACKUP_BYTES=64*1024*1024;
 const plain=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const assert=(ok,message)=>{if(!ok)throw Error(`${message} Nothing was changed.`);};
@@ -69,7 +69,7 @@ export function previewBackup(raw,cards,sections,content){
         assert(typeof s.practiceOnly==='boolean'&&typeof s.diagnostic==='boolean'&&(s.completedAt===null||timestamp(s.completedAt)),'Invalid session status.');
         s.settings=settings(s.settings,sectionIds,chapters);
         assert(chapters.has(s.settings.position)&&[10,15,20].includes(s.settings.minutes)&&Number.isInteger(s.settings.newLimit)&&s.settings.newLimit>=0&&s.settings.newLimit<=20&&typeof s.settings.vosotros==='boolean'&&Number.isFinite(s.settings.speed)&&s.settings.speed>=.5&&s.settings.speed<=1.25,'Invalid session preferences.');
-        for(const [index,draft]of Object.entries(s.drafts))assert(/^\d+$/.test(index)&&Number(index)<s.queue.length&&plain(draft)&&(draft.answer===undefined||typeof draft.answer==='string'&&draft.answer.length<=4000)&&['usedHint','revealed','retry','audioFallback','audioPlayed'].every(k=>draft[k]===undefined||typeof draft[k]==='boolean'),'Invalid saved answer draft.');
+        for(const [index,draft]of Object.entries(s.drafts))assert(/^\d+$/.test(index)&&Number(index)<s.queue.length&&plain(draft)&&(draft.answer===undefined||typeof draft.answer==='string'&&draft.answer.length<=4000)&&['usedHint','hintShown','revealed','retry','audioFallback','audioPlayed'].every(k=>draft[k]===undefined||typeof draft[k]==='boolean'),'Invalid saved answer draft.');
         if(s.feedback)assert(plain(s.feedback)&&exIds.has(s.feedback.exerciseId)&&attempts.has(s.feedback.attemptId)&&plain(s.feedback.checklist)&&Object.values(s.feedback.checklist).every(v=>typeof v==='boolean'),'Invalid saved exercise feedback.');
         // Undo contains state snapshots; validate those too before they can become live data.
         for(const u of s.undo){assert(plain(u)&&s.committed.includes(u.attemptId)&&plain(u.before)&&Number.isInteger(u.before.cursor)&&u.before.cursor>=0&&u.before.cursor<s.cursor&&Number.isInteger(u.before.historyLength)&&u.before.historyLength>=0&&u.before.historyLength<=p.history.length&&Number.isInteger(u.before.attemptsLength)&&u.before.attemptsLength>=0&&u.before.attemptsLength<p.attempts.length,'Invalid undo record.');

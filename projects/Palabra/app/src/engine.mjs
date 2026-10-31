@@ -41,6 +41,16 @@ export function vocabularyScope(position,sections){
 export function newProfile(id,name='Learner'){return {id,displayName:name,settings:structuredClone(defaultSettings),progress:{},history:[],attempts:[],lessons:[],sessions:[],activeSession:null,onboarded:false};}
 export function emptyStore(){return {version:SCHEMA,contentVersion:CONTENT_VERSION,revision:0,activeProfile:'default',profiles:[newProfile('default')],recovery:[]};}
 export const eligibleCards=(cards,settings)=>cards.filter(c=>c.sections.some(s=>settings.sections.includes(s))&&(!settings.verbsOnly||c.verbs.length));
+export function practiceQueue(profile,content,{objectiveId,chapterId,kind='all',verb,tense='all',person='all',limit=12}={}){
+ const items=content.exercises.filter(e=>e.reviewStatus==='reviewed'&&(!e.vosotros||profile.settings.vosotros)&&(!objectiveId||e.objectiveIds.includes(objectiveId))&&(!chapterId||e.chapterId===chapterId)&&(!verb||e.verbEvidence?.verb===verb)&&(tense==='all'||e.verbEvidence?.tense===tense)&&(person==='all'||e.verbEvidence?.person===person)&&(kind==='all'||e.kind===kind||kind==='grammar'&&!['reading','listening','writing','speaking'].includes(e.kind)));
+ const count=e=>profile.attempts.filter(a=>a.exerciseId===e.id).length;
+ items.sort((a,b)=>count(a)-count(b));const chosen=[];
+ const take=e=>{if(e&&!chosen.includes(e)&&chosen.length<limit)chosen.push(e);};
+ // Cover available tenses, then persons (including opted-in vosotros), before repeats.
+ for(const value of new Set(items.map(e=>e.verbEvidence?.tense).filter(Boolean)))take(items.find(e=>e.verbEvidence?.tense===value));
+ for(const value of new Set(items.map(e=>e.verbEvidence?.person).filter(Boolean)))take(items.find(e=>e.verbEvidence?.person===value));
+ for(const e of items)take(e);return chosen.map(e=>e.id);
+}
 export function plan(profile,content,cards,at,seed=1,options={}){
   const random=seeded(seed),settings=structuredClone(profile.settings), selected=eligibleCards(cards,settings);
   const due=selected.filter(c=>profile.progress[c.id]?.due<=at).sort((a,b)=>profile.progress[a.id].due-profile.progress[b.id].due);
@@ -73,10 +83,12 @@ export function plan(profile,content,cards,at,seed=1,options={}){
       const e=candidates[0];if(e)chosen.push({kind:'exercise',exerciseId:e.id,reason:gaps.has(o.id)?'Diagnostic gap':state(o).state==='needs-review'?'A skill needs another look':profile.lessons.includes(o.id)?'Build independent recall':'Learn a prerequisite'});
       if(chosen.length>=slots)break;
     }
-    const activeChapter=chosen.length?content.exercises.find(e=>e.id===chosen.at(-1).exerciseId).chapterId:settings.position;
-    for(const kind of ['reading','listening','writing']){
-      const e=content.exercises.find(e=>e.chapterId===activeChapter&&e.kind===kind&&e.reviewStatus==='reviewed');
-      if(e)chosen.push({kind:'exercise',exerciseId:e.id,reason:kind==='writing'?'Apply it in your own words':`Use Spanish in ${kind}`});
+    const activeChapter=current.length?settings.position:chosen.length?content.exercises.find(e=>e.id===chosen[0].exerciseId).chapterId:settings.position;
+    for(const kinds of [['reading'],['listening'],['writing','speaking']]){
+      const candidates=content.exercises.filter(e=>e.chapterId===activeChapter&&kinds.includes(e.kind)&&e.reviewStatus==='reviewed');
+      const attempts=e=>profile.attempts.filter(a=>a.exerciseId===e.id);
+      candidates.sort((a,b)=>attempts(a).length-attempts(b).length||(attempts(a).at(-1)?.timestamp||0)-(attempts(b).at(-1)?.timestamp||0));
+      const e=candidates[0];if(e)chosen.push({kind:'exercise',exerciseId:e.id,reason:['writing','speaking'].includes(e.kind)?'Apply it in your own words':`Use Spanish in ${e.kind}`});
     }
     queue=[];while(vocab.length||chosen.length){if(vocab.length)queue.push(vocab.shift());if(chosen.length)queue.push(chosen.shift());}
   }
