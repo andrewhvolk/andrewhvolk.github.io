@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Module 11 Summary | MATH 114 | Prof. Volk's Office</title>
-  <meta name="description" content="MATH 114 Module 11 summary: linear and exponential growth, doubling time, half-life, the Rule of 70, and logistic growth.">
+  <meta name="description" content="MATH 114 Module 11 summary: linear and exponential growth, doubling time, half-life, the Rule of 70, powers of ten, and logistic growth.">
   <link rel="canonical" href="https://andrewhvolk.github.io/courses/114-module11-summary.html">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
@@ -113,7 +113,7 @@
     <strong>Due dates (11:59 p.m.):</strong>
     Homework 11 (20 questions), Sunday, Nov 8, 2026 &nbsp;&middot;&nbsp;
     Quiz 11 (10 questions), Monday, Nov 9, 2026. Confirm all dates in Canvas.<br>
-    <strong>Outcomes:</strong> tell linear from exponential growth; use doubling time, half-life and the Rule of 70; recognize logistic growth and carrying capacity.
+    <strong>Outcomes:</strong> tell linear from exponential growth; use doubling time, half-life and the Rule of 70, including fractional periods; bound powers of ten; recognize logistic growth and carrying capacity.
   </div>
 
   <div class="summary-columns">
@@ -125,8 +125,8 @@
       <li><strong>Exponential:</strong> grows by the same <em>percentage</em> each period. <span class="formula">y = y<sub>0</sub>(1 + r)<sup>t</sup></span></li>
       <li><strong>Exponential decay:</strong> shrinks by the same percentage each period. <span class="formula">y = y<sub>0</sub>(1 &minus; r)<sup>t</sup></span></li>
     </ul>
-    <p><strong>Signal words:</strong> &ldquo;increases by 642 per year&rdquo; is linear; &ldquo;grows 30% per year&rdquo; or &ldquo;doubles every&hellip;&rdquo; is exponential.</p>
-    <p><strong>Examples:</strong> 1600 + 642(4) = <strong>4168</strong>; 150(1.3)<sup>3</sup> &asymp; <strong>330</strong>; 2000(1.1)<sup>3</sup> = <strong>2662</strong>; $500 at 8% for 3 years: 500(1.08)<sup>3</sup> &asymp; <strong>$629.86</strong>.</p>
+    <p><strong>Signal words:</strong> linear change is an <em>absolute</em> change and exponential change is a <em>relative</em> change. &ldquo;Increases by 642 per year&rdquo; is linear; &ldquo;grows 30% per year&rdquo; or &ldquo;doubles every&hellip;&rdquo; is exponential.</p>
+    <p><strong>Examples:</strong> 1600 + 642(4) = <strong>4168</strong>; 150(1.3)<sup>3</sup> &asymp; <strong>330</strong>; 2000(1.1)<sup>3</sup> = <strong>2662</strong>; $500 at 8% for 3 years: 500(1.08)<sup>3</sup> &asymp; <strong>$629.86</strong>; $8,000 losing 15% a year (decay factor 0.85) for 3 years: 8000(0.85)<sup>3</sup> = <strong>$4,913.00</strong>.</p>
   </div>
 
   <div class="summary-block">
@@ -134,9 +134,11 @@
     <p>The <strong>doubling time</strong> T is the time for a growing quantity to double.</p>
     <span class="formula">y = y<sub>0</sub> &times; 2<sup>t/T</sup></span>
     <ul>
-      <li><strong>Example:</strong> 50 spores doubling every hour: after 4 hours, 50 &times; 2<sup>4</sup> = <strong>800</strong>.</li>
+      <li><strong>Example:</strong> 50 spores doubling every 6 hours: after 24 hours, 50 &times; 2<sup>24/6</sup> = 50 &times; 2<sup>4</sup> = <strong>800</strong>.</li>
+      <li><strong>Fractional periods:</strong> 5,000 doubling every 8 years, after 12 years: 5000 &times; 2<sup>12/8</sup> &asymp; <strong>14,142</strong>. Put t and T in the same units first.</li>
+      <li><strong>Growth factor over time t:</strong> 2<sup>t/T</sup>. At 0.5% per month, T &asymp; 140 months, so over 5 years (60 months) the factor is 2<sup>60/140</sup> &asymp; <strong>1.35</strong>.</li>
       <li><strong>Rule of 70:</strong> T &asymp; 70 &divide; (percent growth rate). At 5% per year, T &asymp; 70/5 = <strong>14 years</strong>. Works best for rates under about 15%.</li>
-      <li><strong>Exact:</strong> T = ln 2 &divide; ln(1 + r), with r as a decimal.</li>
+      <li><strong>Exact:</strong> T = ln 2 &divide; ln(1 + r), with r as a decimal. Above 15% the Rule of 70 runs low: at 25%, 2.8 years vs. about 3.1.</li>
     </ul>
   </div>
 
@@ -146,7 +148,8 @@
     <span class="formula">y = y<sub>0</sub> &times; (1/2)<sup>t/T</sup></span>
     <ul>
       <li>After 1 half-life, 50% remains; after 2, 25%; after 3, 12.5%.</li>
-      <li><strong>Approximate half-life:</strong> T &asymp; 70 &divide; (percent decay rate).</li>
+      <li><strong>Example:</strong> 500 mg with a 6-hour half-life, after 15 hours: 500 &times; (1/2)<sup>15/6</sup> &asymp; <strong>88.39 mg</strong>.</li>
+      <li><strong>Approximate half-life:</strong> T &asymp; 70 &divide; (percent decay rate). <strong>Exact:</strong> T = &minus;ln 2 &divide; ln(1 &minus; r).</li>
     </ul>
   </div>
 
@@ -167,6 +170,14 @@
       <li><strong>Slowing:</strong> limited resources reduce the growth rate.</li>
       <li><strong>Leveling off:</strong> the population approaches K and the growth rate approaches 0.</li>
     </ol>
+  </div>
+
+  <div class="summary-block">
+    <h2>6. Powers of Ten and Rates</h2>
+    <ul>
+      <li>If n &lt; x &lt; n + 1, then 10<sup>n</sup> &lt; 10<sup>x</sup> &lt; 10<sup>n+1</sup>. Example: 10<sup>2.7</sup> is between 100 and 1000.</li>
+      <li>A year has 365 days, 8,760 hours and 525,600 minutes: 3 million per year &divide; 525,600 &asymp; <strong>5.7 per minute</strong>.</li>
+    </ul>
   </div>
 
   <div class="summary-block">
