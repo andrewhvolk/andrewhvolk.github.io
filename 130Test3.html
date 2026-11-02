@@ -1723,7 +1723,7 @@
                 const absRemainder = Math.abs(theta - turnCount * 360);
                 const fallbackText = `Standard-position angle ${theta} degrees. The terminal side matches ${normalizedTheta} degrees. Rotation is ${directionWord} with ${Math.abs(turnCount)} full ${turnDirection} turn${Math.abs(turnCount) === 1 ? '' : 's'} plus ${absRemainder} additional degrees to the shared terminal side.`;
                 return {
-                    q: `Find one coterminal angle (in degrees) for $\\theta = ${theta}^\\circ$.`,
+                    q: `Find one angle (in degrees) that is coterminal with $\\theta = ${theta}^\\circ$ but is not $\\theta$ itself.`,
                     svg: createCoterminalAngleSvg({
                         originalThetaDeg: theta,
                         normalizedThetaDeg: normalizedTheta,
@@ -1747,7 +1747,7 @@
                 const k = (Math.floor(Math.random() * 4) + 1) * (Math.random() > 0.5 ? 1 : -1);
                 const ans = baseTheta + 2 * Math.PI * k;
                 return {
-                    q: `Find one coterminal angle (in radians) for $\\theta = \\frac{${baseNum}\\pi}{6}$. (Round to 3 decimals if entering a decimal.)`,
+                    q: `Find one angle (in radians) that is coterminal with $\\theta = \\frac{${baseNum}\\pi}{6}$ but is not $\\theta$ itself. (Round to 3 decimals if entering a decimal.)`,
                     inputType: 'coterminal_rad', baseThetaRad: baseTheta, tol: 0.01,
                     entryNote: 'Any answer of the form $\\theta + 2\\pi k$ is valid, where $k$ is an integer. For this input, you may enter either a decimal or simple $\\pi$ notation such as $\\pi$, $2\\pi/3$, or $-5\\pi/6$.',
                     solution: `Coterminal angles differ by multiples of $2\\pi$. One sample valid answer is $\\frac{${baseNum}\\pi}{6} ${k >= 0 ? '+' : '-'}${Math.abs(k)}(2\\pi) = ${ans.toFixed(3)}$ radians.`
@@ -1968,7 +1968,7 @@
                     svgAltText: fallbackText,
                     entryNote,
                     inputType: 'number', a: ans, tol: 0.1,
-                    solution: `First find a coterminal angle between $0^\\circ$ and $360^\\circ$: $${t}^\\circ$. This generator excludes axis cases (${0}^\\circ, ${90}^\\circ, ${180}^\\circ, ${270}^\\circ), so the reference angle is the acute angle to the $x$-axis: $${ans}^\\circ$.`
+                    solution: `First find a coterminal angle between $0^\\circ$ and $360^\\circ$: $${t}^\\circ$. The terminal side is not on an axis, so the reference angle is the acute angle between it and the $x$-axis: $${ans}^\\circ$.`
                 };
             }
         },
@@ -2140,7 +2140,7 @@
                 `;
 
                 return {
-                    q: `Use the graph to find $\\vec{PQ}$ in component form. (Fallback text: Given points $P(${x1},${y1})$ and $Q(${x2},${y2})$.)`,
+                    q: `The graph shows $P(${x1},${y1})$ and $Q(${x2},${y2})$. Find $\\vec{PQ}$ in component form.`,
                     svg,
                     svgAltText: fallbackText,
                     inputType: 'vector_xy',
@@ -2185,7 +2185,7 @@
                 const magnitude = Math.sqrt(a * a + b * b);
                 const fallbackText = `Vector from origin to (${a}, ${b}) on a coordinate grid.`;
                 return {
-                    q: `Use the graph to enter BOTH the magnitude and direction angle (in degrees, from $0^\\circ$ to $360^\\circ$) of the vector. (Fallback text: vector $\\langle ${a}, ${b}\\rangle$.)`,
+                    q: `The graph shows $\\vec v = \\langle ${a}, ${b}\\rangle$. Enter BOTH its magnitude (round to 3 decimals) and its direction angle in degrees, from $0^\\circ$ to $360^\\circ$ (round to 1 decimal).`,
                     svg: createVectorSvg({ x: a, y: b, labelText: `v = <${a}, ${b}>`, fallbackText }),
                     svgAltText: fallbackText,
                     inputType: 'vector_mag_dir',
@@ -2305,7 +2305,7 @@
                 const x = mag*Math.cos(dir*Math.PI/180);
                 const y = mag*Math.sin(dir*Math.PI/180);
                 return {
-                    q: `A vector has magnitude ${mag} and direction angle ${dir}^\\circ$. Enter its components in x and y. (Round to 3 decimals)`,
+                    q: `A vector has magnitude $${mag}$ and direction angle $${dir}^\\circ$. Enter its $x$- and $y$-components. (Round to 3 decimals)`,
                     inputType: 'vector_xy', a: {x, y}, tol: {x: 0.01, y: 0.01},
                     solution: `Use $\\langle a,b\\rangle=\\langle r\\cos\\theta, r\\sin\\theta\\rangle$: $x=${x.toFixed(3)}, y=${y.toFixed(3)}$.`
                 };
@@ -2325,7 +2325,7 @@
                 let dir = Math.atan2(y,x)*180/Math.PI;
                 if (dir < 0) dir += 360;
                 return {
-                    q: `Vectors $\\vec u$ and $\\vec v$ have magnitudes/directions (${r1}, ${t1}^\\circ) and (${r2}, ${t2}^\\circ). Find the resultant magnitude and direction.`,
+                    q: `Vector $\\vec u$ has magnitude $${r1}$ and direction angle $${t1}^\\circ$; vector $\\vec v$ has magnitude $${r2}$ and direction angle $${t2}^\\circ$. Find the magnitude (round to 2 decimals) and direction angle (round to 1 decimal) of $\\vec u + \\vec v$.`,
                     inputType: 'vector_mag_dir', a: {mag, dir}, tol: {mag: 0.02, dir: 0.2},
                     solution: `Convert: $\\vec u = \\langle ${r1}\\cos(${t1}^\\circ), ${r1}\\sin(${t1}^\\circ)\\rangle$, $\\vec v = \\langle ${r2}\\cos(${t2}^\\circ), ${r2}\\sin(${t2}^\\circ)\\rangle$. Sum: $\\langle ${x.toFixed(3)}, ${y.toFixed(3)}\\rangle$. Magnitude: $\\sqrt{${x.toFixed(3)}^2+${y.toFixed(3)}^2}=${mag.toFixed(3)}$. Direction: $\\operatorname{atan2}(${y.toFixed(3)},${x.toFixed(3)})=${dir.toFixed(1)}^\\circ$.`
                 };
@@ -3111,7 +3111,8 @@
             const tol = currentQuestion.tol ?? 0.1;
             const baseTheta = currentQuestion.baseTheta;
             const k = Math.round((userVal - baseTheta) / 360);
-            isCorrect = Math.abs(userVal - (baseTheta + 360 * k)) <= tol;
+            // k = 0 is the given angle itself, not a different coterminal angle.
+            isCorrect = k !== 0 && Math.abs(userVal - (baseTheta + 360 * k)) <= tol;
         } else if (currentQuestion.inputType === 'coterminal_rad') {
             const input = document.getElementById('answer-input');
             let userVal = parseStrictNumber(input.value);
@@ -3125,7 +3126,8 @@
             const tol = currentQuestion.tol ?? 0.01;
             const baseThetaRad = currentQuestion.baseThetaRad;
             const k = Math.round((userVal - baseThetaRad) / (2 * Math.PI));
-            isCorrect = Math.abs(userVal - (baseThetaRad + 2 * Math.PI * k)) <= tol;
+            // k = 0 is the given angle itself, not a different coterminal angle.
+            isCorrect = k !== 0 && Math.abs(userVal - (baseThetaRad + 2 * Math.PI * k)) <= tol;
         } else if (currentQuestion.inputType === 'vector_mag_dir') {
             const umag = parseStrictNumber(document.getElementById('inp-vmag').value);
             const udir = parseStrictNumber(document.getElementById('inp-vdir').value);
