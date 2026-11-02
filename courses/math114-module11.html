@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Module 11: Exponential &amp; Logistic Growth | MATH 114 | Prof. Volk's Office</title>
-  <meta name="description" content="MATH 114 Module 11: exponential growth, doubling time and the Rule of 70, and logistic growth with carrying capacity — with worked examples.">
+  <meta name="description" content="MATH 114 Module 11: linear and exponential growth, doubling time and half-life, the Rule of 70, powers of ten, and logistic growth, with worked examples.">
   <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module11.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Prof. Volk's Office">
@@ -78,7 +78,68 @@
     <div class="cw-prose">
       <p>The <strong>Rule of 70</strong> gives a quick estimate of how long an exponentially growing quantity takes to double:</p>
       <div class="cw-formula">doubling time ≈ 70 ÷ (percent growth rate)</div>
-      <p>Real growth can't continue forever. <strong>Logistic growth</strong> starts out roughly exponential, then slows and levels off at the environment's <strong>carrying capacity</strong> — the maximum the resources can sustain. Its graph is an S-shaped curve.</p>
+      <p>Real growth can't continue forever. <strong>Logistic growth</strong> starts out roughly exponential, then slows and levels off at the environment's <strong>carrying capacity</strong>, the maximum the resources can sustain. Its graph is an S-shaped curve.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c3-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c3-title">3 · Doubling time and half-life for any amount of time</h2>
+    </div>
+    <div class="cw-prose">
+      <p>If a quantity has doubling time <em>T</em>, or half-life <em>T</em>, then after time <em>t</em>:</p>
+      <div class="cw-formula">growth: y = y<sub>0</sub> × 2<sup>t/T</sup><br>decay: y = y<sub>0</sub> × (1/2)<sup>t/T</sup></div>
+      <ul>
+        <li>The exponent <em>t</em>/<em>T</em> counts periods. It does not have to be a whole number: 12 years with an 8-year doubling time is 1.5 doublings.</li>
+        <li>Put <em>t</em> and <em>T</em> in the <strong>same units</strong> before you divide. If the doubling time is in minutes, change hours to minutes first.</li>
+        <li>Count doublings, not days or squares. Quadrupling takes 2 doubling times, and growing 8-fold takes 3. Before you compute, decide which day or square has <strong>zero</strong> doublings.</li>
+        <li>Doubling is <strong>100% growth</strong>. On a chessboard with 1 grain on the first square, square <em>n</em> holds 2<sup><em>n</em>−1</sup> grains, and the first <em>n</em> squares hold 2<sup><em>n</em></sup> − 1 grains in total.</li>
+      </ul>
+      <p><strong>Try it:</strong> on the <a href="../chessboard.html">chessboard demo</a>, click square 10 and check that the first 10 squares hold 2<sup>10</sup> − 1 = 1,023 grains. In the <a href="../employeepay.html">penny-doubling pay demo</a>, day 1 pays one penny (zero doublings), so day 15 pays 2<sup>14</sup> pennies. If the first penny had already doubled once by day 1, day 15 would pay 2<sup>15</sup>.</p>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c4-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c4-title">4 · Percent decay: absolute vs. relative change</h2>
+    </div>
+    <div class="cw-prose">
+      <ul>
+        <li><strong>Linear</strong> change is an <strong>absolute</strong> change: the quantity rises or falls by the same <em>amount</em> each period.</li>
+        <li><strong>Exponential</strong> change is a <strong>relative</strong> change: the quantity rises or falls by the same <em>percent</em> each period.</li>
+      </ul>
+      <p>A quantity that falls by <em>r</em> percent each period is multiplied by the <strong>decay factor</strong> 1 − <em>r</em> (with <em>r</em> as a decimal). A 15% yearly loss means multiplying by 0.85 each year.</p>
+      <div class="cw-formula">y = y<sub>0</sub> × (1 − r)<sup>t</sup><br>approximate half-life ≈ 70 ÷ (percent decay rate)</div>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c5-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c5-title">5 · Using the Rule of 70, and when to trust it</h2>
+    </div>
+    <div class="cw-prose">
+      <ul>
+        <li>The Rule of 70 is reliable for growth rates <strong>below about 15%</strong>. Above that it underestimates the doubling time: at 25% a year it gives 2.8 years, but the exact doubling time is about 3.1 years.</li>
+        <li>Once you know the doubling time, the <strong>growth factor</strong> over any time <em>t</em> is 2<sup>t/T</sup>.</li>
+        <li>A monthly rate gives a doubling time in months. Convert years to months before computing <em>t</em>/<em>T</em>.</li>
+      </ul>
+      <div class="cw-formula">growth factor over time t = 2<sup>t/T</sup><br>exact doubling time T = ln 2 ÷ ln(1 + r)</div>
+    </div>
+  </section>
+
+  <section class="site-section" aria-labelledby="c6-title">
+    <div class="section-header">
+      <p class="section-kicker">Learn the Concepts</p>
+      <h2 id="c6-title">6 · Powers of ten and rates of change</h2>
+    </div>
+    <div class="cw-prose">
+      <ul>
+        <li>If <em>x</em> is between the whole numbers <em>n</em> and <em>n</em> + 1, then 10<sup><em>x</em></sup> is between 10<sup><em>n</em></sup> and 10<sup><em>n</em>+1</sup>. For example, 10<sup>2.7</sup> is between 10<sup>2</sup> = 100 and 10<sup>3</sup> = 1000.</li>
+        <li>To turn a yearly change into a smaller unit, divide by the number of those units in a year: 365 days, 8,760 hours, or 525,600 minutes.</li>
+      </ul>
     </div>
   </section>
 
@@ -89,7 +150,7 @@
     </div>
 
     <details class="cw-example">
-      <summary>Example 1 — 50 spores double every 6 hours. How many after 24 hours?</summary>
+      <summary>Example 1: 50 spores double every 6 hours. How many after 24 hours?</summary>
       <div class="cw-example__body">
         <p>First count the doublings: 24 ÷ 6 = 4.</p>
         <div class="cw-answer">
@@ -99,7 +160,7 @@
     </details>
 
     <details class="cw-example">
-      <summary>Example 2 — An investment grows 5% per year. Estimate its doubling time.</summary>
+      <summary>Example 2: An investment grows 5% per year. Estimate its doubling time.</summary>
       <div class="cw-example__body">
         <p>Use the Rule of 70.</p>
         <div class="cw-answer">
@@ -109,7 +170,7 @@
     </details>
 
     <details class="cw-example">
-      <summary>Example 3 — $500 grows 8% per year. How much after 3 years?</summary>
+      <summary>Example 3: $500 grows 8% per year. How much after 3 years?</summary>
       <div class="cw-example__body">
         <p>Use A = P(1 + r)<sup>t</sup>.</p>
         <div class="cw-answer">
@@ -117,11 +178,67 @@
         </div>
       </div>
     </details>
+
+    <details class="cw-example">
+      <summary>Example 4: A town of 5,000 people doubles every 8 years. What is its population after 12 years?</summary>
+      <div class="cw-example__body">
+        <p>Count the doubling periods: 12 ÷ 8 = 1.5. The number of periods does not have to be whole.</p>
+        <p>Use y = y<sub>0</sub> × 2<sup>t/T</sup>.</p>
+        <div class="cw-answer">
+          <p>y = 5,000 × 2<sup>1.5</sup> ≈ 5,000 × 2.8284 ≈ <strong>14,142 people</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 5: A culture of 100 cells doubles every 20 minutes. How many cells are there after 1.5 hours?</summary>
+      <div class="cw-example__body">
+        <p>Match the units first: 1.5 hours = 90 minutes.</p>
+        <p>Count the doubling periods: 90 ÷ 20 = 4.5.</p>
+        <div class="cw-answer">
+          <p>y = 100 × 2<sup>4.5</sup> ≈ 100 × 22.627 ≈ <strong>2,263 cells</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 6: Prices rise 0.5% per month. Use the Rule of 70 to find the doubling time and the growth factor over 5 years. Is the rule valid here?</summary>
+      <div class="cw-example__body">
+        <p>Doubling time: 70 ÷ 0.5 = 140 months. The rate is monthly, so the doubling time is in months.</p>
+        <p>Match the units: 5 years = 60 months.</p>
+        <p>Growth factor = 2<sup>t/T</sup> = 2<sup>60/140</sup>.</p>
+        <div class="cw-answer">
+          <p>Doubling time ≈ <strong>140 months</strong>; growth factor ≈ <strong>1.35</strong> (prices rise about 35%). The rule is <strong>valid</strong>, since 0.5% is well below 15%.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 7: A 500 mg dose of a medicine has a half-life of 6 hours. How much remains after 15 hours?</summary>
+      <div class="cw-example__body">
+        <p>Count the half-life periods: 15 ÷ 6 = 2.5.</p>
+        <p>Use y = y<sub>0</sub> × (1/2)<sup>t/T</sup>.</p>
+        <div class="cw-answer">
+          <p>y = 500 × (1/2)<sup>2.5</sup> ≈ 500 × 0.17678 ≈ <strong>88.39 mg</strong>.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="cw-example">
+      <summary>Example 8: Equipment worth $8,000 loses 15% of its value each year. Is the decay linear or exponential, and what is it worth after 3 years?</summary>
+      <div class="cw-example__body">
+        <p>The value falls by the same percent each year, so this is a relative change: the decay is <strong>exponential</strong>.</p>
+        <p>Decay factor: 1 − 0.15 = 0.85.</p>
+        <div class="cw-answer">
+          <p>y = 8,000 × 0.85<sup>3</sup> = 8,000 × 0.614125 = <strong>$4,913.00</strong>.</p>
+        </div>
+      </div>
+    </details>
   </section>
 
   <section class="site-section" aria-labelledby="watch-title">
     <div class="section-header">
-      <p class="section-kicker">Watch &amp; Review</p>
+      <p class="section-kicker">Practice &amp; Review</p>
       <h2 id="watch-title">Resources for this module</h2>
     </div>
     <div class="card-grid">
@@ -140,10 +257,16 @@
         </ul>
       </article>
       <article class="resource-card">
+        <span class="resource-card__type">Walkthrough</span>
+        <h3>Oil production growth</h3>
+        <p>A step-by-step percent-growth problem with A = P(1 + r)<sup>t</sup>, from 1950 production to 2020.</p>
+        <a href="math114-oil-production-growth.html" class="button">Open walkthrough</a>
+      </article>
+      <article class="resource-card">
         <span class="resource-card__type">Slides &amp; tools</span>
         <h3>Slides + calculators</h3>
         <ul>
-          <li><a href="../pdfs/math114-module11-slides-2026-11-02.pdf">Lecture slides</a></li>
+          <li><a href="../pdfs/math114-module11-slides-2026-11-02-v2.pdf">Lecture slides</a></li>
           <li><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener noreferrer">Desmos Scientific</a></li>
           <li><a href="https://www.microsoft365.com/launch/excel?" target="_blank" rel="noopener noreferrer">Excel Online</a></li>
         </ul>
@@ -161,12 +284,28 @@
       <div class="cw-example__body"><div class="cw-answer"><p>70 ÷ 7 = <strong>about 10 years</strong>.</p></div></div>
     </details>
     <details class="cw-example">
-      <summary>2. Saving exactly $100 every month — linear or exponential?</summary>
-      <div class="cw-example__body"><div class="cw-answer"><p><strong>Linear</strong> — a constant amount is added each period.</p></div></div>
+      <summary>2. Saving exactly $100 every month: linear or exponential?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p><strong>Linear</strong>, because a constant amount is added each period.</p></div></div>
     </details>
     <details class="cw-example">
       <summary>3. What does carrying capacity describe?</summary>
       <div class="cw-example__body"><div class="cw-answer"><p>The <strong>maximum population</strong> the environment can sustain, where logistic growth levels off.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>4. A quantity doubles every 5 years. How long until it quadruples?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>Quadrupling is 2 doublings, so <strong>10 years</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>5. Is 10<sup>5.2</sup> between 10,000 and 100,000, or between 100,000 and 1,000,000?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>Since 5.2 is between 5 and 6, 10<sup>5.2</sup> is between 10<sup>5</sup> and 10<sup>6</sup>: <strong>between 100,000 and 1,000,000</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>6. A population grows by 3 million people per year. About how many is that per minute?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p>3,000,000 ÷ 525,600 ≈ <strong>5.7 people per minute</strong>.</p></div></div>
+    </details>
+    <details class="cw-example">
+      <summary>7. Would you trust the Rule of 70 for 25% annual growth?</summary>
+      <div class="cw-example__body"><div class="cw-answer"><p><strong>No.</strong> The rule gives 70 ÷ 25 = 2.8 years, but the exact doubling time, ln 2 ÷ ln 1.25, is about 3.1 years. The rule works best below about 15%.</p></div></div>
     </details>
   </section>
 
