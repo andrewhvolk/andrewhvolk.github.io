@@ -50,7 +50,11 @@ function value(tex) {
     s=s.replace(/(\d)(?=3\.141592653589793)/g,'$1*');
     // pi coefficients must be multiplied before replacing pi above.
     assert.match(s,/^[\d.\s()+*/-]+$/,'Unrecognized answer expression: '+tex);
-    return Function('return ('+s+')')();
+    const tokens=s.match(/\d+(?:\.\d*)?|\.\d+|[()+*/-]/g);let i=0;
+    const atom=()=>{const t=tokens[i++];if(t==='-'||t==='+')return (t==='-'?-1:1)*atom();if(t==='('){const v=sum();assert.equal(tokens[i++],')');return v;}return Number(t);};
+    const product=()=>{let v=atom();while(tokens[i]==='*'||tokens[i]==='/'){const op=tokens[i++],w=atom();v=op==='*'?v*w:v/w;}return v;};
+    const sum=()=>{let v=product();while(tokens[i]==='+'||tokens[i]==='-'){const op=tokens[i++],w=product();v=op==='+'?v+w:v-w;}return v;};
+    const answer=sum();assert.equal(i,tokens.length);return answer;
 }
 // Insert explicit multiplication before substituting the pi constant.
 const texNumber = tex => value(tex.replace(/(\d)\\pi/g,'$1*\\pi'));
@@ -62,6 +66,39 @@ const functions={sin:Math.sin,cos:Math.cos,tan:Math.tan,csc:a=>1/Math.sin(a),sec
 const sign = (fn,q) => /^(sin|csc)$/.test(fn)?(q<3?1:-1):/^(cos|sec)$/.test(fn)?([1,4].includes(q)?1:-1):([1,3].includes(q)?1:-1);
 function recompute(g,p) {
     const q=p.q, maths=[...q.matchAll(/\$([^$]+)\$/g)].map(m=>m[1]);let answer;
+    if (p.parameters) {
+        const d=p.parameters;
+        if(g.id==='right_triangle_word_problem')answer=d.findAngle?Math.atan2(d.h,d.d)*180/Math.PI:d.d*Math.tan(deg(d.theta));
+        if(g.id==='angle_of_elevation')answer=d.kind<2?Math.atan2(d.h,d.d)*180/Math.PI:d.kind===2?d.known*Math.tan(deg(d.theta)):d.known/Math.tan(deg(d.theta));
+        if(g.id==='right_triangle_find_angle')answer=({sin:Math.asin,cos:Math.acos,tan:Math.atan})[d.fn](d.x/d.y)*180/Math.PI;
+        if(g.id==='vector_direction')answer=angle(d.x,d.y);
+        if(g.id==='bearing_navigation')answer=d.distance*(d.vertical?Math.cos(deg(d.angle)):Math.sin(deg(d.angle)));
+        if(g.id==='vector_components')answer={x:d.coordinates[1][0]-d.coordinates[0][0],y:d.coordinates[1][1]-d.coordinates[0][1]};
+        if(g.id==='vector_mag_direction')answer={mag:Math.hypot(...d.coordinates[0]),dir:angle(...d.coordinates[0])};
+        if(g.id==='angle_terminal_quadrant'){
+            const t=(d.degrees%360+360)%360;
+            assert.equal(p.a,({0:'positive x-axis',90:'positive y-axis',180:'negative x-axis',270:'negative y-axis'})[t]||'Quadrant '+['I','II','III','IV'][Math.floor(t/90)]);return;
+        }
+        if(g.id==='trig_ratio_variables'){
+            const [o,a,h]=d.letters;assert.equal(p.a,{sin:`${o}/${h}`,cos:`${a}/${h}`,tan:`${o}/${a}`,csc:`${h}/${o}`,sec:`${h}/${a}`,cot:`${a}/${o}`}[d.fn]);
+            assert.ok(p.svgAltText.includes(`${o} opposite`)&&p.svgAltText.includes(`${a} adjacent`));
+            for(const v of d.letters)assert.ok(p.svg.includes('>'+v+'</text>'));return;
+        }
+        if(g.id==='trig_ratios_several'){
+            const missing=Math.sqrt(d.h*d.h-d.leg*d.leg),o=d.knownOpp?d.leg:missing,a=d.knownOpp?missing:d.leg;
+            const values={sin:o/d.h,cos:a/d.h,tan:o/a,csc:d.h/o,sec:d.h/a,cot:a/o};
+            for(const f of p.fields)close(f.answer,values[f.id],g.id+f.id);return;
+        }
+        if(g.id==='solve_right_triangle'){
+            let {a,b,c,A}=d.known;
+            if(d.mode===0){a=b*Math.tan(deg(A));c=Math.hypot(a,b);}
+            if(d.mode===1){c=Math.hypot(a,b);A=Math.atan2(a,b)*180/Math.PI;}
+            if(d.mode===2){a=c*Math.sin(deg(A));b=c*Math.cos(deg(A));}
+            if(d.mode===3){b=Math.sqrt(c*c-a*a);A=Math.asin(a/c)*180/Math.PI;}
+            const values={a,b,c,A,B:90-A};for(const f of p.fields)close(f.answer,values[f.id],g.id+f.id);return;
+        }
+        if(answer!==undefined){if(typeof answer==='object')for(const k of Object.keys(answer))close(p.a[k],answer[k],g.id+'.'+k);else close(p.a,answer,g.id);return;}
+    }
     switch(g.id){
     case 'angle_coterminal': close(p.baseTheta,texNumber(maths[0]),g.id);return;
     case 'angle_coterminal_rad': close(p.baseThetaRad,texNumber(maths[0]),g.id);return;
@@ -69,7 +106,7 @@ function recompute(g,p) {
         const radius=texNumber(maths[0]),given=texNumber(maths[1]);
         answer=q.includes('arc length $')?(q.includes('in degrees')?given/radius*180/Math.PI:given/radius):radius*(maths[1].includes('circ')?deg(given):given);break;
     }
-    case 'trig_ratio': {const o=num(q,/opposite side \$=(\d+)/),a=num(q,/adjacent side \$=(\d+)/);answer=q.includes('$sin')?o/Math.hypot(o,a):q.includes('$cos')?a/Math.hypot(o,a):o/a;break;}
+    case 'trig_ratio': {const o=num(q,/opposite side \$=(\d+)/),a=num(q,/adjacent side \$=(\d+)/);answer=q.includes('\\sin')?o/Math.hypot(o,a):q.includes('\\cos')?a/Math.hypot(o,a):o/a;break;}
     case 'trig_calculator_values': {const m=q.match(/\\(sin|cos|tan|csc|sec|cot)\(([^)]+)\)/);answer=functions[m[1]](m[2].includes('circ')?deg(texNumber(m[2])):texNumber(m[2]));break;}
     case 'angle_unit_conversion': answer=texNumber(maths[0])*(q.includes('to radians')?Math.PI/180:180/Math.PI);break;
     case 'right_triangle_word_problem': {
@@ -176,20 +213,35 @@ function roundedEntries(p) {
 }
 function validate(g,p){
     assert.ok(p.q&&p.solution);
-    for(const text of [p.q,p.solution,p.entryNote||'']){
+    assert.ok(p.hint&&p.hint.trim(),g.id+' needs a hint');
+    for(const text of [p.q,p.solution,p.hint,p.entryNote||'']){
         assert.equal((text.match(/\$/g)||[]).length%2,0,'Unbalanced math');
         const outside=text.split('$').filter((_,i)=>i%2===0).join('');
         assert.ok(!/\\[a-zA-Z]|\^/.test(outside),'TeX outside math: '+outside);
         assert.ok(!/NaN|undefined|Infinity|—|\b(?:generator|fallback|excludes)\b/i.test(text),text);
+        assert.ok(!/the visual intentionally/i.test(text),text);
+        for(const math of text.split('$').filter((_,i)=>i%2===1))assert.ok(!/(?<!\\)\b(sin|cos|tan|csc|sec|cot)\b/.test(math),'Unescaped trig function: '+math);
         for(const math of text.split('$').filter((_,i)=>i%2===1))if(katex&&!renderedMath.has(math)){
             katex.renderToString(math,{throwOnError:true,strict:'error'});renderedMath.add(math);
         }
     }
     assert.ok(!/\d+\.\d{4}(?!\d)/.test(p.q),'Decimal given value');
     assert.ok(!Object.values(defects(p)).some(Boolean),'Display defect: '+JSON.stringify(defects(p)));
+    assert.ok(!/\$(-?\d+)\\approx \1\.0+\$/.test(p.solution));
+    if(p.q.includes('looks down'))assert.ok(!p.q.includes('eye level'));
+    if(p.svg)for(const m of p.svg.matchAll(/<text\b([^>]*)>/g)){
+        const x=Number((m[1].match(/\bx="([\d.]+)"/)||[])[1]);if(x>245)assert.ok(/text-anchor="(?:end|middle)"/.test(m[1]),'Clipped text label');
+    }
+    const values=p.fields?p.fields.map(f=>f.answer):typeof p.a==='number'?[p.a]:p.a&&typeof p.a==='object'?Object.values(p.a).filter(v=>typeof v==='number'):[];
+    for(const value of values)for(const places of [1,2,3,4])assert.ok(!p.hint.includes(value.toFixed(places)),'Hint reveals the answer');
+    if(typeof p.a==='string')assert.ok(!p.hint.includes(p.a),'Hint reveals the answer');
     recompute(g,p);
     assert.ok(skills.grade(p,entries(p)).correct,'Own answer rejected');
     assert.ok(skills.grade(p,roundedEntries(p)).correct,'Rounded answer rejected');
+    if(p.inputType==='two_angle_solutions'){
+        assert.ok(skills.grade(p,entries(p).reverse()).correct);assert.ok(!skills.grade(p,[String(p.a.x),String(p.a.x)]).correct);
+        assert.deepEqual(skills.grade(p,[String(p.a.y),'999999']).parts,[true,false]);
+    }
     assert.ok(!skills.grade(p,entries(p).map(()=> 'junk')).correct,'Junk accepted');
     const wrong=p.inputType==='coterminal_deg'?[String(p.baseTheta+180)]
         :p.inputType==='coterminal_rad'?[String(p.baseThetaRad+Math.PI)]:entries(p).map(()=> '999999');
@@ -203,20 +255,59 @@ function validate(g,p){
     }
 }
 
-const ids=new Set(skills.generators.map(g=>g.id));assert.equal(ids.size,29);
-const checklist=new Function(html.match(/const DEFAULT_CHECKLIST = \[[\s\S]*?\n    \];/)[0]+';return DEFAULT_CHECKLIST')();
-const quizConfig=new Function(html.match(/const QUIZ_CONFIG = \{[\s\S]*?\n    \};/)[0]+';return QUIZ_CONFIG')();
+const ids=new Set(skills.generators.map(g=>g.id));assert.equal(ids.size,32);
+const checklist=vm.runInNewContext(html.match(/const DEFAULT_CHECKLIST = \[[\s\S]*?\n    \];/)[0]+';DEFAULT_CHECKLIST');
+const quizConfig=vm.runInNewContext(html.match(/const QUIZ_CONFIG = \{[\s\S]*?\n    \};/)[0]+';QUIZ_CONFIG');
 for(const row of checklist)assert.ok(ids.has(row.practiceId),'Missing checklist target '+row.id);
 for(const config of Object.values(quizConfig))for(const id of [...config.requiredIds,...config.excludedIds||[]])assert.ok(ids.has(id),'Missing checkpoint target '+id);
 assert.ok(!html.includes('solve_right_triangle_side_52'));
 assert.match(html,/Fall 2026 · Prof\. Young &amp; Prof\. Volk|Fall 2026 · Prof\. Young & Prof\. Volk/);
 for(const g of skills.generators){
-    const random=skills.mulberry32(seed),prompts=new Set();
+    const prompts=new Set(),samples=[];
     for(let i=0;i<3000;i++){
-        try{const p=g.generate(random);validate(g,p);prompts.add(p.q);}catch(e){throw new Error(`${g.id}, seed ${seed}, draw ${i}: ${e.message}`,{cause:e});}
+        try{const p=g.generate(skills.mulberry32(seed+i));validate(g,p);prompts.add(p.q);samples.push(p);}catch(e){throw new Error(`${g.id}, seed ${seed+i}: ${e.message}`,{cause:e});}
     }
-    assert.ok(prompts.size>=(targets[g.id]||(g.id==='trig_ratio_variables'?6:50)),g.id+' only '+prompts.size+' distinct prompts');
+    assert.ok(prompts.size>=(targets[g.id]||(g.id==='trig_ratio_variables'?60:g.id==='trig_ratios_several'?200:50)),g.id+' only '+prompts.size+' distinct prompts');
+    const proportion=(predicate,lo,hi)=>{const p=samples.filter(predicate).length/samples.length;assert.ok(p>=lo&&p<=hi,`${g.id}: proportion ${p}, expected ${lo} to ${hi}`);};
+    if(['angle_coterminal','reference_angle_deg','reference_angle_rad','angle_terminal_quadrant'].includes(g.id)){
+        proportion(p=>{const raw=g.id==='angle_coterminal'?p.baseTheta:g.id==='angle_terminal_quadrant'?p.parameters.degrees:texNumber(p.q.match(/\$([^$]+)\$/)[1])*(g.id.endsWith('_rad')?180/Math.PI:1);return Math.abs(raw)<360;},0.4,0.6);
+    }
+    if(['reference_angle_deg','reference_angle_rad'].includes(g.id))for(const p of samples){
+        const raw=texNumber(p.q.match(/\$([^$]+)\$/)[1]);if(raw<0)assert.match(p.svg,/data-angle-arc="main" d="M [^"]+ A 48 48 0 [01] 1 /);
+        assert.ok(!p.svg.includes('grid:'));
+    }
+    if(['vector_components','vector_mag_direction'].includes(g.id)){
+        proportion(p=>p.graphOnly,0.5,0.6);
+        for(const p of samples.filter(p=>p.graphOnly)){assert.ok(!/\\langle|\(-?\d+,-?\d+\)/.test(p.q));assert.ok(!/>[PQ]?\(-?\d+,\s*-?\d+\)/.test(p.svg));assert.ok(p.svgAltText.match(/\(-?\d+,\s*-?\d+\)/));}
+    }
+    if(g.id==='trig_ratios_several')proportion(p=>p.parameters.chosen.some(fn=>['csc','sec','cot'].includes(fn)),0.3,1);
+    if(g.id==='right_triangle_find_angle')for(const fn of ['sin','cos','tan'])proportion(p=>p.parameters.fn===fn,0.25,0.4);
+    if(g.id==='solve_right_triangle')for(const mode of [0,1,2,3])proportion(p=>p.parameters.mode===mode,0.2,0.3);
+    if(g.id==='vector_direction'){proportion(p=>p.parameters.ij,0.7,1);proportion(p=>!p.parameters.x||!p.parameters.y,0,0.1);for(const p of samples)assert.ok(!/(?:^|[^\d])1\\mathbf/.test(p.q));}
+    if(g.id==='right_triangle_word_problem')for(const p of samples){const d=p.parameters,ranges={ramp:[3,12,2,15],ladder:[60,80,0.5,3],kite:[25,65,10,80],'guy wire':[40,70,2,20],shadow:[15,75,2,40]},[lo,hi,min,max]=ranges[d.context];assert.ok(d.theta>=lo&&d.theta<=hi&&d.d>=min&&d.d<=max);}
     console.log(`${g.id}: 3000 verified, ${prompts.size} distinct`);
+}
+const weights={'Section 5.1':5,'Section 5.2':8,'Section 5.3':8,'Section 7.1':7,'Section 8.4':5};
+for(const snapshot of JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/math130-test3-arcs.json'),'utf8'))){
+    const p=skills.generators.find(g=>g.id==='arc_length').generate(skills.mulberry32(snapshot.seed));
+    assert.equal(p.q,snapshot.q);assert.equal(p.solution,snapshot.solution);
+}
+const library=fs.readFileSync(path.join(root,'assets/js/math130-test3-skills.js'),'utf8').replaceAll('\r\n','\n');
+const sharedBody=library.slice(library.indexOf("    'use strict';"),library.indexOf('    if (typeof module'));
+assert.ok(html.replaceAll('\r\n','\n').includes(sharedBody),'The built-in skills copy must stay byte-for-byte synchronized.');
+for(const angle of [-30,-390,420]){
+    const svg=skills.createBasicAngleSvg({thetaDeg:angle,labelText:angle+'°',fallbackText:angle+' degrees'});
+    assert.ok(svg.includes('>'+angle+'°</text>'));
+    assert.ok(svg.includes((Math.trunc(angle/360)>0?'+':'')+Math.trunc(angle/360)+' full turns'));
+}
+for(let i=0;i<1000;i++){
+    const selected=skills.buildCheckpoint(skills.generators,{count:20,weights},skills.mulberry32(i));
+    assert.equal(selected.length,20);assert.equal(new Set(selected.map(g=>g.id)).size,20);
+    for(const [section,weight] of Object.entries(weights))assert.ok(Math.abs(selected.filter(g=>g.section===section).length-20*weight/33)<=1);
+    for(const config of Object.values(quizConfig)){
+        const pool=skills.generators.filter(g=>config.sections.includes(g.section)&&!(config.excludedIds||[]).includes(g.id)),questions=skills.buildCheckpoint(skills.generators,config,skills.mulberry32(i));
+        assert.equal(questions.length,config.count);assert.equal(new Set(questions.map(g=>g.id)).size,Math.min(config.count,pool.length));
+    }
 }
 for(const [entry,want] of [['5pi/12',5*Math.PI/12],['-sqrt(3)/2',-Math.sqrt(3)/2],['3/5',0.6],['(3/5)pi',3*Math.PI/5],['-1/2',-0.5]])close(skills.parseExact(entry),want,entry);
 for(const [answer,forms] of [[Math.sqrt(3)/2,['sqrt(3)/2','0.8660']],[0.6,['3/5','0.6000']],[Math.PI/12,['pi/12','0.2618']]]){
@@ -254,7 +345,7 @@ function page(shared){
 for(const shared of [true,false]){
     const ctx=page(shared);
     vm.runInContext('loadState();this.savedState=state;this.pageSkills=test3Skills;',ctx);
-    assert.deepEqual(Array.from(ctx.savedState.checklist,c=>c.done),saved.checklist.map(c=>c.done));
+    assert.deepEqual(Array.from(ctx.savedState.checklist,c=>c.done),Array.from(saved.checklist,c=>c.done));
     assert.equal(ctx.savedState.history[0].topic,'Prior practice');assert.equal(ctx.savedState.videosWatched[0],'old-video');
     // The embedded fallback must produce exactly the same seeded questions.
     for(let i=0;i<skills.generators.length;i++)assert.equal(JSON.stringify(ctx.pageSkills.generators[i].generate(skills.mulberry32(99))),JSON.stringify(skills.generators[i].generate(skills.mulberry32(99))));
@@ -270,4 +361,21 @@ for(const shared of [true,false]){
         }
     }
     console.log(`100 complete runs of all checkpoints passed (${shared?'shared file':'offline fallback'}).`);
+    // Real page feedback progression: hint, opt-in reveal, no correct-history credit.
+    for(const generator of skills.generators){
+        ctx.generatorId=generator.id;
+        vm.runInContext('examState.isActive=false;state.history=[];currentQuiz=generators.find(g=>g.id===generatorId);loadQuestion();',ctx);
+        const p=vm.runInContext('currentQuestion',ctx);
+        const controls=p.fields?p.fields.map((_,i)=>'inp-part-'+i):p.inputType==='vector_mag_dir'?['inp-vmag','inp-vdir']:['vector_xy','two_angle_solutions'].includes(p.inputType)?['inp-vx','inp-vy']:['answer-input'];
+        controls.forEach(id=>document.getElementById(id).value='junk');
+        vm.runInContext('checkAnswer()',ctx);
+        assert.ok(document.getElementById('feedback-display').innerHTML.includes(p.hint));
+        assert.ok(!document.getElementById('feedback-display').innerHTML.includes('Show solution'));
+        assert.ok(!document.getElementById('feedback-display').innerHTML.includes(p.solution));
+        vm.runInContext('checkAnswer()',ctx);assert.ok(document.getElementById('feedback-display').innerHTML.includes('Show solution'));
+        vm.runInContext('revealCurrentSolution()',ctx);assert.ok(document.getElementById('revealed-solution').innerHTML.includes(p.solution));
+        controls.forEach((id,i)=>document.getElementById(id).value=entries(p)[i]);
+        vm.runInContext('checkAnswer()',ctx);assert.equal(vm.runInContext('state.history.length',ctx),0);
+        vm.runInContext('loadQuestion()',ctx);assert.equal(vm.runInContext('solutionRevealed',ctx),false);
+    }
 }
