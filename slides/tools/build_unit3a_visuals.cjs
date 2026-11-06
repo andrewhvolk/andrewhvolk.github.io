@@ -333,6 +333,28 @@ function twoTriangles(aFar, aNear, gap, { W = 760, H = 470, fill = C.softBlue, s
   diagrams["two-triangles"] = svg(760, 470, "Two right triangles that share a height", "A tower of height h. From a far point the angle of elevation is 40 degrees; from a point 50 feet closer it is 55 degrees. The near point is d feet from the base. Both triangles share the height h. Drawn to scale.", t.body);
 }
 
+/* Unit 3A model (Prof. Young's notes): solve right triangle ABC with C = 90°, a = 150, c = 345. */
+{
+  const a = 150, c = 345, b = Math.sqrt(c * c - a * a);
+  const t = rightTriangle(b, a, [70, 380], 560);
+  let body = triangleBody(t);
+  body += centered((t.A[0] + t.C[0]) / 2, t.A[1] + 40, "b = ?", C.blue, 28, italic) + text(t.C[0] + 14, (t.C[1] + t.B[1]) / 2 + 10, "a = 150", C.teal, 28);
+  body += text((t.A[0] + t.B[0]) / 2 - 120, (t.A[1] + t.B[1]) / 2 - 20, "c = 345", C.orange, 28);
+  body += thetaMark(t.A, 0, t.angle, 70, "A = ?", C.orange, 24);
+  body += text(t.A[0] - 34, t.A[1] + 10, "A", C.ink, 30, italic) + text(t.C[0] + 10, t.C[1] + 34, "C", C.ink, 30, italic) + text(t.B[0] - 6, t.B[1] - 16, "B", C.ink, 30, italic);
+  body += text(t.B[0] - 92, t.B[1] + 56, "B = ?", C.purple, 24, italic);
+  diagrams["solve-triangle"] = svg(820, 450, "Solving a right triangle", "Right triangle ABC with the right angle at C. Side a, opposite A, is 150; the hypotenuse c is 345. Side b and angles A and B are unknown. Drawn to scale.", body);
+}
+
+/* Unit 3A practice (Prof. Young's notes): sin θ = 5/6, so opposite 5 and hypotenuse 6; adjacent unknown (givens only). */
+{
+  const t = rightTriangle(Math.sqrt(11), 5, [110, 470], 400);
+  let body = triangleBody(t, C.softTeal) + thetaMark(t.A, 0, t.angle, 54);
+  body += centered((t.A[0] + t.C[0]) / 2, t.A[1] + 40, "?", C.blue, 34) + text(t.C[0] + 16, (t.C[1] + t.B[1]) / 2 + 10, "5", C.teal, 32) + text((t.A[0] + t.B[0]) / 2 - 56, (t.A[1] + t.B[1]) / 2, "6", C.orange, 32);
+  body += text(400, 420, "sin θ = 5/6", C.ink, 30, italic);
+  diagrams["one-ratio"] = svg(620, 540, "A right triangle from sine theta equals 5 over 6", "A right triangle drawn to scale with angle theta at the lower left, the side opposite theta equal to 5, the hypotenuse equal to 6, and the adjacent side marked with a question mark. A note reads sine theta equals 5 over 6.", body);
+}
+
 function build() {
   fs.mkdirSync(out, { recursive: true });
   for (const [name, xml] of Object.entries(diagrams)) fs.writeFileSync(path.join(out, `${name}.svg`), xml, "utf8");
