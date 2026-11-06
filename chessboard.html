@@ -1,111 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-  <!-- This tool is designed for light mode only; theme.js keeps it light and hides the theme button. -->
-  <meta name="color-scheme" content="light">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chessboard Rice Growth</title>
-    <!-- Tailwind CSS v3.4.17, precompiled for this page so it needs no runtime script or CDN. -->
-    <style id="tailwind-precompiled">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width:640px){.container{max-width:640px}}@media (min-width:768px){.container{max-width:768px}}@media (min-width:1024px){.container{max-width:1024px}}@media (min-width:1280px){.container{max-width:1280px}}@media (min-width:1536px){.container{max-width:1536px}}.absolute{position:absolute}.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.mb-3{margin-bottom:.75rem}.mb-6{margin-bottom:1.5rem}.mr-2{margin-right:.5rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-4{margin-top:1rem}.flex{display:flex}.aspect-square{aspect-ratio:1/1}.h-full{height:100%}.min-h-\[300px\]{min-height:300px}.w-full{width:100%}.max-w-6xl{max-width:72rem}.max-w-md{max-width:28rem}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.flex-col{flex-direction:column}.gap-6{gap:1.5rem}.overflow-hidden{overflow:hidden}.break-words{overflow-wrap:break-word}.rounded{border-radius:.25rem}.rounded-sm{border-radius:.125rem}.border{border-width:1px}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.ordinal{--tw-ordinal:ordinal;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216/var(--tw-text-opacity,1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175/var(--tw-text-opacity,1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128/var(--tw-text-opacity,1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99/var(--tw-text-opacity,1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81/var(--tw-text-opacity,1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55/var(--tw-text-opacity,1))}.text-green-800{--tw-text-opacity:1;color:rgb(22 101 52/var(--tw-text-opacity,1))}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}@media (min-width:768px){.md\:min-h-\[400px\]{min-height:400px}.md\:gap-8{gap:2rem}.md\:text-3xl{font-size:1.875rem;line-height:2.25rem}}@media (min-width:1024px){.lg\:w-1\/2{width:50%}.lg\:flex-row{flex-direction:row}}@media (min-width:1280px){.xl\:w-2\/5{width:40%}.xl\:w-3\/5{width:60%}}</style>
-    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-    <style>
-      @font-face {
-        font-family: 'LucideIcons';
-        /* Lucide icon font, pinned on jsDelivr */
-        src: url(https://cdn.jsdelivr.net/npm/lucide-static@1.55.0/font/lucide.ttf) format('truetype');
-      }
-      .lucide {
-        font-family: 'LucideIcons';
-        font-size: 1.25rem; /* Adjust size as needed */
-        line-height: 1;
-      }
-      /* Style for chessboard squares */
-      .square {
-        width: 12.5%; /* 100% / 8 squares */
-        padding-bottom: 12.5%; /* Maintain aspect ratio */
-        position: relative;
-        cursor: pointer;
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s;
-        border: 1px solid var(--border-subtle); /* Add subtle border */
-      }
-      .square:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 10px color-mix(in srgb, var(--text-main) 30%, transparent);
-        z-index: 10;
-      }
-      .square.selected {
-         border: 3px solid var(--primary-main); /* Blue border for selected */
-         box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
-      }
-      .square .content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem; /* Smaller font for square number */
-        font-weight: bold;
-        color: var(--text-muted); /* Gray text */
-      }
-      /* Alternating square colors */
-      .board-row:nth-child(odd) .square:nth-child(even),
-      .board-row:nth-child(even) .square:nth-child(odd) {
-        background-color: #d1d5db; /* Light gray */
-      }
-      .board-row:nth-child(odd) .square:nth-child(odd),
-      .board-row:nth-child(even) .square:nth-child(even) {
-        background-color: var(--bg-base); /* Lighter gray/var(--bg-surface) */
-      }
-      /* Style for the chart tooltips */
-      .tooltip {
-        position: absolute;
-        text-align: center;
-        padding: 8px;
-        font-family: var(--type-meta-family);
-        font-size: 0.75rem;
-        background: rgba(50, 50, 50, 0.8); /* Darker tooltip */
-        color: var(--bg-surface);
-        border: 0px;
-        border-radius: 8px;
-        pointer-events: none; /* Make tooltip non-interactive */
-        opacity: 0;
-        transition: opacity 0.2s;
-        z-index: 20; /* Ensure tooltip is above chart elements */
-      }
-      /* Style for chart axes */
-      .axis path,
-      .axis line {
-        fill: none;
-        stroke: var(--text-main);
-        shape-rendering: crispEdges;
-      }
-      .axis text {
-        font-size: 0.8rem;
-        fill: var(--text-main);
-      }
-
-      /* Style for linear chart bars */
-       .bar {
-         fill: #fb923c; /* Orange color for bars */
-         transition: fill 0.2s;
-         cursor: pointer; /* Add cursor pointer to bars */
-       }
-       .bar:hover {
-         fill: #f97316; /* Darker orange on hover */
-         fill-opacity: 0.8; /* Slightly transparent on hover */
-       }
-    </style>
-
-
-    <link rel="stylesheet" href="/styles.css">
-    <script src="theme.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rice on a Chessboard | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 11 demo: one grain of rice on the first square of a chessboard, doubling on every square. See the grains on each square, the running total and how much rice that would be.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/chessboard.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="Rice on a Chessboard">
+  <meta property="og:description" content="One grain on the first square, doubling on every square: how much rice is on the board?">
+  <meta property="og:url" content="https://andrewhvolk.github.io/chessboard.html">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .cb-wrap { max-width: 1060px; margin: 0 auto; }
+    .cb-layout { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+    .cb-card { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 1rem 1.2rem; margin: 0 0 1.25rem; }
+    .cb-card h2 { margin: 0 0 0.6rem; font-size: 1.15rem; }
+    .cb-board { display: grid; grid-template-columns: repeat(8, 1fr); border: 2px solid var(--text-muted); border-radius: 0.4rem; overflow: hidden; aspect-ratio: 1; }
+    .cb-sq { position: relative; border: 0; padding: 0; margin: 0; font: inherit; font-size: 0.72rem; font-weight: 700; cursor: pointer; color: var(--text-main);
+      background: color-mix(in srgb, var(--warning-main) calc(var(--fill, 0) * 85%), var(--cb-base)); }
+    .cb-sq.cb-light { --cb-base: var(--bg-surface); }
+    .cb-sq.cb-dark { --cb-base: color-mix(in srgb, var(--text-muted) 32%, var(--bg-surface)); }
+    .cb-sq:hover { outline: 2px solid var(--primary-main); outline-offset: -2px; z-index: 1; }
+    .cb-sq:focus-visible { outline: 3px solid var(--primary-main); outline-offset: -3px; z-index: 2; }
+    .cb-sq[aria-pressed="true"] { outline: 3px solid var(--primary-main); outline-offset: -3px; z-index: 2; }
+    .cb-sq.cb-past::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 -3px 0 var(--primary-main); }
+    .cb-hint { color: var(--text-muted); font-size: 0.88rem; margin: 0.5rem 0 0; }
+    .cb-stats { display: grid; gap: 0.7rem; }
+    .cb-stat { border-left: 4px solid var(--cb-c, var(--primary-main)); padding: 0.25rem 0.8rem; }
+    .cb-stat .cb-label { color: var(--text-muted); font-size: 0.88rem; }
+    .cb-stat .cb-value { font-size: 1.2rem; font-weight: 700; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .cb-stat .cb-sci { color: var(--text-muted); font-size: 0.9rem; }
+    .cb-math { font-family: var(--type-meta-family); background: color-mix(in srgb, var(--primary-main) 7%, var(--bg-surface)); border-left: 3px solid var(--primary-main); border-radius: 0.4rem; padding: 0.55rem 0.9rem; margin: 0.5rem 0; line-height: 1.7; }
+    .cb-nav { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+    .cb-nav .button { padding: 0.35rem 0.75rem; font-size: 0.9rem; }
+    .cb-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.6rem; }
+    .cb-tab { border: 1px solid var(--border-subtle); background: var(--bg-surface); color: var(--text-main); border-radius: 999px; padding: 0.3rem 0.85rem; font: inherit; font-size: 0.9rem; cursor: pointer; }
+    .cb-tab[aria-pressed="true"] { background: var(--primary-main); border-color: var(--primary-main); color: #fff; }
+    .cb-chart svg { width: 100%; height: auto; display: block; }
+    .cb-chart text { font-family: var(--type-body-family); fill: var(--text-muted); font-size: 12px; }
+    .cb-mass { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.3rem 0 0.6rem; }
+    .cb-mass input { width: 6rem; padding: 0.35rem 0.5rem; border: 1px solid var(--border-subtle); border-radius: 0.4rem; background: var(--bg-surface); color: var(--text-main); font: inherit; }
+    .cb-q { margin: 0 0 0.9rem; }
+    .cb-q p { margin: 0 0 0.35rem; }
+    .cb-q .cb-row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .cb-q input { width: 11rem; padding: 0.35rem 0.55rem; border: 1px solid var(--border-subtle); border-radius: 0.4rem; background: var(--bg-surface); color: var(--text-main); font: inherit; }
+    .cb-q .button { padding: 0.35rem 0.8rem; font-size: 0.9rem; }
+    .cb-fb { font-size: 0.92rem; }
+    @media (max-width: 820px) { .cb-layout { grid-template-columns: 1fr; } .cb-board { max-width: 420px; margin: 0 auto; } }
+    @media print { .course-bar, .site-footer, .cb-nav, .cb-tabs, .cb-q .button, .page-actions { display: none !important; } }
+  </style>
 </head>
-<body class="tool-page-body">
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
 <nav class="course-bar" aria-label="Site">
   <div class="course-bar__inner">
     <a class="course-bar__back" href="/courses/math114.html#module-11"><span aria-hidden="true">&larr;</span> MATH 114</a>
@@ -114,304 +64,269 @@
   </div>
 </nav>
 
-<main class="tool-page-main">
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 11 demo</p>
+    <h1>Rice on a Chessboard</h1>
+    <p class="page-hero__lede">In the old legend, a ruler offers a reward and the inventor of chess asks for rice: one grain on the first square, two on the second, four on the third, doubling on every square. It sounds modest. Pick any square to see how many grains it holds and how much rice is on the board so far.</p>
+    <div class="page-actions">
+      <a href="#board-title" class="button">Explore the board</a>
+      <a href="/courses/math114-module11.html" class="button button-secondary">Module 11 notes</a>
+    </div>
+  </div>
+</header>
 
-    <div class="tool-page-shell w-full max-w-6xl">
-        <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
-            <span class="lucide mr-2">&#xe0e9;</span>
-            Exponential Growth: Rice on a Chessboard
-        </h1>
-
-        <div class="flex flex-col lg:flex-row gap-6 md:gap-8">
-
-            <div class="w-full lg:w-1/2 xl:w-2/5">
-                <h2 class="text-lg font-semibold text-gray-700 mb-3 text-center">Chessboard (Click a Square)</h2>
-                <div id="chessboard" class="aspect-square w-full max-w-md mx-auto tool-chart-box overflow-hidden">
-                    </div>
-                <div id="info-box" class="mt-4 tool-result-panel text-center">
-                    <p class="text-sm text-gray-600">Selected Square: <strong id="selected-square" class="text-blue-700">-</strong></p>
-                    <p class="text-sm text-gray-600 mt-1">Grains on this square:</p>
-                    <p id="grains-on-square" class="text-lg font-bold text-blue-800 break-words">-</p>
-                </div>
-                 <div class="mt-4 tool-info-box text-center">
-                     <p class="text-sm text-gray-600">Total Grains on Board:</p>
-                     <p id="total-grains" class="text-xl font-bold text-green-800 break-words">-</p>
-                </div>
-            </div>
-
-            <div class="w-full lg:w-1/2 xl:w-3/5">
-                 <div>
-                    <h2 class="text-lg font-semibold text-gray-700 mb-3 text-center">Grains up to Selected Square (Linear Scale)</h2>
-                    <div id="linear-chart-container" class="tool-chart-box min-h-[300px] md:min-h-[400px]">
-                        <svg id="linear-rice-chart" class="w-full h-full"></svg>
-                    </div>
-                     <p class="text-xs text-gray-500 mt-2 text-center">Linear scale shows true magnitude (early squares become tiny).</p>
-                 </div>
-            </div>
+<main id="main-content" class="site-main">
+  <div class="cb-wrap">
+    <div class="cb-layout">
+      <section class="cb-card" aria-labelledby="board-title">
+        <h2 id="board-title">The board</h2>
+        <div class="cb-board" id="board" role="group" aria-label="Chessboard squares 1 to 64. Use the arrow keys to move between squares."></div>
+        <p class="cb-hint">Click a square, or use the arrow keys. Squares fill with color as the number of digits in their grain count grows.</p>
+        <div class="cb-nav">
+          <button type="button" class="button button-secondary" id="prev">&larr; Previous square</button>
+          <button type="button" class="button button-secondary" id="next">Next square &rarr;</button>
+          <button type="button" class="button button-secondary" id="jump32">Square 32 (half the board)</button>
+          <button type="button" class="button button-secondary" id="jump64">Square 64</button>
         </div>
+      </section>
+
+      <section class="cb-card" aria-labelledby="square-title">
+        <h2 id="square-title">Square <span id="sq-num">1</span></h2>
+        <div class="cb-stats" aria-live="polite">
+          <div class="cb-stat">
+            <div class="cb-label">Grains on this square</div>
+            <div class="cb-value" id="on-square"></div>
+            <div class="cb-sci" id="on-square-sci"></div>
+          </div>
+          <div class="cb-stat" style="--cb-c: var(--emerald-main)">
+            <div class="cb-label">Total grains on squares 1 through <span id="sq-num2">1</span></div>
+            <div class="cb-value" id="total"></div>
+            <div class="cb-sci" id="total-sci"></div>
+          </div>
+          <div class="cb-stat" style="--cb-c: var(--warning-main)">
+            <div class="cb-label">About how much rice is that?</div>
+            <div class="cb-value" id="mass"></div>
+            <div class="cb-sci" id="mass-note"></div>
+          </div>
+        </div>
+        <div class="cb-math" id="sq-math"></div>
+        <div class="cb-mass">
+          <label for="grain-mg">Mass of one grain:</label>
+          <input type="number" id="grain-mg" min="5" max="60" step="1" value="25"> <span>milligrams (a typical grain is about 20 to 30 mg)</span>
+        </div>
+      </section>
     </div>
 
-    <div id="tooltip" class="tooltip"></div>
+    <section class="cb-card" aria-labelledby="chart-title">
+      <h2 id="chart-title">Grains on each square, up to the one you picked</h2>
+      <div class="cb-tabs" role="group" aria-label="Scale">
+        <button type="button" class="cb-tab" data-scale="linear" aria-pressed="true">Ordinary scale</button>
+        <button type="button" class="cb-tab" data-scale="log" aria-pressed="false">Log scale</button>
+      </div>
+      <div class="cb-chart" id="chart"></div>
+      <p id="chart-note" style="color:var(--text-muted);font-size:0.9rem;margin:0.5rem 0 0"></p>
+    </section>
 
-    <script>
-        // --- Constants and Setup ---
-        const boardSize = 8;
-        const totalSquares = boardSize * boardSize;
-        const chessboard = document.getElementById('chessboard');
-        const infoBox = document.getElementById('info-box');
-        const selectedSquareDisplay = document.getElementById('selected-square');
-        const grainsOnSquareDisplay = document.getElementById('grains-on-square');
-        const totalGrainsDisplay = document.getElementById('total-grains');
-        const linearChartContainer = document.getElementById('linear-chart-container');
-        const tooltip = d3.select("#tooltip");
+    <section class="cb-card" aria-labelledby="math-title">
+      <h2 id="math-title">Why the totals look the way they do</h2>
+      <div class="cb-math">
+        Grains on square <em>n</em>: 2<sup><em>n</em> − 1</sup><br>
+        Total on squares 1 through <em>n</em>: 1 + 2 + 4 + … + 2<sup><em>n</em> − 1</sup> = 2<sup><em>n</em></sup> − 1
+      </div>
+      <p>Square 1 has no doublings yet, so square <em>n</em> has <em>n</em> − 1 doublings. Each square holds one more grain than all the earlier squares together: square 4 holds 8 grains, and squares 1 to 3 hold 1 + 2 + 4 = 7. That is why the running total is always one less than the next power of 2.</p>
+      <p>The same idea gives the board's surprise: square 64 alone holds 2<sup>63</sup> grains, more than all 63 squares before it combined. Squares 1 through 32 together hold about 4.3 billion grains, roughly 100 tonnes; that is a big pile but a believable one. The second half of the board is where the numbers become impossible.</p>
+    </section>
 
-        let grainsData = []; // Array to hold { square: number, grains: BigInt }
-        let totalGrains = 0n; // Use BigInt for total
-        let selectedSquareIndex = -1; // Track selected square (0-63)
+    <section class="cb-card" aria-labelledby="check-title">
+      <h2 id="check-title">Check yourself</h2>
+      <p style="margin-top:0">Use the formulas, then check. The board can confirm your answer afterwards.</p>
+      <div id="questions"></div>
+    </section>
+  </div>
 
-        // D3 Chart variables
-        let linearSvg, linearXScale, linearYScale;
-
-
-        // --- Grain Calculation ---
-        function calculateGrains() {
-            grainsData = [];
-            let currentGrains = 1n; // Start with 1 grain (using BigInt)
-            totalGrains = 0n;
-            for (let i = 0; i < totalSquares; i++) {
-                grainsData.push({ square: i + 1, grains: currentGrains });
-                totalGrains += currentGrains;
-                // Double for the next square only if not the last square
-                if (i < totalSquares - 1) {
-                    currentGrains *= 2n;
-                }
-            }
-            totalGrainsDisplay.textContent = totalGrains.toLocaleString();
-        }
-
-        // --- Chessboard Generation ---
-        function createChessboard() {
-            // Ensure chessboard element exists before trying to modify it
-            if (!chessboard) {
-                console.error("Chessboard element not found!");
-                return;
-            }
-            chessboard.innerHTML = ''; // Clear previous board
-            for (let row = 0; row < boardSize; row++) {
-                const rowDiv = document.createElement('div');
-                rowDiv.className = 'flex board-row'; // Use flex for rows
-                for (let col = 0; col < boardSize; col++) {
-                    const squareIndex = row * boardSize + col;
-                    const squareDiv = document.createElement('div');
-                    // Apply Tailwind classes for styling squares
-                    squareDiv.className = 'square rounded-sm'; // Add rounded corners back if needed
-                    squareDiv.dataset.index = squareIndex; // Store index (0-63)
-
-                    const contentDiv = document.createElement('div');
-                    contentDiv.className = 'content';
-                    contentDiv.textContent = squareIndex + 1; // Display square number (1-64)
-                    squareDiv.appendChild(contentDiv);
-
-                    squareDiv.addEventListener('click', () => handleSquareClick(squareIndex));
-                    rowDiv.appendChild(squareDiv);
-                }
-                chessboard.appendChild(rowDiv);
-            }
-             console.log("Chessboard created."); // Add log to confirm creation
-        }
-
-
-        // --- Linear Bar Chart Creation (D3.js) ---
-        function createLinearChart(selectedIndex) {
-             // Ensure selectedIndex is valid before proceeding
-             if (selectedIndex < 0 || !grainsData || selectedIndex >= grainsData.length) {
-                 console.error("Invalid selectedIndex or missing grainsData for createLinearChart:", selectedIndex);
-                 d3.select("#linear-rice-chart").selectAll("*").remove();
-                 return;
-             }
-
-             const currentData = grainsData.slice(0, selectedIndex + 1); // Data up to selected square
-             if (!currentData.length) return; // Exit if no data
-
-             // Ensure chart container exists
-             if (!linearChartContainer) {
-                 console.error("Linear chart container not found!");
-                 return;
-             }
-             const containerRect = linearChartContainer.getBoundingClientRect();
-             const margin = { top: 20, right: 20, bottom: 40, left: 60 };
-             const width = containerRect.width - margin.left - margin.right;
-             const height = containerRect.height - margin.top - margin.bottom;
-
-             // Ensure width and height are positive
-             if (width <= 0 || height <= 0) {
-                 console.warn("Linear chart container has zero/negative dimensions:", width, height);
-                 // Clear previous chart content if dimensions are invalid
-                 d3.select("#linear-rice-chart").selectAll("*").remove();
-                 return;
-             }
-
-             d3.select("#linear-rice-chart").selectAll("*").remove(); // Clear previous chart
-
-             linearSvg = d3.select("#linear-rice-chart")
-                 .attr("viewBox", `0 0 ${containerRect.width} ${containerRect.height}`)
-                 .attr("preserveAspectRatio", "xMidYMid meet")
-                 .append("g")
-                 .attr("transform", `translate(${margin.left},${margin.top})`);
-
-             // X scale (ordinal for bars)
-             linearXScale = d3.scaleBand()
-                 .domain(currentData.map(d => d.square)) // Squares 1 to selectedIndex+1
-                 .range([0, width])
-                 .padding(0.2); // Padding between bars
-
-             // Y scale (linear)
-             const maxGrainsLinear = Number(currentData[currentData.length - 1].grains);
-             linearYScale = d3.scaleLinear()
-                 .domain([0, maxGrainsLinear > 0 ? maxGrainsLinear : 1]) // Domain from 0 to max grains
-                 .range([height, 0])
-                 .nice(); // Adjust domain to nice round values
-
-             // Add X axis
-             linearSvg.append("g")
-                 .attr("class", "axis x-axis")
-                 .attr("transform", `translate(0,${height})`)
-                 .call(d3.axisBottom(linearXScale)
-                    .tickValues(linearXScale.domain().filter((d, i, arr) => !(i % Math.max(1, Math.floor(arr.length / 10)))))
-                 );
-
-             // Add Y axis
-             linearSvg.append("g")
-                 .attr("class", "axis y-axis")
-                 .call(d3.axisLeft(linearYScale).ticks(5, ".2s")); // SI prefix format
-
-             // Add X axis label
-             linearSvg.append("text")
-                 .attr("text-anchor", "middle")
-                 .attr("x", width / 2)
-                 .attr("y", height + margin.bottom - 5)
-                 .attr("class", "text-xs font-medium text-gray-600")
-                 .text("Square Number");
-
-             // Add Y axis label
-             linearSvg.append("text")
-                 .attr("text-anchor", "middle")
-                 .attr("transform", "rotate(-90)")
-                 .attr("y", -margin.left + 15)
-                 .attr("x", -height / 2)
-                 .attr("class", "text-xs font-medium text-gray-600")
-                 .text("Grains (Linear Scale)");
-
-             // Draw the bars
-             linearSvg.selectAll(".bar")
-                 .data(currentData)
-                 .enter().append("rect")
-                 .attr("class", "bar")
-                 .attr("x", d => linearXScale(d.square))
-                 .attr("y", d => linearYScale(Number(d.grains)))
-                 .attr("width", linearXScale.bandwidth())
-                 .attr("height", d => Math.max(0, height - linearYScale(Number(d.grains)))) // Ensure non-negative height
-                 .attr("data-index", (d, i) => i)
-                 .on("mouseover", handleMouseOver)
-                 .on("mouseout", handleMouseOut)
-                 .on("click", (event, d) => handleSquareClick(d.square - 1));
-        }
-
-
-        // --- Interactivity Handlers ---
-        function handleSquareClick(index) {
-            if (index < 0 || index >= totalSquares) {
-                 console.warn("Invalid square index clicked:", index);
-                 return;
-            }
-
-            selectedSquareIndex = index;
-
-            // Update info box
-            // Ensure grainsData exists and index is valid
-            if (grainsData && grainsData[index]) {
-                 const squareNum = index + 1;
-                 const grains = grainsData[index].grains;
-                 selectedSquareDisplay.textContent = squareNum;
-                 grainsOnSquareDisplay.textContent = grains.toLocaleString();
-            } else {
-                 console.error("Failed to get grain data for index:", index);
-                 selectedSquareDisplay.textContent = "-";
-                 grainsOnSquareDisplay.textContent = "-";
-            }
-
-
-            // Update chessboard square appearance
-            document.querySelectorAll('.square').forEach((sq, i) => {
-                 sq.classList.toggle('selected', i === index);
-            });
-
-            // Update/Create the Linear chart
-            createLinearChart(index);
-        }
-
-
-        // Tooltip mouseover handler
-        function handleMouseOver(event, d) {
-             // Check if data 'd' is valid
-             if (!d || typeof d.square === 'undefined' || typeof d.grains === 'undefined') {
-                 return; // Don't show tooltip if data is missing
-             }
-            tooltip.transition().duration(200).style("opacity", .9);
-            tooltip.html(`Square: ${d.square}<br/>Grains: ${d.grains.toLocaleString()}`)
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 30) + "px");
-
-             // Highlight the hovered bar
-             d3.select(this).style("fill-opacity", 0.7);
-        }
-
-        // Tooltip mouseout handler
-        function handleMouseOut(event, d) {
-            tooltip.transition().duration(500).style("opacity", 0);
-             // Reset hover effect
-             d3.select(this).style("fill-opacity", null);
-        }
-
-        // --- Debounced Resize Handler ---
-         let resizeTimer;
-         function handleResize() {
-             clearTimeout(resizeTimer);
-             resizeTimer = setTimeout(() => {
-                 console.log("Resizing chart...");
-                 if (selectedSquareIndex !== -1) {
-                     // Check if createLinearChart exists before calling
-                     if (typeof createLinearChart === 'function') {
-                         createLinearChart(selectedSquareIndex);
-                     } else {
-                         console.error("createLinearChart function not defined during resize.");
-                     }
-                 }
-             }, 250); // Debounce resize event
-         }
-
-
-        // --- Initialization ---
-        function initialize() {
-             try {
-                 calculateGrains();
-                 createChessboard();
-                 // Select the first square by default and create initial linear chart
-                 handleSquareClick(0);
-                 // Add debounced resize listener
-                 window.addEventListener('resize', handleResize);
-             } catch (error) {
-                 console.error("Initialization failed:", error);
-                 // Optionally display an error message to the user on the page
-             }
-        }
-
-        // --- Run Initialization ---
-        // Ensures the script runs after the HTML is fully parsed
-        document.addEventListener('DOMContentLoaded', initialize);
-
-    </script>
+  <nav class="course-sequence-nav" aria-label="Module 11 demos">
+    <a href="/employeepay.html" class="button button-secondary course-sequence-nav__link">&larr; Doubling pay</a>
+    <a href="/courses/knowledgegrowth.html" class="button button-secondary course-sequence-nav__link">Growth models review</a>
+    <a href="/courses/math114-oil-production-growth.html" class="button course-sequence-nav__link">Next: Oil production &rarr;</a>
+  </nav>
 </main>
 
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/">Courses</a>
+      <a href="/CV.html">About and CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+      <a href="https://www.youtube.com/learnabundantly">YouTube</a>
+    </nav>
+  </div>
+</footer>
+<script>
+document.getElementById('current-year').textContent = new Date().getFullYear();
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var board = $('board'), squares = [], current = 1, scale = 'linear';
+  var WORLD_RICE_T = 541e6; // USDA ERS, Rice Outlook, June 2025: world production about 541 million tons a year (milled).
+
+  function pow2(k) { return 1n << BigInt(k); }
+  function grainsOn(n) { return pow2(n - 1); }
+  function totalThrough(n) { return pow2(n) - 1n; }
+  function big(b) { return b.toLocaleString('en-US'); }
+  function sci(b) {
+    var s = b.toString();
+    if (s.length <= 6) return '';
+    var mant = (Number(s.slice(0, 4)) / 1000).toFixed(2);
+    return 'about ' + mant + ' × 10' + '<sup>' + (s.length - 1) + '</sup>';
+  }
+  function words(b) {
+    var names = [[18, 'quintillion'], [15, 'quadrillion'], [12, 'trillion'], [9, 'billion'], [6, 'million'], [3, 'thousand']];
+    var s = b.toString();
+    for (var i = 0; i < names.length; i++) {
+      if (s.length > names[i][0]) { var v = Number(b) / Math.pow(10, names[i][0]); return 'about ' + Number(v.toPrecision(3)).toLocaleString('en-US') + ' ' + names[i][1] + ' grains'; }
+    }
+    return '';
+  }
+  function massText(grains) {
+    var mg = parseFloat($('grain-mg').value); if (!isFinite(mg) || mg <= 0) mg = 25;
+    var kg = Number(grains) * mg / 1e6, t = kg / 1000, txt, note = '';
+    if (kg < 1) txt = Number((kg * 1000).toPrecision(3)).toLocaleString('en-US') + ' grams';
+    else if (t < 1) txt = Number(kg.toPrecision(3)).toLocaleString('en-US') + ' kilograms';
+    else if (t < 1e6) txt = Number(t.toPrecision(3)).toLocaleString('en-US') + ' metric tons';
+    else if (t < 1e9) txt = Number((t / 1e6).toPrecision(3)).toLocaleString('en-US') + ' million metric tons';
+    else txt = Number((t / 1e9).toPrecision(3)).toLocaleString('en-US') + ' billion metric tons';
+    var years = t / WORLD_RICE_T;
+    if (years >= 1) note = 'about ' + Number(years.toPrecision(3)).toLocaleString('en-US') + ' years of the whole world’s rice harvest (about 541 million metric tons a year)';
+    else if (years >= 0.001) note = 'about ' + Number((years * 100).toPrecision(2)) + '% of one year’s world rice harvest';
+    else if (t >= 1) note = 'roughly ' + Number((t / 1.5).toPrecision(2)).toLocaleString('en-US') + ' car-loads by weight, at 1.5 metric tons a car';
+    else note = mg + ' mg per grain';
+    return { txt: txt, note: note };
+  }
+
+  // Build the board: 8 rows of buttons, square 1 at the top left.
+  for (var i = 0; i < 64; i++) {
+    var b = document.createElement('button');
+    var row = Math.floor(i / 8), col = i % 8;
+    b.type = 'button';
+    b.className = 'cb-sq ' + ((row + col) % 2 === 0 ? 'cb-light' : 'cb-dark');
+    b.textContent = i + 1;
+    b.dataset.n = i + 1;
+    b.tabIndex = -1;
+    b.style.setProperty('--fill', (big(grainsOn(i + 1)).replace(/,/g, '').length - 1) / 18);
+    b.setAttribute('aria-label', 'Square ' + (i + 1) + ': 2 to the power ' + i + ' grains');
+    b.addEventListener('click', function () { select(Number(this.dataset.n), true); });
+    board.appendChild(b); squares.push(b);
+  }
+  board.addEventListener('keydown', function (e) {
+    var n = current, map = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 8, ArrowUp: -8 };
+    if (map[e.key] != null) n += map[e.key];
+    else if (e.key === 'Home') n = 1;
+    else if (e.key === 'End') n = 64;
+    else return;
+    e.preventDefault();
+    select(Math.min(64, Math.max(1, n)), true);
+  });
+
+  function select(n, focus) {
+    current = n;
+    squares.forEach(function (sq, i) {
+      var on = i + 1 === n;
+      sq.setAttribute('aria-pressed', String(on));
+      sq.tabIndex = on ? 0 : -1;
+      sq.classList.toggle('cb-past', i + 1 < n);
+    });
+    if (focus) squares[n - 1].focus();
+    var g = grainsOn(n), tot = totalThrough(n), m = massText(tot);
+    $('sq-num').textContent = n; $('sq-num2').textContent = n;
+    $('on-square').textContent = big(g) + (g === 1n ? ' grain' : ' grains');
+    $('on-square-sci').innerHTML = [sci(g), words(g)].filter(Boolean).join(' · ');
+    $('total').textContent = big(tot) + (tot === 1n ? ' grain' : ' grains');
+    $('total-sci').innerHTML = [sci(tot), words(tot)].filter(Boolean).join(' · ');
+    $('mass').textContent = m.txt;
+    $('mass-note').textContent = m.note;
+    $('sq-math').innerHTML = 'Square ' + n + ': 2<sup>' + (n - 1) + '</sup> = ' + big(g) + '<br>Total: 2<sup>' + n + '</sup> − 1 = ' + big(tot);
+    $('prev').disabled = n === 1; $('next').disabled = n === 64;
+    drawChart();
+  }
+
+  function drawChart() {
+    var n = current, W = 760, H = 330, L = 70, R = 14, T = 14, B = 40, log = scale === 'log';
+    var bw = (W - L - R) / n, s = '';
+    var maxV = Number(grainsOn(n)), y, ticks = [];
+    if (log) {
+      var hi = Math.max(1, Math.ceil(Math.log10(maxV)));
+      y = function (v) { return T + (1 - Math.log10(Math.max(v, 1)) / hi) * (H - T - B); };
+      var step = Math.ceil(hi / 6); for (var e = 0; e <= hi; e += step) ticks.push([Math.pow(10, e), e === 0 ? '1' : '10^' + e]);
+    } else {
+      y = function (v) { return T + (1 - v / maxV) * (H - T - B); };
+      for (var k = 0; k <= 4; k++) { var tv = maxV * k / 4; ticks.push([tv, short(tv)]); }
+    }
+    s += '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-labelledby="chart-svg-title"><title id="chart-svg-title">Bar chart of grains on squares 1 to ' + n + (log ? ' on a log scale, where the bars rise in a straight line.' : ' on an ordinary scale, where only the last few bars are visible.') + '</title>';
+    ticks.forEach(function (t) {
+      var yy = y(t[0]);
+      var label = t[1].indexOf('10^') === 0 ? '10<tspan dy="-6" font-size="9">' + t[1].slice(3) + '</tspan>' : t[1];
+      s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + yy + '" y2="' + yy + '" stroke="var(--border-subtle)"/><text x="' + (L - 8) + '" y="' + (yy + 4) + '" text-anchor="end">' + label + '</text>';
+    });
+    for (var i = 1; i <= n; i++) {
+      var v = Number(grainsOn(i)), x = L + (i - 1) * bw, top = y(v);
+      s += '<rect x="' + (x + bw * 0.12).toFixed(2) + '" y="' + top.toFixed(2) + '" width="' + Math.max(0.6, bw * 0.76).toFixed(2) + '" height="' + Math.max(0, H - B - top).toFixed(2) + '" fill="' + (i === n ? 'var(--warning-main)' : 'var(--primary-main)') + '"><title>Square ' + i + ': ' + big(grainsOn(i)) + ' grains</title></rect>';
+      var every = n > 40 ? 8 : n > 16 ? 4 : n > 8 ? 2 : 1;
+      if (i === 1 || i === n || i % every === 0) s += '<text x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - B + 16) + '" text-anchor="middle">' + i + '</text>';
+    }
+    s += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - B) + '" y2="' + (H - B) + '" stroke="var(--text-muted)"/><text x="' + ((L + W - R) / 2) + '" y="' + (H - 4) + '" text-anchor="middle">square</text></svg>';
+    $('chart').innerHTML = s;
+    $('chart-note').textContent = log
+      ? 'On a log scale each gridline is 10 times the one below, and steady doubling becomes a straight staircase.'
+      : (n > 12 ? 'On an ordinary scale the early squares are too small to see. The last bar is as tall as all the others put together, plus one grain.' : 'Each bar is twice as tall as the one before it.');
+  }
+  function short(v) {
+    if (v === 0) return '0';
+    var names = [[1e18, 'Qi'], [1e15, 'Q'], [1e12, 'T'], [1e9, 'B'], [1e6, 'M'], [1e3, 'K']];
+    for (var i = 0; i < names.length; i++) if (v >= names[i][0]) return Number((v / names[i][0]).toPrecision(3)) + names[i][1];
+    return Number(v.toPrecision(3)).toLocaleString('en-US');
+  }
+
+  // Questions
+  var QS = [
+    { q: 'How many grains are on square 10?', a: 512n, sol: '2<sup>10 − 1</sup> = 2<sup>9</sup> = 512 grains.' },
+    { q: 'How many grains are on squares 1 through 10 together?', a: 1023n, sol: '2<sup>10</sup> − 1 = 1,024 − 1 = 1,023 grains.' },
+    { q: 'Which is the first square with more than one million grains?', a: 21n, sol: 'Square 20 has 2<sup>19</sup> = 524,288; square 21 has 2<sup>20</sup> = 1,048,576. So square 21.' }
+  ];
+  QS.forEach(function (item, i) {
+    var div = document.createElement('div'); div.className = 'cb-q';
+    var id = 'q' + i;
+    div.innerHTML = '<p><label for="' + id + '"><strong>' + (i + 1) + '.</strong> ' + item.q + '</label></p><div class="cb-row"><input type="text" id="' + id + '" inputmode="numeric" autocomplete="off"><button type="button" class="button">Check</button><button type="button" class="button button-secondary" aria-expanded="false" aria-controls="' + id + '-sol">Show solution</button><span class="cb-fb" aria-live="polite"></span></div><p id="' + id + '-sol" hidden style="margin-top:0.4rem">' + item.sol + '</p>';
+    var inp = div.querySelector('input'), btns = div.querySelectorAll('button'), fb = div.querySelector('.cb-fb'), sol = div.querySelector('#' + id + '-sol');
+    function check() {
+      var t = String(inp.value).replace(/[,\s]/g, '').replace(/^square/i, '');
+      if (!/^\d+$/.test(t)) { fb.textContent = 'Enter a whole number.'; fb.style.color = ''; return; }
+      var ok = BigInt(t) === item.a;
+      fb.textContent = ok ? '✓ Correct.' : '✗ Not yet. Remember square 1 has no doublings.';
+      fb.style.color = ok ? 'var(--emerald-main)' : 'var(--danger-main)';
+    }
+    btns[0].addEventListener('click', check);
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    btns[1].addEventListener('click', function () { var open = sol.hidden; sol.hidden = !open; btns[1].setAttribute('aria-expanded', String(open)); btns[1].textContent = open ? 'Hide solution' : 'Show solution'; });
+    $('questions').appendChild(div);
+  });
+
+  $('prev').addEventListener('click', function () { select(current - 1); });
+  $('next').addEventListener('click', function () { select(current + 1); });
+  $('jump32').addEventListener('click', function () { select(32); });
+  $('jump64').addEventListener('click', function () { select(64); });
+  $('grain-mg').addEventListener('input', function () { select(current); });
+  document.querySelectorAll('.cb-tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      scale = t.dataset.scale;
+      document.querySelectorAll('.cb-tab').forEach(function (o) { o.setAttribute('aria-pressed', String(o === t)); });
+      drawChart();
+    });
+  });
+  select(1);
+})();
+</script>
 </body>
 </html>

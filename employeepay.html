@@ -1,36 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-  <!-- This tool is designed for light mode only; theme.js keeps it light and hides the theme button. -->
-  <meta name="color-scheme" content="light">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles.css">
-    <script src="theme.js" defer></script>
-    <title>Who Earns More? Fixed vs. Doubling Pay</title>
-    <!-- Tailwind CSS v3.4.17, precompiled for this page so it needs no runtime script or CDN. -->
-    <style id="tailwind-precompiled">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width:640px){.container{max-width:640px}}@media (min-width:768px){.container{max-width:768px}}@media (min-width:1024px){.container{max-width:1024px}}@media (min-width:1280px){.container{max-width:1280px}}@media (min-width:1536px){.container{max-width:1536px}}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-10{margin-top:2.5rem}.block{display:block}.grid{display:grid}.max-w-3xl{max-width:48rem}.max-w-6xl{max-width:72rem}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.gap-6{gap:1.5rem}.border{border-width:1px}.border-blue-400{--tw-border-opacity:1;border-color:rgb(96 165 250/var(--tw-border-opacity,1))}.border-red-400{--tw-border-opacity:1;border-color:rgb(248 113 113/var(--tw-border-opacity,1))}.px-4{padding-left:1rem;padding-right:1rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-5xl{font-size:3rem;line-height:1}.text-base{font-size:1rem;line-height:1.5rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216/var(--tw-text-opacity,1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99/var(--tw-text-opacity,1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81/var(--tw-text-opacity,1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28/var(--tw-text-opacity,1))}.text-sky-700{--tw-text-opacity:1;color:rgb(3 105 161/var(--tw-text-opacity,1))}.text-sky-800{--tw-text-opacity:1;color:rgb(7 89 133/var(--tw-text-opacity,1))}@media (min-width:768px){.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-lg{font-size:1.125rem;line-height:1.75rem}}</style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
-    <style>
-        /* Basic body styling */
-        body {
-            background-color: var(--bg-surface);
-        }
-        /* Ensure chart container takes up space */
-        .chart-container {
-            height: 55vh;
-            margin-bottom: 3rem;
-        }
-        /* Styling for the person intro boxes */
-        .person-box {
-            text-align: center;
-            border: 1px solid var(--border-subtle);
-        }
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed Pay vs. Doubling Pay | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 11 demo: compare a fixed daily wage with pay that starts at a penny and doubles each day, by the day and in running totals.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/employeepay.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="Fixed Pay vs. Doubling Pay">
+  <meta property="og:description" content="A penny that doubles every day against $1,000 a day: who earns more, and when?">
+  <meta property="og:url" content="https://andrewhvolk.github.io/employeepay.html">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .pd-wrap { max-width: 980px; margin: 0 auto; }
+    .pd-card { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); padding: 1rem 1.2rem; margin: 0 0 1.25rem; }
+    .pd-card h2 { margin: 0 0 0.6rem; font-size: 1.15rem; }
+    .pd-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem 1.2rem; }
+    .pd-field label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+    .pd-field input[type="number"] { width: 100%; padding: 0.4rem 0.55rem; border: 1px solid var(--border-subtle); border-radius: 0.4rem; background: var(--bg-surface); color: var(--text-main); font: inherit; }
+    .pd-field input[type="range"] { width: 100%; accent-color: var(--primary-main); }
+    .pd-field output { font-weight: 700; }
+    .pd-field small { display: block; color: var(--text-muted); margin-top: 0.2rem; }
+    .pd-people { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .pd-person { border-left: 4px solid var(--pd-c); padding: 0.4rem 0.9rem; }
+    .pd-person h3 { margin: 0 0 0.2rem; font-size: 1rem; color: var(--pd-c); }
+    .pd-person p { margin: 0.15rem 0; }
+    .pd-person .pd-big { font-size: 1.35rem; font-weight: 700; color: var(--text-main); font-variant-numeric: tabular-nums; }
+    .pd-fixed { --pd-c: var(--primary-main); }
+    .pd-double { --pd-c: var(--danger-main); }
+    .pd-verdict { margin: 0.8rem 0 0; padding: 0.6rem 0.9rem; border-radius: 0.5rem; background: color-mix(in srgb, var(--primary-main) 8%, var(--bg-surface)); line-height: 1.55; }
+    .pd-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0 0 0.6rem; }
+    .pd-tab { border: 1px solid var(--border-subtle); background: var(--bg-surface); color: var(--text-main); border-radius: 999px; padding: 0.3rem 0.85rem; font: inherit; font-size: 0.9rem; cursor: pointer; }
+    .pd-tab[aria-pressed="true"] { background: var(--primary-main); border-color: var(--primary-main); color: #fff; }
+    .pd-check { margin-left: auto; display: inline-flex; gap: 0.35rem; align-items: center; font-size: 0.9rem; }
+    .pd-chart svg { width: 100%; height: auto; display: block; }
+    .pd-chart text { font-family: var(--type-body-family); fill: var(--text-muted); font-size: 12px; }
+    .pd-chart .pd-axis { stroke: var(--text-muted); stroke-opacity: 0.5; }
+    .pd-chart .pd-grid { stroke: var(--border-subtle); }
+    .pd-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: 0.9rem; margin-top: 0.4rem; }
+    .pd-legend span::before { content: ""; display: inline-block; width: 1.4rem; height: 0.25rem; border-radius: 2px; background: var(--pd-c); vertical-align: middle; margin-right: 0.4rem; }
+    .pd-table-wrap { overflow-x: auto; }
+    .pd-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 0.92rem; }
+    .pd-table th, .pd-table td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--border-subtle); text-align: right; white-space: nowrap; }
+    .pd-table th:first-child, .pd-table td:first-child { text-align: center; }
+    .pd-table thead th { position: sticky; top: 0; background: var(--bg-surface); }
+    .pd-table tr.pd-mark td { background: color-mix(in srgb, var(--warning-main) 14%, var(--bg-surface)); }
+    .pd-table td.pd-win { font-weight: 700; }
+    .pd-math { font-family: var(--type-meta-family); background: color-mix(in srgb, var(--primary-main) 7%, var(--bg-surface)); border-left: 3px solid var(--primary-main); border-radius: 0.4rem; padding: 0.55rem 0.9rem; margin: 0.5rem 0; line-height: 1.7; }
+    .pd-q { margin: 0 0 0.9rem; }
+    .pd-q p { margin: 0 0 0.35rem; }
+    .pd-q .pd-row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .pd-q input { width: 11rem; padding: 0.35rem 0.55rem; border: 1px solid var(--border-subtle); border-radius: 0.4rem; background: var(--bg-surface); color: var(--text-main); font: inherit; }
+    .pd-q .button { padding: 0.35rem 0.8rem; font-size: 0.9rem; }
+    .pd-fb { font-size: 0.92rem; }
+    details.pd-card > summary { cursor: pointer; font-weight: 700; color: var(--primary-main); }
+    details.pd-card[open] > summary { margin-bottom: 0.6rem; }
+    @media (max-width: 560px) { .pd-people { grid-template-columns: 1fr; } .pd-check { margin-left: 0; } }
+    @media print { .course-bar, .site-footer, .pd-controls-card, .pd-tabs, .pd-q .button, .page-actions { display: none !important; } details.pd-card { display: block; } }
+  </style>
 </head>
-<body class="tool-page-body">
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
 <nav class="course-bar" aria-label="Site">
   <div class="course-bar__inner">
     <a class="course-bar__back" href="/courses/math114.html#module-11"><span aria-hidden="true">&larr;</span> MATH 114</a>
@@ -39,192 +72,274 @@
   </div>
 </nav>
 
-<main class="tool-page-main">
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Module 11 demo</p>
+    <h1>Fixed Pay vs. Doubling Pay</h1>
+    <p class="page-hero__lede">One job pays the same amount every day. The other pays one penny on day 1 and doubles the pay each day after. Which job pays more over a month, and when does the doubling job pull ahead? Change the numbers and watch linear and exponential growth separate.</p>
+    <div class="page-actions">
+      <a href="#results" class="button">See the comparison</a>
+      <a href="/courses/math114-module11.html" class="button button-secondary">Module 11 notes</a>
+    </div>
+  </div>
+</header>
 
-    <section class="tool-page-shell max-w-6xl mx-auto"><h1 class="text-2xl md:text-4xl font-bold text-center text-sky-800 mb-6">
-        Who Earns More Money?
-    </h1>
-
-    <p class="text-center max-w-3xl mx-auto mb-8 text-gray-700 text-base md:text-lg px-4">
-        Let's see how two people get paid for 30 days of work! One gets the same amount each day, and the other starts super small, but their pay doubles every day. Watch what happens!
-    </p>
-    <div class="max-w-3xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
-        <div class="person-box tool-info-box border-blue-400">
-            <span class="text-5xl mb-2 block" role="img" aria-label="Steady Worker">👨‍💼</span>
-            <h3 class="text-xl font-semibold text-blue-700 mb-1">Person 1: Steady Sam</h3>
-            <p class="text-gray-600">Gets <strong class="font-bold">$1,000</strong> every single day.</p>
+<main id="main-content" class="site-main">
+  <div class="pd-wrap">
+    <section class="pd-card pd-controls-card" aria-labelledby="controls-title">
+      <h2 id="controls-title">Set up the two jobs</h2>
+      <div class="pd-controls">
+        <div class="pd-field">
+          <label for="fixed">Fixed job: pay per day ($)</label>
+          <input type="number" id="fixed" min="1" max="1000000" step="1" value="1000" inputmode="decimal">
+          <small>The same amount every day (linear).</small>
         </div>
-        <div class="person-box tool-info-box border-red-400">
-             <span class="text-5xl mb-2 block" role="img" aria-label="Rocket Growth">🚀</span>
-            <h3 class="text-xl font-semibold text-red-700 mb-1">Person 2: Doubling Penny</h3>
-            <p class="text-gray-600">Starts with <strong class="font-bold">1 penny</strong> ($0.01). Pay <strong class="font-bold">doubles</strong> each day!</p>
+        <div class="pd-field">
+          <label for="start">Doubling job: pay on day 1 ($)</label>
+          <input type="number" id="start" min="0.01" max="1000" step="0.01" value="0.01" inputmode="decimal">
+          <small>Doubles each day (exponential).</small>
         </div>
-    </div>
-    <h2 class="text-xl md:text-2xl font-semibold text-center text-sky-700 mb-4">
-        Chart 1: Seeing the Start (Log View)
-    </h2>
-    <div class="chart-container tool-chart-box">
-        <canvas id="earningsChartLog"></canvas>
-    </div>
+        <div class="pd-field">
+          <label for="days">Days worked: <output id="days-out" for="days">30</output></label>
+          <input type="range" id="days" min="5" max="40" step="1" value="30">
+          <small>From 5 to 40 days.</small>
+        </div>
+      </div>
+      <p class="pd-field" style="margin:0.8rem 0 0"><button type="button" class="button button-secondary" id="defaults">Back to $1,000 vs. a penny for 30 days</button></p>
+    </section>
 
-    <h2 class="text-xl md:text-2xl font-semibold text-center text-sky-700 mt-10 mb-4">
-        Chart 2: Seeing the End (Normal View)
-    </h2>
-    <div class="chart-container tool-chart-box">
-        <canvas id="earningsChartLinear"></canvas>
-    </div>
+    <section class="pd-card" id="results" aria-labelledby="results-title">
+      <h2 id="results-title">Who earns more?</h2>
+      <div class="pd-people">
+        <div class="pd-person pd-fixed">
+          <h3>Fixed job</h3>
+          <p>Total pay: <span class="pd-big" id="fixed-total"></span></p>
+          <p>Pay on the last day: <span id="fixed-last"></span></p>
+        </div>
+        <div class="pd-person pd-double">
+          <h3>Doubling job</h3>
+          <p>Total pay: <span class="pd-big" id="double-total"></span></p>
+          <p>Pay on the last day: <span id="double-last"></span></p>
+        </div>
+      </div>
+      <p class="pd-verdict" id="verdict" aria-live="polite"></p>
+    </section>
 
-    <script>
-        // --- Data Preparation (Same for both charts) ---
-        const days = Array.from({ length: 30 }, (_, i) => i + 1); // Array [1, 2, ..., 30]
-        const employee1DailyEarnings = Array(30).fill(1000); // Constant $1000 per day
+    <section class="pd-card" aria-labelledby="chart-title">
+      <h2 id="chart-title">Watch the two jobs grow</h2>
+      <div class="pd-tabs" role="group" aria-label="What to graph">
+        <button type="button" class="pd-tab" data-view="daily" aria-pressed="false">Pay each day</button>
+        <button type="button" class="pd-tab" data-view="total" aria-pressed="true">Running total</button>
+        <label class="pd-check"><input type="checkbox" id="logscale"> Log scale (each gridline is 10 times the last)</label>
+      </div>
+      <div class="pd-chart" id="chart"></div>
+      <div class="pd-legend"><span class="pd-fixed">Fixed job</span><span class="pd-double">Doubling job</span></div>
+      <p id="chart-note" style="color:var(--text-muted);font-size:0.9rem;margin:0.5rem 0 0"></p>
+    </section>
 
-        // Calculate Person 2's daily earnings (penny doubling)
-        const employee2DailyEarnings = days.map(day => {
-            // Calculate 0.01 * 2^(day - 1)
-            return 0.01 * Math.pow(2, day - 1);
-        });
+    <section class="pd-card" aria-labelledby="math-title">
+      <h2 id="math-title">The math behind it</h2>
+      <p>With a fixed wage <em>w</em> and a starting pay <em>p</em> that doubles every day:</p>
+      <div class="pd-math">
+        Fixed job, any day: <em>w</em> &nbsp;·&nbsp; total after <em>n</em> days: <em>w</em> · <em>n</em> (linear)<br>
+        Doubling job, day <em>n</em>: <em>p</em> · 2<sup><em>n</em> − 1</sup> &nbsp;·&nbsp; total after <em>n</em> days: <em>p</em> · (2<sup><em>n</em></sup> − 1) (exponential)
+      </div>
+      <p>Day 1 has no doublings yet, which is why day <em>n</em> uses the exponent <em>n</em> − 1. The total is one day's pay short of doubling once more: 1 + 2 + 4 + 8 = 15 = 16 − 1. So each day's doubling pay is larger than all the earlier days put together.</p>
+      <p id="math-live"></p>
+    </section>
 
-        // --- Tooltip Configuration (Shared) ---
-        // Shows the money earned when you hover over a point
-        const tooltipConfig = {
-            callbacks: {
-                label: function(context) {
-                    let label = context.dataset.label || '';
-                    if (label) {
-                        label += ': ';
-                    }
-                    if (context.parsed.y !== null) {
-                        // Format money nicely
-                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
-                    }
-                    return label;
-                }
-            }
-        };
+    <details class="pd-card" id="table-card">
+      <summary>Day-by-day table</summary>
+      <div class="pd-table-wrap">
+        <table class="pd-table" id="table">
+          <caption class="visually-hidden" style="position:absolute;left:-9999px">Pay each day and running totals for both jobs</caption>
+          <thead><tr><th scope="col">Day</th><th scope="col">Fixed: that day</th><th scope="col">Fixed: total</th><th scope="col">Doubling: that day</th><th scope="col">Doubling: total</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p style="color:var(--text-muted);font-size:0.88rem;margin:0.5rem 0 0">Highlighted rows are the days the doubling job first pays more in one day, and first pays more in total. The larger total on each row is in bold.</p>
+    </details>
 
-        // --- Chart 1 Configuration (Logarithmic) ---
-        // This chart helps see the small numbers at the start
-        const ctxLog = document.getElementById('earningsChartLog').getContext('2d');
-        const earningsChartLog = new Chart(ctxLog, {
-            type: 'line', // Make a line chart
-            data: {
-                labels: days, // Days go on the bottom
-                datasets: [
-                    {
-                        label: 'Person 1 (Steady Sam)', // Name for the blue line
-                        data: employee1DailyEarnings,
-                        borderColor: 'rgb(54, 162, 235)', // Blue color
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                        tension: 0.1 // Makes the line slightly curvy
-                    },
-                    {
-                        label: 'Person 2 (Doubling Penny)', // Name for the red line
-                        data: employee2DailyEarnings,
-                        borderColor: 'rgb(255, 99, 132)', // Red color
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        tension: 0.1 // Makes the line slightly curvy
-                    }
-                ]
-            },
-            options: {
-                responsive: true, // Make chart fit the screen size
-                maintainAspectRatio: false, // Let chart fill the box
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Daily Pay Compared (Log View - helps see start)', // Chart title
-                        font: { size: 16 }
-                    },
-                    tooltip: tooltipConfig // Use shared tooltip settings
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Day Number' // Label for bottom axis
-                        }
-                    },
-                    y: {
-                        type: 'logarithmic', // Special scale to see small and big numbers
-                        title: {
-                            display: true,
-                            text: 'Money Earned Each Day ($) - Log Scale' // Label for side axis
-                        },
-                        ticks: {
-                            // Show some money amounts on the side
-                            callback: function(value, index, ticks) {
-                                if (value === 1e-2 || value === 1e0 || value === 1e2 || value === 1e3 || value === 1e4 || value === 1e5 || value === 1e6 || value === 1e7) {
-                                     return '$' + value.toLocaleString();
-                                }
-                                return null; // Hide other numbers to keep it clean
-                            }
-                        }
-                    }
-                }
-            }
-        });
+    <section class="pd-card" aria-labelledby="check-title">
+      <h2 id="check-title">Check yourself</h2>
+      <p style="margin-top:0">These use the original setup: $1,000 a day against a penny that doubles, for 30 days. Work them with the formulas, then check.</p>
+      <div id="questions"></div>
+    </section>
+  </div>
 
-        // --- Chart 2 Configuration (Linear) ---
-        // This chart shows how big the numbers get at the end
-        const ctxLinear = document.getElementById('earningsChartLinear').getContext('2d');
-        const earningsChartLinear = new Chart(ctxLinear, {
-            type: 'line', // Make a line chart
-            data: {
-                labels: days, // Days go on the bottom
-                datasets: [
-                     {
-                        label: 'Person 1 (Steady Sam)', // Name for the blue line
-                        data: employee1DailyEarnings,
-                        borderColor: 'rgb(54, 162, 235)', // Blue color
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Person 2 (Doubling Penny)', // Name for the red line
-                        data: employee2DailyEarnings,
-                        borderColor: 'rgb(255, 99, 132)', // Red color
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        tension: 0.1
-                    }
-                ]
-            },
-            options: {
-                responsive: true, // Make chart fit the screen size
-                maintainAspectRatio: false, // Let chart fill the box
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Daily Pay Compared (Normal View - shows the huge finish!)', // Chart title
-                        font: { size: 16 }
-                    },
-                    tooltip: tooltipConfig // Use shared tooltip settings
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Day Number' // Label for bottom axis
-                        }
-                    },
-                    y: {
-                        type: 'linear', // Normal number scale
-                        title: {
-                            display: true,
-                            text: 'Money Earned Each Day ($) - Normal Scale' // Label for side axis
-                        },
-                        ticks: {
-                             // Show money amounts on the side
-                            callback: function(value, index, ticks) {
-                                return '$' + value.toLocaleString();
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+  <nav class="course-sequence-nav" aria-label="Module 11 demos">
+    <a href="/courses/math114-module11.html" class="button button-secondary course-sequence-nav__link">&larr; Module 11</a>
+    <a href="/courses/knowledgegrowth.html" class="button button-secondary course-sequence-nav__link">Growth models review</a>
+    <a href="/chessboard.html" class="button course-sequence-nav__link">Next: Chessboard rice &rarr;</a>
+  </nav>
 </main>
 
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
+    <nav aria-label="Footer">
+      <a href="/">Courses</a>
+      <a href="/CV.html">About and CV</a>
+      <a href="/club/">Math Club</a>
+      <a href="/contact.html">Contact</a>
+      <a href="https://www.youtube.com/learnabundantly">YouTube</a>
+    </nav>
+  </div>
+</footer>
+<script>
+document.getElementById('current-year').textContent = new Date().getFullYear();
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var fixedIn = $('fixed'), startIn = $('start'), daysIn = $('days');
+  var view = 'total', DEF = { fixed: 1000, start: 0.01, days: 30 };
+
+  function money(x) {
+    if (!isFinite(x)) return '—';
+    return '$' + x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function compact(x) {
+    var a = Math.abs(x);
+    if (a >= 1e12) return '$' + trimNum(x / 1e12) + 'T';
+    if (a >= 1e9) return '$' + trimNum(x / 1e9) + 'B';
+    if (a >= 1e6) return '$' + trimNum(x / 1e6) + 'M';
+    if (a >= 1e3) return '$' + trimNum(x / 1e3) + 'K';
+    if (a >= 1) return '$' + trimNum(x);
+    return '$' + x.toFixed(2);
+  }
+  function trimNum(v) { return Number(v.toPrecision(3)).toLocaleString('en-US'); }
+  function read(input, fallback, min, max) {
+    var v = parseFloat(input.value);
+    if (!isFinite(v) || v < min) return fallback;
+    return Math.min(v, max);
+  }
+  // Exact cents: every doubling pay is p·2^(n−1); keep it in cents so totals are exact.
+  function series(w, p, n) {
+    var rows = [], ft = 0, dt = 0, pc = Math.round(p * 100);
+    for (var d = 1; d <= n; d++) {
+      var dd = pc * Math.pow(2, d - 1) / 100;
+      ft += w; dt = pc * (Math.pow(2, d) - 1) / 100;
+      rows.push({ d: d, fd: w, ft: ft, dd: dd, dt: dt });
+    }
+    return rows;
+  }
+  function firstDay(rows, key) {
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      if (key === 'daily' ? r.dd > r.fd : r.dt > r.ft) return r.d;
+    }
+    return null;
+  }
+
+  function update() {
+    var w = read(fixedIn, DEF.fixed, 1, 1e6), p = read(startIn, DEF.start, 0.01, 1000), n = parseInt(daysIn.value, 10);
+    $('days-out').textContent = n;
+    var rows = series(w, p, n), last = rows[rows.length - 1];
+    var dayWin = firstDay(rows, 'daily'), totWin = firstDay(rows, 'total');
+    $('fixed-total').textContent = money(last.ft);
+    $('double-total').textContent = money(last.dt);
+    $('fixed-last').textContent = money(last.fd);
+    $('double-last').textContent = money(last.dd);
+    var v;
+    if (last.dt > last.ft) {
+      v = 'Over ' + n + ' days the <strong>doubling job pays more</strong>: ' + money(last.dt) + ' against ' + money(last.ft) + ', about ' + trimNum(last.dt / last.ft) + ' times as much.';
+    } else if (last.dt < last.ft) {
+      v = 'Over ' + n + ' days the <strong>fixed job still pays more</strong>: ' + money(last.ft) + ' against ' + money(last.dt) + '.';
+    } else { v = 'Over ' + n + ' days the two jobs pay exactly the same.'; }
+    v += dayWin ? ' The doubling job first pays more <em>in a single day</em> on day ' + dayWin + '.' : ' The doubling job never pays more in a single day within ' + n + ' days.';
+    v += totWin ? ' Its running total first passes the fixed job on day ' + totWin + '.' : ' Its running total never catches up within ' + n + ' days.';
+    if (dayWin && totWin && totWin > dayWin) v += ' The total takes longer to catch up because the fixed job built a head start in the early days.';
+    $('verdict').innerHTML = v;
+    $('math-live').innerHTML = 'With these numbers: day ' + n + ' pays ' + money(p) + ' × 2<sup>' + (n - 1) + '</sup> = ' + money(last.dd) + ', and the doubling total is ' + money(p) + ' × (2<sup>' + n + '</sup> − 1) = ' + money(last.dt) + '. The fixed total is ' + money(w) + ' × ' + n + ' = ' + money(last.ft) + '.';
+    drawTable(rows, dayWin, totWin);
+    drawChart(rows, dayWin, totWin);
+  }
+
+  function drawTable(rows, dayWin, totWin) {
+    var tb = $('table').querySelector('tbody'), html = '';
+    rows.forEach(function (r) {
+      var mark = r.d === dayWin || r.d === totWin;
+      html += '<tr' + (mark ? ' class="pd-mark"' : '') + '><td>' + r.d + '</td><td>' + money(r.fd) + '</td><td' + (r.ft >= r.dt ? ' class="pd-win"' : '') + '>' + money(r.ft) + '</td><td>' + money(r.dd) + '</td><td' + (r.dt > r.ft ? ' class="pd-win"' : '') + '>' + money(r.dt) + '</td></tr>';
+    });
+    tb.innerHTML = html;
+  }
+
+  function drawChart(rows, dayWin, totWin) {
+    var log = $('logscale').checked, W = 760, H = 380, L = 74, R = 18, T = 16, B = 44;
+    var kf = view === 'daily' ? 'fd' : 'ft', kd = view === 'daily' ? 'dd' : 'dt';
+    var n = rows.length, maxY = 0, minY = Infinity;
+    rows.forEach(function (r) { maxY = Math.max(maxY, r[kf], r[kd]); minY = Math.min(minY, r[kf], r[kd]); });
+    var x = function (d) { return L + (d - 1) / Math.max(1, n - 1) * (W - L - R); };
+    var y, ticks = [];
+    if (log) {
+      var lo = Math.floor(Math.log10(Math.max(minY, 0.001))), hi = Math.ceil(Math.log10(maxY));
+      if (hi === lo) hi = lo + 1;
+      y = function (v) { return T + (hi - Math.log10(Math.max(v, Math.pow(10, lo)))) / (hi - lo) * (H - T - B); };
+      var step = Math.ceil((hi - lo) / 8);
+      for (var e = lo; e <= hi; e += step) ticks.push(Math.pow(10, e));
+    } else {
+      var mag = Math.pow(10, Math.floor(Math.log10(maxY))), top = Math.ceil(maxY / mag) * mag;
+      y = function (v) { return T + (1 - v / top) * (H - T - B); };
+      for (var k = 0; k <= 5; k++) ticks.push(top * k / 5);
+    }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-labelledby="chart-svg-title"><title id="chart-svg-title">' +
+      (view === 'daily' ? 'Pay each day' : 'Running total') + ' for both jobs over ' + n + ' days' + (log ? ', on a log scale' : '') + '. The fixed job ' + (view === 'daily' ? 'stays flat at ' + money(rows[0].fd) : 'rises in a straight line to ' + money(rows[n - 1].ft)) + '; the doubling job ' + (log ? 'rises in a straight line on this scale' : 'stays near zero, then shoots up') + ' to ' + money(rows[n - 1][kd]) + '.</title>';
+    ticks.forEach(function (t) { var yy = y(t); s += '<line class="pd-grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + yy + '" y2="' + yy + '"/><text x="' + (L - 8) + '" y="' + (yy + 4) + '" text-anchor="end">' + compact(t) + '</text>'; });
+    var every = n > 30 ? 5 : n > 15 ? 3 : 1;
+    rows.forEach(function (r) { if ((r.d - 1) % every === 0 || r.d === n) s += '<text x="' + x(r.d) + '" y="' + (H - B + 18) + '" text-anchor="middle">' + r.d + '</text>'; });
+    s += '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 6) + '" text-anchor="middle">day</text>';
+    s += '<line class="pd-axis" x1="' + L + '" x2="' + (W - R) + '" y1="' + (H - B) + '" y2="' + (H - B) + '"/><line class="pd-axis" x1="' + L + '" x2="' + L + '" y1="' + T + '" y2="' + (H - B) + '"/>';
+    var mark = view === 'daily' ? dayWin : totWin;
+    if (mark) {
+      var mx = x(mark);
+      s += '<line x1="' + mx + '" x2="' + mx + '" y1="' + T + '" y2="' + (H - B) + '" stroke="var(--warning-main)" stroke-dasharray="5 4"/><text x="' + (mx + 6) + '" y="' + (T + 14) + '" style="fill:var(--warning-main)">day ' + mark + ': doubling pulls ahead</text>';
+    }
+    var line = function (key, color) { return '<polyline fill="none" stroke="' + color + '" stroke-width="3" stroke-linejoin="round" points="' + rows.map(function (r) { return x(r.d).toFixed(1) + ',' + y(r[key]).toFixed(1); }).join(' ') + '"/>'; };
+    s += line(kf, 'var(--primary-main)') + line(kd, 'var(--danger-main)') + '</svg>';
+    $('chart').innerHTML = s;
+    $('chart-note').textContent = log
+      ? 'On a log scale, steady doubling is a straight line, and the gap between gridlines is a factor of 10.'
+      : 'On an ordinary scale the doubling job looks like nothing for weeks, then overtakes everything at the end.';
+  }
+
+  // Check-yourself questions on the original setup.
+  var QS = [
+    { q: 'How much does the doubling job pay on day 30?', a: 0.01 * Math.pow(2, 29), tol: 0.01, sol: '0.01 × 2<sup>29</sup> = $5,368,709.12' },
+    { q: 'What does the doubling job pay in total over 30 days?', a: 0.01 * (Math.pow(2, 30) - 1), tol: 0.01, sol: '0.01 × (2<sup>30</sup> − 1) = $10,737,418.23, about 358 times the fixed job’s $30,000.' },
+    { q: 'On which day does the doubling job first pay more than $1,000 in a single day?', a: 18, tol: 0, sol: 'Day 17 pays 0.01 × 2<sup>16</sup> = $655.36; day 18 pays 0.01 × 2<sup>17</sup> = $1,310.72. So day 18.' },
+    { q: 'On which day does the doubling job’s running total first pass the fixed job’s total?', a: 22, tol: 0, sol: 'Day 21: 0.01 × (2<sup>21</sup> − 1) = $20,971.51, still short of $21,000. Day 22: $41,943.03 against $22,000. So day 22.' }
+  ];
+  var qbox = $('questions');
+  QS.forEach(function (item, i) {
+    var div = document.createElement('div'); div.className = 'pd-q';
+    var id = 'q' + i;
+    div.innerHTML = '<p><label for="' + id + '"><strong>' + (i + 1) + '.</strong> ' + item.q + '</label></p><div class="pd-row"><input type="text" id="' + id + '" inputmode="decimal" autocomplete="off"><button type="button" class="button">Check</button><button type="button" class="button button-secondary" aria-expanded="false" aria-controls="' + id + '-sol">Show solution</button><span class="pd-fb" aria-live="polite"></span></div><p id="' + id + '-sol" hidden style="margin-top:0.4rem">' + item.sol + '</p>';
+    var inp = div.querySelector('input'), btns = div.querySelectorAll('button'), fb = div.querySelector('.pd-fb'), sol = div.querySelector('#' + id + '-sol');
+    function check() {
+      var v = parseFloat(String(inp.value).replace(/[$,\s]/g, '').replace(/^day/i, ''));
+      if (!isFinite(v)) { fb.textContent = 'Enter a number.'; return; }
+      var ok = Math.abs(v - item.a) <= item.tol + 1e-9;
+      fb.textContent = ok ? '✓ Correct.' : '✗ Not yet. Check the exponent, or show the solution.';
+      fb.style.color = ok ? 'var(--emerald-main)' : 'var(--danger-main)';
+    }
+    btns[0].addEventListener('click', check);
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    btns[1].addEventListener('click', function () { var open = sol.hidden; sol.hidden = !open; btns[1].setAttribute('aria-expanded', String(open)); btns[1].textContent = open ? 'Hide solution' : 'Show solution'; });
+    qbox.appendChild(div);
+  });
+
+  [fixedIn, startIn, daysIn].forEach(function (el) { el.addEventListener('input', update); });
+  $('logscale').addEventListener('change', update);
+  document.querySelectorAll('.pd-tab').forEach(function (b) {
+    b.addEventListener('click', function () {
+      view = b.dataset.view;
+      document.querySelectorAll('.pd-tab').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+      update();
+    });
+  });
+  $('defaults').addEventListener('click', function () { fixedIn.value = DEF.fixed; startIn.value = DEF.start; daysIn.value = DEF.days; update(); });
+  update();
+})();
+</script>
 </body>
 </html>
