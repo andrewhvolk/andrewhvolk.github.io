@@ -27,7 +27,7 @@
     },
     {
       "id": "u3a-applications",
-      "text": "solve special-triangle and right-triangle applications"
+      "text": "solve right-triangle word problems, including two-triangle problems"
     }
   ],
   "sessions": [
@@ -41,9 +41,9 @@
       "max_slides": 35,
       "rehearsal": {
         "status": "pending_live_rehearsal",
-        "planned_instruction_minutes": 62.0,
+        "planned_instruction_minutes": 65.0,
         "reserved_buffer_minutes": 5,
-        "available_flex_minutes": 13.0,
+        "available_flex_minutes": 5.0,
         "stopping_points": [
           {
             "after_block": "math130unit3a-u3a-standard-synthesize",
@@ -67,7 +67,7 @@
           },
           {
             "after_block": "math130unit3a-u3a-applications-synthesize",
-            "planned_elapsed": 60.5,
+            "planned_elapsed": 63.5,
             "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
           }
         ]
@@ -111,7 +111,7 @@
             "find coterminal and reference angles in degrees and radians",
             "use radians to compute arc length",
             "use right-triangle trigonometric ratios",
-            "solve special-triangle and right-triangle applications"
+            "solve right-triangle word problems, including two-triangle problems"
           ]
         },
         {
@@ -761,7 +761,7 @@
         },
         {
           "id": "math130unit3a-u3a-applications-activate",
-          "title": "Predict: solve special-triangle and right-triangle applications",
+          "title": "Predict: choose the ratio for a word problem",
           "phase": "activate",
           "component": "poll",
           "objectives": [
@@ -770,7 +770,7 @@
           "minutes": 1.0,
           "source_slides": [],
           "content": [
-            "When is an exact radical answer better than a decimal approximation?"
+            "You know the hypotenuse and want the side opposite the angle. Which ratio do you use, and do you multiply or divide?"
           ],
           "instructor_notes": [
             "Require an individual prediction before discussion."
@@ -779,7 +779,7 @@
         },
         {
           "id": "math130unit3a-u3a-applications-explain",
-          "title": "solve special-triangle and right-triangle applications",
+          "title": "Choose the ratio from the side you know and the side you want",
           "phase": "explain",
           "component": "concept",
           "objectives": [
@@ -791,25 +791,26 @@
             20
           ],
           "content": [
-            "Special triangles produce exact values.",
-            "Word problems require a labeled diagram before choosing a ratio."
+            "Use the ratio that contains the side you know and the side you want.",
+            "If the unknown is on top of the fraction, multiply; if it is on the bottom, divide.",
+            "Sketch and label every word problem before choosing a ratio."
           ],
           "instructor_notes": [],
           "verification": [
-            "Check the labeled geometry and accessibility text of special-triangles.svg."
+            "Check the labeled geometry and accessibility text of choose-ratio.svg."
           ],
           "visual_layout": "split",
           "assets": [
             {
-              "src": "assets/math130unit3a/visuals/special-triangles.svg",
-              "alt": "A 45-45-90 triangle with legs 1 and 1 and hypotenuse root 2. A 30-60-90 triangle with the short leg 1 opposite 30 degrees, the long leg root 3 opposite 60 degrees, and hypotenuse 2. Both are drawn to scale.",
-              "caption": "Exact side ratios for the two special triangles."
+              "src": "assets/math130unit3a/visuals/choose-ratio.svg",
+              "alt": "A right triangle with angle theta and its sides colored: adjacent blue, opposite teal, hypotenuse orange. A table pairs the two sides in a problem with a ratio: hypotenuse and opposite use sine, hypotenuse and adjacent use cosine, adjacent and opposite use tangent. Below: if the unknown is in the numerator, multiply; if it is in the denominator, divide.",
+              "caption": "Pick the ratio from the two sides in the problem."
             }
           ]
         },
         {
           "id": "math130unit3a-u3a-applications-model",
-          "title": "Model the Skill: solve special-triangle and right-triangle applications",
+          "title": "Model the Skill: a side in a word problem",
           "phase": "model",
           "component": "worked-example",
           "objectives": [
@@ -824,7 +825,7 @@
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify special-triangle and word-problem calculations.",
+            "Verify the ladder calculation.",
             "Check the labeled geometry and accessibility text of ladder.svg."
           ],
           "steps": [
@@ -845,8 +846,40 @@
           ]
         },
         {
+          "id": "math130unit3a-u3a-applications-model-two",
+          "title": "Model the Skill: two right triangles, one height",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3a-applications"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "From one point the angle of elevation to the top of a tower is $40^\\circ$. From a point 50 ft closer it is $55^\\circ$. Find the height $h$."
+          ],
+          "instructor_notes": [],
+          "verification": [
+            "Verify the two-triangle calculation (d about 71.23 ft, h about 101.72 ft).",
+            "Check the labeled geometry and accessibility text of two-triangles.svg."
+          ],
+          "steps": [
+            "Near triangle: $h=d\\tan55^\\circ$. Far triangle: $h=(d+50)\\tan40^\\circ$.",
+            "Set them equal and solve: $d=\\dfrac{50\\tan40^\\circ}{\\tan55^\\circ-\\tan40^\\circ}\\approx71.23$ ft.",
+            "$h=d\\tan55^\\circ\\approx101.72$ ft. Check: $(71.23+50)\\tan40^\\circ\\approx101.72$ ft."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3a/visuals/two-triangles.svg",
+              "alt": "A tower of height h. From a far point the angle of elevation is 40 degrees; from a point 50 feet closer it is 55 degrees. The near point is d feet from the base. Both triangles share the height h. Drawn to scale.",
+              "caption": "Drawn to scale. Both triangles share the height h."
+            }
+          ]
+        },
+        {
           "id": "math130unit3a-u3a-applications-practice",
-          "title": "You Try: solve special-triangle and right-triangle applications",
+          "title": "You Try: an unknown in the denominator",
           "phase": "practice",
           "component": "practice",
           "objectives": [
@@ -858,29 +891,30 @@
             23
           ],
           "content": [
-            "A 25 ft ladder makes a 70° angle with the ground. Find the height."
+            "A ramp must rise 2 ft, and it makes a 10° angle with the ground. How long is the ramp?"
           ],
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
           "verification": [
-            "Check the labeled geometry and accessibility text of ladder.svg."
+            "Verify the ramp calculation (about 11.52 ft).",
+            "Check the labeled geometry and accessibility text of ramp.svg."
           ],
           "answer": [
-            "$h=25\\sin70^\\circ\\approx23.5$ ft."
+            "$\\sin10^\\circ=2/L$, so $L=2\\div\\sin10^\\circ\\approx11.52$ ft."
           ],
           "visual_layout": "split",
           "assets": [
             {
-              "src": "assets/math130unit3a/visuals/ladder.svg",
-              "alt": "A ladder 25 feet long leans against a wall. It makes a 70 degree angle with the ground. A dashed vertical segment h runs from the top of the ladder down to the ground and meets it at a right angle. The figure is drawn to scale.",
-              "caption": "The ladder is the hypotenuse; h is opposite the 70° angle."
+              "src": "assets/math130unit3a/visuals/ramp.svg",
+              "alt": "A long, low right triangle drawn to scale. The ramp is the hypotenuse, marked with a question mark. It makes a 10 degree angle with the ground and rises 2 feet.",
+              "caption": "The ramp is the hypotenuse; 2 ft is opposite the 10° angle."
             }
           ]
         },
         {
           "id": "math130unit3a-u3a-applications-feedback",
-          "title": "Check and Diagnose: solve special-triangle and right-triangle applications",
+          "title": "Check and Diagnose: right-triangle word problems",
           "phase": "feedback",
           "component": "misconception",
           "objectives": [
@@ -891,8 +925,9 @@
             24
           ],
           "content": [
-            "Exact-value questions should retain radicals.",
-            "Check that a leg is shorter than the hypotenuse."
+            "A leg must be shorter than the hypotenuse.",
+            "Keep the calculator in degree mode.",
+            "In two-triangle problems, keep $d$ and $d+50$ with the right angles, and round only at the end."
           ],
           "instructor_notes": [
             "Ask students to explain why the incorrect path fails."
@@ -903,7 +938,7 @@
         },
         {
           "id": "math130unit3a-u3a-applications-synthesize",
-          "title": "Make It Stick: solve special-triangle and right-triangle applications",
+          "title": "Make It Stick: right-triangle word problems",
           "phase": "synthesize",
           "component": "summary",
           "objectives": [

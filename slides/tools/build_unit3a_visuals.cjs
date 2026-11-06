@@ -287,10 +287,56 @@ const diagrams = {};
   diagrams["ladder"] = svg(420, 580, "A 25 foot ladder at 70 degrees", "A ladder 25 feet long leans against a wall. It makes a 70 degree angle with the ground. A dashed vertical segment h runs from the top of the ladder down to the ground and meets it at a right angle. The figure is drawn to scale.", body);
 }
 
+/* Two right triangles sharing one height h: angles aFar and aNear seen from points `gap` apart.
+ * Drawn to scale; `known` lists which values to print (the rest show as letters). */
+function twoTriangles(aFar, aNear, gap, { W = 760, H = 470, fill = C.softBlue, showH = "h", showD = "d" } = {}) {
+  const tf = Math.tan(rad(aFar)), tn = Math.tan(rad(aNear));
+  const d = gap * tf / (tn - tf), h = d * tn;
+  const k = Math.min((W - 170) / (gap + d), (H - 120) / h);
+  const base = [W - 90, H - 70], near = [base[0] - d * k, base[1]], far = [near[0] - gap * k, base[1]], top = [base[0], base[1] - h * k];
+  let b = poly([far, base, top], fill) + line(near, top, C.ink, 4) + rightMark(base, far, top, 22);
+  b += thetaMark(far, 0, aFar, 70, `${aFar}°`, C.orange, 26) + thetaMark(near, 0, aNear, 54, `${aNear}°`, C.purple, 26);
+  b += `<circle cx="${f(far[0])}" cy="${f(far[1])}" r="7" fill="${C.ink}"/><circle cx="${f(near[0])}" cy="${f(near[1])}" r="7" fill="${C.ink}"/>`;
+  b += centered((far[0] + near[0]) / 2, base[1] + 42, `${gap} ft`, C.ink, 28) + centered((near[0] + base[0]) / 2, base[1] + 42, showD, C.teal, 30, showD.length === 1 ? italic : "");
+  b += text(base[0] + 14, (base[1] + top[1]) / 2 + 10, showH, C.teal, 32, showH.length === 1 ? italic : "");
+  return { body: b, d, h };
+}
+
+/* Unit 3A, Nov 6: choosing the ratio from what you know and what you want. */
+{
+  const t = rightTriangle(4, 3, [50, 330], 300);
+  let body = triangleBody(t) + thetaMark(t.A, 0, t.angle, 50);
+  body += line(t.A, t.C, C.blue, 7) + line(t.C, t.B, C.teal, 7) + line(t.A, t.B, C.orange, 7) + rightMark(t.C, t.A, t.B);
+  body += centered((t.A[0] + t.C[0]) / 2, t.A[1] + 38, "adj", C.blue, 28) + text(t.C[0] + 14, (t.C[1] + t.B[1]) / 2 + 10, "opp", C.teal, 28) + text((t.A[0] + t.B[0]) / 2 - 80, (t.A[1] + t.B[1]) / 2 - 14, "hyp", C.orange, 28);
+  const rows = [["hyp", "opp", "sin"], ["hyp", "adj", "cos"], ["adj", "opp", "tan"]];
+  const col = { opp: C.teal, adj: C.blue, hyp: C.orange };
+  body += text(420, 78, "know and want", C.muted, 24) + text(640, 78, "use", C.muted, 24);
+  rows.forEach((r, i) => { const y = 132 + i * 66; body += text(420, y, r[0], col[r[0]], 30) + text(490, y, "&", C.ink, 30) + text(526, y, r[1], col[r[1]], 30) + text(640, y, r[2], C.ink, 30, 'font-weight="700"'); });
+  body += text(420, 360, "Unknown on top: multiply.", C.ink, 26) + text(420, 400, "Unknown on the bottom: divide.", C.ink, 26);
+  diagrams["choose-ratio"] = svg(820, 430, "Choosing the ratio", "A right triangle with angle theta and its sides colored: adjacent blue, opposite teal, hypotenuse orange. A table pairs the two sides in a problem with a ratio: hypotenuse and opposite use sine, hypotenuse and adjacent use cosine, adjacent and opposite use tangent. Below: if the unknown is in the numerator, multiply; if it is in the denominator, divide.", body);
+}
+
+/* Unit 3A practice: a ramp rises 2 ft at 10 degrees; the ramp length is unknown (givens only). */
+{
+  const rise = 2, ang = 10, L = rise / Math.sin(rad(ang)), run = L * Math.cos(rad(ang)), k = 600 / run;
+  const A = [70, 300], Cc = [70 + run * k, 300], B = [70 + run * k, 300 - rise * k];
+  let body = poly([A, Cc, B], C.softTeal) + rightMark(Cc, A, B, 18) + line(A, B, C.orange, 9);
+  body += thetaMark(A, 0, ang, 120, "10°", C.ink, 28);
+  body += text(Cc[0] + 14, (Cc[1] + B[1]) / 2 + 10, "2 ft", C.teal, 28) + text((A[0] + B[0]) / 2 - 40, (A[1] + B[1]) / 2 - 26, "ramp = ?", C.orange, 30, italic);
+  body += text(70, 360, "Drawn to scale: a 10° ramp is long and low.", C.muted, 24);
+  diagrams["ramp"] = svg(760, 390, "A ramp rising 2 feet at 10 degrees", "A long, low right triangle drawn to scale. The ramp is the hypotenuse, marked with a question mark. It makes a 10 degree angle with the ground and rises 2 feet.", body);
+}
+
+/* Unit 3A model: the handout's tower, 40 and 55 degrees from points 50 ft apart. */
+{
+  const t = twoTriangles(40, 55, 50, { showH: "h", showD: "d" });
+  diagrams["two-triangles"] = svg(760, 470, "Two right triangles that share a height", "A tower of height h. From a far point the angle of elevation is 40 degrees; from a point 50 feet closer it is 55 degrees. The near point is d feet from the base. Both triangles share the height h. Drawn to scale.", t.body);
+}
+
 function build() {
   fs.mkdirSync(out, { recursive: true });
   for (const [name, xml] of Object.entries(diagrams)) fs.writeFileSync(path.join(out, `${name}.svg`), xml, "utf8");
   console.log(`Built ${Object.keys(diagrams).length} Unit 3A mathematical diagrams.`);
 }
 if (require.main === module) build();
-module.exports = { diagrams, build };
+module.exports = { diagrams, build, helpers: { C, svg, line, arrowLine, poly, text, centered, italic, dash, at, arc, rightMark, rightTriangle, triangleBody, thetaMark, twoTriangles, rad, f } };
