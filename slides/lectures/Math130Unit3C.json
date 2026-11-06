@@ -4,7 +4,7 @@
   "deck": {
     "id": "Math130Unit3C",
     "title": "Right Triangle Applications",
-    "section": "Module 12",
+    "section": "Unit 3C",
     "source": "Math130Unit3C.pptx",
     "canonical": true
   },
@@ -69,7 +69,7 @@
           "source_slides": [],
           "content": [
             "Concepts, worked examples, student practice, and synthesis",
-            "Module 12"
+            "Unit 3C"
           ]
         },
         {
@@ -112,7 +112,7 @@
         },
         {
           "id": "math130unit3c-u3c-model-explain",
-          "title": "model one-triangle applications with SOH-CAH-TOA",
+          "title": "One right triangle: read, draw, label, solve, check",
           "phase": "explain",
           "component": "concept",
           "objectives": [
@@ -146,7 +146,7 @@
             "A 20 ft ladder makes a $65^\\circ$ angle with the ground. Find the height.",
             "$\\sin65^\\circ=h/20$.",
             "$h=20\\sin65^\\circ\\approx18.13$ ft.",
-            "The result agrees with the corrected diagram and is less than 20 ft."
+            "The height is less than the 20 ft ladder, as it must be."
           ],
           "instructor_notes": [],
           "verification": [
@@ -155,7 +155,7 @@
           "steps": [
             "$\\sin65^\\circ=h/20$.",
             "$h=20\\sin65^\\circ\\approx18.13$ ft.",
-            "The result agrees with the corrected diagram and is less than 20 ft."
+            "The height is less than the 20 ft ladder, as it must be."
           ],
           "audit_checks": [
             "u3c-model"
@@ -185,9 +185,19 @@
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
-          "verification": [],
+          "verification": [
+            "Check the labeled geometry and accessibility text of surveyor.svg."
+          ],
           "answer": [
             "$h=80\\tan42^\\circ\\approx72.0$ ft."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3c/visuals/surveyor.svg",
+              "alt": "A surveyor stands 80 feet from a building and sights the top at a 42 degree angle of elevation. The building height h is unknown. Drawn to scale.",
+              "caption": "The building height h is opposite the 42° angle."
+            }
           ]
         },
         {
@@ -254,7 +264,7 @@
         },
         {
           "id": "math130unit3c-u3c-motion-explain",
-          "title": "apply elevation, depression, and motion components",
+          "title": "Elevation, depression and components",
           "phase": "explain",
           "component": "formula",
           "objectives": [
@@ -288,7 +298,8 @@
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify elevation/depression and motion-component calculations."
+            "Verify elevation/depression and motion-component calculations.",
+            "Check the labeled geometry and accessibility text of vector-components.svg."
           ],
           "steps": [
             "East component: $300\\cos25^\\circ\\approx271.89$ mi.",
@@ -297,6 +308,14 @@
           ],
           "audit_checks": [
             "u3c-motion"
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3c/visuals/vector-components.svg",
+              "alt": "An orange arrow 300 miles long points 25 degrees north of east. A blue arrow along the east axis, about 271.89 miles, and a teal arrow north, about 126.79 miles, complete a right triangle. Drawn to scale.",
+              "caption": "The two components form the legs of a right triangle."
+            }
           ]
         },
         {
@@ -312,14 +331,14 @@
             10
           ],
           "content": [
-            "A vehicle travels 300 miles at 25° north of east. Find east and north components."
+            "A plane flies 450 miles at 35° north of east. Find its east and north components."
           ],
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
           "verification": [],
           "answer": [
-            "East: $300\\cos25^\\circ\\approx271.9$ mi; north: $300\\sin25^\\circ\\approx126.8$ mi."
+            "East: $450\\cos35^\\circ\\approx368.62$ mi; north: $450\\sin35^\\circ\\approx258.11$ mi."
           ]
         },
         {
@@ -384,7 +403,7 @@
         },
         {
           "id": "math130unit3c-u3c-two-explain",
-          "title": "solve complete and two-triangle application problems",
+          "title": "Solving complete and two-triangle problems",
           "phase": "explain",
           "component": "concept",
           "objectives": [
@@ -419,7 +438,8 @@
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify complete-triangle and two-triangle algebra and units."
+            "Verify complete-triangle and two-triangle algebra and units.",
+            "Check the labeled geometry and accessibility text of two-towers.svg."
           ],
           "steps": [
             "$h=d\\tan53^\\circ=(d+50)\\tan31^\\circ$.",
@@ -428,6 +448,14 @@
           ],
           "audit_checks": [
             "u3c-two"
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3c/visuals/two-towers.svg",
+              "alt": "A tower of height h seen from two points 50 feet apart. From the far point the angle of elevation is 31 degrees; from the near point, d feet from the base, it is 53 degrees. Drawn to scale.",
+              "caption": "Drawn to scale. The near point is d feet from the base."
+            }
           ]
         },
         {
@@ -444,14 +472,24 @@
             16
           ],
           "content": [
-            "Set up, but do not immediately solve, a two-observation tower problem with a 50 ft gap."
+            "Two points are 60 ft apart. From the far point the angle of elevation to the top of a building is 27°; from the near point it is 48°. Set up both equations, then find $d$ and $h$."
           ],
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
-          "verification": [],
+          "verification": [
+            "Verify d about 50.86 ft and h about 56.49 ft; check two-towers-practice.svg."
+          ],
           "answer": [
-            "Closer: $\\tan53^\\circ=h/d$; farther: $\\tan31^\\circ=h/(d+50)$."
+            "$\\tan48^\\circ=h/d$ and $\\tan27^\\circ=h/(d+60)$, so $d=\\dfrac{60\\tan27^\\circ}{\\tan48^\\circ-\\tan27^\\circ}\\approx50.86$ ft and $h\\approx56.49$ ft."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3c/visuals/two-towers-practice.svg",
+              "alt": "A building of unknown height h seen from two points 60 feet apart. From the far point the angle of elevation is 27 degrees; from the near point, d feet from the base, it is 48 degrees. Drawn to scale.",
+              "caption": "Givens only: find d and h."
+            }
           ]
         },
         {
@@ -467,7 +505,7 @@
             17
           ],
           "content": [
-            "Keep d and d+50 attached to the correct observation points.",
+            "Keep $d$ and $d+50$ attached to the correct observation points.",
             "Show the algebraic distribution step before dividing."
           ],
           "instructor_notes": [
