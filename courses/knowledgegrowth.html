@@ -1,346 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-  <!-- This tool is designed for light mode only; theme.js keeps it light and hides the theme button. -->
-  <meta name="color-scheme" content="light">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knowledge Growth Review | MATH 114 | Prof. Volk's Office</title>
-    <meta name="description" content="MATH 114 interactive quiz prep comparing linear, exponential, and logistic growth models.">
-    <link rel="canonical" href="https://andrewhvolk.github.io/courses/knowledgegrowth.html">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <!-- Tailwind CSS v3.4.17, precompiled for this page so it needs no runtime script or CDN. -->
-    <style id="tailwind-precompiled">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width:640px){.container{max-width:640px}}@media (min-width:768px){.container{max-width:768px}}@media (min-width:1024px){.container{max-width:1024px}}@media (min-width:1280px){.container{max-width:1280px}}@media (min-width:1536px){.container{max-width:1536px}}.visible{visibility:visible}.fixed{position:fixed}.mx-auto{margin-left:auto;margin-right:auto}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-4{margin-left:1rem}.ml-6{margin-left:1.5rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.block{display:block}.hidden{display:none}.max-w-4xl{max-width:56rem}.list-inside{list-style-position:inside}.list-decimal{list-style-type:decimal}.list-disc{list-style-type:disc}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.rounded{border-radius:.25rem}.rounded-lg{border-radius:.5rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-blue-100{--tw-border-opacity:1;border-color:rgb(219 234 254/var(--tw-border-opacity,1))}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235/var(--tw-border-opacity,1))}.border-green-100{--tw-border-opacity:1;border-color:rgb(220 252 231/var(--tw-border-opacity,1))}.border-indigo-100{--tw-border-opacity:1;border-color:rgb(224 231 255/var(--tw-border-opacity,1))}.border-lime-100{--tw-border-opacity:1;border-color:rgb(236 252 203/var(--tw-border-opacity,1))}.border-orange-100{--tw-border-opacity:1;border-color:rgb(255 237 213/var(--tw-border-opacity,1))}.border-pink-100{--tw-border-opacity:1;border-color:rgb(252 231 243/var(--tw-border-opacity,1))}.border-purple-100{--tw-border-opacity:1;border-color:rgb(243 232 255/var(--tw-border-opacity,1))}.border-red-100{--tw-border-opacity:1;border-color:rgb(254 226 226/var(--tw-border-opacity,1))}.border-teal-100{--tw-border-opacity:1;border-color:rgb(204 251 241/var(--tw-border-opacity,1))}.border-yellow-100{--tw-border-opacity:1;border-color:rgb(254 249 195/var(--tw-border-opacity,1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255/var(--tw-bg-opacity,1))}.bg-blue-500{--tw-bg-opacity:1;background-color:rgb(59 130 246/var(--tw-bg-opacity,1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246/var(--tw-bg-opacity,1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235/var(--tw-bg-opacity,1))}.bg-green-50{--tw-bg-opacity:1;background-color:rgb(240 253 244/var(--tw-bg-opacity,1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94/var(--tw-bg-opacity,1))}.bg-indigo-50{--tw-bg-opacity:1;background-color:rgb(238 242 255/var(--tw-bg-opacity,1))}.bg-indigo-500{--tw-bg-opacity:1;background-color:rgb(99 102 241/var(--tw-bg-opacity,1))}.bg-lime-50{--tw-bg-opacity:1;background-color:rgb(247 254 231/var(--tw-bg-opacity,1))}.bg-lime-500{--tw-bg-opacity:1;background-color:rgb(132 204 22/var(--tw-bg-opacity,1))}.bg-orange-50{--tw-bg-opacity:1;background-color:rgb(255 247 237/var(--tw-bg-opacity,1))}.bg-orange-500{--tw-bg-opacity:1;background-color:rgb(249 115 22/var(--tw-bg-opacity,1))}.bg-pink-50{--tw-bg-opacity:1;background-color:rgb(253 242 248/var(--tw-bg-opacity,1))}.bg-pink-500{--tw-bg-opacity:1;background-color:rgb(236 72 153/var(--tw-bg-opacity,1))}.bg-purple-50{--tw-bg-opacity:1;background-color:rgb(250 245 255/var(--tw-bg-opacity,1))}.bg-purple-500{--tw-bg-opacity:1;background-color:rgb(168 85 247/var(--tw-bg-opacity,1))}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242/var(--tw-bg-opacity,1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68/var(--tw-bg-opacity,1))}.bg-teal-50{--tw-bg-opacity:1;background-color:rgb(240 253 250/var(--tw-bg-opacity,1))}.bg-teal-500{--tw-bg-opacity:1;background-color:rgb(20 184 166/var(--tw-bg-opacity,1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232/var(--tw-bg-opacity,1))}.bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8/var(--tw-bg-opacity,1))}.p-3{padding:.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-4{padding-bottom:1rem}.pl-4{padding-left:1rem}.text-center{text-align:center}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-semibold{font-weight:600}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235/var(--tw-text-opacity,1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175/var(--tw-text-opacity,1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81/var(--tw-text-opacity,1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55/var(--tw-text-opacity,1))}.text-green-700{--tw-text-opacity:1;color:rgb(21 128 61/var(--tw-text-opacity,1))}.text-green-800{--tw-text-opacity:1;color:rgb(22 101 52/var(--tw-text-opacity,1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229/var(--tw-text-opacity,1))}.text-indigo-700{--tw-text-opacity:1;color:rgb(67 56 202/var(--tw-text-opacity,1))}.text-indigo-800{--tw-text-opacity:1;color:rgb(55 48 163/var(--tw-text-opacity,1))}.text-lime-700{--tw-text-opacity:1;color:rgb(77 124 15/var(--tw-text-opacity,1))}.text-lime-800{--tw-text-opacity:1;color:rgb(63 98 18/var(--tw-text-opacity,1))}.text-orange-800{--tw-text-opacity:1;color:rgb(154 52 18/var(--tw-text-opacity,1))}.text-pink-600{--tw-text-opacity:1;color:rgb(219 39 119/var(--tw-text-opacity,1))}.text-pink-800{--tw-text-opacity:1;color:rgb(157 23 77/var(--tw-text-opacity,1))}.text-purple-700{--tw-text-opacity:1;color:rgb(126 34 206/var(--tw-text-opacity,1))}.text-purple-800{--tw-text-opacity:1;color:rgb(107 33 168/var(--tw-text-opacity,1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28/var(--tw-text-opacity,1))}.text-red-800{--tw-text-opacity:1;color:rgb(153 27 27/var(--tw-text-opacity,1))}.text-teal-700{--tw-text-opacity:1;color:rgb(15 118 110/var(--tw-text-opacity,1))}.text-teal-800{--tw-text-opacity:1;color:rgb(17 94 89/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-yellow-700{--tw-text-opacity:1;color:rgb(161 98 7/var(--tw-text-opacity,1))}.text-yellow-800{--tw-text-opacity:1;color:rgb(133 77 14/var(--tw-text-opacity,1))}.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color)}.shadow,.shadow-md{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235/var(--tw-bg-opacity,1))}.hover\:bg-green-600:hover{--tw-bg-opacity:1;background-color:rgb(22 163 74/var(--tw-bg-opacity,1))}.hover\:bg-indigo-600:hover{--tw-bg-opacity:1;background-color:rgb(79 70 229/var(--tw-bg-opacity,1))}.hover\:bg-lime-600:hover{--tw-bg-opacity:1;background-color:rgb(101 163 13/var(--tw-bg-opacity,1))}.hover\:bg-orange-600:hover{--tw-bg-opacity:1;background-color:rgb(234 88 12/var(--tw-bg-opacity,1))}.hover\:bg-pink-600:hover{--tw-bg-opacity:1;background-color:rgb(219 39 119/var(--tw-bg-opacity,1))}.hover\:bg-purple-600:hover{--tw-bg-opacity:1;background-color:rgb(147 51 234/var(--tw-bg-opacity,1))}.hover\:bg-red-600:hover{--tw-bg-opacity:1;background-color:rgb(220 38 38/var(--tw-bg-opacity,1))}.hover\:bg-teal-600:hover{--tw-bg-opacity:1;background-color:rgb(13 148 136/var(--tw-bg-opacity,1))}.hover\:bg-yellow-600:hover{--tw-bg-opacity:1;background-color:rgb(202 138 4/var(--tw-bg-opacity,1))}@media (min-width:768px){.md\:py-8{padding-top:2rem;padding-bottom:2rem}}</style>
-    <style>
-        /* Add a little extra spacing for list items inside answers */
-        .answer-content ul li, .answer-content ol li {
-            margin-bottom: 0.5rem; /* 8px */
-        }
-        /* Style for the reveal buttons */
-        .reveal-button {
-            transition: background-color 0.2s ease-in-out;
-        }
-    </style>
-
-    <link rel="stylesheet" href="/styles.css">
-    <script src="../theme.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growth Models Review | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 self-check review of linear, exponential and logistic growth: doubling time, the Rule of 70, half-life, percent decay and rates, with answer checking and fresh numbers.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/knowledgegrowth.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prof. Volk's Office">
+  <meta property="og:title" content="MATH 114 Growth Models Review">
+  <meta property="og:description" content="Check your answers on linear, exponential and logistic growth, doubling time, the Rule of 70 and half-life.">
+  <meta property="og:url" content="https://andrewhvolk.github.io/courses/knowledgegrowth.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/theme.js" defer></script>
+  <style>
+    .gr-wrap { max-width: 860px; margin: 0 auto; }
+    .gr-toolbar { position: sticky; top: calc(var(--gr-bar-h, 56px) + 0.5rem); z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; padding: 0.7rem 1rem; margin: 0 0 1.25rem; background: color-mix(in srgb, var(--bg-surface) 94%, transparent); backdrop-filter: blur(6px); border: 1px solid var(--border-subtle); border-radius: 0.75rem; }
+    .gr-progress { flex: 1 1 220px; min-width: 200px; }
+    .gr-progress__label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .gr-progress__label strong { color: var(--text-main); }
+    .gr-bar { height: 0.55rem; border-radius: 999px; background: color-mix(in srgb, var(--text-muted) 18%, transparent); overflow: hidden; display: flex; }
+    .gr-bar span { display: block; height: 100%; transition: width 0.25s ease; }
+    .gr-bar .is-correct { background: var(--emerald-main); }
+    .gr-bar .is-shown { background: var(--warning-main); }
+    .gr-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .gr-actions .button { padding: 0.45rem 0.85rem; font-size: 0.9rem; }
+    .gr-filter { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1rem; }
+    .gr-chip { border: 1px solid var(--border-subtle); background: var(--bg-surface); color: var(--text-main); border-radius: 999px; padding: 0.3rem 0.8rem; font: inherit; font-size: 0.88rem; cursor: pointer; }
+    .gr-chip[aria-pressed="true"] { background: var(--primary-main); border-color: var(--primary-main); color: #fff; }
+    .gr-ref { border: 1px solid var(--border-subtle); border-radius: 0.75rem; background: var(--bg-surface); margin: 0 0 1.5rem; }
+    .gr-ref > summary { cursor: pointer; padding: 0.8rem 1.1rem; font-weight: 700; color: var(--primary-main); }
+    .gr-ref__body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 15rem); gap: 1rem 1.5rem; padding: 0 1.1rem 1rem; align-items: start; }
+    .gr-ref dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 0.35rem 0.9rem; font-size: 0.95rem; }
+    .gr-ref dt { font-weight: 700; }
+    .gr-ref dd { margin: 0; font-family: var(--type-meta-family); }
+    .gr-ref figure { margin: 0; }
+    .gr-ref figcaption { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.3rem; }
+    .gr-topic { margin: 1.75rem 0 0.6rem; font-size: 1.15rem; color: var(--text-main); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.35rem; }
+    .gr-item { border: 1px solid var(--border-subtle); border-left: 4px solid var(--border-subtle); border-radius: 0.6rem; background: var(--bg-surface); padding: 0.9rem 1.1rem; margin: 0 0 0.85rem; }
+    .gr-item[data-status="correct"] { border-left-color: var(--emerald-main); }
+    .gr-item[data-status="shown"] { border-left-color: var(--warning-main); }
+    .gr-item[data-status="review"] { border-left-color: var(--danger-main); }
+    .gr-item h3 { margin: 0 0 0.4rem; font-size: 1rem; display: flex; gap: 0.6rem; align-items: baseline; flex-wrap: wrap; }
+    .gr-num { color: var(--primary-main); font-variant-numeric: tabular-nums; }
+    .gr-badge { margin-left: auto; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.02em; padding: 0.1rem 0.5rem; border-radius: 999px; }
+    .gr-badge:empty { display: none; }
+    .gr-item[data-status="correct"] .gr-badge { color: var(--emerald-main); border: 1px solid var(--emerald-main); }
+    .gr-item[data-status="shown"] .gr-badge { color: var(--warning-main); border: 1px solid var(--warning-main); }
+    .gr-item[data-status="review"] .gr-badge { color: var(--danger-main); border: 1px solid var(--danger-main); }
+    .gr-prompt { margin: 0 0 0.6rem; line-height: 1.6; }
+    .gr-parts { display: grid; gap: 0.6rem; margin: 0 0 0.6rem; }
+    .gr-part { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; }
+    .gr-part > label, .gr-part > .gr-part__label { font-weight: 600; }
+    .gr-part input[type="text"] { width: 9.5rem; padding: 0.35rem 0.55rem; border: 1px solid var(--border-subtle); border-radius: 0.4rem; background: var(--bg-surface); color: var(--text-main); font: inherit; }
+    .gr-choices { display: flex; flex-wrap: wrap; gap: 0.35rem; border: 0; padding: 0; margin: 0; }
+    .gr-choices legend { font-weight: 600; margin-bottom: 0.3rem; width: 100%; }
+    .gr-choice { display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid var(--border-subtle); border-radius: 0.4rem; padding: 0.3rem 0.65rem; cursor: pointer; }
+    .gr-choice:has(input:checked) { border-color: var(--primary-main); background: color-mix(in srgb, var(--primary-main) 10%, var(--bg-surface)); }
+    .gr-unit { color: var(--text-muted); }
+    .gr-mark { font-weight: 700; font-size: 0.9rem; }
+    .gr-mark.ok { color: var(--emerald-main); }
+    .gr-mark.no { color: var(--danger-main); }
+    .gr-controls { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .gr-controls .button { padding: 0.35rem 0.8rem; font-size: 0.9rem; }
+    .gr-feedback { font-size: 0.92rem; min-height: 1.2em; }
+    .gr-solution { margin-top: 0.75rem; padding: 0.7rem 0.95rem; border-radius: 0.5rem; background: color-mix(in srgb, var(--primary-main) 7%, var(--bg-surface)); border-left: 3px solid var(--primary-main); line-height: 1.6; }
+    .gr-solution ol, .gr-solution ul { margin: 0.3rem 0 0.4rem 1.25rem; }
+    .gr-solution .gr-final { font-weight: 700; margin: 0.35rem 0 0; }
+    .gr-selfcheck { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-top: 0.6rem; font-size: 0.92rem; }
+    .gr-formula { font-family: var(--type-meta-family); }
+    .gr-empty { color: var(--text-muted); font-style: italic; }
+    .gr-svg text { font-family: var(--type-body-family); fill: var(--text-muted); font-size: 11px; }
+    @media (max-width: 640px) { .gr-ref__body { grid-template-columns: 1fr; } .gr-toolbar { position: static; } }
+    @media print {
+      .course-bar, .site-footer, .gr-toolbar, .gr-filter, .gr-controls, .gr-selfcheck, .page-actions, .skip-to-main { display: none !important; }
+      .gr-item { break-inside: avoid; border-left-width: 1px; }
+      .gr-ref[open] { break-inside: avoid; }
+      .gr-part input[type="text"] { border: 0; border-bottom: 1px solid #000; border-radius: 0; }
+    }
+  </style>
 </head>
-<body class="bg-gray-100">
+<body>
+<a class="skip-to-main" href="#main-content">Skip to main content</a>
 <nav class="course-bar" aria-label="Site">
   <div class="course-bar__inner">
-    <a class="course-bar__back" href="/courses/math114.html"><span aria-hidden="true">&larr;</span> MATH 114</a>
+    <a class="course-bar__back" href="/courses/math114.html#module-11"><span aria-hidden="true">&larr;</span> MATH 114</a>
     <a class="course-bar__home" href="/">Andrew H. Volk</a>
     <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="Toggle Theme"></button>
   </div>
 </nav>
-<header class="course-header course-header--unit">
-  <div class="container">
-    <h1>Knowledge Growth Review</h1>
-    <p class="subtitle">Interactive MATH 114 quiz-prep prompts for comparing linear, exponential, and logistic growth models.</p>
+
+<header class="page-hero">
+  <div class="page-hero__inner">
+    <p class="page-hero__eyebrow">MATH 114 · Modules 11 and 14 review</p>
+    <h1>Growth Models Review</h1>
+    <p class="page-hero__lede">Eighteen self-check questions on linear, exponential and logistic growth. Enter an answer and check it, or work the problem on paper and compare with the solution. Choose New numbers for a fresh set of the same problems.</p>
+    <div class="page-actions">
+      <a href="#review" class="button">Start the review</a>
+      <a href="math114-module11.html" class="button button-secondary">Module 11 notes</a>
+    </div>
   </div>
 </header>
-<main class="container course-page py-6 md:py-8">
 
-    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h1 class="text-3xl font-bold text-center text-indigo-700 mb-8 border-b pb-4">Math Quiz Prep: Linear, Exponential & Logistic Growth</h1>
+<main id="main-content" class="site-main">
+  <div class="gr-wrap">
+    <details class="gr-ref" id="reference">
+      <summary>Formula reference</summary>
+      <div class="gr-ref__body">
+        <dl>
+          <dt>Linear</dt><dd>y = y₀ + m·t (adds the same amount)</dd>
+          <dt>Exponential</dt><dd>A = P·(1 + r)<sup>t</sup> (multiplies by the same factor)</dd>
+          <dt>Doubling</dt><dd>A = P·2<sup>t/T</sup>, T = doubling time</dd>
+          <dt>Half-life</dt><dd>A = P·(½)<sup>t/H</sup>, H = half-life</dd>
+          <dt>Percent decay</dt><dd>A = P·(1 − r)<sup>t</sup></dd>
+          <dt>Rule of 70</dt><dd>T ≈ 70 ÷ (percent rate), reliable below about 15%</dd>
+          <dt>Exact doubling</dt><dd>T = ln 2 ÷ ln(1 + r)</dd>
+          <dt>Logistic</dt><dd>S-shaped; levels off at the carrying capacity K</dd>
+        </dl>
+        <figure>
+          <svg class="gr-svg" viewBox="0 0 240 170" role="img" aria-labelledby="ref-fig-title">
+            <title id="ref-fig-title">Linear, exponential and logistic growth from the same starting value. The line rises steadily, the exponential curve bends upward ever more steeply, and the logistic curve rises in an S shape and levels off at the dashed carrying capacity K.</title>
+            <line x1="30" y1="150" x2="232" y2="150" stroke="currentColor" stroke-opacity="0.45"/>
+            <line x1="30" y1="150" x2="30" y2="8" stroke="currentColor" stroke-opacity="0.45"/>
+            <line x1="30" y1="38" x2="232" y2="38" stroke="var(--danger-main)" stroke-dasharray="5 4"/>
+            <text x="214" y="33">K</text>
+            <polyline id="ref-linear" fill="none" stroke="var(--primary-main)" stroke-width="2.5"/>
+            <polyline id="ref-exp" fill="none" stroke="var(--warning-main)" stroke-width="2.5"/>
+            <polyline id="ref-log" fill="none" stroke="var(--emerald-main)" stroke-width="2.5"/>
+            <text x="170" y="104" style="fill:var(--primary-main)">linear</text>
+            <text x="112" y="22" style="fill:var(--warning-main)">exponential</text>
+            <text x="150" y="58" style="fill:var(--emerald-main)">logistic</text>
+            <text x="212" y="164">time</text>
+          </svg>
+          <figcaption>Same start, three kinds of growth.</figcaption>
+        </figure>
+      </div>
+    </details>
 
-        <div class="question-block bg-blue-50 p-4 rounded-lg mb-6 shadow-sm border border-blue-100">
-            <h2 class="text-xl font-bold text-blue-800 mb-3">1. Defining Growth Types</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> Explain the fundamental difference between how a quantity changes in linear growth versus exponential growth.</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Answer:</p>
-                <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
-                    <li><strong>Linear Growth:</strong> Adds a <strong class="text-blue-600">constant amount</strong> per time unit. The rate of change is constant. Example: Saving exactly $50 each month.</li>
-                    <li><strong>Exponential Growth:</strong> Multiplies by a <strong class="text-blue-600">constant factor</strong> (or percentage) per time unit. The rate of change increases as the quantity increases. Example: A population growing by 5% each year.</li>
-                </ul>
-            </div>
-        </div>
+    <div class="gr-toolbar" role="region" aria-label="Review progress and tools">
+      <div class="gr-progress">
+        <div class="gr-progress__label" id="progress-label" aria-live="polite"><strong>0 of 18</strong> correct</div>
+        <div class="gr-bar" aria-hidden="true"><span class="is-correct" id="bar-correct" style="width:0"></span><span class="is-shown" id="bar-shown" style="width:0"></span></div>
+      </div>
+      <div class="gr-actions">
+        <button type="button" class="button" id="new-numbers">New numbers</button>
+        <button type="button" class="button button-secondary" id="reset">Start over</button>
+        <button type="button" class="button button-secondary" id="print">Print</button>
+      </div>
+    </div>
 
-        <div class="question-block bg-green-50 p-4 rounded-lg mb-6 shadow-sm border border-green-100">
-             <h2 class="text-xl font-bold text-green-800 mb-3">2. Identifying Growth Type</h2>
-             <p class="mb-2 text-gray-700"><strong>Question:</strong> Identify the growth type for each scenario:</p>
-             <button class="reveal-button mt-2 px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 text-sm shadow">Reveal Answer</button>
-             <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200 space-y-3">
-                 <div>
-                     <p><strong>Scenario A:</strong> A town's population increases by 1,000 people every year.</p>
-                     <p class="pl-4 text-gray-700"><strong>Answer:</strong> <span class="font-semibold text-green-700">Linear</span> (constant amount added).</p>
-                 </div>
-                 <div>
-                     <p><strong>Scenario B:</strong> A company's profit increases by 12% each year.</p>
-                     <p class="pl-4 text-gray-700"><strong>Answer:</strong> <span class="font-semibold text-green-700">Exponential</span> (constant percentage increase).</p>
-                 </div>
-             </div>
-        </div>
+    <div class="gr-filter" role="group" aria-label="Show questions">
+      <button type="button" class="gr-chip" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="gr-chip" data-filter="todo" aria-pressed="false">Not yet correct</button>
+      <button type="button" class="gr-chip" data-filter="review" aria-pressed="false">Marked to review</button>
+    </div>
 
-        <div class="question-block bg-yellow-50 p-4 rounded-lg mb-6 shadow-sm border border-yellow-100">
-            <h2 class="text-xl font-bold text-yellow-800 mb-3">3. Calculating Exponential Growth</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> A mold culture starts with 50 spores and doubles every 6 hours. How many spores will there be after 24 hours?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>Determine the number of doubling periods: 24 hours / 6 hours/period = 4 periods.</li>
-                    <li>Calculate the final amount: Initial Amount × (Factor)^(Number of Periods)</li>
-                    <li>Calculation: <code class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">50 × (2)⁴ = 50 × 16 = 800</code> spores.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: There will be <strong class="text-yellow-700">800</strong> spores after 24 hours.</p>
-            </div>
-        </div>
+    <div id="review" aria-live="off"></div>
+    <noscript><p>This review needs JavaScript to check answers. The <a href="math114-module11.html">Module 11 notes</a> work through the same ideas.</p></noscript>
+  </div>
 
-        <div class="question-block bg-purple-50 p-4 rounded-lg mb-6 shadow-sm border border-purple-100">
-            <h2 class="text-xl font-bold text-purple-800 mb-3">4. Using the Rule of 70</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> If an investment is growing at an average rate of 5% per year, use the Rule of 70 to estimate how long it will take for the investment to double.</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                 <p class="font-semibold text-gray-800">Formula:</p>
-                 <p class="ml-4 text-gray-700">Doubling Time ≈ 70 / (percentage growth rate)</p>
-                 <p class="font-semibold text-gray-800 mt-2">Calculation:</p>
-                 <p class="ml-4 text-gray-700"><code class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">70 / 5 = 14</code></p>
-                 <p class="mt-3 font-semibold text-gray-800">Answer: It will take approximately <strong class="text-purple-700">14 years</strong> to double.</p>
-             </div>
-        </div>
-
-        <div class="question-block bg-red-50 p-4 rounded-lg mb-6 shadow-sm border border-red-100">
-             <h2 class="text-xl font-bold text-red-800 mb-3">5. Understanding Carrying Capacity</h2>
-             <p class="mb-2 text-gray-700"><strong>Question:</strong> Imagine deer living in a forest. What factors might limit the deer population from growing infinitely? What term do we use for the maximum sustainable population size in that environment?</p>
-             <button class="reveal-button mt-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm shadow">Reveal Answer</button>
-             <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                 <p class="font-semibold text-gray-800">Answer:</p>
-                 <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
-                     <li><strong>Limiting Factors:</strong> Availability of food, water, space; presence of predators; disease.</li>
-                     <li><strong>Term:</strong> The maximum sustainable population size is called the <strong class="text-red-700">carrying capacity (K)</strong>.</li>
-                     <li>Logistic growth models populations that are limited by carrying capacity.</li>
-                 </ul>
-             </div>
-         </div>
-
-        <div class="question-block bg-indigo-50 p-4 rounded-lg mb-6 shadow-sm border border-indigo-100">
-            <h2 class="text-xl font-bold text-indigo-800 mb-3">6. Comparing Doubling Time Formulas</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> When might it be acceptable to use the quick estimate from the Rule of 70, and when might you need a more precise formula (using logarithms)?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Answer:</p>
-                <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
-                    <li><strong>Rule of 70:</strong> Good for <strong class="text-indigo-600">quick mental estimates</strong>, especially for common growth rates (e.g., 1% to 10%). It's an approximation.</li>
-                    <li><strong>Precise Formula (e.g., ln(2)/ln(1+r)):</strong> Needed for <strong class="text-indigo-600">accurate calculations</strong>, scientific work, or when dealing with very high or very low growth rates where the Rule of 70 is less accurate.</li>
-                 </ul>
-            </div>
-        </div>
-
-        <div class="question-block bg-pink-50 p-4 rounded-lg mb-6 shadow-sm border border-pink-100">
-            <h2 class="text-xl font-bold text-pink-800 mb-3">7. Explaining Logistic Growth</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> Describe the shape of a logistic growth curve. What happens to the growth rate during the different phases?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-pink-500 text-white rounded hover:bg-pink-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Answer:</p>
-                 <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
-                    <li><strong>Shape:</strong> It's an <strong class="text-pink-600">S-shaped curve</strong>.</li>
-                    <li><strong>Phases & Growth Rate:</strong>
-                        <ul class="list-circle list-inside ml-6 mt-1">
-                            <li>Starts slow (initial small population).</li>
-                            <li>Accelerates to a maximum growth rate (resembles exponential growth phase).</li>
-                            <li>Slows down as it approaches the carrying capacity (resource limitation).</li>
-                            <li>Levels off at the carrying capacity (growth rate approaches zero).</li>
-                        </ul>
-                    </li>
-                 </ul>
-            </div>
-        </div>
-
-        <div class="question-block bg-teal-50 p-4 rounded-lg mb-6 shadow-sm border border-teal-100">
-            <h2 class="text-xl font-bold text-teal-800 mb-3">8. Calculating Population Growth Rate</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> A country has 25 births per 1,000 people and 10 deaths per 1,000 people annually. What is its natural population growth rate as a percentage?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-teal-500 text-white rounded hover:bg-teal-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>Find the net increase per 1,000 people: Birth Rate - Death Rate = 25 - 10 = 15 per 1,000.</li>
-                    <li>Convert this rate to a decimal: 15 / 1000 = 0.015.</li>
-                    <li>Convert the decimal to a percentage: 0.015 × 100% = 1.5%.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: The population growth rate is <strong class="text-teal-700">1.5%</strong> per year.</p>
-            </div>
-        </div>
-
-         <div class="question-block bg-orange-50 p-4 rounded-lg mb-6 shadow-sm border border-orange-100">
-            <h2 class="text-xl font-bold text-orange-800 mb-3">9. Applying Growth Concepts</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> Give one real-world example where linear growth might be a suitable model, and one where exponential growth is more appropriate (at least initially).</p>
-             <button class="reveal-button mt-2 px-3 py-1 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm shadow">Reveal Answer</button>
-             <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Answer Examples:</p>
-                <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
-                    <li><strong>Linear:</strong> Water level rising in a cylindrical tank being filled at a constant rate; Salary increasing by a fixed amount ($2000) each year.</li>
-                    <li><strong>Exponential:</strong> Compound interest earned on savings; The initial spread of a virus in a large, susceptible population; Bacteria population doubling under ideal conditions.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="question-block bg-lime-50 p-4 rounded-lg mb-6 shadow-sm border border-lime-100">
-            <h2 class="text-xl font-bold text-lime-800 mb-3">10. Exponential Calculation Practice</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> If you start with $500 and it grows by 8% each year, how much money will you have after 3 years?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-lime-500 text-white rounded hover:bg-lime-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution Method 1 (Step-by-step):</p>
-                <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
-                    <li>Year 1: <code class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">$500 × 1.08 = $540</code></li>
-                    <li>Year 2: <code class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">$540 × 1.08 = $583.20</code></li>
-                    <li>Year 3: <code class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">$583.20 × 1.08 = $629.856</code></li>
-                </ul>
-                 <p class="mt-3 font-semibold text-gray-800">Solution Method 2 (Formula):</p>
-                 <p class="ml-4 text-gray-700">Amount = Principal × (1 + rate)^time</p>
-                 <p class="ml-4 text-gray-700">Amount = <code class="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">$500 × (1 + 0.08)³ = $500 × (1.08)³ ≈ $500 × 1.259712 ≈ $629.856</code></p>
-                 <p class="mt-3 font-semibold text-gray-800">Answer: You will have approximately <strong class="text-lime-700">$629.86</strong> after 3 years.</p>
-            </div>
-        </div>
-
-        <div class="question-block bg-blue-50 p-4 rounded-lg mb-6 shadow-sm border border-blue-100">
-            <h2 class="text-xl font-bold text-blue-800 mb-3">11. Counting Doublings</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> A plant is 2 cm tall on day 1 and doubles in height each day. How tall is it on day 6?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>Day 1 has zero doublings, so day 6 has 6 − 1 = 5 doublings.</li>
-                    <li>Height = 2 × 2<sup>5</sup> = 2 × 32.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: <strong class="text-blue-600">64 cm</strong></p>
-            </div>
-        </div>
-
-        <div class="question-block bg-green-50 p-4 rounded-lg mb-6 shadow-sm border border-green-100">
-            <h2 class="text-xl font-bold text-green-800 mb-3">12. Doubling with a Fractional Number of Periods</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> $2,000 doubles every 9 years. What is it worth after 6 years?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>Number of doubling periods: 6 ÷ 9 = 2/3. It does not have to be a whole number.</li>
-                    <li>Value = 2,000 × 2<sup>2/3</sup> ≈ 2,000 × 1.5874.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: <strong class="text-green-700">about $3,174.80</strong></p>
-            </div>
-        </div>
-
-        <div class="question-block bg-yellow-50 p-4 rounded-lg mb-6 shadow-sm border border-yellow-100">
-            <h2 class="text-xl font-bold text-yellow-800 mb-3">13. Converting Units Before You Divide</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> 50 bacteria double every 30 minutes. How many are there after 3 hours 15 minutes?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>Match the units: 3 hours 15 minutes = 195 minutes.</li>
-                    <li>Number of doubling periods: 195 ÷ 30 = 6.5.</li>
-                    <li>Count = 50 × 2<sup>6.5</sup> ≈ 50 × 90.51.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: <strong class="text-yellow-700">about 4,525 bacteria</strong></p>
-            </div>
-        </div>
-
-        <div class="question-block bg-purple-50 p-4 rounded-lg mb-6 shadow-sm border border-purple-100">
-            <h2 class="text-xl font-bold text-purple-800 mb-3">14. Rule of 70 and the Growth Factor</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> A quantity grows 2% per year. Use the Rule of 70 to find its doubling time and its growth factor over 20 years. Is the rule valid here?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-purple-500 text-white rounded hover:bg-purple-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>Doubling time: 70 ÷ 2 = 35 years.</li>
-                    <li>Growth factor over 20 years: 2<sup>20/35</sup> ≈ 1.49.</li>
-                    <li>The rule is valid because 2% is below about 15%.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: <strong class="text-purple-700">35 years; factor about 1.49; valid</strong></p>
-            </div>
-        </div>
-
-        <div class="question-block bg-red-50 p-4 rounded-lg mb-6 shadow-sm border border-red-100">
-            <h2 class="text-xl font-bold text-red-800 mb-3">15. Half-Life with a Fractional Number of Periods</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> 10 g of an isotope has a half-life of 30 years. How much remains after 45 years?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>Number of half-lives: 45 ÷ 30 = 1.5.</li>
-                    <li>Amount = 10 × (1/2)<sup>1.5</sup> ≈ 10 × 0.3536.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: <strong class="text-red-700">about 3.54 g</strong></p>
-            </div>
-        </div>
-
-        <div class="question-block bg-indigo-50 p-4 rounded-lg mb-6 shadow-sm border border-indigo-100">
-            <h2 class="text-xl font-bold text-indigo-800 mb-3">16. Percent Decay</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> A $20,000 car loses 20% of its value each year. Is the decay linear or exponential, and what is the car worth after 2 years?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>The car loses the same percent each year, a relative change, so the decay is exponential.</li>
-                    <li>Decay factor: 1 − 0.20 = 0.80.</li>
-                    <li>Value = 20,000 × 0.80<sup>2</sup> = 20,000 × 0.64.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: <strong class="text-indigo-700">exponential; $12,800</strong></p>
-            </div>
-        </div>
-
-        <div class="question-block bg-pink-50 p-4 rounded-lg mb-6 shadow-sm border border-pink-100">
-            <h2 class="text-xl font-bold text-pink-800 mb-3">17. Powers of Ten</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> Is 10<sup>4.3</sup> between 1,000 and 10,000, or between 10,000 and 100,000? Answer without a calculator.</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-pink-500 text-white rounded hover:bg-pink-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>4.3 is between 4 and 5.</li>
-                    <li>So 10<sup>4.3</sup> is between 10<sup>4</sup> = 10,000 and 10<sup>5</sup> = 100,000.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: <strong class="text-pink-600">between 10,000 and 100,000</strong></p>
-            </div>
-        </div>
-
-        <div class="question-block bg-teal-50 p-4 rounded-lg mb-6 shadow-sm border border-teal-100">
-            <h2 class="text-xl font-bold text-teal-800 mb-3">18. Converting a Yearly Rate</h2>
-            <p class="mb-2 text-gray-700"><strong>Question:</strong> A country adds about 1.2 million people per year. About how many people is that per day?</p>
-            <button class="reveal-button mt-2 px-3 py-1 bg-teal-500 text-white rounded hover:bg-teal-600 text-sm shadow">Reveal Answer</button>
-            <div class="answer-content hidden bg-white p-3 mt-3 rounded border border-gray-200">
-                <p class="font-semibold text-gray-800">Solution:</p>
-                <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700">
-                    <li>A year has 365 days.</li>
-                    <li>1,200,000 ÷ 365 ≈ 3,287.7.</li>
-                </ol>
-                <p class="mt-3 font-semibold text-gray-800">Answer: <strong class="text-teal-700">about 3,288 people per day</strong></p>
-            </div>
-        </div>
-
-    </div> <script>
-        // Wait for the HTML document to be fully loaded before running the script
-        document.addEventListener('DOMContentLoaded', () => {
-            // Select all elements with the class 'reveal-button'
-            const revealButtons = document.querySelectorAll('.reveal-button');
-
-            // Add a click event listener to each button
-            revealButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Find the closest parent element that contains the whole question block
-                    const questionBlock = button.closest('.question-block');
-                    // Find the answer content element within that block
-                    const answerContent = questionBlock.querySelector('.answer-content');
-
-                    // Check if the answer content element exists
-                    if (answerContent) {
-                        // Toggle the 'hidden' class to show/hide the answer
-                        answerContent.classList.toggle('hidden');
-
-                        // Change the button text based on visibility
-                        if (answerContent.classList.contains('hidden')) {
-                            button.textContent = 'Reveal Answer'; // Set text when hidden
-                        } else {
-                            button.textContent = 'Hide Answer'; // Set text when visible
-                        }
-                    }
-                });
-            });
-        });
-    </script>
-
+  <nav class="course-sequence-nav" aria-label="MATH 114 navigation">
+    <a href="math114-module11.html" class="button button-secondary course-sequence-nav__link">&larr; Module 11</a>
+    <a href="/courses/math114.html" class="button button-secondary course-sequence-nav__link">All modules</a>
+    <a href="math114-module14.html" class="button button-secondary course-sequence-nav__link">Module 14 &rarr;</a>
+  </nav>
 </main>
+
 <footer class="site-footer">
   <div class="container">
     <p>&copy; <span id="current-year">2026</span> Andrew H. Volk. Course materials, tools, and academic resources.</p>
@@ -353,6 +180,417 @@
     </nav>
   </div>
 </footer>
-<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById('current-year').textContent = new Date().getFullYear();
+(function () {
+  'use strict';
+  var STORE = 'math114-growth-review-v2';
+
+  /* ---------- formatting ---------- */
+  function fmt(x, dp) {
+    var s = Number(x).toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+    return s.replace('-', '−');
+  }
+  function trim(x, dp) { // up to dp places, no trailing zeros
+    return Number(x).toLocaleString('en-US', { maximumFractionDigits: dp }).replace('-', '−');
+  }
+  function money(x) { return '$' + fmt(x, 2); }
+  function dollars(x) { return Math.abs(x - Math.round(x)) < 1e-9 ? '$' + fmt(x, 0) : money(x); }
+  function sup(e) { return '<sup>' + e + '</sup>'; }
+  function round(x, dp) { var k = Math.pow(10, dp); return Math.round(x * k) / k; }
+  function parseNum(s) {
+    if (s == null) return NaN;
+    var t = String(s).trim().replace(/[−–]/g, '-').replace(/[$,\s≈~]/g, '').replace(/%$/, '');
+    t = t.replace(/[a-zA-Z]+$/, '');
+    if (!/^-?(\d+\.?\d*|\.\d+)$/.test(t)) return NaN;
+    return parseFloat(t);
+  }
+
+  /* ---------- seeded choices: seed 0 gives the original numbers ---------- */
+  function rng(seed) {
+    var a = seed >>> 0;
+    return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  function chooser(seed, salt) {
+    var r = seed ? rng(seed * 1000 + salt) : null;
+    return function (list, original) { return r ? list[Math.floor(r() * list.length)] : original; };
+  }
+
+  /* ---------- question bank ----------
+     kind "check": parts are numbers (n) or choices (c); "self": a model answer with self-rating. */
+  var TOPICS = [
+    ['models', 'The three growth models'],
+    ['exp', 'Exponential growth calculations'],
+    ['doubling', 'Doubling time and the Rule of 70'],
+    ['decay', 'Half-life and decay'],
+    ['rates', 'Rates and estimation']
+  ];
+  var KIND3 = ['Linear', 'Exponential', 'Logistic'];
+
+  var BANK = [
+    { id: 'define', topic: 'models', title: 'Defining growth types', kind: 'self', make: function () { return {
+      prompt: 'Explain the basic difference between how a quantity changes in linear growth and in exponential growth.',
+      solution: '<ul><li><strong>Linear growth</strong> adds a <strong>constant amount</strong> each period, so the rate of change is constant. Example: saving exactly $50 each month.</li><li><strong>Exponential growth</strong> multiplies by a <strong>constant factor</strong> (a constant percentage) each period, so the amount added grows as the quantity grows. Example: a population growing 5% each year.</li></ul>' }; } },
+
+    { id: 'identify', topic: 'models', title: 'Identifying the growth type', kind: 'check', make: function (pick) {
+      var pool = [
+        ['A town’s population increases by 1,000 people every year.', 0, 'a constant amount is added'],
+        ['A company’s profit increases by 12% each year.', 1, 'a constant percentage is added'],
+        ['A gym membership costs $40 to join plus $25 per month.', 0, 'the same $25 is added each month'],
+        ['A savings account earns 4% interest compounded yearly.', 1, 'each year multiplies by 1.04'],
+        ['Fish in a lake multiply quickly at first, then level off as food runs short.', 2, 'growth slows toward a carrying capacity'],
+        ['A rumor spreads fast through a school of 600 students, then slows as nearly everyone has heard it.', 2, 'the number who have heard levels off at 600'],
+        ['A candle burns down 0.5 cm every hour.', 0, 'a constant amount is removed each hour'],
+        ['The number of bacteria in a dish doubles every 20 minutes.', 1, 'doubling multiplies by a constant factor']
+      ];
+      var picks = pick([[0, 4, 1], [2, 3, 5], [6, 1, 4], [7, 0, 5], [3, 6, 4], [5, 7, 2]], [0, 1, 4]);
+      var parts = picks.map(function (i, k) { var s = pool[i]; return { type: 'c', label: 'Scenario ' + 'ABC'[k] + ': ' + s[0], choices: KIND3, answer: s[1], why: s[2] }; });
+      return { prompt: 'Classify each scenario as linear, exponential or logistic growth.', parts: parts,
+        solution: '<ul>' + parts.map(function (p, k) { return '<li>Scenario ' + 'ABC'[k] + ': <strong>' + KIND3[p.answer] + '</strong>, because ' + p.why + '.</li>'; }).join('') + '</ul>' }; } },
+
+    { id: 'examples', topic: 'models', title: 'Choosing a model', kind: 'self', make: function () { return {
+      prompt: 'Give one real-world example where linear growth is a suitable model, and one where exponential growth is more appropriate, at least at first.',
+      solution: '<ul><li><strong>Linear:</strong> the water level in a cylindrical tank filled at a constant rate; a salary that rises by a fixed $2,000 each year.</li><li><strong>Exponential:</strong> compound interest on savings; the early spread of a virus in a large population; bacteria doubling under ideal conditions.</li></ul>' }; } },
+
+    { id: 'capacity', topic: 'models', title: 'Carrying capacity', kind: 'self', make: function () { return {
+      prompt: 'Deer live in a forest. What factors keep the deer population from growing without limit, and what is the maximum population the environment can sustain called?',
+      solution: '<ul><li><strong>Limiting factors:</strong> food, water and space; predators; disease.</li><li>The maximum sustainable population is the <strong>carrying capacity, K</strong>.</li><li>Logistic growth models a population limited by its carrying capacity.</li></ul>' }; } },
+
+    { id: 'logistic', topic: 'models', title: 'The logistic curve', kind: 'self', make: function () { return {
+      prompt: 'Describe the shape of a logistic growth curve. What happens to the growth rate in each phase?',
+      solution: '<p>The curve is <strong>S-shaped</strong>:</p><ol><li>It starts slowly while the population is small.</li><li>It speeds up to its fastest growth, which looks exponential.</li><li>It slows as the population nears the carrying capacity and resources run short.</li><li>It levels off at the carrying capacity, where the growth rate approaches zero.</li></ol>' + LOGISTIC_SVG }; } },
+
+    { id: 'mold', topic: 'exp', title: 'Counting doubling periods', kind: 'check', make: function (pick) {
+      var n0 = pick([20, 30, 40, 60, 80], 50), per = pick([2, 3, 4, 8], 6), k = pick([3, 4, 5], 4), t = per * k, ans = n0 * Math.pow(2, k);
+      return { prompt: 'A mold culture starts with ' + n0 + ' spores and doubles every ' + per + ' hours. How many spores are there after ' + t + ' hours?',
+        parts: [{ type: 'n', label: 'Spores', answer: ans, dp: 0, traps: [[n0 * 2 * k, 'That adds the same amount each period. Doubling multiplies by 2 each period.'], [n0 * Math.pow(2, t), 'Count doubling periods, not hours: divide the time by the doubling time first.']] }],
+        solution: '<ol><li>Doubling periods: ' + t + ' ÷ ' + per + ' = ' + k + '.</li><li>Spores = ' + n0 + ' × 2' + sup(k) + ' = ' + n0 + ' × ' + Math.pow(2, k) + '.</li></ol><p class="gr-final">' + fmt(ans, 0) + ' spores</p>' }; } },
+
+    { id: 'plant', topic: 'exp', title: 'Counting doublings from day 1', kind: 'check', make: function (pick) {
+      var h = pick([1, 3, 4, 5], 2), d = pick([5, 7, 8], 6), k = d - 1, ans = h * Math.pow(2, k);
+      return { prompt: 'A plant is ' + h + ' cm tall on day 1 and doubles in height each day. How tall is it on day ' + d + '?',
+        parts: [{ type: 'n', label: 'Height', unit: 'cm', answer: ans, dp: 0, traps: [[h * Math.pow(2, d), 'Day 1 is the starting height, so it has no doublings yet. Count the doublings after day 1.']] }],
+        solution: '<ol><li>Day 1 has no doublings yet, so day ' + d + ' has ' + d + ' − 1 = ' + k + ' doublings.</li><li>Height = ' + h + ' × 2' + sup(k) + ' = ' + h + ' × ' + Math.pow(2, k) + '.</li></ol><p class="gr-final">' + fmt(ans, 0) + ' cm</p>' }; } },
+
+    { id: 'money', topic: 'exp', title: 'Percent growth', kind: 'check', make: function (pick) {
+      var P = pick([400, 600, 800, 1000, 1200], 500), r = pick([3, 4, 5, 6], 8), t = pick([2, 4, 5], 3), f = 1 + r / 100, ans = P * Math.pow(f, t);
+      return { prompt: 'You start with ' + dollars(P) + ' and it grows by ' + r + '% each year. How much do you have after ' + t + ' years?',
+        parts: [{ type: 'n', label: 'Amount', prefix: '$', answer: round(ans, 2), dp: 2, hint: 'nearest cent', traps: [[P * (1 + r / 100 * t), 'That adds the same interest every year (linear growth). Each year multiplies by the growth factor.']] }],
+        solution: '<ol><li>Growth factor: 1 + ' + trim(r / 100, 2) + ' = ' + trim(f, 2) + '.</li><li>Amount = ' + dollars(P) + ' × ' + trim(f, 2) + sup(t) + ' ≈ ' + dollars(P) + ' × ' + trim(Math.pow(f, t), 6) + '.</li></ol><p class="gr-final">about ' + money(ans) + '</p>' }; } },
+
+    { id: 'fraction', topic: 'exp', title: 'A fractional number of doublings', kind: 'check', make: function (pick) {
+      var A = pick([1000, 3000, 5000, 4000], 2000), T = pick([6, 8, 10, 12], 9), t = pick([3, 4, 5, 10, 15], 6);
+      if (t % T === 0) t += 1;
+      var ans = A * Math.pow(2, t / T);
+      return { prompt: dollars(A) + ' doubles every ' + T + ' years. What is it worth after ' + t + ' years?',
+        parts: [{ type: 'n', label: 'Value', prefix: '$', answer: round(ans, 2), dp: 2, hint: 'nearest cent', traps: [[A * Math.pow(2, Math.floor(t / T)), 'The number of doublings does not have to be a whole number. Use t ÷ T as the exponent.']] }],
+        solution: '<ol><li>Doubling periods: ' + t + ' ÷ ' + T + ' = ' + trim(t / T, 4) + '. The number of periods does not have to be a whole number.</li><li>Value = ' + dollars(A) + ' × 2' + sup(t + '/' + T) + ' ≈ ' + dollars(A) + ' × ' + trim(Math.pow(2, t / T), 4) + '.</li></ol><p class="gr-final">about ' + money(ans) + '</p>' }; } },
+
+    { id: 'units', topic: 'exp', title: 'Matching units before you divide', kind: 'check', make: function (pick) {
+      var n0 = pick([20, 40, 80, 100], 50), per = pick([15, 20, 40], 30), k = pick([4, 5, 7], 6), total = per * (k + 0.5);
+      var hrs = Math.floor(total / 60), mins = total % 60, ans = n0 * Math.pow(2, total / per);
+      var when = (hrs ? hrs + ' hour' + (hrs > 1 ? 's' : '') : '') + (hrs && mins ? ' ' : '') + (mins ? mins + ' minutes' : '');
+      return { prompt: n0 + ' bacteria double every ' + per + ' minutes. About how many are there after ' + when + '?',
+        parts: [{ type: 'n', label: 'Bacteria', answer: Math.round(ans), dp: 0, tol: 1, hint: 'nearest whole number', traps: [[n0 * Math.pow(2, (hrs * 100 + mins) / per), 'Convert the whole time to minutes first; ' + hrs + ' hours is ' + hrs * 60 + ' minutes.']] }],
+        solution: '<ol><li>Match the units: ' + when + ' = ' + total + ' minutes.</li><li>Doubling periods: ' + total + ' ÷ ' + per + ' = ' + trim(total / per, 2) + '.</li><li>Count = ' + n0 + ' × 2' + sup(trim(total / per, 2)) + ' ≈ ' + n0 + ' × ' + trim(Math.pow(2, total / per), 2) + '.</li></ol><p class="gr-final">about ' + fmt(Math.round(ans), 0) + ' bacteria</p>' }; } },
+
+    { id: 'rule70', topic: 'doubling', title: 'Using the Rule of 70', kind: 'check', make: function (pick) {
+      var r = pick([2, 4, 7, 10, 3.5], 5), ans = 70 / r;
+      return { prompt: 'An investment grows at an average of ' + r + '% per year. Use the Rule of 70 to estimate its doubling time.',
+        parts: [{ type: 'n', label: 'Doubling time', unit: 'years', answer: round(ans, 1), dp: 1, hint: 'one decimal place', traps: [[r / 70, 'Divide 70 by the percent rate, not the rate by 70.'], [70 / (r / 100), 'Use the percent itself (' + r + '), not the decimal.']] }],
+        solution: '<p class="gr-formula">doubling time ≈ 70 ÷ (percent growth rate) = 70 ÷ ' + r + '</p><p class="gr-final">about ' + trim(ans, 1) + ' years</p>' }; } },
+
+    { id: 'factor', topic: 'doubling', title: 'Rule of 70 and the growth factor', kind: 'check', make: function (pick) {
+      var r = pick([1, 5, 7, 20, 25], 2), t = pick([10, 15, 30, 40], 20), T = 70 / r, g = Math.pow(2, t / T), valid = r < 15 ? 0 : 1;
+      return { prompt: 'A quantity grows ' + r + '% per year. Use the Rule of 70 to find its doubling time and its growth factor over ' + t + ' years. Is the rule reliable here?',
+        parts: [
+          { type: 'n', label: 'Doubling time', unit: 'years', answer: round(T, 1), dp: 1, hint: 'one decimal place' },
+          { type: 'n', label: 'Growth factor', answer: round(g, 2), dp: 2, tol: 0.015, hint: 'two decimal places' },
+          { type: 'c', label: 'Reliable?', choices: ['Yes', 'No'], answer: valid }
+        ],
+        solution: '<ol><li>Doubling time: 70 ÷ ' + r + ' ≈ ' + trim(T, 1) + ' years.</li><li>Growth factor over ' + t + ' years: 2' + sup(t + '/' + trim(T, 2)) + ' ≈ ' + trim(g, 2) + '.</li><li>' + (valid === 0 ? 'Reliable, because ' + r + '% is below about 15%.' : 'Not reliable, because ' + r + '% is above about 15%. The exact doubling time is ln 2 ÷ ln ' + trim(1 + r / 100, 2) + ' ≈ ' + trim(Math.log(2) / Math.log(1 + r / 100), 2) + ' years.') + '</li></ol>' }; } },
+
+    { id: 'precise', topic: 'doubling', title: 'Estimate or exact formula?', kind: 'self', make: function () { return {
+      prompt: 'When is the quick Rule of 70 estimate good enough, and when do you need the exact doubling-time formula with logarithms?',
+      solution: '<ul><li><strong>Rule of 70:</strong> good for quick mental estimates at common growth rates, below about 15%. It is an approximation.</li><li><strong>Exact formula, T = ln 2 ÷ ln(1 + r):</strong> needed for accurate work, and for high growth rates, where the Rule of 70 underestimates the doubling time. At 25% a year the rule gives 2.8 years, but the exact time is about 3.1 years.</li></ul>' }; } },
+
+    { id: 'halflife', topic: 'decay', title: 'Half-life with a fractional number of periods', kind: 'check', make: function (pick) {
+      var m = pick([8, 20, 50, 100], 10), H = pick([10, 20, 40, 8], 30), k = pick([0.5, 2.5, 3.5], 1.5), t = H * k, ans = m * Math.pow(0.5, k);
+      return { prompt: m + ' g of an isotope has a half-life of ' + H + ' years. How much remains after ' + t + ' years?',
+        parts: [{ type: 'n', label: 'Remaining', unit: 'g', answer: round(ans, 2), dp: 2, hint: 'two decimal places', traps: [[m * Math.pow(0.5, Math.floor(k)), 'The number of half-lives can be a fraction. Use ' + k + ' as the exponent.']] }],
+        solution: '<ol><li>Number of half-lives: ' + t + ' ÷ ' + H + ' = ' + k + '.</li><li>Amount = ' + m + ' × (½)' + sup(k) + ' ≈ ' + m + ' × ' + trim(Math.pow(0.5, k), 4) + '.</li></ol><p class="gr-final">about ' + trim(ans, 2) + ' g</p>' }; } },
+
+    { id: 'car', topic: 'decay', title: 'Percent decay', kind: 'check', make: function (pick) {
+      var V = pick([15000, 18000, 24000, 30000], 20000), r = pick([10, 15, 25], 20), t = pick([3, 4], 2), f = 1 - r / 100, ans = V * Math.pow(f, t);
+      return { prompt: 'A ' + dollars(V) + ' car loses ' + r + '% of its value each year. Is the decay linear or exponential, and what is the car worth after ' + t + ' years?',
+        parts: [
+          { type: 'c', label: 'Type of decay', choices: ['Linear', 'Exponential'], answer: 1 },
+          { type: 'n', label: 'Value', prefix: '$', answer: round(ans, 2), dp: 2, hint: 'nearest cent', traps: [[V * (1 - r / 100 * t), 'That subtracts the same dollar amount each year (linear). Each year multiplies by the decay factor.']] }
+        ],
+        solution: '<ol><li>The car loses the same <em>percent</em> each year, a relative change, so the decay is exponential.</li><li>Decay factor: 1 − ' + trim(r / 100, 2) + ' = ' + trim(f, 2) + '.</li><li>Value = ' + dollars(V) + ' × ' + trim(f, 2) + sup(t) + ' = ' + dollars(V) + ' × ' + trim(Math.pow(f, t), 6) + '.</li></ol><p class="gr-final">exponential; ' + money(ans) + '</p>' }; } },
+
+    { id: 'natural', topic: 'rates', title: 'Natural growth rate', kind: 'check', make: function (pick) {
+      var b = pick([18, 22, 28, 31], 25), d = pick([6, 8, 9, 12], 10), ans = (b - d) / 10;
+      return { prompt: 'A country has ' + b + ' births and ' + d + ' deaths per 1,000 people each year. What is its natural growth rate as a percentage?',
+        parts: [{ type: 'n', label: 'Growth rate', unit: '%', answer: ans, dp: 1, traps: [[b - d, 'That is the increase per 1,000 people. Divide by 1,000, then write it as a percent.'], [(b - d) / 1000, 'That is the decimal. Multiply by 100 to write it as a percent.']] }],
+        solution: '<ol><li>Net increase: ' + b + ' − ' + d + ' = ' + (b - d) + ' per 1,000.</li><li>As a decimal: ' + (b - d) + ' ÷ 1,000 = ' + trim((b - d) / 1000, 4) + '.</li><li>As a percentage: ' + trim((b - d) / 1000, 4) + ' × 100% = ' + trim(ans, 1) + '%.</li></ol><p class="gr-final">' + trim(ans, 1) + '% per year</p>' }; } },
+
+    { id: 'perday', topic: 'rates', title: 'Converting a yearly rate', kind: 'check', make: function (pick) {
+      var M = pick([0.8, 2.5, 3.1, 1.9], 1.2), ans = M * 1e6 / 365;
+      return { prompt: 'A country adds about ' + trim(M, 1) + ' million people per year. About how many people is that per day?',
+        parts: [{ type: 'n', label: 'People per day', answer: Math.round(ans), dp: 0, tol: 2, traps: [[M * 1e6 / 12, 'That is the number per month. A year has 365 days.'], [M * 1e6 / 52, 'That is the number per week. A year has 365 days.']] }],
+        solution: '<ol><li>A year has 365 days.</li><li>' + fmt(M * 1e6, 0) + ' ÷ 365 ≈ ' + fmt(ans, 1) + '.</li></ol><p class="gr-final">about ' + fmt(Math.round(ans), 0) + ' people per day</p>' }; } },
+
+    { id: 'powers', topic: 'rates', title: 'Powers of ten', kind: 'check', make: function (pick) {
+      var e = pick([2.6, 3.8, 5.2, 6.4, 1.7], 4.3), n = Math.floor(e);
+      var ranges = [1, 2, 3, 4, 5, 6].map(function (j) { return 'between ' + fmt(Math.pow(10, j), 0) + ' and ' + fmt(Math.pow(10, j + 1), 0); });
+      var start = Math.max(0, Math.min(n - 2, ranges.length - 3)), opts = ranges.slice(start, start + 3);
+      return { prompt: 'Without a calculator: where does 10' + sup(e) + ' fall?',
+        parts: [{ type: 'c', label: '10' + sup(e) + ' is', choices: opts, answer: (n - 1) - start }],
+        solution: '<ol><li>' + e + ' is between ' + n + ' and ' + (n + 1) + '.</li><li>So 10' + sup(e) + ' is between 10' + sup(n) + ' = ' + fmt(Math.pow(10, n), 0) + ' and 10' + sup(n + 1) + ' = ' + fmt(Math.pow(10, n + 1), 0) + '.</li></ol>' }; } }
+  ];
+
+  var LOGISTIC_SVG = (function () {
+    var pts = [];
+    for (var i = 0; i <= 60; i++) { var x = i / 60 * 200, y = 1 / (1 + Math.exp(-(i / 60 * 12 - 6))); pts.push((30 + x).toFixed(1) + ',' + (130 - y * 100).toFixed(1)); }
+    return '<svg class="gr-svg" viewBox="0 0 250 150" role="img" aria-label="An S-shaped logistic curve: slow start, steep middle, then leveling off at the dashed carrying capacity K." style="max-width:300px;margin-top:0.5rem">' +
+      '<line x1="30" y1="130" x2="240" y2="130" stroke="currentColor" stroke-opacity="0.45"/><line x1="30" y1="130" x2="30" y2="10" stroke="currentColor" stroke-opacity="0.45"/>' +
+      '<line x1="30" y1="30" x2="240" y2="30" stroke="var(--danger-main)" stroke-dasharray="5 4"/><text x="222" y="24">K</text>' +
+      '<polyline points="' + pts.join(' ') + '" fill="none" stroke="var(--emerald-main)" stroke-width="3"/>' +
+      '<text x="40" y="122">slow start</text><text x="140" y="78">fastest growth</text><text x="168" y="46">levels off</text></svg>';
+  })();
+
+  /* ---------- state ---------- */
+  var state = load();
+  function blank() { return { seed: 0, items: {}, filter: 'all' }; }
+  function load() {
+    try { var s = JSON.parse(localStorage.getItem(STORE)); if (s && typeof s.seed === 'number' && s.items) return s; } catch (e) { /* storage unavailable */ }
+    return blank();
+  }
+  function save() { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* storage unavailable */ } }
+  function itemState(id) { return state.items[id] || (state.items[id] = { status: '', inputs: {} }); }
+
+  /* ---------- rendering ---------- */
+  var root = document.getElementById('review');
+  var built = [];
+
+  function render() {
+    root.innerHTML = '';
+    built = [];
+    var number = 0;
+    TOPICS.forEach(function (topic, ti) {
+      var h = document.createElement('h2');
+      h.className = 'gr-topic'; h.id = 'topic-' + topic[0]; h.textContent = topic[1];
+      root.appendChild(h);
+      BANK.filter(function (q) { return q.topic === topic[0]; }).forEach(function (q, qi) {
+        number += 1;
+        var pick = chooser(state.seed, ti * 10 + qi + 1);
+        var art = buildItem(q, q.make(pick), number);
+        root.appendChild(art);
+        built.push(art);
+      });
+    });
+    var empty = document.createElement('p');
+    empty.className = 'gr-empty'; empty.id = 'empty-note'; empty.hidden = true;
+    empty.textContent = 'Nothing to show here. Choose All to see every question.';
+    root.appendChild(empty);
+    applyFilter();
+    updateProgress();
+  }
+
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+
+  function buildItem(q, data, number) {
+    var st = itemState(q.id);
+    var art = el('article', 'gr-item');
+    art.id = 'q-' + q.id; art.dataset.status = st.status;
+    var head = el('h3');
+    head.appendChild(el('span', 'gr-num', number + '.'));
+    head.appendChild(el('span', null, q.title));
+    var badge = el('span', 'gr-badge'); head.appendChild(badge);
+    art.appendChild(head);
+    art.appendChild(el('p', 'gr-prompt', data.prompt));
+    var solId = 'sol-' + q.id;
+    var controls = el('div', 'gr-controls');
+    var feedback = el('div', 'gr-feedback'); feedback.setAttribute('aria-live', 'polite');
+    var marks = [];
+
+    if (q.kind === 'check') {
+      var parts = el('div', 'gr-parts');
+      data.parts.forEach(function (p, pi) {
+        var key = 'p' + pi, row = el('div', 'gr-part'), mark = el('span', 'gr-mark');
+        mark.setAttribute('aria-hidden', 'true');
+        if (p.type === 'n') {
+          var inputId = 'in-' + q.id + '-' + pi;
+          var lab = el('label', null, p.label); lab.htmlFor = inputId;
+          var inp = document.createElement('input');
+          inp.type = 'text'; inp.inputMode = 'decimal'; inp.id = inputId; inp.autocomplete = 'off';
+          inp.value = st.inputs[key] || '';
+          inp.addEventListener('input', function () { st.inputs[key] = inp.value; save(); });
+          inp.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); check(); } });
+          row.appendChild(lab);
+          if (p.prefix) row.appendChild(el('span', 'gr-unit', p.prefix));
+          row.appendChild(inp);
+          if (p.unit && p.unit !== '%') row.appendChild(el('span', 'gr-unit', p.unit));
+          if (p.unit === '%') row.appendChild(el('span', 'gr-unit', '%'));
+          if (p.hint) { var hintEl = el('span', 'gr-unit', '(' + p.hint + ')'); hintEl.id = inputId + '-hint'; inp.setAttribute('aria-describedby', hintEl.id); row.appendChild(hintEl); }
+          marks.push({ p: p, mark: mark, get: function () { return inp.value; }, focus: function () { inp.focus(); } });
+        } else {
+          var fs = el('fieldset', 'gr-choices');
+          fs.appendChild(el('legend', null, p.label));
+          var name = 'ch-' + q.id + '-' + pi;
+          p.choices.forEach(function (c, ci) {
+            var lab2 = el('label', 'gr-choice'), r = document.createElement('input');
+            r.type = 'radio'; r.name = name; r.value = String(ci);
+            if (st.inputs[key] === String(ci)) r.checked = true;
+            r.addEventListener('change', function () { st.inputs[key] = r.value; save(); });
+            lab2.appendChild(r); lab2.appendChild(document.createTextNode(c));
+            fs.appendChild(lab2);
+          });
+          row.appendChild(fs);
+          marks.push({ p: p, mark: mark, get: function () { var c = fs.querySelector('input:checked'); return c ? c.value : ''; }, focus: function () { var f = fs.querySelector('input'); if (f) f.focus(); } });
+        }
+        row.appendChild(mark);
+        parts.appendChild(row);
+      });
+      art.appendChild(parts);
+      var checkBtn = el('button', 'button', 'Check'); checkBtn.type = 'button';
+      checkBtn.addEventListener('click', check);
+      controls.appendChild(checkBtn);
+    }
+
+    var showBtn = el('button', 'button button-secondary', q.kind === 'self' ? 'Show model answer' : 'Show solution');
+    showBtn.type = 'button';
+    showBtn.setAttribute('aria-expanded', 'false'); showBtn.setAttribute('aria-controls', solId);
+    controls.appendChild(showBtn);
+    controls.appendChild(feedback);
+    art.appendChild(controls);
+
+    var sol = el('div', 'gr-solution', data.solution); sol.id = solId; sol.hidden = true;
+    if (q.kind === 'self') {
+      var self = el('div', 'gr-selfcheck', '<span>How did your answer compare?</span>');
+      var got = el('button', 'button', 'I had it'); got.type = 'button';
+      var again = el('button', 'button button-secondary', 'Review again'); again.type = 'button';
+      got.addEventListener('click', function () { setStatus('correct'); feedback.textContent = 'Marked as known.'; });
+      again.addEventListener('click', function () { setStatus('review'); feedback.textContent = 'Marked to review.'; });
+      self.appendChild(got); self.appendChild(again);
+      sol.appendChild(self);
+    }
+    art.appendChild(sol);
+
+    function setSolution(open) {
+      sol.hidden = !open;
+      showBtn.setAttribute('aria-expanded', String(open));
+      showBtn.textContent = open ? (q.kind === 'self' ? 'Hide model answer' : 'Hide solution') : (q.kind === 'self' ? 'Show model answer' : 'Show solution');
+    }
+    showBtn.addEventListener('click', function () {
+      var open = sol.hidden;
+      setSolution(open);
+      if (open && q.kind === 'check' && st.status !== 'correct') setStatus('shown');
+    });
+
+    function setStatus(s) { st.status = s; art.dataset.status = s; badgeText(); save(); updateProgress(); }
+    function badgeText() { badge.textContent = { correct: 'Correct', shown: 'Solution viewed', review: 'Review' }[st.status] || ''; }
+    badgeText();
+
+    function check() {
+      var allRight = true, missing = false, firstWrong = null;
+      marks.forEach(function (m) {
+        var raw = m.get(), ok;
+        if (raw === '') { missing = true; ok = false; m.mark.textContent = ''; m.mark.className = 'gr-mark'; if (!firstWrong) firstWrong = m; allRight = false; return; }
+        if (m.p.type === 'n') {
+          var v = parseNum(raw);
+          m.trap = null;
+          var tol = m.p.tol != null ? m.p.tol : Math.max(0.5 * Math.pow(10, -m.p.dp), Math.abs(m.p.answer) * 0.005);
+          ok = !isNaN(v) && Math.abs(v - m.p.answer) <= tol + 1e-9;
+          if (!ok && !isNaN(v) && m.p.traps) m.p.traps.forEach(function (tr) { if (!m.trap && Math.abs(v - tr[0]) <= Math.max(tol, Math.abs(tr[0]) * 0.005) + 1e-9) m.trap = tr[1]; });
+          if (!ok && isNaN(v)) m.trap = 'Enter a number, such as 1250 or 3.54.';
+        } else { ok = Number(raw) === m.p.answer; }
+        m.mark.textContent = ok ? '✓' : '✗';
+        m.mark.className = 'gr-mark ' + (ok ? 'ok' : 'no');
+        if (!ok) { allRight = false; if (!firstWrong) firstWrong = m; }
+      });
+      if (allRight) {
+        feedback.textContent = 'Correct.';
+        if (st.status !== 'shown') setStatus('correct'); else { feedback.textContent = 'Correct. (You viewed the solution first.)'; }
+      } else if (missing && marks.length > 1) {
+        feedback.textContent = 'Answer every part, then check again.';
+      } else if (missing) {
+        feedback.textContent = 'Enter an answer first.';
+      } else {
+        var trap = null; marks.forEach(function (m) { if (!trap && m.trap) trap = m.trap; });
+        feedback.textContent = 'Not yet. ' + (trap || (marks.length > 1 ? 'Fix the parts marked ✗.' : 'Check your setup, or show the solution.'));
+      }
+      if (!allRight && firstWrong) firstWrong.focus();
+    }
+
+    return art;
+  }
+
+  function applyFilter() {
+    var shown = 0;
+    root.querySelectorAll('.gr-item').forEach(function (art) {
+      var s = art.dataset.status, f = state.filter;
+      var vis = f === 'all' || (f === 'todo' && s !== 'correct') || (f === 'review' && s === 'review');
+      art.hidden = !vis; if (vis) shown += 1;
+    });
+    root.querySelectorAll('.gr-topic').forEach(function (h) {
+      var n = h.nextElementSibling, any = false;
+      while (n && n.classList.contains('gr-item')) { if (!n.hidden) any = true; n = n.nextElementSibling; }
+      h.hidden = !any;
+    });
+    document.getElementById('empty-note').hidden = shown > 0;
+    document.querySelectorAll('.gr-chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.filter === state.filter)); });
+  }
+
+  function updateProgress() {
+    var total = BANK.length, correct = 0, shown = 0;
+    BANK.forEach(function (q) { var s = (state.items[q.id] || {}).status; if (s === 'correct') correct += 1; else if (s === 'shown') shown += 1; });
+    document.getElementById('progress-label').innerHTML = '<strong>' + correct + ' of ' + total + '</strong> correct' + (shown ? ' · ' + shown + ' solution' + (shown > 1 ? 's' : '') + ' viewed' : '');
+    document.getElementById('bar-correct').style.width = (correct / total * 100) + '%';
+    document.getElementById('bar-shown').style.width = (shown / total * 100) + '%';
+    if (state.filter !== 'all') applyFilter();
+  }
+
+  /* ---------- toolbar ---------- */
+  document.getElementById('new-numbers').addEventListener('click', function () {
+    var seed; do { seed = 1 + Math.floor(Math.random() * 1e6); } while (seed === state.seed);
+    state = { seed: seed, items: {}, filter: state.filter };
+    save(); render();
+    document.getElementById('review').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    state = blank(); save(); render();
+  });
+  document.getElementById('print').addEventListener('click', function () { window.print(); });
+  document.querySelectorAll('.gr-chip').forEach(function (c) {
+    c.addEventListener('click', function () { state.filter = c.dataset.filter; save(); applyFilter(); });
+  });
+
+  /* Keep the progress bar just below the site's sticky course bar. */
+  (function () {
+    var bar = document.querySelector('.course-bar');
+    function fit() { if (bar) document.documentElement.style.setProperty('--gr-bar-h', bar.getBoundingClientRect().height + 'px'); }
+    fit(); window.addEventListener('resize', fit);
+  })();
+
+  /* ---------- reference figure ---------- */
+  (function () {
+    var lin = [], ex = [], lg = [];
+    for (var i = 0; i <= 50; i++) {
+      var t = i / 50, x = 30 + t * 200;
+      lin.push(x.toFixed(1) + ',' + (140 - t * 75).toFixed(1));
+      var ey = 140 - 10 * (Math.exp(t * 2.6) - 1);
+      if (ey >= 8) ex.push(x.toFixed(1) + ',' + ey.toFixed(1));
+      lg.push(x.toFixed(1) + ',' + (140 - 102 / (1 + Math.exp(-(t * 11 - 4.2)))).toFixed(1));
+    }
+    document.getElementById('ref-linear').setAttribute('points', lin.join(' '));
+    document.getElementById('ref-exp').setAttribute('points', ex.join(' '));
+    document.getElementById('ref-log').setAttribute('points', lg.join(' '));
+  })();
+
+  render();
+})();
+</script>
 </body>
 </html>
