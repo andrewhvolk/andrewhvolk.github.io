@@ -27,7 +27,7 @@
     },
     {
       "id": "u3a-applications",
-      "text": "solve right-triangle word problems, including two-triangle problems"
+      "text": "solve right triangles and word problems, including two-triangle problems"
     }
   ],
   "sessions": [
@@ -41,9 +41,9 @@
       "max_slides": 35,
       "rehearsal": {
         "status": "pending_live_rehearsal",
-        "planned_instruction_minutes": 65.0,
+        "planned_instruction_minutes": 67.5,
         "reserved_buffer_minutes": 5,
-        "available_flex_minutes": 5.0,
+        "available_flex_minutes": 2.5,
         "stopping_points": [
           {
             "after_block": "math130unit3a-u3a-standard-synthesize",
@@ -62,12 +62,12 @@
           },
           {
             "after_block": "math130unit3a-u3a-ratios-synthesize",
-            "planned_elapsed": 48.5,
+            "planned_elapsed": 51.0,
             "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
           },
           {
             "after_block": "math130unit3a-u3a-applications-synthesize",
-            "planned_elapsed": 63.5,
+            "planned_elapsed": 66.0,
             "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
           }
         ]
@@ -111,7 +111,7 @@
             "find coterminal and reference angles in degrees and radians",
             "use radians to compute arc length",
             "use right-triangle trigonometric ratios",
-            "solve right-triangle word problems, including two-triangle problems"
+            "solve right triangles and word problems, including two-triangle problems"
           ]
         },
         {
@@ -663,6 +663,38 @@
           ]
         },
         {
+          "id": "math130unit3a-u3a-ratios-special",
+          "title": "Exact values from the special triangles",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3a-ratios"
+          ],
+          "minutes": 2.5,
+          "source_slides": [],
+          "content": [
+            "$\\sin30^\\circ=\\tfrac{1}{2}$, $\\cos30^\\circ=\\tfrac{\\sqrt3}{2}$, $\\tan30^\\circ=\\tfrac{\\sqrt3}{3}$",
+            "$\\sin45^\\circ=\\cos45^\\circ=\\tfrac{\\sqrt2}{2}$, $\\tan45^\\circ=1$",
+            "$\\sin60^\\circ=\\tfrac{\\sqrt3}{2}$, $\\cos60^\\circ=\\tfrac{1}{2}$, $\\tan60^\\circ=\\sqrt3$",
+            "Keep exact values unless a decimal is asked for, and round only the final answer."
+          ],
+          "instructor_notes": [
+            "Read each value from the triangle on the right; students should be able to redraw both triangles from memory before Quiz 10."
+          ],
+          "verification": [
+            "Verify the nine exact values against the 1-1-√2 and 1-√3-2 triangles.",
+            "Check the labeled geometry and accessibility text of special-triangles.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3a/visuals/special-triangles.svg",
+              "alt": "A 45-45-90 triangle with legs 1 and 1 and hypotenuse root 2. A 30-60-90 triangle with the short leg 1 opposite 30 degrees, the long leg root 3 opposite 60 degrees, and hypotenuse 2. Both are drawn to scale.",
+              "caption": "Exact side ratios for the two special triangles."
+            }
+          ]
+        },
+        {
           "id": "math130unit3a-u3a-ratios-practice",
           "title": "You Try: use right-triangle trigonometric ratios",
           "phase": "practice",
@@ -675,23 +707,25 @@
             15
           ],
           "content": [
-            "Given $\\cos\\theta=9/41$, find $\\sin\\theta$ and $\\tan\\theta$."
+            "Given $\\sin\\theta=\\tfrac{5}{6}$ for an acute angle $\\theta$, sketch the triangle, find the third side, and give the other five ratios as exact values."
           ],
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
           "verification": [
-            "Check the labeled geometry and accessibility text of ratio-practice.svg."
+            "Verify sqrt(11) and the five exact ratios.",
+            "Check the labeled geometry and accessibility text of one-ratio.svg."
           ],
           "answer": [
-            "Opposite side is 40, so $\\sin\\theta=40/41$ and $\\tan\\theta=40/9$."
+            "Adjacent side: $\\sqrt{6^2-5^2}=\\sqrt{11}$.",
+            "$\\cos\\theta=\\tfrac{\\sqrt{11}}{6}$, $\\tan\\theta=\\tfrac{5}{\\sqrt{11}}=\\tfrac{5\\sqrt{11}}{11}$, $\\csc\\theta=\\tfrac{6}{5}$, $\\sec\\theta=\\tfrac{6}{\\sqrt{11}}=\\tfrac{6\\sqrt{11}}{11}$, $\\cot\\theta=\\tfrac{\\sqrt{11}}{5}$."
           ],
           "visual_layout": "split",
           "assets": [
             {
-              "src": "assets/math130unit3a/visuals/ratio-practice.svg",
-              "alt": "A tall right triangle with angle theta at the lower left, adjacent leg 9, hypotenuse 41, and the opposite leg marked with a question mark. A note reads cosine theta equals 9 over 41.",
-              "caption": "Use the Pythagorean theorem to find the missing leg."
+              "src": "assets/math130unit3a/visuals/one-ratio.svg",
+              "alt": "A right triangle drawn to scale with angle theta at the lower left, the side opposite theta equal to 5, the hypotenuse equal to 6, and the adjacent side marked with a question mark. A note reads sine theta equals 5 over 6.",
+              "caption": "Givens only: find the third side first."
             }
           ]
         },
@@ -793,7 +827,8 @@
           "content": [
             "Use the ratio that contains the side you know and the side you want.",
             "If the unknown is on top of the fraction, multiply; if it is on the bottom, divide.",
-            "Sketch and label every word problem before choosing a ratio."
+            "To find an angle, use inverse trig: $A=\\sin^{-1}\\!\\left(\\tfrac{\\text{opp}}{\\text{hyp}}\\right)$.",
+            "To solve a right triangle, find all three missing parts, then check the angle sum and the Pythagorean theorem."
           ],
           "instructor_notes": [],
           "verification": [
@@ -810,7 +845,7 @@
         },
         {
           "id": "math130unit3a-u3a-applications-model",
-          "title": "Model the Skill: a side in a word problem",
+          "title": "Model the Skill: solve a right triangle",
           "phase": "model",
           "component": "worked-example",
           "objectives": [
@@ -821,17 +856,17 @@
             21
           ],
           "content": [
-            "A 25 ft ladder makes a $70^\\circ$ angle with the ground. Find its vertical reach."
+            "Solve right triangle $ABC$ with $C=90^\\circ$, $a=150$ and $c=345$: find $b$, $A$ and $B$."
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify the ladder calculation.",
-            "Check the labeled geometry and accessibility text of ladder.svg."
+            "Verify A ≈ 25.8°, B ≈ 64.2°, b ≈ 310.7 (Prof. Young lists b = 311, A = 25.8°).",
+            "Check the labeled geometry and accessibility text of solve-triangle.svg."
           ],
           "steps": [
-            "$\\sin70^\\circ=h/25$.",
-            "$h=25\\sin70^\\circ\\approx23.49$ ft.",
-            "The height is less than the 25 ft hypotenuse."
+            "$\\sin A=\\tfrac{150}{345}$, so $A=\\sin^{-1}\\!\\left(\\tfrac{150}{345}\\right)\\approx25.8^\\circ$. Type the parentheses: $\\sin^{-1}(150\\div345)$.",
+            "$B=90^\\circ-A\\approx64.2^\\circ$, and $b=\\sqrt{345^2-150^2}\\approx310.7$.",
+            "Check: $25.8^\\circ+64.2^\\circ+90^\\circ=180^\\circ$ and $150^2+310.7^2\\approx345^2$."
           ],
           "audit_checks": [
             "u3a-applications"
@@ -839,9 +874,9 @@
           "visual_layout": "split",
           "assets": [
             {
-              "src": "assets/math130unit3a/visuals/ladder.svg",
-              "alt": "A ladder 25 feet long leans against a wall. It makes a 70 degree angle with the ground. A dashed vertical segment h runs from the top of the ladder down to the ground and meets it at a right angle. The figure is drawn to scale.",
-              "caption": "Drawn to scale. h is opposite the 70° angle."
+              "src": "assets/math130unit3a/visuals/solve-triangle.svg",
+              "alt": "Right triangle ABC with the right angle at C. Side a, opposite A, is 150; the hypotenuse c is 345. Side b and angles A and B are unknown. Drawn to scale.",
+              "caption": "Drawn to scale. Find the side b and both acute angles."
             }
           ]
         },
@@ -926,7 +961,7 @@
           ],
           "content": [
             "A leg must be shorter than the hypotenuse.",
-            "Keep the calculator in degree mode.",
+            "Degree mode, and parentheses for inverse trig: $\\sin^{-1}(5.5\\div6.5)$, not $\\sin^{-1}5.5\\div6.5$.",
             "In two-triangle problems, keep $d$ and $d+50$ with the right angles, and round only at the end."
           ],
           "instructor_notes": [
@@ -949,7 +984,7 @@
             25
           ],
           "content": [
-            "List the diagram, ratio, solve, and reasonableness-check steps."
+            "List the steps to solve a right triangle and the two checks you finish with."
           ],
           "instructor_notes": [
             "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
