@@ -19,7 +19,7 @@
     },
     {
       "id": "u3b-values",
-      "text": "find exact trigonometric values from points and reference angles"
+      "text": "find exact trigonometric values from points and reference angles, and solve sine and cosine equations"
     },
     {
       "id": "u3b-area",
@@ -34,12 +34,12 @@
       "output": "Math130Unit3B.html",
       "duration_minutes": 55,
       "min_slides": 22,
-      "max_slides": 28,
+      "max_slides": 29,
       "rehearsal": {
         "status": "pending_live_rehearsal",
         "planned_instruction_minutes": 50.0,
         "reserved_buffer_minutes": 5,
-        "available_flex_minutes": 5.0,
+        "available_flex_minutes": 0.0,
         "stopping_points": [
           {
             "after_block": "math130unit3b-u3b-reference-synthesize",
@@ -53,7 +53,7 @@
           },
           {
             "after_block": "math130unit3b-u3b-values-synthesize",
-            "planned_elapsed": 36.5,
+            "planned_elapsed": 41.5,
             "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
           },
           {
@@ -78,7 +78,7 @@
           "source_slides": [],
           "content": [
             "Concepts, worked examples, student practice, and synthesis",
-            "Module 11"
+            "Unit 3B"
           ]
         },
         {
@@ -99,7 +99,7 @@
           "content": [
             "find reference angles in degrees and radians",
             "determine trigonometric signs and quadrants",
-            "find exact trigonometric values from points and reference angles",
+            "find exact trigonometric values from points and reference angles, and solve sine and cosine equations",
             "apply the trigonometric triangle-area formula"
           ]
         },
@@ -139,7 +139,17 @@
             "First find a coterminal angle when the original lies outside one rotation."
           ],
           "instructor_notes": [],
-          "verification": []
+          "verification": [
+            "Check the labeled geometry and accessibility text of reference-angles.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/reference-angles.svg",
+              "alt": "Four small sets of axes, one per quadrant. In each, a teal terminal side makes an angle theta from the positive x-axis, and an orange arc marks the reference angle theta prime, measured to the nearest part of the x-axis. Quadrant I: theta prime equals theta. Quadrant II: 180 degrees minus theta. Quadrant III: theta minus 180 degrees. Quadrant IV: 360 degrees minus theta.",
+              "caption": "Measure the reference angle to the nearest part of the x-axis."
+            }
+          ]
         },
         {
           "id": "math130unit3b-u3b-reference-model",
@@ -268,7 +278,17 @@
             "Signs follow from x, y, and positive r."
           ],
           "instructor_notes": [],
-          "verification": []
+          "verification": [
+            "Check the labeled geometry and accessibility text of astc.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/astc.svg",
+              "alt": "Coordinate axes with the four quadrants. Quadrant I: all functions positive, x and y positive. Quadrant II: sine and cosecant positive, x negative and y positive. Quadrant III: tangent and cotangent positive, x and y negative. Quadrant IV: cosine and secant positive, x positive and y negative. A note says sine is y over r, cosine is x over r, tangent is y over x, and r is always positive.",
+              "caption": "The signs of x and y decide each function’s sign."
+            }
+          ]
         },
         {
           "id": "math130unit3b-u3b-signs-model",
@@ -410,7 +430,8 @@
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify exact values and quadrant signs."
+            "Verify exact values and quadrant signs.",
+            "Check the labeled geometry and accessibility text of point-ratios.svg."
           ],
           "steps": [
             "$r=\\sqrt{(-3)^2+4^2}=5$.",
@@ -419,6 +440,14 @@
           ],
           "audit_checks": [
             "u3b-values"
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/point-ratios.svg",
+              "alt": "Axes with the point P at negative 3, 4 in Quadrant II. A right triangle drops from P to the x-axis: horizontal leg x equals negative 3, vertical leg y equals 4, and the segment from the origin to P has length r equal to 5. The reference angle theta prime is between the terminal side and the negative x-axis.",
+              "caption": "r comes from the Pythagorean theorem and is always positive."
+            }
           ]
         },
         {
@@ -447,6 +476,63 @@
           ]
         },
         {
+          "id": "math130unit3b-u3b-values-solve-model",
+          "title": "Model the Skill: solve a sine or cosine equation",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Find all $\\theta$ in $[0^\\circ,360^\\circ)$ with $\\sin\\theta=-\\tfrac{\\sqrt2}{2}$."
+          ],
+          "steps": [
+            "Reference angle: $\\sin\\theta'=\\tfrac{\\sqrt2}{2}$ gives $\\theta'=45^\\circ$.",
+            "Sine is negative in Quadrants III and IV.",
+            "$\\theta=180^\\circ+45^\\circ=225^\\circ$ and $\\theta=360^\\circ-45^\\circ=315^\\circ$."
+          ],
+          "instructor_notes": [
+            "Quiz 10 has one sine and one cosine equation of this kind; stress that there are two answers on one rotation."
+          ],
+          "verification": [
+            "Verify sin 225° = sin 315° = −√2/2.",
+            "Check the labeled geometry and accessibility text of solve-sine.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/solve-sine.svg",
+              "alt": "A unit circle with a dashed horizontal line at y equals negative root 2 over 2. It crosses the circle at two points, on terminal sides at 225 degrees in Quadrant III and 315 degrees in Quadrant IV. Each makes a 45 degree reference angle with the x-axis.",
+              "caption": "Two terminal sides meet the line y = −√2/2."
+            }
+          ]
+        },
+        {
+          "id": "math130unit3b-u3b-values-solve-practice",
+          "title": "You Try: solve a cosine equation",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Find all $\\theta$ in $[0^\\circ,360^\\circ)$ with $\\cos\\theta=-\\tfrac{\\sqrt2}{2}$."
+          ],
+          "answer": [
+            "Reference angle $45^\\circ$; cosine is negative in Quadrants II and III, so $\\theta=135^\\circ$ and $\\theta=225^\\circ$."
+          ],
+          "verification": [
+            "Verify cos 135° = cos 225° = −√2/2."
+          ],
+          "instructor_notes": [
+            "Students should name the quadrants before computing."
+          ]
+        },
+        {
           "id": "math130unit3b-u3b-values-feedback",
           "title": "Check and Diagnose: find exact trigonometric values from points and reference angles",
           "phase": "feedback",
@@ -460,7 +546,8 @@
           ],
           "content": [
             "r is always positive.",
-            "Rationalize denominators only when required by course convention."
+            "Rationalize denominators only when required by course convention.",
+            "An equation like $\\sin\\theta=k$ has two answers on one rotation; find both."
           ],
           "instructor_notes": [
             "Ask students to explain why the incorrect path fails."
@@ -574,7 +661,8 @@
           "verification": [],
           "answer": [
             "$A=\\tfrac12(12)(15)\\sin40^\\circ\\approx57.85$."
-          ]
+          ],
+          "optional": true
         },
         {
           "id": "math130unit3b-u3b-area-feedback",
@@ -597,7 +685,8 @@
           ],
           "verification": [
             "Verify all triangle-area calculations."
-          ]
+          ],
+          "optional": true
         },
         {
           "id": "math130unit3b-u3b-area-synthesize",
