@@ -973,7 +973,8 @@
       <div class="learning-step__actions">
         <a class="learning-action--primary" href="slides/Math130Unit3A.html" target="_blank" rel="noopener">Learn with 3A</a>
         <a href="slides/Math130Unit3B.html" target="_blank" rel="noopener">Continue with 3B</a>
-        <button type="button" onclick="launchUnitCheckpoint(6)">Quiz 10 checkpoint</button>
+        <button type="button" onclick="launchUnitCheckpoint(5)">Quiz 10 checkpoint (5.1–5.2)</button>
+        <button type="button" onclick="launchUnitCheckpoint(6)">Section 5.3 checkpoint</button>
       </div>
     </article>
     <article class="learning-step">
@@ -1192,11 +1193,11 @@
 <p class="review-callout__body review-callout__body--sm u-text-center">Quizzes 10 to 12 check each step of Unit 3, and Quiz 13 is a cumulative readiness check for Test 3. Dates are on the <a href="/courses/math130.html#test-3">MATH 130 page</a>.</p>
 <div class="review-option-grid">
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(5)">
-<div class="review-option-title">Topic practice — Sections 5.1–5.2 foundations</div>
-<div class="review-option-copy">Coterminal angles + exact trig triangle skills</div>
+<div class="review-option-title">Quiz 10 practice — Sections 5.1–5.2</div>
+<div class="review-option-copy">Coterminal angles, the six ratios of a right triangle, and one ratio from another</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(6)">
-<div class="review-option-title">Planned Quiz 10 practice — Section 5.3</div>
+<div class="review-option-title">Section 5.3 practice</div>
 <div class="review-option-copy">Reference angles, signs, and solving trig equations on 0°–360°</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
@@ -1252,9 +1253,9 @@
 </div>
 <div class="slides-grid">
 <div class="slide-card">
-<h3>Quiz 10 Notes + Practice (Section 5.3)</h3>
-<p class="slide-subtitle">A printable reference-angle notes sheet and a dedicated practice set for the planned Quiz 10 skills.</p>
-<div class="slide-actions"><a class="btn-primary" href="/130quiz10.html" target="_blank" rel="noopener noreferrer"><i data-lucide="clipboard-check"></i><span>Open Quiz 10 Practice</span></a> <a class="btn-secondary" href="/130Q10.html" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>Printable Notes</span></a></div>
+<h3>Quiz 10 Practice (Sections 5.1–5.2)</h3>
+<p class="slide-subtitle">Coterminal angles, the six trig ratios of a right triangle, and finding one ratio from another. The Section 5.3 notes and practice are linked as well.</p>
+<div class="slide-actions"><a class="btn-primary" href="/130quiz10.html" target="_blank" rel="noopener noreferrer"><i data-lucide="clipboard-check"></i><span>Open Quiz 10 Practice</span></a> <a class="btn-secondary" href="/130-section-5-3-practice.html" target="_blank" rel="noopener noreferrer"><i data-lucide="list-checks"></i><span>Section 5.3 Practice</span></a> <a class="btn-secondary" href="/130Q10.html" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>Section 5.3 Notes</span></a></div>
 </div>
 <div class="slide-card">
 <h3>Skyhawk Trig (Section 7.1)</h3>
@@ -1336,7 +1337,7 @@
 </div>
 </div>
 </div>
-<script src="assets/js/math130-test3-skills.js?v=20261102-2"></script>
+<script src="assets/js/math130-test3-skills.js?v=20261111-1"></script>
 <script>
     // --- ICON REFRESH (debounced to prevent redundant DOM walks) ---
     let _iconTimer = null;
@@ -1583,7 +1584,7 @@
             const period = rad ? 2 * Math.PI : 360;
             const v = parseExact(entries[0]);
             const k = v === null ? 0 : Math.round((v - base) / period);
-            parts = [k !== 0 && close(entries[0], base + period * k, question.tol)];
+            parts = [k !== 0 && close(entries[0], base + period * k, question.tol) && (!question.sign || Math.sign(v) === question.sign)];
         } else if (question.inputType === 'two_angle_solutions') {
             const direct=[close(entries[0],question.a.x,question.tol.x),close(entries[1],question.a.y,question.tol.y)];
             const swapped=[close(entries[0],question.a.y,question.tol.y),close(entries[1],question.a.x,question.tol.x)];
@@ -1811,22 +1812,28 @@
     const definitions = [
         { id: 'angle_coterminal', section: 'Section 5.1', label: 'Coterminal Angles (Degrees)',
           generate: (r = Math.random) => {
-            const theta = sampledAngle(r,180), answer = theta + 360;
+            const theta = sampledAngle(r,180), wantPos = r() < 0.5;
+            const answer = wantPos ? (theta >= 0 ? theta + 360 : theta + 360*(Math.floor(-theta/360)+1))
+                                   : (theta <= 0 ? theta - 360 : theta - 360*(Math.floor(theta/360)+1));
+            const word = wantPos ? 'positive' : 'negative';
             const normalizedThetaDeg = normalizeDegrees(theta), turnCount = Math.round((theta-normalizedThetaDeg)/360);
             const svgAltText = `Angle ${theta} degrees with terminal side at ${normalizedThetaDeg} degrees.`;
-            return {q:`Find one coterminal angle for $${theta}^\\circ$ different from the given angle. Enter an integer in degrees.`,
+            const turns = Math.round((answer-theta)/360);
+            return {q:`Find a <strong>${word}</strong> angle that is coterminal with $${theta}^\\circ$ and different from it. Enter an integer in degrees.`,
                 svg:createCoterminalAngleSvg({originalThetaDeg:theta,normalizedThetaDeg,turnCount,fallbackText:svgAltText}),svgAltText,
-                inputType:'coterminal_deg',baseTheta:theta,tol:0,
-                solution:`Add a full turn: $${signedTerm(theta,360)}=${answer}^\\circ$. Any nonzero integer number of full turns gives another coterminal angle.`};
+                inputType:'coterminal_deg',baseTheta:theta,sign:wantPos?1:-1,tol:0,
+                solution:`${turns>0?'Add':'Subtract'} ${Math.abs(turns)===1?'one full turn':Math.abs(turns)+' full turns'}: $${theta}^\\circ${turns>0?'+':'-'}${Math.abs(turns)*360}^\\circ=${answer}^\\circ$, which is ${word}. Any ${word} angle that differs from $${theta}^\\circ$ by a multiple of $360^\\circ$ is also correct.`};
           } },
 
         { id:'angle_coterminal_rad',section:'Section 5.1',label:'Coterminal Angles (Radians)',
           generate:(r = Math.random) => {
-            const d=pick(r,[3,4,6,12]),n=int(r,1,8*d)*(r()<0.5?-1:1);
-            return {q:`Find one coterminal angle for $${piFraction(n,d)}$ radians different from the given angle. Enter an exact value or round to 3 decimals.`,
-                inputType:'coterminal_rad',baseThetaRad:n*Math.PI/d,tol:0.001,
+            const d=pick(r,[3,4,6,9,12]),n=int(r,1,8*d)*(r()<0.5?-1:1),wantPos=r()<0.5,full=2*d;
+            const m = wantPos ? (n >= 0 ? n+full : n+full*(Math.floor(-n/full)+1)) : (n <= 0 ? n-full : n-full*(Math.floor(n/full)+1));
+            const word = wantPos ? 'positive' : 'negative', turns = Math.round((m-n)/full);
+            return {q:`Find a <strong>${word}</strong> angle that is coterminal with $${piFraction(n,d)}$ radians and different from it. Enter an exact value or round to 3 decimals.`,
+                inputType:'coterminal_rad',baseThetaRad:n*Math.PI/d,sign:wantPos?1:-1,tol:0.001,
                 entryNote:'Type pi for $\\pi$, for example 5pi/12.',
-                solution:`Add $2\\pi$: $${piFraction(n,d)}+2\\pi=${piFraction(n+2*d,d)}\\approx ${fixed((n+2*d)*Math.PI/d,3)}$ radians.`};
+                solution:`${turns>0?'Add':'Subtract'} ${Math.abs(turns)===1?'$2\\pi$':'$'+(2*Math.abs(turns))+'\\pi$'}: $${piFraction(n,d)}${turns>0?'+':'-'}${piFraction(Math.abs(turns)*full,d)}=${piFraction(m,d)}\\approx ${fixed(m*Math.PI/d,3)}$ radians, which is ${word}.`};
           } },
 
         {id:'arc_length',section:'Section 5.1',label:'Arc Length and Central Angle',generate:(r=Math.random)=>{
@@ -2126,6 +2133,26 @@
 
         {id:'trig_from_given_ratio',section:'Section 5.2',label:'Find Another Trigonometric Ratio',
          generate:(r = Math.random) => {
+            if (r() < 0.45) {
+                // Radical case: one leg is a square root, as in cos θ = √a/c.
+                const [c,b]=pick(r,[[4,3],[6,5],[7,4],[7,5],[8,3],[8,7],[9,4],[9,7],[10,7],[11,6]]), a=c*c-b*b;
+                const givenFn=pick(r,['sin','cos']), rootLeg=givenFn==='sin'?'opp':'adj';
+                const opp=rootLeg==='opp'?Math.sqrt(a):b, adj=rootLeg==='adj'?Math.sqrt(a):b;
+                const S=`\\sqrt{${a}}`;
+                const exact={opp:rootLeg==='opp'?S:`${b}`,adj:rootLeg==='adj'?S:`${b}`};
+                const rat=(num,den)=>{ // exact ratio with rationalized denominator
+                    if (num==='root') return `\\frac{\\sqrt{${a}}}{${den}}`;
+                    if (den==='root') { const g=gcd(num,a), k=num/g, q=a/g, top=(k===1?'':k)+`\\sqrt{${a}}`; return q===1?top:`\\frac{${top}}{${q}}`; }
+                    return fraction(num,den);
+                };
+                const o=rootLeg==='opp'?'root':b, ad=rootLeg==='adj'?'root':b;
+                const vals={sin:[o,c],cos:[ad,c],tan:[o,ad],csc:[c,o],sec:[c,ad],cot:[ad,o]};
+                const target=pick(r,trigNames.filter(f=>f!==givenFn&&f!==(givenFn==='sin'?'csc':'sec')));
+                const [tn,td]=vals[target], num=n=>n==='root'?Math.sqrt(a):n;
+                return {q:`For an acute angle $\\theta$, $\\${givenFn}\\theta=\\frac{\\sqrt{${a}}}{${c}}$. Find $\\${target}\\theta$. Enter an exact value (type sqrt(${a}) for $\\sqrt{${a}}$) or round to 4 decimals.`,
+                    inputType:'exact',a:num(tn)/num(td),tol:0.0001,
+                    solution:`Label the triangle from $\\${givenFn}\\theta=\\frac{\\sqrt{${a}}}{${c}}$: ${rootLeg==='opp'?'opposite':'adjacent'} $=\\sqrt{${a}}$, hypotenuse $=${c}$. The Pythagorean theorem gives the other leg: $\\sqrt{${c}^2-(\\sqrt{${a}})^2}=\\sqrt{${c*c}-${a}}=${b}$. So opposite $=${exact.opp}$ and adjacent $=${exact.adj}$, and $\\${target}\\theta=${rat(tn,td)}\\approx ${fixed(num(tn)/num(td),4)}$. Rationalize any square root in the denominator.`};
+            }
             const [adj,opp,hyp]=pick(r,[[3,4,5],[5,12,13],[8,15,17],[7,24,25],[20,21,29],[9,40,41],[12,35,37],[11,60,61],[28,45,53],[33,56,65]]);
             const ratios={sin:[opp,hyp],cos:[adj,hyp],tan:[opp,adj],csc:[hyp,opp],sec:[hyp,adj],cot:[adj,opp]};
             const known=pick(r,trigNames),target=pick(r,trigNames.filter(f=>f!==known)),[n,d]=ratios[target];
@@ -3226,14 +3253,14 @@
     // --- MOCK QUIZ MODE ---
     const QUIZ_CONFIG = {
         5: {
-            label: 'Topic practice — Sections 5.1–5.2 (Core Skills)',
+            label: 'Quiz 10 — Sections 5.1–5.2 (Core Skills)',
             sections: ['Section 5.1', 'Section 5.2'],
-            requiredIds: ['angle_coterminal', 'angle_coterminal_rad', 'trig_ratio', 'right_triangle_word_problem', 'trig_from_given_ratio'],
+            requiredIds: ['angle_coterminal', 'angle_coterminal_rad', 'trig_ratios_several', 'trig_from_given_ratio', 'trig_ratio'],
             excludedIds: ['trig_calculator_values', 'angle_unit_conversion'],
             count: 5
         },
         6: {
-            label: 'Quiz 10 — Section 5.3 (Core Skills)',
+            label: 'Section 5.3 Practice (Core Skills)',
             sections: ['Section 5.3'],
             requiredIds: ['reference_angle_deg', 'quadrant_signs', 'trig_values_from_info', 'solve_trig_equation_special'],
             count: 5

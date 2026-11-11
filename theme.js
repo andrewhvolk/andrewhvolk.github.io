@@ -356,7 +356,7 @@ const math130FallSchedule = [
     ['Week 11', 'Nov 4', 'Wed', '5.2'],
     ['Week 11', 'Nov 6', 'Fri', '5.2'],
     ['Week 12', 'Nov 9', 'Mon', '5.3'],
-    ['Week 12', 'Nov 11', 'Wed', '5.3; ALEKS 5.1/5.2 due; Quiz 10 on paper (Canvas master date 2:10 PM)'],
+    ['Week 12', 'Nov 11', 'Wed', '5.3; ALEKS 5.1/5.2 due; Quiz 10 (5.1-5.2) on paper (Canvas master date 2:10 PM)'],
     ['Week 12', 'Nov 13', 'Fri', '5.3'],
     ['Week 13', 'Nov 16', 'Mon', '5.7, 7.1'],
     ['Week 13', 'Nov 18', 'Wed', '7.1; ALEKS 5.3/5.7 due; Quiz 11 on paper (Canvas master date 2:10 PM)'],
@@ -389,7 +389,7 @@ const math130CanvasDueDates = [
     ['2026-10-21T14:10:00', 'Oct 21 at 2:10 PM', 'Quiz 8 on paper'],
     ['2026-10-28T14:10:00', 'Oct 28 at 2:10 PM', 'Take-home Quiz 9 on circles due at the start of class'],
     ['2026-10-30T14:10:00', 'Oct 30 at 2:10 PM', 'ALEKS Geometry; Test 2 on paper'],
-    ['2026-11-11T14:10:00', 'Nov 11 at 2:10 PM', 'ALEKS 5.1/5.2; Quiz 10 on paper'],
+    ['2026-11-11T14:10:00', 'Nov 11 at 2:10 PM', 'ALEKS 5.1/5.2; Quiz 10 (5.1-5.2) on paper'],
     ['2026-11-18T14:10:00', 'Nov 18 at 2:10 PM', 'ALEKS 5.3/5.7; Quiz 11 on paper'],
     ['2026-11-30T14:10:00', 'Nov 30 at 2:10 PM', 'ALEKS 7.1'],
     ['2026-12-02T14:10:00', 'Dec 2 at 2:10 PM', 'ALEKS 8.4; Quiz 12 on paper'],
@@ -461,8 +461,9 @@ const math130FallPageMap = {
     '/130Test2.html': { type: 'unit', key: 'unit2', title: 'Test 2 Review', prev: '/130Test1.html', next: '/130Test3.html' },
     '/130Test3.html': { type: 'unit', key: 'unit3', title: 'Test 3 Review', prev: '/130Test2.html', next: '/130Test4.html' },
     '/130Test4.html': { type: 'unit', key: 'final', title: 'Final Exam Practice Lab', prev: '/130Test3.html', next: '/math130_final_lecture.html', finalPage: true },
-    '/130Q10.html': { type: 'support', key: 'unit3', title: 'Quiz 10 Notes', prev: '/130Test3.html', next: '/130quiz10.html' },
-    '/130quiz10.html': { type: 'support', key: 'unit3', title: 'Quiz 10 Practice', prev: '/130Q10.html', next: '/130Test3.html' },
+    '/130quiz10.html': { type: 'support', key: 'unit3', title: 'Quiz 10 Practice (5.1-5.2)', prev: '/130Test3.html', next: '/130Q10.html' },
+    '/130Q10.html': { type: 'support', key: 'unit3', title: 'Section 5.3 Notes', prev: '/130quiz10.html', next: '/130-section-5-3-practice.html' },
+    '/130-section-5-3-practice.html': { type: 'support', key: 'unit3', title: 'Section 5.3 Practice', prev: '/130Q10.html', next: '/130Test3.html' },
     '/math130_final_lecture.html': { type: 'support', key: 'final', title: 'Final Exam Lecture Prep', prev: '/130Test4.html', next: '/courses/math130.html', finalPage: true }
 };
 

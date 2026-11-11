@@ -15,6 +15,7 @@ const renderedMath = new Set();
 const baseline = process.argv.includes('--baseline');
 const html = baseline ? cp.execFileSync('git', ['show', 'ac64a8c:130Test3.html'], { cwd: root, encoding: 'utf8' }) : fs.readFileSync(path.join(root, '130Test3.html'), 'utf8');
 const gcd = (a,b) => b ? gcd(b,a%b) : Math.abs(a);
+const cotermAnswer=(base,period,sign)=>{let v=base+(sign<0?-period:period);while(Math.sign(v)!==(sign||1)||Math.abs(v-base)<1e-9)v+=(sign<0?-period:period);return v;};
 const targets = {solve_trig_equation_special:36,quadrant_signs:24,trig_from_given_ratio:50,reference_angle_rad:60,angle_coterminal_rad:80,vector_from_mag_dir:100,trig_calculator_values:100,angle_coterminal:150,arc_length:150};
 const seed = 1302026;
 function legacyGenerators() {
@@ -163,7 +164,7 @@ function recompute(g,p) {
         if(fn==='sin'||fn==='csc'){h=1;o=fn==='sin'?v:1/v;a=Math.sqrt(1-o*o);}
         else if(fn==='cos'||fn==='sec'){h=1;a=fn==='cos'?v:1/v;o=Math.sqrt(1-a*a);}
         else {a=1;o=fn==='tan'?v:1/v;h=Math.hypot(a,o);}
-        const target=maths.at(-1).match(/\\(sin|cos|tan|csc|sec|cot)/)[1];answer={sin:o/h,cos:a/h,tan:o/a,csc:h/o,sec:h/a,cot:a/o}[target];break;
+        const target=maths.filter(x=>/\\(sin|cos|tan|csc|sec|cot)/.test(x)).at(-1).match(/\\(sin|cos|tan|csc|sec|cot)/)[1];answer={sin:o/h,cos:a/h,tan:o/a,csc:h/o,sec:h/a,cot:a/o}[target];break;
     }
     case 'solve_trig_equation_special': {
         const m=q.match(/\\(sin|cos|tan)\\theta=([^$]+)/),v=texNumber(m[2]);let angles;
@@ -199,15 +200,15 @@ function recompute(g,p) {
 function entries(p) {
     if(p.fields)return p.fields.map(f=>String(f.answer));
     if(p.inputType==='bearing')return [`${p.a.ns} ${p.a.angle.toFixed(1)} ${p.a.ew}`];
-    if(p.inputType==='coterminal_deg')return [String(p.baseTheta+360)];
-    if(p.inputType==='coterminal_rad')return [String(p.baseThetaRad+2*Math.PI)];
+    if(p.inputType==='coterminal_deg')return [String(cotermAnswer(p.baseTheta,360,p.sign))];
+    if(p.inputType==='coterminal_rad')return [String(cotermAnswer(p.baseThetaRad,2*Math.PI,p.sign))];
     return typeof p.a==='object'?Object.values(p.a).map(String):[String(p.a)];
 }
 function roundedEntries(p) {
     const round=(v,t)=>t>0?v.toFixed(Math.round(-Math.log10(t))):String(v);
     if(p.fields)return p.fields.map(f=>round(f.answer,f.tolerance));
     if(p.inputType==='bearing'||p.inputType==='choice')return entries(p);
-    if(p.inputType==='coterminal_rad')return [(p.baseThetaRad+2*Math.PI).toFixed(3)];
+    if(p.inputType==='coterminal_rad')return [cotermAnswer(p.baseThetaRad,2*Math.PI,p.sign).toFixed(3)];
     if(p.inputType==='coterminal_deg')return entries(p);
     return typeof p.a==='object'?Object.keys(p.a).map(k=>round(p.a[k],p.tol[k])):[round(p.a,p.tol)];
 }
