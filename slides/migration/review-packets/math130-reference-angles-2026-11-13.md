@@ -11,7 +11,7 @@
 
 | Objective | Activate | Explain | Model | Practice | Feedback | Synthesize |
 |---|---:|---:|---:|---:|---:|---:|
-| find exact trigonometric values from points and reference angles | yes | yes | yes | yes | yes | yes |
+| find exact trigonometric values from points and reference angles, and solve sine and cosine equations | yes | yes | yes | yes | yes | yes |
 | find reference angles in degrees and radians | yes | yes | yes | yes | NO | NO |
 | determine trigonometric signs and quadrants | yes | NO | NO | yes | NO | NO |
 

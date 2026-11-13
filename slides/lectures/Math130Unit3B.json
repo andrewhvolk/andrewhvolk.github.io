@@ -19,7 +19,7 @@
     },
     {
       "id": "u3b-values",
-      "text": "find exact trigonometric values from points and reference angles"
+      "text": "find exact trigonometric values from points and reference angles, and solve sine and cosine equations"
     },
     {
       "id": "u3b-area",
@@ -656,6 +656,67 @@
           ],
           "verification": [],
           "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+        },
+        {
+          "id": "math130unit3b-u3b-values-solve-model",
+          "title": "Model the Skill: solve a sine or cosine equation",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 3.0,
+          "source_slides": [],
+          "content": [
+            "Find all $\\theta$ in $[0^\\circ,360^\\circ)$ with $\\sin\\theta=-\\tfrac{\\sqrt2}{2}$."
+          ],
+          "steps": [
+            "Reference angle: $\\sin\\theta'=\\tfrac{\\sqrt2}{2}$ gives $\\theta'=45^\\circ$.",
+            "Sine is negative in Quadrants III and IV.",
+            "$\\theta=180^\\circ+45^\\circ=225^\\circ$ and $\\theta=360^\\circ-45^\\circ=315^\\circ$."
+          ],
+          "instructor_notes": [
+            "Quiz 10 has one sine and one cosine equation of this kind; stress that there are two answers on one rotation.",
+            "Retained from the November 9 lesson as an optional exact-equation example."
+          ],
+          "verification": [
+            "Verify sin 225° = sin 315° = −√2/2.",
+            "Check the labeled geometry and accessibility text of solve-sine.svg."
+          ],
+          "visual_layout": "split",
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/solve-sine.svg",
+              "alt": "A unit circle with a dashed horizontal line at y equals negative root 2 over 2. It crosses the circle at two points, on terminal sides at 225 degrees in Quadrant III and 315 degrees in Quadrant IV. Each makes a 45 degree reference angle with the x-axis.",
+              "caption": "Two terminal sides meet the line y = −√2/2."
+            }
+          ],
+          "optional": true
+        },
+        {
+          "id": "math130unit3b-u3b-values-solve-practice",
+          "title": "You Try: solve a cosine equation",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2.0,
+          "source_slides": [],
+          "content": [
+            "Find all $\\theta$ in $[0^\\circ,360^\\circ)$ with $\\cos\\theta=-\\tfrac{\\sqrt2}{2}$."
+          ],
+          "answer": [
+            "Reference angle $45^\\circ$; cosine is negative in Quadrants II and III, so $\\theta=135^\\circ$ and $\\theta=225^\\circ$."
+          ],
+          "verification": [
+            "Verify cos 135° = cos 225° = −√2/2."
+          ],
+          "instructor_notes": [
+            "Students should name the quadrants before computing.",
+            "Retained from the November 9 lesson as an optional exact-equation example."
+          ],
+          "optional": true
         },
         {
           "id": "math130unit3b-equation-model",

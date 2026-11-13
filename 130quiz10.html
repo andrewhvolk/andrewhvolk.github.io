@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Math 130 – Section 5.3 Practice</title>
+<title>Math 130 – Quiz 10 Practice | Sections 5.1–5.2</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -40,7 +40,6 @@
   .overview { background: var(--ink); color: var(--paper); border-radius: 2px; padding: 2rem 2.2rem; margin-bottom: 2.5rem; }
   .overview h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 1rem; border-bottom: 1px solid rgba(201,146,42,0.3); padding-bottom: 0.5rem; }
   .overview p { font-size: 0.95rem; color: rgba(247,243,237,0.82); margin-bottom: 0.5rem; }
-  .overview a { color: var(--gold); text-decoration: underline; }
   .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; margin-top: 1.2rem; }
   .topic-item { display: flex; align-items: flex-start; gap: 0.55rem; font-size: 0.88rem; color: rgba(247,243,237,0.75); }
   .topic-item .bullet { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 0.1rem; flex-shrink: 0; }
@@ -175,6 +174,7 @@
     .progress-wrap { width: 100%; margin: 0; }
   }
 </style>
+<style>.trig-table input[type="text"] { width: 150px; max-width: 100%; }</style>
 <style id="m130-topbar-style">
   .m130-topbar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 16px; margin: 0; padding: 10px max(16px, env(safe-area-inset-left)); background: #f7f5f0; border-bottom: 1px solid #e4e0d8; color: #66625b; font: 15px/1.45 "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif; position: relative; z-index: 50; }
   .m130-topbar a { color: #2d5b8c; font-weight: 600; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
@@ -184,13 +184,13 @@
 </style>
 </head>
 <body>
-<nav class="m130-topbar" aria-label="Course"><a href="/courses/math130.html#sections-5-3-and-5-7"><span aria-hidden="true">&larr;</span>&nbsp;MATH 130</a><span>Section 5.3 practice: reference angles, signs, and trig values.</span></nav>
+<nav class="m130-topbar" aria-label="Course"><a href="/courses/math130.html#sections-5-1-5-3"><span aria-hidden="true">&larr;</span>&nbsp;MATH 130</a><span>Practice for Sections 5.1 and 5.2, before Quiz 10.</span></nav>
 
 <header>
   <div class="header-inner">
-    <div class="course-tag">Math 130 &nbsp;·&nbsp; Fall 2026 &nbsp;·&nbsp; Planned Section 5.3 Coverage</div>
-    <h1>Section 5.3 <em>Practice</em></h1>
-    <div class="subtitle">Reference Angles &amp; Trigonometric Functions</div>
+    <div class="course-tag">Math 130 &nbsp;·&nbsp; Fall 2026 &nbsp;·&nbsp; Sections 5.1–5.2</div>
+    <h1>Quiz 10 <em>Practice</em></h1>
+    <div class="subtitle">Coterminal Angles &amp; Right-Triangle Trigonometry</div>
   </div>
 </header>
 
@@ -198,478 +198,311 @@
 
   <!-- OVERVIEW -->
   <div class="overview">
-    <h2>Section 5.3 practice</h2>
-    <p>You can revise an answer and check it again. Equivalent fractions and decimals are accepted. The score shows your latest checked answers. To check your understanding on fresh questions, try <a href="130Test3.html?skill=trig_values_from_point">randomized signed-point problems</a> or <a href="130Test3.html?practice=aviation">aviation practice in the Spring Quiz 11 format</a>.</p>
-    <p>This practice focuses on <strong>Section 5.3</strong> — using reference angles to evaluate trig functions for any angle, identifying quadrants from sign conditions, and finding all angles that produce a given trig value. The next scheduled quiz is <strong>Quiz 11, Wednesday, Nov 18 at 2:10 PM</strong>. Check Canvas or class announcements for official coverage and any changes.</p>
+    <h2>Quiz 10 practice</h2>
+    <p>Quiz 10 is on paper on <strong>Wednesday, November 11, at 2:10 PM</strong>. It covers <strong>Sections 5.1 and 5.2</strong>. Show your work on the quiz for full credit, and give exact values (fractions and simplified square roots, not decimals). On this page you can check each answer as many times as you like.</p>
     <div class="topic-grid">
-      <div class="topic-item"><span class="bullet">▸</span><span>Finding and using <strong>reference angles</strong> (θ′)</span></div>
-      <div class="topic-item"><span class="bullet">▸</span><span>Evaluating <strong>sin, cos, tan</strong> for non-acute angles</span></div>
-      <div class="topic-item"><span class="bullet">▸</span><span>Determining the <strong>quadrant</strong> from sign conditions</span></div>
-      <div class="topic-item"><span class="bullet">▸</span><span>Finding <strong>all solutions</strong> in 0° ≤ θ &lt; 360°, including no solution</span></div>
-      <div class="topic-item"><span class="bullet">▸</span><span>All <strong>six trig functions</strong> from a point (x, y)</span></div>
-      <div class="topic-item"><span class="bullet">▸</span><span>Sketching angles in <strong>standard position</strong></span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>A <strong>positive and a negative coterminal angle</strong> in degrees</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>A <strong>positive and a negative coterminal angle</strong> in radians</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>The <strong>missing side</strong> of a right triangle (Pythagorean Theorem)</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>All <strong>six exact trig ratios</strong> of an acute angle</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>Finding <strong>one ratio from another</strong> for an acute angle</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span><strong>Rationalizing</strong> a square root in a denominator</span></div>
     </div>
   </div>
 
   <!-- 3-STEP WORKFLOW -->
   <div class="workflow">
-    <h3>The 3-Step Process — use this on every trig value problem</h3>
+    <h3>The 3-step process for any right-triangle ratio problem</h3>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <div class="step-title">Find θ′</div>
-        <div class="step-desc">
-          First reduce to 0° ≤ θ &lt; 360°, then use the quadrant formula (for angles off the axes):<br>
-          Q I: <span class="mono">θ′ = θ</span><br>
-          Q II: <span class="mono">θ′ = 180° − θ</span><br>
-          Q III: <span class="mono">θ′ = θ − 180°</span><br>
-          Q IV: <span class="mono">θ′ = 360° − θ</span>
-        </div>
+        <div class="step-title">Label</div>
+        <div class="step-desc">Mark θ. Name the sides relative to θ: <span class="mono">opp</span>, <span class="mono">adj</span>, <span class="mono">hyp</span>. If a ratio is given, read two sides from it.</div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div class="step-title">Evaluate at θ′</div>
-        <div class="step-desc">
-          Look up the trig value for the reference angle using a special triangle. This step always gives a <em>positive</em> number — the magnitude of the answer.
-        </div>
+        <div class="step-title">Find the third side</div>
+        <div class="step-desc">Use <span class="mono">opp² + adj² = hyp²</span>. The hypotenuse is always the longest side.</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div class="step-title">Apply the Sign</div>
-        <div class="step-desc">
-          Use the ASTC chart to decide whether the answer is positive or negative based on which quadrant the original angle θ is in.
-        </div>
+        <div class="step-title">Write the ratios</div>
+        <div class="step-desc">SOH-CAH-TOA, then flip for csc, sec, cot. Simplify, and rationalize any square root in a denominator.</div>
       </div>
     </div>
   </div>
 
-  <!-- WORKED EXAMPLE -->
+  <!-- WORKED EXAMPLE 1: COTERMINAL -->
   <div class="worked">
     <div class="worked-header" id="worked-hdr" onclick="toggleWorked()">
-      <h3>📖 Worked Example — click to expand and see the 3 steps in action</h3>
+      <h3>📖 Worked Example: Coterminal Angles (click to expand)</h3>
       <span class="worked-toggle" id="worked-icon">▼</span>
     </div>
     <div class="worked-body" id="worked-body">
       <div class="worked-inner">
         <div class="example-problem">
-          <strong>Problem:</strong> For θ = 210°, find the reference angle θ′ and then find <strong>sin(210°)</strong> exactly.
+          <strong>Problem:</strong> Find a positive and a negative angle coterminal with (a) 130° and (b) −5π/6.
         </div>
-
         <div class="ex-step">
-          <div class="ex-badge">Step 1</div>
+          <div class="ex-badge">Idea</div>
+          <div class="ex-content">Coterminal angles share the same terminal side. Add or subtract full turns: <span class="mono">360°</span> in degrees, <span class="mono">2π</span> in radians.</div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-badge">(a)</div>
           <div class="ex-content">
-            <strong>Which quadrant?</strong> 210° is between 180° and 270° → <strong>Quadrant III</strong>.<br>
-            Reference angle formula for Q III: <span class="mono">θ′ = θ − 180°</span><br>
-            <span class="mono">θ′ = 210° − 180° = <strong>30°</strong></span>
+            Positive: <span class="mono">130° + 360° = <strong>490°</strong></span><br>
+            Negative: <span class="mono">130° − 360° = <strong>−230°</strong></span>
           </div>
         </div>
-
         <div class="ex-step">
-          <div class="ex-badge">Step 2</div>
+          <div class="ex-badge">(b)</div>
           <div class="ex-content">
-            <strong>Look up sin at the reference angle:</strong><br>
-            From the 30-60-90 triangle: <span class="mono">sin(30°) = 1/2</span><br>
-            The <em>magnitude</em> of the answer is <strong>1/2</strong>.
+            Write 2π with the same denominator: <span class="mono">2π = 12π/6</span>.<br>
+            Positive: <span class="mono">−5π/6 + 12π/6 = <strong>7π/6</strong></span><br>
+            Negative: <span class="mono">−5π/6 − 12π/6 = <strong>−17π/6</strong></span>
           </div>
         </div>
-
         <div class="ex-step">
-          <div class="ex-badge">Step 3</div>
-          <div class="ex-content">
-            <strong>Apply the sign using ASTC:</strong><br>
-            In Quadrant III, only <strong>Tangent</strong> is positive. Sine is <strong>negative</strong>.<br>
-            Final answer: <span class="mono">sin(210°) = <strong>−1/2</strong></span>
-          </div>
-        </div>
-
-        <div class="ex-step">
-          <div class="ex-badge">Bonus</div>
-          <div class="ex-content">
-            <strong>What if the angle is negative, like θ = −5π/6?</strong><br>
-            Negative angles rotate clockwise. First add 2π to get a positive co-terminal angle:<br>
-            <span class="mono">−5π/6 + 2π = 7π/6</span>&nbsp; (which is 210° — same situation as above!)<br>
-            Then follow the same 3 steps. <span class="mono">sin(−5π/6) = −1/2</span>
-          </div>
+          <div class="ex-badge">Check</div>
+          <div class="ex-content">If one full turn does not change the sign (for example 800°), keep subtracting turns: <span class="mono">800° − 2(360°) = 80°</span> and <span class="mono">800° − 3(360°) = −280°</span>.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ASTC + SPECIAL TRIANGLES -->
+  <!-- REFERENCE CARDS -->
   <div class="reference-panel">
-
     <div class="ref-card">
-      <h4>ASTC Sign Chart — which functions are positive?</h4>
-      <div class="astc-grid">
-        <div class="astc-cell q2">
-          <div class="qnum">Q II</div>
-          <div class="pos">S positive</div>
-          <div class="functions">sin, csc ✓<br>cos &amp; tan negative</div>
-        </div>
-        <div class="astc-cell q1">
-          <div class="qnum">Q I</div>
-          <div class="pos">All positive</div>
-          <div class="functions">sin, cos,<br>tan all ✓</div>
-        </div>
-        <div class="astc-cell q3">
-          <div class="qnum">Q III</div>
-          <div class="pos">T positive</div>
-          <div class="functions">tan, cot ✓<br>sin &amp; cos negative</div>
-        </div>
-        <div class="astc-cell q4">
-          <div class="qnum">Q IV</div>
-          <div class="pos">C positive</div>
-          <div class="functions">cos, sec ✓<br>sin &amp; tan negative</div>
-        </div>
+      <h4>SOH-CAH-TOA and the reciprocals</h4>
+      <div class="tri-values">
+        sin θ = <strong>opp/hyp</strong> &nbsp;&nbsp; csc θ = <strong>hyp/opp</strong><br>
+        cos θ = <strong>adj/hyp</strong> &nbsp;&nbsp; sec θ = <strong>hyp/adj</strong><br>
+        tan θ = <strong>opp/adj</strong> &nbsp;&nbsp; cot θ = <strong>adj/opp</strong>
       </div>
-      <p class="astc-note">Memory: <strong>"All Students Take Calculus"</strong></p>
+      <p class="astc-note">Each function in the right column is the reciprocal of the one beside it.</p>
     </div>
-
     <div class="ref-card">
-      <h4>Special Triangle Values</h4>
-      <div class="tri-row">
-        <div class="tri-item">
-          <svg width="82" height="75" viewBox="0 0 82 75">
-            <polygon points="6,69 76,69 76,12" fill="#fff3e0" stroke="#e65100" stroke-width="1.5"/>
-            <text x="40" y="67" font-size="9.5" fill="#666" text-anchor="middle">√3</text>
-            <text x="79" y="44" font-size="9.5" fill="#666">1</text>
-            <text x="32" y="34" font-size="9.5" fill="#e65100" text-anchor="middle">2</text>
-            <text x="13" y="62" font-size="8.5" fill="#888">30°</text>
-            <text x="60" y="28" font-size="8.5" fill="#888">60°</text>
-          </svg>
-          <div class="tri-label">30–60–90</div>
-          <div class="tri-values">
-            sin 30° = <strong>1/2</strong><br>
-            cos 30° = <strong>√3/2</strong><br>
-            sin 60° = <strong>√3/2</strong><br>
-            cos 60° = <strong>1/2</strong>
-          </div>
-        </div>
-        <div class="tri-item">
-          <svg width="78" height="75" viewBox="0 0 78 75">
-            <polygon points="6,69 72,69 6,12" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
-            <text x="38" y="67" font-size="9.5" fill="#666" text-anchor="middle">1</text>
-            <text x="1" y="43" font-size="9.5" fill="#666">1</text>
-            <text x="42" y="36" font-size="9.5" fill="#1565c0" text-anchor="middle">√2</text>
-            <text x="10" y="62" font-size="8.5" fill="#888">45°</text>
-            <text x="10" y="22" font-size="8.5" fill="#888">45°</text>
-          </svg>
-          <div class="tri-label">45–45–90</div>
-          <div class="tri-values">
-            sin 45° = <strong>√2/2</strong><br>
-            cos 45° = <strong>√2/2</strong><br>
-            tan 45° = <strong>1</strong>
-          </div>
-        </div>
+      <h4>Rationalizing a denominator</h4>
+      <div class="tri-values">
+        Multiply the top and bottom by the root:<br>
+        <span class="mono">3/√5 = 3√5/5</span><br>
+        <span class="mono">7/(2√10) = 7√10/20</span><br>
+        Simplify roots first: <span class="mono">√40 = 2√10</span>
       </div>
     </div>
-
   </div>
 
-  <!-- WORKED EXAMPLE 2: SIX TRIG FUNCTIONS FROM A POINT -->
+  <!-- WORKED EXAMPLE 2: RATIO FROM RATIO -->
   <div class="worked">
     <div class="worked-header" id="worked-hdr2" onclick="toggleWorked2()">
-      <h3>📍 Worked Example — Six Trig Functions from a Point</h3>
+      <h3>📐 Worked Example: One Ratio from Another</h3>
       <span class="worked-toggle" id="worked-icon2">▼</span>
     </div>
     <div class="worked-body" id="worked-body2">
       <div class="worked-inner">
         <div class="example-problem">
-          <strong>Problem:</strong> The point (−3, −4) lies on the terminal side of angle θ. Find r and all six trig functions of θ.
+          <strong>Problem:</strong> θ is acute and cos θ = 3/7. Find the exact value of csc θ.
         </div>
-
         <div class="ex-step">
           <div class="ex-badge">Step 1</div>
-          <div class="ex-content">
-            <strong>Identify x and y, then compute r:</strong><br>
-            <span class="mono">x = −3</span>, &nbsp;<span class="mono">y = −4</span><br>
-            <span class="mono">r = √(x² + y²) = √(9 + 16) = √25 = <strong>5</strong></span><br>
-            Note: r is <em>always positive</em> — it is a distance.
-          </div>
+          <div class="ex-content"><strong>Label:</strong> cos θ = adj/hyp, so <span class="mono">adj = 3</span> and <span class="mono">hyp = 7</span>.</div>
         </div>
-
         <div class="ex-step">
           <div class="ex-badge">Step 2</div>
-          <div class="ex-content">
-            <strong>Apply the definitions directly — signs come from x and y, not from a quadrant rule:</strong><br>
-            <span class="mono">sin θ = y/r = −4/5</span><br>
-            <span class="mono">cos θ = x/r = −3/5</span><br>
-            <span class="mono">tan θ = y/x = (−4)/(−3) = <strong>4/3</strong></span> &nbsp;← both negative, so tan is positive (Q III ✓)
-          </div>
+          <div class="ex-content"><strong>Third side:</strong> <span class="mono">opp = √(7² − 3²) = √(49 − 9) = √40 = 2√10</span>.</div>
         </div>
-
         <div class="ex-step">
           <div class="ex-badge">Step 3</div>
-          <div class="ex-content">
-            <strong>Find the three reciprocal functions by flipping:</strong><br>
-            <span class="mono">csc θ = 1/sin θ = r/y = 5/(−4) = <strong>−5/4</strong></span><br>
-            <span class="mono">sec θ = 1/cos θ = r/x = 5/(−3) = <strong>−5/3</strong></span><br>
-            <span class="mono">cot θ = 1/tan θ = x/y = (−3)/(−4) = <strong>3/4</strong></span>
-          </div>
+          <div class="ex-content"><strong>Ratio:</strong> <span class="mono">csc θ = hyp/opp = 7/(2√10)</span>. Rationalize: <span class="mono">7/(2√10) · √10/√10 = <strong>7√10/20</strong></span>.</div>
         </div>
-
         <div class="ex-step">
-          <div class="ex-badge">Check</div>
-          <div class="ex-content">
-            <strong>Sanity-check with ASTC:</strong> (−3, −4) is in Quadrant III — only tangent and cotangent should be positive. ✓<br>
-            sin and cos are negative ✓ &nbsp;·&nbsp; tan and cot are positive ✓ &nbsp;·&nbsp; csc and sec are negative ✓
-          </div>
+          <div class="ex-badge">Note</div>
+          <div class="ex-content">When the given ratio already contains a root, such as sin θ = √5/3, use it as a side length: <span class="mono">opp = √5</span>, <span class="mono">hyp = 3</span>, so <span class="mono">adj = √(9 − 5) = 2</span>.</div>
         </div>
       </div>
     </div>
   </div>
 
+  <p class="astc-note" style="margin:-1.2rem 0 2rem;text-align:left">How to type answers: fractions like <span class="mono">-113</span> or <span class="mono">3/5</span>; roots as <span class="mono">sqrt(29)</span> or <span class="mono">√29</span>, for example <span class="mono">2sqrt(29)/29</span>; π as <span class="mono">pi</span>, for example <span class="mono">-31pi/12</span>.</p>
+
   <!-- ══════════════════ QUESTIONS ══════════════════ -->
 
-  <div class="section-label">Section A — Reference Angles</div>
+  <div class="section-label">Section A: Coterminal Angles (5.1)</div>
 
   <div class="question-card" id="q1">
-    <div class="q-header"><div class="q-num">1</div><div class="q-text">What is the reference angle for <span class="math">θ = 150°</span>?</div></div>
+    <div class="q-header"><div class="q-num">1</div><div class="q-text">Find a positive and a negative angle coterminal with <span class="math">247°</span>.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h1')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h1">150° falls between 90° and 180° — that's <strong>Quadrant II</strong>. For Q II, the formula is <span class="mono">θ′ = 180° − θ</span>.</div>
-    <div class="choices">
-      <label class="choice-label"><input type="radio" name="q1" value="A"> <span>30°</span></label>
-      <label class="choice-label"><input type="radio" name="q1" value="B"> <span>60°</span></label>
-      <label class="choice-label"><input type="radio" name="q1" value="C"> <span>150°</span></label>
-      <label class="choice-label"><input type="radio" name="q1" value="D"> <span>45°</span></label>
+    <div class="inline-hint" id="h1">Add <span class="mono">360°</span> for a positive angle. Subtract <span class="mono">360°</span> for a negative one.</div>
+    <div class="multi-blank">
+      <div class="blank-group"><label for="q1p">Positive</label><input type="text" id="q1p" placeholder="degrees"></div>
+      <div class="blank-group"><label for="q1n">Negative</label><input type="text" id="q1n" placeholder="degrees"></div>
     </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkMC('q1','A',
-      'θ′ = 180° − 150° = 30°. The reference angle is always the acute angle to the nearest x-axis.',
-      'If you chose 60°: 150° is 30° away from the 180° axis, not 60°. If you chose 150° itself: the reference angle must always be acute (under 90°).')">Check</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkCot('q1', 247, 'deg', '247° + 360° = 607° and 247° − 360° = −113°. Other answers that differ by multiples of 360° are also correct.')">Check</button></div>
     <div class="feedback" id="q1-fb"></div>
   </div>
 
   <div class="question-card" id="q2">
-    <div class="q-header"><div class="q-num">2</div><div class="q-text">Find the reference angle for <span class="math">θ = −5π/6</span>.</div></div>
+    <div class="q-header"><div class="q-num">2</div><div class="q-text">Find a positive and a negative angle coterminal with <span class="math">−38°</span>.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h2')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h2">Negative angles rotate <em>clockwise</em>. Add 2π to get a positive co-terminal angle first: <span class="mono">−5π/6 + 2π = 7π/6</span>. Now, 7π/6 is between π and 3π/2 — which quadrant is that? Then apply the right formula.</div>
-    <div class="choices">
-      <label class="choice-label"><input type="radio" name="q2" value="A"> <span>5π/6</span></label>
-      <label class="choice-label"><input type="radio" name="q2" value="B"> <span>π/3</span></label>
-      <label class="choice-label"><input type="radio" name="q2" value="C"> <span>π/6</span></label>
-      <label class="choice-label"><input type="radio" name="q2" value="D"> <span>π/4</span></label>
+    <div class="inline-hint" id="h2">The given angle is already negative, so the negative answer must be a <em>different</em> angle: subtract another full turn.</div>
+    <div class="multi-blank">
+      <div class="blank-group"><label for="q2p">Positive</label><input type="text" id="q2p" placeholder="degrees"></div>
+      <div class="blank-group"><label for="q2n">Negative</label><input type="text" id="q2n" placeholder="degrees"></div>
     </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkMC('q2','C',
-      'Co-terminal angle = 7π/6 (Q III). θ′ = 7π/6 − π = π/6.',
-      'A common mistake is working with −5π/6 directly instead of converting first. If you chose 5π/6: that is just the magnitude of the original angle — not the reference angle, which must be acute. The terminal side of 7π/6 is π/6 away from the negative x-axis.')">Check</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkCot('q2', -38, 'deg', '−38° + 360° = 322° and −38° − 360° = −398°.')">Check</button></div>
     <div class="feedback" id="q2-fb"></div>
   </div>
 
   <div class="question-card" id="q3">
-    <div class="q-header"><div class="q-num">3</div><div class="q-text">What is the reference angle for <span class="math">θ = 300°</span>?</div></div>
+    <div class="q-header"><div class="q-num">3</div><div class="q-text">Find a positive and a negative angle coterminal with <span class="math">−7π/12</span>.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h3')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h3">300° is between 270° and 360°, placing it in <strong>Quadrant IV</strong>. For Q IV: <span class="mono">θ′ = 360° − θ</span>.</div>
-    <div class="choices">
-      <label class="choice-label"><input type="radio" name="q3" value="A"> <span>60°</span></label>
-      <label class="choice-label"><input type="radio" name="q3" value="B"> <span>30°</span></label>
-      <label class="choice-label"><input type="radio" name="q3" value="C"> <span>300°</span></label>
-      <label class="choice-label"><input type="radio" name="q3" value="D"> <span>120°</span></label>
+    <div class="inline-hint" id="h3">Write one full turn with denominator 12: <span class="mono">2π = 24π/12</span>.</div>
+    <div class="multi-blank">
+      <div class="blank-group"><label for="q3p">Positive</label><input type="text" id="q3p" placeholder="e.g. 5pi/12"></div>
+      <div class="blank-group"><label for="q3n">Negative</label><input type="text" id="q3n" placeholder="e.g. -5pi/12"></div>
     </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkMC('q3','A',
-      'θ′ = 360° − 300° = 60°.',
-      'If you chose 30°: 300° belongs to the 60° family (it is 60° away from the x-axis), not the 30° family. Think of it as 360° − 300° = 60°.')">Check</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkCot('q3', -7*Math.PI/12, 'rad', '−7π/12 + 24π/12 = 17π/12 and −7π/12 − 24π/12 = −31π/12.')">Check</button></div>
     <div class="feedback" id="q3-fb"></div>
   </div>
 
-  <div class="section-label">Section B — Exact Trig Values</div>
-
   <div class="question-card" id="q4">
-    <div class="q-header"><div class="q-num">4</div><div class="q-text">Find the <strong>exact</strong> value of <span class="math">cos(240°)</span>.</div></div>
+    <div class="q-header"><div class="q-num">4</div><div class="q-text">Find a positive and a negative angle coterminal with <span class="math">13π/4</span>.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h4')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h4"><strong>Step 1:</strong> 240° is in Q III → <span class="mono">θ′ = 240° − 180° = 60°</span>.<br><strong>Step 2:</strong> From your special triangle: <span class="mono">cos(60°) = 1/2</span>.<br><strong>Step 3:</strong> Check your ASTC chart — is cosine positive or negative in Q III?</div>
-    <div class="choices">
-      <label class="choice-label"><input type="radio" name="q4" value="A"> <span>1/2</span></label>
-      <label class="choice-label"><input type="radio" name="q4" value="B"> <span>−√3/2</span></label>
-      <label class="choice-label"><input type="radio" name="q4" value="C"> <span>−1/2</span></label>
-      <label class="choice-label"><input type="radio" name="q4" value="D"> <span>√3/2</span></label>
+    <div class="inline-hint" id="h4">One full turn is <span class="mono">8π/4</span>. Subtracting one turn leaves a positive angle; subtract a second turn to get a negative one.</div>
+    <div class="multi-blank">
+      <div class="blank-group"><label for="q4p">Positive</label><input type="text" id="q4p" placeholder="e.g. 5pi/4"></div>
+      <div class="blank-group"><label for="q4n">Negative</label><input type="text" id="q4n" placeholder="e.g. -5pi/4"></div>
     </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkMC('q4','C',
-      'θ′ = 60°, cos(60°) = 1/2. Cosine is negative in Q III → cos(240°) = −1/2.',
-      'If you chose +1/2: you got the magnitude right but forgot to flip the sign — cosine is negative in Q III (only tangent is positive there). If you chose −√3/2: that would be cos(150°), using sin(60°) instead of cos(60°) — be careful which function you look up in Step 2.')">Check</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkCot('q4', 13*Math.PI/4, 'rad', '13π/4 − 8π/4 = 5π/4 (positive) and 13π/4 − 16π/4 = −3π/4 (negative). 21π/4 is another positive answer.')">Check</button></div>
     <div class="feedback" id="q4-fb"></div>
   </div>
 
+  <div class="section-label">Section B: Six Trig Ratios of a Right Triangle (5.2)</div>
+
   <div class="question-card" id="q5">
-    <div class="q-header"><div class="q-num">5</div><div class="q-text">Find the <strong>exact</strong> value of <span class="math">tan(135°)</span>.</div></div>
+    <div class="q-header"><div class="q-num">5</div><div class="q-text">In the right triangle below, find the missing side and all six exact trig ratios of θ.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h5')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h5">135° is in Q II. Reference angle: <span class="mono">180° − 135° = 45°</span>. From the 45-45-90 triangle: <span class="mono">tan(45°) = 1</span>. Now check: is tangent positive or negative in Q II?</div>
-    <div class="choices">
-      <label class="choice-label"><input type="radio" name="q5" value="A"> <span>1</span></label>
-      <label class="choice-label"><input type="radio" name="q5" value="B"> <span>√2</span></label>
-      <label class="choice-label"><input type="radio" name="q5" value="C"> <span>−1</span></label>
-      <label class="choice-label"><input type="radio" name="q5" value="D"> <span>−√2</span></label>
+    <div class="inline-hint" id="h5">The two given sides are the legs, so the missing side is the hypotenuse: <span class="mono">hyp = √(7² + 24²)</span>.</div>
+    <div class="triangle-wrap">
+      <div class="triangle-svg-wrap" data-tri="7|24|?"></div>
+      <div class="triangle-blanks"><table class="trig-table" data-six="q5" data-side="hypotenuse"></table></div>
     </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkMC('q5','C',
-      'θ′ = 45°, tan(45°) = 1. In Q II only sine is positive → tan(135°) = −1.',
-      'If you chose +1: correct magnitude, wrong sign. In Q II only sine (and csc) are positive — tangent is negative. If you chose −√2: tan(45°) = sin/cos = (√2/2)/(√2/2) = 1, not √2. √2 is the hypotenuse of the 45-45-90 triangle, not a trig value.')">Check</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkSix('q5', {side:25, sin:7/25, cos:24/25, tan:7/24, csc:25/7, sec:25/24, cot:24/7}, 'hyp = √(49 + 576) = √625 = 25. sin θ = 7/25, cos θ = 24/25, tan θ = 7/24, csc θ = 25/7, sec θ = 25/24, cot θ = 24/7.')">Check</button></div>
     <div class="feedback" id="q5-fb"></div>
   </div>
 
-  <div class="section-label">Section C — Quadrant Identification</div>
-
   <div class="question-card" id="q6">
-    <div class="q-header"><div class="q-num">6</div><div class="q-text">The terminal side of θ satisfies <span class="math">cos θ &gt; 0</span> and <span class="math">sin θ &lt; 0</span>. In which quadrant does θ lie?</div></div>
+    <div class="q-header"><div class="q-num">6</div><div class="q-text">In the right triangle below, find the missing side and all six exact trig ratios of θ.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h6')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h6">Translate into coordinates: since <span class="mono">r > 0</span> always, <span class="mono">cos θ = x/r > 0</span> means <strong>x > 0</strong> (right side) and <span class="mono">sin θ = y/r &lt; 0</span> means <strong>y &lt; 0</strong> (below x-axis). Which quadrant is right and below?</div>
-    <div class="choices">
-      <label class="choice-label"><input type="radio" name="q6" value="A"> <span>Quadrant I</span></label>
-      <label class="choice-label"><input type="radio" name="q6" value="B"> <span>Quadrant II</span></label>
-      <label class="choice-label"><input type="radio" name="q6" value="C"> <span>Quadrant III</span></label>
-      <label class="choice-label"><input type="radio" name="q6" value="D"> <span>Quadrant IV</span></label>
+    <div class="inline-hint" id="h6">This time the hypotenuse is given. Subtract: <span class="mono">opp = √(41² − 9²)</span>.</div>
+    <div class="triangle-wrap">
+      <div class="triangle-svg-wrap" data-tri="?|9|41"></div>
+      <div class="triangle-blanks"><table class="trig-table" data-six="q6" data-side="opposite side"></table></div>
     </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkMC('q6','D',
-      'cos > 0 → x > 0 (right). sin < 0 → y < 0 (below x-axis). That intersection is Quadrant IV.',
-      'If you chose Q III: sin is indeed negative there, but cos is also negative in Q III — both conditions must be satisfied simultaneously. Q IV is the only quadrant with cos positive AND sin negative.')">Check</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkSix('q6', {side:40, sin:40/41, cos:9/41, tan:40/9, csc:41/40, sec:41/9, cot:9/40}, 'opp = √(1681 − 81) = √1600 = 40. sin θ = 40/41, cos θ = 9/41, tan θ = 40/9, csc θ = 41/40, sec θ = 41/9, cot θ = 9/40.')">Check</button></div>
     <div class="feedback" id="q6-fb"></div>
   </div>
 
   <div class="question-card" id="q7">
-    <div class="q-header"><div class="q-num">7</div><div class="q-text">Identify the quadrant where <span class="math">csc θ &gt; 0</span> and <span class="math">cos θ &lt; 0</span>.</div></div>
+    <div class="q-header"><div class="q-num">7</div><div class="q-text">In the right triangle below, find the missing side and all six exact trig ratios of θ. Rationalize denominators.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h7')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h7">First, translate the reciprocal: <span class="mono">csc θ = 1/sin θ</span>, so csc > 0 means <strong>sin > 0</strong> as well (same sign). Now you have: sin > 0 and cos &lt; 0. Which two quadrants have sin > 0? Of those, which also has cos &lt; 0?</div>
-    <div class="choices">
-      <label class="choice-label"><input type="radio" name="q7" value="A"> <span>Quadrant I</span></label>
-      <label class="choice-label"><input type="radio" name="q7" value="B"> <span>Quadrant II</span></label>
-      <label class="choice-label"><input type="radio" name="q7" value="C"> <span>Quadrant III</span></label>
-      <label class="choice-label"><input type="radio" name="q7" value="D"> <span>Quadrant IV</span></label>
+    <div class="inline-hint" id="h7"><span class="mono">hyp = √(2² + 5²) = √29</span>, which does not simplify. Then, for example, <span class="mono">sin θ = 2/√29 = 2√29/29</span>.</div>
+    <div class="triangle-wrap">
+      <div class="triangle-svg-wrap" data-tri="2|5|?"></div>
+      <div class="triangle-blanks"><table class="trig-table" data-six="q7" data-side="hypotenuse"></table></div>
     </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkMC('q7','B',
-      'csc > 0 → sin > 0 (upper half: Q I or Q II). cos < 0 → left half (Q II or Q III). The overlap is Quadrant II.',
-      'The key first move is converting csc > 0 into sin > 0 — they always share the same sign since csc = 1/sin. Once you do that, treat it like Q6: narrow down by each condition separately, then find where they overlap.')">Check</button></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkSix('q7', {side:Math.sqrt(29), sin:2/Math.sqrt(29), cos:5/Math.sqrt(29), tan:2/5, csc:Math.sqrt(29)/2, sec:Math.sqrt(29)/5, cot:5/2}, 'hyp = √29. sin θ = 2√29/29, cos θ = 5√29/29, tan θ = 2/5, csc θ = √29/2, sec θ = √29/5, cot θ = 5/2.')">Check</button></div>
     <div class="feedback" id="q7-fb"></div>
   </div>
 
-  <div class="section-label">Section D — Finding Angles from a Trig Value</div>
+  <div class="section-label">Section C: One Ratio from Another (5.2)</div>
 
   <div class="question-card" id="q8">
-    <div class="q-header"><div class="q-num">8</div><div class="q-text">Find <strong>two</strong> angles between 0° and 360° satisfying <span class="math">sin θ = −√3/2</span>.</div></div>
+    <div class="q-header"><div class="q-num">8</div><div class="q-text">θ is acute and <span class="math">sin θ = 12/37</span>. Find the exact value of <span class="math">cos θ</span>.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h8')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h8">
-      <strong>1)</strong> Ignore the sign first — what reference angle gives <span class="mono">sin θ′ = √3/2</span>? (Look at your 30-60-90 triangle.)<br>
-      <strong>2)</strong> The value is negative, so θ must be in a quadrant where sine is negative. That's <strong>Q III and Q IV</strong>.<br>
-      <strong>3)</strong> Build the two angles: Q III → <span class="mono">180° + θ′</span>, and Q IV → <span class="mono">360° − θ′</span>.
-    </div>
-    <div class="multi-blank">
-      <div class="blank-group"><label>First angle</label><input type="text" id="q8a" placeholder="___°"></div>
-      <div class="blank-group"><label>Second angle</label><input type="text" id="q8b" placeholder="___°"></div>
-    </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkDoubleAngle('q8','240','300',
-      'θ′ = 60°. Sine is negative in Q III and Q IV. Q III: 180°+60° = 240°. Q IV: 360°−60° = 300°.',
-      'A common error is placing the answers in Q I or Q II, where sine is positive. Since the given value is negative, both answers must come from Q III and Q IV only.')">Check</button></div>
+    <div class="inline-hint" id="h8"><span class="mono">opp = 12</span>, <span class="mono">hyp = 37</span>. Find <span class="mono">adj = √(37² − 12²)</span>.</div>
+    <div class="multi-blank"><div class="blank-group"><label for="q8a">cos θ</label><input type="text" id="q8a" placeholder="exact value"></div></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkOne('q8', 35/37, 'adj = √(1369 − 144) = √1225 = 35, so cos θ = adj/hyp = 35/37.', 'Use the hypotenuse in the denominator for cosine.')">Check</button></div>
     <div class="feedback" id="q8-fb"></div>
   </div>
 
-  <div class="section-label">Section E — Six Trig Functions from a Point</div>
-
   <div class="question-card" id="q9">
-    <div class="q-header"><div class="q-num">9</div><div class="q-text">The point <span class="math">(−4, 3)</span> lies on the terminal side of θ. Find <span class="math">r</span> and all six trigonometric functions. Use exact values or decimals rounded to four places.</div></div>
+    <div class="q-header"><div class="q-num">9</div><div class="q-text">θ is acute and <span class="math">cos θ = √11/6</span>. Find the exact value of <span class="math">csc θ</span>.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h9')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h9">
-      With <span class="mono">x = −4</span> and <span class="mono">y = 3</span>:<br>
-      &nbsp;&nbsp;r = √(x² + y²) &nbsp;— always positive.<br>
-      &nbsp;&nbsp;sin θ = y/r &nbsp;·&nbsp; cos θ = x/r &nbsp;·&nbsp; tan θ = y/x<br>
-      &nbsp;&nbsp;csc θ = r/y &nbsp;·&nbsp; sec θ = r/x &nbsp;·&nbsp; cot θ = x/y<br>
-      Pay close attention to signs — x is negative, so cos θ will be negative too.
-    </div>
-    <div class="multi-blank">
-      <div class="blank-group"><label>r =</label><input type="text" id="q9r" placeholder="exact"></div>
-      <div class="blank-group"><label>sin θ =</label><input type="text" id="q9s" placeholder="y/r"></div>
-      <div class="blank-group"><label>cos θ =</label><input type="text" id="q9c" placeholder="x/r"></div>
-      <div class="blank-group"><label>tan θ =</label><input type="text" id="q9t" placeholder="y/x"></div>
-      <div class="blank-group"><label for="q9csc">csc θ =</label><input type="text" id="q9csc" placeholder="r/y"></div>
-      <div class="blank-group"><label for="q9sec">sec θ =</label><input type="text" id="q9sec" placeholder="r/x"></div>
-      <div class="blank-group"><label for="q9cot">cot θ =</label><input type="text" id="q9cot" placeholder="x/y"></div>
-    </div>
-    <div class="btn-row"><button class="check-btn" onclick="checkSixTrig()">Check</button></div>
+    <div class="inline-hint" id="h9"><span class="mono">adj = √11</span>, <span class="mono">hyp = 6</span>. Then <span class="mono">opp = √(36 − 11)</span>. Remember that <span class="mono">(√11)² = 11</span>.</div>
+    <div class="multi-blank"><div class="blank-group"><label for="q9a">csc θ</label><input type="text" id="q9a" placeholder="exact value"></div></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkOne('q9', 6/5, 'opp = √(36 − 11) = √25 = 5, so csc θ = hyp/opp = 6/5.', 'csc θ is the reciprocal of sin θ, so it is hyp/opp, not opp/hyp.')">Check</button></div>
     <div class="feedback" id="q9-fb"></div>
   </div>
 
   <div class="question-card" id="q10">
-    <div class="q-header"><div class="q-num">10</div><div class="q-text"><strong>Solve the right triangle.</strong> Given the labeled triangle below, find the missing side and both unknown angles. Round angles to the nearest tenth of a degree.</div></div>
+    <div class="q-header"><div class="q-num">10</div><div class="q-text">θ is acute and <span class="math">sin θ = √7/4</span>. Find the exact value of <span class="math">cot θ</span>. Rationalize the denominator.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h10')">💡 Need a hint?</button>
-    <div class="inline-hint" id="h10">
-      <strong>Missing side:</strong> Use the Pythagorean theorem — <span class="mono">a² + b² = c²</span>. You know two sides.<br>
-      <strong>Angle β:</strong> You know the side opposite β and the hypotenuse, so use <span class="mono">sin β = opp/hyp</span> → <span class="mono">β = sin⁻¹(opp/hyp)</span>.<br>
-      <strong>Angle α:</strong> Either use inverse trig on another ratio, <em>or</em> use the fact that the three angles of a triangle sum to 180°.
-    </div>
-
-    <div class="triangle-wrap">
-      <!-- SVG Triangle Diagram -->
-      <div class="triangle-svg-wrap">
-        <svg width="240" height="185" viewBox="0 0 240 185" style="display:block;">
-          <!-- Triangle -->
-          <polygon points="20,160 205,160 205,28" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="2"/>
-          <!-- Right angle box at C -->
-          <rect x="188" y="143" width="17" height="17" fill="white" stroke="#4a6fa5" stroke-width="1.5"/>
-          <!-- Vertex labels -->
-          <text x="5" y="166" font-size="14" fill="#1a1310" font-family="Georgia,serif" font-style="italic" font-weight="bold">B</text>
-          <text x="210" y="166" font-size="14" fill="#1a1310" font-family="Georgia,serif" font-style="italic" font-weight="bold">C</text>
-          <text x="210" y="26" font-size="14" fill="#1a1310" font-family="Georgia,serif" font-style="italic" font-weight="bold">A</text>
-          <!-- BC = 21 (bottom, given) -->
-          <text x="112" y="178" font-size="12" fill="#2e7d32" font-family="monospace" text-anchor="middle" font-weight="bold">21</text>
-          <!-- AC = b (right side, unknown) -->
-          <text x="217" y="100" font-size="12" fill="#b84c2b" font-family="monospace" font-style="italic">b = ?</text>
-          <!-- AB = 29 (hypotenuse) -->
-          <text x="88" y="83" font-size="12" fill="#1565c0" font-family="monospace" text-anchor="middle" font-weight="bold">29</text>
-          <!-- Angle arc at B -->
-          <path d="M 43,160 A 23,23 0 0,0 30.5,139" fill="none" stroke="#c9922a" stroke-width="1.5"/>
-          <text x="40" y="152" font-size="12" fill="#c9922a" font-family="Georgia,serif" font-style="italic">β</text>
-          <!-- Angle arc at A -->
-          <path d="M 205,51 A 23,23 0 0,0 183,40" fill="none" stroke="#c9922a" stroke-width="1.5"/>
-          <text x="181" y="58" font-size="12" fill="#c9922a" font-family="Georgia,serif" font-style="italic">α</text>
-          <!-- Right angle label -->
-          <text x="191" y="158" font-size="9" fill="#4a6fa5">90°</text>
-        </svg>
-      </div>
-
-      <!-- Answer blanks as a clean table -->
-      <div class="triangle-blanks">
-        <h5>Fill in all missing measurements:</h5>
-        <table class="trig-table">
-          <thead><tr><th>Element</th><th>Value</th></tr></thead>
-          <tbody>
-            <tr><td>Side BC</td><td><span class="given">21</span></td></tr>
-            <tr><td>Side AC &nbsp;(<em>b</em>)</td><td><input type="text" id="q10b" placeholder="find b"></td></tr>
-            <tr><td>Hypotenuse AB</td><td><span class="given">29</span></td></tr>
-            <tr><td>Angle β (at B)</td><td><input type="text" id="q10beta" placeholder="___°"></td></tr>
-            <tr><td>Angle α (at A)</td><td><input type="text" id="q10alpha" placeholder="___°"></td></tr>
-            <tr><td>Angle C</td><td><span class="given">90°</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="btn-row"><button class="check-btn" onclick="checkSolveTriangle()">Check</button></div>
+    <div class="inline-hint" id="h10"><span class="mono">opp = √7</span>, <span class="mono">hyp = 4</span>, so <span class="mono">adj = √(16 − 7) = 3</span>. cot θ = adj/opp.</div>
+    <div class="multi-blank"><div class="blank-group"><label for="q10a">cot θ</label><input type="text" id="q10a" placeholder="exact value"></div></div>
+    <div class="btn-row"><button class="check-btn" onclick="checkOne('q10', 3/Math.sqrt(7), 'adj = 3, so cot θ = 3/√7 = 3√7/7.', 'cot θ = adj/opp. After dividing, multiply the top and bottom by √7.')">Check</button></div>
     <div class="feedback" id="q10-fb"></div>
   </div>
+
+  <div class="question-card" id="q11">
+    <div class="q-header"><div class="q-num">11</div><div class="q-text">θ is acute and <span class="math">sec θ = 7/3</span>. Find the exact values of <span class="math">tan θ</span> and <span class="math">sin θ</span>.</div></div>
+    <button class="hint-toggle" onclick="toggleHint('h11')">💡 Need a hint?</button>
+    <div class="inline-hint" id="h11">sec θ = hyp/adj, so <span class="mono">hyp = 7</span> and <span class="mono">adj = 3</span>. Then <span class="mono">opp = √(49 − 9) = √40</span>; simplify the root.</div>
+    <div class="multi-blank">
+      <div class="blank-group"><label for="q11a">tan θ</label><input type="text" id="q11a" placeholder="exact value"></div>
+      <div class="blank-group"><label for="q11b">sin θ</label><input type="text" id="q11b" placeholder="exact value"></div>
+    </div>
+    <div class="btn-row"><button class="check-btn" onclick="checkSet('q11', {q11a: Math.sqrt(40)/3, q11b: Math.sqrt(40)/7}, 'opp = √40 = 2√10. tan θ = opp/adj = 2√10/3 and sin θ = opp/hyp = 2√10/7.', 'sec θ = 7/3 means hyp = 7 and adj = 3, not the other way around.')">Check</button></div>
+    <div class="feedback" id="q11-fb"></div>
+  </div>
+
+  <p class="astc-note" style="text-align:left;margin-top:2rem">More practice: the Quiz 10 checkpoint on the <a href="/130Test3.html">Test 3 review page</a> draws new problems of these types each time. The Nov 2 and Nov 4 handouts on the <a href="/courses/math130.html#sections-5-1-5-3">MATH 130 page</a> have more worked problems. Section 5.3 work continues on the <a href="/130-section-5-3-practice.html">Section 5.3 practice page</a>.</p>
 
 </main>
 
 <div class="score-bar">
   <div><div class="score-label">Score</div><div class="score-value" id="score-display">0 / 0</div></div>
   <div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
-  <div><div class="score-label">Answered</div><div class="score-value" id="answered-display">0 / 10</div></div>
+  <div><div class="score-label">Answered</div><div class="score-value" id="answered-display">0 / 11</div></div>
 </div>
 
-<script src="assets/js/math130-test3-skills.js"></script>
 <script>
+  // Students may check an answer as often as they like; the score counts the latest check of each question.
+  const TOTAL = 11;
   let answered = new Set();
   let correct  = new Set();
+  function record(qid, ok) { answered.add(qid); if (ok) correct.add(qid); else correct.delete(qid); }
+
+  // Accepts integers, fractions, decimals, a true minus sign, sqrt or √, and pi or π; returns the numeric value.
+  function numVal(raw) {
+    let t = String(raw).trim().toLowerCase().replace(/[−–]/g, '-').replace(/\s+/g, '').replace(/°/g, '').replace(/deg/g, '')
+      .replace(/√/g, 'sqrt').replace(/π/g, 'pi');
+    if (!t) return NaN;
+    t = t.replace(/sqrt(\d+(?:\.\d+)?)/g, 'sqrt($1)');
+    t = t.replace(/(\d|\))(?=sqrt|pi|\()/g, '$1*').replace(/pi(?=\d|sqrt|\()/g, 'pi*');
+    if (!/^(?:sqrt|pi|[\d.+\-*/()])+$/.test(t)) return NaN;
+    t = t.replace(/sqrt/g, 'Math.sqrt').replace(/pi/g, 'Math.PI');
+    try { const v = Function('return (' + t + ')')(); return typeof v === 'number' ? v : NaN; } catch (e) { return NaN; }
+  }
+  function same(raw, target) { const v = numVal(raw); return isFinite(v) && Math.abs(v - target) < 1e-6; }
+  function mark(el, ok) { el.classList.remove('correct', 'wrong'); el.classList.add(ok ? 'correct' : 'wrong'); }
 
   function updateScore() {
     document.getElementById('score-display').textContent    = `${correct.size} / ${answered.size}`;
-    document.getElementById('answered-display').textContent = `${answered.size} / 10`;
-    document.getElementById('progress-fill').style.width    = `${(answered.size / 10) * 100}%`;
+    document.getElementById('answered-display').textContent = `${answered.size} / ${TOTAL}`;
+    document.getElementById('progress-fill').style.width    = `${(answered.size / TOTAL) * 100}%`;
   }
 
   function showFeedback(id, isCorrect, correctMsg, wrongMsg) {
     const fb = document.getElementById(id + '-fb');
     fb.className = `feedback show ${isCorrect ? 'correct' : 'wrong'}`;
-    if (isCorrect) {
-      fb.innerHTML = `<strong>✓ Correct!</strong> ${correctMsg}`;
-    } else {
-      fb.innerHTML = `<strong>✗ Not quite.</strong> ${correctMsg}<span class="why">⚠ Why this happens: ${wrongMsg}</span>`;
-    }
+    if (isCorrect) fb.innerHTML = `<strong>✓ Correct!</strong> ${correctMsg}`;
+    else fb.innerHTML = `<strong>✗ Not quite.</strong> ${correctMsg}${wrongMsg ? `<span class="why">⚠ ${wrongMsg}</span>` : ''}`;
+  }
+  function needAll(id) {
+    const fb = document.getElementById(id + '-fb');
+    fb.className = 'feedback show wrong';
+    fb.innerHTML = 'Please fill in every blank first.';
   }
 
   function toggleHint(id) {
@@ -678,117 +511,72 @@
     el.classList.toggle('open');
     btn.textContent = el.classList.contains('open') ? '🙈 Hide hint' : '💡 Need a hint?';
   }
-
-  function toggleWorked() {
-    const body = document.getElementById('worked-body');
-    const icon = document.getElementById('worked-icon');
+  function toggleBody(bodyId, iconId) {
+    const body = document.getElementById(bodyId), icon = document.getElementById(iconId);
     body.classList.toggle('open');
     icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
   }
+  function toggleWorked()  { toggleBody('worked-body', 'worked-icon'); }
+  function toggleWorked2() { toggleBody('worked-body2', 'worked-icon2'); }
 
-  function checkMC(qid, correctVal, correctMsg, wrongMsg) {
-    const selected = document.querySelector(`input[name="${qid}"]:checked`);
-    if (!selected) { alert('Please select an answer first.'); return; }
-    answered.add(qid);
-    const isCorrect = selected.value === correctVal;
-    if (isCorrect) correct.add(qid); else correct.delete(qid);
-    document.querySelectorAll(`#${qid} .choice-label`).forEach(lbl => {
-      const inp = lbl.querySelector('input');
-      lbl.classList.remove('correct','wrong');
-      if (inp.value === correctVal) lbl.classList.add('correct');
-      else if (inp.checked) lbl.classList.add('wrong');
-    });
-    showFeedback(qid, isCorrect, correctMsg, wrongMsg);
+  // Coterminal pair: a positive and a negative angle, each a nonzero whole number of turns from the base.
+  function checkCot(qid, base, unit, msg) {
+    const p = document.getElementById(qid + 'p'), n = document.getElementById(qid + 'n');
+    if (!p.value.trim() || !n.value.trim()) { needAll(qid); return; }
+    const period = unit === 'deg' ? 360 : 2 * Math.PI, tol = unit === 'deg' ? 1e-6 : 0.002;
+    const ok = (el, sign) => {
+      const v = numVal(el.value); if (!isFinite(v)) return false;
+      const k = Math.round((v - base) / period);
+      return k !== 0 && Math.abs(v - (base + k * period)) < tol && Math.sign(v) === sign;
+    };
+    const pOk = ok(p, 1), nOk = ok(n, -1);
+    mark(p, pOk); mark(n, nOk);
+    const isCorrect = pOk && nOk;
+    record(qid, isCorrect);
+    showFeedback(qid, isCorrect, msg, unit === 'deg'
+      ? 'Each answer must differ from the given angle by a whole number of 360° turns, and must have the requested sign.'
+      : 'Each answer must differ from the given angle by a whole number of 2π turns. Use a common denominator before adding or subtracting.');
     updateScore();
   }
 
-  function normalize(val) {
-    return val.trim().replace(/\s+/g,'').toLowerCase().replace(/(?:°|degrees|deg)$/,'');
-  }
-
-  function numericEntry(raw) { return Math130Test3Skills.parseExact(normalize(raw)); }
-  function closeEntry(raw,expected,tolerance=0) {
-    const value=numericEntry(raw);
-    return value!==null && Math.abs(value-expected)<=tolerance+1e-10;
-  }
-  function markEntry(id,ok) {
-    const el=document.getElementById(id);
-    el.classList.remove('correct','wrong');
-    el.classList.add(ok?'correct':'wrong');
-  }
-
-  function checkDoubleAngle(qid, ans1, ans2, correctMsg, wrongMsg) {
-    const a = normalize(document.getElementById(qid+'a').value);
-    const b = normalize(document.getElementById(qid+'b').value);
-    if (!a || !b) { alert('Please fill in both angles.'); return; }
-    const direct=closeEntry(a,Number(ans1))&&closeEntry(b,Number(ans2));
-    const swapped=closeEntry(a,Number(ans2))&&closeEntry(b,Number(ans1));
-    const isCorrect = direct||swapped;
-    answered.add(qid);
-    if (isCorrect) correct.add(qid); else correct.delete(qid);
-    ['a','b'].forEach(s => {
-      markEntry(qid+s,isCorrect);
-    });
-    showFeedback(qid, isCorrect, correctMsg, wrongMsg);
+  function checkSet(qid, key, msg, why) {
+    const ids = Object.keys(key);
+    if (ids.some(id => !document.getElementById(id).value.trim())) { needAll(qid); return; }
+    let isCorrect = true;
+    ids.forEach(id => { const el = document.getElementById(id), good = same(el.value, key[id]); if (!good) isCorrect = false; mark(el, good); });
+    record(qid, isCorrect);
+    showFeedback(qid, isCorrect, msg, why);
     updateScore();
   }
+  function checkOne(qid, value, msg, why) { checkSet(qid, { [qid + 'a']: value }, msg, why); }
 
-  function toggleWorked2() {
-    const body = document.getElementById('worked-body2');
-    const icon = document.getElementById('worked-icon2');
-    body.classList.toggle('open');
-    icon.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+  function checkSix(qid, key, msg) {
+    const map = {};
+    Object.keys(key).forEach(k => { map[qid + k] = key[k]; });
+    checkSet(qid, map, msg, 'Check the red boxes. Label opp and adj relative to θ, and flip sin, cos and tan to get csc, sec and cot.');
   }
 
-  function checkSolveTriangle() {
-    const bRaw    = normalize(document.getElementById('q10b').value);
-    const betaRaw = normalize(document.getElementById('q10beta').value);
-    const alphaRaw= normalize(document.getElementById('q10alpha').value);
-    if (!bRaw || !betaRaw || !alphaRaw) { alert('Please fill in all three blanks.'); return; }
-
-    // b = 20 exactly
-    const bOk = closeEntry(bRaw,20);
-    const betaOk = closeEntry(betaRaw,Math.asin(20/29)*180/Math.PI,0.05);
-    const alphaOk = closeEntry(alphaRaw,Math.asin(21/29)*180/Math.PI,0.05);
-
-    const isCorrect = bOk && betaOk && alphaOk;
-    answered.add('q10');
-    if (isCorrect) correct.add('q10'); else correct.delete('q10');
-
-    [['q10b',bOk],['q10beta',betaOk],['q10alpha',alphaOk]].forEach(([id,ok])=>markEntry(id,ok));
-
-    showFeedback('q10', isCorrect,
-      'b = √(29² − 21²) = √(841 − 441) = √400 = 20. ' +
-      'β = sin⁻¹(20/29) ≈ 43.6°. α = sin⁻¹(21/29) ≈ 46.4°. Check: 43.6° + 46.4° + 90° = 180° ✓',
-      (!bOk
-        ? 'For side b: use the Pythagorean theorem — 21² + b² = 29². So b² = 841 − 441 = 400, b = 20. '
-        : '') +
-      (!betaOk
-        ? 'For β: the side opposite β is AC = b = 20, and the hypotenuse is 29, so sin β = 20/29 → β ≈ 43.6°. '
-        : '') +
-      (!alphaOk
-        ? 'For α: either use sin α = 21/29 ≈ 46.4°, or subtract from 90° since α + β = 90°. '
-        : '')
-    );
-    updateScore();
-  }
-
-  function checkSixTrig() {
-    const ids=['q9r','q9s','q9c','q9t','q9csc','q9sec','q9cot'];
-    const values=ids.map(id=>document.getElementById(id).value);
-    if(values.some(v=>!v.trim())) { alert('Please fill in all seven blanks.'); return; }
-    const expected=[5,3/5,-4/5,-3/4,5/3,-5/4,-4/3];
-    const parts=values.map((v,i)=>closeEntry(v,expected[i],i===0?0:0.00005));
-    const isCorrect=parts.every(Boolean);
-    answered.add('q9');
-    if (isCorrect) correct.add('q9'); else correct.delete('q9');
-    ids.forEach((id,i)=>markEntry(id,parts[i]));
-    showFeedback('q9', isCorrect,
-      'r = √(16+9) = 5. sin θ = 3/5, cos θ = −4/5, tan θ = −3/4. Reciprocals: csc = 5/3, sec = −5/4, cot = −4/3.',
-      'Check your signs carefully. x = −4 makes cos θ negative. y = 3 makes sin θ positive. tan θ = y/x = 3/(−4) = −3/4. A common error is writing cos = 4/5 (positive) by ignoring the negative x.'
-    );
-    updateScore();
-  }
+  // Build the triangle diagrams and answer tables.
+  // data-tri = "opp|adj|hyp": θ at the bottom-left, the right angle at the bottom-right, opp is the vertical leg.
+  document.querySelectorAll('[data-tri]').forEach(box => {
+    const [opp, adj, hyp] = box.dataset.tri.split('|');
+    const col = v => v === '?' ? '#b84c2b' : '#2e7d32';
+    box.innerHTML = `<svg width="250" height="180" viewBox="0 0 250 180" role="img" aria-label="Right triangle: side opposite theta ${opp}, side adjacent to theta ${adj}, hypotenuse ${hyp}">
+      <polygon points="25,150 205,150 205,30" fill="#f0f4ff" stroke="#4a6fa5" stroke-width="2"/>
+      <rect x="190" y="135" width="15" height="15" fill="white" stroke="#4a6fa5" stroke-width="1.5"/>
+      <path d="M 60,150 A 35,35 0 0,0 54.1,130.6" fill="none" stroke="#c9922a" stroke-width="1.5"/>
+      <text x="66" y="143" font-size="15" fill="#c9922a" font-family="Georgia,serif" font-style="italic">θ</text>
+      <text x="115" y="170" font-size="14" fill="${col(adj)}" font-family="monospace" text-anchor="middle" font-weight="bold">${adj}</text>
+      <text x="214" y="95" font-size="14" fill="${col(opp)}" font-family="monospace" font-weight="bold">${opp}</text>
+      <text x="100" y="78" font-size="14" fill="${col(hyp)}" font-family="monospace" text-anchor="middle" font-weight="bold">${hyp}</text>
+    </svg>`;
+  });
+  document.querySelectorAll('[data-six]').forEach(tbl => {
+    const q = tbl.dataset.six, side = tbl.dataset.side;
+    const rows = [['side', `Missing side (${side})`], ['sin', 'sin θ'], ['cos', 'cos θ'], ['tan', 'tan θ'], ['csc', 'csc θ'], ['sec', 'sec θ'], ['cot', 'cot θ']];
+    tbl.innerHTML = '<thead><tr><th>Find</th><th>Exact value</th></tr></thead><tbody>' +
+      rows.map(([k, label]) => `<tr><td><label for="${q}${k}">${label}</label></td><td><input type="text" id="${q}${k}" placeholder="exact"></td></tr>`).join('') + '</tbody>';
+  });
 </script>
 </body>
 </html>

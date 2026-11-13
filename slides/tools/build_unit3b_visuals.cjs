@@ -3,6 +3,7 @@
  * Run: node slides/tools/build_unit3b_visuals.cjs
  */
 'use strict';
+require('./build_unit3b_nov9_visuals.cjs');
 const fs=require('node:fs'),path=require('node:path');
 const out=path.resolve(__dirname,'../assets/math130unit3b/visuals');
 fs.mkdirSync(out,{recursive:true});

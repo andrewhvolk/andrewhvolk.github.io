@@ -2,7 +2,7 @@
 
 - **Output:** `Math130Unit3B.html`
 - **Duration:** 55 minutes
-- **Slide count:** 32
+- **Slide count:** 34
 
 | # | Block | Phase | Component | Minutes | Source |
 |---:|---|---|---|---:|---|
@@ -29,12 +29,14 @@
 | 21 | A point in Quadrant III | practice | practice | 3.0 | 14, 15 |
 | 22 | Distance and coordinates have different roles | feedback | misconception | 1 | 16 |
 | 23 | From a point to six values | synthesize | summary | 0.5 | 17 |
-| 24 | Calculator output and interval solutions | model | worked-example | 4 | Authored |
-| 25 | All solutions, including no solution | practice | practice | 4 | Authored |
-| 26 | Why must the angle be included? | activate | poll | 1.0 | Authored |
-| 27 | Area from two sides and an angle | explain | concept | 2.5 | 18 |
-| 28 | The height is hidden in the diagram | model | worked-example | 3.0 | 19 |
-| 29 | Choose the sides around the angle | practice | practice | 3.0 | Authored |
-| 30 | A formula needs matching labels | feedback | misconception | 2.0 | 20 |
-| 31 | Explain where the sine comes from | synthesize | summary | 0.5 | Authored |
-| 32 | Show what you can now explain | synthesize | summary | 1.5 | 21 |
+| 24 | Model the Skill: solve a sine or cosine equation | model | worked-example | 3.0 | Authored |
+| 25 | You Try: solve a cosine equation | practice | practice | 2.0 | Authored |
+| 26 | Calculator output and interval solutions | model | worked-example | 4 | Authored |
+| 27 | All solutions, including no solution | practice | practice | 4 | Authored |
+| 28 | Why must the angle be included? | activate | poll | 1.0 | Authored |
+| 29 | Area from two sides and an angle | explain | concept | 2.5 | 18 |
+| 30 | The height is hidden in the diagram | model | worked-example | 3.0 | 19 |
+| 31 | Choose the sides around the angle | practice | practice | 3.0 | Authored |
+| 32 | A formula needs matching labels | feedback | misconception | 2.0 | 20 |
+| 33 | Explain where the sine comes from | synthesize | summary | 0.5 | Authored |
+| 34 | Show what you can now explain | synthesize | summary | 1.5 | 21 |

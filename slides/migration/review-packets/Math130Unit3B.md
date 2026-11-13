@@ -3,7 +3,7 @@
 - **Output:** `Math130Unit3B.html`
 - **Required timing:** 50 of 55 minutes
 - **Reserved classroom buffer:** 5 minutes
-- **Required slides:** 32
+- **Required slides:** 34
 - **Status:** Pending instructor review
 - **Computational math audit:** PASS
 
@@ -13,7 +13,7 @@
 |---|---:|---:|---:|---:|---:|---:|
 | find reference angles in degrees and radians | yes | yes | yes | yes | yes | yes |
 | determine trigonometric signs and quadrants | yes | yes | yes | yes | yes | yes |
-| find exact trigonometric values from points and reference angles | yes | yes | yes | yes | yes | yes |
+| find exact trigonometric values from points and reference angles, and solve sine and cosine equations | yes | yes | yes | yes | yes | yes |
 | apply the trigonometric triangle-area formula | yes | yes | yes | yes | yes | yes |
 
 ## Source Coverage
@@ -29,6 +29,9 @@ Mapped source slides in this session: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
 - [x] Computational audit evidence: Recomputed interval solutions 237.99/302.01, 118.65/298.65, 66.40/293.60, and 138.59/221.41 degrees; checked the impossible sine value and zero-denominator axis cases.
 - [ ] Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG.
 - [ ] Verify exact values and quadrant signs.
+- [ ] Verify sin 225° = sin 315° = −√2/2.
+- [ ] Check the labeled geometry and accessibility text of solve-sine.svg.
+- [ ] Verify cos 135° = cos 225° = −√2/2.
 - [ ] Verify all triangle-area calculations.
 - [ ] Verify formula: `$\theta=150^\circ`
 - [ ] Verify formula: `$30^\circ`
@@ -93,6 +96,17 @@ Mapped source slides in this session: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
 - [ ] Verify formula: `$\sec=-\sqrt{29}/2`
 - [ ] Verify formula: `$\cot=2/5`
 - [ ] Verify formula: `$\sin240^\circ=-\sqrt3/2`
+- [ ] Verify formula: `$\theta`
+- [ ] Verify formula: `$[0^\circ,360^\circ)`
+- [ ] Verify formula: `$\sin\theta=-\tfrac{\sqrt2}{2}`
+- [ ] Verify formula: `$\sin\theta'=\tfrac{\sqrt2}{2}`
+- [ ] Verify formula: `$\theta'=45^\circ`
+- [ ] Verify formula: `$\theta=180^\circ+45^\circ=225^\circ`
+- [ ] Verify formula: `$\theta=360^\circ-45^\circ=315^\circ`
+- [ ] Verify formula: `$\cos\theta=-\tfrac{\sqrt2}{2}`
+- [ ] Verify formula: `$45^\circ`
+- [ ] Verify formula: `$\theta=135^\circ`
+- [ ] Verify formula: `$\theta=225^\circ`
 - [ ] Verify formula: `$\sin\theta=-0.848`
 - [ ] Verify formula: `$0^\circ\leq\theta<360^\circ`
 - [ ] Verify formula: `$\arcsin(-0.848)\approx-57.99^\circ`
@@ -120,6 +134,7 @@ Mapped source slides in this session: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
 - [ ] Verify diagram and alt text: Two equal-scale unit circles show the point (0,1) at 90 degrees and the point (-1,0) at 180 degrees. At 90 degrees x is zero; at 180 degrees y is zero. No acute reference angle is drawn.
 - [ ] Verify diagram and alt text: An equal-scale coordinate diagram plots P=(-3,4). The horizontal directed coordinate is -3, the vertical directed coordinate is 4, and the radial length is labeled r without revealing its value. The blue angle is measured counterclockwise from positive x.
 - [ ] Verify diagram and alt text: An equal-scale coordinate diagram plots P=(-2,-5). The horizontal directed coordinate is -2, the vertical directed coordinate is -5, and the radial length is labeled r without revealing its value. The blue angle is measured counterclockwise from positive x.
+- [ ] Verify diagram and alt text: A unit circle with a dashed horizontal line at y equals negative root 2 over 2. It crosses the circle at two points, on terminal sides at 225 degrees in Quadrant III and 315 degrees in Quadrant IV. Each makes a 45 degree reference angle with the x-axis.
 - [ ] Verify diagram and alt text: A unit circle on equal-scale axes intersects the horizontal line y=-0.848 twice, in Quadrants III and IV. Teal rays reach both intersections. A blue clockwise arc marks the negative principal inverse-sine output at the Quadrant IV ray. No final solution angles are printed.
 - [ ] Verify diagram and alt text: A triangle drawn to scale has AC=b=34, AB=c=21, and included angle A=76 degrees. The perpendicular height from B meets AC. The area is not displayed.
 

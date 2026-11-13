@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const skills=require('../assets/js/math130-test3-skills.js');
-const html=fs.readFileSync(require('node:path').join(__dirname,'../130quiz10.html'),'utf8');
+const html=fs.readFileSync(require('node:path').join(__dirname,'../130-section-5-3-practice.html'),'utf8');
 const source=html.slice(html.indexOf('  let answered ='),html.indexOf('</script>',html.indexOf('  let answered =')));
 const inputs=new Map();
 function element(id){if(!inputs.has(id))inputs.set(id,{value:'',disabled:false,style:{},classList:{add(){},remove(){}}});return inputs.get(id);}

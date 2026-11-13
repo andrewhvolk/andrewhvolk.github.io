@@ -34,15 +34,17 @@
 | 21 | A point in Quadrant III | 3 | 39 |  |  |
 | 22 | Distance and coordinates have different roles | 1 | 40 |  |  |
 | 23 | From a point to six values | 0.5 | 40.5 |  |  |
-| 24 | Calculator output and interval solutions | 4 | 44.5 |  |  |
-| 25 | All solutions, including no solution | 4 | 48.5 |  |  |
-| 26 | Why must the angle be included? | 1 (optional) | 48.5 |  | Outside the core clock |
-| 27 | Area from two sides and an angle | 2.5 (optional) | 48.5 |  | Outside the core clock |
-| 28 | The height is hidden in the diagram | 3 (optional) | 48.5 |  | Outside the core clock |
-| 29 | Choose the sides around the angle | 3 (optional) | 48.5 |  | Outside the core clock |
-| 30 | A formula needs matching labels | 2 (optional) | 48.5 |  | Outside the core clock |
-| 31 | Explain where the sine comes from | 0.5 (optional) | 48.5 |  | Outside the core clock |
-| 32 | Show what you can now explain | 1.5 | 50 |  |  |
+| 24 | Model the Skill: solve a sine or cosine equation | 3 (optional) | 40.5 |  | Outside the core clock |
+| 25 | You Try: solve a cosine equation | 2 (optional) | 40.5 |  | Outside the core clock |
+| 26 | Calculator output and interval solutions | 4 | 44.5 |  |  |
+| 27 | All solutions, including no solution | 4 | 48.5 |  |  |
+| 28 | Why must the angle be included? | 1 (optional) | 48.5 |  | Outside the core clock |
+| 29 | Area from two sides and an angle | 2.5 (optional) | 48.5 |  | Outside the core clock |
+| 30 | The height is hidden in the diagram | 3 (optional) | 48.5 |  | Outside the core clock |
+| 31 | Choose the sides around the angle | 3 (optional) | 48.5 |  | Outside the core clock |
+| 32 | A formula needs matching labels | 2 (optional) | 48.5 |  | Outside the core clock |
+| 33 | Explain where the sine comes from | 0.5 (optional) | 48.5 |  | Outside the core clock |
+| 34 | Show what you can now explain | 1.5 | 50 |  |  |
 
 ## Explicit Stopping Points
 
