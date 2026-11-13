@@ -12,39 +12,44 @@
 | Slide | Teaching block | Planned min | Cumulative min | Actual min | Notes |
 |---:|---|---:|---:|---:|---|
 | 1 | Trigonometric Functions of Any Angle | 0 | 0 |  |  |
-| 2 | Today’s Learning Roadmap | 0.5 | 0.5 |  |  |
-| 3 | Predict: find reference angles in degrees and radians | 1 | 1.5 |  |  |
-| 4 | find reference angles in degrees and radians | 2.5 | 4 |  |  |
-| 5 | Model the Skill: find reference angles in degrees and radians | 3 | 7 |  |  |
-| 6 | You Try: find reference angles in degrees and radians | 3 | 10 |  |  |
-| 7 | Check and Diagnose: find reference angles in degrees and radians | 2 | 12 |  |  |
-| 8 | Make It Stick: find reference angles in degrees and radians | 0.5 | 12.5 |  |  |
-| 9 | Predict: determine trigonometric signs and quadrants | 1 | 13.5 |  |  |
-| 10 | determine trigonometric signs and quadrants | 2.5 | 16 |  |  |
-| 11 | Model the Skill: determine trigonometric signs and quadrants | 3 | 19 |  |  |
-| 12 | You Try: determine trigonometric signs and quadrants | 3 | 22 |  |  |
-| 13 | Check and Diagnose: determine trigonometric signs and quadrants | 2 | 24 |  |  |
-| 14 | Make It Stick: determine trigonometric signs and quadrants | 0.5 | 24.5 |  |  |
-| 15 | Predict: find exact trigonometric values from points and reference angles | 1 | 25.5 |  |  |
-| 16 | find exact trigonometric values from points and reference angles | 2.5 | 28 |  |  |
-| 17 | Model the Skill: find exact trigonometric values from points and reference angles | 3 | 31 |  |  |
-| 18 | You Try: find exact trigonometric values from points and reference angles | 3 | 34 |  |  |
-| 19 | Check and Diagnose: find exact trigonometric values from points and reference angles | 2 | 36 |  |  |
-| 20 | Make It Stick: find exact trigonometric values from points and reference angles | 0.5 | 36.5 |  |  |
-| 21 | Predict: apply the trigonometric triangle-area formula | 1 | 37.5 |  |  |
-| 22 | apply the trigonometric triangle-area formula | 2.5 | 40 |  |  |
-| 23 | Model the Skill: apply the trigonometric triangle-area formula | 3 | 43 |  |  |
-| 24 | You Try: apply the trigonometric triangle-area formula | 3 | 46 |  |  |
-| 25 | Check and Diagnose: apply the trigonometric triangle-area formula | 2 | 48 |  |  |
-| 26 | Make It Stick: apply the trigonometric triangle-area formula | 0.5 | 48.5 |  |  |
-| 27 | Session Summary and Exit Ticket | 1.5 | 50 |  |  |
+| 2 | From an angle to a value | 0.5 | 0.5 |  |  |
+| 3 | Which axis defines a reference angle? | 1 | 1.5 |  |  |
+| 4 | The acute angle to the x-axis | 2.5 | 4 |  |  |
+| 5 | Rotate, predict, then reveal | 3 | 7 |  |  |
+| 6 | Different rotations, the same method | 3 | 10 |  |  |
+| 7 | More than one full turn | 3 | 13 |  |  |
+| 8 | A plausible angle, measured from the wrong axis | 1 | 14 |  |  |
+| 9 | Explain the reference-angle rule | 0.5 | 14.5 |  |  |
+| 10 | Two sign clues, one quadrant | 1 | 15.5 |  |  |
+| 11 | Coordinates explain the signs | 2.5 | 18 |  |  |
+| 12 | Intersect the possible quadrants | 2 | 20 |  |  |
+| 13 | Choose a quadrant and defend it | 3 | 23 |  |  |
+| 14 | Check the coordinate signs | 2 | 25 |  |  |
+| 15 | Explain a sign without the mnemonic | 0.5 | 25.5 |  |  |
+| 16 | What stays positive? | 1 | 26.5 |  |  |
+| 17 | Six ratios from one terminal point | 2.5 | 29 |  |  |
+| 18 | Angles on the coordinate axes | 2 | 31 |  |  |
+| 19 | Identities and possible values | 2 | 33 |  |  |
+| 20 | A point in Quadrant II | 3 | 36 |  |  |
+| 21 | A point in Quadrant III | 3 | 39 |  |  |
+| 22 | Distance and coordinates have different roles | 1 | 40 |  |  |
+| 23 | From a point to six values | 0.5 | 40.5 |  |  |
+| 24 | Calculator output and interval solutions | 4 | 44.5 |  |  |
+| 25 | All solutions, including no solution | 4 | 48.5 |  |  |
+| 26 | Why must the angle be included? | 1 (optional) | 48.5 |  | Outside the core clock |
+| 27 | Area from two sides and an angle | 2.5 (optional) | 48.5 |  | Outside the core clock |
+| 28 | The height is hidden in the diagram | 3 (optional) | 48.5 |  | Outside the core clock |
+| 29 | Choose the sides around the angle | 3 (optional) | 48.5 |  | Outside the core clock |
+| 30 | A formula needs matching labels | 2 (optional) | 48.5 |  | Outside the core clock |
+| 31 | Explain where the sine comes from | 0.5 (optional) | 48.5 |  | Outside the core clock |
+| 32 | Show what you can now explain | 1.5 | 50 |  |  |
 
 ## Explicit Stopping Points
 
-- **12.5 minutes, after `math130unit3b-u3b-reference-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- **24.5 minutes, after `math130unit3b-u3b-signs-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- **36.5 minutes, after `math130unit3b-u3b-values-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
-- **48.5 minutes, after `math130unit3b-u3b-area-synthesize`:** Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback.
+- **14.5 minutes, after `math130unit3b-u3b-reference-synthesize`:** Preserve the prediction, student practice, and feedback. Defer optional extensions if behind.
+- **25.5 minutes, after `math130unit3b-u3b-signs-synthesize`:** Preserve the prediction, student practice, and feedback. Defer optional extensions if behind.
+- **40.5 minutes, after `math130unit3b-u3b-values-synthesize`:** Preserve the prediction, student practice, and feedback. Defer optional extensions if behind.
+- **48.5 minutes, after `math130unit3b-u3b-area-synthesize`:** Preserve the prediction, student practice, and feedback. Defer optional extensions if behind.
 
 ## Live Rehearsal Record
 

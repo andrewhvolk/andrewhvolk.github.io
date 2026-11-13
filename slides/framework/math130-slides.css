@@ -389,6 +389,21 @@ body { margin: 0; }
   max-width: 100%;
 }
 .interactive-panel input[type="range"] { width: 100%; }
+.angle-explorer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 50px; align-items: center; }
+.angle-explorer svg { display: block; width: 100%; max-height: 570px; overflow: visible; }
+.angle-explorer svg text { font-family: Arial, Helvetica, sans-serif; font-size: 23px; fill: var(--ink); }
+.angle-explorer svg .explorer-legend { font-size: 18px; }
+.explorer-prompt { font-size: .85em; margin: 0 0 .3em; }
+.explorer-controls label { display: block; font-size: .7em; color: var(--muted); }
+.explorer-controls output { display: block; font-size: 1.15em; font-weight: 700; margin: .5em 0; }
+.explorer-controls input { display: block; width: 100%; margin: 20px 0; accent-color: var(--teal); min-height: 32px; }
+.explorer-presets { display: flex; flex-wrap: wrap; gap: 10px; }
+.explorer-presets button { background: transparent; color: var(--blue); border: 2px solid var(--line); border-radius: 4px; padding: .4em .65em; cursor: pointer; font: inherit; font-size: .65em; min-height: 44px; }
+.explorer-presets button:hover, .explorer-presets button:focus-visible { border-color: var(--blue); outline: 3px solid #8ac4ed; }
+.explorer-challenge { font-size: .72em; color: var(--muted); }
+.explorer-results { font-size: .78em; line-height: 1.4; border-left: 4px solid var(--orange); padding-left: 16px; }
+.explorer-results[hidden] { display: none; }
+.notes-view .angle-explorer { gap: 20px; }
 .generated-problem {
   font-size: 1.18em;
   font-weight: 700;
@@ -551,6 +566,9 @@ html.notes-view, html.notes-view body { height: auto; overflow: auto; }
   min-height: 0;
   opacity: 1;
   padding: 22px 20px 26px;
+  /* Reveal disables pointer events on inactive slides. Notes mode shows all
+     sections without initializing Reveal, so restore their answer buttons. */
+  pointer-events: auto;
   position: relative;
   scroll-margin-top: 60px;
   top: auto;

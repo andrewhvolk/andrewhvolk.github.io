@@ -149,6 +149,8 @@ def validate_manifest(path: Path, manifest: dict) -> list[str]:
             if block.get("component") == "worked-example" and len(block.get("steps", [])) < 2:
                 errors.append(f"{block_id}: worked example requires at least two staged steps")
             visual_layout = block.get("visual_layout")
+            if block.get("interaction") and (block["interaction"] != "reference-angle-explorer" or block.get("component") != "diagram"):
+                errors.append(f"{block_id}: unsupported interaction or component")
             if visual_layout is not None:
                 if visual_layout != "split":
                     errors.append(f"{block_id}: visual_layout must be split")
@@ -334,7 +336,25 @@ def render_block(block: dict, session: dict, deck: dict) -> str:
         # hidden answer, instead of rendering it twice in nested layouts.
         block = {**block, "assets": []}
 
-    if component == "diagram":
+    if block.get("interaction") == "reference-angle-explorer":
+        classes += " angle-explorer-slide"
+        widget_id = f'{block["id"]}-explorer'
+        body = (
+            f'<p class="explorer-prompt">{esc(content[0])}</p>'
+            f'<div class="angle-explorer" id="{widget_id}" data-reference-angle-explorer>'
+            '<svg viewBox="0 0 500 500" role="img" aria-label="Interactive angle diagram"></svg>'
+            '<div class="explorer-controls">'
+            f'<label for="{widget_id}-angle">Rotate the terminal side</label>'
+            '<output aria-live="polite">225 degrees</output>'
+            f'<input id="{widget_id}-angle" aria-label="Angle in degrees" type="range" min="-720" max="720" step="1" value="225">'
+            '<div class="explorer-presets" role="group" aria-label="Example angles">'
+            + ''.join(f'<button type="button" data-angle-preset="{a}">{a}°</button>' for a in (150, -150, 420, 90, 225))
+            + '</div><p class="explorer-challenge">Predict the quadrant, reference angle, and signs before revealing.</p>'
+            f'<button class="answer-toggle" type="button" data-explorer-reveal aria-expanded="false" aria-controls="{widget_id}-results">Show reasoning</button>'
+            f'<p id="{widget_id}-results" class="explorer-results" data-explorer-results hidden></p>'
+            '</div></div>'
+        )
+    elif component == "diagram":
         body = (
             f'<div class="diagram-layout"><div class="component-card">'
             f'<span class="card-label">{component_label}</span>{render_items(content)}</div>'
@@ -435,6 +455,10 @@ def deck_html(manifest: dict, session: dict) -> str:
         "id": deck["id"], "title": deck["title"], "section": deck["section"],
         "session": session["id"], "duration": session["duration_minutes"],
     }
+    explorer_script = (
+        f'<script src="{framework_asset_url("framework/reference-angle-explorer.js")}"></script>'
+        if any(block.get('interaction') == 'reference-angle-explorer' for block in session['blocks']) else ''
+    )
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -456,6 +480,7 @@ def deck_html(manifest: dict, session: dict) -> str:
   <script src="vendor/reveal/reveal.js"></script>
   <script>window.MATH130_DECK={json.dumps(metadata, ensure_ascii=False)};</script>
   <script src="{framework_asset_url('framework/math130-slides.js')}"></script>
+  {explorer_script}
 </body>
 </html>
 """
@@ -702,10 +727,14 @@ def write_rehearsal_packet(manifest: dict, session: dict) -> None:
     ]
     elapsed = 0.0
     for index, block in enumerate(session["blocks"], 1):
-        elapsed += float(block["minutes"])
+        optional = block.get("optional", False)
+        if not optional:
+            elapsed += float(block["minutes"])
+        timing = f"{block['minutes']:g}" + (" (optional)" if optional else "")
+        note = "Outside the core clock" if optional else ""
         lines.append(
-            f"| {index} | {block['title'].replace('|', '/')} | {block['minutes']:g} | "
-            f"{elapsed:g} |  |  |"
+            f"| {index} | {block['title'].replace('|', '/')} | {timing} | "
+            f"{elapsed:g} |  | {note} |"
         )
     lines.extend(["", "## Explicit Stopping Points", ""])
     for item in rehearsal["stopping_points"]:

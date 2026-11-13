@@ -12,6 +12,7 @@ from xml.etree import ElementTree as ET
 
 from compile_lectures import load_manifests
 from verify_unit2c_visuals import verify as verify_unit2c_visuals
+from verify_unit3b_visuals import verify as verify_unit3b_visuals
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "migration" / "math-audit"
@@ -24,6 +25,32 @@ def close(actual: float, expected: float, tolerance: float = 0.005) -> None:
 
 def calculations() -> dict[str, list[str]]:
     pi = math.pi
+    assert round(math.degrees(math.asin(150 / 345)), 1) == 25.8
+    assert round(90 - math.degrees(math.asin(150 / 345)), 1) == 64.2
+    assert round(math.sqrt(345**2 - 150**2), 1) == 310.7
+    assert round(2 / math.sin(math.radians(10)), 2) == 11.52
+    near_distance = 50 * math.tan(math.radians(40)) / (math.tan(math.radians(55)) - math.tan(math.radians(40)))
+    assert round(near_distance, 2) == 71.23
+    assert round(near_distance * math.tan(math.radians(55)), 2) == 101.72
+    assert round(450 * math.cos(math.radians(35)), 2) == 368.62
+    assert round(450 * math.sin(math.radians(35)), 2) == 258.11
+    # Section 5.3: independently check rounded interval solutions, not the
+    # inverse-function principal output that can fall outside the interval.
+    equation_cases = [
+        (math.sin, -0.848, [237.99, 302.01]),
+        (math.tan, -1.830, [118.65, 298.65]),
+        (math.cos, 0.4003, [66.40, 293.60]),
+        (math.cos, -0.75, [138.59, 221.41]),
+    ]
+    for function, target, roots in equation_cases:
+        for theta in roots:
+            assert 0 <= theta < 360
+            assert abs(function(math.radians(theta)) - target) < 0.0004
+    alpha = math.degrees(math.asin(0.848))
+    assert [round(180 + alpha, 2), round(360 - alpha, 2)] == [237.99, 302.01]
+    assert abs(-1.637) > 1  # Sine equation has no real solution.
+    assert abs(math.cos(math.radians(90))) < 1e-12  # tan(90) undefined.
+    assert abs(math.sin(math.radians(180))) < 1e-12  # cot(180) undefined.
     close(2000 * (1 + 0.031 / 2) ** 6, 2193.36)
     close(500 * 2 ** (10 / 3), 5039.7)
     close(math.log(175, 3), 4.701, 0.0006)
@@ -149,10 +176,10 @@ def calculations() -> dict[str, list[str]]:
         "u3a-coterminal": ["Verified degree coterminals $263^\\circ,-457^\\circ,45^\\circ$ and radian coterminals $23\\pi/7,-5\\pi/7$."],
         "u3a-arc": ["Verified model arc $8\\pi$ and practice arc $6\\pi$ after degree-to-radian conversion."],
         "u3a-ratios": ["Verified the 9-40-41 Pythagorean triple and all six reciprocal trigonometric ratios."],
-        "u3a-applications": [f"Recomputed ladder height $25\\sin70^\\circ={25 * math.sin(math.radians(70)):.2f}$ ft."],
+        "u3a-applications": ["Recomputed the current 150-345 right triangle: angles 25.8 and 64.2 degrees, missing side 310.7; ramp length 11.52 ft; two-observation near distance 71.23 ft and height 101.72 ft."],
         "u3b-reference": ["Verified reference angles $30^\\circ,50^\\circ,60^\\circ,\\pi/4$, and practice angle $40^\\circ$."],
         "u3b-signs": ["Intersected sign quadrants: tangent positive and cosine negative gives Quadrant III; sine positive and secant negative gives Quadrant II."],
-        "u3b-values": ["Verified point-radius calculations and all six signs/ratios for $(-3,4)$ and $(-2,-5)$; $\\sin240^\\circ=-\\sqrt3/2$."],
+        "u3b-values": ["Verified point-radius calculations and all six signs/ratios for $(-3,4)$ and $(-2,-5)$; $\\sin240^\\circ=-\\sqrt3/2$.", "Recomputed interval solutions 237.99/302.01, 118.65/298.65, 66.40/293.60, and 138.59/221.41 degrees; checked the impossible sine value and zero-denominator axis cases."],
         "u3b-area": [f"Recomputed model area {0.5 * 34 * 21 * math.sin(math.radians(76)):.2f} and practice area {0.5 * 12 * 15 * math.sin(math.radians(40)):.2f} square units."],
         "u3c-model": [f"Recomputed corrected ladder height $20\\sin65^\\circ={20 * math.sin(math.radians(65)):.2f}$ ft and practice height {80 * math.tan(math.radians(42)):.2f} ft."],
         "u3c-motion": [f"Recomputed 300-mile components: east {300 * math.cos(math.radians(25)):.2f}, north {300 * math.sin(math.radians(25)):.2f}."],
@@ -198,13 +225,13 @@ REQUIRED_FRAGMENTS = {
     "u3a-coterminal": ["263^\\\\circ", "-457^\\\\circ", "23\\\\pi/7", "-5\\\\pi/7"],
     "u3a-arc": ["8\\\\pi", "6\\\\pi"],
     "u3a-ratios": ["$\\\\sin\\\\theta=40/41$", "$\\\\cot\\\\theta=9/40$"],
-    "u3a-applications": ["23.49", "23.5"],
+    "u3a-applications": ["25.8", "64.2", "310.7", "11.52", "71.23", "101.72"],
     "u3b-reference": ["30^\\\\circ", "50^\\\\circ", "60^\\\\circ", "\\\\pi/4"],
     "u3b-signs": ["Quadrant III", "Quadrant II"],
-    "u3b-values": ["=5$.", "$r=\\\\sqrt{29}$", "$\\\\sin240^\\\\circ=-\\\\sqrt3/2$"],
+    "u3b-values": ["=5$.", "$r=\\\\sqrt{29}$", "$\\\\sin240^\\\\circ=-\\\\sqrt3/2$", "237.99", "302.01", "118.65", "298.65", "66.40", "293.60", "138.59", "221.41", "No real solution", "undefined"],
     "u3b-area": ["346.40", "57.85"],
     "u3c-model": ["18.13", "72.0"],
-    "u3c-motion": ["271.89", "126.79", "271.9", "126.8"],
+    "u3c-motion": ["271.89", "126.79", "368.62", "258.11"],
     "u3c-two": ["41.37", "54.90"],
     "u3d-components": ["\\\\langle5,-6\\\\rangle", "\\\\langle6,3\\\\rangle"],
     "u3d-operations": ["\\\\langle11,-16\\\\rangle", "\\\\langle7,-18\\\\rangle"],
@@ -276,6 +303,10 @@ def main() -> int:
         diagram_evidence.update(verify_unit2c_visuals())
     except (AssertionError, OSError, ET.ParseError) as exc:
         failures.append(f"Unit 2C diagram audit: {exc}")
+    try:
+        diagram_evidence.update(verify_unit3b_visuals())
+    except (AssertionError, OSError, ET.ParseError) as exc:
+        failures.append(f"Unit 3B diagram audit: {exc}")
     for relative, claim in diagram_evidence.items():
         path = ROOT / relative
         if not path.exists():

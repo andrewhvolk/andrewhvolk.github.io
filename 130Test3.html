@@ -967,23 +967,23 @@
   </aside>
   <div class="learning-path__grid">
     <article class="learning-step">
-      <div class="learning-step__meta">Step 1 · Units 3A and 3B · Quiz 10</div>
+      <div class="learning-step__meta">Step 1 · Units 3A and 3B</div>
       <h3>Angles, trig foundations, and reference angles</h3>
       <p>Work through 3A before 3B. Build angle and triangle fluency first, then use reference angles, signs, and exact trig values.</p>
       <div class="learning-step__actions">
         <a class="learning-action--primary" href="slides/Math130Unit3A.html" target="_blank" rel="noopener">Learn with 3A</a>
         <a href="slides/Math130Unit3B.html" target="_blank" rel="noopener">Continue with 3B</a>
-        <button type="button" onclick="launchUnitCheckpoint(6)">Quiz 10 checkpoint</button>
+        <button type="button" onclick="launchUnitCheckpoint(6)">Section 5.3 checkpoint</button>
       </div>
     </article>
     <article class="learning-step">
-      <div class="learning-step__meta">Step 2 · Unit 3C · Quiz 11</div>
+      <div class="learning-step__meta">Step 2 · Unit 3C</div>
       <h3>Right-triangle applications</h3>
       <p>Translate diagrams and contexts into right triangles, then practice elevation, bearings, motion, and multi-step applications.</p>
       <div class="learning-step__actions">
         <a class="learning-action--primary" href="slides/Math130Unit3C.html" target="_blank" rel="noopener">Learn with 3C</a>
         <button type="button" onclick="openUnitPractice()">Targeted practice</button>
-        <button type="button" onclick="launchUnitCheckpoint(7)">Quiz 11 checkpoint</button>
+        <button type="button" onclick="launchUnitCheckpoint(7)">Applications checkpoint</button>
       </div>
     </article>
     <article class="learning-step">
@@ -1189,25 +1189,30 @@
 <!-- Mock Quiz CTA -->
 <div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg review-callout--padded">
 <h3 class="review-callout__title u-text-center">📝 Mock Quiz Mode</h3>
-<p class="review-callout__body review-callout__body--sm u-text-center">Quizzes 10 to 12 check each step of Unit 3, and Quiz 13 is a cumulative readiness check for Test 3. Dates are on the <a href="/courses/math130.html#test-3">MATH 130 page</a>.</p>
+<p class="review-callout__body review-callout__body--sm u-text-center">Choose practice by topic. The aviation mode follows the four problem types in Spring 2026 Quiz 11; quiz numbering and coverage can change between semesters. Confirm current coverage in Canvas. Dates are on the <a href="/courses/math130.html#test-3">MATH 130 page</a>.</p>
 <div class="review-option-grid">
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(5)">
 <div class="review-option-title">Topic practice — Sections 5.1–5.2 foundations</div>
 <div class="review-option-copy">Coterminal angles + exact trig triangle skills</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(6)">
-<div class="review-option-title">Planned Quiz 10 practice — Section 5.3</div>
-<div class="review-option-copy">Reference angles, signs, and solving trig equations on 0°–360°</div>
+<div class="review-option-title">Section 5.3 practice</div>
+<div class="review-option-copy">Six questions: degrees, radians, signs, exact values, equations, and all six functions from a point</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
-<div class="review-option-title">Planned Quiz 11 practice — Section 7.1</div>
+<div class="review-option-title">Section 7.1 applications practice</div>
 <div class="review-option-copy">Airplane applications, angle of elevation, and bearings</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(8)">
 <div class="review-option-title">Planned Quiz 12 practice — Section 8.4</div>
 <div class="review-option-copy">Graph/resultant vectors and magnitude-direction conversions</div>
 </button>
+<button id="aviation-practice" class="btn-secondary review-option-button" onclick="startMockQuiz(10)">
+<div class="review-option-title">Aviation practice — Spring Quiz 11 format</div>
+<div class="review-option-copy">Four problems: climb time, descent loss, both compass components, and distance with a return bearing</div>
+</button>
 </div>
+<p class="u-text-center"><a href="/pdfs/math130-aviation-quiz-practice.pdf">Print aviation practice and worked answers</a></p>
 </div>
 <!-- Exam Progress Bar (hidden until active) -->
 <div id="exam-progress-bar" class="u-mb-lg" style="display:none;">
@@ -1252,9 +1257,9 @@
 </div>
 <div class="slides-grid">
 <div class="slide-card">
-<h3>Quiz 10 Notes + Practice (Section 5.3)</h3>
-<p class="slide-subtitle">A printable reference-angle notes sheet and a dedicated practice set for the planned Quiz 10 skills.</p>
-<div class="slide-actions"><a class="btn-primary" href="/130quiz10.html" target="_blank" rel="noopener noreferrer"><i data-lucide="clipboard-check"></i><span>Open Quiz 10 Practice</span></a> <a class="btn-secondary" href="/130Q10.html" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>Printable Notes</span></a></div>
+<h3>Section 5.3 Notes + Practice</h3>
+<p class="slide-subtitle">Reference angles, quadrant signs, exact values, and solutions in a stated interval. Use the course page for quiz dates and Canvas for official coverage.</p>
+<div class="slide-actions"><a class="btn-primary" href="/130quiz10.html" target="_blank" rel="noopener noreferrer"><i data-lucide="clipboard-check"></i><span>Open Section 5.3 Practice</span></a> <a class="btn-secondary" href="/130Q10.html" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i><span>Printable Notes</span></a> <a class="btn-secondary" href="/slides/math130-reference-angles-2026-11-13.html"><span>Nov 13 Lesson</span></a> <a class="btn-secondary" href="/pdfs/math130-reference-angles-practice-2026-11-13.pdf"><span>Nov 13 Practice + Key</span></a></div>
 </div>
 <div class="slide-card">
 <h3>Skyhawk Trig (Section 7.1)</h3>
@@ -1278,7 +1283,7 @@
 <div class="tab-content" id="tab-videos">
 <div class="card review-card">
 <h2>Study Videos</h2>
-<p>The Unit 3 videos are being re-linked. Until they are posted, use the Unit 3 slides on the <a href="/courses/math130.html#sections-5-1-5-3">MATH 130 page</a> and the practice in this review.</p>
+<p>The Unit 3 videos are being re-linked. Until they are posted, use the Unit 3 slides on the <a href="/courses/math130.html#sections-5-3-and-5-7">MATH 130 page</a> and the practice in this review.</p>
 </div>
 </div>
 
@@ -1566,17 +1571,29 @@
         function sum() { let v = product(); while (tokens[i] === '+' || tokens[i] === '-') { const t = tokens[i++]; const w = product(); v = t === '+' ? v + w : v - w; } return v; }
         try { const v = sum(); return i === tokens.length && Number.isFinite(v) ? v : null; } catch (_) { return null; }
     }
+    function bearingHeading(raw) {
+        const s=String(raw).trim().toUpperCase().replace(/\s+/g,'');
+        let m=s.match(/^([NS])(\d+(?:\.\d+)?)°?([EW])$/);
+        if(m){const a=Number(m[2]);if(a>90)return null;return m[1]==='N'?(m[3]==='E'?a:(360-a)%360):(m[3]==='E'?180-a:180+a);}
+        m=s.match(/^([EW])(\d+(?:\.\d+)?)°?([NS])$/);
+        if(m){const a=Number(m[2]);if(a>90)return null;return m[1]==='E'?(m[3]==='N'?90-a:90+a):(m[3]==='N'?270+a:270-a);}
+        const a=parseExact(s.replace(/°$/,''));
+        return a!==null&&a>=0&&a<=360?a%360:null;
+    }
     function grade(question, entries) {
         const close = (raw, answer, tol = 0) => {
             const v = parseExact(raw);
             return v !== null && Math.abs(v - answer) <= tol + 1e-10;
         };
+        const bearingClose=(raw,answer,tolerance=0.1)=>{
+            const actual=bearingHeading(raw),expected=bearingHeading(`${answer.ns}${answer.angle}${answer.ew}`);
+            return actual!==null&&expected!==null&&Math.abs((actual-expected+540)%360-180)<=tolerance+1e-10;
+        };
         let parts;
-        if (question.fields) parts = question.fields.map((f, i) => close(entries[i], f.answer, f.tolerance));
+        if (question.fields) parts = question.fields.map((f, i) => f.inputType==='bearing'?bearingClose(entries[i],f.answer,f.tolerance):close(entries[i], f.answer, f.tolerance));
         else if (question.inputType === 'choice') parts = [String(entries[0]) === question.a];
         else if (question.inputType === 'bearing') {
-            const m = String(entries[0]).trim().toUpperCase().match(/^([NS])\s*(\d+(?:\.\d+)?)\s*°?\s*([EW])$/);
-            parts = [!!m && m[1] === question.a.ns && m[3] === question.a.ew && close(m[2], question.a.angle, 0.1)];
+            parts = [bearingClose(entries[0],question.a,question.tol===undefined?0.1:question.tol)];
         } else if (question.inputType.startsWith('coterminal_')) {
             const rad = question.inputType === 'coterminal_rad';
             const base = rad ? question.baseThetaRad : question.baseTheta;
@@ -2229,7 +2246,60 @@
 
 
 
+    definitions.push(
+        {id:'trig_values_from_point',section:'Section 5.3',label:'All Six Functions from a Signed Point',generate:(r=Math.random)=>{
+            const x=int(r,1,9)*(r()<0.5?-1:1),y=int(r,1,9)*(r()<0.5?-1:1),n=x*x+y*y,radius=Math.sqrt(n);
+            const values={r:radius,sin:y/radius,cos:x/radius,tan:y/x,csc:radius/y,sec:radius/x,cot:x/y};
+            const overRoot=k=>Number.isInteger(radius)?fraction(k,radius):radical(n*k*k,n,Math.sign(k));
+            const exact={r:radical(n),sin:overRoot(y),cos:overRoot(x),tan:fraction(y,x),csc:radical(n,Math.abs(y),Math.sign(y)),sec:radical(n,Math.abs(x),Math.sign(x)),cot:fraction(x,y)};
+            const scale=85/Math.max(Math.abs(x),Math.abs(y)),px=150+x*scale,py=145-y*scale;
+            const svgAltText=`Equal-scale axes with terminal point P(${x}, ${y}); the radial length is unknown.`;
+            return {q:`The terminal side of $\\theta$ passes through $P=(${x},${y})$. Find $r$ and all six trigonometric functions. Enter exact values or decimals rounded to 4 places.`,
+                inputType:'parts',fields:Object.entries(values).map(([id,answer])=>({id,label:id==='r'?'r':id+' θ',answer,tolerance:0.00005})),
+                svgAltText,svg:`<svg viewBox="0 0 300 290" width="300" height="290" role="img" aria-label="${svgAltText}"><rect width="300" height="290" fill="var(--diagram-bg)"/><path d="M25 145 H275 M150 25 V265" fill="none" stroke="var(--diagram-axis-label)" stroke-width="2"/><path d="M150 145 H${px} V${py} Z" fill="none" stroke="var(--diagram-ray)" stroke-width="3"/><circle cx="${px}" cy="${py}" r="4" fill="var(--diagram-ray)"/><g font-size="15" fill="var(--diagram-axis-label)"><text x="${px+10}" y="${py-12}">P(${x}, ${y})</text><text x="277" y="138">x</text><text x="158" y="25">y</text></g></svg>`,
+                entryNote:'Use sqrt(65), -4/sqrt(65), or equivalent rationalized forms. Each field is checked separately.',
+                solution:`$r=\\sqrt{${paren(x)}^2+${paren(y)}^2}=${exact.r}$. ${trigNames.map(fn=>`$\\${fn}\\theta=${exact[fn]}$`).join('; ')}.`,parameters:{x,y}};
+        }},
+        {id:'aviation_climb_time',section:'Section 7.1',label:'Aviation: Time to Reach Altitude',generate:(r=Math.random)=>{
+            const speed=int(r,11,24)*20,angle=int(r,4,16),altitude=int(r,6,16)/2;
+            const minutes=60*altitude/(speed*Math.sin(angle*Math.PI/180));
+            return {q:`An airplane climbs at $${angle}^\\circ$ at an average airspeed of ${speed} mph along its flight path. How long will it take to gain ${altitude} miles of altitude? Round to the nearest minute.`,inputType:'number',a:Math.round(minutes),tol:0,
+                entryNote:'Sketch the triangle. Enter the whole number of minutes, not hours.',
+                solution:`Vertical speed is $${speed}\\sin(${angle}^\\circ)$ miles/hour. Thus $t=\\frac{${altitude}}{${speed}\\sin(${angle}^\\circ)}$ hours, or $60t\\approx${fixed(minutes,3)}$ minutes. Rounded answer: ${Math.round(minutes)} minutes.`,parameters:{speed,angle,altitude}};
+        }},
+        {id:'aviation_descent_loss',section:'Section 7.1',label:'Aviation: Altitude Lost in Minutes',generate:(r=Math.random)=>{
+            const speed=int(r,8,16)*20,angle=int(r,2,8),minutes=int(r,3,12),distance=speed*minutes/60,loss=distance*Math.sin(angle*Math.PI/180);
+            return {q:`An airplane descends at an average airspeed of ${speed} mph along its flight path, at an angle of depression of $${angle}^\\circ$. How much altitude does it lose in ${minutes} minutes? Round to the nearest tenth of a mile.`,inputType:'number',a:loss,tol:0.05,
+                entryNote:'Report the positive amount of altitude lost in miles. Convert minutes to hours first.',
+                solution:`Time is $${minutes}/60$ hours, so the flight-path distance is $d=${speed}(${minutes}/60)=${fixed(distance,3)}$ miles. Altitude lost is $d\\sin(${angle}^\\circ)\\approx${fixed(loss,1)}$ miles.`,parameters:{speed,angle,minutes}};
+        }},
+        {id:'aviation_bearing_displacement',section:'Section 7.1',label:'Aviation: Both Compass Components',generate:(r=Math.random)=>{
+            const speed=int(r,18,36)*10,hours=pick(r,[0.8,1.2,1.5,1.8,2.4,2.6]),angle=int(r,10,80),ns=pick(r,['N','S']),ew=pick(r,['E','W']);
+            const heading=ns==='N'?(ew==='E'?angle:360-angle):(ew==='E'?180-angle:180+angle),distance=speed*hours;
+            const vertical=distance*Math.cos(angle*Math.PI/180),horizontal=distance*Math.sin(angle*Math.PI/180);
+            const northSouth=ns==='N'?'north':'south',eastWest=ew==='E'?'east':'west';
+            return {q:`An airplane flies at ${speed} knots on bearing ${ns}${angle}°${ew} (${heading}° compass heading) for ${hours} hours. How many nautical miles ${northSouth} and ${eastWest} does it travel? Round each answer to the nearest nautical mile.`,
+                inputType:'parts',fields:[{id:'vertical',label:`Nautical miles ${northSouth}`,answer:Math.round(vertical),tolerance:0},{id:'horizontal',label:`Nautical miles ${eastWest}`,answer:Math.round(horizontal),tolerance:0}],
+                entryNote:'Knots are nautical miles per hour. Enter positive distances in the two named directions.',
+                solution:`Total distance is $d=${speed}(${hours})=${fixed(distance,1)}$ nautical miles. Measure from ${northSouth}: ${northSouth} $=d\\cos(${angle}^\\circ)\\approx${Math.round(vertical)}$ nautical miles; ${eastWest} $=d\\sin(${angle}^\\circ)\\approx${Math.round(horizontal)}$ nautical miles.`,parameters:{speed,hours,angle,ns,ew}};
+        }},
+        {id:'aviation_return_to_origin',section:'Section 7.1',label:'Aviation: Distance and Return Bearing',generate:(r=Math.random)=>{
+            const speed=int(r,12,24)*20,firstHours=pick(r,[0.5,0.75,1,1.25,1.5]),secondHours=pick(r,[1,1.5,2,2.5]),ns=pick(r,['N','S']),ew=pick(r,['E','W']);
+            const vertical=speed*firstHours,horizontal=speed*secondHours,distance=Math.hypot(vertical,horizontal),angle=Math.atan2(horizontal,vertical)*180/Math.PI;
+            const backNS=ns==='N'?'S':'N',backEW=ew==='E'?'W':'E';
+            return {q:`An airplane leaves an airport and flies ${ns==='N'?'north':'south'} for ${firstHours} hours, then ${ew==='E'?'east':'west'} for ${secondHours} hours, at an average speed of ${speed} mph on both legs. Find its direct distance back to the airport and the bearing for the return flight. Round miles and the bearing angle to 1 decimal.`,
+                inputType:'parts',fields:[{id:'distance',label:'Distance back (miles)',answer:distance,tolerance:0.05},{id:'bearing',label:'Return bearing (example: S 35.2 E)',inputType:'bearing',answer:{ns:backNS,ew:backEW,angle},tolerance:0.05}],
+                entryNote:'Sketch both flight legs. Return toward the airport. Equivalent quadrant bearings or a compass heading in degrees are accepted.',
+                solution:`The legs are $${speed}(${firstHours})=${vertical}$ miles ${ns==='N'?'north':'south'} and $${speed}(${secondHours})=${horizontal}$ miles ${ew==='E'?'east':'west'}. Direct distance is $\\sqrt{${vertical}^2+${horizontal}^2}\\approx${fixed(distance,1)}$ miles. Reverse both directions for the return: ${backNS} $\\arctan(${horizontal}/${vertical})\\approx${fixed(angle,1)}^\\circ$ ${backEW}, so the bearing is ${backNS} ${fixed(angle,1)}° ${backEW}.`,parameters:{speed,firstHours,secondHours,ns,ew}};
+        }}
+    );
+
     const HINTS = {
+    "trig_values_from_point":"Find the positive distance r using the Pythagorean theorem. Use signed x and y in the ratios and their reciprocals.",
+    "aviation_climb_time":"The vertical component of airspeed uses sine. Divide the required altitude by vertical speed, then convert the time to minutes.",
+    "aviation_descent_loss":"Convert the time to hours, find distance along the flight path, then take its vertical component with sine.",
+    "aviation_bearing_displacement":"First multiply knots by hours. Bearings are measured from north or south: the component along that axis uses cosine; the other uses sine.",
+    "aviation_return_to_origin":"Compute each leg with distance = speed × time. Use a right triangle for the direct distance, then reverse both compass directions to head back.",
     "angle_coterminal": "Add or subtract a nonzero whole number of full turns.",
     "angle_coterminal_rad": "Add or subtract a nonzero whole number of full turns, measured in radians.",
     "arc_length": "Use $s=r\\theta$ with $\\theta$ in radians. Rearrange when the angle is unknown.",
@@ -2278,7 +2348,7 @@
         return question;
     }}));
 
-    const api = { generators, buildCheckpoint, createBasicAngleSvg, mulberry32, parseExact, grade, piFraction, fraction, radical, signedTerm };
+    const api = { generators, buildCheckpoint, createBasicAngleSvg, mulberry32, parseExact, grade, bearingHeading, piFraction, fraction, radical, signedTerm };
     return api;
     })();
     const generators = test3Skills.generators;
@@ -3233,13 +3303,13 @@
             count: 5
         },
         6: {
-            label: 'Quiz 10 — Section 5.3 (Core Skills)',
+            label: 'Section 5.3 — Reference Angles and Trig Values',
             sections: ['Section 5.3'],
-            requiredIds: ['reference_angle_deg', 'quadrant_signs', 'trig_values_from_info', 'solve_trig_equation_special'],
-            count: 5
+            requiredIds: ['reference_angle_deg', 'reference_angle_rad', 'quadrant_signs', 'trig_values_from_info', 'solve_trig_equation_special', 'trig_values_from_point'],
+            count: 6
         },
         7: {
-            label: 'Quiz 11 — Section 7.1 (Core Skills)',
+            label: 'Section 7.1 — Applications Checkpoint',
             sections: ['Section 7.1'],
             requiredIds: ['angle_of_elevation', 'distance_rate_time', 'two_right_triangles', 'bearing_navigation', 'oblique_triangle_area'],
             count: 5
@@ -3256,6 +3326,12 @@
             requiredIds: ['trig_ratio', 'right_triangle_word_problem', 'trig_from_given_ratio'],
             excludedIds: ['trig_calculator_values', 'angle_unit_conversion'],
             count: 5
+        },
+        10: {
+            label: 'Aviation Practice — Spring 2026 Quiz 11 Format',
+            sections: ['Section 7.1'],
+            requiredIds: ['aviation_climb_time', 'aviation_descent_loss', 'aviation_bearing_displacement', 'aviation_return_to_origin'],
+            count: 4
         }
     };
     function shuffleInPlace(arr) {
@@ -3311,6 +3387,20 @@
     }
 
     let _mathRetryTimer = null;
+    let _localMathJaxLoading = false;
+    function loadLocalMathJax() {
+        if (_localMathJaxLoading) return;
+        _localMathJaxLoading = true;
+        window.MathJax = {tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},startup:{typeset:false}};
+        const script = document.createElement('script');
+        script.src = 'slides/vendor/mathjax/tex-chtml.js';
+        script.onload = () => window.MathJax.startup.promise.then(() => {
+            document.getElementById('math-runtime-warning').hidden = true;
+            renderMath();
+        });
+        script.onerror = () => showMathRuntimeWarning('Math rendering could not load. Refresh this page or check the connection.');
+        document.head.appendChild(script);
+    }
     function showMathRuntimeWarning(message) {
         const warning = document.getElementById('math-runtime-warning');
         if (!warning) return;
@@ -3326,6 +3416,10 @@
             });
             return true;
         }
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([document.body]).catch(() => showMathRuntimeWarning('Some math could not be displayed. Please refresh.'));
+            return true;
+        }
 
         if (retries > 0) {
             clearTimeout(_mathRetryTimer);
@@ -3333,17 +3427,17 @@
             return false;
         }
 
-        showMathRuntimeWarning('Math rendering is unavailable right now. Please refresh or check network/content-blocking settings.');
+        loadLocalMathJax();
         return false;
     }
 
     window.addEventListener('load', () => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('practice') === 'aviation') { showTab('practice'); startMockQuiz(10); }
+        if (params.get('skill') === 'trig_values_from_point') { showTab('practice'); startQuiz('trig_values_from_point'); }
         if (!window.katex || !window.renderMathInElement) {
             if (window.loadLocalKatexAssets) window.loadLocalKatexAssets();
             setTimeout(() => {
-                if (!window.katex || !window.renderMathInElement) {
-                    showMathRuntimeWarning('Math rendering is unavailable right now. CDN and local KaTeX fallback both failed to initialize.');
-                }
                 renderMath();
             }, 250);
             return;

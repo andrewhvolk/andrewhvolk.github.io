@@ -68,6 +68,23 @@ function recompute(g,p) {
     const q=p.q, maths=[...q.matchAll(/\$([^$]+)\$/g)].map(m=>m[1]);let answer;
     if (p.parameters) {
         const d=p.parameters;
+        if(g.id==='trig_values_from_point'){
+            const radius=Math.hypot(d.x,d.y),v={r:radius,sin:d.y/radius,cos:d.x/radius,tan:d.y/d.x,csc:radius/d.y,sec:radius/d.x,cot:d.x/d.y};
+            for(const f of p.fields)close(f.answer,v[f.id],g.id+'.'+f.id);return;
+        }
+        if(g.id==='aviation_climb_time')answer=Math.round(d.altitude/(d.speed*Math.sin(deg(d.angle)))*60);
+        if(g.id==='aviation_descent_loss')answer=d.speed*(d.minutes/60)*Math.sin(deg(d.angle));
+        if(g.id==='aviation_bearing_displacement'){
+            close(p.fields[0].answer,Math.round(d.speed*d.hours*Math.cos(deg(d.angle))),g.id+'.vertical');
+            close(p.fields[1].answer,Math.round(d.speed*d.hours*Math.sin(deg(d.angle))),g.id+'.horizontal');return;
+        }
+        if(g.id==='aviation_return_to_origin'){
+            const north=(d.ns==='N'?1:-1)*d.speed*d.firstHours,east=(d.ew==='E'?1:-1)*d.speed*d.secondHours;
+            close(p.fields[0].answer,Math.hypot(north,east),g.id+'.distance');
+            const heading=(Math.atan2(-east,-north)*180/Math.PI+360)%360;
+            const b=p.fields[1].answer,actual=b.ns==='N'?(b.ew==='E'?b.angle:360-b.angle):(b.ew==='E'?180-b.angle:180+b.angle);
+            close(actual,heading,g.id+'.return heading');return;
+        }
         if(g.id==='right_triangle_word_problem')answer=d.findAngle?Math.atan2(d.h,d.d)*180/Math.PI:d.d*Math.tan(deg(d.theta));
         if(g.id==='angle_of_elevation')answer=d.kind<2?Math.atan2(d.h,d.d)*180/Math.PI:d.kind===2?d.known*Math.tan(deg(d.theta)):d.known/Math.tan(deg(d.theta));
         if(g.id==='right_triangle_find_angle')answer=({sin:Math.asin,cos:Math.acos,tan:Math.atan})[d.fn](d.x/d.y)*180/Math.PI;
@@ -197,15 +214,15 @@ function recompute(g,p) {
     if(typeof answer==='object')for(const k of Object.keys(answer))close(p.a[k],answer[k],g.id+'.'+k);else close(p.a,answer,g.id);
 }
 function entries(p) {
-    if(p.fields)return p.fields.map(f=>String(f.answer));
+    if(p.fields)return p.fields.map(f=>f.inputType==='bearing'?`${f.answer.ns} ${f.answer.angle} ${f.answer.ew}`:String(f.answer));
     if(p.inputType==='bearing')return [`${p.a.ns} ${p.a.angle.toFixed(1)} ${p.a.ew}`];
     if(p.inputType==='coterminal_deg')return [String(p.baseTheta+360)];
     if(p.inputType==='coterminal_rad')return [String(p.baseThetaRad+2*Math.PI)];
     return typeof p.a==='object'?Object.values(p.a).map(String):[String(p.a)];
 }
 function roundedEntries(p) {
-    const round=(v,t)=>t>0?v.toFixed(Math.round(-Math.log10(t))):String(v);
-    if(p.fields)return p.fields.map(f=>round(f.answer,f.tolerance));
+    const round=(v,t)=>t>0?v.toFixed(t===0.05?1:t===0.00005?4:Math.round(-Math.log10(t))):String(v);
+    if(p.fields)return p.fields.map(f=>f.inputType==='bearing'?`${f.answer.ns} ${f.answer.angle.toFixed(1)} ${f.answer.ew}`:round(f.answer,f.tolerance));
     if(p.inputType==='bearing'||p.inputType==='choice')return entries(p);
     if(p.inputType==='coterminal_rad')return [(p.baseThetaRad+2*Math.PI).toFixed(3)];
     if(p.inputType==='coterminal_deg')return entries(p);
@@ -232,7 +249,7 @@ function validate(g,p){
     if(p.svg)for(const m of p.svg.matchAll(/<text\b([^>]*)>/g)){
         const x=Number((m[1].match(/\bx="([\d.]+)"/)||[])[1]);if(x>245)assert.ok(/text-anchor="(?:end|middle)"/.test(m[1]),'Clipped text label');
     }
-    const values=p.fields?p.fields.map(f=>f.answer):typeof p.a==='number'?[p.a]:p.a&&typeof p.a==='object'?Object.values(p.a).filter(v=>typeof v==='number'):[];
+    const values=p.fields?p.fields.map(f=>f.answer).filter(v=>typeof v==='number'):typeof p.a==='number'?[p.a]:p.a&&typeof p.a==='object'?Object.values(p.a).filter(v=>typeof v==='number'):[];
     for(const value of values)for(const places of [1,2,3,4])assert.ok(!p.hint.includes(value.toFixed(places)),'Hint reveals the answer');
     if(typeof p.a==='string')assert.ok(!p.hint.includes(p.a),'Hint reveals the answer');
     recompute(g,p);
@@ -255,7 +272,7 @@ function validate(g,p){
     }
 }
 
-const ids=new Set(skills.generators.map(g=>g.id));assert.equal(ids.size,32);
+const ids=new Set(skills.generators.map(g=>g.id));assert.equal(ids.size,37);
 const checklist=vm.runInNewContext(html.match(/const DEFAULT_CHECKLIST = \[[\s\S]*?\n    \];/)[0]+';DEFAULT_CHECKLIST');
 const quizConfig=vm.runInNewContext(html.match(/const QUIZ_CONFIG = \{[\s\S]*?\n    \};/)[0]+';QUIZ_CONFIG');
 for(const row of checklist)assert.ok(ids.has(row.practiceId),'Missing checklist target '+row.id);
@@ -349,9 +366,9 @@ for(const shared of [true,false]){
     assert.equal(ctx.savedState.history[0].topic,'Prior practice');assert.equal(ctx.savedState.videosWatched[0],'old-video');
     // The embedded fallback must produce exactly the same seeded questions.
     for(let i=0;i<skills.generators.length;i++)assert.equal(JSON.stringify(ctx.pageSkills.generators[i].generate(skills.mulberry32(99))),JSON.stringify(skills.generators[i].generate(skills.mulberry32(99))));
-    for(let run=0;run<100;run++)for(const checkpoint of [5,6,7,8,9,13]){
+    for(let run=0;run<100;run++)for(const checkpoint of [5,6,7,8,9,10,13]){
         vm.runInContext(checkpoint===13?'startMockExam()':`startMockQuiz(${checkpoint})`,ctx);
-        const total=vm.runInContext('examState.total',ctx);assert.equal(total,checkpoint===13?20:5);
+        const total=vm.runInContext('examState.total',ctx);assert.equal(total,checkpoint===13?20:quizConfig[checkpoint].count);
         for(let i=0;i<total;i++){
             const p=vm.runInContext('currentQuestion',ctx),e=entries(p);
             const controls=p.fields?p.fields.map((_,i)=>'inp-part-'+i):p.inputType==='vector_mag_dir'?['inp-vmag','inp-vdir']:['vector_xy','two_angle_solutions'].includes(p.inputType)?['inp-vx','inp-vy']:['answer-input'];

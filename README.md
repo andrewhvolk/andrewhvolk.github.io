@@ -126,5 +126,13 @@ The Math Club is one page, `club/index.html`, built from `_data/club.yml`. The o
 
 ## Notes
 
+MATH 130 practice lives in `assets/js/math130-test3-skills.js`. After editing it,
+run `node scripts/sync-math130-test3-fallback.cjs` to refresh the embedded copy,
+then `node tests/verify-math130-test3.cjs` and
+`node tests/verify-math130-practice-fixes.cjs`. The aviation mode uses one of
+each Spring 2026 Quiz 11 problem type; its label does not set current quiz coverage.
+Rebuild the printable packets with `python slides/tools/build_section53_practice.py`
+and `python slides/tools/build_aviation_practice.py` (ReportLab required).
+
 - Prefer canonical PDFs for finalized handouts.
 - If a resource is not yet available, avoid placeholder links and show clear "coming soon" text.

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Math 130 – Quiz 10 Practice | Section 5.3</title>
+<title>Math 130 – Section 5.3 Practice</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -40,6 +40,7 @@
   .overview { background: var(--ink); color: var(--paper); border-radius: 2px; padding: 2rem 2.2rem; margin-bottom: 2.5rem; }
   .overview h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 1rem; border-bottom: 1px solid rgba(201,146,42,0.3); padding-bottom: 0.5rem; }
   .overview p { font-size: 0.95rem; color: rgba(247,243,237,0.82); margin-bottom: 0.5rem; }
+  .overview a { color: var(--gold); text-decoration: underline; }
   .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; margin-top: 1.2rem; }
   .topic-item { display: flex; align-items: flex-start; gap: 0.55rem; font-size: 0.88rem; color: rgba(247,243,237,0.75); }
   .topic-item .bullet { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; margin-top: 0.1rem; flex-shrink: 0; }
@@ -183,12 +184,12 @@
 </style>
 </head>
 <body>
-<nav class="m130-topbar" aria-label="Course"><a href="/courses/math130.html#sections-5-1-5-3"><span aria-hidden="true">&larr;</span>&nbsp;MATH 130</a><span>Practice for Section 5.3, before Quiz 10.</span></nav>
+<nav class="m130-topbar" aria-label="Course"><a href="/courses/math130.html#sections-5-3-and-5-7"><span aria-hidden="true">&larr;</span>&nbsp;MATH 130</a><span>Section 5.3 practice: reference angles, signs, and trig values.</span></nav>
 
 <header>
   <div class="header-inner">
     <div class="course-tag">Math 130 &nbsp;·&nbsp; Fall 2026 &nbsp;·&nbsp; Planned Section 5.3 Coverage</div>
-    <h1>Quiz 10 <em>Practice</em></h1>
+    <h1>Section 5.3 <em>Practice</em></h1>
     <div class="subtitle">Reference Angles &amp; Trigonometric Functions</div>
   </div>
 </header>
@@ -197,13 +198,14 @@
 
   <!-- OVERVIEW -->
   <div class="overview">
-    <h2>Planned Quiz 10 practice</h2>
-    <p>This practice focuses on <strong>Section 5.3</strong> — using reference angles to evaluate trig functions for any angle, identifying quadrants from sign conditions, and finding all angles that produce a given trig value. Quiz 10 is listed in Canvas for <strong>Nov 11 at 2:10 PM</strong>; confirm official coverage there or in class.</p>
+    <h2>Section 5.3 practice</h2>
+    <p>You can revise an answer and check it again. Equivalent fractions and decimals are accepted. The score shows your latest checked answers. To check your understanding on fresh questions, try <a href="130Test3.html?skill=trig_values_from_point">randomized signed-point problems</a> or <a href="130Test3.html?practice=aviation">aviation practice in the Spring Quiz 11 format</a>.</p>
+    <p>This practice focuses on <strong>Section 5.3</strong> — using reference angles to evaluate trig functions for any angle, identifying quadrants from sign conditions, and finding all angles that produce a given trig value. The next scheduled quiz is <strong>Quiz 11, Wednesday, Nov 18 at 2:10 PM</strong>. Check Canvas or class announcements for official coverage and any changes.</p>
     <div class="topic-grid">
       <div class="topic-item"><span class="bullet">▸</span><span>Finding and using <strong>reference angles</strong> (θ′)</span></div>
       <div class="topic-item"><span class="bullet">▸</span><span>Evaluating <strong>sin, cos, tan</strong> for non-acute angles</span></div>
       <div class="topic-item"><span class="bullet">▸</span><span>Determining the <strong>quadrant</strong> from sign conditions</span></div>
-      <div class="topic-item"><span class="bullet">▸</span><span>Finding <strong>two angles</strong> (0°–360°) satisfying a trig equation</span></div>
+      <div class="topic-item"><span class="bullet">▸</span><span>Finding <strong>all solutions</strong> in 0° ≤ θ &lt; 360°, including no solution</span></div>
       <div class="topic-item"><span class="bullet">▸</span><span>All <strong>six trig functions</strong> from a point (x, y)</span></div>
       <div class="topic-item"><span class="bullet">▸</span><span>Sketching angles in <strong>standard position</strong></span></div>
     </div>
@@ -217,7 +219,7 @@
         <div class="step-num">1</div>
         <div class="step-title">Find θ′</div>
         <div class="step-desc">
-          Locate the quadrant, then use its formula:<br>
+          First reduce to 0° ≤ θ &lt; 360°, then use the quadrant formula (for angles off the axes):<br>
           Q I: <span class="mono">θ′ = θ</span><br>
           Q II: <span class="mono">θ′ = 180° − θ</span><br>
           Q III: <span class="mono">θ′ = θ − 180°</span><br>
@@ -560,12 +562,13 @@
   <div class="section-label">Section E — Six Trig Functions from a Point</div>
 
   <div class="question-card" id="q9">
-    <div class="q-header"><div class="q-num">9</div><div class="q-text">The point <span class="math">(−4, 3)</span> lies on the terminal side of θ. Find <span class="math">r</span>, then compute <span class="math">sin θ</span>, <span class="math">cos θ</span>, and <span class="math">tan θ</span>.</div></div>
+    <div class="q-header"><div class="q-num">9</div><div class="q-text">The point <span class="math">(−4, 3)</span> lies on the terminal side of θ. Find <span class="math">r</span> and all six trigonometric functions. Use exact values or decimals rounded to four places.</div></div>
     <button class="hint-toggle" onclick="toggleHint('h9')">💡 Need a hint?</button>
     <div class="inline-hint" id="h9">
       With <span class="mono">x = −4</span> and <span class="mono">y = 3</span>:<br>
       &nbsp;&nbsp;r = √(x² + y²) &nbsp;— always positive.<br>
       &nbsp;&nbsp;sin θ = y/r &nbsp;·&nbsp; cos θ = x/r &nbsp;·&nbsp; tan θ = y/x<br>
+      &nbsp;&nbsp;csc θ = r/y &nbsp;·&nbsp; sec θ = r/x &nbsp;·&nbsp; cot θ = x/y<br>
       Pay close attention to signs — x is negative, so cos θ will be negative too.
     </div>
     <div class="multi-blank">
@@ -573,6 +576,9 @@
       <div class="blank-group"><label>sin θ =</label><input type="text" id="q9s" placeholder="y/r"></div>
       <div class="blank-group"><label>cos θ =</label><input type="text" id="q9c" placeholder="x/r"></div>
       <div class="blank-group"><label>tan θ =</label><input type="text" id="q9t" placeholder="y/x"></div>
+      <div class="blank-group"><label for="q9csc">csc θ =</label><input type="text" id="q9csc" placeholder="r/y"></div>
+      <div class="blank-group"><label for="q9sec">sec θ =</label><input type="text" id="q9sec" placeholder="r/x"></div>
+      <div class="blank-group"><label for="q9cot">cot θ =</label><input type="text" id="q9cot" placeholder="x/y"></div>
     </div>
     <div class="btn-row"><button class="check-btn" onclick="checkSixTrig()">Check</button></div>
     <div class="feedback" id="q9-fb"></div>
@@ -645,6 +651,7 @@
   <div><div class="score-label">Answered</div><div class="score-value" id="answered-display">0 / 10</div></div>
 </div>
 
+<script src="assets/js/math130-test3-skills.js"></script>
 <script>
   let answered = new Set();
   let correct  = new Set();
@@ -682,40 +689,46 @@
   function checkMC(qid, correctVal, correctMsg, wrongMsg) {
     const selected = document.querySelector(`input[name="${qid}"]:checked`);
     if (!selected) { alert('Please select an answer first.'); return; }
-    if (answered.has(qid)) return;
     answered.add(qid);
     const isCorrect = selected.value === correctVal;
-    if (isCorrect) correct.add(qid);
+    if (isCorrect) correct.add(qid); else correct.delete(qid);
     document.querySelectorAll(`#${qid} .choice-label`).forEach(lbl => {
       const inp = lbl.querySelector('input');
-      inp.disabled = true;
+      lbl.classList.remove('correct','wrong');
       if (inp.value === correctVal) lbl.classList.add('correct');
       else if (inp.checked) lbl.classList.add('wrong');
     });
-    document.querySelector(`#${qid} .check-btn`).disabled = true;
     showFeedback(qid, isCorrect, correctMsg, wrongMsg);
     updateScore();
   }
 
   function normalize(val) {
-    return val.trim().replace(/\s+/g,'').toLowerCase().replace(/°/g,'').replace(/deg/g,'');
+    return val.trim().replace(/\s+/g,'').toLowerCase().replace(/(?:°|degrees|deg)$/,'');
+  }
+
+  function numericEntry(raw) { return Math130Test3Skills.parseExact(normalize(raw)); }
+  function closeEntry(raw,expected,tolerance=0) {
+    const value=numericEntry(raw);
+    return value!==null && Math.abs(value-expected)<=tolerance+1e-10;
+  }
+  function markEntry(id,ok) {
+    const el=document.getElementById(id);
+    el.classList.remove('correct','wrong');
+    el.classList.add(ok?'correct':'wrong');
   }
 
   function checkDoubleAngle(qid, ans1, ans2, correctMsg, wrongMsg) {
-    if (answered.has(qid)) return;
     const a = normalize(document.getElementById(qid+'a').value);
     const b = normalize(document.getElementById(qid+'b').value);
     if (!a || !b) { alert('Please fill in both angles.'); return; }
-    const pair = new Set([a, b]);
-    const isCorrect = pair.has(ans1) && pair.has(ans2);
+    const direct=closeEntry(a,Number(ans1))&&closeEntry(b,Number(ans2));
+    const swapped=closeEntry(a,Number(ans2))&&closeEntry(b,Number(ans1));
+    const isCorrect = direct||swapped;
     answered.add(qid);
-    if (isCorrect) correct.add(qid);
+    if (isCorrect) correct.add(qid); else correct.delete(qid);
     ['a','b'].forEach(s => {
-      const inp = document.getElementById(qid+s);
-      inp.disabled = true;
-      inp.classList.add(isCorrect ? 'correct' : 'wrong');
+      markEntry(qid+s,isCorrect);
     });
-    document.querySelector(`#${qid} .check-btn`).disabled = true;
     showFeedback(qid, isCorrect, correctMsg, wrongMsg);
     updateScore();
   }
@@ -728,32 +741,21 @@
   }
 
   function checkSolveTriangle() {
-    if (answered.has('q10')) return;
     const bRaw    = normalize(document.getElementById('q10b').value);
     const betaRaw = normalize(document.getElementById('q10beta').value);
     const alphaRaw= normalize(document.getElementById('q10alpha').value);
     if (!bRaw || !betaRaw || !alphaRaw) { alert('Please fill in all three blanks.'); return; }
 
     // b = 20 exactly
-    const bOk = bRaw === '20';
-    // β = arcsin(20/29) ≈ 43.6°  (accept within 1°)
-    const betaVal  = parseFloat(betaRaw);
-    const alphaVal = parseFloat(alphaRaw);
-    const betaOk   = !isNaN(betaVal)  && Math.abs(betaVal  - 43.6) <= 1.0;
-    const alphaOk  = !isNaN(alphaVal) && Math.abs(alphaVal - 46.4) <= 1.0;
+    const bOk = closeEntry(bRaw,20);
+    const betaOk = closeEntry(betaRaw,Math.asin(20/29)*180/Math.PI,0.05);
+    const alphaOk = closeEntry(alphaRaw,Math.asin(21/29)*180/Math.PI,0.05);
 
     const isCorrect = bOk && betaOk && alphaOk;
     answered.add('q10');
-    if (isCorrect) correct.add('q10');
+    if (isCorrect) correct.add('q10'); else correct.delete('q10');
 
-    ['q10b','q10beta','q10alpha'].forEach(id => {
-      const el = document.getElementById(id);
-      el.disabled = true;
-    });
-    document.getElementById('q10b').classList.add(bOk ? 'correct' : 'wrong');
-    document.getElementById('q10beta').classList.add(betaOk ? 'correct' : 'wrong');
-    document.getElementById('q10alpha').classList.add(alphaOk ? 'correct' : 'wrong');
-    document.querySelector('#q10 .check-btn').disabled = true;
+    [['q10b',bOk],['q10beta',betaOk],['q10alpha',alphaOk]].forEach(([id,ok])=>markEntry(id,ok));
 
     showFeedback('q10', isCorrect,
       'b = √(29² − 21²) = √(841 − 441) = √400 = 20. ' +
@@ -772,25 +774,15 @@
   }
 
   function checkSixTrig() {
-    if (answered.has('q9')) return;
-    const r = normalize(document.getElementById('q9r').value);
-    const s = normalize(document.getElementById('q9s').value);
-    const c = normalize(document.getElementById('q9c').value);
-    const t = normalize(document.getElementById('q9t').value);
-    if (!r || !s || !c || !t) { alert('Please fill in all four blanks.'); return; }
-    const rOk = r === '5';
-    const sOk = ['3/5','0.6'].includes(s);
-    const cOk = ['-4/5','−4/5'].includes(c);
-    const tOk = ['-3/4','−3/4'].includes(t);
-    const isCorrect = rOk && sOk && cOk && tOk;
+    const ids=['q9r','q9s','q9c','q9t','q9csc','q9sec','q9cot'];
+    const values=ids.map(id=>document.getElementById(id).value);
+    if(values.some(v=>!v.trim())) { alert('Please fill in all seven blanks.'); return; }
+    const expected=[5,3/5,-4/5,-3/4,5/3,-5/4,-4/3];
+    const parts=values.map((v,i)=>closeEntry(v,expected[i],i===0?0:0.00005));
+    const isCorrect=parts.every(Boolean);
     answered.add('q9');
-    if (isCorrect) correct.add('q9');
-    ['q9r','q9s','q9c','q9t'].forEach(id => {
-      const el = document.getElementById(id);
-      el.disabled = true;
-      el.classList.add(isCorrect ? 'correct' : 'wrong');
-    });
-    document.querySelector('#q9 .check-btn').disabled = true;
+    if (isCorrect) correct.add('q9'); else correct.delete('q9');
+    ids.forEach((id,i)=>markEntry(id,parts[i]));
     showFeedback('q9', isCorrect,
       'r = √(16+9) = 5. sin θ = 3/5, cos θ = −4/5, tan θ = −3/4. Reciprocals: csc = 5/3, sec = −5/4, cot = −4/3.',
       'Check your signs carefully. x = −4 makes cos θ negative. y = 3 makes sin θ positive. tan θ = y/x = 3/(−4) = −3/4. A common error is writing cos = 4/5 (positive) by ignoring the negative x.'

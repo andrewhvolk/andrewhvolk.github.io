@@ -30,11 +30,11 @@
     {
       "id": "math130unit3b",
       "title": "Trigonometric Functions of Any Angle",
-      "subtitle": "Concepts, worked examples, student practice, and synthesis",
+      "subtitle": "Reference angles, exact values, undefined values, and interval solutions; optional triangle area",
       "output": "Math130Unit3B.html",
       "duration_minutes": 55,
       "min_slides": 22,
-      "max_slides": 28,
+      "max_slides": 35,
       "rehearsal": {
         "status": "pending_live_rehearsal",
         "planned_instruction_minutes": 50.0,
@@ -43,23 +43,23 @@
         "stopping_points": [
           {
             "after_block": "math130unit3b-u3b-reference-synthesize",
-            "planned_elapsed": 12.5,
-            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+            "planned_elapsed": 14.5,
+            "action": "Preserve the prediction, student practice, and feedback. Defer optional extensions if behind."
           },
           {
             "after_block": "math130unit3b-u3b-signs-synthesize",
-            "planned_elapsed": 24.5,
-            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+            "planned_elapsed": 25.5,
+            "action": "Preserve the prediction, student practice, and feedback. Defer optional extensions if behind."
           },
           {
             "after_block": "math130unit3b-u3b-values-synthesize",
-            "planned_elapsed": 36.5,
-            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+            "planned_elapsed": 40.5,
+            "action": "Preserve the prediction, student practice, and feedback. Defer optional extensions if behind."
           },
           {
             "after_block": "math130unit3b-u3b-area-synthesize",
             "planned_elapsed": 48.5,
-            "action": "Continue if on time; if more than 3 minutes behind, shorten discussion while preserving practice and feedback."
+            "action": "Preserve the prediction, student practice, and feedback. Defer optional extensions if behind."
           }
         ]
       },
@@ -77,13 +77,12 @@
           "minutes": 0,
           "source_slides": [],
           "content": [
-            "Concepts, worked examples, student practice, and synthesis",
-            "Module 11"
+            "Section 5.3. Reference angles, signs, exact values, and equations."
           ]
         },
         {
           "id": "math130unit3b-roadmap",
-          "title": "Today’s Learning Roadmap",
+          "title": "From an angle to a value",
           "phase": "activate",
           "component": "roadmap",
           "objectives": [
@@ -97,15 +96,15 @@
             1
           ],
           "content": [
-            "find reference angles in degrees and radians",
-            "determine trigonometric signs and quadrants",
-            "find exact trigonometric values from points and reference angles",
-            "apply the trigonometric triangle-area formula"
+            "Locate the terminal side and its reference angle.",
+            "Use coordinates to explain a function’s sign.",
+            "Evaluate exact values and find every solution in an interval.",
+            "Optional extension: area from two sides and their included angle."
           ]
         },
         {
           "id": "math130unit3b-u3b-reference-activate",
-          "title": "Predict: find reference angles in degrees and radians",
+          "title": "Which axis defines a reference angle?",
           "phase": "activate",
           "component": "poll",
           "objectives": [
@@ -114,16 +113,19 @@
           "minutes": 1.0,
           "source_slides": [],
           "content": [
-            "Why is a reference angle always acute?"
+            "For $\\theta=150^\\circ$, is the reference angle $30^\\circ$ or $60^\\circ$? Sketch your reason."
           ],
           "instructor_notes": [
             "Require an individual prediction before discussion."
           ],
-          "verification": []
+          "verification": [],
+          "answer": [
+            "$30^\\circ$: measure to the x-axis. The $60^\\circ$ angle meets the y-axis."
+          ]
         },
         {
           "id": "math130unit3b-u3b-reference-explain",
-          "title": "find reference angles in degrees and radians",
+          "title": "The acute angle to the x-axis",
           "phase": "explain",
           "component": "formula",
           "objectives": [
@@ -135,15 +137,69 @@
             3
           ],
           "content": [
-            "Reference angles are measured to the nearest x-axis.",
-            "First find a coterminal angle when the original lies outside one rotation."
+            "The reference angle is the positive acute angle to the x-axis.",
+            "Reduce to $0\\leq\\theta<360^\\circ$ first. In radians, replace $180^\\circ$ by $\\pi$ and $360^\\circ$ by $2\\pi$."
           ],
           "instructor_notes": [],
-          "verification": []
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/reference-150.svg",
+              "alt": "Equal-scale axes show a 150 degree counterclockwise angle in Quadrant II. The orange acute reference angle is measured from the negative x-axis to the terminal side, not from the y-axis.",
+              "caption": "Measure to the x-axis, even in Quadrant II."
+            }
+          ],
+          "visual_layout": "split",
+          "table": {
+            "headers": [
+              "Terminal quadrant",
+              "Reference angle"
+            ],
+            "rows": [
+              [
+                "I",
+                "$\\alpha=\\theta$"
+              ],
+              [
+                "II",
+                "$\\alpha=180^\\circ-\\theta$"
+              ],
+              [
+                "III",
+                "$\\alpha=\\theta-180^\\circ$"
+              ],
+              [
+                "IV",
+                "$\\alpha=360^\\circ-\\theta$"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "math130unit3b-explorer",
+          "title": "Rotate, predict, then reveal",
+          "phase": "practice",
+          "component": "diagram",
+          "objectives": [
+            "u3b-reference",
+            "u3b-signs"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "Choose an angle. Predict its reference angle and signs, then test your reasoning."
+          ],
+          "interaction": "reference-angle-explorer",
+          "instructor_notes": [
+            "Ask students to sketch 225 degrees before revealing. Compare -150 and 420 degrees. Finish at 90 degrees and ask why the acute-angle method stops applying.",
+            "Have a student choose the next preset and another student justify the result before revealing."
+          ]
         },
         {
           "id": "math130unit3b-u3b-reference-model",
-          "title": "Model the Skill: find reference angles in degrees and radians",
+          "title": "Different rotations, the same method",
           "phase": "model",
           "component": "derivation",
           "objectives": [
@@ -157,7 +213,9 @@
             "Find reference angles for $150^\\circ$, $310^\\circ$, $-120^\\circ$, and $7\\pi/4$."
           ],
           "instructor_notes": [],
-          "verification": [],
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
           "steps": [
             "$150^\\circ$ has reference angle $30^\\circ$; $310^\\circ$ has $50^\\circ$.",
             "$-120^\\circ$ is coterminal with $240^\\circ$, so its reference angle is $60^\\circ$.",
@@ -165,11 +223,19 @@
           ],
           "audit_checks": [
             "u3b-reference"
-          ]
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/unit-reference-examples.svg",
+              "alt": "Equal-scale axes show 150 degrees in Quadrant II, 310 degrees in Quadrant IV, negative 120 degrees ending in Quadrant III, and seven pi over four ending in Quadrant IV. The reference arcs meet the x-axis and no reference values are printed.",
+              "caption": ""
+            }
+          ],
+          "visual_layout": "split"
         },
         {
           "id": "math130unit3b-u3b-reference-practice",
-          "title": "You Try: find reference angles in degrees and radians",
+          "title": "More than one full turn",
           "phase": "practice",
           "component": "practice",
           "objectives": [
@@ -186,35 +252,58 @@
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
-          "verification": [],
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
           "answer": [
             "$580-360=220^\\circ$, so the QIII reference angle is 40°."
-          ]
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/practice-580.svg",
+              "alt": "A blue directed spiral turns counterclockwise 580 degrees and a teal terminal ray lies in Quadrant III. Equal-scale axes are shown. The requested reference angle is not labeled.",
+              "caption": "Remove full rotations before locating the reference angle."
+            }
+          ],
+          "visual_layout": "split"
         },
         {
           "id": "math130unit3b-u3b-reference-feedback",
-          "title": "Check and Diagnose: find reference angles in degrees and radians",
+          "title": "A plausible angle, measured from the wrong axis",
           "phase": "feedback",
           "component": "misconception",
           "objectives": [
             "u3b-reference"
           ],
-          "minutes": 2.0,
+          "minutes": 1,
           "source_slides": [
             8
           ],
           "content": [
-            "Do not measure to the y-axis.",
-            "Use π, not 180°, when working in radians."
+            "A student calls the orange $60^\\circ$ angle the reference angle for $150^\\circ$.",
+            "Explain the mistake to a partner, then state the correct reference angle."
           ],
           "instructor_notes": [
             "Ask students to explain why the incorrect path fails."
           ],
-          "verification": []
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
+          "answer": [
+            "The orange arc meets the y-axis. The reference angle meets the x-axis: $180^\\circ-150^\\circ=30^\\circ$."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/wrong-axis.svg",
+              "alt": "Equal-scale axes show a 150 degree terminal side in Quadrant II. An orange 60 degree arc runs from the positive y-axis to the terminal side and is labeled with a question mark. Students must explain why measuring from the y-axis does not give the reference angle.",
+              "caption": ""
+            }
+          ],
+          "visual_layout": "split"
         },
         {
           "id": "math130unit3b-u3b-reference-synthesize",
-          "title": "Make It Stick: find reference angles in degrees and radians",
+          "title": "Explain the reference-angle rule",
           "phase": "synthesize",
           "component": "summary",
           "objectives": [
@@ -235,7 +324,7 @@
         },
         {
           "id": "math130unit3b-u3b-signs-activate",
-          "title": "Predict: determine trigonometric signs and quadrants",
+          "title": "Two sign clues, one quadrant",
           "phase": "activate",
           "component": "poll",
           "objectives": [
@@ -249,11 +338,14 @@
           "instructor_notes": [
             "Require an individual prediction before discussion."
           ],
-          "verification": []
+          "verification": [],
+          "answer": [
+            "Quadrant III. Both sign conditions must hold at the same time."
+          ]
         },
         {
           "id": "math130unit3b-u3b-signs-explain",
-          "title": "determine trigonometric signs and quadrants",
+          "title": "Coordinates explain the signs",
           "phase": "explain",
           "component": "decision",
           "objectives": [
@@ -268,17 +360,27 @@
             "Signs follow from x, y, and positive r."
           ],
           "instructor_notes": [],
-          "verification": []
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/coordinate-signs.svg",
+              "alt": "A unit circle on equal-scale axes shows positive x and y in Quadrant I, negative x and positive y in II, negative x and y in III, and positive x and negative y in IV. Radius r is positive everywhere.",
+              "caption": "The signs come from x and y; r is always positive."
+            }
+          ],
+          "visual_layout": "split"
         },
         {
           "id": "math130unit3b-u3b-signs-model",
-          "title": "Model the Skill: determine trigonometric signs and quadrants",
+          "title": "Intersect the possible quadrants",
           "phase": "model",
           "component": "worked-example",
           "objectives": [
             "u3b-signs"
           ],
-          "minutes": 3.0,
+          "minutes": 2,
           "source_slides": [],
           "content": [
             "Determine the quadrant if $\\tan\\theta>0$ and $\\cos\\theta<0$."
@@ -296,7 +398,7 @@
         },
         {
           "id": "math130unit3b-u3b-signs-practice",
-          "title": "You Try: determine trigonometric signs and quadrants",
+          "title": "Choose a quadrant and defend it",
           "phase": "practice",
           "component": "practice",
           "objectives": [
@@ -319,7 +421,7 @@
         },
         {
           "id": "math130unit3b-u3b-signs-feedback",
-          "title": "Check and Diagnose: determine trigonometric signs and quadrants",
+          "title": "Check the coordinate signs",
           "phase": "feedback",
           "component": "comparison",
           "objectives": [
@@ -338,7 +440,7 @@
         },
         {
           "id": "math130unit3b-u3b-signs-synthesize",
-          "title": "Make It Stick: determine trigonometric signs and quadrants",
+          "title": "Explain a sign without the mnemonic",
           "phase": "synthesize",
           "component": "summary",
           "objectives": [
@@ -357,7 +459,7 @@
         },
         {
           "id": "math130unit3b-u3b-values-activate",
-          "title": "Predict: find exact trigonometric values from points and reference angles",
+          "title": "What stays positive?",
           "phase": "activate",
           "component": "poll",
           "objectives": [
@@ -375,7 +477,7 @@
         },
         {
           "id": "math130unit3b-u3b-values-explain",
-          "title": "find exact trigonometric values from points and reference angles",
+          "title": "Six ratios from one terminal point",
           "phase": "explain",
           "component": "concept",
           "objectives": [
@@ -387,15 +489,61 @@
             12
           ],
           "content": [
-            "$r=\\sqrt{x^2+y^2}$.",
-            "Use the reference angle for magnitude and the quadrant for sign."
+            "For a nonzero terminal point $(x,y)$, $r=\\sqrt{x^2+y^2}>0$.",
+            "$\\sin\\theta=y/r$, $\\cos\\theta=x/r$, $\\tan\\theta=y/x$.",
+            "$\\csc\\theta=r/y$, $\\sec\\theta=r/x$, $\\cot\\theta=x/y$.",
+            "A function is undefined when its denominator is zero."
           ],
           "instructor_notes": [],
           "verification": []
         },
         {
+          "id": "math130unit3b-quadrantal-values",
+          "title": "Angles on the coordinate axes",
+          "phase": "explain",
+          "component": "comparison",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "At $90^\\circ$, $x=0$: $\\sin\\theta=1$, $\\cos\\theta=0$, and $\\tan\\theta$ is undefined.",
+            "At $180^\\circ$, $y=0$: $\\sin\\theta=0$, $\\cos\\theta=-1$, and $\\cot\\theta$ is undefined.",
+            "These angles have no acute reference angle. Check the denominator directly."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/axis-values.svg",
+              "alt": "Two equal-scale unit circles show the point (0,1) at 90 degrees and the point (-1,0) at 180 degrees. At 90 degrees x is zero; at 180 degrees y is zero. No acute reference angle is drawn.",
+              "caption": "An axis point can put zero in a denominator."
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ]
+        },
+        {
+          "id": "math130unit3b-fundamental-identities",
+          "title": "Identities and possible values",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "$\\sin^2\\theta+\\cos^2\\theta=1$; $\\tan\\theta=\\sin\\theta/\\cos\\theta$ where defined.",
+            "$\\csc\\theta=1/\\sin\\theta$, $\\sec\\theta=1/\\cos\\theta$, $\\cot\\theta=\\cos\\theta/\\sin\\theta$ where defined.",
+            "$-1\\leq\\sin\\theta\\leq1$ and $-1\\leq\\cos\\theta\\leq1$.",
+            "Use the quadrant to choose the sign after taking a square root."
+          ]
+        },
+        {
           "id": "math130unit3b-u3b-values-model",
-          "title": "Model the Skill: find exact trigonometric values from points and reference angles",
+          "title": "A point in Quadrant II",
           "phase": "model",
           "component": "worked-example",
           "objectives": [
@@ -410,7 +558,8 @@
           ],
           "instructor_notes": [],
           "verification": [
-            "Verify exact values and quadrant signs."
+            "Verify exact values and quadrant signs.",
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
           ],
           "steps": [
             "$r=\\sqrt{(-3)^2+4^2}=5$.",
@@ -419,11 +568,19 @@
           ],
           "audit_checks": [
             "u3b-values"
-          ]
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/point-negative3-positive4.svg",
+              "alt": "An equal-scale coordinate diagram plots P=(-3,4). The horizontal directed coordinate is -3, the vertical directed coordinate is 4, and the radial length is labeled r without revealing its value. The blue angle is measured counterclockwise from positive x.",
+              "caption": "The signed coordinates locate the point. The radius is a length."
+            }
+          ],
+          "visual_layout": "split"
         },
         {
           "id": "math130unit3b-u3b-values-practice",
-          "title": "You Try: find exact trigonometric values from points and reference angles",
+          "title": "A point in Quadrant III",
           "phase": "practice",
           "component": "practice",
           "objectives": [
@@ -440,21 +597,31 @@
           "instructor_notes": [
             "Pause before revealing the solution."
           ],
-          "verification": [],
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
           "answer": [
             "For $P=(-2,-5)$, $r=\\sqrt{29}$; $\\sin=-5/\\sqrt{29}$, $\\cos=-2/\\sqrt{29}$, $\\tan=5/2$.",
             "$\\csc=-\\sqrt{29}/5$, $\\sec=-\\sqrt{29}/2$, $\\cot=2/5$; $\\sin240^\\circ=-\\sqrt3/2$."
-          ]
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/point-negative2-negative5.svg",
+              "alt": "An equal-scale coordinate diagram plots P=(-2,-5). The horizontal directed coordinate is -2, the vertical directed coordinate is -5, and the radial length is labeled r without revealing its value. The blue angle is measured counterclockwise from positive x.",
+              "caption": "Use the coordinate signs in the six ratios."
+            }
+          ],
+          "visual_layout": "split"
         },
         {
           "id": "math130unit3b-u3b-values-feedback",
-          "title": "Check and Diagnose: find exact trigonometric values from points and reference angles",
+          "title": "Distance and coordinates have different roles",
           "phase": "feedback",
           "component": "misconception",
           "objectives": [
             "u3b-values"
           ],
-          "minutes": 2.0,
+          "minutes": 1,
           "source_slides": [
             16
           ],
@@ -471,7 +638,7 @@
         },
         {
           "id": "math130unit3b-u3b-values-synthesize",
-          "title": "Make It Stick: find exact trigonometric values from points and reference angles",
+          "title": "From a point to six values",
           "phase": "synthesize",
           "component": "summary",
           "objectives": [
@@ -491,8 +658,62 @@
           "pacing_checkpoint": "Check elapsed time before beginning the next objective."
         },
         {
+          "id": "math130unit3b-equation-model",
+          "title": "Calculator output and interval solutions",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "Find all solutions of $\\sin\\theta=-0.848$ with $0^\\circ\\leq\\theta<360^\\circ$. Round to two decimals."
+          ],
+          "steps": [
+            "$\\arcsin(-0.848)\\approx-57.99^\\circ$ points to QIV, but lies outside the interval.",
+            "Use the unrounded $\\alpha\\approx57.994800^\\circ$. Sine is negative in QIII and QIV.",
+            "$\\theta=180^\\circ+\\alpha\\approx237.99^\\circ$.",
+            "$\\theta=360^\\circ-\\alpha\\approx302.01^\\circ$. Check both points on the circle."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/sine-two-solutions.svg",
+              "alt": "A unit circle on equal-scale axes intersects the horizontal line y=-0.848 twice, in Quadrants III and IV. Teal rays reach both intersections. A blue clockwise arc marks the negative principal inverse-sine output at the Quadrant IV ray. No final solution angles are printed.",
+              "caption": "Both intersections satisfy the same sine equation."
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ]
+        },
+        {
+          "id": "math130unit3b-equation-practice",
+          "title": "All solutions, including no solution",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "Find all solutions on $0^\\circ\\leq\\theta<360^\\circ$, rounded to two decimals.",
+            "(a) $\\tan\\theta=-1.830$; (b) $\\cos\\theta=0.4003$; (c) $\\sin\\theta=-1.637$."
+          ],
+          "answer": [
+            "(a) $\\theta\\approx118.65^\\circ,\\ 298.65^\\circ$ (QII and QIV).",
+            "(b) $\\theta\\approx66.40^\\circ,\\ 293.60^\\circ$ (QI and QIV).",
+            "(c) No real solution: a sine value must lie in $[-1,1]$."
+          ],
+          "instructor_notes": [
+            "Keep full calculator precision until the final answers. Ask students to justify the quadrants."
+          ]
+        },
+        {
           "id": "math130unit3b-u3b-area-activate",
-          "title": "Predict: apply the trigonometric triangle-area formula",
+          "title": "Why must the angle be included?",
           "phase": "activate",
           "component": "poll",
           "objectives": [
@@ -504,13 +725,15 @@
             "Why must the known angle be included between the two known sides?"
           ],
           "instructor_notes": [
-            "Require an individual prediction before discussion."
+            "Require an individual prediction before discussion.",
+            "Extension after the core reference-angle and equation practice; defer if time is short."
           ],
-          "verification": []
+          "verification": [],
+          "optional": true
         },
         {
           "id": "math130unit3b-u3b-area-explain",
-          "title": "apply the trigonometric triangle-area formula",
+          "title": "Area from two sides and an angle",
           "phase": "explain",
           "component": "concept",
           "objectives": [
@@ -524,12 +747,15 @@
             "$A=\\tfrac12bc\\sin A$ uses two sides and their included angle.",
             "The formula applies to nonright triangles."
           ],
-          "instructor_notes": [],
-          "verification": []
+          "instructor_notes": [
+            "Extension after the core reference-angle and equation practice; defer if time is short."
+          ],
+          "verification": [],
+          "optional": true
         },
         {
           "id": "math130unit3b-u3b-area-model",
-          "title": "Model the Skill: apply the trigonometric triangle-area formula",
+          "title": "The height is hidden in the diagram",
           "phase": "model",
           "component": "worked-example",
           "objectives": [
@@ -542,9 +768,12 @@
           "content": [
             "Find the area when $A=76^\\circ$, $b=34$, and $c=21$."
           ],
-          "instructor_notes": [],
+          "instructor_notes": [
+            "Extension after the core reference-angle and equation practice; defer if time is short."
+          ],
           "verification": [
-            "Verify all triangle-area calculations."
+            "Verify all triangle-area calculations.",
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
           ],
           "steps": [
             "$A_{triangle}=\\tfrac12bc\\sin A$.",
@@ -553,11 +782,20 @@
           ],
           "audit_checks": [
             "u3b-area"
-          ]
+          ],
+          "optional": true,
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/triangle-area-76.svg",
+              "alt": "A triangle drawn to scale has AC=b=34, AB=c=21, and included angle A=76 degrees. The perpendicular height from B meets AC. The area is not displayed.",
+              "caption": "The perpendicular height is h = c sin A."
+            }
+          ],
+          "visual_layout": "split"
         },
         {
           "id": "math130unit3b-u3b-area-practice",
-          "title": "You Try: apply the trigonometric triangle-area formula",
+          "title": "Choose the sides around the angle",
           "phase": "practice",
           "component": "practice",
           "objectives": [
@@ -569,16 +807,18 @@
             "Find the area when sides 12 and 15 include a 40° angle."
           ],
           "instructor_notes": [
-            "Pause before revealing the solution."
+            "Pause before revealing the solution.",
+            "Extension after the core reference-angle and equation practice; defer if time is short."
           ],
           "verification": [],
           "answer": [
             "$A=\\tfrac12(12)(15)\\sin40^\\circ\\approx57.85$."
-          ]
+          ],
+          "optional": true
         },
         {
           "id": "math130unit3b-u3b-area-feedback",
-          "title": "Check and Diagnose: apply the trigonometric triangle-area formula",
+          "title": "A formula needs matching labels",
           "phase": "feedback",
           "component": "misconception",
           "objectives": [
@@ -593,15 +833,17 @@
             "Square units are required."
           ],
           "instructor_notes": [
-            "Ask students to explain why the incorrect path fails."
+            "Ask students to explain why the incorrect path fails.",
+            "Extension after the core reference-angle and equation practice; defer if time is short."
           ],
           "verification": [
             "Verify all triangle-area calculations."
-          ]
+          ],
+          "optional": true
         },
         {
           "id": "math130unit3b-u3b-area-synthesize",
-          "title": "Make It Stick: apply the trigonometric triangle-area formula",
+          "title": "Explain where the sine comes from",
           "phase": "synthesize",
           "component": "summary",
           "objectives": [
@@ -613,14 +855,16 @@
             "Explain how the diagram identifies the correct sine angle."
           ],
           "instructor_notes": [
-            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides."
+            "If more than 3 minutes behind, shorten discussion but preserve the next practice and feedback slides.",
+            "Extension after the core reference-angle and equation practice; defer if time is short."
           ],
           "verification": [],
-          "pacing_checkpoint": "Check elapsed time before beginning the next objective."
+          "pacing_checkpoint": "Check elapsed time before beginning the next objective.",
+          "optional": true
         },
         {
           "id": "math130unit3b-closing",
-          "title": "Session Summary and Exit Ticket",
+          "title": "Show what you can now explain",
           "phase": "synthesize",
           "component": "summary",
           "objectives": [
@@ -643,6 +887,412 @@
           ]
         }
       ]
+    },
+    {
+      "id": "math130-2026-11-13",
+      "title": "Reference Angles and Trig Equations",
+      "subtitle": "Friday, November 13, 2026 | Section 5.3",
+      "output": "math130-reference-angles-2026-11-13.html",
+      "duration_minutes": 50,
+      "min_slides": 13,
+      "max_slides": 16,
+      "blocks": [
+        {
+          "id": "math130-2026-11-13-title",
+          "title": "Reference Angles and Trig Equations",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 0,
+          "source_slides": [],
+          "content": [
+            "Friday, November 13, 2026. Sketch, predict, explain, and check."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-retrieval",
+          "title": "Reference angles and signs",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3b-reference",
+            "u3b-signs"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "For $\\theta=225^\\circ$, sketch the terminal side. Predict the quadrant, reference angle, and signs of sine and cosine."
+          ],
+          "instructor_notes": [
+            "Give 30 seconds of individual sketching, then 30 seconds of partner comparison. Collect a vote before revealing."
+          ],
+          "answer": [
+            "QIII; $\\alpha=45^\\circ$; sine and cosine are both negative."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-reference",
+          "title": "Reference-angle rules",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3b-reference"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "The reference angle is the positive acute angle to the x-axis.",
+            "Reduce to $0\\leq\\theta<360^\\circ$ first. In radians, replace $180^\\circ$ by $\\pi$ and $360^\\circ$ by $2\\pi$."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/four-reference-angles.svg",
+              "alt": "Four coordinate planes use equal scales and terminal angles 40, 140, 220, and 320 degrees. Each orange arc meets the x-axis and measures 40 degrees. Blue arcs measure the original angle counterclockwise from positive x.",
+              "caption": "All four orange arcs meet an x-axis."
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
+          "table": {
+            "headers": [
+              "Terminal quadrant",
+              "Reference angle"
+            ],
+            "rows": [
+              [
+                "I",
+                "$\\alpha=\\theta$"
+              ],
+              [
+                "II",
+                "$\\alpha=180^\\circ-\\theta$"
+              ],
+              [
+                "III",
+                "$\\alpha=\\theta-180^\\circ$"
+              ],
+              [
+                "IV",
+                "$\\alpha=360^\\circ-\\theta$"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "math130-2026-11-13-explorer",
+          "title": "Rotate, predict, then reveal",
+          "phase": "practice",
+          "component": "diagram",
+          "objectives": [
+            "u3b-reference",
+            "u3b-signs"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "Choose an angle. Predict its reference angle and signs, then test your reasoning."
+          ],
+          "interaction": "reference-angle-explorer",
+          "instructor_notes": [
+            "Ask students to sketch 225 degrees before revealing. Compare -150 and 420 degrees. Finish at 90 degrees and ask why the acute-angle method stops applying.",
+            "Have a student choose the next preset and another student justify the result before revealing."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-reference-model",
+          "title": "Reference angles in degrees",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-reference"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "Find the reference angles for $150^\\circ$, $230^\\circ$, $285^\\circ$, and $420^\\circ$."
+          ],
+          "steps": [
+            "$150^\\circ$: QII, $180^\\circ-150^\\circ=30^\\circ$.",
+            "$230^\\circ$: QIII, $230^\\circ-180^\\circ=50^\\circ$.",
+            "$285^\\circ$: QIV, $360^\\circ-285^\\circ=75^\\circ$.",
+            "$420^\\circ$ is coterminal with $60^\\circ$: QI, reference angle $60^\\circ$."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/reference-examples.svg",
+              "alt": "Four equal-scale coordinate planes show terminal sides for 150, 230, 285, and 420 degrees. Orange arcs mark the acute angle to the x-axis without giving its value. The 420 degree rotation includes a full turn.",
+              "caption": "Name the quadrant before calculating α."
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-radians",
+          "title": "Reference angles in radians",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-reference",
+            "u3b-signs"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "Find the quadrant and reference angle for $-5\\pi/6$ and $7\\pi/4$."
+          ],
+          "answer": [
+            "$-5\\pi/6+2\\pi=7\\pi/6$: QIII, $\\alpha=\\pi/6$.",
+            "$7\\pi/4$: QIV, $\\alpha=2\\pi-7\\pi/4=\\pi/4$."
+          ],
+          "pacing_checkpoint": "Check reference-angle fluency before evaluating functions.",
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/radian-practice.svg",
+              "alt": "Equal-scale axes show a clockwise rotation of negative five pi over six ending in Quadrant III and a counterclockwise rotation of seven pi over four ending in Quadrant IV. Orange reference arcs have no numeric labels.",
+              "caption": "Follow the rotation, then measure the acute angle to the x-axis."
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
+          "instructor_notes": [
+            "Each partner solves one angle, then explains the direction of rotation and reference angle to the other."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-exact-values",
+          "title": "Magnitude first, then sign",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "Evaluate $\\sin150^\\circ$, $\\sin225^\\circ$, and $\\cos(-5\\pi/6)$ exactly."
+          ],
+          "steps": [
+            "$\\sin150^\\circ=\\sin30^\\circ=1/2$ (QII).",
+            "$\\sin225^\\circ=-\\sin45^\\circ=-\\sqrt2/2$ (QIII).",
+            "$\\cos(-5\\pi/6)=-\\cos(\\pi/6)=-\\sqrt3/2$ (QIII)."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/exact-values.svg",
+              "alt": "Three equal-scale coordinate planes place 150 degrees in Quadrant II, 225 degrees in Quadrant III, and negative five pi over six in Quadrant III. Unit circles and unsigned reference arcs support exact-value reasoning without displaying answers.",
+              "caption": "The sign comes from the coordinate; the magnitude comes from the reference angle."
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-ratios",
+          "title": "Six functions from a terminal point",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 4,
+          "source_slides": [],
+          "content": [
+            "For $P=(4,-3)$, find $r$ and all six trig functions."
+          ],
+          "answer": [
+            "$r=5$; $\\sin\\theta=-3/5$, $\\cos\\theta=4/5$, $\\tan\\theta=-3/4$.",
+            "$\\csc\\theta=-5/3$, $\\sec\\theta=5/4$, $\\cot\\theta=-4/3$.",
+            "The QIV coordinates give $\\tan\\theta=y/x=(-3)/4$."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/point-positive4-negative3.svg",
+              "alt": "An equal-scale coordinate diagram plots P=(4,-3). The horizontal directed coordinate is 4, the vertical directed coordinate is -3, and the radial length is labeled r without revealing its value. The blue angle is measured counterclockwise from positive x.",
+              "caption": "Signed coordinates: x = 4 and y = −3. Radius r remains positive."
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ],
+          "instructor_notes": [
+            "Ask one student for the three basic functions and a partner for the reciprocals. Both check signs against the picture."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-axes",
+          "title": "Angles on the coordinate axes",
+          "phase": "explain",
+          "component": "comparison",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "At $90^\\circ$, $x=0$: $\\sin\\theta=1$, $\\cos\\theta=0$, and $\\tan\\theta$ is undefined.",
+            "At $180^\\circ$, $y=0$: $\\sin\\theta=0$, $\\cos\\theta=-1$, and $\\cot\\theta$ is undefined.",
+            "These angles have no acute reference angle. Check the denominator directly."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/axis-values.svg",
+              "alt": "Two equal-scale unit circles show the point (0,1) at 90 degrees and the point (-1,0) at 180 degrees. At 90 degrees x is zero; at 180 degrees y is zero. No acute reference angle is drawn.",
+              "caption": ""
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-identities",
+          "title": "Optional identity review",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "$\\sin^2\\theta+\\cos^2\\theta=1$; $\\tan\\theta=\\sin\\theta/\\cos\\theta$ where defined.",
+            "$\\csc\\theta=1/\\sin\\theta$, $\\sec\\theta=1/\\cos\\theta$, $\\cot\\theta=\\cos\\theta/\\sin\\theta$ where defined.",
+            "$-1\\leq\\sin\\theta\\leq1$ and $-1\\leq\\cos\\theta\\leq1$.",
+            "Use the quadrant to choose the sign after taking a square root."
+          ],
+          "optional": true,
+          "instructor_notes": [
+            "Independent review or a later meeting. Preserve the paired equation practice and the five-minute class buffer."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-equations",
+          "title": "Calculator output and interval solutions",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 6,
+          "source_slides": [],
+          "content": [
+            "Find all solutions of $\\sin\\theta=-0.848$ with $0^\\circ\\leq\\theta<360^\\circ$. Round to two decimals."
+          ],
+          "steps": [
+            "$\\arcsin(-0.848)\\approx-57.99^\\circ$ points to QIV, but lies outside the interval.",
+            "Use the unrounded $\\alpha\\approx57.994800^\\circ$. Sine is negative in QIII and QIV.",
+            "$\\theta=180^\\circ+\\alpha\\approx237.99^\\circ$.",
+            "$\\theta=360^\\circ-\\alpha\\approx302.01^\\circ$. Check both points on the circle."
+          ],
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/sine-two-solutions.svg",
+              "alt": "A unit circle on equal-scale axes intersects the horizontal line y=-0.848 twice, in Quadrants III and IV. Teal rays reach both intersections. A blue clockwise arc marks the negative principal inverse-sine output at the Quadrant IV ray. No final solution angles are printed.",
+              "caption": "A negative principal output and a positive coterminal angle share a terminal side."
+            }
+          ],
+          "visual_layout": "split",
+          "verification": [
+            "Verify the signed coordinates, direction of rotation, and equal x/y scales in the attached SVG."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-equation-practice",
+          "title": "All solutions, including no solution",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 6,
+          "source_slides": [],
+          "content": [
+            "Find all solutions on $0^\\circ\\leq\\theta<360^\\circ$, rounded to two decimals.",
+            "A: $\\tan\\theta=-1.830$; B: $\\cos\\theta=0.4003$; both: $\\sin\\theta=-1.637$."
+          ],
+          "answer": [
+            "(a) $\\theta\\approx118.65^\\circ,\\ 298.65^\\circ$ (QII and QIV).",
+            "(b) $\\theta\\approx66.40^\\circ,\\ 293.60^\\circ$ (QI and QIV).",
+            "(c) No real solution: a sine value must lie in $[-1,1]$."
+          ],
+          "instructor_notes": [
+            "Partner A solves tangent and Partner B solves cosine. Exchange work and check quadrants before revealing. Both decide whether the sine equation has a solution."
+          ],
+          "pacing_checkpoint": "Leave time for the exit check; defer extensions."
+        },
+        {
+          "id": "math130-2026-11-13-error-analysis",
+          "title": "Can an equation have no angles?",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 2,
+          "source_slides": [],
+          "content": [
+            "A student writes two angles for $\\sin\\theta=-1.637$.",
+            "Name a check that would catch the error before using a calculator."
+          ],
+          "answer": [
+            "No real angle has that sine value. A calculator domain error is expected."
+          ]
+        },
+        {
+          "id": "math130-2026-11-13-exit",
+          "title": "Exit check",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3b-values"
+          ],
+          "minutes": 3,
+          "source_slides": [],
+          "content": [
+            "Individually: find all solutions of $\\cos\\theta=-0.75$ on $0^\\circ\\leq\\theta<360^\\circ$.",
+            "Sketch both terminal sides and explain why a principal output alone can miss a solution."
+          ],
+          "answer": [
+            "$\\theta\\approx138.59^\\circ,\\ 221.41^\\circ$.",
+            "Every final angle must satisfy both the equation and the stated interval."
+          ]
+        }
+      ],
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 44,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 6,
+        "stopping_points": [
+          {
+            "after_block": "math130-2026-11-13-radians",
+            "planned_elapsed": 17,
+            "action": "Preserve the prediction, student practice, and feedback. Defer optional extensions if behind."
+          },
+          {
+            "after_block": "math130-2026-11-13-equation-practice",
+            "planned_elapsed": 39,
+            "action": "Preserve the prediction, student practice, and feedback. Defer optional extensions if behind."
+          }
+        ]
+      }
     }
   ],
   "source_disposition": [

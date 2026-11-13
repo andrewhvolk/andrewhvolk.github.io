@@ -96,7 +96,7 @@ Computations were independently recalculated with Python’s standard math libra
 - Verified trapezoid area 91, similarity result $x=10$, and linear speed 2 m/s.
 
 ## u3a-applications
-- Recomputed ladder height $25\sin70^\circ=23.49$ ft.
+- Recomputed the current 150-345 right triangle: angles 25.8 and 64.2 degrees, missing side 310.7; ramp length 11.52 ft; two-observation near distance 71.23 ft and height 101.72 ft.
 
 ## u3a-arc
 - Verified model arc $8\pi$ and practice arc $6\pi$ after degree-to-radian conversion.
@@ -121,6 +121,7 @@ Computations were independently recalculated with Python’s standard math libra
 
 ## u3b-values
 - Verified point-radius calculations and all six signs/ratios for $(-3,4)$ and $(-2,-5)$; $\sin240^\circ=-\sqrt3/2$.
+- Recomputed interval solutions 237.99/302.01, 118.65/298.65, 66.40/293.60, and 138.59/221.41 degrees; checked the impossible sine value and zero-denominator axis cases.
 
 ## u3c-model
 - Recomputed corrected ladder height $20\sin65^\circ=18.13$ ft and practice height 72.03 ft.
@@ -184,6 +185,21 @@ Computations were independently recalculated with Python’s standard math libra
 - `assets/math130unit2c/visuals/similarity-practice.svg`: Checked SVG structure, accessible labels, givens, and relevant geometric proportions: Scale factor and decimal degrees practice. SHA-256 `489ba702d93cd22db835001d8a75e2b7c8afec0d47fd3a76665b92306bb54243`
 - `assets/math130unit2c/visuals/dms-regrouping.svg`: Checked SVG structure, accessible labels, givens, and relevant geometric proportions: DMS carrying and valid ranges. SHA-256 `2f0a50dbdde6d6041015ada99701b0d891ff7681b8b5577f1ac650b9d513d88b`
 - `assets/math130unit2c/visuals/quiz-similarity-practice.svg`: Checked SVG structure, accessible labels, givens, and relevant geometric proportions: An independent multipart similarity problem. SHA-256 `49f2e7042aec5568f0a4da5c2da270a6df365e953b47e005f9f21906144289e6`
+- `assets/math130unit3b/visuals/reference-150.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `94857d123d0917972e4c3bf4f70939d1fc282553663a8ef508bb26e65bc943bb`
+- `assets/math130unit3b/visuals/four-reference-angles.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `96869e31f79d1dd73967227fd254a29bc9a7cec533faeb78e104981f76ed2e47`
+- `assets/math130unit3b/visuals/practice-580.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `b48b71279bbfcd32572763c20a84ad43a93f759a800780bdaf33ef6dc90700f3`
+- `assets/math130unit3b/visuals/reference-examples.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `3dacec56a937fada93ac0f161c4716c35c1d61410f698ab8d8488f11f777cc0f`
+- `assets/math130unit3b/visuals/unit-reference-examples.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `9e484842b6019194a3974bbf1cd3e38e37114764f9ed51f64fb3a04eced70258`
+- `assets/math130unit3b/visuals/radian-practice.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `37c71f16e278876cf376b481ef3f7714a3ba0fed2543af420d7ed19a63df1652`
+- `assets/math130unit3b/visuals/exact-values.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `30c6997be9d5f7acaec6a68bbbb7347afcdfe1a2d3e7e57d14328cc8f40532e6`
+- `assets/math130unit3b/visuals/coordinate-signs.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `8d831c4202008956e49baea0baa49be33d58a70aacad68307adfb50d8d6777a0`
+- `assets/math130unit3b/visuals/point-negative3-positive4.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `1f818c664d3b073bab136a6ef94b054df38e55d33affc48fc3303d541e209921`
+- `assets/math130unit3b/visuals/point-negative2-negative5.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `e4b9805a4a1b88a2ae825a07e75bde626edb95a6d5b429499d9e6160521596f5`
+- `assets/math130unit3b/visuals/point-positive4-negative3.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `e40c8348010b600d549da0acf1106a95b894d89222c663bb8cd70dd5efc60895`
+- `assets/math130unit3b/visuals/axis-values.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `3ab4f5e4411af28c1175af72f0a4fb6fa388853d6cc7aa4f80ded227e4ce79d1`
+- `assets/math130unit3b/visuals/sine-two-solutions.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `89b5561e140d163463db8bc850ecfb75b1cf3bb61d749ff6dbe1f5feec91e8f4`
+- `assets/math130unit3b/visuals/triangle-area-76.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `34678887775452e5821c572414bf57588fbae3c865a6f030164bf2c81d0eb93e`
+- `assets/math130unit3b/visuals/wrong-axis.svg`: Parsed SVG geometry: equal coordinate scales, signed terminal directions, acute arcs to the x-axis, accessible labels, and no numeric practice solutions. SHA-256 `837bb836b0d6329a12bfc2787900746c7633a34095fb7af33a1b480a7c9b7b5e`
 
 ## Limitations
 
