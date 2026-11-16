@@ -20,6 +20,14 @@
     {
       "id": "u3c-two",
       "text": "solve complete and two-triangle application problems"
+    },
+    {
+      "id": "u3c-review53",
+      "text": "review Section 5.3: reference angles, quadrants from signs, and values from a terminal point"
+    },
+    {
+      "id": "u3c-aviation",
+      "text": "solve aviation applications: climb time, altitude lost, bearing components, and the bearing back"
     }
   ],
   "sessions": [
@@ -33,9 +41,9 @@
       "max_slides": 26,
       "rehearsal": {
         "status": "pending_live_rehearsal",
-        "planned_instruction_minutes": 38.0,
+        "planned_instruction_minutes": 48.5,
         "reserved_buffer_minutes": 5,
-        "available_flex_minutes": 17.0,
+        "available_flex_minutes": 6.5,
         "stopping_points": [
           {
             "after_block": "math130unit3c-u3c-model-synthesize",
@@ -537,6 +545,93 @@
           "pacing_checkpoint": "Check elapsed time before beginning the next objective."
         },
         {
+          "source_slides": [],
+          "id": "math130unit3c-u3c-aviation-activate",
+          "title": "Predict: which ratio for a climb?",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 1,
+          "content": [
+            "A plane climbs at $12^\\circ$ at 450 mph. To find the time to gain 7 miles, which side is the hypotenuse?"
+          ],
+          "answer": [
+            "The distance flown: speed is along the flight path, so use $\\sin12^\\circ=7/d$."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130unit3c-u3c-aviation-explain",
+          "title": "Flight paths and bearings",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 2,
+          "content": [
+            "Distance flown $=$ speed $\\times$ time; altitude $=$ distance flown $\\times\\sin(\\text{angle})$.",
+            "Bearing S $\\theta$ W: start at south, turn $\\theta$ toward west. North-south leg $=d\\cos\\theta$; east-west leg $=d\\sin\\theta$.",
+            "Way back after two perpendicular legs: distance by the Pythagorean theorem, angle by inverse tangent, then name both directions."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130unit3c-u3c-aviation-model",
+          "title": "Model the skill: bearing components",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 3,
+          "content": [
+            "A plane flies 280 knots on a bearing of S $38^\\circ$ W for 1.8 hours. Find how far south and west it travels."
+          ],
+          "steps": [
+            "Distance $=280\\times1.8=504$ NM.",
+            "South $=504\\cos38^\\circ\\approx397$ NM; west $=504\\sin38^\\circ\\approx310$ NM."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130unit3c-u3c-aviation-practice",
+          "title": "You try: the way home",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 3,
+          "content": [
+            "North 1.5 hours, then west 0.75 hour, at 350 mph. Find the distance and bearing back to the airport."
+          ],
+          "answer": [
+            "Legs 525 and 262.5 mi; distance $\\approx587.0$ mi.",
+            "$\\tan A=262.5/525$, $A\\approx26.6^\\circ$: bearing S $26.6^\\circ$ E."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130unit3c-u3c-aviation-feedback",
+          "title": "Check and diagnose: bearings and units",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 1.5,
+          "content": [
+            "Report a bearing with both directions and the angle, such as S $26.6^\\circ$ E.",
+            "Convert hours to minutes before rounding a flight time."
+          ],
+          "answer": [
+            "The angle in a bearing is measured from north or south, so cosine gives the north-south leg."
+          ]
+        },
+        {
           "id": "math130unit3c-closing",
           "title": "Session Summary and Exit Ticket",
           "phase": "synthesize",
@@ -557,6 +652,418 @@
           ],
           "answer": [
             "Use the objective roadmap to identify any skill that still needs deliberate practice."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "math130-2026-11-16",
+      "title": "Applications, Bearings, and Section 5.3 Review",
+      "subtitle": "Monday, November 16, 2026 | Sections 5.3 and 7.1",
+      "output": "math130-applications-2026-11-16.html",
+      "duration_minutes": 50,
+      "min_slides": 15,
+      "max_slides": 20,
+      "pilot": {
+        "candidate": false,
+        "status": "pending_classroom_use"
+      },
+      "rehearsal": {
+        "status": "pending_live_rehearsal",
+        "planned_instruction_minutes": 41,
+        "reserved_buffer_minutes": 5,
+        "available_flex_minutes": 9,
+        "stopping_points": []
+      },
+      "blocks": [
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-title",
+          "title": "Applications, Bearings, and Section 5.3 Review",
+          "phase": "activate",
+          "component": "title",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 0,
+          "content": [
+            "Monday, November 16, 2026. ALEKS 5.3/5.7 and Quiz 11 are Wednesday."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-warmup",
+          "title": "Warm-up: sketch -135°",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 2,
+          "content": [
+            "Sketch $\\theta=-135^\\circ$ in standard position. Name its quadrant and reference angle."
+          ],
+          "instructor_notes": [
+            "Give 30 seconds alone, then a partner check. Ask which direction a negative angle turns."
+          ],
+          "answer": [
+            "Clockwise $135^\\circ$ ends in Quadrant III; reference angle $180^\\circ-135^\\circ=45^\\circ$."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-rules",
+          "title": "Reference-angle rules",
+          "phase": "explain",
+          "component": "formula",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 2,
+          "content": [
+            "The reference angle is the positive acute angle to the x-axis.",
+            "First add or subtract $360^\\circ$ (or $2\\pi$) to land in $[0^\\circ,360^\\circ)$; then find the quadrant."
+          ],
+          "table": {
+            "headers": [
+              "Quadrant",
+              "Degrees",
+              "Radians"
+            ],
+            "rows": [
+              [
+                "I",
+                "$\\alpha=\\theta$",
+                "$\\alpha=\\theta$"
+              ],
+              [
+                "II",
+                "$\\alpha=180^\\circ-\\theta$",
+                "$\\alpha=\\pi-\\theta$"
+              ],
+              [
+                "III",
+                "$\\alpha=\\theta-180^\\circ$",
+                "$\\alpha=\\theta-\\pi$"
+              ],
+              [
+                "IV",
+                "$\\alpha=360^\\circ-\\theta$",
+                "$\\alpha=2\\pi-\\theta$"
+              ]
+            ]
+          },
+          "assets": [
+            {
+              "src": "assets/math130unit3b/visuals/four-reference-angles.svg",
+              "alt": "Four coordinate planes use equal scales and terminal angles 40, 140, 220, and 320 degrees. Each orange arc meets the x-axis and measures 40 degrees.",
+              "caption": "Every reference arc meets the x-axis."
+            }
+          ],
+          "visual_layout": "split"
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-sketches",
+          "title": "Sketch, then find the reference angle",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 4,
+          "audit_checks": [
+            "u3c-review53"
+          ],
+          "content": [
+            "Sketch each angle in standard position and show its reference angle: $-135^\\circ$, $1035^\\circ$, $5\\pi/3$."
+          ],
+          "steps": [
+            "$-135^\\circ$: turn clockwise into Quadrant III; $\\alpha=180^\\circ-135^\\circ=45^\\circ$.",
+            "$1035^\\circ-720^\\circ=315^\\circ$ (two full turns): Quadrant IV; $\\alpha=360^\\circ-315^\\circ=45^\\circ$.",
+            "$3\\pi/2<5\\pi/3<2\\pi$: Quadrant IV; $\\alpha=2\\pi-5\\pi/3=\\pi/3$."
+          ],
+          "instructor_notes": [
+            "Draw the rotation in one color and the reference arc in another. For 1035 degrees, draw two full loops before the last 315 degrees."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-reference-practice",
+          "title": "Reference angles in degrees and radians",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 3,
+          "content": [
+            "$200^\\circ$",
+            "$375^\\circ$",
+            "$-390^\\circ$",
+            "$8\\pi/9$",
+            "$17\\pi/12$"
+          ],
+          "answer": [
+            "$200^\\circ$: Quadrant III, $\\alpha=20^\\circ$.",
+            "$375^\\circ-360^\\circ=15^\\circ$: Quadrant I, $\\alpha=15^\\circ$.",
+            "$-390^\\circ+720^\\circ=330^\\circ$: Quadrant IV, $\\alpha=30^\\circ$.",
+            "$\\pi/2<8\\pi/9<\\pi$: Quadrant II, $\\alpha=\\pi-8\\pi/9=\\pi/9$.",
+            "$\\pi<17\\pi/12<3\\pi/2$: Quadrant III, $\\alpha=17\\pi/12-\\pi=5\\pi/12$."
+          ],
+          "instructor_notes": [
+            "Partners split degrees and radians, then explain each quadrant to each other before revealing."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-signs",
+          "title": "Which functions are positive?",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 2,
+          "content": [
+            "Quadrant I: all six are positive. Quadrant II: sine and cosecant.",
+            "Quadrant III: tangent and cotangent. Quadrant IV: cosine and secant.",
+            "Cosecant has the sign of sine, secant of cosine, cotangent of tangent.",
+            "Two sign clues: list the quadrants for each clue, then keep the one in both lists."
+          ],
+          "instructor_notes": [
+            "Tie each sign to the coordinate: cosine follows x, sine follows y."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-signs-practice",
+          "title": "Two sign clues, one quadrant",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 3,
+          "content": [
+            "$\\cos\\theta<0$ and $\\csc\\theta<0$",
+            "$\\sin\\theta<0$ and $\\cot\\theta>0$",
+            "$\\cos\\theta>0$ and $\\tan\\theta<0$",
+            "$\\cos\\theta>0$ and $\\sin\\theta>0$",
+            "$\\tan\\theta>0$ and $\\sin\\theta>0$",
+            "$\\cos\\theta>0$ and $\\sin\\theta<0$"
+          ],
+          "answer": [
+            "II or III, and III or IV: Quadrant III.",
+            "III or IV, and I or III: Quadrant III.",
+            "I or IV, and II or IV: Quadrant IV.",
+            "I or IV, and I or II: Quadrant I.",
+            "I or III, and I or II: Quadrant I.",
+            "I or IV, and III or IV: Quadrant IV."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-point-practice",
+          "title": "Values from a point on the terminal side",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 3,
+          "content": [
+            "Find $r=\\sqrt{x^2+y^2}$ first; $r$ is always positive.",
+            "$(6,5)$: find $\\cos\\theta$, $\\sec\\theta$, and $\\cot\\theta$.",
+            "$(-5,-2)$: find $\\sin\\theta$, $\\sec\\theta$, and $\\tan\\theta$."
+          ],
+          "answer": [
+            "$(6,5)$: $r=\\sqrt{61}$; $\\cos\\theta=6/\\sqrt{61}=6\\sqrt{61}/61$, $\\sec\\theta=\\sqrt{61}/6$, $\\cot\\theta=6/5$.",
+            "$(-5,-2)$: $r=\\sqrt{29}$; $\\sin\\theta=-2/\\sqrt{29}=-2\\sqrt{29}/29$, $\\sec\\theta=-\\sqrt{29}/5$, $\\tan\\theta=2/5$.",
+            "Check: $(-5,-2)$ is in Quadrant III, where only tangent and cotangent are positive."
+          ],
+          "instructor_notes": [
+            "One partner finds the ratio, the other rationalizes and checks the sign against the quadrant."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-review-check",
+          "title": "Check the sign, the axis, and r",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3c-review53"
+          ],
+          "minutes": 1,
+          "content": [
+            "A student says the reference angle for $150^\\circ$ is $60^\\circ$.",
+            "Another writes $r=-\\sqrt{29}$ for $(-5,-2)$."
+          ],
+          "answer": [
+            "$60^\\circ$ is measured to the y-axis; to the x-axis it is $30^\\circ$.",
+            "$r$ is a distance, so $r=\\sqrt{29}$; the signs come from $x$ and $y$."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-aviation-poll",
+          "title": "Which ratio?",
+          "phase": "activate",
+          "component": "poll",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 1,
+          "content": [
+            "A plane climbs at $9^\\circ$. You know its altitude gain and want the distance it flies. Which trig ratio links them?"
+          ],
+          "answer": [
+            "Sine: the altitude is opposite the climb angle, and the distance flown is the hypotenuse."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-aviation-setup",
+          "title": "Climb, descent, and bearings",
+          "phase": "explain",
+          "component": "concept",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 2,
+          "content": [
+            "Speed is along the flight path, so distance flown $=$ speed $\\times$ time is the hypotenuse.",
+            "Climb or descent: altitude $=$ distance flown $\\times\\sin(\\text{angle})$. Convert hours to minutes with $\\times60$.",
+            "A bearing such as S $38^\\circ$ W starts at south and turns $38^\\circ$ toward west (compass heading $218^\\circ$).",
+            "Because the angle is measured from north or south, the north-south leg uses cosine and the east-west leg uses sine."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-climb",
+          "title": "Time to climb",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 4,
+          "audit_checks": [
+            "u3c-aviation"
+          ],
+          "content": [
+            "A plane climbs at $9^\\circ$ at 360 mph along its flight path. How long does it take to gain 5 miles of altitude? Round to the nearest minute."
+          ],
+          "steps": [
+            "$\\sin9^\\circ=5/d$, so $d=5/\\sin9^\\circ\\approx31.96$ mi.",
+            "$t=31.96/360\\approx0.0888$ hr.",
+            "$0.0888\\times60\\approx5.3$, about 5 minutes."
+          ],
+          "instructor_notes": [
+            "Ask why tangent would give the ground distance instead of the distance flown."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-descent",
+          "title": "Altitude lost on a descent",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 3,
+          "content": [
+            "A plane descends at 260 mph at an angle of depression of $3^\\circ$. How much altitude does it lose in 8 minutes? Round to the nearest tenth of a mile."
+          ],
+          "answer": [
+            "Distance flown $=260\\times8/60\\approx34.67$ mi.",
+            "Altitude lost $=34.67\\sin3^\\circ\\approx1.8$ mi."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-bearing",
+          "title": "How far south and west?",
+          "phase": "model",
+          "component": "worked-example",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 3,
+          "content": [
+            "A plane flies 280 knots on a bearing of S $38^\\circ$ W for 1.8 hours. How many nautical miles south and west has it traveled?"
+          ],
+          "steps": [
+            "Total distance $=280\\times1.8=504$ NM.",
+            "South $=504\\cos38^\\circ\\approx397$ NM.",
+            "West $=504\\sin38^\\circ\\approx310$ NM."
+          ],
+          "instructor_notes": [
+            "Sketch the compass first. The 38 degree angle sits at the south axis, so south is adjacent."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-way-home",
+          "title": "The way home",
+          "phase": "practice",
+          "component": "practice",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 4,
+          "content": [
+            "A plane flies north for 1.5 hours, then west for 0.75 hour, at 350 mph on both legs.",
+            "Find the direct distance back to the airport and the bearing the plane should fly."
+          ],
+          "answer": [
+            "Legs: north $350\\times1.5=525$ mi, west $350\\times0.75=262.5$ mi.",
+            "Distance $=\\sqrt{525^2+262.5^2}\\approx587.0$ mi.",
+            "$\\tan A=262.5/525$, so $A\\approx26.6^\\circ$. The airport is south and east of the plane: bearing S $26.6^\\circ$ E."
+          ],
+          "instructor_notes": [
+            "Require a sketch with both legs labeled before any calculation."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-aviation-check",
+          "title": "Bearing and time mistakes",
+          "phase": "feedback",
+          "component": "misconception",
+          "objectives": [
+            "u3c-aviation"
+          ],
+          "minutes": 2,
+          "content": [
+            "A student answers the way-home bearing with $26.6^\\circ$ only.",
+            "Another reports the climb time as 0.09."
+          ],
+          "answer": [
+            "A bearing names both directions and the angle: S $26.6^\\circ$ E.",
+            "0.0888 is in hours; multiply by 60 to report about 5 minutes."
+          ]
+        },
+        {
+          "source_slides": [],
+          "id": "math130-2026-11-16-exit",
+          "title": "Exit check",
+          "phase": "synthesize",
+          "component": "summary",
+          "objectives": [
+            "u3c-review53",
+            "u3c-aviation"
+          ],
+          "minutes": 2,
+          "content": [
+            "Find the reference angle for $-390^\\circ$ and name its quadrant.",
+            "A plane flies 300 NM on a bearing of N $40^\\circ$ E. How far north and east does it travel?"
+          ],
+          "answer": [
+            "$-390^\\circ+720^\\circ=330^\\circ$: Quadrant IV, reference angle $30^\\circ$.",
+            "North $=300\\cos40^\\circ\\approx229.8$ NM; east $=300\\sin40^\\circ\\approx192.8$ NM."
           ]
         }
       ]
