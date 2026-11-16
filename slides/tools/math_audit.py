@@ -23,6 +23,41 @@ def close(actual: float, expected: float, tolerance: float = 0.005) -> None:
         raise AssertionError(f"{actual} does not match {expected}")
 
 
+def reference(theta: float) -> float:
+    t = theta % 360
+    return min(t % 180, 180 - t % 180)
+
+
+def review53_evidence() -> list[str]:
+    for angle, expected in [(-135, 45), (1035, 45), (300, 60), (200, 20), (375, 15), (-390, 30), (160, 20), (255, 75)]:
+        close(reference(angle), expected)
+    # 5pi/3 -> pi/3, 8pi/9 -> pi/9, 17pi/12 -> 5pi/12 (checked in degrees: 300, 160, 255)
+    r61, r29 = math.sqrt(61), math.sqrt(29)
+    close(6 / r61, 6 * r61 / 61)
+    close(-2 / r29, -2 * r29 / 29)
+    close(r29 / -5, -r29 / 5)
+    signs = {"I": (1, 1), "II": (-1, 1), "III": (-1, -1), "IV": (1, -1)}
+    def quadrants(test):
+        return {q for q, (x, y) in signs.items() if test(x, y)}
+    assert quadrants(lambda x, y: x < 0) & quadrants(lambda x, y: y < 0) == {"III"}
+    assert quadrants(lambda x, y: y < 0) & quadrants(lambda x, y: x * y > 0) == {"III"}
+    assert quadrants(lambda x, y: x > 0) & quadrants(lambda x, y: x * y < 0) == {"IV"}
+    assert quadrants(lambda x, y: x > 0) & quadrants(lambda x, y: y > 0) == {"I"}
+    assert quadrants(lambda x, y: x * y > 0) & quadrants(lambda x, y: y > 0) == {"I"}
+    assert quadrants(lambda x, y: x > 0) & quadrants(lambda x, y: y < 0) == {"IV"}
+    return ["Verified reference angles 45, 45, 60 (pi/3), 20, 15, 30 degrees and pi/9, 5pi/12; sign-quadrant intersections III, III, IV, I, I, IV; rationalized values for (6,5) and (-5,-2)."]
+
+
+def aviation_evidence() -> list[str]:
+    d = 5 / math.sin(math.radians(9))
+    assert round(d, 2) == 31.96 and round(d / 360 * 60) == 5
+    assert round(260 * 8 / 60 * math.sin(math.radians(3)), 1) == 1.8
+    assert round(504 * math.cos(math.radians(38))) == 397 and round(504 * math.sin(math.radians(38))) == 310
+    assert round(math.hypot(525, 262.5), 1) == 587.0 and round(math.degrees(math.atan(262.5 / 525)), 1) == 26.6
+    assert round(300 * math.cos(math.radians(40)), 1) == 229.8 and round(300 * math.sin(math.radians(40)), 1) == 192.8
+    return ["Recomputed climb distance 31.96 mi (5 min), altitude lost 1.8 mi, components 397/310 NM, return distance 587.0 mi at S 26.6 E, and exit components 229.8/192.8 NM."]
+
+
 def calculations() -> dict[str, list[str]]:
     pi = math.pi
     assert round(math.degrees(math.asin(150 / 345)), 1) == 25.8
@@ -184,6 +219,8 @@ def calculations() -> dict[str, list[str]]:
         "u3c-model": [f"Recomputed corrected ladder height $20\\sin65^\\circ={20 * math.sin(math.radians(65)):.2f}$ ft and practice height {80 * math.tan(math.radians(42)):.2f} ft."],
         "u3c-motion": [f"Recomputed 300-mile components: east {300 * math.cos(math.radians(25)):.2f}, north {300 * math.sin(math.radians(25)):.2f}."],
         "u3c-two": ["Solved shared-height equations: closer distance 41.37 ft, farther distance 91.37 ft, and height 54.90 ft."],
+        "u3c-review53": review53_evidence(),
+        "u3c-aviation": aviation_evidence(),
         "u3d-components": ["Verified terminal-minus-initial gives $\\langle5,-6\\rangle$ and practice gives $\\langle6,3\\rangle$."],
         "u3d-operations": ["Verified $u+v=\\langle2,3\\rangle$, $3u-2v=\\langle11,-16\\rangle$, and practice $2u-3v=\\langle7,-18\\rangle$."],
         "u3d-direction": ["Verified model magnitude 5 and direction $126.87^\\circ$; practice magnitude $3\\sqrt5$ and direction $26.57^\\circ$."],
@@ -233,6 +270,8 @@ REQUIRED_FRAGMENTS = {
     "u3c-model": ["18.13", "72.0"],
     "u3c-motion": ["271.89", "126.79", "368.62", "258.11"],
     "u3c-two": ["41.37", "54.90"],
+    "u3c-review53": ["\\\\pi/9", "5\\\\pi/12", "6\\\\sqrt{61}/61", "-2\\\\sqrt{29}/29", "Quadrant IV"],
+    "u3c-aviation": ["31.96", "1.8", "397", "310", "587.0", "26.6", "229.8", "192.8"],
     "u3d-components": ["\\\\langle5,-6\\\\rangle", "\\\\langle6,3\\\\rangle"],
     "u3d-operations": ["\\\\langle11,-16\\\\rangle", "\\\\langle7,-18\\\\rangle"],
     "u3d-direction": ["126.87", "26.57"],
