@@ -215,7 +215,8 @@ function recompute(g,p) {
     if(typeof answer==='object')for(const k of Object.keys(answer))close(p.a[k],answer[k],g.id+'.'+k);else close(p.a,answer,g.id);
 }
 function entries(p) {
-    if(p.fields)return p.fields.map(f=>f.inputType==='bearing'?`${f.answer.ns} ${f.answer.angle} ${f.answer.ew}`:String(f.answer));
+    if(p.exactInputs)return p.exactInputs;
+    if(p.fields)return p.fields.map(f=>f.inputType==='bearing'?`${f.answer.ns} ${f.answer.angle} ${f.answer.ew}`:f.answerText||String(f.answer));
     if(p.inputType==='bearing')return [`${p.a.ns} ${p.a.angle.toFixed(1)} ${p.a.ew}`];
     if(p.inputType==='coterminal_deg')return [String(cotermAnswer(p.baseTheta,360,p.sign))];
     if(p.inputType==='coterminal_rad')return [String(cotermAnswer(p.baseThetaRad,2*Math.PI,p.sign))];
@@ -346,11 +347,13 @@ class Element {
     get innerHTML(){return this._html;}
     querySelectorAll(){return [];}
     querySelector(){return null;}
+    appendChild(){}
+    scrollIntoView(){}
     addEventListener(){} focus(){} setAttribute(){} getAttribute(){return null;}
 }
 const elements=new Map(),document={
     getElementById(id){if(!elements.has(id))elements.set(id,new Element(id));return elements.get(id);},
-    querySelectorAll(){return [];},addEventListener(){},documentElement:new Element('root'),body:new Element('body')
+    querySelectorAll(){return [];},querySelector(selector){return this.getElementById(selector);},createElement(tag){return new Element(tag);},addEventListener(){},documentElement:new Element('root'),body:new Element('body')
 };
 const saved={theme:'dark',checklist:checklist.map((c,i)=>({id:c.id,done:i%2===0})),history:[{topic:'Prior practice',tries:0}],videosWatched:['old-video']};
 const source=[...html.matchAll(/<script(?: [^>]*)?>([\s\S]*?)<\/script>/g)].at(-1)[1];
@@ -377,8 +380,25 @@ for(const shared of [true,false]){
             vm.runInContext('checkAnswer()',ctx);assert.equal(vm.runInContext('examState.score',ctx),i+1,'Page checker failed '+p.q);
             if(i+1<total)vm.runInContext('loadQuestion()',ctx);
         }
+        if(checkpoint===6){
+            assert.equal(vm.runInContext('examState.points',ctx),105);
+            vm.runInContext('showExamResults()',ctx);
+            assert.match(document.getElementById('exam-score-display').innerHTML,/105%/);
+            assert.match(document.getElementById('exam-score-display').innerHTML,/100-point scale/);
+            assert.equal(vm.runInContext('state.history[0].examScore',ctx),105);
+        }
     }
     console.log(`100 complete runs of all checkpoints passed (${shared?'shared file':'offline fallback'}).`);
+    // Partial answers contribute once, using paper weights, without turning
+    // incomplete questions into fully-correct questions or capping at 100.
+    vm.runInContext('startMockQuiz(6)',ctx);
+    const partial=vm.runInContext('currentQuestion',ctx);
+    entries(partial).forEach((entry,i)=>document.getElementById('inp-part-'+i).value=i===2?'999':entry);
+    vm.runInContext('checkAnswer()',ctx);
+    close(vm.runInContext('examState.points',ctx),40/3,'Paper partial credit');
+    assert.equal(vm.runInContext('examState.score',ctx),0);
+    vm.runInContext('checkAnswer()',ctx);
+    close(vm.runInContext('examState.points',ctx),40/3,'Repeated submit must not add points');
     // Real page feedback progression: hint, opt-in reveal, no correct-history credit.
     for(const generator of skills.generators){
         ctx.generatorId=generator.id;

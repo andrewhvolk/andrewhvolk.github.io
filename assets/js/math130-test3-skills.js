@@ -89,6 +89,9 @@
     }
     function grade(question, entries) {
         const close = (raw, answer, tol = 0) => {
+            // Paper rehearsals require exact expressions; broad topic practice
+            // continues to accept the decimal precision stated in its prompt.
+            if (question.exactOnly && /\.|\d[eE][+-]?\d/.test(String(raw))) return false;
             const v = parseExact(raw);
             return v !== null && Math.abs(v - answer) <= tol + 1e-10;
         };
@@ -314,6 +317,10 @@
     }
     // Allocate section quotas by largest remainder, then sample each pool once.
     function buildCheckpoint(generators, config, r = Math.random) {
+        if (config.blueprint === 'quiz11-section53') return buildSection53Rehearsal(r).map((question, i) => ({
+            id: `quiz11_paper_${i + 1}`, section: 'Section 5.3', label: `Quiz 11 rehearsal: Question ${i + 1}`,
+            generate: () => question
+        }));
         const pool=generators.filter(g=>(!config.sections||config.sections.includes(g.section))&&!(config.excludedIds||[]).includes(g.id));
         const result=[];
         const take=(list,count)=>{let available=shuffleInPlace([...list],r);while(count--&&list.length){if(!available.length)available=shuffleInPlace([...list],r);result.push(available.shift());}};
@@ -330,6 +337,72 @@
             if(result.length<config.count)take(pool,config.count-result.length);
         }
         return shuffleInPlace(result,r);
+    }
+
+    // Parallel practice, in the paper's order. Do not use the Spring aviation
+    // quiz-number mapping to select this Fall Section 5.3 blueprint.
+    function buildSection53Rehearsal(r = Math.random) {
+        const field = (id, label, answer, answerText = String(answer)) => ({id, label, answer, answerText, tolerance: 0});
+        const plain = tex => tex.replace(/\\sqrt\{([^{}]+)\}/g, 'sqrt($1)')
+            .replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '($1)/($2)').replace(/\\pi/g, 'pi');
+        const blankAxes = '<svg viewBox="0 0 260 210" width="260" height="210" role="img" aria-label="Blank coordinate axes for your standard-position sketch"><path d="M20 105 H240 M130 15 V195" fill="none" stroke="var(--diagram-axis-label)" stroke-width="2"/><g fill="var(--diagram-axis-label)" font-size="15"><text x="242" y="99">x</text><text x="137" y="18">y</text></g></svg>';
+        const exactNote = 'Use exact fractions, sqrt(...), and pi; decimal entries are not accepted. Show your work on paper. Sketches are self-checked against the revealed diagram.';
+        const chain = (radians) => {
+            const ref = pick(r, [30, 45, 60]), quadrant = radians ? pick(r, [3, 4]) : 2;
+            const degrees = {2:180-ref, 3:180+ref, 4:360-ref}[quadrant], fn = radians ? 'cos' : 'sin';
+            const theta = radians ? piFraction(degrees,180) : `${degrees}^\\circ`;
+            const alpha = radians ? piFraction(ref,180) : `${ref}^\\circ`;
+            const magnitude = trig(fn,ref*Math.PI/180), sign = signOf(fn,quadrant);
+            const positive = exactSpecial(fn,ref), signed = exactSpecial(fn,ref,sign);
+            return {q:`For $\\theta=${theta}$, ${radians?'use the axes to locate the terminal side':'sketch the angle in standard position'} and find the exact values below.`,
+                inputType:'parts', exactOnly:true,
+                fields:[field('reference',`a) θ′ (${radians?'radians':'degrees'})`,radians?ref*Math.PI/180:ref,plain(radians?piFraction(ref,180):String(ref))),
+                    field('reference_value',`b) ${fn} θ′`,magnitude,plain(positive)), field('value',`c) ${fn} θ`,sign*magnitude,plain(signed))],
+                svg:blankAxes, svgAltText:'Blank coordinate axes. Draw the terminal side and label the reference angle on your own paper.',
+                solution:`The terminal side is in Quadrant ${quadrant}. $\\theta'=${alpha}$; $\\${fn}\\theta'=${positive}$; $\\${fn}\\theta=${signed}$. Check your sketch: the reference angle meets the horizontal axis.`,
+                solutionSvg:createBasicAngleSvg({thetaDeg:degrees,labelText:`${degrees}°`,fallbackText:`Solution sketch: ${degrees} degrees, Quadrant ${quadrant}.`}),
+                hint:'Locate the terminal side, find its acute angle to the horizontal axis, evaluate the reference-angle function, then apply the quadrant sign.',
+                entryNote:exactNote, parameters:{degrees,ref,quadrant,fn,radians}};
+        };
+        const signs = [];
+        for (let i=0;i<2;i++) {
+            const quadrant=pick(r,[1,2,3,4].filter(q=>!signs.some(s=>s.quadrant===q)));
+            const first=pick(r,i===0?['csc','sec','cot']:trigNames);
+            const second=pick(r,trigNames.filter(fn=>trigNames.indexOf(fn)%3!==trigNames.indexOf(first)%3));
+            signs.push({quadrant,first,second});
+        }
+        const equation = radians => {
+            const fn=pick(r,['sin','cos']), ref=radians?45:30, magnitude=radians?Math.SQRT1_2:0.5;
+            // Degree equations on both paper forms have value +1/2. The acute
+            // reference angle depends on whether the chosen function is sine/cosine.
+            const alpha=radians?ref:fn==='sin'?30:60, sign=radians?-1:1;
+            const quadrants=[1,2,3,4].filter(q=>signOf(fn,q)===sign);
+            const degrees=quadrants.map(q=>({1:alpha,2:180-alpha,3:180+alpha,4:360-alpha})[q]);
+            const exacts=degrees.map(a=>radians?piFraction(a,180):String(a));
+            return {q:`Find two angles ${radians?'in $0\\leq\\theta<2\\pi$ radians':'in $0^\\circ\\leq\\theta<360^\\circ$'} satisfying $\\${fn}\\theta=${radians?'-\\frac{1}{\\sqrt{2}}':'\\frac{1}{2}'}$. Give exact answers.`,
+                inputType:'two_angle_solutions', exactOnly:true, units:radians?'radians':'degrees',
+                a:{x:radians?degrees[0]*Math.PI/180:degrees[0], y:radians?degrees[1]*Math.PI/180:degrees[1]},tol:{x:0,y:0},
+                exactInputs:exacts.map(plain), entryNote:'Enter both solutions in either order. Use pi for radians; decimal entries are not accepted.',
+                solution:`The reference angle is $${radians?piFraction(alpha,180):alpha+'^\\circ'}$. ${fn==='sin'?'Sine':'Cosine'} is ${sign<0?'negative':'positive'} in Quadrants ${quadrants.join(' and ')}. The two solutions are $${exacts[0]}${radians?'':'^\\circ'}$ and $${exacts[1]}${radians?'':'^\\circ'}$.`,
+                hint:'Find the acute reference angle, locate both quadrants with the required sign, then express both angles in the requested units.', parameters:{fn,ref:alpha,sign,radians,magnitude}};
+        };
+        const [legX,legY,hyp]=pick(r,[[3,4,5],[5,12,13],[8,15,17],[7,24,25],[20,21,29]]);
+        const quadrant=pick(r,[2,4]), x=legX*(quadrant===2?-1:1), y=legY*(quadrant===4?-1:1);
+        const ratios={sin:[y,hyp],cos:[x,hyp],tan:[y,x],csc:[hyp,y],sec:[hyp,x],cot:[x,y]};
+        const questions=[chain(false),chain(true),
+            {q:'Given each pair of sign conditions, identify the quadrant containing the terminal side of $\\theta$.<br>'+signs.map((s,i)=>`${i?'b':'a'}) $\\${s.first}\\theta${signOf(s.first,s.quadrant)>0?'>':'<'}0$ and $\\${s.second}\\theta${signOf(s.second,s.quadrant)>0?'>':'<'}0$`).join('<br>'),
+                inputType:'parts',fields:signs.map((s,i)=>field('quadrant'+i,`${i?'b':'a'}) Quadrant (1, 2, 3, or 4)`,s.quadrant)),
+                solution:signs.map((s,i)=>`${i?'b':'a'}) Both sign conditions hold in Quadrant ${s.quadrant}.`).join(' '),
+                hint:'Sine and cosecant share a sign; cosine and secant share a sign; tangent and cotangent share a sign. Find where both conditions hold.', parameters:{signs}},
+            equation(true),equation(false),
+            {q:`If $(${x},${y})$ is a point on the terminal side of $\\theta$ in standard position, find all six trigonometric functions.`,
+                inputType:'parts',exactOnly:true,fields:trigNames.map(fn=>field(fn,fn+' θ',ratios[fn][0]/ratios[fn][1],plain(fraction(...ratios[fn])))),
+                entryNote:'Compute the positive radius on paper, then enter all six exact ratios. Fractions may be equivalent; decimal entries are not accepted.',
+                solution:`$r=\\sqrt{${paren(x)}^2+${paren(y)}^2}=${hyp}$. ${trigNames.map(fn=>`$\\${fn}\\theta=${fraction(...ratios[fn])}$`).join('; ')}.`,
+                hint:'Find the positive distance from the origin. Use signed x and y in the three ratios and then take their reciprocals.',parameters:{x,y,hyp,quadrant}}
+        ];
+        return questions.map((question,i)=>({...question,number:i+1,points:[20,20,10,15,15,25][i],
+            q:`<strong>Question ${i+1} · ${[20,20,10,15,15,25][i]} points</strong><br>${question.q}`}));
     }
 
     const definitions = [
@@ -881,7 +954,7 @@
         return question;
     }}));
 
-    const api = { generators, buildCheckpoint, createBasicAngleSvg, mulberry32, parseExact, grade, bearingHeading, piFraction, fraction, radical, signedTerm };
+    const api = { generators, buildCheckpoint, buildSection53Rehearsal, createBasicAngleSvg, mulberry32, parseExact, grade, bearingHeading, piFraction, fraction, radical, signedTerm };
     if (typeof module === 'object' && module.exports) module.exports = api;
     root.Math130Test3Skills = api;
 })(typeof window !== 'undefined' ? window : globalThis);

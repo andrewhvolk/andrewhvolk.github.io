@@ -306,7 +306,8 @@
         .quiz-btn.active { background: var(--primary-main); color: var(--bg-surface); border-color: var(--primary-main); }
 
         .quiz-box { text-align: center; padding: 1rem 0; }
-        .question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.8; }
+        .question-text { font-size: 1.3rem; margin-bottom: 1.5rem; line-height: 1.8; scroll-margin-top: 150px; }
+        #exam-results { scroll-margin-top: 150px; }
         
         .graph-description { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
         #svg-display svg, .solution-step svg { max-width: 100%; height: auto; }
@@ -974,7 +975,7 @@
         <a class="learning-action--primary" href="slides/Math130Unit3A.html" target="_blank" rel="noopener">Learn with 3A</a>
         <a href="slides/Math130Unit3B.html" target="_blank" rel="noopener">Continue with 3B</a>
         <button type="button" onclick="launchUnitCheckpoint(5)">Quiz 10 checkpoint (5.1–5.2)</button>
-        <button type="button" onclick="launchUnitCheckpoint(6)">Section 5.3 checkpoint</button>
+        <button type="button" onclick="launchUnitCheckpoint(6)">Quiz 11 rehearsal (Section 5.3)</button>
       </div>
     </article>
     <article class="learning-step">
@@ -1190,15 +1191,15 @@
 <!-- Mock Quiz CTA -->
 <div id="quiz-cta" class="review-callout review-callout--highlight u-mb-lg review-callout--padded">
 <h3 class="review-callout__title u-text-center">📝 Mock Quiz Mode</h3>
-<p class="review-callout__body review-callout__body--sm u-text-center">Choose practice by topic. The aviation mode follows the four problem types in Spring 2026 Quiz 11; quiz numbering and coverage can change between semesters. Confirm current coverage in Canvas. Dates are on the <a href="/courses/math130.html#test-3">MATH 130 page</a>.</p>
+<p class="review-callout__body review-callout__body--sm u-text-center"><strong>Fall Quiz 11 covers Section 5.3.</strong> Rehearse its six-question paper format in order: two reference-angle chains, two sign pairs, equations in radians and degrees, and all six functions from a point. There are intentionally 105 points available on a 100-point scale. Aviation applications are separate practice. Dates are on the <a href="/courses/math130.html#test-3">MATH 130 page</a>.</p>
 <div class="review-option-grid">
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(5)">
 <div class="review-option-title">Quiz 10 practice — Sections 5.1–5.2</div>
 <div class="review-option-copy">Coterminal angles + exact trig triangle skills</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(6)">
-<div class="review-option-title">Section 5.3 practice</div>
-<div class="review-option-copy">Six questions: degrees, radians, signs, exact values, equations, and all six functions from a point</div>
+<div class="review-option-title">Quiz 11 rehearsal — Section 5.3</div>
+<div class="review-option-copy">Six questions in paper order · exact answers · 105 points, including extra credit. Sketch and show work on paper.</div>
 </button>
 <button class="btn-secondary review-option-button" onclick="startMockQuiz(7)">
 <div class="review-option-title">Section 7.1 applications practice</div>
@@ -1209,7 +1210,7 @@
 <div class="review-option-copy">Graph/resultant vectors and magnitude-direction conversions</div>
 </button>
 <button id="aviation-practice" class="btn-secondary review-option-button" onclick="startMockQuiz(10)">
-<div class="review-option-title">Aviation practice — Spring Quiz 11 format</div>
+<div class="review-option-title">Aviation applications — separate practice</div>
 <div class="review-option-copy">Four problems: climb time, descent loss, both compass components, and distance with a return bearing</div>
 </button>
 </div>
@@ -1236,8 +1237,8 @@
 </div>
 <div class="quiz-selector" id="quiz-categories"></div>
 <div class="quiz-box quiz-box--active-shell" id="quiz-active-area" style="display:none;">
-<div id="svg-display"></div>
 <div class="question-text" id="question-display"></div>
+<div id="svg-display"></div>
 <div class="question-note" id="question-note" style="display:none;"></div>
 <div class="input-group" id="dynamic-inputs">
 <!-- Inputs injected here based on type -->
@@ -1343,7 +1344,7 @@
 </div>
 </div>
 </div>
-<script src="assets/js/math130-test3-skills.js?v=20261102-2"></script>
+<script src="assets/js/math130-test3-skills.js?v=20261118-quiz11"></script>
 <script>
     // --- ICON REFRESH (debounced to prevent redundant DOM walks) ---
     let _iconTimer = null;
@@ -1584,6 +1585,9 @@
     }
     function grade(question, entries) {
         const close = (raw, answer, tol = 0) => {
+            // Paper rehearsals require exact expressions; broad topic practice
+            // continues to accept the decimal precision stated in its prompt.
+            if (question.exactOnly && /\.|\d[eE][+-]?\d/.test(String(raw))) return false;
             const v = parseExact(raw);
             return v !== null && Math.abs(v - answer) <= tol + 1e-10;
         };
@@ -1809,6 +1813,10 @@
     }
     // Allocate section quotas by largest remainder, then sample each pool once.
     function buildCheckpoint(generators, config, r = Math.random) {
+        if (config.blueprint === 'quiz11-section53') return buildSection53Rehearsal(r).map((question, i) => ({
+            id: `quiz11_paper_${i + 1}`, section: 'Section 5.3', label: `Quiz 11 rehearsal: Question ${i + 1}`,
+            generate: () => question
+        }));
         const pool=generators.filter(g=>(!config.sections||config.sections.includes(g.section))&&!(config.excludedIds||[]).includes(g.id));
         const result=[];
         const take=(list,count)=>{let available=shuffleInPlace([...list],r);while(count--&&list.length){if(!available.length)available=shuffleInPlace([...list],r);result.push(available.shift());}};
@@ -1825,6 +1833,72 @@
             if(result.length<config.count)take(pool,config.count-result.length);
         }
         return shuffleInPlace(result,r);
+    }
+
+    // Parallel practice, in the paper's order. Do not use the Spring aviation
+    // quiz-number mapping to select this Fall Section 5.3 blueprint.
+    function buildSection53Rehearsal(r = Math.random) {
+        const field = (id, label, answer, answerText = String(answer)) => ({id, label, answer, answerText, tolerance: 0});
+        const plain = tex => tex.replace(/\\sqrt\{([^{}]+)\}/g, 'sqrt($1)')
+            .replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '($1)/($2)').replace(/\\pi/g, 'pi');
+        const blankAxes = '<svg viewBox="0 0 260 210" width="260" height="210" role="img" aria-label="Blank coordinate axes for your standard-position sketch"><path d="M20 105 H240 M130 15 V195" fill="none" stroke="var(--diagram-axis-label)" stroke-width="2"/><g fill="var(--diagram-axis-label)" font-size="15"><text x="242" y="99">x</text><text x="137" y="18">y</text></g></svg>';
+        const exactNote = 'Use exact fractions, sqrt(...), and pi; decimal entries are not accepted. Show your work on paper. Sketches are self-checked against the revealed diagram.';
+        const chain = (radians) => {
+            const ref = pick(r, [30, 45, 60]), quadrant = radians ? pick(r, [3, 4]) : 2;
+            const degrees = {2:180-ref, 3:180+ref, 4:360-ref}[quadrant], fn = radians ? 'cos' : 'sin';
+            const theta = radians ? piFraction(degrees,180) : `${degrees}^\\circ`;
+            const alpha = radians ? piFraction(ref,180) : `${ref}^\\circ`;
+            const magnitude = trig(fn,ref*Math.PI/180), sign = signOf(fn,quadrant);
+            const positive = exactSpecial(fn,ref), signed = exactSpecial(fn,ref,sign);
+            return {q:`For $\\theta=${theta}$, ${radians?'use the axes to locate the terminal side':'sketch the angle in standard position'} and find the exact values below.`,
+                inputType:'parts', exactOnly:true,
+                fields:[field('reference',`a) θ′ (${radians?'radians':'degrees'})`,radians?ref*Math.PI/180:ref,plain(radians?piFraction(ref,180):String(ref))),
+                    field('reference_value',`b) ${fn} θ′`,magnitude,plain(positive)), field('value',`c) ${fn} θ`,sign*magnitude,plain(signed))],
+                svg:blankAxes, svgAltText:'Blank coordinate axes. Draw the terminal side and label the reference angle on your own paper.',
+                solution:`The terminal side is in Quadrant ${quadrant}. $\\theta'=${alpha}$; $\\${fn}\\theta'=${positive}$; $\\${fn}\\theta=${signed}$. Check your sketch: the reference angle meets the horizontal axis.`,
+                solutionSvg:createBasicAngleSvg({thetaDeg:degrees,labelText:`${degrees}°`,fallbackText:`Solution sketch: ${degrees} degrees, Quadrant ${quadrant}.`}),
+                hint:'Locate the terminal side, find its acute angle to the horizontal axis, evaluate the reference-angle function, then apply the quadrant sign.',
+                entryNote:exactNote, parameters:{degrees,ref,quadrant,fn,radians}};
+        };
+        const signs = [];
+        for (let i=0;i<2;i++) {
+            const quadrant=pick(r,[1,2,3,4].filter(q=>!signs.some(s=>s.quadrant===q)));
+            const first=pick(r,i===0?['csc','sec','cot']:trigNames);
+            const second=pick(r,trigNames.filter(fn=>trigNames.indexOf(fn)%3!==trigNames.indexOf(first)%3));
+            signs.push({quadrant,first,second});
+        }
+        const equation = radians => {
+            const fn=pick(r,['sin','cos']), ref=radians?45:30, magnitude=radians?Math.SQRT1_2:0.5;
+            // Degree equations on both paper forms have value +1/2. The acute
+            // reference angle depends on whether the chosen function is sine/cosine.
+            const alpha=radians?ref:fn==='sin'?30:60, sign=radians?-1:1;
+            const quadrants=[1,2,3,4].filter(q=>signOf(fn,q)===sign);
+            const degrees=quadrants.map(q=>({1:alpha,2:180-alpha,3:180+alpha,4:360-alpha})[q]);
+            const exacts=degrees.map(a=>radians?piFraction(a,180):String(a));
+            return {q:`Find two angles ${radians?'in $0\\leq\\theta<2\\pi$ radians':'in $0^\\circ\\leq\\theta<360^\\circ$'} satisfying $\\${fn}\\theta=${radians?'-\\frac{1}{\\sqrt{2}}':'\\frac{1}{2}'}$. Give exact answers.`,
+                inputType:'two_angle_solutions', exactOnly:true, units:radians?'radians':'degrees',
+                a:{x:radians?degrees[0]*Math.PI/180:degrees[0], y:radians?degrees[1]*Math.PI/180:degrees[1]},tol:{x:0,y:0},
+                exactInputs:exacts.map(plain), entryNote:'Enter both solutions in either order. Use pi for radians; decimal entries are not accepted.',
+                solution:`The reference angle is $${radians?piFraction(alpha,180):alpha+'^\\circ'}$. ${fn==='sin'?'Sine':'Cosine'} is ${sign<0?'negative':'positive'} in Quadrants ${quadrants.join(' and ')}. The two solutions are $${exacts[0]}${radians?'':'^\\circ'}$ and $${exacts[1]}${radians?'':'^\\circ'}$.`,
+                hint:'Find the acute reference angle, locate both quadrants with the required sign, then express both angles in the requested units.', parameters:{fn,ref:alpha,sign,radians,magnitude}};
+        };
+        const [legX,legY,hyp]=pick(r,[[3,4,5],[5,12,13],[8,15,17],[7,24,25],[20,21,29]]);
+        const quadrant=pick(r,[2,4]), x=legX*(quadrant===2?-1:1), y=legY*(quadrant===4?-1:1);
+        const ratios={sin:[y,hyp],cos:[x,hyp],tan:[y,x],csc:[hyp,y],sec:[hyp,x],cot:[x,y]};
+        const questions=[chain(false),chain(true),
+            {q:'Given each pair of sign conditions, identify the quadrant containing the terminal side of $\\theta$.<br>'+signs.map((s,i)=>`${i?'b':'a'}) $\\${s.first}\\theta${signOf(s.first,s.quadrant)>0?'>':'<'}0$ and $\\${s.second}\\theta${signOf(s.second,s.quadrant)>0?'>':'<'}0$`).join('<br>'),
+                inputType:'parts',fields:signs.map((s,i)=>field('quadrant'+i,`${i?'b':'a'}) Quadrant (1, 2, 3, or 4)`,s.quadrant)),
+                solution:signs.map((s,i)=>`${i?'b':'a'}) Both sign conditions hold in Quadrant ${s.quadrant}.`).join(' '),
+                hint:'Sine and cosecant share a sign; cosine and secant share a sign; tangent and cotangent share a sign. Find where both conditions hold.', parameters:{signs}},
+            equation(true),equation(false),
+            {q:`If $(${x},${y})$ is a point on the terminal side of $\\theta$ in standard position, find all six trigonometric functions.`,
+                inputType:'parts',exactOnly:true,fields:trigNames.map(fn=>field(fn,fn+' θ',ratios[fn][0]/ratios[fn][1],plain(fraction(...ratios[fn])))),
+                entryNote:'Compute the positive radius on paper, then enter all six exact ratios. Fractions may be equivalent; decimal entries are not accepted.',
+                solution:`$r=\\sqrt{${paren(x)}^2+${paren(y)}^2}=${hyp}$. ${trigNames.map(fn=>`$\\${fn}\\theta=${fraction(...ratios[fn])}$`).join('; ')}.`,
+                hint:'Find the positive distance from the origin. Use signed x and y in the three ratios and then take their reciprocals.',parameters:{x,y,hyp,quadrant}}
+        ];
+        return questions.map((question,i)=>({...question,number:i+1,points:[20,20,10,15,15,25][i],
+            q:`<strong>Question ${i+1} · ${[20,20,10,15,15,25][i]} points</strong><br>${question.q}`}));
     }
 
     const definitions = [
@@ -2376,7 +2450,7 @@
         return question;
     }}));
 
-    const api = { generators, buildCheckpoint, createBasicAngleSvg, mulberry32, parseExact, grade, bearingHeading, piFraction, fraction, radical, signedTerm };
+    const api = { generators, buildCheckpoint, buildSection53Rehearsal, createBasicAngleSvg, mulberry32, parseExact, grade, bearingHeading, piFraction, fraction, radical, signedTerm };
     return api;
     })();
     const generators = test3Skills.generators;
@@ -3003,7 +3077,13 @@
         }
         
         // Focus first input
-        setTimeout(() => { const firstInp = inputArea.querySelector('input'); if(firstInp) firstInp.focus(); }, 50);
+        setTimeout(() => {
+            if (examState.isActive && examState.paperRehearsal) {
+                document.getElementById('question-display').scrollIntoView({block:'start',behavior:'smooth'});
+            } else {
+                const firstInp = inputArea.querySelector('input'); if(firstInp) firstInp.focus();
+            }
+        }, 50);
         
         document.getElementById('btn-submit').style.display = 'inline-block';
         document.getElementById('btn-next').style.display = 'none';
@@ -3040,6 +3120,7 @@
         
         let isCorrect = false;
         let partSummary = '';
+        let checkedParts = [];
         
         if (document.getElementById('btn-submit').style.display === 'none') return;
 
@@ -3050,6 +3131,7 @@
                 : ['vector_xy', 'two_angle_solutions'].includes(currentQuestion.inputType) ? ['inp-vx', 'inp-vy'] : ['answer-input'];
             const entries = ids.map(id => document.getElementById(id).value);
             const result = test3Skills.grade(currentQuestion, entries);
+            checkedParts = result.parts;
             result.parts.forEach((ok, i) => {
                 const input = document.getElementById(ids[i]);
                 input.classList.remove('inp-correct', 'inp-wrong');
@@ -3156,6 +3238,10 @@
                 examState.results[section].correct++;
                 examState.score++;
             }
+            if (examState.paperRehearsal) {
+                examState.points += currentQuestion.points * checkedParts.filter(Boolean).length / checkedParts.length;
+                partSummary += `Answer-check credit: ${Number((currentQuestion.points * checkedParts.filter(Boolean).length / checkedParts.length).toFixed(2))}/${currentQuestion.points} points. `;
+            }
 
             // Disable inputs
             document.querySelectorAll('#dynamic-inputs input, #dynamic-inputs select').forEach(inp => inp.disabled = true);
@@ -3166,7 +3252,8 @@
 
             if (isCorrect) {
                 feedback.className = 'feedback correct';
-                feedback.innerHTML = `<i data-lucide="check-circle" style="display:inline-block; vertical-align:middle; margin-right:8px;"></i> Correct!`;
+                feedback.innerHTML = `<i data-lucide="check-circle" style="display:inline-block; vertical-align:middle; margin-right:8px;"></i> Correct! ${partSummary}`;
+                if (examState.paperRehearsal) feedback.innerHTML += `<div class="solution-step"><strong>Check your work:</strong> ${currentQuestion.solution}</div>`;
             } else {
                 feedback.className = 'feedback incorrect';
                 feedback.innerHTML = `
@@ -3253,7 +3340,7 @@
     }
 
     function showExamResults() {
-        const pct = Math.round((examState.score / examState.total) * 100);
+        const pct = examState.paperRehearsal ? Number(examState.points.toFixed(2)) : Math.round((examState.score / examState.total) * 100);
         const label = examState.label || 'Mock Exam';
 
         // Save exam to history
@@ -3276,7 +3363,8 @@
         document.querySelector('#exam-results h2').textContent = `📊 ${label} Results`;
 
         const color = pct >= 85 ? 'var(--emerald-main)' : pct >= 70 ? 'var(--warning-main)' : 'var(--danger-main)';
-        document.getElementById('exam-score-display').innerHTML = `<span style="color: ${color}">${pct}%</span>`;
+        document.getElementById('exam-score-display').innerHTML = `<span style="color: ${color}">${pct}%</span>` + (examState.paperRehearsal
+            ? `<p class="u-meta-muted-sm">${pct} points on a 100-point scale · 105 available, including extra credit.</p><p class="u-meta-muted-sm">Answer-check score: practice points are split evenly across each question’s answer fields. Check your sketches and written work against the solutions; your instructor awards paper work credit.</p>` : '');
 
         // Breakdown by section
         const breakdown = document.getElementById('exam-breakdown');
@@ -3300,6 +3388,7 @@
 
         renderMath();
         refreshIcons();
+        if (examState.paperRehearsal) document.getElementById('exam-results').scrollIntoView({block:'start',behavior:'smooth'});
     }
 
     function endMockExam() {
@@ -3331,7 +3420,8 @@
             count: 5
         },
         6: {
-            label: 'Section 5.3 — Reference Angles and Trig Values',
+            label: 'Quiz 11 Rehearsal — Section 5.3',
+            blueprint: 'quiz11-section53',
             sections: ['Section 5.3'],
             requiredIds: ['reference_angle_deg', 'reference_angle_rad', 'quadrant_signs', 'trig_values_from_info', 'solve_trig_equation_special', 'trig_values_from_point'],
             count: 6
@@ -3356,7 +3446,7 @@
             count: 5
         },
         10: {
-            label: 'Aviation Practice — Spring 2026 Quiz 11 Format',
+            label: 'Aviation Applications — Separate Practice',
             sections: ['Section 7.1'],
             requiredIds: ['aviation_climb_time', 'aviation_descent_loss', 'aviation_bearing_displacement', 'aviation_return_to_origin'],
             count: 4
@@ -3384,7 +3474,9 @@
             results: {},
             score: 0,
             total: selected.length,
-            label: config.label
+            label: config.label,
+            paperRehearsal: config.blueprint === 'quiz11-section53',
+            points: 0
         };
 
         // UI
@@ -3462,6 +3554,7 @@
     window.addEventListener('load', () => {
         const params = new URLSearchParams(window.location.search);
         if (params.get('practice') === 'aviation') { showTab('practice'); startMockQuiz(10); }
+        if (params.get('practice') === 'quiz11') { showTab('practice'); startMockQuiz(6); }
         if (params.get('skill') === 'trig_values_from_point') { showTab('practice'); startQuiz('trig_values_from_point'); }
         if (!window.katex || !window.renderMathInElement) {
             if (window.loadLocalKatexAssets) window.loadLocalKatexAssets();
