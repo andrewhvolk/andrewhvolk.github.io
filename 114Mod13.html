@@ -273,8 +273,9 @@
                 let rate2 = rate1 - (Math.floor(Math.random() * 30) + 15); 
                 
                 let isA_Steeper = Math.random() > 0.5;
-                let rA = isA_Steeper ? rate1 : rate2;
-                let rB = isA_Steeper ? rate2 : rate1;
+                let isSame = Math.random() < 0.2;
+                let rA = isSame ? rate1 : (isA_Steeper ? rate1 : rate2);
+                let rB = isSame ? rate1 : (isA_Steeper ? rate2 : rate1);
 
                 return {
                     type: "mc",
@@ -284,7 +285,7 @@
                         `Town B growing at a constant rate of ${rB} people per year.`,
                         `They would have the exact same slope.`
                     ],
-                    correct: isA_Steeper ? 0 : 1
+                    correct: isSame ? 2 : (isA_Steeper ? 0 : 1)
                 };
             }
         },
@@ -308,8 +309,75 @@
                     correct: 1
                 };
             }
+        },
+        {
+            title: "Mission 5: Build a Linear Model",
+            hints: "Slope m = (y2 - y1) / (x2 - x1), measured in output units per input unit. Then substitute one point into y = mx + b and solve for b.",
+            generateProblem: () => {
+                const ri = (lo, hi) => Math.floor(Math.random() * (hi - lo + 1)) + lo;
+                const contexts = [
+                    { out: "C", inp: "v", outUnits: "dollars", outUnit: "dollar", inUnits: "visits", inUnit: "visit", m: [3, 12], b: [10, 60], x: [2, 20],
+                      setup: (x1, y1, x2, y2) => `A gym member paid a total of $${y1} after ${x1} visits and $${y2} after ${x2} visits.` },
+                    { out: "T", inp: "d", outUnits: "dollars", outUnit: "dollar", inUnits: "miles", inUnit: "mile", m: [2, 4], b: [3, 8], x: [2, 15],
+                      setup: (x1, y1, x2, y2) => `A ${x1}-mile taxi ride costs $${y1}, and a ${x2}-mile ride costs $${y2}.` },
+                    { out: "S", inp: "w", outUnits: "dollars", outUnit: "dollar", inUnits: "weeks", inUnit: "week", m: [15, 40], b: [50, 300], x: [2, 20],
+                      setup: (x1, y1, x2, y2) => `A savings account held $${y1} after ${x1} weeks and $${y2} after ${x2} weeks.` },
+                    { out: "H", inp: "t", outUnits: "centimeters", outUnit: "centimeter", inUnits: "hours", inUnit: "hour", m: [-3, -1], b: [20, 40], x: [1, 6],
+                      setup: (x1, y1, x2, y2) => `A candle is ${y1} cm tall after ${x1} hours of burning and ${y2} cm tall after ${x2} hours.` },
+                    { out: "W", inp: "t", outUnits: "gallons", outUnit: "gallon", inUnits: "minutes", inUnit: "minute", m: [-12, -4], b: [200, 400], x: [2, 15],
+                      setup: (x1, y1, x2, y2) => `A draining tank holds ${y1} gallons after ${x1} minutes and ${y2} gallons after ${x2} minutes.` }
+                ];
+                const c = contexts[ri(0, contexts.length - 1)];
+                const m = ri(c.m[0], c.m[1]);
+                const b = ri(c.b[0], c.b[1]);
+                const x1 = ri(c.x[0], c.x[1] - 1);
+                const x2 = ri(x1 + 1, c.x[1]);
+                const y1 = m * x1 + b, y2 = m * x2 + b;
+
+                const fmt = (slope, icept) => {
+                    const mPart = slope === 1 ? c.inp : slope === -1 ? `-${c.inp}` : `${slope}${c.inp}`;
+                    return icept >= 0 ? `${c.out} = ${mPart} + ${icept}` : `${c.out} = ${mPart} - ${-icept}`;
+                };
+                const eqOptions = [fmt(m, b)];
+                [fmt(m, y1), fmt(b, m), fmt(-m, b), fmt(m, b + m), fmt(m, b - m)].forEach(e => {
+                    if (eqOptions.length < 4 && !eqOptions.includes(e)) eqOptions.push(e);
+                });
+
+                return {
+                    type: "multi",
+                    scenario: `${c.setup(x1, y1, x2, y2)} The relationship is linear. Let ${c.inp} be the ${c.inUnits} and ${c.out} be the ${c.outUnits}.`,
+                    parts: [
+                        { type: "num", answer: m,
+                          text: `What is the slope m? (Type a number. Use a minus sign if the output decreases.)` },
+                        { type: "mc", text: `Which units belong with the slope?`,
+                          options: [`${c.outUnits} per ${c.inUnit}`, `${c.inUnits} per ${c.outUnit}`, c.outUnits, c.inUnits], correct: 0 },
+                        { type: "num", answer: b,
+                          text: `Substitute one point into ${c.out} = ${m}${c.inp} + b. What is the initial value b?` },
+                        { type: "mc", text: `Which equation models the situation?`, options: eqOptions, correct: 0 }
+                    ]
+                };
+            }
         }
     ];
+
+    // Shuffle answer choices so the correct option is not always in the same position.
+    function shuffleChoices(problem) {
+        const order = problem.options.map((_, i) => i);
+        for (let i = order.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [order[i], order[j]] = [order[j], order[i]];
+        }
+        return Object.assign({}, problem, {
+            options: order.map(i => problem.options[i]),
+            correct: order.indexOf(problem.correct)
+        });
+    }
+
+    // Read the first number in a typed answer such as "$12", "-3", or "12 dollars per visit".
+    function parseNumber(text) {
+        const match = text.replace(/[\u2212\u2013]/g, "-").replace(/,/g, "").match(/-?\d+(\.\d+)?/);
+        return match ? parseFloat(match[0]) : NaN;
+    }
 
     function hideAll() {
         document.getElementById("screen-welcome").classList.add("hidden");
@@ -349,36 +417,52 @@
         loadAnother();
     }
 
+    let currentPart = null;
+    let currentPartIndex = 0;
+
     function loadAnother() {
         const mission = missions[currentMissionIndex];
         currentProblemObj = mission.generateProblem();
-        
-        document.getElementById("problem-text").innerText = currentProblemObj.text;
+        currentPartIndex = 0;
+        renderPart();
+    }
+
+    function renderPart() {
+        const isMulti = currentProblemObj.type === "multi";
+        let part = isMulti ? currentProblemObj.parts[currentPartIndex] : currentProblemObj;
+        if (part.type === "mc") part = shuffleChoices(part);
+        currentPart = part;
+
+        document.getElementById("problem-text").innerText = isMulti
+            ? `${currentProblemObj.scenario}\n\nStep ${currentPartIndex + 1} of ${currentProblemObj.parts.length}: ${part.text}`
+            : part.text;
         document.getElementById("feedback").innerText = "";
         document.getElementById("action-buttons").classList.add("hidden");
         
         const mcContainer = document.getElementById("options-container");
         const fitbContainer = document.getElementById("text-input-container");
         
-        if (currentProblemObj.type === "mc") {
+        if (part.type === "mc") {
             fitbContainer.classList.add("hidden");
             mcContainer.classList.remove("hidden");
             mcContainer.innerHTML = "";
             
-            currentProblemObj.options.forEach((opt, index) => {
+            part.options.forEach((opt, index) => {
                 const btn = document.createElement("button");
                 btn.className = "option-btn";
                 btn.innerText = opt;
                 btn.onclick = () => checkMcAnswer(index, btn);
                 mcContainer.appendChild(btn);
             });
-        } else if (currentProblemObj.type === "fitb") {
+        } else {
             mcContainer.classList.add("hidden");
             fitbContainer.classList.remove("hidden");
             
             const inputField = document.getElementById("fitb-input");
             inputField.value = "";
             inputField.disabled = false;
+            inputField.style.borderColor = "#bdc3c7";
+            inputField.style.backgroundColor = "";
             document.getElementById("fitb-submit").disabled = false;
             inputField.focus();
             
@@ -388,16 +472,28 @@
         }
     }
 
+    // After a correct answer, move to the next step of a multi-step problem or offer the next problem.
+    function handleCorrect(message) {
+        const feedback = document.getElementById("feedback");
+        const isMulti = currentProblemObj.type === "multi";
+        if (isMulti && currentPartIndex < currentProblemObj.parts.length - 1) {
+            feedback.innerHTML = `<span class="correct">Correct! On to the next step.</span>`;
+            setTimeout(() => { currentPartIndex++; renderPart(); }, 1200);
+        } else {
+            feedback.innerHTML = `<span class="correct">${message}</span>`;
+            document.getElementById("action-buttons").classList.remove("hidden");
+        }
+    }
+
     function checkMcAnswer(selectedIndex, btnElement) {
         const buttons = document.querySelectorAll('.option-btn');
         buttons.forEach(b => b.disabled = true);
         const feedback = document.getElementById("feedback");
 
-        if (selectedIndex === currentProblemObj.correct) {
+        if (selectedIndex === currentPart.correct) {
             btnElement.style.backgroundColor = "#d4edda";
             btnElement.style.borderColor = "#c3e6cb";
-            feedback.innerHTML = `<span class="correct">Spot on! Great job.</span>`;
-            document.getElementById("action-buttons").classList.remove("hidden");
+            handleCorrect("Spot on! Great job.");
         } else {
             btnElement.style.backgroundColor = "#f8d7da";
             btnElement.style.borderColor = "#f5c6cb";
@@ -425,24 +521,31 @@
         inputField.disabled = true;
         submitBtn.disabled = true;
 
-        // Process the student's raw input through our normalizer
-        const normalizedUserInput = normalizeString(inputField.value);
+        let isCorrect;
+        if (currentPart.type === "num") {
+            // Numeric answers are compared by value, so "$12" and "12 dollars" both count.
+            isCorrect = Math.abs(parseNumber(inputField.value) - currentPart.answer) < 0.01;
+        } else {
+            // Process the student's raw input through our normalizer
+            const normalizedUserInput = normalizeString(inputField.value);
 
-        // Check if the normalized user input matches any of the normalized valid answers
-        const isCorrect = currentProblemObj.validAnswers.some(validAns => {
-            const normalizedValidAns = normalizeString(validAns);
-            return normalizedValidAns === normalizedUserInput;
-        });
+            // Check if the normalized user input matches any of the normalized valid answers
+            isCorrect = currentPart.validAnswers.some(validAns => {
+                const normalizedValidAns = normalizeString(validAns);
+                return normalizedValidAns === normalizedUserInput;
+            });
+        }
 
         if (isCorrect) {
             inputField.style.borderColor = "var(--success)";
             inputField.style.backgroundColor = "#d4edda";
-            feedback.innerHTML = `<span class="correct">Excellent! You nailed it.</span>`;
-            document.getElementById("action-buttons").classList.remove("hidden");
+            handleCorrect("Excellent! You nailed it.");
         } else {
             inputField.style.borderColor = "#c0392b";
             inputField.style.backgroundColor = "#f8d7da";
-            feedback.innerHTML = `<span class="incorrect">Not quite. Check the hint box above to make sure you have the right variable.</span>`;
+            feedback.innerHTML = currentPart.type === "num"
+                ? `<span class="incorrect">Not quite. Use the hint box above, check your arithmetic and sign, and try again.</span>`
+                : `<span class="incorrect">Not quite. Check the hint box above to make sure you have the right variable.</span>`;
             
             setTimeout(() => {
                 inputField.disabled = false;
