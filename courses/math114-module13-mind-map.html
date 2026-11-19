@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 13 Mind Map | MATH 114 | Prof. Volk's Office</title>
+  <meta name="description" content="MATH 114 Module 13 one-page mind map: functions, domain and range, slope, y = mx + b, building and using linear models.">
+  <link rel="canonical" href="https://andrewhvolk.github.io/courses/math114-module13-mind-map.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@1,500&display=swap">
+<style>
+/* Layout: a 3 x 3 grid with the big idea in the center cell and eight note cards around it, joined by spokes; one landscape letter sheet in print. */
+:root {
+  --paper: #ffffff;
+  --ink: #1b2430;
+  --muted: #566273;
+  --rule: #d5dbe3;
+  --spoke: #b7c1cd;
+  --hub: #1d3557;
+  --hub-ink: #ffffff;
+  --c9a: #0e7c74;      /* Chapter 9A: functions */
+  --c9a-tint: #e7f4f2;
+  --c9b: #2f5fb3;      /* Chapter 9B: linear models */
+  --c9b-tint: #e9eff9;
+  --use: #b35c00;      /* Applying models */
+  --use-tint: #fbf0e4;
+  --warn: #b3261e;
+  --font-head: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-math: "IBM Plex Serif", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #11161d; --ink: #e3e8ef; --muted: #9aa6b6; --rule: #2a3441; --spoke: #3c4a5c;
+    --hub: #9cc0ee; --hub-ink: #0f1620;
+    --c9a: #4fc7bb; --c9a-tint: #15302d; --c9b: #8db0f0; --c9b-tint: #182640;
+    --use: #f0a456; --use-tint: #33240f; --warn: #ff8a80; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #11161d; --ink: #e3e8ef; --muted: #9aa6b6; --rule: #2a3441; --spoke: #3c4a5c;
+  --hub: #9cc0ee; --hub-ink: #0f1620;
+  --c9a: #4fc7bb; --c9a-tint: #15302d; --c9b: #8db0f0; --c9b-tint: #182640;
+  --use: #f0a456; --use-tint: #33240f; --warn: #ff8a80; color-scheme: dark;
+}
+body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 12.5px; line-height: 1.38; }
+.sheet {
+  max-width: 1320px; margin: 0 auto;
+  padding-block: 18px 22px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 10px;
+}
+.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 20px; border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
+.top h1 { font: 700 22px/1.1 var(--font-head); margin: 0; letter-spacing: .01em; }
+.top .meta { font-size: 11.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.key { display: inline-flex; align-items: center; gap: 5px; }
+.key i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+.map { position: relative; display: grid; grid-template-columns: 1fr 0.92fr 1fr; gap: 14px 18px; align-items: center; }
+.spokes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: visible; }
+.spokes line { stroke: var(--spoke); stroke-width: 2; stroke-dasharray: 1 0; }
+
+.card, .hub { position: relative; z-index: 1; min-width: 0; }
+.card { background: var(--paper); border: 1.5px solid var(--rule); border-top: 5px solid var(--tone); border-radius: 6px; padding: 7px 10px 8px; display: flex; flex-direction: column; gap: 4px; }
+.card.a { --tone: var(--c9a); --tint: var(--c9a-tint); }
+.card.b { --tone: var(--c9b); --tint: var(--c9b-tint); }
+.card.u { --tone: var(--use); --tint: var(--use-tint); }
+.card h2 { font: 700 15px/1.15 var(--font-head); margin: 0; color: var(--tone); display: flex; justify-content: space-between; gap: 8px; text-wrap: balance; }
+.card h2 small { font: 600 10.5px/1.4 var(--font-body); color: var(--muted); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.card ul { margin: 0; padding-left: 15px; }
+.card li + li { margin-top: 2px; }
+.card p { margin: 0; }
+.f { background: var(--tint); border-radius: 4px; padding: 3px 7px; font-weight: 600; text-align: center; }
+.ex { border-left: 3px solid var(--tone); padding-left: 7px; color: var(--ink); }
+.ex b:first-child { color: var(--tone); font-weight: 600; }
+var, .v { font-family: var(--font-math); font-style: italic; font-weight: 500; }
+.row { display: flex; gap: 10px; align-items: center; min-width: 0; }
+.row > * { min-width: 0; }
+svg.mini { flex: none; display: block; }
+svg.mini text { font: 500 10px var(--font-body); fill: var(--muted); }
+table.t { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 11.5px; }
+table.t th, table.t td { border: 1px solid var(--rule); padding: 1px 7px; text-align: center; }
+table.t th { background: var(--tint); font-weight: 600; }
+.steps { margin: 0; padding-left: 17px; }
+.steps li + li { margin-top: 2px; }
+
+.hub { align-self: center; background: var(--hub); color: var(--hub-ink); border-radius: 14px; padding: 14px 14px 13px; text-align: center; display: flex; flex-direction: column; gap: 7px; }
+.hub .eyebrow { font: 600 10.5px/1 var(--font-body); letter-spacing: .1em; text-transform: uppercase; opacity: .85; }
+.hub h2 { font: 700 25px/1.05 var(--font-head); margin: 0; }
+.hub .big { font: 500 13px/1.35 var(--font-body); }
+.hub .eq { background: color-mix(in srgb, var(--hub-ink) 14%, transparent); border-radius: 8px; padding: 6px 8px; font-size: 14px; font-weight: 600; }
+.hub .eq var { font-size: 16px; }
+
+.strip { display: grid; grid-template-columns: 1.5fr 1fr; gap: 10px 18px; border-top: 2px solid var(--ink); padding-top: 7px; }
+.strip h3 { font: 700 13.5px/1.2 var(--font-head); margin: 0 0 3px; }
+.strip ul { margin: 0; padding-left: 15px; columns: 2; column-gap: 22px; }
+.strip li { break-inside: avoid; margin-bottom: 2px; }
+.strip .warn h3 { color: var(--warn); }
+.strip .check ul { columns: 1; list-style: none; padding-left: 0; }
+.strip .check li::before { content: "\2610"; margin-right: 6px; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .map { grid-template-columns: 1fr; }
+  .hub { order: -1; }
+  .spokes { display: none; }
+  .strip { grid-template-columns: 1fr; }
+  .strip ul { columns: 1; }
+}
+
+@page { size: letter landscape; margin: 0.3in; }
+@media print {
+  :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+    --paper: #ffffff; --ink: #1b2430; --muted: #566273; --rule: #c9d0da; --spoke: #b7c1cd;
+    --hub: #1d3557; --hub-ink: #ffffff;
+    --c9a: #0e7c74; --c9a-tint: #e7f4f2; --c9b: #2f5fb3; --c9b-tint: #e9eff9;
+    --use: #b35c00; --use-tint: #fbf0e4; --warn: #b3261e; color-scheme: light;
+  }
+  :root { padding: 0 !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 10.3px; line-height: 1.32; }
+  .sheet { max-width: none; padding: 0; gap: 5px; }
+  .top h1 { font-size: 19px; }
+  .top .meta { font-size: 10px; }
+  .map { gap: 7px 12px; grid-template-columns: 1fr 0.9fr 1fr; }
+  .card { padding: 4px 7px 5px; gap: 2.5px; border-top-width: 4px; }
+  .card h2 { font-size: 13px; }
+  .card h2 small { font-size: 8.5px; }
+  .hub { padding: 9px 10px; gap: 5px; }
+  .hub h2 { font-size: 22px; }
+  .hub .big { font-size: 11.3px; }
+  .hub .eq { font-size: 11.5px; }
+  .hub .eq var { font-size: 13.5px; }
+  table.t { font-size: 10px; }
+  .strip { padding-top: 4px; gap: 4px 14px; }
+  .strip h3 { font-size: 12px; margin-bottom: 1px; }
+  .spokes { display: block; }
+}
+</style>
+<style>
+body { margin: 0; }
+.m13-bar { display: flex; flex-wrap: wrap; gap: 8px 18px; max-width: 1320px; margin: 0 auto; padding-block: 12px 0; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); font: 600 13px/1.4 var(--font-body); }
+.m13-bar a { color: var(--c9b); text-decoration: none; }
+.m13-bar a:hover, .m13-bar a:focus-visible { text-decoration: underline; }
+@media print { .m13-bar { display: none !important; } }
+</style>
+</head>
+<body>
+<nav class="m13-bar" aria-label="MATH 114 navigation">
+  <a href="/courses/math114-module13.html">&larr; Module 13 lesson</a>
+  <a href="/pdfs/math114-module13-mind-map-2026-11-19.pdf">Download the PDF</a>
+</nav>
+<div class="sheet">
+  <header class="top">
+    <h1>MATH 114 · Module 13: Linear Modeling</h1>
+    <div class="meta">
+      <span>Chapter 9A–9B</span>
+      <span class="key"><i style="background:var(--c9a)"></i>9A Functions</span>
+      <span class="key"><i style="background:var(--c9b)"></i>9B Linear models</span>
+      <span class="key"><i style="background:var(--use)"></i>Building and using models</span>
+    </div>
+  </header>
+
+  <div class="map" id="map">
+    <svg class="spokes" id="spokes" aria-hidden="true"></svg>
+
+    <!-- Row 1 -->
+    <section class="card a">
+      <h2>What is a function? <small>9A</small></h2>
+      <ul>
+        <li>A <b>function</b> assigns each input <b>exactly one</b> output.</li>
+        <li><b>Independent variable</b> = input (the cause). <b>Dependent variable</b> = output (the effect).</li>
+        <li>Write it as (input, output), or <var>y</var> = <var>f</var>(<var>x</var>), read "y is a function of x."</li>
+        <li>Ask: "What <i>depends on</i> what?" The thing that depends is the output.</li>
+      </ul>
+      <p class="ex"><b>Example:</b> A heating bill depends on outside temperature. Input: temperature. Output: bill.</p>
+    </section>
+
+    <section class="card a">
+      <h2>Four ways to show a function <small>9A</small></h2>
+      <div class="row">
+        <table class="t" aria-label="Gym cost table">
+          <tr><th>visits <var>v</var></th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+          <tr><th>cost <var>C</var></th><td>30</td><td>35</td><td>40</td><td>45</td></tr>
+        </table>
+      </div>
+      <ul>
+        <li><b>Words:</b> $30 fee plus $5 per visit.</li>
+        <li><b>Table:</b> above. <b>Graph:</b> points rise in a straight line.</li>
+        <li><b>Equation:</b> <var>C</var> = 5<var>v</var> + 30.</li>
+      </ul>
+      <p>On a graph, the input goes on the horizontal axis and the output on the vertical axis.</p>
+    </section>
+
+    <section class="card a">
+      <h2>Domain and range <small>9A</small></h2>
+      <ul>
+        <li><b>Domain:</b> the input values that make sense.</li>
+        <li><b>Range:</b> the output values that result.</li>
+        <li>In context, ask what the real situation allows: no negative visits, no negative distance, no time before the start.</li>
+      </ul>
+      <p class="ex"><b>Example:</b> <var>d</var> = 100 − 60<var>t</var>. The car arrives when <var>d</var> = 0, at <var>t</var> ≈ 1.67 h. Domain: 0 ≤ <var>t</var> ≤ 1.67. Range: 0 ≤ <var>d</var> ≤ 100.</p>
+    </section>
+
+    <!-- Row 2 -->
+    <section class="card a">
+      <h2>Describe the relationship <small>9A</small></h2>
+      <div class="row">
+        <svg class="mini" width="112" height="62" viewBox="0 0 112 62" aria-label="Three graph shapes">
+          <path d="M6 4 V44 H40" fill="none" stroke="var(--muted)" stroke-width="1"/>
+          <path d="M8 40 Q24 34 38 8" fill="none" stroke="var(--c9a)" stroke-width="2"/>
+          <path d="M68 4 V44 H102" fill="none" stroke="var(--muted)" stroke-width="1"/>
+          <path d="M70 8 Q80 36 100 40" fill="none" stroke="var(--c9a)" stroke-width="2"/>
+          <text x="23" y="57" text-anchor="middle">increasing</text>
+          <text x="85" y="57" text-anchor="middle">decreasing</text>
+        </svg>
+        <ul>
+          <li>Say how the output changes as the input increases: "As altitude increases, air pressure decreases."</li>
+          <li>Sketch a <b>qualitative graph</b>: label axes, show rising, falling, or level, with no exact numbers.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="hub" id="hub">
+      <span class="eyebrow">The big idea</span>
+      <h2>Linear Modeling</h2>
+      <p class="big">A <b>model</b> describes a real situation with math. A model is <b>linear</b> when the output changes by the <b>same amount</b> for each unit of input.</p>
+      <div class="eq">output = initial value + (rate of change) × input<br><var>y</var> = <var>m</var><var>x</var> + <var>b</var></div>
+    </div>
+
+    <section class="card b">
+      <h2>Rate of change and slope <small>9B</small></h2>
+      <div class="row">
+        <svg class="mini" width="92" height="70" viewBox="0 0 92 70" aria-label="Slope triangle">
+          <path d="M8 4 V60 H88" fill="none" stroke="var(--muted)" stroke-width="1"/>
+          <line x1="10" y1="56" x2="84" y2="10" stroke="var(--c9b)" stroke-width="2"/>
+          <path d="M30 43.6 H66 V21.2" fill="none" stroke="var(--use)" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="48" y="53" text-anchor="middle">Δx</text>
+          <text x="80" y="36" text-anchor="middle">Δy</text>
+        </svg>
+        <div class="f">slope <var>m</var> = (<var>y</var>₂ − <var>y</var>₁) ÷ (<var>x</var>₂ − <var>x</var>₁)<br>= change in output ÷ change in input</div>
+      </div>
+      <ul>
+        <li><b>Units:</b> output units <i>per</i> input unit (dollars per visit, miles per hour).</li>
+        <li><var>m</var> &gt; 0 rises, <var>m</var> &lt; 0 falls, <var>m</var> = 0 is flat. Larger |<var>m</var>| means steeper.</li>
+      </ul>
+    </section>
+
+    <!-- Row 3 -->
+    <section class="card b">
+      <h2>The linear equation <small>9B</small></h2>
+      <div class="f"><var>y</var> = <var>m</var><var>x</var> + <var>b</var></div>
+      <ul>
+        <li><var>m</var> = <b>rate of change</b> (slope), with units.</li>
+        <li><var>b</var> = <b>initial value</b>: the output when <var>x</var> = 0 (the <var>y</var>-intercept).</li>
+        <li>Same <var>m</var>, different <var>b</var>: parallel lines.</li>
+        <li><b>Linear test for a table:</b> equal input steps give equal output changes. If the change is not constant, the model is not linear.</li>
+      </ul>
+    </section>
+
+    <section class="card u">
+      <h2>Build a model</h2>
+      <p><b>From words:</b> the starting amount is <var>b</var>, the "per" amount is <var>m</var>. Decreasing means a negative <var>m</var>.</p>
+      <p class="ex"><b>Example:</b> 100 miles away, approaching at 60 mph: <var>d</var> = 100 − 60<var>t</var>.</p>
+      <p><b>From two points</b> ($50 in year 2, $80 in year 5):</p>
+      <ol class="steps">
+        <li>Slope: <var>m</var> = (80 − 50) ÷ (5 − 2) = 10 dollars per year.</li>
+        <li>Substitute a point: 50 = 10(2) + <var>b</var>, so <var>b</var> = 30.</li>
+        <li>Write it: <var>P</var> = 10<var>t</var> + 30. Check: 10(5) + 30 = 80. ✓</li>
+      </ol>
+    </section>
+
+    <section class="card u">
+      <h2>Use the model</h2>
+      <ul>
+        <li><b>Predict the output:</b> substitute the input. 8 visits: <var>C</var> = 5(8) + 30 = $70.</li>
+        <li><b>Find the input:</b> set the model equal to the output and solve. When is the car 10 miles away? 10 = 100 − 60<var>t</var>, so 60<var>t</var> = 90 and <var>t</var> = 1.5 h.</li>
+        <li><b>Interpret</b> in a sentence with units: "The price rises $10 per year."</li>
+        <li><b>Check</b> that the answer is inside the domain and makes sense.</li>
+        <li><b>Graph it</b> in Desmos: type <span class="v">y</span> = 5<span class="v">x</span> + 30.</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="strip">
+    <div class="warn">
+      <h3>Common mistakes</h3>
+      <ul>
+        <li>Dividing change in input by change in output (flip it: output on top).</li>
+        <li>Losing the minus sign when the quantity decreases.</li>
+        <li>Using the first output as <var>b</var>. <var>b</var> is the output at <var>x</var> = 0.</li>
+        <li>Swapping the independent and dependent variables.</li>
+        <li>Leaving off units, or writing them backward (visits per dollar).</li>
+        <li>Using a model outside its domain (a negative distance).</li>
+      </ul>
+    </div>
+    <div class="check">
+      <h3>Before the quiz, I can…</h3>
+      <ul>
+        <li>name the input and output and describe how they relate</li>
+        <li>find a slope with units from two points or a table</li>
+        <li>write <var>y</var> = <var>m</var><var>x</var> + <var>b</var> from words or from two points</li>
+        <li>predict an output, solve for an input, and check the domain</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var map = document.getElementById("map"), svg = document.getElementById("spokes"), hub = document.getElementById("hub");
+  function draw() {
+    var box = map.getBoundingClientRect();
+    if (!box.width) return;
+    var h = hub.getBoundingClientRect();
+    var hx = h.left + h.width / 2 - box.left, hy = h.top + h.height / 2 - box.top;
+    var out = "";
+    map.querySelectorAll(".card").forEach(function (c) {
+      var r = c.getBoundingClientRect();
+      var cx = r.left + r.width / 2 - box.left, cy = r.top + r.height / 2 - box.top;
+      // Percent units keep the spokes aligned if the page reflows for printing.
+      out += '<line x1="' + (hx / box.width * 100) + '%" y1="' + (hy / box.height * 100) + '%" x2="' + (cx / box.width * 100) + '%" y2="' + (cy / box.height * 100) + '%"/>';
+    });
+    svg.innerHTML = out;
+  }
+  draw();
+  window.addEventListener("resize", draw);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  if (window.ResizeObserver) new ResizeObserver(draw).observe(map);
+  var mq = window.matchMedia && window.matchMedia("print");
+  if (mq && mq.addEventListener) mq.addEventListener("change", draw);
+  window.addEventListener("beforeprint", draw);
+  window.addEventListener("afterprint", draw);
+  window.redrawSpokes = draw;
+})();
+</script>
+</body>
+</html>
