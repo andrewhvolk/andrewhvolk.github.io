@@ -45,7 +45,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Open | Unassigned | Initial audit below |
 | SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Open | Unassigned | Initial audit below |
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
-| SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Open | Unassigned | Initial audit below |
+| SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-010 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
 
 ## Product scope and constraints
@@ -295,3 +295,36 @@ Copy the following structure and **append the completed entry at the very bottom
 - Change: Bumped the shared-file query string in `130Test3.html` from `?v=20261118-quiz11` to `?v=20261120-sh011` so returning browsers fetch the corrected engine. Updated the matching assertion in `tests/verify-math130-quiz11-rehearsal.cjs`. `130-section-5-3-practice.html` loads the shared file without a version query and was left unchanged.
 - Tests and evidence: Re-ran all MATH 130 suites and `tests/verify-skyhawk-trig.cjs` before committing; results are in the commit.
 - Task status and owner: SH-001 and SH-011 remain Verification, Claude (Opus 5.5), pending deployment checks (SH-001 also pending its SH-010 seed criterion).
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-010 seeded engine; SH-001 seed criterion
+
+- Entry type: Starting assessment, decision, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh010-seeded-engine`, stacked on `5bd931d` (PR #328, SH-001/SH-011, not yet merged).
+- Current status assessment: Confirmed SH-010 as recorded. Generation, grading, and DOM updates were interleaved in `generateDataForStage`/`renderStage`/`verifyAnswer`; problems used unseeded `Math.random` and string-rounded `toFixed(1)` picks, so no reported problem could be replayed. No other owner was recorded.
+- Decision (shared engine): Evaluated reusing `assets/js/math130-test3-skills.js`. Not adopted now. Its aviation profile uses knots for bearings, different ranges, 1-decimal tolerance grading for descent/return, and a random return quadrant, so adopting it would change the Skyhawk questions rather than just their plumbing. Loading it would also require the external-file-plus-synced-fallback arrangement that `130Test3.html` uses. Instead, the Skyhawk engine follows the same conventions (mulberry32, `roundTo`, `generate(rng)` → parameters) so it can be merged later. Revisit with SH-007, when bearing variety is added.
+- Change (`SkyhawkTrig.html`):
+  - A DOM-free `SkyhawkEngine` sits between `// <skyhawk-engine>` markers, inline so the page still works as a single offline file. API: `SKILLS`, `generate(type, seed)`, `build(type, params, seed?)`, `parseCode`, `newSeed`, `grade`, `roundTo`, `mulberry32`.
+  - Each problem holds its type, seed, code, parameters, prompt, hint, fields (label with units, rounded answer), and solution HTML. Decimal parameters are drawn as integer tenths instead of `toFixed` strings.
+  - Problem codes such as `bearing-q9kw6c` (skill plus base-36 seed) appear under each question and on the review screen. `SkyhawkTrig.html?problem=<code>` opens that exact problem at its stage; malformed codes fall back to the welcome screen.
+  - The page now only renders and grades through the engine. Inputs got `<label for>` associations as a side effect (partial SH-005; other SH-005 items untouched). Student-facing wording and grading behavior are otherwise unchanged; SH-004 (blank/partial feedback) remains open.
+- Tests and evidence: Rewrote `tests/verify-skyhawk-trig.cjs` (21/21 pass; the engine checks failed before implementation). It covers:
+  - loading the engine with no DOM;
+  - deep-equal reproduction per (skill, seed), and rebuilding from (skill, parameters);
+  - code round-trips, case-insensitivity, and rejection of malformed codes;
+  - prompt variety;
+  - 10,000 seeded cases per skill checked for parameter ranges and steps, units in labels, independent correct rounding, and readable precision;
+  - the earlier exact known-answer and grading cases;
+  - page wiring: `?problem=` replay, grading through the engine, and welcome fallback.
+
+  All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, and `check_css_links.py`. Browser check at `http://localhost:8137` (built-in Chromium pane, about 800×600):
+  - a correct elevation answer showed "Calculation Correct!"; a blank bearing answer opened Math Review with the code shown;
+  - `?problem=BEARING-q9kw6c` opened Stage 2 with a problem JSON-identical to the engine's;
+  - labels resolved to their inputs, and there were no console errors.
+
+  Not checked: other browsers or viewports, or deployment.
+- SH-001 note: Its remaining criterion ("a reported seed/parameter set reproduces the same prompt, expected answers, solution, and diagram") is now met for prompt, answers, and solution; no diagram exists yet (SH-006). SH-001 stays in Verification only for deployment checks.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-010 Verification, Claude (Opus 5.5). Close after merge and a post-deployment `?problem=` check.
+- New findings: None beyond the shared-engine decision above.
+- Remaining work and next action: Merge PR #328, then this branch. Next recommended task: SH-002/SH-003 (layout, the remaining P1 bugs), then SH-004.
+
