@@ -44,7 +44,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-006 entry below; `tests/verify-skyhawk-trig.cjs`; deployed, 2026-11-20 live site audit below |
 | SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
-| SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-009 entry below; `tests/verify-skyhawk-trig.cjs` |
+| SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Done | Claude (Opus 5.5) | 2026-11-20 final live audit below |
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below; deployed, 2026-11-20 live site audit below |
@@ -800,4 +800,44 @@ Copy the following structure and **append the completed entry at the very bottom
 - Implementation commit or PR: pending (this branch).
 - Task status and owner: SH-009 Verification, Claude (Opus 5.5). Close after deployment and a check in a browser with storage blocked (for example, Safari private browsing). SH-014 is Done.
 - Remaining work and next action: Commit and open a PR. Every planned task is now Done or in Verification. The remaining work is the human checks listed in the live audit entry (real phone and on-screen keyboard; a screen-reader pass), SH-012's owner closure, and a classroom pilot.
+
+### 2026-11-20 — Claude (Opus 5.5) — Final live audit; SH-009 closed
+
+- Entry type: Verification (deployment) and handoff.
+- Target: `https://andrewhvolk.github.io/SkyhawkTrig.html` at `main` `a742330` (PR #339). The Pages build reports `built a742330`, and the live file (86,235 bytes) matches `main` apart from line endings. Tools: headless Chrome via the chrome-devtools MCP and `curl`.
+- Lighthouse (navigation mode, mobile and desktop): Accessibility, Best Practices, SEO, and Agentic Browsing all 100; 51 audits passed, 0 failed. There were no console messages during any check below.
+- Mathematics: the live engine's answers for 500 seeds per skill (2,000 problems) matched an independent recomputation. That recomputation used half-up rounding, reversed return directions, and the tenths-precision descent loss. The SH-001 regression (125 mph / 1.4 h / S 30° W → 88, with 87 rejected) also holds.
+- Flows, scripted in the live page, with 0 failures:
+  - blank entries cost no attempt;
+  - wrong attempts get feedback;
+  - the worked solution appears only on request, followed by a fresh problem of the same skill;
+  - first-try success;
+  - guided completion is honest, with no "master" wording;
+  - checkpoint questions are independent and cover all four skills;
+  - results carry the practice-target wording (9 of 12, not met);
+  - three follow-ups left the frozen records unchanged;
+  - equivalent return bearings are accepted and the unreversed one is rejected;
+  - all four diagrams have accessible SVG and show unknowns;
+  - replay codes reproduce problems;
+  - saved progress is valid, with only the documented keys.
+
+  Reload and resume on this same build (checkpoint question 4, typed "7", 3 records) was verified right after deployment, in the post-merge check.
+- Keyboard: real key presses (Tab, Tab, Enter) started the guided flight with focus on the input. Typing a wrong value and pressing Enter gave "Attempt 1: not yet", with focus kept on the input. Backspace, the right value, and Enter gave "Correct on attempt 2, after using hints", with focus moved to the heading. A saved state correctly put "Resume: Checkpoint results" first in the Tab order.
+- Layout: the reachability and overlap audit (all guided screens plus checkpoint question and results) found 0 issues at 320×568, 390×844, 844×390 (mobile, touch), and 1366×768.
+- Reduced motion and dark mode: with both emulated, the plane and progress-fill transitions were `0s` and the course bar used its dark theme.
+- Blocked storage in a real browser, the remaining SH-009 criterion:
+  - With `localStorage` access throwing `SecurityError` before the page loads, the status read "Progress is not being saved…" at load, and a full 12-question checkpoint completed to results.
+  - With every write throwing `QuotaExceededError` (how older Safari private browsing behaves), the same message appeared and the full guided flight completed.
+
+  Neither case logged console errors. This was simulated in Chrome; Safari itself was not tested.
+- Delivery and links: one network request (the HTML). The page's only hrefs are `/courses/math130.html` and `/favicon.svg`, both 200. The course page links to `/SkyhawkTrig.html` and has the `sections-7-1-and-8-4` anchor. The live shared engine for `130Test3.html` (`?v=20261120-sh011`) matches `main`.
+- Task status: SH-009 is Done, because every criterion has been verified on the deployed page. Done overall: SH-001, 007, 008, 009, 010, 011, 013, 014.
+- Still in Verification, each needing a person rather than code:
+  - SH-002/SH-003: a real phone, including the on-screen keyboard;
+  - SH-004/SH-005/SH-006: a pass with a real screen reader (NVDA with Chrome, or VoiceOver);
+  - SH-012: owned by Codex; verified live and ready for its owner to close.
+- Recommended next steps, outside code:
+  - a small classroom pilot, to check the wording and whether the checkpoint target (10/12, 2/3 per skill) is set at the right level;
+  - a Safari and Firefox spot check.
+- New findings: none.
 
