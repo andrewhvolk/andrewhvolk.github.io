@@ -206,6 +206,29 @@ check('without ?problem= the page shows the welcome screen', () => {
     assert.equal((elements['modal-text'] || {}).innerHTML || '', '', 'welcome screen untouched');
 });
 
+// --- Layout guards (SH-002/SH-003). Browser viewport checks are recorded in the tracker. ---
+const css = html.slice(html.indexOf('<style>'), html.indexOf('</style>'));
+const rule = (selector) => {
+    // Find a top-level rule by its exact selector text and return its declarations.
+    const escaped = selector.replace(/[#.*+?^${}()|[\]\\]/g, '\\$&');
+    const m = css.match(new RegExp(String.raw`(?:^|\n)\s*${escaped}\s*\{([^}]*)\}`));
+    return m ? m[1] : '';
+};
+check('page can scroll vertically (no overflow: hidden or fixed 100vh on html/body)', () => {
+    const base = rule('body, html') + rule('html, body') + rule('body') + rule('html');
+    assert.doesNotMatch(base, /overflow\s*:\s*hidden/);
+    assert.doesNotMatch(base, /(^|[^-])height\s*:\s*100vh/);
+    assert.doesNotMatch(base, /width\s*:\s*100vw/, '100vw causes horizontal scroll next to a scrollbar');
+});
+check('progress bar sits in normal flow below the course navigation', () => {
+    assert.doesNotMatch(rule('#progress-container'), /position\s*:\s*(absolute|fixed)/);
+    assert.ok(html.indexOf('class="m130-topbar"') < html.indexOf('id="progress-container"'));
+});
+check('question panel is in normal flow so it can grow and scroll', () => {
+    assert.doesNotMatch(rule('#modal-overlay'), /position\s*:\s*(absolute|fixed)/);
+    assert.match(rule('#game-area'), /overflow(-x)?\s*:\s*(hidden|clip)/, 'scene decorations must not cause horizontal scroll');
+});
+
 report();
 function report() {
     let failed = 0;
