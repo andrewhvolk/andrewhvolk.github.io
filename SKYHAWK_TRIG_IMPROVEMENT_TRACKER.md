@@ -42,7 +42,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-004 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-005 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Open | Unassigned | Initial audit below |
-| SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Open | Unassigned | Initial audit below |
+| SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-007 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Open | Unassigned | Initial audit below |
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-010 entry below; `tests/verify-skyhawk-trig.cjs` |
@@ -512,4 +512,54 @@ Copy the following structure and **append the completed entry at the very bottom
 - Task status and owner: SH-013 Verification, Claude (Opus 5.5). Close after merge and deployment.
 - New findings: None.
 - Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-007 (bearing quadrants and equivalent bearings), which reopens the shared-engine decision, or SH-006 (diagrams).
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-007 varied quadrants and equivalent bearings
+
+- Entry type: Starting assessment, decision, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh007-bearings`, stacked on PR #333 (SH-013), which is stacked on PRs #332, #331, #330, and #329. None are merged yet.
+- Current status assessment: Nobody had claimed SH-007. Confirmed the audit finding on the current engine:
+  - every bearing problem was `S θ° W`;
+  - every return problem flew North then West, and its answer field was labelled `Bearing Angle S __° E`, so the student supplied only the angle;
+  - a compass heading or an equivalent quadrant form could not be entered.
+- Decision (shared engine, revisited from the SH-010 entry): Still not adopted. The page remains a single offline file. Its return answers are graded to the nearest degree, not to 0.1° with tolerance as in `math130-test3-skills.js`. However, the bearing input grammar now matches the shared engine's `bearingClose` parser: `N 35° E`, `N35E`, angles measured from the east–west axis such as `E 55° N` (angle at most 90), and compass headings from 0 to 360, compared as headings. A future merge can therefore share one parser.
+- Change (`SkyhawkTrig.html`):
+  - Directions (`ns`, `ew`) are now drawn for bearing and return problems after the existing numeric picks. Existing problem codes keep their speeds, times, and angles, and gain a direction. When omitted, `build()` defaults to the previous S…W (bearing) and North-then-West (return) cases.
+  - Bearing stage: the prompt, field labels, hints, and worked solution use the drawn quadrant, for example "N 30° E … How many miles North and East" with fields "North (miles)" and "East (miles)". The stage hint asks for positive distances, and a negated component gets the hint "Enter a positive distance: the field already names the direction." No signed-coordinate convention is used anywhere.
+  - Return stage:
+    - The legs fly toward any quadrant. The prompt asks for "the bearing to fly home" as a quadrant bearing or a compass heading.
+    - The stage hint says to reverse both outbound directions without naming them, and the field is a text box labelled "Return bearing (degrees)".
+    - Correct answers are the rounded quadrant bearing or any equivalent form: compact, angle from the east–west axis, or compass heading. A heading equal to the rounded exact heading is also accepted, which keeps half-degree cases consistent.
+    - Targeted hints cover:
+      - the outbound bearing, or only one direction reversed (including a heading equal to that bearing): reverse both directions;
+      - the complementary angle: measure from the North–South axis, with tan θ = {east–west leg} ÷ {north–south leg};
+      - radian mode;
+      - an unrounded angle;
+      - an answer within 1°.
+    - Malformed entries (`N 95 W`, `400`, `-20`, `NE 37`, free text) get an inline message and cost no attempt.
+    - The worked solution names the return directions and gives the equivalent compass heading.
+  - Page: bearing fields render as `type="text"` (no autocomplete, capitalized), with a matching text-input style (9em, 4.6:1 border). The worked-solution summary now HTML-escapes typed entries, because bearing entries are free text.
+- Tests and evidence:
+  - `tests/verify-skyhawk-trig.cjs` passes 59/59. The seven new SH-007 checks failed before the change, except the code-stability check, which is designed to pass both before and after. Three existing return checks failed until they were updated for string answers. The new checks cover:
+    - all four quadrants for both stages (400 seeds);
+    - unchanged numbers for existing problem codes;
+    - direction-named, positive components;
+    - accepted equivalent forms;
+    - each targeted hint;
+    - malformed-entry messages;
+    - text entry through the page.
+  - An exhaustive check covers all 7,744 return parameter sets (16 speeds × 11 × 11 leg times × 4 quadrants). It compares each answer against an independently computed reversed quadrant bearing, confirms the compact, east–west-axis, and heading forms are accepted, and confirms the outbound bearing is rejected.
+  - The "no hint reveals an answer" check now also asserts that hints do not reveal the return directions or angle.
+  - All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, and `git diff --check`.
+  - Browser check (built-in Chromium pane, typing) on `?problem=return-5` (outbound South then East):
+    - `171` / `S 28 E` kept the correct distance and gave the reverse-both-directions hint, with focus on the bearing;
+    - replacing the bearing with `332` and pressing Enter gave "Correct on attempt 2, after using hints";
+    - a markup-like entry was rejected as an invalid bearing;
+    - the worked solution listed the entries (escaped) and ended "S 37° E (equivalently, a compass heading of 143°)";
+    - there were no console errors.
+  - The 320×568 layout audit found 0 issues in the return question and feedback states; the bearing box is 164px wide. Lighthouse (mobile snapshot, feedback state) scored 100 for accessibility; the only failure is the SEO meta description already noted.
+- Not performed: real devices, a screen reader, and deployment. There is no separate guided/independent mode yet (SH-008). The direction-free return entry applies to every return problem.
+- New findings: None.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-007 Verification, Claude (Opus 5.5). Close after merge and deployment.
+- Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-006 (diagrams; quadrant data now exists for the bearing and return sketches), then SH-008 and SH-009.
 
