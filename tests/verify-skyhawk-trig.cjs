@@ -193,17 +193,158 @@ check('?problem= opens that exact problem at its stage and shows the code', () =
 check('page grades through the engine (regression case accepted, 87 rejected)', () => {
     const p = E.build('bearing', { speed: 125, time: 1.4, angle: 30 }, 5);
     for (const [west, ok] of [['88', true], ['87', false]]) {
-        const { page, elements } = loadPage('');
-        Object.assign(page.data, plain(p));
-        elements.inp1 = { value: '152', style: {} }; elements.inp2 = { value: west, style: {} };
+        const { page, el } = pageWith(p); // defined with the SH-004 page checks below (hoisted)
+        el('inp1').value = '152'; el('inp2').value = west;
         page.verifyAnswer();
-        assert.equal(/Correct/.test(elements['modal-title'].innerHTML), ok, `west ${west}`);
+        assert.equal(/Correct/.test(el('modal-title').innerHTML), ok, `west ${west}`);
     }
 });
 check('without ?problem= the page shows the welcome screen', () => {
     const { page, elements } = loadPage('?problem=nonsense-!!');
     assert.equal(page.stage, 0);
     assert.equal((elements['modal-text'] || {}).innerHTML || '', '', 'welcome screen untouched');
+});
+
+// --- SH-004: validation, per-part feedback, targeted hints, attempt honesty ---
+const bearingCase = () => E.build('bearing', { speed: 125, time: 1.4, angle: 30 }, 7);
+const hints = (d) => plain(d.parts.map((p) => p.hint));
+check('validate flags blank, non-numeric, and nonfinite entries per field', () => {
+    const p = bearingCase();
+    const [blank, ok] = E.validate(p, ['', '88']);
+    assert.match(blank, /South/); assert.equal(ok, null);
+    for (const bad of ['abc', '   ', 'Infinity', '1e400', '12,5', '5 miles']) assert.ok(E.validate(p, [bad, '88'])[0], bad);
+    assert.deepEqual(plain(E.validate(p, ['152', '88.0'])), [null, null]);
+    assert.deepEqual(plain(E.validate(p, [' -5 ', '0'])), [null, null], 'finite numbers are valid input even when wrong');
+});
+check('diagnose keeps a correct part and targets only the wrong part', () => {
+    const d = E.diagnose(bearingCase(), ['152', '90']);
+    assert.equal(d.correct, false);
+    assert.deepEqual(plain(d.parts.map((p) => p.correct)), [true, false]);
+    assert.equal(d.parts[0].hint, null);
+    assert.ok(d.parts[1].hint && d.parts[1].hint.length > 20);
+});
+check('sine/cosine swap is identified in each component', () => {
+    const h = hints(E.diagnose(bearingCase(), ['88', '152']));
+    assert.match(h[0], /cosine/i); assert.match(h[1], /sine/i);
+});
+check('using the total distance as a component is identified', () => {
+    assert.match(hints(E.diagnose(bearingCase(), ['175', '88']))[0], /total distance/i);
+});
+check('unrounded and mis-rounded answers get rounding hints', () => {
+    const h = hints(E.diagnose(bearingCase(), ['151.55', '87.5']));
+    assert.match(h[0], /round/i); assert.match(h[1], /round/i);
+    assert.match(hints(E.diagnose(bearingCase(), ['152', '87']))[1], /round/i);
+});
+check('climb: hours instead of minutes and cosine instead of sine', () => {
+    const p = E.build('elevation', { angle: 6, speed: 80, alt: 1.0 });
+    assert.match(hints(E.diagnose(p, ['0.12']))[0], /hours/i);
+    assert.match(hints(E.diagnose(p, ['0.75']))[0], /sin/i);
+});
+check('descent: minutes used as hours and distance instead of altitude', () => {
+    const p = E.build('depression', { speed: 90, angle: 5, timeMins: 5 });
+    assert.match(hints(E.diagnose(p, ['39.2']))[0], /60/);
+    assert.match(hints(E.diagnose(p, ['7.5']))[0], /sin/i);
+});
+check('return: added legs, complementary angle, and radian mode', () => {
+    const p = E.build('return', { speed: 120, timeN: 0.8, timeW: 0.6 });
+    assert.match(hints(E.diagnose(p, ['168', '37']))[0], /Pythagorean/i);
+    assert.match(hints(E.diagnose(p, ['120', '53']))[1], /West distance ÷ North distance/i);
+    assert.match(hints(E.diagnose(p, ['120', '0.64']))[1], /degree mode/i);
+});
+check('diagnose agrees with grade, and hints never reveal an answer', () => {
+    const tenth = (v) => Math.round(v * 10) / 10;
+    for (const type of SKILLS) for (let seed = 0; seed < 3000; seed++) {
+        const p = E.generate(type, seed), answers = ans(p);
+        const right = E.diagnose(p, answers.map(String));
+        assert.equal(right.correct, true, `${p.code} correct answers`);
+        assert.ok(right.parts.every((x) => x.hint === null));
+        const offsets = [7, -3, 0.5, 1, 40];
+        const wrong = answers.map((a, i) => String(tenth(a + offsets[(seed + i) % offsets.length] * (type === 'depression' ? 0.1 : 1))));
+        const d = E.diagnose(p, wrong);
+        assert.equal(d.correct, E.grade(p, wrong).correct, `${p.code} ${wrong}`);
+        d.parts.forEach((x, i) => {
+            if (x.correct) return;
+            assert.ok(typeof x.hint === 'string' && x.hint.length > 0, `${p.code}: missing hint`);
+            const answerPattern = new RegExp(`(^|[^\\d.])${String(answers[i]).replace('.', '\\.')}([^\\d]|$)`);
+            assert.doesNotMatch(x.hint, answerPattern, `${p.code}: hint reveals ${answers[i]}`);
+        });
+    }
+});
+
+// Page flow: attempt -> per-part feedback -> retry / explicit worked solution -> fresh problem.
+function pageWith(problem) {
+    const elements = {};
+    const el = (id) => (elements[id] ||= {
+        id, value: '', style: {}, innerHTML: '', innerText: '', className: '', attrs: {},
+        setAttribute(k, v) { this.attrs[k] = v; }, removeAttribute(k) { delete this.attrs[k]; }, focus() { elements.__focused = id; },
+    });
+    const context = { Math, document: { getElementById: el }, console, location: { search: '' }, URLSearchParams, __problem: problem };
+    vm.createContext(context);
+    vm.runInContext(script + ';currentStageIndex=SkyhawkEngine.SKILLS.indexOf(__problem.type);startProblem(__problem);' +
+        'this.page={verifyAnswer,showSolution,loadStage,get attempt(){return attemptState},get data(){return currentData}};', context);
+    return { page: context.page, el, elements };
+}
+const text = (e) => String(e.innerHTML || e.innerText || '');
+check('blank entry shows an inline message, keeps the other entry, and costs no attempt', () => {
+    const { page, el, elements } = pageWith(bearingCase());
+    el('inp1').value = ''; el('inp2').value = '88';
+    page.verifyAnswer();
+    assert.equal(page.attempt.count, 0);
+    assert.notEqual(el('solution-container').style.display, 'block', 'solution must not be revealed');
+    assert.match(text(el('inp1-feedback')), /Enter a number/);
+    assert.equal(el('inp2').value, '88');
+    assert.match(text(el('inputs-container')), /id="inp1"/, 'inputs are not cleared');
+    assert.equal(el('inp1').attrs['aria-invalid'], 'true');
+    assert.equal(elements.__focused, 'inp1', 'focus moves to the first entry to fix');
+});
+check('partly correct attempt keeps both entries and marks each part in text', () => {
+    const { page, el } = pageWith(bearingCase());
+    el('inp1').value = '152'; el('inp2').value = '90';
+    page.verifyAnswer();
+    assert.equal(page.attempt.count, 1);
+    assert.equal(el('inp1').value, '152'); assert.equal(el('inp2').value, '90');
+    assert.match(text(el('inputs-container')), /id="inp2"/);
+    assert.match(text(el('inp1-feedback')), /Correct/);
+    assert.match(text(el('inp2-feedback')), /Needs attention/);
+    assert.notEqual(el('solution-container').style.display, 'block');
+    assert.doesNotMatch(text(el('modal-title')), /Correct/);
+    assert.match(text(el('btn-container')), /Check Again/);
+    assert.match(text(el('btn-container')), /Show Worked Solution/);
+    assert.equal(page.attempt.assisted, true, 'a targeted hint was shown');
+});
+check('correct retry is reported as a later, assisted attempt', () => {
+    const { page, el } = pageWith(bearingCase());
+    el('inp1').value = '152'; el('inp2').value = '90'; page.verifyAnswer();
+    el('inp2').value = '88'; page.verifyAnswer();
+    assert.match(text(el('modal-title')), /Correct/);
+    assert.match(text(el('modal-text')), /attempt 2/i);
+    assert.match(text(el('modal-text')), /hint/i);
+    assert.equal(page.attempt.firstTry, false);
+    page.verifyAnswer(); page.verifyAnswer();
+    assert.equal(page.attempt.count, 2, 'repeat submissions after solving are ignored');
+});
+check('first-attempt success is recorded as unassisted', () => {
+    const { page, el } = pageWith(bearingCase());
+    el('inp1').value = '152'; el('inp2').value = '88.0'; page.verifyAnswer();
+    assert.equal(page.attempt.firstTry, true); assert.equal(page.attempt.assisted, false);
+    assert.match(text(el('modal-text')), /first attempt/i);
+});
+check('worked solution is explicit, marks assistance, and leads to a fresh problem', () => {
+    const p = bearingCase();
+    const { page, el } = pageWith(p);
+    el('inp1').value = '100'; el('inp2').value = '90'; page.verifyAnswer();
+    page.showSolution();
+    assert.equal(el('solution-container').style.display, 'block');
+    assert.ok(text(el('solution-container')).includes('88 miles'));
+    assert.match(text(el('modal-text')), /100/, 'student entries remain visible for comparison');
+    assert.equal(page.attempt.solutionViewed, true); assert.equal(page.attempt.assisted, true);
+    assert.match(text(el('btn-container')), /Fresh/);
+    el('inp1').value = '152'; el('inp2').value = '88'; page.verifyAnswer();
+    assert.equal(page.attempt.count, 1, 'answers after viewing the solution do not count');
+    page.loadStage();
+    assert.equal(page.data.type, 'bearing');
+    assert.notEqual(page.data.seed, p.seed);
+    assert.equal(page.attempt.count, 0); assert.equal(page.attempt.assisted, false);
 });
 
 // --- Layout guards (SH-002/SH-003). Browser viewport checks are recorded in the tracker. ---

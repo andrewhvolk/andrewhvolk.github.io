@@ -39,7 +39,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-001 | P1 | Correct rounding and answer grading at numerical boundaries | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 handoff below; `tests/verify-skyhawk-trig.cjs` |
 | SH-002 | P1 | Make controls reachable on small screens and in landscape | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
 | SH-003 | P1 | Prevent navigation from covering flight progress | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
-| SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Open | Unassigned | Initial audit below |
+| SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-004 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Open | Unassigned | Initial audit below |
 | SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Open | Unassigned | Initial audit below |
 | SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Open | Unassigned | Initial audit below |
@@ -48,6 +48,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-010 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
 | SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below |
+| SH-013 | P2 | Show one-decimal flight times consistently (prompts can say "for 1 hours") | 4 | Open | Unassigned | 2026-11-20 SH-004 entry below |
 
 ## Product scope and constraints
 
@@ -404,4 +405,42 @@ Copy the following structure and **append the completed entry at the very bottom
 - Implementation commit or PR: pending (this branch).
 - Task status and owner: SH-002 and SH-003 Verification, Claude (Opus 5.5). Close after a real-device or mobile-keyboard check and deployment.
 - Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-004 (blank and partly correct answers), then the rest of SH-005.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-004 correction loop; new SH-013
+
+- Entry type: Starting assessment, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh004-feedback`, stacked on `840866e` (PR #330, SH-002/SH-003), which is stacked on PR #329. Neither is merged yet.
+- Current status assessment: Read the latest entries. Nobody had claimed SH-004, and Codex's PR #329 reconciliation entries do not touch it. Reproduced both audit findings in a Node VM against the current page with `bearing` 125 mph / 1.4 h / S 30° W:
+  - Submitting blank entries switched to "Math Review", showed the full solution, and removed the inputs.
+  - Submitting `152`/`90` (South correct) did the same, with only the generic "see where you made a mistake" text.
+- Change (`SkyhawkTrig.html`), following the plan's sequence: attempt → feedback on each part → targeted hint → retry → optional worked solution → fresh problem.
+  - Engine:
+    - Each field now carries its exact value, precision, unit, a list of recognizable mistakes (the value an error produces plus a hint naming that error), and a general retry hint.
+    - `validate()` rejects blank, non-numeric (e.g. `12,5`, `5 miles`), and nonfinite entries.
+    - `diagnose()` grades each part. Hints are chosen in this order: a recognized mistake, then a rounding hint (unrounded value, or within one unit; halves round up), then the retry hint.
+    - Recognized mistakes include sine/cosine swaps and total distance used as a component (bearing); hours instead of minutes, cosine, airspeed instead of vertical speed, and distance instead of time (climb); minutes used as hours and distance instead of altitude lost (descent); and added legs, the complementary angle, and radian mode (return).
+    - `grade()` now delegates to `diagnose()`. No hint contains an answer value.
+  - Page:
+    - Invalid entries get an inline message next to the field (`aria-invalid` and `aria-describedby` set; focus moves to the field). No attempt is counted, and the solution stays hidden.
+    - A graded wrong attempt keeps every entry. Each part is marked in text ("✓ Correct. Keep this value." or "✗ Needs attention." plus its hint), and color only supplements the text. A status line reports, for example, "Attempt 1: 1 of 2 parts correct". Focus moves to the first wrong part, and the buttons become Check Again and Show Worked Solution.
+    - The worked solution appears only on request. It lists the student's last answers for comparison and offers only "Try a Fresh Problem" (a new seed for the same skill).
+    - Each problem has an attempt record (`count`, `assisted`, `solutionViewed`, `solved`, `firstTry`). Showing a targeted hint or the solution marks the problem assisted. Submissions after solving or viewing the solution are ignored. The success screen states "Correct on your first attempt." or "Correct on attempt N, after using hints."
+    - The welcome text now describes this flow.
+  - Not built: there are no aggregate counters yet (SH-008), so "retries do not inflate counts" is enforced through the per-problem record and tests only.
+- Tests and evidence:
+  - `tests/verify-skyhawk-trig.cjs` passes 39/39. The 14 new checks failed before implementation. They cover validation, per-part diagnosis, each recognized mistake, and agreement between `diagnose` and `grade`. They also confirm, over 3,000 seeds per skill with wrong entries, that no hint reveals an answer. Page-flow checks cover blank entries, partly correct attempts, assisted retries, first-attempt success, ignored repeat submissions, and the explicit solution followed by a fresh problem. The older page grading test now uses the richer DOM stub.
+  - All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, and `git diff --check`.
+  - Browser check in the built-in Chromium pane on `?problem=bearing-9ix`, with clicks and typing:
+    - a blank Submit showed "Enter a number for South.", focused South, and counted no attempt;
+    - `126`/`130` kept both entries, marked South correct and West as needing attention, and focused West;
+    - correcting West to `122` and choosing Check Again gave "Correct on attempt 2, after using hints.";
+    - the worked solution listed the student's entries and offered a fresh problem.
+
+    There were no console errors. The layout audit at 320×568 found no unreachable controls and no horizontal scroll in the feedback and worked-solution states.
+  - Not performed: screen-reader testing, real devices, and deployment.
+- New finding SH-013 (P2, wording): Flight times are drawn as tenths but displayed as plain numbers. Whole-hour values therefore read "for 1 hours" (about 6% of bearing prompts: 231 of 4,000 seeds) and appear as "1 hrs" in solutions. This predates SH-010; the old `parseFloat(toFixed(1))` behaved the same way. Fix by formatting times with one decimal (or singular/plural wording) in prompts and solutions.
+- Related: The green "Show Worked Solution" button reuses `.secondary` (white on `#4CAF50`, about 2.78:1), which is still SH-005. Enter-to-submit is also still SH-005.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-004 Verification, Claude (Opus 5.5). Close after a screen-reader check and deployment. SH-013 Open, Unassigned.
+- Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-005 (Enter key, live announcements, button contrast, reduced motion). Then SH-013 is a quick wording fix.
 

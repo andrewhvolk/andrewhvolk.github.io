@@ -211,6 +211,31 @@
             display: block;
         }
 
+        /* Per-part feedback: always stated in text, color is only a supplement */
+        .field-feedback {
+            flex-basis: 100%;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .field-feedback:empty {
+            display: none;
+        }
+
+        .field-feedback.is-correct {
+            color: #1B5E20;
+        }
+
+        .field-feedback.is-wrong,
+        .field-feedback.is-invalid {
+            color: #B71C1C;
+        }
+
+        input[aria-invalid="true"] {
+            border-color: #B71C1C;
+        }
+
         .problem-code {
             display: block;
             margin-top: 10px;
@@ -265,7 +290,7 @@
                     <li>☑ Stage 3: Depression (Descent altitude loss)</li>
                     <li>☑ Stage 4: Return (Distance & Bearing to origin)</li>
                 </ul>
-                <b>Important:</b> Always round to the designated precision. If you miss a calculation, ATC will show you the math and give you a new heading to try.
+                <b>Important:</b> Always round to the designated precision. If a calculation is off, ATC will mark the part that needs attention and give you a hint. Fix it and check again, or ask for the worked solution and try a fresh problem.
             </div>
             
             <div id="solution-container" class="solution-box"></div>
@@ -320,13 +345,28 @@
             return: (r) => ({ speed: int(r, 105, 120), timeN: tenths(r, 0.5, 1.5), timeW: tenths(r, 0.5, 1.5) }),
         };
 
+        // An answer field: the rounded answer plus what diagnose() needs to give targeted feedback.
+        // `mistakes` pairs the value a common error produces with a hint that names the error
+        // without revealing the answer.
+        const field = (id, label, exact, places, unit, mistakes, retryHint, step) => ({
+            id, label, answer: roundTo(exact, places), exact, places, unit,
+            mistakes: mistakes.map(([value, hint]) => ({ value, hint })), retryHint, ...(step ? { step } : {}),
+        });
+        const USE_SIN_CLIMB = 'The altitude gained is opposite the climb angle, so the flight-path distance is altitude ÷ sin(angle). Check that you used sine, not cosine.';
+        const USE_SIN_DESCENT = 'That is about the distance flown along the descent path. Altitude lost is opposite the depression angle: multiply the distance by sin(angle).';
+
         const builders = {
             elevation({ angle, speed, alt }) {
                 const dist = alt / Math.sin(rad(angle)), hours = dist / speed, minutes = hours * 60, ans = roundTo(minutes);
                 return {
                     prompt: `You establish a climb at an angle of ${angle}&deg; at an average climb speed of ${speed} mph. How long will it take for the Skyhawk to reach an altitude of ${alt} miles?`,
                     hint: 'Hint: Find distance on the hypotenuse first. Round to the nearest minute.',
-                    fields: [{ id: 'inp1', label: 'Time (minutes)', answer: ans }],
+                    fields: [field('inp1', 'Time (minutes)', minutes, 0, 'minute', [
+                        [hours, 'This looks like the time in hours. Multiply by 60 to convert it to minutes.'],
+                        [alt / Math.cos(rad(angle)) / speed * 60, USE_SIN_CLIMB],
+                        [alt / speed * 60, USE_SIN_CLIMB],
+                        [dist, 'That is the flight-path distance in miles. Divide it by the speed to get hours, then convert to minutes.'],
+                    ], 'Find the flight-path distance (altitude ÷ sin of the climb angle), divide by the speed to get hours, then multiply by 60.')],
                     solutionHtml: `
                 <b>1. Find diagonal distance flown (d):</b><br>
                 sin(${angle}&deg;) = Opposite / Hypotenuse<br>
@@ -344,7 +384,16 @@
                 return {
                     prompt: `You fly at ${speed} mph on a bearing of S ${angle}&deg; W for ${time} hours. How many miles South and West have you traveled?`,
                     hint: 'Hint: Distance = speed &times; time. Use sine and cosine. Round to the nearest mile.',
-                    fields: [{ id: 'inp1', label: 'South (miles)', answer: ans1 }, { id: 'inp2', label: 'West (miles)', answer: ans2 }],
+                    fields: [
+                        field('inp1', 'South (miles)', south, 0, 'mile', [
+                            [west, 'The bearing angle is measured from the North–South axis, so South is the adjacent side: use cosine for South and sine for West.'],
+                            [dist, 'That is the total distance flown. Multiply it by cos(angle) to get the South component.'],
+                        ], 'South = (speed × time) × cos(angle), because the bearing angle is measured from South.'),
+                        field('inp2', 'West (miles)', west, 0, 'mile', [
+                            [south, 'West is opposite the bearing angle: use sine for West and cosine for South.'],
+                            [dist, 'That is the total distance flown. Multiply it by sin(angle) to get the West component.'],
+                        ], 'West = (speed × time) × sin(angle).'),
+                    ],
                     solutionHtml: `
                 <b>1. Find total distance:</b><br>
                 Distance = ${speed} mph * ${time} hrs = ${dist.toFixed(2)} miles.<br>
@@ -361,7 +410,11 @@
                 return {
                     prompt: `You begin a descent at ${speed} mph with an angle of depression of ${angle}&deg;. How much altitude will you lose in ${timeMins} minutes?`,
                     hint: 'Hint: Convert minutes to hours first. Round to the nearest tenth of a mile.',
-                    fields: [{ id: 'inp1', label: 'Altitude lost (miles)', answer: ans, step: '0.1' }],
+                    fields: [field('inp1', 'Altitude lost (miles)', lost, 1, 'tenth of a mile', [
+                        [speed * timeMins * Math.sin(rad(angle)), 'It looks like the minutes were used as hours. Divide the minutes by 60 before multiplying by the speed.'],
+                        [dist, USE_SIN_DESCENT],
+                        [dist * Math.cos(rad(angle)), USE_SIN_DESCENT],
+                    ], 'Distance = speed × (minutes ÷ 60); altitude lost = distance × sin(depression angle).', '0.1')],
                     solutionHtml: `
                 <b>1. Convert time to hours:</b><br>
                 ${timeMins} mins / 60 = ${hours.toFixed(4)} hours.<br>
@@ -379,7 +432,15 @@
                 return {
                     prompt: `You divert, flying North for ${timeN} hours and West for ${timeW} hours at ${speed} mph. Find the direct distance back to your starting point and the bearing you should take.`,
                     hint: 'Hint: Use Pythagorean theorem for distance. Return bearing requires switching directions (South and East). Round distance to nearest mile, angle to nearest degree.',
-                    fields: [{ id: 'inp1', label: 'Distance (miles)', answer: ans1 }, { id: 'inp2', label: 'Bearing Angle S __&deg; E (degrees)', answer: ans2 }],
+                    fields: [
+                        field('inp1', 'Distance (miles)', total, 0, 'mile', [
+                            [north + west, 'The two legs meet at a right angle, so combine them with the Pythagorean theorem instead of adding them.'],
+                        ], 'Distance = √(North² + West²), where each leg is speed × time.'),
+                        field('inp2', 'Bearing Angle S __&deg; E (degrees)', angle, 0, 'degree', [
+                            [90 - angle, 'Measure the return bearing from the North–South axis: tan θ = West distance ÷ North distance.'],
+                            [Math.atan2(west, north), 'This looks like an angle in radians. Set your calculator to degree mode.'],
+                        ], 'θ = arctan(West distance ÷ North distance); the return bearing is S θ° E.'),
+                    ],
                     solutionHtml: `
                 <b>1. Find individual distances:</b><br>
                 North = ${speed} * ${timeN} = ${north.toFixed(1)} mi.<br>
@@ -425,24 +486,64 @@
             return Math.floor(Math.random() * SEED_LIMIT);
         }
 
-        // Each entry must be a nonblank number equal to the rounded answer ("88" and "88.0" both match).
-        function grade(problem, entries) {
-            const parts = problem.fields.map((f, i) => {
-                const raw = entries[i];
-                if (typeof raw !== 'string' || raw.trim() === '') return false;
-                const v = Number(raw.trim());
-                return Number.isFinite(v) && v === f.answer;
+        // Per field: null when the entry is a single finite number, otherwise a message to show
+        // next to it. Invalid entries are never graded, so they cost no attempt.
+        function validate(problem, entries) {
+            return problem.fields.map((f, i) => {
+                const raw = typeof entries[i] === 'string' ? entries[i].trim() : '';
+                const name = f.label.replace(/\s*\([^)]*\)$/, '');
+                if (raw === '') return `Enter a number for ${name}.`;
+                if (!/^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(raw) || !Number.isFinite(Number(raw))) {
+                    return `Enter ${name} as a single number, such as 12 or 3.5.`;
+                }
+                return null;
             });
-            return { parts, correct: parts.every(Boolean) };
         }
 
-        return { SKILLS, build, generate, parseCode, newSeed, grade, roundTo, formatForRounding, mulberry32 };
+        // The hint for a wrong (but valid) entry: a recognized mistake first, then rounding, then a general retry hint.
+        function hintFor(f, v) {
+            const unit = 10 ** -f.places, eps = 1e-9;
+            for (const m of f.mistakes) {
+                if (roundTo(m.value, f.places) === f.answer) continue; // indistinguishable from the right answer
+                for (let d = f.places; d <= 3; d++) if (roundTo(m.value, d) === v) return m.hint;
+            }
+            if (Math.abs(v - f.exact) < unit / 2 - eps) return `Round your answer to the nearest ${f.unit}.`;
+            if (Math.abs(v - f.answer) <= unit + eps) {
+                return `Close. Keep full precision until the final step, then round to the nearest ${f.unit} (halves round up).`;
+            }
+            return f.retryHint;
+        }
+
+        // Grades each part separately. Correct parts get no hint; others get a targeted one.
+        function diagnose(problem, entries) {
+            const invalid = validate(problem, entries);
+            const parts = problem.fields.map((f, i) => {
+                if (invalid[i]) return { correct: false, hint: invalid[i] };
+                const v = Number(entries[i].trim());
+                return v === f.answer ? { correct: true, hint: null } : { correct: false, hint: hintFor(f, v) };
+            });
+            return { parts, correct: parts.every((p) => p.correct) };
+        }
+
+        // Each entry must be a single number equal to the rounded answer ("88" and "88.0" both match).
+        function grade(problem, entries) {
+            const d = diagnose(problem, entries);
+            return { parts: d.parts.map((p) => p.correct), correct: d.correct };
+        }
+
+        return { SKILLS, build, generate, parseCode, newSeed, validate, diagnose, grade, roundTo, formatForRounding, mulberry32 };
     })();
     // </skyhawk-engine>
 
     // --- Game State ---
     let currentStageIndex = 0;
     let currentData = {};
+
+    // Per-problem attempt record. Only graded submissions count; invalid entries and anything
+    // submitted after solving or viewing the worked solution do not. Seeing a targeted hint
+    // or the worked solution marks the problem as assisted.
+    const newAttempt = () => ({ count: 0, assisted: false, solutionViewed: false, solved: false, firstTry: false, entries: [] });
+    let attemptState = newAttempt();
 
     // Define the sequence of question types and their visual animations
     const stageDefinitions = [
@@ -483,19 +584,24 @@
 
         updateProgress();
         const type = stageDefinitions[currentStageIndex].type;
-        currentData = SkyhawkEngine.generate(type, seed === undefined ? SkyhawkEngine.newSeed() : seed);
-        renderStage(false);
+        startProblem(SkyhawkEngine.generate(type, seed === undefined ? SkyhawkEngine.newSeed() : seed));
+    }
+
+    function startProblem(problem) {
+        currentData = problem;
+        attemptState = newAttempt();
+        renderStage();
     }
 
     const problemCodeHtml = () => currentData.code
         ? `<span class="problem-code">Problem code: <a href="?problem=${currentData.code}">${currentData.code}</a></span>`
         : '';
 
-    function renderStage(showingSolution) {
+    function renderStage() {
         const def = stageDefinitions[currentStageIndex];
 
         document.getElementById("modal-title").innerHTML = def.title;
-        document.getElementById("solution-container").style.display = showingSolution ? "block" : "none";
+        document.getElementById("solution-container").style.display = "none";
         document.getElementById("error-msg").innerText = "";
 
         const plane = document.getElementById("plane");
@@ -507,37 +613,93 @@
         const btnContainer = document.getElementById("btn-container");
         const textElem = document.getElementById("modal-text");
 
-        if (showingSolution) {
-            document.getElementById("modal-title").innerHTML = `<span style="color:#D32F2F;">Math Review</span>`;
-            textElem.innerHTML = "Review the breakdown below to see where you made a mistake." + problemCodeHtml();
-            document.getElementById("solution-container").innerHTML = currentData.solutionHtml;
-            inputsContainer.innerHTML = "";
-            btnContainer.innerHTML = `<button onclick="loadStage()">Try Another Example</button>`;
-            return;
-        }
-
         textElem.innerHTML = currentData.prompt + `<br><br><span class='math-hint'>${currentData.hint}</span>` + problemCodeHtml();
         inputsContainer.innerHTML = currentData.fields.map((f) => `
                 <div class="input-group">
                     <label for="${f.id}">${f.label}:</label>
-                    <input type="number" id="${f.id}"${f.step ? ` step="${f.step}"` : ''} />
+                    <input type="number" id="${f.id}" aria-describedby="${f.id}-feedback"${f.step ? ` step="${f.step}"` : ''} />
+                    <div class="field-feedback" id="${f.id}-feedback" aria-live="polite"></div>
                 </div>`).join('');
 
         btnContainer.innerHTML = `<button onclick="verifyAnswer()">Submit Calculation</button>`;
     }
 
+    // Show a message beside each field (state: 'correct', 'wrong', 'invalid', or null to clear).
+    function showFieldFeedback(items) {
+        currentData.fields.forEach((f, i) => {
+            const item = items[i], box = document.getElementById(`${f.id}-feedback`), input = document.getElementById(f.id);
+            box.className = item ? `field-feedback is-${item.state}` : 'field-feedback';
+            box.innerHTML = item ? item.text : '';
+            if (item && item.state !== 'correct') input.setAttribute('aria-invalid', 'true');
+            else input.removeAttribute('aria-invalid');
+        });
+    }
+
     function verifyAnswer() {
+        if (attemptState.solved || attemptState.solutionViewed) return;
         const entries = currentData.fields.map((f) => document.getElementById(f.id).value);
-        if (SkyhawkEngine.grade(currentData, entries).correct) {
-            showSuccessScreen();
-        } else {
-            renderStage(true); // Show math review
+        const status = document.getElementById("error-msg");
+
+        // Invalid entries get an inline message and are not graded, so no attempt is used.
+        const invalid = SkyhawkEngine.validate(currentData, entries);
+        if (invalid.some(Boolean)) {
+            showFieldFeedback(invalid.map((msg) => msg && { state: 'invalid', text: msg }));
+            status.innerText = "Fix the marked entry before checking. This did not count as an attempt.";
+            document.getElementById(currentData.fields[invalid.findIndex(Boolean)].id).focus();
+            return;
         }
+
+        attemptState.count++;
+        attemptState.entries = entries;
+        const result = SkyhawkEngine.diagnose(currentData, entries);
+        if (result.correct) {
+            attemptState.solved = true;
+            attemptState.firstTry = attemptState.count === 1 && !attemptState.assisted;
+            showSuccessScreen();
+            return;
+        }
+
+        // Keep every entry in place, confirm correct parts, and give a targeted hint for the rest.
+        attemptState.assisted = true;
+        showFieldFeedback(result.parts.map((p) => p.correct
+            ? { state: 'correct', text: '✓ Correct. Keep this value.' }
+            : { state: 'wrong', text: `✗ Needs attention. ${p.hint}` }));
+        const right = result.parts.filter((p) => p.correct).length, total = result.parts.length;
+        status.innerText = total > 1
+            ? `Attempt ${attemptState.count}: ${right} of ${total} parts correct. Revise the marked part and check again.`
+            : `Attempt ${attemptState.count}: not yet. Revise your answer and check again.`;
+        document.getElementById("btn-container").innerHTML = `
+            <button onclick="verifyAnswer()">Check Again</button>
+            <button class="secondary" onclick="showSolution()">Show Worked Solution</button>`;
+        const firstWrong = currentData.fields[result.parts.findIndex((p) => !p.correct)];
+        document.getElementById(firstWrong.id).focus();
+    }
+
+    // The worked solution is shown only on request and is followed by a fresh problem of the same skill.
+    function showSolution() {
+        attemptState.assisted = true;
+        attemptState.solutionViewed = true;
+        const yours = currentData.fields.map((f, i) => {
+            const v = Number(attemptState.entries[i]);
+            return `${f.label}: ${attemptState.entries.length && Number.isFinite(v) ? v : '(none)'}`;
+        }).join('; ');
+        document.getElementById("modal-title").innerHTML = "Worked Solution";
+        document.getElementById("modal-text").innerHTML =
+            `Your last answers: ${yours}. Compare each step with your work, then try a fresh problem of this type.` + problemCodeHtml();
+        const solution = document.getElementById("solution-container");
+        solution.innerHTML = currentData.solutionHtml;
+        solution.style.display = "block";
+        document.getElementById("inputs-container").innerHTML = "";
+        document.getElementById("error-msg").innerText = "";
+        document.getElementById("btn-container").innerHTML = `<button onclick="loadStage()">Try a Fresh Problem</button>`;
     }
 
     function showSuccessScreen() {
-        document.getElementById("modal-title").innerHTML = `<span style="color:#388E3C;">Calculation Correct!</span>`;
-        document.getElementById("modal-text").innerHTML = "Great job! Your calculations are spot on.";
+        const record = attemptState.firstTry
+            ? "Correct on your first attempt."
+            : `Correct on attempt ${attemptState.count}${attemptState.assisted ? ", after using hints" : ""}.`;
+        document.getElementById("modal-title").innerHTML = `<span style="color:#2E7D32;">Calculation Correct!</span>`;
+        document.getElementById("modal-text").innerHTML = `Great job! ${record}`;
         document.getElementById("inputs-container").innerHTML = "";
         document.getElementById("error-msg").innerText = "";
 
