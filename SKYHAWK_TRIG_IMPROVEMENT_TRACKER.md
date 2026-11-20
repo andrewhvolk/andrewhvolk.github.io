@@ -47,6 +47,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Open | Unassigned | Initial audit below |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
+| SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below |
 
 ## Product scope and constraints
 
@@ -295,3 +296,23 @@ Copy the following structure and **append the completed entry at the very bottom
 - Change: Bumped the shared-file query string in `130Test3.html` from `?v=20261118-quiz11` to `?v=20261120-sh011` so returning browsers fetch the corrected engine. Updated the matching assertion in `tests/verify-math130-quiz11-rehearsal.cjs`. `130-section-5-3-practice.html` loads the shared file without a version query and was left unchanged.
 - Tests and evidence: Re-ran all MATH 130 suites and `tests/verify-skyhawk-trig.cjs` before committing; results are in the commit.
 - Task status and owner: SH-001 and SH-011 remain Verification, Claude (Opus 5.5), pending deployment checks (SH-001 also pending its SH-010 seed criterion).
+
+### 2026-11-20 — Codex — SH-012 starting assessment
+
+- Entry type: Starting assessment, new bug, and claim following review of PR #328.
+- Branch and starting commit: `claude/skyhawk-trigger-prioritization-d6b3d4`, `5bd931d`; clean checkout before this follow-up.
+- Current status assessment: Read the tracker, inspected the PR changes, and ran all seven regression suites successfully during review. The user authorized updating this PR directly. SH-001 and SH-011 retain their existing owner and Verification status; this follow-up claims the new display defect only.
+- Reproduction: Generate the bearing stage with 105 mph, 2.4 hours, S 25 degrees W. The west component is 106.49980195865626 and correctly grades as 106, but the new three-decimal display says `106.500 -> 106`, suggesting that an exact half rounds down. Reproduced using the page script in a Node VM. No browser or deployment check performed.
+- Expected behavior: Show enough digits that the displayed approximation rounds to the same final answer as the full-precision calculation; keep routine values concise and exact-half answers correct.
+- Files involved: `SkyhawkTrig.html`, `tests/verify-skyhawk-trig.cjs`, and this tracker.
+- Task status and owner: SH-012 In progress, Codex. Add regression coverage, fix display precision, rerun the suites, and update PR #328.
+
+### 2026-11-20 — Codex — SH-012 display-precision handoff
+
+- Entry type: Progress, verification, and handoff.
+- Change: Added `formatForRounding`, which starts with three decimals and adds digits only when the displayed value would round to a different final answer. Applied it to the climb-time, bearing-component, and descent-loss approximations introduced in PR #328. Full-precision calculations and grading are unchanged. The reported example now shows `106.4998 -> 106`; the exact-half regression still shows `87.500 -> 88`.
+- Tests and evidence: Added the explicit 105 mph / 2.4 h / S 25 degrees W regression and checks that the displayed approximations round to their stated answers in all 10,000 seeded cases per skill. Before the fix, the new checks failed for the fixed regression, generated bearing cases, and generated descent cases (including 86 mph / 5 degrees / 6 minutes, displayed as `0.750 -> 0.7`). After the fix, `node tests/verify-skyhawk-trig.cjs` passes 17/17 checks, and all seven `tests/verify-*.cjs` suites pass, including shared MATH 130 and offline fallback flows. `git diff --check` passes.
+- Limitations: Browser/visual and deployment checks were not performed. Python-based site validators could not run because the installed `python` and `py` launchers are unavailable in this environment.
+- Implementation reference: Follow-up to PR #328 on `claude/skyhawk-trigger-prioritization-d6b3d4`.
+- Task status and owner: SH-012 Verification, Codex, pending browser and deployment confirmation. SH-001 and SH-011 retain their existing Verification status. No additional issues found beyond this display defect.
+- Remaining work and next action: Review the correction in PR #328 and verify worked-solution text in the browser and after deployment before marking SH-012 Done.

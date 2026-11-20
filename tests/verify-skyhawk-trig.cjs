@@ -56,6 +56,14 @@ check('bearing 105 mph, 1.0 h, S 60 W -> 52.5 S rounds to 53', () => {
     const d = generateWith('bearing', [105, 1.0, 60]);
     assert.equal(d.ans1, 53); assert.equal(d.ans2, 91);
 });
+check('worked solution preserves the side of a rounding boundary', () => {
+    const d = generateWith('bearing', [105, 2.4, 25]);
+    assert.equal(d.ans2, 106);
+    assert.match(d.solutionText, /106\.4998 &rarr; <b>106 miles/);
+    assert.doesNotMatch(d.solutionText, /106\.500 &rarr;/);
+    const half = generateWith('bearing', [125, 1.4, 30]);
+    assert.match(half.solutionText, /87\.500 &rarr; <b>88 miles/);
+});
 check('bearing 107 mph, 1.5 h, S 30 W -> 80.25 W rounds to 80', () => {
     const d = generateWith('bearing', [107, 1.5, 30]);
     assert.equal(d.ans2, 80);
@@ -120,6 +128,13 @@ for (const type of ['elevation', 'bearing', 'depression', 'return']) {
                 assertRounded(Math.atan2(w, n) * 180 / Math.PI, d.ans2, 1, label);
             }
             assert.ok(!/\d\.\d{6,}/.test(d.solutionText), `${label}: solution shows unreadable precision`);
+            // Check the values students actually see, independently of the formatter.
+            const steps = [...d.solutionText.matchAll(/&approx; ([\d.]+) &rarr; <b>([\d.]+)/g)];
+            if (type !== 'return') assert.equal(steps.length, type === 'bearing' ? 2 : 1, label);
+            for (const [, shown, answer] of steps) {
+                const scale = type === 'depression' ? 10 : 1;
+                assert.equal(Math.floor(Number(shown) * scale + 0.5) / scale, Number(answer), `${label}: displayed ${shown} must round to ${answer}`);
+            }
         }
     });
 }

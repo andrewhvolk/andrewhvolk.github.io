@@ -270,6 +270,15 @@
         const factor = 10 ** places;
         return Math.round(Number((value * factor).toPrecision(12))) / factor;
     };
+    // Keep approximations concise without displaying a false halfway value
+    // (e.g. 106.4998 must not appear as 106.500 before rounding to 106).
+    const formatForRounding = (value, places = 0) => {
+        let decimals = 3;
+        while (decimals < 12 && roundTo(Number(value.toFixed(decimals)), places) !== roundTo(value, places)) {
+            decimals++;
+        }
+        return value.toFixed(decimals);
+    };
 
     // --- Game State ---
     let currentStageIndex = 0;
@@ -335,7 +344,7 @@
                 <b>2. Find time in hours:</b><br>
                 Time = Distance / Speed = ${dist.toFixed(3)} / ${currentData.speed} = ${t_hours.toFixed(4)} hours.<br>
                 <b>3. Convert to minutes:</b><br>
-                ${t_hours.toFixed(4)} * 60 &approx; ${(t_hours * 60).toFixed(3)} &rarr; <b>${currentData.ans} minutes</b>.
+                ${t_hours.toFixed(4)} * 60 &approx; ${formatForRounding(t_hours * 60)} &rarr; <b>${currentData.ans} minutes</b>.
             `;
         } 
         else if (def.type === "bearing") {
@@ -357,10 +366,10 @@
                 Distance = ${currentData.speed} mph * ${currentData.time} hrs = ${dist.toFixed(2)} miles.<br>
                 <b>2. Find ${dir1} component (Adjacent):</b><br>
                 ${dir1} = Distance * cos(${currentData.angle}&deg;)<br>
-                ${dir1} = ${dist.toFixed(2)} * cos(${currentData.angle}&deg;) &approx; ${comp1.toFixed(3)} &rarr; <b>${currentData.ans1} miles</b>.<br>
+                ${dir1} = ${dist.toFixed(2)} * cos(${currentData.angle}&deg;) &approx; ${formatForRounding(comp1)} &rarr; <b>${currentData.ans1} miles</b>.<br>
                 <b>3. Find ${dir2} component (Opposite):</b><br>
                 ${dir2} = Distance * sin(${currentData.angle}&deg;)<br>
-                ${dir2} = ${dist.toFixed(2)} * sin(${currentData.angle}&deg;) &approx; ${comp2.toFixed(3)} &rarr; <b>${currentData.ans2} miles</b>.
+                ${dir2} = ${dist.toFixed(2)} * sin(${currentData.angle}&deg;) &approx; ${formatForRounding(comp2)} &rarr; <b>${currentData.ans2} miles</b>.
             `;
         }
         else if (def.type === "depression") {
@@ -380,7 +389,7 @@
                 Distance = ${currentData.speed} mph * ${t_hours.toFixed(4)} hrs = ${dist.toFixed(3)} miles.<br>
                 <b>3. Find altitude lost (Opposite):</b><br>
                 sin(${currentData.angle}&deg;) = Altitude / Distance<br>
-                Altitude = ${dist.toFixed(3)} * sin(${currentData.angle}&deg;) &approx; ${altLost.toFixed(3)} &rarr; <b>${currentData.ans} miles</b>.
+                Altitude = ${dist.toFixed(3)} * sin(${currentData.angle}&deg;) &approx; ${formatForRounding(altLost, 1)} &rarr; <b>${currentData.ans} miles</b>.
             `;
         }
         else if (def.type === "return") {
