@@ -48,7 +48,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-010 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
 | SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below |
-| SH-013 | P2 | Show one-decimal flight times consistently (prompts can say "for 1 hours") | 4 | Open | Unassigned | 2026-11-20 SH-004 entry below |
+| SH-013 | P2 | Show one-decimal flight times consistently (prompts can say "for 1 hours") | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-013 entry below; `tests/verify-skyhawk-trig.cjs` |
 
 ## Product scope and constraints
 
@@ -492,4 +492,24 @@ Copy the following structure and **append the completed entry at the very bottom
 - Implementation commit or PR: pending (this branch).
 - Task status and owner: SH-005 Verification, Claude (Opus 5.5). Close after a real screen-reader pass (for example NVDA with Chrome) and deployment.
 - Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-013, a quick wording fix. Then SH-007 (bearing variety), which reopens the shared-engine decision, and SH-006 (diagrams).
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-013 one-decimal times and altitudes
+
+- Entry type: Starting assessment, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh013-decimal-times`, stacked on PR #332 (SH-005).
+- Current status assessment: Nobody had claimed SH-013. Reproduced it with the new test, and found it is broader than recorded. Every value drawn in tenths prints without its tenth when it is a whole number:
+  - bearing: "for 1 hours" and "1 hrs";
+  - return: "North for 1 hours" and "120 * 1 = 120.0 mi";
+  - climb: "an altitude of 1 miles" and "d = 1 / sin(…)".
+- Change (`SkyhawkTrig.html` engine text only): Format `alt`, `time`, `timeN`, and `timeW` with `toFixed(1)` in prompts and worked solutions, so they read "1.0 hours", "1.0 hrs", and "1.0 miles". Parameters, answers, grading, and problem codes are unchanged, so existing problem codes replay the same problems with corrected wording.
+- Tests and evidence:
+  - `tests/verify-skyhawk-trig.cjs` passes 51/51. The two new checks failed before the change (first failure: `elevation-1`, "altitude without a tenth").
+    - The first scans 4,000 seeds each for climb, bearing, and return, and asserts that no time or altitude prints without a tenth. The sample must include at least 100 whole-number values.
+    - The second is an explicit regression for 116 mph / 1.0 h, return 1.0 h / 0.5 h, and climb altitude 1.0.
+  - All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py` and `git diff --check`.
+  - No browser check: the page renders these engine strings directly, as the existing `?problem=` replay test confirms.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-013 Verification, Claude (Opus 5.5). Close after merge and deployment.
+- New findings: None.
+- Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-007 (bearing quadrants and equivalent bearings), which reopens the shared-engine decision, or SH-006 (diagrams).
 

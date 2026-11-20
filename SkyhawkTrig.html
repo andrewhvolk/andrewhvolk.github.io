@@ -381,7 +381,7 @@
             elevation({ angle, speed, alt }) {
                 const dist = alt / Math.sin(rad(angle)), hours = dist / speed, minutes = hours * 60, ans = roundTo(minutes);
                 return {
-                    prompt: `You establish a climb at an angle of ${angle}&deg; at an average climb speed of ${speed} mph. How long will it take for the Skyhawk to reach an altitude of ${alt} miles?`,
+                    prompt: `You establish a climb at an angle of ${angle}&deg; at an average climb speed of ${speed} mph. How long will it take for the Skyhawk to reach an altitude of ${alt.toFixed(1)} miles?`,
                     hint: 'Hint: Find distance on the hypotenuse first. Round to the nearest minute.',
                     fields: [field('inp1', 'Time (minutes)', minutes, 0, 'minute', [
                         [hours, 'This looks like the time in hours. Multiply by 60 to convert it to minutes.'],
@@ -392,7 +392,7 @@
                     solutionHtml: `
                 <b>1. Find diagonal distance flown (d):</b><br>
                 sin(${angle}&deg;) = Opposite / Hypotenuse<br>
-                d = ${alt} / sin(${angle}&deg;) = ${dist.toFixed(3)} miles.<br>
+                d = ${alt.toFixed(1)} / sin(${angle}&deg;) = ${dist.toFixed(3)} miles.<br>
                 <b>2. Find time in hours:</b><br>
                 Time = Distance / Speed = ${dist.toFixed(3)} / ${speed} = ${hours.toFixed(4)} hours.<br>
                 <b>3. Convert to minutes:</b><br>
@@ -404,7 +404,7 @@
                 const dist = speed * time, south = dist * Math.cos(rad(angle)), west = dist * Math.sin(rad(angle));
                 const ans1 = roundTo(south), ans2 = roundTo(west);
                 return {
-                    prompt: `You fly at ${speed} mph on a bearing of S ${angle}&deg; W for ${time} hours. How many miles South and West have you traveled?`,
+                    prompt: `You fly at ${speed} mph on a bearing of S ${angle}&deg; W for ${time.toFixed(1)} hours. How many miles South and West have you traveled?`,
                     hint: 'Hint: Distance = speed &times; time. Use sine and cosine. Round to the nearest mile.',
                     fields: [
                         field('inp1', 'South (miles)', south, 0, 'mile', [
@@ -418,7 +418,7 @@
                     ],
                     solutionHtml: `
                 <b>1. Find total distance:</b><br>
-                Distance = ${speed} mph * ${time} hrs = ${dist.toFixed(2)} miles.<br>
+                Distance = ${speed} mph * ${time.toFixed(1)} hrs = ${dist.toFixed(2)} miles.<br>
                 <b>2. Find South component (Adjacent):</b><br>
                 South = Distance * cos(${angle}&deg;)<br>
                 South = ${dist.toFixed(2)} * cos(${angle}&deg;) &approx; ${formatForRounding(south)} &rarr; <b>${ans1} miles</b>.<br>
@@ -452,7 +452,7 @@
                 // The plane ends north and west of the start, so the direct return heads south and east.
                 const angle = Math.atan2(west, north) * 180 / Math.PI, ans1 = roundTo(total), ans2 = roundTo(angle);
                 return {
-                    prompt: `You divert, flying North for ${timeN} hours and West for ${timeW} hours at ${speed} mph. Find the direct distance back to your starting point and the bearing you should take.`,
+                    prompt: `You divert, flying North for ${timeN.toFixed(1)} hours and West for ${timeW.toFixed(1)} hours at ${speed} mph. Find the direct distance back to your starting point and the bearing you should take.`,
                     hint: 'Hint: Use Pythagorean theorem for distance. Return bearing requires switching directions (South and East). Round distance to nearest mile, angle to nearest degree.',
                     fields: [
                         field('inp1', 'Distance (miles)', total, 0, 'mile', [
@@ -465,8 +465,8 @@
                     ],
                     solutionHtml: `
                 <b>1. Find individual distances:</b><br>
-                North = ${speed} * ${timeN} = ${north.toFixed(1)} mi.<br>
-                West = ${speed} * ${timeW} = ${west.toFixed(1)} mi.<br>
+                North = ${speed} * ${timeN.toFixed(1)} = ${north.toFixed(1)} mi.<br>
+                West = ${speed} * ${timeW.toFixed(1)} = ${west.toFixed(1)} mi.<br>
                 <b>2. Find direct distance (Hypotenuse):</b><br>
                 c&sup2; = a&sup2; + b&sup2; &rarr; &radic;(${north.toFixed(1)}&sup2; + ${west.toFixed(1)}&sup2;) = ${total.toFixed(2)} &rarr; <b>${ans1} miles</b>.<br>
                 <b>3. Find Return Bearing:</b><br>

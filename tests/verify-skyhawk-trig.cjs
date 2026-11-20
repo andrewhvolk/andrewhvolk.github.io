@@ -347,6 +347,31 @@ check('worked solution is explicit, marks assistance, and leads to a fresh probl
     assert.equal(page.attempt.count, 0); assert.equal(page.attempt.assisted, false);
 });
 
+// --- SH-013: one-decimal flight times and altitudes are always shown with their tenth ---
+check('times and altitudes drawn in tenths always display one decimal ("1.0 hours", never "1 hours")', () => {
+    const tenthsParams = { elevation: ['alt'], bearing: ['time'], return: ['timeN', 'timeW'] };
+    let wholeValues = 0;
+    for (const [type, keys] of Object.entries(tenthsParams)) for (let seed = 0; seed < 4000; seed++) {
+        const p = E.generate(type, seed), shown = p.prompt + p.solutionHtml;
+        assert.doesNotMatch(shown, /(^|[^\d.])\d+ (hours|hrs)\b/, `${p.code}: time without a tenth`);
+        assert.doesNotMatch(p.prompt, /altitude of \d+ miles/, `${p.code}: altitude without a tenth`);
+        for (const k of keys) {
+            assert.ok(p.prompt.includes(p.params[k].toFixed(1)), `${p.code}: ${k} shown as ${p.params[k].toFixed(1)}`);
+            if (Number.isInteger(p.params[k])) wholeValues++;
+        }
+    }
+    assert.ok(wholeValues > 100, 'the sample must include whole-number values to exercise the fix');
+});
+check('SH-013 regression: bearing 116 mph for 1.0 h reads "1.0 hours" and "1.0 hrs"', () => {
+    const p = E.build('bearing', { speed: 116, time: 1, angle: 29 });
+    assert.match(p.prompt, /for 1\.0 hours\./);
+    assert.match(p.solutionHtml, /116 mph \* 1\.0 hrs = 116\.00 miles/);
+    const r = E.build('return', { speed: 110, timeN: 1, timeW: 0.5 });
+    assert.match(r.prompt, /North for 1\.0 hours and West for 0\.5 hours/);
+    assert.match(r.solutionHtml, /North = 110 \* 1\.0 = 110\.0 mi/);
+    assert.match(E.build('elevation', { angle: 6, speed: 80, alt: 1 }).prompt, /altitude of 1\.0 miles/);
+});
+
 // --- Layout guards (SH-002/SH-003). Browser viewport checks are recorded in the tracker. ---
 const css = html.slice(html.indexOf('<style>'), html.indexOf('</style>'));
 const rule = (selector) => {
