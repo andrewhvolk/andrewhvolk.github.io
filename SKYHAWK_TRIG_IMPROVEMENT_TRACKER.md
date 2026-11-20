@@ -43,7 +43,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-005 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-006 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-007 entry below; `tests/verify-skyhawk-trig.cjs` |
-| SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Open | Unassigned | Initial audit below |
+| SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-008 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-010 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
@@ -623,4 +623,60 @@ Copy the following structure and **append the completed entry at the very bottom
 - Implementation commit or PR: pending (this branch).
 - Task status and owner: SH-006 Verification, Claude (Opus 5.5). Close after a screen-reader pass and deployment.
 - Remaining work and next action: Commit and open a PR to `main`. Next recommended tasks: SH-008 (guided versus independent checkpoint; can use `guided: false` diagrams), then SH-009 (save and resume).
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-008 independent checkpoint and honest completion
+
+- Entry type: Starting assessment, decision, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh008-checkpoint` from `main` at `7f93455` (PR #336 merged; Pages built `7f93455`, and the live `SkyhawkTrig.html` was confirmed identical to `main`).
+- Current status assessment: Nobody had claimed SH-008. Confirmed the audit finding: after four stages the page said "You've successfully mastered the 4 key right-triangle trigonometry skills", there was no independent mode, and no record of first-attempt performance.
+- Decisions:
+  - The checkpoint uses the tracker's proposed defaults: 3 questions per skill (12), a target of at least 10/12 correct on the first try, and at least 2/3 in every skill.
+  - A teacher can change these with URL parameters: `cp_per` (questions per skill, 1–5), `cp_target` (overall first-try target, 1–total), and `cp_skill` (per-skill target, 1–cp_per). Out-of-range values fall back to the defaults, and the default targets scale with the length (about 10/12 and 2/3).
+  - "First try" means correct on the first graded attempt with no hint and no worked solution, matching SH-004's attempt record.
+  - After a checkpoint miss, the student still sees the per-part feedback and may retry or view the solution. That work is recorded as assisted, and the first-try result stays a miss.
+  - Follow-up practice is guided (hints and side names) and is recorded separately from the checkpoint.
+- Change (`SkyhawkTrig.html`):
+  - Engine (DOM-free):
+    - `checkpointConfig(params)`;
+    - `buildCheckpoint(seed, perSkill)`: every skill equally, a shuffled order, and fresh distinct problem seeds, all reproducible from the checkpoint seed;
+    - `summarizeCheckpoint(records, config)`: totals, per-skill first-try and assisted counts, completeness, target met, skills needing review, and skills with misses;
+    - `followUpQueue(records, seed)`: one fresh problem per non-first-try question, never reusing a checkpoint problem;
+    - `SKILL_NAMES`.
+  - Welcome screen: offers "Start Guided Flight" and "Independent Checkpoint", each with a one-line description.
+  - Checkpoint questions:
+    - they show a title such as "Checkpoint question 5 of 12: Bearing components" and a progress bar reading "Independent checkpoint: question 5 of 12" (`aria-valuemax` follows the length);
+    - there is no formula hint, and diagrams use `guided: false`, so there are no side names;
+    - after a correct answer, a miss, or the worked solution, the next button is "Next Question" ("See Results" on the last). The record is then frozen: `type`, `seed`, `code`, `firstTry`, `assisted`, `solved`, `attempts`.
+  - Results screen:
+    - it states "Readiness target met." or "Readiness target not met yet.", the first-try count against the configured target, and a per-skill table (first try, assisted, and status: On target, On target (n missed), or Needs review);
+    - it also gives the assisted count, the skills that need review, and a note that only unassisted first-try answers count, that assisted work is listed separately, and that this is a practice target, not a prediction of a quiz grade;
+    - buttons: Practice Missed Skills (when there were misses and no follow-up yet), Retake Checkpoint, Guided Flight.
+  - Follow-up practice: shows "Follow-up question i of n" with hints. The results screen then adds "Follow-up practice: x of n solved, y on the first try. Follow-up practice does not change your checkpoint results above." The checkpoint records stay unchanged.
+  - Guided flight completion: the title is "Flight Complete!". The text reports how many of the four stages were right on the first attempt (from the problem solved at each stage before continuing), says that guided practice is not a readiness check, and offers "Take Independent Checkpoint" or "Start A New Flight". The word "mastered" is gone.
+- Tests and evidence:
+  - `tests/verify-skyhawk-trig.cjs` passes 79/79. All 11 new checks failed before implementation. They cover:
+    - config defaults, overrides, and bounds;
+    - checkpoint composition, order variety, distinct seeds, and reproducibility (300 seeds);
+    - summary rules: 10/12 with one skill at 1/3 is not met; 9/12 spread out is not met; an incomplete checkpoint is never met; unsolved questions are counted;
+    - the follow-up queue;
+    - independent rendering;
+    - an all-correct run (target met, no "master" wording, no follow-up button);
+    - a run with misses, retries, and a viewed solution (records 3× firstTry=false with assisted=true; solved true/false/false; not met; "Needs review"; "3 questions were assisted");
+    - follow-ups with fresh seeds that leave the checkpoint records byte-identical;
+    - URL settings (8 questions, target 7 of 8);
+    - the guided completion text ("3 of 4 stages on the first attempt", "not a readiness check");
+    - the welcome buttons.
+  - All seven `tests/verify-*.cjs` suites pass (the Skyhawk suite also against a CRLF copy), as do `check_html_structure.py`, `check_links.py`, and `git diff --check`.
+  - Browser check (built-in Chromium pane, 390×844):
+    - the welcome screen showed both modes;
+    - an independent bearing question showed no hint and an unlabelled diagram;
+    - a run with two Descent misses produced "Readiness target not met yet. You answered 10 of 12…", with Descent at "1 of 3, Needs review" and "2 questions were assisted";
+    - the follow-up showed "Follow-up question 1 of 2: Descent", and its result appeared separately.
+
+    The layout audit at 320×568 found 0 issues on the checkpoint question, feedback, and results screens, and there were no console errors. Lighthouse (mobile snapshot, results screen) scored 100 for accessibility; the only failure is the known SEO meta description.
+- Not performed: a screen reader, real devices, deployment, and the effect of a refresh. A refresh still loses checkpoint progress (SH-009).
+- New findings: None.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-008 Verification, Claude (Opus 5.5). Close after merge and deployment; the teacher defaults may need adjusting after a classroom pilot.
+- Remaining work and next action: Commit and open a PR. Next and last planned task: SH-009 (save, resume, and reset; it must store checkpoint records without rewriting them).
 
