@@ -72,6 +72,6 @@ assert.ok(!hub.includes('Aviation practice: Quiz 11 format'));
 assert.ok(!hub.includes('Nov 16: Quiz 11 practice with worked answers'));
 const page=fs.readFileSync(path.join(root,'130Test3.html'),'utf8');
 assert.match(page,/params.get\('practice'\) === 'quiz11'/);
-assert.match(page,/math130-test3-skills\.js\?v=20261118-quiz11/,'Refresh cached shared code when publishing the new blueprint');
+assert.match(page,/math130-test3-skills\.js\?v=20261120-sh011/,'Refresh cached shared code when publishing the new blueprint');
 assert.ok(!page.includes('Aviation practice — Spring Quiz 11 format'));
 console.log('PASS: 1,000 complete paper blueprints; exact forms, both equation units, sign pairs, integer radii, six ratios, and intentional 105/100 scoring.');

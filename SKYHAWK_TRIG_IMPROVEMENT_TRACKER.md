@@ -36,7 +36,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 
 | ID | Priority | Task | Phase | Status | Owner | Latest evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| SH-001 | P1 | Correct rounding and answer grading at numerical boundaries | 1 | Open | Unassigned | Initial audit below |
+| SH-001 | P1 | Correct rounding and answer grading at numerical boundaries | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 handoff below; `tests/verify-skyhawk-trig.cjs` |
 | SH-002 | P1 | Make controls reachable on small screens and in landscape | 2 | Open | Unassigned | Initial audit below |
 | SH-003 | P1 | Prevent navigation from covering flight progress | 2 | Open | Unassigned | Initial audit below |
 | SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Open | Unassigned | Initial audit below |
@@ -46,6 +46,8 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Open | Unassigned | Initial audit below |
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Open | Unassigned | Initial audit below |
+| SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
+| SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below |
 
 ## Product scope and constraints
 
@@ -230,3 +232,87 @@ Copy the following structure and **append the completed entry at the very bottom
 - Verification: Confirmed the referenced local activity and shared-engine paths exist and checked the documentation diff for whitespace errors. No new behavioral test run was required for these documentation-only changes; the earlier audit is still the recorded behavioral baseline.
 - Task status and owner: SH-001 through SH-010 remain Open and Unassigned. The documentation is available for the next programmer; the activity implementation is unchanged.
 - Remaining work and next action: Start Phase 1 and the responsive/accessibility work in Phase 2 after reassessing the current code and appending a starting assessment. Record any newly discovered findings at the very bottom of this file.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-001 starting assessment
+
+- Entry type: Starting assessment and claim.
+- Branch and starting commit: `claude/skyhawk-trigger-prioritization-d6b3d4`, `3fe746b`; clean working tree.
+- Current status assessment: Read this whole tracker and the generation/grading script in `SkyhawkTrig.html`. Chose SH-001 as the most impactful open item. It is a P1 correctness defect that rejects correct student answers and is the first task in Phase 1. No other owner was recorded.
+- Finding: Confirmed SH-001 still reproduces. With fixed inputs `125 mph`, `1.4 h`, `S 30° W`, the page computes the west component as `87.49999999999999` and expects `87`. An exhaustive sweep of the bearing parameter space (speed 105–125, time 1.0–2.5, angle 25–65; 27,552 components) found 33 mis-rounded expected answers. The worked solutions also printed raw floats such as `87.49999999999999`.
+- Task status and owner: SH-001 In progress, Claude (Opus 5.5).
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-001 handoff; new SH-011
+
+- Entry type: Progress, verification, and handoff.
+- Finding or change: Added a `roundTo(value, places)` helper in `SkyhawkTrig.html`. It snaps to 12 significant digits before rounding half up, which removes binary floating-point error without changing the requested precision. All five expected answers use it (climb minutes, both bearing components, descent tenths, return distance and angle). Worked solutions now show intermediate values as `≈` with 3 decimals instead of raw floats; the final answer still comes from the full-precision value. Grading is unchanged: it compares the parsed number exactly, so `88` and `88.0` match and an unrounded `87.5` is rejected.
+- Tests and evidence: Added `node tests/verify-skyhawk-trig.cjs`. It loads the page script in a VM and passes 16/16 checks. Before the fix, 6 of these checks failed. It covers:
+  - exact known-answer cases, including the `125/1.4/30°` case and exact `.5`, `.25`, and `.75` component values, plus 3-4-5 and 45° return cases;
+  - 10,000 seeded generated cases per skill (mulberry32 seeds), each checked against an independent correctly-rounded value, its precision, and that the solution shows no unreadable float precision;
+  - grading of `88`/`88.0` (accepted), `87` and `87.5` (rejected), and `0.7`/`0.70` vs `0.654` for descent.
+
+  The exhaustive bearing sweep now shows 0/27,552 mis-rounded components. `python scripts/check_html_structure.py` and `python scripts/check_links.py` pass.
+- Not performed: No browser or visual check of the changed solution text. No deployment check.
+- SH-001 criteria still open:
+  - The page itself still uses unseeded `Math.random`, so a reported seed cannot reproduce a page session. The test injects a seeded RNG instead. This belongs to SH-010.
+  - The shared-engine criterion does not apply here, because no shared code was changed.
+- Implementation commit or PR: pending (uncommitted on this branch).
+- Task status and owner: SH-001 Verification, Claude (Opus 5.5). Close it after commit/PR and the seed criterion under SH-010.
+- New finding SH-011 (P1): `assets/js/math130-test3-skills.js` `aviation_bearing_displacement` uses bare `Math.round` and has the same defect. An exhaustive sweep (16,188 components) found 9 wrong expected answers with `tolerance:0`, e.g. `190 knots, 1.5 h, 30°`: the component is `142.49999999999997`, so the engine expects `142` instead of the correct `143` (also 210 and 230 knots at 1.5 h, 30°). `aviation_climb_time` showed 0 discrepancies in its range. A fix must re-run `tests/verify-math130-test3.cjs` and sync the offline fallback (`scripts/sync-math130-test3-fallback.cjs`).
+- Remaining work and next action: Commit this change, then fix SH-011 using the same rounding approach, then start SH-010 (seeded, isolated generation) or SH-002/SH-003 (layout).
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-011 fix and handoff
+
+- Entry type: Starting assessment, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-trigger-prioritization-d6b3d4`, `3fe746b`, with the uncommitted SH-001 changes from the previous entry.
+- Current status assessment:
+  - Reproduced SH-011 as recorded: 9 of 16,188 `aviation_bearing_displacement` components are mis-rounded, e.g. 190/210/230 knots for 1.5 h at 30°.
+  - All six existing MATH 130 suites passed before the change. However, `tests/verify-math130-test3.cjs` checked the bearing and climb answers with the same bare `Math.round`, so it shared the floating-point mistake and could not detect the defect.
+  - Tolerance-graded fields (`aviation_descent_loss`, `aviation_return_to_origin`) store the unrounded value and compare within `tol + 1e-10`, so they are not affected.
+- Finding or change:
+  - `assets/js/math130-test3-skills.js` gained a `roundTo` helper using the same 12-significant-digit snap as the SH-001 fix. It is used for the climb-time answer and both bearing components (expected answers and solution text) and is exported for testing.
+  - The independent check in `tests/verify-math130-test3.cjs` now uses a different half-up method (`roundUnit`). New known-answer cases cover 190/210/230 kn, 1.5 h, S 30° W (expects 143/158/173), confirm that grading rejects `want − 1` and the unrounded `.5` entry, and check `roundTo` directly.
+  - Regenerated the offline fallback in `130Test3.html` with `node scripts/sync-math130-test3-fallback.cjs`.
+- Tests and evidence: All of these pass:
+  - `tests/verify-math130-test3.cjs` (shared file and offline fallback)
+  - `tests/verify-math130-practice-fixes.cjs`
+  - `tests/verify-math130-quiz11-rehearsal.cjs`
+  - `tests/verify-math130-section53.cjs`
+  - `tests/verify-math130-test2-practice.cjs`
+  - `tests/verify-math130-test2.cjs`
+  - `tests/verify-skyhawk-trig.cjs` (16/16)
+  - `scripts/check_html_structure.py` and `scripts/check_links.py`
+
+  An exhaustive scripted-RNG sweep of all bearing parameters shows the old engine wrong on 9/16,188 components and the new engine on 0/16,188. No browser check was performed.
+- Deployment note: `130Test3.html` loads the shared file as `math130-test3-skills.js?v=20261118-quiz11`, and `tests/verify-math130-quiz11-rehearsal.cjs` asserts that exact string. The version was not bumped, so a returning browser may keep a cached copy of the old shared file until its cache expires. If this needs to reach students immediately, bump the query string and that assertion together.
+- Implementation commit or PR: pending (uncommitted on this branch).
+- Task status and owner: SH-011 Verification, Claude (Opus 5.5). Close after commit/PR and a post-deployment check.
+- New task IDs or related existing IDs: Related to SH-001 and SH-010. No other new issues found.
+- Remaining work and next action: Commit SH-001 and SH-011, then start SH-010 (seeded, isolated Skyhawk generation; consider adopting the shared engine with a Skyhawk parameter profile) or SH-002/SH-003 (layout).
+
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-011 cache version bump
+
+- Entry type: Progress; corrects the deployment note in the previous SH-011 entry.
+- Change: Bumped the shared-file query string in `130Test3.html` from `?v=20261118-quiz11` to `?v=20261120-sh011` so returning browsers fetch the corrected engine. Updated the matching assertion in `tests/verify-math130-quiz11-rehearsal.cjs`. `130-section-5-3-practice.html` loads the shared file without a version query and was left unchanged.
+- Tests and evidence: Re-ran all MATH 130 suites and `tests/verify-skyhawk-trig.cjs` before committing; results are in the commit.
+- Task status and owner: SH-001 and SH-011 remain Verification, Claude (Opus 5.5), pending deployment checks (SH-001 also pending its SH-010 seed criterion).
+
+### 2026-11-20 — Codex — SH-012 starting assessment
+
+- Entry type: Starting assessment, new bug, and claim following review of PR #328.
+- Branch and starting commit: `claude/skyhawk-trigger-prioritization-d6b3d4`, `5bd931d`; clean checkout before this follow-up.
+- Current status assessment: Read the tracker, inspected the PR changes, and ran all seven regression suites successfully during review. The user authorized updating this PR directly. SH-001 and SH-011 retain their existing owner and Verification status; this follow-up claims the new display defect only.
+- Reproduction: Generate the bearing stage with 105 mph, 2.4 hours, S 25 degrees W. The west component is 106.49980195865626 and correctly grades as 106, but the new three-decimal display says `106.500 -> 106`, suggesting that an exact half rounds down. Reproduced using the page script in a Node VM. No browser or deployment check performed.
+- Expected behavior: Show enough digits that the displayed approximation rounds to the same final answer as the full-precision calculation; keep routine values concise and exact-half answers correct.
+- Files involved: `SkyhawkTrig.html`, `tests/verify-skyhawk-trig.cjs`, and this tracker.
+- Task status and owner: SH-012 In progress, Codex. Add regression coverage, fix display precision, rerun the suites, and update PR #328.
+
+### 2026-11-20 — Codex — SH-012 display-precision handoff
+
+- Entry type: Progress, verification, and handoff.
+- Change: Added `formatForRounding`, which starts with three decimals and adds digits only when the displayed value would round to a different final answer. Applied it to the climb-time, bearing-component, and descent-loss approximations introduced in PR #328. Full-precision calculations and grading are unchanged. The reported example now shows `106.4998 -> 106`; the exact-half regression still shows `87.500 -> 88`.
+- Tests and evidence: Added the explicit 105 mph / 2.4 h / S 25 degrees W regression and checks that the displayed approximations round to their stated answers in all 10,000 seeded cases per skill. Before the fix, the new checks failed for the fixed regression, generated bearing cases, and generated descent cases (including 86 mph / 5 degrees / 6 minutes, displayed as `0.750 -> 0.7`). After the fix, `node tests/verify-skyhawk-trig.cjs` passes 17/17 checks, and all seven `tests/verify-*.cjs` suites pass, including shared MATH 130 and offline fallback flows. `git diff --check` passes.
+- Limitations: Browser/visual and deployment checks were not performed. Python-based site validators could not run because the installed `python` and `py` launchers are unavailable in this environment.
+- Implementation reference: Follow-up to PR #328 on `claude/skyhawk-trigger-prioritization-d6b3d4`.
+- Task status and owner: SH-012 Verification, Codex, pending browser and deployment confirmation. SH-001 and SH-011 retain their existing Verification status. No additional issues found beyond this display defect.
+- Remaining work and next action: Review the correction in PR #328 and verify worked-solution text in the browser and after deployment before marking SH-012 Done.

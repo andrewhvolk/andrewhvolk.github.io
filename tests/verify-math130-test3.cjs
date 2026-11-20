@@ -61,6 +61,8 @@ function value(tex) {
 const texNumber = tex => value(tex.replace(/(\d)\\pi/g,'$1*\\pi'));
 const deg = x => x*Math.PI/180;
 const angle = (x,y) => (Math.atan2(y,x)*180/Math.PI+360)%360;
+// Independent half-up rounding (different method from the engine's roundTo) so a shared float mistake is caught.
+const roundUnit = v => Math.floor(Math.round(v*1e9)/1e9+0.5);
 const close = (a,b,label) => assert.ok(Math.abs(a-b)<1e-8,`${label}: expected ${b}, got ${a}`);
 const num = (q,re,index=1) => {const m=q.match(re);assert.ok(m,'Cannot read '+re+' in '+q);return Number(m[index]);};
 const functions={sin:Math.sin,cos:Math.cos,tan:Math.tan,csc:a=>1/Math.sin(a),sec:a=>1/Math.cos(a),cot:a=>1/Math.tan(a)};
@@ -73,11 +75,11 @@ function recompute(g,p) {
             const radius=Math.hypot(d.x,d.y),v={r:radius,sin:d.y/radius,cos:d.x/radius,tan:d.y/d.x,csc:radius/d.y,sec:radius/d.x,cot:d.x/d.y};
             for(const f of p.fields)close(f.answer,v[f.id],g.id+'.'+f.id);return;
         }
-        if(g.id==='aviation_climb_time')answer=Math.round(d.altitude/(d.speed*Math.sin(deg(d.angle)))*60);
+        if(g.id==='aviation_climb_time')answer=roundUnit(d.altitude/(d.speed*Math.sin(deg(d.angle)))*60);
         if(g.id==='aviation_descent_loss')answer=d.speed*(d.minutes/60)*Math.sin(deg(d.angle));
         if(g.id==='aviation_bearing_displacement'){
-            close(p.fields[0].answer,Math.round(d.speed*d.hours*Math.cos(deg(d.angle))),g.id+'.vertical');
-            close(p.fields[1].answer,Math.round(d.speed*d.hours*Math.sin(deg(d.angle))),g.id+'.horizontal');return;
+            close(p.fields[0].answer,roundUnit(d.speed*d.hours*Math.cos(deg(d.angle))),g.id+'.vertical');
+            close(p.fields[1].answer,roundUnit(d.speed*d.hours*Math.sin(deg(d.angle))),g.id+'.horizontal');return;
         }
         if(g.id==='aviation_return_to_origin'){
             const north=(d.ns==='N'?1:-1)*d.speed*d.firstHours,east=(d.ew==='E'?1:-1)*d.speed*d.secondHours;
@@ -333,6 +335,20 @@ for(const [answer,forms] of [[Math.sqrt(3)/2,['sqrt(3)/2','0.8660']],[0.6,['3/5'
     for(const form of forms)assert.ok(skills.grade({inputType:'exact',a:answer,tol:0.0001},[form]).correct,form);
 }
 for(const entry of ['','3junk','1/0','sqrt(-1)','pi/','2**3','Math.PI','1;alert(1)','sqrt(3)junk'])assert.equal(skills.parseExact(entry),null,entry);
+// SH-011: exact halfway components must round up despite binary error (142.49999999999997 is 142.5).
+{
+    const scripted=picks=>{const q=picks.map(([k,n])=>(k+0.5)/n);return()=>q.shift();};
+    const bearing=skills.generators.find(g=>g.id==='aviation_bearing_displacement');
+    for(const [speed,want] of [[190,143],[210,158],[230,173]]){
+        const p=bearing.generate(scripted([[speed/10-18,19],[2,6],[20,71],[1,2],[1,2]]));
+        assert.deepEqual(p.parameters,{speed,hours:1.5,angle:30,ns:'S',ew:'W'});
+        assert.equal(p.fields[1].answer,want,`${speed} kn, 1.5 h, S30°W west component`);
+        assert.equal(skills.grade(p,[String(p.fields[0].answer),String(want)]).correct,true);
+        assert.equal(skills.grade(p,[String(p.fields[0].answer),String(want-1)]).correct,false);
+        assert.equal(skills.grade(p,[String(p.fields[0].answer),String(want-0.5)]).correct,false);
+    }
+    assert.equal(skills.roundTo(87.49999999999999),88);assert.equal(skills.roundTo(0.6499999999999999,1),0.7);assert.equal(skills.roundTo(142.4999),142);
+}
 console.log('All seeded generator, parser, and routing checks passed.');
 
 // Exercise the actual page functions with a small DOM adapter. Browser rendering
