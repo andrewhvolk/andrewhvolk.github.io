@@ -593,6 +593,118 @@ check('progressbar exposes completed stages', () => {
     assert.equal(el('progress-bar-bg').attrs['aria-valuenow'], '4');
 });
 
+// --- SH-006: instructional diagrams ---
+const degBetween = (v, a, b) => {
+    const ux = a.x - v.x, uy = a.y - v.y, wx = b.x - v.x, wy = b.y - v.y;
+    return Math.acos((ux * wx + uy * wy) / (Math.hypot(ux, uy) * Math.hypot(wx, wy))) * 180 / Math.PI;
+};
+const textOf = (svg) => svg.replace(/<[^>]+>/g, ' ');
+const numbersIn = (s) => new Set((s.replace(/&[a-z]+;/g, ' ').match(/\d+(?:\.\d+)?/g) || []).map(Number));
+check('every skill has an accessible diagram with a title and description', () => {
+    for (const type of SKILLS) {
+        const { svg } = E.diagram(E.generate(type, 11));
+        assert.match(svg, /^<svg [^>]*role="img"[^>]*aria-labelledby="dg-title dg-desc"/);
+        assert.match(svg, /<title id="dg-title">[^<]+<\/title>/);
+        assert.match(svg, /<desc id="dg-desc">[^<]{40,}<\/desc>/);
+    }
+});
+check('plan views use one scale and draw the bearing angle and quadrant exactly', () => {
+    for (let seed = 0; seed < 500; seed++) {
+        const p = E.generate('bearing', seed), g = E.diagram(p).geometry, d = p.params;
+        assert.equal(g.kind, 'plan');
+        assert.ok(Math.abs(degBetween(g.start, g.corner, g.end) - d.angle) < 0.01, `${p.code}: drawn ${degBetween(g.start, g.corner, g.end)} vs ${d.angle}`);
+        assert.ok(Math.abs(degBetween(g.corner, g.start, g.end) - 90) < 0.01, `${p.code}: right angle at the corner`);
+        assert.equal(Math.sign(g.end.x - g.start.x), d.ew === 'E' ? 1 : -1, `${p.code}: east is right`);
+        assert.equal(Math.sign(g.end.y - g.start.y), d.ns === 'N' ? -1 : 1, `${p.code}: north is up`);
+        assert.ok(Math.abs(g.start.x - g.corner.x) < 1e-9, `${p.code}: the ${d.ns} leg lies on the North–South axis`);
+        // Equal scales: drawn leg lengths are proportional to the true component distances.
+        const dist = d.speed * d.time, rad = d.angle * Math.PI / 180;
+        assert.ok(Math.abs(Math.abs(g.corner.y - g.start.y) / (dist * Math.cos(rad)) - g.scale) < 1e-9);
+        assert.ok(Math.abs(Math.abs(g.end.x - g.corner.x) / (dist * Math.sin(rad)) - g.scale) < 1e-9);
+        for (const pt of [g.start, g.corner, g.end]) assert.ok(pt.x >= 0 && pt.x <= 340 && pt.y >= 0 && pt.y <= 230, `${p.code}: point inside the view`);
+    }
+});
+check('return view: legs at right angles, true scale, and return angle measured from North–South at the final position', () => {
+    for (let seed = 0; seed < 500; seed++) {
+        const p = E.generate('return', seed), g = E.diagram(p).geometry, d = p.params, f = p.fields[1];
+        assert.ok(Math.abs(degBetween(g.turn, g.start, g.now) - 90) < 0.01, `${p.code}: legs perpendicular`);
+        assert.ok(Math.abs(Math.abs(g.turn.y - g.start.y) / (d.speed * d.timeN) - g.scale) < 1e-9, `${p.code}: north–south leg to scale`);
+        assert.ok(Math.abs(Math.abs(g.now.x - g.turn.x) / (d.speed * d.timeW) - g.scale) < 1e-9, `${p.code}: east–west leg to scale`);
+        const ref = { x: g.now.x, y: g.start.y }; // straight toward the start's side along North–South
+        assert.ok(Math.abs(degBetween(g.now, ref, g.start) - f.exact) < 0.01, `${p.code}: return angle`);
+        assert.equal(Math.sign(g.start.y - g.now.y), f.ns === 'N' ? -1 : 1, `${p.code}: return heads ${f.ns}`);
+        assert.equal(Math.sign(g.start.x - g.now.x), f.ew === 'E' ? 1 : -1, `${p.code}: return heads ${f.ew}`);
+    }
+});
+check('side views mark the angle at the correct vertex with its true value', () => {
+    for (let seed = 0; seed < 200; seed++) {
+        const c = E.generate('elevation', seed), gc = E.diagram(c).geometry;
+        assert.equal(gc.kind, 'side');
+        assert.ok(Math.abs(gc.horizontalEnd.y - gc.vertex.y) < 1e-9 && gc.horizontalEnd.x > gc.vertex.x, 'climb: level ground to the right of takeoff');
+        assert.ok(gc.pathEnd.y < gc.vertex.y && Math.abs(gc.pathEnd.x - gc.horizontalEnd.x) < 1e-9, 'climb: altitude is vertical, above the ground');
+        assert.ok(Math.abs(degBetween(gc.vertex, gc.horizontalEnd, gc.pathEnd) - gc.drawnAngle) < 0.01);
+        assert.equal(gc.trueAngle, c.params.angle);
+        const want = Math.tan(gc.drawnAngle * Math.PI / 180) / Math.tan(c.params.angle * Math.PI / 180);
+        assert.ok(Math.abs(gc.exaggeration - want) < 1e-9 && gc.exaggeration >= 1);
+        assert.match(E.diagram(c).svg, />[^<]*not to scale[^<]*</i, 'side views say they are not to scale');
+        assert.match(textOf(E.diagram(c).svg), new RegExp(`${c.params.angle}°`));
+        const s = E.generate('depression', seed), gs = E.diagram(s).geometry;
+        assert.ok(Math.abs(gs.horizontalEnd.y - gs.vertex.y) < 1e-9, 'descent: horizontal starts at the plane');
+        assert.ok(gs.pathEnd.y > gs.vertex.y, 'descent: the path goes down from the upper horizontal');
+        assert.ok(Math.abs(gs.pathEnd.x - gs.horizontalEnd.x) < 1e-9, 'descent: altitude lost is vertical');
+        assert.ok(Math.abs(degBetween(gs.vertex, gs.horizontalEnd, gs.pathEnd) - gs.drawnAngle) < 0.01);
+        assert.equal(gs.trueAngle, s.params.angle);
+    }
+});
+check('before an answer, diagrams show only given values and unknown markers', () => {
+    for (const type of SKILLS) for (let seed = 0; seed < 1000; seed++) {
+        const p = E.generate(type, seed), { svg } = E.diagram(p);
+        const allowed = numbersIn(p.prompt);
+        for (const n of numbersIn(textOf(svg))) assert.ok(allowed.has(n), `${p.code}: diagram shows ${n}, which is not given in the prompt`);
+        assert.match(textOf(svg), /\?/, `${p.code}: unknowns are marked`);
+        if (type === 'return') assert.doesNotMatch(textOf(svg), /\b[NS] *\d+ *°? *[EW]\b/, `${p.code}: no return bearing shown`);
+    }
+});
+check('revealed diagrams label each unknown with its answer', () => {
+    for (const type of SKILLS) for (let seed = 0; seed < 200; seed++) {
+        const p = E.generate(type, seed), t = textOf(E.diagram(p, { reveal: true }).svg);
+        for (const f of p.fields) assert.ok(t.includes(String(f.answer)), `${p.code}: revealed diagram shows ${f.answer}`);
+        assert.doesNotMatch(t, /\?/, `${p.code}: no unknown markers remain`);
+    }
+});
+check('independent diagrams drop side-name cues that guided diagrams show', () => {
+    for (const type of ['elevation', 'bearing', 'depression']) {
+        const p = E.generate(type, 3);
+        assert.match(textOf(E.diagram(p, { guided: true }).svg), /adjacent|opposite|hypotenuse/);
+        assert.doesNotMatch(textOf(E.diagram(p, { guided: false }).svg), /adjacent|opposite|hypotenuse|\b(sin|cos|tan)\b/i);
+    }
+});
+check('page shows the diagram: unknowns while answering, answers after success or the worked solution', () => {
+    const { page, el } = pageWith(bearingCase());
+    assert.match(text(el('diagram-container')), /<svg[\s\S]*\?/);
+    el('inp1').value = '152'; el('inp2').value = '90'; page.verifyAnswer();
+    assert.match(text(el('diagram-container')), /\?/, 'a wrong attempt does not reveal the answers');
+    page.showSolution();
+    assert.match(text(el('diagram-container')), /≈ 88 mi/);
+    const second = pageWith(bearingCase());
+    second.el('inp1').value = '152'; second.el('inp2').value = '88'; second.page.verifyAnswer();
+    assert.match(text(second.el('diagram-container')), /≈ 152 mi/);
+    second.page.endGame();
+    assert.equal(text(second.el('diagram-container')), '');
+});
+check('diagram styles exist with readable label colors', () => {
+    for (const sel of ['.dg-label', '.dg-unknown', '.dg-answer']) {
+        const m = rule(sel).match(/fill\s*:\s*(#[0-9a-fA-F]{6})/);
+        assert.ok(m, `${sel} needs a fill`);
+        assert.ok(contrast(m[1], '#ffffff') >= 4.5, `${sel}: ${contrast(m[1], '#ffffff').toFixed(2)}:1`);
+    }
+    for (const sel of ['.dg-path', '.dg-component', '.dg-return', '.dg-axis', '.dg-angle']) {
+        const m = rule(sel).match(/stroke\s*:\s*(#[0-9a-fA-F]{6})/);
+        assert.ok(m, `${sel} needs a stroke`);
+        assert.ok(contrast(m[1], '#ffffff') >= 3, `${sel}: ${contrast(m[1], '#ffffff').toFixed(2)}:1`);
+    }
+});
+
 report();
 function report() {
     let failed = 0;
