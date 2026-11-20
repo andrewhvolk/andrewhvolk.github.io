@@ -202,6 +202,18 @@
             display: block;
         }
 
+        .problem-code {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #595959;
+        }
+
+        .problem-code a {
+            color: #1565C0;
+            font-family: Consolas, "Courier New", monospace;
+        }
+
         .solution-box {
             background: #f1f8e9;
             border-left: 4px solid #4CAF50;
@@ -259,35 +271,174 @@
 </div>
 
 <script>
-    // --- Math Helpers ---
-    const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-    const randomFloat = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
-    const toRadians = (degrees) => degrees * (Math.PI / 180);
-    const toDegrees = (radians) => radians * (180 / Math.PI);
-    // Round half up to `places` decimals. Snapping to 12 significant digits first removes
-    // binary floating-point error (125 * 1.4 * sin 30° evaluates to 87.49999999999999 but is exactly 87.5).
-    const roundTo = (value, places = 0) => {
-        const factor = 10 ** places;
-        return Math.round(Number((value * factor).toPrecision(12))) / factor;
-    };
-    // Keep approximations concise without displaying a false halfway value
-    // (e.g. 106.4998 must not appear as 106.500 before rounding to 106).
-    const formatForRounding = (value, places = 0) => {
-        let decimals = 3;
-        while (decimals < 12 && roundTo(Number(value.toFixed(decimals)), places) !== roundTo(value, places)) {
-            decimals++;
+    // <skyhawk-engine>
+    // Pure problem engine: no DOM access. Each problem is fully determined by
+    // (skill, seed) or by (skill, parameters), so a reported problem code replays exactly.
+    const SkyhawkEngine = (() => {
+        const SKILLS = ['elevation', 'bearing', 'depression', 'return'];
+        const SEED_LIMIT = 2 ** 31;
+
+        // Small seeded PRNG (same algorithm as the shared MATH 130 engine).
+        const mulberry32 = (a) => () => {
+            a |= 0; a = (a + 0x6D2B79F5) | 0;
+            let t = Math.imul(a ^ (a >>> 15), 1 | a);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+        const int = (r, lo, hi) => lo + Math.floor(r() * (hi - lo + 1));
+        const tenths = (r, lo, hi) => int(r, Math.round(lo * 10), Math.round(hi * 10)) / 10;
+        const rad = (deg) => deg * Math.PI / 180;
+        // Round half up to `places` decimals. Snapping to 12 significant digits first removes
+        // binary floating-point error (125 * 1.4 * sin 30° evaluates to 87.49999999999999 but is exactly 87.5).
+        const roundTo = (value, places = 0) => {
+            const factor = 10 ** places;
+            return Math.round(Number((value * factor).toPrecision(12))) / factor;
+        };
+        // Keep approximations concise without displaying a false halfway value
+        // (e.g. 106.4998 must not appear as 106.500 before rounding to 106). Tracker SH-012.
+        const formatForRounding = (value, places = 0) => {
+            let decimals = 3;
+            while (decimals < 12 && roundTo(Number(value.toFixed(decimals)), places) !== roundTo(value, places)) {
+                decimals++;
+            }
+            return value.toFixed(decimals);
+        };
+
+        const pickParams = {
+            elevation: (r) => ({ angle: int(r, 4, 9), speed: int(r, 75, 90), alt: tenths(r, 0.5, 1.5) }),
+            bearing: (r) => ({ speed: int(r, 105, 125), time: tenths(r, 1.0, 2.5), angle: int(r, 25, 65) }),
+            depression: (r) => ({ speed: int(r, 85, 105), angle: int(r, 3, 6), timeMins: int(r, 3, 7) }),
+            return: (r) => ({ speed: int(r, 105, 120), timeN: tenths(r, 0.5, 1.5), timeW: tenths(r, 0.5, 1.5) }),
+        };
+
+        const builders = {
+            elevation({ angle, speed, alt }) {
+                const dist = alt / Math.sin(rad(angle)), hours = dist / speed, minutes = hours * 60, ans = roundTo(minutes);
+                return {
+                    prompt: `You establish a climb at an angle of ${angle}&deg; at an average climb speed of ${speed} mph. How long will it take for the Skyhawk to reach an altitude of ${alt} miles?`,
+                    hint: 'Hint: Find distance on the hypotenuse first. Round to the nearest minute.',
+                    fields: [{ id: 'inp1', label: 'Time (minutes)', answer: ans }],
+                    solutionHtml: `
+                <b>1. Find diagonal distance flown (d):</b><br>
+                sin(${angle}&deg;) = Opposite / Hypotenuse<br>
+                d = ${alt} / sin(${angle}&deg;) = ${dist.toFixed(3)} miles.<br>
+                <b>2. Find time in hours:</b><br>
+                Time = Distance / Speed = ${dist.toFixed(3)} / ${speed} = ${hours.toFixed(4)} hours.<br>
+                <b>3. Convert to minutes:</b><br>
+                ${hours.toFixed(4)} * 60 &approx; ${formatForRounding(minutes)} &rarr; <b>${ans} minutes</b>.`,
+                };
+            },
+            bearing({ speed, time, angle }) {
+                // Stage 2 currently always flies a SW bearing (varied quadrants are tracker SH-007).
+                const dist = speed * time, south = dist * Math.cos(rad(angle)), west = dist * Math.sin(rad(angle));
+                const ans1 = roundTo(south), ans2 = roundTo(west);
+                return {
+                    prompt: `You fly at ${speed} mph on a bearing of S ${angle}&deg; W for ${time} hours. How many miles South and West have you traveled?`,
+                    hint: 'Hint: Distance = speed &times; time. Use sine and cosine. Round to the nearest mile.',
+                    fields: [{ id: 'inp1', label: 'South (miles)', answer: ans1 }, { id: 'inp2', label: 'West (miles)', answer: ans2 }],
+                    solutionHtml: `
+                <b>1. Find total distance:</b><br>
+                Distance = ${speed} mph * ${time} hrs = ${dist.toFixed(2)} miles.<br>
+                <b>2. Find South component (Adjacent):</b><br>
+                South = Distance * cos(${angle}&deg;)<br>
+                South = ${dist.toFixed(2)} * cos(${angle}&deg;) &approx; ${formatForRounding(south)} &rarr; <b>${ans1} miles</b>.<br>
+                <b>3. Find West component (Opposite):</b><br>
+                West = Distance * sin(${angle}&deg;)<br>
+                West = ${dist.toFixed(2)} * sin(${angle}&deg;) &approx; ${formatForRounding(west)} &rarr; <b>${ans2} miles</b>.`,
+                };
+            },
+            depression({ speed, angle, timeMins }) {
+                const hours = timeMins / 60, dist = speed * hours, lost = dist * Math.sin(rad(angle)), ans = roundTo(lost, 1);
+                return {
+                    prompt: `You begin a descent at ${speed} mph with an angle of depression of ${angle}&deg;. How much altitude will you lose in ${timeMins} minutes?`,
+                    hint: 'Hint: Convert minutes to hours first. Round to the nearest tenth of a mile.',
+                    fields: [{ id: 'inp1', label: 'Altitude lost (miles)', answer: ans, step: '0.1' }],
+                    solutionHtml: `
+                <b>1. Convert time to hours:</b><br>
+                ${timeMins} mins / 60 = ${hours.toFixed(4)} hours.<br>
+                <b>2. Find distance flown:</b><br>
+                Distance = ${speed} mph * ${hours.toFixed(4)} hrs = ${dist.toFixed(3)} miles.<br>
+                <b>3. Find altitude lost (Opposite):</b><br>
+                sin(${angle}&deg;) = Altitude / Distance<br>
+                Altitude = ${dist.toFixed(3)} * sin(${angle}&deg;) &approx; ${formatForRounding(lost, 1)} &rarr; <b>${ans} miles</b>.`,
+                };
+            },
+            return({ speed, timeN, timeW }) {
+                const north = speed * timeN, west = speed * timeW, total = Math.hypot(north, west);
+                // The plane ends north and west of the start, so the direct return heads south and east.
+                const angle = Math.atan2(west, north) * 180 / Math.PI, ans1 = roundTo(total), ans2 = roundTo(angle);
+                return {
+                    prompt: `You divert, flying North for ${timeN} hours and West for ${timeW} hours at ${speed} mph. Find the direct distance back to your starting point and the bearing you should take.`,
+                    hint: 'Hint: Use Pythagorean theorem for distance. Return bearing requires switching directions (South and East). Round distance to nearest mile, angle to nearest degree.',
+                    fields: [{ id: 'inp1', label: 'Distance (miles)', answer: ans1 }, { id: 'inp2', label: 'Bearing Angle S __&deg; E (degrees)', answer: ans2 }],
+                    solutionHtml: `
+                <b>1. Find individual distances:</b><br>
+                North = ${speed} * ${timeN} = ${north.toFixed(1)} mi.<br>
+                West = ${speed} * ${timeW} = ${west.toFixed(1)} mi.<br>
+                <b>2. Find direct distance (Hypotenuse):</b><br>
+                c&sup2; = a&sup2; + b&sup2; &rarr; &radic;(${north.toFixed(1)}&sup2; + ${west.toFixed(1)}&sup2;) = ${total.toFixed(2)} &rarr; <b>${ans1} miles</b>.<br>
+                <b>3. Find Return Bearing:</b><br>
+                You are currently North and West of origin. You must fly South and East.<br>
+                tan(&theta;) = Opposite(West) / Adjacent(North)<br>
+                &theta; = arctan(${west.toFixed(1)} / ${north.toFixed(1)}) = ${angle.toFixed(2)}&deg; &rarr; <b>S ${ans2}&deg; E</b>.`,
+                };
+            },
+        };
+
+        const isSeed = (seed) => Number.isInteger(seed) && seed >= 0 && seed < SEED_LIMIT;
+
+        // Build a problem from explicit parameters. A seed, when given, is recorded as its problem code.
+        function build(type, params, seed) {
+            if (!builders[type]) throw new Error(`Unknown skill: ${type}`);
+            const p = { ...params };
+            const hasSeed = isSeed(seed);
+            return { type, seed: hasSeed ? seed : null, code: hasSeed ? `${type}-${seed.toString(36)}` : null, params: p, ...builders[type](p) };
         }
-        return value.toFixed(decimals);
-    };
+
+        function generate(type, seed) {
+            if (!pickParams[type]) throw new Error(`Unknown skill: ${type}`);
+            if (!isSeed(seed)) throw new Error(`Invalid seed: ${seed}`);
+            return build(type, pickParams[type](mulberry32(seed)), seed);
+        }
+
+        // Accepts codes such as "bearing-k3f9q2" (case-insensitive); returns null when malformed.
+        function parseCode(code) {
+            if (typeof code !== 'string') return null;
+            const m = code.trim().toLowerCase().match(/^([a-z]+)-([0-9a-z]{1,6})$/);
+            if (!m || !SKILLS.includes(m[1])) return null;
+            const seed = parseInt(m[2], 36);
+            return isSeed(seed) ? { type: m[1], seed } : null;
+        }
+
+        function newSeed() {
+            const c = globalThis.crypto;
+            if (c && typeof c.getRandomValues === 'function') return c.getRandomValues(new Uint32Array(1))[0] % SEED_LIMIT;
+            return Math.floor(Math.random() * SEED_LIMIT);
+        }
+
+        // Each entry must be a nonblank number equal to the rounded answer ("88" and "88.0" both match).
+        function grade(problem, entries) {
+            const parts = problem.fields.map((f, i) => {
+                const raw = entries[i];
+                if (typeof raw !== 'string' || raw.trim() === '') return false;
+                const v = Number(raw.trim());
+                return Number.isFinite(v) && v === f.answer;
+            });
+            return { parts, correct: parts.every(Boolean) };
+        }
+
+        return { SKILLS, build, generate, parseCode, newSeed, grade, roundTo, formatForRounding, mulberry32 };
+    })();
+    // </skyhawk-engine>
 
     // --- Game State ---
     let currentStageIndex = 0;
-    let currentData = {}; 
+    let currentData = {};
 
     // Define the sequence of question types and their visual animations
     const stageDefinitions = [
         { type: "elevation", title: "Stage 1: Elevation (Takeoff from LYH)", anim: { b: '40vh', l: '30%', t: 'rotate(-15deg)' } },
-        { type: "bearing", title: "Stage 2: Bearing (Cruising)", dir: "SW", anim: { b: '40vh', l: '60%', t: 'rotate(0deg)' } },
+        { type: "bearing", title: "Stage 2: Bearing (Cruising)", anim: { b: '40vh', l: '60%', t: 'rotate(0deg)' } },
         { type: "depression", title: "Stage 3: Depression (Descent)", anim: { b: '25vh', l: '80%', t: 'rotate(10deg)' } },
         { type: "return", title: "Stage 4: Return (Diverted)", anim: { b: '25vh', l: '20%', t: 'scaleX(-1) rotate(0deg)' } }
     ];
@@ -314,116 +465,26 @@
         loadStage();
     }
 
-    function loadStage() {
+    // Load the current stage with a fresh problem, or with `seed` to replay a reported problem.
+    function loadStage(seed) {
         if (currentStageIndex >= stageDefinitions.length) {
             endGame();
             return;
         }
-        
+
         updateProgress();
-        generateDataForStage(stageDefinitions[currentStageIndex]);
+        const type = stageDefinitions[currentStageIndex].type;
+        currentData = SkyhawkEngine.generate(type, seed === undefined ? SkyhawkEngine.newSeed() : seed);
         renderStage(false);
     }
 
-    function generateDataForStage(def) {
-        currentData = { type: def.type, dir: def.dir };
-
-        if (def.type === "elevation") {
-            currentData.angle = randomInt(4, 9); // degrees
-            currentData.speed = randomInt(75, 90); // mph
-            currentData.alt = parseFloat(randomFloat(0.5, 1.5)); // miles
-            
-            let dist = currentData.alt / Math.sin(toRadians(currentData.angle));
-            let t_hours = dist / currentData.speed;
-            currentData.ans = roundTo(t_hours * 60); // nearest minute
-            
-            currentData.solutionText = `
-                <b>1. Find diagonal distance flown (d):</b><br>
-                sin(${currentData.angle}&deg;) = Opposite / Hypotenuse<br>
-                d = ${currentData.alt} / sin(${currentData.angle}&deg;) = ${dist.toFixed(3)} miles.<br>
-                <b>2. Find time in hours:</b><br>
-                Time = Distance / Speed = ${dist.toFixed(3)} / ${currentData.speed} = ${t_hours.toFixed(4)} hours.<br>
-                <b>3. Convert to minutes:</b><br>
-                ${t_hours.toFixed(4)} * 60 &approx; ${formatForRounding(t_hours * 60)} &rarr; <b>${currentData.ans} minutes</b>.
-            `;
-        } 
-        else if (def.type === "bearing") {
-            currentData.speed = randomInt(105, 125);
-            currentData.time = parseFloat(randomFloat(1.0, 2.5));
-            currentData.angle = randomInt(25, 65); // e.g. S 40 W
-            
-            let dist = currentData.speed * currentData.time;
-            let comp1 = dist * Math.cos(toRadians(currentData.angle)); // Adjacent to N/S axis
-            let comp2 = dist * Math.sin(toRadians(currentData.angle)); // Opposite to N/S axis
-            currentData.ans1 = roundTo(comp1);
-            currentData.ans2 = roundTo(comp2);
-            
-            let dir1 = def.dir === "SW" ? "South" : "North";
-            let dir2 = def.dir === "SW" ? "West" : "East";
-
-            currentData.solutionText = `
-                <b>1. Find total distance:</b><br>
-                Distance = ${currentData.speed} mph * ${currentData.time} hrs = ${dist.toFixed(2)} miles.<br>
-                <b>2. Find ${dir1} component (Adjacent):</b><br>
-                ${dir1} = Distance * cos(${currentData.angle}&deg;)<br>
-                ${dir1} = ${dist.toFixed(2)} * cos(${currentData.angle}&deg;) &approx; ${formatForRounding(comp1)} &rarr; <b>${currentData.ans1} miles</b>.<br>
-                <b>3. Find ${dir2} component (Opposite):</b><br>
-                ${dir2} = Distance * sin(${currentData.angle}&deg;)<br>
-                ${dir2} = ${dist.toFixed(2)} * sin(${currentData.angle}&deg;) &approx; ${formatForRounding(comp2)} &rarr; <b>${currentData.ans2} miles</b>.
-            `;
-        }
-        else if (def.type === "depression") {
-            currentData.speed = randomInt(85, 105);
-            currentData.angle = randomInt(3, 6);
-            currentData.timeMins = randomInt(3, 7);
-            
-            let t_hours = currentData.timeMins / 60;
-            let dist = currentData.speed * t_hours;
-            let altLost = dist * Math.sin(toRadians(currentData.angle));
-            currentData.ans = roundTo(altLost, 1); // nearest tenth
-            
-            currentData.solutionText = `
-                <b>1. Convert time to hours:</b><br>
-                ${currentData.timeMins} mins / 60 = ${t_hours.toFixed(4)} hours.<br>
-                <b>2. Find distance flown:</b><br>
-                Distance = ${currentData.speed} mph * ${t_hours.toFixed(4)} hrs = ${dist.toFixed(3)} miles.<br>
-                <b>3. Find altitude lost (Opposite):</b><br>
-                sin(${currentData.angle}&deg;) = Altitude / Distance<br>
-                Altitude = ${dist.toFixed(3)} * sin(${currentData.angle}&deg;) &approx; ${formatForRounding(altLost, 1)} &rarr; <b>${currentData.ans} miles</b>.
-            `;
-        }
-        else if (def.type === "return") {
-            currentData.speed = randomInt(105, 120);
-            currentData.timeN = parseFloat(randomFloat(0.5, 1.5));
-            currentData.timeW = parseFloat(randomFloat(0.5, 1.5));
-            
-            let distN = currentData.speed * currentData.timeN;
-            let distW = currentData.speed * currentData.timeW;
-            let totalDist = Math.sqrt((distN * distN) + (distW * distW));
-            
-            currentData.ans1 = roundTo(totalDist); // distance
-            
-            // Plane is NW of origin. To fly direct to origin, it must fly SE.
-            let angle = toDegrees(Math.atan(distW / distN));
-            currentData.ans2 = roundTo(angle); // degrees
-
-            currentData.solutionText = `
-                <b>1. Find individual distances:</b><br>
-                North = ${currentData.speed} * ${currentData.timeN} = ${distN.toFixed(1)} mi.<br>
-                West = ${currentData.speed} * ${currentData.timeW} = ${distW.toFixed(1)} mi.<br>
-                <b>2. Find direct distance (Hypotenuse):</b><br>
-                c&sup2; = a&sup2; + b&sup2; &rarr; &radic;(${distN.toFixed(1)}&sup2; + ${distW.toFixed(1)}&sup2;) = ${totalDist.toFixed(2)} &rarr; <b>${currentData.ans1} miles</b>.<br>
-                <b>3. Find Return Bearing:</b><br>
-                You are currently North and West of origin. You must fly South and East.<br>
-                tan(&theta;) = Opposite(West) / Adjacent(North)<br>
-                &theta; = arctan(${distW.toFixed(1)} / ${distN.toFixed(1)}) = ${angle.toFixed(2)}&deg; &rarr; <b>S ${currentData.ans2}&deg; E</b>.
-            `;
-        }
-    }
+    const problemCodeHtml = () => currentData.code
+        ? `<span class="problem-code">Problem code: <a href="?problem=${currentData.code}">${currentData.code}</a></span>`
+        : '';
 
     function renderStage(showingSolution) {
         const def = stageDefinitions[currentStageIndex];
-        
+
         document.getElementById("modal-title").innerHTML = def.title;
         document.getElementById("solution-container").style.display = showingSolution ? "block" : "none";
         document.getElementById("error-msg").innerText = "";
@@ -439,83 +500,26 @@
 
         if (showingSolution) {
             document.getElementById("modal-title").innerHTML = `<span style="color:#D32F2F;">Math Review</span>`;
-            textElem.innerHTML = "Review the breakdown below to see where you made a mistake.";
-            document.getElementById("solution-container").innerHTML = currentData.solutionText;
+            textElem.innerHTML = "Review the breakdown below to see where you made a mistake." + problemCodeHtml();
+            document.getElementById("solution-container").innerHTML = currentData.solutionHtml;
             inputsContainer.innerHTML = "";
             btnContainer.innerHTML = `<button onclick="loadStage()">Try Another Example</button>`;
             return;
         }
 
-        // Build question text dynamically
-        let qText, hint, htmlInputs;
+        textElem.innerHTML = currentData.prompt + `<br><br><span class='math-hint'>${currentData.hint}</span>` + problemCodeHtml();
+        inputsContainer.innerHTML = currentData.fields.map((f) => `
+                <div class="input-group">
+                    <label for="${f.id}">${f.label}:</label>
+                    <input type="number" id="${f.id}"${f.step ? ` step="${f.step}"` : ''} />
+                </div>`).join('');
 
-        if (currentData.type === "elevation") {
-            qText = `You establish a climb at an angle of ${currentData.angle}&deg; at an average climb speed of ${currentData.speed} mph. How long will it take for the Skyhawk to reach an altitude of ${currentData.alt} miles?`;
-            hint = "Hint: Find distance on the hypotenuse first. Round to the nearest minute.";
-            htmlInputs = `
-                <div class="input-group">
-                    <label>Time (minutes):</label>
-                    <input type="number" id="inp1" />
-                </div>`;
-        } 
-        else if (currentData.type === "bearing") {
-            let bText = currentData.dir === "SW" ? `S ${currentData.angle}&deg; W` : `N ${currentData.angle}&deg; E`;
-            let dir1 = currentData.dir === "SW" ? "South" : "North";
-            let dir2 = currentData.dir === "SW" ? "West" : "East";
-            
-            qText = `You fly at ${currentData.speed} mph on a bearing of ${bText} for ${currentData.time} hours. How many miles ${dir1} and ${dir2} have you traveled?`;
-            hint = "Hint: Distance = speed &times; time. Use sine and cosine. Round to the nearest mile.";
-            htmlInputs = `
-                <div class="input-group">
-                    <label>${dir1} (miles):</label>
-                    <input type="number" id="inp1" />
-                </div>
-                <div class="input-group">
-                    <label>${dir2} (miles):</label>
-                    <input type="number" id="inp2" />
-                </div>`;
-        }
-        else if (currentData.type === "depression") {
-            qText = `You begin a descent at ${currentData.speed} mph with an angle of depression of ${currentData.angle}&deg;. How much altitude will you lose in ${currentData.timeMins} minutes?`;
-            hint = "Hint: Convert minutes to hours first. Round to the nearest tenth of a mile.";
-            htmlInputs = `
-                <div class="input-group">
-                    <label>Altitude lost (miles):</label>
-                    <input type="number" id="inp1" step="0.1" />
-                </div>`;
-        }
-        else if (currentData.type === "return") {
-            qText = `You divert, flying North for ${currentData.timeN} hours and West for ${currentData.timeW} hours at ${currentData.speed} mph. Find the direct distance back to your starting point and the bearing you should take.`;
-            hint = "Hint: Use Pythagorean theorem for distance. Return bearing requires switching directions (South and East). Round distance to nearest mile, angle to nearest degree.";
-            htmlInputs = `
-                <div class="input-group">
-                    <label>Distance (miles):</label>
-                    <input type="number" id="inp1" />
-                </div>
-                <div class="input-group">
-                    <label>Bearing Angle (S __&deg; E):</label>
-                    <input type="number" id="inp2" />
-                </div>`;
-        }
-
-        textElem.innerHTML = qText + `<br><br><span class='math-hint'>${hint}</span>`;
-        inputsContainer.innerHTML = htmlInputs;
-        
         btnContainer.innerHTML = `<button onclick="verifyAnswer()">Submit Calculation</button>`;
     }
 
     function verifyAnswer() {
-        let isCorrect = false;
-        let v1 = parseFloat(document.getElementById("inp1").value);
-        
-        if (currentData.type === "elevation" || currentData.type === "depression") {
-            if (v1 === currentData.ans) isCorrect = true;
-        } else {
-            let v2 = parseFloat(document.getElementById("inp2").value);
-            if (v1 === currentData.ans1 && v2 === currentData.ans2) isCorrect = true;
-        }
-
-        if (isCorrect) {
+        const entries = currentData.fields.map((f) => document.getElementById(f.id).value);
+        if (SkyhawkEngine.grade(currentData, entries).correct) {
             showSuccessScreen();
         } else {
             renderStage(true); // Show math review
@@ -527,7 +531,7 @@
         document.getElementById("modal-text").innerHTML = "Great job! Your calculations are spot on.";
         document.getElementById("inputs-container").innerHTML = "";
         document.getElementById("error-msg").innerText = "";
-        
+
         document.getElementById("btn-container").innerHTML = `
             <button class="secondary" onclick="practiceAgain()">Practice This Type Again</button>
             <button onclick="continueFlight()">Continue Flight</button>
@@ -547,20 +551,28 @@
 
     function endGame() {
         updateProgress(); // Sets progress bar to 100%
-        
+
         const plane = document.getElementById("plane");
         plane.style.transform = 'rotate(0deg)';
-        plane.style.bottom = '12vh'; 
+        plane.style.bottom = '12vh';
         plane.style.left = '80%';
-        
+
         document.getElementById("modal-title").innerText = "Landing Successful!";
         document.getElementById("modal-text").innerText = "Great job navigating! You've successfully mastered the 4 key right-triangle trigonometry skills.";
         document.getElementById("inputs-container").innerHTML = "";
         document.getElementById("solution-container").style.display = "none";
         document.getElementById("error-msg").innerText = "";
-        
+
         document.getElementById("btn-container").innerHTML = `<button onclick="initGame()">Start A New Flight</button>`;
     }
+
+    // Replay a reported problem: SkyhawkTrig.html?problem=bearing-k3f9q2 opens that exact problem.
+    (() => {
+        const replay = SkyhawkEngine.parseCode(new URLSearchParams(location.search).get('problem'));
+        if (!replay) return;
+        currentStageIndex = stageDefinitions.findIndex((d) => d.type === replay.type);
+        loadStage(replay.seed);
+    })();
 </script>
 
 </body>

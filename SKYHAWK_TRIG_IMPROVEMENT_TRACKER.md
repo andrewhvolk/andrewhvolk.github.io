@@ -45,7 +45,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Open | Unassigned | Initial audit below |
 | SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Open | Unassigned | Initial audit below |
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
-| SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Open | Unassigned | Initial audit below |
+| SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-010 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
 | SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below |
 
@@ -316,3 +316,62 @@ Copy the following structure and **append the completed entry at the very bottom
 - Implementation reference: Follow-up to PR #328 on `claude/skyhawk-trigger-prioritization-d6b3d4`.
 - Task status and owner: SH-012 Verification, Codex, pending browser and deployment confirmation. SH-001 and SH-011 retain their existing Verification status. No additional issues found beyond this display defect.
 - Remaining work and next action: Review the correction in PR #328 and verify worked-solution text in the browser and after deployment before marking SH-012 Done.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-010 seeded engine; SH-001 seed criterion
+
+- Entry type: Starting assessment, decision, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh010-seeded-engine`, stacked on `5bd931d` (PR #328, SH-001/SH-011, not yet merged).
+- Current status assessment: Confirmed SH-010 as recorded. Generation, grading, and DOM updates were interleaved in `generateDataForStage`/`renderStage`/`verifyAnswer`; problems used unseeded `Math.random` and string-rounded `toFixed(1)` picks, so no reported problem could be replayed. No other owner was recorded.
+- Decision (shared engine): Evaluated reusing `assets/js/math130-test3-skills.js`. Not adopted now. Its aviation profile uses knots for bearings, different ranges, 1-decimal tolerance grading for descent/return, and a random return quadrant, so adopting it would change the Skyhawk questions rather than just their plumbing. Loading it would also require the external-file-plus-synced-fallback arrangement that `130Test3.html` uses. Instead, the Skyhawk engine follows the same conventions (mulberry32, `roundTo`, `generate(rng)` → parameters) so it can be merged later. Revisit with SH-007, when bearing variety is added.
+- Change (`SkyhawkTrig.html`):
+  - A DOM-free `SkyhawkEngine` sits between `// <skyhawk-engine>` markers, inline so the page still works as a single offline file. API: `SKILLS`, `generate(type, seed)`, `build(type, params, seed?)`, `parseCode`, `newSeed`, `grade`, `roundTo`, `mulberry32`.
+  - Each problem holds its type, seed, code, parameters, prompt, hint, fields (label with units, rounded answer), and solution HTML. Decimal parameters are drawn as integer tenths instead of `toFixed` strings.
+  - Problem codes such as `bearing-q9kw6c` (skill plus base-36 seed) appear under each question and on the review screen. `SkyhawkTrig.html?problem=<code>` opens that exact problem at its stage; malformed codes fall back to the welcome screen.
+  - The page now only renders and grades through the engine. Inputs got `<label for>` associations as a side effect (partial SH-005; other SH-005 items untouched). Student-facing wording and grading behavior are otherwise unchanged; SH-004 (blank/partial feedback) remains open.
+- Tests and evidence: Rewrote `tests/verify-skyhawk-trig.cjs` (21/21 pass; the engine checks failed before implementation). It covers:
+  - loading the engine with no DOM;
+  - deep-equal reproduction per (skill, seed), and rebuilding from (skill, parameters);
+  - code round-trips, case-insensitivity, and rejection of malformed codes;
+  - prompt variety;
+  - 10,000 seeded cases per skill checked for parameter ranges and steps, units in labels, independent correct rounding, and readable precision;
+  - the earlier exact known-answer and grading cases;
+  - page wiring: `?problem=` replay, grading through the engine, and welcome fallback.
+
+  All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, and `check_css_links.py`. Browser check at `http://localhost:8137` (built-in Chromium pane, about 800×600):
+  - a correct elevation answer showed "Calculation Correct!"; a blank bearing answer opened Math Review with the code shown;
+  - `?problem=BEARING-q9kw6c` opened Stage 2 with a problem JSON-identical to the engine's;
+  - labels resolved to their inputs, and there were no console errors.
+
+  Not checked: other browsers or viewports, or deployment.
+- SH-001 note: Its remaining criterion ("a reported seed/parameter set reproduces the same prompt, expected answers, solution, and diagram") is now met for prompt, answers, and solution; no diagram exists yet (SH-006). SH-001 stays in Verification only for deployment checks.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-010 Verification, Claude (Opus 5.5). Close after merge and a post-deployment `?problem=` check.
+- New findings: None beyond the shared-engine decision above.
+- Remaining work and next action: Merge PR #328, then this branch. Next recommended task: SH-002/SH-003 (layout, the remaining P1 bugs), then SH-004.
+
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-010 merged with SH-012
+
+- Entry type: Progress (merge resolution).
+- Change: Merged the updated base branch, Codex's SH-012 commit `17fb1e7`, into `claude/skyhawk-sh010-seeded-engine` (PR #329). SH-010 had moved the solution text into `SkyhawkEngine`, so `formatForRounding` now lives in the engine. It is applied to the same values (climb minutes, both bearing components, descent loss) and exported for testing. Codex's regression checks were ported to the engine API: 105 mph / 2.4 h / S 25° W shows `106.4998 → 106`, the exact half shows `87.500 → 88`, 86 mph / 5° / 6 min shows `0.749… → 0.7`, and every displayed approximation in the 10,000 seeded cases per skill must round to its stated answer.
+- Tests and evidence: `tests/verify-skyhawk-trig.cjs` passes 22/22. All seven `tests/verify-*.cjs` suites, `check_html_structure.py`, `check_links.py`, and `git diff --check` pass. No browser check was performed for this merge.
+- Task status and owner: Unchanged. SH-010 Verification, Claude (Opus 5.5); SH-012 Verification, Codex.
+
+### 2026-11-20 — Codex — PR #329 reconciliation starting assessment
+
+- Entry type: Starting assessment and integration review; SH-010 and SH-012.
+- Starting branch and commit: `codex/reconcile-pr329` from PR #329 head `9f245f9`, using the clean primary checkout. The separate Claude worktree is untouched.
+- Current status assessment: The user authorized merging PR #328 and updating PR #329 against main. Merged #328 as `92bcffc` and retargeted #329 to main. The developer's latest commit `9f245f9` had already resolved the earlier overlapping changes by moving `formatForRounding` into `SkyhawkEngine` and porting the display regression checks. Reviewed those resolutions and confirmed both append-only tracker histories remain present.
+- Integration plan: Merge `origin/main` into the reconciliation branch without rewriting the developer's history. Verify the exact-half and near-half display cases, seed replay, grading, all seven regression suites, and the final diff before updating the existing PR branch.
+- Ownership/status: Existing SH-010 and SH-012 owners and Verification states remain unchanged. Codex owns this integration review. Browser and deployment checks remain pending; no new browser verification is claimed.
+
+### 2026-11-20 — Codex — PR #329 reconciliation verification and handoff
+
+- Entry type: Verification and handoff; SH-010 and SH-012.
+- Integration: PR #328 is merged at `92bcffc`. Retargeted PR #329 to `main` and merged that main commit into the PR #329 history. The merge completed cleanly because `9f245f9` already contained the developer's conflict resolution. No activity or test changes were needed beyond that resolution; both prior tracker histories are preserved.
+- Review result: The seeded engine retains `formatForRounding` for climb minutes, both bearing components, and descent loss. The fixed `106.4998 -> 106`, exact-half `87.500 -> 88`, and descent boundary cases remain covered. Reviewed seed/code parsing, deterministic generation, grading, page replay, and label wiring; no additional actionable defects found within this reconciliation scope.
+- Tests and evidence: All seven `tests/verify-*.cjs` suites pass against the combined result. Skyhawk passes 22/22 checks, including 10,000 cases per skill, display-to-answer consistency, seed and parameter reproduction, code round-trips, grading, and page replay. Shared MATH 130 and embedded offline fallback checks pass. `git diff --check` and the staged diff check pass; there are no unresolved merge entries.
+- Limitations: Browser and deployment verification remain pending for this combined result. Python-based site validators were not rerun because the installed Python launchers are unavailable in this environment.
+- Implementation reference: Reconciliation merge on PR #329 (`claude/skyhawk-sh010-seeded-engine`), prepared from `9f245f9` and main `92bcffc`.
+- Task status and owner: SH-010 and SH-012 remain Verification with their existing owners; SH-001 and SH-011 likewise retain their Verification status. No tracker task is closed by this integration check.
+- Remaining work and next action: Review the updated PR #329, then perform browser and deployment checks before recording those tasks as Done. The separate layout worktree was not modified.
