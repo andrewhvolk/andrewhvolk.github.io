@@ -36,19 +36,20 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 
 | ID | Priority | Task | Phase | Status | Owner | Latest evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| SH-001 | P1 | Correct rounding and answer grading at numerical boundaries | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 handoff below; `tests/verify-skyhawk-trig.cjs` |
-| SH-002 | P1 | Make controls reachable on small screens and in landscape | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
-| SH-003 | P1 | Prevent navigation from covering flight progress | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
-| SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-004 entry below; `tests/verify-skyhawk-trig.cjs` |
-| SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-005 entry below; `tests/verify-skyhawk-trig.cjs` |
-| SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-006 entry below; `tests/verify-skyhawk-trig.cjs` |
-| SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-007 entry below; `tests/verify-skyhawk-trig.cjs` |
-| SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-008 entry below; `tests/verify-skyhawk-trig.cjs` |
+| SH-001 | P1 | Correct rounding and answer grading at numerical boundaries | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
+| SH-002 | P1 | Make controls reachable on small screens and in landscape | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below; deployed, 2026-11-20 live site audit below |
+| SH-003 | P1 | Prevent navigation from covering flight progress | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below; deployed, 2026-11-20 live site audit below |
+| SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-004 entry below; `tests/verify-skyhawk-trig.cjs`; deployed, 2026-11-20 live site audit below |
+| SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-005 entry below; `tests/verify-skyhawk-trig.cjs`; deployed, 2026-11-20 live site audit below |
+| SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-006 entry below; `tests/verify-skyhawk-trig.cjs`; deployed, 2026-11-20 live site audit below |
+| SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
+| SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
-| SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-010 entry below; `tests/verify-skyhawk-trig.cjs` |
-| SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
-| SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below |
-| SH-013 | P2 | Show one-decimal flight times consistently (prompts can say "for 1 hours") | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-013 entry below; `tests/verify-skyhawk-trig.cjs` |
+| SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
+| SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
+| SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below; deployed, 2026-11-20 live site audit below |
+| SH-013 | P2 | Show one-decimal flight times consistently (prompts can say "for 1 hours") | 4 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
+| SH-014 | P2 | Add page metadata: an icon link (browser falls back to a missing /favicon.ico) and a meta description | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-014 entry below; `tests/verify-skyhawk-trig.cjs` |
 
 ## Product scope and constraints
 
@@ -679,4 +680,57 @@ Copy the following structure and **append the completed entry at the very bottom
 - Implementation commit or PR: pending (this branch).
 - Task status and owner: SH-008 Verification, Claude (Opus 5.5). Close after merge and deployment; the teacher defaults may need adjusting after a classroom pilot.
 - Remaining work and next action: Commit and open a PR. Next and last planned task: SH-009 (save, resume, and reset; it must store checkpoint records without rewriting them).
+
+### 2026-11-20 — Claude (Opus 5.5) — Live site audit; tasks closed; new SH-014
+
+- Entry type: Verification (deployment), decision, and new finding.
+- Target: `https://andrewhvolk.github.io/SkyhawkTrig.html`, served from `main` at `21f4658` (GitHub Pages build `built 21f4658`; the live file is byte-identical to `main` apart from line endings). Tools: headless Chrome via the chrome-devtools MCP (Lighthouse, device emulation, and scripted flows in the live page), plus `curl` for links and the shared engine.
+- Lighthouse (navigation mode, mobile and desktop): Accessibility 100, Best Practices 96, SEO 91, Agentic Browsing 100.
+  - The Best Practices failure is a console error: a 404 for `/favicon.ico`. The page declares no icon, so the browser requests the default path; `favicon.svg` exists (200) and other course pages declare it.
+  - The SEO failure is the missing meta description.
+  - Both are recorded as SH-014. There are no other console errors.
+- Live flows (scripted in the deployed page):
+  - SH-001 regression: 125 mph / 1.4 h / S 30° W gives 152 and 88; 88 is accepted, 87 is rejected, and the solution shows `87.500 → 88`.
+  - Blank entry: inline message, 0 attempts, solution hidden.
+  - Wrong attempt: entry kept, targeted hint, diagram still unrevealed. A corrected retry gives "Correct on attempt 2, after using hints".
+  - Guided completion: "Flight Complete!", "3 of 4 stages on the first attempt", and no "mastered".
+  - Checkpoint: no hint or side names. With three misses, the result is 9 of 12, target not met. Three follow-ups left the checkpoint records unchanged.
+  - The return forms `N 37° W`, `N37W`, `W 53° N`, and `323` are all accepted.
+  - `?problem=return-5` replays a problem identical to `generate('return', 5)`, with focus on the first input and a text bearing field.
+- Live layout: the scripted reachability and overlap audit, run on the welcome, question, review, success, and completion screens plus the checkpoint question and results, found 0 issues at 320×568, 390×844, and 844×390 (mobile, touch, DPR 2–3) and at 1366×768.
+- Live reduced motion: with `prefers-reduced-motion: reduce` emulated in Chrome, the plane and progress-fill transition durations are `0s`. Until now this was verified only by the CSS guard.
+- Live dark mode (390×844): the course bar switches theme, and the panel and diagram remain readable.
+- Self-contained delivery: loading the page makes one network request (the HTML), and the source has no `fetch`, `XMLHttpRequest`, external scripts, stylesheets, or imports. After loading, practice needs no network. A true offline reload was not tested: offline emulation reloads the page.
+- Links: the course link target `/courses/math130.html#sections-7-1-and-8-4` returns 200 and has that anchor. The course page links to `/SkyhawkTrig.html`.
+- Shared engine (SH-011): the live `130Test3.html` loads `math130-test3-skills.js?v=20261120-sh011`. The live file matches `main`, and the 190, 210, and 230 kn / 1.5 h / S 30° W cases give 143, 158, and 173.
+- SH-013: the live engine prints "for 1.0 hours" and "North for 1.0 hours", with 0 untenthed times or altitudes across 6,000 generated problems.
+- Decision: closing tasks whose remaining criterion was the post-deployment check. They are now Done:
+  - SH-001: rounding, plus seed replay via SH-010;
+  - SH-007: bearings;
+  - SH-008: checkpoint. The default targets remain open to adjustment after a classroom pilot;
+  - SH-010: seeded engine and replay;
+  - SH-011: shared engine;
+  - SH-013: decimal times.
+- Still in Verification, with the specific check each needs:
+  - SH-002/SH-003: a real phone, including the on-screen keyboard;
+  - SH-004, SH-005, SH-006: a pass with a real screen reader (for example NVDA with Chrome, or VoiceOver on iOS) covering feedback announcements, focus moves, and the SVG descriptions;
+  - SH-012: owned by Codex. The live solution shows `87.500 → 88`, and its display tests pass, so it is ready for its owner to close.
+- Open: SH-009 (save, resume, and reset local progress) and the new SH-014 (icon link and meta description).
+- Not performed: real devices, a screen reader, Safari or Firefox, and a classroom pilot.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-014 page metadata; flaky checkpoint test fixed
+
+- Entry type: Progress, verification, and test fix.
+- Branch: `claude/skyhawk-live-audit` from `main` at `21f4658`. It also carries the live-audit entry above.
+- Change (`SkyhawkTrig.html` `<head>`):
+  - Added `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`, matching the other MATH 130 pages, so browsers stop requesting the missing `/favicon.ico`.
+  - Added a meta description summarizing the four Section 7.1 skills and the two modes.
+- New check: the page declares the existing site icon and a 50–200 character description. It fails against the `main` page and passes after the change.
+- Test fix (no page change): the SH-008 check "misses: retries and hints are assisted…" failed in about 4 of 30 runs.
+  - Cause: when the deliberately missed skill was the checkpoint's last question, the page correctly shows "See Results", but the check accepted only "Next Question".
+  - A seeded reproduction over 400 runs found no page misbehavior.
+  - The check now accepts either label, and 60 consecutive runs passed.
+- Tests and evidence: `tests/verify-skyhawk-trig.cjs` passes 80/80. All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, `check_css_links.py`, and `git diff --check`.
+- Not performed: re-running Lighthouse on the deployed page. Do this after merge to confirm the console error is gone and SEO no longer flags the description.
+- Task status and owner: SH-014 Verification, Claude (Opus 5.5). Close after the post-deployment Lighthouse check.
 
