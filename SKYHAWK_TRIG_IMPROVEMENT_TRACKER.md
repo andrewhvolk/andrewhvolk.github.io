@@ -47,6 +47,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-010 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-011 entry below; `tests/verify-math130-test3.cjs` |
+| SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below |
 
 ## Product scope and constraints
 
@@ -296,6 +297,26 @@ Copy the following structure and **append the completed entry at the very bottom
 - Tests and evidence: Re-ran all MATH 130 suites and `tests/verify-skyhawk-trig.cjs` before committing; results are in the commit.
 - Task status and owner: SH-001 and SH-011 remain Verification, Claude (Opus 5.5), pending deployment checks (SH-001 also pending its SH-010 seed criterion).
 
+### 2026-11-20 — Codex — SH-012 starting assessment
+
+- Entry type: Starting assessment, new bug, and claim following review of PR #328.
+- Branch and starting commit: `claude/skyhawk-trigger-prioritization-d6b3d4`, `5bd931d`; clean checkout before this follow-up.
+- Current status assessment: Read the tracker, inspected the PR changes, and ran all seven regression suites successfully during review. The user authorized updating this PR directly. SH-001 and SH-011 retain their existing owner and Verification status; this follow-up claims the new display defect only.
+- Reproduction: Generate the bearing stage with 105 mph, 2.4 hours, S 25 degrees W. The west component is 106.49980195865626 and correctly grades as 106, but the new three-decimal display says `106.500 -> 106`, suggesting that an exact half rounds down. Reproduced using the page script in a Node VM. No browser or deployment check performed.
+- Expected behavior: Show enough digits that the displayed approximation rounds to the same final answer as the full-precision calculation; keep routine values concise and exact-half answers correct.
+- Files involved: `SkyhawkTrig.html`, `tests/verify-skyhawk-trig.cjs`, and this tracker.
+- Task status and owner: SH-012 In progress, Codex. Add regression coverage, fix display precision, rerun the suites, and update PR #328.
+
+### 2026-11-20 — Codex — SH-012 display-precision handoff
+
+- Entry type: Progress, verification, and handoff.
+- Change: Added `formatForRounding`, which starts with three decimals and adds digits only when the displayed value would round to a different final answer. Applied it to the climb-time, bearing-component, and descent-loss approximations introduced in PR #328. Full-precision calculations and grading are unchanged. The reported example now shows `106.4998 -> 106`; the exact-half regression still shows `87.500 -> 88`.
+- Tests and evidence: Added the explicit 105 mph / 2.4 h / S 25 degrees W regression and checks that the displayed approximations round to their stated answers in all 10,000 seeded cases per skill. Before the fix, the new checks failed for the fixed regression, generated bearing cases, and generated descent cases (including 86 mph / 5 degrees / 6 minutes, displayed as `0.750 -> 0.7`). After the fix, `node tests/verify-skyhawk-trig.cjs` passes 17/17 checks, and all seven `tests/verify-*.cjs` suites pass, including shared MATH 130 and offline fallback flows. `git diff --check` passes.
+- Limitations: Browser/visual and deployment checks were not performed. Python-based site validators could not run because the installed `python` and `py` launchers are unavailable in this environment.
+- Implementation reference: Follow-up to PR #328 on `claude/skyhawk-trigger-prioritization-d6b3d4`.
+- Task status and owner: SH-012 Verification, Codex, pending browser and deployment confirmation. SH-001 and SH-011 retain their existing Verification status. No additional issues found beyond this display defect.
+- Remaining work and next action: Review the correction in PR #328 and verify worked-solution text in the browser and after deployment before marking SH-012 Done.
+
 ### 2026-11-20 — Claude (Opus 5.5) — SH-010 seeded engine; SH-001 seed criterion
 
 - Entry type: Starting assessment, decision, progress, verification, and handoff.
@@ -328,3 +349,10 @@ Copy the following structure and **append the completed entry at the very bottom
 - New findings: None beyond the shared-engine decision above.
 - Remaining work and next action: Merge PR #328, then this branch. Next recommended task: SH-002/SH-003 (layout, the remaining P1 bugs), then SH-004.
 
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-010 merged with SH-012
+
+- Entry type: Progress (merge resolution).
+- Change: Merged the updated base branch, Codex's SH-012 commit `17fb1e7`, into `claude/skyhawk-sh010-seeded-engine` (PR #329). SH-010 had moved the solution text into `SkyhawkEngine`, so `formatForRounding` now lives in the engine. It is applied to the same values (climb minutes, both bearing components, descent loss) and exported for testing. Codex's regression checks were ported to the engine API: 105 mph / 2.4 h / S 25° W shows `106.4998 → 106`, the exact half shows `87.500 → 88`, 86 mph / 5° / 6 min shows `0.749… → 0.7`, and every displayed approximation in the 10,000 seeded cases per skill must round to its stated answer.
+- Tests and evidence: `tests/verify-skyhawk-trig.cjs` passes 22/22. All seven `tests/verify-*.cjs` suites, `check_html_structure.py`, `check_links.py`, and `git diff --check` pass. No browser check was performed for this merge.
+- Task status and owner: Unchanged. SH-010 Verification, Claude (Opus 5.5); SH-012 Verification, Codex.

@@ -87,6 +87,15 @@ check('bearing exact .5/.25/.75 components round correctly', () => {
     assert.equal(ans(E.build('bearing', { speed: 111, time: 1.5, angle: 30 }))[1], 83);
     assert.equal(ans(E.build('bearing', { speed: 115, time: 1.3, angle: 30 }))[1], 75);
 });
+check('worked solution preserves the side of a rounding boundary (SH-012)', () => {
+    const d = E.build('bearing', { speed: 105, time: 2.4, angle: 25 });
+    assert.equal(ans(d)[1], 106);
+    assert.match(d.solutionHtml, /106\.4998 &rarr; <b>106 miles/);
+    assert.doesNotMatch(d.solutionHtml, /106\.500 &rarr;/);
+    const half = E.build('bearing', { speed: 125, time: 1.4, angle: 30 });
+    assert.match(half.solutionHtml, /87\.500 &rarr; <b>88 miles/);
+    assert.match(E.build('depression', { speed: 86, angle: 5, timeMins: 6 }).solutionHtml, /&approx; 0\.749\d* &rarr; <b>0\.7 miles/);
+});
 check('return 3-4-5 and 45 degree cases', () => {
     assert.deepEqual(ans(E.build('return', { speed: 120, timeN: 0.8, timeW: 0.6 })), [120, 37]);
     assert.deepEqual(ans(E.build('return', { speed: 105, timeN: 1.0, timeW: 1.0 })), [148, 45]);
@@ -135,6 +144,13 @@ for (const type of SKILLS) {
                 assertRounded(Math.atan2(w, n) * 180 / Math.PI, a[1], 1, label);
             }
             assert.ok(!/\d\.\d{6,}/.test(p.solutionHtml + p.prompt), `${label}: unreadable precision`);
+            // Check the values students actually see, independently of the formatter (SH-012).
+            const steps = [...p.solutionHtml.matchAll(/&approx; ([\d.]+) &rarr; <b>([\d.]+)/g)];
+            if (type !== 'return') assert.equal(steps.length, type === 'bearing' ? 2 : 1, label);
+            for (const [, shown, answer] of steps) {
+                const scale = type === 'depression' ? 10 : 1;
+                assert.equal(Math.floor(Number(shown) * scale + 0.5) / scale, Number(answer), `${label}: displayed ${shown} must round to ${answer}`);
+            }
         }
     });
 }

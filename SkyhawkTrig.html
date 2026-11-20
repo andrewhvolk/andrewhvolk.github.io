@@ -294,6 +294,15 @@
             const factor = 10 ** places;
             return Math.round(Number((value * factor).toPrecision(12))) / factor;
         };
+        // Keep approximations concise without displaying a false halfway value
+        // (e.g. 106.4998 must not appear as 106.500 before rounding to 106). Tracker SH-012.
+        const formatForRounding = (value, places = 0) => {
+            let decimals = 3;
+            while (decimals < 12 && roundTo(Number(value.toFixed(decimals)), places) !== roundTo(value, places)) {
+                decimals++;
+            }
+            return value.toFixed(decimals);
+        };
 
         const pickParams = {
             elevation: (r) => ({ angle: int(r, 4, 9), speed: int(r, 75, 90), alt: tenths(r, 0.5, 1.5) }),
@@ -316,7 +325,7 @@
                 <b>2. Find time in hours:</b><br>
                 Time = Distance / Speed = ${dist.toFixed(3)} / ${speed} = ${hours.toFixed(4)} hours.<br>
                 <b>3. Convert to minutes:</b><br>
-                ${hours.toFixed(4)} * 60 &approx; ${minutes.toFixed(3)} &rarr; <b>${ans} minutes</b>.`,
+                ${hours.toFixed(4)} * 60 &approx; ${formatForRounding(minutes)} &rarr; <b>${ans} minutes</b>.`,
                 };
             },
             bearing({ speed, time, angle }) {
@@ -332,10 +341,10 @@
                 Distance = ${speed} mph * ${time} hrs = ${dist.toFixed(2)} miles.<br>
                 <b>2. Find South component (Adjacent):</b><br>
                 South = Distance * cos(${angle}&deg;)<br>
-                South = ${dist.toFixed(2)} * cos(${angle}&deg;) &approx; ${south.toFixed(3)} &rarr; <b>${ans1} miles</b>.<br>
+                South = ${dist.toFixed(2)} * cos(${angle}&deg;) &approx; ${formatForRounding(south)} &rarr; <b>${ans1} miles</b>.<br>
                 <b>3. Find West component (Opposite):</b><br>
                 West = Distance * sin(${angle}&deg;)<br>
-                West = ${dist.toFixed(2)} * sin(${angle}&deg;) &approx; ${west.toFixed(3)} &rarr; <b>${ans2} miles</b>.`,
+                West = ${dist.toFixed(2)} * sin(${angle}&deg;) &approx; ${formatForRounding(west)} &rarr; <b>${ans2} miles</b>.`,
                 };
             },
             depression({ speed, angle, timeMins }) {
@@ -351,7 +360,7 @@
                 Distance = ${speed} mph * ${hours.toFixed(4)} hrs = ${dist.toFixed(3)} miles.<br>
                 <b>3. Find altitude lost (Opposite):</b><br>
                 sin(${angle}&deg;) = Altitude / Distance<br>
-                Altitude = ${dist.toFixed(3)} * sin(${angle}&deg;) &approx; ${lost.toFixed(3)} &rarr; <b>${ans} miles</b>.`,
+                Altitude = ${dist.toFixed(3)} * sin(${angle}&deg;) &approx; ${formatForRounding(lost, 1)} &rarr; <b>${ans} miles</b>.`,
                 };
             },
             return({ speed, timeN, timeW }) {
@@ -418,7 +427,7 @@
             return { parts, correct: parts.every(Boolean) };
         }
 
-        return { SKILLS, build, generate, parseCode, newSeed, grade, roundTo, mulberry32 };
+        return { SKILLS, build, generate, parseCode, newSeed, grade, roundTo, formatForRounding, mulberry32 };
     })();
     // </skyhawk-engine>
 
