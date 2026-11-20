@@ -280,6 +280,89 @@
             font-family: Consolas, "Courier New", monospace;
         }
 
+        /* Instructional diagrams */
+        .diagram-box svg {
+            display: block;
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            margin: 4px auto 12px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .dg-label {
+            fill: #212121;
+            font-size: 12px;
+        }
+
+        .dg-unknown {
+            fill: #B71C1C;
+            font-weight: bold;
+        }
+
+        .dg-answer {
+            fill: #1B5E20;
+            font-weight: bold;
+        }
+
+        .dg-caption {
+            fill: #595959;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        .dg-compass {
+            fill: #424242;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .dg-path {
+            stroke: #1565C0;
+            stroke-width: 3;
+        }
+
+        .dg-component {
+            stroke: #2E7D32;
+            stroke-width: 2.5;
+            stroke-dasharray: 6 4;
+        }
+
+        .dg-return {
+            stroke: #6A1B9A;
+            stroke-width: 3;
+            stroke-dasharray: 8 5;
+        }
+
+        .dg-axis {
+            stroke: #757575;
+            stroke-width: 1.5;
+            stroke-dasharray: 4 4;
+        }
+
+        .dg-ground {
+            stroke: #33691E;
+            stroke-width: 3;
+        }
+
+        .dg-angle {
+            stroke: #E65100;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .dg-right {
+            stroke: #424242;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .dg-point {
+            fill: #212121;
+        }
+
         .solution-box {
             background: #f1f8e9;
             border-left: 4px solid #4CAF50;
@@ -325,6 +408,7 @@
                 <b>Important:</b> Always round to the designated precision. If a calculation is off, ATC will mark the part that needs attention and give you a hint. Fix it and check again, or ask for the worked solution and try a fresh problem.
             </div>
             
+            <div id="diagram-container" class="diagram-box"></div>
             <div id="solution-container" class="solution-box"></div>
             <div id="inputs-container"></div>
             <div id="error-msg" role="status"></div>
@@ -538,6 +622,181 @@
             },
         };
 
+        // --- Instructional diagrams (SH-006) ---
+        // Top views (bearing, return) use one scale for both axes, so their angles and proportions are true.
+        // Side views (climb, descent) exaggerate the vertical scale, because the real angles are only a
+        // few degrees; the angle is still marked at the correct vertex and labelled with its true value.
+        // Before an answer, labels show only values given in the prompt plus "?" for each unknown.
+        const VIEW = { w: 340, h: 230 };
+        const SIDE_ANGLE = 24; // drawn angle for side views, in degrees
+        const px = (n) => Number(n.toFixed(2));
+        const at = (x, y) => ({ x, y });
+        const svgLine = (a, b, cls) => `<line x1="${px(a.x)}" y1="${px(a.y)}" x2="${px(b.x)}" y2="${px(b.y)}" class="${cls}"/>`;
+        const svgDot = (p) => `<circle cx="${px(p.x)}" cy="${px(p.y)}" r="4" class="dg-point"/>`;
+        const svgText = (p, text, cls = 'dg-label', anchor = 'middle') =>
+            `<text x="${px(p.x)}" y="${px(p.y)}" text-anchor="${anchor}" class="${cls}">${text}</text>`;
+        const unit = (a, b) => { const d = Math.hypot(b.x - a.x, b.y - a.y); return at((b.x - a.x) / d, (b.y - a.y) / d); };
+        const along = (a, u, r) => at(a.x + u.x * r, a.y + u.y * r);
+        // Angle arc at vertex v between unit directions u1 and u2, with its label on the bisector.
+        function svgAngle(v, u1, u2, label, r = 30) {
+            const p1 = along(v, u1, r), p2 = along(v, u2, r);
+            const sweep = u1.x * u2.y - u1.y * u2.x > 0 ? 1 : 0;
+            const arcPath = `<path d="M ${px(p1.x)} ${px(p1.y)} A ${r} ${r} 0 0 ${sweep} ${px(p2.x)} ${px(p2.y)}" class="dg-angle"/>`;
+            const between = Math.acos(Math.max(-1, Math.min(1, u1.x * u2.x + u1.y * u2.y))) * 180 / Math.PI;
+            if (between >= 32) {
+                const bis = unit(at(0, 0), at(u1.x + u2.x, u1.y + u2.y));
+                return arcPath + svgText(along(v, bis, r + 16), label, 'dg-label dg-angle-label');
+            }
+            // Narrow angle: put the label just outside the first ray, on the side away from the second.
+            let n = at(-u1.y, u1.x);
+            if (n.x * u2.x + n.y * u2.y > 0) n = at(-n.x, -n.y);
+            const spot = along(along(v, u1, r * 0.7), n, 8);
+            return arcPath + svgText(at(spot.x, spot.y + 4), label, 'dg-label dg-angle-label', n.x > 0 ? 'start' : 'end');
+        }
+        // Label beside segment a-b at fraction t, offset perpendicular, on the side away from point `avoid`.
+        // Steep segments get start/end-anchored text so it does not run across the line.
+        function besideLine(a, b, t, avoid, text, gap = 14) {
+            const p = at(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t), d = unit(a, b);
+            let n = at(-d.y, d.x);
+            if (n.x * (p.x - avoid.x) + n.y * (p.y - avoid.y) < 0) n = at(-n.x, -n.y);
+            const anchor = n.x > 0.5 ? 'start' : n.x < -0.5 ? 'end' : 'middle';
+            // Centered text spans about 90px; move it further off a sloped line so its ends stay clear.
+            if (anchor === 'middle') gap += Math.min(30, 45 * Math.abs(d.y / (d.x || 1e-9)));
+            return svgText(at(p.x + n.x * gap, p.y + n.y * gap + (n.y > 0.5 ? 8 : 4)), text, 'dg-label', anchor);
+        }
+        // Small square marking the right angle at corner c between unit directions u1 and u2.
+        const svgRightAngle = (c, u1, u2, s = 10) => {
+            const a = along(c, u1, s), b = along(a, u2, s), d = along(c, u2, s);
+            return `<path d="M ${px(a.x)} ${px(a.y)} L ${px(b.x)} ${px(b.y)} L ${px(d.x)} ${px(d.y)}" class="dg-right"/>`;
+        };
+        // Scale points given in miles (x east, y north) into the view with one shared scale.
+        function fitPlan(points, padX = 70, padY = 34) {
+            const xs = points.map((p) => p.x), ys = points.map((p) => p.y);
+            const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+            const scale = Math.min((VIEW.w - 2 * padX) / Math.max(maxX - minX, 1e-9), (VIEW.h - 2 * padY) / Math.max(maxY - minY, 1e-9));
+            const ox = (VIEW.w - (maxX - minX) * scale) / 2 - minX * scale;
+            const oy = (VIEW.h + (maxY - minY) * scale) / 2 + minY * scale;
+            return { scale, toPx: (p) => at(ox + p.x * scale, oy - p.y * scale) };
+        }
+        const unknown = (name, value, reveal) => reveal
+            ? `<tspan class="dg-answer">${name} ≈ ${value}</tspan>`
+            : `<tspan class="dg-unknown">${name} = ?</tspan>`;
+        const svgShell = (title, desc, body) =>
+            `<svg viewBox="0 0 ${VIEW.w} ${VIEW.h}" role="img" aria-labelledby="dg-title dg-desc" class="diagram" xmlns="http://www.w3.org/2000/svg">` +
+            `<title id="dg-title">${title}</title><desc id="dg-desc">${desc}</desc>${body}</svg>`;
+        const NOT_TO_SCALE = 'Not to scale: vertical exaggerated';
+
+        function sideView(kind, p, reveal, guided) {
+            const climb = kind === 'elevation';
+            const run = 200, rise = run * Math.tan(rad(SIDE_ANGLE));
+            const vertex = climb ? at(40, 186) : at(40, 48);
+            const horizontalEnd = at(vertex.x + run, vertex.y);
+            const pathEnd = at(horizontalEnd.x, climb ? vertex.y - rise : vertex.y + rise);
+            const exaggeration = Math.tan(rad(SIDE_ANGLE)) / Math.tan(rad(p.params.angle));
+            const geometry = { kind: 'side', vertex, horizontalEnd, pathEnd, drawnAngle: SIDE_ANGLE, trueAngle: p.params.angle, exaggeration };
+            const f = p.fields[0];
+            // Two-line label: main text plus an optional guided side name below it.
+            const twoLine = (pt, main, side, anchor = 'middle') => svgText(pt,
+                `<tspan>${main}</tspan>${guided ? `<tspan x="${px(pt.x)}" dy="15">(${side})</tspan>` : ''}`, 'dg-label', anchor);
+            const hyp = unit(vertex, pathEnd), level = unit(vertex, horizontalEnd);
+            const mid = at((vertex.x + pathEnd.x) / 2, (vertex.y + pathEnd.y) / 2);
+            const vMid = at(horizontalEnd.x + 8, (horizontalEnd.y + pathEnd.y) / 2 + 4);
+            let body = svgLine(vertex, horizontalEnd, climb ? 'dg-ground' : 'dg-axis') +
+                svgLine(vertex, pathEnd, 'dg-path') + svgLine(horizontalEnd, pathEnd, 'dg-component') +
+                svgRightAngle(horizontalEnd, unit(horizontalEnd, vertex), unit(horizontalEnd, pathEnd)) +
+                svgAngle(vertex, level, hyp, `${p.params.angle}°`, 34) + svgDot(vertex) + svgDot(pathEnd);
+            if (climb) {
+                body += twoLine(at(mid.x - 34, mid.y - 30), `flight path, ${p.params.speed} mph`, 'hypotenuse') +
+                    twoLine(vMid, `${p.params.alt.toFixed(1)} mi gained`, 'opposite', 'start') +
+                    svgText(at(vertex.x + run / 2, vertex.y + 22), 'level ground') +
+                    svgText(at(VIEW.w / 2, 24), unknown('time', `${f.answer} min`, reveal));
+            } else {
+                body += twoLine(at(mid.x - 40, mid.y + 40), `${p.params.speed} mph for ${p.params.timeMins} min`, 'hypotenuse') +
+                    svgText(at(vertex.x + run / 2, vertex.y - 10), 'horizontal') +
+                    twoLine(vMid, 'altitude lost', 'opposite', 'start') +
+                    svgText(at(VIEW.w / 2, VIEW.h - 30), unknown('altitude lost', `${f.answer} mi`, reveal));
+            }
+            body += svgText(at(VIEW.w - 6, VIEW.h - 6), NOT_TO_SCALE, 'dg-caption', 'end');
+            const title = climb ? 'Climb diagram (side view)' : 'Descent diagram (side view)';
+            const known = climb
+                ? `The flight path rises from level ground at ${p.params.angle}° and climbs ${p.params.alt.toFixed(1)} miles at ${p.params.speed} mph`
+                : `The flight path descends at ${p.params.angle}° below the horizontal for ${p.params.timeMins} minutes at ${p.params.speed} mph`;
+            const desc = `Side view, not to scale. ${known}. ` + (reveal
+                ? `The answer is ${climb ? `about ${f.answer} minutes` : `about ${f.answer} miles of altitude lost`}.`
+                : `The ${climb ? 'climb time' : 'altitude lost (the vertical side)'} is unknown.`);
+            return { svg: svgShell(title, desc, body), geometry };
+        }
+
+        function bearingView(p, reveal, guided) {
+            const { speed, time, angle, ns = 'S', ew = 'W' } = p.params;
+            const sx = ew === 'E' ? 1 : -1, sy = ns === 'N' ? 1 : -1, dist = speed * time;
+            const miles = [at(0, 0), at(0, sy * dist * Math.cos(rad(angle))), at(sx * dist * Math.sin(rad(angle)), sy * dist * Math.cos(rad(angle)))];
+            const { scale, toPx } = fitPlan(miles, 100, 44);
+            const [start, corner, end] = miles.map(toPx);
+            const geometry = { kind: 'plan', scale, start, corner, end };
+            const [f1, f2] = p.fields, NS = DIR[ns], EW = DIR[ew];
+            const sideTag = (pt, t) => (guided ? `<tspan x="${px(pt.x)}" dy="15" class="dg-label">(${t})</tspan>` : '');
+            const nsAt = at(start.x - sx * 8, (start.y + corner.y) / 2), ewAt = at(corner.x + sx * 8, corner.y + (sy > 0 ? -22 : 18));
+            const body =
+                svgLine(at(start.x, 10), at(start.x, VIEW.h - 10), 'dg-axis') + svgLine(at(10, start.y), at(VIEW.w - 10, start.y), 'dg-axis') +
+                // N/S letters sit on the side away from the triangle, clear of its labels.
+                svgText(at(start.x - sx * 8, 18), 'N', 'dg-compass', sx > 0 ? 'end' : 'start') +
+                svgText(at(start.x - sx * 8, VIEW.h - 6), 'S', 'dg-compass', sx > 0 ? 'end' : 'start') +
+                svgText(at(VIEW.w - 4, start.y - 4), 'E', 'dg-compass', 'end') + svgText(at(4, start.y - 4), 'W', 'dg-compass', 'start') +
+                svgLine(start, corner, 'dg-component') + svgLine(corner, end, 'dg-component') + svgLine(start, end, 'dg-path') +
+                svgRightAngle(corner, unit(corner, start), unit(corner, end)) +
+                svgAngle(start, unit(start, corner), unit(start, end), `${angle}°`) +
+                svgDot(start) + svgDot(end) +
+                besideLine(start, end, 0.7, corner, `${speed} mph, ${time.toFixed(1)} h`) +
+                svgText(nsAt, unknown(NS, `${f1.answer} mi`, reveal) + sideTag(nsAt, 'adjacent'), 'dg-label', sx > 0 ? 'end' : 'start') +
+                // Anchored at the axis end of the leg so the text never crosses the North–South axis.
+                svgText(ewAt, unknown(EW, `${f2.answer} mi`, reveal) + sideTag(ewAt, 'opposite'), 'dg-label', sx > 0 ? 'start' : 'end');
+            const desc = `Top view with north up, drawn to scale. From the start, the plane flies on bearing ${ns} ${angle}° ${ew}, ` +
+                `measured from the North–South axis toward ${EW}, at ${speed} mph for ${time.toFixed(1)} hours. ` + (reveal
+                ? `It ends about ${f1.answer} miles ${NS} and ${f2.answer} miles ${EW} of the start.`
+                : `A right triangle shows the unknown ${NS} and ${EW} distances.`);
+            return { svg: svgShell('Bearing diagram (top view)', desc, body), geometry };
+        }
+
+        function returnView(p, reveal) {
+            const { speed, timeN, timeW, ns = 'N', ew = 'W' } = p.params;
+            const sx = ew === 'E' ? 1 : -1, sy = ns === 'N' ? 1 : -1;
+            const miles = [at(0, 0), at(0, sy * speed * timeN), at(sx * speed * timeW, sy * speed * timeN)];
+            const { scale, toPx } = fitPlan(miles, 100, 40);
+            const [start, turn, now] = miles.map(toPx);
+            const geometry = { kind: 'plan', scale, start, turn, now };
+            const [f1, f2] = p.fields, NS = DIR[ns], EW = DIR[ew];
+            const refEnd = at(now.x, now.y + Math.sign(start.y - now.y) * 60);
+            const nowSide = now.x < turn.x ? -1 : 1;
+            const body =
+                svgText(at(VIEW.w - 14, 18), 'N ↑', 'dg-compass', 'end') +
+                svgLine(at(now.x, now.y - 60), at(now.x, now.y + 60), 'dg-axis') +
+                svgLine(start, turn, 'dg-path') + svgLine(turn, now, 'dg-path') + svgLine(now, start, 'dg-return') +
+                svgRightAngle(turn, unit(turn, start), unit(turn, now)) +
+                svgAngle(now, unit(now, refEnd), unit(now, start), reveal ? `${f2.angle}°` : 'θ = ?', 34) +
+                svgDot(start) + svgDot(now) +
+                svgText(at(start.x, start.y + (sy > 0 ? 18 : -10)), 'Start') +
+                svgText(at(now.x + nowSide * 12, now.y + 4), 'Now', 'dg-label', nowSide < 0 ? 'end' : 'start') +
+                svgText(at(start.x - sx * 8, (start.y + turn.y) / 2), `${NS}, ${timeN.toFixed(1)} h`, 'dg-label', sx > 0 ? 'end' : 'start') +
+                // Placed just beyond the turn, outside the triangle and clear of the reference line at "Now".
+                svgText(at(turn.x - sx * 8, turn.y + (sy > 0 ? -8 : 18)), `${EW}, ${timeW.toFixed(1)} h`, 'dg-label', sx > 0 ? 'end' : 'start') +
+                // Distance label sits nearer the start, clear of the angle arc at "Now".
+                besideLine(now, start, 0.65, turn, unknown('distance', `${f1.answer} mi`, reveal)) +
+                svgText(at(8, 18), `both legs at ${speed} mph` + (reveal ? `; return bearing ${f2.answer}` : ''), 'dg-caption', 'start');
+            const desc = `Top view with north up, drawn to scale. The plane flew ${NS} for ${timeN.toFixed(1)} hours and then ${EW} ` +
+                `for ${timeW.toFixed(1)} hours at ${speed} mph. ` + (reveal
+                ? `The direct return is about ${f1.answer} miles on bearing ${f2.answer}.`
+                : 'A dashed line shows the unknown direct distance back to the start, and an arc marks the unknown return angle measured from the North–South line.');
+            return { svg: svgShell('Return diagram (top view)', desc, body), geometry };
+        }
+
+        // Diagram for a problem. reveal: label unknowns with their answers. guided: name triangle sides.
+        function diagram(problem, { reveal = false, guided = true } = {}) {
+            if (problem.type === 'bearing') return bearingView(problem, reveal, guided);
+            if (problem.type === 'return') return returnView(problem, reveal);
+            return sideView(problem.type, problem, reveal, guided);
+        }
+
         const isSeed = (seed) => Number.isInteger(seed) && seed >= 0 && seed < SEED_LIMIT;
 
         // Build a problem from explicit parameters. A seed, when given, is recorded as its problem code.
@@ -642,7 +901,7 @@
             return { parts: d.parts.map((p) => p.correct), correct: d.correct };
         }
 
-        return { SKILLS, build, generate, parseCode, newSeed, validate, diagnose, grade, parseBearing, headingOf, roundTo, formatForRounding, mulberry32 };
+        return { SKILLS, build, generate, parseCode, newSeed, validate, diagnose, grade, diagram, parseBearing, headingOf, roundTo, formatForRounding, mulberry32 };
     })();
     // </skyhawk-engine>
 
@@ -722,6 +981,13 @@
         renderStage();
     }
 
+    // Diagram for the current problem: unknowns as "?" while answering, answers once solved or
+    // after the worked solution is shown; null clears it.
+    const setDiagram = (reveal) => {
+        document.getElementById("diagram-container").innerHTML =
+            reveal === null ? '' : SkyhawkEngine.diagram(currentData, { reveal }).svg;
+    };
+
     const problemCodeHtml = () => currentData.code
         ? `<span class="problem-code">Problem code: <a href="?problem=${currentData.code}">${currentData.code}</a></span>`
         : '';
@@ -743,6 +1009,7 @@
         const textElem = document.getElementById("modal-text");
 
         textElem.innerHTML = currentData.prompt + `<br><br><span class='math-hint'>${currentData.hint}</span>` + problemCodeHtml();
+        setDiagram(false);
         inputsContainer.innerHTML = currentData.fields.map((f) => `
                 <div class="input-group">
                     <label for="${f.id}">${f.label}:</label>
@@ -824,6 +1091,7 @@
         const solution = document.getElementById("solution-container");
         solution.innerHTML = currentData.solutionHtml;
         solution.style.display = "block";
+        setDiagram(true);
         document.getElementById("inputs-container").innerHTML = "";
         document.getElementById("error-msg").innerText = "";
         document.getElementById("btn-container").innerHTML = `<button onclick="loadStage()">Try a Fresh Problem</button>`;
@@ -836,6 +1104,7 @@
             : `Correct on attempt ${attemptState.count}${attemptState.assisted ? ", after using hints" : ""}.`;
         document.getElementById("modal-title").innerHTML = `<span style="color:#2E7D32;">Calculation Correct!</span>`;
         document.getElementById("modal-text").innerHTML = `Great job! ${record}`;
+        setDiagram(true);
         document.getElementById("inputs-container").innerHTML = "";
         document.getElementById("error-msg").innerText = "";
 
@@ -869,6 +1138,7 @@
         document.getElementById("modal-title").innerText = "Landing Successful!";
         document.getElementById("modal-text").innerText = "Great job navigating! You've successfully mastered the 4 key right-triangle trigonometry skills.";
         document.getElementById("inputs-container").innerHTML = "";
+        setDiagram(null);
         document.getElementById("solution-container").style.display = "none";
         document.getElementById("error-msg").innerText = "";
 

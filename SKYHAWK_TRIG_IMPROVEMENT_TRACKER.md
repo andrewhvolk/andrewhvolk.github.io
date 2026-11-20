@@ -41,7 +41,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-003 | P1 | Prevent navigation from covering flight progress | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
 | SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-004 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-005 entry below; `tests/verify-skyhawk-trig.cjs` |
-| SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Open | Unassigned | Initial audit below |
+| SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-006 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-007 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Open | Unassigned | Initial audit below |
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
@@ -581,4 +581,46 @@ Copy the following structure and **append the completed entry at the very bottom
 - New finding (test only, fixed on `claude/skyhawk-test-crlf`): In a fresh Windows checkout of `main` (`core.autocrlf=true`, so the page has CRLF line endings), `tests/verify-skyhawk-trig.cjs` failed one check: "reduced-motion preference turns off plane and progress animation". That check locates the end of the media block with an LF-only pattern. The page itself is unaffected; the check passed in the developer worktree only because its edited files had LF endings. Fix: the test now normalizes CRLF to LF when reading the page. It passes 59/59 with both CRLF and LF copies of the page. The other six suites passed in the fresh CRLF checkout.
 - Task status: SH-001 through SH-005, SH-007, SH-010, and SH-013 remain in Verification until the deployed site is checked; SH-011 and SH-012 are unchanged. SH-006, SH-008, and SH-009 remain Open.
 - Next action: Merge the CRLF test fix, then check the deployed `SkyhawkTrig.html` and record which tasks can close.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-006 instructional diagrams
+
+- Entry type: Starting assessment, decision, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh006-diagrams` from `main` at `76ae5d9`, which includes every earlier Skyhawk change.
+- Current status assessment: Nobody had claimed SH-006. Confirmed the audit finding: the page had no diagrams, only the decorative plane, and the question panel covered most of the scene.
+- Decisions:
+  - Top views (bearing, return) are drawn to scale with one shared scale for both axes, so their angles and proportions are true.
+  - Side views (climb, descent) involve real angles of only 3–9°, which would be nearly flat at true scale. They are drawn at 24° with the vertical exaggerated and the caption "Not to scale: vertical exaggerated". The angle is still marked at the correct vertex and labelled with its true value.
+  - Diagrams are built by the DOM-free engine (`SkyhawkEngine.diagram(problem, { reveal, guided })` → `{ svg, geometry }`), so their geometry is testable.
+  - Guided diagrams name the triangle sides (adjacent, opposite, hypotenuse); `guided: false` removes those cues. The page uses guided diagrams because all practice is currently guided; SH-008 can switch independent questions to `guided: false`.
+  - The decorative plane animation is unchanged.
+- Change (`SkyhawkTrig.html`):
+  - Diagram content per skill:
+    - Climb: level ground, the climb angle at takeoff, the flight path with its speed, the altitude gained, and "time = ?".
+    - Descent: the upper horizontal at the plane, the depression angle there, the path with speed and minutes, and "altitude lost = ?".
+    - Bearing: dashed North–South and East–West axes through the start, the path labelled with speed and time, the bearing angle measured from the named N/S axis, a right-angle mark, and both components as "? " legs.
+    - Return: both legs in their directions with times, Start and Now, the dashed direct return path ("distance = ?"), and θ measured from a North–South reference line at the final position.
+  - Before an answer, labels show only values given in the prompt plus "?" markers. After a correct answer or the worked solution, the diagram shows each answer (for example "West ≈ 88 mi", "return bearing N 28° W"). A wrong attempt does not reveal anything.
+  - Each SVG has `role="img"` and is labelled by its `<title>` and `<desc>`. Before an answer, the description states only the given information and names the unknowns; after, it includes the answers.
+  - Styles: label fills are #212121, #B71C1C, #1B5E20, and #595959 (all at least 4.5:1). Line strokes are at least 3:1 against white; the dashed return path is purple and the angle arcs are orange.
+  - The diagram is shown between the question and the inputs, and cleared on the completion screen.
+- Tests and evidence:
+  - `tests/verify-skyhawk-trig.cjs` passes 68/68. The nine new checks failed before the change. They cover:
+    - accessible markup;
+    - plan-view geometry over 500 bearing and 500 return seeds: drawn angle within 0.01° of the bearing or return angle, a right angle at the corner, every quadrant's direction (north up, east right), legs proportional to the true distances with one shared scale, and every point inside the view;
+    - side views over 200 seeds each: angle at the correct vertex, upper horizontal for descent, vertical altitude side, a consistent exaggeration factor, and a true-angle label;
+    - no numbers that are not in the prompt, and "?" for unknowns, across 1,000 seeds per skill; no return bearing before reveal;
+    - answers present and no "?" after reveal;
+    - guided versus independent cues;
+    - the reveal timing in the page (question, wrong attempt, worked solution, success, completion);
+    - label and stroke contrast.
+  - All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, and `git diff --check`. The Skyhawk suite also passes against a CRLF copy of the page.
+  - Visual review (built-in Chromium pane): I iterated through galleries of all four skills, every quadrant, narrow (<25°) and wide (>60°) angles, and both reveal states, fixing clipped labels, labels sitting on lines, and angle labels crowding. The final review showed no clipped text and no labels overlapping lines or each other, except that "distance ≈ … mi" can sit close to "Start" in some revealed return views.
+  - The layout audit at 320×568, 390×844, and 844×390 found 0 issues. Lighthouse (snapshot, return feedback state, mobile and desktop) scored 100 for accessibility; the only failure in any category is the known SEO meta description.
+- Limitations and not performed:
+  - At a 320px viewport the diagram scales to about 260px, so its 12px labels render at about 9px. They remain present and zoomable, but are small.
+  - Not checked: a real screen reader reading the SVG description, real devices, and deployment.
+- New findings: None filed. The tight "distance/Start" spacing above is cosmetic.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-006 Verification, Claude (Opus 5.5). Close after a screen-reader pass and deployment.
+- Remaining work and next action: Commit and open a PR to `main`. Next recommended tasks: SH-008 (guided versus independent checkpoint; can use `guided: false` diagrams), then SH-009 (save and resume).
 
