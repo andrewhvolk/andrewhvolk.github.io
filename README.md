@@ -126,6 +126,12 @@ The Math Club is one page, `club/index.html`, built from `_data/club.yml`. The o
 
 ## Notes
 
+For Skyhawk Trig work, read the
+[Skyhawk Trig improvement tracker](SKYHAWK_TRIG_IMPROVEMENT_TRACKER.md) before
+changing the activity. Every programmer must evaluate the current implementation,
+update task ownership/status, and append new bugs, improvement opportunities,
+verification evidence, and a handoff to the bottom of that document as they work.
+
 MATH 130 practice lives in `assets/js/math130-test3-skills.js`. After editing it,
 run `node scripts/sync-math130-test3-fallback.cjs` to refresh the embedded copy,
 then `node tests/verify-math130-test3.cjs` and
