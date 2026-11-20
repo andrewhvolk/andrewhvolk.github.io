@@ -563,3 +563,22 @@ Copy the following structure and **append the completed entry at the very bottom
 - Task status and owner: SH-007 Verification, Claude (Opus 5.5). Close after merge and deployment.
 - Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-006 (diagrams; quadrant data now exists for the bearing and return sketches), then SH-008 and SH-009.
 
+### 2026-11-20 — Claude (Opus 5.5) — Stack merged to main; CRLF test fix
+
+- Entry type: Progress and new bug (test only).
+- Merge: The user asked to merge the stack. PRs were merged into `main` in order with merge commits, each retargeted to `main` just before merging; the source branches were not deleted:
+
+| PR | Change | Merge commit |
+| --- | --- | --- |
+| #329 | SH-010 seeded engine | `8afae07` |
+| #330 | SH-002/SH-003 layout | `ba584b6` |
+| #331 | SH-004 feedback | `0e4f4b9` |
+| #332 | SH-005 accessibility | `e552320` |
+| #333 | SH-013 decimal times | `dd660db` |
+| #334 | SH-007 bearings | `9ae24b5` |
+
+  `main` at `9ae24b5` is byte-identical to the tested `claude/skyhawk-sh007-bearings` tip.
+- New finding (test only, fixed on `claude/skyhawk-test-crlf`): In a fresh Windows checkout of `main` (`core.autocrlf=true`, so the page has CRLF line endings), `tests/verify-skyhawk-trig.cjs` failed one check: "reduced-motion preference turns off plane and progress animation". That check locates the end of the media block with an LF-only pattern. The page itself is unaffected; the check passed in the developer worktree only because its edited files had LF endings. Fix: the test now normalizes CRLF to LF when reading the page. It passes 59/59 with both CRLF and LF copies of the page. The other six suites passed in the fresh CRLF checkout.
+- Task status: SH-001 through SH-005, SH-007, SH-010, and SH-013 remain in Verification until the deployed site is checked; SH-011 and SH-012 are unchanged. SH-006, SH-008, and SH-009 remain Open.
+- Next action: Merge the CRLF test fix, then check the deployed `SkyhawkTrig.html` and record which tasks can close.
+

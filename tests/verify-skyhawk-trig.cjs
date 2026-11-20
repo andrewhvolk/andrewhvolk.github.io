@@ -9,7 +9,9 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
-const html = fs.readFileSync(path.join(root, 'SkyhawkTrig.html'), 'utf8');
+// Normalize line endings: Windows checkouts with core.autocrlf=true have CRLF, and the
+// CSS/markup checks below match LF-delimited text.
+const html = fs.readFileSync(path.join(root, 'SkyhawkTrig.html'), 'utf8').replace(/\r\n/g, '\n');
 const script = html.slice(html.lastIndexOf('<script>') + 8, html.lastIndexOf('</script>'));
 
 const results = [];
