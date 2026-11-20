@@ -264,6 +264,12 @@
     const randomFloat = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
     const toRadians = (degrees) => degrees * (Math.PI / 180);
     const toDegrees = (radians) => radians * (180 / Math.PI);
+    // Round half up to `places` decimals. Snapping to 12 significant digits first removes
+    // binary floating-point error (125 * 1.4 * sin 30° evaluates to 87.49999999999999 but is exactly 87.5).
+    const roundTo = (value, places = 0) => {
+        const factor = 10 ** places;
+        return Math.round(Number((value * factor).toPrecision(12))) / factor;
+    };
 
     // --- Game State ---
     let currentStageIndex = 0;
@@ -320,7 +326,7 @@
             
             let dist = currentData.alt / Math.sin(toRadians(currentData.angle));
             let t_hours = dist / currentData.speed;
-            currentData.ans = Math.round(t_hours * 60); // nearest minute
+            currentData.ans = roundTo(t_hours * 60); // nearest minute
             
             currentData.solutionText = `
                 <b>1. Find diagonal distance flown (d):</b><br>
@@ -329,7 +335,7 @@
                 <b>2. Find time in hours:</b><br>
                 Time = Distance / Speed = ${dist.toFixed(3)} / ${currentData.speed} = ${t_hours.toFixed(4)} hours.<br>
                 <b>3. Convert to minutes:</b><br>
-                ${t_hours.toFixed(4)} * 60 = ${t_hours * 60} &rarr; <b>${currentData.ans} minutes</b>.
+                ${t_hours.toFixed(4)} * 60 &approx; ${(t_hours * 60).toFixed(3)} &rarr; <b>${currentData.ans} minutes</b>.
             `;
         } 
         else if (def.type === "bearing") {
@@ -338,8 +344,10 @@
             currentData.angle = randomInt(25, 65); // e.g. S 40 W
             
             let dist = currentData.speed * currentData.time;
-            currentData.ans1 = Math.round(dist * Math.cos(toRadians(currentData.angle))); // Adjacent to N/S axis
-            currentData.ans2 = Math.round(dist * Math.sin(toRadians(currentData.angle))); // Opposite to N/S axis
+            let comp1 = dist * Math.cos(toRadians(currentData.angle)); // Adjacent to N/S axis
+            let comp2 = dist * Math.sin(toRadians(currentData.angle)); // Opposite to N/S axis
+            currentData.ans1 = roundTo(comp1);
+            currentData.ans2 = roundTo(comp2);
             
             let dir1 = def.dir === "SW" ? "South" : "North";
             let dir2 = def.dir === "SW" ? "West" : "East";
@@ -349,10 +357,10 @@
                 Distance = ${currentData.speed} mph * ${currentData.time} hrs = ${dist.toFixed(2)} miles.<br>
                 <b>2. Find ${dir1} component (Adjacent):</b><br>
                 ${dir1} = Distance * cos(${currentData.angle}&deg;)<br>
-                ${dir1} = ${dist.toFixed(2)} * cos(${currentData.angle}&deg;) = ${dist * Math.cos(toRadians(currentData.angle))} &rarr; <b>${currentData.ans1} miles</b>.<br>
+                ${dir1} = ${dist.toFixed(2)} * cos(${currentData.angle}&deg;) &approx; ${comp1.toFixed(3)} &rarr; <b>${currentData.ans1} miles</b>.<br>
                 <b>3. Find ${dir2} component (Opposite):</b><br>
                 ${dir2} = Distance * sin(${currentData.angle}&deg;)<br>
-                ${dir2} = ${dist.toFixed(2)} * sin(${currentData.angle}&deg;) = ${dist * Math.sin(toRadians(currentData.angle))} &rarr; <b>${currentData.ans2} miles</b>.
+                ${dir2} = ${dist.toFixed(2)} * sin(${currentData.angle}&deg;) &approx; ${comp2.toFixed(3)} &rarr; <b>${currentData.ans2} miles</b>.
             `;
         }
         else if (def.type === "depression") {
@@ -363,7 +371,7 @@
             let t_hours = currentData.timeMins / 60;
             let dist = currentData.speed * t_hours;
             let altLost = dist * Math.sin(toRadians(currentData.angle));
-            currentData.ans = Math.round(altLost * 10) / 10; // nearest tenth
+            currentData.ans = roundTo(altLost, 1); // nearest tenth
             
             currentData.solutionText = `
                 <b>1. Convert time to hours:</b><br>
@@ -372,7 +380,7 @@
                 Distance = ${currentData.speed} mph * ${t_hours.toFixed(4)} hrs = ${dist.toFixed(3)} miles.<br>
                 <b>3. Find altitude lost (Opposite):</b><br>
                 sin(${currentData.angle}&deg;) = Altitude / Distance<br>
-                Altitude = ${dist.toFixed(3)} * sin(${currentData.angle}&deg;) = ${altLost} &rarr; <b>${currentData.ans} miles</b>.
+                Altitude = ${dist.toFixed(3)} * sin(${currentData.angle}&deg;) &approx; ${altLost.toFixed(3)} &rarr; <b>${currentData.ans} miles</b>.
             `;
         }
         else if (def.type === "return") {
@@ -384,11 +392,11 @@
             let distW = currentData.speed * currentData.timeW;
             let totalDist = Math.sqrt((distN * distN) + (distW * distW));
             
-            currentData.ans1 = Math.round(totalDist); // distance
+            currentData.ans1 = roundTo(totalDist); // distance
             
             // Plane is NW of origin. To fly direct to origin, it must fly SE.
             let angle = toDegrees(Math.atan(distW / distN));
-            currentData.ans2 = Math.round(angle); // degrees
+            currentData.ans2 = roundTo(angle); // degrees
 
             currentData.solutionText = `
                 <b>1. Find individual distances:</b><br>
