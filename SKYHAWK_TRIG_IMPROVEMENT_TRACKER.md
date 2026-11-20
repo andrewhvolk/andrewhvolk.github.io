@@ -40,7 +40,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-002 | P1 | Make controls reachable on small screens and in landscape | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
 | SH-003 | P1 | Prevent navigation from covering flight progress | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
 | SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-004 entry below; `tests/verify-skyhawk-trig.cjs` |
-| SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Open | Unassigned | Initial audit below |
+| SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-005 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Open | Unassigned | Initial audit below |
 | SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Open | Unassigned | Initial audit below |
 | SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Open | Unassigned | Initial audit below |
@@ -443,4 +443,53 @@ Copy the following structure and **append the completed entry at the very bottom
 - Implementation commit or PR: pending (this branch).
 - Task status and owner: SH-004 Verification, Claude (Opus 5.5). Close after a screen-reader check and deployment. SH-013 Open, Unassigned.
 - Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-005 (Enter key, live announcements, button contrast, reduced motion). Then SH-013 is a quick wording fix.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-005 keyboard, announcements, contrast, motion
+
+- Entry type: Starting assessment, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh005-a11y`, stacked on `9d808cf` (PR #331, SH-004), which is stacked on #330 and #329. None are merged yet.
+- Current status assessment: Nobody had claimed SH-005. Labels and units were already associated by SH-010, and correct/incorrect text without relying on color by SH-004. Confirmed the remaining gaps:
+  - Enter did nothing.
+  - There was no status live region, and focus stayed on the clicked button, which was then replaced.
+  - Measured contrast against white: green `.secondary` buttons 2.78:1 (4.12:1 on hover) and the input border `#90CAF9` 1.75:1 (below the 3:1 non-text minimum). Every other text pair passed: blue button 5.75, progress text 5.20 at the lightest gradient stop, hint 5.74, error 4.98, problem code 7.00.
+  - No `prefers-reduced-motion` handling, so the plane's 2 s transition always animated.
+  - The plane emoji and the `☑` glyphs were exposed to screen readers.
+  - There was no `main` landmark; Lighthouse accessibility scored 98 before this was fixed.
+- Change (`SkyhawkTrig.html`):
+  - Keyboard: Enter in an answer field checks the answer once (`submitOnEnter`; held-down repeats and other keys are ignored, and solved or solution-viewed problems ignore it as well). An amber 3px `:focus-visible` outline appears on buttons, links, inputs, and the heading.
+  - Focus order:
+    - a new question focuses its first input, which `aria-describedby` links to the question text and the field's feedback;
+    - feedback focuses the first part that needs attention;
+    - the success, worked-solution, and completion screens focus their heading (`tabindex="-1"`).
+  - Announcements: `#error-msg` is a single `role="status"` region, so validation and attempt results are announced. The per-field `aria-live` was removed; field feedback is read with its input. The question panel is a `role="region"` labelled by its heading. The activity area is now `<main>`. The progress bar has `role="progressbar"` with `aria-valuenow`/`aria-valuetext` (for example "Stage 2 of 4: 1 completed"). The plane and `☑` glyphs are `aria-hidden`.
+  - Contrast: `.secondary` is now `#2E7D32` (5.13:1), with hover `#1B5E20` (7.87:1). The input border is now `#1976D2` (about 4.6:1). The invalid border `#B71C1C` is 6.57:1.
+  - Motion: `prefers-reduced-motion: reduce` turns off transitions on the plane, the progress fill, and buttons. The final plane position and the progress values still convey the same information.
+  - `endGame()` now sets the stage counter to complete itself, rather than relying on the caller.
+  - Not changed: the completion text still says the skills were "mastered", which remains SH-008. The course top bar is shared and was not changed.
+- Tests and evidence:
+  - `tests/verify-skyhawk-trig.cjs` passes 49/49. Nine of the ten new checks failed before the change. The tenth (status text) already passed via SH-004. The checks cover:
+    - computed contrast for every button state and both input-border states;
+    - the reduced-motion block and the focus-visible outline;
+    - static markup: status region, focusable heading, `main` landmark, hidden decorations, and the progress bar;
+    - `aria-describedby` wiring with no stray `aria-live`;
+    - Enter (once, repeat, other keys, after solving);
+    - focus on each screen change, status announcements, and progress-bar values.
+  - All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, and `git diff --check`.
+  - Keyboard-only browser run (built-in Chromium pane), using only Tab, Enter, Ctrl+A, and typing:
+    - Start Engine led to stage 1 with focus on the input;
+    - a wrong answer submitted with Enter kept focus on the input with the status shown;
+    - a corrected answer submitted with Enter focused "Calculation Correct!", then Tab Tab Enter on Continue Flight;
+    - stages 2–4 continued the same way until "Landing Successful!" was focused and the progress bar read "Flight complete: all 4 stages done".
+
+    There were no console errors. The accessibility tree shows the navigation, progress bar, region with heading, status, and buttons.
+  - Lighthouse snapshot audits (chrome-devtools MCP, headless Chrome) scored 100 for accessibility on the welcome screen (mobile), the bearing feedback state (mobile), and the worked-solution state (desktop). The only remaining failure in any category is SEO `meta-description`, which is outside SH-005.
+  - The layout audit at 320×568 and 844×390 still finds 0 issues after the `<main>` change.
+- Not performed:
+  - No real screen reader was used (NVDA, JAWS, VoiceOver, or TalkBack); the announcement behavior is inferred from roles and the accessibility tree.
+  - The reduced-motion preference was not emulated in a browser; it is verified only by the CSS guard.
+  - Real 200% browser zoom and real devices were not tested.
+- New findings: None beyond the SEO observation above (no meta description). It was not filed as a task because it is not part of this activity's plan.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-005 Verification, Claude (Opus 5.5). Close after a real screen-reader pass (for example NVDA with Chrome) and deployment.
+- Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-013, a quick wording fix. Then SH-007 (bearing variety), which reopens the shared-engine decision, and SH-006 (diagrams).
 
