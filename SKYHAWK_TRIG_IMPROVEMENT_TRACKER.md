@@ -44,12 +44,12 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-006 entry below; `tests/verify-skyhawk-trig.cjs`; deployed, 2026-11-20 live site audit below |
 | SH-007 | P2 | Vary bearing/return directions and accept equivalent bearings | 4 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-008 | P2 | Separate guided completion from independent readiness evidence | 5 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
-| SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Open | Unassigned | Initial audit below |
+| SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-009 entry below; `tests/verify-skyhawk-trig.cjs` |
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below; deployed, 2026-11-20 live site audit below |
 | SH-013 | P2 | Show one-decimal flight times consistently (prompts can say "for 1 hours") | 4 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
-| SH-014 | P2 | Add page metadata: an icon link (browser falls back to a missing /favicon.ico) and a meta description | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-014 entry below; `tests/verify-skyhawk-trig.cjs` |
+| SH-014 | P2 | Add page metadata: an icon link (browser falls back to a missing /favicon.ico) and a meta description | 2 | Done | Claude (Opus 5.5) | 2026-11-20 SH-009 entry below (live Lighthouse after #338) |
 
 ## Product scope and constraints
 
@@ -733,4 +733,71 @@ Copy the following structure and **append the completed entry at the very bottom
 - Tests and evidence: `tests/verify-skyhawk-trig.cjs` passes 80/80. All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, `check_css_links.py`, and `git diff --check`.
 - Not performed: re-running Lighthouse on the deployed page. Do this after merge to confirm the console error is gone and SEO no longer flags the description.
 - Task status and owner: SH-014 Verification, Claude (Opus 5.5). Close after the post-deployment Lighthouse check.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-009 save, resume, and reset; SH-014 closed
+
+- Entry type: Starting assessment, decision, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh009-save-resume` from `main` at `1325d43` (PR #338 merged).
+- SH-014 closure: after #338 deployed (Pages built `1325d43`), live Lighthouse (navigation, mobile) scored Accessibility, Best Practices, SEO, and Agentic Browsing all 100, with no console messages. SH-014 is Done.
+- Current status assessment: Nobody had claimed SH-009. The page used no storage, so any refresh returned to the welcome screen and lost guided progress or a checkpoint in progress.
+- Decisions:
+  - Storage: one `localStorage` key, `skyhawk-trig-progress`, holding a versioned (`v: 1`) snapshot of practice state only:
+    - mode and screen;
+    - guided stage index and per-stage outcomes;
+    - the checkpoint (seed, config, question list, index, frozen records, follow-ups);
+    - the current problem's skill and seed;
+    - the attempt record and typed entries, each clipped to 40 characters.
+
+    There is no name, account, identity, or gradebook data.
+  - Validation: on load, the snapshot is checked field by field. Any failure discards the whole snapshot rather than half-restoring it. The checks include:
+    - known skills and screens, and valid seeds;
+    - integer ranges and booleans;
+    - a checkpoint question list identical to the one its seed produces;
+    - record counts consistent with the index and phase;
+    - problem-code patterns and size limits.
+  - The student chooses to resume: a refresh shows "Resume: <description>", which restores the exact screen. Starting a new flight or checkpoint replaces saved progress, and "Clear Saved Progress" removes it.
+  - Replay links (`?problem=`) never read or write saved progress.
+- Change (`SkyhawkTrig.html`):
+  - Engine: `snapshotProgress`, `parseProgress` (returns ok or a reason: `empty`, `malformed`, `version`, or `invalid`), and `describeProgress`.
+  - Page:
+    - The state is saved after every screen change (question, feedback, success, solution, results, complete), after invalid submissions, and as entries are typed (`oninput`).
+    - `resumeSaved()` restores the records, stage, and checkpoint, then regenerates the problem from its seed. Depending on the saved state, it re-renders the success screen, the worked solution (still viewed, so later answers do not count), or the question with its typed entries and any previous attempt's feedback. Nothing is recorded again, so resuming never adds credit.
+    - Wrong-attempt feedback was factored into `showAttemptFeedback` so the same code renders it when resuming.
+    - A polite status line (`#save-status`, `aria-live="polite"`) shows one of:
+      - "Progress is saved on this device only. No name or account is stored.";
+      - "Progress is not being saved: this browser is blocking storage…" (missing or blocked storage, including a failed write);
+      - "This is a replay link, so progress here is not saved.";
+      - "Saved progress found: … Resume it, or start something new to replace it.";
+      - "Saved progress cleared.";
+      - "Saved progress could not be used (it was from an older version or was damaged), so it was cleared."
+    - All storage calls are wrapped in try/catch, and practice continues if storage fails.
+- Tests and evidence:
+  - `tests/verify-skyhawk-trig.cjs` passes 92/92, with 0 failures in 40 consecutive runs. The 12 new checks failed before implementation. They cover:
+    - snapshot round-trips and the stored key set (no identity terms);
+    - rejection of 15 tampered variants, version mismatches, malformed and oversized data;
+    - refresh-and-resume of a guided feedback state (same problem code, typed "12", attempt count 1, feedback and Check Again restored);
+    - a solved checkpoint question resumed three times without duplicating credit, with Next then recording exactly once;
+    - a viewed solution staying viewed;
+    - results restored byte-identically;
+    - clearing and replacement;
+    - corrupt and old data discarded with a message while practice still works;
+    - blocked (throwing) and missing storage running a full checkpoint with the session-only message;
+    - the device-only message;
+    - replay links not overwriting saved progress;
+    - the status markup.
+  - All seven `tests/verify-*.cjs` suites pass, as do `check_html_structure.py`, `check_links.py`, and `git diff --check`.
+  - Browser (built-in Chromium pane, real reloads):
+    - I started a checkpoint, answered 2 questions, typed "42" on question 3, and reloaded. The page showed "Resume: Independent checkpoint, question 3 of 12" and the saved-progress message.
+    - Resuming restored question 3 (`elevation-e8b6zx`), the "42", 2 records, the progress bar, and focus on the input, with no console errors.
+    - The stored value was 1,137 bytes under the single key, containing only the documented fields.
+    - A damaged stored value was removed on reload, with the "could not be used" message and the normal welcome buttons.
+    - The four-button resume screen passed the 320×568 reachability audit.
+  - Lighthouse (snapshot, resume screen, mobile) scored 100 in every category.
+- Not performed:
+  - real devices, Safari's private mode, and other browsers;
+  - blocked storage in a real browser (covered only by the throwing-storage test);
+  - a screen reader announcing the status line.
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-009 Verification, Claude (Opus 5.5). Close after deployment and a check in a browser with storage blocked (for example, Safari private browsing). SH-014 is Done.
+- Remaining work and next action: Commit and open a PR. Every planned task is now Done or in Verification. The remaining work is the human checks listed in the live audit entry (real phone and on-screen keyboard; a screen-reader pass), SH-012's owner closure, and a classroom pilot.
 

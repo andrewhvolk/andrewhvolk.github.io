@@ -875,6 +875,185 @@ check('page declares the site icon and a meta description', () => {
     assert.ok(fs.existsSync(path.join(root, 'favicon.svg')), 'the icon file exists');
 });
 
+// --- SH-009: save, resume, and reset local progress ---
+const memStorage = () => {
+    const m = new Map();
+    return { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), removeItem: (k) => m.delete(k), get size() { return m.size; }, dump: () => [...m.values()] };
+};
+const blockedStorage = () => ({ getItem() { throw Error('SecurityError'); }, setItem() { throw Error('SecurityError'); }, removeItem() { throw Error('SecurityError'); } });
+const sampleCheckpoint = (index = 5) => {
+    const config = E.checkpointConfig({}), queue = plain(E.buildCheckpoint(77, config.perSkill));
+    const records = queue.slice(0, index).map((q, i) => ({ type: q.type, seed: q.seed, code: `${q.type}-${q.seed.toString(36)}`, firstTry: i % 2 === 0, assisted: i % 2 === 1, solved: true, attempts: 1 + (i % 2) }));
+    return { seed: 77, config, queue, index, records, phase: 'checkpoint', followQueue: [], followUps: null };
+};
+const sampleState = (over = {}) => ({
+    mode: 'checkpoint', screen: 'feedback', stageIndex: 0, guidedRecords: [], checkpoint: sampleCheckpoint(),
+    current: { type: 'bearing', seed: 12345 }, attempt: { count: 1, assisted: true, solutionViewed: false, solved: false, firstTry: false, entries: ['152', '90'] },
+    inputs: ['152', '90'], ...over,
+});
+check('progress snapshots round-trip and contain only practice state (no identity or gradebook data)', () => {
+    for (const st of [sampleState(), sampleState({ mode: 'guided', checkpoint: null, stageIndex: 2, screen: 'question', guidedRecords: [{ type: 'elevation', code: 'elevation-5', firstTry: true, assisted: false }, { type: 'bearing', code: 'bearing-9', firstTry: false, assisted: true }] })]) {
+        const snap = plain(E.snapshotProgress(st));
+        assert.deepEqual(Object.keys(snap).sort(), ['attempt', 'checkpoint', 'current', 'guided', 'inputs', 'mode', 'screen', 'v']);
+        assert.equal(snap.v, 1);
+        const back = E.parseProgress(JSON.stringify(snap));
+        assert.equal(back.ok, true, back.reason);
+        assert.deepEqual(plain(back.state), snap);
+        assert.doesNotMatch(JSON.stringify(snap), /name|email|student|user|score|grade/i);
+    }
+});
+check('invalid, tampered, or incompatible saved progress is rejected with a reason', () => {
+    const good = plain(E.snapshotProgress(sampleState()));
+    const variant = (fn) => { const s = JSON.parse(JSON.stringify(good)); fn(s); return JSON.stringify(s); };
+    assert.equal(E.parseProgress(null).reason, 'empty');
+    assert.equal(E.parseProgress('').reason, 'empty');
+    assert.equal(E.parseProgress('{not json').reason, 'malformed');
+    assert.equal(E.parseProgress('"text"').reason, 'malformed');
+    assert.equal(E.parseProgress(variant((s) => { s.v = 2; })).reason, 'version');
+    assert.equal(E.parseProgress(variant((s) => { delete s.v; })).reason, 'version');
+    const invalid = [
+        (s) => { s.mode = 'admin'; }, (s) => { s.screen = '<img>'; }, (s) => { s.current.type = 'hack'; }, (s) => { s.current.seed = -1; },
+        (s) => { s.attempt.count = 'many'; }, (s) => { s.attempt.solved = 'yes'; }, (s) => { s.inputs = ['x'.repeat(500)]; },
+        (s) => { s.checkpoint.queue[0].seed += 1; }, (s) => { s.checkpoint.index = 9; }, (s) => { s.checkpoint.records[0].firstTry = 'true'; },
+        (s) => { s.checkpoint.config.perSkill = 9; }, (s) => { s.checkpoint.phase = 'done'; }, (s) => { s.guided.stageIndex = 7; },
+        (s) => { s.guided.records = [{ type: 'bearing', firstTry: 1 }]; }, (s) => { s.checkpoint.records[0].code = '<script>'; },
+    ];
+    invalid.forEach((fn, i) => assert.equal(E.parseProgress(variant(fn)).reason, 'invalid', `case ${i}`));
+    assert.equal(E.parseProgress('{"v":1,' + '"x":"' + 'y'.repeat(200000) + '"}').ok, false, 'oversized data is rejected');
+});
+
+// Page-level save/resume. A "refresh" is a fresh page context over the same storage.
+function spPage(storage, search = '') {
+    const elements = {};
+    const el = (id) => (elements[id] ||= {
+        id, value: '', style: {}, innerHTML: '', innerText: '', className: '', attrs: {},
+        setAttribute(k, v) { this.attrs[k] = v; }, removeAttribute(k) { delete this.attrs[k]; }, focus() { elements.__focused = id; },
+    });
+    const context = { Math, document: { getElementById: el }, console, location: { search }, URLSearchParams, ...(storage ? { localStorage: storage } : {}) };
+    vm.createContext(context);
+    vm.runInContext(script + ';this.page={initGame,startCheckpoint,nextQuestion,continueFlight,verifyAnswer,showSolution,saveProgress,resumeSaved,clearSavedProgress,' +
+        'get checkpoint(){return checkpoint},get guidedRecords(){return guidedRecords},get stage(){return currentStageIndex},get data(){return currentData},get attempt(){return attemptState}};', context);
+    return { page: context.page, el, elements };
+}
+const typed = (ctx, values) => values.forEach((v, i) => { const f = ctx.page.data.fields[i]; ctx.el(f.id).value = v; ctx.page.saveProgress(); });
+check('a refresh offers to resume; resuming restores the question, typed entries, and attempt state', () => {
+    const storage = memStorage();
+    const a = spPage(storage);
+    a.page.initGame(); // stage 1 question
+    const code = a.page.data.code, wrongEntry = String(a.page.data.fields[0].answer + 7);
+    a.el('inp1').value = wrongEntry; a.page.verifyAnswer();   // one wrong attempt: feedback screen
+    a.el('inp1').value = '12'; a.page.saveProgress();          // typed but not submitted
+    const b = spPage(storage);
+    assert.match(text(b.el('btn-container')), /Resume/);
+    assert.match(text(b.el('save-status')), /Saved progress found: Guided flight, stage 1 of 4/);
+    b.page.resumeSaved();
+    assert.equal(b.page.data.code, code);
+    assert.equal(b.el('inp1').value, '12');
+    assert.equal(b.page.attempt.count, 1); assert.equal(b.page.attempt.assisted, true);
+    assert.match(text(b.el('inp1-feedback')), /Needs attention/);
+    assert.match(text(b.el('btn-container')), /Check Again/);
+});
+check('resuming a solved checkpoint question never duplicates credit', () => {
+    const storage = memStorage();
+    const a = spPage(storage);
+    a.page.startCheckpoint();
+    for (let i = 0; i < 4; i++) { answer(a, true); a.page.nextQuestion(); }
+    answer(a, true); // fifth question solved, not yet recorded
+    const queue = JSON.stringify(a.page.checkpoint.queue);
+    for (let refresh = 0; refresh < 3; refresh++) {
+        const b = spPage(storage); b.page.resumeSaved();
+        assert.equal(JSON.stringify(b.page.checkpoint.queue), queue, 'same checkpoint');
+        assert.equal(b.page.checkpoint.records.length, 4, 'not recorded twice by resuming');
+        assert.match(text(b.el('modal-title')), /Correct/);
+        assert.equal(b.page.attempt.firstTry, true);
+    }
+    const c = spPage(storage); c.page.resumeSaved(); c.page.nextQuestion();
+    assert.equal(c.page.checkpoint.records.length, 5);
+    assert.match(text(c.el('modal-title')), /Checkpoint question 6 of 12/);
+    c.page.verifyAnswer(); // nothing typed: invalid, no attempt
+    const d = spPage(storage); d.page.resumeSaved();
+    assert.equal(d.page.checkpoint.records.length, 5); assert.equal(d.page.attempt.count, 0);
+});
+check('a viewed worked solution stays viewed after a refresh (no fresh first attempt)', () => {
+    const storage = memStorage();
+    const a = spPage(storage);
+    a.page.startCheckpoint(); answer(a, false); a.page.showSolution();
+    const b = spPage(storage); b.page.resumeSaved();
+    assert.equal(b.page.attempt.solutionViewed, true);
+    assert.equal(b.el('solution-container').style.display, 'block');
+    answer(b, true);
+    assert.equal(b.page.attempt.count, 1, 'answers after the solution still do not count');
+    b.page.nextQuestion();
+    assert.deepEqual(plain(b.page.checkpoint.records.map((r) => [r.firstTry, r.assisted, r.solved])), [[false, true, false]]);
+});
+check('checkpoint results survive a refresh unchanged', () => {
+    const storage = memStorage();
+    const a = spPage(storage);
+    a.page.startCheckpoint();
+    for (let i = 0; i < 12; i++) { answer(a, i !== 3); a.page.nextQuestion(); }
+    const before = text(a.el('modal-text'));
+    const b = spPage(storage);
+    assert.match(text(b.el('save-status')), /Checkpoint results/);
+    b.page.resumeSaved();
+    assert.equal(text(b.el('modal-text')), before);
+});
+check('clearing saved progress removes it; starting a new mode replaces it', () => {
+    const storage = memStorage();
+    const a = spPage(storage);
+    a.page.startCheckpoint(); answer(a, true); a.page.nextQuestion();
+    const b = spPage(storage);
+    b.page.clearSavedProgress();
+    assert.equal(storage.size, 0);
+    assert.doesNotMatch(text(b.el('btn-container')), /Resume/);
+    assert.match(text(b.el('save-status')), /cleared/i);
+    const c = spPage(storage);
+    c.page.startCheckpoint(); answer(c, true); c.page.nextQuestion();
+    c.page.initGame();
+    const d = spPage(storage);
+    assert.match(text(d.el('save-status')), /Guided flight, stage 1 of 4/);
+});
+check('corrupt or old saved data is discarded with a message, and practice still works', () => {
+    for (const bad of ['{oops', JSON.stringify({ v: 0, mode: 'guided' }), JSON.stringify({ v: 1, mode: 'guided', screen: 'question' })]) {
+        const storage = memStorage(); storage.setItem('skyhawk-trig-progress', bad);
+        const a = spPage(storage);
+        assert.match(text(a.el('save-status')), /could not be (used|restored)/i, bad);
+        assert.equal(storage.getItem('skyhawk-trig-progress'), null, 'bad data removed');
+        assert.doesNotMatch(text(a.el('btn-container')), /Resume/);
+        a.page.initGame(); answer(a, true);
+        assert.match(text(a.el('modal-title')), /Correct/);
+    }
+});
+check('blocked or missing storage never prevents practice and says progress is session-only', () => {
+    for (const storage of [blockedStorage(), null]) {
+        const a = spPage(storage);
+        assert.match(text(a.el('save-status')), /not being saved/i);
+        a.page.startCheckpoint();
+        for (let i = 0; i < 12; i++) { answer(a, true); a.page.nextQuestion(); }
+        assert.match(text(a.el('modal-title')), /Checkpoint Results/);
+        assert.match(text(a.el('save-status')), /not being saved/i);
+    }
+});
+check('saved progress is reported as device-only when storage works', () => {
+    const a = spPage(memStorage());
+    a.page.initGame();
+    assert.match(text(a.el('save-status')), /saved on this device/i);
+    assert.match(text(a.el('save-status')), /no name or account/i);
+});
+check('a replay link neither overwrites nor offers saved progress', () => {
+    const storage = memStorage();
+    const a = spPage(storage);
+    a.page.startCheckpoint(); answer(a, true); a.page.nextQuestion();
+    const saved = storage.getItem('skyhawk-trig-progress');
+    const b = spPage(storage, '?problem=bearing-9ix');
+    assert.equal(b.page.data.code, 'bearing-9ix');
+    answer(b, true);
+    assert.equal(storage.getItem('skyhawk-trig-progress'), saved, 'replay did not overwrite saved progress');
+    assert.match(text(b.el('save-status')), /replay/i);
+});
+check('page markup has a polite status line for save messages', () => {
+    assert.match(html, /<p id="save-status" class="save-status"[^>]*><\/p>/);
+});
+
 report();
 function report() {
     let failed = 0;
