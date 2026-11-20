@@ -808,7 +808,8 @@ check('misses: retries and hints are assisted, never first-attempt; target not m
         const type = ctx.page.data.type;
         if (type === firstType) {
             answer(ctx, false); missed++;
-            assert.match(text(ctx.el('btn-container')), /Next Question/, 'can move on after a miss');
+            // The last question's button reads "See Results" instead of "Next Question".
+            assert.match(text(ctx.el('btn-container')), /Next Question|See Results/, 'can move on after a miss');
             if (missed === 1) { answer(ctx, true); } else if (missed === 2) { ctx.page.showSolution(); }
         } else answer(ctx, true);
         ctx.page.nextQuestion();
@@ -863,6 +864,15 @@ check('guided flight completion reports what was completed and points to the che
 check('welcome screen offers both guided flight and the independent checkpoint', () => {
     assert.match(html, /onclick="initGame\(\)">Start Guided Flight</);
     assert.match(html, /onclick="startCheckpoint\(\)">Independent Checkpoint</);
+});
+
+// --- SH-014: page metadata ---
+check('page declares the site icon and a meta description', () => {
+    const head = html.slice(0, html.indexOf('</head>'));
+    assert.match(head, /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml">/);
+    const m = head.match(/<meta name="description" content="([^"]+)">/);
+    assert.ok(m && m[1].length >= 50 && m[1].length <= 200, 'a 50-200 character description');
+    assert.ok(fs.existsSync(path.join(root, 'favicon.svg')), 'the icon file exists');
 });
 
 report();
