@@ -363,6 +363,37 @@
             fill: #212121;
         }
 
+        .mode-note {
+            text-align: left;
+            margin: 12px 0 0;
+            font-size: 0.95rem;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.95rem;
+        }
+
+        .results-table caption {
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .results-table th,
+        .results-table td {
+            border: 1px solid #bdbdbd;
+            padding: 6px 8px;
+            text-align: left;
+        }
+
+        .result-note {
+            font-size: 0.9rem;
+            color: #424242;
+        }
+
         .solution-box {
             background: #f1f8e9;
             border-left: 4px solid #4CAF50;
@@ -406,6 +437,8 @@
                     <li><span aria-hidden="true">☑</span> Stage 4: Return (Distance & Bearing to origin)</li>
                 </ul>
                 <b>Important:</b> Always round to the designated precision. If a calculation is off, ATC will mark the part that needs attention and give you a hint. Fix it and check again, or ask for the worked solution and try a fresh problem.
+                <p class="mode-note"><b>Guided flight:</b> the four stages in order, with hints and labelled diagrams.<br>
+                <b>Independent checkpoint:</b> mixed questions from all four skills (12 by default), without hints. Your first-try answers show whether you meet the practice readiness target.</p>
             </div>
             
             <div id="diagram-container" class="diagram-box"></div>
@@ -414,7 +447,8 @@
             <div id="error-msg" role="status"></div>
             
             <div id="btn-container">
-                <button onclick="initGame()">Start Engine</button>
+                <button onclick="initGame()">Start Guided Flight</button>
+                <button class="secondary" onclick="startCheckpoint()">Independent Checkpoint</button>
             </div>
         </div>
     </div>
@@ -797,6 +831,71 @@
             return sideView(problem.type, problem, reveal, guided);
         }
 
+        // --- Independent checkpoint (SH-008) ---
+        // A practice readiness criterion, not a validated prediction of a quiz grade. Defaults follow the
+        // tracker: 3 questions per skill (12), at least 10 correct on the first attempt, and at least
+        // 2 of 3 in every skill. Teachers can adjust these with cp_per, cp_target, and cp_skill.
+        const SKILL_NAMES = { elevation: 'Climb (angle of elevation)', bearing: 'Bearing components', depression: 'Descent (angle of depression)', return: 'Direct return' };
+
+        function checkpointConfig(params = {}) {
+            const read = (key, lo, hi) => {
+                const v = Number(params[key]);
+                return params[key] !== undefined && Number.isInteger(v) && v >= lo && v <= hi ? v : null;
+            };
+            const perSkill = read('cp_per', 1, 5) ?? 3;
+            const total = perSkill * SKILLS.length;
+            // Defaults scale with length: about 10/12 overall and 2/3 per skill.
+            const totalTarget = read('cp_target', 1, total) ?? Math.ceil(total * 10 / 12);
+            const perSkillTarget = read('cp_skill', 1, perSkill) ?? Math.ceil(perSkill * 2 / 3);
+            return { perSkill, total, totalTarget, perSkillTarget };
+        }
+
+        // Seeds not already in `used`, drawn from r.
+        const freshSeed = (r, used) => {
+            let s;
+            do { s = Math.floor(r() * SEED_LIMIT); } while (used.has(s));
+            used.add(s);
+            return s;
+        };
+
+        // perSkill questions of every skill in a shuffled order, each with its own fresh problem seed.
+        function buildCheckpoint(seed, perSkill = 3) {
+            const r = mulberry32(seed), types = [];
+            for (const type of SKILLS) for (let i = 0; i < perSkill; i++) types.push(type);
+            for (let i = types.length - 1; i > 0; i--) {
+                const j = Math.floor(r() * (i + 1));
+                [types[i], types[j]] = [types[j], types[i]];
+            }
+            const used = new Set();
+            return types.map((type) => ({ type, seed: freshSeed(r, used) }));
+        }
+
+        // records: one per checkpoint question, in order: { type, seed, code, firstTry, assisted, solved, attempts }.
+        // firstTry means correct on the first graded attempt without a hint or the worked solution.
+        function summarizeCheckpoint(records, config) {
+            const perSkill = {};
+            for (const t of SKILLS) perSkill[t] = { firstTry: 0, total: 0, assisted: 0, solved: 0 };
+            let firstTry = 0, assisted = 0, solved = 0;
+            for (const rec of records) {
+                const s = perSkill[rec.type];
+                s.total++;
+                if (rec.firstTry) { s.firstTry++; firstTry++; }
+                if (rec.assisted) { s.assisted++; assisted++; }
+                if (rec.solved) { s.solved++; solved++; }
+            }
+            const complete = records.length === config.total && SKILLS.every((t) => perSkill[t].total === config.perSkill);
+            const skillsNeedingReview = SKILLS.filter((t) => perSkill[t].total && perSkill[t].firstTry < config.perSkillTarget);
+            const skillsWithMisses = SKILLS.filter((t) => perSkill[t].firstTry < perSkill[t].total);
+            const met = complete && firstTry >= config.totalTarget && skillsNeedingReview.length === 0;
+            return { total: records.length, firstTry, assisted, solved, perSkill, complete, met, skillsNeedingReview, skillsWithMisses };
+        }
+
+        // One fresh problem of the same skill for each checkpoint question that was not right on the first try.
+        function followUpQueue(records, seed) {
+            const r = mulberry32(seed), used = new Set(records.map((rec) => rec.seed));
+            return records.filter((rec) => !rec.firstTry).map((rec) => ({ type: rec.type, seed: freshSeed(r, used) }));
+        }
+
         const isSeed = (seed) => Number.isInteger(seed) && seed >= 0 && seed < SEED_LIMIT;
 
         // Build a problem from explicit parameters. A seed, when given, is recorded as its problem code.
@@ -901,7 +1000,7 @@
             return { parts: d.parts.map((p) => p.correct), correct: d.correct };
         }
 
-        return { SKILLS, build, generate, parseCode, newSeed, validate, diagnose, grade, diagram, parseBearing, headingOf, roundTo, formatForRounding, mulberry32 };
+        return { SKILLS, SKILL_NAMES, checkpointConfig, buildCheckpoint, summarizeCheckpoint, followUpQueue, build, generate, parseCode, newSeed, validate, diagnose, grade, diagram, parseBearing, headingOf, roundTo, formatForRounding, mulberry32 };
     })();
     // </skyhawk-engine>
 
@@ -915,6 +1014,13 @@
     const newAttempt = () => ({ count: 0, assisted: false, solutionViewed: false, solved: false, firstTry: false, entries: [] });
     let attemptState = newAttempt();
 
+    // Guided flight: the outcome of the problem solved at each stage before continuing.
+    let guidedRecords = [];
+    // Independent checkpoint state, or null during the guided flight. phase: 'checkpoint' | 'followup' | 'results'.
+    let checkpoint = null;
+    const SKILL_NAMES = SkyhawkEngine.SKILL_NAMES;
+    const urlParams = () => Object.fromEntries(new URLSearchParams(location.search));
+
     // Define the sequence of question types and their visual animations
     const stageDefinitions = [
         { type: "elevation", title: "Stage 1: Elevation (Takeoff from LYH)", anim: { b: '40vh', l: '30%', t: 'rotate(-15deg)' } },
@@ -923,29 +1029,37 @@
         { type: "return", title: "Stage 4: Return (Diverted)", anim: { b: '25vh', l: '20%', t: 'scaleX(-1) rotate(0deg)' } }
     ];
 
-    function updateProgress() {
-        const progContainer = document.getElementById("progress-container");
-        const progText = document.getElementById("progress-text");
-        const progFill = document.getElementById("progress-bar-fill");
-
-        progContainer.style.display = "flex";
-
-        if (currentStageIndex >= stageDefinitions.length) {
-            progText.innerText = "Flight Complete!";
-            progFill.style.width = "100%";
-        } else {
-            progText.innerText = `Flight Progress: ${stageDefinitions[currentStageIndex].title} (${currentStageIndex + 1} of ${stageDefinitions.length})`;
-            let pct = (currentStageIndex / stageDefinitions.length) * 100;
-            progFill.style.width = `${pct}%`;
-        }
-
-        // Expose completed stages to assistive technology.
-        const total = stageDefinitions.length, done = Math.min(currentStageIndex, total);
+    // Show the progress text and bar, and expose the same progress to assistive technology.
+    function setProgress(text, done, total, valueText) {
+        document.getElementById("progress-container").style.display = "flex";
+        document.getElementById("progress-text").innerText = text;
+        document.getElementById("progress-bar-fill").style.width = `${(done / total) * 100}%`;
         const bar = document.getElementById("progress-bar-bg");
+        bar.setAttribute("aria-valuemax", String(total));
         bar.setAttribute("aria-valuenow", String(done));
-        bar.setAttribute("aria-valuetext", done >= total
-            ? "Flight complete: all 4 stages done"
-            : `Stage ${done + 1} of ${total}: ${done} completed`);
+        bar.setAttribute("aria-valuetext", valueText);
+    }
+
+    function updateProgress() {
+        const total = stageDefinitions.length, done = Math.min(currentStageIndex, total);
+        if (done >= total) setProgress("Flight Complete!", total, total, "Flight complete: all 4 stages done");
+        else setProgress(`Flight Progress: ${stageDefinitions[done].title} (${done + 1} of ${total})`, done, total,
+            `Stage ${done + 1} of ${total}: ${done} completed`);
+    }
+
+    // What the current question screen shows: its title, plane position, and whether it is independent
+    // (checkpoint questions omit the formula hint and the side-name labels on the diagram).
+    function currentView() {
+        if (checkpoint && checkpoint.phase !== 'results') {
+            const list = checkpoint.phase === 'checkpoint' ? checkpoint.queue : checkpoint.followQueue;
+            const label = checkpoint.phase === 'checkpoint' ? 'Checkpoint' : 'Follow-up';
+            return {
+                title: `${label} question ${checkpoint.index + 1} of ${list.length}: ${SKILL_NAMES[currentData.type]}`,
+                anim: stageDefinitions.find((d) => d.type === currentData.type).anim,
+                independent: checkpoint.phase === 'checkpoint',
+            };
+        }
+        return { ...stageDefinitions[currentStageIndex], independent: false };
     }
 
     // Each new screen moves focus to its heading so screen readers begin there.
@@ -959,6 +1073,8 @@
     }
 
     function initGame() {
+        checkpoint = null;
+        guidedRecords = [];
         currentStageIndex = 0;
         loadStage();
     }
@@ -985,7 +1101,7 @@
     // after the worked solution is shown; null clears it.
     const setDiagram = (reveal) => {
         document.getElementById("diagram-container").innerHTML =
-            reveal === null ? '' : SkyhawkEngine.diagram(currentData, { reveal }).svg;
+            reveal === null ? '' : SkyhawkEngine.diagram(currentData, { reveal, guided: !currentView().independent }).svg;
     };
 
     const problemCodeHtml = () => currentData.code
@@ -993,7 +1109,7 @@
         : '';
 
     function renderStage() {
-        const def = stageDefinitions[currentStageIndex];
+        const def = currentView();
 
         document.getElementById("modal-title").innerHTML = def.title;
         document.getElementById("solution-container").style.display = "none";
@@ -1008,7 +1124,7 @@
         const btnContainer = document.getElementById("btn-container");
         const textElem = document.getElementById("modal-text");
 
-        textElem.innerHTML = currentData.prompt + `<br><br><span class='math-hint'>${currentData.hint}</span>` + problemCodeHtml();
+        textElem.innerHTML = currentData.prompt + (def.independent ? '' : `<br><br><span class='math-hint'>${currentData.hint}</span>`) + problemCodeHtml();
         setDiagram(false);
         inputsContainer.innerHTML = currentData.fields.map((f) => `
                 <div class="input-group">
@@ -1070,7 +1186,7 @@
             : `Attempt ${attemptState.count}: not yet. Revise your answer and check again.`;
         document.getElementById("btn-container").innerHTML = `
             <button onclick="verifyAnswer()">Check Again</button>
-            <button class="secondary" onclick="showSolution()">Show Worked Solution</button>`;
+            <button class="secondary" onclick="showSolution()">Show Worked Solution</button>` + (checkpoint ? nextQuestionButton() : '');
         const firstWrong = currentData.fields[result.parts.findIndex((p) => !p.correct)];
         document.getElementById(firstWrong.id).focus();
     }
@@ -1087,14 +1203,14 @@
         }).join('; ');
         document.getElementById("modal-title").innerHTML = "Worked Solution";
         document.getElementById("modal-text").innerHTML =
-            `Your last answers: ${yours}. Compare each step with your work, then try a fresh problem of this type.` + problemCodeHtml();
+            `Your last answers: ${yours}. Compare each step with your work, then ${checkpoint ? 'continue' : 'try a fresh problem of this type'}.` + problemCodeHtml();
         const solution = document.getElementById("solution-container");
         solution.innerHTML = currentData.solutionHtml;
         solution.style.display = "block";
         setDiagram(true);
         document.getElementById("inputs-container").innerHTML = "";
         document.getElementById("error-msg").innerText = "";
-        document.getElementById("btn-container").innerHTML = `<button onclick="loadStage()">Try a Fresh Problem</button>`;
+        document.getElementById("btn-container").innerHTML = checkpoint ? nextQuestionButton() : `<button onclick="loadStage()">Try a Fresh Problem</button>`;
         focusHeading();
     }
 
@@ -1108,7 +1224,7 @@
         document.getElementById("inputs-container").innerHTML = "";
         document.getElementById("error-msg").innerText = "";
 
-        document.getElementById("btn-container").innerHTML = `
+        document.getElementById("btn-container").innerHTML = checkpoint ? nextQuestionButton() : `
             <button class="secondary" onclick="practiceAgain()">Practice This Type Again</button>
             <button onclick="continueFlight()">Continue Flight</button>
         `;
@@ -1121,7 +1237,8 @@
     }
 
     function continueFlight() {
-        // Increment index and load next stage
+        // Record the problem just solved at this stage, then move to the next stage.
+        guidedRecords.push({ type: currentData.type, code: currentData.code, firstTry: attemptState.firstTry, assisted: attemptState.assisted });
         currentStageIndex++;
         loadStage();
     }
@@ -1135,14 +1252,110 @@
         plane.style.bottom = '12vh';
         plane.style.left = '80%';
 
-        document.getElementById("modal-title").innerText = "Landing Successful!";
-        document.getElementById("modal-text").innerText = "Great job navigating! You've successfully mastered the 4 key right-triangle trigonometry skills.";
+        // Report what was completed. Four guided answers are not evidence of readiness.
+        const firstTries = guidedRecords.filter((r) => r.firstTry).length;
+        document.getElementById("modal-title").innerHTML = "Flight Complete!";
+        document.getElementById("modal-text").innerHTML =
+            `<p>You landed back at LYH after finishing all four guided stages: ${firstTries} of ${guidedRecords.length} stages on the first attempt` +
+            `${firstTries < guidedRecords.length ? ', and the rest with hints or retries' : ''}.</p>` +
+            '<p>Guided practice shows you can work each problem type with support. It is not a readiness check. ' +
+            'Take the independent checkpoint to see whether you meet the practice readiness target.</p>';
         document.getElementById("inputs-container").innerHTML = "";
         setDiagram(null);
         document.getElementById("solution-container").style.display = "none";
         document.getElementById("error-msg").innerText = "";
 
-        document.getElementById("btn-container").innerHTML = `<button onclick="initGame()">Start A New Flight</button>`;
+        document.getElementById("btn-container").innerHTML =
+            `<button onclick="startCheckpoint()">Take Independent Checkpoint</button>` +
+            `<button class="secondary" onclick="initGame()">Start A New Flight</button>`;
+        focusHeading();
+    }
+
+    // --- Independent checkpoint and follow-up practice ---
+    function startCheckpoint() {
+        const config = SkyhawkEngine.checkpointConfig(urlParams());
+        const seed = SkyhawkEngine.newSeed();
+        checkpoint = { seed, config, queue: SkyhawkEngine.buildCheckpoint(seed, config.perSkill), index: 0, records: [], phase: 'checkpoint', followQueue: [], followUps: null };
+        loadCheckpointQuestion();
+    }
+
+    function loadCheckpointQuestion() {
+        const list = checkpoint.phase === 'checkpoint' ? checkpoint.queue : checkpoint.followQueue;
+        const item = list[checkpoint.index];
+        const label = checkpoint.phase === 'checkpoint' ? 'Independent checkpoint' : 'Follow-up practice';
+        setProgress(`${label}: question ${checkpoint.index + 1} of ${list.length}`, checkpoint.index, list.length,
+            `Question ${checkpoint.index + 1} of ${list.length}: ${checkpoint.index} answered`);
+        startProblem(SkyhawkEngine.generate(item.type, item.seed));
+    }
+
+    const nextQuestionButton = () => {
+        const list = checkpoint.phase === 'checkpoint' ? checkpoint.queue : checkpoint.followQueue;
+        return `<button onclick="nextQuestion()">${checkpoint.index + 1 < list.length ? 'Next Question' : 'See Results'}</button>`;
+    };
+
+    // Record the current question as it stands and move on. Records are never changed afterward.
+    function nextQuestion() {
+        if (!checkpoint || checkpoint.phase === 'results') return;
+        const record = {
+            type: currentData.type, seed: currentData.seed, code: currentData.code, firstTry: attemptState.firstTry,
+            assisted: attemptState.assisted, solved: attemptState.solved, attempts: attemptState.count,
+        };
+        const followUp = checkpoint.phase === 'followup';
+        (followUp ? checkpoint.followUps : checkpoint.records).push(record);
+        const list = followUp ? checkpoint.followQueue : checkpoint.queue;
+        checkpoint.index++;
+        if (checkpoint.index < list.length) loadCheckpointQuestion();
+        else showCheckpointResults();
+    }
+
+    // Fresh problems for each checkpoint question that was not right on the first try (guided, with hints).
+    function practiceMissed() {
+        checkpoint.followQueue = SkyhawkEngine.followUpQueue(checkpoint.records, SkyhawkEngine.newSeed());
+        checkpoint.followUps = [];
+        checkpoint.phase = 'followup';
+        checkpoint.index = 0;
+        loadCheckpointQuestion();
+    }
+
+    function showCheckpointResults() {
+        const cfg = checkpoint.config, s = SkyhawkEngine.summarizeCheckpoint(checkpoint.records, cfg);
+        checkpoint.phase = 'results';
+        setProgress("Independent checkpoint: results", cfg.total, cfg.total, `Checkpoint complete: ${cfg.total} questions answered`);
+        const rows = SkyhawkEngine.SKILLS.map((t) => {
+            const k = s.perSkill[t], misses = k.total - k.firstTry;
+            const status = k.firstTry < cfg.perSkillTarget ? 'Needs review' : misses ? `On target (${misses} missed)` : 'On target';
+            return `<tr><th scope="row">${SKILL_NAMES[t]}</th><td>${k.firstTry} of ${k.total}</td><td>${k.assisted}</td><td>${status}</td></tr>`;
+        }).join('');
+        const assistedLine = s.assisted === 1 ? '1 question was assisted' : `${s.assisted} questions were assisted`;
+        const review = s.skillsNeedingReview.map((t) => SKILL_NAMES[t]);
+        let followHtml = '';
+        if (checkpoint.followUps) {
+            const done = checkpoint.followUps, solved = done.filter((r) => r.solved).length, first = done.filter((r) => r.firstTry).length;
+            followHtml = `<p><b>Follow-up practice:</b> ${solved} of ${done.length} solved, ${first} on the first try. ` +
+                'Follow-up practice does not change your checkpoint results above.</p>';
+        }
+        document.getElementById("modal-title").innerHTML = "Checkpoint Results";
+        document.getElementById("modal-text").innerHTML =
+            `<p class="result-line"><b>${s.met ? 'Readiness target met.' : 'Readiness target not met yet.'}</b> ` +
+            `You answered ${s.firstTry} of ${cfg.total} questions correctly on the first try, without hints. ` +
+            `Target: at least ${cfg.totalTarget} of ${cfg.total}, and at least ${cfg.perSkillTarget} of ${cfg.perSkill} in every skill.</p>` +
+            `<table class="results-table"><caption>First-try results by skill</caption>` +
+            `<thead><tr><th scope="col">Skill</th><th scope="col">First try</th><th scope="col">Assisted</th><th scope="col">Status</th></tr></thead>` +
+            `<tbody>${rows}</tbody></table>` +
+            `<p>${assistedLine} (a hint, a retry, or the worked solution was used). ` +
+            `${review.length ? `Skills that need review: ${review.join(', ')}.` : 'No skill is below its per-skill target.'}</p>` +
+            followHtml +
+            '<p class="result-note">Only answers that were correct on the first try, without hints or the worked solution, count toward the target. ' +
+            'Questions finished after a hint, a retry, or the worked solution count as assisted. ' +
+            'This is a practice target, not a prediction of a quiz grade.</p>';
+        document.getElementById("inputs-container").innerHTML = "";
+        setDiagram(null);
+        document.getElementById("solution-container").style.display = "none";
+        document.getElementById("error-msg").innerText = "";
+        document.getElementById("btn-container").innerHTML =
+            (s.skillsWithMisses.length && !checkpoint.followUps ? `<button onclick="practiceMissed()">Practice Missed Skills</button>` : '') +
+            `<button class="secondary" onclick="startCheckpoint()">Retake Checkpoint</button>` +
+            `<button class="secondary" onclick="initGame()">Guided Flight</button>`;
         focusHeading();
     }
 

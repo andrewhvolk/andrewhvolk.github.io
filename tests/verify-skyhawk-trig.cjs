@@ -705,6 +705,166 @@ check('diagram styles exist with readable label colors', () => {
     }
 });
 
+// --- SH-008: guided completion vs independent readiness evidence ---
+check('checkpoint config: 12 questions (3 per skill), 10/12 overall and 2/3 per skill by default; teacher-adjustable and bounded', () => {
+    assert.deepEqual(plain(E.checkpointConfig({})), { perSkill: 3, total: 12, totalTarget: 10, perSkillTarget: 2 });
+    assert.deepEqual(plain(E.checkpointConfig({ cp_per: '2', cp_target: '7', cp_skill: '1' })), { perSkill: 2, total: 8, totalTarget: 7, perSkillTarget: 1 });
+    assert.deepEqual(plain(E.checkpointConfig({ cp_per: '4' })), { perSkill: 4, total: 16, totalTarget: 14, perSkillTarget: 3 });
+    for (const bad of [{ cp_per: '0' }, { cp_per: '9' }, { cp_per: 'x' }, { cp_target: '13' }, { cp_skill: '4' }, { cp_target: '-1' }]) {
+        assert.deepEqual(plain(E.checkpointConfig(bad)), { perSkill: 3, total: 12, totalTarget: 10, perSkillTarget: 2 }, JSON.stringify(bad));
+    }
+});
+check('checkpoint questions: every skill equally, mixed order, fresh distinct seeds, reproducible from the checkpoint seed', () => {
+    const orders = new Set();
+    for (let seed = 0; seed < 300; seed++) {
+        const q = plain(E.buildCheckpoint(seed, 3));
+        assert.equal(q.length, 12);
+        for (const t of SKILLS) assert.equal(q.filter((x) => x.type === t).length, 3, `seed ${seed}: 3 ${t}`);
+        assert.equal(new Set(q.map((x) => x.seed)).size, 12, 'distinct problem seeds');
+        assert.deepEqual(q, plain(E.buildCheckpoint(seed, 3)));
+        orders.add(q.map((x) => x.type[0]).join(''));
+    }
+    assert.ok(orders.size > 200, `orders vary (${orders.size} distinct)`);
+});
+const rec = (type, firstTry, extra = {}) => ({ type, code: `${type}-1`, firstTry, assisted: !firstTry, solved: true, attempts: firstTry ? 1 : 2, ...extra });
+const cfg = () => E.checkpointConfig({}); // lazy, so a missing engine API fails one check, not the suite
+check('summary: target needs 10/12 first-attempt AND 2/3 in every skill; assisted work is counted separately', () => {
+    const all = SKILLS.flatMap((t) => [rec(t, true), rec(t, true), rec(t, true)]);
+    let s = E.summarizeCheckpoint(all, cfg());
+    assert.equal(s.firstTry, 12); assert.equal(s.met, true); assert.deepEqual(plain(s.skillsNeedingReview), []);
+    // 10/12 overall but one skill at 1/3: not met.
+    const uneven = [...all]; uneven[0] = rec('elevation', false); uneven[1] = rec('elevation', false);
+    s = E.summarizeCheckpoint(uneven, cfg());
+    assert.equal(s.firstTry, 10); assert.equal(s.met, false); assert.deepEqual(plain(s.skillsNeedingReview), ['elevation']);
+    assert.equal(s.assisted, 2); assert.equal(s.perSkill.elevation.firstTry, 1);
+    // 9/12 spread out (each skill >= 2/3): not met on the overall target.
+    const spread = [...all]; spread[0] = rec('elevation', false); spread[3] = rec('bearing', false); spread[6] = rec('depression', false);
+    s = E.summarizeCheckpoint(spread, cfg());
+    assert.equal(s.firstTry, 9); assert.equal(s.met, false); assert.deepEqual(plain(s.skillsNeedingReview), []);
+    assert.deepEqual(plain(s.skillsWithMisses), ['elevation', 'bearing', 'depression']);
+    // An incomplete checkpoint never meets the target.
+    assert.equal(E.summarizeCheckpoint(all.slice(0, 11), cfg()).met, false);
+    // Unsolved questions count as misses and are reported.
+    s = E.summarizeCheckpoint([...all.slice(1), rec('elevation', false, { solved: false })], cfg());
+    assert.equal(s.solved, 11); assert.equal(s.firstTry, 11);
+});
+check('follow-up queue: one fresh problem per missed checkpoint question, never reusing a checkpoint problem', () => {
+    const records = [rec('bearing', false, { seed: 5 }), rec('bearing', true, { seed: 6 }), rec('return', false, { seed: 7 }), rec('bearing', false, { seed: 8 })];
+    const q = plain(E.followUpQueue(records, 99));
+    assert.deepEqual(q.map((x) => x.type), ['bearing', 'return', 'bearing']);
+    assert.ok(q.every((x) => ![5, 6, 7, 8].includes(x.seed)));
+    assert.deepEqual(q, plain(E.followUpQueue(records, 99)));
+    assert.deepEqual(plain(E.followUpQueue(records.filter((r) => r.firstTry), 1)), []);
+});
+
+// Page flow helpers.
+function cpPage(search = '') {
+    const elements = {};
+    const el = (id) => (elements[id] ||= {
+        id, value: '', style: {}, innerHTML: '', innerText: '', className: '', attrs: {},
+        setAttribute(k, v) { this.attrs[k] = v; }, removeAttribute(k) { delete this.attrs[k]; }, focus() { elements.__focused = id; },
+    });
+    const context = { Math, document: { getElementById: el }, console, location: { search }, URLSearchParams };
+    vm.createContext(context);
+    vm.runInContext(script + ';this.page={startCheckpoint,nextQuestion,practiceMissed,initGame,continueFlight,endGame,verifyAnswer,showSolution,' +
+        'get checkpoint(){return checkpoint},get guidedRecords(){return guidedRecords},get data(){return currentData},get attempt(){return attemptState}};', context);
+    return { page: context.page, el, elements };
+}
+const answer = ({ page, el }, right) => {
+    page.data.fields.forEach((f) => {
+        el(f.id).value = right ? String(f.answer)
+            : f.kind === 'bearing' ? `${f.ns} ${Math.min(89, f.angle + 7)} ${f.ew}` : String(f.answer + 7);
+    });
+    page.verifyAnswer();
+};
+check('checkpoint questions are independent: no formula hint, no side-name cues, mixed skills, and a numbered title', () => {
+    const ctx = cpPage();
+    ctx.page.startCheckpoint();
+    assert.equal(ctx.page.checkpoint.queue.length, 12);
+    assert.doesNotMatch(text(ctx.el('modal-text')), /math-hint|Hint:/);
+    assert.doesNotMatch(text(ctx.el('diagram-container')), />[^<]*\((adjacent|opposite|hypotenuse)\)/);
+    assert.match(text(ctx.el('modal-title')), /Checkpoint question 1 of 12/);
+    assert.match(ctx.el('progress-text').innerText, /Independent checkpoint: question 1 of 12/);
+    assert.equal(ctx.el('progress-bar-bg').attrs['aria-valuemax'], '12');
+});
+check('all twelve right on the first attempt meets the target and says what that means', () => {
+    const ctx = cpPage();
+    ctx.page.startCheckpoint();
+    for (let i = 0; i < 12; i++) { answer(ctx, true); assert.match(text(ctx.el('btn-container')), i < 11 ? /Next Question/ : /See Results/); ctx.page.nextQuestion(); }
+    const t = text(ctx.el('modal-text'));
+    assert.match(text(ctx.el('modal-title')), /Checkpoint Results/);
+    assert.match(t, /12 of 12/); assert.match(t, /Readiness target met/);
+    assert.match(t, /practice target, not a prediction/i);
+    assert.match(t, /first try, without hints/i);
+    assert.doesNotMatch(t, /master/i);
+    assert.doesNotMatch(text(ctx.el('btn-container')), /Practice Missed/);
+});
+check('misses: retries and hints are assisted, never first-attempt; target not met; skill flagged for review', () => {
+    const ctx = cpPage();
+    ctx.page.startCheckpoint();
+    const firstType = ctx.page.checkpoint.queue[0].type;
+    let missed = 0;
+    for (let i = 0; i < 12; i++) {
+        const type = ctx.page.data.type;
+        if (type === firstType) {
+            answer(ctx, false); missed++;
+            assert.match(text(ctx.el('btn-container')), /Next Question/, 'can move on after a miss');
+            if (missed === 1) { answer(ctx, true); } else if (missed === 2) { ctx.page.showSolution(); }
+        } else answer(ctx, true);
+        ctx.page.nextQuestion();
+    }
+    const recs = ctx.page.checkpoint.records;
+    assert.equal(recs.length, 12);
+    const mine = recs.filter((r) => r.type === firstType);
+    assert.deepEqual(plain(mine.map((r) => [r.firstTry, r.assisted, r.solved])), [[false, true, true], [false, true, false], [false, true, false]]);
+    const t = text(ctx.el('modal-text'));
+    assert.match(t, /9 of 12/); assert.match(t, /not met/i);
+    assert.match(t, /needs review/i);
+    assert.match(t, /3 assisted|assisted: 3|3 questions? (were|was) assisted/i);
+});
+check('follow-up practice uses fresh problems and does not rewrite the checkpoint record', () => {
+    const ctx = cpPage();
+    ctx.page.startCheckpoint();
+    for (let i = 0; i < 12; i++) { answer(ctx, i % 4 !== 0); ctx.page.nextQuestion(); }
+    const before = JSON.stringify(ctx.page.checkpoint.records), firstTry = ctx.page.checkpoint.records.filter((r) => r.firstTry).length;
+    assert.match(text(ctx.el('btn-container')), /Practice Missed Skills/);
+    ctx.page.practiceMissed();
+    const q = ctx.page.checkpoint.followQueue;
+    assert.equal(q.length, 12 - firstTry);
+    assert.match(text(ctx.el('modal-title')), new RegExp(`Follow-up question 1 of ${q.length}`));
+    const used = new Set(ctx.page.checkpoint.queue.map((x) => x.seed));
+    assert.ok(q.every((x) => !used.has(x.seed)), 'fresh problems');
+    assert.match(text(ctx.el('modal-text')), /Hint:/, 'follow-ups are guided practice');
+    for (let i = 0; i < q.length; i++) { answer(ctx, true); ctx.page.nextQuestion(); }
+    assert.equal(JSON.stringify(ctx.page.checkpoint.records), before, 'checkpoint history unchanged');
+    const t = text(ctx.el('modal-text'));
+    assert.match(t, new RegExp(`${firstTry} of 12`));
+    assert.match(t, /Follow-up practice/); assert.match(t, /do(es)? not change/i);
+});
+check('teacher settings in the URL change the checkpoint length and targets', () => {
+    const ctx = cpPage('?cp_per=2&cp_target=7&cp_skill=1');
+    ctx.page.startCheckpoint();
+    assert.equal(ctx.page.checkpoint.queue.length, 8);
+    for (let i = 0; i < 8; i++) { answer(ctx, true); ctx.page.nextQuestion(); }
+    assert.match(text(ctx.el('modal-text')), /7 of 8/);
+});
+check('guided flight completion reports what was completed and points to the checkpoint, without claiming mastery', () => {
+    const ctx = cpPage();
+    ctx.page.initGame();
+    for (let i = 0; i < 4; i++) { answer(ctx, i !== 1); if (i === 1) answer(ctx, true); ctx.page.continueFlight(); }
+    const t = String(ctx.el('modal-text').innerHTML || ctx.el('modal-text').innerText);
+    assert.match(text(ctx.el('modal-title')), /Flight Complete/i);
+    assert.doesNotMatch(t, /master/i);
+    assert.match(t, /3 of 4 stages on the first attempt/);
+    assert.match(t, /not a readiness check/i);
+    assert.match(text(ctx.el('btn-container')), /Independent Checkpoint/);
+    assert.deepEqual(plain(ctx.page.guidedRecords.map((r) => r.firstTry)), [true, false, true, true]);
+});
+check('welcome screen offers both guided flight and the independent checkpoint', () => {
+    assert.match(html, /onclick="initGame\(\)">Start Guided Flight</);
+    assert.match(html, /onclick="startCheckpoint\(\)">Independent Checkpoint</);
+});
+
 report();
 function report() {
     let failed = 0;
