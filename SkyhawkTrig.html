@@ -160,7 +160,7 @@
             padding: 8px;
             font-size: 1rem;
             width: 80px;
-            border: 2px solid #90CAF9;
+            border: 2px solid #1976D2; /* 4.6:1 against white (non-text minimum is 3:1) */
             border-radius: 4px;
             text-align: center;
         }
@@ -188,12 +188,34 @@
             background: #0D47A1;
         }
         
+        /* Darker greens keep white button text at or above 4.5:1 (#2E7D32 is 5.1:1, #1B5E20 is 7.9:1) */
         button.secondary {
-            background: #4CAF50;
+            background: #2E7D32;
         }
 
         button.secondary:hover {
-            background: #388E3C;
+            background: #1B5E20;
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        h2:focus-visible {
+            outline: 3px solid #FFB300;
+            outline-offset: 2px;
+        }
+
+        /* Headings receive focus on screen changes only so screen readers start there */
+        h2:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #plane,
+            #progress-bar-fill,
+            button {
+                transition: none;
+            }
         }
 
         #error-msg {
@@ -271,38 +293,38 @@
 
 <div id="progress-container">
     <div id="progress-text">Preflight</div>
-    <div id="progress-bar-bg">
+    <div id="progress-bar-bg" role="progressbar" aria-label="Flight progress" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
         <div id="progress-bar-fill"></div>
     </div>
 </div>
 
-<div id="game-area">
+<main id="game-area">
     <div id="ground"></div>
     <div id="runway"></div>
-    <div id="plane">&#128745;</div> <div id="modal-overlay">
-        <div id="modal">
-            <h2 id="modal-title">Skyhawk Review of Math 130 7.1 Skills</h2>
+    <div id="plane" aria-hidden="true">&#128745;</div> <div id="modal-overlay">
+        <div id="modal" role="region" aria-labelledby="modal-title">
+            <h2 id="modal-title" tabindex="-1">Skyhawk Review of Math 130 7.1 Skills</h2>
             <div id="modal-text">
                 Welcome to your checkride out of Lynchburg (LYH). You will review and practice the 4 key right-triangle trigonometry skills required for your flight path:
                 <ul class="checklist">
-                    <li>☑ Stage 1: Elevation (Ascent distance & time)</li>
-                    <li>☑ Stage 2: Bearing (North/South & East/West components)</li>
-                    <li>☑ Stage 3: Depression (Descent altitude loss)</li>
-                    <li>☑ Stage 4: Return (Distance & Bearing to origin)</li>
+                    <li><span aria-hidden="true">☑</span> Stage 1: Elevation (Ascent distance & time)</li>
+                    <li><span aria-hidden="true">☑</span> Stage 2: Bearing (North/South & East/West components)</li>
+                    <li><span aria-hidden="true">☑</span> Stage 3: Depression (Descent altitude loss)</li>
+                    <li><span aria-hidden="true">☑</span> Stage 4: Return (Distance & Bearing to origin)</li>
                 </ul>
                 <b>Important:</b> Always round to the designated precision. If a calculation is off, ATC will mark the part that needs attention and give you a hint. Fix it and check again, or ask for the worked solution and try a fresh problem.
             </div>
             
             <div id="solution-container" class="solution-box"></div>
             <div id="inputs-container"></div>
-            <div id="error-msg"></div>
+            <div id="error-msg" role="status"></div>
             
             <div id="btn-container">
                 <button onclick="initGame()">Start Engine</button>
             </div>
         </div>
     </div>
-</div>
+</main>
 
 <script>
     // <skyhawk-engine>
@@ -568,6 +590,24 @@
             let pct = (currentStageIndex / stageDefinitions.length) * 100;
             progFill.style.width = `${pct}%`;
         }
+
+        // Expose completed stages to assistive technology.
+        const total = stageDefinitions.length, done = Math.min(currentStageIndex, total);
+        const bar = document.getElementById("progress-bar-bg");
+        bar.setAttribute("aria-valuenow", String(done));
+        bar.setAttribute("aria-valuetext", done >= total
+            ? "Flight complete: all 4 stages done"
+            : `Stage ${done + 1} of ${total}: ${done} completed`);
+    }
+
+    // Each new screen moves focus to its heading so screen readers begin there.
+    const focusHeading = () => document.getElementById("modal-title").focus();
+
+    // Enter in an answer field checks the answer once; held-down repeats are ignored.
+    function submitOnEnter(event) {
+        if (event.key !== "Enter" || event.repeat) return;
+        event.preventDefault();
+        verifyAnswer();
     }
 
     function initGame() {
@@ -617,11 +657,13 @@
         inputsContainer.innerHTML = currentData.fields.map((f) => `
                 <div class="input-group">
                     <label for="${f.id}">${f.label}:</label>
-                    <input type="number" id="${f.id}" aria-describedby="${f.id}-feedback"${f.step ? ` step="${f.step}"` : ''} />
-                    <div class="field-feedback" id="${f.id}-feedback" aria-live="polite"></div>
+                    <input type="number" id="${f.id}" aria-describedby="modal-text ${f.id}-feedback" onkeydown="submitOnEnter(event)"${f.step ? ` step="${f.step}"` : ''} />
+                    <div class="field-feedback" id="${f.id}-feedback"></div>
                 </div>`).join('');
 
         btnContainer.innerHTML = `<button onclick="verifyAnswer()">Submit Calculation</button>`;
+        // The input is described by the question text, so focusing it reads the question.
+        document.getElementById(currentData.fields[0].id).focus();
     }
 
     // Show a message beside each field (state: 'correct', 'wrong', 'invalid', or null to clear).
@@ -692,6 +734,7 @@
         document.getElementById("inputs-container").innerHTML = "";
         document.getElementById("error-msg").innerText = "";
         document.getElementById("btn-container").innerHTML = `<button onclick="loadStage()">Try a Fresh Problem</button>`;
+        focusHeading();
     }
 
     function showSuccessScreen() {
@@ -707,6 +750,7 @@
             <button class="secondary" onclick="practiceAgain()">Practice This Type Again</button>
             <button onclick="continueFlight()">Continue Flight</button>
         `;
+        focusHeading();
     }
 
     function practiceAgain() {
@@ -721,6 +765,7 @@
     }
 
     function endGame() {
+        currentStageIndex = stageDefinitions.length;
         updateProgress(); // Sets progress bar to 100%
 
         const plane = document.getElementById("plane");
@@ -735,6 +780,7 @@
         document.getElementById("error-msg").innerText = "";
 
         document.getElementById("btn-container").innerHTML = `<button onclick="initGame()">Start A New Flight</button>`;
+        focusHeading();
     }
 
     // Replay a reported problem: SkyhawkTrig.html?problem=bearing-k3f9q2 opens that exact problem.

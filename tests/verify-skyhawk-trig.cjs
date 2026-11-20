@@ -176,7 +176,7 @@ check('grading accepts 0.7 and 0.70 for depression; rejects unrounded 0.654 and 
 // --- Page wiring: the page uses the engine and replays ?problem= codes ---
 function loadPage(search) {
     const elements = {};
-    const document = { getElementById: (id) => (elements[id] ||= { id, value: '', style: {}, innerHTML: '', innerText: '' }) };
+    const document = { getElementById: (id) => (elements[id] ||= { id, value: '', style: {}, innerHTML: '', innerText: '', setAttribute() {}, removeAttribute() {}, focus() {} }) };
     const context = { Math, document, console, location: { search }, URLSearchParams, crypto: { getRandomValues: (a) => { a[0] = 99; return a; } } };
     vm.createContext(context);
     vm.runInContext(script + ';this.page={get data(){return currentData},get stage(){return currentStageIndex},verifyAnswer};', context);
@@ -281,7 +281,7 @@ function pageWith(problem) {
     const context = { Math, document: { getElementById: el }, console, location: { search: '' }, URLSearchParams, __problem: problem };
     vm.createContext(context);
     vm.runInContext(script + ';currentStageIndex=SkyhawkEngine.SKILLS.indexOf(__problem.type);startProblem(__problem);' +
-        'this.page={verifyAnswer,showSolution,loadStage,get attempt(){return attemptState},get data(){return currentData}};', context);
+        'this.page={verifyAnswer,showSolution,loadStage,submitOnEnter:typeof submitOnEnter==="function"?submitOnEnter:()=>{throw Error("submitOnEnter missing")},initGame,continueFlight,endGame,get attempt(){return attemptState},get data(){return currentData}};', context);
     return { page: context.page, el, elements };
 }
 const text = (e) => String(e.innerHTML || e.innerText || '');
@@ -368,6 +368,102 @@ check('progress bar sits in normal flow below the course navigation', () => {
 check('question panel is in normal flow so it can grow and scroll', () => {
     assert.doesNotMatch(rule('#modal-overlay'), /position\s*:\s*(absolute|fixed)/);
     assert.match(rule('#game-area'), /overflow(-x)?\s*:\s*(hidden|clip)/, 'scene decorations must not cause horizontal scroll');
+});
+
+// --- SH-005: keyboard, focus, announcements, contrast, and motion ---
+const contrast = (a, b) => {
+    const lum = (h) => {
+        const [r, g, bl] = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
+            .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+        return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+    };
+    const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05);
+};
+const colorIn = (selector, prop) => {
+    // Accept the longhand property or its shorthand (border-color inside `border: 2px solid #hex`).
+    const shorthand = prop.replace(/-color$/, '');
+    const m = rule(selector).match(new RegExp(`(?:^|[;\\s])(?:${prop}|${shorthand})\\s*:[^;]*?(#[0-9a-fA-F]{6})`));
+    assert.ok(m, `${selector} needs a 6-digit hex ${prop}`);
+    return m[1];
+};
+check('button text has at least 4.5:1 contrast in every state', () => {
+    for (const sel of ['button', 'button:hover', 'button.secondary', 'button.secondary:hover']) {
+        const ratio = contrast(colorIn(sel, 'background'), '#ffffff');
+        assert.ok(ratio >= 4.5, `${sel}: ${ratio.toFixed(2)}:1`);
+    }
+});
+check('input borders have at least 3:1 non-text contrast', () => {
+    for (const sel of ['input[type="number"]', 'input[aria-invalid="true"]']) {
+        const ratio = contrast(colorIn(sel, 'border-color'), '#ffffff');
+        assert.ok(ratio >= 3, `${sel}: ${ratio.toFixed(2)}:1`);
+    }
+});
+check('reduced-motion preference turns off plane and progress animation', () => {
+    const at = css.indexOf('@media (prefers-reduced-motion: reduce)');
+    assert.ok(at >= 0, 'missing prefers-reduced-motion media query');
+    const block = css.slice(at, css.indexOf('}\n        }', at) + 1);
+    assert.match(block, /#plane/); assert.match(block, /#progress-bar-fill/);
+    assert.match(block, /transition\s*:\s*none/);
+});
+check('keyboard focus is clearly visible on buttons, links, and inputs', () => {
+    assert.match(css, /:focus-visible/);
+    assert.match(css, /outline\s*:\s*3px solid/);
+});
+check('static markup: status region, focusable heading, decorative content hidden, progressbar role', () => {
+    assert.match(html, /<div id="error-msg" role="status"/);
+    assert.match(html, /<main id="game-area">[\s\S]*<\/main>/, 'activity is the main landmark');
+    assert.match(html, /<h2 id="modal-title" tabindex="-1"/);
+    assert.match(html, /<div id="plane" aria-hidden="true">/);
+    assert.match(html, /id="progress-bar-bg" role="progressbar"/);
+    assert.doesNotMatch(html.slice(html.indexOf('<ul class="checklist">'), html.indexOf('</ul>')), /<li>☑/, 'checkbox glyphs should be hidden from screen readers');
+});
+check('inputs are described by the question and their own feedback', () => {
+    const { el } = pageWith(bearingCase());
+    const inputs = text(el('inputs-container'));
+    assert.match(inputs, /id="inp1" aria-describedby="modal-text inp1-feedback"/);
+    assert.match(inputs, /id="inp2" aria-describedby="modal-text inp2-feedback"/);
+    assert.doesNotMatch(inputs, /aria-live/, 'one status region announces results; field feedback is read with its input');
+});
+check('Enter submits the active answer once; repeats and other keys do nothing', () => {
+    const { page, el } = pageWith(bearingCase());
+    let prevented = 0;
+    const key = (k, repeat = false) => page.submitOnEnter({ key: k, repeat, preventDefault() { prevented++; } });
+    el('inp1').value = '152'; el('inp2').value = '90';
+    key('Tab'); assert.equal(page.attempt.count, 0);
+    key('Enter'); assert.equal(page.attempt.count, 1); assert.equal(prevented, 1);
+    key('Enter', true); assert.equal(page.attempt.count, 1, 'held-down Enter does not resubmit');
+    el('inp2').value = '88'; key('Enter');
+    assert.equal(page.attempt.count, 2); assert.match(text(el('modal-title')), /Correct/);
+    key('Enter'); assert.equal(page.attempt.count, 2, 'Enter after solving does not count');
+});
+check('focus moves predictably on each screen change', () => {
+    const { page, el, elements } = pageWith(bearingCase());
+    page.initGame(); assert.equal(elements.__focused, 'inp1', 'new question focuses its first input');
+    el('inp1').value = String(page.data.fields[0].answer); page.verifyAnswer();
+    assert.equal(elements.__focused, 'modal-title', 'result screen focuses its heading');
+    page.continueFlight(); assert.equal(elements.__focused, 'inp1');
+    el('inp1').value = '1'; el('inp2').value = '2'; page.verifyAnswer();
+    assert.equal(elements.__focused, 'inp1', 'feedback focuses the first part needing attention');
+    page.showSolution(); assert.equal(elements.__focused, 'modal-title');
+    page.endGame(); assert.equal(elements.__focused, 'modal-title');
+});
+check('status region announces validation and attempt results', () => {
+    const { page, el } = pageWith(bearingCase());
+    el('inp1').value = ''; el('inp2').value = '88'; page.verifyAnswer();
+    assert.match(text(el('error-msg')), /did not count/);
+    el('inp1').value = '152'; el('inp2').value = '90'; page.verifyAnswer();
+    assert.match(text(el('error-msg')), /1 of 2 parts correct/);
+});
+check('progressbar exposes completed stages', () => {
+    const { page, el } = pageWith(bearingCase());
+    page.initGame();
+    assert.equal(el('progress-bar-bg').attrs['aria-valuenow'], '0');
+    assert.match(el('progress-bar-bg').attrs['aria-valuetext'], /Stage 1 of 4/);
+    page.continueFlight();
+    assert.equal(el('progress-bar-bg').attrs['aria-valuenow'], '1');
+    page.endGame();
+    assert.equal(el('progress-bar-bg').attrs['aria-valuenow'], '4');
 });
 
 report();
