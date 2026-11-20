@@ -37,8 +37,8 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | ID | Priority | Task | Phase | Status | Owner | Latest evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | SH-001 | P1 | Correct rounding and answer grading at numerical boundaries | 1 | Verification | Claude (Opus 5.5) | 2026-11-20 handoff below; `tests/verify-skyhawk-trig.cjs` |
-| SH-002 | P1 | Make controls reachable on small screens and in landscape | 2 | Open | Unassigned | Initial audit below |
-| SH-003 | P1 | Prevent navigation from covering flight progress | 2 | Open | Unassigned | Initial audit below |
+| SH-002 | P1 | Make controls reachable on small screens and in landscape | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
+| SH-003 | P1 | Prevent navigation from covering flight progress | 2 | Verification | Claude (Opus 5.5) | 2026-11-20 SH-002/SH-003 entry below |
 | SH-004 | P2 | Validate entries and provide feedback on each answer part without clearing work | 3 | Open | Unassigned | Initial audit below |
 | SH-005 | P2 | Complete keyboard, label, announcement, contrast, and motion support | 2 | Open | Unassigned | Initial audit below |
 | SH-006 | P2 | Add mathematically accurate instructional diagrams | 4 | Open | Unassigned | Initial audit below |
@@ -375,3 +375,33 @@ Copy the following structure and **append the completed entry at the very bottom
 - Implementation reference: Reconciliation merge on PR #329 (`claude/skyhawk-sh010-seeded-engine`), prepared from `9f245f9` and main `92bcffc`.
 - Task status and owner: SH-010 and SH-012 remain Verification with their existing owners; SH-001 and SH-011 likewise retain their Verification status. No tracker task is closed by this integration check.
 - Remaining work and next action: Review the updated PR #329, then perform browser and deployment checks before recording those tasks as Done. The separate layout worktree was not modified.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-002, SH-003 responsive layout
+
+- Entry type: Starting assessment, progress, verification, and handoff.
+- Branch and starting commit: `claude/skyhawk-sh002-layout`, stacked on `9f245f9` (PR #329, SH-010, including the SH-012 merge), which is stacked on PR #328. Neither is merged yet.
+- Current status assessment: Reproduced both findings in the built-in Chromium pane with a scripted audit. For each control, the audit checks that it can be scrolled into view by the user, sits fully inside the viewport, and is not covered (`elementFromPoint`). It also checks whether the progress text and bar are covered and whether the page scrolls horizontally.
+  - SH-002: Start Engine was unreachable at 320×568 and 844×390, and the return-stage problem-code link was unreachable on the review screen at 844×390. Both `html` and `body` were `overflow: hidden` with a fixed `100vh` height, so users could not scroll.
+  - SH-003: At 1366×768 the course navigation (z-index 50) fully covered the progress text and bar on every stage screen. `#progress-container` was `position: absolute; top: 0`.
+- Finding or change (`SkyhawkTrig.html` CSS only; no script or text changes):
+  - `body` is now a `min-height: 100vh/100dvh` flex column with no overflow clipping or `100vw` width, so the page scrolls when content exceeds the window.
+  - `#progress-container` is in normal flow directly below the course navigation, with centered, wrapping text.
+  - `#game-area` grows with its content and clips the decorative scene horizontally (`overflow: hidden`).
+  - `#modal-overlay` is in normal flow, with padding that includes the bottom safe area, so the panel grows instead of being clipped.
+  - `#modal` uses `width: 100%`, `max-width: 550px`, `box-sizing: border-box`, and `clamp(16px, 5vw, 30px)` padding.
+  - `.input-group` wraps, so long labels sit above their inputs on narrow screens.
+  - The shared `.m130-topbar` style was not changed.
+- Tests and evidence:
+  - `tests/verify-skyhawk-trig.cjs` has three static CSS guards. They check that `html`/`body` have no `overflow: hidden`, fixed `100vh`, or `100vw`; that the progress bar and panel are not absolutely or fixed positioned; and that the scene area clips horizontally. All three failed before the change. The file now passes 24/24, all seven `tests/verify-*.cjs` suites pass, and `check_html_structure.py` and `check_links.py` pass.
+  - After the change, the scripted audit found 0 problems on the welcome, elevation question, return question, return review, success, and completion screens at:
+    - `320×568`, `390×844`, `844×390`, and `1366×768`;
+    - `683×384`, which approximates 1366×768 at 200% zoom;
+    - `320×568` with the root font size at 200%, simulating enlarged text.
+
+    Screenshots at 320×568 and 844×390 show the progress bar below the navigation and the panel scrolling. There were no console errors.
+- Not performed: real phones, an on-screen keyboard, actual browser zoom (approximated by viewport size), browsers other than the built-in Chromium pane, and deployment checks. The keyboard criterion is likely satisfied because the page can now scroll, but it is unverified.
+- Observation (no new task): On small screens the dark overlay and panel cover most of the flight scene, so the plane is mostly hidden. This is already within SH-006's scope ("the central panel concealed much of the flight scene").
+- Implementation commit or PR: pending (this branch).
+- Task status and owner: SH-002 and SH-003 Verification, Claude (Opus 5.5). Close after a real-device or mobile-keyboard check and deployment.
+- Remaining work and next action: Commit and open a stacked PR. Next recommended task: SH-004 (blank and partly correct answers), then the rest of SH-005.
+
