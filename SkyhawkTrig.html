@@ -396,6 +396,16 @@
             color: #424242;
         }
 
+        .save-status {
+            margin: 12px 0 0;
+            font-size: 0.85rem;
+            color: #424242;
+        }
+
+        .save-status:empty {
+            display: none;
+        }
+
         .solution-box {
             background: #f1f8e9;
             border-left: 4px solid #4CAF50;
@@ -452,6 +462,7 @@
                 <button onclick="initGame()">Start Guided Flight</button>
                 <button class="secondary" onclick="startCheckpoint()">Independent Checkpoint</button>
             </div>
+            <p id="save-status" class="save-status" aria-live="polite"></p>
         </div>
     </div>
 </main>
@@ -900,6 +911,86 @@
 
         const isSeed = (seed) => Number.isInteger(seed) && seed >= 0 && seed < SEED_LIMIT;
 
+        // --- Saved progress (SH-009) ---
+        // Only practice state is stored: mode, screen, problem seeds, attempts, typed entries, and
+        // checkpoint records. No name, account, or gradebook data. Bump PROGRESS_VERSION whenever the
+        // shape changes; older or malformed data is rejected rather than half-restored.
+        const PROGRESS_VERSION = 1;
+        const MAX_PROGRESS_CHARS = 100000;
+        const SCREENS = ['question', 'feedback', 'success', 'solution', 'results', 'complete'];
+        const PHASES = ['checkpoint', 'followup', 'results'];
+        const isBool = (v) => typeof v === 'boolean';
+        const isInt = (v, lo, hi) => Number.isInteger(v) && v >= lo && v <= hi;
+        const isShortText = (v, max = 40) => typeof v === 'string' && v.length <= max;
+        const isCode = (v) => v === null || (typeof v === 'string' && /^[a-z]+-[0-9a-z]{1,6}$/.test(v));
+        const isProblemRef = (q) => q && SKILLS.includes(q.type) && isSeed(q.seed);
+        const isGuidedRecord = (r) => r && SKILLS.includes(r.type) && isCode(r.code ?? null) && isBool(r.firstTry) && isBool(r.assisted);
+        const isCheckpointRecord = (r) => isProblemRef(r) && isCode(r.code) && isBool(r.firstTry) && isBool(r.assisted) && isBool(r.solved) && isInt(r.attempts, 0, 1000);
+        const isAttempt = (a) => a && isInt(a.count, 0, 1000) && ['assisted', 'solutionViewed', 'solved', 'firstTry'].every((k) => isBool(a[k])) &&
+            Array.isArray(a.entries) && a.entries.length <= 4 && a.entries.every((e) => isShortText(e));
+
+        function isCheckpointState(c) {
+            if (!c || !isSeed(c.seed) || !PHASES.includes(c.phase) || !c.config) return false;
+            const expected = checkpointConfig({ cp_per: String(c.config.perSkill), cp_target: String(c.config.totalTarget), cp_skill: String(c.config.perSkillTarget) });
+            if (['perSkill', 'total', 'totalTarget', 'perSkillTarget'].some((k) => expected[k] !== c.config[k])) return false;
+            // The question list must be exactly the one this checkpoint seed produces.
+            if (!Array.isArray(c.queue) || JSON.stringify(c.queue) !== JSON.stringify(buildCheckpoint(c.seed, c.config.perSkill))) return false;
+            if (!Array.isArray(c.records) || !c.records.every(isCheckpointRecord)) return false;
+            if (!Array.isArray(c.followQueue) || !c.followQueue.every(isProblemRef)) return false;
+            if (c.followUps !== null && !(Array.isArray(c.followUps) && c.followUps.every(isCheckpointRecord))) return false;
+            const total = c.config.total;
+            if (c.phase === 'checkpoint') return isInt(c.index, 0, total - 1) && c.records.length === c.index && c.followUps === null;
+            if (c.records.length !== total) return false;
+            if (c.phase === 'followup') {
+                return Array.isArray(c.followUps) && c.followQueue.length > 0 && isInt(c.index, 0, c.followQueue.length - 1) && c.followUps.length === c.index;
+            }
+            return c.followUps === null || c.followUps.length === c.followQueue.length; // results
+        }
+
+        // Normalized, storable copy of the page's progress.
+        function snapshotProgress(st) {
+            const copy = (v) => JSON.parse(JSON.stringify(v));
+            return {
+                v: PROGRESS_VERSION,
+                mode: st.mode,
+                screen: st.screen,
+                guided: { stageIndex: st.stageIndex, records: copy(st.guidedRecords || []) },
+                checkpoint: st.checkpoint ? copy(st.checkpoint) : null,
+                current: st.current ? { type: st.current.type, seed: st.current.seed } : null,
+                attempt: copy(st.attempt),
+                inputs: copy(st.inputs || []),
+            };
+        }
+
+        // { ok: true, state } or { ok: false, reason: 'empty' | 'malformed' | 'version' | 'invalid' }.
+        function parseProgress(text) {
+            if (text === null || text === undefined || text === '') return { ok: false, reason: 'empty' };
+            if (typeof text !== 'string' || text.length > MAX_PROGRESS_CHARS) return { ok: false, reason: 'malformed' };
+            let s;
+            try { s = JSON.parse(text); } catch (e) { return { ok: false, reason: 'malformed' }; }
+            if (!s || typeof s !== 'object' || Array.isArray(s)) return { ok: false, reason: 'malformed' };
+            if (s.v !== PROGRESS_VERSION) return { ok: false, reason: 'version' };
+            const valid = ['guided', 'checkpoint'].includes(s.mode) && SCREENS.includes(s.screen) &&
+                s.guided && isInt(s.guided.stageIndex, 0, SKILLS.length) && Array.isArray(s.guided.records) &&
+                s.guided.records.length <= SKILLS.length && s.guided.records.every(isGuidedRecord) &&
+                (s.mode === 'guided' ? s.checkpoint === null : isCheckpointState(s.checkpoint)) &&
+                (s.current === null ? ['results', 'complete'].includes(s.screen) : isProblemRef(s.current)) &&
+                isAttempt(s.attempt) && Array.isArray(s.inputs) && s.inputs.length <= 4 && s.inputs.every((e) => isShortText(e)) &&
+                Object.keys(s).every((k) => ['v', 'mode', 'screen', 'guided', 'checkpoint', 'current', 'attempt', 'inputs'].includes(k));
+            return valid ? { ok: true, state: s } : { ok: false, reason: 'invalid' };
+        }
+
+        // Short description of saved progress for the resume prompt.
+        function describeProgress(s) {
+            if (s.mode === 'guided') {
+                return s.screen === 'complete' ? 'Guided flight, completed' : `Guided flight, stage ${Math.min(s.guided.stageIndex + 1, SKILLS.length)} of ${SKILLS.length}`;
+            }
+            const c = s.checkpoint;
+            if (c.phase === 'results') return 'Checkpoint results';
+            if (c.phase === 'followup') return `Follow-up practice, question ${c.index + 1} of ${c.followQueue.length}`;
+            return `Independent checkpoint, question ${c.index + 1} of ${c.queue.length}`;
+        }
+
         // Build a problem from explicit parameters. A seed, when given, is recorded as its problem code.
         function build(type, params, seed) {
             if (!builders[type]) throw new Error(`Unknown skill: ${type}`);
@@ -1002,7 +1093,7 @@
             return { parts: d.parts.map((p) => p.correct), correct: d.correct };
         }
 
-        return { SKILLS, SKILL_NAMES, checkpointConfig, buildCheckpoint, summarizeCheckpoint, followUpQueue, build, generate, parseCode, newSeed, validate, diagnose, grade, diagram, parseBearing, headingOf, roundTo, formatForRounding, mulberry32 };
+        return { SKILLS, SKILL_NAMES, snapshotProgress, parseProgress, describeProgress, checkpointConfig, buildCheckpoint, summarizeCheckpoint, followUpQueue, build, generate, parseCode, newSeed, validate, diagnose, grade, diagram, parseBearing, headingOf, roundTo, formatForRounding, mulberry32 };
     })();
     // </skyhawk-engine>
 
@@ -1020,6 +1111,8 @@
     let guidedRecords = [];
     // Independent checkpoint state, or null during the guided flight. phase: 'checkpoint' | 'followup' | 'results'.
     let checkpoint = null;
+    // Which screen is showing, for saving and resuming; null on the welcome screen (nothing to save).
+    let screen = null;
     const SKILL_NAMES = SkyhawkEngine.SKILL_NAMES;
     const urlParams = () => Object.fromEntries(new URLSearchParams(location.search));
 
@@ -1132,14 +1225,16 @@
                 <div class="input-group">
                     <label for="${f.id}">${f.label}:</label>
                     ${f.kind === 'bearing'
-                        ? `<input type="text" id="${f.id}" aria-describedby="modal-text ${f.id}-feedback" onkeydown="submitOnEnter(event)" autocomplete="off" autocapitalize="characters" spellcheck="false" />`
-                        : `<input type="number" id="${f.id}" aria-describedby="modal-text ${f.id}-feedback" onkeydown="submitOnEnter(event)"${f.step ? ` step="${f.step}"` : ''} />`}
+                        ? `<input type="text" id="${f.id}" aria-describedby="modal-text ${f.id}-feedback" onkeydown="submitOnEnter(event)" oninput="saveProgress()" autocomplete="off" autocapitalize="characters" spellcheck="false" />`
+                        : `<input type="number" id="${f.id}" aria-describedby="modal-text ${f.id}-feedback" onkeydown="submitOnEnter(event)" oninput="saveProgress()"${f.step ? ` step="${f.step}"` : ''} />`}
                     <div class="field-feedback" id="${f.id}-feedback"></div>
                 </div>`).join('');
 
         btnContainer.innerHTML = `<button onclick="verifyAnswer()">Submit Calculation</button>`;
         // The input is described by the question text, so focusing it reads the question.
         document.getElementById(currentData.fields[0].id).focus();
+        screen = 'question';
+        saveProgress();
     }
 
     // Show a message beside each field (state: 'correct', 'wrong', 'invalid', or null to clear).
@@ -1164,6 +1259,7 @@
             showFieldFeedback(invalid.map((msg) => msg && { state: 'invalid', text: msg }));
             status.innerText = "Fix the marked entry before checking. This did not count as an attempt.";
             document.getElementById(currentData.fields[invalid.findIndex(Boolean)].id).focus();
+            saveProgress();
             return;
         }
 
@@ -1177,8 +1273,13 @@
             return;
         }
 
-        // Keep every entry in place, confirm correct parts, and give a targeted hint for the rest.
         attemptState.assisted = true;
+        showAttemptFeedback(result);
+    }
+
+    // Keep every entry in place, confirm correct parts, and give a targeted hint for the rest.
+    function showAttemptFeedback(result) {
+        const status = document.getElementById("error-msg");
         showFieldFeedback(result.parts.map((p) => p.correct
             ? { state: 'correct', text: '✓ Correct. Keep this value.' }
             : { state: 'wrong', text: `✗ Needs attention. ${p.hint}` }));
@@ -1191,6 +1292,8 @@
             <button class="secondary" onclick="showSolution()">Show Worked Solution</button>` + (checkpoint ? nextQuestionButton() : '');
         const firstWrong = currentData.fields[result.parts.findIndex((p) => !p.correct)];
         document.getElementById(firstWrong.id).focus();
+        screen = 'feedback';
+        saveProgress();
     }
 
     // The worked solution is shown only on request and is followed by a fresh problem of the same skill.
@@ -1214,6 +1317,8 @@
         document.getElementById("error-msg").innerText = "";
         document.getElementById("btn-container").innerHTML = checkpoint ? nextQuestionButton() : `<button onclick="loadStage()">Try a Fresh Problem</button>`;
         focusHeading();
+        screen = 'solution';
+        saveProgress();
     }
 
     function showSuccessScreen() {
@@ -1231,6 +1336,8 @@
             <button onclick="continueFlight()">Continue Flight</button>
         `;
         focusHeading();
+        screen = 'success';
+        saveProgress();
     }
 
     function practiceAgain() {
@@ -1271,6 +1378,8 @@
             `<button onclick="startCheckpoint()">Take Independent Checkpoint</button>` +
             `<button class="secondary" onclick="initGame()">Start A New Flight</button>`;
         focusHeading();
+        screen = 'complete';
+        saveProgress();
     }
 
     // --- Independent checkpoint and follow-up practice ---
@@ -1281,12 +1390,16 @@
         loadCheckpointQuestion();
     }
 
-    function loadCheckpointQuestion() {
+    function checkpointProgress() {
         const list = checkpoint.phase === 'checkpoint' ? checkpoint.queue : checkpoint.followQueue;
-        const item = list[checkpoint.index];
         const label = checkpoint.phase === 'checkpoint' ? 'Independent checkpoint' : 'Follow-up practice';
         setProgress(`${label}: question ${checkpoint.index + 1} of ${list.length}`, checkpoint.index, list.length,
             `Question ${checkpoint.index + 1} of ${list.length}: ${checkpoint.index} answered`);
+        return list[checkpoint.index];
+    }
+
+    function loadCheckpointQuestion() {
+        const item = checkpointProgress();
         startProblem(SkyhawkEngine.generate(item.type, item.seed));
     }
 
@@ -1359,14 +1472,124 @@
             `<button class="secondary" onclick="startCheckpoint()">Retake Checkpoint</button>` +
             `<button class="secondary" onclick="initGame()">Guided Flight</button>`;
         focusHeading();
+        screen = 'results';
+        saveProgress();
     }
 
-    // Replay a reported problem: SkyhawkTrig.html?problem=bearing-k3f9q2 opens that exact problem.
+    // --- Saved progress (SH-009) ---
+    // Progress lives only in this browser's localStorage under one key. Blocked or missing storage never
+    // stops practice; the status line then says progress is session-only.
+    const PROGRESS_KEY = 'skyhawk-trig-progress';
+    const WELCOME_BUTTONS = document.getElementById("btn-container").innerHTML;
+    const storage = (() => {
+        try {
+            const area = globalThis.localStorage;
+            if (!area) return { ok: false };
+            area.setItem('__skyhawk_probe__', '1');
+            area.removeItem('__skyhawk_probe__');
+            return { ok: true, area };
+        } catch (e) {
+            return { ok: false };
+        }
+    })();
+    let persist = true;        // false for replay links, which must not overwrite saved progress
+    let savedProgress = null;  // parsed progress waiting for "Resume"
+    let statusNote = null;     // one-time message (saved progress found, cleared, or discarded)
+
+    function showSaveStatus() {
+        const text = statusNote
+            || (!persist ? 'This is a replay link, so progress here is not saved.'
+                : storage.ok ? 'Progress is saved on this device only. No name or account is stored.'
+                    : 'Progress is not being saved: this browser is blocking storage. Your work stays until you leave or refresh this page.');
+        const el = document.getElementById("save-status");
+        if (el.innerText !== text) el.innerText = text;
+    }
+
+    function saveProgress() {
+        statusNote = null;
+        if (!persist || screen === null) { showSaveStatus(); return; }
+        if (storage.ok) {
+            const onQuestion = screen === 'question' || screen === 'feedback';
+            const clip = (v) => String(v ?? '').slice(0, 40);
+            const snap = SkyhawkEngine.snapshotProgress({
+                mode: checkpoint ? 'checkpoint' : 'guided',
+                screen,
+                stageIndex: Math.min(currentStageIndex, stageDefinitions.length),
+                guidedRecords,
+                checkpoint,
+                current: screen === 'results' || screen === 'complete' ? null : { type: currentData.type, seed: currentData.seed },
+                attempt: { ...attemptState, entries: attemptState.entries.map(clip) },
+                inputs: onQuestion ? currentData.fields.map((f) => clip(document.getElementById(f.id).value)) : [],
+            });
+            try {
+                storage.area.setItem(PROGRESS_KEY, JSON.stringify(snap));
+            } catch (e) {
+                storage.ok = false; // quota or privacy settings: carry on without saving
+            }
+        }
+        showSaveStatus();
+    }
+
+    function clearSavedProgress() {
+        if (storage.ok) {
+            try { storage.area.removeItem(PROGRESS_KEY); } catch (e) { storage.ok = false; }
+        }
+        savedProgress = null;
+        document.getElementById("btn-container").innerHTML = WELCOME_BUTTONS;
+        statusNote = 'Saved progress cleared.';
+        showSaveStatus();
+    }
+
+    function offerResume(saved) {
+        savedProgress = saved;
+        document.getElementById("btn-container").innerHTML =
+            `<button onclick="resumeSaved()">Resume: ${SkyhawkEngine.describeProgress(saved)}</button>` + WELCOME_BUTTONS +
+            `<button class="secondary" onclick="clearSavedProgress()">Clear Saved Progress</button>`;
+        statusNote = `Saved progress found: ${SkyhawkEngine.describeProgress(saved)}. Resume it, or start something new to replace it.`;
+        showSaveStatus();
+    }
+
+    // Restore the saved screen exactly: same problem, typed entries, attempts, and records.
+    // Nothing is recorded again, so resuming never adds credit.
+    function resumeSaved() {
+        const s = savedProgress;
+        if (!s) return;
+        savedProgress = null;
+        guidedRecords = s.guided.records;
+        currentStageIndex = s.guided.stageIndex;
+        checkpoint = s.checkpoint;
+        if (s.screen === 'complete') { endGame(); return; }
+        if (s.screen === 'results') { showCheckpointResults(); return; }
+        if (checkpoint) checkpointProgress(); else updateProgress();
+        currentData = SkyhawkEngine.generate(s.current.type, s.current.seed);
+        attemptState = { ...s.attempt, entries: [...s.attempt.entries] };
+        if (attemptState.solved) { showSuccessScreen(); return; }
+        if (attemptState.solutionViewed) { showSolution(); return; }
+        renderStage();
+        s.inputs.forEach((v, i) => { if (currentData.fields[i]) document.getElementById(currentData.fields[i].id).value = v; });
+        if (s.screen === 'feedback' && attemptState.count > 0) showAttemptFeedback(SkyhawkEngine.diagnose(currentData, attemptState.entries));
+        saveProgress();
+    }
+
+    // Startup: a replay link opens one problem without touching saved progress; otherwise offer to resume.
     (() => {
         const replay = SkyhawkEngine.parseCode(new URLSearchParams(location.search).get('problem'));
-        if (!replay) return;
-        currentStageIndex = stageDefinitions.findIndex((d) => d.type === replay.type);
-        loadStage(replay.seed);
+        if (replay) {
+            persist = false;
+            currentStageIndex = stageDefinitions.findIndex((d) => d.type === replay.type);
+            loadStage(replay.seed);
+            return;
+        }
+        if (!storage.ok) { showSaveStatus(); return; }
+        let raw = null;
+        try { raw = storage.area.getItem(PROGRESS_KEY); } catch (e) { storage.ok = false; showSaveStatus(); return; }
+        const parsed = SkyhawkEngine.parseProgress(raw);
+        if (parsed.ok) { offerResume(parsed.state); return; }
+        if (parsed.reason !== 'empty') {
+            try { storage.area.removeItem(PROGRESS_KEY); } catch (e) { /* nothing more to do */ }
+            statusNote = 'Saved progress could not be used (it was from an older version or was damaged), so it was cleared.';
+        }
+        showSaveStatus();
     })();
 </script>
 
