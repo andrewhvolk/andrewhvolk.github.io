@@ -357,6 +357,25 @@ Copy the following structure and **append the completed entry at the very bottom
 - Tests and evidence: `tests/verify-skyhawk-trig.cjs` passes 22/22. All seven `tests/verify-*.cjs` suites, `check_html_structure.py`, `check_links.py`, and `git diff --check` pass. No browser check was performed for this merge.
 - Task status and owner: Unchanged. SH-010 Verification, Claude (Opus 5.5); SH-012 Verification, Codex.
 
+### 2026-11-20 — Codex — PR #329 reconciliation starting assessment
+
+- Entry type: Starting assessment and integration review; SH-010 and SH-012.
+- Starting branch and commit: `codex/reconcile-pr329` from PR #329 head `9f245f9`, using the clean primary checkout. The separate Claude worktree is untouched.
+- Current status assessment: The user authorized merging PR #328 and updating PR #329 against main. Merged #328 as `92bcffc` and retargeted #329 to main. The developer's latest commit `9f245f9` had already resolved the earlier overlapping changes by moving `formatForRounding` into `SkyhawkEngine` and porting the display regression checks. Reviewed those resolutions and confirmed both append-only tracker histories remain present.
+- Integration plan: Merge `origin/main` into the reconciliation branch without rewriting the developer's history. Verify the exact-half and near-half display cases, seed replay, grading, all seven regression suites, and the final diff before updating the existing PR branch.
+- Ownership/status: Existing SH-010 and SH-012 owners and Verification states remain unchanged. Codex owns this integration review. Browser and deployment checks remain pending; no new browser verification is claimed.
+
+### 2026-11-20 — Codex — PR #329 reconciliation verification and handoff
+
+- Entry type: Verification and handoff; SH-010 and SH-012.
+- Integration: PR #328 is merged at `92bcffc`. Retargeted PR #329 to `main` and merged that main commit into the PR #329 history. The merge completed cleanly because `9f245f9` already contained the developer's conflict resolution. No activity or test changes were needed beyond that resolution; both prior tracker histories are preserved.
+- Review result: The seeded engine retains `formatForRounding` for climb minutes, both bearing components, and descent loss. The fixed `106.4998 -> 106`, exact-half `87.500 -> 88`, and descent boundary cases remain covered. Reviewed seed/code parsing, deterministic generation, grading, page replay, and label wiring; no additional actionable defects found within this reconciliation scope.
+- Tests and evidence: All seven `tests/verify-*.cjs` suites pass against the combined result. Skyhawk passes 22/22 checks, including 10,000 cases per skill, display-to-answer consistency, seed and parameter reproduction, code round-trips, grading, and page replay. Shared MATH 130 and embedded offline fallback checks pass. `git diff --check` and the staged diff check pass; there are no unresolved merge entries.
+- Limitations: Browser and deployment verification remain pending for this combined result. Python-based site validators were not rerun because the installed Python launchers are unavailable in this environment.
+- Implementation reference: Reconciliation merge on PR #329 (`claude/skyhawk-sh010-seeded-engine`), prepared from `9f245f9` and main `92bcffc`.
+- Task status and owner: SH-010 and SH-012 remain Verification with their existing owners; SH-001 and SH-011 likewise retain their Verification status. No tracker task is closed by this integration check.
+- Remaining work and next action: Review the updated PR #329, then perform browser and deployment checks before recording those tasks as Done. The separate layout worktree was not modified.
+
 ### 2026-11-20 — Claude (Opus 5.5) — SH-002, SH-003 responsive layout
 
 - Entry type: Starting assessment, progress, verification, and handoff.
