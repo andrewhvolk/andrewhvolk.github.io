@@ -47,7 +47,7 @@ Update ownership, status, and the latest evidence reference here. Keep historica
 | SH-009 | P2 | Save, resume, and reset local progress reliably | 5 | Done | Claude (Opus 5.5) | 2026-11-20 final live audit below |
 | SH-010 | P2 | Isolate reproducible calculation/generation logic and add regression coverage | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-011 | P1 | Fix the same floating-point rounding defect in the shared aviation engine (`math130-test3-skills.js`) | 1 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
-| SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Verification | Codex | 2026-11-20 PR #328 display-precision handoff below; deployed, 2026-11-20 live site audit below |
+| SH-012 | P2 | Keep worked-solution precision consistent with final rounding | 1 | Done | Codex (closed by Claude (Opus 5.5) at the user's request) | 2026-11-20 SH-012 closure entry below |
 | SH-013 | P2 | Show one-decimal flight times consistently (prompts can say "for 1 hours") | 4 | Done | Claude (Opus 5.5) | 2026-11-20 live site audit below |
 | SH-014 | P2 | Add page metadata: an icon link (browser falls back to a missing /favicon.ico) and a meta description | 2 | Done | Claude (Opus 5.5) | 2026-11-20 SH-009 entry below (live Lighthouse after #338) |
 
@@ -840,4 +840,16 @@ Copy the following structure and **append the completed entry at the very bottom
   - a small classroom pilot, to check the wording and whether the checkpoint target (10/12, 2/3 per skill) is set at the right level;
   - a Safari and Firefox spot check.
 - New findings: none.
+
+### 2026-11-20 — Claude (Opus 5.5) — SH-012 closed at the user's request
+
+- Entry type: Verification (deployment) and closure. SH-012 is owned by Codex. The user asked me to close it, and this entry records that; ownership is unchanged.
+- Target: `https://andrewhvolk.github.io/SkyhawkTrig.html` at `main` `b1ab1b6` (the page is unchanged since `a742330`), using headless Chrome via the chrome-devtools MCP.
+- Evidence against SH-012's own criteria (from Codex's SH-012 entries):
+  - The near-boundary case, 105 mph / 2.4 h / S 25° W, displays `106.4998 → 106` and never `106.500 →`.
+  - The exact half, 125 mph / 1.4 h / S 30° W, displays `87.500 → 88`.
+  - The descent boundary, 86 mph / 5° / 6 min, displays `0.7495 → 0.7`.
+  - Across 3,000 seeds each for climb, bearing, and descent, all 12,000 displayed approximations round half up to their stated answers, with 0 mismatches.
+- Supporting evidence already recorded: `formatForRounding` moved into `SkyhawkEngine` (SH-010 merge), and its display checks run in `tests/verify-skyhawk-trig.cjs` on every change. The live audits (Lighthouse 100, live flows) cover the solution screens.
+- Task status: SH-012 is Done. Remaining Verification tasks need human checks only: SH-002/SH-003 (a real phone with the on-screen keyboard) and SH-004/SH-005/SH-006 (a screen-reader pass).
 
