@@ -165,6 +165,16 @@
             text-align: center;
         }
 
+        /* Free-text bearing entry (for example N 37° W or 323) */
+        input[type="text"] {
+            padding: 8px;
+            font-size: 1rem;
+            width: 9em;
+            border: 2px solid #1976D2;
+            border-radius: 4px;
+            text-align: center;
+        }
+
         #btn-container {
             display: flex;
             justify-content: center;
@@ -360,12 +370,41 @@
             return value.toFixed(decimals);
         };
 
+        // Directions are drawn after the numbers, so earlier problem codes keep their numbers.
+        const pickDirections = (r, p) => {
+            p.ns = r() < 0.5 ? 'N' : 'S';
+            p.ew = r() < 0.5 ? 'E' : 'W';
+            return p;
+        };
         const pickParams = {
             elevation: (r) => ({ angle: int(r, 4, 9), speed: int(r, 75, 90), alt: tenths(r, 0.5, 1.5) }),
-            bearing: (r) => ({ speed: int(r, 105, 125), time: tenths(r, 1.0, 2.5), angle: int(r, 25, 65) }),
+            bearing: (r) => pickDirections(r, { speed: int(r, 105, 125), time: tenths(r, 1.0, 2.5), angle: int(r, 25, 65) }),
             depression: (r) => ({ speed: int(r, 85, 105), angle: int(r, 3, 6), timeMins: int(r, 3, 7) }),
-            return: (r) => ({ speed: int(r, 105, 120), timeN: tenths(r, 0.5, 1.5), timeW: tenths(r, 0.5, 1.5) }),
+            return: (r) => pickDirections(r, { speed: int(r, 105, 120), timeN: tenths(r, 0.5, 1.5), timeW: tenths(r, 0.5, 1.5) }),
         };
+
+        // --- Compass helpers ---
+        const DIR = { N: 'North', S: 'South', E: 'East', W: 'West' };
+        const OPPOSITE = { N: 'S', S: 'N', E: 'W', W: 'E' };
+        // Compass heading (clockwise from north) of a quadrant bearing such as S 37° E.
+        const headingOf = (ns, ew, a) => (ns === 'N' ? (ew === 'E' ? a : 360 - a) : (ew === 'E' ? 180 - a : 180 + a)) % 360;
+        const angleGap = (a, b) => Math.abs((((a - b) % 360) + 540) % 360 - 180);
+        // Accepts N 37° W, N37W, W 53° N (angle from the east-west axis), or a heading such as 323 or 323°.
+        // Returns the heading in degrees, or null when the text is not a bearing.
+        function parseBearing(raw) {
+            if (typeof raw !== 'string') return null;
+            const s = raw.toUpperCase().replace(/DEGREES?|DEG/g, '').replace(/[°º\s]/g, '');
+            let m = s.match(/^([NS])(\d+(?:\.\d+)?)([EW])$/);
+            if (m) return Number(m[2]) <= 90 ? headingOf(m[1], m[3], Number(m[2])) : null;
+            m = s.match(/^([EW])(\d+(?:\.\d+)?)([NS])$/);
+            if (m) {
+                const a = Number(m[2]);
+                if (a > 90) return null;
+                return m[1] === 'E' ? (m[3] === 'N' ? 90 - a : 90 + a) : (m[3] === 'N' ? 270 + a : 270 - a);
+            }
+            if (/^\d+(\.\d+)?$/.test(s) && Number(s) <= 360) return Number(s) % 360;
+            return null;
+        }
 
         // An answer field: the rounded answer plus what diagnose() needs to give targeted feedback.
         // `mistakes` pairs the value a common error produces with a hint that names the error
@@ -376,6 +415,8 @@
         });
         const USE_SIN_CLIMB = 'The altitude gained is opposite the climb angle, so the flight-path distance is altitude ÷ sin(angle). Check that you used sine, not cosine.';
         const USE_SIN_DESCENT = 'That is about the distance flown along the descent path. Altitude lost is opposite the depression angle: multiply the distance by sin(angle).';
+        const POSITIVE_DISTANCE = 'Enter a positive distance: the field already names the direction.';
+        const REVERSE_BOTH = 'Reverse both outbound directions to head back to the start, and measure the angle from the North–South axis.';
 
         const builders = {
             elevation({ angle, speed, alt }) {
@@ -399,32 +440,36 @@
                 ${hours.toFixed(4)} * 60 &approx; ${formatForRounding(minutes)} &rarr; <b>${ans} minutes</b>.`,
                 };
             },
-            bearing({ speed, time, angle }) {
-                // Stage 2 currently always flies a SW bearing (varied quadrants are tracker SH-007).
-                const dist = speed * time, south = dist * Math.cos(rad(angle)), west = dist * Math.sin(rad(angle));
-                const ans1 = roundTo(south), ans2 = roundTo(west);
+            // ns/ew name the bearing's quadrant (S 30° W when omitted). Components are positive
+            // distances in the named directions.
+            bearing({ speed, time, angle, ns = 'S', ew = 'W' }) {
+                const NS = DIR[ns], EW = DIR[ew];
+                const dist = speed * time, along = dist * Math.cos(rad(angle)), across = dist * Math.sin(rad(angle));
+                const ans1 = roundTo(along), ans2 = roundTo(across);
                 return {
-                    prompt: `You fly at ${speed} mph on a bearing of S ${angle}&deg; W for ${time.toFixed(1)} hours. How many miles South and West have you traveled?`,
-                    hint: 'Hint: Distance = speed &times; time. Use sine and cosine. Round to the nearest mile.',
+                    prompt: `You fly at ${speed} mph on a bearing of ${ns} ${angle}&deg; ${ew} for ${time.toFixed(1)} hours. How many miles ${NS} and ${EW} have you traveled?`,
+                    hint: 'Hint: Distance = speed &times; time. Use sine and cosine. Give each distance as a positive number of miles. Round to the nearest mile.',
                     fields: [
-                        field('inp1', 'South (miles)', south, 0, 'mile', [
-                            [west, 'The bearing angle is measured from the North–South axis, so South is the adjacent side: use cosine for South and sine for West.'],
-                            [dist, 'That is the total distance flown. Multiply it by cos(angle) to get the South component.'],
-                        ], 'South = (speed × time) × cos(angle), because the bearing angle is measured from South.'),
-                        field('inp2', 'West (miles)', west, 0, 'mile', [
-                            [south, 'West is opposite the bearing angle: use sine for West and cosine for South.'],
-                            [dist, 'That is the total distance flown. Multiply it by sin(angle) to get the West component.'],
-                        ], 'West = (speed × time) × sin(angle).'),
+                        field('inp1', `${NS} (miles)`, along, 0, 'mile', [
+                            [across, `The bearing angle is measured from the North–South axis, so ${NS} is the adjacent side: use cosine for ${NS} and sine for ${EW}.`],
+                            [dist, `That is the total distance flown. Multiply it by cos(angle) to get the ${NS} component.`],
+                            [-along, POSITIVE_DISTANCE],
+                        ], `${NS} = (speed × time) × cos(angle), because the bearing angle is measured from ${NS}.`),
+                        field('inp2', `${EW} (miles)`, across, 0, 'mile', [
+                            [along, `${EW} is opposite the bearing angle: use sine for ${EW} and cosine for ${NS}.`],
+                            [dist, `That is the total distance flown. Multiply it by sin(angle) to get the ${EW} component.`],
+                            [-across, POSITIVE_DISTANCE],
+                        ], `${EW} = (speed × time) × sin(angle).`),
                     ],
                     solutionHtml: `
                 <b>1. Find total distance:</b><br>
                 Distance = ${speed} mph * ${time.toFixed(1)} hrs = ${dist.toFixed(2)} miles.<br>
-                <b>2. Find South component (Adjacent):</b><br>
-                South = Distance * cos(${angle}&deg;)<br>
-                South = ${dist.toFixed(2)} * cos(${angle}&deg;) &approx; ${formatForRounding(south)} &rarr; <b>${ans1} miles</b>.<br>
-                <b>3. Find West component (Opposite):</b><br>
-                West = Distance * sin(${angle}&deg;)<br>
-                West = ${dist.toFixed(2)} * sin(${angle}&deg;) &approx; ${formatForRounding(west)} &rarr; <b>${ans2} miles</b>.`,
+                <b>2. Find ${NS} component (Adjacent):</b><br>
+                ${NS} = Distance * cos(${angle}&deg;)<br>
+                ${NS} = ${dist.toFixed(2)} * cos(${angle}&deg;) &approx; ${formatForRounding(along)} &rarr; <b>${ans1} miles</b>.<br>
+                <b>3. Find ${EW} component (Opposite):</b><br>
+                ${EW} = Distance * sin(${angle}&deg;)<br>
+                ${EW} = ${dist.toFixed(2)} * sin(${angle}&deg;) &approx; ${formatForRounding(across)} &rarr; <b>${ans2} miles</b>.`,
                 };
             },
             depression({ speed, angle, timeMins }) {
@@ -447,32 +492,48 @@
                 Altitude = ${dist.toFixed(3)} * sin(${angle}&deg;) &approx; ${formatForRounding(lost, 1)} &rarr; <b>${ans} miles</b>.`,
                 };
             },
-            return({ speed, timeN, timeW }) {
-                const north = speed * timeN, west = speed * timeW, total = Math.hypot(north, west);
-                // The plane ends north and west of the start, so the direct return heads south and east.
-                const angle = Math.atan2(west, north) * 180 / Math.PI, ans1 = roundTo(total), ans2 = roundTo(angle);
+            // Outbound legs: timeN hours toward ns (north or south), then timeW hours toward ew
+            // (east or west); N then W when omitted. The parameter names predate varied directions.
+            // The student must choose the return directions (both reversed).
+            return({ speed, timeN, timeW, ns = 'N', ew = 'W' }) {
+                const NS = DIR[ns], EW = DIR[ew], backNS = OPPOSITE[ns], backEW = OPPOSITE[ew];
+                const legNS = speed * timeN, legEW = speed * timeW, total = Math.hypot(legNS, legEW);
+                const angle = Math.atan2(legEW, legNS) * 180 / Math.PI, ans1 = roundTo(total), ans2 = roundTo(angle);
+                const exactHeading = headingOf(backNS, backEW, angle);
+                const bearingAnswer = `${backNS} ${ans2}° ${backEW}`;
                 return {
-                    prompt: `You divert, flying North for ${timeN.toFixed(1)} hours and West for ${timeW.toFixed(1)} hours at ${speed} mph. Find the direct distance back to your starting point and the bearing you should take.`,
-                    hint: 'Hint: Use Pythagorean theorem for distance. Return bearing requires switching directions (South and East). Round distance to nearest mile, angle to nearest degree.',
+                    prompt: `You divert, flying ${NS} for ${timeN.toFixed(1)} hours and ${EW} for ${timeW.toFixed(1)} hours at ${speed} mph. Find the direct distance back to your starting point and the bearing to fly home. Give the bearing as a quadrant bearing (direction letter, angle, direction letter) or as a compass heading measured clockwise from north.`,
+                    hint: 'Hint: Use the Pythagorean theorem for the distance. For the bearing, reverse both outbound directions and measure the angle from the North–South axis. Round the distance to the nearest mile and the angle to the nearest degree.',
                     fields: [
                         field('inp1', 'Distance (miles)', total, 0, 'mile', [
-                            [north + west, 'The two legs meet at a right angle, so combine them with the Pythagorean theorem instead of adding them.'],
-                        ], 'Distance = √(North² + West²), where each leg is speed × time.'),
-                        field('inp2', 'Bearing Angle S __&deg; E (degrees)', angle, 0, 'degree', [
-                            [90 - angle, 'Measure the return bearing from the North–South axis: tan θ = West distance ÷ North distance.'],
-                            [Math.atan2(west, north), 'This looks like an angle in radians. Set your calculator to degree mode.'],
-                        ], 'θ = arctan(West distance ÷ North distance); the return bearing is S θ° E.'),
+                            [legNS + legEW, 'The two legs meet at a right angle, so combine them with the Pythagorean theorem instead of adding them.'],
+                        ], `Distance = √(${NS}² + ${EW}²), where each leg is speed × time.`),
+                        {
+                            id: 'inp2', kind: 'bearing', label: 'Return bearing (degrees)', answer: bearingAnswer,
+                            ns: backNS, ew: backEW, angle: ans2, exact: angle, unit: 'degree', exactHeading,
+                            // Headings that count as correct: from the rounded quadrant angle, and the rounded exact heading.
+                            headings: [headingOf(backNS, backEW, ans2), roundTo(exactHeading) % 360],
+                            radians: rad(angle),
+                            mistakes: [
+                                { value: headingOf(ns, ew, angle), hint: REVERSE_BOTH },
+                                { value: headingOf(backNS, ew, angle), hint: REVERSE_BOTH },
+                                { value: headingOf(ns, backEW, angle), hint: REVERSE_BOTH },
+                                { value: headingOf(backNS, backEW, 90 - angle), hint: `Measure the return bearing from the North–South axis: tan θ = ${EW} distance ÷ ${NS} distance.` },
+                            ],
+                            retryHint: `θ = arctan(${EW} distance ÷ ${NS} distance). Then reverse both outbound directions to name the return bearing.`,
+                        },
                     ],
                     solutionHtml: `
                 <b>1. Find individual distances:</b><br>
-                North = ${speed} * ${timeN.toFixed(1)} = ${north.toFixed(1)} mi.<br>
-                West = ${speed} * ${timeW.toFixed(1)} = ${west.toFixed(1)} mi.<br>
+                ${NS} = ${speed} * ${timeN.toFixed(1)} = ${legNS.toFixed(1)} mi.<br>
+                ${EW} = ${speed} * ${timeW.toFixed(1)} = ${legEW.toFixed(1)} mi.<br>
                 <b>2. Find direct distance (Hypotenuse):</b><br>
-                c&sup2; = a&sup2; + b&sup2; &rarr; &radic;(${north.toFixed(1)}&sup2; + ${west.toFixed(1)}&sup2;) = ${total.toFixed(2)} &rarr; <b>${ans1} miles</b>.<br>
+                c&sup2; = a&sup2; + b&sup2; &rarr; &radic;(${legNS.toFixed(1)}&sup2; + ${legEW.toFixed(1)}&sup2;) = ${total.toFixed(2)} &rarr; <b>${ans1} miles</b>.<br>
                 <b>3. Find Return Bearing:</b><br>
-                You are currently North and West of origin. You must fly South and East.<br>
-                tan(&theta;) = Opposite(West) / Adjacent(North)<br>
-                &theta; = arctan(${west.toFixed(1)} / ${north.toFixed(1)}) = ${angle.toFixed(2)}&deg; &rarr; <b>S ${ans2}&deg; E</b>.`,
+                You are now ${NS} and ${EW} of the start, so the return flight heads ${DIR[backNS]} and ${DIR[backEW]}.<br>
+                tan(&theta;) = Opposite(${EW}) / Adjacent(${NS})<br>
+                &theta; = arctan(${legEW.toFixed(1)} / ${legNS.toFixed(1)}) = ${angle.toFixed(2)}&deg; &rarr; <b>${backNS} ${ans2}&deg; ${backEW}</b>
+                (equivalently, a compass heading of ${roundTo(exactHeading) % 360}&deg;).`,
                 };
             },
         };
@@ -514,6 +575,11 @@
             return problem.fields.map((f, i) => {
                 const raw = typeof entries[i] === 'string' ? entries[i].trim() : '';
                 const name = f.label.replace(/\s*\([^)]*\)$/, '');
+                if (f.kind === 'bearing') {
+                    return parseBearing(raw) === null
+                        ? 'Enter the return bearing as a quadrant bearing (direction letter, angle up to 90, direction letter) or a compass heading from 0 to 360.'
+                        : null;
+                }
                 if (raw === '') return `Enter a number for ${name}.`;
                 if (!/^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(raw) || !Number.isFinite(Number(raw))) {
                     return `Enter ${name} as a single number, such as 12 or 3.5.`;
@@ -536,11 +602,34 @@
             return f.retryHint;
         }
 
+        // Bearing feedback, compared as compass headings so every equivalent form is treated alike.
+        function bearingHintFor(f, raw, heading) {
+            const eps = 1e-9, s = raw.trim();
+            if (/^\d+(\.\d+)?$/.test(s) && Math.abs(Number(s) - f.radians) < 0.01) {
+                return 'This looks like an angle in radians. Set your calculator to degree mode.';
+            }
+            for (const m of f.mistakes) {
+                if (angleGap(m.value, f.exactHeading) < 0.5) continue; // indistinguishable from the right answer
+                if (angleGap(heading, m.value) <= 0.5 + eps) return m.hint;
+            }
+            if (angleGap(heading, f.exactHeading) < 0.5) return 'Round the angle to the nearest degree.';
+            if (f.headings.some((h) => angleGap(heading, h) <= 1 + eps)) {
+                return 'Close. Keep full precision until the final step, then round the angle to the nearest degree (halves round up).';
+            }
+            return f.retryHint;
+        }
+
         // Grades each part separately. Correct parts get no hint; others get a targeted one.
         function diagnose(problem, entries) {
             const invalid = validate(problem, entries);
             const parts = problem.fields.map((f, i) => {
                 if (invalid[i]) return { correct: false, hint: invalid[i] };
+                if (f.kind === 'bearing') {
+                    const heading = parseBearing(entries[i]);
+                    return f.headings.some((h) => angleGap(heading, h) < 1e-9)
+                        ? { correct: true, hint: null }
+                        : { correct: false, hint: bearingHintFor(f, entries[i], heading) };
+                }
                 const v = Number(entries[i].trim());
                 return v === f.answer ? { correct: true, hint: null } : { correct: false, hint: hintFor(f, v) };
             });
@@ -553,7 +642,7 @@
             return { parts: d.parts.map((p) => p.correct), correct: d.correct };
         }
 
-        return { SKILLS, build, generate, parseCode, newSeed, validate, diagnose, grade, roundTo, formatForRounding, mulberry32 };
+        return { SKILLS, build, generate, parseCode, newSeed, validate, diagnose, grade, parseBearing, headingOf, roundTo, formatForRounding, mulberry32 };
     })();
     // </skyhawk-engine>
 
@@ -657,7 +746,9 @@
         inputsContainer.innerHTML = currentData.fields.map((f) => `
                 <div class="input-group">
                     <label for="${f.id}">${f.label}:</label>
-                    <input type="number" id="${f.id}" aria-describedby="modal-text ${f.id}-feedback" onkeydown="submitOnEnter(event)"${f.step ? ` step="${f.step}"` : ''} />
+                    ${f.kind === 'bearing'
+                        ? `<input type="text" id="${f.id}" aria-describedby="modal-text ${f.id}-feedback" onkeydown="submitOnEnter(event)" autocomplete="off" autocapitalize="characters" spellcheck="false" />`
+                        : `<input type="number" id="${f.id}" aria-describedby="modal-text ${f.id}-feedback" onkeydown="submitOnEnter(event)"${f.step ? ` step="${f.step}"` : ''} />`}
                     <div class="field-feedback" id="${f.id}-feedback"></div>
                 </div>`).join('');
 
@@ -721,9 +812,11 @@
     function showSolution() {
         attemptState.assisted = true;
         attemptState.solutionViewed = true;
+        // Entries can be free text (bearings), so escape them before display.
+        const escapeHtml = (t) => t.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
         const yours = currentData.fields.map((f, i) => {
-            const v = Number(attemptState.entries[i]);
-            return `${f.label}: ${attemptState.entries.length && Number.isFinite(v) ? v : '(none)'}`;
+            const entry = String(attemptState.entries[i] ?? '').trim();
+            return `${f.label}: ${entry ? escapeHtml(entry) : '(none)'}`;
         }).join('; ');
         document.getElementById("modal-title").innerHTML = "Worked Solution";
         document.getElementById("modal-text").innerHTML =

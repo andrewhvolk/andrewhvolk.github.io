@@ -97,8 +97,8 @@ check('worked solution preserves the side of a rounding boundary (SH-012)', () =
     assert.match(E.build('depression', { speed: 86, angle: 5, timeMins: 6 }).solutionHtml, /&approx; 0\.749\d* &rarr; <b>0\.7 miles/);
 });
 check('return 3-4-5 and 45 degree cases', () => {
-    assert.deepEqual(ans(E.build('return', { speed: 120, timeN: 0.8, timeW: 0.6 })), [120, 37]);
-    assert.deepEqual(ans(E.build('return', { speed: 105, timeN: 1.0, timeW: 1.0 })), [148, 45]);
+    assert.deepEqual(ans(E.build('return', { speed: 120, timeN: 0.8, timeW: 0.6 })), [120, 'S 37° E']);
+    assert.deepEqual(ans(E.build('return', { speed: 105, timeN: 1.0, timeW: 1.0 })), [148, 'S 45° E']);
 });
 check('depression 90 mph, 5 deg, 5 min -> 0.7; elevation 6 deg, 80 mph, 1.0 mi -> 7', () => {
     assert.deepEqual(ans(E.build('depression', { speed: 90, angle: 5, timeMins: 5 })), [0.7]);
@@ -141,7 +141,11 @@ for (const type of SKILLS) {
                 inRange(d.speed, 105, 120, 1, label); inRange(d.timeN, 0.5, 1.5, 0.1, label); inRange(d.timeW, 0.5, 1.5, 0.1, label);
                 const n = d.speed * d.timeN, w = d.speed * d.timeW;
                 assertRounded(Math.hypot(n, w), a[0], 1, label);
-                assertRounded(Math.atan2(w, n) * 180 / Math.PI, a[1], 1, label);
+                const b = p.fields[1];
+                assertRounded(Math.atan2(w, n) * 180 / Math.PI, b.angle, 1, label);
+                assert.equal(b.ns, d.ns === 'N' ? 'S' : 'N', `${label}: return reverses the north/south leg`);
+                assert.equal(b.ew, d.ew === 'E' ? 'W' : 'E', `${label}: return reverses the east/west leg`);
+                assert.equal(a[1], `${b.ns} ${b.angle}° ${b.ew}`);
             }
             assert.ok(!/\d\.\d{6,}/.test(p.solutionHtml + p.prompt), `${label}: unreadable precision`);
             // Check the values students actually see, independently of the formatter (SH-012).
@@ -248,7 +252,7 @@ check('descent: minutes used as hours and distance instead of altitude', () => {
 check('return: added legs, complementary angle, and radian mode', () => {
     const p = E.build('return', { speed: 120, timeN: 0.8, timeW: 0.6 });
     assert.match(hints(E.diagnose(p, ['168', '37']))[0], /Pythagorean/i);
-    assert.match(hints(E.diagnose(p, ['120', '53']))[1], /West distance ÷ North distance/i);
+    assert.match(hints(E.diagnose(p, ['120', 'S 53 E']))[1], /West distance ÷ North distance/i);
     assert.match(hints(E.diagnose(p, ['120', '0.64']))[1], /degree mode/i);
 });
 check('diagnose agrees with grade, and hints never reveal an answer', () => {
@@ -259,14 +263,21 @@ check('diagnose agrees with grade, and hints never reveal an answer', () => {
         assert.equal(right.correct, true, `${p.code} correct answers`);
         assert.ok(right.parts.every((x) => x.hint === null));
         const offsets = [7, -3, 0.5, 1, 40];
-        const wrong = answers.map((a, i) => String(tenth(a + offsets[(seed + i) % offsets.length] * (type === 'depression' ? 0.1 : 1))));
+        const wrong = answers.map((a, i) => {
+            const off = offsets[(seed + i) % offsets.length], f = p.fields[i];
+            // Bearing answers are quadrant strings: offset the angle but keep the directions.
+            if (f.kind === 'bearing') return `${f.ns} ${tenth(Math.min(89, f.angle + off))} ${f.ew}`;
+            return String(tenth(a + off * (type === 'depression' ? 0.1 : 1)));
+        });
         const d = E.diagnose(p, wrong);
         assert.equal(d.correct, E.grade(p, wrong).correct, `${p.code} ${wrong}`);
         d.parts.forEach((x, i) => {
             if (x.correct) return;
             assert.ok(typeof x.hint === 'string' && x.hint.length > 0, `${p.code}: missing hint`);
-            const answerPattern = new RegExp(`(^|[^\\d.])${String(answers[i]).replace('.', '\\.')}([^\\d]|$)`);
-            assert.doesNotMatch(x.hint, answerPattern, `${p.code}: hint reveals ${answers[i]}`);
+            const f = p.fields[i], secret = f.kind === 'bearing' ? f.angle : answers[i];
+            const answerPattern = new RegExp(`(^|[^\\d.])${String(secret).replace('.', '\\.')}([^\\d]|$)`);
+            assert.doesNotMatch(x.hint, answerPattern, `${p.code}: hint reveals ${secret}`);
+            if (f.kind === 'bearing') assert.doesNotMatch(x.hint, new RegExp(`\\b${f.ns}\\s*\\d|\\d\\D*\\b${f.ew}\\b`), `${p.code}: hint reveals return directions`);
         });
     }
 });
@@ -370,6 +381,95 @@ check('SH-013 regression: bearing 116 mph for 1.0 h reads "1.0 hours" and "1.0 h
     assert.match(r.prompt, /North for 1\.0 hours and West for 0\.5 hours/);
     assert.match(r.solutionHtml, /North = 110 \* 1\.0 = 110\.0 mi/);
     assert.match(E.build('elevation', { angle: 6, speed: 80, alt: 1 }).prompt, /altitude of 1\.0 miles/);
+});
+
+// --- SH-007: varied quadrants, student-chosen return directions, equivalent bearings ---
+check('bearing and return problems cover all four quadrants', () => {
+    const outbound = new Set(), back = new Set();
+    for (let seed = 0; seed < 400; seed++) {
+        const b = E.generate('bearing', seed).params; outbound.add(b.ns + b.ew);
+        const f = E.generate('return', seed).fields[1]; back.add(f.ns + f.ew);
+    }
+    assert.deepEqual([...outbound].sort(), ['NE', 'NW', 'SE', 'SW']);
+    assert.deepEqual([...back].sort(), ['NE', 'NW', 'SE', 'SW']);
+});
+check('existing problem codes keep their numbers (direction picks are drawn last)', () => {
+    for (const type of ['bearing', 'return']) for (let seed = 0; seed < 200; seed++) {
+        const { params } = E.generate(type, seed);
+        const r = E.mulberry32(seed), int = (lo, hi) => lo + Math.floor(r() * (hi - lo + 1));
+        const expected = type === 'bearing'
+            ? { speed: int(105, 125), time: int(10, 25) / 10, angle: int(25, 65) }
+            : { speed: int(105, 120), timeN: int(5, 15) / 10, timeW: int(5, 15) / 10 };
+        for (const [k, v] of Object.entries(expected)) assert.equal(params[k], v, `${type} seed ${seed} ${k}`);
+    }
+});
+check('component fields name the flown directions and ask for positive distances', () => {
+    const p = E.build('bearing', { speed: 125, time: 1.4, angle: 30, ns: 'N', ew: 'E' });
+    assert.match(p.prompt, /bearing of N 30&deg; E/);
+    assert.match(p.prompt, /How many miles North and East/);
+    assert.deepEqual(plain(p.fields.map((f) => f.label)), ['North (miles)', 'East (miles)']);
+    assert.deepEqual(ans(p), [152, 88]);
+    assert.match(p.hint, /positive/i);
+    assert.match(hints(E.diagnose(p, ['-152', '88']))[0], /positive/i);
+    assert.match(hints(E.diagnose(p, ['88', '152']))[0], /cosine for North/);
+    assert.match(p.solutionHtml, /North = Distance \* cos\(30&deg;\)/);
+});
+const returnSE = () => E.build('return', { speed: 120, timeN: 0.8, timeW: 0.6, ns: 'S', ew: 'E' });
+check('return: student chooses directions; equivalent bearings and headings are accepted', () => {
+    const p = returnSE(); // flew south then east, so the return heads N 37° W (heading 323°)
+    assert.match(p.prompt, /flying South for 0\.8 hours and East for 0\.6 hours/);
+    assert.equal(ans(p)[1], 'N 37° W');
+    assert.equal(p.fields[1].kind, 'bearing');
+    assert.doesNotMatch(p.fields[1].label + p.hint + p.prompt, /N\s*_+|_+\s*°?\s*W|North and West/, 'directions are not supplied');
+    for (const ok of ['N 37° W', 'N37W', 'n 37 w', 'N 37.0° W', 'W 53° N', '323', '323°', '323.0', ' 323 degrees ']) {
+        assert.equal(E.grade(p, ['120', ok]).correct, true, ok);
+    }
+});
+check('return: wrong directions, complements, radians, and unrounded angles get targeted hints', () => {
+    const p = returnSE(), h = (entry) => hints(E.diagnose(p, ['120', entry]))[1];
+    assert.match(h('S 37° E'), /Reverse both outbound directions/);
+    assert.match(h('N 37° E'), /Reverse both outbound directions/);
+    assert.match(h('37'), /Reverse both outbound directions/);
+    assert.match(h('N 53° W'), /East distance ÷ South distance/);
+    assert.match(h('0.64'), /degree mode/);
+    assert.match(h('N 36.87° W'), /nearest degree/);
+    assert.match(h('N 38° W'), /Close/);
+});
+check('return: malformed bearings get an inline message', () => {
+    const p = returnSE();
+    for (const bad of ['', 'north-ish', 'N 95 W', 'N W', '400', '-20', 'NE 37']) {
+        assert.match(E.validate(p, ['120', bad])[1], /bearing/i, JSON.stringify(bad));
+    }
+    assert.equal(E.validate(p, ['120', 'N 37° W'])[1], null);
+});
+check('return bearing field renders as text entry and grades a heading through the page', () => {
+    const { page, el } = pageWith(returnSE());
+    assert.match(text(el('inputs-container')), /id="inp2" type="text"|type="text"[^>]*id="inp2"/);
+    assert.match(text(el('inputs-container')), /id="inp1" aria-describedby[^>]*type="number"|type="number"[^>]*id="inp1"/);
+    el('inp1').value = '120'; el('inp2').value = '323';
+    page.verifyAnswer();
+    assert.match(text(el('modal-title')), /Correct/);
+});
+
+check('every return parameter set accepts all equivalent answer forms and rejects the outbound bearing', () => {
+    let n = 0;
+    for (let speed = 105; speed <= 120; speed++) for (let a = 5; a <= 15; a++) for (let b = 5; b <= 15; b++) {
+        for (const ns of ['N', 'S']) for (const ew of ['E', 'W']) {
+            const p = E.build('return', { speed, timeN: a / 10, timeW: b / 10, ns, ew }), f = p.fields[1];
+            // Independent expectation: atan in degrees, rounded half up, directions reversed.
+            const theta = Math.atan2(speed * b / 10, speed * a / 10) * 180 / Math.PI;
+            const want = Math.floor(theta + 0.5 + 1e-9), back = { N: 'S', S: 'N', E: 'W', W: 'E' };
+            assert.equal(f.answer, `${back[ns]} ${want}° ${back[ew]}`, p.prompt);
+            const heading = { NE: want, NW: 360 - want, SE: 180 - want, SW: 180 + want }[back[ns] + back[ew]] % 360;
+            const ewForm = `${back[ew]} ${90 - want} ${back[ns]}`;
+            for (const ok of [f.answer, `${back[ns]}${want}${back[ew]}`, String(heading), ewForm]) {
+                assert.equal(E.grade(p, [String(f.answer && ans(p)[0]), ok]).parts[1], true, `${f.answer}: ${ok}`);
+            }
+            assert.equal(E.grade(p, ['0', `${ns} ${want} ${ew}`]).parts[1], false, `${f.answer}: outbound bearing must be rejected`);
+            n++;
+        }
+    }
+    assert.equal(n, 16 * 11 * 11 * 4);
 });
 
 // --- Layout guards (SH-002/SH-003). Browser viewport checks are recorded in the tracker. ---
